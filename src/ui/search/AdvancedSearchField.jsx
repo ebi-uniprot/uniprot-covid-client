@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import TreeSelect from './TreeSelect';
+import { TreeSelect } from 'franklin-sites';
 
 class AdvancedSearchField extends Component {
   constructor(props) {
@@ -95,12 +95,7 @@ class AdvancedSearchField extends Component {
       : 'tree-select-menu';
     return (
       <div className="advanced-search-field">
-        <a className="button" onClick={e => this.toggleTreeSelect(e)}>
-          {this.state.selectedNode.label}
-        </a>
-        <div className={treeSelectClass}>
-          <TreeSelect data={this.props.data} onSelectNode={e => this._selectNode(e)} />
-        </div>
+        <TreeSelect data={this.props.data} onSelect={e => this._selectNode(e)} />
         {this.state.selectedNode.inputs.map((input) => {
           // initialise value for controlled input
           input.value = input.value ? input.value : '';

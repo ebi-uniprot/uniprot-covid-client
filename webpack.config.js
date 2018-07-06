@@ -44,7 +44,22 @@ module.exports = {
             loader: 'sass-loader', // compiles Sass to CSS
           },
         ],
-      },
+      }, {
+        test: /\.svg$/,
+        use: [{
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      }, {
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        loader: 'file-loader?name=[name].[ext]'
+      }
     ],
   },
   plugins: [

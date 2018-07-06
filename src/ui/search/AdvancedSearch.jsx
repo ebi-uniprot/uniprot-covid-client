@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { TreeSelect } from 'franklin-sites';
 import data from './advanced-search-data.json';
-// import AdvancedSearchField from './AdvancedSearchField';
+import AdvancedSearchField from './AdvancedSearchField';
 import '../../styles/advanced-search-fields.scss';
 
 class AdvancedSearch extends Component {
@@ -83,7 +82,6 @@ class AdvancedSearch extends Component {
   }
 
   render() {
-    console.log(TreeSelect);
     return (
       <div>
         <div>
@@ -99,12 +97,11 @@ class AdvancedSearch extends Component {
               <option value="OR">OR</option>
               <option value="NOT">NOT</option>
             </select>
-            <TreeSelect data={data} />
-            {/* <AdvancedSearchField
+            <AdvancedSearchField
               data={data}
               selectedNode={field.selectedNode}
               onNodeSelect={node => this._updateSelectedNode(node, field.id)}
-            /> */}
+            />
             <a onClick={() => this._removeField(field.id)}>Remove</a>
           </div>
         ))}
