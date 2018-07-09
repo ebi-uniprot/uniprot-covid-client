@@ -1,3 +1,6 @@
+section#layout[data-layout="home-page"] {
+  grid-template-areas: "header" "datasets" "news" "tools" "help" "technical" "footer"; }
+
 .advanced-search-field {
   display: inline-block;
   padding: .5em; }
