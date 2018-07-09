@@ -1,0 +1,39 @@
+
+// Layout Blocks
+// -------------
+.block {
+  width: 100%;
+  display: grid;
+  grid-area: block;
+
+  div {
+    height: 200px;
+    margin: 10px;
+  }
+
+  &--1-col {
+    grid-template-columns: repeat(1, 100%);
+
+    div { background: blue; }
+  }
+
+  &--2-col {
+    grid-template-columns: repeat(2, 50%);
+    
+    div { background: red; }
+  }
+
+
+  &--3-col {
+    grid-template-columns: repeat(3, calc(100%/3));
+    
+    div { background: yellow; }
+  }
+
+
+  &--4-col {
+    grid-template-columns: repeat(4, 25%);
+    
+    div { background: green; }
+  }
+}

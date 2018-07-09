@@ -1,5 +1,29 @@
+.block {
+  width: 100%;
+  display: grid;
+  grid-area: block; }
+  .block div {
+    height: 200px;
+    margin: 10px; }
+  .block--1-col {
+    grid-template-columns: repeat(1, 100%); }
+    .block--1-col div {
+      background: blue; }
+  .block--2-col {
+    grid-template-columns: repeat(2, 50%); }
+    .block--2-col div {
+      background: red; }
+  .block--3-col {
+    grid-template-columns: repeat(3, calc(100%/3)); }
+    .block--3-col div {
+      background: yellow; }
+  .block--4-col {
+    grid-template-columns: repeat(4, 25%); }
+    .block--4-col div {
+      background: green; }
+
 section#layout[data-layout="home-page"] {
-  grid-template-areas: "header" "datasets" "news" "tools" "help" "technical" "footer"; }
+  grid-template-areas: repeat(auto-fill, 100%); }
 
 .advanced-search-field {
   display: inline-block;
