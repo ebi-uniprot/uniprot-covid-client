@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import AdvancedSearch from '../search/AdvancedSearch';
+
+import HomePageLayout from '../layout/HomePageLayout';
 
 const HomePage = () => (
-  <Fragment>
+  <HomePageLayout>
     <h3>Welcome!</h3>
-  </Fragment>
+  </HomePageLayout>
 );
 
 export default HomePage;

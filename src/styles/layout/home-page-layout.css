@@ -1,0 +1,2 @@
+section#layout[data-layout="home-page"] {
+  grid-template-areas: "header" "datasets" "news" "tools" "help" "technical" "footer"; }

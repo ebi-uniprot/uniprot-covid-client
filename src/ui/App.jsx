@@ -1,15 +1,17 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 
-import UniProtHeader from './header/UniProtHeader';
+import BaseLayout from './layout/BaseLayout';
 import HomePage from './pages/HomePage';
 
 const App = () => (
   <Router>
-    <Fragment>
-      <UniProtHeader />
+    <BaseLayout>
       <Route path="/" exact component={HomePage} />
-    </Fragment>
+    </BaseLayout>
   </Router>
 );
 
