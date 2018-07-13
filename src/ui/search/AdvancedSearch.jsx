@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import data from './advanced-search-data.json';
+import jsonData from './uniprot_search_new.json';
 import AdvancedSearchField from './AdvancedSearchField';
-import '../../styles/advanced-search-fields.scss';
 
 class AdvancedSearch extends Component {
   static getRandomId() {
@@ -15,8 +14,13 @@ class AdvancedSearch extends Component {
     super(props);
     this.state = {
       namespace: 'UniProtKB',
-      fields: this.initFields(),
+      data: jsonData.searchItems,
+      fields: undefined,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ fields: this.initFields() });
   }
 
   initFields() {
@@ -30,20 +34,20 @@ class AdvancedSearch extends Component {
   createField() {
     return {
       id: AdvancedSearch.getRandomId(),
-      selectedNode: cloneDeep(data[0]),
+      selectedNode: cloneDeep(this.state.data[0]),
       logic: 'AND',
     };
   }
 
-  _updateSelectedNode(node, id) {
-    const fields = cloneDeep(this.state.fields);
-    fields.map((field) => {
-      if (field.id === id) {
-        field.selectedNode = node;
-      }
-    });
-    this.setState({ fields });
-  }
+  // _updateSelectedNode(node, id) {
+  //   const fields = cloneDeep(this.state.fields);
+  //   fields.map((field) => {
+  //     if (field.id === id) {
+  //       field.selectedNode = node;
+  //     }
+  //   });
+  //   this.setState({ fields });
+  // }
 
   _updateLogic(e, id) {
     const fields = cloneDeep(this.state.fields);
@@ -82,8 +86,11 @@ class AdvancedSearch extends Component {
   }
 
   render() {
+    if (typeof this.state.fields === 'undefined') {
+      return null;
+    }
     return (
-      <div>
+      <div className="advanced-search">
         <div>
           Searching in{' '}
           <select>
@@ -91,26 +98,26 @@ class AdvancedSearch extends Component {
           </select>
         </div>
         {this.state.fields.map(field => (
-          <div key={field.id}>
-            <select value={field.logic} onChange={e => this._updateLogic(e, field.id)}>
+          <div key={field.id} className="advanced-search__field">
+            <select
+              className="advanced-search__logic"
+              value={field.logic}
+              onChange={e => this._updateLogic(e, field.id)}
+            >
               <option value="AND">AND</option>
               <option value="OR">OR</option>
               <option value="NOT">NOT</option>
             </select>
-            <AdvancedSearchField
-              data={data}
-              selectedNode={field.selectedNode}
-              onNodeSelect={node => this._updateSelectedNode(node, field.id)}
-            />
+            <AdvancedSearchField data={this.state.data} selectedNode={field.selectedNode} />
             <a onClick={() => this._removeField(field.id)}>Remove</a>
           </div>
         ))}
         <hr />
         <div>
-          <a className="button right-float" onClick={() => this._addField()}>
+          <a className="button" onClick={() => this._addField()}>
             Add Field
           </a>
-          <a className="button right-float" onClick={() => this._submitQuery()}>
+          <a className="button" onClick={() => this._submitQuery()}>
             Search
           </a>
         </div>

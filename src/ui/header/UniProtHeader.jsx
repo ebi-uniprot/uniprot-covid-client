@@ -1,6 +1,7 @@
 import React from 'react';
-import { Header } from 'franklin-sites';
+import { Header, TreeSelect } from 'franklin-sites';
 import { Link } from 'react-router-dom';
+import AdvancedSearch from '../search/AdvancedSearch';
 
 import Logo from '../../svg/uniprot-rgb.svg';
 
@@ -29,6 +30,7 @@ const UniProtHeader = () => (
         <Link to="/">Help</Link>{' '}
       </li>
     </ul>
+    <AdvancedSearch />
   </Header>
 );
 

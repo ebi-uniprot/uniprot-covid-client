@@ -1,0 +1,14 @@
+.advanced-search {
+  .advanced-search__field {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    .advanced-search__logic {
+      flex: 0 1 6rem;
+    }
+    .advanced-search__inputs {
+      flex-grow: 2;
+    }
+  }
+
+}

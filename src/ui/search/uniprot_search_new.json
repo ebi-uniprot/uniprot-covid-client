@@ -1,0 +1,1278 @@
+{
+  "searchItems": [{
+      "label": "UniProtKB AC",
+      "itemType": "single",
+      "term": "accession",
+      "dataType": "string",
+      "description": "Search by UniProtKB Accession",
+      "example": "accession:P123456"
+    },
+    {
+      "label": "EntryName (ID)",
+      "itemType": "single",
+      "term": "id",
+      "dataType": "string",
+      "description": "Search by UniProtKB entry name",
+      "example": "id:P53_HUMAN"
+    },
+    {
+      "label": "Protein Name (DE)",
+      "itemType": "single",
+      "term": "protein_name",
+      "dataType": "string",
+      "description": "Search by UniProtKB Protein name",
+      "example": "protein_name:mas5"
+    },
+    {
+      "label": "Gene Name (GN)",
+      "itemType": "single",
+      "term": "gene",
+      "dataType": "string",
+      "description": "Search by UniProtKB gene name",
+      "example": "gene:ydj1"
+    },
+    {
+      "label": "Organism (OS)",
+      "itemType": "single",
+      "term": "organism",
+      "dataType": "string",
+      "autoComplete": true,
+      "description": "Search by Organism name",
+      "example": "organism:saccharomyces"
+    },
+    {
+      "label": "Taxonomy",
+      "itemType": "single",
+      "term": "taxonomy",
+      "dataType": "string",
+      "autoComplete": true,
+      "description": "Search by NCBI taxonomy",
+      "example": "taxonomy:human"
+    },
+    {
+      "label": "Virus host",
+      "itemType": "single",
+      "term": "host",
+      "dataType": "string",
+      "autoComplete": true,
+      "description": "Search by virus host",
+      "example": "host:human"
+    },
+    {
+      "label": "Protein Existence [PE]",
+      "term": "protein_existence",
+      "dataType": "enum",
+      "description": "Search by protein existence",
+      "values": [{
+          "name": "Evidence at protein level",
+          "value": "protein_level"
+        },
+        {
+          "name": "Evidence at transcript level",
+          "value": "transcript_level"
+        },
+        {
+          "name": "Inferred from homology",
+          "value": "homology"
+        },
+        {
+          "name": "Predicted",
+          "value": "predicted"
+        },
+        {
+          "name": "Uncertain",
+          "value": "uncertain"
+        }
+      ],
+      "example": "protein_existence: protein_level"
+    },
+    {
+      "label": "Function",
+      "itemType": "group",
+      "term": "",
+      "items": [{
+          "label": "Enzyme EC",
+          "itemType": "single",
+          "term": "ec",
+          "dataType": "string",
+          "autoComplete": true,
+          "description": "Search by Enzyme EC number",
+          "example": "ec:1.1.2.3"
+        },
+        {
+          "label": "Cofactors",
+          "itemType": "group",
+          "items": [{
+              "label": "ChEBI term",
+              "itemType": "comment",
+              "term": "cofactor_chebi",
+              "dataType": "string",
+              "autoComplete": true,
+              "hasEvidence": true,
+              "description": "Search by cofactor chebi",
+              "example": "(cc_cofactor_chebi : 29105) AND (ccev_cofactor_chebi : ECO_0000269)"
+            },
+            {
+              "label": "Note",
+              "itemType": "comment",
+              "term": "cofactor_note",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by cofactor note",
+              "example": "(cc_cofactor_note : subunit) AND (ccev_cofactor_note : ECO_0000269)"
+            }
+          ]
+        },
+        {
+          "label": "Biophysicochemical properties",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "comment",
+              "term": "bpcp",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties",
+              "example": "(cc_bpcp : \"some value\") AND (ccev_bpcp : ECO_0000269)"
+            },
+            {
+              "label": "Absorption",
+              "itemType": "comment",
+              "term": "bpcp_absorption",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties: absorption",
+              "example": "(cc_bpcp_absorption : \"some value\") AND (ccev_bpcp_absorption : ECO_0000269)"
+            },
+            {
+              "label": "Kinetic parameters",
+              "itemType": "comment",
+              "term": "bpcp_kinetics",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties: kinetic parameters",
+              "example": "(cc_bpcp_kinetics : \"some value\") AND (ccev_bpcp_kinetics : ECO_0000269)"
+            },
+            {
+              "label": "ph dependence",
+              "itemType": "comment",
+              "term": "bpcp_ph_dependence",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties: ph dependence",
+              "example": "(cc_bpcp_ph_dependence : \"some value\") AND (ccev_bpcp_ph_dependence : ECO_0000269)"
+            },
+            {
+              "label": "Redox potential",
+              "itemType": "comment",
+              "term": "bpcp_redox_potential",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties: redox potential",
+              "example": "(cc_bpcp_redox_potential : \"some value\") AND (ccev_bpcp_redox_potential : ECO_0000269)"
+            },
+            {
+              "label": "Temperature dependence",
+              "itemType": "comment",
+              "term": "bpcp_temp_dependence",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by biophysicochemical properties: tempeature dependence",
+              "example": "(cc_bpcp_temp_dependence : \"some value\") AND (ccev_bpcp_temp_dependence : ECO_0000269)"
+            }
+          ]
+        },
+        {
+          "label": "Catalytic Activity",
+          "itemType": "comment",
+          "term": "catalytic_activity",
+          "hasEvidence": true,
+          "description": "Search by comment catalytic activity",
+          "example": "(cc_catalytic_activity : \"some value\") AND (ccev_catalytic_activity : ECO_0000250)"
+        },
+        {
+          "label": "Enzyme regulation",
+          "itemType": "comment",
+          "term": "enzyme_regulation",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by comment enzyme regulation",
+          "example": "(cc_enzyme_regulation : \"some value\") AND (ccev_enzyme_regulation : ECO_0000255)"
+        },
+        {
+          "label": "Function [CC]",
+          "itemType": "comment",
+          "term": "function",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by comment function",
+          "example": "(cc_function : \"some value\") AND (ccev_function : ECO_0000250)"
+        },
+        {
+          "label": "Sites",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "feature",
+              "term": "sites",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by feature sites",
+              "example": "(ft_sites : translocation) AND (ftlen_sites : [1 TO 3]) AND (ftev_sites : ECO_0000305)"
+            },
+            {
+              "label": "Active site",
+              "itemType": "feature",
+              "term": "act_site",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by feature  active site",
+              "example": "(ft_active_site : phosphocysteine) AND (ftlen_active_site : [1 TO 3]) AND (ftev_active_site : ECO_0000256)"
+            },
+            {
+              "label": "Metal binding",
+              "itemType": "feature",
+              "term": "metal",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by feature metal binding",
+              "example": "(ft_metal : phosphocysteine) AND (ftlen_metal : [1 TO 3]) AND (ftev_metal : ECO_0000305)"
+            },
+            {
+              "label": "Binding site",
+              "itemType": "feature",
+              "term": "binding",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by feature binding site",
+              "example": "(ft_binding : phosphocysteine) AND (ftlen_binding : [1 TO 3]) AND (ftev_binding : ECO_0000305)"
+            },
+            {
+              "label": "Other",
+              "itemType": "feature",
+              "term": "site",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by feature other site",
+              "example": "(ft_site : phosphocysteine) AND (ftlen_site : [1 TO 3]) AND (ftev_site : ECO_0000305)"
+            }
+          ]
+        },
+        {
+          "label": "Calcium binding",
+          "itemType": "feature",
+          "term": "ca_bind",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature calcium binding",
+          "example": "(ft_ca_bind : site.) AND (ftlen_ca_bind : [1 TO 2]) AND (ftev_ca_bind : ECO_0000250)"
+        },
+        {
+          "label": "DNA binding",
+          "itemType": "feature",
+          "term": "dna_bind",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature DNA binding",
+          "example": "(ft_dna_bind : *) AND (ftlen_dna_bind : [1 TO 6]) AND (ftev_dna_bind : ECO_0000250)"
+        },
+        {
+          "label": "Nucleotide binding",
+          "itemType": "feature",
+          "term": "np_bind",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature Nucleotide binding",
+          "example": "(ft_np_bind : NADP) AND (ftlen_np_bind : [1 TO 6]) AND (ftev_np_bind : ECO_0000250)"
+        },
+        {
+          "label": "Pathway",
+          "itemType": "comment",
+          "term": "pathway",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by comment pathway",
+          "example": "(cc_pathway : \"some value\") AND (ccev_pathway : ECO_0000269)"
+        },
+        {
+          "label": "Miscellaneous [CC]",
+          "itemType": "comment",
+          "term": "miscellaneous",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by comment Miscellaneous",
+          "example": "(cc_miscellaneous : \"some value\") AND (ccev_miscellaneous : ECO_0000269)"
+        }
+      ]
+    },
+    {
+      "label": "Subcellular location",
+      "itemType": "group",
+      "items": [{
+          "label": "Subcellular location [CC]",
+          "itemType": "group",
+          "items": [{
+              "label": "Subcellular location term",
+              "itemType": "group",
+              "items": [{
+                  "label": "Any",
+                  "itemType": "comment",
+                  "term": "scl_term",
+                  "dataType": "string",
+                  "autoComplete": true,
+                  "hasEvidence": true,
+                  "description": "Search by comment subcellular location any term",
+                  "example": "(cc_scl_term : membrane) AND (ccev_scl_term : ECO_0000269)"
+                },
+                {
+                  "label": "Component",
+                  "itemType": "comment",
+                  "term": "scl_term_location",
+                  "dataType": "string",
+                  "autoComplete": true,
+                  "hasEvidence": true,
+                  "description": "Search by comment subcellular location component",
+                  "example": "(cc_scl_term_location : \"Bud membrane [SL-0028]\") AND (ccev_scl_term_location : ECO_0000269)"
+                },
+                {
+                  "label": "Orientation",
+                  "itemType": "comment",
+                  "term": "scl_term_orientation",
+                  "dataType": "string",
+                  "autoComplete": true,
+                  "hasEvidence": true,
+                  "description": "Search by comment subcellular location orientation",
+                  "example": "(cc_scl_term_orientation : \"Bud membrane [SL-0028]\") AND (ccev_scl_term_orientation : ECO_0000269)"
+                },
+                {
+                  "label": "Topology",
+                  "itemType": "comment",
+                  "term": "scl_term_topology",
+                  "dataType": "string",
+                  "autoComplete": true,
+                  "hasEvidence": true,
+                  "description": "Search by comment subcellular location topology",
+                  "example": "(cc_scl_term_topology : \"Bud membrane [SL-0028]\") AND (ccev_scl_term_topology : ECO_0000269)"
+                }
+              ]
+            },
+            {
+              "label": "Note",
+              "itemType": "comment",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by comment subcellular location note",
+              "example": "(cc_scl_note : membrane) AND (ccev_scl_note : ECO_0000269)"
+            }
+          ]
+        },
+        {
+          "label": "Transmembrane",
+          "itemType": "feature",
+          "term": "transmem",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Transmembrane",
+          "example": "(ft_transmem : forming) AND (ftlen_transmem : [20 TO 30]) AND (ftev_transmem : ECO_0000250)"
+        },
+        {
+          "label": "Topological domain",
+          "itemType": "feature",
+          "term": "topo_dom",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Topological domain",
+          "example": "(ft_topo_dom : forming) AND (ftlen_topo_dom : [20 TO 30]) AND (ftev_topo_dom : ECO_0000250)"
+        },
+        {
+          "label": "Intramembrane",
+          "itemType": "feature",
+          "term": "intramem",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Intramembrane",
+          "example": "(ft_intramem : forming) AND (ftlen_intramem : [20 TO 30]) AND (ftev_intramem : ECO_0000250)"
+        }
+      ]
+    },
+    {
+      "label": "Pathology & Biotech",
+      "itemType": "group",
+      "items": [{
+          "label": "Disease",
+          "itemType": "comment",
+          "term": "disease",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment disease",
+          "example": "(cc_disease : \"some value\") AND (ccev_disease : ECO_0000269)"
+        },
+        {
+          "label": "Alergenic properties",
+          "itemType": "comment",
+          "term": "allergen",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment alergenic properties",
+          "example": "(cc_allergen : \"some value\") AND (ccev_allergen : ECO_0000269)"
+        },
+        {
+          "label": "Toxic dose",
+          "itemType": "comment",
+          "term": "toxic_dose",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Toxic dose",
+          "example": "(cc_toxic_dose : \"some value\") AND (ccev_toxic_dose : ECO_0000269)"
+        },
+        {
+          "label": "Biotechnological use",
+          "itemType": "comment",
+          "term": "biotechnolog",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Biotechnological use",
+          "example": "(cc_biotechnology : \"some value\") AND (ccev_biotechnology : ECO_0000269)"
+        },
+        {
+          "label": "Pharmaceutical use",
+          "itemType": "comment",
+          "term": "pharmaceutical",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Pharmaceutical use",
+          "example": "(cc_pharmaceutical : \"some value\") AND (ccev_pharmaceutical : ECO_0000269)"
+        },
+        {
+          "label": "Disruption phenotype",
+          "itemType": "comment",
+          "term": "disruption_phenotype",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Disruption phenotype",
+          "example": "(cc_disruption_phenotype : \"some value\") AND (ccev_disruption_phenotype : ECO_0000269)"
+        },
+        {
+          "label": "Mutagenesis",
+          "itemType": "feature",
+          "term": "mutagen",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Mutagenesis",
+          "example": "(ft_mutagen : molecular) AND (ftlen_mutagen : [1 TO 1]) AND (ftev_mutagen : ECO_0000269)"
+        }
+      ]
+    },
+    {
+      "label": "PTM/Processing",
+      "itemType": "group",
+      "items": [{
+          "label": "Post-translational modification [CC]",
+          "itemType": "comment",
+          "term": "ptm",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Post-translational modification",
+          "example": "(cc_ptm : \"some value\") AND (ccev_ptm : ECO_0000269)"
+        },
+        {
+          "label": "Modified residue [FT]",
+          "itemType": "feature",
+          "term": "mod_res",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Modified residue",
+          "example": "(ft_mod_res : phosphoserine) AND (ftlen_mod_res : [1 TO 1]) AND (ftev_mod_res : ECO_0000305)"
+        },
+        {
+          "label": "Lipidation [FT]",
+          "itemType": "feature",
+          "term": "lipid",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Lipidation",
+          "example": "(ft_lipid : cysteine) AND (ftlen_lipid : [1 TO 1]) AND (ftev_lipid : ECO_0000250)"
+        },
+        {
+          "label": "Glycosylation [FT]",
+          "itemType": "feature",
+          "term": "carbohyd",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Glycosylation",
+          "example": "(ft_carbohyd : cysteine) AND (ftlen_carbohyd : [1 TO 1]) AND (ftev_carbohyd : ECO_0000255)"
+        },
+        {
+          "label": "Disulfide bond [FT]",
+          "itemType": "feature",
+          "term": "disulfid",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Disulfide bond",
+          "example": "(ft_disulfid : reversible) AND (ftlen_disulfid : [100 TO 150]) AND (ftev_disulfid : ECO_0000250)"
+        },
+        {
+          "label": "Cross-link [FT]",
+          "itemType": "feature",
+          "term": "crosslnk",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Cross-link",
+          "example": "(ft_crosslnk : lysine) AND (ftlen_crosslnk : [1 TO 1]) AND (ftev_crosslnk : ECO_0000269)"
+        },
+        {
+          "label": "Molecule Processing [FT]",
+          "itemType": "feature",
+          "term": "molecule_processing",
+          "dataType": "range",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by Feature Molecule Processing",
+          "example": "(ft_molecule_processing : disulfide) AND (ftlen_molecule_processing : [300 TO 400]) AND (ftev_molecule_processing : ECO_0000269)"
+        }
+      ]
+    },
+    {
+      "label": "Expression",
+      "itemType": "group",
+      "items": [{
+          "label": "Developmental stage",
+          "itemType": "comment",
+          "term": "developmental_stage",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Developmental stage",
+          "example": "(cc_developmental_stage : \"some value\") AND (ccev_developmental_stage : ECO_0000269)"
+        },
+        {
+          "label": "Induction",
+          "itemType": "comment",
+          "term": "induction",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Induction",
+          "example": "(cc_induction : \"some value\") AND (ccev_induction : ECO_0000269)"
+        },
+        {
+          "label": "Tissue specificity",
+          "itemType": "comment",
+          "term": "tissue_specificity",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Tissue specificity",
+          "example": "(cc_tissue_specificity : \"some value\") AND (ccev_tissue_specificity : ECO_0000269)"
+        }
+      ]
+    },
+    {
+      "label": "Interaction",
+      "itemType": "group",
+      "items": [{
+          "label": "Binary Interaction",
+          "term": "interactor",
+          "dataType": "string",
+          "hasEvidence": false,
+          "description": "Search by Comment Binary Interaction",
+          "example": "interactor : EBI-1042898"
+        },
+        {
+          "label": "Subunit structure",
+          "itemType": "comment",
+          "term": "subunit",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Subunit structure",
+          "example": "(cc_subunit : homodimer) AND ((ccev_subunit : ECO_0000269))"
+        }
+      ]
+    },
+    {
+      "label": "Structure",
+      "itemType": "group",
+      "items": [{
+          "label": "3D Structure",
+          "itemType": "database",
+          "term": "pdb",
+          "dataType": "enum",
+          "hasEvidence": false,
+          "description": "Search by Comment 3D Structure",
+          "values": [{
+              "name": "Yes",
+              "value": "yes"
+            },
+            {
+              "name": "No",
+              "value": "no"
+            }
+          ],
+          "example": "database:(type:pdb)"
+        },
+        {
+          "label": "Secondary structure",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "feature",
+              "term": "secstruct",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature Any secondary structure",
+              "example": "(ft_secstruct : *) AND (ftlen_secstruct : [1 TO 25]) AND (ftev_secstruct : ECO_0000244)"
+            },
+            {
+              "label": "Helix",
+              "itemType": "feature",
+              "term": "helix",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature helix",
+              "example": "(ft_helix : *) AND (ftlen_helix : [5 TO 6]) AND (ftev_helix : ECO_0000244)"
+            },
+            {
+              "label": "Turn",
+              "itemType": "feature",
+              "term": "turn",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature turn",
+              "example": "(ft_turn : *) AND (ftlen_turn : [5 TO 6]) AND (ftev_turn : ECO_0000244)"
+            },
+            {
+              "label": "Beta strand",
+              "itemType": "feature",
+              "term": "strand",
+              "dataType": "range",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature Beta strand",
+              "example": "(ft_strand : *) AND (ftlen_strand : [5 TO 6]) AND (ftev_strand : ECO_0000244)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Sequence",
+      "itemType": "group",
+      "items": [{
+          "label": "Mass(Da)",
+          "itemType": "single",
+          "term": "mass",
+          "dataType": "range",
+          "hasRange": true,
+          "description": "Search by Sequence mass",
+          "example": "mass:[441126 TO 441126]"
+        },
+        {
+          "label": "Sequence length",
+          "term": "length",
+          "itemType": "single",
+          "dataType": "range",
+          "hasRange": true,
+          "description": "Search by Sequence length",
+          "example": "length:[441 TO 450]"
+        },
+        {
+          "label": "Alternative products (isoforms)",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "comment",
+              "term": "ap",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment alternative Products",
+              "example": "(cc_ap : \"some value\") AND (ccev_ap : ECO_0000269)"
+            },
+            {
+              "label": "Alternative promoter usage",
+              "itemType": "comment",
+              "term": "ap_apu",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment alternative Products: alternative promoter usage",
+              "example": "(cc_ap_apu : \"some value\") AND (ccev_ap_apu : ECO_0000269)"
+            },
+            {
+              "label": "Alternative splicing",
+              "itemType": "comment",
+              "term": "ap_as",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment alternative Products: alternative splicing",
+              "example": "(cc_ap_as : \"some value\") AND (ccev_ap_as : ECO_0000269)"
+            },
+            {
+              "label": "Alternative initiation",
+              "itemType": "comment",
+              "term": "ap_ai",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment alternative Products: alternative initiation",
+              "example": "(cc_ap_ai : \"some value\") AND (ccev_ap_ai : ECO_0000269)"
+            },
+            {
+              "label": "Ribosomal frameshifting",
+              "itemType": "comment",
+              "term": "ap_rf",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment alternative Products: ribosomal frameshifting",
+              "example": "(cc_ap_rf : \"some value\") AND (ccev_ap_rf : ECO_0000269)"
+            }
+          ]
+        },
+        {
+          "label": "Sequence caution",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "comment",
+              "term": "sc",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment Sequence caution",
+              "example": "(cc_sc : translated) AND (ccev_sc : ECO_0000305)"
+            },
+            {
+              "label": "Framshift",
+              "itemType": "comment",
+              "term": "sc_framesh",
+              "dataType": "string",
+              "hasEvidence": false,
+              "description": "Search by Comment Sequence caution: frameshift",
+              "example": "(cc_sc_framesh : ba)"
+            },
+            {
+              "label": "Erroneous initiation",
+              "itemType": "comment",
+              "term": "sc_einit",
+              "dataType": "string",
+              "hasEvidence": false,
+              "description": "Search by Comment Sequence caution: erroneous initiation",
+              "example": "(cc_sc_einit : extended)"
+            },
+            {
+              "label": "Erroneous termination",
+              "itemType": "comment",
+              "term": "sc_eterm",
+              "dataType": "string",
+              "hasEvidence": false,
+              "description": "Search by Comment Sequence caution: erroneous termination",
+              "example": "(cc_sc_eterm : translated)"
+            },
+            {
+              "label": "Erroneous gene model prediction",
+              "itemType": "comment",
+              "term": "sc_epred",
+              "dataType": "string",
+              "hasEvidence": false,
+              "description": "Search by Comment Sequence caution: erroneous gene model prediction",
+              "example": "(cc_sc_epred : ba)"
+            },
+            {
+              "label": "Erroneous translation",
+              "itemType": "comment",
+              "term": "sc_etran",
+              "dataType": "string",
+              "hasEvidence": false,
+              "description": "Search by Comment Sequence caution: erroneous translation",
+              "example": "(cc_sc_etran : choice)"
+            },
+            {
+              "label": "Miscellaneous Discrepancy",
+              "itemType": "comment",
+              "term": "sc_misc",
+              "dataType": "string",
+              "hasEvidence": true,
+              "description": "Search by Comment Sequence caution: miscellaneous discrepancy",
+              "example": "(cc_sc_misc : sequence) AND (ccev_sc_misc : ECO_0000305)"
+            }
+          ]
+        },
+        {
+          "label": "Mass spectrometry",
+          "itemType": "comment",
+          "term": "mass_spectrometry",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment mass spectrometry",
+          "example": "(cc_mass_spectrometry : \"some value\") AND (ccev_mass_spectrometry : ECO_0000269)"
+        },
+        {
+          "label": "Polymorphism",
+          "itemType": "comment",
+          "term": "polymorphism",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment Polymorphism",
+          "example": "(cc_polymorphism : \"some value\") AND (ccev_polymorphism : ECO_0000269)"
+        },
+        {
+          "label": "RNA Editing",
+          "itemType": "comment",
+          "term": "rna_editing",
+          "dataType": "string",
+          "hasEvidence": true,
+          "description": "Search by Comment rna editing",
+          "example": "(cc_rna_editing : \"some value\") AND (ccev_rna_editing : ECO_0000269)"
+        },
+        {
+          "label": "Natural Variations",
+          "itemType": "group",
+          "items": [{
+              "label": "Any",
+              "itemType": "feature",
+              "term": "variants",
+              "dataType": "string",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature natural variations",
+              "example": "(ft_variants : colorectal) AND (ftlen_variants : [1 TO 2]) AND (ftev_variants : ECO_0000269)"
+            },
+            {
+              "label": "Natural variant",
+              "itemType": "feature",
+              "term": "variant",
+              "dataType": "string",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature natural variant",
+              "example": "(ft_variant : colorectal) AND (ftlen_variant : [1 TO 1]) AND (ftev_variant : ECO_0000269)"
+            },
+            {
+              "label": "Alternative sequence",
+              "itemType": "feature",
+              "term": "var_seq",
+              "dataType": "string",
+              "hasRange": true,
+              "hasEvidence": true,
+              "description": "Search by Feature alternative sequence",
+              "example": "(ft_var_seq : \"isoform 3\") AND (ftlen_var_seq : [10 TO 20]) AND (ftev_var_seq : ECO_0000305)"
+            }
+          ]
+        },
+        {
+          "label": "Non-standard residue",
+          "itemType": "feature",
+          "term": "non_std",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature non standard residue",
+          "example": "(ft_non_std : selenocysteine) AND (ftlen_non_std : [1 TO 1]) AND (ftev_non_std : ECO_0000250)"
+        },
+        {
+          "label": "Non-terminal residue",
+          "itemType": "feature",
+          "term": "non_ter",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature non-terminal residue",
+          "example": "(ft_non_ter : *) AND (ftlen_non_ter : [1 TO 1]) AND (ftev_non_ter : ECO_0000303)"
+        },
+        {
+          "label": "Non-adjacent residue",
+          "itemType": "feature",
+          "term": "non_cons",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature non-adjacent residue",
+          "example": "(ft_non_cons : *) AND (ftlen_non_cons : [1 TO 2]) AND (ftev_non_cons : ECO_0000305)"
+        },
+        {
+          "label": "Sequence conflict",
+          "itemType": "feature",
+          "term": "conflict",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature Sequence conflict",
+          "example": "(ft_conflict : *) AND (ftlen_conflict : [1 TO 10]) AND (ftev_conflict : ECO_0000305)"
+        },
+        {
+          "label": "Sequence uncertainty,",
+          "itemType": "feature",
+          "term": "unsure",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature Sequence uncertainty",
+          "example": "(ft_unsure : *) AND (ftlen_unsure : [1 TO 10]) AND (ftev_unsure : ECO_0000269)"
+        },
+        {
+          "label": "Sequence features [FT]",
+          "itemType": "feature",
+          "term": "positional",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by sequence positional features",
+          "example": "(ft_positional : colorectal) AND (ftlen_positional : [1 TO 21]) AND (ftev_positional : ECO_0000269)"
+        },
+        {
+          "label": "Fragment",
+          "term": "fragment",
+          "dataType": "enum",
+          "values": [{
+              "name": "Yes",
+              "value": "true"
+            },
+            {
+              "name": "No",
+              "value": "false"
+            }
+          ],
+          "description": "Search by fragment",
+          "example": "fragment:true"
+        },
+        {
+          "label": "Encoded in",
+          "term": "organelle",
+          "dataType": "string",
+          "autoComplete": true,
+          "description": "Search by organelle",
+          "example": "organelle:mitochondrion"
+        },
+        {
+          "label": "Precursor",
+          "term": "precursor",
+          "dataType": "enum",
+          "values": [{
+              "name": "Yes",
+              "value": "true"
+            },
+            {
+              "name": "No",
+              "value": "false"
+            }
+          ],
+          "description": "Search by precursor",
+          "example": "precursor:true"
+        },
+        {
+          "label": "Sequence from ... [RC]",
+          "itemType": "group",
+          "items": [{
+              "label": "Tissue",
+              "term": "tissue",
+              "dataType": "string",
+              "description": "Search by tissue",
+              "example": "tissue:valu"
+            },
+            {
+              "label": "Strain",
+              "term": "strain",
+              "dataType": "string",
+              "description": "Search by strain",
+              "example": "strain:valu"
+            },
+            {
+              "label": "Plasmid",
+              "term": "plasmid",
+              "dataType": "string",
+              "description": "Search by plasmid",
+              "example": "plasmid:valu"
+            },
+            {
+              "label": "Transposon",
+              "term": "transposon",
+              "dataType": "string",
+              "description": "Search by transposon",
+              "example": "transposon:valu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Family and Domains",
+      "itemType": "group",
+      "items": [{
+          "label": "Domain [FT]",
+          "itemType": "feature",
+          "term": "domain",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature domain",
+          "example": "(ft_domain : phosphatase) AND (ftlen_domain : [10 TO 20]) AND (ftev_domain : ECO_0000259)"
+        },
+        {
+          "label": "Domain Comments [CC]",
+          "itemType": "comment",
+          "term": "domain",
+          "dataType": "string",
+          "hasRange": false,
+          "hasEvidence": true,
+          "description": "Search by comment domain",
+          "example": "(cc_domain : \"some value\") AND (ccev_domain : ECO_0000269)"
+        },
+        {
+          "label": "Protein family",
+          "term": "family",
+          "dataType": "string",
+          "description": "Search by protein belongs to a family",
+          "example": "family:pa28"
+        },
+        {
+          "label": "Coiled-coil",
+          "itemType": "feature",
+          "term": "coiled",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature coiled coil",
+          "example": "(ft_coiled : *) AND (ftlen_coiled : [10 TO 100]) AND (ftev_coiled : ECO_0000255)"
+        },
+        {
+          "label": "Compositional bias",
+          "itemType": "feature",
+          "term": "compbias",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature compositional bias",
+          "example": "(ft_compbias : glu-rich) AND (ftlen_compbias : [10 TO 30]) AND (ftev_compbias : ECO_0000256)"
+        },
+        {
+          "label": "Motif",
+          "itemType": "feature",
+          "term": "motif",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature motif",
+          "example": "(ft_motif : motif) AND (ftlen_motif : [1 TO 100]) AND (ftev_motif : ECO_0000256)"
+        },
+        {
+          "label": "Region",
+          "itemType": "feature",
+          "term": "region",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature region",
+          "example": "(ft_region : motif) AND (ftlen_region : [2 TO 30]) AND (ftev_region : ECO_0000256)"
+        },
+        {
+          "label": "Repeat",
+          "itemType": "feature",
+          "term": "repeat",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature repeat",
+          "example": "ft_repeat : motif) AND (ftlen_repeat : [1 TO 100]) AND (ftev_repeat : ECO_0000256)"
+        },
+        {
+          "label": "Sequence similarity",
+          "itemType": "feature",
+          "term": "similarity",
+          "dataType": "string",
+          "hasRange": false,
+          "hasEvidence": true,
+          "description": "Search by comment similarity",
+          "example": "(cc_similarity : \"some value\") AND (ccev_similarity : ECO_0000269)"
+        },
+        {
+          "label": "Zinc finger",
+          "itemType": "feature",
+          "term": "zn_fing",
+          "dataType": "string",
+          "hasRange": true,
+          "hasEvidence": true,
+          "description": "Search by feature zinc finger",
+          "example": "(ft_zn_fing : UBP) AND (ftlen_zn_fing : [2 TO 70]) AND (ftev_zn_fing : ECO_0000256)"
+        }
+      ]
+    },
+    {
+      "label": "Cross-references",
+      "itemType": "database",
+      "term": "xref_",
+      "dataType": "string",
+      "description": "Search by Cross reference",
+      "example": "(xref_embl: EU518936)"
+    },
+    {
+      "label": "Web Resources",
+      "term": "comment_webresource",
+      "dataType": "string",
+      "description": "Search by comment Web resources",
+      "example": "comment_webresource:lck"
+    },
+    {
+      "label": "Date Of",
+      "itemType": "group",
+      "items": [{
+          "label": "Date Of Creation",
+          "term": "created",
+          "dataType": "date",
+          "hasRange": true,
+          "description": "Search by Date of creation",
+          "example": "created:[20180304 TO 20180308]"
+        },
+        {
+          "label": "Date of last entry modification",
+          "term": "modified",
+          "dataType": "date",
+          "hasRange": true,
+          "description": "Search by Date of last entry modification",
+          "example": "modified:[20180304 TO 20180308]"
+        },
+        {
+          "label": "Date of last sequence modification",
+          "term": "sequence_modified",
+          "dataType": "date",
+          "hasRange": true,
+          "description": "Search by Date of last sequence modification",
+          "example": "sequence_modified:[20180304 TO 20180308]"
+        }
+      ]
+    },
+    {
+      "label": "Gene Ontology [GO]",
+      "itemType": "goterm",
+      "term": "go",
+      "hasEvidence": true,
+      "description": "search go term with evidence. If evidence is not consider term is go. If evidence is considered such as iea, the term is go_iea",
+      "example": "go_iso:0009986"
+    },
+    {
+      "label": "Keyword [KW]",
+      "term": "keywords",
+      "dataType": "string",
+      "autoComplete": true,
+      "description": "Search by keyword",
+      "example": "keywords:chromosomal"
+    },
+    {
+      "label": "Literature Citation",
+      "itemType": "group",
+      "items": [{
+          "label": "Title & Abstract",
+          "term": "lit_citation",
+          "dataType": "string",
+          "description": "Search by title or abstract",
+          "example": "lit_citation: somevalue"
+        },
+        {
+          "label": "Author",
+          "term": "lib_author",
+          "dataType": "string",
+          "description": "Search by author",
+          "example": "(lit_author :smith)"
+        },
+        {
+          "label": "Journal",
+          "term": "lit_journal",
+          "dataType": "string",
+          "description": "Search by journal name",
+          "example": "(lit_journal: nature)"
+        },
+        {
+          "label": "Published",
+          "term": "lit_pubdate",
+          "dataType": "date",
+          "description": "Search by published date",
+          "example": "lit_pubdate : [2017-01-01 TO 2010-12-31]"
+        },
+        {
+          "label": "PubMed Id",
+          "term": "lit_pubmed",
+          "dataType": "string",
+          "description": "Search by pubmed id",
+          "example": "(lit_pubmed : 15165820)"
+        },
+        {
+          "label": "Title",
+          "term": "lit_title",
+          "dataType": "string",
+          "description": "Search by title",
+          "example": "(lit_title : protein)"
+        }
+      ]
+    },
+    {
+      "label": "Proteomes",
+      "itemType": "group",
+      "items": [{
+          "label": "Proteome ID",
+          "term": "xref_proteome",
+          "dataType": "string",
+          "description": "Search by Proteome ID",
+          "example": "xref_proteomes:UP1234"
+        },
+        {
+          "label": "Proteome Component",
+          "term": "proteomecomponent",
+          "dataType": "string",
+          "description": "Search by Proteome component",
+          "example": "proteomecomponent:va"
+        }
+      ]
+    },
+    {
+      "label": "Cited for",
+      "term": "scope",
+      "dataType": "string",
+      "description": "Search by citation RP cited for",
+      "example": "scope:microtubule"
+    },
+    {
+      "label": "Reviewed",
+      "term": "reviewed",
+      "dataType": "enum",
+      "values": [{
+          "name": "Yes",
+          "value": "true"
+        },
+        {
+          "name": "No",
+          "value": "false"
+        }
+      ],
+      "description": "Search by reviewed",
+      "example": "reviewed:true"
+    },
+    {
+      "label": "Active",
+      "term": "active",
+      "dataType": "enum",
+      "values": [{
+          "name": "Yes",
+          "value": "true"
+        },
+        {
+          "name": "No",
+          "value": "false"
+        }
+      ],
+      "description": "Search by active or not",
+      "example": "active:true"
+    }
+  ]
+}

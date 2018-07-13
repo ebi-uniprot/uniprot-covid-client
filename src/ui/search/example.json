@@ -1,0 +1,81 @@
+[{
+    "label": "Mass(Da)",
+    "itemType": "single",
+    "term": "mass",
+    "dataType": "range",
+    "description": "Search by Sequence mass",
+    "example": "441126 TO 441126"
+  },
+  {
+    "label": "Natural Variations",
+    "items": [{
+      "label": "Any",
+      "itemType": "group", //Display the child items together
+      "items": [{
+          "itemType": "feature",
+          "term": "variants",
+          "dataType": "string",
+          "description": "Search by Feature natural variations",
+          "example": "colorectal"
+        },
+        {
+          "itemType": "feature",
+          "term": "variants",
+          "dataType": "range", // Display as a range
+          "description": "Search by Feature natural variations",
+          "example": "1 TO 2"
+        },
+        {
+          "itemType": "feature",
+          "term": "variants",
+          "dataType": "evidence", // Display the evidence selector
+          "description": "Search by Feature natural variations"
+        }
+      ]
+    }]
+  },
+  {
+    "label": "Literature Citation",
+    "itemType": "group", //Display the child items together
+    "items": [{
+        "label": "Title & Abstract",
+        "term": "lit_citation",
+        "dataType": "string",
+        "description": "Search by title or abstract",
+        "example": "somevalue"
+      },
+      {
+        "label": "Author",
+        "term": "lib_author",
+        "dataType": "string",
+        "description": "Search by author",
+        "example": "smith"
+      },
+      {
+        "label": "Journal",
+        "term": "lit_journal",
+        "dataType": "string",
+        "description": "Search by journal name",
+        "example": "nature"
+      }
+    ]
+  },
+  {
+    "label": "Proteomes", //No "itemType":"group" means don't display the child items together
+    "items": [{
+        "label": "Proteome ID",
+        "term": "xref_proteome",
+        "dataType": "string",
+        "description": "Search by Proteome ID",
+        "example": "UP1234"
+      },
+      {
+        "label": "Proteome Component",
+        "term": "proteomecomponent",
+        "dataType": "string",
+        "description": "Search by Proteome component",
+        "example": "va"
+      }
+    ]
+  }
+]
