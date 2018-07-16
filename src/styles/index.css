@@ -2,21 +2,12 @@
   width: 100%;
   display: grid;
   grid-area: block; }
-  .block div {
-    height: 200px;
-    margin: 10px; }
   .block--1-col {
     grid-template-columns: repeat(1, 100%); }
-    .block--1-col div {
-      background: blue; }
   .block--2-col {
     grid-template-columns: repeat(2, 50%); }
-    .block--2-col div {
-      background: red; }
   .block--3-col {
     grid-template-columns: repeat(3, calc(100%/3)); }
-    .block--3-col div {
-      background: yellow; }
   .block--4-col {
     grid-template-columns: repeat(4, 25%); }
 
@@ -25,9 +16,16 @@ section#layout[data-layout="home-page"] {
 
 .advanced-search .advanced-search__field {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-around; }
+  align-items: center; }
+  .advanced-search .advanced-search__field > div,
+  .advanced-search .advanced-search__field > select,
+  .advanced-search .advanced-search__field > a {
+    margin: 0 0.5rem; }
   .advanced-search .advanced-search__field .advanced-search__logic {
     flex: 0 1 6rem; }
   .advanced-search .advanced-search__field .advanced-search__inputs {
-    flex-grow: 2; }
+    flex-grow: 2;
+    margin-bottom: .5rem;
+    display: flex; }
+    .advanced-search .advanced-search__field .advanced-search__inputs label {
+      width: 100%; }
