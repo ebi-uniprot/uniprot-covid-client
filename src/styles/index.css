@@ -2,6 +2,8 @@
   width: 100%;
   display: grid;
   grid-area: block; }
+  .block > div {
+    margin: 0 0.5rem; }
   .block--1-col {
     grid-template-columns: repeat(1, 100%); }
   .block--2-col {

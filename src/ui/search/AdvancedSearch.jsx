@@ -1,26 +1,44 @@
-import React, { Component } from 'react';
-import cloneDeep from 'lodash/cloneDeep';
-import jsonData from './uniprot_search_new.json';
-import AdvancedSearchField from './AdvancedSearchField';
+// @flow
+import React, { Component } from "react";
+import AdvancedSearchField from "./AdvancedSearchField";
+import axios from "axios";
 
-class AdvancedSearch extends Component {
-  static getRandomId() {
-    return Math.random()
-      .toString(36)
-      .replace(/[^a-z]+/g, '');
-  }
+import type Node from "./AdvancedSearch";
 
-  constructor(props) {
+type Props = {};
+
+type State = {
+  namespace: string,
+  data: Array<Node>,
+  fields: Array<Field>
+};
+
+type Field = {
+  id: string,
+  ref: React.Ref<AdvancedSearchField>
+};
+
+class AdvancedSearch extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      namespace: 'UniProtKB',
-      data: jsonData.searchItems,
-      fields: undefined,
+      namespace: "UniProtKB",
+      data: [],
+      fields: this.initFields()
     };
   }
 
   componentDidMount() {
-    this.setState({ fields: this.initFields() });
+    axios
+      .get("//wp-np2-be.ebi.ac.uk:8081/configure/uniprot/search_terms")
+      .then(d => this.setState({ data: d.data }))
+      .catch(err => console.log(err));
+  }
+
+  _getRandomId(): string {
+    return Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, "");
   }
 
   initFields() {
@@ -31,84 +49,53 @@ class AdvancedSearch extends Component {
     return fields;
   }
 
-  createField() {
+  createField(): Field {
     return {
-      id: AdvancedSearch.getRandomId(),
-      selectedNode: cloneDeep(this.state.data[0]),
-      logic: 'AND',
+      id: this._getRandomId(),
+      ref: React.createRef()
     };
   }
 
-  // _updateSelectedNode(node, id) {
-  //   const fields = cloneDeep(this.state.fields);
-  //   fields.map((field) => {
-  //     if (field.id === id) {
-  //       field.selectedNode = node;
-  //     }
-  //   });
-  //   this.setState({ fields });
-  // }
-
-  _updateLogic(e, id) {
-    const fields = cloneDeep(this.state.fields);
-    fields.map((field) => {
-      if (field.id === id) {
-        field.logic = e.target.value;
-      }
-    });
-    this.setState({ fields });
-  }
-
   _addField() {
-    const fields = cloneDeep(this.state.fields);
-    fields.push(this._createField());
+    const fields = this.state.fields;
+    fields.push(this.createField());
     this.setState({ fields });
   }
 
-  _removeField(id) {
-    const fields = cloneDeep(this.state.fields);
+  _removeField(id: string) {
+    const fields = this.state.fields;
     fields.splice(fields.findIndex(field => field.id === id), 1);
     this.setState({ fields });
   }
 
-  _getQueryField() {
-    let queryString = '';
-    // TODO handle proper query string creation
-    console.log(this.state.selectedNode.queryField);
-    for (const input of this.state.selectedNode.inputs) {
-      queryString = `${queryString} ${input.queryField}:"${input.value}"`.trim();
-    }
-    return queryString;
-  }
-
   _submitQuery() {
-    console.log(this.state.fields);
+    let query = "";
+    this.state.fields.map((field, index) => {
+      if (index > 0) {
+        query = `${query}${field.ref.current.state.logic}`;
+      }
+      query = `${query}(${field.ref.current.state.selectedNode.term}:${
+        field.ref.current.state.inputValues
+      })`;
+    });
+    console.log(query);
   }
 
   render() {
-    if (typeof this.state.fields === 'undefined') {
+    if (this.state.data.length <= 0) {
       return null;
     }
     return (
       <div className="advanced-search">
         <div>
-          Searching in{' '}
+          Searching in{" "}
           <select>
             <option>{this.state.namespace}</option>
           </select>
         </div>
-        {this.state.fields.map(field => (
-          <div key={field.id} className="advanced-search__field">
-            <select
-              className="advanced-search__logic"
-              value={field.logic}
-              onChange={e => this._updateLogic(e, field.id)}
-            >
-              <option value="AND">AND</option>
-              <option value="OR">OR</option>
-              <option value="NOT">NOT</option>
-            </select>
-            <AdvancedSearchField data={this.state.data} selectedNode={field.selectedNode} />
+        {this.state.fields.map((field, i) => (
+          <div key={`field_${field.id}`} className="advanced-search__field">
+            <AdvancedSearchField data={this.state.data} ref={field.ref} />
             <a onClick={() => this._removeField(field.id)}>Remove</a>
           </div>
         ))}

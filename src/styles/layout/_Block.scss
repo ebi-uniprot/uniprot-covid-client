@@ -1,9 +1,15 @@
+@import '../settings';
+
 // Layout Blocks
 // -------------
 .block {
   width: 100%;
   display: grid;
   grid-area: block;
+
+  &>div {
+    margin: 0 $gutter-size;
+  }
 
   &--1-col {
     grid-template-columns: repeat(1, 100%);
