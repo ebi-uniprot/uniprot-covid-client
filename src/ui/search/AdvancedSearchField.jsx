@@ -1,6 +1,7 @@
 // @flow
 import React, { Component, Fragment } from "react";
 import cloneDeep from "lodash/cloneDeep";
+import EvidenceField from "./EvidenceField";
 import { TreeSelect } from "franklin-sites";
 
 const dataTypes = { string: "text", integer: "number" };
@@ -12,6 +13,7 @@ export type Node = {
   itemType: string,
   dataType: string,
   hasRange?: boolean,
+  hasEvidence?: boolean,
   options?: Array<{
     name: string,
     values: Array<{
@@ -29,13 +31,18 @@ type Props = {
 
 type State = {
   selectedNode: Node,
-  inputValues: string | number,
+  inputs: {
+    stringValue?: string,
+    rangeValue?: string,
+    evidenceValue?: string
+  },
   logic: Operator
 };
 
 class AdvancedSearchField extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    //Define default query field
     this.state = {
       selectedNode: {
         label: "Any",
@@ -44,7 +51,9 @@ class AdvancedSearchField extends Component<Props, State> {
         itemType: "single",
         dataType: "string"
       },
-      inputValues: "*",
+      inputs: {
+        stringValue: "*"
+      },
       logic: "AND"
     };
   }
@@ -53,12 +62,20 @@ class AdvancedSearchField extends Component<Props, State> {
     this.setState({ selectedNode: node });
   }
 
-  handleInputChange(
+  handleInputChange = (
     e: SyntheticInputEvent<HTMLInputElement>,
     queryField: string | number
-  ) {
-    this.setState({ inputValues: e.target.value });
-  }
+  ) => {
+    const inputs = this.state.inputs;
+    inputs.stringValue = e.target.value;
+    this.setState({ inputs });
+  };
+
+  handleEvidenceChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const inputs = this.state.inputs;
+    inputs.evidenceValue = e.target.value;
+    this.setState({ inputs });
+  };
 
   handleRangeInput(e: SyntheticInputEvent<HTMLInputElement>) {
     // const selectedNode = cloneDeep(this.state.selectedNode);
@@ -178,13 +195,11 @@ class AdvancedSearchField extends Component<Props, State> {
 
   getQueryString(): string {
     return `${this.state.logic}(${this.state.selectedNode.term}:${
-      this.state.inputValues
+      this.state.inputs.stringValue
     })`;
   }
 
   render() {
-    // this.state.hasRange
-    // this.state.hasEvidence
     // this.state.autoComplete
 
     // .itemType
@@ -236,6 +251,12 @@ class AdvancedSearchField extends Component<Props, State> {
           onSelect={e => this._selectNode(e)}
         />
         {field}
+        {this.state.selectedNode.hasEvidence && (
+          <EvidenceField
+            updateEvidence={this.handleEvidenceChange}
+            selectedEvidence={this.state.inputs.evidenceValue}
+          />
+        )}
       </Fragment>
     );
   }

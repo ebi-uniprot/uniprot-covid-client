@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import AdvancedSearchField from "./AdvancedSearchField";
+import apiUrls from "../apiUrls";
 import axios from "axios";
 
 import type Node from "./AdvancedSearch";
@@ -29,8 +30,9 @@ class AdvancedSearch extends Component<Props, State> {
   }
 
   componentDidMount() {
+    console.log(apiUrls.advanced_search_terms);
     axios
-      .get("//wp-np2-be.ebi.ac.uk:8081/configure/uniprot/search_terms")
+      .get(apiUrls.advanced_search_terms)
       .then(d => this.setState({ data: d.data }))
       .catch(err => console.log(err));
   }
