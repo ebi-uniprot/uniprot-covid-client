@@ -1,31 +1,31 @@
 // @flow
-import React, { Component } from "react";
-import AdvancedSearchField from "./AdvancedSearchField";
-import apiUrls from "../apiUrls";
-import axios from "axios";
+import React, { Component } from 'react';
+import AdvancedSearchField from './AdvancedSearchField';
+import apiUrls from '../apiUrls';
+import axios from 'axios';
 
-import type Node from "./AdvancedSearch";
+import type Node from './AdvancedSearch';
 
 type Props = {};
 
 type State = {
   namespace: string,
   data: Array<Node>,
-  fields: Array<Field>
+  fields: Array<Field>,
 };
 
 type Field = {
   id: string,
-  ref: React.Ref<AdvancedSearchField>
+  ref: React.Ref<AdvancedSearchField>,
 };
 
 class AdvancedSearch extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      namespace: "UniProtKB",
+      namespace: 'UniProtKB',
       data: [],
-      fields: this.initFields()
+      fields: this.initFields(),
     };
   }
 
@@ -40,7 +40,7 @@ class AdvancedSearch extends Component<Props, State> {
   _getRandomId(): string {
     return Math.random()
       .toString(36)
-      .replace(/[^a-z]+/g, "");
+      .replace(/[^a-z]+/g, '');
   }
 
   initFields() {
@@ -54,7 +54,7 @@ class AdvancedSearch extends Component<Props, State> {
   createField(): Field {
     return {
       id: this._getRandomId(),
-      ref: React.createRef()
+      ref: React.createRef(),
     };
   }
 
@@ -71,7 +71,7 @@ class AdvancedSearch extends Component<Props, State> {
   }
 
   _submitQuery() {
-    let query = "";
+    let query = '';
     this.state.fields.map((field, index) => {
       if (index > 0) {
         query = `${query}${field.ref.current.state.logic}`;
@@ -90,7 +90,7 @@ class AdvancedSearch extends Component<Props, State> {
     return (
       <div className="advanced-search">
         <div>
-          Searching in{" "}
+          Searching in{' '}
           <select>
             <option>{this.state.namespace}</option>
           </select>

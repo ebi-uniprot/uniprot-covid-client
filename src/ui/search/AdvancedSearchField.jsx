@@ -1,10 +1,10 @@
 // @flow
-import React, { Component, Fragment } from "react";
-import cloneDeep from "lodash/cloneDeep";
-import EvidenceField from "./EvidenceField";
-import { TreeSelect } from "franklin-sites";
+import React, { Component, Fragment } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
+import { TreeSelect } from 'franklin-sites';
+import EvidenceField from './EvidenceField';
 
-const dataTypes = { string: "text", integer: "number" };
+const dataTypes = { string: 'text', integer: 'number' };
 
 export type Node = {
   label: string,
@@ -18,15 +18,15 @@ export type Node = {
     name: string,
     values: Array<{
       name: string,
-      label: string
-    }>
-  }>
+      label: string,
+    }>,
+  }>,
 };
 
-type Operator = "AND" | "OR" | "NOT";
+type Operator = 'AND' | 'OR' | 'NOT';
 
 type Props = {
-  data: Array<Node>
+  data: Array<Node>,
 };
 
 type State = {
@@ -34,27 +34,27 @@ type State = {
   inputs: {
     stringValue?: string,
     rangeValue?: string,
-    evidenceValue?: string
+    evidenceValue?: string,
   },
-  logic: Operator
+  logic: Operator,
 };
 
 class AdvancedSearchField extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    //Define default query field
+    // Define default query field
     this.state = {
       selectedNode: {
-        label: "Any",
-        term: "",
-        example: "a4_human, P05067, cdc7 human",
-        itemType: "single",
-        dataType: "string"
+        label: 'Any',
+        term: '',
+        example: 'a4_human, P05067, cdc7 human',
+        itemType: 'single',
+        dataType: 'string',
       },
       inputs: {
-        stringValue: "*"
+        stringValue: '*',
       },
-      logic: "AND"
+      logic: 'AND',
     };
   }
 
@@ -62,10 +62,7 @@ class AdvancedSearchField extends Component<Props, State> {
     this.setState({ selectedNode: node });
   }
 
-  handleInputChange = (
-    e: SyntheticInputEvent<HTMLInputElement>,
-    queryField: string | number
-  ) => {
+  handleInputChange = (e: SyntheticInputEvent<HTMLInputElement>, queryField: string | number) => {
     const inputs = this.state.inputs;
     inputs.stringValue = e.target.value;
     this.setState({ inputs });
@@ -91,7 +88,7 @@ class AdvancedSearchField extends Component<Props, State> {
   renderField(input: Node) {
     return (
       <Fragment>
-        {(!input.hasRange || input.dataType !== "integer") && (
+        {(!input.hasRange || input.dataType !== 'integer') && (
           <div className="advanced-search__inputs" key={input.term}>
             <label htmlFor={`input_${input.term}`}>
               {input.label}
@@ -143,12 +140,9 @@ class AdvancedSearchField extends Component<Props, State> {
       <div className="advanced-search__inputs" key={input.term}>
         <label htmlFor={`input_${input.term}`}>
           {input.label}
-          <select
-            id={`input_${input.term}`}
-            onChange={e => this.handleInputChange(e, input.term)}
-          >
-            {input.options &&
-              input.options.map(optgroup => (
+          <select id={`input_${input.term}`} onChange={e => this.handleInputChange(e, input.term)}>
+            {input.options
+              && input.options.map(optgroup => (
                 <optgroup label={optgroup.name}>
                   {optgroup.values.map(option => (
                     <option value={option.name} key={option.name}>
@@ -190,13 +184,11 @@ class AdvancedSearchField extends Component<Props, State> {
   }
 
   renderDateField(input: Node) {
-    //TODO render calendar picker
+    // TODO render calendar picker
   }
 
   getQueryString(): string {
-    return `${this.state.logic}(${this.state.selectedNode.term}:${
-      this.state.inputs.stringValue
-    })`;
+    return `${this.state.logic}(${this.state.selectedNode.term}:${this.state.inputs.stringValue})`;
   }
 
   render() {
@@ -223,10 +215,10 @@ class AdvancedSearchField extends Component<Props, State> {
 
     let field;
     switch (this.state.selectedNode.dataType) {
-      case "enum":
+      case 'enum':
         field = this.renderEnumField(this.state.selectedNode);
         break;
-      case "date":
+      case 'date':
         field = this.renderDateField(this.state.selectedNode);
         break;
       default:
@@ -246,10 +238,7 @@ class AdvancedSearchField extends Component<Props, State> {
           <option value="NOT">NOT</option>
         </select>
 
-        <TreeSelect
-          data={this.props.data}
-          onSelect={e => this._selectNode(e)}
-        />
+        <TreeSelect data={this.props.data} onSelect={e => this._selectNode(e)} />
         {field}
         {this.state.selectedNode.hasEvidence && (
           <EvidenceField

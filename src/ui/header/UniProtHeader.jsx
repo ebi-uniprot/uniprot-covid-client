@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, TreeSelect } from 'franklin-sites';
+import { Header } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../svg/uniprot-rgb.svg';
@@ -11,22 +11,28 @@ const UniProtHeader = () => (
     </a>
     <ul className="header__navigation">
       <li>
-        <Link to="/">BLAST</Link>{' '}
+        <Link to="/">BLAST</Link>
+        {' '}
       </li>
       <li>
-        <Link to="/">Aligh</Link>{' '}
+        <Link to="/">Aligh</Link>
+        {' '}
       </li>
       <li>
-        <Link to="/">Peptide search</Link>{' '}
+        <Link to="/">Peptide search</Link>
+        {' '}
       </li>
       <li>
-        <Link to="/">Retrieve/ID Mapping</Link>{' '}
+        <Link to="/">Retrieve/ID Mapping</Link>
+        {' '}
       </li>
       <li>
-        <Link to="/">API</Link>{' '}
+        <Link to="/">API</Link>
+        {' '}
       </li>
       <li>
-        <Link to="/">Help</Link>{' '}
+        <Link to="/">Help</Link>
+        {' '}
       </li>
     </ul>
   </Header>
