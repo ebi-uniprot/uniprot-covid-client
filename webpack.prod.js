@@ -14,5 +14,6 @@ module.exports = merge(common, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
+    new webpack.DefinePlugin({ BASE_URL: JSON.stringify('/uniprot-website') }),
   ],
 });
