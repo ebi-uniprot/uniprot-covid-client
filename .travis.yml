@@ -6,3 +6,4 @@ notifications:
     - xwatkins@ebi.ac.uk
     - mmahmoudy@ebi.ac.uk
     - dlrice@ebi.ac.uk
+  slack: ebi-uniprot:7OMFmmkUp9uxH3SXgyq7OVb3
