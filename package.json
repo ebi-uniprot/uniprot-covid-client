@@ -8,7 +8,7 @@
     "dev-server": "webpack --mode development && webpack-dev-server --mode development --open",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src/** __tests__/** __mocks__/**",
+    "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src __tests__ __mocks__",
     "csslint": "scss-lint ./src/styles/**/*.scss",
     "test": "jest",
     "remove-obsolete-snapshots": "yarn test -u",
