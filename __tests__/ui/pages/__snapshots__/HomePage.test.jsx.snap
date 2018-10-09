@@ -1,26 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HomePage component should render 1`] = `
-<div
-  className="default-page-layout"
+<section
+  data-layout="home-page"
+  id="layout"
 >
-  You are viewing 
-  <b>
-    Home Page
-  </b>
-  <br />
-  <div
-    className="default-page-conent"
+  <section
+    id="layout-content"
   >
-    <h3>
-      Welcome!
-    </h3>
-    <a
-      href="/sample-page"
-      onClick={[Function]}
+    <div
+      className="block block--1-col"
+    />
+    <div
+      className="block block--4-col"
     >
-      Go to Sample Page
-    </a>
-  </div>
-</div>
+      <div
+        className="tile"
+      >
+        <h3
+          className="tile__header"
+        >
+          UniProtKB
+        </h3>
+        <p
+          className="tile__content"
+        >
+          This is a short description of what the resource is/provides.
+        </p>
+      </div>
+      <div
+        className="tile tile-proteomes"
+      >
+        <h3
+          className="tile__header"
+        >
+          Proteomes
+        </h3>
+        <p
+          className="tile__content"
+        >
+          Sets of proteins for reference and other species of interest.
+        </p>
+      </div>
+      <div
+        className="tile tile-uniref"
+      >
+        <h3
+          className="tile__header"
+        >
+          UniRef
+        </h3>
+        <p
+          className="tile__content"
+        >
+          Clusters of protein sequences at 100%, 90% & 50% similarity
+        </p>
+      </div>
+      <div
+        className="tile tile-uniparc"
+      >
+        <h3
+          className="tile__header"
+        >
+          UniParc
+        </h3>
+        <p
+          className="tile__content"
+        >
+          Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)
+        </p>
+      </div>
+    </div>
+  </section>
+</section>
 `;

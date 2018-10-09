@@ -29,7 +29,10 @@ module.exports = {
       },
       {
         test: /\.(css|sass|scss)$/,
-        exclude: /node_modules/,
+        include: [
+          path.resolve(__dirname, 'node_modules/franklin-sites/dist'),
+          path.resolve(__dirname, 'src'),
+        ],
         use: [
           {
             loader: 'style-loader', // creates style nodes from JS strings
