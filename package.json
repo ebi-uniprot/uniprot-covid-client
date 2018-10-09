@@ -5,9 +5,8 @@
   "repository": "",
   "license": "MIT",
   "scripts": {
-    "dev-server": "webpack --mode development && webpack-dev-server --mode development --open",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
+    "dev-server": "webpack-dev-server --mode development --open --config webpack.dev.js",
+    "build": "webpack --mode production --config webpack.prod.js",
     "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src __tests__ __mocks__",
     "csslint": "scss-lint ./src/styles/**/*.scss",
     "test": "jest",
@@ -37,7 +36,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "franklin-sites": "^0.0.2",
+    "franklin-sites": "^0.0.3-dev.1",
     "lodash": "^4.17.11",
     "node-sass-chokidar": "^1.3.3",
     "npm-run-all": "^4.1.2",
@@ -60,8 +59,6 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "browser-sync": "^2.24.7",
-    "browser-sync-webpack-plugin": "^2.0.1",
     "css-loader": "^1.0.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
@@ -84,6 +81,7 @@
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
   }
 }
