@@ -1,31 +1,31 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import apiUrls from "../apiUrls";
-import axios from "axios";
+import axios from 'axios';
+import apiUrls from '../apiUrls';
 
 type Props = {
   updateEvidence: Function,
-  selectedEvidence?: string
+  selectedEvidence?: string,
 };
 
 type State = {
-  evidenceList: Array<Group>
+  evidenceList: Array<Group>,
 };
 
 type Group = {
   groupName: string,
   items: Array<{
     code: string,
-    name: string
-  }>
+    name: string,
+  }>,
 };
 
 class EvidenceField extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      evidenceList: []
+      evidenceList: [],
     };
   }
 
@@ -44,10 +44,7 @@ class EvidenceField extends Component<Props, State> {
       <div className="advanced-search__inputs">
         <label>
           Evidence
-          <select
-            value={this.props.selectedEvidence}
-            onChange={e => this.props.updateEvidence(e)}
-          >
+          <select value={this.props.selectedEvidence} onChange={e => this.props.updateEvidence(e)}>
             {this.state.evidenceList.map(group => (
               <optgroup label={group.groupName} key={group.groupName}>
                 {group.items.map(item => (

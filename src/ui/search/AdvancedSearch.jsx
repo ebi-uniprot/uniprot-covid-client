@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
+import axios from 'axios';
 import AdvancedSearchField from './AdvancedSearchField';
 import apiUrls from '../apiUrls';
-import axios from 'axios';
 
 import type Node from './AdvancedSearch';
 
@@ -73,12 +73,7 @@ class AdvancedSearch extends Component<Props, State> {
   _submitQuery() {
     let query = '';
     this.state.fields.map((field, index) => {
-      if (index > 0) {
-        query = `${query}${field.ref.current.state.logic}`;
-      }
-      query = `${query}(${field.ref.current.state.selectedNode.term}:${
-        field.ref.current.state.inputValues
-      })`;
+      query = `${query}${field.ref.current.getQueryString()}`;
     });
     console.log(query);
   }
@@ -90,7 +85,8 @@ class AdvancedSearch extends Component<Props, State> {
     return (
       <div className="advanced-search">
         <div>
-          Searching in{' '}
+          Searching in
+          {' '}
           <select>
             <option>{this.state.namespace}</option>
           </select>
