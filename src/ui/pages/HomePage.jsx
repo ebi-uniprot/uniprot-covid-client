@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+// @flow
+import React from 'react';
 import { Tile } from 'franklin-sites';
 
 import Block from '../layout/Block';

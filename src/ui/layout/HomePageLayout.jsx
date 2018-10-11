@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from 'react';
+// @flow
+import React from 'react';
+import type { Node } from 'react';
 
-class HomePageLayout extends Component {
+type Props = {
+  children: Node,
+};
 
-  render() {
-    const { children } = this.props;
-
-    return (
-      <section id="layout" data-layout="home-page">
-        <section id="layout-content">
-          { children }
-        </section>
-      </section>
-    );
-  }
-}
+const HomePageLayout = (props: Props) => {
+  const { children } = props;
+  return (
+    <section id="layout" data-layout="home-page">
+      <section id="layout-content">{children}</section>
+    </section>
+  );
+};
 
 export default HomePageLayout;

@@ -9,10 +9,6 @@ type Props = {
   selectedEvidence?: string,
 };
 
-type State = {
-  evidenceList: Array<Group>,
-};
-
 type Group = {
   groupName: string,
   items: Array<{
@@ -21,7 +17,15 @@ type Group = {
   }>,
 };
 
+type State = {
+  evidenceList: Array<Group>,
+};
+
 class EvidenceField extends Component<Props, State> {
+  static defaultProps = {
+    selectedEvidence: '',
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -37,15 +41,17 @@ class EvidenceField extends Component<Props, State> {
   }
 
   render() {
-    if (this.state.evidenceList.length <= 0) {
+    const { evidenceList } = this.state;
+    const { selectedEvidence, updateEvidence } = this.props;
+    if (evidenceList.length <= 0) {
       return null;
     }
     return (
       <div className="advanced-search__inputs">
-        <label>
+        <label htmlFor="evidence_select">
           Evidence
-          <select value={this.props.selectedEvidence} onChange={e => this.props.updateEvidence(e)}>
-            {this.state.evidenceList.map(group => (
+          <select id="evidence_select" value={selectedEvidence} onChange={e => updateEvidence(e)}>
+            {evidenceList.map(group => (
               <optgroup label={group.groupName} key={group.groupName}>
                 {group.items.map(item => (
                   <option value={item.code} key={item.code}>

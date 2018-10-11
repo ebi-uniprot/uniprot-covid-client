@@ -1,10 +1,15 @@
-import React, { Fragment } from 'react';
+// @flow
+import React from 'react';
+import type { Node } from 'react';
 
+type Props = {
+  columns: string,
+  children: Node,
+};
 
-const Block = props => (
-  <div className={`block block--${props.columns}-col`}>
-    { props.children }
-  </div>
-);
+const Block = (props: Props) => {
+  const { columns, children } = props;
+  return <div className={`block block--${columns}-col`}>{children}</div>;
+};
 
 export default Block;
