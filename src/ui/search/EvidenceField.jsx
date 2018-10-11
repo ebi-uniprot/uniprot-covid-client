@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-import apiUrls from '../apiUrls';
 
 type Props = {
   updateEvidence: Function,
   selectedEvidence?: string,
+  url: string,
 };
 
 type Group = {
@@ -34,8 +34,10 @@ class EvidenceField extends Component<Props, State> {
   }
 
   componentDidMount() {
+    const { url } = this.props;
+    console.log(url);
     axios
-      .get(apiUrls.annotation_evidences)
+      .get(url)
       .then(data => this.setState({ evidenceList: data.data }))
       .catch(e => console.error(e));
   }

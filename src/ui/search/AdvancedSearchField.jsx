@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
+import apiUrls from '../apiUrls';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
@@ -202,6 +203,11 @@ class AdvancedSearchField extends Component<Props> {
             <EvidenceField
               updateEvidence={this.handleEvidenceChange}
               selectedEvidence={field.queryInput.evidenceValue}
+              url={
+                field.selectedNode.term === 'go'
+                  ? apiUrls.go_evidences
+                  : apiUrls.annotation_evidences
+              }
             />
         )}
       </Fragment>
