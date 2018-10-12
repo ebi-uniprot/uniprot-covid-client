@@ -10,6 +10,7 @@
     "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src __tests__ __mocks__",
     "csslint": "scss-lint ./src/styles/**/*.scss",
     "test": "jest",
+    "test-watch": "jest --watch",
     "remove-obsolete-snapshots": "yarn test -u",
     "build-css": "node-sass-chokidar src/styles -o src/styles",
     "watch-css": "npm run build-css && node-sass-chokidar src/styles -o src/styles --watch --recursive",

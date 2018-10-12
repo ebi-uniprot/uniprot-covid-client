@@ -1,51 +1,22 @@
 // @flow
 import React, { Component } from 'react';
-
-import axios from 'axios';
+import withData from '../hoc/withData';
 
 type Props = {
   updateEvidence: Function,
   selectedEvidence?: string,
   url: string,
+  data: Array<Group>,
 };
 
-type Group = {
-  groupName: string,
-  items: Array<{
-    code: string,
-    name: string,
-  }>,
-};
-
-type State = {
-  evidenceList: Array<Group>,
-};
-
-class EvidenceField extends Component<Props, State> {
+class EvidenceField extends Component<Props> {
   static defaultProps = {
     selectedEvidence: '',
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      evidenceList: [],
-    };
-  }
-
-  componentDidMount() {
-    const { url } = this.props;
-    console.log(url);
-    axios
-      .get(url)
-      .then(data => this.setState({ evidenceList: data.data }))
-      .catch(e => console.error(e));
-  }
-
   render() {
-    const { evidenceList } = this.state;
-    const { selectedEvidence, updateEvidence } = this.props;
-    if (evidenceList.length <= 0) {
+    const { data, selectedEvidence, updateEvidence } = this.props;
+    if (!data) {
       return null;
     }
     return (
@@ -53,7 +24,7 @@ class EvidenceField extends Component<Props, State> {
         <label htmlFor="evidence_select">
           Evidence
           <select id="evidence_select" value={selectedEvidence} onChange={e => updateEvidence(e)}>
-            {evidenceList.map(group => (
+            {data.map(group => (
               <optgroup label={group.groupName} key={group.groupName}>
                 {group.items.map(item => (
                   <option value={item.code} key={item.code}>
@@ -69,4 +40,4 @@ class EvidenceField extends Component<Props, State> {
   }
 }
 
-export default EvidenceField;
+export default withData(props => props.url)(EvidenceField);

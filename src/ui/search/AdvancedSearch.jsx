@@ -1,17 +1,18 @@
 // @flow
 import React, { Component } from 'react';
-import axios from 'axios';
 import AdvancedSearchField from './AdvancedSearchField';
+import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
 import getRandomId from '../utils';
 
 import type { TermNode, Field } from './AdvancedSearchField';
 
-type Props = {};
+type Props = {
+  data: [],
+};
 
 type State = {
   namespace: string,
-  data: Array<TermNode>,
   fields: Array<Field>,
 };
 
@@ -20,16 +21,8 @@ class AdvancedSearch extends Component<Props, State> {
     super(props);
     this.state = {
       namespace: 'UniProtKB',
-      data: [],
       fields: this.initFields(),
     };
-  }
-
-  componentDidMount() {
-    axios
-      .get(apiUrls.advanced_search_terms)
-      .then(d => this.setState({ data: d.data }))
-      .catch(err => console.error(err));
   }
 
   createField = (): Field => ({
@@ -96,8 +89,9 @@ class AdvancedSearch extends Component<Props, State> {
   }
 
   render() {
-    const { data, namespace, fields } = this.state;
-    if (data.length <= 0) {
+    const { namespace, fields } = this.state;
+    const { data } = this.props;
+    if (!data) {
       return null;
     }
     return (
@@ -131,4 +125,4 @@ class AdvancedSearch extends Component<Props, State> {
   }
 }
 
-export default AdvancedSearch;
+export default withData(apiUrls.advanced_search_terms)(AdvancedSearch);
