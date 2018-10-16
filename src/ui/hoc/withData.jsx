@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import axios from 'axios';
+import fetchData from './fetchData';
 
 type Props = {};
 type State = {
@@ -18,10 +18,10 @@ const withData = url => (WrappedComponent: Component) => {
 
     componentDidMount() {
       const endpoint = typeof url === 'function' ? url(this.props) : url;
-
-      axios
-        .get(endpoint)
-        .then(data => this.setState({ data: data.data }))
+      fetchData(endpoint)
+        .then((data) => {
+          this.setState({ data: data.data });
+        })
         .catch(e => console.error(e));
     }
 

@@ -106,17 +106,26 @@ class AdvancedSearch extends Component<Props, State> {
         {fields.map(field => (
           <div key={`field_${field.id}`} className="advanced-search__field">
             <AdvancedSearchField data={data} field={field} updateField={this.updateField} />
-            <button type="button" onClick={() => this.removeField(field.id)}>
+            <button
+              type="button"
+              className="button-remove"
+              onClick={() => this.removeField(field.id)}
+            >
               Remove
             </button>
           </div>
         ))}
         <hr />
         <div>
-          <button type="button" className="button" onClick={() => this.addField()}>
+          <button type="button" id="add-field" className="button" onClick={() => this.addField()}>
             Add Field
           </button>
-          <button type="button" className="button" onClick={() => this.submitQuery()}>
+          <button
+            type="button"
+            id="submit-query"
+            className="button"
+            onClick={() => this.submitQuery()}
+          >
             Search
           </button>
         </div>
