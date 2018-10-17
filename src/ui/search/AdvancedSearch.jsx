@@ -5,7 +5,7 @@ import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
 import getRandomId from '../utils';
 
-import type { TermNode, Field } from './AdvancedSearchField';
+import type { Field } from './AdvancedSearchField';
 
 type Props = {
   data: [],
