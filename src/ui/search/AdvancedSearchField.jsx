@@ -131,7 +131,7 @@ class AdvancedSearchField extends Component<Props> {
 
   renderRangeField(term: TermNode, type: string) {
     return (
-      <div className="advanced-search__inputs" key={term.term}>
+      <div className="advanced-search__inputs" key={`range_${term.term}`}>
         <label htmlFor={`${rangeFromName}input_${term.term}`}>
           From
           <input
