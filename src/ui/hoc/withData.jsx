@@ -17,7 +17,7 @@ const withData = url => (WrappedComponent: Component) => {
     }
 
     componentDidMount() {
-      const endpoint = typeof url === 'function' ? url(this.props) : url;
+      const endpoint = url(this.props);
       fetchData(endpoint)
         .then((data) => {
           this.setState({ data: data.data });

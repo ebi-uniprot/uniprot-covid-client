@@ -134,4 +134,4 @@ class AdvancedSearch extends Component<Props, State> {
   }
 }
 
-export default withData(apiUrls.advanced_search_terms)(AdvancedSearch);
+export default withData(() => apiUrls.advanced_search_terms)(AdvancedSearch);
