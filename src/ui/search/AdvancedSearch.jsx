@@ -80,8 +80,8 @@ class AdvancedSearch extends Component<Props, State> {
 
   removeField(id: string) {
     const { fields } = this.state;
-    fields.splice(fields.findIndex(field => field.id === id), 1);
-    this.setState({ fields });
+    const updatedFields = fields.filter(field => field.id !== id);
+    this.setState({ fields: updatedFields });
   }
 
   submitQuery() {
@@ -97,11 +97,12 @@ class AdvancedSearch extends Component<Props, State> {
     return (
       <div className="advanced-search">
         <div>
-          Searching in
-          {' '}
-          <select>
-            <option>{namespace}</option>
-          </select>
+          <label htmlFor="namespace-select">
+            Searching in
+            <select id="namespace-select">
+              <option>{namespace}</option>
+            </select>
+          </label>
         </div>
         {fields.map(field => (
           <div key={`field_${field.id}`} className="advanced-search__field">
