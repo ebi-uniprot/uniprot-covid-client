@@ -15,13 +15,18 @@ exports[`HomePage component should render 1`] = `
         className="advanced-search"
       >
         <div>
-          Searching in
-           
-          <select>
-            <option>
-              UniProtKB
-            </option>
-          </select>
+          <label
+            htmlFor="namespace-select"
+          >
+            Searching in
+            <select
+              id="namespace-select"
+            >
+              <option>
+                UniProtKB
+              </option>
+            </select>
+          </label>
         </div>
         <div
           className="advanced-search__field"
