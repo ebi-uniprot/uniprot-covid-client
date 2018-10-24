@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
+import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
 import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
-import getRandomId from '../utils';
 
 import type { Field } from './AdvancedSearchField';
 
@@ -26,7 +26,7 @@ class AdvancedSearch extends Component<Props, State> {
   }
 
   createField = (): Field => ({
-    id: getRandomId(),
+    id: v1(),
     logic: 'AND',
     selectedNode: {
       label: 'Any',
