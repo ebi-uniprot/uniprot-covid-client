@@ -1,13 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class UniProtFooter extends Component {
-
-  render() {
-
-    return (
-      <footer></footer>
-    );
-  }
-}
+const UniProtFooter = () => <footer />;
 
 export default UniProtFooter;

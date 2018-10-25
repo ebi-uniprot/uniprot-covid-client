@@ -5,6 +5,9 @@
 /build
 /dist
 
+# Test coverage
+/coverage
+
 # misc
 .DS_Store
 .env.local

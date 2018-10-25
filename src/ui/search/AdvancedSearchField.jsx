@@ -1,12 +1,12 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import cloneDeep from 'lodash/cloneDeep';
 import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
+import apiUrls from '../apiUrls';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
-export type Node = {
+export type TermNode = {
   label: string,
   term: string,
   example: string,
@@ -21,113 +21,132 @@ export type Node = {
       label: string,
     }>,
   }>,
+  values?: Array<{
+    name: string,
+    value: string,
+  }>,
 };
 
-type Operator = 'AND' | 'OR' | 'NOT';
+export type Input = {
+  stringValue?: string,
+  rangeFrom?: string,
+  rangeTo?: string,
+  evidenceValue?: string,
+};
+
+export type Operator = 'AND' | 'OR' | 'NOT';
+
+export type Field = {
+  id: string,
+  selectedNode: TermNode,
+  logic: Operator,
+  queryInput: Input,
+};
 
 type Props = {
-  data: Array<Node>,
+  data: Array<TermNode>,
+  field: Field,
+  updateField: Function,
 };
 
-type State = {
-  selectedNode: Node,
-  inputs: {
-    stringValue?: string,
-    rangeValue?: string,
-    evidenceValue?: string,
-  },
-  logic: Operator,
-};
+const operators: Array<Operator> = ['AND', 'OR', 'NOT'];
+const rangeFromName = 'from_';
+const rangeToName = 'to_';
 
-class AdvancedSearchField extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    // Define default query field
-    this.state = {
-      selectedNode: {
-        label: 'Any',
-        term: '',
-        example: 'a4_human, P05067, cdc7 human',
-        itemType: 'single',
-        dataType: 'string',
-      },
-      inputs: {
-        stringValue: '*',
-      },
-      logic: 'AND',
-    };
-  }
+class AdvancedSearchField extends Component<Props> {
+  selectNode = (node: TermNode) => {
+    const { field, updateField } = this.props;
+    field.selectedNode = node;
+    updateField(field);
+  };
 
-  _selectNode(node: Node) {
-    this.setState({ selectedNode: node });
-  }
-
-  handleInputChange = (e: SyntheticInputEvent<HTMLInputElement>, queryField: string | number) => {
-    const inputs = this.state.inputs;
-    inputs.stringValue = e.target.value;
-    this.setState({ inputs });
+  handleInputChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const { field, updateField } = this.props;
+    field.queryInput.stringValue = e.target.value;
+    updateField(field);
   };
 
   handleEvidenceChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const inputs = this.state.inputs;
-    inputs.evidenceValue = e.target.value;
-    this.setState({ inputs });
+    const { field, updateField } = this.props;
+    field.queryInput.evidenceValue = e.target.value;
+    updateField(field);
   };
 
-  handleRangeInput(e: SyntheticInputEvent<HTMLInputElement>) {
-    // const selectedNode = cloneDeep(this.state.selectedNode);
-    // const selectedInput = selectedNode.inputs.filter(input => input.queryField === e.target.dataset.queryfield);
-    // selectedInput.value = { rangeField: e.target.value };
-    // this.setState({ selectedNode });
-  }
+  handleRangeInputChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const { field, updateField } = this.props;
+    if (e.target.id.startsWith(rangeFromName)) {
+      field.queryInput.rangeFrom = e.target.value;
+    } else {
+      field.queryInput.rangeTo = e.target.value;
+    }
+    updateField(field);
+  };
 
-  _updateLogic(e: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({ logic: e.target.value });
-  }
+  updateLogic = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const { field, updateField } = this.props;
+    const op = operators.find(o => o === e.target.value);
+    if (!op) {
+      return;
+    }
+    field.logic = op;
+    updateField(field);
+  };
 
-  renderField(input: Node) {
+  renderField(term: TermNode) {
     return (
       <Fragment>
-        {(!input.hasRange || input.dataType !== 'integer') && (
-          <div className="advanced-search__inputs" key={input.term}>
-            <label htmlFor={`input_${input.term}`}>
-              {input.label}
+        {(!term.hasRange || term.dataType !== 'integer') && (
+          <div className="advanced-search__inputs" key={term.term}>
+            <label htmlFor={`input_${term.term}`}>
+              {term.label}
               <input
-                id={`input_${input.term}`}
-                type={dataTypes[input.dataType]}
-                onChange={e => this.handleInputChange(e, input.term)}
-                placeholder={input.example}
+                id={`input_${term.term}`}
+                type={dataTypes[term.dataType]}
+                onChange={e => this.handleInputChange(e)}
+                placeholder={term.example}
               />
             </label>
           </div>
         )}
-        {input.hasRange && this.renderRangeField(input)}
+        {term.hasRange && this.renderRangeField(term, 'number')}
       </Fragment>
     );
   }
 
-  renderEnumField(input: Node) {
-    return null;
-  }
+  renderEnumField = (term: TermNode) => (
+    <div className="advanced-search__inputs" key={term.term}>
+      <label htmlFor={`select_${term.term}`}>
+        {term.label}
+        <select onChange={e => this.handleInputChange(e)} id={`select_${term.term}`}>
+          {term.values
+            && term.values.map(item => (
+              <option value={item.value} key={`select_${item.value}`}>
+                {item.name}
+              </option>
+            ))}
+        </select>
+      </label>
+    </div>
+  );
 
-  renderRangeField(input: Node) {
+  renderRangeField(term: TermNode, type: string) {
     return (
-      <div className="advanced-search__inputs" key={input.term}>
-        <label htmlFor={`input_from_${input.term}`}>
+      <div className="advanced-search__inputs" key={`range_${term.term}`}>
+        <label htmlFor={`${rangeFromName}input_${term.term}`}>
           From
           <input
-            id={`input_from_${input.term}`}
-            type="number"
-            onChange={e => this.handleInputChange(e, input.term)}
+            id={`${rangeFromName}input_${term.term}`}
+            type={type}
+            onChange={e => this.handleRangeInputChange(e)}
             placeholder="0"
           />
         </label>
-        <label htmlFor={`input_to_${input.term}`}>
+        <label htmlFor={`${rangeToName}input_${term.term}`}>
           To
           <input
-            id={`input_to_${input.term}`}
-            type="number"
-            onChange={e => this.handleInputChange(e, input.term)}
+            id={`${rangeToName}input_${term.term}`}
+            type={type}
+            onChange={e => this.handleRangeInputChange(e)}
             placeholder="100"
           />
         </label>
@@ -135,64 +154,8 @@ class AdvancedSearchField extends Component<Props, State> {
     );
   }
 
-  renderSelectMenu(input: Node) {
-    return (
-      <div className="advanced-search__inputs" key={input.term}>
-        <label htmlFor={`input_${input.term}`}>
-          {input.label}
-          <select id={`input_${input.term}`} onChange={e => this.handleInputChange(e, input.term)}>
-            {input.options
-              && input.options.map(optgroup => (
-                <optgroup label={optgroup.name}>
-                  {optgroup.values.map(option => (
-                    <option value={option.name} key={option.name}>
-                      {option.label}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-          </select>
-        </label>
-      </div>
-    );
-  }
-
-  renderRangeInputs(input: Node) {
-    return (
-      <div className="advanced-search__inputs" key={input.term}>
-        <span>{input.label}</span>
-        <label htmlFor={`input_from_${input.term}`}>
-          From
-          <input
-            id={`input_from_${input.term}`}
-            type="number"
-            data-queryfield={input.term}
-            onChange={e => this.handleRangeInput(e)}
-          />
-        </label>
-        <label htmlFor={`input_to_${input.term}`}>
-          To
-          <input
-            id={`input_to_${input.term}`}
-            type="number"
-            data-queryfield={input.term}
-            onChange={e => this.handleRangeInput(e)}
-          />
-        </label>
-      </div>
-    );
-  }
-
-  renderDateField(input: Node) {
-    // TODO render calendar picker
-  }
-
-  getQueryString(): string {
-    return `${this.state.logic}(${this.state.selectedNode.term}:${this.state.inputs.stringValue})`;
-  }
-
   render() {
-    // this.state.autoComplete
+    const { field, data } = this.props;
 
     // .itemType
     // single: a simple/single type item: such as accession, gene created, this is default type.
@@ -202,27 +165,20 @@ class AdvancedSearchField extends Component<Props, State> {
     // goterm: for go term search
     // Group: this item type is a group type, grouping a list of search items
 
-    // .dataType
-    // string
-    // integer
-    // enum (has 'values')
-    // date
-    // range
-
-    if (!this.state || !this.state.selectedNode) {
-      return;
+    if (!field.selectedNode) {
+      return null;
     }
 
-    let field;
-    switch (this.state.selectedNode.dataType) {
+    let fieldRender;
+    switch (field.selectedNode.dataType) {
       case 'enum':
-        field = this.renderEnumField(this.state.selectedNode);
+        fieldRender = this.renderEnumField(field.selectedNode);
         break;
       case 'date':
-        field = this.renderDateField(this.state.selectedNode);
+        fieldRender = this.renderRangeField(field.selectedNode, 'date');
         break;
       default:
-        field = this.renderField(this.state.selectedNode);
+        fieldRender = this.renderField(field.selectedNode);
         break;
     }
 
@@ -230,21 +186,29 @@ class AdvancedSearchField extends Component<Props, State> {
       <Fragment>
         <select
           className="advanced-search__logic"
-          value={this.state.logic}
-          onChange={e => this._updateLogic(e)}
+          value={field.logic}
+          onChange={e => this.updateLogic(e)}
         >
-          <option value="AND">AND</option>
-          <option value="OR">OR</option>
-          <option value="NOT">NOT</option>
+          {operators.map(op => (
+            <option value={op} key={op}>
+              {op}
+            </option>
+          ))}
         </select>
 
-        <TreeSelect data={this.props.data} onSelect={e => this._selectNode(e)} />
-        {field}
-        {this.state.selectedNode.hasEvidence && (
-          <EvidenceField
-            updateEvidence={this.handleEvidenceChange}
-            selectedEvidence={this.state.inputs.evidenceValue}
-          />
+        <TreeSelect data={data} onSelect={e => this.selectNode(e)} />
+        {fieldRender}
+        {field.selectedNode
+          && field.selectedNode.hasEvidence && (
+            <EvidenceField
+              updateEvidence={this.handleEvidenceChange}
+              selectedEvidence={field.queryInput.evidenceValue}
+              url={
+                field.selectedNode.term === 'go'
+                  ? apiUrls.go_evidences
+                  : apiUrls.annotation_evidences
+              }
+            />
         )}
       </Fragment>
     );

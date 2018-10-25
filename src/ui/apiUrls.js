@@ -13,6 +13,6 @@ export default {
   // Database cross reference fields in result column configure
   // "itemType": "database",
   database_fields: `${prefix}/configure/uniprotkb/databasefields`,
-  //All result fields except database cross reference fields
-  results_fields: `${prefix}/configure/uniprotkb/resultfields`
+  // All result fields except database cross reference fields
+  results_fields: `${prefix}/configure/uniprotkb/resultfields`,
 };

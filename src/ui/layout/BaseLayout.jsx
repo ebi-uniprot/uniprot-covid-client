@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
+import type { Node } from 'react';
 
 import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
 
-class BaseLayout extends Component {
+type Props = {
+  children: Node,
+};
 
-  render() {
-    const { children } = this.props;
-
-    return (
-      <section id="outter-layout">
-        <UniProtHeader />
-        { children }
-        <UniProtFooter />
-      </section>
-    );
-  }
-}
+const BaseLayout = (props: Props) => {
+  const { children } = props;
+  return (
+    <section id="outter-layout">
+      <UniProtHeader />
+      {children}
+      <UniProtFooter />
+    </section>
+  );
+};
 
 export default BaseLayout;

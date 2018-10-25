@@ -1,22 +1,19 @@
 // @flow
 import React, { Component } from 'react';
+import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
+import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
-import axios from 'axios';
 
-import type Node from './AdvancedSearch';
+import type { Field } from './AdvancedSearchField';
 
-type Props = {};
+type Props = {
+  data: [],
+};
 
 type State = {
   namespace: string,
-  data: Array<Node>,
   fields: Array<Field>,
-};
-
-type Field = {
-  id: string,
-  ref: React.Ref<AdvancedSearchField>,
 };
 
 class AdvancedSearch extends Component<Props, State> {
@@ -24,95 +21,118 @@ class AdvancedSearch extends Component<Props, State> {
     super(props);
     this.state = {
       namespace: 'UniProtKB',
-      data: [],
       fields: this.initFields(),
     };
   }
 
-  componentDidMount() {
-    console.log(apiUrls.advanced_search_terms);
-    axios
-      .get(apiUrls.advanced_search_terms)
-      .then(d => this.setState({ data: d.data }))
-      .catch(err => console.log(err));
-  }
+  createField = (): Field => ({
+    id: v1(),
+    logic: 'AND',
+    selectedNode: {
+      label: 'Any',
+      term: 'All',
+      example: 'a4_human, P05067, cdc7 human',
+      itemType: 'single',
+      dataType: 'string',
+    },
+    queryInput: {},
+  });
 
-  _getRandomId(): string {
-    return Math.random()
-      .toString(36)
-      .replace(/[^a-z]+/g, '');
-  }
+  initFields = (): Array<Field> => [...Array(4)].map(() => this.createField());
 
-  initFields() {
-    const fields = [];
-    for (let i = 0; i < 4; i++) {
-      fields.push(this.createField());
+  updateField = (field: Field) => {
+    const { fields } = this.state;
+    let match: void | Field = fields.find(f => f.id === field.id);
+    if (match) {
+      match = field;
+      this.setState({ fields });
     }
-    return fields;
-  }
+  };
 
-  createField(): Field {
-    return {
-      id: this._getRandomId(),
-      ref: React.createRef(),
-    };
-  }
+  createQueryString = (): string => {
+    const { fields } = this.state;
+    return fields.reduce((queryAccumulator: string, field: Field) => {
+      let query = '';
+      if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
+        query = `${query}(${field.selectedNode.term}:[${
+          field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
+        }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
+      }
+      if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
+        query = `${query}(${field.selectedNode.term}:${
+          field.queryInput.stringValue ? field.queryInput.stringValue : ''
+        })`;
+      }
+      if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
+        query = `${query}AND(${field.selectedNode.term}:${field.queryInput.evidenceValue})`;
+      }
+      return `${queryAccumulator}${
+        queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
+      }${query}`;
+    }, '');
+  };
 
-  _addField() {
-    const fields = this.state.fields;
+  addField() {
+    const { fields } = this.state;
     fields.push(this.createField());
     this.setState({ fields });
   }
 
-  _removeField(id: string) {
-    const fields = this.state.fields;
-    fields.splice(fields.findIndex(field => field.id === id), 1);
-    this.setState({ fields });
+  removeField(id: string) {
+    const { fields } = this.state;
+    const updatedFields = fields.filter(field => field.id !== id);
+    this.setState({ fields: updatedFields });
   }
 
-  _submitQuery() {
-    let query = '';
-    this.state.fields.map((field, index) => {
-      if (index > 0) {
-        query = `${query}${field.ref.current.state.logic}`;
-      }
-      query = `${query}(${field.ref.current.state.selectedNode.term}:${
-        field.ref.current.state.inputValues
-      })`;
-    });
-    console.log(query);
+  submitQuery() {
+    console.log(this.createQueryString());
   }
 
   render() {
-    if (this.state.data.length <= 0) {
+    const { namespace, fields } = this.state;
+    const { data } = this.props;
+    if (!data) {
       return null;
     }
     return (
       <div className="advanced-search">
         <div>
-          Searching in{' '}
-          <select>
-            <option>{this.state.namespace}</option>
-          </select>
+          <label htmlFor="namespace-select">
+            Searching in
+            <select id="namespace-select">
+              <option>{namespace}</option>
+            </select>
+          </label>
         </div>
-        {this.state.fields.map((field, i) => (
+        {fields.map(field => (
           <div key={`field_${field.id}`} className="advanced-search__field">
-            <AdvancedSearchField data={this.state.data} ref={field.ref} />
-            <a onClick={() => this._removeField(field.id)}>Remove</a>
+            <AdvancedSearchField data={data} field={field} updateField={this.updateField} />
+            <button
+              type="button"
+              className="button-remove"
+              onClick={() => this.removeField(field.id)}
+            >
+              Remove
+            </button>
           </div>
         ))}
         <hr />
         <div>
-          <a className="button" onClick={() => this._addField()}>
+          <button type="button" id="add-field" className="button" onClick={() => this.addField()}>
             Add Field
-          </a>
-          <a className="button" onClick={() => this._submitQuery()}>
+          </button>
+          <button
+            type="button"
+            id="submit-query"
+            className="button"
+            onClick={() => this.submitQuery()}
+          >
             Search
-          </a>
+          </button>
         </div>
       </div>
     );
   }
 }
 
-export default AdvancedSearch;
+export default withData(() => apiUrls.advanced_search_terms)(AdvancedSearch);
