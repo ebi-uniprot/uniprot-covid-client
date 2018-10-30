@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
 import withData from '../hoc/withData';
+import appendUniqueValue from '../hoc/prepareData';
 import apiUrls from '../apiUrls';
 
 import type { Field } from './AdvancedSearchField';
@@ -135,4 +136,5 @@ class AdvancedSearch extends Component<Props, State> {
   }
 }
 
-export default withData(() => apiUrls.advanced_search_terms)(AdvancedSearch);
+const url = () => apiUrls.advanced_search_terms;
+export default withData(url, appendUniqueValue)(AdvancedSearch);

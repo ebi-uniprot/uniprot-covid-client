@@ -7,7 +7,7 @@ type State = {
   data: [],
 };
 
-const withData = url => (WrappedComponent: Component) => {
+const withData = (url, prepareData) => (WrappedComponent: Component) => {
   class WithData extends WrappedComponent<Props, State> {
     constructor(props: Props) {
       super(props);
@@ -19,8 +19,9 @@ const withData = url => (WrappedComponent: Component) => {
     componentDidMount() {
       const endpoint = url(this.props);
       fetchData(endpoint)
+        .then(data => prepareData(data.data))
         .then((data) => {
-          this.setState({ data: data.data });
+          this.setState({ data });
         })
         .catch(e => console.error(e));
     }
