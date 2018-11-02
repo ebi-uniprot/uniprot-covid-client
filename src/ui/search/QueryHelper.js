@@ -5,7 +5,6 @@ const getItemTypePrefix = (itemType) => {
   const itemTypeToPrefixMap = {
     feature: 'ft_',
     comment: 'cc_',
-    goterm: 'go_',
   };
   return itemTypeToPrefixMap[itemType] ? itemTypeToPrefixMap[itemType] : '';
 };
