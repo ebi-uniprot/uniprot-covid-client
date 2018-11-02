@@ -119,6 +119,20 @@ const fields = [
       rangeTo: '2018-03-08',
     },
   },
+  {
+    id: 'field_xref',
+    selectedNode: {
+      label: 'PDB',
+      itemType: 'database',
+      term: 'xref',
+      dataType: 'string',
+      valuePrefix: 'pdb',
+    },
+    logic: 'AND',
+    queryInput: {
+      stringValue: 'Something',
+    },
+  },
 ];
 
 describe('QueryHelper', () => {
@@ -155,6 +169,11 @@ describe('QueryHelper', () => {
   test('should handle date range', () => {
     const queryString = createQueryString(fields.filter(f => f.id === 'field_range_date'));
     expect(queryString).toBe('(created:[2018-03-04 TO 2018-03-08])');
+  });
+
+  test('should handle xrefs', () => {
+    const queryString = createQueryString(fields.filter(f => f.id === 'field_xref'));
+    expect(queryString).toBe('(xref:pdb-Something)');
   });
 
   // TODO databases

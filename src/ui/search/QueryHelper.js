@@ -20,8 +20,8 @@ const getItemTypeEvidencePrefix = (itemType) => {
 const getItemTypeRangePrefix = itemType => (itemType === 'feature' ? 'ftlen_' : '');
 
 const createSimpleSubquery = (field: Field) => `(${getItemTypePrefix(field.selectedNode.itemType)}${field.selectedNode.term}:${
-  field.queryInput.stringValue ? field.queryInput.stringValue : ''
-})`;
+  field.selectedNode.valuePrefix ? `${field.selectedNode.valuePrefix}-` : ''
+}${field.queryInput.stringValue ? field.queryInput.stringValue : ''})`;
 
 const createRangeSubquery = (field: Field) => `(${getItemTypeRangePrefix(field.selectedNode.itemType)}${field.selectedNode.term}:[${
   field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
