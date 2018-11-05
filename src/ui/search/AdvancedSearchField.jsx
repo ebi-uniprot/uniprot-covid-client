@@ -1,8 +1,9 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { TreeSelect } from 'franklin-sites';
+import { TreeSelect, Autocomplete } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
 import apiUrls from '../apiUrls';
+import AutocompleteWrapper from './AutocompleteWrapper';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
@@ -14,6 +15,8 @@ export type TermNode = {
   dataType: string,
   hasRange?: boolean,
   hasEvidence?: boolean,
+  value?: string,
+  autoComplete?: string,
   options?: Array<{
     name: string,
     values: Array<{
@@ -55,6 +58,7 @@ const rangeToName = 'to_';
 
 class AdvancedSearchField extends Component<Props> {
   selectNode = (node: TermNode) => {
+    console.log(node);
     const { field, updateField } = this.props;
     field.selectedNode = node;
     updateField(field);
@@ -92,19 +96,38 @@ class AdvancedSearchField extends Component<Props> {
     updateField(field);
   };
 
+  handleAutocompleteChange = (value: String) => {
+    console.log(value);
+  }
+
   renderField(term: TermNode) {
+    let node;
+    if (term.autoComplete) {
+      console.log('here');
+      node = (
+        <AutocompleteWrapper
+          data={[]}
+          onSelect={e => this.handleInputChange(e)}
+          onChange={v => this.handleAutocompleteChange(v)}
+        />
+      );
+    } else {
+      node = (
+        <input
+          type={dataTypes[term.dataType]}
+          onChange={e => this.handleInputChange(e)}
+          placeholder={term.example}
+        />
+      );
+    }
+
     return (
       <Fragment>
         {(!term.hasRange || term.dataType !== 'integer') && (
-          <div className="advanced-search__inputs" key={term.term}>
-            <label htmlFor={`input_${term.term}`}>
+          <div className="advanced-search__inputs" key={term.value}>
+            <label htmlFor={`input_${term.value}`}>
               {term.label}
-              <input
-                id={`input_${term.term}`}
-                type={dataTypes[term.dataType]}
-                onChange={e => this.handleInputChange(e)}
-                placeholder={term.example}
-              />
+              {React.cloneElement(node, {id: `input_${term.value}`})}
             </label>
           </div>
         )}
@@ -196,7 +219,12 @@ class AdvancedSearchField extends Component<Props> {
           ))}
         </select>
 
-        <TreeSelect data={data} onSelect={e => this.selectNode(e)} />
+        <TreeSelect
+          data={data}
+          onSelect={e => this.selectNode(e)}
+          autocompletePlaceholder="Search for field"
+          autocomplete
+        />
         {fieldRender}
         {field.selectedNode
           && field.selectedNode.hasEvidence && (
