@@ -6,7 +6,7 @@ const getItemTypePrefix = (itemType) => {
     feature: 'ft_',
     comment: 'cc_',
   };
-  return itemTypeToPrefixMap[itemType] ? itemTypeToPrefixMap[itemType] : '';
+  return itemTypeToPrefixMap[itemType] || '';
 };
 
 const getItemTypeEvidencePrefix = (itemType) => {
@@ -14,37 +14,51 @@ const getItemTypeEvidencePrefix = (itemType) => {
     feature: 'ftev_',
     comment: 'ccev_',
   };
-  return itemTypeToEvidencePrefixMap[itemType] ? itemTypeToEvidencePrefixMap[itemType] : '';
+  return itemTypeToEvidencePrefixMap[itemType] || '';
 };
 
 const getItemTypeRangePrefix = itemType => (itemType === 'feature' ? 'ftlen_' : '');
 
-const createSimpleSubquery = (field: Field) => `(${getItemTypePrefix(field.selectedNode.itemType)}${field.selectedNode.term}:${
-  field.selectedNode.valuePrefix ? `${field.selectedNode.valuePrefix}-` : ''
-}${field.queryInput.stringValue ? field.queryInput.stringValue : ''})`;
+const createSimpleSubquery = (field: Field) => {
+  const { itemType, term, valuePrefix } = field.selectedNode;
+  const { stringValue } = field.queryInput;
+  const itemTypePrefix = getItemTypePrefix(itemType);
+  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
+  const stringValueChecked = stringValue || '';
+  return `(${itemTypePrefix}${term}:${valuePrefixChecked}${stringValueChecked})`;
+};
 
-const createRangeSubquery = (field: Field) => `(${getItemTypeRangePrefix(field.selectedNode.itemType)}${field.selectedNode.term}:[${
-  field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
-} TO ${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
+const createRangeSubquery = (field: Field) => {
+  const { term, itemType } = field.selectedNode;
+  const { rangeFrom, rangeTo } = field.queryInput;
+  const rangeFromChecked = rangeFrom || '';
+  const rangeToChecked = rangeTo || '';
+  const itemTypeRangePrefix = getItemTypeRangePrefix(itemType);
+  return `(${itemTypeRangePrefix}${term}:[${rangeFromChecked} TO ${rangeToChecked}])`;
+};
 
-const wrapIntoEvidenceSubquery = (field: Field, subQuery: string) => `(${subQuery}AND(${getItemTypeEvidencePrefix(field.selectedNode.itemType)}${
-  field.selectedNode.term
-}:${field.queryInput.evidenceValue}))`;
+const wrapIntoEvidenceSubquery = (field: Field, subQuery: string) => {
+  const { evidenceValue } = field.queryInput;
+  const { term, itemType } = field.selectedNode;
+  const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
+  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
+};
 
-const createQueryString = (queryFields: Array<Field>): string => queryFields.reduce((queryAccumulator: string, field: Field) => {
-  let query = '';
-  if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
-    query = `${query}${createSimpleSubquery(field)}`;
-  }
-  if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
-    query = `${query}${createRangeSubquery(field)}`;
-  }
-  if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
-    query = `${wrapIntoEvidenceSubquery(field, query)}`;
-  }
-  return `${queryAccumulator}${
-    queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
-  }${query}`;
-}, '');
+const createQueryString = (queryFields: Array<Field>): string => (
+  queryFields.reduce((queryAccumulator: string, field: Field) => {
+    let query = '';
+    if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
+      query = `${query}${createSimpleSubquery(field)}`;
+    }
+    if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
+      query = `${query}${createRangeSubquery(field)}`;
+    }
+    if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
+      query = `${wrapIntoEvidenceSubquery(field, query)}`;
+    }
+    return `${queryAccumulator}${
+      queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''}${query}`;
+  }, '')
+);
 
 export default createQueryString;
