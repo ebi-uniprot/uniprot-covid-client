@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { TreeSelect, Autocomplete } from 'franklin-sites';
+import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
 import apiUrls from '../apiUrls';
 import AutocompleteWrapper from './AutocompleteWrapper';
@@ -96,19 +96,19 @@ class AdvancedSearchField extends Component<Props> {
     updateField(field);
   };
 
-  handleAutocompleteChange = (value: String) => {
-    console.log(value);
+  handleAutocompleteSelect = (value: string) => {
+    const { field, updateField } = this.props;
+    field.queryInput.stringValue = value;
+    updateField(field);
   }
 
   renderField(term: TermNode) {
     let node;
     if (term.autoComplete) {
-      console.log('here');
       node = (
         <AutocompleteWrapper
-          data={[]}
-          onSelect={e => this.handleInputChange(e)}
-          onChange={v => this.handleAutocompleteChange(v)}
+          url={term.autoComplete}
+          onSelect={v => this.handleAutocompleteSelect(v)}
         />
       );
     } else {
@@ -127,7 +127,7 @@ class AdvancedSearchField extends Component<Props> {
           <div className="advanced-search__inputs" key={term.value}>
             <label htmlFor={`input_${term.value}`}>
               {term.label}
-              {React.cloneElement(node, {id: `input_${term.value}`})}
+              {React.cloneElement(node, { id: `input_${term.value}` })}
             </label>
           </div>
         )}
@@ -237,7 +237,7 @@ class AdvancedSearchField extends Component<Props> {
                   : apiUrls.annotation_evidences
               }
             />
-        )}
+          )}
       </Fragment>
     );
   }

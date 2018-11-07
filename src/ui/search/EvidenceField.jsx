@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import withData from '../hoc/withData';
-import appendUniqueValue from '../hoc/prepareData';
+import appendUniqueId from '../hoc/prepareData';
 type Props = {
   updateEvidence: Function,
   selectedEvidence?: string,
@@ -41,4 +41,4 @@ class EvidenceField extends Component<Props> {
 }
 
 const url = props => props.url;
-export default withData(url, appendUniqueValue)(EvidenceField);
+export default withData(url, appendUniqueId)(EvidenceField);

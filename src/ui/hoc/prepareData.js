@@ -1,32 +1,13 @@
-import { v1 as uuidv1 } from 'uuid';
-
-function getUniqueIdFromItemProperties(item) {
-  let uid = '';
-  if (item.term) {
-    uid += `-${item.term}`;
-  }
-  if (item.label) {
-    uid += `-${item.label}`;
-  }
-  if (item.valuePrefix) {
-    uid += `-${item.valuePrefix}`;
-  }
-  if (item.itemType) {
-    uid += `-${item.itemType}`;
-  }
-  return uid;
-}
-
-export default function appendUniqueValue(data, idFromItemProperties = true) {
-  const idGenerator = idFromItemProperties ? getUniqueIdFromItemProperties : uuidv1;
-  return data.map((item) => {
+export default function appendUniqueId(data, prefix = 'id') {
+  return data.map((item, index) => {
+    const id = `${prefix}_${index}`;
     const newItem = {
       ...item,
-      value: getUniqueIdFromItemProperties(item),
+      id,
     };
     const { items } = item;
     if (items) {
-      newItem.items = appendUniqueValue(items, idGenerator);
+      newItem.items = appendUniqueId(items, `${id}_`);
     }
     return newItem;
   });

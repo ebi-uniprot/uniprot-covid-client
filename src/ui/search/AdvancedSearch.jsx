@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
 import withData from '../hoc/withData';
-import appendUniqueValue from '../hoc/prepareData';
+import appendUniqueId from '../hoc/prepareData';
 import apiUrls from '../apiUrls';
 
 import type { Field } from './AdvancedSearchField';
@@ -57,19 +57,19 @@ class AdvancedSearch extends Component<Props, State> {
       if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
         query = `${query}(${field.selectedNode.term}:[${
           field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
-        }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
+          }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
       }
       if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
         query = `${query}(${field.selectedNode.term}:${
           field.queryInput.stringValue ? field.queryInput.stringValue : ''
-        })`;
+          })`;
       }
       if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
         query = `${query}AND(${field.selectedNode.term}:${field.queryInput.evidenceValue})`;
       }
       return `${queryAccumulator}${
         queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
-      }${query}`;
+        }${query}`;
     }, '');
   };
 
@@ -137,4 +137,4 @@ class AdvancedSearch extends Component<Props, State> {
 }
 
 const url = () => apiUrls.advanced_search_terms;
-export default withData(url, appendUniqueValue)(AdvancedSearch);
+export default withData(url)(AdvancedSearch);
