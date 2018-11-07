@@ -40,8 +40,9 @@ const createRangeSubquery = (field: Field) => {
 const wrapIntoEvidenceSubquery = (field: Field, subQuery: string) => {
   const { evidenceValue } = field.queryInput;
   const { term, itemType } = field.selectedNode;
+  const evidenceValueChecked = evidenceValue || '';
   const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
-  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
+  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValueChecked}))`;
 };
 
 const createQueryString = (queryFields: Array<Field>): string => (
