@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
 import withData from '../hoc/withData';
-import appendUniqueId from '../hoc/prepareData';
 import apiUrls from '../apiUrls';
 
 import type { Field } from './AdvancedSearchField';

@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+// @flow
+import React, { Component } from 'react';
 import urljoin from 'url-join';
 import { Autocomplete } from 'franklin-sites';
 import fetchData from '../hoc/fetchData';
@@ -7,8 +8,23 @@ import appendUniqueId from '../hoc/prepareData';
 const SERVER = 'http://wwwdev.ebi.ac.uk/';
 const RE_QUERY = /\?$/;
 
-class AutocompleteWrapper extends Component {
-  constructor(props) {
+type Props = {
+  url: string,
+  onSelect: Function,
+};
+
+type Suggestions = {
+  dictionary: string,
+  query: string,
+  suggestions: Array<string>,
+};
+
+type State = {
+  data: Array<Suggestions>,
+};
+
+class AutocompleteWrapper extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { data: [] };
     this.handleSelect = this.handleSelect.bind(this);
@@ -22,14 +38,12 @@ class AutocompleteWrapper extends Component {
   }
 
   fetchOptions(url) {
-    fetchData(url).then((data) => {
-      return data.data.suggestions;
-    }).then(data => [...new Set(data)])
+    fetchData(url)
+      // Remove duplicates for now as there is a bug in the API
+      .then(data => [...new Set(data.data.suggestions)])
       .then(data => data.map(x => ({ pathLabel: x, itemLabel: x })))
       .then(data => appendUniqueId(data, 'autocomplete'))
-      .then((data) => {
-        this.setState({ data });
-      })
+      .then(data => this.setState({ data }))
       .catch(e => console.error(e));
   }
 

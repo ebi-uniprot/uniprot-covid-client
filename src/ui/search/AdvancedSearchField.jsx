@@ -237,7 +237,8 @@ class AdvancedSearchField extends Component<Props> {
                   : apiUrls.annotation_evidences
               }
             />
-          )}
+          )
+        }
       </Fragment>
     );
   }

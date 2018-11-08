@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import withData from '../hoc/withData';
 import appendUniqueId from '../hoc/prepareData';
+
 type Props = {
   updateEvidence: Function,
   selectedEvidence?: string,
