@@ -5,6 +5,7 @@ import EvidenceField from './EvidenceField';
 import apiUrls from '../apiUrls';
 import RangeField from '../components/RangeField';
 import EnumField from '../components/EnumField';
+import TextField from '../components/TextField';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
@@ -95,32 +96,6 @@ class AdvancedSearchField extends Component<Props> {
     updateField(field);
   };
 
-  renderField(term: TermNode) {
-    return (
-      <Fragment>
-        {(!term.hasRange || term.dataType !== 'integer') && (
-          <div className="advanced-search__inputs" key={term.term}>
-            <label htmlFor={`input_${term.term}`}>
-              {term.label}
-              <input
-                id={`input_${term.term}`}
-                type={dataTypes[term.dataType]}
-                onChange={e => this.handleInputChange(e)}
-                placeholder={term.example}
-              />
-            </label>
-          </div>
-        )}
-        {term.hasRange
-          && RangeField({
-            type: 'number',
-            handleRangeInputChange: this.handleRangeInputChange,
-            term,
-          })}
-      </Fragment>
-    );
-  }
-
   render() {
     const { field, data } = this.props;
 
@@ -152,7 +127,12 @@ class AdvancedSearchField extends Component<Props> {
         });
         break;
       default:
-        fieldRender = this.renderField(field.selectedNode);
+        fieldRender = TextField({
+          term: field.selectedNode,
+          type: dataTypes[field.selectedNode.dataType],
+          handleInputChange: this.handleInputChange,
+          handleRangeInputChange: this.handleRangeInputChange,
+        });
         break;
     }
 
