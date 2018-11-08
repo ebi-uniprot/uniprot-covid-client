@@ -96,6 +96,32 @@ class AdvancedSearchField extends Component<Props> {
     updateField(field);
   };
 
+  renderField = (term) => {
+    const { handleRangeInputChange, handleInputChange } = this;
+    const { dataType, hasRange } = term;
+
+    if (dataType === 'enum') {
+      return EnumField({ term, handleRangeInputChange });
+    }
+    if (dataType === 'date') {
+      return RangeField({ term, handleRangeInputChange });
+    }
+    if (!hasRange || dataType !== 'integer') {
+      return TextField({
+        term,
+        handleInputChange,
+        type: dataTypes[dataType],
+      });
+    }
+    if (term.hasRange) {
+      return RangeField({
+        term,
+        handleRangeInputChange,
+        type: 'number',
+      });
+    }
+  }
+
   render() {
     const { field, data } = this.props;
 
@@ -111,30 +137,7 @@ class AdvancedSearchField extends Component<Props> {
       return null;
     }
 
-    let fieldRender;
-    switch (field.selectedNode.dataType) {
-      case 'enum':
-        fieldRender = EnumField({
-          term: field.selectedNode,
-          handleRangeInputChange: this.handleRangeInputChange,
-        });
-        break;
-      case 'date':
-        fieldRender = RangeField({
-          term: field.selectedNode,
-          type: 'date',
-          handleRangeInputChange: this.handleRangeInputChange,
-        });
-        break;
-      default:
-        fieldRender = TextField({
-          term: field.selectedNode,
-          type: dataTypes[field.selectedNode.dataType],
-          handleInputChange: this.handleInputChange,
-          handleRangeInputChange: this.handleRangeInputChange,
-        });
-        break;
-    }
+    const fieldRender = this.renderField(field.selectedNode);
 
     return (
       <Fragment>
