@@ -4,6 +4,7 @@ import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
 import apiUrls from '../apiUrls';
 import RangeField from '../components/RangeField';
+import EnumField from '../components/EnumField';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
@@ -120,22 +121,6 @@ class AdvancedSearchField extends Component<Props> {
     );
   }
 
-  renderEnumField = (term: TermNode) => (
-    <div className="advanced-search__inputs" key={term.term}>
-      <label htmlFor={`select_${term.term}`}>
-        {term.label}
-        <select onChange={e => this.handleInputChange(e)} id={`select_${term.term}`}>
-          {term.values
-            && term.values.map(item => (
-              <option value={item.value} key={`select_${item.value}`}>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </label>
-    </div>
-  );
-
   render() {
     const { field, data } = this.props;
 
@@ -154,7 +139,10 @@ class AdvancedSearchField extends Component<Props> {
     let fieldRender;
     switch (field.selectedNode.dataType) {
       case 'enum':
-        fieldRender = this.renderEnumField(field.selectedNode);
+        fieldRender = EnumField({
+          term: field.selectedNode,
+          handleRangeInputChange: this.handleRangeInputChange,
+        });
         break;
       case 'date':
         fieldRender = RangeField({
