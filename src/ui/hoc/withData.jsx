@@ -7,7 +7,7 @@ type State = {
   data: [],
 };
 
-const withData = url => (WrappedComponent: Component) => {
+const withData = (url: string) => (WrappedComponent: Component) => {
   class WithData extends WrappedComponent<Props, State> {
     constructor(props: Props) {
       super(props);

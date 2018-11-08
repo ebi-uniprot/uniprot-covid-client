@@ -14,6 +14,7 @@ export type TermNode = {
   dataType: string,
   hasRange?: boolean,
   hasEvidence?: boolean,
+  valuePrefix?: string,
   options?: Array<{
     name: string,
     values: Array<{
