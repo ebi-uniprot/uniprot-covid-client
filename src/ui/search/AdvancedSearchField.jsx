@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
 import apiUrls from '../apiUrls';
+import RangeField from '../components/RangeField';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
@@ -109,7 +110,12 @@ class AdvancedSearchField extends Component<Props> {
             </label>
           </div>
         )}
-        {term.hasRange && this.renderRangeField(term, 'number')}
+        {term.hasRange
+          && RangeField({
+            type: 'number',
+            handleRangeInputChange: this.handleRangeInputChange,
+            term,
+          })}
       </Fragment>
     );
   }
@@ -129,31 +135,6 @@ class AdvancedSearchField extends Component<Props> {
       </label>
     </div>
   );
-
-  renderRangeField(term: TermNode, type: string) {
-    return (
-      <div className="advanced-search__inputs" key={`range_${term.term}`}>
-        <label htmlFor={`${rangeFromName}input_${term.term}`}>
-          From
-          <input
-            id={`${rangeFromName}input_${term.term}`}
-            type={type}
-            onChange={e => this.handleRangeInputChange(e)}
-            placeholder="0"
-          />
-        </label>
-        <label htmlFor={`${rangeToName}input_${term.term}`}>
-          To
-          <input
-            id={`${rangeToName}input_${term.term}`}
-            type={type}
-            onChange={e => this.handleRangeInputChange(e)}
-            placeholder="100"
-          />
-        </label>
-      </div>
-    );
-  }
 
   render() {
     const { field, data } = this.props;
@@ -176,7 +157,11 @@ class AdvancedSearchField extends Component<Props> {
         fieldRender = this.renderEnumField(field.selectedNode);
         break;
       case 'date':
-        fieldRender = this.renderRangeField(field.selectedNode, 'date');
+        fieldRender = RangeField({
+          term: field.selectedNode,
+          type: 'date',
+          handleRangeInputChange: this.handleRangeInputChange,
+        });
         break;
       default:
         fieldRender = this.renderField(field.selectedNode);
@@ -210,7 +195,7 @@ class AdvancedSearchField extends Component<Props> {
                   : apiUrls.annotation_evidences
               }
             />
-        )}
+          )}
       </Fragment>
     );
   }
