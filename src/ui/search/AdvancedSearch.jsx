@@ -4,6 +4,7 @@ import { v1 } from 'uuid';
 import AdvancedSearchField from './AdvancedSearchField';
 import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
+import createQueryString from './QueryHelper';
 
 import type { Field } from './AdvancedSearchField';
 
@@ -49,29 +50,6 @@ class AdvancedSearch extends Component<Props, State> {
     }
   };
 
-  createQueryString = (): string => {
-    const { fields } = this.state;
-    return fields.reduce((queryAccumulator: string, field: Field) => {
-      let query = '';
-      if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
-        query = `${query}(${field.selectedNode.term}:[${
-          field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
-        }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
-      }
-      if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
-        query = `${query}(${field.selectedNode.term}:${
-          field.queryInput.stringValue ? field.queryInput.stringValue : ''
-        })`;
-      }
-      if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
-        query = `${query}AND(${field.selectedNode.term}:${field.queryInput.evidenceValue})`;
-      }
-      return `${queryAccumulator}${
-        queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
-      }${query}`;
-    }, '');
-  };
-
   addField() {
     const { fields } = this.state;
     fields.push(this.createField());
@@ -85,7 +63,8 @@ class AdvancedSearch extends Component<Props, State> {
   }
 
   submitQuery() {
-    console.log(this.createQueryString());
+    const { fields } = this.state;
+    console.log(createQueryString(fields));
   }
 
   render() {
