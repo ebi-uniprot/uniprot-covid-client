@@ -24,8 +24,10 @@ const createSimpleSubquery = (field: Field) => {
   const { stringValue } = field.queryInput;
   const itemTypePrefix = getItemTypePrefix(itemType);
   const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
-  const stringValueChecked = stringValue || '';
-  return `(${itemTypePrefix}${term}:${valuePrefixChecked}${stringValueChecked})`;
+  if (!stringValue) {
+    throw new Error('Value not provided in query');
+  }
+  return `(${itemTypePrefix}${term}:${valuePrefixChecked}${stringValue})`;
 };
 
 const createRangeSubquery = (field: Field) => {
@@ -40,26 +42,27 @@ const createRangeSubquery = (field: Field) => {
 const wrapIntoEvidenceSubquery = (field: Field, subQuery: string) => {
   const { evidenceValue } = field.queryInput;
   const { term, itemType } = field.selectedNode;
-  const evidenceValueChecked = evidenceValue || '';
+  if (!evidenceValue) {
+    throw new Error('Evidence value not provided');
+  }
   const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
-  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValueChecked}))`;
+  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
 };
 
-const createQueryString = (queryFields: Array<Field>): string => (
-  queryFields.reduce((queryAccumulator: string, field: Field) => {
-    let query = '';
-    if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
-      query = `${query}${createSimpleSubquery(field)}`;
-    }
-    if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
-      query = `${query}${createRangeSubquery(field)}`;
-    }
-    if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
-      query = `${wrapIntoEvidenceSubquery(field, query)}`;
-    }
-    return `${queryAccumulator}${
-      queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''}${query}`;
-  }, '')
-);
+const createQueryString = (queryFields: Array<Field>): string => queryFields.reduce((queryAccumulator: string, field: Field) => {
+  let query = '';
+  if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
+    query = `${query}${createSimpleSubquery(field)}`;
+  }
+  if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
+    query = `${query}${createRangeSubquery(field)}`;
+  }
+  if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
+    query = `${wrapIntoEvidenceSubquery(field, query)}`;
+  }
+  return `${queryAccumulator}${
+    queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
+  }${query}`;
+}, '');
 
 export default createQueryString;
