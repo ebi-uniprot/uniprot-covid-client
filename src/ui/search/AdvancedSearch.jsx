@@ -6,7 +6,7 @@ import withData from '../hoc/withData';
 import apiUrls from '../apiUrls';
 import createQueryString from './QueryHelper';
 
-import type { Field } from './AdvancedSearchField';
+import type { FieldType } from './AdvancedSearchField';
 
 type Props = {
   data: [],
@@ -14,7 +14,7 @@ type Props = {
 
 type State = {
   namespace: string,
-  fields: Array<Field>,
+  fields: Array<FieldType>,
 };
 
 class AdvancedSearch extends Component<Props, State> {
@@ -26,7 +26,7 @@ class AdvancedSearch extends Component<Props, State> {
     };
   }
 
-  createField = (): Field => ({
+  createField = (): FieldType => ({
     id: v1(),
     logic: 'AND',
     selectedNode: {
@@ -39,11 +39,11 @@ class AdvancedSearch extends Component<Props, State> {
     queryInput: {},
   });
 
-  initFields = (): Array<Field> => [...Array(4)].map(() => this.createField());
+  initFields = (): Array<FieldType> => [...Array(4)].map(() => this.createField());
 
-  updateField = (field: Field) => {
+  updateField = (field: FieldType) => {
     const { fields } = this.state;
-    let match: void | Field = fields.find(f => f.id === field.id);
+    let match: void | FieldType = fields.find(f => f.id === field.id);
     if (match) {
       match = field;
       this.setState({ fields });
