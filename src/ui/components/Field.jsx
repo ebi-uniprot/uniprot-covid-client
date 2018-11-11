@@ -7,22 +7,28 @@ const dataTypes = { string: 'text', integer: 'number' };
 const Field = (field, handleInputChange, handleRangeInputChange) => {
   const { dataType, hasRange } = field;
   if (dataType === 'enum') {
-    return EnumField({ field, handleInputChange });
+    return EnumField({
+      field,
+      handleChange: handleInputChange,
+    });
   }
   if (dataType === 'date') {
-    return RangeField({ field, handleRangeInputChange });
+    return RangeField({
+      field,
+      handleChange: handleRangeInputChange,
+    });
   }
   if (!hasRange || dataType !== 'integer') {
     return TextField({
       field,
-      handleInputChange,
+      handleChange: handleInputChange,
       type: dataTypes[dataType],
     });
   }
   if (hasRange) {
     return RangeField({
       field,
-      handleRangeInputChange,
+      handleChange: handleRangeInputChange,
       type: 'number',
     });
   }

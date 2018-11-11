@@ -7,7 +7,7 @@ import React from 'react';
 //   data: Array<Group>,
 // };
 
-const EvidenceField = (field, data, selectedEvidence = '', updateEvidence) => {
+const EvidenceField = (field, data, selectedEvidence = '', handleChange) => {
   if (!data) {
     return null;
   }
@@ -19,7 +19,7 @@ const EvidenceField = (field, data, selectedEvidence = '', updateEvidence) => {
         <select
           id="evidence_select"
           value={selectedEvidence}
-          onChange={updateEvidence}
+          onChange={e => handleChange(e.target.value)}
         >
           {data.map(group => (
             <optgroup label={group.groupName} key={group.groupName}>

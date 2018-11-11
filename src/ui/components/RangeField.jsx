@@ -3,14 +3,14 @@ import React from 'react';
 const rangeFromName = 'from_';
 const rangeToName = 'to_';
 
-const RangeField = ({ field, type, handleRangeInputChange }) => (
+const RangeField = ({ field, type, handleChange }) => (
   <div className="advanced-search__inputs" key={`range_${field.term}`}>
     <label htmlFor={`${rangeFromName}input_${field.term}`}>
       From
       <input
         id={`${rangeFromName}input_${field.term}`}
         type={type}
-        onChange={handleRangeInputChange}
+        onChange={e => handleChange(e.target.value, rangeFromName)}
         placeholder="0"
       />
     </label>
@@ -19,7 +19,7 @@ const RangeField = ({ field, type, handleRangeInputChange }) => (
       <input
         id={`${rangeToName}input_${field.term}`}
         type={type}
-        onChange={handleRangeInputChange}
+        onChange={e => handleChange(e.target.value, rangeToName)}
         placeholder="100"
       />
     </label>
