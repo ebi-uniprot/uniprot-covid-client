@@ -8,29 +8,40 @@ export const SUBMIT_QUERY = 'SUBMIT_QUERY';
 export const ADD_CLAUSE = 'ADD_CLAUSE';
 
 export const selectField = (clauseId, fieldId, value) => ({
-
+  type: SELECT_FIELD,
+  fieldId,
+  value,
 });
 
 export const changeInputValue = (clauseId, fieldId, value) => ({
-
+  type: CHANGE_INPUT_VALUE,
+  fieldId,
+  value,
 });
 
 export const changeEvidence = (clauseId, fieldId, value) => ({
-
+  type: CHANGE_EVIDENCE,
+  fieldId,
+  value,
 });
 
 export const changeRangeValue = (clauseId, fieldId, value, from) => ({
-
+  type: CHANGE_RANGE_VALUE,
+  fieldId,
+  value,
+  from,
 });
 
 export const changeLogicOperator = (clauseId, fieldId, value) => ({
-
+  type: CHANGE_LOGIC_OPERATOR,
+  fieldId,
+  value,
 });
 
 export const submitQuery = () => ({
-
+  type: SUBMIT_QUERY,
 });
 
 export const addClause = () => ({
-
+  type: ADD_CLAUSE,
 });
