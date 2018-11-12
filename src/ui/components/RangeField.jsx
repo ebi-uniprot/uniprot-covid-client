@@ -10,7 +10,7 @@ const RangeField = ({ field, type, handleChange }) => (
       <input
         id={`${rangeFromName}input_${field.term}`}
         type={type}
-        onChange={e => handleChange(e.target.value, rangeFromName)}
+        onChange={e => handleChange(e.target.value, true)}
         placeholder="0"
       />
     </label>
@@ -19,7 +19,7 @@ const RangeField = ({ field, type, handleChange }) => (
       <input
         id={`${rangeToName}input_${field.term}`}
         type={type}
-        onChange={e => handleChange(e.target.value, rangeToName)}
+        onChange={e => handleChange(e.target.value, false)}
         placeholder="100"
       />
     </label>

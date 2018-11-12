@@ -13,7 +13,7 @@ const AdvancedSearchForm = ({
   handleLogicChange,
   handleRemoveClause,
   submitQuery,
-  addField,
+  addClause,
 }) => (
   <div className="advanced-search">
     <div>
@@ -36,7 +36,7 @@ const AdvancedSearchForm = ({
     />
     <hr />
     <div>
-      <button type="button" id="add-field" className="button" onClick={addField}>
+      <button type="button" id="add-field" className="button" onClick={addClause}>
         Add Field
       </button>
       <button

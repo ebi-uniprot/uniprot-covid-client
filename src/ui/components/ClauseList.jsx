@@ -77,7 +77,7 @@ const ClauseList = (clauses, searchTerms, handleFieldSelect, handleInputChange, 
         <Field
           field={clause.field}
           handleInputChange={value => handleInputChange(clause.id, value)}
-          handleRangeInputChange={value => handleRangeInputChange(clause.id, value)}
+          handleRangeInputChange={(value, from) => handleRangeInputChange(clause.id, value, from)}
         />
         {clause.field.hasEvidence && (
           <EvidenceField
