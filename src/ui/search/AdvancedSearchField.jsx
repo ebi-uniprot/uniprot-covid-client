@@ -58,7 +58,6 @@ const rangeToName = 'to_';
 
 class AdvancedSearchField extends Component<Props> {
   selectNode = (node: TermNode) => {
-    console.log(node);
     const { field, updateField } = this.props;
     field.selectedNode = node;
     updateField(field);
@@ -120,14 +119,13 @@ class AdvancedSearchField extends Component<Props> {
         />
       );
     }
-
     return (
       <Fragment>
         {(!term.hasRange || term.dataType !== 'integer') && (
-          <div className="advanced-search__inputs" key={term.value}>
-            <label htmlFor={`input_${term.value}`}>
+          <div className="advanced-search__inputs" key={term.id}>
+            <label htmlFor={`input_${term.id}`}>
               {term.label}
-              {React.cloneElement(node, { id: `input_${term.value}` })}
+              {React.cloneElement(node, { id: `input_${term.id}` })}
             </label>
           </div>
         )}
@@ -237,7 +235,7 @@ class AdvancedSearchField extends Component<Props> {
                   : apiUrls.annotation_evidences
               }
             />
-          )
+        )
         }
       </Fragment>
     );

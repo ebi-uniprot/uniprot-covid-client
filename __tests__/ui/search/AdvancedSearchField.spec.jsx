@@ -17,6 +17,7 @@ describe('AdvancedSearchField component', () => {
         dataType: 'string',
         description: 'Search by UniProtKB Accession',
         example: 'P12345',
+        id: 'id_accession',
       },
       queryInput: {},
     };
@@ -44,6 +45,7 @@ describe('AdvancedSearchField component', () => {
         ],
         description: 'Search by protein existence',
         example: '1',
+        id: 'id_existence',
       },
       queryInput: {},
     };
@@ -79,6 +81,7 @@ describe('AdvancedSearchField component', () => {
         hasRange: true,
         description: 'Search by feature sites',
         example: 'translocation',
+        id: 'id_sites',
       },
       queryInput: {},
     };

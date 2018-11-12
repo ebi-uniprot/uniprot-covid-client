@@ -34,6 +34,7 @@ class AdvancedSearch extends Component<Props, State> {
       example: 'a4_human, P05067, cdc7 human',
       itemType: 'single',
       dataType: 'string',
+      id: 'All',
     },
     queryInput: {},
   });
@@ -56,19 +57,19 @@ class AdvancedSearch extends Component<Props, State> {
       if (field.queryInput.rangeFrom || field.queryInput.rangeTo) {
         query = `${query}(${field.selectedNode.term}:[${
           field.queryInput.rangeFrom ? field.queryInput.rangeFrom : ''
-          }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
+        }-${field.queryInput.rangeTo ? field.queryInput.rangeTo : ''}])`;
       }
       if (field.queryInput.stringValue && field.queryInput.stringValue !== '') {
         query = `${query}(${field.selectedNode.term}:${
           field.queryInput.stringValue ? field.queryInput.stringValue : ''
-          })`;
+        })`;
       }
       if (field.queryInput.evidenceValue && field.queryInput.evidenceValue !== '') {
         query = `${query}AND(${field.selectedNode.term}:${field.queryInput.evidenceValue})`;
       }
       return `${queryAccumulator}${
         queryAccumulator.length > 0 && query.length > 0 ? field.logic : ''
-        }${query}`;
+      }${query}`;
     }, '');
   };
 

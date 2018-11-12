@@ -35,24 +35,66 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
     className="advanced-search__inputs"
   >
     <label
-      htmlFor="input_ec"
+      htmlFor="input_undefined"
     >
       Enzyme classification [EC]
-      <input
-        id="input_ec"
-        onChange={[Function]}
-        placeholder="1.1.2.3"
-        type="text"
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
     </label>
   </div>,
 ]
@@ -93,9 +135,35 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
@@ -162,9 +230,35 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
@@ -229,24 +323,66 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
     className="advanced-search__inputs"
   >
     <label
-      htmlFor="input_cofactor_chebi"
+      htmlFor="input_undefined"
     >
       ChEBI term
-      <input
-        id="input_cofactor_chebi"
-        onChange={[Function]}
-        placeholder="29105"
-        type="text"
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
     </label>
   </div>,
   <div
@@ -301,20 +437,46 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
     className="advanced-search__inputs"
   >
     <label
-      htmlFor="input_sites"
+      htmlFor="input_id_sites"
     >
       Any
       <input
-        id="input_sites"
+        id="input_id_sites"
         onChange={[Function]}
         placeholder="translocation"
         type="text"
@@ -385,20 +547,46 @@ Array [
     <div
       className="dropdown-menu"
     >
-      <ul
-        className=""
-      />
+      <div
+        className="dropdown-container"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <input
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Search for field"
+            type="text"
+            value=""
+          />
+        </form>
+        <div
+          className="autocomplete-menu"
+        >
+          <div
+            className="dropdown-menu__panel"
+          />
+        </div>
+      </div>
+      <div
+        className="dropdown-menu__panel"
+      >
+        <ul
+          className=""
+        />
+      </div>
     </div>
   </div>,
   <div
     className="advanced-search__inputs"
   >
     <label
-      htmlFor="input_accession"
+      htmlFor="input_id_accession"
     >
       UniProtKB AC
       <input
-        id="input_accession"
+        id="input_id_accession"
         onChange={[Function]}
         placeholder="P12345"
         type="text"

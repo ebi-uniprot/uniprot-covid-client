@@ -55,9 +55,35 @@ exports[`AdvancedSearch component should render 1`] = `
       <div
         className="dropdown-menu"
       >
-        <ul
-          className=""
-        />
+        <div
+          className="dropdown-container"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Search for field"
+              type="text"
+              value=""
+            />
+          </form>
+          <div
+            className="autocomplete-menu"
+          >
+            <div
+              className="dropdown-menu__panel"
+            />
+          </div>
+        </div>
+        <div
+          className="dropdown-menu__panel"
+        >
+          <ul
+            className=""
+          />
+        </div>
       </div>
     </div>
     <div
@@ -120,9 +146,35 @@ exports[`AdvancedSearch component should render 1`] = `
       <div
         className="dropdown-menu"
       >
-        <ul
-          className=""
-        />
+        <div
+          className="dropdown-container"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Search for field"
+              type="text"
+              value=""
+            />
+          </form>
+          <div
+            className="autocomplete-menu"
+          >
+            <div
+              className="dropdown-menu__panel"
+            />
+          </div>
+        </div>
+        <div
+          className="dropdown-menu__panel"
+        >
+          <ul
+            className=""
+          />
+        </div>
       </div>
     </div>
     <div
@@ -185,9 +237,35 @@ exports[`AdvancedSearch component should render 1`] = `
       <div
         className="dropdown-menu"
       >
-        <ul
-          className=""
-        />
+        <div
+          className="dropdown-container"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Search for field"
+              type="text"
+              value=""
+            />
+          </form>
+          <div
+            className="autocomplete-menu"
+          >
+            <div
+              className="dropdown-menu__panel"
+            />
+          </div>
+        </div>
+        <div
+          className="dropdown-menu__panel"
+        >
+          <ul
+            className=""
+          />
+        </div>
       </div>
     </div>
     <div
@@ -250,9 +328,35 @@ exports[`AdvancedSearch component should render 1`] = `
       <div
         className="dropdown-menu"
       >
-        <ul
-          className=""
-        />
+        <div
+          className="dropdown-container"
+        >
+          <form
+            onSubmit={[Function]}
+          >
+            <input
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Search for field"
+              type="text"
+              value=""
+            />
+          </form>
+          <div
+            className="autocomplete-menu"
+          >
+            <div
+              className="dropdown-menu__panel"
+            />
+          </div>
+        </div>
+        <div
+          className="dropdown-menu__panel"
+        >
+          <ul
+            className=""
+          />
+        </div>
       </div>
     </div>
     <div

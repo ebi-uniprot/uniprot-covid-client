@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export default function fetchData(url, config={}) {
-  return axios.get(url, config);
+export default function fetchData(url) {
+  return axios.get(url);
 }
