@@ -24,10 +24,9 @@ const clause = (state, action) => {
       if (state.id !== action.clauseId) {
         return state;
       }
-
       return {
         ...state,
-        value: action.value,
+        queryInput: action.value,
       };
     case UPDATE_LOGIC_OPERATOR:
       if (state.id !== action.clauseId) {
@@ -44,16 +43,14 @@ const clause = (state, action) => {
 };
 
 const query = (state = [], action) => {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case SELECT_FIELD:
+    case UPDATE_INPUT_VALUE:
       return {
         ...state,
         clauses: state.clauses.map(f => clause(f, action)),
       };
     case SUBMIT_QUERY:
-      console.log('SUBMIT_QUERY');
       return state;
     case ADD_CLAUSE:
       return {

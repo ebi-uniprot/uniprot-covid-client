@@ -4,7 +4,7 @@ import TextField from './TextField';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
-const Field = (field, handleInputChange, handleRangeInputChange) => {
+const Field = ({ field, handleInputChange, handleRangeInputChange }) => {
   const { dataType, hasRange } = field;
   if (dataType === 'enum') {
     return EnumField({

@@ -14,21 +14,21 @@ export const selectField = (clauseId, field) => ({
   field,
 });
 
-export const updateInputValue = (clauseId, fieldId, value) => ({
+export const updateInputValue = (clauseId, value) => ({
   type: UPDATE_INPUT_VALUE,
-  fieldId,
+  clauseId,
   value,
 });
 
 export const updateEvidence = (clauseId, fieldId, value) => ({
   type: UPDATE_EVIDENCE,
-  fieldId,
+  clauseId,
   value,
 });
 
 export const updateRangeValue = (clauseId, fieldId, value, from) => ({
   type: UPDATE_RANGE_VALUE,
-  fieldId,
+  clauseId,
   value,
   from,
 });

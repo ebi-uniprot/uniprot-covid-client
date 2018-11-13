@@ -58,9 +58,17 @@ export type Clause = {
 //   updateField: Function,
 // };
 
-const ClauseList = ({ clauses, searchTerms, handleFieldSelect, handleInputChange, handleEvidenceChange, handleRangeInputChange, handleLogicChange, handleRemoveClause }) => {
-  console.log(clauses);
-  return clauses.map((clause) => {
+const ClauseList = ({
+  clauses,
+  searchTerms,
+  handleFieldSelect,
+  handleInputChange,
+  handleEvidenceChange,
+  handleRangeInputChange,
+  handleLogicChange,
+  handleRemoveClause,
+}) => (
+  clauses.map((clause) => {
     if (!clause.field) {
       return null;
     }
@@ -100,7 +108,7 @@ const ClauseList = ({ clauses, searchTerms, handleFieldSelect, handleInputChange
         </button>
       </div>
     );
-  });
-};
+  })
+);
 
 export default ClauseList;
