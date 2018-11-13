@@ -7,6 +7,7 @@ import {
   updateLogicOperator,
   submitQuery,
   addClause,
+  removeClause,
 } from '../actions';
 import AdvancedSearchForm from '../components/AdvancedSearchForm';
 
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   handleEvidenceChange: (clauseId, fieldId, value) => dispatch(updateEvidence(clauseId, fieldId, value)),
   handleRangeInputChange: (clauseId, fieldId, value, from) => dispatch(updateRangeValue(clauseId, fieldId, value, from)),
   handleLogicChange: (clauseId, fieldId, value) => dispatch(updateLogicOperator(clauseId, fieldId, value)),
-  handleRemoveClause: clauseId => dispatch(selectField(clauseId)),
+  handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   submitQuery: () => dispatch(submitQuery()),
   addClause: () => dispatch(addClause()),
 });
