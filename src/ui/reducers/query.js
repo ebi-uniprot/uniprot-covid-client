@@ -1,22 +1,27 @@
 import {
-  UPDATE_FIELD,
-  UPDATE_VALUE,
-  UPDATE_LOGICAL_OPERATOR,
-} from '../constants/ActionTypes';
+  SELECT_FIELD,
+  UPDATE_INPUT_VALUE,
+  UPDATE_EVIDENCE,
+  UPDATE_RANGE_VALUE,
+  UPDATE_LOGIC_OPERATOR,
+  SUBMIT_QUERY,
+  ADD_CLAUSE,
 
-const filter = (state, action) => {
+} from '../actions';
+
+const clause = (state, action) => {
   switch (action.type) {
-    case UPDATE_FIELD:
-      if (state.id !== action.id) {
+    case SELECT_FIELD:
+      if (state.id !== action.clauseId) {
         return state;
       }
-
+      console.log(state, action);
       return {
         ...state,
-        clause: action.clause,
+        field: action.field,
       };
-    case UPDATE_VALUE:
-      if (state.id !== action.id) {
+    case UPDATE_INPUT_VALUE:
+      if (state.id !== action.clauseId) {
         return state;
       }
 
@@ -24,8 +29,8 @@ const filter = (state, action) => {
         ...state,
         value: action.value,
       };
-    case UPDATE_LOGICAL_OPERATOR:
-      if (state.id !== action.id) {
+    case UPDATE_LOGIC_OPERATOR:
+      if (state.id !== action.clauseId) {
         return state;
       }
 
@@ -39,11 +44,22 @@ const filter = (state, action) => {
 };
 
 const query = (state = [], action) => {
+  console.log(state);
+  console.log(action);
   switch (action.type) {
-    case UPDATE_FIELD:
-    case UPDATE_VALUE:
-    case UPDATE_LOGICAL_OPERATOR:
-      return state.map(f => filter(f, action));
+    case SELECT_FIELD:
+    case UPDATE_INPUT_VALUE:
+    case UPDATE_LOGIC_OPERATOR:
+      return {
+        ...state,
+        clauses: state.clauses.map(f => clause(f, action)),
+      }
+    case SUBMIT_QUERY:
+      console.log('SUBMIT_QUERY');
+      return state;
+    case ADD_CLAUSE:
+      console.log(ADD_CLAUSE);
+      return state;
     default:
       return state;
   }

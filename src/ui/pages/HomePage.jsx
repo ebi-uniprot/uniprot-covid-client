@@ -4,7 +4,7 @@ import { Tile } from 'franklin-sites';
 
 import Block from '../layout/Block';
 import HomePageLayout from '../layout/HomePageLayout';
-import AdvancedSearch from '../search/AdvancedSearch';
+import AdvancedSearch from '../containers/AdvancedSearch';
 
 const HomePage = () => (
   <HomePageLayout>

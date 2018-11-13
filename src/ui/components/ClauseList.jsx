@@ -58,7 +58,8 @@ export type Clause = {
 //   updateField: Function,
 // };
 
-const ClauseList = (clauses, searchTerms, handleFieldSelect, handleInputChange, handleEvidenceChange, handleRangeInputChange, handleLogicChange, removeClause) => {
+const ClauseList = ({ clauses, searchTerms, handleFieldSelect, handleInputChange, handleEvidenceChange, handleRangeInputChange, handleLogicChange, handleRemoveClause }) => {
+  console.log(clauses);
   return clauses.map((clause) => {
     if (!clause.field) {
       return null;
@@ -93,7 +94,7 @@ const ClauseList = (clauses, searchTerms, handleFieldSelect, handleInputChange, 
         <button
           type="button"
           className="button-remove"
-          onClick={() => removeClause(clause.id)}
+          onClick={() => handleRemoveClause(clause.id)}
         >
           Remove
         </button>
