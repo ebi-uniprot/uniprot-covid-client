@@ -7,8 +7,8 @@ import {
   SUBMIT_QUERY,
   ADD_CLAUSE,
   REMOVE_CLAUSE,
-
 } from '../actions';
+import createEmptyField from '../utils';
 
 const clause = (state, action) => {
   switch (action.type) {
@@ -56,11 +56,16 @@ const query = (state = [], action) => {
       console.log('SUBMIT_QUERY');
       return state;
     case ADD_CLAUSE:
-      console.log(ADD_CLAUSE);
-      return state;
+      return {
+        ...state,
+        clauses: [...state.clauses, createEmptyField()],
+      };
     case REMOVE_CLAUSE:
       if (state.clauses.length === 1) {
-        return state;
+        return {
+          ...state,
+          clauses: [createEmptyField()],
+        };
       }
       return {
         ...state,
