@@ -7,6 +7,8 @@ export const HANDLE_FIELD_SELECT = 'HANDLE_FIELD_SELECT';
 export const SUBMIT_QUERY = 'SUBMIT_QUERY';
 export const ADD_CLAUSE = 'ADD_CLAUSE';
 export const REMOVE_CLAUSE = 'REMOVE_CLAUSE';
+export const REQUEST_SEARCH_TERMS = 'REQUEST_SEARCH_TERMS';
+export const RECEIVE_SEARCH_TERMS = 'RECEIVE_SEARCH_TERMS';
 
 export const selectField = (clauseId, field) => ({
   type: SELECT_FIELD,
@@ -50,4 +52,12 @@ export const addClause = () => ({
 export const removeClause = clauseId => ({
   type: REMOVE_CLAUSE,
   clauseId,
+});
+
+export const requestSearchTerms = () => ({
+  type: REQUEST_SEARCH_TERMS,
+});
+
+export const receiveSearchTerms = () => ({
+  type: RECEIVE_SEARCH_TERMS,
 });
