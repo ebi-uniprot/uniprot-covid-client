@@ -36,7 +36,7 @@ const clause = (state, action) => {
     case UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
-        logicalOperator: action.logicalOperator,
+        logicOperator: action.value,
       };
     default:
       return state;
@@ -48,9 +48,10 @@ const query = (state = [], action) => {
     case SELECT_FIELD:
     case UPDATE_INPUT_VALUE:
     case UPDATE_RANGE_VALUE:
+    case UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
-        clauses: state.clauses.map(f => clause(f, action)),
+        clauses: state.clauses.map(c => clause(c, action)),
       };
     case SUBMIT_QUERY:
       return state;

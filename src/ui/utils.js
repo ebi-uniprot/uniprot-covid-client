@@ -2,7 +2,7 @@ import { v1 } from 'uuid';
 
 const createEmptyField = () => ({
   id: v1(),
-  logic: 'AND',
+  logicOperator: 'AND',
   field: {
     label: 'Any',
     term: 'All',

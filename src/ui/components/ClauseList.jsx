@@ -48,7 +48,7 @@ export type Operator = 'AND' | 'OR' | 'NOT';
 export type Clause = {
   id: string,
   field: FieldType,
-  logic: Operator,
+  logicOperator: Operator,
   queryInput: Input,
 };
 
@@ -76,7 +76,7 @@ const ClauseList = ({
     return (
       <div key={`clause_${clause.id}`} className="advanced-search__field">
         <LogicalOperator
-          value={clause.logic}
+          value={clause.logicOperator}
           handleChange={value => handleLogicChange(clause.id, value)}
         />
         <TreeSelect

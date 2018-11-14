@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   handleInputChange: (clauseId, value) => dispatch(updateInputValue(clauseId, value)),
   handleEvidenceChange: (clauseId, fieldId, value) => dispatch(updateEvidence(clauseId, fieldId, value)),
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
-  handleLogicChange: (clauseId, fieldId, value) => dispatch(updateLogicOperator(clauseId, fieldId, value)),
+  handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   submitQuery: () => dispatch(submitQuery()),
   addClause: () => dispatch(addClause()),

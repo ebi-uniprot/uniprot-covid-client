@@ -33,9 +33,9 @@ export const updateRangeValue = (clauseId, value, from) => ({
   from,
 });
 
-export const updateLogicOperator = (clauseId, fieldId, value) => ({
+export const updateLogicOperator = (clauseId, value) => ({
   type: UPDATE_LOGIC_OPERATOR,
-  fieldId,
+  clauseId,
   value,
 });
 
