@@ -8,7 +8,10 @@ import {
   ADD_CLAUSE,
   REMOVE_CLAUSE,
 } from '../actions';
-import { createEmptyClause } from '../utils';
+import {
+  createEmptyClause,
+  createQueryString,
+} from '../utils';
 
 const clause = (state, action) => {
   if (state.id !== action.clauseId) {
@@ -54,6 +57,7 @@ const query = (state = [], action) => {
         clauses: state.clauses.map(c => clause(c, action)),
       };
     case SUBMIT_QUERY:
+      console.log(createQueryString(state.clauses));
       return state;
     case ADD_CLAUSE:
       return {

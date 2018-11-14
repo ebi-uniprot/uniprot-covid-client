@@ -20,7 +20,7 @@ const getItemTypeEvidencePrefix = (itemType) => {
 const getItemTypeRangePrefix = itemType => (itemType === 'feature' ? 'ftlen_' : '');
 
 const createSimpleSubquery = (clause: Clause) => {
-  const { itemType, term, valuePrefix } = clause.selectedNode;
+  const { itemType, term, valuePrefix } = clause.field;
   const { stringValue } = clause.queryInput;
   const itemTypePrefix = getItemTypePrefix(itemType);
   const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
@@ -31,7 +31,7 @@ const createSimpleSubquery = (clause: Clause) => {
 };
 
 const createRangeSubquery = (clause: Clause) => {
-  const { term, itemType } = clause.selectedNode;
+  const { term, itemType } = clause.field;
   const { rangeFrom, rangeTo } = clause.queryInput;
   const rangeFromChecked = rangeFrom || '';
   const rangeToChecked = rangeTo || '';
@@ -41,7 +41,7 @@ const createRangeSubquery = (clause: Clause) => {
 
 const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
   const { evidenceValue } = clause.queryInput;
-  const { term, itemType } = clause.selectedNode;
+  const { term, itemType } = clause.field;
   if (!evidenceValue) {
     throw new Error('Evidence value not provided');
   }
@@ -50,6 +50,8 @@ const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
 };
 
 const createQueryString = (clauses: Array<Clause>): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
+  console.log(clauses);
+  console.log(clause);
   let query = '';
   if (clause.queryInput.stringValue && clause.queryInput.stringValue !== '') {
     query = `${query}${createSimpleSubquery(clause)}`;
