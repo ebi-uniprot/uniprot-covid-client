@@ -8,7 +8,7 @@ import {
   ADD_CLAUSE,
   REMOVE_CLAUSE,
 } from '../actions';
-import createEmptyField from '../utils';
+import { createEmptyClause } from '../utils';
 
 const clause = (state, action) => {
   if (state.id !== action.clauseId) {
@@ -37,7 +37,7 @@ const clause = (state, action) => {
       return {
         ...state,
         logicOperator: action.value,
-      };
+      };  
     default:
       return state;
   }
@@ -58,13 +58,13 @@ const query = (state = [], action) => {
     case ADD_CLAUSE:
       return {
         ...state,
-        clauses: [...state.clauses, createEmptyField()],
+        clauses: [...state.clauses, createEmptyClause()],
       };
     case REMOVE_CLAUSE:
       if (state.clauses.length === 1) {
         return {
           ...state,
-          clauses: [createEmptyField()],
+          clauses: [createEmptyClause()],
         };
       }
       return {

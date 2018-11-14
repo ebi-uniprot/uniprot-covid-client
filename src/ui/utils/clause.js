@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 
-const createEmptyField = () => ({
+const createEmptyClause = () => ({
   id: v1(),
   logicOperator: 'AND',
   field: {
@@ -14,4 +14,4 @@ const createEmptyField = () => ({
   queryInput: {},
 });
 
-export default createEmptyField;
+export default createEmptyClause;
