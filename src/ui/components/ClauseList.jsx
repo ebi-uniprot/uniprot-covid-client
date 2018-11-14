@@ -61,16 +61,27 @@ export type Clause = {
 const ClauseList = ({
   clauses,
   searchTerms,
+  evidences,
   handleFieldSelect,
   handleInputChange,
   handleEvidenceChange,
   handleRangeInputChange,
   handleLogicChange,
   handleRemoveClause,
+  fetchEvidencesIfNeeded,
 }) => (
   clauses.map((clause) => {
     if (!clause.field) {
       return null;
+    }
+
+    let evidencesData;
+    if (clause.field.hasEvidence) {
+      const evidencesType = clause.field.term === 'go' ? 'go' : 'annotation';
+      evidencesData = evidences[evidencesType].data || [];
+      if (evidencesData.length === 0) {
+        fetchEvidencesIfNeeded(evidencesType);
+      }
     }
 
     return (
@@ -89,17 +100,13 @@ const ClauseList = ({
           handleRangeInputChange={(value, from) => handleRangeInputChange(clause.id, value, from)}
           queryInput={clause.queryInput}
         />
-        {/* {clause.field.hasEvidence && (
+        {clause.field.hasEvidence && (
           <EvidenceField
             handleChange={value => handleEvidenceChange(clause.id, value)}
             value={clause.queryInput.evidenceValue}
-            url={
-              clause.field.term === 'go'
-                ? apiUrls.go_evidences
-                : apiUrls.annotation_evidences
-            }
+            data={evidencesData}
           />
-        )} */}
+        )}
         <button
           type="button"
           className="button-remove"

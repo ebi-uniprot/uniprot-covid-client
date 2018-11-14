@@ -1,8 +1,6 @@
 import { fetchData } from '../utils';
 import apiUrls from '../apiUrls';
 
-const { advanced_search_terms } = apiUrls;
-
 export const SELECT_FIELD = 'SELECT_FIELD';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const UPDATE_EVIDENCE = 'UPDATE_EVIDENCE';
@@ -14,12 +12,16 @@ export const ADD_CLAUSE = 'ADD_CLAUSE';
 export const REMOVE_CLAUSE = 'REMOVE_CLAUSE';
 export const REQUEST_SEARCH_TERMS = 'REQUEST_SEARCH_TERMS';
 export const RECEIVE_SEARCH_TERMS = 'RECEIVE_SEARCH_TERMS';
+export const REQUEST_EVIDENCES = 'REQUEST_EVIDENCES';
+export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 
-export const selectField = (clauseId, field) => ({
-  type: SELECT_FIELD,
-  clauseId,
-  field,
-});
+export const selectField = (clauseId, field) => {
+  return {
+    type: SELECT_FIELD,
+    clauseId,
+    field,
+  };
+};
 
 export const updateInputValue = (clauseId, value) => ({
   type: UPDATE_INPUT_VALUE,
@@ -71,6 +73,36 @@ export const receiveSearchTerms = data => ({
 
 export const fetchSearchTerms = () => (dispatch) => {
   dispatch(requestSearchTerms());
-  return fetchData(advanced_search_terms)
+  return fetchData(apiUrls.advanced_search_terms)
     .then(response => dispatch(receiveSearchTerms(response.data)));
+};
+
+export const requestEvidences = evidencesType => ({
+  type: REQUEST_EVIDENCES,
+  evidencesType,
+});
+
+export const receiveEvidences = (data, evidencesType) => ({
+  type: RECEIVE_EVIDENCES,
+  data,
+  evidencesType,
+  receivedAt: Date.now(),
+});
+
+const fetchEvidences = evidencesType => (dispatch) => {
+  const url = apiUrls.evidences[evidencesType];
+  dispatch(requestEvidences(evidencesType));
+  return fetchData(url)
+    .then(response => dispatch(receiveEvidences(response.data, evidencesType)));
+};
+
+const shouldFetchEvidences = (state, evidenceType) => {
+  const evidences = state.query.evidences[evidenceType];
+  return !evidences.isFetching;
+};
+
+export const fetchEvidencesIfNeeded = evidencesType => (dispatch, getState) => {
+  if (shouldFetchEvidences(getState(), evidencesType)) {
+    return dispatch(fetchEvidences(evidencesType));
+  }
 };

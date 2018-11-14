@@ -10,6 +10,7 @@ import {
   addClause,
   removeClause,
   fetchSearchTerms,
+  fetchEvidencesIfNeeded,
 } from '../actions';
 import ClauseList from '../components/ClauseList';
 
@@ -17,13 +18,11 @@ import ClauseList from '../components/ClauseList';
 class AdvancedSearch extends Component {
   componentDidMount() {
     const { dispatchFetchSearchTerms } = this.props;
-    console.log('mounted');
     dispatchFetchSearchTerms();
   }
 
-
   render() {
-    const { namespace, addClause, submitQuery } = this.props;
+    const { namespace, dispatchAddClause, dispatchSubmitQuery } = this.props;
     return (
       <div className="advanced-search">
         <div>
@@ -39,14 +38,14 @@ class AdvancedSearch extends Component {
         />
         <hr />
         <div>
-          <button type="button" id="add-field" className="button" onClick={addClause}>
+          <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
             Add Field
           </button>
           <button
             type="button"
             id="submit-query"
             className="button"
-            onClick={submitQuery}
+            onClick={dispatchSubmitQuery}
           >
             Search
           </button>
@@ -54,23 +53,13 @@ class AdvancedSearch extends Component {
       </div>
     );
   }
-};
-
-// clauses={clauses}
-// searchTerms={searchTerms}
-// handleFieldSelect={handleFieldSelect}
-// handleInputChange={handleInputChange}
-// handleEvidenceChange={handleEvidenceChange}
-// handleRangeInputChange={handleRangeInputChange}
-// handleLogicChange={handleLogicChange}
-// handleRemoveClause={handleRemoveClause}
-
-
+}
 
 const mapStateToProps = state => ({
   clauses: state.query.clauses,
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
+  evidences: state.query.evidences,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -80,8 +69,9 @@ const mapDispatchToProps = dispatch => ({
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
-  submitQuery: () => dispatch(submitQuery()),
-  addClause: () => dispatch(addClause()),
+  dispatchSubmitQuery: () => dispatch(submitQuery()),
+  dispatchAddClause: () => dispatch(addClause()),
+  fetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
 });
 

@@ -15,6 +15,16 @@ const initialState = {
     searchTerms: {
       data: [],
     },
+    evidences: {
+      go: {
+        data: [],
+        isFetching: false,
+      },
+      annotation: {
+        data: [],
+        isFetching: false,
+      },
+    },
   },
 };
 

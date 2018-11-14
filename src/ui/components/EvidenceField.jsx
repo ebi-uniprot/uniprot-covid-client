@@ -7,7 +7,7 @@ import React from 'react';
 //   data: Array<Group>,
 // };
 
-const EvidenceField = ({ field, value='', handleChange }) => {
+const EvidenceField = ({ field, value='', handleChange, data=[] }) => {
   if (!data) {
     return null;
   }

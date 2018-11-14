@@ -4,10 +4,12 @@ export default {
   // uniprotkb advanced search terms
   advanced_search_terms: `${prefix}/configure/uniprotkb/search_terms`,
   // Annotation evidence used by advanced search
-  annotation_evidences: `${prefix}/configure/uniprotkb/annotation_evidences`,
-  // Go evidences used by advanced go search
-  // "itemType": "goterm",
-  go_evidences: `${prefix}/configure/uniprotkb/go_evidences`,
+  evidences: {
+    annotation: `${prefix}/configure/uniprotkb/annotation_evidences`,
+    // Go evidences used by advanced go search
+    // "itemType": "goterm",
+    go: `${prefix}/configure/uniprotkb/go_evidences`,
+  },
   // Database cross references used by advanced search
   database_xefs: `${prefix}/configure/uniprotkb/databases`,
   // Database cross reference fields in result column configure

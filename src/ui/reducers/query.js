@@ -9,6 +9,8 @@ import {
   REMOVE_CLAUSE,
   REQUEST_SEARCH_TERMS,
   RECEIVE_SEARCH_TERMS,
+  REQUEST_EVIDENCES,
+  RECEIVE_EVIDENCES,
 } from '../actions';
 import {
   createEmptyClause,
@@ -56,7 +58,6 @@ const searchTerms = (state = [], action) => {
         isFetching: true,
       };
     case RECEIVE_SEARCH_TERMS:
-      console.log(action)
       return {
         ...state,
         isFetching: false,
@@ -67,6 +68,29 @@ const searchTerms = (state = [], action) => {
       return state;
   }
 };
+
+const evidences = (state = [], action) => {
+  switch (action.type) {
+    case REQUEST_EVIDENCES:
+      return {
+        ...state,
+        [action.evidencesType]: {
+          isFetching: true,
+        },
+      };
+    case RECEIVE_EVIDENCES:
+      return {
+        ...state,
+        [action.evidencesType]: {
+          isFetching: false,
+          data: action.data,
+          lastUpdated: action.receivedAt,
+        },
+      };
+    default:
+      return state;
+  }
+}
 
 const query = (state = [], action) => {
   switch (action.type) {
@@ -102,7 +126,13 @@ const query = (state = [], action) => {
       return {
         ...state,
         searchTerms: searchTerms(state.searchTerms, action),
-      }
+      };
+    case REQUEST_EVIDENCES:
+    case RECEIVE_EVIDENCES:
+      return {
+        ...state,
+        evidences: evidences(state.evidences, action),
+      };
     default:
       return state;
   }
