@@ -7,6 +7,8 @@ import {
   SUBMIT_QUERY,
   ADD_CLAUSE,
   REMOVE_CLAUSE,
+  REQUEST_SEARCH_TERMS,
+  RECEIVE_SEARCH_TERMS,
 } from '../actions';
 import {
   createEmptyClause,
@@ -46,6 +48,26 @@ const clause = (state, action) => {
   }
 };
 
+const searchTerms = (state = [], action) => {
+  switch (action.type) {
+    case REQUEST_SEARCH_TERMS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case RECEIVE_SEARCH_TERMS:
+      console.log(action)
+      return {
+        ...state,
+        isFetching: false,
+        data: action.data,
+        lastUpdated: action.receivedAt,
+      };
+    default:
+      return state;
+  }
+};
+
 const query = (state = [], action) => {
   switch (action.type) {
     case SELECT_FIELD:
@@ -75,6 +97,12 @@ const query = (state = [], action) => {
         ...state,
         clauses: state.clauses.filter(c => c.id !== action.clauseId),
       };
+    case REQUEST_SEARCH_TERMS:
+    case RECEIVE_SEARCH_TERMS:
+      return {
+        ...state,
+        searchTerms: searchTerms(state.searchTerms, action),
+      }
     default:
       return state;
   }

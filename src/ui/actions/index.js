@@ -1,3 +1,8 @@
+import { fetchData } from '../utils';
+import apiUrls from '../apiUrls';
+
+const { advanced_search_terms } = apiUrls;
+
 export const SELECT_FIELD = 'SELECT_FIELD';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const UPDATE_EVIDENCE = 'UPDATE_EVIDENCE';
@@ -58,6 +63,14 @@ export const requestSearchTerms = () => ({
   type: REQUEST_SEARCH_TERMS,
 });
 
-export const receiveSearchTerms = () => ({
+export const receiveSearchTerms = data => ({
   type: RECEIVE_SEARCH_TERMS,
+  data,
+  receivedAt: Date.now(),
 });
+
+export const fetchSearchTerms = () => (dispatch) => {
+  dispatch(requestSearchTerms());
+  return fetchData(advanced_search_terms)
+    .then(response => dispatch(receiveSearchTerms(response.data)));
+};

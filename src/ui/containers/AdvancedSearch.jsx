@@ -9,14 +9,16 @@ import {
   submitQuery,
   addClause,
   removeClause,
+  fetchSearchTerms,
 } from '../actions';
 import ClauseList from '../components/ClauseList';
 
 
 class AdvancedSearch extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatchFetchSearchTerms } = this.props;
     console.log('mounted');
+    dispatchFetchSearchTerms();
   }
 
 
@@ -80,6 +82,7 @@ const mapDispatchToProps = dispatch => ({
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   submitQuery: () => dispatch(submitQuery()),
   addClause: () => dispatch(addClause()),
+  dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
 });
 
 export default connect(
