@@ -87,18 +87,19 @@ const ClauseList = ({
           field={clause.field}
           handleInputChange={value => handleInputChange(clause.id, value)}
           handleRangeInputChange={(value, from) => handleRangeInputChange(clause.id, value, from)}
+          queryInput={clause.queryInput}
         />
-        {clause.field.hasEvidence && (
+        {/* {clause.field.hasEvidence && (
           <EvidenceField
             handleChange={value => handleEvidenceChange(clause.id, value)}
-            selectedEvidence={clause.queryInput.evidenceValue}
+            value={clause.queryInput.evidenceValue}
             url={
               clause.field.term === 'go'
                 ? apiUrls.go_evidences
                 : apiUrls.annotation_evidences
             }
           />
-        )}
+        )} */}
         <button
           type="button"
           className="button-remove"

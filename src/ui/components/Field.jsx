@@ -4,7 +4,7 @@ import TextField from './TextField';
 
 const dataTypes = { string: 'text', integer: 'number' };
 
-const Field = ({ field, handleInputChange, handleRangeInputChange }) => {
+const Field = ({ field, handleInputChange, handleRangeInputChange, queryInput }) => {
   const { dataType, hasRange } = field;
   if (dataType === 'enum') {
     return EnumField({
@@ -18,11 +18,12 @@ const Field = ({ field, handleInputChange, handleRangeInputChange }) => {
       handleChange: handleRangeInputChange,
     });
   }
-  if (!hasRange || dataType !== 'integer') {
+  if (!hasRange) {
     return TextField({
       field,
       handleChange: handleInputChange,
       type: dataTypes[dataType],
+      value: queryInput.stringValue,
     });
   }
   if (hasRange) {
@@ -30,6 +31,8 @@ const Field = ({ field, handleInputChange, handleRangeInputChange }) => {
       field,
       handleChange: handleRangeInputChange,
       type: 'number',
+      rangeFrom: queryInput.rangeFrom,
+      rangeTo: queryInput.rangeTo,
     });
   }
   return null;

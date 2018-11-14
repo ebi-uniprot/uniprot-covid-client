@@ -26,7 +26,7 @@ export const updateEvidence = (clauseId, fieldId, value) => ({
   value,
 });
 
-export const updateRangeValue = (clauseId, fieldId, value, from) => ({
+export const updateRangeValue = (clauseId, value, from) => ({
   type: UPDATE_RANGE_VALUE,
   clauseId,
   value,

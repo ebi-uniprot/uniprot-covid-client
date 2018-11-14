@@ -11,28 +11,29 @@ import {
 import createEmptyField from '../utils';
 
 const clause = (state, action) => {
+  if (state.id !== action.clauseId) {
+    return state;
+  }
   switch (action.type) {
     case SELECT_FIELD:
-      if (state.id !== action.clauseId) {
-        return state;
-      }
       return {
         ...state,
         field: action.field,
       };
     case UPDATE_INPUT_VALUE:
-      if (state.id !== action.clauseId) {
-        return state;
-      }
       return {
         ...state,
-        queryInput: action.value,
+        queryInput: { stringValue: action.value },
+      };
+    case UPDATE_RANGE_VALUE:
+      return {
+        ...state,
+        queryInput: {
+          ...state.queryInput,
+          [action.from ? 'rangeFrom' : 'rangeTo']: action.value,
+        },
       };
     case UPDATE_LOGIC_OPERATOR:
-      if (state.id !== action.clauseId) {
-        return state;
-      }
-
       return {
         ...state,
         logicalOperator: action.logicalOperator,
@@ -46,6 +47,7 @@ const query = (state = [], action) => {
   switch (action.type) {
     case SELECT_FIELD:
     case UPDATE_INPUT_VALUE:
+    case UPDATE_RANGE_VALUE:
       return {
         ...state,
         clauses: state.clauses.map(f => clause(f, action)),
