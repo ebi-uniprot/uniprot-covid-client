@@ -43,7 +43,10 @@ const clause = (state, action) => {
     case UPDATE_EVIDENCE:
       return {
         ...state,
-        queryInput: { evidenceValue: action.value },
+        queryInput: {
+          ...state.queryInput,
+          evidenceValue: action.value,
+        },
       };
     case UPDATE_LOGIC_OPERATOR:
       return {
