@@ -33,7 +33,7 @@ class AdvancedSearch extends Component {
         <div>
           <label htmlFor="namespace-select">
             Searching in
-          <select id="namespace-select">
+            <select id="namespace-select">
               <option>{namespace}</option>
             </select>
           </label>
@@ -71,7 +71,9 @@ const mapDispatchToProps = dispatch => ({
   handleFieldSelect: (clauseId, field) => dispatch(selectField(clauseId, field)),
   handleInputChange: (clauseId, value) => dispatch(updateInputValue(clauseId, value)),
   handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
-  handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
+  handleRangeInputChange: (clauseId, value, from) => dispatch(
+    updateRangeValue(clauseId, value, from),
+  ),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchSubmitQuery: () => dispatch(submitQuery()),

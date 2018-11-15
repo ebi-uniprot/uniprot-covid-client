@@ -7,7 +7,11 @@ import React from 'react';
 //   data: Array<Group>,
 // };
 
-const EvidenceField = ({ field, value='', handleChange, data=[] }) => {
+const EvidenceField = ({
+  value = '',
+  handleChange,
+  data = [],
+}) => {
   if (!data) {
     return null;
   }
@@ -34,6 +38,6 @@ const EvidenceField = ({ field, value='', handleChange, data=[] }) => {
       </label>
     </div>
   );
-}
+};
 
 export default EvidenceField;

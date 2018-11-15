@@ -1,8 +1,7 @@
 // @flow
-import React, { Fragment } from 'react';
+import React from 'react';
 import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
-import apiUrls from '../apiUrls';
 import LogicalOperator from './LogicalOperator';
 import Field from './Field';
 

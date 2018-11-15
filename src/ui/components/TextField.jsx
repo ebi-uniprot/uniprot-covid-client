@@ -1,6 +1,11 @@
 import React from 'react';
 
-const TextField = ({ field, type, handleChange, value='' }) => (
+const TextField = ({
+  field,
+  type,
+  handleChange,
+  value = '',
+}) => (
   <div className="advanced-search__inputs" key={field.term}>
     <label htmlFor={`input_${field.term}`}>
       {field.label}

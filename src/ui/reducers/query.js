@@ -52,7 +52,7 @@ const clause = (state, action) => {
       return {
         ...state,
         logicOperator: action.value,
-      };  
+      };
     default:
       return state;
   }
@@ -98,7 +98,7 @@ const evidences = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 const query = (state = [], action) => {
   switch (action.type) {
@@ -138,7 +138,6 @@ const query = (state = [], action) => {
       };
     case REQUEST_EVIDENCES:
     case RECEIVE_EVIDENCES:
-    case UPDATE_EVIDENCE:
       return {
         ...state,
         evidences: evidences(state.evidences, action),

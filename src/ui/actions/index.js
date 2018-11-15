@@ -15,13 +15,11 @@ export const RECEIVE_SEARCH_TERMS = 'RECEIVE_SEARCH_TERMS';
 export const REQUEST_EVIDENCES = 'REQUEST_EVIDENCES';
 export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 
-export const selectField = (clauseId, field) => {
-  return {
-    type: SELECT_FIELD,
-    clauseId,
-    field,
-  };
-};
+export const selectField = (clauseId, field) => ({
+  type: SELECT_FIELD,
+  clauseId,
+  field,
+});
 
 export const updateInputValue = (clauseId, value) => ({
   type: UPDATE_INPUT_VALUE,
@@ -103,6 +101,6 @@ const shouldFetchEvidences = (state, evidenceType) => {
 
 export const fetchEvidencesIfNeeded = evidencesType => (dispatch, getState) => {
   if (shouldFetchEvidences(getState(), evidencesType)) {
-    return dispatch(fetchEvidences(evidencesType));
+    dispatch(fetchEvidences(evidencesType));
   }
 };

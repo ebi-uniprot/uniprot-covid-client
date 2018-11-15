@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
-import AdvancedSearch from '../../../src/ui/search/AdvancedSearch';
+import AdvancedSearch from '../../../src/ui/containers/AdvancedSearch';
 
 configure({ adapter: new Adapter() });
 
