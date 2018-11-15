@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Clause component should render \`autocomplete\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="input_undefined"
+  >
+    <input
+      id="input_undefined"
+      onChange={[Function]}
+      value=""
+    />
+  </label>
+</div>
+`;
+
+exports[`Clause component should render \`date\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="input_undefined"
+  >
+    <input
+      id="input_undefined"
+      onChange={[Function]}
+      value=""
+    />
+  </label>
+</div>
+`;
+
+exports[`Clause component should render \`enum\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="select_existence"
+  >
+    Protein Existence [PE]
+    <select
+      id="select_existence"
+      onChange={[Function]}
+    >
+      <option
+        value="1"
+      >
+        Evidence at protein level
+      </option>
+      <option
+        value="2"
+      >
+        Evidence at transcript level
+      </option>
+    </select>
+  </label>
+</div>
+`;
+
+exports[`Clause component should render \`evidence\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="input_undefined"
+  >
+    <input
+      id="input_undefined"
+      onChange={[Function]}
+      value=""
+    />
+  </label>
+</div>
+`;
+
+exports[`Clause component should render \`range\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="input_undefined"
+  >
+    <input
+      id="input_undefined"
+      onChange={[Function]}
+      value=""
+    />
+  </label>
+</div>
+`;
+
+exports[`Clause component should render \`string\` field 1`] = `
+<div
+  className="advanced-search__inputs"
+>
+  <label
+    htmlFor="input_accession"
+  >
+    UniProtKB AC
+    <input
+      id="input_accession"
+      onChange={[Function]}
+      placeholder="P12345"
+      type="text"
+      value=""
+    />
+  </label>
+</div>
+`;
