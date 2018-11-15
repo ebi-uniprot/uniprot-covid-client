@@ -17,8 +17,13 @@ import ClauseList from '../components/ClauseList';
 
 class AdvancedSearch extends Component {
   componentDidMount() {
-    const { dispatchFetchSearchTerms } = this.props;
+    const {
+      dispatchFetchSearchTerms,
+      dispatchfetchEvidencesIfNeeded,
+    } = this.props;
     dispatchFetchSearchTerms();
+    dispatchfetchEvidencesIfNeeded('go');
+    dispatchfetchEvidencesIfNeeded('annotation');
   }
 
   render() {
@@ -71,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchSubmitQuery: () => dispatch(submitQuery()),
   dispatchAddClause: () => dispatch(addClause()),
-  fetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
+  dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
 });
 

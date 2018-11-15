@@ -68,7 +68,6 @@ const ClauseList = ({
   handleRangeInputChange,
   handleLogicChange,
   handleRemoveClause,
-  fetchEvidencesIfNeeded,
 }) => (
   clauses.map((clause) => {
     if (!clause.field) {
@@ -79,9 +78,6 @@ const ClauseList = ({
     if (clause.field.hasEvidence) {
       const evidencesType = clause.field.term === 'go' ? 'go' : 'annotation';
       evidencesData = evidences[evidencesType].data || [];
-      if (evidencesData.length === 0) {
-        fetchEvidencesIfNeeded(evidencesType);
-      }
     }
 
     return (
