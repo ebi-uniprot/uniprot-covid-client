@@ -29,7 +29,7 @@ export const updateInputValue = (clauseId, value) => ({
   value,
 });
 
-export const updateEvidence = (clauseId, fieldId, value) => ({
+export const updateEvidence = (clauseId, value) => ({
   type: UPDATE_EVIDENCE,
   clauseId,
   value,

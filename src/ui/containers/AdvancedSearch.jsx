@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleFieldSelect: (clauseId, field) => dispatch(selectField(clauseId, field)),
   handleInputChange: (clauseId, value) => dispatch(updateInputValue(clauseId, value)),
-  handleEvidenceChange: (clauseId, fieldId, value) => dispatch(updateEvidence(clauseId, fieldId, value)),
+  handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),

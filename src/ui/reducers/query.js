@@ -40,6 +40,11 @@ const clause = (state, action) => {
           [action.from ? 'rangeFrom' : 'rangeTo']: action.value,
         },
       };
+    case UPDATE_EVIDENCE:
+      return {
+        ...state,
+        queryInput: { evidenceValue: action.value },
+      };
     case UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
@@ -97,6 +102,7 @@ const query = (state = [], action) => {
     case SELECT_FIELD:
     case UPDATE_INPUT_VALUE:
     case UPDATE_RANGE_VALUE:
+    case UPDATE_EVIDENCE:
     case UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
@@ -129,6 +135,7 @@ const query = (state = [], action) => {
       };
     case REQUEST_EVIDENCES:
     case RECEIVE_EVIDENCES:
+    case UPDATE_EVIDENCE:
       return {
         ...state,
         evidences: evidences(state.evidences, action),
