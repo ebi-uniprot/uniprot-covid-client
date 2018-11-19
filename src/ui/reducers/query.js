@@ -12,10 +12,7 @@ import {
   REQUEST_EVIDENCES,
   RECEIVE_EVIDENCES,
 } from '../actions';
-import {
-  createEmptyClause,
-  createQueryString,
-} from '../utils';
+import { createEmptyClause, createQueryString } from '../utils';
 
 const clause = (state, action) => {
   if (state.id !== action.clauseId) {

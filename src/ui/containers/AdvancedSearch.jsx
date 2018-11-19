@@ -14,13 +14,9 @@ import {
 } from '../actions';
 import ClauseList from '../components/ClauseList';
 
-
-class AdvancedSearch extends Component {
+export class AdvancedSearch extends Component {
   componentDidMount() {
-    const {
-      dispatchFetchSearchTerms,
-      dispatchfetchEvidencesIfNeeded,
-    } = this.props;
+    const { dispatchFetchSearchTerms, dispatchfetchEvidencesIfNeeded } = this.props;
     dispatchFetchSearchTerms();
     dispatchfetchEvidencesIfNeeded('go');
     dispatchfetchEvidencesIfNeeded('annotation');
@@ -38,20 +34,13 @@ class AdvancedSearch extends Component {
             </select>
           </label>
         </div>
-        <ClauseList
-          {...this.props}
-        />
+        <ClauseList {...this.props} />
         <hr />
         <div>
           <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
             Add Field
           </button>
-          <button
-            type="button"
-            id="submit-query"
-            className="button"
-            onClick={dispatchSubmitQuery}
-          >
+          <button type="button" id="submit-query" className="button" onClick={dispatchSubmitQuery}>
             Search
           </button>
         </div>
@@ -71,9 +60,7 @@ const mapDispatchToProps = dispatch => ({
   handleFieldSelect: (clauseId, field) => dispatch(selectField(clauseId, field)),
   handleInputChange: (clauseId, value) => dispatch(updateInputValue(clauseId, value)),
   handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
-  handleRangeInputChange: (clauseId, value, from) => dispatch(
-    updateRangeValue(clauseId, value, from),
-  ),
+  handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchSubmitQuery: () => dispatch(submitQuery()),

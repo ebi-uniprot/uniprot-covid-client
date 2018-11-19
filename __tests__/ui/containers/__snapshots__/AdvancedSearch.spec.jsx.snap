@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdvancedSearch component should render 1`] = `
+<div
+  className="advanced-search"
+>
+  <div>
+    <label
+      htmlFor="namespace-select"
+    >
+      Searching in
+      <select
+        id="namespace-select"
+      >
+        <option />
+      </select>
+    </label>
+  </div>
+  <ClauseList />
+  <hr />
+  <div>
+    <button
+      className="button"
+      id="add-field"
+      type="button"
+    >
+      Add Field
+    </button>
+    <button
+      className="button"
+      id="submit-query"
+      type="button"
+    >
+      Search
+    </button>
+  </div>
+</div>
+`;

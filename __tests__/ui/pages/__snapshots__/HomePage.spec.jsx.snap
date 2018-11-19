@@ -82,6 +82,7 @@ exports[`HomePage component should render 1`] = `
                 onChange={[Function]}
                 placeholder="a4_human, P05067, cdc7 human"
                 type="text"
+                value=""
               />
             </label>
           </div>
@@ -147,6 +148,7 @@ exports[`HomePage component should render 1`] = `
                 onChange={[Function]}
                 placeholder="a4_human, P05067, cdc7 human"
                 type="text"
+                value=""
               />
             </label>
           </div>
@@ -212,6 +214,7 @@ exports[`HomePage component should render 1`] = `
                 onChange={[Function]}
                 placeholder="a4_human, P05067, cdc7 human"
                 type="text"
+                value=""
               />
             </label>
           </div>
@@ -277,6 +280,7 @@ exports[`HomePage component should render 1`] = `
                 onChange={[Function]}
                 placeholder="a4_human, P05067, cdc7 human"
                 type="text"
+                value=""
               />
             </label>
           </div>

@@ -3,19 +3,11 @@ import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import apiUrls from '../../../src/ui/apiUrls';
-import EvidenceField from '../../../src/ui/search/EvidenceField';
-import fetchData from '../../../src/ui/hoc/fetchData';
-
-jest.mock('../../../src/ui/hoc/fetchData');
+import EvidenceField from '../../../src/ui/components/EvidenceField';
 
 configure({ adapter: new Adapter() });
 
 describe('EvidenceField component', () => {
-  test('should make call to retrieve data', () => {
-    shallow(<EvidenceField url={apiUrls.annotation_evidences} />);
-    expect(fetchData).toHaveBeenCalledWith(apiUrls.annotation_evidences);
-  });
-
   test('should render', () => {
     const component = renderer
       .create(<EvidenceField url={apiUrls.annotation_evidences} />)
