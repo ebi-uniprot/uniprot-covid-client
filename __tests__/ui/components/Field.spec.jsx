@@ -1,11 +1,9 @@
 import React from 'react';
-import { configure } from 'enzyme';
-import renderer from 'react-test-renderer';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Field from '../../../src/ui/components/Field';
 
 configure({ adapter: new Adapter() });
-
 // field,
 // handleInputChange,
 // handleRangeInputChange,
@@ -23,45 +21,23 @@ describe('Clause component', () => {
       description: 'Search by UniProtKB Accession',
       example: 'P12345',
     };
-    const component = renderer.create(
+    const component = shallow(
       <Field
         field={field}
         handleInputChange={handleInputChange}
         handleRangeInputChange={handleRangeInputChange}
         queryInput={{}}
       />,
-    ).toJSON();
+    );
     expect(component).toMatchSnapshot();
   });
 
   test('should render `enum` field', () => {
     const field = {
-      label: 'Protein Existence [PE]',
-      itemType: 'single',
-      term: 'existence',
       dataType: 'enum',
-      values: [
-        {
-          name: 'Evidence at protein level',
-          value: '1',
-        },
-        {
-          name: 'Evidence at transcript level',
-          value: '2',
-        },
-      ],
-      description: 'Search by protein existence',
-      example: '1',
     };
-    const component = renderer.create(
-      <Field
-        field={field}
-        handleInputChange={handleInputChange}
-        handleRangeInputChange={handleRangeInputChange}
-        queryInput={{}}
-      />,
-    ).toJSON();
-    expect(component).toMatchSnapshot();
+    const component = shallow(<Field field={field} />);
+    expect(component.debug()).toMatchSnapshot();
   });
 
   test('should render `autocomplete` field', () => {
@@ -77,14 +53,14 @@ describe('Clause component', () => {
         example: '1.1.2.3',
       },
     };
-    const component = renderer.create(
+    const component = shallow(
       <Field
         field={field}
         handleInputChange={handleInputChange}
         handleRangeInputChange={handleRangeInputChange}
         queryInput={{}}
       />,
-    ).toJSON();
+    );
     expect(component).toMatchSnapshot();
   });
 
@@ -102,14 +78,14 @@ describe('Clause component', () => {
       },
       queryInput: {},
     };
-    const component = renderer.create(
+    const component = shallow(
       <Field
         field={field}
         handleInputChange={handleInputChange}
         handleRangeInputChange={handleRangeInputChange}
         queryInput={{}}
       />,
-    ).toJSON();
+    );
     expect(component).toMatchSnapshot();
   });
 
@@ -128,14 +104,14 @@ describe('Clause component', () => {
       },
       queryInput: {},
     };
-    const component = renderer.create(
+    const component = shallow(
       <Field
         field={field}
         handleInputChange={handleInputChange}
         handleRangeInputChange={handleRangeInputChange}
         queryInput={{}}
       />,
-    ).toJSON();
+    );
     expect(component).toMatchSnapshot();
   });
 
@@ -153,14 +129,14 @@ describe('Clause component', () => {
       },
       queryInput: {},
     };
-    const component = renderer.create(
+    const component = shallow(
       <Field
         field={field}
         handleInputChange={handleInputChange}
         handleRangeInputChange={handleRangeInputChange}
         queryInput={{}}
       />,
-    ).toJSON();
+    );
     expect(component).toMatchSnapshot();
   });
 });
