@@ -34,32 +34,10 @@ describe('Clause component', () => {
 
   test('should render `enum` field', () => {
     const field = {
-      label: 'Protein Existence [PE]',
-      itemType: 'single',
-      term: 'existence',
       dataType: 'enum',
-      values: [
-        {
-          name: 'Evidence at protein level',
-          value: '1',
-        },
-        {
-          name: 'Evidence at transcript level',
-          value: '2',
-        },
-      ],
-      description: 'Search by protein existence',
-      example: '1',
     };
-    const component = shallow(
-      <Field
-        field={field}
-        handleInputChange={handleInputChange}
-        handleRangeInputChange={handleRangeInputChange}
-        queryInput={{}}
-      />,
-    );
-    expect(component).toMatchSnapshot();
+    const component = shallow(<Field field={field} />);
+    expect(component.debug()).toMatchSnapshot();
   });
 
   test('should render `autocomplete` field', () => {

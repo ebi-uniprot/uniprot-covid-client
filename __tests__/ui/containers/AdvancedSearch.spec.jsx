@@ -50,7 +50,7 @@ describe('AdvancedSearch component', () => {
   });
 
   test('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 
   test('should add field rows', () => {
