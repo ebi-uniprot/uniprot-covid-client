@@ -5,10 +5,7 @@ import TextField from './TextField';
 const dataTypes = { string: 'text', integer: 'number' };
 
 const Field = ({
-  field,
-  handleInputChange,
-  handleRangeInputChange,
-  queryInput,
+  field, handleInputChange, handleRangeInputChange, queryInput,
 }) => {
   const { dataType, hasRange } = field;
   if (dataType === 'enum') {
@@ -23,7 +20,7 @@ const Field = ({
       handleChange: handleRangeInputChange,
     });
   }
-  if (!hasRange) {
+  if (dataType === 'string' || dataType === 'integer') {
     return TextField({
       field,
       handleChange: handleInputChange,
@@ -31,7 +28,7 @@ const Field = ({
       value: queryInput.stringValue,
     });
   }
-  if (hasRange) {
+  if (hasRange && dataType !== 'integer') {
     return RangeField({
       field,
       handleChange: handleRangeInputChange,

@@ -41,6 +41,6 @@ describe('EvidenceField component', () => {
   });
 
   test('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 });
