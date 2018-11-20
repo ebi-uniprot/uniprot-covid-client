@@ -81,6 +81,7 @@ export const evidences = (state = [], action) => {
       return {
         ...state,
         [action.evidencesType]: {
+          ...state[action.evidencesType],
           isFetching: true,
         },
       };
