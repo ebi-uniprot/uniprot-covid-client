@@ -1,11 +1,21 @@
-import { clause } from '../../../src/ui/reducers/query';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import apiUrls from '../../../src/ui/apiUrls';
+import { clause, searchTerms } from '../../../src/ui/reducers/query';
 import {
   selectField,
   updateInputValue,
   updateEvidence,
   updateRangeValue,
   updateLogicOperator,
+  requestSearchTerms,
+  receiveSearchTerms,
 } from '../../../src/ui/actions';
+
+const mock = new MockAdapter(axios);
+
+const dateNow = 1542736574043;
+jest.spyOn(Date, 'now').mockImplementation(() => dateNow);
 
 describe('Clause reducer', () => {
   test('should select field', () => {
@@ -77,6 +87,36 @@ describe('Clause reducer', () => {
       field: 'foo',
       queryInput: { stringValue: 'bar' },
       logicOperator: 'OR',
+    });
+  });
+});
+
+describe('searchTerms reducer', () => {
+  test('should request search terms', () => {
+    const state = {
+      isFetching: false,
+      data: [],
+    };
+    const action = requestSearchTerms();
+    expect(searchTerms(state, action)).toEqual({
+      isFetching: true,
+      data: [],
+    });
+  });
+
+  test('should receive search terms', () => {
+    const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
+    mock.onGet(apiUrls.advanced_search_terms).reply(200, data);
+
+    const state = {
+      isFetching: true,
+      data: [],
+    };
+    const action = receiveSearchTerms(data);
+    expect(searchTerms(state, action)).toEqual({
+      isFetching: false,
+      lastUpdated: dateNow,
+      data,
     });
   });
 });
