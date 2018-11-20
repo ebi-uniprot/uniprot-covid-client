@@ -3,7 +3,7 @@
 exports[`ClauseList component should render 1`] = `
 "<div className=\\"advanced-search__field\\">
   <LogicalOperator value=\\"AND\\" handleChange={[Function: handleChange]} />
-  <e data={{...}} onSelect={[Function: onSelect]} />
+  <e data={{...}} onSelect={[Function: onSelect]} autocomplete={false} autocompletePlaceholder=\\"\\" autocompleteFilter={true} />
   <Field field={{...}} handleInputChange={[Function: handleInputChange]} handleRangeInputChange={[Function: handleRangeInputChange]} queryInput={{...}} />
   <button type=\\"button\\" className=\\"button-remove\\" onClick={[Function: onClick]}>
     Remove

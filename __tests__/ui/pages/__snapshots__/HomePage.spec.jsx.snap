@@ -65,9 +65,13 @@ exports[`HomePage component should render 1`] = `
             <div
               className="dropdown-menu"
             >
-              <ul
-                className=""
-              />
+              <div
+                className="dropdown-menu__panel"
+              >
+                <ul
+                  className=""
+                />
+              </div>
             </div>
           </div>
           <div
@@ -131,9 +135,13 @@ exports[`HomePage component should render 1`] = `
             <div
               className="dropdown-menu"
             >
-              <ul
-                className=""
-              />
+              <div
+                className="dropdown-menu__panel"
+              >
+                <ul
+                  className=""
+                />
+              </div>
             </div>
           </div>
           <div
@@ -197,9 +205,13 @@ exports[`HomePage component should render 1`] = `
             <div
               className="dropdown-menu"
             >
-              <ul
-                className=""
-              />
+              <div
+                className="dropdown-menu__panel"
+              >
+                <ul
+                  className=""
+                />
+              </div>
             </div>
           </div>
           <div
@@ -263,9 +275,13 @@ exports[`HomePage component should render 1`] = `
             <div
               className="dropdown-menu"
             >
-              <ul
-                className=""
-              />
+              <div
+                className="dropdown-menu__panel"
+              >
+                <ul
+                  className=""
+                />
+              </div>
             </div>
           </div>
           <div
