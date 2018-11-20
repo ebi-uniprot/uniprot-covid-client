@@ -14,7 +14,7 @@ import {
 } from '../actions';
 import { createEmptyClause, createQueryString } from '../utils';
 
-const clause = (state, action) => {
+export const clause = (state, action) => {
   if (state.id !== action.clauseId) {
     return state;
   }
@@ -56,7 +56,7 @@ const clause = (state, action) => {
   }
 };
 
-const searchTerms = (state = [], action) => {
+export const searchTerms = (state = [], action) => {
   switch (action.type) {
     case REQUEST_SEARCH_TERMS:
       return {
@@ -75,7 +75,7 @@ const searchTerms = (state = [], action) => {
   }
 };
 
-const evidences = (state = [], action) => {
+export const evidences = (state = [], action) => {
   switch (action.type) {
     case REQUEST_EVIDENCES:
       return {

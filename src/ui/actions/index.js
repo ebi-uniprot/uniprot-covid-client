@@ -71,8 +71,7 @@ export const receiveSearchTerms = data => ({
 
 export const fetchSearchTerms = () => (dispatch) => {
   dispatch(requestSearchTerms());
-  return fetchData(apiUrls.advanced_search_terms)
-    .then(response => dispatch(receiveSearchTerms(response.data)));
+  return fetchData(apiUrls.advanced_search_terms).then(response => dispatch(receiveSearchTerms(response.data)));
 };
 
 export const requestEvidences = evidencesType => ({
@@ -90,8 +89,7 @@ export const receiveEvidences = (data, evidencesType) => ({
 const fetchEvidences = evidencesType => (dispatch) => {
   const url = apiUrls.evidences[evidencesType];
   dispatch(requestEvidences(evidencesType));
-  return fetchData(url)
-    .then(response => dispatch(receiveEvidences(response.data, evidencesType)));
+  return fetchData(url).then(response => dispatch(receiveEvidences(response.data, evidencesType)));
 };
 
 const shouldFetchEvidences = (state, evidenceType) => {
