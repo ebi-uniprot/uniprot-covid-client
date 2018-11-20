@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import apiUrls from '../../../src/ui/apiUrls';
-import { clause, searchTerms } from '../../../src/ui/reducers/query';
+import { clause, searchTerms, evidences } from '../../../src/ui/reducers/query';
 import {
   selectField,
   updateInputValue,
@@ -10,6 +10,8 @@ import {
   updateLogicOperator,
   requestSearchTerms,
   receiveSearchTerms,
+  requestEvidences,
+  receiveEvidences,
 } from '../../../src/ui/actions';
 
 const mock = new MockAdapter(axios);
@@ -117,6 +119,61 @@ describe('searchTerms reducer', () => {
       isFetching: false,
       lastUpdated: dateNow,
       data,
+    });
+  });
+});
+
+describe('evidences reducer', () => {
+  test('should request evidences', () => {
+    const state = {
+      go: {
+        data: [],
+        isFetching: false,
+      },
+    };
+    const action = requestEvidences('go');
+    expect(evidences(state, action)).toEqual({
+      go: {
+        data: [],
+        isFetching: true,
+      },
+    });
+  });
+
+  test('should receive search terms', () => {
+    const data = [
+      {
+        groupName: 'Any',
+        items: [
+          {
+            name: 'Any assertion method',
+            code: 'any',
+          },
+          {
+            name: 'Any manual assertion',
+            code: 'manual',
+          },
+          {
+            name: 'Any automatic assertion',
+            code: 'automatic',
+          },
+        ],
+      },
+    ];
+    mock.onGet(apiUrls.evidences.go).reply(200, data);
+    const state = {
+      go: {
+        data: [],
+        isFetching: false,
+      },
+    };
+    const action = receiveEvidences(data, 'go');
+    expect(evidences(state, action)).toEqual({
+      go: {
+        isFetching: false,
+        lastUpdated: dateNow,
+        data,
+      },
     });
   });
 });
