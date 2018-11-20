@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Range field should render a text field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <label htmlFor=\\"input_accession\\">
+    UniProtKB AC
+    <input id=\\"input_accession\\" type=\\"text\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"P12345\\" />
+  </label>
+</div>"
+`;

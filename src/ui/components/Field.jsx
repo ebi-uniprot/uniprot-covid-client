@@ -2,8 +2,6 @@ import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
 
-const dataTypes = { string: 'text', integer: 'number' };
-
 const Field = ({
   field, handleInputChange, handleRangeInputChange, queryInput,
 }) => {
@@ -24,7 +22,7 @@ const Field = ({
     return TextField({
       field,
       handleChange: handleInputChange,
-      type: dataTypes[dataType],
+      type: dataType,
       value: queryInput.stringValue,
     });
   }
