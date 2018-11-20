@@ -23,11 +23,12 @@ const clause = (state, action) => {
       return {
         ...state,
         field: action.field,
+        queryInput: {},
       };
     case UPDATE_INPUT_VALUE:
       return {
         ...state,
-        queryInput: { stringValue: action.value },
+        queryInput: { ...state.queryInput, stringValue: action.value },
       };
     case UPDATE_RANGE_VALUE:
       return {
