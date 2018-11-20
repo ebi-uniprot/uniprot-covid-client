@@ -9,36 +9,41 @@ const Field = ({
   const { dataType, hasRange } = field;
   switch (dataType) {
     case 'enum':
-      return EnumField({
-        field,
-        handleChange: handleInputChange,
-      });
+      return <EnumField field={field} handleChange={handleInputChange} />;
     case 'date':
-      return RangeField({
-        field,
-        handleChange: handleRangeInputChange,
-      });
+      return <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
     case 'string':
-    case 'integer':
       return (
         <Fragment>
           <TextField
             field={field}
             handleChange={handleInputChange}
-            type={dataType}
+            type="text"
             value={queryInput.stringValue}
           />
           {hasRange && dataType !== 'integer' && (
             <RangeField
               field={field}
               handleChange={handleRangeInputChange}
-              type="number"
+              type="text"
               rangeFrom={queryInput.rangeFrom}
               rangeTo={queryInput.rangeTo}
             />
           )}
         </Fragment>
       );
+    case 'integer':
+      if (hasRange) {
+        return RangeField({
+          field,
+          handleChange: handleRangeInputChange,
+        });
+      }
+      return TextField({
+        field,
+        type: 'number',
+        handleChange: { handleInputChange },
+      });
     default:
       return null;
   }

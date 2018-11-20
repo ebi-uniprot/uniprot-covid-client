@@ -1,7 +1,5 @@
 import React from 'react';
 
-const dataTypes = { string: 'text', integer: 'number' };
-
 const TextField = ({
   field, type, handleChange, value = '',
 }) => (
@@ -10,7 +8,7 @@ const TextField = ({
       {field.label}
       <input
         id={`input_${field.term}`}
-        type={dataTypes[type]}
+        type={type}
         value={value}
         onChange={e => handleChange(e.target.value)}
         placeholder={field.example}
