@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
+import AutocompleteWrapper from '../utils/AutocompleteWrapper';
 
 const Field = ({
   field, handleInputChange, handleRangeInputChange, queryInput,
@@ -15,12 +16,16 @@ const Field = ({
     case 'string':
       return (
         <Fragment>
-          <TextField
-            field={field}
-            handleChange={handleInputChange}
-            type="text"
-            value={queryInput.stringValue}
-          />
+          {field.autoComplete ? (
+            <AutocompleteWrapper url={field.autoComplete} onSelect={handleInputChange} />
+          ) : (
+            <TextField
+              field={field}
+              handleChange={handleInputChange}
+              type="text"
+              value={queryInput.stringValue}
+            />
+          )}
           {hasRange && dataType !== 'integer' && (
             <RangeField
               field={field}

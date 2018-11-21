@@ -40,9 +40,7 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   fetchOptions = (url: string) => {
     fetchData(url)
-      // Remove duplicates for now as there is a bug in the API
-      .then(data => [...new Set(data.data.suggestions)])
-      .then(data => data.map(x => ({ pathLabel: x, itemLabel: x })))
+      .then(data => data.data.suggestions.map(x => ({ pathLabel: x, itemLabel: x })))
       .then(data => appendUniqueId(data, 'autocomplete'))
       .then(data => this.setState({ data }))
       .catch(e => console.error(e));
