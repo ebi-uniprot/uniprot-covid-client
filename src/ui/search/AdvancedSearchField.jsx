@@ -17,6 +17,7 @@ export type TermNode = {
   hasEvidence?: boolean,
   value?: string,
   autoComplete?: string,
+  valuePrefix?: string,
   options?: Array<{
     name: string,
     values: Array<{
