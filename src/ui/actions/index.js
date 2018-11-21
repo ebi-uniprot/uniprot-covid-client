@@ -86,13 +86,13 @@ export const receiveEvidences = (data, evidencesType) => ({
   receivedAt: Date.now(),
 });
 
-const fetchEvidences = evidencesType => (dispatch) => {
+export const fetchEvidences = evidencesType => (dispatch) => {
   const url = apiUrls.evidences[evidencesType];
   dispatch(requestEvidences(evidencesType));
   return fetchData(url).then(response => dispatch(receiveEvidences(response.data, evidencesType)));
 };
 
-const shouldFetchEvidences = (state, evidenceType) => {
+export const shouldFetchEvidences = (state, evidenceType) => {
   const evidences = state.query.evidences[evidenceType];
   return !evidences.isFetching;
 };
