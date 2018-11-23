@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { Autocomplete } from 'franklin-sites';
-import fetchData from './fetchData';
+import fetchData from '../utils/fetchData';
 import appendUniqueId from './prepareData';
-import { getSuggesterUrl } from '../apiUrls';
+import { getSuggesterUrl } from '../advanced-search/utils/apiUrls';
 
 type Props = {
   url: string,

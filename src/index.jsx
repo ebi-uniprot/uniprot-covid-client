@@ -9,6 +9,7 @@ import '../node_modules/franklin-sites/dist/index.css';
 import './styles/index.css';
 import initialState from './advanced-search/initialState';
 
+console.log(query);
 const debug = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 const store = createStore(query, initialState, debug(applyMiddleware(thunkMiddleware)));
 ReactDOM.render(<App store={store} />, document.getElementById('root'));

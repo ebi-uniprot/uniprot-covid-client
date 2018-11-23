@@ -1,4 +1,4 @@
-import { createEmptyClause } from './utils';
+import createEmptyClause from './utils/clause';
 
 const initialState = {
   query: {

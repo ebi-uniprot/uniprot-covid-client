@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
-import AutocompleteWrapper from '../utils/AutocompleteWrapper';
+import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
 
 const Field = ({
   field, handleInputChange, handleRangeInputChange, queryInput,

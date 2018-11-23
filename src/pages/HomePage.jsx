@@ -4,12 +4,12 @@ import { Tile } from 'franklin-sites';
 
 import Block from '../layout/Block';
 import HomePageLayout from '../layout/HomePageLayout';
-import AdvancedSearch from '../containers/AdvancedSearch';
+import AdvancedSearchContainer from '../advanced-search/AdvancedSearchContainer';
 
 const HomePage = () => (
   <HomePageLayout>
     <Block columns="1">
-      <AdvancedSearch />
+      <AdvancedSearchContainer />
     </Block>
 
     <Block columns="4">

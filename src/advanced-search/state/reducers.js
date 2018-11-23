@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
   SELECT_FIELD,
   UPDATE_INPUT_VALUE,
@@ -11,8 +12,9 @@ import {
   RECEIVE_SEARCH_TERMS,
   REQUEST_EVIDENCES,
   RECEIVE_EVIDENCES,
-} from '../actions';
-import { createEmptyClause, createQueryString } from '../utils';
+} from './actions';
+import createEmptyClause from '../utils/clause';
+import createQueryString from '../utils/QueryStringGenerator';
 
 export const clause = (state, action) => {
   if (state.id !== action.clauseId) {
@@ -146,4 +148,6 @@ const query = (state = [], action) => {
   }
 };
 
-export default query;
+export default combineReducers({
+  query,
+});

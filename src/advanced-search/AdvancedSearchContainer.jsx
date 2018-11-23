@@ -11,8 +11,8 @@ import {
   removeClause,
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
-} from '../actions';
-import ClauseList from '../components/ClauseList';
+} from './state/actions';
+import ClauseList from './ClauseList';
 
 export class AdvancedSearch extends Component {
   componentDidMount() {
@@ -69,7 +69,9 @@ const mapDispatchToProps = dispatch => ({
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
 });
 
-export default connect(
+const AdvancedSearchContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(AdvancedSearch);
+
+export default AdvancedSearchContainer;

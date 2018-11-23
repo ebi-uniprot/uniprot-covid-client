@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 
-import Logo from '../../svg/uniprot-rgb.svg';
+import Logo from '../svg/uniprot-rgb.svg';
 
 const UniProtHeader = () => (
   <Header>
