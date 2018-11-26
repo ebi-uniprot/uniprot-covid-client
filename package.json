@@ -7,7 +7,7 @@
   "scripts": {
     "dev-server": "webpack-dev-server --mode development --open --config webpack.dev.js",
     "build": "webpack --mode production --config webpack.prod.js",
-    "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src __tests__ __mocks__",
+    "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src  __mocks__",
     "csslint": "scss-lint ./src/styles/**/*.scss",
     "test": "jest",
     "test-watch": "jest --watch",
