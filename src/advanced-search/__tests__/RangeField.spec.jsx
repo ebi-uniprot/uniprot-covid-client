@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import RangeField from '../../../src/ui/components/RangeField';
+import RangeField from '../RangeField';
 
 configure({ adapter: new Adapter() });
 let props;

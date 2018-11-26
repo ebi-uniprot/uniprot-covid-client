@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { createEmptyClause } from '../../../src/ui/utils';
-import { AdvancedSearch } from '../../../src/ui/containers/AdvancedSearch';
+import createEmptyClause from '../utils/clause';
+import { AdvancedSearch } from '../AdvancedSearchContainer';
 
 configure({ adapter: new Adapter() });
 

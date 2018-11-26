@@ -4,9 +4,9 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import { createEmptyClause } from '../../../src/ui/utils';
+import createEmptyClause from '../../advanced-search/utils/clause';
 
-import HomePage from '../../../src/ui/pages/HomePage';
+import HomePage from '../HomePage';
 
 const mockStore = configureStore([thunkMiddleware]);
 const initialState = {

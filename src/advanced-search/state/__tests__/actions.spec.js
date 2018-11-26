@@ -2,9 +2,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import apiUrls from '../../../src/ui/apiUrls';
-import * as actions from '../../../src/ui/actions';
-import initialState from '../../../src/ui/initialState';
+import apiUrls from '../../utils/apiUrls';
+import * as actions from '../actions';
+import initialState from '../initialState';
 
 const mock = new MockAdapter(axios);
 const middlewares = [thunk];

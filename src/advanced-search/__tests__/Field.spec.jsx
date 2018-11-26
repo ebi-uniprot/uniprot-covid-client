@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Field from '../../../src/ui/components/Field';
+import Field from '../Field';
 
 configure({ adapter: new Adapter() });
 const handleInputChange = jest.fn();

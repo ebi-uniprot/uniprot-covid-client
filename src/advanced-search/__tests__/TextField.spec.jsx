@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import TextField from '../../../src/ui/components/TextField';
+import TextField from '../TextField';
 
 configure({ adapter: new Adapter() });
 let props;

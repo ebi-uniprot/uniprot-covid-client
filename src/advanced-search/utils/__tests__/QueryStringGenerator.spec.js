@@ -1,4 +1,4 @@
-import createQueryString from '../../../src/ui/utils/query';
+import createQueryString from '../QueryStringGenerator';
 
 const clauses = [
   {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import apiUrls from '../../../src/ui/apiUrls';
-import { clause, searchTerms, evidences } from '../../../src/ui/reducers/query';
+import apiUrls from '../../utils/apiUrls';
+import { clause, searchTerms, evidences } from '../reducers';
 import {
   selectField,
   updateInputValue,
@@ -12,7 +12,7 @@ import {
   receiveSearchTerms,
   requestEvidences,
   receiveEvidences,
-} from '../../../src/ui/actions';
+} from '../actions';
 
 const mock = new MockAdapter(axios);
 

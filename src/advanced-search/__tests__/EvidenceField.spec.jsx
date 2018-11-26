@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import EvidenceField from '../../../src/ui/components/EvidenceField';
+import EvidenceField from '../EvidenceField';
 
 configure({ adapter: new Adapter() });
 

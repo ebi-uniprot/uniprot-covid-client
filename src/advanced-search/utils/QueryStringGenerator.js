@@ -1,5 +1,5 @@
 // @flow
-import type { Clause } from '../components/ClauseList';
+import type { Clause } from '../ClauseList';
 
 const getItemTypePrefix = (itemType) => {
   const itemTypeToPrefixMap = {
@@ -49,22 +49,20 @@ const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
   return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
 };
 
-const createQueryString = (clauses: Array<Clause>): string => (
-  clauses.reduce((queryAccumulator: string, clause: Clause) => {
-    let query = '';
-    if (clause.queryInput.stringValue && clause.queryInput.stringValue !== '') {
-      query = `${query}${createSimpleSubquery(clause)}`;
-    }
-    if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
-      query = `${query}${createRangeSubquery(clause)}`;
-    }
-    if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
-      query = `${wrapIntoEvidenceSubquery(clause, query)}`;
-    }
-    return `${queryAccumulator}${
-      queryAccumulator.length > 0 && query.length > 0 ? clause.logicOperator : ''
-    }${query}`;
-  }, '')
-);
+const createQueryString = (clauses: Array<Clause>): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
+  let query = '';
+  if (clause.queryInput.stringValue && clause.queryInput.stringValue !== '') {
+    query = `${query}${createSimpleSubquery(clause)}`;
+  }
+  if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
+    query = `${query}${createRangeSubquery(clause)}`;
+  }
+  if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
+    query = `${wrapIntoEvidenceSubquery(clause, query)}`;
+  }
+  return `${queryAccumulator}${
+    queryAccumulator.length > 0 && query.length > 0 ? clause.logicOperator : ''
+  }${query}`;
+}, '');
 
 export default createQueryString;

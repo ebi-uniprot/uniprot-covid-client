@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import EnumField from '../../../src/ui/components/EnumField';
+import EnumField from '../EnumField';
 
 configure({ adapter: new Adapter() });
 let props;
