@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // type Props = {
 //   updateEvidence: Function,
@@ -7,24 +7,16 @@ import React from 'react';
 //   data: Array<Group>,
 // };
 
-const EvidenceField = ({
-  value = '',
-  handleChange,
-  data = [],
-}) => {
+const EvidenceField = ({ value = '', handleChange, data = [] }) => {
   if (!data) {
     return null;
   }
 
   return (
-    <div className="advanced-search__inputs">
+    <Fragment>
       <label htmlFor="evidence_select">
         Evidence
-        <select
-          id="evidence_select"
-          value={value}
-          onChange={e => handleChange(e.target.value)}
-        >
+        <select id="evidence_select" value={value} onChange={e => handleChange(e.target.value)}>
           {data.map(group => (
             <optgroup label={group.groupName} key={group.groupName}>
               {group.items.map(item => (
@@ -36,7 +28,7 @@ const EvidenceField = ({
           ))}
         </select>
       </label>
-    </div>
+    </Fragment>
   );
 };
 

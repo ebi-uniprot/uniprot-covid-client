@@ -1,12 +1,12 @@
-@import '../settings';
+@import "../settings";
 
 .advanced-search {
-  .advanced-search__field {
+  .advanced-search__clause {
     display: flex;
-    align-items: center; // justify-content: space-around;
-    &>div,
-    &>select,
-    &>a {
+    align-items: center;
+    & > div,
+    & > select,
+    & > a {
       margin: 0 $gutter-size;
     }
     .advanced-search__logic {
@@ -14,7 +14,7 @@
     }
     .advanced-search__inputs {
       flex-grow: 2;
-      margin-bottom: .5rem;
+      margin-bottom: 0.25rem;
       display: flex;
       label {
         width: 100%;

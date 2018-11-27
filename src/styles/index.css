@@ -16,18 +16,18 @@
 section#layout[data-layout="home-page"] {
   grid-template-areas: repeat(auto-fill, 100%); }
 
-.advanced-search .advanced-search__field {
+.advanced-search .advanced-search__clause {
   display: flex;
   align-items: center; }
-  .advanced-search .advanced-search__field > div,
-  .advanced-search .advanced-search__field > select,
-  .advanced-search .advanced-search__field > a {
+  .advanced-search .advanced-search__clause > div,
+  .advanced-search .advanced-search__clause > select,
+  .advanced-search .advanced-search__clause > a {
     margin: 0 0.5rem; }
-  .advanced-search .advanced-search__field .advanced-search__logic {
+  .advanced-search .advanced-search__clause .advanced-search__logic {
     flex: 0 1 6rem; }
-  .advanced-search .advanced-search__field .advanced-search__inputs {
+  .advanced-search .advanced-search__clause .advanced-search__inputs {
     flex-grow: 2;
-    margin-bottom: .5rem;
+    margin-bottom: 0.25rem;
     display: flex; }
-    .advanced-search .advanced-search__field .advanced-search__inputs label {
+    .advanced-search .advanced-search__clause .advanced-search__inputs label {
       width: 100%; }

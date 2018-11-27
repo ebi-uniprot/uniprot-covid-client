@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const EnumField = ({ field, handleChange }) => (
-  <div className="advanced-search__inputs" key={field.term}>
+  <Fragment>
     <label htmlFor={`select_${field.term}`}>
       {field.label}
-      <select
-        onChange={e => handleChange(e.target.value)}
-        id={`select_${field.term}`}
-      >
+      <select onChange={e => handleChange(e.target.value)} id={`select_${field.term}`}>
         {field.values
           && field.values.map(item => (
             <option value={item.value} key={`select_${item.value}`}>
@@ -16,7 +13,7 @@ const EnumField = ({ field, handleChange }) => (
           ))}
       </select>
     </label>
-  </div>
+  </Fragment>
 );
 
 export default EnumField;

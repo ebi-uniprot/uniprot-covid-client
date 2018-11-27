@@ -79,7 +79,7 @@ const ClauseList = ({
   }
 
   return (
-    <div key={`clause_${clause.id}`} className="advanced-search__field">
+    <div key={`clause_${clause.id}`} className="advanced-search__clause">
       <LogicalOperator
         value={clause.logicOperator}
         handleChange={value => handleLogicChange(clause.id, value)}

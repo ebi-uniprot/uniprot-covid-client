@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const RangeField = ({
-  field,
-  type,
-  handleChange,
-  rangeFrom = '',
-  rangeTo = '',
+  field, type, handleChange, rangeFrom = '', rangeTo = '',
 }) => (
-  <div className="advanced-search__inputs" key={`range_${field.id}`}>
+  <Fragment>
     <label htmlFor={`from_input_${field.id}`}>
       From
       <input
@@ -28,7 +24,7 @@ const RangeField = ({
         value={rangeTo}
       />
     </label>
-  </div>
+  </Fragment>
 );
 
 export default RangeField;

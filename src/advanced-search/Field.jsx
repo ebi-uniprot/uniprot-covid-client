@@ -8,13 +8,16 @@ const Field = ({
   field, handleInputChange, handleRangeInputChange, queryInput,
 }) => {
   const { dataType, hasRange } = field;
+  let node;
   switch (dataType) {
     case 'enum':
-      return <EnumField field={field} handleChange={handleInputChange} />;
+      node = <EnumField field={field} handleChange={handleInputChange} />;
+      break;
     case 'date':
-      return <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
+      node = <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
+      break;
     case 'string':
-      return (
+      node = (
         <Fragment>
           {field.autoComplete ? (
             <AutocompleteWrapper url={field.autoComplete} onSelect={handleInputChange} />
@@ -37,21 +40,24 @@ const Field = ({
           )}
         </Fragment>
       );
+      break;
     case 'integer':
       if (hasRange) {
-        return RangeField({
+        node = RangeField({
           field,
           handleChange: handleRangeInputChange,
         });
       }
-      return TextField({
+      node = TextField({
         field,
         type: 'number',
         handleChange: { handleInputChange },
       });
+      break;
     default:
       return null;
   }
+  return <div className="advanced-search__inputs">{node}</div>;
 };
 
 export default Field;
