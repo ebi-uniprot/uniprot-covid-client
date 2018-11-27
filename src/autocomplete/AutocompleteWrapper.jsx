@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Autocomplete } from 'franklin-sites';
+import { v1 } from 'uuid';
 import fetchData from '../utils/fetchData';
 import appendUniqueId from './prepareData';
 import { getSuggesterUrl } from '../advanced-search/utils/apiUrls';
@@ -30,6 +31,7 @@ class AutocompleteWrapper extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { data: [] };
+    this.id = v1();
   }
 
   handleChange = (textInputValue: string) => {
@@ -53,13 +55,18 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   render() {
     const { data } = this.state;
+    const { title } = this.props;
     return (
-      <Autocomplete
-        data={data}
-        onSelect={this.handleSelect}
-        onChange={this.handleChange}
-        filter={false}
-      />
+      <label htmlFor={this.id}>
+        {title}
+        <Autocomplete
+          id={this.id}
+          data={data}
+          onSelect={this.handleSelect}
+          onChange={this.handleChange}
+          filter={false}
+        />
+      </label>
     );
   }
 }

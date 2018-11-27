@@ -20,7 +20,11 @@ const Field = ({
       node = (
         <Fragment>
           {field.autoComplete ? (
-            <AutocompleteWrapper url={field.autoComplete} onSelect={handleInputChange} />
+            <AutocompleteWrapper
+              url={field.autoComplete}
+              onSelect={handleInputChange}
+              title={field.label}
+            />
           ) : (
             <TextField
               field={field}
