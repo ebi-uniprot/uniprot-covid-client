@@ -29,7 +29,7 @@ exports[`HomePage component should render 1`] = `
           </label>
         </div>
         <div
-          className="advanced-search__field"
+          className="advanced-search__clause"
         >
           <select
             className="advanced-search__logic"
@@ -99,18 +99,22 @@ exports[`HomePage component should render 1`] = `
           <div
             className="advanced-search__inputs"
           >
-            <label
-              htmlFor="input_All"
+            <div
+              className="advanced-search__inputs"
             >
-              Any
-              <input
-                id="input_All"
-                onChange={[Function]}
-                placeholder="a4_human, P05067, cdc7 human"
-                type="text"
-                value=""
-              />
-            </label>
+              <label
+                htmlFor="input_All"
+              >
+                Any
+                <input
+                  id="input_All"
+                  onChange={[Function]}
+                  placeholder="a4_human, P05067, cdc7 human"
+                  type="text"
+                  value=""
+                />
+              </label>
+            </div>
           </div>
           <button
             className="button-remove"
@@ -121,7 +125,7 @@ exports[`HomePage component should render 1`] = `
           </button>
         </div>
         <div
-          className="advanced-search__field"
+          className="advanced-search__clause"
         >
           <select
             className="advanced-search__logic"
@@ -191,18 +195,22 @@ exports[`HomePage component should render 1`] = `
           <div
             className="advanced-search__inputs"
           >
-            <label
-              htmlFor="input_All"
+            <div
+              className="advanced-search__inputs"
             >
-              Any
-              <input
-                id="input_All"
-                onChange={[Function]}
-                placeholder="a4_human, P05067, cdc7 human"
-                type="text"
-                value=""
-              />
-            </label>
+              <label
+                htmlFor="input_All"
+              >
+                Any
+                <input
+                  id="input_All"
+                  onChange={[Function]}
+                  placeholder="a4_human, P05067, cdc7 human"
+                  type="text"
+                  value=""
+                />
+              </label>
+            </div>
           </div>
           <button
             className="button-remove"
@@ -213,7 +221,7 @@ exports[`HomePage component should render 1`] = `
           </button>
         </div>
         <div
-          className="advanced-search__field"
+          className="advanced-search__clause"
         >
           <select
             className="advanced-search__logic"
@@ -283,18 +291,22 @@ exports[`HomePage component should render 1`] = `
           <div
             className="advanced-search__inputs"
           >
-            <label
-              htmlFor="input_All"
+            <div
+              className="advanced-search__inputs"
             >
-              Any
-              <input
-                id="input_All"
-                onChange={[Function]}
-                placeholder="a4_human, P05067, cdc7 human"
-                type="text"
-                value=""
-              />
-            </label>
+              <label
+                htmlFor="input_All"
+              >
+                Any
+                <input
+                  id="input_All"
+                  onChange={[Function]}
+                  placeholder="a4_human, P05067, cdc7 human"
+                  type="text"
+                  value=""
+                />
+              </label>
+            </div>
           </div>
           <button
             className="button-remove"
@@ -305,7 +317,7 @@ exports[`HomePage component should render 1`] = `
           </button>
         </div>
         <div
-          className="advanced-search__field"
+          className="advanced-search__clause"
         >
           <select
             className="advanced-search__logic"
@@ -375,18 +387,22 @@ exports[`HomePage component should render 1`] = `
           <div
             className="advanced-search__inputs"
           >
-            <label
-              htmlFor="input_All"
+            <div
+              className="advanced-search__inputs"
             >
-              Any
-              <input
-                id="input_All"
-                onChange={[Function]}
-                placeholder="a4_human, P05067, cdc7 human"
-                type="text"
-                value=""
-              />
-            </label>
+              <label
+                htmlFor="input_All"
+              >
+                Any
+                <input
+                  id="input_All"
+                  onChange={[Function]}
+                  placeholder="a4_human, P05067, cdc7 human"
+                  type="text"
+                  value=""
+                />
+              </label>
+            </div>
           </div>
           <button
             className="button-remove"

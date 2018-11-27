@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EvidenceField component should render 1`] = `
-"<div className=\\"advanced-search__inputs\\">
+"<Fragment>
   <label htmlFor=\\"evidence_select\\">
     Evidence
     <select id=\\"evidence_select\\" value=\\"\\" onChange={[Function: onChange]}>
@@ -15,5 +15,5 @@ exports[`EvidenceField component should render 1`] = `
       </optgroup>
     </select>
   </label>
-</div>"
+</Fragment>"
 `;

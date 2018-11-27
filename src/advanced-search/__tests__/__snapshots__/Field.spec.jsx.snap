@@ -2,41 +2,49 @@
 
 exports[`Clause component should not return anything 1`] = `""`;
 
-exports[`Clause component should render \`date\` field 1`] = `"<RangeField type=\\"date\\" field={{...}} handleChange={[Function: mockConstructor]} />"`;
+exports[`Clause component should render \`date\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <RangeField type=\\"date\\" field={{...}} handleChange={[Function: mockConstructor]} />
+</div>"
+`;
 
 exports[`Clause component should render a \`string\` field with range 1`] = `
-"<Fragment>
+"<div className=\\"advanced-search__inputs\\">
   <TextField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" value={[undefined]} />
   <RangeField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" rangeFrom={[undefined]} rangeTo={[undefined]} />
-</Fragment>"
+</div>"
 `;
 
 exports[`Clause component should render a \`text\` field 1`] = `
-"<Fragment>
+"<div className=\\"advanced-search__inputs\\">
   <TextField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" value={[undefined]} />
-</Fragment>"
+</div>"
 `;
 
-exports[`Clause component should render an \`enum\` field 1`] = `"<EnumField field={{...}} handleChange={[undefined]} />"`;
+exports[`Clause component should render an \`enum\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <EnumField field={{...}} handleChange={[undefined]} />
+</div>"
+`;
 
 exports[`Clause component should render an \`integer\` \`range\` field 1`] = `
 "<div className=\\"advanced-search__inputs\\">
-  <label htmlFor=\\"from_input_undefined\\">
-    From
-    <input id=\\"from_input_undefined\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"0\\" value=\\"\\" />
-  </label>
-  <label htmlFor=\\"to_input_undefined\\">
-    To
-    <input id=\\"to_input_undefined\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"100\\" value=\\"\\" />
-  </label>
+  <div className=\\"advanced-search__inputs\\">
+    <label htmlFor=\\"input_sites\\">
+      Any
+      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
+    </label>
+  </div>
 </div>"
 `;
 
 exports[`Clause component should render an \`integer\` field 1`] = `
 "<div className=\\"advanced-search__inputs\\">
-  <label htmlFor=\\"input_sites\\">
-    Any
-    <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
-  </label>
+  <div className=\\"advanced-search__inputs\\">
+    <label htmlFor=\\"input_sites\\">
+      Any
+      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
+    </label>
+  </div>
 </div>"
 `;

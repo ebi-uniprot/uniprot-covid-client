@@ -1,14 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import fetchData from './fetchData';
+import fetchData from '../utils/fetchData';
 
 type Props = {};
 type State = {
   data: [],
 };
 
-const withData = (url: Function,
-  prepareData: Function = x => x) => (WrappedComponent: Component) => {
+const withData = (url: Function, prepareData: Function = x => x) => (
+  WrappedComponent: Component,
+) => {
   class WithData extends WrappedComponent<Props, State> {
     constructor(props: Props) {
       super(props);
