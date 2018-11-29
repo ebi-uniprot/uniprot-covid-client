@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+import urljoin from 'url-join';
 import fetchData from '../../utils/fetchData';
 import apiUrls from '../../utils/apiUrls';
 import createQueryString from '../utils/QueryStringGenerator';
@@ -16,10 +18,12 @@ export const fetchResultsStarted = () => ({
 });
 
 export const fetchResults = query => (dispatch) => {
-  const queryString = createQueryString(query);
+  const uniprotQueryString = createQueryString(query);
+  const queryUrl = queryString.stringify({
+    query: uniprotQueryString,
+  });
   dispatch(fetchResultsStarted());
-  // TODO we need to use something better to handle url params
-  fetchData(`${apiUrls.advanced_search_terms}/?${queryString}`)
+  fetchData(urljoin(apiUrls.advanced_search_terms, '/?', queryUrl))
     .then(response => dispatch(fetchResultsSuccess(response.data)))
     .catch(error => throw error);
 };
