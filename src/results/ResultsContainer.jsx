@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSearchTerms } from './state/actions';
+import { fetchResults } from './state/actions';
 
 export class Results extends Component {
   componentDidMount() {
-    const { query, dispatchFetchSearchTerms } = this.props;
-    dispatchFetchSearchTerms(query);
+    const { query, dispatchFetchResults } = this.props;
+    dispatchFetchResults(query);
   }
 
   render() {
-    return <ResultsTable />;
+    return <ResultsTable {...this.props} />;
   }
 }
 
 const mapStateToProps = state => ({
-  query: state.advancedSearch.query,
+  query: state.query,
+  results: state.results,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchSearchTerms: query => dispatch(fetchSearchTerms(query)),
+  dispatchFetchResults: query => dispatch(fetchResults(query)),
 });
 
 const ResultsContainer = connect(
