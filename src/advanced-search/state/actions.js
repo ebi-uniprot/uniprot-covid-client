@@ -1,5 +1,5 @@
 import fetchData from '../../utils/fetchData';
-import apiUrls from '../utils/apiUrls';
+import apiUrls from '../../utils/apiUrls';
 
 export const SELECT_FIELD = 'SELECT_FIELD';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';

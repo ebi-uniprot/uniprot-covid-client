@@ -4,7 +4,7 @@ import { Autocomplete } from 'franklin-sites';
 import { v1 } from 'uuid';
 import fetchData from '../utils/fetchData';
 import appendUniqueId from './prepareData';
-import { getSuggesterUrl } from '../advanced-search/utils/apiUrls';
+import { getSuggesterUrl } from '../utils/apiUrls';
 
 type Props = {
   url: string,

@@ -19,6 +19,8 @@ export default {
   database_fields: urljoin(prefix, '/uniprot/api/configure/uniprotkb/databasefields'),
   // All result fields except database cross reference fields
   results_fields: urljoin(prefix, '/uniprot/api/configure/uniprotkb/resultfields'),
+  // Retrieve results
+  advanced_search: urljoin(prefix, '/uniprot/search'),
 };
 
 const RE_QUERY = /\?$/;
