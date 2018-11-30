@@ -6,12 +6,12 @@ import {
   updateEvidence,
   updateRangeValue,
   updateLogicOperator,
-  submitQuery,
   addClause,
   removeClause,
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
+import { copyQueryObjectGoToResults } from '../state/actions';
 import ClauseList from './ClauseList';
 
 export class AdvancedSearch extends Component {
@@ -23,7 +23,7 @@ export class AdvancedSearch extends Component {
   }
 
   render() {
-    const { namespace, dispatchAddClause, dispatchSubmitQuery } = this.props;
+    const { namespace, dispatchAddClause, dispatchCopyQueryObjectGoToResults } = this.props;
     return (
       <div className="advanced-search">
         <div>
@@ -40,7 +40,12 @@ export class AdvancedSearch extends Component {
           <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
             Add Field
           </button>
-          <button type="button" id="submit-query" className="button" onClick={dispatchSubmitQuery}>
+          <button
+            type="button"
+            id="submit-query"
+            className="button"
+            onClick={dispatchCopyQueryObjectGoToResults}
+          >
             Search
           </button>
         </div>
@@ -63,10 +68,10 @@ const mapDispatchToProps = dispatch => ({
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
-  dispatchSubmitQuery: () => dispatch(submitQuery()),
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
+  dispatchCopyQueryObjectGoToResults: () => dispatch(copyQueryObjectGoToResults()),
 });
 
 const AdvancedSearchContainer = connect(

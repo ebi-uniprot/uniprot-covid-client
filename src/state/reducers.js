@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
 import query from '../advanced-search/state/reducers';
 import search from '../results/state/reducers';
-import COPY_QUERY_OBJECT_TO_RESULTS from './actions';
+import { COPY_QUERY_OBJECT_GO_TO_RESULTS } from './actions';
 
-const copyQueryObjectToResults = (queryState, action, searchState) => {
-  console.log(queryState, action, searchState);
-  return queryState;
+const handleCopyQueryObjectGoToResults = (searchState, action, queryState) => {
+  const queryClauses = JSON.parse(JSON.stringify(queryState.clauses));
+  return {
+    ...searchState,
+    queryClauses,
+  };
 };
 
 const combinedReducer = combineReducers({
@@ -15,10 +18,10 @@ const combinedReducer = combineReducers({
 
 const crossSliceReducer = (state, action) => {
   switch (action.type) {
-    case COPY_QUERY_OBJECT_TO_RESULTS:
+    case COPY_QUERY_OBJECT_GO_TO_RESULTS:
       return {
-        query: copyQueryObjectToResults(state.query, action, state.search),
-        search,
+        query: state.query,
+        search: handleCopyQueryObjectGoToResults(state.search, action, state.query),
       };
     default:
       return state;
