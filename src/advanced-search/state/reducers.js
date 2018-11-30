@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
   SELECT_FIELD,
   UPDATE_INPUT_VALUE,
@@ -147,6 +146,4 @@ const query = (state = [], action) => {
   }
 };
 
-export default combineReducers({
-  query,
-});
+export default query;

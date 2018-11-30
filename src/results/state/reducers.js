@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS } from './actions';
 
 const search = (state = [], action) => {
@@ -20,6 +19,4 @@ const search = (state = [], action) => {
   }
 };
 
-export default combineReducers({
-  search,
-});
+export default search;
