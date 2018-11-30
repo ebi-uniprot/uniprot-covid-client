@@ -1,5 +1,5 @@
-export const COPY_QUERY_OBJECT_GO_TO_RESULTS = 'COPY_QUERY_OBJECT_GO_TO_RESULTS';
+export const COPY_QUERY_CLAUSES_OBJECT_TO_SEARCH = 'COPY_QUERY_CLAUSES_OBJECT_TO_SEARCH';
 
-export const copyQueryObjectGoToResults = () => ({
-  type: COPY_QUERY_OBJECT_GO_TO_RESULTS,
+export const copyQueryClausesToSearch = () => ({
+  type: COPY_QUERY_CLAUSES_OBJECT_TO_SEARCH,
 });
