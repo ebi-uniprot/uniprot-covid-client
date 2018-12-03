@@ -18,7 +18,7 @@ exports[`AdvancedSearch component should render 1`] = `
     <button type=\\"button\\" id=\\"add-field\\" className=\\"button\\" onClick={[Function: mockConstructor]}>
       Add Field
     </button>
-    <button type=\\"button\\" id=\\"submit-query\\" className=\\"button\\" onClick={[Function: mockConstructor]}>
+    <button type=\\"button\\" id=\\"submit-query\\" className=\\"button\\" onClick={[Function: handleSubmitClick]}>
       Search
     </button>
   </div>

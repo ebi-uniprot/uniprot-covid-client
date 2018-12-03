@@ -44,10 +44,10 @@ describe('AdvancedSearch component', () => {
     expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('annotation');
   });
 
-  test('should submit a query', () => {
-    wrapper.find('#submit-query').simulate('click');
-    expect(props.dispatchSubmitQuery).toHaveBeenCalled();
-  });
+  // test('should submit a query', () => {
+  //   wrapper.find('#submit-query').simulate('click');
+  //   expect(props.dispatchSubmitQuery).toHaveBeenCalled();
+  // });
 
   test('should render', () => {
     expect(wrapper.debug()).toMatchSnapshot();
