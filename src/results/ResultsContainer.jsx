@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchResults } from './state/actions';
+import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
   componentDidMount() {
