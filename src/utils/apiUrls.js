@@ -1,4 +1,5 @@
 import urljoin from 'url-join';
+import queryString from 'query-string';
 
 const prefix = '//wwwdev.ebi.ac.uk';
 
@@ -26,3 +27,11 @@ export default {
 const RE_QUERY = /\?$/;
 
 export const getSuggesterUrl = (url, value) => urljoin(prefix, url.replace(RE_QUERY, value));
+
+export const getUniProtQueryUrl = (uniprotQueryString, cursor, columns, filters) => urljoin(
+  this.advanced_search,
+  '/?',
+  queryString.stringify({
+    query: encodeURI(uniprotQueryString),
+  }),
+);

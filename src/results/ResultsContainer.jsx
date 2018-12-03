@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchResults } from './state/actions';
-import ResultsTable from './ResultsTable';
-import serializableDeepCopy from '../utils/utils';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchResults } from "./state/actions";
+import ResultsTable from "./ResultsTable";
+import serializableDeepCopy from "../utils/utils";
 
 export class Results extends Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ResultsContainer = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Results);
 
 export default ResultsContainer;
