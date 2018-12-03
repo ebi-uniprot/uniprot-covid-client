@@ -12,7 +12,7 @@ export class Results extends Component {
     const { queryClauses: queryClausesFromProps, dispatchFetchResults, location } = this.props;
     const touchedQueryClausesFromProps = queryClausesFromProps.filter(isClauseTouched);
     const queryFromUrl = location.search;
-    if (touchedQueryClausesFromProps) {
+    if (touchedQueryClausesFromProps.length) {
       // The user has provided some input from the advanced-search so fetch results from this
       console.log(
         'user provided input from the advanced-search so fetch results from this',

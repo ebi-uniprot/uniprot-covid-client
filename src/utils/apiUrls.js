@@ -3,7 +3,7 @@ import queryString from 'query-string';
 
 const prefix = '//wwwdev.ebi.ac.uk';
 
-export default {
+const apiUrls = {
   // uniprotkb advanced search terms
   advanced_search_terms: urljoin(prefix, '/uniprot/api/configure/uniprotkb/search_terms'),
   // Annotation evidence used by advanced search
@@ -24,12 +24,14 @@ export default {
   advanced_search: urljoin(prefix, '/uniprot/search'),
 };
 
+export default apiUrls;
+
 const RE_QUERY = /\?$/;
 
 export const getSuggesterUrl = (url, value) => urljoin(prefix, url.replace(RE_QUERY, value));
 
 export const getUniProtQueryUrl = (uniprotQueryString, cursor, columns, filters) => urljoin(
-  this.advanced_search,
+  apiUrls.advanced_search,
   '/?',
   queryString.stringify({
     query: encodeURI(uniprotQueryString),
