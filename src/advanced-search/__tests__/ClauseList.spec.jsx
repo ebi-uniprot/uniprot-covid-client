@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ClauseList from '../ClauseList';
-import createEmptyClause from '../utils/clause';
+import { createEmptyClause } from '../utils/clause';
 
 jest.mock('uuid/v1', () => {
   let value = 0;

@@ -1,8 +1,7 @@
 import React from 'react';
 
-const ResultsTable = (props) => {
-  console.log(props);
-  const { results } = props;
+const ResultsTable = ({ results = [] }) => {
+  console.log(results);
   return (
     <div>
       {results.map(row => (

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import createEmptyClause from '../../advanced-search/utils/clause';
+import { createEmptyClause } from '../../advanced-search/utils/clause';
 
 import HomePage from '../HomePage';
 

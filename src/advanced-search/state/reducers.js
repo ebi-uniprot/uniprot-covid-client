@@ -12,7 +12,7 @@ import {
   REQUEST_EVIDENCES,
   RECEIVE_EVIDENCES,
 } from './actions';
-import createEmptyClause from '../utils/clause';
+import { createEmptyClause } from '../utils/clause';
 
 export const clause = (state, action) => {
   if (state.id !== action.clauseId) {

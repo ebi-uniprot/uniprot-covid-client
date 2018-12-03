@@ -1,6 +1,7 @@
 import { v1 } from 'uuid';
+import { serializableDeepEquals, removeProperty } from '../../utils/utils';
 
-const createEmptyClause = () => ({
+export const createEmptyClause = () => ({
   id: v1(),
   logicOperator: 'AND',
   field: {
@@ -14,4 +15,9 @@ const createEmptyClause = () => ({
   queryInput: {},
 });
 
-export default createEmptyClause;
+export const isClauseTouched = (clause) => {
+  const empty = createEmptyClause();
+  const emptyWithoutID = removeProperty(empty, 'id');
+  const clauseWithoutID = removeProperty(clause, 'id');
+  return !serializableDeepEquals(emptyWithoutID, clauseWithoutID);
+};
