@@ -6,12 +6,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import BaseLayout from './layout/BaseLayout';
 import HomePage from './pages/HomePage';
+import ResultsPage from './pages/ResultsPage';
 
 const App = ({ store }) => (
   <Provider store={store}>
     <Router>
       <BaseLayout>
-        <Route path={BASE_URL} exact component={HomePage} />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/uniprotkb" component={ResultsPage} />
       </BaseLayout>
     </Router>
   </Provider>

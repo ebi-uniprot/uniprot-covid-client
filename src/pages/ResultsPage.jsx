@@ -1,11 +1,6 @@
-import React, { Fragment } from 'react';
-import queryString from 'query-string';
+import React from 'react';
+import ResultsContainer from '../results/ResultsContainer';
 
-const ResultsPage = ({ match, location }) => (
-  <Fragment>
-    <h1>Results</h1>
-    <div>{match.params.query}</div>
-  </Fragment>
-);
+const ResultsPage = () => <ResultsContainer />;
 
 export default ResultsPage;

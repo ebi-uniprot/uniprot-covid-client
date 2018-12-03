@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchResults } from './state/actions';
+import ResultsTable from './ResultsTable';
+import serializableDeepCopy from '../utils/utils';
 
 export class Results extends Component {
   componentDidMount() {
@@ -14,8 +16,8 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  query: state.query,
-  results: state.results,
+  queryClauses: serializableDeepCopy(state.query.clauses),
+  results: state.search.results,
 });
 
 const mapDispatchToProps = dispatch => ({
