@@ -4,7 +4,6 @@ import { withRouter, Link } from 'react-router-dom';
 import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
 import { serializableDeepAreEqual } from '../utils/utils';
-import { isClauseTouched } from '../advanced-search/utils/clause';
 import createQueryString from './utils/QueryStringGenerator';
 
 export class Results extends Component {
