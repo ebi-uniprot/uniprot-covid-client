@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { serializableDeepEquals, removeProperty } from '../../utils/utils';
+import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 
 export const createEmptyClause = () => ({
   id: v1(),
@@ -15,9 +15,11 @@ export const createEmptyClause = () => ({
   queryInput: {},
 });
 
-export const isClauseTouched = (clause) => {
-  const empty = createEmptyClause();
-  const emptyWithoutID = removeProperty(empty, 'id');
-  const clauseWithoutID = removeProperty(clause, 'id');
-  return !serializableDeepEquals(emptyWithoutID, clauseWithoutID);
-};
+// export const isClauseTouched = (clause) => {
+//   const empty = createEmptyClause();
+//   const emptyWithoutID = removeProperty(empty, 'id');
+//   const clauseWithoutID = removeProperty(clause, 'id');
+//   return !serializableDeepEquals(emptyWithoutID, clauseWithoutID);
+// };
+
+export const clausesAreEqual = (clause1, clause2) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));

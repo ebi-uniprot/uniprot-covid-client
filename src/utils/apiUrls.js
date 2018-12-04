@@ -32,10 +32,10 @@ const RE_QUERY = /\?$/;
 
 export const getSuggesterUrl = (url, value) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (uniprotQueryString, cursor, columns, filters) => joinUrl(
+export const getUniProtQueryUrl = (encodedUniprotQueryString, cursor, columns, filters) => joinUrl(
   apiUrls.advanced_search,
   '/?',
   queryString.stringify({
-    query: encodeURI(uniprotQueryString),
+    query: encodedUniprotQueryString,
   }),
 );

@@ -1,43 +1,55 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
-import { serializableDeepCopy } from '../utils/utils';
+import { serializableDeepAreEqual } from '../utils/utils';
 import { isClauseTouched } from '../advanced-search/utils/clause';
+import createQueryString from './utils/QueryStringGenerator';
 
 export class Results extends Component {
   componentDidMount() {
-    console.log('here');
-    const { queryClauses: queryClausesFromProps, dispatchFetchResults, location } = this.props;
-    const touchedQueryClausesFromProps = queryClausesFromProps.filter(isClauseTouched);
-    const queryFromUrl = location.search;
-    if (touchedQueryClausesFromProps.length) {
-      // The user has provided some input from the advanced-search so fetch results from this
-      console.log(
-        'user provided input from the advanced-search so fetch results from this',
-        touchedQueryClausesFromProps,
-      );
-      dispatchFetchResults(touchedQueryClausesFromProps);
-      return;
-    }
+    console.log('componentDidMount');
+    const {
+      location: { search: queryFromUrl },
+      queryClauses,
+      history,
+    } = this.props;
     if (queryFromUrl) {
-      // decode query from URL
-      console.log('decode query from URL', queryFromUrl);
-      return;
+      console.log('queryClauses = unpack(queryFromUrl)');
+      console.log('dispatch setQueryClauses');
     }
-    // run query on all
-    console.log('run query on all');
+    this.replaceUrlAndFetchResults();
+  }
+
+  replaceUrlAndFetchResults() {
+    const { queryClauses, dispatchFetchResults, history } = this.props;
+    const encodedQueryString = encodeURI(createQueryString(queryClauses));
+    history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
+    dispatchFetchResults(encodedQueryString);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { queryClauses: prevQueryClauses } = prevProps;
+    const { queryClauses, dispatchFetchResults, history } = this.props;
+    if (!serializableDeepAreEqual(prevQueryClauses, queryClauses)) {
+      this.replaceUrlAndFetchResults();
+    }
   }
 
   render() {
     const { queryClauses, results } = this.props;
-    return <ResultsTable queryClauses={queryClauses} results={results} />;
+    return (
+      <Fragment>
+        <Link to="/">←Advanced Search</Link>
+        <ResultsTable queryClauses={queryClauses} results={results} />
+      </Fragment>
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  queryClauses: serializableDeepCopy(state.query.clauses),
+  queryClauses: state.query.clauses,
   results: state.search.results,
 });
 
