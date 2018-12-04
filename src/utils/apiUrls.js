@@ -28,10 +28,11 @@ const RE_QUERY = /\?$/;
 
 export const getSuggesterUrl = (url, value) => urljoin(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (uniprotQueryString, cursor, columns, filters) => urljoin(
+export const getUniProtQueryUrl = (uniprotQueryString, columns, filters, cursor) => urljoin(
   this.advanced_search,
   '/?',
   queryString.stringify({
     query: encodeURI(uniprotQueryString),
+    fields: columns,
   }),
 );

@@ -5,8 +5,8 @@ import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
   componentDidMount() {
-    const { query, dispatchFetchResults } = this.props;
-    dispatchFetchResults(query);
+    const { query, columns, dispatchFetchResults } = this.props;
+    dispatchFetchResults(query, columns);
   }
 
   render() {
@@ -16,11 +16,12 @@ export class Results extends Component {
 
 const mapStateToProps = state => ({
   query: state.query,
+  columns: state.columns,
   results: state.results,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchResults: query => dispatch(fetchResults(query)),
+  dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
 });
 
 const ResultsContainer = connect(
