@@ -15,11 +15,4 @@ export const createEmptyClause = () => ({
   queryInput: {},
 });
 
-// export const isClauseTouched = (clause) => {
-//   const empty = createEmptyClause();
-//   const emptyWithoutID = removeProperty(empty, 'id');
-//   const clauseWithoutID = removeProperty(clause, 'id');
-//   return !serializableDeepEquals(emptyWithoutID, clauseWithoutID);
-// };
-
 export const clausesAreEqual = (clause1, clause2) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));
