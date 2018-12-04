@@ -49,7 +49,7 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  queryClauses: state.query.clauses,
+  queryClauses: state.search.queryClauses,
   results: state.search.results,
 });
 

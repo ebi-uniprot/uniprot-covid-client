@@ -12,6 +12,7 @@ import {
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
+import { copyQueryClausesToSearch } from '../state/actions';
 import ClauseList from './ClauseList';
 
 export class AdvancedSearch extends Component {
@@ -24,7 +25,8 @@ export class AdvancedSearch extends Component {
   }
 
   handleSubmitClick() {
-    const { history } = this.props;
+    const { dispatchCopyQueryClausesToSearch, history } = this.props;
+    dispatchCopyQueryClausesToSearch();
     history.push('/uniprotkb');
   }
 
@@ -77,6 +79,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
+  dispatchCopyQueryClausesToSearch: () => dispatch(copyQueryClausesToSearch()),
 });
 
 const AdvancedSearchContainer = withRouter(
