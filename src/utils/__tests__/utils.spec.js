@@ -1,4 +1,4 @@
-import { serializableDeepCopy, serializableDeepEquals, removeProperty } from '../utils';
+import { serializableDeepCopy, serializableDeepAreEqual, removeProperty } from '../utils';
 
 test('serializableDeepCopy returns a copy that is not a reference ', () => {
   const obj = { foo: { bar: [1] } };
@@ -7,16 +7,16 @@ test('serializableDeepCopy returns a copy that is not a reference ', () => {
   expect(objCopy).toEqual(obj);
 });
 
-test('serializableDeepEquals returns true if has recursively equal attributes for obj1 and obj2 ', () => {
+test('serializableDeepAreEqual returns true if has recursively equal attributes for obj1 and obj2 ', () => {
   const obj1 = { foo: { bar: [1] } };
   const obj2 = { foo: { bar: [1] } };
-  expect(serializableDeepEquals(obj1, obj2)).toBe(true);
+  expect(serializableDeepAreEqual(obj1, obj2)).toBe(true);
 });
 
-test('serializableDeepEquals returns false if has recursively unequal attributes for obj1 and obj2 ', () => {
+test('serializableDeepAreEqual returns false if has recursively unequal attributes for obj1 and obj2 ', () => {
   const obj1 = { foo: { bar: [1] } };
   const obj2 = { foo: { bar: [2] } };
-  expect(serializableDeepEquals(obj1, obj2)).toBe(false);
+  expect(serializableDeepAreEqual(obj1, obj2)).toBe(false);
 });
 
 test('removeProperty removes only specified property and returns a deep copy of object ', () => {
