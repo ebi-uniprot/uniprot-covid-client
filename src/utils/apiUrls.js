@@ -1,37 +1,41 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 
+export const joinUrl = (...args) => urljoin(args);
+
 const prefix = '//wwwdev.ebi.ac.uk';
 
-export default {
+const apiUrls = {
   // uniprotkb advanced search terms
-  advanced_search_terms: urljoin(prefix, '/uniprot/api/configure/uniprotkb/search_terms'),
+  advanced_search_terms: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/search_terms'),
   // Annotation evidence used by advanced search
   evidences: {
-    annotation: urljoin(prefix, '/uniprot/api/configure/uniprotkb/annotation_evidences'),
+    annotation: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/annotation_evidences'),
     // Go evidences used by advanced go search
     // "itemType": "goterm",
-    go: urljoin(prefix, '/uniprot/api/configure/uniprotkb/go_evidences'),
+    go: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/go_evidences'),
   },
   // Database cross references used by advanced search
-  database_xefs: urljoin(prefix, '/uniprot/api/configure/uniprotkb/databases'),
+  database_xefs: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databases'),
   // Database cross reference fields in result column configure
   // "itemType": "database",
-  database_fields: urljoin(prefix, '/uniprot/api/configure/uniprotkb/databasefields'),
+  database_fields: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databasefields'),
   // All result fields except database cross reference fields
-  results_fields: urljoin(prefix, '/uniprot/api/configure/uniprotkb/resultfields'),
+  results_fields: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/resultfields'),
   // Retrieve results
-  advanced_search: urljoin(prefix, '/uniprot/search'),
+  advanced_search: joinUrl(prefix, '/uniprot/search'),
 };
+
+export default apiUrls;
 
 const RE_QUERY = /\?$/;
 
-export const getSuggesterUrl = (url, value) => urljoin(prefix, url.replace(RE_QUERY, value));
+export const getSuggesterUrl = (url, value) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (uniprotQueryString, cursor, columns, filters) => urljoin(
-  this.advanced_search,
+export const getUniProtQueryUrl = (encodedUniprotQueryString, cursor, columns, filters) => joinUrl(
+  apiUrls.advanced_search,
   '/?',
   queryString.stringify({
-    query: encodeURI(uniprotQueryString),
+    query: encodedUniprotQueryString,
   }),
 );

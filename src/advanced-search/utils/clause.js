@@ -1,6 +1,7 @@
 import { v1 } from 'uuid';
+import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 
-const createEmptyClause = () => ({
+export const createEmptyClause = () => ({
   id: v1(),
   logicOperator: 'AND',
   field: {
@@ -14,4 +15,4 @@ const createEmptyClause = () => ({
   queryInput: {},
 });
 
-export default createEmptyClause;
+export const clausesAreEqual = (clause1, clause2) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));
