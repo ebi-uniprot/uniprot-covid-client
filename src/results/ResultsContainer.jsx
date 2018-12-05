@@ -8,7 +8,6 @@ import createQueryString from './utils/QueryStringGenerator';
 
 export class Results extends Component {
   componentDidMount() {
-    console.log('componentDidMount');
     const {
       location: { search: queryFromUrl },
       queryClauses,
@@ -17,8 +16,17 @@ export class Results extends Component {
     if (queryFromUrl) {
       console.log('queryClauses = unpack(queryFromUrl)');
       console.log('dispatch setQueryClauses');
+      return;
     }
     this.replaceUrlAndFetchResults();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { queryClauses: prevQueryClauses } = prevProps;
+    const { queryClauses } = this.props;
+    if (!serializableDeepAreEqual(prevQueryClauses, queryClauses)) {
+      this.replaceUrlAndFetchResults();
+    }
   }
 
   replaceUrlAndFetchResults() {
@@ -26,14 +34,6 @@ export class Results extends Component {
     const encodedQueryString = encodeURI(createQueryString(queryClauses));
     history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
     dispatchFetchResults(encodedQueryString);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { queryClauses: prevQueryClauses } = prevProps;
-    const { queryClauses, dispatchFetchResults, history } = this.props;
-    if (!serializableDeepAreEqual(prevQueryClauses, queryClauses)) {
-      this.replaceUrlAndFetchResults();
-    }
   }
 
   render() {
