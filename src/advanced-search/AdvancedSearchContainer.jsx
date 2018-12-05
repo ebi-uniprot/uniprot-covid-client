@@ -16,8 +16,12 @@ import { copyQueryClausesToSearch } from '../state/actions';
 import ClauseList from './ClauseList';
 
 export class AdvancedSearch extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
+  }
+
+  componentDidMount() {
     const { dispatchFetchSearchTerms, dispatchfetchEvidencesIfNeeded } = this.props;
     dispatchFetchSearchTerms();
     dispatchfetchEvidencesIfNeeded('go');
