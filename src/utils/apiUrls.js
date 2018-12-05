@@ -1,7 +1,7 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 
-export const joinUrl = (a, b) => urljoin(a, b);
+export const joinUrl = (...args) => urljoin(args);
 
 const prefix = '//wwwdev.ebi.ac.uk';
 
