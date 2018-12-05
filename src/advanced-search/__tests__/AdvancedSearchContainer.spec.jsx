@@ -9,13 +9,17 @@ configure({ adapter: new Adapter() });
 let wrapper;
 let props;
 
-describe('AdvancedSearch component', () => {
+describe('AdvancedSearch shallow components', () => {
   beforeEach(() => {
     props = {
       dispatchAddClause: jest.fn(),
       dispatchSubmitQuery: jest.fn(),
       dispatchFetchSearchTerms: jest.fn(),
       dispatchfetchEvidencesIfNeeded: jest.fn(),
+      dispatchCopyQueryClausesToSearch: jest.fn(),
+      history: {
+        push: jest.fn(),
+      },
       clauses: [...Array(4)].map(() => createEmptyClause()),
       namespace: 'UniProtKB',
       searchTerms: {
@@ -44,11 +48,6 @@ describe('AdvancedSearch component', () => {
     expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('annotation');
   });
 
-  // test('should submit a query', () => {
-  //   wrapper.find('#submit-query').simulate('click');
-  //   expect(props.dispatchSubmitQuery).toHaveBeenCalled();
-  // });
-
   test('should render', () => {
     expect(wrapper.debug()).toMatchSnapshot();
   });
@@ -56,5 +55,11 @@ describe('AdvancedSearch component', () => {
   test('should add field rows', () => {
     wrapper.find('#add-field').simulate('click');
     expect(props.dispatchAddClause).toHaveBeenCalled();
+  });
+
+  test('should submit a query', () => {
+    wrapper.find('#submit-query').simulate('click');
+    expect(props.dispatchCopyQueryClausesToSearch).toHaveBeenCalled();
+    expect(props.history.push).toHaveBeenCalled();
   });
 });
