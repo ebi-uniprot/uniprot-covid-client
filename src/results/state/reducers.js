@@ -10,7 +10,7 @@ const search = (state = [], action) => {
     case FETCH_RESULTS_SUCCESS:
       return {
         ...state,
-        results: action.data,
+        results: action.data.results,
         lastUpdated: action.receivedAt,
         isFetching: false,
       };

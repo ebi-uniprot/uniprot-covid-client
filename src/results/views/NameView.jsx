@@ -6,9 +6,9 @@ const NameView = (props) => {
     <div>
       <strong>{name}</strong>
       {shortName}
-      {alternativeNames.map(alternativeName => (
+      {/* {alternativeNames.map(alternativeName => (
         <span key={alternativeName}>{alternativeName}</span>
-      ))}
+      ))} */}
     </div>
   );
 };
