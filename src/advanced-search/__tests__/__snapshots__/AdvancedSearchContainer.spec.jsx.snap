@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AdvancedSearch component should render 1`] = `
+exports[`AdvancedSearch shallow components should render 1`] = `
 "<div className=\\"advanced-search\\">
   <div>
     <label htmlFor=\\"namespace-select\\">
@@ -12,13 +12,13 @@ exports[`AdvancedSearch component should render 1`] = `
       </select>
     </label>
   </div>
-  <ClauseList dispatchAddClause={[Function: mockConstructor]} dispatchSubmitQuery={[Function: mockConstructor]} dispatchFetchSearchTerms={[Function: mockConstructor]} dispatchfetchEvidencesIfNeeded={[Function: mockConstructor]} clauses={{...}} namespace=\\"UniProtKB\\" searchTerms={{...}} evidences={{...}} />
+  <ClauseList dispatchAddClause={[Function: mockConstructor]} dispatchSubmitQuery={[Function: mockConstructor]} dispatchFetchSearchTerms={[Function: mockConstructor]} dispatchfetchEvidencesIfNeeded={[Function: mockConstructor]} dispatchCopyQueryClausesToSearch={[Function: mockConstructor]} history={{...}} clauses={{...}} namespace=\\"UniProtKB\\" searchTerms={{...}} evidences={{...}} />
   <hr />
   <div>
     <button type=\\"button\\" id=\\"add-field\\" className=\\"button\\" onClick={[Function: mockConstructor]}>
       Add Field
     </button>
-    <button type=\\"button\\" id=\\"submit-query\\" className=\\"button\\" onClick={[Function: mockConstructor]}>
+    <button type=\\"button\\" id=\\"submit-query\\" className=\\"button\\" onClick={[Function: bound handleSubmitClick]}>
       Search
     </button>
   </div>

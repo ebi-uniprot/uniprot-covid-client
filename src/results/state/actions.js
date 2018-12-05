@@ -15,10 +15,9 @@ export const fetchResultsStarted = () => ({
   type: FETCH_RESULTS_STARTED,
 });
 
-export const fetchResults = (query, columns) => (dispatch) => {
-  const uniprotQueryString = createQueryString(query);
+export const fetchResults = (encodedUniprotQueryString, columns) => (dispatch) => {
   dispatch(fetchResultsStarted());
-  fetchData(getUniProtQueryUrl(uniprotQueryString, columns))
+  fetchData(getUniProtQueryUrl(encodedUniprotQueryString, columns))
     .then(response => dispatch(fetchResultsSuccess(response.data)))
     .catch(error => console.error(error));
 };
