@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NameView component should render 1`] = `
+"<div>
+  <strong>
+    Name
+  </strong>
+  Short Name
+  <span>
+    name1
+  </span>
+  <span>
+    name2
+  </span>
+  <span>
+    name3
+  </span>
+</div>"
+`;
