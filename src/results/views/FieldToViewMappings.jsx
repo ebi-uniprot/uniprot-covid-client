@@ -12,8 +12,10 @@ const FieldToViewMappings = {
     if (ecNumber) {
       alternativeNames.push(ecNumber);
     }
-    const alternativeName = get(row, 'protein.alternativeName[0].fullName.value');
-    if (alternativeName) {
+    const alternativeName = get(row, 'protein.alternativeName', []).map(
+      name => name.fullName.value,
+    );
+    if (alternativeName.length) {
       alternativeNames.push(alternativeName);
     }
     const props = {
