@@ -42,7 +42,6 @@ export class Results extends Component {
     const { queryClauses, results } = this.props;
     return (
       <Fragment>
-        <Link to="/">←Advanced Search</Link>
         <ResultsTable queryClauses={queryClauses} results={results} />
       </Fragment>
     );
