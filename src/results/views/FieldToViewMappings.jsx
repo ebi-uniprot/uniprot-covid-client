@@ -27,7 +27,7 @@ const FieldToViewMappings = {
   },
   gene_name: (row) => {
     const genes = get(row, 'gene', []);
-    const name = genes.map(gene => gene.name.value).join(', ');
+    const name = genes.map(gene => get(gene, 'name.value')).join(', ');
     const alternativeNames = genes
       .map(gene => [
         ...get(gene, 'synonyms', []).map(syn => syn.value),

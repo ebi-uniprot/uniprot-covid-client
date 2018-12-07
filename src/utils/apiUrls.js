@@ -23,7 +23,7 @@ const apiUrls = {
   // All result fields except database cross reference fields
   results_fields: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/resultfields'),
   // Retrieve results
-  advanced_search: joinUrl(prefix, '/uniprot/search'),
+  advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
 };
 
 export default apiUrls;
@@ -37,6 +37,6 @@ export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, 
   '/?',
   queryString.stringify({
     query: encodedUniprotQueryString,
-    fields: columns,
+    fields: columns.join(','),
   }),
 );
