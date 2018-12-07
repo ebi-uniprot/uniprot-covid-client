@@ -4,7 +4,6 @@ import FieldToViewMappings from './views/FieldToViewMappings';
 
 const columnNames = Object.keys(FieldToViewMappings).sort();
 
-console.log(columnNames);
 const ResultsTable = ({ results = [] }) => (
   <table>
     <thead>
