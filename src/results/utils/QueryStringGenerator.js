@@ -49,7 +49,7 @@ const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
   return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
 };
 
-const createQueryString = (clauses: Array<Clause>): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
+const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
   let query = '';
   if (clause.queryInput.stringValue && clause.queryInput.stringValue !== '') {
     query = `${query}${createSimpleSubquery(clause)}`;
