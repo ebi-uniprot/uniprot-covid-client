@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import query from '../advanced-search/state/reducers';
-import search from '../results/state/reducers';
+import results from '../results/state/reducers';
 import { COPY_QUERY_CLAUSES_OBJECT_TO_SEARCH } from './actions';
 
-const handleCopyQueryClausesToSearch = (searchState, action, queryState) => {
+const handleCopyQueryClausesToSearch = (resultsState, action, queryState) => {
   const queryClauses = JSON.parse(JSON.stringify(queryState.clauses));
   return {
-    ...searchState,
+    ...resultsState,
     queryClauses,
   };
 };
 
 const combinedReducer = combineReducers({
   query,
-  search,
+  results,
 });
 
 const crossSliceReducer = (state, action) => {
@@ -21,7 +21,7 @@ const crossSliceReducer = (state, action) => {
     case COPY_QUERY_CLAUSES_OBJECT_TO_SEARCH:
       return {
         query: state.query,
-        search: handleCopyQueryClausesToSearch(state.search, action, state.query),
+        results: handleCopyQueryClausesToSearch(state.results, action, state.query),
       };
     default:
       return state;

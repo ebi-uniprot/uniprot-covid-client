@@ -1,13 +1,18 @@
 import React from 'react';
 
-const NameView = ({ name, shortName, alternativeNames }) => (
-  <div>
-    <strong>{name}</strong>
-    {shortName}
-    {alternativeNames.map(alternativeName => (
-      <span key={alternativeName}>{alternativeName}</span>
-    ))}
-  </div>
-);
+const NameView = (props) => {
+  const { name, shortName, alternativeNames } = props;
+  const altNames = alternativeNames.map(alternativeName => (
+    <span key={alternativeName}>{alternativeName}</span>
+  ));
+  return (
+    <div>
+      <strong>{name}</strong>
+      {shortName}
+      {' '}
+      {altNames.length ? <span>{altNames}</span> : undefined}
+    </div>
+  );
+};
 
 export default NameView;

@@ -1,6 +1,6 @@
 import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS } from './actions';
 
-const search = (state = [], action) => {
+const results = (state = [], action) => {
   switch (action.type) {
     case FETCH_RESULTS_STARTED:
       return {
@@ -10,7 +10,7 @@ const search = (state = [], action) => {
     case FETCH_RESULTS_SUCCESS:
       return {
         ...state,
-        results: action.data,
+        results: action.data.results,
         lastUpdated: action.receivedAt,
         isFetching: false,
       };
@@ -19,4 +19,4 @@ const search = (state = [], action) => {
   }
 };
 
-export default search;
+export default results;

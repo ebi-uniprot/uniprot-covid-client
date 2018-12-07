@@ -10,7 +10,7 @@ module.exports = merge(common, {
     contentBase: path.join(__dirname, 'build'),
     compress: true,
     host: 'localhost',
-    port: 39093,
+    port: 0,
     historyApiFallback: true,
   },
   plugins: [new webpack.DefinePlugin({ BASE_URL: JSON.stringify('/') })],

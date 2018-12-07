@@ -1,6 +1,5 @@
 import fetchData from '../../utils/fetchData';
 import { getUniProtQueryUrl } from '../../utils/apiUrls';
-import createQueryString from '../utils/QueryStringGenerator';
 
 export const FETCH_RESULTS_STARTED = 'FETCH_RESULTS_STARTED';
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS';
