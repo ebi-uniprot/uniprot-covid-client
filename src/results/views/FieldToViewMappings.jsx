@@ -12,7 +12,7 @@ const FieldToViewMappings = {
     if (ecNumber) {
       alternativeNames.push(ecNumber);
     }
-    const alternativeName = get(row, 'protein.recommendedName.alternativeName');
+    const alternativeName = get(row, 'protein.alternativeName[0].fullName.value');
     if (alternativeName) {
       alternativeNames.push(alternativeName);
     }
@@ -24,13 +24,15 @@ const FieldToViewMappings = {
     return <NameView {...props} />;
   },
   gene_name: (row) => {
-    const props = {
-      name: row.gene ? row.gene[0].name.value : '',
-      alternativeNames: [
-        // ...row.gene[0].synonyms.map(syn => syn.value),
-        // ...row.gene[0].orfNames.map(orf => orf.value),
-      ],
-    };
+    const genes = get(row, 'gene', []);
+    const name = genes.map(gene => gene.name.value).join(', ');
+    const alternativeNames = genes
+      .map(gene => [
+        ...get(gene, 'synonyms', []).map(syn => syn.value),
+        ...get(gene, 'orfNames', []).map(orf => orf.value),
+      ])
+      .filter(x => x.length);
+    const props = { name, alternativeNames };
     return <NameView {...props} />;
   },
 };
