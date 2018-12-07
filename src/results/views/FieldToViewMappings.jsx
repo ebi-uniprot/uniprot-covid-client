@@ -1,5 +1,5 @@
 import React from 'react';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import SimpleView from './SimpleView';
 import NameView from './NameView';
 
