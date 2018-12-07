@@ -10,10 +10,10 @@ import ResultsPage from './pages/ResultsPage';
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <Router basename={BASE_URL}>
       <BaseLayout>
-        <Route path={joinUrl(BASE_URL, '/')} exact component={HomePage} />
-        <Route path={joinUrl(BASE_URL, 'uniprotkb')} component={ResultsPage} />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/uniprotkb" component={ResultsPage} />
       </BaseLayout>
     </Router>
   </Provider>
