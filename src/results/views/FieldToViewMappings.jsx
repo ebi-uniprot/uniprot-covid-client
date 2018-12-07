@@ -1,4 +1,5 @@
 import React from 'react';
+import get from 'lodash/get';
 import SimpleView from './SimpleView';
 import NameView from './NameView';
 
@@ -7,19 +8,17 @@ const FieldToViewMappings = {
   id: row => <SimpleView termValue={row.id} />,
   protein_name: (row) => {
     const alternativeNames = [];
-    if (row.protein.recommendedName.ecNumber) {
-      alternativeNames.push(row.protein.recommendedName.ecNumber.value);
+    const ecNumber = get(row, 'protein.recommendedName.ecNumber.value');
+    if (ecNumber) {
+      alternativeNames.push(ecNumber);
     }
-    if (row.protein.recommendedName.alternativeName) {
-      alternativeNames.push(row.protein.recommendedName.alternativeName.value);
+    const alternativeName = get(row, 'protein.recommendedName.alternativeName.value');
+    if (alternativeName) {
+      alternativeNames.push(alternativeName);
     }
     const props = {
-      name: row.protein.recommendedName.fullName
-        ? row.protein.recommendedName.fullName.value
-        : undefined,
-      shortName: row.protein.recommendedName.shortName
-        ? row.protein.recommendedName.shortName.value
-        : undefined,
+      name: get(row, 'protein.recommendedName.fullName.value'),
+      shortName: get(row, 'protein.recommendedName.shortName.value'),
       alternativeNames,
     };
     return <NameView {...props} />;
