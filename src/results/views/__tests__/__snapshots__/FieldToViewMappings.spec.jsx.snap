@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldToViewMappings should render gene_name 1`] = `
+"<div>
+  <strong>
+    My gene
+  </strong>
+  <span>
+    synonym 1
+  </span>
+  <span>
+    synonym 2
+  </span>
+  <span>
+    orfNames 1
+  </span>
+  <span>
+    orfNames 2
+  </span>
+  <span>
+    orfNames 3
+  </span>
+</div>"
+`;
+
+exports[`FieldToViewMappings should render protein_name 1`] = `
+"<div>
+  <strong>
+    My protein
+  </strong>
+  My prot
+  <span>
+    ec1234
+  </span>
+  <span>
+    Some protein
+  </span>
+</div>"
+`;
