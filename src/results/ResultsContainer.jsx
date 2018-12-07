@@ -30,7 +30,9 @@ export class Results extends Component {
   }
 
   replaceUrlAndFetchResults() {
-    const { queryClauses, columns, dispatchFetchResults, history } = this.props;
+    const {
+      queryClauses, columns, dispatchFetchResults, history,
+    } = this.props;
     const encodedQueryString = encodeURI(createQueryString(queryClauses));
     history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
     dispatchFetchResults(encodedQueryString, columns);
@@ -48,9 +50,9 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  queryClauses: state.search.queryClauses,
-  columns: state.search.columns,
-  results: state.search.results,
+  queryClauses: state.results.queryClauses,
+  columns: state.results.columns,
+  results: state.results.results,
 });
 
 const mapDispatchToProps = dispatch => ({
