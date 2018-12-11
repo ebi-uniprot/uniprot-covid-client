@@ -47,11 +47,11 @@ export class AdvancedSearch extends Component {
           </label>
         </div>
         <ClauseList {...this.props} />
+        <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
+          Add Field
+        </button>
         <hr />
         <div>
-          <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
-            Add Field
-          </button>
           <button
             type="button"
             id="submit-query"
