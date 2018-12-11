@@ -12,7 +12,11 @@ const Field = ({
   switch (dataType) {
     case 'enum':
       node = (
-        <EnumField field={field} handleChange={handleInputChange} value={queryInput.stringValue} />
+        <EnumField
+          field={field}
+          handleChange={handleInputChange}
+          value={queryInput ? queryInput.stringValue : ''}
+        />
       );
       break;
     case 'date':
