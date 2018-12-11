@@ -11,7 +11,9 @@ const Field = ({
   let node;
   switch (dataType) {
     case 'enum':
-      node = <EnumField field={field} handleChange={handleInputChange} />;
+      node = (
+        <EnumField field={field} handleChange={handleInputChange} value={queryInput.stringValue} />
+      );
       break;
     case 'date':
       node = <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
