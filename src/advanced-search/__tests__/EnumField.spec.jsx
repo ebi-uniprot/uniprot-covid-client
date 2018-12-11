@@ -29,6 +29,7 @@ describe('Enum field', () => {
         example: '1',
       },
       handleChange: jest.fn(),
+      queryInput: { stringValue: '1' },
     };
     wrapper = shallow(<EnumField {...props} />);
   });
