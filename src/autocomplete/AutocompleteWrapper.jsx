@@ -55,7 +55,7 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   render() {
     const { data } = this.state;
-    const { title } = this.props;
+    const { title, value } = this.props;
     return (
       <label htmlFor={this.id}>
         {title}
@@ -65,6 +65,7 @@ class AutocompleteWrapper extends Component<Props, State> {
           onSelect={this.handleSelect}
           onChange={this.handleChange}
           filter={false}
+          value={value}
         />
       </label>
     );

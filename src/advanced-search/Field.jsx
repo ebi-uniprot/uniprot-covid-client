@@ -24,6 +24,7 @@ const Field = ({
               url={field.autoComplete}
               onSelect={handleInputChange}
               title={field.label}
+              value={queryInput.stringValue}
             />
           ) : (
             <TextField
