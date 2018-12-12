@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { MainSearch } from 'franklin-sites';
 import {
   selectField,
   updateInputValue,
@@ -18,6 +19,10 @@ import ClauseList from './ClauseList';
 export class AdvancedSearch extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showAdvanced: false,
+    };
+    this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
@@ -28,6 +33,11 @@ export class AdvancedSearch extends Component {
     dispatchfetchEvidencesIfNeeded('annotation');
   }
 
+  toggleAdvanced() {
+    const { showAdvanced } = this.state;
+    this.setState({ showAdvanced: !showAdvanced });
+  }
+
   handleSubmitClick() {
     const { dispatchCopyQueryClausesToSearch, history } = this.props;
     dispatchCopyQueryClausesToSearch();
@@ -36,6 +46,21 @@ export class AdvancedSearch extends Component {
 
   render() {
     const { namespace, dispatchAddClause } = this.props;
+    const { showAdvanced } = this.state;
+    let search;
+    if (showAdvanced) {
+      search = (
+        <Fragment>
+          <ClauseList {...this.props} />
+          <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
+            Add Field
+          </button>
+        </Fragment>
+      );
+    } else {
+      search = <MainSearch />;
+    }
+
     return (
       <div className="advanced-search">
         <div>
@@ -46,11 +71,10 @@ export class AdvancedSearch extends Component {
             </select>
           </label>
         </div>
-        <ClauseList {...this.props} />
-        <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
-          Add Field
+        {search}
+        <button type="button" onClick={this.toggleAdvanced}>
+          Advanced search
         </button>
-        <hr />
         <div>
           <button
             type="button"

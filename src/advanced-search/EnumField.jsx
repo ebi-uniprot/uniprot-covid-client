@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 
-const EnumField = ({ field, handleChange }) => (
+const EnumField = ({ field, handleChange, value }) => (
   <Fragment>
     <label htmlFor={`select_${field.term}`}>
       {field.label}
-      <select onChange={e => handleChange(e.target.value)} id={`select_${field.term}`}>
+      <select
+        onChange={e => handleChange(e.target.value)}
+        id={`select_${field.term}`}
+        value={value}
+      >
         {field.values
           && field.values.map(item => (
             <option value={item.value} key={`select_${item.value}`}>

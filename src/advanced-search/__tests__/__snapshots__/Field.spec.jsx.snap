@@ -23,7 +23,7 @@ exports[`Clause component should render a \`text\` field 1`] = `
 
 exports[`Clause component should render an \`enum\` field 1`] = `
 "<div className=\\"advanced-search__inputs\\">
-  <EnumField field={{...}} handleChange={[undefined]} />
+  <EnumField field={{...}} handleChange={[undefined]} value=\\"\\" />
 </div>"
 `;
 

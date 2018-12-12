@@ -4,7 +4,7 @@ exports[`Enum field should render an enum field 1`] = `
 "<Fragment>
   <label htmlFor=\\"select_existence\\">
     Protein Existence [PE]
-    <select onChange={[Function: onChange]} id=\\"select_existence\\">
+    <select onChange={[Function: onChange]} id=\\"select_existence\\" value={[undefined]}>
       <option value=\\"1\\">
         Evidence at protein level
       </option>

@@ -88,6 +88,7 @@ const ClauseList = ({
         data={searchTerms}
         onSelect={value => handleFieldSelect(clause.id, value)}
         autocompletePlaceholder="Search for field"
+        value={clause.field}
         autocomplete
       />
       <Field
