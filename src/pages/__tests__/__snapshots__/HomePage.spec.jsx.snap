@@ -60,7 +60,7 @@ exports[`HomePage component should render 1`] = `
               onClick={[Function]}
               type="button"
             >
-              Select
+              Any
             </button>
             <div
               className="dropdown-menu"
@@ -156,7 +156,7 @@ exports[`HomePage component should render 1`] = `
               onClick={[Function]}
               type="button"
             >
-              Select
+              Any
             </button>
             <div
               className="dropdown-menu"
@@ -252,7 +252,7 @@ exports[`HomePage component should render 1`] = `
               onClick={[Function]}
               type="button"
             >
-              Select
+              Any
             </button>
             <div
               className="dropdown-menu"
@@ -348,7 +348,7 @@ exports[`HomePage component should render 1`] = `
               onClick={[Function]}
               type="button"
             >
-              Select
+              Any
             </button>
             <div
               className="dropdown-menu"

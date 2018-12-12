@@ -11,7 +11,13 @@ const Field = ({
   let node;
   switch (dataType) {
     case 'enum':
-      node = <EnumField field={field} handleChange={handleInputChange} />;
+      node = (
+        <EnumField
+          field={field}
+          handleChange={handleInputChange}
+          value={queryInput ? queryInput.stringValue : ''}
+        />
+      );
       break;
     case 'date':
       node = <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
@@ -24,6 +30,7 @@ const Field = ({
               url={field.autoComplete}
               onSelect={handleInputChange}
               title={field.label}
+              value={queryInput.stringValue}
             />
           ) : (
             <TextField
