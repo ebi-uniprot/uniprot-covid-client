@@ -8,12 +8,13 @@ import {
   updateEvidence,
   updateRangeValue,
   updateLogicOperator,
+  updateQueryString,
+  submitAdvancedQuery,
   addClause,
   removeClause,
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
-import { copyQueryClausesToSearch } from '../state/actions';
 import ClauseList from './ClauseList';
 
 export class AdvancedSearch extends Component {
@@ -39,13 +40,15 @@ export class AdvancedSearch extends Component {
   }
 
   handleSubmitClick() {
-    const { dispatchCopyQueryClausesToSearch, history } = this.props;
-    dispatchCopyQueryClausesToSearch();
+    const { dispatchSubmitAdvancedQuery, history } = this.props;
+    dispatchSubmitAdvancedQuery();
     history.push('/uniprotkb');
   }
 
   render() {
-    const { namespace, dispatchAddClause } = this.props;
+    const {
+      namespace, dispatchAddClause, queryString, handleQueryStringChange,
+    } = this.props;
     const { showAdvanced } = this.state;
     let search;
     if (showAdvanced) {
@@ -58,7 +61,7 @@ export class AdvancedSearch extends Component {
         </Fragment>
       );
     } else {
-      search = <MainSearch />;
+      search = <MainSearch handleSearchSubmit={handleQueryStringChange} searchTerm={queryString} />;
     }
 
     return (
@@ -92,6 +95,7 @@ export class AdvancedSearch extends Component {
 
 const mapStateToProps = state => ({
   clauses: state.query.clauses,
+  queryString: state.query.queryString,
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
@@ -103,11 +107,12 @@ const mapDispatchToProps = dispatch => ({
   handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
+  handleQueryStringChange: queryString => dispatch(updateQueryString(queryString)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
-  dispatchCopyQueryClausesToSearch: () => dispatch(copyQueryClausesToSearch()),
+  dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
 });
 
 const AdvancedSearchContainer = withRouter(

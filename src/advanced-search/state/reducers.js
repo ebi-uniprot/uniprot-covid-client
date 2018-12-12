@@ -4,7 +4,8 @@ import {
   UPDATE_EVIDENCE,
   UPDATE_RANGE_VALUE,
   UPDATE_LOGIC_OPERATOR,
-  SUBMIT_QUERY,
+  UPDATE_QUERY_STRING,
+  SUBMIT_ADVANCED_QUERY,
   ADD_CLAUSE,
   REMOVE_CLAUSE,
   REQUEST_SEARCH_TERMS,
@@ -13,6 +14,7 @@ import {
   RECEIVE_EVIDENCES,
 } from './actions';
 import { createEmptyClause } from '../utils/clause';
+import createQueryString from '../utils/QueryStringGenerator';
 
 export const clause = (state, action) => {
   if (state.id !== action.clauseId) {
@@ -110,9 +112,16 @@ const query = (state = [], action) => {
         ...state,
         clauses: state.clauses.map(c => clause(c, action)),
       };
-    case SUBMIT_QUERY:
-      console.log(state.clauses);
-      return state;
+    case UPDATE_QUERY_STRING:
+      return {
+        ...state,
+        queryString: action.queryString,
+      };
+    case SUBMIT_ADVANCED_QUERY:
+      return {
+        ...state,
+        queryString: createQueryString(state.clauses),
+      };
     case ADD_CLAUSE:
       return {
         ...state,
