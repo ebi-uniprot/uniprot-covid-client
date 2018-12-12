@@ -70,12 +70,13 @@ describe('sync actions', () => {
     expect(actions.updateLogicOperator(clauseId, value)).toEqual(expectedAction);
   });
 
-  it('should create a SUBMIT_QUERY action', () => {
-    const clauseId = '1';
+  it('should create an UPDATE_QUERY_STRING action', () => {
+    const queryString = 'blah';
     const expectedAction = {
-      type: actions.SUBMIT_QUERY,
+      type: actions.UPDATE_QUERY_STRING,
+      queryString,
     };
-    expect(actions.submitQuery(clauseId)).toEqual(expectedAction);
+    expect(actions.updateQueryString(queryString)).toEqual(expectedAction);
   });
 
   it('should create a ADD_CLAUSE action', () => {

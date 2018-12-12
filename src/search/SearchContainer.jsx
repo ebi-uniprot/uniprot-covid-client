@@ -15,7 +15,7 @@ import {
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
-import ClauseList from './ClauseList';
+import AdvancedSearch from './AdvancedSearch';
 
 export class Search extends Component {
   constructor(props) {
@@ -58,42 +58,21 @@ export class Search extends Component {
     let search;
     if (showAdvanced) {
       search = (
-        <Fragment>
-          <ClauseList {...this.props} />
-          <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
-            Add Field
-          </button>
-        </Fragment>
+        <AdvancedSearch
+          {...this.props}
+          handleAdvancedSubmitClick={this.handleAdvancedSubmitClick}
+        />
       );
     } else {
       search = <MainSearch handleSearchSubmit={this.handleSubmitClick} searchTerm={queryString} />;
     }
-
     return (
-      <div className="advanced-search">
-        <div>
-          <label htmlFor="namespace-select">
-            Searching in
-            <select id="namespace-select">
-              <option>{namespace}</option>
-            </select>
-          </label>
-        </div>
+      <Fragment>
         {search}
         <button type="button" onClick={this.toggleAdvanced}>
           Advanced search
         </button>
-        <div>
-          <button
-            type="button"
-            id="submit-query"
-            className="button"
-            onClick={this.handleAdvancedSubmitClick}
-          >
-            Search
-          </button>
-        </div>
-      </div>
+      </Fragment>
     );
   }
 }
