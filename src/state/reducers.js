@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import query from '../advanced-search/state/reducers';
+import query from '../search/state/reducers';
 import results from '../results/state/reducers';
 
 const combinedReducer = combineReducers({

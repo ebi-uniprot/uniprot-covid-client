@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 
-import AdvancedSearchContainer from '../advanced-search/AdvancedSearchContainer';
+import AdvancedSearchContainer from '../search/AdvancedSearchContainer';
 
 import Logo from '../svg/uniprot-rgb.svg';
 
