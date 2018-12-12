@@ -25,6 +25,7 @@ export class AdvancedSearch extends Component {
     };
     this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
+    this.handleAdvancedSubmitClick = this.handleAdvancedSubmitClick.bind(this);
   }
 
   componentDidMount() {
@@ -39,16 +40,20 @@ export class AdvancedSearch extends Component {
     this.setState({ showAdvanced: !showAdvanced });
   }
 
-  handleSubmitClick() {
+  handleAdvancedSubmitClick() {
     const { dispatchSubmitAdvancedQuery, history } = this.props;
     dispatchSubmitAdvancedQuery();
     history.push('/uniprotkb');
   }
 
+  handleSubmitClick() {
+    const { dispatchQueryStringChange, history } = this.props;
+    dispatchQueryStringChange();
+    history.push('/uniprotkb');
+  }
+
   render() {
-    const {
-      namespace, dispatchAddClause, queryString, handleQueryStringChange,
-    } = this.props;
+    const { namespace, dispatchAddClause, queryString } = this.props;
     const { showAdvanced } = this.state;
     let search;
     if (showAdvanced) {
@@ -61,7 +66,7 @@ export class AdvancedSearch extends Component {
         </Fragment>
       );
     } else {
-      search = <MainSearch handleSearchSubmit={handleQueryStringChange} searchTerm={queryString} />;
+      search = <MainSearch handleSearchSubmit={this.handleSubmitClick} searchTerm={queryString} />;
     }
 
     return (
@@ -83,7 +88,7 @@ export class AdvancedSearch extends Component {
             type="button"
             id="submit-query"
             className="button"
-            onClick={this.handleSubmitClick}
+            onClick={this.handleAdvancedSubmitClick}
           >
             Search
           </button>
@@ -107,12 +112,12 @@ const mapDispatchToProps = dispatch => ({
   handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
   handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
-  handleQueryStringChange: queryString => dispatch(updateQueryString(queryString)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
+  dispatchQueryStringChange: queryString => dispatch(updateQueryString(queryString)),
 });
 
 const AdvancedSearchContainer = withRouter(
