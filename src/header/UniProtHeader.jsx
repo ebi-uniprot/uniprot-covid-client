@@ -6,7 +6,7 @@ import SearchContainer from '../search/SearchContainer';
 
 import Logo from '../svg/uniprot-rgb.svg';
 
-const UniProtHeader = () => (
+const UniProtHeader = ({ isHomePage }) => (
   <Header>
     <a className="header__logo" href="/">
       <Logo width={120} height={50} />
@@ -31,7 +31,7 @@ const UniProtHeader = () => (
         <Link to="/">Help</Link>
       </li>
     </ul>
-    <SearchContainer />
+    {!isHomePage && <SearchContainer />}
   </Header>
 );
 export default UniProtHeader;

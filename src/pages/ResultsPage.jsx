@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import BaseLayout from '../layout/BaseLayout';
 import ResultsContainer from '../results/ResultsContainer';
 
 const ResultsPage = () => (
-  <Fragment>
+  <BaseLayout>
     <ResultsContainer />
-  </Fragment>
+  </BaseLayout>
 );
 
 export default ResultsPage;

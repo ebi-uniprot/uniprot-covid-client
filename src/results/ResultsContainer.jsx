@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
-import { serializableDeepAreEqual } from '../utils/utils';
 
 export class Results extends Component {
   componentDidMount() {

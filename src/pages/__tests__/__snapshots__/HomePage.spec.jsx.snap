@@ -2,72 +2,224 @@
 
 exports[`HomePage component should render 1`] = `
 <section
-  data-layout="home-page"
-  id="layout"
+  id="outter-layout"
 >
-  <section
-    id="layout-content"
+  <div
+    className="header"
   >
-    <div
-      className="block block--4-col"
+    <a
+      className="header__logo"
+      href="/"
     >
-      <div
-        className="tile"
+      <test-file-stub
+        height={50}
+        width={120}
+      />
+    </a>
+    <ul
+      className="header__navigation"
+    >
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          BLAST
+        </a>
+      </li>
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Aligh
+        </a>
+      </li>
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Peptide search
+        </a>
+      </li>
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Retrieve/ID Mapping
+        </a>
+      </li>
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          API
+        </a>
+      </li>
+      <li>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Help
+        </a>
+      </li>
+    </ul>
+  </div>
+  <section
+    data-layout="home-page"
+    id="layout"
+  >
+    <section
+      id="layout-content"
+    >
+      <form
+        className="main-search"
+        onSubmit={[Function]}
       >
-        <h3
-          className="tile__header"
+        <div
+          className="dropdown-container"
         >
-          UniProtKB
-        </h3>
-        <p
-          className="tile__content"
+          <button
+            className="button dropdown"
+            onClick={[Function]}
+            type="button"
+          >
+            UniProtKB
+          </button>
+          <div
+            className="dropdown-menu"
+          >
+            <ul>
+              <li>
+                <button
+                  type="button"
+                >
+                  UniProtKB - the UniProt knowledgebase
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                >
+                  UniRef
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                >
+                  UniParc
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                >
+                  Proteomes
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                >
+                  Publications
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                >
+                  Keywords
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <input
+          className="main-search__input"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <button
+          className="button"
+          type="submit"
         >
-          This is a short description of what the resource is/provides.
-        </p>
-      </div>
-      <div
-        className="tile tile-proteomes"
+          Search
+        </button>
+      </form>
+      <button
+        onClick={[Function]}
+        type="button"
       >
-        <h3
-          className="tile__header"
-        >
-          Proteomes
-        </h3>
-        <p
-          className="tile__content"
-        >
-          Sets of proteins for reference and other species of interest.
-        </p>
-      </div>
+        Advanced search
+      </button>
       <div
-        className="tile tile-uniref"
+        className="block block--4-col"
       >
-        <h3
-          className="tile__header"
+        <div
+          className="tile"
         >
-          UniRef
-        </h3>
-        <p
-          className="tile__content"
+          <h3
+            className="tile__header"
+          >
+            UniProtKB
+          </h3>
+          <p
+            className="tile__content"
+          >
+            This is a short description of what the resource is/provides.
+          </p>
+        </div>
+        <div
+          className="tile tile-proteomes"
         >
-          Clusters of protein sequences at 100%, 90% & 50% similarity
-        </p>
+          <h3
+            className="tile__header"
+          >
+            Proteomes
+          </h3>
+          <p
+            className="tile__content"
+          >
+            Sets of proteins for reference and other species of interest.
+          </p>
+        </div>
+        <div
+          className="tile tile-uniref"
+        >
+          <h3
+            className="tile__header"
+          >
+            UniRef
+          </h3>
+          <p
+            className="tile__content"
+          >
+            Clusters of protein sequences at 100%, 90% & 50% similarity
+          </p>
+        </div>
+        <div
+          className="tile tile-uniparc"
+        >
+          <h3
+            className="tile__header"
+          >
+            UniParc
+          </h3>
+          <p
+            className="tile__content"
+          >
+            Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)
+          </p>
+        </div>
       </div>
-      <div
-        className="tile tile-uniparc"
-      >
-        <h3
-          className="tile__header"
-        >
-          UniParc
-        </h3>
-        <p
-          className="tile__content"
-        >
-          Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)
-        </p>
-      </div>
-    </div>
+    </section>
   </section>
+  <footer />
 </section>
 `;

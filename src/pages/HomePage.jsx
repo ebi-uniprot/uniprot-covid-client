@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import { Tile } from 'franklin-sites';
-
 import Block from '../layout/Block';
 import HomePageLayout from '../layout/HomePageLayout';
+import SearchContainer from '../search/SearchContainer';
 
 const HomePage = () => (
   <HomePageLayout>
+    <SearchContainer />
     <Block columns="4">
       <Tile title="UniProtKB" />
       <Tile
