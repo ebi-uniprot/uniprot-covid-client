@@ -23,7 +23,7 @@ export class Results extends Component {
   componentDidUpdate(prevProps) {
     const { queryString: prevQueryString } = prevProps;
     const { queryString } = this.props;
-    if (!serializableDeepAreEqual(prevQueryString, queryString)) {
+    if (prevQueryString !== queryString) {
       this.fetchResults();
     }
   }
@@ -38,7 +38,10 @@ export class Results extends Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, isFetching } = this.props;
+    if (isFetching) {
+      return <h3>Loading...</h3>;
+    }
     return (
       <Fragment>
         <ResultsTable results={results} />
@@ -51,6 +54,7 @@ const mapStateToProps = state => ({
   queryString: state.query.queryString,
   columns: state.results.columns,
   results: state.results.results,
+  isFetching: state.results.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({

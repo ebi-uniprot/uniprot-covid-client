@@ -46,9 +46,9 @@ export class AdvancedSearch extends Component {
     history.push('/uniprotkb');
   }
 
-  handleSubmitClick() {
+  handleSubmitClick(searchTerm) {
     const { dispatchQueryStringChange, history } = this.props;
-    dispatchQueryStringChange();
+    dispatchQueryStringChange(searchTerm);
     history.push('/uniprotkb');
   }
 
