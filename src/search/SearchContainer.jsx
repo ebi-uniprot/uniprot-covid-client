@@ -17,7 +17,7 @@ import {
 } from './state/actions';
 import ClauseList from './ClauseList';
 
-export class AdvancedSearch extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,11 +120,11 @@ const mapDispatchToProps = dispatch => ({
   dispatchQueryStringChange: queryString => dispatch(updateQueryString(queryString)),
 });
 
-const AdvancedSearchContainer = withRouter(
+const SearchContainer = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(AdvancedSearch),
+  )(Search),
 );
 
-export default AdvancedSearchContainer;
+export default SearchContainer;
