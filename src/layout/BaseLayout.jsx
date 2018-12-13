@@ -12,7 +12,7 @@ type Props = {
 const BaseLayout = (props: Props) => {
   const { children, isHomePage } = props;
   return (
-    <section id="outter-layout">
+    <section id="outer-layout">
       <UniProtHeader isHomePage={isHomePage} />
       {children}
       <UniProtFooter />

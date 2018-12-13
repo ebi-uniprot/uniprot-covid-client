@@ -47,13 +47,13 @@ export class Search extends Component {
   }
 
   handleSubmitClick(searchTerm) {
-    const { dispatchQueryStringChange, history } = this.props;
-    dispatchQueryStringChange(searchTerm);
+    const { dispatchUpdateQueryString, history } = this.props;
+    dispatchUpdateQueryString(searchTerm);
     history.push('/uniprotkb');
   }
 
   render() {
-    const { namespace, dispatchAddClause, queryString } = this.props;
+    const { queryString } = this.props;
     const { showAdvanced } = this.state;
     let search;
     if (showAdvanced) {
@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
-  dispatchQueryStringChange: queryString => dispatch(updateQueryString(queryString)),
+  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
 });
 
 const SearchContainer = withRouter(

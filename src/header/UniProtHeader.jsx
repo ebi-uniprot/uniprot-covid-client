@@ -6,7 +6,7 @@ import SearchContainer from '../search/SearchContainer';
 
 import Logo from '../svg/uniprot-rgb.svg';
 
-const UniProtHeader = ({ isHomePage }) => (
+const UniProtHeader = ({ isHomePage = false }) => (
   <Header>
     <a className="header__logo" href="/">
       <Logo width={120} height={50} />
