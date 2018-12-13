@@ -2,7 +2,7 @@
 
 exports[`HomePage component should render 1`] = `
 <section
-  id="outter-layout"
+  id="outer-layout"
 >
   <div
     className="header"
