@@ -1,5 +1,5 @@
-import advancedSearchInitialState from '../advanced-search/state/initialState';
+import searchInitialState from '../search/state/initialState';
 import resultsInitialState from '../results/state/initialState';
 
-const initialState = { ...advancedSearchInitialState, ...resultsInitialState };
+const initialState = { ...searchInitialState, ...resultsInitialState };
 export default initialState;

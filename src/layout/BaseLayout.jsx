@@ -10,10 +10,10 @@ type Props = {
 };
 
 const BaseLayout = (props: Props) => {
-  const { children } = props;
+  const { children, isHomePage } = props;
   return (
-    <section id="outter-layout">
-      <UniProtHeader />
+    <section id="outer-layout">
+      <UniProtHeader isHomePage={isHomePage} />
       {children}
       <UniProtFooter />
     </section>

@@ -2,7 +2,8 @@ import { createEmptyClause } from '../utils/clause';
 
 const initialState = {
   query: {
-    clauses: [...Array(4)].map(() => createEmptyClause()),
+    clauses: [...Array(2)].map(() => createEmptyClause()),
+    queryString: '',
     namespace: 'UniProtKB',
     searchTerms: {
       data: [],

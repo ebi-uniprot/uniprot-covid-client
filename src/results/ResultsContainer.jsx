@@ -1,57 +1,59 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
-import { serializableDeepAreEqual } from '../utils/utils';
-import createQueryString from './utils/QueryStringGenerator';
 
 export class Results extends Component {
   componentDidMount() {
     const {
       location: { search: queryFromUrl },
-      queryClauses,
+      queryString,
       history,
     } = this.props;
     if (queryFromUrl) {
-      console.log('queryClauses = unpack(queryFromUrl)');
-      console.log('dispatch setQueryClauses');
+      console.log('queryString = unpack(queryFromUrl)');
+      console.log('dispatch setQueryString');
       return;
     }
-    this.replaceUrlAndFetchResults();
+    this.fetchResults();
   }
 
   componentDidUpdate(prevProps) {
-    const { queryClauses: prevQueryClauses } = prevProps;
-    const { queryClauses } = this.props;
-    if (!serializableDeepAreEqual(prevQueryClauses, queryClauses)) {
-      this.replaceUrlAndFetchResults();
+    const { queryString: prevQueryString } = prevProps;
+    const { queryString } = this.props;
+    if (prevQueryString !== queryString) {
+      this.fetchResults();
     }
   }
 
-  replaceUrlAndFetchResults() {
+  fetchResults() {
     const {
-      queryClauses, columns, dispatchFetchResults, history,
+      queryString, columns, dispatchFetchResults, history,
     } = this.props;
-    const encodedQueryString = encodeURI(createQueryString(queryClauses));
+    const encodedQueryString = encodeURI(queryString);
     history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
     dispatchFetchResults(encodedQueryString, columns);
   }
 
   render() {
-    const { queryClauses, results } = this.props;
+    const { results, isFetching } = this.props;
+    if (isFetching) {
+      return <h3>Loading...</h3>;
+    }
     return (
       <Fragment>
-        <ResultsTable queryClauses={queryClauses} results={results} />
+        <ResultsTable results={results} />
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  queryClauses: state.results.queryClauses,
+  queryString: state.query.queryString,
   columns: state.results.columns,
   results: state.results.results,
+  isFetching: state.results.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({

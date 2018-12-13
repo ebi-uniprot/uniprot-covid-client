@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import BaseLayout from '../layout/BaseLayout';
 import ResultsContainer from '../results/ResultsContainer';
-import AdvancedSearchContainer from '../advanced-search/AdvancedSearchContainer';
 
 const ResultsPage = () => (
-  <Fragment>
-    <AdvancedSearchContainer />
+  <BaseLayout>
     <ResultsContainer />
-  </Fragment>
+  </BaseLayout>
 );
 
 export default ResultsPage;

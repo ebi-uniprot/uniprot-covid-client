@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { MainSearch } from 'franklin-sites';
 import {
   selectField,
   updateInputValue,
   updateEvidence,
   updateRangeValue,
   updateLogicOperator,
+  updateQueryString,
+  submitAdvancedQuery,
   addClause,
   removeClause,
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
-import { copyQueryClausesToSearch } from '../state/actions';
-import ClauseList from './ClauseList';
+import AdvancedSearch from './AdvancedSearch';
 
-export class AdvancedSearch extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showAdvanced: false,
+    };
+    this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
+    this.handleAdvancedSubmitClick = this.handleAdvancedSubmitClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,46 +35,51 @@ export class AdvancedSearch extends Component {
     dispatchfetchEvidencesIfNeeded('annotation');
   }
 
-  handleSubmitClick() {
-    const { dispatchCopyQueryClausesToSearch, history } = this.props;
-    dispatchCopyQueryClausesToSearch();
+  toggleAdvanced() {
+    const { showAdvanced } = this.state;
+    this.setState({ showAdvanced: !showAdvanced });
+  }
+
+  handleAdvancedSubmitClick() {
+    const { dispatchSubmitAdvancedQuery, history } = this.props;
+    dispatchSubmitAdvancedQuery();
+    history.push('/uniprotkb');
+  }
+
+  handleSubmitClick(searchTerm) {
+    const { dispatchUpdateQueryString, history } = this.props;
+    dispatchUpdateQueryString(searchTerm);
     history.push('/uniprotkb');
   }
 
   render() {
-    const { namespace, dispatchAddClause } = this.props;
+    const { queryString } = this.props;
+    const { showAdvanced } = this.state;
+    let search;
+    if (showAdvanced) {
+      search = (
+        <AdvancedSearch
+          {...this.props}
+          handleAdvancedSubmitClick={this.handleAdvancedSubmitClick}
+        />
+      );
+    } else {
+      search = <MainSearch handleSearchSubmit={this.handleSubmitClick} searchTerm={queryString} />;
+    }
     return (
-      <div className="advanced-search">
-        <div>
-          <label htmlFor="namespace-select">
-            Searching in
-            <select id="namespace-select">
-              <option>{namespace}</option>
-            </select>
-          </label>
-        </div>
-        <ClauseList {...this.props} />
-        <hr />
-        <div>
-          <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
-            Add Field
-          </button>
-          <button
-            type="button"
-            id="submit-query"
-            className="button"
-            onClick={this.handleSubmitClick}
-          >
-            Search
-          </button>
-        </div>
-      </div>
+      <Fragment>
+        {search}
+        <button type="button" onClick={this.toggleAdvanced}>
+          Advanced search
+        </button>
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
   clauses: state.query.clauses,
+  queryString: state.query.queryString,
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
@@ -83,14 +95,15 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
-  dispatchCopyQueryClausesToSearch: () => dispatch(copyQueryClausesToSearch()),
+  dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
+  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
 });
 
-const AdvancedSearchContainer = withRouter(
+const SearchContainer = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(AdvancedSearch),
+  )(Search),
 );
 
-export default AdvancedSearchContainer;
+export default SearchContainer;

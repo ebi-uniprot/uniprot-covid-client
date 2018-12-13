@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import type { Node } from 'react';
+import BaseLayout from './BaseLayout';
 
 type Props = {
   children: Node,
@@ -9,9 +10,11 @@ type Props = {
 const HomePageLayout = (props: Props) => {
   const { children } = props;
   return (
-    <section id="layout" data-layout="home-page">
-      <section id="layout-content">{children}</section>
-    </section>
+    <BaseLayout isHomePage>
+      <section id="layout" data-layout="home-page">
+        <section id="layout-content">{children}</section>
+      </section>
+    </BaseLayout>
   );
 };
 
