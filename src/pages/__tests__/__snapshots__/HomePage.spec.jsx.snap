@@ -5,17 +5,21 @@ exports[`HomePage component should render 1`] = `
   id="outer-layout"
 >
   <div
-    className="header"
+    className="header header--negative"
   >
-    <a
+    <div
       className="header__logo"
-      href="/"
     >
-      <test-file-stub
-        height={50}
-        width={120}
-      />
-    </a>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <test-file-stub
+          height={50}
+          width={120}
+        />
+      </a>
+    </div>
     <ul
       className="header__navigation"
     >
@@ -40,23 +44,7 @@ exports[`HomePage component should render 1`] = `
           href="/"
           onClick={[Function]}
         >
-          Peptide search
-        </a>
-      </li>
-      <li>
-        <a
-          href="/"
-          onClick={[Function]}
-        >
-          Retrieve/ID Mapping
-        </a>
-      </li>
-      <li>
-        <a
-          href="/"
-          onClick={[Function]}
-        >
-          API
+          Tools
         </a>
       </li>
       <li>
@@ -68,6 +56,9 @@ exports[`HomePage component should render 1`] = `
         </a>
       </li>
     </ul>
+    <div
+      className="header__search"
+    />
   </div>
   <section
     data-layout="home-page"
@@ -76,88 +67,109 @@ exports[`HomePage component should render 1`] = `
     <section
       id="layout-content"
     >
-      <form
-        className="main-search"
-        onSubmit={[Function]}
+      <div
+        className="hero-header"
       >
         <div
-          className="dropdown-container"
+          className="hero-header__title"
         >
+          <h1>
+            Find your protein
+          </h1>
+        </div>
+        <div
+          className="hero-header__content"
+        >
+          <form
+            className="main-search"
+            onSubmit={[Function]}
+          >
+            <div
+              className="dropdown-container"
+            >
+              <button
+                className="button dropdown"
+                onClick={[Function]}
+                type="button"
+              >
+                UniProtKB
+              </button>
+              <div
+                className="dropdown-menu"
+              >
+                <ul>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniProtKB - the UniProt knowledgebase
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniRef
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniParc
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Proteomes
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Publications
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Keywords
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <input
+              className="main-search__input"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <button
+              className="button"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
           <button
-            className="button dropdown"
+            className="adv-search-toggle"
             onClick={[Function]}
             type="button"
           >
-            UniProtKB
+            Advanced search
           </button>
-          <div
-            className="dropdown-menu"
-          >
-            <ul>
-              <li>
-                <button
-                  type="button"
-                >
-                  UniProtKB - the UniProt knowledgebase
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                >
-                  UniRef
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                >
-                  UniParc
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                >
-                  Proteomes
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                >
-                  Publications
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                >
-                  Keywords
-                </button>
-              </li>
-            </ul>
-          </div>
         </div>
-        <input
-          className="main-search__input"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-        <button
-          className="button"
-          type="submit"
+        <div
+          className="hero-header__footer"
         >
-          Search
-        </button>
-      </form>
-      <button
-        onClick={[Function]}
-        type="button"
-      >
-        Advanced search
-      </button>
+          The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.
+        </div>
+      </div>
       <div
         className="block block--4-col"
       >
