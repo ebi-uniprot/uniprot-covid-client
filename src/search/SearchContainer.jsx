@@ -17,6 +17,8 @@ import {
 } from './state/actions';
 import AdvancedSearch from './AdvancedSearch';
 
+import './styles/SearchContainer.scss';
+
 export class Search extends Component {
   constructor(props) {
     super(props);
@@ -69,8 +71,8 @@ export class Search extends Component {
     return (
       <Fragment>
         {search}
-        <button type="button" onClick={this.toggleAdvanced}>
-          Advanced search
+        <button type="button" onClick={this.toggleAdvanced} className="adv-search-toggle">
+          {showAdvanced ? 'Back to quick search' : 'Advanced search'}
         </button>
       </Fragment>
     );
