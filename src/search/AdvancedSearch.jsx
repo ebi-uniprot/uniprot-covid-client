@@ -1,6 +1,8 @@
 import React from 'react';
 import ClauseList from './ClauseList';
 
+import './styles/AdvancedSearch.scss';
+
 const AdvancedSearch = (props) => {
   const { handleAdvancedSubmitClick, namespace, dispatchAddClause } = props;
   return (
@@ -14,7 +16,7 @@ const AdvancedSearch = (props) => {
         </label>
       </div>
       <ClauseList {...props} />
-      <button type="button" id="add-field" className="button" onClick={dispatchAddClause}>
+      <button type="button" id="add-field" onClick={dispatchAddClause}>
         Add Field
       </button>
       <div>

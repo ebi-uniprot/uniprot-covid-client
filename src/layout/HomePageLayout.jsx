@@ -3,6 +3,8 @@ import React from 'react';
 import type { Node } from 'react';
 import BaseLayout from './BaseLayout';
 
+import './styles/HomePageLayout.scss';
+
 type Props = {
   children: Node,
 };

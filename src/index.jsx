@@ -5,8 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './state/reducers';
 import App from './App';
-import '../node_modules/franklin-sites/dist/index.css';
-import './styles/index.css';
 import initialState from './state/initialState';
 
 const debug = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;

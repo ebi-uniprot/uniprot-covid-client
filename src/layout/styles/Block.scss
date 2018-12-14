@@ -1,4 +1,4 @@
-@import '../settings';
+@import "../../styles/settings";
 
 // Layout Blocks
 // -------------
@@ -7,7 +7,7 @@
   display: grid;
   grid-area: block;
 
-  &>div {
+  & > div {
     margin: 0 $gutter-size;
   }
 
@@ -19,11 +19,9 @@
     grid-template-columns: repeat(2, 50%);
   }
 
-
   &--3-col {
-    grid-template-columns: repeat(3, calc(100%/3));
+    grid-template-columns: repeat(3, calc(100% / 3));
   }
-
 
   &--4-col {
     grid-template-columns: repeat(4, 25%);
