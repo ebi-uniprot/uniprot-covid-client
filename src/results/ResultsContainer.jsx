@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchResults } from './state/actions';
+import { Facets } from 'franklin-sites';
+import { fetchResults, toggleFacet } from './state/actions';
+import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
@@ -37,14 +39,19 @@ export class Results extends Component {
   }
 
   render() {
-    const { results, isFetching } = this.props;
+    const {
+      results, facets, isFetching, selectedFacets, dispatchToggleFacet,
+    } = this.props;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
     return (
-      <Fragment>
-        <ResultsTable results={results} />
-      </Fragment>
+      <SideBarLayout
+        sidebar={
+          <Facets data={facets} selectedFacets={selectedFacets} toggleFacet={dispatchToggleFacet} />
+        }
+        content={<ResultsTable results={results} />}
+      />
     );
   }
 }
@@ -52,12 +59,15 @@ export class Results extends Component {
 const mapStateToProps = state => ({
   queryString: state.query.queryString,
   columns: state.results.columns,
+  selectedFacets: state.results.selectedFacets,
   results: state.results.results,
+  facets: state.results.facets,
   isFetching: state.results.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
+  dispatchToggleFacet: (facetName, facetValue) => dispatch(toggleFacet(facetName, facetValue)),
 });
 
 const ResultsContainer = withRouter(
