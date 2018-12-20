@@ -1,8 +1,6 @@
 import React from 'react';
 import { DataTable } from 'franklin-sites';
-import ResultRow from './ResultRow';
 import FieldToViewMappings from './views/FieldToViewMappings';
-import Field from '../search/Field';
 
 const ResultsTable = ({ results = [], selectedRows, handleRowSelect }) => {
   const columnNames = ['accession', 'id', 'protein_name', 'gene_name'];
