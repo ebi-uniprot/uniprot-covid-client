@@ -14,7 +14,7 @@ import {
   RECEIVE_EVIDENCES,
 } from './actions';
 import { createEmptyClause } from '../utils/clause';
-import createQueryString from '../utils/QueryStringGenerator';
+import { createQueryString } from '../utils/QueryStringGenerator';
 
 export const clause = (state, action) => {
   if (state.id !== action.clauseId) {

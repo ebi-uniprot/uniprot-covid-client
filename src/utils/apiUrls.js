@@ -32,7 +32,7 @@ const RE_QUERY = /\?$/;
 
 export const getSuggesterUrl = (url, value) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, cursor) => `${apiUrls.advanced_search}?${queryString.stringify({
+export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, cursor) => `${apiUrls.advanced_search}?${queryString.stringify({
   query: encodedUniprotQueryString,
   fields: columns.join(','),
   includeFacets: true,

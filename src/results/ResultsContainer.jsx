@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Facets } from 'franklin-sites';
-import { fetchResults, toggleFacet } from './state/actions';
+import { fetchResults, addFacetToQuery } from './state/actions';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 
@@ -31,25 +31,28 @@ export class Results extends Component {
 
   fetchResults() {
     const {
-      queryString, columns, dispatchFetchResults, history,
+      queryString, columns, selectedFacets, dispatchFetchResults, history,
     } = this.props;
-    const encodedQueryString = encodeURI(queryString);
-    history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
-    dispatchFetchResults(encodedQueryString, columns);
+    history.replace({ to: '/uniprotkb', search: `query=${encodeURI(queryString)}` });
+    dispatchFetchResults(queryString, columns);
   }
 
   render() {
     const {
-      results, facets, isFetching, selectedFacets, dispatchToggleFacet,
+      results, facets, isFetching, selectedFacets, dispatchAddFacetToQuery,
     } = this.props;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
     return (
       <SideBarLayout
-        sidebar={
-          <Facets data={facets} selectedFacets={selectedFacets} toggleFacet={dispatchToggleFacet} />
-        }
+        sidebar={(
+          <Facets
+            data={facets}
+            selectedFacets={selectedFacets}
+            toggleFacet={dispatchAddFacetToQuery}
+          />
+)}
         content={<ResultsTable results={results} />}
       />
     );
@@ -67,7 +70,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
-  dispatchToggleFacet: (facetName, facetValue) => dispatch(toggleFacet(facetName, facetValue)),
+  dispatchAddFacetToQuery: (facetName, facetValue) => dispatch(addFacetToQuery(facetName, facetValue)),
 });
 
 const ResultsContainer = withRouter(

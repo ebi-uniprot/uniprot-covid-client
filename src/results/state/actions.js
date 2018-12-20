@@ -4,6 +4,7 @@ import { getUniProtQueryUrl } from '../../utils/apiUrls';
 export const FETCH_RESULTS_STARTED = 'FETCH_RESULTS_STARTED';
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS';
 export const TOGGLE_FACET = 'TOGGLE_FACET';
+export const ADD_FACETS_TO_QUERY_STRING = 'ADD_FACETS_TO_QUERY_STRING';
 
 export const fetchResultsSuccess = data => ({
   type: FETCH_RESULTS_SUCCESS,
@@ -27,3 +28,12 @@ export const toggleFacet = (facetName, facetValue) => ({
   facetName,
   facetValue,
 });
+
+export const updateQueryStringWithFacets = () => ({
+  type: ADD_FACETS_TO_QUERY_STRING,
+});
+
+export const addFacetToQuery = (facetName, facetValue) => (dispatch) => {
+  dispatch(toggleFacet(facetName, facetValue));
+  dispatch(updateQueryStringWithFacets());
+};

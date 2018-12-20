@@ -46,7 +46,7 @@ const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
     throw new Error('Evidence value not provided');
   }
   const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
-  return `(${subQuery}AND(${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
+  return `(${subQuery} AND (${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
 };
 
 const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
@@ -60,9 +60,16 @@ const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduc
   if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
     query = `${wrapIntoEvidenceSubquery(clause, query)}`;
   }
-  return `${queryAccumulator}${
+  return `${queryAccumulator} ${
     queryAccumulator.length > 0 && query.length > 0 ? clause.logicOperator : ''
-  }${query}`;
+  } ${query}`;
 }, '');
 
-export default createQueryString;
+const getFacetItems = (facetName, values) => values.reduce((queryAccumulator, value) => `${queryAccumulator} AND (${facetName}:${value})`, '');
+
+const createFacetsQueryString = facets => Object.keys(facets).reduce(
+  (queryAccumulator, facetName) => `${queryAccumulator}${getFacetItems(facetName, facets[facetName])}`,
+  '',
+);
+
+export { createQueryString, createFacetsQueryString };
