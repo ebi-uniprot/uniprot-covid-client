@@ -6,7 +6,7 @@ export const createEmptyClause = () => ({
   logicOperator: 'AND',
   field: {
     label: 'Any',
-    term: 'All',
+    term: '',
     example: 'a4_human, P05067, cdc7 human',
     itemType: 'single',
     dataType: 'string',
