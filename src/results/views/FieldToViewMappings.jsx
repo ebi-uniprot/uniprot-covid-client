@@ -3,6 +3,16 @@ import get from 'lodash/get';
 import SimpleView from './SimpleView';
 import NameView from './NameView';
 
+const organismNameReducer = type => (acc, cur) => {
+  if (cur.type === type) {
+    if (type === 'scientific') {
+      return `${acc} ${cur.value}`;
+    }
+    return `${acc} (${cur.value})`;
+  }
+  return acc;
+};
+
 const FieldToViewMappings = {
   accession: row => <SimpleView termValue={row.accession} />,
   id: row => <SimpleView termValue={row.id} />,
@@ -25,7 +35,7 @@ const FieldToViewMappings = {
     };
     return <NameView {...props} />;
   },
-  gene_name: (row) => {
+  gene_names: (row) => {
     const genes = get(row, 'gene', []);
     const name = genes.map(gene => get(gene, 'name.value')).join(', ');
     const alternativeNames = genes
@@ -36,6 +46,14 @@ const FieldToViewMappings = {
       .filter(x => x.length);
     const props = { name, alternativeNames };
     return <NameView {...props} />;
+  },
+  organism: (row) => {
+    const names = get(row, 'organism.names', []);
+    const termValue = ['scientific', 'common', 'synonym'].reduce(
+      (acc, cur) => `${acc} ${names.reduce(organismNameReducer(cur), '')}`,
+      '',
+    );
+    return <SimpleView termValue={termValue} />;
   },
 };
 

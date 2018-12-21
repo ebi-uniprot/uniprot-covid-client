@@ -54,7 +54,7 @@ export class Results extends Component {
   }
 
   render() {
-    const { results, isFetching } = this.props;
+    const { results, isFetching, columns } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
@@ -63,6 +63,7 @@ export class Results extends Component {
       <Fragment>
         <ResultsTable
           results={results}
+          columnNames={columns}
           handleRowSelect={this.handleRowSelect}
           selectedRows={selectedRows}
         />
