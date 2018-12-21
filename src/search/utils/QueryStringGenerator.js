@@ -27,7 +27,7 @@ const createSimpleSubquery = (clause: Clause) => {
   if (!stringValue) {
     throw new Error('Value not provided in query');
   }
-  return `(${itemTypePrefix}${term}:${valuePrefixChecked}${stringValue})`;
+  return `(${itemTypePrefix}${term}${term ? ':' : ''}${valuePrefixChecked}${stringValue})`;
 };
 
 const createRangeSubquery = (clause: Clause) => {

@@ -182,7 +182,7 @@ describe('QueryHelper', () => {
       facet2: ['value 3'],
     };
     const queryString = createFacetsQueryString(facets);
-    expect(queryString).toBe('AND(facet1:value 1)AND(facet1:value2)AND(facet2:value 3)');
+    expect(queryString).toBe(' AND (facet1:value 1) AND (facet1:value2) AND (facet2:value 3)');
   });
 
   // TODO databases
