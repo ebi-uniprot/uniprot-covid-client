@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsRow component should call to get results 1`] = `
+"<tr>
+  <td>
+    <SimpleView termValue=\\"ABCD\\" />
+  </td>
+  <td>
+    <NameView name=\\"\\" alternativeNames={{...}} />
+  </td>
+  <td>
+    <SimpleView termValue={[undefined]} />
+  </td>
+  <td>
+    <NameView name={[undefined]} shortName={[undefined]} alternativeNames={{...}} />
+  </td>
+</tr>"
+`;
+
+exports[`ResultsRow component should render 1`] = `
+"<tr>
+  <td>
+    <SimpleView termValue=\\"ABCD\\" />
+  </td>
+  <td>
+    <NameView name=\\"\\" alternativeNames={{...}} />
+  </td>
+  <td>
+    <SimpleView termValue={[undefined]} />
+  </td>
+  <td>
+    <NameView name={[undefined]} shortName={[undefined]} alternativeNames={{...}} />
+  </td>
+</tr>"
+`;

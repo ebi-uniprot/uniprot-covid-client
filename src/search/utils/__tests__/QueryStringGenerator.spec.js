@@ -148,12 +148,12 @@ describe('QueryHelper', () => {
 
   test('should handle cc evidence tags', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_cc_evidence'));
-    expect(queryString).toBe('((cc_cofactor_chebi:blah)AND(ccev_cofactor_chebi:blahvidence))');
+    expect(queryString).toBe('((cc_cofactor_chebi:blah) AND (ccev_cofactor_chebi:blahvidence))');
   });
 
   test('should handle ft evidence tags', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_ft_evidence'));
-    expect(queryString).toBe('((ft_ca_bind:blah)AND(ftev_ca_bind:blahvidence))');
+    expect(queryString).toBe('((ft_ca_bind:blah) AND (ftev_ca_bind:blahvidence))');
   });
 
   test('should handle range', () => {
@@ -163,7 +163,7 @@ describe('QueryHelper', () => {
 
   test('should handle ft range and evidence', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_ft_range_evidence'));
-    expect(queryString).toBe('((ftlen_sites:[10 TO 100])AND(ftev_sites:blahvidence))');
+    expect(queryString).toBe('((ftlen_sites:[10 TO 100]) AND (ftev_sites:blahvidence))');
   });
 
   test('should handle date range', () => {

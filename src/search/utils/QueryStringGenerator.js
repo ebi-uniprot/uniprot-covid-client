@@ -60,9 +60,9 @@ const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduc
   if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
     query = `${wrapIntoEvidenceSubquery(clause, query)}`;
   }
-  return `${queryAccumulator} ${
-    queryAccumulator.length > 0 && query.length > 0 ? clause.logicOperator : ''
-  } ${query}`;
+  return `${queryAccumulator}${
+    queryAccumulator.length > 0 && query.length > 0 ? ` ${clause.logicOperator} ` : ''
+  }${query}`;
 }, '');
 
 const getFacetItems = (facetName, values) => values.reduce((queryAccumulator, value) => `${queryAccumulator} AND (${facetName}:${value})`, '');
