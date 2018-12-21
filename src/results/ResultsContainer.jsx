@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Facets } from 'franklin-sites';
@@ -31,7 +31,7 @@ export class Results extends Component {
 
   fetchResults() {
     const {
-      queryString, columns, selectedFacets, dispatchFetchResults, history,
+      queryString, columns, dispatchFetchResults, history,
     } = this.props;
     history.replace({ to: '/uniprotkb', search: `query=${encodeURI(queryString)}` });
     dispatchFetchResults(queryString, columns);
