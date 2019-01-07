@@ -29,7 +29,7 @@ describe('FieldToViewMappings', () => {
     expect(wrapper.debug()).toMatchSnapshot();
   });
 
-  test('should render gene_name', () => {
+  test('should render gene_names', () => {
     const data = {
       gene: [
         {
@@ -41,7 +41,7 @@ describe('FieldToViewMappings', () => {
         },
       ],
     };
-    const component = FieldToViewMappings.gene_name(data);
+    const component = FieldToViewMappings.gene_names(data);
     const wrapper = shallow(component);
     expect(wrapper.debug()).toMatchSnapshot();
   });

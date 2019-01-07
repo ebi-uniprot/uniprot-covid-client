@@ -1,23 +1,33 @@
 import React from 'react';
-import ResultRow from './ResultRow';
+import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from './views/FieldToViewMappings';
+import '../styles/alert.scss';
 
-const columnNames = Object.keys(FieldToViewMappings).sort();
+const ResultsTable = ({
+  results = [], columnNames, selectedRows, handleRowSelect,
+}) => {
+  const columns = columnNames.map((columnName) => {
+    let render;
+    if (columnName in FieldToViewMappings) {
+      render = row => FieldToViewMappings[columnName](row);
+    } else {
+      render = () => <div className="warning">{`${columnName} has no render method`}</div>;
+    }
+    return {
+      label: columnName,
+      name: columnName,
+      render,
+    };
+  });
 
-const ResultsTable = ({ results = [] }) => (
-  <table>
-    <thead>
-      <tr>
-        {columnNames.map(columnName => (
-          <th key={`results_table_header_${columnName}`}>{columnName}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {results.map(row => (
-        <ResultRow key={row.accession} {...row} />
-      ))}
-    </tbody>
-  </table>
-);
+  return (
+    <DataTable
+      columns={columns}
+      data={results}
+      selectable
+      selected={selectedRows}
+      onSelect={handleRowSelect}
+    />
+  );
+};
 export default ResultsTable;

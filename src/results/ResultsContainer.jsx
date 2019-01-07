@@ -5,6 +5,12 @@ import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedRows: {} };
+    this.handleRowSelect = this.handleRowSelect.bind(this);
+  }
+
   componentDidMount() {
     const {
       location: { search: queryFromUrl },
@@ -36,14 +42,31 @@ export class Results extends Component {
     dispatchFetchResults(encodedQueryString, columns);
   }
 
+  handleRowSelect(rowId) {
+    const { selectedRows: prevSelectedRows } = this.state;
+    if (rowId in prevSelectedRows) {
+      const { [rowId]: value, ...selectedRows } = prevSelectedRows;
+      this.setState({ selectedRows });
+    } else {
+      prevSelectedRows[rowId] = true;
+      this.setState({ selectedRows: prevSelectedRows });
+    }
+  }
+
   render() {
-    const { results, isFetching } = this.props;
+    const { results, isFetching, columns } = this.props;
+    const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
     return (
       <Fragment>
-        <ResultsTable results={results} />
+        <ResultsTable
+          results={results}
+          columnNames={columns}
+          handleRowSelect={this.handleRowSelect}
+          selectedRows={selectedRows}
+        />
       </Fragment>
     );
   }
