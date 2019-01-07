@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from './state/actions';
 import ResultsTable from './ResultsTable';
+import { unpackQueryUrl } from '../utils/apiUrls';
 
 export class Results extends Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ export class Results extends Component {
       history,
     } = this.props;
     if (queryFromUrl) {
+      unpackQueryUrl(queryFromUrl);
       console.log('queryString = unpack(queryFromUrl)');
       console.log('dispatch setQueryString');
       return;

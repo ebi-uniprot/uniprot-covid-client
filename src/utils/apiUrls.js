@@ -36,3 +36,37 @@ export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, 
   query: encodedUniprotQueryString,
   fields: columns.join(','),
 })}`;
+
+const findTopLevelParenthesis = (queryUrl) => {
+  console.log(queryUrl);
+  let balance = 0;
+  let parenthesisIndices = [0, 0];
+  const topLevelParenthesisIndices = [];
+  for (let i = 0; i < queryUrl.length; i += 1) {
+    const c = queryUrl[i];
+    if (c === '(') {
+      balance += 1;
+      if (balance === 1) {
+        parenthesisIndices = [i, 0];
+      }
+    } else if (c === ')') {
+      balance -= 1;
+      if (balance === 0) {
+        parenthesisIndices[1] = i;
+        topLevelParenthesisIndices.push(parenthesisIndices);
+      }
+    }
+  }
+  return topLevelParenthesisIndices;
+};
+
+export const unpackQueryUrl = (queryUrl) => {
+  const t = findTopLevelParenthesis(queryUrl);
+  console.log(t);
+};
+
+// def parse_clause(conjunction, field_value):
+//     if not conjunction:
+//         conjunction = 'AND'
+//     field, value = field_value.split(':')
+//     print('conjunction', conjunction, 'field', field, 'value', value)
