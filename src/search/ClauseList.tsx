@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
@@ -14,41 +13,41 @@ import Field from './Field';
 // Group: this item type is a group type, grouping a list of search items
 
 export type FieldType = {
-  label: string,
-  term: string,
-  example: string,
-  itemType: string,
-  dataType: string,
-  hasRange?: boolean,
-  hasEvidence?: boolean,
-  valuePrefix?: string,
+  label: string;
+  term: string;
+  example: string;
+  itemType: string;
+  dataType: string;
+  hasRange?: boolean;
+  hasEvidence?: boolean;
+  valuePrefix?: string;
   options?: Array<{
-    name: string,
+    name: string;
     values: Array<{
-      name: string,
-      label: string,
-    }>,
-  }>,
+      name: string;
+      label: string;
+    }>;
+  }>;
   values?: Array<{
-    name: string,
-    value: string,
-  }>,
+    name: string;
+    value: string;
+  }>;
 };
 
 export type Input = {
-  stringValue?: string,
-  rangeFrom?: string,
-  rangeTo?: string,
-  evidenceValue?: string,
+  stringValue?: string;
+  rangeFrom?: string;
+  rangeTo?: string;
+  evidenceValue?: string;
 };
 
 export type Operator = 'AND' | 'OR' | 'NOT';
 
 export type Clause = {
-  id: string,
-  field: FieldType,
-  logicOperator: Operator,
-  queryInput: Input,
+  id: string;
+  field: FieldType;
+  logicOperator: Operator;
+  queryInput: Input;
 };
 
 // type Props = {

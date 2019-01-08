@@ -1,12 +1,10 @@
-// @flow
 import React from 'react';
-import type { Node } from 'react';
 
 import './styles/Block.scss';
 
 type Props = {
-  columns: string,
-  children: Node,
+  columns: string;
+  children: Node;
 };
 
 const Block = (props: Props) => {

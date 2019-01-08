@@ -1,24 +1,20 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "plugin:jest/recommended",
-    "plugin:flowtype/recommended"
-  ],
-  "plugins": [
-    "jest",
-    "flowtype"
-  ],
+  "extends": ["airbnb", "plugin:jest/recommended"],
+  "plugins": ["jest"],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
   "rules": {
-    "jsx-a11y/anchor-is-valid": ["error", {
-      "components": ["Link"],
-      "specialLink": ["to", "hrefLeft", "hrefRight"],
-      "aspects": ["noHref", "invalidHref", "preferButton"]
-    }]
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to", "hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ]
   }
 }

@@ -1,23 +1,28 @@
-// @flow
-import type { Clause } from '../ClauseList';
+import { Clause } from '../ClauseList';
 
-const getItemTypePrefix = (itemType) => {
-  const itemTypeToPrefixMap = {
+interface IPrefixMap {
+  feature: string;
+  comment: string;
+  [key: string]: string;
+}
+
+const getItemTypePrefix = (itemType: string) => {
+  const itemTypeToPrefixMap: IPrefixMap = {
     feature: 'ft_',
     comment: 'cc_',
   };
   return itemTypeToPrefixMap[itemType] || '';
 };
 
-const getItemTypeEvidencePrefix = (itemType) => {
-  const itemTypeToEvidencePrefixMap = {
+const getItemTypeEvidencePrefix = (itemType: string) => {
+  const itemTypeToEvidencePrefixMap: IPrefixMap = {
     feature: 'ftev_',
     comment: 'ccev_',
   };
   return itemTypeToEvidencePrefixMap[itemType] || '';
 };
 
-const getItemTypeRangePrefix = itemType => (itemType === 'feature' ? 'ftlen_' : '');
+const getItemTypeRangePrefix = (itemType: string) => (itemType === 'feature' ? 'ftlen_' : '');
 
 const createSimpleSubquery = (clause: Clause) => {
   const { itemType, term, valuePrefix } = clause.field;

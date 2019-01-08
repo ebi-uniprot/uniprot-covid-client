@@ -1,11 +1,11 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: ["@babel/polyfill", path.resolve(__dirname, "src/index.jsx")],
+  entry: ['@babel/polyfill', path.resolve(__dirname, 'src/index.tsx')],
   resolve: {
-    extensions: [".tsx", ".jsx", ".js", ".ts"]
+    extensions: ['.tsx', '.jsx', '.js', '.ts'],
   },
   module: {
     rules: [
@@ -13,62 +13,62 @@ module.exports = {
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
+            loader: 'html-loader',
             options: {
-              minimize: true
-            }
-          }
-        ]
+              minimize: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(css|sass|scss)$/,
         include: [
-          path.resolve(__dirname, "node_modules/franklin-sites/dist"),
-          path.resolve(__dirname, "src")
+          path.resolve(__dirname, 'node_modules/franklin-sites/dist'),
+          path.resolve(__dirname, 'src'),
         ],
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: 'style-loader', // creates style nodes from JS strings
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: 'css-loader', // translates CSS into CommonJS
           },
           {
-            loader: "sass-loader" // compiles Sass to CSS
-          }
-        ]
+            loader: 'sass-loader', // compiles Sass to CSS
+          },
+        ],
       },
       {
         test: /\.svg$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: 'babel-loader',
           },
           {
-            loader: "react-svg-loader",
+            loader: 'react-svg-loader',
             options: {
-              jsx: true // true outputs JSX tags
-            }
-          }
-        ]
+              jsx: true, // true outputs JSX tags
+            },
+          },
+        ],
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
-        loader: "file-loader?name=[name].[ext]"
-      }
-    ]
+        loader: 'file-loader?name=[name].[ext]',
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: `${__dirname}/index.html`,
-      filename: "index.html"
-    })
-  ]
+      filename: 'index.html',
+    }),
+  ],
 };

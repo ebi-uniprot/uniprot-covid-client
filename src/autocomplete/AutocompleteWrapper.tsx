@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import { Autocomplete } from 'franklin-sites';
 import { v1 } from 'uuid';
@@ -7,24 +6,24 @@ import appendUniqueId from './prepareData';
 import { getSuggesterUrl } from '../utils/apiUrls';
 
 type Props = {
-  url: string,
-  onSelect: Function,
+  url: string;
+  onSelect: Function;
 };
 
 type Suggestions = {
-  dictionary: string,
-  query: string,
-  suggestions: Array<string>,
+  dictionary: string;
+  query: string;
+  suggestions: Array<string>;
 };
 
 type State = {
-  data: Array<Suggestions>,
+  data: Array<Suggestions>;
 };
 
 type Chosen = {
-  id: string,
-  itemLabel: string,
-  pathLabel: string,
+  id: string;
+  itemLabel: string;
+  pathLabel: string;
 };
 
 class AutocompleteWrapper extends Component<Props, State> {

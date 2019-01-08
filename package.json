@@ -1,12 +1,13 @@
 {
   "name": "uniprot-website",
   "version": "0.0.0",
-  "main": "./src/ui/index.jsx",
+  "main": "./src/ui/index.tsx",
   "repository": "",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
     "build": "webpack --mode production --config webpack.prod.js",
+    "check-types": "tsc",
     "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src  __mocks__",
     "test": "jest"
   },
@@ -55,6 +56,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/uuid": "^3.4.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",

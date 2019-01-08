@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { Tile, HeroHeader } from 'franklin-sites';
 import Block from '../layout/Block';

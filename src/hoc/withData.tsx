@@ -1,10 +1,9 @@
-// @flow
 import React, { Component } from 'react';
 import fetchData from '../utils/fetchData';
 
 type Props = {};
 type State = {
-  data: [],
+  data: [];
 };
 
 const withData = (url: Function, prepareData: Function = x => x) => (
