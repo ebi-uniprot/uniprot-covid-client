@@ -37,13 +37,13 @@ export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, 
   fields: columns.join(','),
 })}`;
 
-const findTopLevelParenthesis = (queryUrl) => {
-  console.log(queryUrl);
+const findTopLevelParenthesisIndices = (query) => {
+  console.log(query);
   let balance = 0;
   let parenthesisIndices = [0, 0];
   const topLevelParenthesisIndices = [];
-  for (let i = 0; i < queryUrl.length; i += 1) {
-    const c = queryUrl[i];
+  for (let i = 0; i < query.length; i += 1) {
+    const c = query[i];
     if (c === '(') {
       balance += 1;
       if (balance === 1) {
@@ -60,13 +60,26 @@ const findTopLevelParenthesis = (queryUrl) => {
   return topLevelParenthesisIndices;
 };
 
-export const unpackQueryUrl = (queryUrl) => {
-  const t = findTopLevelParenthesis(queryUrl);
-  console.log(t);
+const ALLOWED_CONJUNCTIONS = ['and', 'or', 'not'];
+
+const parseClause = (conjunction, fieldValue) => {
+  const conjunctionLower = conjunction ? conjunction.toLowerCase() : 'and';
+  const [field, value] = fieldValue.split(':');
+  if (!ALLOWED_CONJUNCTIONS.includes(conjunctionLower)) {
+    throw new Error(`conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
+  }
+  return [conjunctionLower, field, value];
 };
 
-// def parse_clause(conjunction, field_value):
-//     if not conjunction:
-//         conjunction = 'AND'
-//     field, value = field_value.split(':')
-//     print('conjunction', conjunction, 'field', field, 'value', value)
+export const unpackQueryUrl = (queryFromUrl) => {
+  const query = queryFromUrl.replace('?query=', '');
+  const parenthesisIndices = findTopLevelParenthesisIndices(query);
+  let conjunctionIndex = 0;
+  parenthesisIndices.forEach((parenthesis) => {
+    const conjunction = query.slice(conjunctionIndex, parenthesis[0]);
+    const fieldValue = query.slice(parenthesis[0] + 1, parenthesis[1]);
+    conjunctionIndex = parenthesis[1] + 1;
+    const [conjunctionLower, field, value] = parseClause(conjunction, fieldValue);
+    console.log(conjunctionLower, field, value);
+  });
+};
