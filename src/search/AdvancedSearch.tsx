@@ -1,9 +1,16 @@
 import React from 'react';
 import ClauseList from './ClauseList';
+import { Namespace } from './types/searchTypes';
 
 import './styles/AdvancedSearch.scss';
 
-const AdvancedSearch = (props) => {
+type AdvancedSearchProps = {
+  handleAdvancedSubmitClick: () => void;
+  namespace: Namespace;
+  dispatchAddClause: () => void;
+};
+
+const AdvancedSearch = (props: AdvancedSearchProps) => {
   const { handleAdvancedSubmitClick, namespace, dispatchAddClause } = props;
   return (
     <div className="advanced-search">

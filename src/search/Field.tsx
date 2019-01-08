@@ -3,10 +3,18 @@ import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
 import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
+import { FieldType, Input } from './types/searchTypes';
+
+type FieldProps = {
+  field: FieldType;
+  handleInputChange: (clauseId: string, value: string | number) => void;
+  handleRangeInputChange: (clauseId: string, value: number, from?: boolean) => void;
+  queryInput: Input;
+};
 
 const Field = ({
   field, handleInputChange, handleRangeInputChange, queryInput,
-}) => {
+}: FieldProps) => {
   const { dataType, hasRange } = field;
   let node;
   switch (dataType) {

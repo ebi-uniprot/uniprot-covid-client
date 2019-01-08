@@ -1,9 +1,9 @@
 import React from 'react';
+import { Operator } from './types/searchTypes';
 
-type Operator = 'AND' | 'OR' | 'NOT';
-const operators: Array<Operator> = ['AND', 'OR', 'NOT'];
+const operators: Array<Operator> = [Operator.AND, Operator.OR, Operator.NOT];
 
-const LogicalOperator = ({ value, handleChange }) => (
+const LogicalOperator = ({ value, handleChange }: { value: Operator; handleChange: Function }) => (
   <select
     className="advanced-search__logic"
     value={value}

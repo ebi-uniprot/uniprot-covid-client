@@ -1,5 +1,19 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
+import { Operator } from '../LogicalOperator';
+
+type Clause = {
+  id: string;
+  logicOperator: Operator;
+  field: {
+    label: string;
+    term: string;
+    example: string;
+    itemType: string; // TODO should be enum?
+    dataType: string; // TODO should be enum?
+    id: string;
+  };
+};
 
 export const createEmptyClause = () => ({
   id: v1(),
@@ -15,4 +29,4 @@ export const createEmptyClause = () => ({
   queryInput: {},
 });
 
-export const clausesAreEqual = (clause1, clause2) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));
+export const clausesAreEqual = (clause1: Clause, clause2: Clause) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));
