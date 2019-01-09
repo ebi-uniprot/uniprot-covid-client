@@ -16,6 +16,7 @@ import {
   fetchEvidencesIfNeeded,
 } from './state/actions';
 import AdvancedSearch from './AdvancedSearch';
+import createQueryString from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 
@@ -43,15 +44,15 @@ export class Search extends Component {
   }
 
   handleAdvancedSubmitClick() {
-    const { dispatchSubmitAdvancedQuery, history } = this.props;
-    dispatchSubmitAdvancedQuery();
-    history.push('/uniprotkb');
+    const { history, clauses } = this.props;
+    const encodedQueryString = encodeURI(createQueryString(clauses));
+    history.push({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 
   handleSubmitClick(searchTerm) {
-    const { dispatchUpdateQueryString, history } = this.props;
-    dispatchUpdateQueryString(searchTerm);
-    history.push('/uniprotkb');
+    const { history } = this.props;
+    const encodedQueryString = encodeURI(searchTerm);
+    history.push({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 
   render() {

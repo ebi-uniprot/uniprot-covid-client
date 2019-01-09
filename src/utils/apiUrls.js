@@ -1,5 +1,6 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
+import { createEmptyClause } from '../search/utils/clause';
 
 export const joinUrl = (...args) => urljoin(args);
 
@@ -60,26 +61,42 @@ const findTopLevelParenthesisIndices = (query) => {
   return topLevelParenthesisIndices;
 };
 
+const findSearchTerm = (queryField, value, searchTerms) => searchTerms.find((field) => {
+  if (field.items) {
+    return findSearchTerm(queryField, value, field.items);
+  }
+  return field.term === queryField;
+});
+
 const ALLOWED_CONJUNCTIONS = ['and', 'or', 'not'];
 
-const parseClause = (conjunction, fieldValue) => {
+const parseClause = (conjunction, fieldValue, searchTerms) => {
+  if (!searchTerms) {
+    return false;
+  }
   const conjunctionLower = conjunction ? conjunction.toLowerCase() : 'and';
   const [field, value] = fieldValue.split(':');
   if (!ALLOWED_CONJUNCTIONS.includes(conjunctionLower)) {
     throw new Error(`conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
   }
+  // const clause = createEmptyClause();
+  console.log(findSearchTerm(field, value, searchTerms));
   return [conjunctionLower, field, value];
 };
 
-export const unpackQueryUrl = (queryFromUrl) => {
-  const query = queryFromUrl.replace('?query=', '');
+export const getQueryFromUrl = (query) => {
+  const m = query.match(/\?query=(.*)/);
+  return m && m[1];
+};
+
+export const unpackQueryUrl = (query, searchTerms) => {
   const parenthesisIndices = findTopLevelParenthesisIndices(query);
   let conjunctionIndex = 0;
-  parenthesisIndices.forEach((parenthesis) => {
+  return parenthesisIndices.map((parenthesis) => {
     const conjunction = query.slice(conjunctionIndex, parenthesis[0]);
     const fieldValue = query.slice(parenthesis[0] + 1, parenthesis[1]);
     conjunctionIndex = parenthesis[1] + 1;
-    const [conjunctionLower, field, value] = parseClause(conjunction, fieldValue);
-    console.log(conjunctionLower, field, value);
+    const [conjunctionLower, field, value] = parseClause(conjunction, fieldValue, searchTerms);
+    return [conjunctionLower, field, value];
   });
 };
