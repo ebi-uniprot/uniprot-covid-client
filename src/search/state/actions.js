@@ -7,6 +7,7 @@ export const UPDATE_EVIDENCE = 'UPDATE_EVIDENCE';
 export const UPDATE_RANGE_VALUE = 'UPDATE_RANGE_VALUE';
 export const UPDATE_LOGIC_OPERATOR = 'UPDATE_LOGIC_OPERATOR';
 export const HANDLE_FIELD_SELECT = 'HANDLE_FIELD_SELECT';
+export const SET_CLAUSES = 'SET_CLAUSES';
 export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 export const SUBMIT_ADVANCED_QUERY = 'SUBMIT_ADVANCED_QUERY';
 export const ADD_CLAUSE = 'ADD_CLAUSE';
@@ -45,6 +46,11 @@ export const updateLogicOperator = (clauseId, value) => ({
   type: UPDATE_LOGIC_OPERATOR,
   clauseId,
   value,
+});
+
+export const setClauses = clauses => ({
+  type: SET_CLAUSES,
+  clauses,
 });
 
 export const updateQueryString = queryString => ({

@@ -12,6 +12,7 @@ import {
   RECEIVE_SEARCH_TERMS,
   REQUEST_EVIDENCES,
   RECEIVE_EVIDENCES,
+  SET_CLAUSES,
 } from './actions';
 import { createEmptyClause } from '../utils/clause';
 import createQueryString from '../utils/QueryStringGenerator';
@@ -111,6 +112,11 @@ const query = (state = [], action) => {
       return {
         ...state,
         clauses: state.clauses.map(c => clause(c, action)),
+      };
+    case SET_CLAUSES:
+      return {
+        ...state,
+        clauses: action.clauses,
       };
     case UPDATE_QUERY_STRING:
       return {

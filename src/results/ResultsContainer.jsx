@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from './state/actions';
-import { fetchSearchTerms } from '../search/state/actions';
+import { fetchSearchTerms, setClauses } from '../search/state/actions';
 import ResultsTable from './ResultsTable';
 import { unpackQueryUrl, getQueryFromUrl } from '../utils/apiUrls';
 
@@ -22,14 +22,14 @@ export class Results extends Component {
     const {
       location: { search: queryParam },
       searchTerms,
+      dispatchSetClauses,
     } = this.props;
-    console.log(searchTerms);
-    console.log(queryParam);
     if (searchTerms && searchTerms.length > 0) {
       const query = getQueryFromUrl(queryParam);
       if (query) {
         const t = unpackQueryUrl(query, searchTerms);
         console.log(t);
+        dispatchSetClauses(t);
       }
     }
     // const { queryString: prevQueryString } = prevProps;
@@ -44,9 +44,7 @@ export class Results extends Component {
       columns,
       dispatchFetchResults,
     } = this.props;
-    console.log(queryParam);
     const query = getQueryFromUrl(queryParam);
-    console.log(query);
     dispatchFetchResults(encodeURI(query), columns);
   }
 
@@ -82,6 +80,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
+  dispatchSetClauses: clauses => dispatch(setClauses(clauses)),
 });
 
 const ResultsContainer = withRouter(

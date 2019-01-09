@@ -1,5 +1,6 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
+import { v1 } from 'uuid';
 import { createEmptyClause } from '../search/utils/clause';
 
 export const joinUrl = (...args) => urljoin(args);
@@ -39,7 +40,6 @@ export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, 
 })}`;
 
 const findTopLevelParenthesisIndices = (query) => {
-  console.log(query);
   let balance = 0;
   let parenthesisIndices = [0, 0];
   const topLevelParenthesisIndices = [];
@@ -68,20 +68,46 @@ const findSearchTerm = (queryField, value, searchTerms) => searchTerms.find((fie
   return field.term === queryField;
 });
 
-const ALLOWED_CONJUNCTIONS = ['and', 'or', 'not'];
+const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
 
 const parseClause = (conjunction, fieldValue, searchTerms) => {
   if (!searchTerms) {
     return false;
   }
-  const conjunctionLower = conjunction ? conjunction.toLowerCase() : 'and';
+  const conjunctionUpper = conjunction ? conjunction.toUpperCase() : 'AND';
   const [field, value] = fieldValue.split(':');
-  if (!ALLOWED_CONJUNCTIONS.includes(conjunctionLower)) {
-    throw new Error(`conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
+  if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
+    throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
   }
-  // const clause = createEmptyClause();
-  console.log(findSearchTerm(field, value, searchTerms));
-  return [conjunctionLower, field, value];
+  const searchTerm = findSearchTerm(field, value, searchTerms);
+  if (!searchTerm) {
+    throw new Error(`${field} not a valid field.`);
+  }
+  console.log(conjunction, field, value, searchTerm);
+  const queryInput = {};
+  switch (searchTerm.dataType) {
+    case 'date':
+      console.log('date');
+      break;
+    case 'enum':
+    case 'string':
+      if (searchTerm.hasRange) {
+        console.log(value);
+      }
+      queryInput.stringValue = value;
+      break;
+    case 'integer':
+      console.log('integer');
+      break;
+    default:
+      return null;
+  }
+  return {
+    id: v1(),
+    logicOperator: conjunctionUpper,
+    field: searchTerm,
+    queryInput,
+  };
 };
 
 export const getQueryFromUrl = (query) => {
@@ -96,7 +122,6 @@ export const unpackQueryUrl = (query, searchTerms) => {
     const conjunction = query.slice(conjunctionIndex, parenthesis[0]);
     const fieldValue = query.slice(parenthesis[0] + 1, parenthesis[1]);
     conjunctionIndex = parenthesis[1] + 1;
-    const [conjunctionLower, field, value] = parseClause(conjunction, fieldValue, searchTerms);
-    return [conjunctionLower, field, value];
+    return parseClause(conjunction, fieldValue, searchTerms);
   });
 };
