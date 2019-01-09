@@ -12,6 +12,7 @@ export enum Operator {
 }
 
 export type FieldType = {
+  id: string;
   label: string;
   term: string;
   example: string;
@@ -20,6 +21,7 @@ export type FieldType = {
   hasRange?: boolean;
   hasEvidence?: boolean;
   valuePrefix?: string;
+  autoComplete?: string;
   options?: Array<{
     name: string;
     values: Array<{

@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
-import { Operator } from '../LogicalOperator';
+import { Operator } from '../types/searchTypes';
 
 type Clause = {
   id: string;

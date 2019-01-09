@@ -1,8 +1,16 @@
 import React from 'react';
+import { FieldType } from './types/searchTypes';
+
+interface TextFieldProps {
+  field: FieldType;
+  type: string;
+  value?: string;
+  handleChange: (value: string) => void;
+}
 
 const TextField = ({
   field, type, handleChange, value = '',
-}) => (
+}: TextFieldProps) => (
   <div className="advanced-search__inputs" key={field.term}>
     <label htmlFor={`input_${field.term}`}>
       {field.label}

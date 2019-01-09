@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Dispatch } from 'redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import {
   selectField,
@@ -15,12 +16,25 @@ import {
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
+import { Clause, FieldType, Operator } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 
 import './styles/SearchContainer.scss';
 
-export class Search extends Component {
-  constructor(props) {
+interface SearchProps extends RouteComponentProps {
+  queryString: string;
+  dispatchFetchSearchTerms: () => void;
+  dispatchfetchEvidencesIfNeeded: (type: string) => void;
+  dispatchSubmitAdvancedQuery: () => void;
+  dispatchUpdateQueryString: (type: string) => void;
+}
+
+interface SearchState {
+  showAdvanced: boolean;
+}
+
+export class Search extends Component<SearchProps, SearchState> {
+  constructor(props: SearchProps) {
     super(props);
     this.state = {
       showAdvanced: false,
@@ -48,7 +62,7 @@ export class Search extends Component {
     history.push('/uniprotkb');
   }
 
-  handleSubmitClick(searchTerm) {
+  handleSubmitClick(searchTerm: string) {
     const { dispatchUpdateQueryString, history } = this.props;
     dispatchUpdateQueryString(searchTerm);
     history.push('/uniprotkb');
@@ -87,11 +101,11 @@ const mapStateToProps = state => ({
   evidences: state.query.evidences,
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleFieldSelect: (clauseId, field) => dispatch(selectField(clauseId, field)),
-  handleInputChange: (clauseId, value) => dispatch(updateInputValue(clauseId, value)),
-  handleEvidenceChange: (clauseId, value) => dispatch(updateEvidence(clauseId, value)),
-  handleRangeInputChange: (clauseId, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleFieldSelect: (clauseId: string, field: FieldType) => dispatch(selectField(clauseId, field)),
+  handleInputChange: (clauseId: string, value: string | number) => dispatch(updateInputValue(clauseId, value)),
+  handleEvidenceChange: (clauseId: string, value: string | number) => dispatch(updateEvidence(clauseId, value)),
+  handleRangeInputChange: (clauseId: string, value, from) => dispatch(updateRangeValue(clauseId, value, from)),
   handleLogicChange: (clauseId, value) => dispatch(updateLogicOperator(clauseId, value)),
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchAddClause: () => dispatch(addClause()),
