@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import fetchData from '../../utils/fetchData';
 import apiUrls from '../../utils/apiUrls';
 import { FieldType, Operator, EvidenceType } from '../types/searchTypes';
-import { searchState } from './initialState';
+import { RootState } from '../../state/initialState';
 
 export const selectField = createAction(
   'search/select-field',
@@ -72,7 +72,8 @@ export const fetchEvidences = (evidencesType: EvidenceType) => async (dispatch: 
   return fetchData(url).then(response => dispatch(receiveEvidences(response.data, evidencesType)));
 };
 
-export const shouldFetchEvidences = (state: searchState, evidenceType: EvidenceType) => {
+export const shouldFetchEvidences = (state: RootState, evidenceType: EvidenceType) => {
+  console.log(state);
   const evidences = state.query.evidences[evidenceType];
   return !evidences.isFetching;
 };
@@ -80,7 +81,7 @@ export const shouldFetchEvidences = (state: searchState, evidenceType: EvidenceT
 // TODO what type is dispatch and can we use action() here without passing a type???
 export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
   dispatch: Dispatch,
-  getState: () => searchState,
+  getState: () => RootState,
 ) => {
   if (shouldFetchEvidences(getState(), evidencesType)) {
     dispatch(fetchEvidences(evidencesType));
