@@ -31,7 +31,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
-    "franklin-sites": "0.0.3-dev.18",
+    "franklin-sites": "0.0.3-dev.19",
     "lodash": "^4.17.11",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
