@@ -83,7 +83,6 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
   if (!searchTerm) {
     throw new Error(`${field} not a valid field.`);
   }
-  console.log(conjunction, field, value, searchTerm);
   const queryInput = {};
   switch (searchTerm.dataType) {
     case 'date':

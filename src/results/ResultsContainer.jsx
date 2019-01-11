@@ -2,50 +2,51 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from './state/actions';
-import { fetchSearchTerms, setClauses } from '../search/state/actions';
+import { fetchSearchTerms, setClauses, updateQueryString } from '../search/state/actions';
 import ResultsTable from './ResultsTable';
 import { unpackQueryUrl, getQueryFromUrl } from '../utils/apiUrls';
 
 export class Results extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { queryString: undefined };
   }
 
   componentDidMount() {
-    const { dispatchFetchSearchTerms } = this.props;
-    this.fetchResults();
+    const {
+      location: { search: queryParamFromUrl },
+      dispatchFetchSearchTerms,
+      dispatchUpdateQueryString,
+      queryString,
+    } = this.props;
     dispatchFetchSearchTerms();
+    console.log('here');
+    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
+    if (queryFromUrl && queryString !== queryFromUrl) {
+      dispatchUpdateQueryString(queryFromUrl);
+    }
   }
 
   componentDidUpdate(prevProps) {
+    console.log('in componentDidUpdate');
     const {
-      location: { search: queryParam },
+      location: { search: queryParamFromUrl },
       searchTerms,
+      queryString,
       dispatchSetClauses,
+      dispatchFetchResults,
+      dispatchUpdateQueryString,
+      columns,
     } = this.props;
-    if (searchTerms && searchTerms.length > 0) {
-      const query = getQueryFromUrl(queryParam);
-      if (query) {
-        const t = unpackQueryUrl(query, searchTerms);
-        console.log(t);
-        dispatchSetClauses(t);
+    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
+    if (queryFromUrl && queryString !== queryFromUrl) {
+      console.log(queryString);
+      dispatchFetchResults(encodeURI(queryFromUrl), columns);
+      if (searchTerms && searchTerms.length > 0) {
+        const clauses = unpackQueryUrl(queryFromUrl, searchTerms);
+        dispatchSetClauses(clauses);
       }
     }
-    // const { queryString: prevQueryString } = prevProps;
-    // if (prevQueryString !== queryInUrl) {
-    //   this.fetchResults();
-    // }
-  }
-
-  fetchResults() {
-    const {
-      location: { search: queryParam },
-      columns,
-      dispatchFetchResults,
-    } = this.props;
-    const query = getQueryFromUrl(queryParam);
-    dispatchFetchResults(encodeURI(query), columns);
   }
 
   render() {
@@ -70,17 +71,18 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  queryString: state.query.queryString,
   columns: state.results.columns,
   results: state.results.results,
   isFetching: state.results.isFetching,
   searchTerms: state.query.searchTerms.data,
+  queryString: state.query.queryString,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
   dispatchSetClauses: clauses => dispatch(setClauses(clauses)),
+  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
 });
 
 const ResultsContainer = withRouter(

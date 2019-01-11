@@ -25,6 +25,7 @@ export class Search extends Component {
     super(props);
     this.state = {
       showAdvanced: false,
+      mainSearchTerm: '',
     };
     this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
@@ -46,17 +47,19 @@ export class Search extends Component {
   handleAdvancedSubmitClick() {
     const { history, clauses } = this.props;
     const encodedQueryString = encodeURI(createQueryString(clauses));
-    history.push({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
+    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 
-  handleSubmitClick(searchTerm) {
-    const { history } = this.props;
-    const encodedQueryString = encodeURI(searchTerm);
-    history.push({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
+  handleSubmitClick(e) {
+    e.preventDefault();
+    const { history, queryString } = this.props;
+    const encodedQueryString = encodeURI(queryString);
+    console.log('encodedQueryString', encodedQueryString);
+    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 
   render() {
-    const { queryString } = this.props;
+    const { queryString, dispatchUpdateQueryString } = this.props;
     const { showAdvanced } = this.state;
     let search;
     if (showAdvanced) {
@@ -67,7 +70,13 @@ export class Search extends Component {
         />
       );
     } else {
-      search = <MainSearch handleSearchSubmit={this.handleSubmitClick} searchTerm={queryString} />;
+      search = (
+        <MainSearch
+          onSubmit={e => this.handleSubmitClick(e)}
+          onChange={v => dispatchUpdateQueryString(v)}
+          searchTerm={queryString}
+        />
+      );
     }
     return (
       <Fragment>
