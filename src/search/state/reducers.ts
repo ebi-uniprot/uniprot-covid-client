@@ -1,99 +1,90 @@
-import {
-  SELECT_FIELD,
-  UPDATE_INPUT_VALUE,
-  UPDATE_EVIDENCE,
-  UPDATE_RANGE_VALUE,
-  UPDATE_LOGIC_OPERATOR,
-  UPDATE_QUERY_STRING,
-  SUBMIT_ADVANCED_QUERY,
-  ADD_CLAUSE,
-  REMOVE_CLAUSE,
-  REQUEST_SEARCH_TERMS,
-  RECEIVE_SEARCH_TERMS,
-  REQUEST_EVIDENCES,
-  RECEIVE_EVIDENCES,
-} from './actions';
+import { ActionType, getType } from 'typesafe-actions';
+import * as searchActions from './actions';
 import { createEmptyClause } from '../utils/clause';
 import createQueryString from '../utils/QueryStringGenerator';
+import initialState, { SearchState } from './initialState';
+import { Clause, EvidenceType } from '../types/searchTypes';
 
-export const clause = (state, action) => {
-  if (state.id !== action.clauseId) {
+export type SearchActions = ActionType<typeof searchActions>;
+
+export const clause = (state: Clause, action: SearchActions) => {
+  if (state.id !== action.payload.clauseId) {
     return state;
   }
   switch (action.type) {
-    case SELECT_FIELD:
+    case getType(searchActions.selectField):
       return {
         ...state,
-        field: action.field,
+        field: action.payload.field,
         queryInput: {},
       };
-    case UPDATE_INPUT_VALUE:
+    case getType(searchActions.updateInputValue):
       return {
         ...state,
-        queryInput: { ...state.queryInput, stringValue: action.value },
+        queryInput: { ...state.queryInput, stringValue: action.payload.value },
       };
-    case UPDATE_RANGE_VALUE:
+    case getType(searchActions.updateRangeValue):
       return {
         ...state,
         queryInput: {
           ...state.queryInput,
-          [action.from ? 'rangeFrom' : 'rangeTo']: action.value,
+          [action.payload.from ? 'rangeFrom' : 'rangeTo']: action.payload.value,
         },
       };
-    case UPDATE_EVIDENCE:
+    case getType(searchActions.updateEvidence):
       return {
         ...state,
         queryInput: {
           ...state.queryInput,
-          evidenceValue: action.value,
+          evidenceValue: action.payload.value,
         },
       };
-    case UPDATE_LOGIC_OPERATOR:
+    case getType(searchActions.updateLogicOperator):
       return {
         ...state,
-        logicOperator: action.value,
+        logicOperator: action.payload.value,
       };
     default:
       return state;
   }
 };
 
-export const searchTerms = (state = [], action) => {
+export const searchTerms = (state, action: SearchActions) => {
   switch (action.type) {
-    case REQUEST_SEARCH_TERMS:
+    case getType(searchActions.requestSearchTerms):
       return {
         ...state,
         isFetching: true,
       };
-    case RECEIVE_SEARCH_TERMS:
+    case getType(searchActions.receiveSearchTerms):
       return {
         ...state,
         isFetching: false,
-        data: action.data,
-        lastUpdated: action.receivedAt,
+        data: action.payload.data,
+        lastUpdated: action.payload.receivedAt,
       };
     default:
       return state;
   }
 };
 
-export const evidences = (state = [], action) => {
+export const evidences = (state, action: SearchActions) => {
   switch (action.type) {
-    case REQUEST_EVIDENCES:
+    case getType(searchActions.requestEvidences):
       return {
         ...state,
-        [action.evidencesType]: {
-          ...state[action.evidencesType],
+        [action.payload.evidencesType]: {
+          ...state[action.payload.evidencesType],
           isFetching: true,
         },
       };
-    case RECEIVE_EVIDENCES:
+    case getType(searchActions.receiveEvidences):
       return {
         ...state,
-        [action.evidencesType]: {
+        [action.payload.evidencesType]: {
           isFetching: false,
-          data: action.data,
-          lastUpdated: action.receivedAt,
+          data: action.payload.data,
+          lastUpdated: action.payload.receivedAt,
         },
       };
     default:
@@ -101,33 +92,33 @@ export const evidences = (state = [], action) => {
   }
 };
 
-const query = (state = [], action) => {
+const query = (state: SearchState = initialState, action: SearchActions) => {
   switch (action.type) {
-    case SELECT_FIELD:
-    case UPDATE_INPUT_VALUE:
-    case UPDATE_RANGE_VALUE:
-    case UPDATE_EVIDENCE:
-    case UPDATE_LOGIC_OPERATOR:
+    case getType(searchActions.selectField):
+    case getType(searchActions.updateInputValue):
+    case getType(searchActions.updateRangeValue):
+    case getType(searchActions.updateEvidence):
+    case getType(searchActions.updateLogicOperator):
       return {
         ...state,
         clauses: state.clauses.map(c => clause(c, action)),
       };
-    case UPDATE_QUERY_STRING:
+    case getType(searchActions.updateQueryString):
       return {
         ...state,
-        queryString: action.queryString,
+        queryString: action.payload.queryString,
       };
-    case SUBMIT_ADVANCED_QUERY:
+    case getType(searchActions.submitAdvancedQuery):
       return {
         ...state,
         queryString: createQueryString(state.clauses),
       };
-    case ADD_CLAUSE:
+    case getType(searchActions.addClause):
       return {
         ...state,
         clauses: [...state.clauses, createEmptyClause()],
       };
-    case REMOVE_CLAUSE:
+    case getType(searchActions.removeClause):
       if (state.clauses.length === 1) {
         return {
           ...state,
@@ -136,16 +127,16 @@ const query = (state = [], action) => {
       }
       return {
         ...state,
-        clauses: state.clauses.filter(c => c.id !== action.clauseId),
+        clauses: state.clauses.filter(c => c.id !== action.payload.clauseId),
       };
-    case REQUEST_SEARCH_TERMS:
-    case RECEIVE_SEARCH_TERMS:
+    case getType(searchActions.requestSearchTerms):
+    case getType(searchActions.receiveSearchTerms):
       return {
         ...state,
         searchTerms: searchTerms(state.searchTerms, action),
       };
-    case REQUEST_EVIDENCES:
-    case RECEIVE_EVIDENCES:
+    case getType(searchActions.requestEvidences):
+    case getType(searchActions.receiveEvidences):
       return {
         ...state,
         evidences: evidences(state.evidences, action),

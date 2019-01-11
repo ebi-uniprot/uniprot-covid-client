@@ -1,22 +1,32 @@
 import { createEmptyClause } from '../utils/clause';
+import { Clause, Namespace } from '../types/searchTypes';
+
+export type SearchState = {
+  readonly clauses: Array<Clause>;
+  readonly queryString: string;
+  readonly namespace: Namespace;
+  readonly searchTerms: any;
+  readonly evidences: {
+    readonly go: any;
+    readonly annotation: any;
+  };
+};
 
 const initialState = {
-  query: {
-    clauses: [...Array(2)].map(() => createEmptyClause()),
-    queryString: '',
-    namespace: 'UniProtKB',
-    searchTerms: {
+  clauses: [...Array(2)].map(() => createEmptyClause()),
+  queryString: '',
+  namespace: Namespace.UniProtKB,
+  searchTerms: {
+    data: [],
+  },
+  evidences: {
+    go: {
       data: [],
+      isFetching: false,
     },
-    evidences: {
-      go: {
-        data: [],
-        isFetching: false,
-      },
-      annotation: {
-        data: [],
-        isFetching: false,
-      },
+    annotation: {
+      data: [],
+      isFetching: false,
     },
   },
 };

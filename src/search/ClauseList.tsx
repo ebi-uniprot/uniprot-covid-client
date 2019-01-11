@@ -3,7 +3,9 @@ import { TreeSelect } from 'franklin-sites';
 import EvidenceField from './EvidenceField';
 import LogicalOperator from './LogicalOperator';
 import Field from './Field';
-import { Clause, FieldType, Operator } from './types/searchTypes';
+import {
+  Clause, FieldType, Operator, EvidenceType,
+} from './types/searchTypes';
 
 // .itemType
 // single: a simple/single type item: such as accession, gene created, this is default type.
@@ -48,7 +50,7 @@ const ClauseList = ({
 
   let evidencesData;
   if (clause.field.hasEvidence) {
-    const evidencesType = clause.field.term === 'go' ? 'go' : 'annotation';
+    const evidencesType = clause.field.term === EvidenceType.GO ? EvidenceType.GO : EvidenceType.ANNOTATION;
     evidencesData = evidences[evidencesType].data || [];
   }
 

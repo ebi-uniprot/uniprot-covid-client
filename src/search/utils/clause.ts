@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
-import { Operator } from '../types/searchTypes';
+import { Operator, Input } from '../types/searchTypes';
 
 type Clause = {
   id: string;
@@ -13,11 +13,12 @@ type Clause = {
     dataType: string; // TODO should be enum?
     id: string;
   };
+  queryInput: Input;
 };
 
-export const createEmptyClause = () => ({
+export const createEmptyClause = (): Clause => ({
   id: v1(),
-  logicOperator: 'AND',
+  logicOperator: Operator.AND,
   field: {
     label: 'Any',
     term: 'All',

@@ -48,3 +48,8 @@ export type Clause = {
   logicOperator: Operator;
   queryInput: Input;
 };
+
+export enum EvidenceType {
+  GO = 'go',
+  ANNOTATION = 'annotation',
+}

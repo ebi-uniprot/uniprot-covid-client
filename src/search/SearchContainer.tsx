@@ -16,7 +16,9 @@ import {
   fetchSearchTerms,
   fetchEvidencesIfNeeded,
 } from './state/actions';
-import { Clause, FieldType, Operator } from './types/searchTypes';
+import {
+  Clause, FieldType, Operator, EvidenceType,
+} from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 
 import './styles/SearchContainer.scss';
@@ -47,8 +49,8 @@ export class Search extends Component<SearchProps, SearchState> {
   componentDidMount() {
     const { dispatchFetchSearchTerms, dispatchfetchEvidencesIfNeeded } = this.props;
     dispatchFetchSearchTerms();
-    dispatchfetchEvidencesIfNeeded('go');
-    dispatchfetchEvidencesIfNeeded('annotation');
+    dispatchfetchEvidencesIfNeeded(EvidenceType.GO);
+    dispatchfetchEvidencesIfNeeded(EvidenceType.ANNOTATION);
   }
 
   toggleAdvanced() {
