@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchResults } from './state/actions';
+import { fetchSearchResultsIfNeeded } from './state/actions';
 import { fetchSearchTerms, setClauses, updateQueryString } from '../search/state/actions';
 import ResultsTable from './ResultsTable';
 import { unpackQueryUrl, getQueryFromUrl } from '../utils/apiUrls';
@@ -34,18 +34,16 @@ export class Results extends Component {
       searchTerms,
       queryString,
       dispatchSetClauses,
-      dispatchFetchResults,
+      dispatchFetchSearchResultsIfNeeded,
       dispatchUpdateQueryString,
       columns,
     } = this.props;
     const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
-    if (queryFromUrl && queryString !== queryFromUrl) {
-      console.log(queryString);
-      dispatchFetchResults(encodeURI(queryFromUrl), columns);
-      if (searchTerms && searchTerms.length > 0) {
-        const clauses = unpackQueryUrl(queryFromUrl, searchTerms);
-        dispatchSetClauses(clauses);
-      }
+    console.log(queryString);
+    dispatchFetchSearchResultsIfNeeded(encodeURI(queryFromUrl), columns);
+    if (searchTerms && searchTerms.length > 0) {
+      const clauses = unpackQueryUrl(queryFromUrl, searchTerms);
+      dispatchSetClauses(clauses);
     }
   }
 
@@ -72,14 +70,14 @@ export class Results extends Component {
 
 const mapStateToProps = state => ({
   columns: state.results.columns,
-  results: state.results.results,
+  results: state.results.data,
   isFetching: state.results.isFetching,
   searchTerms: state.query.searchTerms.data,
   queryString: state.query.queryString,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
+  dispatchFetchSearchResultsIfNeeded: (query, columns) => dispatch(fetchSearchResultsIfNeeded(query, columns)),
   dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
   dispatchSetClauses: clauses => dispatch(setClauses(clauses)),
   dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),

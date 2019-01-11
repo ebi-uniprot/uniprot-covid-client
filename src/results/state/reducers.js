@@ -1,17 +1,18 @@
-import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS } from './actions';
+import { REQUEST_SEARCH_RESULTS, RECEIVE_SEARCH_RESULTS } from './actions';
 
 const results = (state = [], action) => {
   switch (action.type) {
-    case FETCH_RESULTS_STARTED:
+    case REQUEST_SEARCH_RESULTS:
       return {
         ...state,
         isFetching: true,
       };
-    case FETCH_RESULTS_SUCCESS:
+    case RECEIVE_SEARCH_RESULTS:
       return {
         ...state,
-        results: action.data.results,
+        data: action.data.results,
         lastUpdated: action.receivedAt,
+        encodedQueryString: action.encodedQueryString,
         isFetching: false,
       };
     default:
