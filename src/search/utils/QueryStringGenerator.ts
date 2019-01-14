@@ -1,4 +1,4 @@
-import { Clause } from '../ClauseList';
+import { Clause } from '../types/searchTypes';
 
 interface IPrefixMap {
   feature: string;

@@ -49,7 +49,7 @@ export const clause = (state: Clause, action: SearchActions) => {
   }
 };
 
-export const searchTerms = (state, action: SearchActions) => {
+export const searchTerms = (state: SearchState['searchTerms'], action: SearchActions) => {
   switch (action.type) {
     case getType(searchActions.requestSearchTerms):
       return {
@@ -68,7 +68,7 @@ export const searchTerms = (state, action: SearchActions) => {
   }
 };
 
-export const evidences = (state, action: SearchActions) => {
+export const evidences = (state: SearchState['evidences'], action: SearchActions) => {
   switch (action.type) {
     case getType(searchActions.requestEvidences):
       return {

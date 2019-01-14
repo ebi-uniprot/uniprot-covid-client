@@ -24,7 +24,7 @@ import {
 type ClauseListProps = {
   clauses: Array<Clause>;
   searchTerms: Array<FieldType>;
-  evidences: Array<any>;
+  evidences: any;
   handleFieldSelect: (clauseId: string, field: FieldType) => void;
   handleInputChange: (clauseId: string, value: string | number) => void;
   handleEvidenceChange: (clauseId: string, value: string | number) => void;

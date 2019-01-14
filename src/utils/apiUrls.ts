@@ -1,7 +1,7 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 
-export const joinUrl = (...args) => urljoin(args);
+export const joinUrl = (...args: string[]) => urljoin(args);
 
 const prefix = '//wwwdev.ebi.ac.uk';
 
@@ -30,9 +30,14 @@ export default apiUrls;
 
 const RE_QUERY = /\?$/;
 
-export const getSuggesterUrl = (url, value) => joinUrl(prefix, url.replace(RE_QUERY, value));
+export const getSuggesterUrl = (url: string, value: string) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (encodedUniprotQueryString, columns, filters, cursor) => `${apiUrls.advanced_search}?${queryString.stringify({
+export const getUniProtQueryUrl = (
+  encodedUniprotQueryString: string,
+  columns: Array<string>,
+  filters: Array<string>,
+  cursor: string,
+) => `${apiUrls.advanced_search}?${queryString.stringify({
   query: encodedUniprotQueryString,
   fields: columns.join(','),
 })}`;

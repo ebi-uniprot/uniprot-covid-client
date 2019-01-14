@@ -8,6 +8,8 @@ import { getSuggesterUrl } from '../utils/apiUrls';
 type Props = {
   url: string;
   onSelect: Function;
+  title: string;
+  value?: string;
 };
 
 type Suggestions = {

@@ -3,18 +3,14 @@ import { FieldType } from './types/searchTypes';
 
 interface RangeFieldProps {
   field: FieldType;
-  type: string;
-  handleChange: (value: string, isFrom: boolean) => void;
-  rangeFrom?: string;
-  rangeTo?: string;
+  type?: string;
+  handleChange: (value: number, isFrom: boolean) => void;
+  rangeFrom?: number;
+  rangeTo?: number;
 }
 
 const RangeField = ({
-  field,
-  type,
-  handleChange,
-  rangeFrom = '',
-  rangeTo = '',
+  field, type, handleChange, rangeFrom, rangeTo,
 }: RangeFieldProps) => (
   <Fragment>
     <label htmlFor={`from_input_${field.id}`}>
@@ -22,7 +18,7 @@ const RangeField = ({
       <input
         id={`from_input_${field.id}`}
         type={type}
-        onChange={e => handleChange(e.target.value, true)}
+        onChange={e => handleChange(parseInt(e.target.value), true)}
         placeholder="0"
         value={rangeFrom}
       />
@@ -32,7 +28,7 @@ const RangeField = ({
       <input
         id={`to_input_${field.id}`}
         type={type}
-        onChange={e => handleChange(e.target.value, false)}
+        onChange={e => handleChange(parseInt(e.target.value), false)}
         placeholder="100"
         value={rangeTo}
       />

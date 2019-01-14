@@ -8,7 +8,7 @@ import { FieldType, Input } from './types/searchTypes';
 type FieldProps = {
   field: FieldType;
   handleInputChange: (clauseId: string, value: string | number) => void;
-  handleRangeInputChange: (clauseId: string, value: number, from?: boolean) => void;
+  handleRangeInputChange: (value: number, from?: boolean) => void;
   queryInput: Input;
 };
 

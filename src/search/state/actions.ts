@@ -73,12 +73,10 @@ export const fetchEvidences = (evidencesType: EvidenceType) => async (dispatch: 
 };
 
 export const shouldFetchEvidences = (state: RootState, evidenceType: EvidenceType) => {
-  console.log(state);
   const evidences = state.query.evidences[evidenceType];
   return !evidences.isFetching;
 };
 
-// TODO what type is dispatch and can we use action() here without passing a type???
 export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
   dispatch: Dispatch,
   getState: () => RootState,
