@@ -5,20 +5,21 @@
     "plugin:jest/recommended",
     "plugin:flowtype/recommended"
   ],
-  "plugins": [
-    "jest",
-    "flowtype"
-  ],
+  "plugins": ["jest", "flowtype"],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
   "rules": {
-    "jsx-a11y/anchor-is-valid": ["error", {
-      "components": ["Link"],
-      "specialLink": ["to", "hrefLeft", "hrefRight"],
-      "aspects": ["noHref", "invalidHref", "preferButton"]
-    }]
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to", "hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "react/no-did-update-set-state": false
   }
 }
