@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 import * as searchActions from './actions';
 import { createEmptyClause } from '../utils/clause';
-import createQueryString from '../utils/QueryStringGenerator';
+import { createQueryString } from '../utils/QueryStringGenerator';
 import initialState, { SearchState } from './initialState';
 import { Clause, EvidenceType } from '../types/searchTypes';
 
