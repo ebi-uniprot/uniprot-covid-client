@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FieldToViewMappings should render gene_name 1`] = `
+exports[`FieldToViewMappings should render gene_names 1`] = `
 "<div>
   <strong>
     My gene

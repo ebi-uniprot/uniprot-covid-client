@@ -7,6 +7,12 @@ import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedRows: {} };
+    this.handleRowSelect = this.handleRowSelect.bind(this);
+  }
+
   componentDidMount() {
     const {
       location: { search: queryFromUrl },
@@ -18,6 +24,7 @@ export class Results extends Component {
       console.log('dispatch setQueryString');
       return;
     }
+    console.log('getting');
     this.fetchResults();
   }
 
@@ -37,10 +44,27 @@ export class Results extends Component {
     dispatchFetchResults(queryString, columns);
   }
 
+  handleRowSelect(rowId) {
+    const { selectedRows: prevSelectedRows } = this.state;
+    if (rowId in prevSelectedRows) {
+      const { [rowId]: value, ...selectedRows } = prevSelectedRows;
+      this.setState({ selectedRows });
+    } else {
+      prevSelectedRows[rowId] = true;
+      this.setState({ selectedRows: prevSelectedRows });
+    }
+  }
+
   render() {
     const {
-      results, facets, isFetching, selectedFacets, dispatchAddFacetToQuery,
+      results,
+      facets,
+      isFetching,
+      selectedFacets,
+      dispatchAddFacetToQuery,
+      columns,
     } = this.props;
+    const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
@@ -53,7 +77,14 @@ export class Results extends Component {
             toggleFacet={dispatchAddFacetToQuery}
           />
 )}
-        content={<ResultsTable results={results} />}
+        content={(
+          <ResultsTable
+            results={results}
+            columnNames={columns}
+            handleRowSelect={this.handleRowSelect}
+            selectedRows={selectedRows}
+          />
+)}
       />
     );
   }

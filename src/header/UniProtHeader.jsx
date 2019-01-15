@@ -11,7 +11,7 @@ const links = [
     path: '/',
   },
   {
-    label: 'Aligh',
+    label: 'Align',
     path: '/',
   },
   {
