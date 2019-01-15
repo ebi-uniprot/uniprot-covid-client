@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsTable component should render 1`] = `"<e columns={{...}} data={{...}} selectable={true} selected={{...}} onSelect={[Function: onSelect]} onHeaderClick={[Function: onHeaderClick]} />"`;

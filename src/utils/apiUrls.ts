@@ -40,4 +40,5 @@ export const getUniProtQueryUrl = (
 ) => `${apiUrls.advanced_search}?${queryString.stringify({
   query: encodedUniprotQueryString,
   fields: columns.join(','),
+  includeFacets: true,
 })}`;

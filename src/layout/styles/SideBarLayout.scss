@@ -1,0 +1,16 @@
+@import "../../styles/settings";
+
+#sidebar-layout {
+  padding-left: 0.5em;
+  display: grid;
+  grid-gap: $gutter-size;
+  grid-template-columns: 1fr 6fr;
+  grid-template-areas: "sidebar content";
+  &__sidebar {
+    grid-area: sidebar;
+  }
+
+  &__content {
+    grid-area: content;
+  }
+}

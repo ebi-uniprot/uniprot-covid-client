@@ -1,4 +1,4 @@
-import createQueryString from '../QueryStringGenerator';
+import { createQueryString, createFacetsQueryString } from '../QueryStringGenerator';
 
 const clauses = [
   {
@@ -148,12 +148,12 @@ describe('QueryHelper', () => {
 
   test('should handle cc evidence tags', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_cc_evidence'));
-    expect(queryString).toBe('((cc_cofactor_chebi:blah)AND(ccev_cofactor_chebi:blahvidence))');
+    expect(queryString).toBe('((cc_cofactor_chebi:blah) AND (ccev_cofactor_chebi:blahvidence))');
   });
 
   test('should handle ft evidence tags', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_ft_evidence'));
-    expect(queryString).toBe('((ft_ca_bind:blah)AND(ftev_ca_bind:blahvidence))');
+    expect(queryString).toBe('((ft_ca_bind:blah) AND (ftev_ca_bind:blahvidence))');
   });
 
   test('should handle range', () => {
@@ -163,7 +163,7 @@ describe('QueryHelper', () => {
 
   test('should handle ft range and evidence', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_ft_range_evidence'));
-    expect(queryString).toBe('((ftlen_sites:[10 TO 100])AND(ftev_sites:blahvidence))');
+    expect(queryString).toBe('((ftlen_sites:[10 TO 100]) AND (ftev_sites:blahvidence))');
   });
 
   test('should handle date range', () => {
@@ -174,6 +174,24 @@ describe('QueryHelper', () => {
   test('should handle xrefs', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_xref'));
     expect(queryString).toBe('(xref:pdb-Something)');
+  });
+
+  test('should generate facet query', () => {
+    const facets = {
+      facet1: ['value 1', 'value2'],
+      facet2: ['value 3'],
+    };
+    const queryString = createFacetsQueryString(facets);
+    expect(queryString).toBe(' AND (facet1:value 1) AND (facet1:value2) AND (facet2:value 3)');
+  });
+
+  test('should generate facet query with an empty facet', () => {
+    const facets = {
+      facet1: [],
+      facet2: ['value 3'],
+    };
+    const queryString = createFacetsQueryString(facets);
+    expect(queryString).toBe(' AND (facet2:value 3)');
   });
 
   // TODO databases
