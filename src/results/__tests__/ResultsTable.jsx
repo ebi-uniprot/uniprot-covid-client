@@ -8,9 +8,10 @@ configure({ adapter: new Adapter() });
 let wrapper;
 let props;
 
-describe('ResultsRow component', () => {
+describe('ResultsTable component', () => {
   beforeEach(() => {
     props = {
+      columnNames: ['accession'],
       results: [{ accession: '1234' }, { accession: '5678' }],
     };
     wrapper = shallow(<ResultsTable {...props} />);
