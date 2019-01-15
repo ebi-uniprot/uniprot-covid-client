@@ -1,4 +1,4 @@
-import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS } from './actions';
+import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS, TOGGLE_FACET } from './actions';
 
 const results = (state = [], action) => {
   switch (action.type) {
@@ -11,9 +11,26 @@ const results = (state = [], action) => {
       return {
         ...state,
         results: action.data.results,
+        facets: action.data.facets,
         lastUpdated: action.receivedAt,
         isFetching: false,
       };
+    case TOGGLE_FACET: {
+      const { selectedFacets } = state;
+      if (!(action.facetName in selectedFacets)) {
+        selectedFacets[action.facetName] = [action.facetValue];
+      } else if (selectedFacets[action.facetName].includes(action.facetValue)) {
+        selectedFacets[action.facetName] = selectedFacets[action.facetName].filter(
+          f => f !== action.facetValue,
+        );
+      } else {
+        selectedFacets[action.facetName].push(action.facetValue);
+      }
+      return {
+        ...state,
+        selectedFacets,
+      };
+    }
     default:
       return state;
   }

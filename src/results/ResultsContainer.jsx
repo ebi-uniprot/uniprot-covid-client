@@ -1,7 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchResults } from './state/actions';
+import { Facets } from 'franklin-sites';
+import { fetchResults, addFacetToQuery } from './state/actions';
+import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 
 export class Results extends Component {
@@ -22,6 +24,7 @@ export class Results extends Component {
       console.log('dispatch setQueryString');
       return;
     }
+    console.log('getting');
     this.fetchResults();
   }
 
@@ -37,9 +40,8 @@ export class Results extends Component {
     const {
       queryString, columns, dispatchFetchResults, history,
     } = this.props;
-    const encodedQueryString = encodeURI(queryString);
-    history.replace({ to: '/uniprotkb', search: `query=${encodedQueryString}` });
-    dispatchFetchResults(encodedQueryString, columns);
+    history.replace({ to: '/uniprotkb', search: `query=${encodeURI(queryString)}` });
+    dispatchFetchResults(queryString, columns);
   }
 
   handleRowSelect(rowId) {
@@ -54,20 +56,36 @@ export class Results extends Component {
   }
 
   render() {
-    const { results, isFetching, columns } = this.props;
+    const {
+      results,
+      facets,
+      isFetching,
+      selectedFacets,
+      dispatchAddFacetToQuery,
+      columns,
+    } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
     return (
-      <Fragment>
-        <ResultsTable
-          results={results}
-          columnNames={columns}
-          handleRowSelect={this.handleRowSelect}
-          selectedRows={selectedRows}
-        />
-      </Fragment>
+      <SideBarLayout
+        sidebar={(
+          <Facets
+            data={facets}
+            selectedFacets={selectedFacets}
+            toggleFacet={dispatchAddFacetToQuery}
+          />
+)}
+        content={(
+          <ResultsTable
+            results={results}
+            columnNames={columns}
+            handleRowSelect={this.handleRowSelect}
+            selectedRows={selectedRows}
+          />
+)}
+      />
     );
   }
 }
@@ -75,12 +93,15 @@ export class Results extends Component {
 const mapStateToProps = state => ({
   queryString: state.query.queryString,
   columns: state.results.columns,
+  selectedFacets: state.results.selectedFacets,
   results: state.results.results,
+  facets: state.results.facets,
   isFetching: state.results.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
+  dispatchAddFacetToQuery: (facetName, facetValue) => dispatch(addFacetToQuery(facetName, facetValue)),
 });
 
 const ResultsContainer = withRouter(
