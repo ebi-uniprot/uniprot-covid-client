@@ -76,6 +76,12 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
   }
   const conjunctionUpper = conjunction ? conjunction.toUpperCase() : 'AND';
   const [field, value] = fieldValue.split(':');
+  if (!value) {
+    const allClause = createEmptyClause();
+    allClause.queryInput = { stringValue: field };
+    return allClause;
+  }
+
   if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
     throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
   }
