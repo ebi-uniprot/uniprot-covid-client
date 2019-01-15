@@ -1,7 +1,12 @@
-import { REQUEST_SEARCH_RESULTS, RECEIVE_SEARCH_RESULTS } from './actions';
+import { REQUEST_SEARCH_RESULTS, RECEIVE_SEARCH_RESULTS, UPDATE_QUERY_STRING } from './actions';
 
 const results = (state = [], action) => {
   switch (action.type) {
+    case UPDATE_QUERY_STRING:
+      return {
+        ...state,
+        queryString: action.queryString,
+      };
     case REQUEST_SEARCH_RESULTS:
       return {
         ...state,

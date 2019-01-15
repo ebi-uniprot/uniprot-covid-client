@@ -116,6 +116,7 @@ export const getQueryFromUrl = (query) => {
 
 export const unpackQueryUrl = (query, searchTerms) => {
   const parenthesisIndices = findTopLevelParenthesisIndices(query);
+  console.log(parenthesisIndices);
   let conjunctionIndex = 0;
   return parenthesisIndices.map((parenthesis) => {
     const conjunction = query.slice(conjunctionIndex, parenthesis[0]);

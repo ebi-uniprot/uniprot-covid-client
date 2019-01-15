@@ -3,11 +3,11 @@ import { getUniProtQueryUrl } from '../../utils/apiUrls';
 
 export const REQUEST_SEARCH_RESULTS = 'REQUEST_SEARCH_RESULTS';
 export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
+export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 
-export const receiveSearchResults = (data, encodedQueryString) => ({
+export const receiveSearchResults = data => ({
   type: RECEIVE_SEARCH_RESULTS,
   data,
-  encodedQueryString,
   receivedAt: Date.now(),
 });
 
@@ -15,20 +15,26 @@ export const requestSearchResults = () => ({
   type: REQUEST_SEARCH_RESULTS,
 });
 
-export const shouldFetchSearchResults = (state, encodedQueryString) => {
-  const { encodedQueryString: prevEncodedQueryString, isFetching } = state.results;
-  return !isFetching && prevEncodedQueryString !== encodedQueryString;
+export const updateQueryString = queryString => ({
+  type: UPDATE_QUERY_STRING,
+  queryString,
+});
+
+export const shouldFetchSearchResults = (state, queryString) => {
+  const { queryString: prevQueryString, isFetching } = state.results;
+  return !isFetching && prevQueryString !== queryString;
 };
 
-export const fetchSearchResults = (encodedQueryString, columns) => (dispatch) => {
+export const fetchSearchResults = (queryString, columns) => (dispatch) => {
+  dispatch(updateQueryString(queryString));
   dispatch(requestSearchResults());
-  fetchData(getUniProtQueryUrl(encodedQueryString, columns))
-    .then(response => dispatch(receiveSearchResults(response.data, encodedQueryString)))
+  fetchData(getUniProtQueryUrl(queryString, columns))
+    .then(response => dispatch(receiveSearchResults(response.data)))
     .catch(error => console.error(error));
 };
 
-export const fetchSearchResultsIfNeeded = (encodedQueryString, columns) => (dispatch, getState) => {
-  if (shouldFetchSearchResults(getState(), encodedQueryString)) {
-    dispatch(fetchSearchResults(encodedQueryString, columns));
+export const fetchSearchResultsIfNeeded = (queryString, columns) => (dispatch, getState) => {
+  if (shouldFetchSearchResults(getState(), queryString)) {
+    dispatch(fetchSearchResults(queryString, columns));
   }
 };
