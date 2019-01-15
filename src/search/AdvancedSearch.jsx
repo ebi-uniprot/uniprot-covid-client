@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import ClauseList from './ClauseList';
 import { unpackQueryUrl } from '../utils/apiUrls';
-
 import './styles/AdvancedSearch.scss';
 
 class AdvancedSearch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { queryString: '' };
-  }
-
   componentDidMount() {
-    const { dispatchfetchEvidencesIfNeeded, dispatchFetchSearchTermsIfNeeded } = this.props;
+    const {
+      searchTerms,
+      dispatchUpdateClauses,
+      dispatchfetchEvidencesIfNeeded,
+      dispatchFetchSearchTermsIfNeeded,
+      queryString,
+    } = this.props;
     dispatchfetchEvidencesIfNeeded('go');
     dispatchfetchEvidencesIfNeeded('annotation');
     dispatchFetchSearchTermsIfNeeded();
+
+    if (searchTerms.length && queryString) {
+      dispatchUpdateClauses(unpackQueryUrl(queryString, searchTerms));
+    }
   }
 
-  componentDidUpdate() {
-    const { queryString: incomingQueryString, searchTerms, dispatchUpdateClauses } = this.props;
-    const { queryString } = this.state;
-    if (searchTerms.length && incomingQueryString && incomingQueryString !== queryString) {
-      const clauses = unpackQueryUrl(incomingQueryString, searchTerms);
-      dispatchUpdateClauses(clauses);
-      this.setState({ queryString: incomingQueryString });
+  componentDidUpdate(prevProps) {
+    const { queryString: prevQueryString, searchTerms: prevSearchTerms } = prevProps;
+    const { queryString, searchTerms, dispatchUpdateClauses } = this.props;
+    if (
+      searchTerms.length
+      && queryString
+      && (queryString !== prevQueryString || searchTerms !== prevSearchTerms)
+    ) {
+      dispatchUpdateClauses(unpackQueryUrl(queryString, searchTerms));
     }
   }
 

@@ -116,8 +116,10 @@ export const getQueryFromUrl = (query) => {
 
 export const unpackQueryUrl = (query, searchTerms) => {
   const parenthesisIndices = findTopLevelParenthesisIndices(query);
-  console.log(parenthesisIndices);
   let conjunctionIndex = 0;
+  if (!parenthesisIndices.length) {
+    return [parseClause('AND', query, searchTerms)];
+  }
   return parenthesisIndices.map((parenthesis) => {
     const conjunction = query.slice(conjunctionIndex, parenthesis[0]);
     const fieldValue = query.slice(parenthesis[0] + 1, parenthesis[1]);

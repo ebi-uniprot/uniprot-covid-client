@@ -58,7 +58,6 @@ export class Search extends Component {
     const { history } = this.props;
     const { queryString } = this.state;
     const encodedQueryString = encodeURI(queryString);
-    console.log('encodedQueryString', encodedQueryString);
     history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 

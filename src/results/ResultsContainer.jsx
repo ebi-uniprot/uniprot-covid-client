@@ -7,7 +7,6 @@ import { unpackQueryUrl, getQueryFromUrl } from '../utils/apiUrls';
 
 export class Results extends Component {
   componentDidMount() {
-    console.log('in componentDidMount');
     const {
       location: { search: queryParamFromUrl },
       dispatchFetchSearchResultsIfNeeded,
@@ -18,7 +17,6 @@ export class Results extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('in componentDidUpdate');
     const {
       location: { search: queryParamFromUrl },
       dispatchFetchSearchResultsIfNeeded,
