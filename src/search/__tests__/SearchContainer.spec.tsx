@@ -1,4 +1,5 @@
 import React from 'react';
+import '@babel/polyfill';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createEmptyClause } from '../utils/clause';
