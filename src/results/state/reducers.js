@@ -18,7 +18,7 @@ const results = (state = [], action) => {
     case TOGGLE_FACET: {
       const { selectedFacets } = state;
       if (!(action.facetName in selectedFacets)) {
-        selectedFacets[action.facetName] = [...Array(1)].map(() => action.facetValue);
+        selectedFacets[action.facetName] = [action.facetValue];
       } else if (selectedFacets[action.facetName].includes(action.facetValue)) {
         selectedFacets[action.facetName] = selectedFacets[action.facetName].filter(
           f => f !== action.facetValue,
