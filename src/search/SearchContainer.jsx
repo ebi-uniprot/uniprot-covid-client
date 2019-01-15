@@ -11,7 +11,7 @@ import {
   submitAdvancedQuery,
   addClause,
   removeClause,
-  fetchSearchTerms,
+  fetchSearchTermsIfNeeded,
   fetchEvidencesIfNeeded,
   updateClauses,
 } from './state/actions';
@@ -32,11 +32,6 @@ export class Search extends Component {
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleAdvancedSubmitClick = this.handleAdvancedSubmitClick.bind(this);
     this.hundleQueryStringChange = this.hundleQueryStringChange.bind(this);
-  }
-
-  componentDidMount() {
-    const { dispatchFetchSearchTerms } = this.props;
-    dispatchFetchSearchTerms();
   }
 
   componentDidUpdate(prevProps) {
@@ -119,7 +114,7 @@ const mapDispatchToProps = dispatch => ({
   handleRemoveClause: clauseId => dispatch(removeClause(clauseId)),
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
-  dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
+  dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
   dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
 });

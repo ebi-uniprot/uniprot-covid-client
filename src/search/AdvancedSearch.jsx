@@ -11,10 +11,10 @@ class AdvancedSearch extends Component {
   }
 
   componentDidMount() {
-    const { dispatchfetchEvidencesIfNeeded, dispatchFetchSearchTerms } = this.props;
+    const { dispatchfetchEvidencesIfNeeded, dispatchFetchSearchTermsIfNeeded } = this.props;
     dispatchfetchEvidencesIfNeeded('go');
     dispatchfetchEvidencesIfNeeded('annotation');
-    dispatchFetchSearchTerms();
+    dispatchFetchSearchTermsIfNeeded();
   }
 
   componentDidUpdate() {
@@ -28,10 +28,7 @@ class AdvancedSearch extends Component {
   }
 
   render() {
-    const {
-      handleAdvancedSubmitClick, namespace, dispatchAddClause, clauses,
-    } = this.props;
-
+    const { handleAdvancedSubmitClick, namespace, dispatchAddClause } = this.props;
     return (
       <div className="advanced-search">
         <div>

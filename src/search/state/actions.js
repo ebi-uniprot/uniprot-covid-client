@@ -75,9 +75,20 @@ export const receiveSearchTerms = data => ({
   receivedAt: Date.now(),
 });
 
+export const shouldFetchSearchTerms = (state) => {
+  const { searchTerms } = state.query;
+  return !searchTerms.isFetching && !searchTerms.data.length;
+};
+
 export const fetchSearchTerms = () => (dispatch) => {
   dispatch(requestSearchTerms());
   return fetchData(apiUrls.advanced_search_terms).then(response => dispatch(receiveSearchTerms(response.data)));
+};
+
+export const fetchSearchTermsIfNeeded = () => (dispatch, getState) => {
+  if (shouldFetchSearchTerms(getState())) {
+    dispatch(fetchSearchTerms());
+  }
 };
 
 export const requestEvidences = evidencesType => ({

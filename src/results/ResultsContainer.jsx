@@ -29,7 +29,6 @@ export class Results extends Component {
     } = prevProps;
     const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
     const prevQueryFromUrl = getQueryFromUrl(prevQueryParamFromUrl);
-    // console.log(queryFromUrl, prevQueryFromUrl);
     if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
       dispatchFetchSearchResultsIfNeeded(encodeURI(queryFromUrl), columns);
     }
