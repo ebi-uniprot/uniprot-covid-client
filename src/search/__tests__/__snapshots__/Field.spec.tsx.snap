@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Clause component should not return anything 1`] = `""`;
+
+exports[`Clause component should render \`date\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <RangeField type=\\"date\\" field={{...}} handleChange={[Function: mockConstructor]} />
+</div>"
+`;
+
+exports[`Clause component should render a \`string\` field with range 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <TextField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" value={[undefined]} />
+  <RangeField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" rangeFrom={[undefined]} rangeTo={[undefined]} />
+</div>"
+`;
+
+exports[`Clause component should render a \`text\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <TextField field={{...}} handleChange={[Function: mockConstructor]} type=\\"text\\" value={[undefined]} />
+</div>"
+`;
+
+exports[`Clause component should render an \`enum\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <EnumField field={{...}} handleChange={[undefined]} value=\\"\\" />
+</div>"
+`;
+
+exports[`Clause component should render an \`integer\` \`range\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <div className=\\"advanced-search__inputs\\">
+    <label htmlFor=\\"input_sites\\">
+      Any
+      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
+    </label>
+  </div>
+</div>"
+`;
+
+exports[`Clause component should render an \`integer\` field 1`] = `
+"<div className=\\"advanced-search__inputs\\">
+  <div className=\\"advanced-search__inputs\\">
+    <label htmlFor=\\"input_sites\\">
+      Any
+      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
+    </label>
+  </div>
+</div>"
+`;

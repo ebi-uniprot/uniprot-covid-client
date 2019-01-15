@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EvidenceField component should render 1`] = `
+"<Fragment>
+  <label htmlFor=\\"evidence_select\\">
+    Evidence
+    <select id=\\"evidence_select\\" value=\\"\\" onChange={[Function: onChange]}>
+      <optgroup label=\\"foo\\">
+        <option value={0}>
+          bar
+        </option>
+        <option value={1}>
+          baz
+        </option>
+      </optgroup>
+    </select>
+  </label>
+</Fragment>"
+`;

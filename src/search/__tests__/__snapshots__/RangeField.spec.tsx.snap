@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Range field should render a range field 1`] = `
+"<Fragment>
+  <label htmlFor=\\"from_input_range_field\\">
+    From
+    <input id=\\"from_input_range_field\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"0\\" value={[undefined]} />
+  </label>
+  <label htmlFor=\\"to_input_range_field\\">
+    To
+    <input id=\\"to_input_range_field\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"100\\" value={[undefined]} />
+  </label>
+</Fragment>"
+`;

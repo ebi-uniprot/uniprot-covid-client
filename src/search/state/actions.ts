@@ -1,5 +1,6 @@
 import { createAction, createAsyncAction, getType } from 'typesafe-actions';
-import { Dispatch } from 'redux';
+import { Dispatch, Action } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
 import apiUrls from '../../utils/apiUrls';
 import { FieldType, Operator, EvidenceType } from '../types/searchTypes';
@@ -51,7 +52,7 @@ export const receiveSearchTerms = createAction(
   resolve => (data: any) => resolve({ data, receivedAt: Date.now() }),
 );
 
-export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
+export const fetchSearchTerms = () => (dispatch: Dispatch) => {
   dispatch(requestSearchTerms());
   return fetchData(apiUrls.advanced_search_terms).then(response => dispatch(receiveSearchTerms(response.data)));
 };
@@ -66,7 +67,9 @@ export const receiveEvidences = createAction(
   resolve => (data: any, evidencesType: EvidenceType) => resolve({ data, evidencesType, receivedAt: Date.now() }),
 );
 
-export const fetchEvidences = (evidencesType: EvidenceType) => async (dispatch: Dispatch) => {
+export const fetchEvidences = (evidencesType: EvidenceType) => async (
+  dispatch: ThunkDispatch<RootState, void, Action>,
+) => {
   const url = apiUrls.evidences[evidencesType];
   dispatch(requestEvidences(evidencesType));
   return fetchData(url).then(response => dispatch(receiveEvidences(response.data, evidencesType)));
@@ -77,8 +80,8 @@ export const shouldFetchEvidences = (state: RootState, evidenceType: EvidenceTyp
   return !evidences.isFetching;
 };
 
-export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
-  dispatch: Dispatch,
+export const fetchEvidencesIfNeeded = async (evidencesType: EvidenceType) => (
+  dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState,
 ) => {
   if (shouldFetchEvidences(getState(), evidencesType)) {
