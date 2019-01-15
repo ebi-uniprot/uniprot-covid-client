@@ -21,19 +21,20 @@ export const updateQueryString = queryString => ({
 });
 
 export const shouldFetchSearchResults = (state, queryString) => {
-  const { queryString: prevQueryString, isFetching } = state.results;
-  return !isFetching && prevQueryString !== queryString;
+  const { queryString: prevQueryString } = state.results;
+  return prevQueryString !== queryString;
 };
 
 export const fetchSearchResults = (queryString, columns) => (dispatch) => {
-  dispatch(updateQueryString(queryString));
+  dispatch(updateQueryString(decodeURI(queryString)));
   dispatch(requestSearchResults());
-  fetchData(getUniProtQueryUrl(queryString, columns))
+  fetchData(getUniProtQueryUrl(encodeURI(queryString), columns))
     .then(response => dispatch(receiveSearchResults(response.data)))
     .catch(error => console.error(error));
 };
 
 export const fetchSearchResultsIfNeeded = (queryString, columns) => (dispatch, getState) => {
+  console.log(queryString);
   if (shouldFetchSearchResults(getState(), queryString)) {
     dispatch(fetchSearchResults(queryString, columns));
   }

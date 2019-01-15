@@ -81,7 +81,6 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
     allClause.queryInput = { stringValue: field };
     return allClause;
   }
-
   if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
     throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
   }
@@ -92,7 +91,8 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
   const queryInput = {};
   switch (searchTerm.dataType) {
     case 'date':
-      console.log('date');
+      // (created:%5B2019-01-01%20TO%200001-12-12%5D)
+      console.log(value);
       break;
     case 'enum':
     case 'string':

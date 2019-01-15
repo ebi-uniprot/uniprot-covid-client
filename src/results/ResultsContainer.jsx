@@ -13,7 +13,7 @@ export class Results extends Component {
       columns,
     } = this.props;
     const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
-    dispatchFetchSearchResultsIfNeeded(encodeURI(queryFromUrl), columns);
+    dispatchFetchSearchResultsIfNeeded(queryFromUrl, columns);
   }
 
   componentDidUpdate(prevProps) {
@@ -28,7 +28,7 @@ export class Results extends Component {
     const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
     const prevQueryFromUrl = getQueryFromUrl(prevQueryParamFromUrl);
     if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
-      dispatchFetchSearchResultsIfNeeded(encodeURI(queryFromUrl), columns);
+      dispatchFetchSearchResultsIfNeeded(queryFromUrl, columns);
     }
   }
 
