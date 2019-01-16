@@ -9,17 +9,18 @@ import {
   updateEvidence,
   updateRangeValue,
   updateLogicOperator,
-  updateQueryString,
   submitAdvancedQuery,
   addClause,
   removeClause,
-  fetchSearchTerms,
+  fetchSearchTermsIfNeeded,
   fetchEvidencesIfNeeded,
+  updateClauses,
 } from './state/actions';
 import {
   Clause, FieldType, Operator, EvidenceType,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
+import createQueryString from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 import { RootState } from '../state/initialState';
@@ -41,19 +42,23 @@ interface SearchContainerState {
 export class Search extends Component<SearchProps, SearchContainerState> {
   constructor(props: SearchProps) {
     super(props);
+    const { queryString } = props;
     this.state = {
       showAdvanced: false,
+      queryString,
     };
     this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleAdvancedSubmitClick = this.handleAdvancedSubmitClick.bind(this);
+    this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  componentDidMount() {
-    const { dispatchFetchSearchTerms, dispatchfetchEvidencesIfNeeded } = this.props;
-    dispatchFetchSearchTerms();
-    dispatchfetchEvidencesIfNeeded(EvidenceType.GO);
-    dispatchfetchEvidencesIfNeeded(EvidenceType.ANNOTATION);
+  componentDidUpdate(prevProps) {
+    const { queryString: prevQueryString } = prevProps;
+    const { queryString } = this.props;
+    if (prevQueryString !== queryString) {
+      this.setState({ queryString });
+    }
   }
 
   toggleAdvanced() {
@@ -62,31 +67,42 @@ export class Search extends Component<SearchProps, SearchContainerState> {
   }
 
   handleAdvancedSubmitClick() {
-    const { dispatchSubmitAdvancedQuery, history } = this.props;
-    dispatchSubmitAdvancedQuery();
-    history.push('/uniprotkb');
+    const { history, clauses } = this.props;
+    const encodedQueryString = encodeURI(createQueryString(clauses));
+    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
   }
 
-  handleSubmitClick(searchTerm: string) {
-    const { dispatchUpdateQueryString, history } = this.props;
-    dispatchUpdateQueryString(searchTerm);
-    history.push('/uniprotkb');
+  handleSubmitClick(e) {
+    e.preventDefault();
+    const { history } = this.props;
+    const { queryString } = this.state;
+    const encodedQueryString = encodeURI(queryString);
+    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
+  }
+
+  handleQueryStringChange(queryString) {
+    this.setState({ queryString });
   }
 
   render() {
-    const { queryString, namespace, dispatchAddClause } = this.props;
-    const { showAdvanced } = this.state;
+    const { showAdvanced, queryString } = this.state;
     let search;
     if (showAdvanced) {
       search = (
         <AdvancedSearch
-          namespace={namespace}
-          dispatchAddClause={dispatchAddClause}
+          {...this.props}
+          queryString={queryString}
           handleAdvancedSubmitClick={this.handleAdvancedSubmitClick}
         />
       );
     } else {
-      search = <MainSearch handleSearchSubmit={this.handleSubmitClick} searchTerm={queryString} />;
+      search = (
+        <MainSearch
+          onSubmit={this.handleSubmitClick}
+          onChange={this.handleQueryStringChange}
+          searchTerm={queryString}
+        />
+      );
     }
     return (
       <Fragment>
@@ -101,10 +117,10 @@ export class Search extends Component<SearchProps, SearchContainerState> {
 
 const mapStateToProps = (state: RootState) => ({
   clauses: state.query.clauses,
-  queryString: state.query.queryString,
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
+  queryString: state.results.queryString,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -116,9 +132,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleRemoveClause: (clauseId: string) => dispatch(removeClause(clauseId)),
   dispatchAddClause: () => dispatch(addClause()),
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
-  dispatchFetchSearchTerms: () => dispatch(fetchSearchTerms()),
+  dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
-  dispatchUpdateQueryString: (queryString: string) => dispatch(updateQueryString(queryString)),
+  dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
 });
 
 const SearchContainer = withRouter(
