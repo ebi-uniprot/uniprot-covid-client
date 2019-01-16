@@ -1,5 +1,5 @@
-import { ActionType, getType } from 'typesafe-actions';
 import * as searchActions from './actions';
+import { ActionType } from 'typesafe-actions';
 import { createEmptyClause } from '../utils/clause';
 import { createQueryString } from '../utils/QueryStringGenerator';
 import initialState, { SearchState } from './initialState';
@@ -8,22 +8,22 @@ import { Clause, EvidenceType } from '../types/searchTypes';
 export type SearchActions = ActionType<typeof searchActions>;
 
 export const clause = (state: Clause, action: SearchActions) => {
-  if (state.id !== action.payload.clauseId) {
+  if (state.id !== action.clauseId) {
     return state;
   }
   switch (action.type) {
-    case getType(searchActions.selectField):
+    case searchActions.SELECT_FIELD:
       return {
         ...state,
         field: action.payload.field,
         queryInput: {},
       };
-    case getType(searchActions.updateInputValue):
+    case searchActions.UPDATE_INPUT_VALUE:
       return {
         ...state,
         queryInput: { ...state.queryInput, stringValue: action.payload.value },
       };
-    case getType(searchActions.updateRangeValue):
+    case searchActions.UPDATE_RANGE_VALUE:
       return {
         ...state,
         queryInput: {
@@ -31,7 +31,7 @@ export const clause = (state: Clause, action: SearchActions) => {
           [action.payload.from ? 'rangeFrom' : 'rangeTo']: action.payload.value,
         },
       };
-    case getType(searchActions.updateEvidence):
+    case searchActions.UPDATE_EVIDENCE:
       return {
         ...state,
         queryInput: {
@@ -39,7 +39,7 @@ export const clause = (state: Clause, action: SearchActions) => {
           evidenceValue: action.payload.value,
         },
       };
-    case getType(searchActions.updateLogicOperator):
+    case searchActions.UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
         logicOperator: action.payload.value,
@@ -51,12 +51,12 @@ export const clause = (state: Clause, action: SearchActions) => {
 
 export const searchTerms = (state: SearchState['searchTerms'], action: SearchActions) => {
   switch (action.type) {
-    case getType(searchActions.requestSearchTerms):
+    case searchActions.REQUEST_SEARCH_TERMS:
       return {
         ...state,
         isFetching: true,
       };
-    case getType(searchActions.receiveSearchTerms):
+    case searchActions.RECEIVE_SEARCH_TERMS:
       return {
         ...state,
         isFetching: false,
@@ -70,7 +70,7 @@ export const searchTerms = (state: SearchState['searchTerms'], action: SearchAct
 
 export const evidences = (state: SearchState['evidences'], action: SearchActions) => {
   switch (action.type) {
-    case getType(searchActions.requestEvidences):
+    case searchActions.REQUEST_EVIDENCES:
       return {
         ...state,
         [action.payload.evidencesType]: {
@@ -78,7 +78,7 @@ export const evidences = (state: SearchState['evidences'], action: SearchActions
           isFetching: true,
         },
       };
-    case getType(searchActions.receiveEvidences):
+    case searchActions.RECEIVE_EVIDENCES:
       return {
         ...state,
         [action.payload.evidencesType]: {
@@ -94,31 +94,31 @@ export const evidences = (state: SearchState['evidences'], action: SearchActions
 
 const query = (state: SearchState = initialState, action: SearchActions) => {
   switch (action.type) {
-    case getType(searchActions.selectField):
-    case getType(searchActions.updateInputValue):
-    case getType(searchActions.updateRangeValue):
-    case getType(searchActions.updateEvidence):
-    case getType(searchActions.updateLogicOperator):
+    case searchActions.SELECT_FIELD:
+    case searchActions.UPDATE_INPUT_VALUE:
+    case searchActions.UPDATE_RANGE_VALUE:
+    case searchActions.UPDATE_EVIDENCE:
+    case searchActions.UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
         clauses: state.clauses.map(c => clause(c, action)),
       };
-    case getType(searchActions.updateQueryString):
+    case searchActions.UPDATE_QUERY_STRING:
       return {
         ...state,
         queryString: action.payload.queryString,
       };
-    case getType(searchActions.submitAdvancedQuery):
+    case searchActions.SUBMIT_ADVANCED_QUERY:
       return {
         ...state,
         queryString: createQueryString(state.clauses),
       };
-    case getType(searchActions.addClause):
+    case searchActions.ADD_CLAUSE:
       return {
         ...state,
         clauses: [...state.clauses, createEmptyClause()],
       };
-    case getType(searchActions.removeClause):
+    case searchActions.REMOVE_CLAUSE:
       if (state.clauses.length === 1) {
         return {
           ...state,
@@ -129,14 +129,14 @@ const query = (state: SearchState = initialState, action: SearchActions) => {
         ...state,
         clauses: state.clauses.filter(c => c.id !== action.payload.clauseId),
       };
-    case getType(searchActions.requestSearchTerms):
-    case getType(searchActions.receiveSearchTerms):
+    case searchActions.REQUEST_SEARCH_TERMS:
+    case searchActions.RECEIVE_SEARCH_TERMS:
       return {
         ...state,
         searchTerms: searchTerms(state.searchTerms, action),
       };
-    case getType(searchActions.requestEvidences):
-    case getType(searchActions.receiveEvidences):
+    case searchActions.REQUEST_EVIDENCES:
+    case searchActions.RECEIVE_EVIDENCES:
       return {
         ...state,
         evidences: evidences(state.evidences, action),
