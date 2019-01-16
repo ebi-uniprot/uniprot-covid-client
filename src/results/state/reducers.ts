@@ -1,13 +1,13 @@
-import { FETCH_RESULTS_STARTED, FETCH_RESULTS_SUCCESS, TOGGLE_FACET } from './actions';
+import * as resultsActions from './actions';
 
 const results = (state = [], action) => {
   switch (action.type) {
-    case FETCH_RESULTS_STARTED:
+    case resultsActions.FETCH_RESULTS_REQUEST:
       return {
         ...state,
         isFetching: true,
       };
-    case FETCH_RESULTS_SUCCESS:
+    case resultsActions.FETCH_RESULTS_SUCCESS:
       return {
         ...state,
         results: action.data.results,
@@ -15,7 +15,7 @@ const results = (state = [], action) => {
         lastUpdated: action.receivedAt,
         isFetching: false,
       };
-    case TOGGLE_FACET: {
+    case resultsActions.TOGGLE_FACET: {
       const { selectedFacets } = state;
       if (!(action.facetName in selectedFacets)) {
         selectedFacets[action.facetName] = [action.facetValue];
@@ -29,6 +29,12 @@ const results = (state = [], action) => {
       return {
         ...state,
         selectedFacets,
+      };
+    }
+    case resultsActions.UPDATE_QUERY_STRING: {
+      return {
+        ...state,
+        queryString: action.queryString,
       };
     }
     default:

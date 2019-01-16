@@ -12,15 +12,14 @@ import {
   submitAdvancedQuery,
   addClause,
   removeClause,
-  fetchSearchTermsIfNeeded,
   fetchEvidencesIfNeeded,
-  updateClauses,
+  fetchSearchTermsIfNeeded,
 } from './state/actions';
 import {
   Clause, FieldType, Operator, EvidenceType,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
-import createQueryString from './utils/QueryStringGenerator';
+import { createQueryString } from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 import { RootState } from '../state/initialState';
@@ -134,7 +133,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
-  dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
 });
 
 const SearchContainer = withRouter(

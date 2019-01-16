@@ -12,7 +12,6 @@ export const UPDATE_EVIDENCE = 'UPDATE_EVIDENCE';
 export const UPDATE_RANGE_VALUE = 'UPDATE_RANGE_VALUE';
 export const UPDATE_LOGIC_OPERATOR = 'UPDATE_LOGIC_OPERATOR';
 export const HANDLE_FIELD_SELECT = 'HANDLE_FIELD_SELECT';
-export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 export const SUBMIT_ADVANCED_QUERY = 'SUBMIT_ADVANCED_QUERY';
 export const ADD_CLAUSE = 'ADD_CLAUSE';
 export const REMOVE_CLAUSE = 'REMOVE_CLAUSE';
@@ -42,13 +41,9 @@ export const updateRangeValue = (clauseId: string, value: number, from: boolean)
   from,
 });
 
-export const updateLogicOperator = (clauseId: string, value: Operator)  => action(UPDATE_LOGIC_OPERATOR, {
+export const updateLogicOperator = (clauseId: string, value: Operator) => action(UPDATE_LOGIC_OPERATOR, {
   clauseId,
   value,
-});
-
-export const updateQueryString = (queryString: string) => action(UPDATE_QUERY_STRING, {
-  queryString,
 });
 
 export const submitAdvancedQuery = () => action(SUBMIT_ADVANCED_QUERY);
@@ -71,11 +66,25 @@ export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
   return fetchData(apiUrls.advanced_search_terms).then(response => dispatch(receiveSearchTerms(response.data)));
 };
 
+export const shouldFetchSearchTerms = (state: RootState) => {
+  const { searchTerms } = state.query;
+  return !searchTerms.isFetching && !searchTerms.data.length;
+};
+
+export const fetchSearchTermsIfNeeded = () => (
+  dispatch: ThunkDispatch<RootState, void, Action>,
+  getState: () => RootState,
+) => {
+  if (shouldFetchSearchTerms(getState())) {
+    dispatch(fetchSearchTerms());
+  }
+};
+
 export const requestEvidences = (evidencesType: EvidenceType) => action(REQUEST_EVIDENCES, {
   evidencesType,
 });
 
-export const receiveEvidences = (data: any, evidencesType:EvidenceType) => action(RECEIVE_EVIDENCES, {
+export const receiveEvidences = (data: any, evidencesType: EvidenceType) => action(RECEIVE_EVIDENCES, {
   data,
   evidencesType,
   receivedAt: Date.now(),
@@ -94,7 +103,7 @@ export const shouldFetchEvidences = (state: RootState, evidenceType: EvidenceTyp
   return !evidences.isFetching;
 };
 
-export const fetchEvidencesIfNeeded = async (evidencesType: EvidenceType) => (
+export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState,
 ) => {

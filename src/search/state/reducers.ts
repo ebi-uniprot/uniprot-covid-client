@@ -1,5 +1,5 @@
-import * as searchActions from './actions';
 import { ActionType } from 'typesafe-actions';
+import * as searchActions from './actions';
 import { createEmptyClause } from '../utils/clause';
 import { createQueryString } from '../utils/QueryStringGenerator';
 import initialState, { SearchState } from './initialState';
@@ -102,11 +102,6 @@ const query = (state: SearchState = initialState, action: SearchActions) => {
       return {
         ...state,
         clauses: state.clauses.map(c => clause(c, action)),
-      };
-    case searchActions.UPDATE_QUERY_STRING:
-      return {
-        ...state,
-        queryString: action.payload.queryString,
       };
     case searchActions.SUBMIT_ADVANCED_QUERY:
       return {

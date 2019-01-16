@@ -39,11 +39,18 @@ export const getUniProtQueryUrl = (
   columns: Array<string>,
   filters: Array<string>,
   cursor: string,
-) => `${apiUrls.advanced_search}?${queryString.stringify({
-  query: encodedUniprotQueryString,
-  fields: columns.join(','),
-  includeFacets: true,
-})}`;
+) => {
+  console.log(
+    queryString.stringify({
+      query: encodedUniprotQueryString,
+    }),
+  );
+  return `${apiUrls.advanced_search}?${queryString.stringify({
+    query: encodedUniprotQueryString,
+    fields: columns.join(','),
+    includeFacets: true,
+  })}`;
+};
 
 const findTopLevelParenthesisIndices = (query) => {
   let balance = 0;
@@ -123,7 +130,7 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
 
 export const getQueryFromUrl = (query) => {
   const m = query.match(/\?query=(.*)/);
-  return m && m[1];
+  return m && decodeURI(m[1]);
 };
 
 export const unpackQueryUrl = (query, searchTerms) => {

@@ -2,46 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Facets } from 'franklin-sites';
-import { fetchResults, addFacetToQuery } from './state/actions';
+import { fetchResultsIfNeeded, toggleFacet } from './state/actions';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
+import { getQueryFromUrl } from '../utils/apiUrls';
+import { createFacetsQueryString } from '../search/utils/QueryStringGenerator';
 
 export class Results extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedRows: {} };
     this.handleRowSelect = this.handleRowSelect.bind(this);
+    this.addFacetToQuery = this.addFacetToQuery.bind(this);
   }
 
   componentDidMount() {
     const {
-      location: { search: queryFromUrl },
-      queryString,
-      history,
+      location: { search: queryParamFromUrl },
+      dispatchFetchResultsIfNeeded,
+      columns,
     } = this.props;
-    if (queryFromUrl) {
-      console.log('queryString = unpack(queryFromUrl)');
-      console.log('dispatch setQueryString');
-      return;
-    }
-    console.log('getting');
-    this.fetchResults();
+    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
+    dispatchFetchResultsIfNeeded(queryFromUrl, columns);
   }
 
   componentDidUpdate(prevProps) {
-    const { queryString: prevQueryString } = prevProps;
-    const { queryString } = this.props;
-    if (prevQueryString !== queryString) {
-      this.fetchResults();
-    }
-  }
-
-  fetchResults() {
     const {
-      queryString, columns, dispatchFetchResults, history,
+      location: { search: queryParamFromUrl },
+      dispatchFetchResultsIfNeeded,
+      columns,
     } = this.props;
-    history.replace({ to: '/uniprotkb', search: `query=${encodeURI(queryString)}` });
-    dispatchFetchResults(queryString, columns);
+    const {
+      location: { search: prevQueryParamFromUrl },
+    } = prevProps;
+    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
+    const prevQueryFromUrl = getQueryFromUrl(prevQueryParamFromUrl);
+    if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
+      dispatchFetchResultsIfNeeded(queryFromUrl, columns);
+    }
   }
 
   handleRowSelect(rowId) {
@@ -53,6 +51,16 @@ export class Results extends Component {
       prevSelectedRows[rowId] = true;
       this.setState({ selectedRows: prevSelectedRows });
     }
+  }
+
+  addFacetToQuery(facetName, facetValue) {
+    const {
+      selectedFacets, dispatchToggleFacet, queryString, history,
+    } = this.props;
+    dispatchToggleFacet(facetName, facetValue);
+    console.log(createFacetsQueryString(selectedFacets));
+    const updatedQueryString = `${queryString}${createFacetsQueryString(selectedFacets)}`;
+    history.push({ pathname: '/uniprotkb', search: `query=${updatedQueryString}` });
   }
 
   render() {
@@ -74,7 +82,7 @@ export class Results extends Component {
           <Facets
             data={facets}
             selectedFacets={selectedFacets}
-            toggleFacet={dispatchAddFacetToQuery}
+            toggleFacet={this.addFacetToQuery}
           />
 )}
         content={(
@@ -91,7 +99,7 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  queryString: state.query.queryString,
+  queryString: state.results.queryString,
   columns: state.results.columns,
   selectedFacets: state.results.selectedFacets,
   results: state.results.results,
@@ -100,8 +108,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchResults: (query, columns) => dispatch(fetchResults(query, columns)),
-  dispatchAddFacetToQuery: (facetName, facetValue) => dispatch(addFacetToQuery(facetName, facetValue)),
+  dispatchFetchResultsIfNeeded: (query, columns) => dispatch(fetchResultsIfNeeded(query, columns)),
+  dispatchToggleFacet: (facetName, facetValue) => dispatch(toggleFacet(facetName, facetValue)),
 });
 
 const ResultsContainer = withRouter(
