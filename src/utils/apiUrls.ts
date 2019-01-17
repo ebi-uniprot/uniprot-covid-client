@@ -2,6 +2,7 @@ import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
 import { createEmptyClause } from '../search/utils/clause';
+import { FieldType } from '../search/types/searchTypes';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
@@ -50,28 +51,6 @@ export const getUniProtQueryUrl = (
     fields: columns.join(','),
     includeFacets: true,
   })}`;
-};
-
-const findTopLevelParenthesisIndices = (query) => {
-  let balance = 0;
-  let parenthesisIndices = [0, 0];
-  const topLevelParenthesisIndices = [];
-  for (let i = 0; i < query.length; i += 1) {
-    const c = query[i];
-    if (c === '(') {
-      balance += 1;
-      if (balance === 1) {
-        parenthesisIndices = [i, 0];
-      }
-    } else if (c === ')') {
-      balance -= 1;
-      if (balance === 0) {
-        parenthesisIndices[1] = i;
-        topLevelParenthesisIndices.push(parenthesisIndices);
-      }
-    }
-  }
-  return topLevelParenthesisIndices;
 };
 
 const findSearchTerm = (queryField, value, searchTerms) => searchTerms.find((field) => {
@@ -128,21 +107,19 @@ const parseClause = (conjunction, fieldValue, searchTerms) => {
   };
 };
 
-export const getQueryFromUrl = (query) => {
+export const getQueryFromUrl = (query: string) => {
   const m = query.match(/\?query=(.*)/);
   return m && decodeURI(m[1]);
 };
 
-export const unpackQueryUrl = (query, searchTerms) => {
-  const parenthesisIndices = findTopLevelParenthesisIndices(query);
-  let conjunctionIndex = 0;
-  if (!parenthesisIndices.length) {
-    return [parseClause('AND', query, searchTerms)];
+export const unpackQueryUrl = (query: string, searchTerms: Array<FieldType>) => {
+  const regex_query = /\(?([0-9a-z]+:?[0-9a-z\[\]\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  let match;
+  const clauses = [];
+  while ((match = regex_query.exec(query)) !== null) {
+    const fieldValue = match[1];
+    const conjunction = match[2] || 'AND';
+    clauses.push(parseClause(conjunction, fieldValue, searchTerms));
   }
-  return parenthesisIndices.map((parenthesis) => {
-    const conjunction = query.slice(conjunctionIndex, parenthesis[0]);
-    const fieldValue = query.slice(parenthesis[0] + 1, parenthesis[1]);
-    conjunctionIndex = parenthesis[1] + 1;
-    return parseClause(conjunction, fieldValue, searchTerms);
-  });
+  return clauses;
 };
