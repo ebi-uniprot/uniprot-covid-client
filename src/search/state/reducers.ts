@@ -124,6 +124,11 @@ const query = (state: SearchState = initialState, action: SearchActions) => {
         ...state,
         clauses: state.clauses.filter(c => c.id !== action.payload.clauseId),
       };
+    case searchActions.UPDATE_CLAUSES:
+      return {
+        ...state,
+        clauses: action.payload.clauses,
+      };
     case searchActions.REQUEST_SEARCH_TERMS:
     case searchActions.RECEIVE_SEARCH_TERMS:
       return {

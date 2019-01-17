@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 import { Facets } from 'franklin-sites';
 import { fetchResultsIfNeeded, toggleFacet } from './state/actions';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
-import { getQueryFromUrl } from '../utils/apiUrls';
 import { createFacetsQueryString } from '../search/utils/QueryStringGenerator';
 
 export class Results extends Component {
@@ -22,7 +22,7 @@ export class Results extends Component {
       dispatchFetchResultsIfNeeded,
       columns,
     } = this.props;
-    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
+    const queryFromUrl = queryString.parse(queryParamFromUrl).query;
     dispatchFetchResultsIfNeeded(queryFromUrl, columns);
   }
 
@@ -35,8 +35,8 @@ export class Results extends Component {
     const {
       location: { search: prevQueryParamFromUrl },
     } = prevProps;
-    const queryFromUrl = getQueryFromUrl(queryParamFromUrl);
-    const prevQueryFromUrl = getQueryFromUrl(prevQueryParamFromUrl);
+    const queryFromUrl = queryString.parse(queryParamFromUrl).query;
+    const prevQueryFromUrl = queryString.parse(prevQueryParamFromUrl).query;
     if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
       dispatchFetchResultsIfNeeded(queryFromUrl, columns);
     }

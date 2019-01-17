@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ClauseList from './ClauseList';
-import { unpackQueryUrl } from '../utils/apiUrls';
+import { unpackQueryUrl } from './utils/clause';
 import { Namespace } from './types/searchTypes';
 import './styles/AdvancedSearch.scss';
 

@@ -1,8 +1,6 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
-import { createEmptyClause } from '../search/utils/clause';
-import { FieldType } from '../search/types/searchTypes';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
@@ -32,7 +30,6 @@ const apiUrls = {
 export default apiUrls;
 
 const RE_QUERY = /\?$/;
-
 export const getSuggesterUrl = (url: string, value: string) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
 export const getUniProtQueryUrl = (
@@ -45,74 +42,3 @@ export const getUniProtQueryUrl = (
   fields: columns.join(','),
   includeFacets: true,
 })}`;
-
-const findSearchTerm = (queryField, value, searchTerms) => searchTerms.find((field) => {
-  if (field.items) {
-    return findSearchTerm(queryField, value, field.items);
-  }
-  return field.term === queryField;
-});
-
-const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
-
-const parseClause = (conjunction, fieldValue, searchTerms) => {
-  if (!searchTerms) {
-    return false;
-  }
-  const conjunctionUpper = conjunction ? conjunction.toUpperCase() : 'AND';
-  const [field, value] = fieldValue.split(':');
-  if (!value) {
-    const allClause = createEmptyClause();
-    allClause.queryInput = { stringValue: field };
-    return allClause;
-  }
-  if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
-    throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
-  }
-  const searchTerm = findSearchTerm(field, value, searchTerms);
-  if (!searchTerm) {
-    throw new Error(`${field} not a valid field.`);
-  }
-  const queryInput = {};
-  switch (searchTerm.dataType) {
-    case 'date':
-      // (created:%5B2019-01-01%20TO%200001-12-12%5D)
-      console.log(value);
-      break;
-    case 'enum':
-    case 'string':
-      if (searchTerm.hasRange) {
-        console.log(value);
-      }
-      queryInput.stringValue = value;
-      break;
-    case 'integer':
-      console.log('integer');
-      break;
-    default:
-      return null;
-  }
-  return {
-    id: v1(),
-    logicOperator: conjunctionUpper,
-    field: searchTerm,
-    queryInput,
-  };
-};
-
-export const getQueryFromUrl = (query: string) => {
-  const m = query.match(/\?query=(.*)/);
-  return m && decodeURI(m[1]);
-};
-
-export const unpackQueryUrl = (query: string, searchTerms: Array<FieldType>) => {
-  const regex_query = /\(?([0-9a-z]+:?[0-9a-z\[\]\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
-  let match;
-  const clauses = [];
-  while ((match = regex_query.exec(query)) !== null) {
-    const fieldValue = match[1];
-    const conjunction = match[2] || 'AND';
-    clauses.push(parseClause(conjunction, fieldValue, searchTerms));
-  }
-  return clauses;
-};

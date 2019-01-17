@@ -14,6 +14,7 @@ import {
   removeClause,
   fetchEvidencesIfNeeded,
   fetchSearchTermsIfNeeded,
+  updateClauses,
 } from './state/actions';
 import {
   Clause, FieldType, Operator, EvidenceType,
@@ -133,6 +134,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
   dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
+  dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
 });
 
 const SearchContainer = withRouter(

@@ -19,6 +19,7 @@ export const REQUEST_SEARCH_TERMS = 'REQUEST_SEARCH_TERMS';
 export const RECEIVE_SEARCH_TERMS = 'RECEIVE_SEARCH_TERMS';
 export const REQUEST_EVIDENCES = 'REQUEST_EVIDENCES';
 export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
+export const UPDATE_CLAUSES = 'UPDATE_CLAUSES';
 
 export const selectField = (clauseId: string, field: FieldType) => action(SELECT_FIELD, {
   clauseId,
@@ -59,6 +60,10 @@ export const requestSearchTerms = () => action(REQUEST_SEARCH_TERMS);
 export const receiveSearchTerms = (data: Array<FieldType>) => action(RECEIVE_SEARCH_TERMS, {
   data,
   receivedAt: Date.now(),
+});
+
+export const updateClauses = clauses => action(UPDATE_CLAUSES, {
+  clauses,
 });
 
 export const fetchSearchTerms = () => async (dispatch: Dispatch) => {

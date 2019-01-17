@@ -33,6 +33,7 @@ export type FieldType = {
     name: string;
     value: string;
   }>;
+  items?: Array<FieldType>;
 };
 
 export type Input = {
