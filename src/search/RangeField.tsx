@@ -10,11 +10,15 @@ interface RangeFieldProps {
 }
 
 const RangeField = ({
-  field, type, handleChange, rangeFrom, rangeTo,
+  field,
+  type,
+  handleChange,
+  rangeFrom = '',
+  rangeTo = '',
 }: RangeFieldProps) => (
   <Fragment>
     <label htmlFor={`from_input_${field.id}`}>
-      From
+        From
       <input
         id={`from_input_${field.id}`}
         type={type}
@@ -24,7 +28,7 @@ const RangeField = ({
       />
     </label>
     <label htmlFor={`to_input_${field.id}`}>
-      To
+        To
       <input
         id={`to_input_${field.id}`}
         type={type}

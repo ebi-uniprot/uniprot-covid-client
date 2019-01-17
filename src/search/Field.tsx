@@ -4,6 +4,7 @@ import EnumField from './EnumField';
 import TextField from './TextField';
 import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
 import { FieldType, Input } from './types/searchTypes';
+import query from './state/reducers';
 
 type FieldProps = {
   field: FieldType;
@@ -62,15 +63,18 @@ const Field = ({
       break;
     case 'integer':
       if (hasRange) {
-        node = RangeField({
+        return RangeField({
           field,
           handleChange: handleRangeInputChange,
+          rangeFrom: queryInput.rangeFrom,
+          rangeTo: queryInput.rangeTo,
         });
       }
-      node = TextField({
+      return TextField({
         field,
         type: 'number',
-        handleChange: { handleInputChange },
+        handleChange: handleInputChange,
+        value: queryInput.stringValue,
       });
       break;
     default:
