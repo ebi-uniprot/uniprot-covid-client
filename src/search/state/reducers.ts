@@ -8,7 +8,7 @@ import { Clause, EvidenceType } from '../types/searchTypes';
 export type SearchActions = ActionType<typeof searchActions>;
 
 export const clause = (state: Clause, action: SearchActions) => {
-  if (state.id !== action.clauseId) {
+  if (state.id !== action.payload.clauseId) {
     return state;
   }
   switch (action.type) {

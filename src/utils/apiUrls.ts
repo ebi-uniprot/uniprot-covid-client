@@ -40,18 +40,11 @@ export const getUniProtQueryUrl = (
   columns: Array<string>,
   filters: Array<string>,
   cursor: string,
-) => {
-  console.log(
-    queryString.stringify({
-      query: encodedUniprotQueryString,
-    }),
-  );
-  return `${apiUrls.advanced_search}?${queryString.stringify({
-    query: encodedUniprotQueryString,
-    fields: columns.join(','),
-    includeFacets: true,
-  })}`;
-};
+) => `${apiUrls.advanced_search}?${queryString.stringify({
+  query: encodedUniprotQueryString,
+  fields: columns.join(','),
+  includeFacets: true,
+})}`;
 
 const findSearchTerm = (queryField, value, searchTerms) => searchTerms.find((field) => {
   if (field.items) {

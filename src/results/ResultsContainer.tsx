@@ -58,7 +58,6 @@ export class Results extends Component {
       selectedFacets, dispatchToggleFacet, queryString, history,
     } = this.props;
     dispatchToggleFacet(facetName, facetValue);
-    console.log(createFacetsQueryString(selectedFacets));
     const updatedQueryString = `${queryString}${createFacetsQueryString(selectedFacets)}`;
     history.push({ pathname: '/uniprotkb', search: `query=${updatedQueryString}` });
   }
