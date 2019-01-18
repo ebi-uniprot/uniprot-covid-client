@@ -105,7 +105,7 @@ export const fetchEvidences = (evidencesType: EvidenceType) => async (
 
 export const shouldFetchEvidences = (state: RootState, evidenceType: EvidenceType) => {
   const evidences = state.query.evidences[evidenceType];
-  return !evidences.isFetching;
+  return !evidences.isFetching && !evidences.data.length;
 };
 
 export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
