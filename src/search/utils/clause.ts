@@ -2,6 +2,7 @@ import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input } from '../types/searchTypes';
 import { FieldType } from '../types/searchTypes';
+import Field from '../Field';
 
 type Clause = {
   id: string;
@@ -37,12 +38,16 @@ const findSearchTerm = (
   queryField: string,
   value: string,
   searchTerms: Array<FieldType>,
-): FieldType | undefined => searchTerms.find((field: FieldType) => {
-  if (field.items) {
-    return findSearchTerm(queryField, value, field.items);
+): FieldType | undefined => {
+  for (let i = 0; i < searchTerms.length; i++) {
+    const searchTerm = searchTerms[i];
+    if (searchTerm.term === queryField) return searchTerm;
+    if (searchTerm.items) {
+      const found = findSearchTerm(queryField, value, searchTerm.items);
+      if (found) return found;
+    }
   }
-  return field.term === queryField;
-});
+};
 
 const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
 
@@ -61,10 +66,12 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
     throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
   }
   const searchTerm = findSearchTerm(field, value, searchTerms);
+  console.log(searchTerm);
   if (!searchTerm) {
     throw new Error(`${field} not a valid field.`);
   }
   const queryInput = {};
+  console.log(searchTerm.dataType);
   switch (searchTerm.dataType) {
     case 'date':
       // (created:%5B2019-01-01%20TO%200001-12-12%5D)
@@ -72,6 +79,7 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
       break;
     case 'enum':
     case 'string':
+      console.log('here');
       if (searchTerm.hasRange) {
         console.log(value);
       }
