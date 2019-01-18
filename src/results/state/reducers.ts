@@ -1,3 +1,4 @@
+import { array } from 'prop-types';
 import * as resultsActions from './actions';
 
 const results = (state = [], action) => {
@@ -15,26 +16,25 @@ const results = (state = [], action) => {
         lastUpdated: action.receivedAt,
         isFetching: false,
       };
-    case resultsActions.TOGGLE_FACET: {
-      const { selectedFacets } = state;
-      if (!(action.facetName in selectedFacets)) {
-        selectedFacets[action.facetName] = [action.facetValue];
-      } else if (selectedFacets[action.facetName].includes(action.facetValue)) {
-        selectedFacets[action.facetName] = selectedFacets[action.facetName].filter(
-          f => f !== action.facetValue,
-        );
-      } else {
-        selectedFacets[action.facetName].push(action.facetValue);
-      }
+    case resultsActions.ADD_FACET: {
       return {
         ...state,
-        selectedFacets,
+        selectedFacets: [
+          ...state.selectedFacets.slice(0, state.selectedFacets.length),
+          action.facet,
+        ],
       };
     }
-    case resultsActions.UPDATE_QUERY_STRING: {
+    case resultsActions.REMOVE_FACET: {
+      const index = state.selectedFacets.findIndex(
+        selectedFacet => action.facet.name === selectedFacet.name && action.facet.value === selectedFacet.value,
+      );
       return {
         ...state,
-        queryString: action.queryString,
+        selectedFacets: [
+          ...state.selectedFacets.slice(0, index),
+          ...state.selectedFacets.slice(index + 1),
+        ],
       };
     }
     default:

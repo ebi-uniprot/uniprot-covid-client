@@ -20,6 +20,7 @@ export const RECEIVE_SEARCH_TERMS = 'RECEIVE_SEARCH_TERMS';
 export const REQUEST_EVIDENCES = 'REQUEST_EVIDENCES';
 export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 export const UPDATE_CLAUSES = 'UPDATE_CLAUSES';
+export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 
 export const selectField = (clauseId: string, field: FieldType) => action(SELECT_FIELD, {
   clauseId,
@@ -116,3 +117,7 @@ export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
     dispatch(fetchEvidences(evidencesType));
   }
 };
+
+export const updateQueryString = queryString => action(UPDATE_QUERY_STRING, {
+  queryString,
+});

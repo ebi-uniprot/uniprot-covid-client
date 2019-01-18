@@ -15,6 +15,7 @@ import {
   fetchEvidencesIfNeeded,
   fetchSearchTermsIfNeeded,
   updateClauses,
+  updateQueryString,
 } from './state/actions';
 import {
   Clause, FieldType, Operator, EvidenceType,
@@ -67,17 +68,19 @@ export class Search extends Component<SearchProps, SearchContainerState> {
   }
 
   handleAdvancedSubmitClick() {
-    const { history, clauses } = this.props;
-    const encodedQueryString = encodeURI(createQueryString(clauses));
-    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
+    const { history, clauses, dispatchUpdateQueryString } = this.props;
+    dispatchUpdateQueryString(createQueryString(clauses));
+    // const encodedQueryString = encodeURI(createQueryString(clauses));
+    history.push({ pathname: '/uniprotkb' });
   }
 
   handleSubmitClick(e) {
     e.preventDefault();
-    const { history } = this.props;
+    const { history, dispatchUpdateQueryString } = this.props;
     const { queryString } = this.state;
-    const encodedQueryString = encodeURI(queryString);
-    history.push({ pathname: '/uniprotkb', search: `query=${encodedQueryString}` });
+    dispatchUpdateQueryString(queryString);
+    // const encodedQueryString = encodeURI(queryString);
+    history.push({ pathname: '/uniprotkb' });
   }
 
   handleQueryStringChange(queryString) {
@@ -135,6 +138,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
   dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
   dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
+  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
 });
 
 const SearchContainer = withRouter(

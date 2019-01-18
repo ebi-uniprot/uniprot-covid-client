@@ -1,8 +1,9 @@
 const initialState = {
   columns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
-  selectedFacets: {},
+  selectedFacets: [],
   data: [],
   queryString: '',
+  queryUrl: '',
   isFetching: false,
 };
 

@@ -70,11 +70,4 @@ const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduc
   }${query}`;
 }, '');
 
-const getFacetItems = (facetName, values) => values.reduce((queryAccumulator, value) => `${queryAccumulator} AND (${facetName}:${value})`, '');
-
-const createFacetsQueryString = facets => Object.keys(facets).reduce(
-  (queryAccumulator, facetName) => `${queryAccumulator}${getFacetItems(facetName, facets[facetName])}`,
-  '',
-);
-
-export { createQueryString, createFacetsQueryString };
+export { createQueryString };

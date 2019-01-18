@@ -32,13 +32,8 @@ export default apiUrls;
 const RE_QUERY = /\?$/;
 export const getSuggesterUrl = (url: string, value: string) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getUniProtQueryUrl = (
-  encodedUniprotQueryString: string,
-  columns: Array<string>,
-  filters: Array<string>,
-  cursor: string,
-) => `${apiUrls.advanced_search}?${queryString.stringify({
-  query: encodedUniprotQueryString,
+export const getQueryUrl = (encodedQueryString: string, columns: Array<string>, cursor?: string) => `${apiUrls.advanced_search}?${queryString.stringify({
+  query: encodedQueryString,
   fields: columns.join(','),
   includeFacets: true,
 })}`;
