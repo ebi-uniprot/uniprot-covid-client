@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { default as queryStringModule } from 'query-string';
 import { Facets } from 'franklin-sites';
 import { fetchResults, addFacet, removeFacet } from './state/actions';
+import { updateQueryString } from '../search/state/actions';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 
@@ -20,9 +21,15 @@ export class Results extends Component {
       queryString,
       selectedFacets,
       dispatchFetchResults,
+      dispatchUpdateQueryString,
       columns,
+      history,
     } = this.props;
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
+    if (queryFromUrl && queryFromUrl !== queryString) {
+      dispatchUpdateQueryString(queryFromUrl);
+    }
+    history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
     dispatchFetchResults(queryString, columns, selectedFacets);
   }
 
@@ -33,10 +40,12 @@ export class Results extends Component {
       queryString,
       selectedFacets,
       columns,
+      history,
     } = this.props;
     const {
       location: { search: prevQueryParamFromUrl },
     } = prevProps;
+
     // const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
     // const prevQueryFromUrl = queryStringModule.parse(prevQueryParamFromUrl).query;
     // if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
@@ -45,6 +54,7 @@ export class Results extends Component {
       || selectedFacets !== prevProps.selectedFacets
       || columns !== prevProps.columns
     ) {
+      history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
       dispatchFetchResults(queryString, columns, selectedFacets);
     }
   }
@@ -110,6 +120,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchFetchResults: (query, columns, selectedFacets) => dispatch(fetchResults(query, columns, selectedFacets)),
   dispatchAddFacet: (facetName, facetValue) => dispatch(addFacet(facetName, facetValue)),
   dispatchRemoveFacet: (facetName, facetValue) => dispatch(removeFacet(facetName, facetValue)),
+  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
 });
 
 const ResultsContainer = withRouter(
