@@ -71,7 +71,6 @@ const Field = ({
       break;
     case 'integer':
       if (hasRange) {
-        console.log(queryInput);
         return RangeField({
           field,
           handleChange: (v, isFrom) => handleRangeInputChange(parseInt(v), isFrom),
