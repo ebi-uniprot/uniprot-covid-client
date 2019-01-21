@@ -29,9 +29,9 @@ export class Results extends Component {
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
     if (queryFromUrl && queryFromUrl !== queryString) {
       dispatchUpdateQueryString(queryFromUrl);
+    } else {
+      dispatchFetchResults(queryString, columns, selectedFacets);
     }
-    history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-    dispatchFetchResults(queryString, columns, selectedFacets);
   }
 
   componentDidUpdate(prevProps) {
