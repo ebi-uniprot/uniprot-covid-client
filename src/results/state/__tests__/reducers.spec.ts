@@ -1,40 +1,24 @@
 import results from '../reducers';
-import { toggleFacet, fetchResultsStarted } from '../actions';
+import { addFacet, removeFacet, fetchResultsRequest } from '../actions';
 
 describe('Results reducer', () => {
   test('should add new facet', () => {
     const state = {
-      selectedFacets: {},
+      selectedFacets: [],
     };
-    const action = toggleFacet('facet1', 'value1');
+    const action = addFacet('facet1', 'value1');
     expect(results(state, action)).toEqual({
-      selectedFacets: {
-        facet1: ['value1'],
-      },
+      selectedFacets: [{ name: 'facet1', value: 'value1' }],
     });
   });
 
-  test('should add new facet value', () => {
+  test('should remove facet', () => {
     const state = {
-      selectedFacets: { facet1: ['value1'] },
+      selectedFacets: [{ name: 'facet1', value: 'value1' }],
     };
-    const action = toggleFacet('facet1', 'value2');
+    const action = removeFacet('facet1', 'value1');
     expect(results(state, action)).toEqual({
-      selectedFacets: {
-        facet1: ['value1', 'value2'],
-      },
-    });
-  });
-
-  test('should toggle facet', () => {
-    const state = {
-      selectedFacets: { facet1: ['value1', 'value2'] },
-    };
-    const action = toggleFacet('facet1', 'value1');
-    expect(results(state, action)).toEqual({
-      selectedFacets: {
-        facet1: ['value2'],
-      },
+      selectedFacets: [],
     });
   });
 
@@ -42,7 +26,7 @@ describe('Results reducer', () => {
     const state = {
       isFetching: false,
     };
-    const action = fetchResultsStarted();
+    const action = fetchResultsRequest();
     expect(results(state, action)).toEqual({
       isFetching: true,
     });

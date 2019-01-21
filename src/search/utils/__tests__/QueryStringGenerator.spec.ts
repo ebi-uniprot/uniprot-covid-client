@@ -1,4 +1,4 @@
-import { createQueryString, createFacetsQueryString } from '../QueryStringGenerator';
+import { createQueryString } from '../QueryStringGenerator';
 
 const clauses = [
   {
@@ -174,24 +174,6 @@ describe('QueryHelper', () => {
   test('should handle xrefs', () => {
     const queryString = createQueryString(clauses.filter(f => f.id === 'field_xref'));
     expect(queryString).toBe('(xref:pdb-Something)');
-  });
-
-  test('should generate facet query', () => {
-    const facets = {
-      facet1: ['value 1', 'value2'],
-      facet2: ['value 3'],
-    };
-    const queryString = createFacetsQueryString(facets);
-    expect(queryString).toBe(' AND (facet1:value 1) AND (facet1:value2) AND (facet2:value 3)');
-  });
-
-  test('should generate facet query with an empty facet', () => {
-    const facets = {
-      facet1: [],
-      facet2: ['value 3'],
-    };
-    const queryString = createFacetsQueryString(facets);
-    expect(queryString).toBe(' AND (facet2:value 3)');
   });
 
   // TODO databases
