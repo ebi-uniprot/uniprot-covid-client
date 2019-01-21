@@ -36,14 +36,15 @@ export const clausesAreEqual = (clause1: Clause, clause2: Clause) => serializabl
 
 const findSearchTerm = (
   queryField: string,
-  value: string,
   searchTerms: Array<FieldType>,
+  valuePrefix = '',
 ): FieldType | undefined => {
   for (let i = 0; i < searchTerms.length; i++) {
     const searchTerm = searchTerms[i];
-    if (searchTerm.term === queryField) return searchTerm;
+    if (valuePrefix && searchTerm.valuePrefix === valuePrefix && searchTerm.term === queryField) return searchTerm;
+    if (!valuePrefix && searchTerm.term === queryField) return searchTerm;
     if (searchTerm.items) {
-      const found = findSearchTerm(queryField, value, searchTerm.items);
+      const found = findSearchTerm(queryField, searchTerm.items, valuePrefix);
       if (found) return found;
     }
   }
@@ -51,56 +52,62 @@ const findSearchTerm = (
 
 const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
 
+const parseRangeValue = (value: string) => {
+  const regex_range = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
+  const capture_groups = regex_range.exec(value);
+  if (!capture_groups || (!capture_groups[1] && !capture_groups[2])) {
+    throw new Error(`${value} value is not a valid range`);
+  }
+  return {
+    rangeFrom: capture_groups[1],
+    rangeTo: capture_groups[2],
+  };
+};
+
 const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array<FieldType>) => {
   if (!searchTerms) {
     return false;
   }
   const conjunctionUpper = conjunction ? conjunction.toUpperCase() : 'AND';
-  const [field, value] = fieldValue.split(':');
+  let [field, value] = fieldValue.split(':');
   if (!value) {
     const allClause = createEmptyClause();
     allClause.queryInput = { stringValue: field };
     return allClause;
   }
   if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
-    throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}`);
+    throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}.`);
   }
-  const searchTerm = findSearchTerm(field, value, searchTerms);
+
+  let valuePrefix;
+  if (field === 'xref') {
+    const tokens = value.split('-');
+    if (tokens.length === 1) {
+      field = '';
+      value = tokens[0];
+    } else if (tokens.length === 2) {
+      valuePrefix = tokens[0];
+      value = tokens[1];
+    } else {
+      throw new Error(`${value} is not a properly formed xref.`);
+    }
+  }
+
+  const searchTerm = findSearchTerm(field, searchTerms, valuePrefix);
   console.log(searchTerm);
   if (!searchTerm) {
     throw new Error(`${field} not a valid field.`);
-  }
-  const queryInput = {};
-  console.log(searchTerm.dataType);
-  switch (searchTerm.dataType) {
-    case 'date':
-      // (created:%5B2019-01-01%20TO%200001-12-12%5D)
-      console.log(value);
-      break;
-    case 'enum':
-    case 'string':
-      console.log('here');
-      if (searchTerm.hasRange) {
-        console.log(value);
-      }
-      queryInput.stringValue = value;
-      break;
-    case 'integer':
-      console.log('integer');
-      break;
-    default:
-      return null;
   }
   return {
     id: v1(),
     logicOperator: conjunctionUpper,
     field: searchTerm,
-    queryInput,
+    queryInput: searchTerm.hasRange ? parseRangeValue(value) : { stringValue: value },
   };
 };
 
 export const unpackQueryUrl = (query: string, searchTerms: Array<FieldType>) => {
-  const regex_query = /\(?([0-9a-z]+:?[0-9a-z\[\]\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  const regex_query = /\(?([0-9a-z]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
   let match;
   const clauses = [];
   while ((match = regex_query.exec(query)) !== null) {

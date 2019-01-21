@@ -29,7 +29,15 @@ const Field = ({
       );
       break;
     case 'date':
-      node = <RangeField type="date" field={field} handleChange={handleRangeInputChange} />;
+      node = (
+        <RangeField
+          type="date"
+          field={field}
+          handleChange={handleRangeInputChange}
+          rangeFrom={queryInput.rangeFrom}
+          rangeTo={queryInput.rangeTo}
+        />
+      );
       break;
     case 'string':
       node = (
@@ -63,9 +71,10 @@ const Field = ({
       break;
     case 'integer':
       if (hasRange) {
+        console.log(queryInput);
         return RangeField({
           field,
-          handleChange: handleRangeInputChange,
+          handleChange: (v, isFrom) => handleRangeInputChange(parseInt(v), isFrom),
           rangeFrom: queryInput.rangeFrom,
           rangeTo: queryInput.rangeTo,
         });
@@ -73,7 +82,7 @@ const Field = ({
       return TextField({
         field,
         type: 'number',
-        handleChange: handleInputChange,
+        handleChange: v => handleInputChange(parseInt(clauseId), v),
         value: queryInput.stringValue,
       });
       break;

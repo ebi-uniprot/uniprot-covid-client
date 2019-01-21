@@ -25,6 +25,7 @@ export class Results extends Component {
       columns,
       history,
     } = this.props;
+    console.log(queryParamFromUrl);
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
     if (queryFromUrl && queryFromUrl !== queryString) {
       dispatchUpdateQueryString(queryFromUrl);
