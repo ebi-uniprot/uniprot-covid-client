@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Autocomplete } from 'franklin-sites';
 import { v1 } from 'uuid';
 import fetchData from '../utils/fetchData';
-import appendUniqueId from './prepareData';
 import { getSuggesterUrl } from '../utils/apiUrls';
 
 type Props = {
@@ -43,8 +42,11 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   fetchOptions = (url: string) => {
     fetchData(url)
-      .then(data => data.data.suggestions.map(x => ({ pathLabel: x, itemLabel: x })))
-      .then(data => appendUniqueId(data, 'autocomplete'))
+      .then(data => data.data.suggestions.map(x => ({
+        pathLabel: x.value,
+        itemLabel: x.value,
+        id: x.id,
+      })))
       .then(data => this.setState({ data }))
       .catch(e => console.error(e));
   };
