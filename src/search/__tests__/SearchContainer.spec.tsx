@@ -39,4 +39,8 @@ describe('Search shallow components', () => {
     };
     wrapper = shallow(<Search {...props} />);
   });
+
+  test('should render', () => {
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
 });

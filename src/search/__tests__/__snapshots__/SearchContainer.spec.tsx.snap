@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search shallow components should render 1`] = `
+"<Fragment>
+  <Component onSubmit={[Function: bound handleSubmitClick]} onChange={[Function: bound handleQueryStringChange]} searchTerm=\\"\\" />
+  <button type=\\"button\\" onClick={[Function: bound toggleAdvanced]} className=\\"adv-search-toggle\\">
+    Advanced search
+  </button>
+</Fragment>"
+`;
