@@ -69,9 +69,10 @@ export class Search extends Component<SearchProps, SearchContainerState> {
 
   handleAdvancedSubmitClick() {
     const { history, clauses, dispatchUpdateQueryString } = this.props;
-    dispatchUpdateQueryString(createQueryString(clauses));
-    // const encodedQueryString = encodeURI(createQueryString(clauses));
-    history.push({ pathname: '/uniprotkb' });
+    const queryString = createQueryString(clauses);
+    dispatchUpdateQueryString(queryString);
+    history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
+
   }
 
   handleSubmitClick(e) {
@@ -79,8 +80,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const { history, dispatchUpdateQueryString } = this.props;
     const { queryString } = this.state;
     dispatchUpdateQueryString(queryString);
-    // const encodedQueryString = encodeURI(queryString);
-    history.push({ pathname: '/uniprotkb' });
+    history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
   }
 
   handleQueryStringChange(queryString) {
