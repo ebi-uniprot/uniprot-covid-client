@@ -94,7 +94,6 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
   }
 
   const searchTerm = findSearchTerm(field, searchTerms, valuePrefix);
-  console.log(searchTerm);
   if (!searchTerm) {
     throw new Error(`${field} not a valid field.`);
   }

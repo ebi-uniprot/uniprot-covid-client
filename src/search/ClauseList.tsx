@@ -26,7 +26,7 @@ type ClauseListProps = {
   searchTerms: Array<FieldType>;
   evidences: any;
   handleFieldSelect: (clauseId: string, field: FieldType) => void;
-  handleInputChange: (clauseId: string, value: string | number) => void;
+  handleInputChange: (clauseId: string, value: string | number, id: string) => void;
   handleEvidenceChange: (clauseId: string, value: string | number) => void;
   handleRangeInputChange: (clauseId: string, value: number, from?: boolean) => void;
   handleLogicChange: (clauseId: string, value: string | number) => void;
@@ -69,7 +69,7 @@ const ClauseList = ({
       />
       <Field
         field={clause.field}
-        handleInputChange={(value: string) => handleInputChange(clause.id, value)}
+        handleInputChange={(value: string, id: string) => handleInputChange(clause.id, value, id)}
         handleRangeInputChange={(value: number, from?: boolean) => handleRangeInputChange(clause.id, value, from)
           }
         queryInput={clause.queryInput}

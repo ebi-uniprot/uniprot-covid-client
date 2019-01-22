@@ -41,6 +41,7 @@ export type Input = {
   rangeFrom?: number;
   rangeTo?: number;
   evidenceValue?: string;
+  id?: string;
 };
 
 export type Clause = {

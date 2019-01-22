@@ -24,15 +24,51 @@ const getItemTypeEvidencePrefix = (itemType: string) => {
 
 const getItemTypeRangePrefix = (itemType: string) => (itemType === 'feature' ? 'ftlen_' : '');
 
+const createTermString = (term: string, itemType: string, id: string | undefined) => {
+  const itemTypePrefix = getItemTypePrefix(itemType);
+  if (term === 'ec') {
+    if (id) {
+      return 'ec:';
+    }
+    throw new Error('Value not provided in query');
+  }
+  if (['organism', 'taxonomy'].includes(term)) {
+    if (id) {
+      return `${term}_id:`;
+    }
+    return `${term}_name:`;
+  }
+  return `${itemTypePrefix}${term}${term ? ':' : ''}`;
+};
+
+const createValueString = (
+  term: string,
+  valuePrefix: string | undefined,
+  stringValue: string,
+  id: string | undefined,
+) => {
+  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
+  if (term === 'ec') {
+    if (id) {
+      return id;
+    }
+    throw new Error('Value not provided in query');
+  }
+  if (['organism', 'taxonomy'].includes(term) && id) {
+    return id;
+  }
+  return `${valuePrefixChecked}${stringValue}`;
+};
+
 const createSimpleSubquery = (clause: Clause) => {
   const { itemType, term, valuePrefix } = clause.field;
-  const { stringValue } = clause.queryInput;
-  const itemTypePrefix = getItemTypePrefix(itemType);
-  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
+  const { stringValue, id } = clause.queryInput;
   if (!stringValue) {
     throw new Error('Value not provided in query');
   }
-  return `(${itemTypePrefix}${term}${term ? ':' : ''}${valuePrefixChecked}${stringValue})`;
+  const termString = createTermString(term, itemType, id);
+  const valueString = createValueString(term, valuePrefix, stringValue, id);
+  return `(${termString}${valueString})`;
 };
 
 const createRangeSubquery = (clause: Clause) => {
@@ -56,7 +92,10 @@ const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
 
 const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
   let query = '';
-  if (clause.queryInput.stringValue && clause.queryInput.stringValue !== '') {
+  if (
+    (clause.queryInput.id && clause.queryInput.id !== '')
+      || (clause.queryInput.stringValue && clause.queryInput.stringValue !== '')
+  ) {
     query = `${query}${createSimpleSubquery(clause)}`;
   }
   if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {

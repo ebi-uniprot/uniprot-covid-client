@@ -45,7 +45,8 @@ class AutocompleteWrapper extends Component<Props, State> {
       .then(data => data.data.suggestions.map(x => ({
         pathLabel: x.value,
         itemLabel: x.value,
-        id: x.id,
+        apiId: x.id,
+        id: v1(),
       })))
       .then(data => this.setState({ data }))
       .catch(e => console.error(e));
@@ -53,7 +54,7 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   handleSelect = (chosen: Chosen) => {
     const { onSelect } = this.props;
-    onSelect(chosen.pathLabel);
+    onSelect(chosen.pathLabel, chosen.apiId);
   };
 
   render() {

@@ -21,7 +21,11 @@ export const clause = (state: Clause, action: SearchActions) => {
     case searchActions.UPDATE_INPUT_VALUE:
       return {
         ...state,
-        queryInput: { ...state.queryInput, stringValue: action.payload.value },
+        queryInput: {
+          ...state.queryInput,
+          stringValue: action.payload.value,
+          id: action.payload.id,
+        },
       };
     case searchActions.UPDATE_RANGE_VALUE:
       return {

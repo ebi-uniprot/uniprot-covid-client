@@ -27,9 +27,10 @@ export const selectField = (clauseId: string, field: FieldType) => action(SELECT
   field,
 });
 
-export const updateInputValue = (clauseId: string, value: string) => action(UPDATE_INPUT_VALUE, {
+export const updateInputValue = (clauseId: string, value: string, id: string) => action(UPDATE_INPUT_VALUE, {
   clauseId,
   value,
+  id,
 });
 
 export const updateEvidence = (clauseId: string, value: string) => action(UPDATE_EVIDENCE, {
