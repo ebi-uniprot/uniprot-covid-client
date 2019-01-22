@@ -1,22 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
-import {
-  selectField,
-  updateInputValue,
-  updateEvidence,
-  updateRangeValue,
-  updateLogicOperator,
-  submitAdvancedQuery,
-  addClause,
-  removeClause,
-  fetchEvidencesIfNeeded,
-  fetchSearchTermsIfNeeded,
-  updateClauses,
-  updateQueryString,
-} from './state/actions';
+import { RootState, RootAction } from '../state/state-types';
+import * as searchActions from './state/actions';
 import {
   Clause, FieldType, Operator, EvidenceType,
 } from './types/searchTypes';
@@ -24,20 +12,20 @@ import AdvancedSearch from './AdvancedSearch';
 import { createQueryString } from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
-import { RootState } from '../state/initialState';
-import { SearchState } from './state/initialState';
 
-interface SearchProps extends RouteComponentProps, SearchState {
+interface SearchProps extends RouteComponentProps {
   queryString: string;
-  dispatchFetchSearchTerms: () => void;
-  dispatchfetchEvidencesIfNeeded: (type: string) => void;
-  dispatchSubmitAdvancedQuery: () => void;
+  // dispatchFetchSearchTerms: () => void;
+  // dispatchfetchEvidencesIfNeeded: (type: string) => void;
+  // dispatchSubmitAdvancedQuery: () => void;
+  clauses?: Array<Clause>;
   dispatchUpdateQueryString: (type: string) => void;
-  dispatchAddClause: () => void;
+  // dispatchAddClause: () => void;
 }
 
 interface SearchContainerState {
   showAdvanced: boolean;
+  queryString: string;
 }
 
 export class Search extends Component<SearchProps, SearchContainerState> {
@@ -54,7 +42,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SearchProps) {
     const { queryString: prevQueryString } = prevProps;
     const { queryString } = this.props;
     if (prevQueryString !== queryString) {
@@ -72,10 +60,9 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const queryString = createQueryString(clauses);
     dispatchUpdateQueryString(queryString);
     history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-
   }
 
-  handleSubmitClick(e) {
+  handleSubmitClick(e: SyntheticEvent) {
     e.preventDefault();
     const { history, dispatchUpdateQueryString } = this.props;
     const { queryString } = this.state;
@@ -83,7 +70,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
   }
 
-  handleQueryStringChange(queryString) {
+  handleQueryStringChange(queryString: string) {
     this.setState({ queryString });
   }
 
@@ -126,20 +113,23 @@ const mapStateToProps = (state: RootState) => ({
   queryString: state.results.queryString,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleFieldSelect: (clauseId: string, field: FieldType) => dispatch(selectField(clauseId, field)),
-  handleInputChange: (clauseId: string, value: string, id: string) => dispatch(updateInputValue(clauseId, value, id)),
-  handleEvidenceChange: (clauseId: string, value: string) => dispatch(updateEvidence(clauseId, value)),
-  handleRangeInputChange: (clauseId: string, value: number, from: boolean) => dispatch(updateRangeValue(clauseId, value, from)),
-  handleLogicChange: (clauseId: string, value: Operator) => dispatch(updateLogicOperator(clauseId, value)),
-  handleRemoveClause: (clauseId: string) => dispatch(removeClause(clauseId)),
-  dispatchAddClause: () => dispatch(addClause()),
-  dispatchfetchEvidencesIfNeeded: evidencesType => dispatch(fetchEvidencesIfNeeded(evidencesType)),
-  dispatchFetchSearchTermsIfNeeded: () => dispatch(fetchSearchTermsIfNeeded()),
-  dispatchSubmitAdvancedQuery: () => dispatch(submitAdvancedQuery()),
-  dispatchUpdateClauses: clauses => dispatch(updateClauses(clauses)),
-  dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
-});
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators(
+  {
+    handleFieldSelect: (clauseId: string, field: FieldType) => searchActions.selectField(clauseId, field),
+    handleInputChange: (clauseId: string, value: string, id: string) => searchActions.updateInputValue(clauseId, value, id),
+    handleEvidenceChange: (clauseId: string, value: string) => searchActions.updateEvidence(clauseId, value),
+    handleRangeInputChange: (clauseId: string, value: number, from: boolean) => searchActions.updateRangeValue(clauseId, value, from),
+    handleLogicChange: (clauseId: string, value: Operator) => searchActions.updateLogicOperator(clauseId, value),
+    handleRemoveClause: (clauseId: string) => searchActions.removeClause(clauseId),
+    dispatchAddClause: () => searchActions.addClause(),
+    dispatchfetchEvidencesIfNeeded: evidencesType => searchActions.fetchEvidencesIfNeeded(evidencesType),
+    dispatchFetchSearchTermsIfNeeded: () => searchActions.fetchSearchTermsIfNeeded(),
+    dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
+    dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
+    dispatchUpdateQueryString: queryString => searchActions.updateQueryString(queryString),
+  },
+  dispatch,
+);
 
 const SearchContainer = withRouter(
   connect(

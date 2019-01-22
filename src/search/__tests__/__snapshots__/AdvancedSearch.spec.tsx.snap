@@ -12,7 +12,7 @@ exports[`AdvancedSearch shallow components should render 1`] = `
       </select>
     </label>
   </div>
-  <ClauseList dispatchAddClause={[Function: mockConstructor]} handleAdvancedSubmitClick={[Function: mockConstructor]} dispatchFetchSearchTerms={[Function: mockConstructor]} dispatchfetchEvidencesIfNeeded={[Function: mockConstructor]} dispatchCopyQueryClausesToSearch={[Function: mockConstructor]} history={{...}} clauses={{...}} namespace=\\"UniProtKB\\" searchTerms={{...}} evidences={{...}} />
+  <ClauseList dispatchAddClause={[Function: mockConstructor]} handleAdvancedSubmitClick={[Function: mockConstructor]} dispatchFetchSearchTermsIfNeeded={[Function: mockConstructor]} dispatchfetchEvidencesIfNeeded={[Function: mockConstructor]} dispatchCopyQueryClausesToSearch={[Function: mockConstructor]} history={{...}} clauses={{...}} namespace=\\"UniProtKB\\" searchTerms={{...}} evidences={{...}} />
   <button type=\\"button\\" id=\\"add-field\\" onClick={[Function: mockConstructor]}>
     Add Field
   </button>

@@ -7,11 +7,17 @@ import rootReducer from './state/reducers';
 import App from './App';
 import initialState from './state/initialState';
 
-let store;
-if (process.env.NODE_ENV === 'development') {
-  const debug = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-  store = createStore(rootReducer, initialState, debug(applyMiddleware(thunkMiddleware)));
-} else {
-  store = createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
+function configureStore(initialState: any) {
+  let store;
+  if (process.env.NODE_ENV === 'development') {
+    const debug = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+    store = createStore(rootReducer, initialState!, debug(applyMiddleware(thunkMiddleware)));
+  } else {
+    store = createStore(rootReducer, initialState!, applyMiddleware(thunkMiddleware));
+  }
+  return store;
 }
+
+const store = configureStore(initialState);
+
 ReactDOM.render(<App store={store} />, document.getElementById('root'));

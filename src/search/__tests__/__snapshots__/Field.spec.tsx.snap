@@ -4,7 +4,7 @@ exports[`Clause component should not return anything 1`] = `""`;
 
 exports[`Clause component should render \`date\` field 1`] = `
 "<div className=\\"advanced-search__inputs\\">
-  <RangeField type=\\"date\\" field={{...}} handleChange={[Function: mockConstructor]} />
+  <RangeField type=\\"date\\" field={{...}} handleChange={[Function: mockConstructor]} rangeFrom={[undefined]} rangeTo={[undefined]} />
 </div>"
 `;
 
@@ -28,23 +28,23 @@ exports[`Clause component should render an \`enum\` field 1`] = `
 `;
 
 exports[`Clause component should render an \`integer\` \`range\` field 1`] = `
-"<div className=\\"advanced-search__inputs\\">
-  <div className=\\"advanced-search__inputs\\">
-    <label htmlFor=\\"input_sites\\">
-      Any
-      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
-    </label>
-  </div>
-</div>"
+"<Fragment>
+  <label htmlFor=\\"from_input_undefined\\">
+    From
+    <input id=\\"from_input_undefined\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"0\\" value=\\"\\" />
+  </label>
+  <label htmlFor=\\"to_input_undefined\\">
+    To
+    <input id=\\"to_input_undefined\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"100\\" value=\\"\\" />
+  </label>
+</Fragment>"
 `;
 
 exports[`Clause component should render an \`integer\` field 1`] = `
 "<div className=\\"advanced-search__inputs\\">
-  <div className=\\"advanced-search__inputs\\">
-    <label htmlFor=\\"input_sites\\">
-      Any
-      <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
-    </label>
-  </div>
+  <label htmlFor=\\"input_sites\\">
+    Any
+    <input id=\\"input_sites\\" type=\\"number\\" value=\\"\\" onChange={[Function: onChange]} placeholder=\\"translocation\\" />
+  </label>
 </div>"
 `;

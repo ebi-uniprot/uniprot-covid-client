@@ -3,8 +3,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { action } from 'typesafe-actions';
 import fetchData from '../../utils/fetchData';
 import apiUrls from '../../utils/apiUrls';
-import { FieldType, Operator, EvidenceType } from '../types/searchTypes';
-import { RootState } from '../../state/initialState';
+import {
+  FieldType, Operator, EvidenceType, Clause,
+} from '../types/searchTypes';
+import { RootState } from '../../state/state-types';
 
 export const SELECT_FIELD = 'SELECT_FIELD';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
@@ -64,7 +66,7 @@ export const receiveSearchTerms = (data: Array<FieldType>) => action(RECEIVE_SEA
   receivedAt: Date.now(),
 });
 
-export const updateClauses = clauses => action(UPDATE_CLAUSES, {
+export const updateClauses = (clauses: Array<Clause>) => action(UPDATE_CLAUSES, {
   clauses,
 });
 
@@ -119,6 +121,6 @@ export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
   }
 };
 
-export const updateQueryString = queryString => action(UPDATE_QUERY_STRING, {
+export const updateQueryString = (queryString: string) => action(UPDATE_QUERY_STRING, {
   queryString,
 });

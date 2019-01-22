@@ -40,12 +40,7 @@ describe('Search shallow components', () => {
     wrapper = shallow(<Search {...props} />);
   });
 
-  test('should call to get search terms', () => {
-    expect(props.dispatchFetchSearchTerms).toHaveBeenCalled();
-  });
-
-  test('should call to get evidences', () => {
-    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('go');
-    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('annotation');
+  test('should render', () => {
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 });

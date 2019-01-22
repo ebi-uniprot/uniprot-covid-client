@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
 
-// type Props = {
-//   updateEvidence: Function,
-//   selectedEvidence?: string,
-//   url: string,
-//   data: Array<Group>,
-// };
+type EvidenceFieldProps = {
+  value: string;
+  handleChange: (value:string) => void;
+  data: Array<any>,
+};
 
-const EvidenceField = ({ value = '', handleChange, data = [] }) => {
+const EvidenceField: React.FC<EvidenceFieldProps> = ({ value = '', handleChange, data = [] }) => {
   if (!data) {
     return null;
   }
@@ -19,7 +18,7 @@ const EvidenceField = ({ value = '', handleChange, data = [] }) => {
         <select id="evidence_select" value={value} onChange={e => handleChange(e.target.value)}>
           {data.map(group => (
             <optgroup label={group.groupName} key={group.groupName}>
-              {group.items.map(item => (
+              {group.items.map((item: {code: string,name: string}) => (
                 <option value={item.code} key={item.code}>
                   {item.name}
                 </option>

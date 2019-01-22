@@ -14,7 +14,7 @@ describe('AdvancedSearch shallow components', () => {
     props = {
       dispatchAddClause: jest.fn(),
       handleAdvancedSubmitClick: jest.fn(),
-      dispatchFetchSearchTerms: jest.fn(),
+      dispatchFetchSearchTermsIfNeeded: jest.fn(),
       dispatchfetchEvidencesIfNeeded: jest.fn(),
       dispatchCopyQueryClausesToSearch: jest.fn(),
       history: {
@@ -41,6 +41,15 @@ describe('AdvancedSearch shallow components', () => {
 
   test('should render', () => {
     expect(wrapper.debug()).toMatchSnapshot();
+  });
+
+  test('should call to get search terms', () => {
+    expect(props.dispatchFetchSearchTermsIfNeeded).toHaveBeenCalled();
+  });
+
+  test('should call to get evidences', () => {
+    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('go');
+    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('annotation');
   });
 
   test('should add field rows', () => {

@@ -1,6 +1,13 @@
 import React, { Fragment } from 'react';
+import { FieldType } from './types/searchTypes';
 
-const EnumField = ({ field, handleChange, value }) => (
+type EnumFieldProps = {
+  field: FieldType;
+  handleChange: (value: string) => void;
+  value: string;
+}
+
+const EnumField: React.FC<EnumFieldProps> = ({ field, handleChange, value }) => (
   <Fragment>
     <label htmlFor={`select_${field.term}`}>
       {field.label}

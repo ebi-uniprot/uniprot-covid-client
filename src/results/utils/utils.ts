@@ -6,7 +6,7 @@ const createFacetsQueryString = facets => facets.reduce(
   '',
 );
 
-const getAPIQueryUrl = (queryString: string, columns: [string], selectedFacets: {}) => {
+const getAPIQueryUrl = (queryString: string, columns: [string], selectedFacets: []) => {
   const facetsQueryString = createFacetsQueryString(selectedFacets);
   return getQueryUrl(`${queryString}${facetsQueryString}`, columns);
 };
