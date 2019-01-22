@@ -25,7 +25,6 @@ const getItemTypeEvidencePrefix = (itemType: string) => {
 const getItemTypeRangePrefix = (itemType: string) => (itemType === 'feature' ? 'ftlen_' : '');
 
 const createTermString = (term: string, itemType: string, id: string | undefined) => {
-  const itemTypePrefix = getItemTypePrefix(itemType);
   if (term === 'ec') {
     if (id) {
       return 'ec:';
@@ -38,6 +37,7 @@ const createTermString = (term: string, itemType: string, id: string | undefined
     }
     return `${term}_name:`;
   }
+  const itemTypePrefix = getItemTypePrefix(itemType);
   return `${itemTypePrefix}${term}${term ? ':' : ''}`;
 };
 
@@ -47,7 +47,6 @@ const createValueString = (
   stringValue: string,
   id: string | undefined,
 ) => {
-  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
   if (term === 'ec') {
     if (id) {
       return id;
@@ -57,6 +56,7 @@ const createValueString = (
   if (['organism', 'taxonomy'].includes(term) && id) {
     return id;
   }
+  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
   return `${valuePrefixChecked}${stringValue}`;
 };
 

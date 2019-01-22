@@ -3,6 +3,7 @@ import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input } from '../types/searchTypes';
 import { FieldType } from '../types/searchTypes';
 import Field from '../Field';
+import { searchTerms } from '../state/reducers';
 
 type Clause = {
   id: string;
@@ -34,7 +35,7 @@ export const createEmptyClause = (): Clause => ({
 
 export const clausesAreEqual = (clause1: Clause, clause2: Clause) => serializableDeepAreEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));
 
-const findSearchTerm = (
+const findSearchTermRecursive = (
   queryField: string,
   searchTerms: Array<FieldType>,
   valuePrefix = '',
@@ -44,13 +45,23 @@ const findSearchTerm = (
     if (valuePrefix && searchTerm.valuePrefix === valuePrefix && searchTerm.term === queryField) return searchTerm;
     if (!valuePrefix && searchTerm.term === queryField) return searchTerm;
     if (searchTerm.items) {
-      const found = findSearchTerm(queryField, searchTerm.items, valuePrefix);
+      const found = findSearchTermRecursive(queryField, searchTerm.items, valuePrefix);
       if (found) return found;
     }
   }
 };
 
-const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
+const findSearchTerm = (
+  queryField: string,
+  searchTerms: Array<FieldType>,
+  valuePrefix = '',
+): FieldType | undefined => {
+  const searchTerm = findSearchTermRecursive(queryField, searchTerms, valuePrefix);
+  if (!searchTerm) {
+    throw new Error(`${queryField} not a valid field.`);
+  }
+  return searchTerm;
+};
 
 const parseRangeValue = (value: string) => {
   const regex_range = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
@@ -64,36 +75,63 @@ const parseRangeValue = (value: string) => {
   };
 };
 
+const getXrefAnySearchTerm = searchTerms => searchTerms
+  .find(x => x.id === 'id_group_cross_references')[0]
+  .items.find(x => x.id === 'id_group_any').items[0];
+
+const parseXrefClause = (field, value, conjunction, searchTerms) => {
+  const clause = {
+    id: v1(),
+    logicOperator: conjunction,
+  };
+  const tokens = value.split('-');
+  if (tokens.length === 1) {
+    // Only a value is provided so this is an xref any search
+    return {
+      ...clause,
+      field: getXrefAnySearchTerm(searchTerms),
+      queryInput: { stringValue: tokens[0] },
+    };
+  }
+  if (tokens.length === 2) {
+    return {
+      ...clause,
+      field: findSearchTerm('xref', searchTerms, tokens[0]),
+      queryInput: { stringValue: tokens[1] },
+    };
+  }
+  throw new Error(`${value} is not a properly formed xref.`);
+};
+
+const parseIdNameClause = (field, value, conjunction, searchTerms) => {
+  console.log(field, value, conjunction, searchTerms);
+};
+
 const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array<FieldType>) => {
   if (!searchTerms) {
     return false;
   }
   const conjunctionUpper = conjunction ? conjunction.toUpperCase() : 'AND';
-  let [field, value] = fieldValue.split(':');
-  if (!value) {
-    const allClause = createEmptyClause();
-    allClause.queryInput = { stringValue: field };
-    return allClause;
-  }
+  const ALLOWED_CONJUNCTIONS = ['AND', 'OR', 'NOT'];
   if (!ALLOWED_CONJUNCTIONS.includes(conjunctionUpper)) {
     throw new Error(`${conjunctionUpper} conjunction is not part of ${ALLOWED_CONJUNCTIONS}.`);
   }
 
-  let valuePrefix;
-  if (field === 'xref') {
-    const tokens = value.split('-');
-    if (tokens.length === 1) {
-      field = '';
-      value = tokens[0];
-    } else if (tokens.length === 2) {
-      valuePrefix = tokens[0];
-      value = tokens[1];
-    } else {
-      throw new Error(`${value} is not a properly formed xref.`);
-    }
+  const [field, value] = fieldValue.split(':');
+  if (!value) {
+    const emptyClause = createEmptyClause();
+    return { ...emptyClause, queryInput: { stringValue: field } };
   }
 
-  const searchTerm = findSearchTerm(field, searchTerms, valuePrefix);
+  if (field.match(/^xref/i)) {
+    return parseXrefClause(field, value, conjunction, searchTerms);
+  }
+
+  if (field.match(/^organism|taxonomy/i)) {
+    return parseIdNameClause(field, value, conjunction, searchTerms);
+  }
+
+  const searchTerm = findSearchTerm(field, searchTerms);
   if (!searchTerm) {
     throw new Error(`${field} not a valid field.`);
   }
@@ -106,7 +144,7 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
 };
 
 export const unpackQueryUrl = (query: string, searchTerms: Array<FieldType>) => {
-  const regex_query = /\(?([0-9a-z]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  const regex_query = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
   let match;
   const clauses = [];
   while ((match = regex_query.exec(query)) !== null) {
