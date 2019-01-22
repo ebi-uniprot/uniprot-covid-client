@@ -12,7 +12,7 @@ type AppProps = {
   store: RootState;
 };
 
-const App: React.SFC<AppProps> = ({ store }) => (
+const App: React.FC<AppProps> = ({ store }) => (
   <FranklinSite>
     <Provider store={store}>
       <Router basename={BASE_URL}>
