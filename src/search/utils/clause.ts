@@ -1,9 +1,12 @@
 import { v1 } from 'uuid';
+import { string } from 'prop-types';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input } from '../types/searchTypes';
 import { FieldType } from '../types/searchTypes';
 import Field from '../Field';
 import { searchTerms } from '../state/reducers';
+import { getSuggesterUrl } from '../../utils/apiUrls';
+import fetchData from '../../utils/fetchData';
 
 type Clause = {
   id: string;
@@ -103,8 +106,34 @@ const parseXrefClause = (field, value, conjunction, searchTerms) => {
   throw new Error(`${value} is not a properly formed xref.`);
 };
 
-const parseIdNameClause = (field, value, conjunction, searchTerms) => {
-  console.log(field, value, conjunction, searchTerms);
+const getFieldValueForId = (searchTerm, id) => fetchData(getSuggesterUrl(searchTerm.autoComplete, `"${id}"`)).then(
+  data => data.data.suggestions.find(x => x.id === id).value,
+);
+
+const parseIdNameClause = (queryField, value, conjunction, searchTerms) => {
+  const [field, searchType] = queryField.split('_');
+  const searchTerm = findSearchTerm(field, searchTerms);
+  const clause = {
+    id: v1(),
+    logicOperator: conjunction,
+    field: searchTerm,
+  };
+  console.log(searchTerm);
+  if (searchType === 'id') {
+    getFieldValueForId(searchTerm, value).then((stringValue) => {
+      console.log(stringValue);
+      return {
+        ...clause,
+        queryInput: { id: value, stringValue },
+      };
+    });
+  } else if (searchType === 'name') {
+    return {
+      ...clause,
+      queryInput: { stringValue: value },
+    };
+  }
+  throw new Error(`${queryField} not a valid _id or _name style term.`);
 };
 
 const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array<FieldType>) => {
@@ -128,7 +157,9 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
   }
 
   if (field.match(/^organism|taxonomy/i)) {
-    return parseIdNameClause(field, value, conjunction, searchTerms);
+    const t = parseIdNameClause(field, value, conjunction, searchTerms);
+    console.log(t);
+    return t;
   }
 
   const searchTerm = findSearchTerm(field, searchTerms);
