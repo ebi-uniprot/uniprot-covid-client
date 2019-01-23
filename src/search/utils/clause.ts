@@ -106,30 +106,16 @@ const parseXrefClause = (field, value, conjunction, searchTerms) => {
   throw new Error(`${value} is not a properly formed xref.`);
 };
 
-const getFieldValueForId = (searchTerm, id) => fetchData(getSuggesterUrl(searchTerm.autoComplete, `"${id}"`)).then(
-  data => data.data.suggestions.find(x => x.id === id).value,
-);
-
 const parseIdNameClause = (queryField, value, conjunction, searchTerms) => {
   const [field, searchType] = queryField.split('_');
   const searchTerm = findSearchTerm(field, searchTerms);
-  const clause = {
-    id: v1(),
-    logicOperator: conjunction,
-    field: searchTerm,
-  };
+
   console.log(searchTerm);
   if (searchType === 'id') {
-    getFieldValueForId(searchTerm, value).then((stringValue) => {
-      console.log(stringValue);
-      return {
-        ...clause,
-        queryInput: { id: value, stringValue },
-      };
-    });
-  } else if (searchType === 'name') {
     return {
-      ...clause,
+      id: v1(),
+      logicOperator: conjunction,
+      field: searchTerm,
       queryInput: { stringValue: value },
     };
   }
