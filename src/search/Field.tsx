@@ -47,7 +47,11 @@ const Field = ({
               url={field.autoComplete}
               onSelect={handleInputChange}
               title={field.label}
-              value={queryInput.stringValue}
+              value={
+                queryInput.id
+                  ? `${queryInput.id} [${queryInput.stringValue}]`
+                  : queryInput.stringValue
+              }
             />
           ) : (
             <TextField
