@@ -1,7 +1,11 @@
 import { array } from 'prop-types';
+import { ActionType } from 'typesafe-actions';
 import * as resultsActions from './actions';
+import initialState, { ResultsState } from './initialState';
 
-const results = (state = [], action) => {
+export type ResultAction = ActionType<typeof resultsActions>;
+
+const results = (state: ResultsState = initialState, action: ResultAction) => {
   switch (action.type) {
     case resultsActions.FETCH_RESULTS_REQUEST:
       return {
@@ -11,9 +15,9 @@ const results = (state = [], action) => {
     case resultsActions.FETCH_RESULTS_SUCCESS:
       return {
         ...state,
-        results: action.data.results,
-        facets: action.data.facets,
-        lastUpdated: action.receivedAt,
+        results: action.payload.data.results,
+        facets: action.payload.data.facets,
+        lastUpdated: action.payload.receivedAt,
         isFetching: false,
       };
     case resultsActions.ADD_FACET: {
@@ -21,13 +25,14 @@ const results = (state = [], action) => {
         ...state,
         selectedFacets: [
           ...state.selectedFacets.slice(0, state.selectedFacets.length),
-          action.facet,
+          action.payload.facet,
         ],
       };
     }
     case resultsActions.REMOVE_FACET: {
       const index = state.selectedFacets.findIndex(
-        selectedFacet => action.facet.name === selectedFacet.name && action.facet.value === selectedFacet.value,
+        selectedFacet => action.payload.facet.name === selectedFacet.name
+          && action.payload.facet.value === selectedFacet.value,
       );
       return {
         ...state,

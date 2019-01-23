@@ -1,10 +1,7 @@
 import { v1 } from 'uuid';
-import { string } from 'prop-types';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input } from '../types/searchTypes';
 import { FieldType } from '../types/searchTypes';
-import Field from '../Field';
-import { searchTerms } from '../state/reducers';
 import { getSuggesterUrl } from '../../utils/apiUrls';
 import fetchData from '../../utils/fetchData';
 
