@@ -5,9 +5,9 @@ import { createQueryString } from '../utils/QueryStringGenerator';
 import initialState, { SearchState } from './initialState';
 import { Clause, EvidenceType } from '../types/searchTypes';
 
-export type SearchActions = ActionType<typeof searchActions>;
+export type SearchAction = ActionType<typeof searchActions>;
 
-export const clause = (state: Clause, action: SearchActions) => {
+export const clause = (state: Clause, action: SearchAction) => {
   if (state.id !== action.payload.clauseId) {
     return state;
   }
@@ -53,7 +53,7 @@ export const clause = (state: Clause, action: SearchActions) => {
   }
 };
 
-export const searchTerms = (state: SearchState['searchTerms'], action: SearchActions) => {
+export const searchTerms = (state: SearchState['searchTerms'], action: SearchAction) => {
   switch (action.type) {
     case searchActions.REQUEST_SEARCH_TERMS:
       return {
@@ -72,7 +72,7 @@ export const searchTerms = (state: SearchState['searchTerms'], action: SearchAct
   }
 };
 
-export const evidences = (state: SearchState['evidences'], action: SearchActions) => {
+export const evidences = (state: SearchState['evidences'], action: SearchAction) => {
   switch (action.type) {
     case searchActions.REQUEST_EVIDENCES:
       return {
@@ -96,7 +96,7 @@ export const evidences = (state: SearchState['evidences'], action: SearchActions
   }
 };
 
-const query = (state: SearchState = initialState, action: SearchActions) => {
+const query = (state: SearchState = initialState, action: SearchAction): SearchState => {
   switch (action.type) {
     case searchActions.SELECT_FIELD:
     case searchActions.UPDATE_INPUT_VALUE:
