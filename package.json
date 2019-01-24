@@ -9,7 +9,7 @@
     "build": "webpack --mode production --config webpack.prod.js",
     "check-types": "tsc",
     "jslint": "./node_modules/.bin/eslint -c .eslintrc.json --ext .js --ext .jsx src  __mocks__",
-    "test": "jest -u"
+    "test": "jest"
   },
   "browserslist": [
     "last 2 version",
