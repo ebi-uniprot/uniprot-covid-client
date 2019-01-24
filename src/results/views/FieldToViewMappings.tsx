@@ -3,7 +3,16 @@ import get from 'lodash/get';
 import SimpleView from './SimpleView';
 import NameView from './NameView';
 
-const organismNameReducer = type => (acc, cur) => {
+type ProteinName = {
+  recommendedName: {
+    ecNumber: {
+      value: string;
+    };
+  };
+  alternativeName: [{ fullName: { value: string } }];
+};
+
+const organismNameReducer = (type: string) => (acc: string, cur: string) => {
   if (cur.type === type) {
     if (type === 'scientific') {
       return `${acc} ${cur.value}`;
@@ -14,16 +23,16 @@ const organismNameReducer = type => (acc, cur) => {
 };
 
 const FieldToViewMappings = {
-  accession: row => <SimpleView termValue={row.accession} />,
-  id: row => <SimpleView termValue={row.id} />,
-  protein_name: (row) => {
+  accession: (row: { accession: string }) => <SimpleView termValue={row.accession} />,
+  id: (row: { id: string }) => <SimpleView termValue={row.id} />,
+  protein_name: (row: ProteinName) => {
     const alternativeNames = [];
     const ecNumber = get(row, 'protein.recommendedName.ecNumber.value');
     if (ecNumber) {
       alternativeNames.push(ecNumber);
     }
     const alternativeName = get(row, 'protein.alternativeName', []).map(
-      name => name.fullName.value,
+      (name: ProteinName['alternativeName']) => name.fullName.value,
     );
     if (alternativeName.length) {
       alternativeNames.push(alternativeName);
@@ -35,7 +44,7 @@ const FieldToViewMappings = {
     };
     return <NameView {...props} />;
   },
-  gene_names: (row) => {
+  gene_names: (row: any) => {
     const genes = get(row, 'gene', []);
     const name = genes.map(gene => get(gene, 'name.value')).join(', ');
     const alternativeNames = genes
@@ -47,7 +56,7 @@ const FieldToViewMappings = {
     const props = { name, alternativeNames };
     return <NameView {...props} />;
   },
-  organism: (row) => {
+  organism: (row: any) => {
     const names = get(row, 'organism.names', []);
     const termValue = ['scientific', 'common', 'synonym'].reduce(
       (acc, cur) => `${acc} ${names.reduce(organismNameReducer(cur), '')}`,

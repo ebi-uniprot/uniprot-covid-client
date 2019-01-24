@@ -3,8 +3,18 @@ import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from './views/FieldToViewMappings';
 import '../styles/alert.scss';
 
-const ResultsTable = ({
-  results = [], columnNames, selectedRows, handleRowSelect,
+type ResultsTableProps = {
+  results: [];
+  columnNames: Array<string>;
+  selectedRows: Array<{ name: string; value: string }>;
+  handleRowSelect: () => void;
+};
+
+const ResultsTable: React.FC<ResultsTableProps> = ({
+  results = [],
+  columnNames,
+  selectedRows,
+  handleRowSelect,
 }) => {
   const columns = columnNames.map((columnName) => {
     let render;

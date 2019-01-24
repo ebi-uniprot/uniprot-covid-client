@@ -25,12 +25,7 @@ export class Results extends Component {
       columns,
       history,
     } = this.props;
-    const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    if (queryFromUrl && queryFromUrl !== queryString) {
-      dispatchUpdateQueryString(queryFromUrl);
-    } else {
-      dispatchFetchResults(queryString, columns, selectedFacets);
-    }
+    dispatchFetchResults(queryString, columns, selectedFacets);
   }
 
   componentDidUpdate(prevProps) {
@@ -108,7 +103,7 @@ export class Results extends Component {
 }
 
 const mapStateToProps = state => ({
-  queryString: state.results.queryString,
+  queryString: state.query.queryString,
   columns: state.results.columns,
   selectedFacets: state.results.selectedFacets,
   results: state.results.results,

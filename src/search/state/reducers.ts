@@ -8,9 +8,6 @@ import { Clause, EvidenceType } from '../types/searchTypes';
 export type SearchAction = ActionType<typeof searchActions>;
 
 export const clause = (state: Clause, action: SearchAction) => {
-  if (state.id !== action.payload.clauseId) {
-    return state;
-  }
   switch (action.type) {
     case searchActions.SELECT_FIELD:
       return {
@@ -105,7 +102,12 @@ const query = (state: SearchState = initialState, action: SearchAction): SearchS
     case searchActions.UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
-        clauses: state.clauses.map(c => clause(c, action)),
+        clauses: state.clauses.map((c) => {
+          if (c.id !== action.payload.clauseId) {
+            return c;
+          }
+          return clause(c, action);
+        }),
       };
     case searchActions.SUBMIT_ADVANCED_QUERY:
       return {
@@ -145,6 +147,12 @@ const query = (state: SearchState = initialState, action: SearchAction): SearchS
         ...state,
         evidences: evidences(state.evidences, action),
       };
+    case searchActions.UPDATE_QUERY_STRING: {
+      return {
+        ...state,
+        queryString: action.payload.queryString,
+      };
+    }
     default:
       return state;
   }
