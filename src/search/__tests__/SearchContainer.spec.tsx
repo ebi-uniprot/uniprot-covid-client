@@ -18,8 +18,12 @@ describe('Search shallow components', () => {
       dispatchFetchSearchTerms: jest.fn(),
       dispatchfetchEvidencesIfNeeded: jest.fn(),
       dispatchCopyQueryClausesToSearch: jest.fn(),
+      location: {
+        search: '',
+      },
       history: {
         push: jest.fn(),
+        replace: jest.fn(),
       },
       clauses: [...Array(4)].map(() => createEmptyClause()),
       namespace: 'UniProtKB',

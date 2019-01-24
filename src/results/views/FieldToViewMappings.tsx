@@ -9,7 +9,8 @@ type ProteinName = {
       value: string;
     };
   };
-  alternativeName: [{ fullName: { value: string } }];
+  alternativeName: [
+    {name: { fullName: { value: string } }}];
 };
 
 const organismNameReducer = (type: string) => (acc: string, cur: string) => {
