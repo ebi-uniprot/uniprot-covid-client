@@ -80,33 +80,37 @@ const createRangeSubquery = (clause: Clause) => {
   return `(${itemTypeRangePrefix}${term}:[${rangeFromChecked} TO ${rangeToChecked}])`;
 };
 
-const wrapIntoEvidenceSubquery = (clause: Clause, subQuery: string) => {
+const getEvidenceSubquery = (clause: Clause) => {
   const { evidenceValue } = clause.queryInput;
   const { term, itemType } = clause.field;
   if (!evidenceValue) {
     throw new Error('Evidence value not provided');
   }
   const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
-  return `(${subQuery} AND (${itemTypeEvidencePrefix}${term}:${evidenceValue}))`;
+  return `(${itemTypeEvidencePrefix}${term}:${evidenceValue})`;
 };
 
 const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
-  let query = '';
+  const query = [];
   if (
     (clause.queryInput.id && clause.queryInput.id !== '')
       || (clause.queryInput.stringValue && clause.queryInput.stringValue !== '')
   ) {
-    query = `${query}${createSimpleSubquery(clause)}`;
+    query.push(createSimpleSubquery(clause));
   }
   if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
-    query = `${query}${createRangeSubquery(clause)}`;
+    query.push(createRangeSubquery(clause));
   }
   if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
-    query = `${wrapIntoEvidenceSubquery(clause, query)}`;
+    query.push(getEvidenceSubquery(clause));
+  }
+  let queryJoined = query.join(' AND ');
+  if (query.length > 1) {
+    queryJoined = `(${queryJoined})`;
   }
   return `${queryAccumulator}${
     queryAccumulator.length > 0 && query.length > 0 ? ` ${clause.logicOperator} ` : ''
-  }${query}`;
+  }${queryJoined}`;
 }, '');
 
 export { createQueryString };
