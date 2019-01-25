@@ -6,12 +6,26 @@ exports[`FieldToViewMappings should render gene_names 1`] = `
     My gene
   </strong>
    
+   
   <span>
     <span>
+       
       synonym 1
+    </span>
+    <span>
+       
       synonym 2
+    </span>
+    <span>
+       
       orfNames 1
+    </span>
+    <span>
+       
       orfNames 2
+    </span>
+    <span>
+       
       orfNames 3
     </span>
   </span>
@@ -23,10 +37,12 @@ exports[`FieldToViewMappings should render protein_name 1`] = `
   <strong>
     My protein
   </strong>
+   
   My prot
    
   <span>
     <span>
+       
       ec1234
     </span>
   </span>

@@ -84,22 +84,22 @@ const FieldToViewMappings = {
     if (!genes || genes.length <= 0) {
       return;
     }
-    const name = genes.map(gene => idx(gene, _ => _.name.value)).join(', ');
-
-    const alternativeNames = genes
-      .map((gene) => {
-        const returnNames = [];
-        if (gene.synonyms) {
-          returnNames.push(...gene.synonyms.map(syn => syn.value));
-        }
-        if (gene.orfNames) {
-          returnNames.push(...gene.orfNames.map(orf => orf.value));
-        }
-        return returnNames;
-      })
-      .filter(x => x.length)
-      .flat();
-    const props = { name, alternativeNames };
+    // const name = genes.map(gene => idx(gene, _ => _.name.value)).join(', ');
+    const names: string[] = [];
+    const alternativeNames: string[] = [];
+    genes.forEach((gene) => {
+      if (gene.name) {
+        names.push(gene.name.value);
+      }
+      if (gene.synonyms) {
+        alternativeNames.push(...gene.synonyms.map(syn => syn.value));
+      }
+      if (gene.orfNames) {
+        alternativeNames.push(...gene.orfNames.map(orf => orf.value));
+      }
+    });
+    const nameString = names.join(', ');
+    const props = { name: nameString, alternativeNames };
     return <NameView {...props} />;
   },
   organism: (row: OrganismRow) => {

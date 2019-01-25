@@ -5,16 +5,20 @@ exports[`NameView component should render 1`] = `
   <strong>
     Name
   </strong>
+   
   Short Name
    
   <span>
     <span>
+       
       name1
     </span>
     <span>
+       
       name2
     </span>
     <span>
+       
       name3
     </span>
   </span>
