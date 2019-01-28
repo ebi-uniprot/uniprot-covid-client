@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { default as queryStringModule } from 'query-string';
 import { Facets } from 'franklin-sites';
-import { fetchResults, addFacet, removeFacet } from './state/actions';
+import {
+  fetchResults, addFacet, removeFacet, updateColumnSort,
+} from './state/actions';
 import { updateQueryString } from '../search/state/actions';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
@@ -36,21 +38,17 @@ export class Results extends Component {
       selectedFacets,
       columns,
       history,
+      sort: { column, direction },
     } = this.props;
-    const {
-      location: { search: prevQueryParamFromUrl },
-    } = prevProps;
-
-    // const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    // const prevQueryFromUrl = queryStringModule.parse(prevQueryParamFromUrl).query;
-    // if (queryFromUrl && queryFromUrl !== prevQueryFromUrl) {
     if (
       queryString !== prevProps.queryString
       || selectedFacets !== prevProps.selectedFacets
       || columns !== prevProps.columns
+      || column !== prevProps.sort.column
+      || direction !== prevProps.sort.direction
     ) {
       history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-      dispatchFetchResults(queryString, columns, selectedFacets);
+      dispatchFetchResults(queryString, columns, selectedFacets, column, direction);
     }
   }
 
@@ -74,6 +72,8 @@ export class Results extends Component {
       columns,
       dispatchAddFacet,
       dispatchRemoveFacet,
+      dispatchUpdateColumnSort,
+      sort,
     } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
@@ -95,6 +95,8 @@ export class Results extends Component {
             columnNames={columns}
             handleRowSelect={this.handleRowSelect}
             selectedRows={selectedRows}
+            handleHeaderClick={dispatchUpdateColumnSort}
+            sort={sort}
           />
 )}
       />
@@ -109,13 +111,15 @@ const mapStateToProps = state => ({
   results: state.results.results,
   facets: state.results.facets,
   isFetching: state.results.isFetching,
+  sort: state.results.sort,
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFetchResults: (query, columns, selectedFacets) => dispatch(fetchResults(query, columns, selectedFacets)),
+  dispatchFetchResults: (query, columns, selectedFacets, sortBy, sortDirection) => dispatch(fetchResults(query, columns, selectedFacets, sortBy, sortDirection)),
   dispatchAddFacet: (facetName, facetValue) => dispatch(addFacet(facetName, facetValue)),
   dispatchRemoveFacet: (facetName, facetValue) => dispatch(removeFacet(facetName, facetValue)),
   dispatchUpdateQueryString: queryString => dispatch(updateQueryString(queryString)),
+  dispatchUpdateColumnSort: column => dispatch(updateColumnSort(column)),
 });
 
 const ResultsContainer = withRouter(

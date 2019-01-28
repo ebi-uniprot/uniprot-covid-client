@@ -1,3 +1,8 @@
+export enum SortDirections {
+  ascend = 'ascend',
+  descend = 'descend',
+}
+
 export type ResultsState = {
   columns: Array<string>;
   selectedFacets: Array<{ name: string; value: string }>;
@@ -5,6 +10,10 @@ export type ResultsState = {
   queryUrl: string;
   isFetching: boolean;
   results: Array<any>;
+  sort: {
+    column: string;
+    direction: SortDirections;
+  };
 };
 
 const initialState = {
@@ -14,6 +23,10 @@ const initialState = {
   queryString: '',
   queryUrl: '',
   isFetching: false,
+  sort: {
+    column: '',
+    direction: SortDirections.ascend,
+  },
 };
 
 export default initialState;
