@@ -7,7 +7,7 @@ import { default as queryStringModule } from 'query-string';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/actions';
 import {
-  Clause, FieldType, Operator, EvidenceType,
+  Clause, FieldType, Operator, EvidenceType, Namespace,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import { createQueryString } from './utils/QueryStringGenerator';
@@ -16,12 +16,22 @@ import './styles/SearchContainer.scss';
 
 interface SearchProps extends RouteComponentProps {
   queryString: string;
-  // dispatchFetchSearchTerms: () => void;
-  // dispatchfetchEvidencesIfNeeded: (type: string) => void;
-  // dispatchSubmitAdvancedQuery: () => void;
-  clauses?: Array<Clause>;
   dispatchUpdateQueryString: (type: string) => void;
-  // dispatchAddClause: () => void;
+  searchTerms: [any];
+  namespace: Namespace;
+  clauses: Array<Clause>;
+  evidences: any;
+  dispatchUpdateClauses: (clauses: Array<Clause>) => void;
+  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
+  dispatchFetchSearchTermsIfNeeded: () => void;
+  handleAdvancedSubmitClick: () => void;
+  dispatchAddClause: () => void;
+  handleFieldSelect: (clauseId: string, field: FieldType) => void;
+  handleInputChange: (clauseId: string, value: string, id?: string) => void;
+  handleEvidenceChange: (clauseId: string, value: string) => void;
+  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
+  handleLogicChange: (clauseId: string, value: Operator) => void;
+  handleRemoveClause: (clauseId: string) => void;
 }
 
 interface SearchContainerState {
@@ -50,7 +60,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
       dispatchUpdateQueryString,
     } = this.props;
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    if (queryFromUrl && queryFromUrl !== queryString) {
+    if (queryFromUrl && queryFromUrl !== queryString && typeof queryFromUrl === 'string') {
       dispatchUpdateQueryString(queryFromUrl);
     }
   }
@@ -129,9 +139,9 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators(
   {
     handleFieldSelect: (clauseId: string, field: FieldType) => searchActions.selectField(clauseId, field),
-    handleInputChange: (clauseId: string, value: string, id: string) => searchActions.updateInputValue(clauseId, value, id),
+    handleInputChange: (clauseId: string, value: string, id?: string) => searchActions.updateInputValue(clauseId, value, id),
     handleEvidenceChange: (clauseId: string, value: string) => searchActions.updateEvidence(clauseId, value),
-    handleRangeInputChange: (clauseId: string, value: number, from: boolean) => searchActions.updateRangeValue(clauseId, value, from),
+    handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => searchActions.updateRangeValue(clauseId, value, from),
     handleLogicChange: (clauseId: string, value: Operator) => searchActions.updateLogicOperator(clauseId, value),
     handleRemoveClause: (clauseId: string) => searchActions.removeClause(clauseId),
     dispatchAddClause: () => searchActions.addClause(),

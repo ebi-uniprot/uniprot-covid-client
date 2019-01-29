@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import ClauseList from './ClauseList';
 import { unpackQueryUrl } from './utils/clause';
-import { Namespace } from './types/searchTypes';
+import {
+  Namespace, EvidenceType, Clause, FieldType, Operator,
+} from './types/searchTypes';
 import './styles/AdvancedSearch.scss';
 
 type AdvancedSearchProps = {
-  handleAdvancedSubmitClick: () => void;
+  searchTerms: [any];
+  queryString: string;
   namespace: Namespace;
+  clauses: Array<Clause>;
+  evidences: any;
+  dispatchUpdateClauses: (clauses: Array<Clause>) => void;
+  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
+  dispatchFetchSearchTermsIfNeeded: () => void;
+  handleAdvancedSubmitClick: () => void;
   dispatchAddClause: () => void;
+  handleFieldSelect: (clauseId: string, field: FieldType) => void;
+  handleInputChange: (clauseId: string, value: string, id?: string) => void;
+  handleEvidenceChange: (clauseId: string, value: string) => void;
+  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
+  handleLogicChange: (clauseId: string, value: Operator) => void;
+  handleRemoveClause: (clauseId: string) => void;
 };
 class AdvancedSearch extends Component<AdvancedSearchProps> {
   componentDidMount() {
@@ -18,8 +33,8 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
       dispatchFetchSearchTermsIfNeeded,
       queryString,
     } = this.props;
-    dispatchfetchEvidencesIfNeeded('go');
-    dispatchfetchEvidencesIfNeeded('annotation');
+    dispatchfetchEvidencesIfNeeded(EvidenceType.GO);
+    dispatchfetchEvidencesIfNeeded(EvidenceType.ANNOTATION);
     dispatchFetchSearchTermsIfNeeded();
 
     if (searchTerms.length && queryString) {
@@ -27,7 +42,7 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: AdvancedSearchProps) {
     const { queryString: prevQueryString, searchTerms: prevSearchTerms } = prevProps;
     const { queryString, searchTerms, dispatchUpdateClauses } = this.props;
     if (

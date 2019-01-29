@@ -4,12 +4,11 @@ import EnumField from './EnumField';
 import TextField from './TextField';
 import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
 import { FieldType, Input } from './types/searchTypes';
-import query from './state/reducers';
 
 type FieldProps = {
   field: FieldType;
-  handleInputChange: (clauseId: string, value: string | number) => void;
-  handleRangeInputChange: (value: number, from?: boolean) => void;
+  handleInputChange: (value: string, id?: string) => void;
+  handleRangeInputChange: (value: string, from?: boolean) => void;
   queryInput: Input;
 };
 
@@ -61,7 +60,7 @@ const Field = ({
               value={queryInput.stringValue}
             />
           )}
-          {hasRange && dataType !== 'integer' && (
+          {hasRange && String(dataType) !== 'integer' && (
             <RangeField
               field={field}
               handleChange={handleRangeInputChange}
@@ -77,7 +76,7 @@ const Field = ({
       if (hasRange) {
         return RangeField({
           field,
-          handleChange: (v, isFrom) => handleRangeInputChange(parseInt(v), isFrom),
+          handleChange: (value, isFrom) => handleRangeInputChange(value, isFrom),
           rangeFrom: queryInput.rangeFrom,
           rangeTo: queryInput.rangeTo,
         });
@@ -85,7 +84,7 @@ const Field = ({
       return TextField({
         field,
         type: 'number',
-        handleChange: v => handleInputChange(parseInt(clauseId), v),
+        handleChange: value => handleInputChange(value),
         value: queryInput.stringValue,
       });
       break;

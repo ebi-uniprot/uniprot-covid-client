@@ -4,8 +4,8 @@ import { FieldType } from './types/searchTypes';
 type EnumFieldProps = {
   field: FieldType;
   handleChange: (value: string) => void;
-  value: string;
-}
+  value: string | undefined;
+};
 
 const EnumField: React.FC<EnumFieldProps> = ({ field, handleChange, value }) => (
   <Fragment>

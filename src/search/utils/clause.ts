@@ -2,8 +2,6 @@ import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input } from '../types/searchTypes';
 import { FieldType } from '../types/searchTypes';
-import { getSuggesterUrl } from '../../utils/apiUrls';
-import fetchData from '../../utils/fetchData';
 
 type Clause = {
   id: string;
@@ -79,7 +77,7 @@ const getXrefAnySearchTerm = searchTerms => searchTerms
   .find(x => x.id === 'id_group_cross_references')[0]
   .items.find(x => x.id === 'id_group_any').items[0];
 
-const parseXrefClause = (field, value, conjunction, searchTerms) => {
+const parseXrefClause = (field, value, conjunction, searchTerms: Array<FieldType>) => {
   const clause = {
     id: v1(),
     logicOperator: conjunction,
@@ -160,7 +158,7 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
 export const unpackQueryUrl = (query: string, searchTerms: Array<FieldType>) => {
   const regex_query = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
   let match;
-  const clauses = [];
+  const clauses: Array<Clause> = [];
   while ((match = regex_query.exec(query)) !== null) {
     const fieldValue = match[1];
     const conjunction = match[2] || 'AND';

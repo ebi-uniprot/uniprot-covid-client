@@ -38,8 +38,8 @@ export type FieldType = {
 
 export type Input = {
   stringValue?: string;
-  rangeFrom?: number;
-  rangeTo?: number;
+  rangeFrom?: string;
+  rangeTo?: string;
   evidenceValue?: string;
   id?: string;
 };

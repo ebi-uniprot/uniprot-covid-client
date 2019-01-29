@@ -29,7 +29,7 @@ export const selectField = (clauseId: string, field: FieldType) => action(SELECT
   field,
 });
 
-export const updateInputValue = (clauseId: string, value: string, id: string) => action(UPDATE_INPUT_VALUE, {
+export const updateInputValue = (clauseId: string, value: string, id?: string) => action(UPDATE_INPUT_VALUE, {
   clauseId,
   value,
   id,
@@ -40,7 +40,7 @@ export const updateEvidence = (clauseId: string, value: string) => action(UPDATE
   value,
 });
 
-export const updateRangeValue = (clauseId: string, value: number, from: boolean) => action(UPDATE_RANGE_VALUE, {
+export const updateRangeValue = (clauseId: string, value: string, from?: boolean) => action(UPDATE_RANGE_VALUE, {
   clauseId,
   value,
   from,
