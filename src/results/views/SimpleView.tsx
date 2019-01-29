@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SimpleView = (props) => {
+const SimpleView = (props: { termValue: string }) => {
   const { termValue } = props;
   return <div>{termValue}</div>;
 };
