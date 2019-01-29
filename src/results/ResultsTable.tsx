@@ -10,6 +10,7 @@ type ResultsTableProps = {
   selectedRows: Array<{ name: string; value: string }>;
   handleRowSelect: () => void;
   handleHeaderClick: () => void;
+  sort: { column: string; direction: string };
 };
 
 const ResultsTable: React.FC<ResultsTableProps> = ({
