@@ -1,12 +1,24 @@
 import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
 import * as resultsActions from './actions';
-import initialState, { ResultsState } from './initialState';
+import initialState, { ResultsState, SortDirections } from './initialState';
 
 export type ResultAction = ActionType<typeof resultsActions>;
 
 const results = (state: ResultsState = initialState, action: ResultAction) => {
   switch (action.type) {
+    case resultsActions.UPDATE_COLUMN_SORT:
+      return {
+        ...state,
+        sort: {
+          column: action.payload.column,
+          direction:
+            state.sort.column === action.payload.column
+            && state.sort.direction === SortDirections.ascend
+              ? SortDirections.descend
+              : SortDirections.ascend,
+        },
+      };
     case resultsActions.FETCH_RESULTS_REQUEST:
       return {
         ...state,

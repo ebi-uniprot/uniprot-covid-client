@@ -1,6 +1,7 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
+import sortableColumns from '../results/sortableColumns';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
@@ -32,8 +33,15 @@ export default apiUrls;
 const RE_QUERY = /\?$/;
 export const getSuggesterUrl = (url: string, value: string) => joinUrl(prefix, url.replace(RE_QUERY, value));
 
-export const getQueryUrl = (encodedQueryString: string, columns: Array<string>, cursor?: string) => `${apiUrls.advanced_search}?${queryString.stringify({
+export const getQueryUrl = (
+  encodedQueryString: string,
+  columns: Array<string>,
+  cursor?: string,
+  sortBy?: string | undefined,
+  sortDirection?: string,
+) => `${apiUrls.advanced_search}?${queryString.stringify({
   query: encodedQueryString,
   fields: columns.join(','),
   includeFacets: true,
+  sort: sortBy in sortableColumns ? `${sortBy} ${sortDirection}` : undefined,
 })}`;

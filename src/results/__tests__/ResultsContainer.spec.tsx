@@ -27,6 +27,7 @@ describe('Results component', () => {
         push: jest.fn(),
         replace: jest.fn(),
       },
+      sort: { column: '', direction: '' },
     };
     wrapper = shallow(<Results {...props} />);
   });

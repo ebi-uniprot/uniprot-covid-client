@@ -105,7 +105,6 @@ const parseIdNameClause = (queryField, value, conjunction, searchTerms) => {
   const [field, searchType] = queryField.split('_');
   const searchTerm = findSearchTerm(field, searchTerms);
 
-  console.log(searchTerm);
   if (searchType === 'id') {
     return {
       id: v1(),
@@ -139,7 +138,6 @@ const parseClause = (conjunction: string, fieldValue: string, searchTerms: Array
 
   if (field.match(/^organism|taxonomy/i)) {
     const t = parseIdNameClause(field, value, conjunction, searchTerms);
-    console.log(t);
     return t;
   }
 

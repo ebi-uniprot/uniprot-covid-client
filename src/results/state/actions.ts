@@ -10,6 +10,7 @@ export const TOGGLE_FACET = 'TOGGLE_FACET';
 export const ADD_FACET = 'ADD_FACET';
 export const REMOVE_FACET = 'REMOVE_FACET';
 export const ADD_FACETS_TO_QUERY_STRING = 'ADD_FACETS_TO_QUERY_STRING';
+export const UPDATE_COLUMN_SORT = 'UPDATE_COLUMN_SORT';
 
 export const fetchResultsSuccess = (data: any) => action(FETCH_RESULTS_SUCCESS, {
   data,
@@ -18,11 +19,15 @@ export const fetchResultsSuccess = (data: any) => action(FETCH_RESULTS_SUCCESS, 
 
 export const fetchResultsRequest = () => action(FETCH_RESULTS_REQUEST);
 
-export const fetchResults = (queryString: string, columns: [string], selectedFacets: []) => async (
-  dispatch: Dispatch,
-) => {
+export const fetchResults = (
+  queryString: string,
+  columns: [string],
+  selectedFacets: [],
+  sortBy: string,
+  sortDirection: string,
+) => async (dispatch: Dispatch) => {
   dispatch(fetchResultsRequest());
-  fetchData(getAPIQueryUrl(queryString, columns, selectedFacets))
+  fetchData(getAPIQueryUrl(queryString, columns, selectedFacets, sortBy, sortDirection))
     .then(response => dispatch(fetchResultsSuccess(response.data)))
     .catch(error => console.error(error));
 };
@@ -42,3 +47,5 @@ export const removeFacet = (facetName: string, facetValue: string) => action(REM
 });
 
 export const updateQueryStringWithFacets = () => action(ADD_FACETS_TO_QUERY_STRING);
+
+export const updateColumnSort = (column: string) => action(UPDATE_COLUMN_SORT, { column });
