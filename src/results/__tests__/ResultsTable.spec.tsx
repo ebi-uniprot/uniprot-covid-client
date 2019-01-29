@@ -13,6 +13,7 @@ describe('ResultsTable component', () => {
     props = {
       columnNames: ['accession'],
       results: [{ accession: '1234' }, { accession: '5678' }],
+      sort: { column: 'accession', direction: 'descend' },
     };
     wrapper = shallow(<ResultsTable {...props} />);
   });

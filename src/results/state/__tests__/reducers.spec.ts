@@ -1,5 +1,7 @@
 import results from '../reducers';
-import { addFacet, removeFacet, fetchResultsRequest } from '../actions';
+import {
+  addFacet, removeFacet, fetchResultsRequest, updateColumnSort,
+} from '../actions';
 
 describe('Results reducer', () => {
   test('should add new facet', () => {
@@ -29,6 +31,16 @@ describe('Results reducer', () => {
     const action = fetchResultsRequest();
     expect(results(state, action)).toEqual({
       isFetching: true,
+    });
+  });
+
+  test('should sort on a column', () => {
+    const state = {
+      sort: { column: 'foo', direction: 'descend' },
+    };
+    const action = updateColumnSort('bar');
+    expect(results(state, action)).toEqual({
+      sort: { column: 'bar', direction: 'ascend' },
     });
   });
 });

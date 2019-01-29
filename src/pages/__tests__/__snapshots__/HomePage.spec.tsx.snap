@@ -2,9 +2,9 @@
 
 exports[`HomePage component should render 1`] = `
 "<HomePageLayout>
-  <E title=\\"Find your protein\\" footer=\\"The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.\\">
+  <S title=\\"Find your protein\\" footer=\\"The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.\\">
     <withRouter(Connect(Search)) />
-  </E>
+  </S>
   <Block columns=\\"4\\">
     <Component title=\\"UniProtKB\\" description=\\"This is a short description of what the resource is/provides.\\" namespace=\\"\\" />
     <Component title=\\"Proteomes\\" namespace=\\"proteomes\\" description=\\"Sets of proteins for reference and other species of interest.\\" />
