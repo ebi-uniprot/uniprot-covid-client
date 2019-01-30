@@ -1,12 +1,11 @@
-import { default as queryStringModule } from 'query-string';
 import { getQueryUrl } from '../../utils/apiUrls';
-import sortableColumns from '../sortableColumns';
-import { SortDirections } from '../state/initialState';
 
-const createFacetsQueryString = (facets: Array<Facet>) => facets.reduce(
-  (queryAccumulator, facet) => `${queryAccumulator} AND (${facet.name}:${facet.value})`,
-  '',
-);
+const createFacetsQueryString = (facets: Facet[]) =>
+  facets.reduce(
+    (queryAccumulator, facet) =>
+      `${queryAccumulator} AND (${facet.name}:${facet.value})`,
+    ''
+  );
 
 interface IApiSortDirection {
   ascend: string;
@@ -15,7 +14,7 @@ interface IApiSortDirection {
 
 const apiSortDirectionMap: IApiSortDirection = {
   ascend: 'asc',
-  descend: 'desc',
+  descend: 'desc'
 };
 
 const getAPIQueryUrl = (
@@ -23,7 +22,7 @@ const getAPIQueryUrl = (
   columns: [string],
   selectedFacets: [],
   sortBy: string,
-  sortDirection: string,
+  sortDirection: string
 ) => {
   const facetsQueryString = createFacetsQueryString(selectedFacets);
   const key: keyof IApiSortDirection = sortDirection as keyof IApiSortDirection;
@@ -33,7 +32,7 @@ const getAPIQueryUrl = (
     columns,
     undefined,
     sortBy,
-    apiSortDirection,
+    apiSortDirection
   );
 };
 

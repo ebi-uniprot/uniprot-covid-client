@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { default as queryStringModule } from 'query-string';
-import { Facets } from 'franklin-sites';
-import * as resultsActions from './state/actions';
-import * as searchActions from '../search/state/actions';
-import { Clause } from '../search/types/searchTypes';
-import SideBarLayout from '../layout/SideBarLayout';
-import ResultsTable from './ResultsTable';
-import { RootState, RootAction } from '../state/state-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Dispatch, bindActionCreators } from "redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { default as queryStringModule } from "query-string";
+import { Facets } from "franklin-sites";
+import * as resultsActions from "./state/actions";
+import * as searchActions from "../search/state/actions";
+import { Clause } from "../search/types/searchTypes";
+import SideBarLayout from "../layout/SideBarLayout";
+import ResultsTable from "./ResultsTable";
+import { RootState, RootAction } from "../state/state-types";
 
 interface IResultsProps extends RouteComponentProps {
   queryString: string;
@@ -19,7 +19,7 @@ interface IResultsProps extends RouteComponentProps {
     columns: Array<string>,
     selectedFacets: [],
     sortBy: string,
-    sortDirection: string,
+    sortDirection: string
   ) => void;
   dispatchUpdateQueryString: (type: string) => void;
   dispatchUpdateColumnSort: (column: string) => void;
@@ -53,9 +53,15 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchUpdateQueryString,
       columns,
       history,
-      sort: { column, direction },
+      sort: { column, direction }
     } = this.props;
-    dispatchFetchResults(queryString, columns, selectedFacets, column, direction);
+    dispatchFetchResults(
+      queryString,
+      columns,
+      selectedFacets,
+      column,
+      direction
+    );
   }
 
   componentDidUpdate(prevProps: IResultsProps) {
@@ -66,17 +72,23 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       selectedFacets,
       columns,
       history,
-      sort: { column, direction },
+      sort: { column, direction }
     } = this.props;
     if (
-      queryString !== prevProps.queryString
-      || selectedFacets !== prevProps.selectedFacets
-      || columns !== prevProps.columns
-      || column !== prevProps.sort.column
-      || direction !== prevProps.sort.direction
+      queryString !== prevProps.queryString ||
+      selectedFacets !== prevProps.selectedFacets ||
+      columns !== prevProps.columns ||
+      column !== prevProps.sort.column ||
+      direction !== prevProps.sort.direction
     ) {
-      history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-      dispatchFetchResults(queryString, columns, selectedFacets, column, direction);
+      history.push({ pathname: "/uniprotkb", search: `query=${queryString}` });
+      dispatchFetchResults(
+        queryString,
+        columns,
+        selectedFacets,
+        column,
+        direction
+      );
     }
   }
 
@@ -101,7 +113,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchAddFacet,
       dispatchRemoveFacet,
       dispatchUpdateColumnSort,
-      sort,
+      sort
     } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
@@ -109,15 +121,15 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
     }
     return (
       <SideBarLayout
-        sidebar={(
+        sidebar={
           <Facets
             data={facets}
             selectedFacets={selectedFacets}
             addFacet={dispatchAddFacet}
             removeFacet={dispatchRemoveFacet}
           />
-)}
-        content={(
+        }
+        content={
           <ResultsTable
             results={results}
             columnNames={columns}
@@ -126,7 +138,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
             handleHeaderClick={dispatchUpdateColumnSort}
             sort={sort}
           />
-)}
+        }
       />
     );
   }
@@ -139,25 +151,43 @@ const mapStateToProps = (state: RootState) => ({
   results: state.results.results,
   facets: state.results.facets,
   isFetching: state.results.isFetching,
-  sort: state.results.sort,
+  sort: state.results.sort
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators(
-  {
-    dispatchFetchResults: (query, columns, selectedFacets, sortBy, sortDirection) => resultsActions.fetchResults(query, columns, selectedFacets, sortBy, sortDirection),
-    dispatchAddFacet: (facetName, facetValue) => resultsActions.addFacet(facetName, facetValue),
-    dispatchRemoveFacet: (facetName, facetValue) => resultsActions.removeFacet(facetName, facetValue),
-    dispatchUpdateQueryString: queryString => searchActions.updateQueryString(queryString),
-    dispatchUpdateColumnSort: column => resultsActions.updateColumnSort(column),
-  },
-  dispatch,
-);
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      dispatchFetchResults: (
+        query,
+        columns,
+        selectedFacets,
+        sortBy,
+        sortDirection
+      ) =>
+        resultsActions.fetchResults(
+          query,
+          columns,
+          selectedFacets,
+          sortBy,
+          sortDirection
+        ),
+      dispatchAddFacet: (facetName, facetValue) =>
+        resultsActions.addFacet(facetName, facetValue),
+      dispatchRemoveFacet: (facetName, facetValue) =>
+        resultsActions.removeFacet(facetName, facetValue),
+      dispatchUpdateQueryString: queryString =>
+        searchActions.updateQueryString(queryString),
+      dispatchUpdateColumnSort: column =>
+        resultsActions.updateColumnSort(column)
+    },
+    dispatch
+  );
 
 const ResultsContainer = withRouter(
   connect(
     mapStateToProps,
-    mapDispatchToProps,
-  )(Results),
+    mapDispatchToProps
+  )(Results)
 );
 
 export default ResultsContainer;
