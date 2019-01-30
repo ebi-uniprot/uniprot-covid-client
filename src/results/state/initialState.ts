@@ -1,7 +1,4 @@
-export enum SortDirections {
-  ascend = 'ascend',
-  descend = 'descend',
-}
+import { SortDirections } from '../sortTypes';
 
 export type ResultsState = {
   columns: string[];
@@ -12,7 +9,7 @@ export type ResultsState = {
   results: any[];
   sort: {
     column: string;
-    direction: SortDirections;
+    direction: string;
   };
 };
 
@@ -25,7 +22,7 @@ const initialState = {
   isFetching: false,
   sort: {
     column: '',
-    direction: SortDirections.ascend,
+    direction: '',
   },
 };
 

@@ -1,4 +1,9 @@
 import { getQueryUrl } from '../../utils/apiUrls';
+import {
+  SortDirections,
+  SortDirectionsType,
+  sortableColumns
+} from '../sortTypes';
 
 const createFacetsQueryString = (facets: Facet[]) =>
   facets.reduce(
@@ -7,32 +12,25 @@ const createFacetsQueryString = (facets: Facet[]) =>
     ''
   );
 
-interface IApiSortDirection {
-  ascend: string;
-  descend: string;
-}
-
-const apiSortDirectionMap: IApiSortDirection = {
-  ascend: 'asc',
-  descend: 'desc'
-};
-
 const getAPIQueryUrl = (
   queryString: string,
   columns: [string],
   selectedFacets: [],
-  sortBy: string,
-  sortDirection: string
+  sortBy: sortableColumns | undefined = undefined,
+  sortDirectionKey: keyof SortDirectionsType = SortDirections.ascend
+    .app as keyof SortDirectionsType
 ) => {
+  console.log(sortDirectionKey);
+  console.log(SortDirections[sortDirectionKey]);
   const facetsQueryString = createFacetsQueryString(selectedFacets);
-  const key: keyof IApiSortDirection = sortDirection as keyof IApiSortDirection;
-  const apiSortDirection = apiSortDirectionMap[key];
   return getQueryUrl(
     `${queryString}${facetsQueryString}`,
     columns,
     undefined,
     sortBy,
-    apiSortDirection
+    sortBy && sortBy in sortableColumns
+      ? SortDirections[sortDirectionKey].api
+      : undefined
   );
 };
 

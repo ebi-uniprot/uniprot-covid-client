@@ -2,7 +2,7 @@ import React from 'react';
 import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from './views/FieldToViewMappings';
 import '../styles/alert.scss';
-import sortableColumns from './sortableColumns';
+import { sortableColumns } from './sortTypes';
 
 type ResultsTableProps = {
   results: [];
