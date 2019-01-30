@@ -1,12 +1,12 @@
 import { SortDirections } from '../sortTypes';
 
 export type ResultsState = {
-  columns: Array<string>;
-  selectedFacets: Array<Facet>;
+  columns: string[];
+  selectedFacets: Facet[];
   queryString: string;
   queryUrl: string;
   isFetching: boolean;
-  results: Array<any>;
+  results: any[];
   sort: {
     column: string;
     direction: string;
