@@ -37,11 +37,11 @@ export const getQueryUrl = (
   encodedQueryString: string,
   columns: Array<string>,
   cursor?: string,
-  sortBy?: string | undefined,
-  sortDirection?: string,
+  sortBy?: sortableColumns | undefined,
+  sortDirection?: string | undefined,
 ) => `${apiUrls.advanced_search}?${queryString.stringify({
   query: encodedQueryString,
   fields: columns.join(','),
   includeFacets: true,
-  sort: sortBy in sortableColumns ? `${sortBy} ${sortDirection}` : undefined,
+  sort: sortBy && sortBy in sortableColumns ? `${sortBy} ${sortDirection}` : undefined,
 })}`;

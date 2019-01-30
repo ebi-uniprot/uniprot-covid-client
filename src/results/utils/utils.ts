@@ -1,6 +1,6 @@
 import { default as queryStringModule } from 'query-string';
 import { getQueryUrl } from '../../utils/apiUrls';
-import { SortDirections, SortDirectionsType } from '../sortTypes';
+import { SortDirections, SortDirectionsType, sortableColumns } from '../sortTypes';
 
 const createFacetsQueryString = facets => facets.reduce(
   (queryAccumulator, facet) => `${queryAccumulator} AND (${facet.name}:${facet.value})`,
@@ -11,8 +11,9 @@ const getAPIQueryUrl = (
   queryString: string,
   columns: [string],
   selectedFacets: [],
-  sortBy: string,
-  sortDirectionKey: keyof SortDirectionsType,
+  sortBy: sortableColumns | undefined = undefined,
+  sortDirectionKey: keyof SortDirectionsType = SortDirections.ascend
+    .app as keyof SortDirectionsType,
 ) => {
   console.log(sortDirectionKey);
   console.log(SortDirections[sortDirectionKey]);
@@ -22,7 +23,7 @@ const getAPIQueryUrl = (
     columns,
     undefined,
     sortBy,
-    SortDirections[sortDirectionKey].api,
+    sortBy && sortBy in sortableColumns ? SortDirections[sortDirectionKey].api : undefined,
   );
 };
 

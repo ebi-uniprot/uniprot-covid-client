@@ -22,7 +22,7 @@ const initialState = {
   isFetching: false,
   sort: {
     column: '',
-    direction: SortDirections.ascend.app,
+    direction: '',
   },
 };
 
