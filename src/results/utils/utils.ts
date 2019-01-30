@@ -3,7 +3,7 @@ import { getQueryUrl } from '../../utils/apiUrls';
 import sortableColumns from '../sortableColumns';
 import { SortDirections } from '../state/initialState';
 
-const createFacetsQueryString = facets => facets.reduce(
+const createFacetsQueryString = (facets: Array<Facet>) => facets.reduce(
   (queryAccumulator, facet) => `${queryAccumulator} AND (${facet.name}:${facet.value})`,
   '',
 );

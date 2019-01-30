@@ -5,7 +5,7 @@ export enum SortDirections {
 
 export type ResultsState = {
   columns: Array<string>;
-  selectedFacets: Array<{ name: string; value: string }>;
+  selectedFacets: Array<Facet>;
   queryString: string;
   queryUrl: string;
   isFetching: boolean;
