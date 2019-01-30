@@ -3,11 +3,12 @@ import React from 'react';
 import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
 
-type Props = {
-  children: Node;
+type BaseLayoutProps = {
+  children: JSX.Element;
+  isHomePage?: boolean;
 };
 
-const BaseLayout = (props: Props) => {
+const BaseLayout: React.FC<BaseLayoutProps> = (props) => {
   const { children, isHomePage } = props;
   return (
     <section id="outer-layout">

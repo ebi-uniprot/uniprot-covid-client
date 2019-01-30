@@ -8,8 +8,8 @@ type ResultsTableProps = {
   results: [];
   columnNames: Array<string>;
   selectedRows: Array<{ name: string; value: string }>;
-  handleRowSelect: () => void;
-  handleHeaderClick: () => void;
+  handleRowSelect: (rowId: string) => void;
+  handleHeaderClick: (column: string) => void;
   sort: { column: string; direction: string };
 };
 

@@ -21,17 +21,17 @@ interface SearchProps extends RouteComponentProps {
   namespace: Namespace;
   clauses: Array<Clause>;
   evidences: any;
-  dispatchUpdateClauses: (clauses: Array<Clause>) => void;
-  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
-  dispatchFetchSearchTermsIfNeeded: () => void;
-  handleAdvancedSubmitClick: () => void;
-  dispatchAddClause: () => void;
-  handleFieldSelect: (clauseId: string, field: FieldType) => void;
-  handleInputChange: (clauseId: string, value: string, id?: string) => void;
-  handleEvidenceChange: (clauseId: string, value: string) => void;
-  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
-  handleLogicChange: (clauseId: string, value: Operator) => void;
-  handleRemoveClause: (clauseId: string) => void;
+  dispatchUpdateClauses?: (clauses: Array<Clause>) => void;
+  dispatchfetchEvidencesIfNeeded?: (type: EvidenceType) => void;
+  dispatchFetchSearchTermsIfNeeded?: () => void;
+  handleAdvancedSubmitClick?: () => void;
+  dispatchAddClause?: () => void;
+  handleFieldSelect?: (clauseId: string, field: FieldType) => void;
+  handleInputChange?: (clauseId: string, value: string, id?: string) => void;
+  handleEvidenceChange?: (clauseId: string, value: string) => void;
+  handleRangeInputChange?: (clauseId: string, value: string, from?: boolean) => void;
+  handleLogicChange?: (clauseId: string, value: Operator) => void;
+  handleRemoveClause?: (clauseId: string) => void;
 }
 
 interface SearchContainerState {
