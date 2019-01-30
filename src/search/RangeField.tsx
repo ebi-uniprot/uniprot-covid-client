@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { FieldType } from './types/searchTypes';
+import { SearchTermType } from './types/searchTypes';
 
 interface RangeFieldProps {
-  field: FieldType;
+  field: SearchTermType;
   type?: string;
   handleChange: (value: string, isFrom: boolean) => void;
   rangeFrom?: string;
@@ -14,7 +14,7 @@ const RangeField = ({
   type,
   handleChange,
   rangeFrom = '',
-  rangeTo = '',
+  rangeTo = ''
 }: RangeFieldProps) => (
   <Fragment>
     <label htmlFor={`from_input_${field.id}`}>

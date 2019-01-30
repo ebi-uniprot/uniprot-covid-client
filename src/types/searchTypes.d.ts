@@ -2,16 +2,16 @@ export enum Namespace {
   UniProtKB = 'UniProtKB',
   UniRef = 'UniRef',
   UniParc = 'UniParc',
-  Proteomes = 'Proteomes',
+  Proteomes = 'Proteomes'
 }
 
 declare enum Operator {
   AND = 'AND',
   OR = 'OR',
-  NOT = 'NOT',
+  NOT = 'NOT'
 }
 
-export type FieldType = {
+export type SearchTermType = {
   id: string;
   label: string;
   term: string;
@@ -33,7 +33,7 @@ export type FieldType = {
     name: string;
     value: string;
   }>;
-  items?: Array<FieldType>;
+  items?: Array<SearchTermType>;
 };
 
 export type Input = {
@@ -46,12 +46,12 @@ export type Input = {
 
 export type Clause = {
   id: string;
-  field: FieldType;
+  field: SearchTermType;
   logicOperator: Operator;
   queryInput: Input;
 };
 
 export enum EvidenceType {
   GO = 'go',
-  ANNOTATION = 'annotation',
+  ANNOTATION = 'annotation'
 }

@@ -4,7 +4,10 @@ import EvidenceField from './EvidenceField';
 import LogicalOperator from './LogicalOperator';
 import Field from './Field';
 import {
-  Clause, FieldType, Operator, EvidenceType,
+  Clause,
+  SearchTermType,
+  Operator,
+  EvidenceType
 } from './types/searchTypes';
 
 // .itemType
@@ -17,12 +20,16 @@ import {
 
 type ClauseListProps = {
   clauses: Array<Clause>;
-  searchTerms: Array<FieldType>;
+  searchTerms: Array<SearchTermType>;
   evidences: any;
-  handleFieldSelect: (clauseId: string, field: FieldType) => void;
+  handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
-  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
+  handleRangeInputChange: (
+    clauseId: string,
+    value: string,
+    from?: boolean
+  ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
 };
@@ -36,17 +43,20 @@ const ClauseList: React.FC<ClauseListProps> = ({
   handleEvidenceChange,
   handleRangeInputChange,
   handleLogicChange,
-  handleRemoveClause,
+  handleRemoveClause
 }) => (
   <Fragment>
-    {clauses.map((clause) => {
+    {clauses.map(clause => {
       if (!clause.field) {
         return null;
       }
 
       let evidencesData;
       if (clause.field.hasEvidence) {
-        const evidencesType = clause.field.term === EvidenceType.GO ? EvidenceType.GO : EvidenceType.ANNOTATION;
+        const evidencesType =
+          clause.field.term === EvidenceType.GO
+            ? EvidenceType.GO
+            : EvidenceType.ANNOTATION;
         evidencesData = evidences[evidencesType].data || [];
       }
 
@@ -54,26 +64,34 @@ const ClauseList: React.FC<ClauseListProps> = ({
         <div key={`clause_${clause.id}`} className="advanced-search__clause">
           <LogicalOperator
             value={clause.logicOperator}
-            handleChange={(value: Operator) => handleLogicChange(clause.id, value)}
+            handleChange={(value: Operator) =>
+              handleLogicChange(clause.id, value)
+            }
           />
           <TreeSelect
             data={searchTerms}
-            onSelect={(value: FieldType) => handleFieldSelect(clause.id, value)}
+            onSelect={(value: SearchTermType) =>
+              handleFieldSelect(clause.id, value)
+            }
             autocompletePlaceholder="Search for field"
             value={clause.field}
             autocomplete
           />
           <Field
             field={clause.field}
-            handleInputChange={(value: string, id?: string) => handleInputChange(clause.id, value, id)
+            handleInputChange={(value: string, id?: string) =>
+              handleInputChange(clause.id, value, id)
             }
-            handleRangeInputChange={(value: string, from?: boolean) => handleRangeInputChange(clause.id, value, from)
+            handleRangeInputChange={(value: string, from?: boolean) =>
+              handleRangeInputChange(clause.id, value, from)
             }
             queryInput={clause.queryInput}
           />
           {clause.field.hasEvidence && (
             <EvidenceField
-              handleChange={(value: string) => handleEvidenceChange(clause.id, value)}
+              handleChange={(value: string) =>
+                handleEvidenceChange(clause.id, value)
+              }
               value={clause.queryInput.evidenceValue}
               data={evidencesData}
             />

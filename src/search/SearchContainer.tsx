@@ -7,7 +7,11 @@ import { default as queryStringModule } from 'query-string';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/actions';
 import {
-  Clause, FieldType, Operator, EvidenceType, Namespace,
+  Clause,
+  SearchTermType,
+  Operator,
+  EvidenceType,
+  Namespace
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import { createQueryString } from './utils/QueryStringGenerator';
@@ -25,10 +29,14 @@ interface SearchProps extends RouteComponentProps {
   dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   dispatchAddClause: () => void;
-  handleFieldSelect: (clauseId: string, field: FieldType) => void;
+  handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
-  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
+  handleRangeInputChange: (
+    clauseId: string,
+    value: string,
+    from?: boolean
+  ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
 }
@@ -44,7 +52,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const { queryString } = props;
     this.state = {
       showAdvanced: false,
-      queryString,
+      queryString
     };
     this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
@@ -56,10 +64,14 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const {
       location: { search: queryParamFromUrl },
       queryString,
-      dispatchUpdateQueryString,
+      dispatchUpdateQueryString
     } = this.props;
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    if (queryFromUrl && queryFromUrl !== queryString && typeof queryFromUrl === 'string') {
+    if (
+      queryFromUrl &&
+      queryFromUrl !== queryString &&
+      typeof queryFromUrl === 'string'
+    ) {
       dispatchUpdateQueryString(queryFromUrl);
     }
   }
@@ -119,7 +131,11 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     return (
       <Fragment>
         {search}
-        <button type="button" onClick={this.toggleAdvanced} className="adv-search-toggle">
+        <button
+          type="button"
+          onClick={this.toggleAdvanced}
+          className="adv-search-toggle"
+        >
           {showAdvanced ? 'Back to quick search' : 'Advanced search'}
         </button>
       </Fragment>
@@ -132,32 +148,45 @@ const mapStateToProps = (state: RootState) => ({
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
-  queryString: state.query.queryString,
+  queryString: state.query.queryString
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) => bindActionCreators(
-  {
-    handleFieldSelect: (clauseId: string, field: FieldType) => searchActions.selectField(clauseId, field),
-    handleInputChange: (clauseId: string, value: string, id?: string) => searchActions.updateInputValue(clauseId, value, id),
-    handleEvidenceChange: (clauseId: string, value: string) => searchActions.updateEvidence(clauseId, value),
-    handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => searchActions.updateRangeValue(clauseId, value, from),
-    handleLogicChange: (clauseId: string, value: Operator) => searchActions.updateLogicOperator(clauseId, value),
-    handleRemoveClause: (clauseId: string) => searchActions.removeClause(clauseId),
-    dispatchAddClause: () => searchActions.addClause(),
-    dispatchfetchEvidencesIfNeeded: evidencesType => searchActions.fetchEvidencesIfNeeded(evidencesType),
-    dispatchFetchSearchTermsIfNeeded: () => searchActions.fetchSearchTermsIfNeeded(),
-    dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
-    dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
-    dispatchUpdateQueryString: queryString => searchActions.updateQueryString(queryString),
-  },
-  dispatch,
-);
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      handleFieldSelect: (clauseId: string, field: SearchTermType) =>
+        searchActions.selectField(clauseId, field),
+      handleInputChange: (clauseId: string, value: string, id?: string) =>
+        searchActions.updateInputValue(clauseId, value, id),
+      handleEvidenceChange: (clauseId: string, value: string) =>
+        searchActions.updateEvidence(clauseId, value),
+      handleRangeInputChange: (
+        clauseId: string,
+        value: string,
+        from?: boolean
+      ) => searchActions.updateRangeValue(clauseId, value, from),
+      handleLogicChange: (clauseId: string, value: Operator) =>
+        searchActions.updateLogicOperator(clauseId, value),
+      handleRemoveClause: (clauseId: string) =>
+        searchActions.removeClause(clauseId),
+      dispatchAddClause: () => searchActions.addClause(),
+      dispatchfetchEvidencesIfNeeded: evidencesType =>
+        searchActions.fetchEvidencesIfNeeded(evidencesType),
+      dispatchFetchSearchTermsIfNeeded: () =>
+        searchActions.fetchSearchTermsIfNeeded(),
+      dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
+      dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
+      dispatchUpdateQueryString: queryString =>
+        searchActions.updateQueryString(queryString)
+    },
+    dispatch
+  );
 
 const SearchContainer = withRouter(
   connect(
     mapStateToProps,
-    mapDispatchToProps,
-  )(Search),
+    mapDispatchToProps
+  )(Search)
 );
 
 export default SearchContainer;

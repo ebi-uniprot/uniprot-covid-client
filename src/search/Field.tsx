@@ -3,17 +3,20 @@ import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
 import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
-import { FieldType, Input } from './types/searchTypes';
+import { SearchTermType, Input } from './types/searchTypes';
 
 type FieldProps = {
-  field: FieldType;
+  field: SearchTermType;
   handleInputChange: (value: string, id?: string) => void;
   handleRangeInputChange: (value: string, from?: boolean) => void;
   queryInput: Input;
 };
 
 const Field = ({
-  field, handleInputChange, handleRangeInputChange, queryInput,
+  field,
+  handleInputChange,
+  handleRangeInputChange,
+  queryInput
 }: FieldProps) => {
   const { dataType, hasRange } = field;
   let node;
@@ -76,16 +79,17 @@ const Field = ({
       if (hasRange) {
         return RangeField({
           field,
-          handleChange: (value, isFrom) => handleRangeInputChange(value, isFrom),
+          handleChange: (value, isFrom) =>
+            handleRangeInputChange(value, isFrom),
           rangeFrom: queryInput.rangeFrom,
-          rangeTo: queryInput.rangeTo,
+          rangeTo: queryInput.rangeTo
         });
       }
       return TextField({
         field,
         type: 'number',
         handleChange: value => handleInputChange(value),
-        value: queryInput.stringValue,
+        value: queryInput.stringValue
       });
       break;
     default:

@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
-import { FieldType } from './types/searchTypes';
+import { SearchTermType } from './types/searchTypes';
 
 type EnumFieldProps = {
-  field: FieldType;
+  field: SearchTermType;
   handleChange: (value: string) => void;
   value: string | undefined;
 };
 
-const EnumField: React.FC<EnumFieldProps> = ({ field, handleChange, value }) => (
+const EnumField: React.FC<EnumFieldProps> = ({
+  field,
+  handleChange,
+  value
+}) => (
   <Fragment>
     <label htmlFor={`select_${field.term}`}>
       {field.label}
@@ -16,8 +20,8 @@ const EnumField: React.FC<EnumFieldProps> = ({ field, handleChange, value }) => 
         id={`select_${field.term}`}
         value={value}
       >
-        {field.values
-          && field.values.map(item => (
+        {field.values &&
+          field.values.map(item => (
             <option value={item.value} key={`select_${item.value}`}>
               {item.name}
             </option>

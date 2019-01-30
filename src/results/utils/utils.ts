@@ -21,8 +21,6 @@ const getAPIQueryUrl = (
   sortDirectionKey: keyof SortDirectionsType = SortDirections.ascend
     .app as keyof SortDirectionsType
 ) => {
-  console.log(sortDirectionKey);
-  console.log(SortDirections[sortDirectionKey]);
   const facetsQueryString = createFacetsQueryString(selectedFacets);
   return getQueryUrl(
     `${queryString}${facetsQueryString}`,

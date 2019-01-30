@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import { default as queryStringModule } from "query-string";
-import { Facets } from "franklin-sites";
-import * as resultsActions from "./state/actions";
-import * as searchActions from "../search/state/actions";
-import { Clause } from "../search/types/searchTypes";
-import SideBarLayout from "../layout/SideBarLayout";
-import ResultsTable from "./ResultsTable";
-import { RootState, RootAction } from "../state/state-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { default as queryStringModule } from 'query-string';
+import { Facets } from 'franklin-sites';
+import * as resultsActions from './state/actions';
+import * as searchActions from '../search/state/actions';
+import { Clause } from '../search/types/searchTypes';
+import SideBarLayout from '../layout/SideBarLayout';
+import ResultsTable from './ResultsTable';
+import { RootState, RootAction } from '../state/state-types';
 
 interface IResultsProps extends RouteComponentProps {
   queryString: string;
@@ -81,7 +81,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       column !== prevProps.sort.column ||
       direction !== prevProps.sort.direction
     ) {
-      history.push({ pathname: "/uniprotkb", search: `query=${queryString}` });
+      history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
       dispatchFetchResults(
         queryString,
         columns,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ClauseList from './ClauseList';
 import { unpackQueryUrl } from './utils/clause';
 import {
-  Namespace, EvidenceType, Clause, FieldType, Operator,
+  Namespace, EvidenceType, Clause, SearchTermType, Operator,
 } from './types/searchTypes';
 import './styles/AdvancedSearch.scss';
 
@@ -17,7 +17,7 @@ type AdvancedSearchProps = {
   dispatchFetchSearchTermsIfNeeded: () => void;
   handleAdvancedSubmitClick: () => void;
   dispatchAddClause: () => void;
-  handleFieldSelect: (clauseId: string, field: FieldType) => void;
+  handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
   handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
