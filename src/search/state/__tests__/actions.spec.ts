@@ -70,7 +70,9 @@ describe('sync actions', () => {
         from,
       },
     };
-    expect(actions.updateRangeValue(clauseId, value, from)).toEqual(expectedAction);
+    expect(actions.updateRangeValue(clauseId, value, from)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create a UPDATE_LOGIC_OPERATOR action', () => {
@@ -84,7 +86,9 @@ describe('sync actions', () => {
         value,
       },
     };
-    expect(actions.updateLogicOperator(clauseId, value)).toEqual(expectedAction);
+    expect(actions.updateLogicOperator(clauseId, value)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create an UPDATE_QUERY_STRING action', () => {
@@ -146,13 +150,20 @@ describe('sync actions', () => {
 });
 
 describe('async actions', () => {
-  const search_terms_data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
+  const search_terms_data = [
+    { id: '1', label: 'foo' },
+    { id: '2', label: 'bar' },
+  ];
 
   it('creates RECEIVE_SEARCH_TERMS when fetching has been done', () => {
     const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
     mock.onGet(apiUrls.advanced_search_terms).reply(200, data);
     const expectedActions = [
-      { type: actions.REQUEST_SEARCH_TERMS, meta: undefined, payload: undefined },
+      {
+        type: actions.REQUEST_SEARCH_TERMS,
+        meta: undefined,
+        payload: undefined,
+      },
       {
         type: actions.RECEIVE_SEARCH_TERMS,
         payload: { receivedAt: dateNow, data: search_terms_data },
@@ -186,13 +197,21 @@ describe('async actions', () => {
     ];
     mock.onGet(apiUrls.evidences.go).reply(200, data);
     const expectedActions = [
-      { type: actions.REQUEST_SEARCH_TERMS, meta: undefined, payload: undefined },
+      {
+        type: actions.REQUEST_SEARCH_TERMS,
+        meta: undefined,
+        payload: undefined,
+      },
       {
         type: actions.RECEIVE_SEARCH_TERMS,
         payload: { receivedAt: dateNow, data: search_terms_data },
         meta: undefined,
       },
-      { type: actions.REQUEST_EVIDENCES, payload: { evidencesType: 'go' }, meta: undefined },
+      {
+        type: actions.REQUEST_EVIDENCES,
+        payload: { evidencesType: 'go' },
+        meta: undefined,
+      },
       {
         type: actions.RECEIVE_EVIDENCES,
         payload: {
