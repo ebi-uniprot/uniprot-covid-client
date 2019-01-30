@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import fetchData from '../../utils/fetchData';
 import { getAPIQueryUrl } from '../utils/utils';
 import { ResultsState } from './initialState';
+import { SortDirections, SortDirectionsType } from '../sortTypes';
 
 export const FETCH_RESULTS_REQUEST = 'FETCH_RESULTS_STARTED';
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS';
@@ -24,7 +25,7 @@ export const fetchResults = (
   columns: [string],
   selectedFacets: [],
   sortBy: string,
-  sortDirection: string,
+  sortDirection: keyof SortDirectionsType,
 ) => async (dispatch: Dispatch) => {
   dispatch(fetchResultsRequest());
   fetchData(getAPIQueryUrl(queryString, columns, selectedFacets, sortBy, sortDirection))

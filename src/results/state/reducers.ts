@@ -1,7 +1,8 @@
 import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
 import * as resultsActions from './actions';
-import initialState, { ResultsState, SortDirections } from './initialState';
+import initialState, { ResultsState } from './initialState';
+import { SortDirections } from '../sortTypes';
 
 export type ResultAction = ActionType<typeof resultsActions>;
 
@@ -14,9 +15,9 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
           column: action.payload.column,
           direction:
             state.sort.column === action.payload.column
-            && state.sort.direction === SortDirections.ascend
-              ? SortDirections.descend
-              : SortDirections.ascend,
+            && state.sort.direction === SortDirections.ascend.app
+              ? SortDirections.descend.app
+              : SortDirections.ascend.app,
         },
       };
     case resultsActions.FETCH_RESULTS_REQUEST:

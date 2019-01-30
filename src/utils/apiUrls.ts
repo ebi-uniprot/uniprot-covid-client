@@ -1,7 +1,7 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
-import sortableColumns from '../results/sortableColumns';
+import { sortableColumns } from '../results/sortTypes';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
