@@ -2,12 +2,12 @@ import React from 'react';
 
 import './styles/Block.scss';
 
-type Props = {
+type BlockProps = {
   columns: string;
-  children: Node;
+  children: Array<JSX.Element>;
 };
 
-const Block = (props: Props) => {
+const Block: React.FC<BlockProps> = (props) => {
   const { columns, children } = props;
   return <div className={`block block--${columns}-col`}>{children}</div>;
 };

@@ -8,8 +8,8 @@ type ResultsTableProps = {
   results: [];
   columnNames: Array<string>;
   selectedRows: Array<{ name: string; value: string }>;
-  handleRowSelect: () => void;
-  handleHeaderClick: () => void;
+  handleRowSelect: (rowId: string) => void;
+  handleHeaderClick: (column: string) => void;
   sort: { column: string; direction: string };
 };
 
@@ -24,7 +24,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   const columns = columnNames.map((columnName) => {
     let render;
     if (columnName in FieldToViewMappings) {
-      render = row => FieldToViewMappings[columnName](row);
+      render = (row: any) => FieldToViewMappings[columnName](row);
     } else {
       render = () => <div className="warning">{`${columnName} has no render method`}</div>;
     }

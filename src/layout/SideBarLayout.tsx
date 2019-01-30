@@ -3,7 +3,12 @@ import BaseLayout from './BaseLayout';
 
 import './styles/SideBarLayout.scss';
 
-const SideBarLayout = ({ sidebar, content }) => (
+type SideBarLayoutProps = {
+  sidebar: JSX.Element;
+  content: JSX.Element;
+};
+
+const SideBarLayout: React.FC<SideBarLayoutProps> = ({ sidebar, content }) => (
   <BaseLayout>
     <section id="sidebar-layout" data-layout="left-sidebar-layout">
       <section id="sidebar-layout__sidebar">{sidebar}</section>

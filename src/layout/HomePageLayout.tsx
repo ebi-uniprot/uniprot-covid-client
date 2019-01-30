@@ -3,11 +3,11 @@ import BaseLayout from './BaseLayout';
 
 import './styles/HomePageLayout.scss';
 
-type Props = {
-  children: Node;
+type HomePageLayoutProps = {
+  children: Array<JSX.Element>;
 };
 
-const HomePageLayout = (props: Props) => {
+const HomePageLayout: React.FC<HomePageLayoutProps> = (props) => {
   const { children } = props;
   return (
     <BaseLayout isHomePage>

@@ -24,7 +24,6 @@ interface SearchProps extends RouteComponentProps {
   dispatchUpdateClauses: (clauses: Array<Clause>) => void;
   dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
-  handleAdvancedSubmitClick: () => void;
   dispatchAddClause: () => void;
   handleFieldSelect: (clauseId: string, field: FieldType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;

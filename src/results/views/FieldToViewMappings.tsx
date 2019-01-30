@@ -56,7 +56,7 @@ const organismNameReducer = (type: string) => (
   return acc;
 };
 
-const FieldToViewMappings = {
+const FieldToViewMappings: { [index: string]: (row: any) => JSX.Element | undefined } = {
   accession: (row: { accession: string }) => <SimpleView termValue={row.accession} />,
   id: (row: { id: string }) => <SimpleView termValue={row.id} />,
   protein_name: (row: ProteinNameRow) => {
