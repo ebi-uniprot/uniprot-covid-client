@@ -11,10 +11,15 @@ type Props = {
   value?: string;
 };
 
+type Suggestion = {
+  value: string;
+  id: string;
+};
+
 type Suggestions = {
   dictionary: string;
   query: string;
-  suggestions: Array<string>;
+  suggestions: Array<Suggestion>;
 };
 
 type State = {
@@ -25,9 +30,11 @@ type Chosen = {
   id: string;
   itemLabel: string;
   pathLabel: string;
+  apiId: string;
 };
 
 class AutocompleteWrapper extends Component<Props, State> {
+  id: string;
   constructor(props: Props) {
     super(props);
     this.state = { data: [] };
@@ -42,12 +49,14 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   fetchOptions = (url: string) => {
     fetchData(url)
-      .then(data => data.data.suggestions.map(x => ({
-        pathLabel: x.value,
-        itemLabel: x.value,
-        apiId: x.id,
-        id: v1(),
-      })))
+      .then(data =>
+        data.data.suggestions.map((suggestion: Suggestion) => ({
+          pathLabel: suggestion.value,
+          itemLabel: suggestion.value,
+          apiId: suggestion.id,
+          id: v1()
+        }))
+      )
       .then(data => this.setState({ data }))
       .catch(e => console.error(e));
   };

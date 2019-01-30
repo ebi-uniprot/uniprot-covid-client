@@ -1,4 +1,5 @@
 import { SortDirections } from '../sortTypes';
+import { Facet } from '../types/resultsTypes';
 
 export type ResultsState = {
   columns: string[];

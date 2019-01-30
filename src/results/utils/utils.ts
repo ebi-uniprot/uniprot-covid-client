@@ -4,6 +4,7 @@ import {
   SortDirectionsType,
   sortableColumns
 } from '../sortTypes';
+import { Facet } from '../types/resultsTypes';
 
 const createFacetsQueryString = (facets: Facet[]) =>
   facets.reduce(
