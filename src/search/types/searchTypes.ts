@@ -46,7 +46,7 @@ export type Input = {
 
 export type Clause = {
   id: string;
-  field: SearchTermType;
+  searchTerm: SearchTermType;
   logicOperator: Operator;
   queryInput: Input;
 };

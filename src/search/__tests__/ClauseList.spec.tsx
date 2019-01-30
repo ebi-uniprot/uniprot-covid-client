@@ -22,25 +22,25 @@ describe('ClauseList component', () => {
     props = {
       clauses: [createEmptyClause()],
       searchTerms: {
-        data: [],
+        data: []
       },
       evidences: {
         go: {
           data: [],
-          isFetching: false,
+          isFetching: false
         },
         annotation: {
           data: [],
-          isFetching: false,
-        },
+          isFetching: false
+        }
       },
-      handleRemoveClause: jest.fn(),
+      handleRemoveClause: jest.fn()
     };
 
     wrapper = shallow(<ClauseList {...props} />);
   });
 
-  test('should submit a query', () => {
+  test('should remove a clause', () => {
     wrapper.find('.button-remove').simulate('click');
     expect(props.handleRemoveClause).toHaveBeenCalled();
   });

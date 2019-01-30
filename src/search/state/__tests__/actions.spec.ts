@@ -15,18 +15,20 @@ jest.spyOn(Date, 'now').mockImplementation(() => dateNow);
 const store = mockStore({ query: initialState });
 
 describe('sync actions', () => {
-  it('should create a SELECT_FIELD action', () => {
+  it('should create a SELECT_SEARCH_TERM action', () => {
     const clauseId = '1';
-    const field = 'foo';
+    const searchTerm = 'foo';
     const expectedAction = {
-      type: actions.SELECT_FIELD,
+      type: actions.SELECT_SEARCH_TERM,
       meta: undefined,
       payload: {
         clauseId,
-        field,
-      },
+        searchTerm
+      }
     };
-    expect(actions.selectField(clauseId, field)).toEqual(expectedAction);
+    expect(actions.selectSearchTerm(clauseId, searchTerm)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create a UPDATE_INPUT_VALUE action', () => {
@@ -37,8 +39,8 @@ describe('sync actions', () => {
       meta: undefined,
       payload: {
         clauseId,
-        value,
-      },
+        value
+      }
     };
     expect(actions.updateInputValue(clauseId, value)).toEqual(expectedAction);
   });
@@ -51,8 +53,8 @@ describe('sync actions', () => {
       meta: undefined,
       payload: {
         clauseId,
-        value,
-      },
+        value
+      }
     };
     expect(actions.updateEvidence(clauseId, value)).toEqual(expectedAction);
   });
@@ -67,10 +69,12 @@ describe('sync actions', () => {
       payload: {
         clauseId,
         value,
-        from,
-      },
+        from
+      }
     };
-    expect(actions.updateRangeValue(clauseId, value, from)).toEqual(expectedAction);
+    expect(actions.updateRangeValue(clauseId, value, from)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create a UPDATE_LOGIC_OPERATOR action', () => {
@@ -81,10 +85,12 @@ describe('sync actions', () => {
       meta: undefined,
       payload: {
         clauseId,
-        value,
-      },
+        value
+      }
     };
-    expect(actions.updateLogicOperator(clauseId, value)).toEqual(expectedAction);
+    expect(actions.updateLogicOperator(clauseId, value)).toEqual(
+      expectedAction
+    );
   });
 
   it('should create an UPDATE_QUERY_STRING action', () => {
@@ -93,15 +99,15 @@ describe('sync actions', () => {
       type: actions.UPDATE_QUERY_STRING,
       meta: undefined,
       payload: {
-        queryString,
-      },
+        queryString
+      }
     };
     expect(actions.updateQueryString(queryString)).toEqual(expectedAction);
   });
 
   it('should create a ADD_CLAUSE action', () => {
     const expectedAction = {
-      type: actions.ADD_CLAUSE,
+      type: actions.ADD_CLAUSE
     };
     expect(actions.addClause()).toEqual(expectedAction);
   });
@@ -112,15 +118,15 @@ describe('sync actions', () => {
       type: actions.REMOVE_CLAUSE,
       meta: undefined,
       payload: {
-        clauseId,
-      },
+        clauseId
+      }
     };
     expect(actions.removeClause(clauseId)).toEqual(expectedAction);
   });
 
   it('should create a REQUEST_SEARCH_TERMS action', () => {
     const expectedAction = {
-      type: actions.REQUEST_SEARCH_TERMS,
+      type: actions.REQUEST_SEARCH_TERMS
     };
     expect(actions.requestSearchTerms()).toEqual(expectedAction);
   });
@@ -138,26 +144,33 @@ describe('sync actions', () => {
       type: actions.REQUEST_EVIDENCES,
       meta: undefined,
       payload: {
-        evidencesType: undefined,
-      },
+        evidencesType: undefined
+      }
     };
     expect(actions.requestEvidences()).toEqual(expectedAction);
   });
 });
 
 describe('async actions', () => {
-  const search_terms_data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
+  const search_terms_data = [
+    { id: '1', label: 'foo' },
+    { id: '2', label: 'bar' }
+  ];
 
   it('creates RECEIVE_SEARCH_TERMS when fetching has been done', () => {
     const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
     mock.onGet(apiUrls.advanced_search_terms).reply(200, data);
     const expectedActions = [
-      { type: actions.REQUEST_SEARCH_TERMS, meta: undefined, payload: undefined },
+      {
+        type: actions.REQUEST_SEARCH_TERMS,
+        meta: undefined,
+        payload: undefined
+      },
       {
         type: actions.RECEIVE_SEARCH_TERMS,
         payload: { receivedAt: dateNow, data: search_terms_data },
-        meta: undefined,
-      },
+        meta: undefined
+      }
     ];
     return store.dispatch(actions.fetchSearchTerms()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
@@ -171,37 +184,45 @@ describe('async actions', () => {
         items: [
           {
             name: 'Any assertion method',
-            code: 'any',
+            code: 'any'
           },
           {
             name: 'Any manual assertion',
-            code: 'manual',
+            code: 'manual'
           },
           {
             name: 'Any automatic assertion',
-            code: 'automatic',
-          },
-        ],
-      },
+            code: 'automatic'
+          }
+        ]
+      }
     ];
     mock.onGet(apiUrls.evidences.go).reply(200, data);
     const expectedActions = [
-      { type: actions.REQUEST_SEARCH_TERMS, meta: undefined, payload: undefined },
+      {
+        type: actions.REQUEST_SEARCH_TERMS,
+        meta: undefined,
+        payload: undefined
+      },
       {
         type: actions.RECEIVE_SEARCH_TERMS,
         payload: { receivedAt: dateNow, data: search_terms_data },
-        meta: undefined,
+        meta: undefined
       },
-      { type: actions.REQUEST_EVIDENCES, payload: { evidencesType: 'go' }, meta: undefined },
+      {
+        type: actions.REQUEST_EVIDENCES,
+        payload: { evidencesType: 'go' },
+        meta: undefined
+      },
       {
         type: actions.RECEIVE_EVIDENCES,
         payload: {
           receivedAt: dateNow,
           evidencesType: 'go',
-          data,
+          data
         },
-        meta: undefined,
-      },
+        meta: undefined
+      }
     ];
     return store.dispatch(actions.fetchEvidences('go')).then(() => {
       expect(store.getActions()).toEqual(expectedActions);

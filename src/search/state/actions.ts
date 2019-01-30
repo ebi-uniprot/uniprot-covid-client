@@ -27,7 +27,10 @@ export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 export const UPDATE_CLAUSES = 'UPDATE_CLAUSES';
 export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 
-export const selectField = (clauseId: string, searchTerm: SearchTermType) =>
+export const selectSearchTerm = (
+  clauseId: string,
+  searchTerm: SearchTermType
+) =>
   action(SELECT_SEARCH_TERM, {
     clauseId,
     searchTerm

@@ -155,7 +155,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
       handleFieldSelect: (clauseId: string, field: SearchTermType) =>
-        searchActions.selectField(clauseId, field),
+        searchActions.selectSearchTerm(clauseId, field),
       handleInputChange: (clauseId: string, value: string, id?: string) =>
         searchActions.updateInputValue(clauseId, value, id),
       handleEvidenceChange: (clauseId: string, value: string) =>

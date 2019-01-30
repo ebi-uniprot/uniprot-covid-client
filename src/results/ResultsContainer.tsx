@@ -10,6 +10,7 @@ import { Clause } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 import { RootState, RootAction } from '../state/state-types';
+import { selectedRows } from './types/resultsTypes';
 
 interface IResultsProps extends RouteComponentProps {
   queryString: string;
@@ -34,7 +35,7 @@ interface IResultsProps extends RouteComponentProps {
 }
 
 type ResultsContainerState = {
-  selectedRows: { [key: string]: boolean };
+  selectedRows: selectedRows;
 };
 
 export class Results extends Component<IResultsProps, ResultsContainerState> {

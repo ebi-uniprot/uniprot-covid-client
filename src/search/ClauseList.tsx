@@ -47,14 +47,14 @@ const ClauseList: React.FC<ClauseListProps> = ({
 }) => (
   <Fragment>
     {clauses.map(clause => {
-      if (!clause.field) {
+      if (!clause.searchTerm) {
         return null;
       }
 
       let evidencesData;
-      if (clause.field.hasEvidence) {
+      if (clause.searchTerm.hasEvidence) {
         const evidencesType =
-          clause.field.term === EvidenceType.GO
+          clause.searchTerm.term === EvidenceType.GO
             ? EvidenceType.GO
             : EvidenceType.ANNOTATION;
         evidencesData = evidences[evidencesType].data || [];
@@ -74,11 +74,11 @@ const ClauseList: React.FC<ClauseListProps> = ({
               handleFieldSelect(clause.id, value)
             }
             autocompletePlaceholder="Search for field"
-            value={clause.field}
+            value={clause.searchTerm}
             autocomplete
           />
           <Field
-            field={clause.field}
+            field={clause.searchTerm}
             handleInputChange={(value: string, id?: string) =>
               handleInputChange(clause.id, value, id)
             }
@@ -87,7 +87,7 @@ const ClauseList: React.FC<ClauseListProps> = ({
             }
             queryInput={clause.queryInput}
           />
-          {clause.field.hasEvidence && (
+          {clause.searchTerm.hasEvidence && (
             <EvidenceField
               handleChange={(value: string) =>
                 handleEvidenceChange(clause.id, value)

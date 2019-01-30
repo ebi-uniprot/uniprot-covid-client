@@ -3,11 +3,12 @@ import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from './views/FieldToViewMappings';
 import '../styles/alert.scss';
 import { sortableColumns } from './sortTypes';
+import { selectedRows } from './types/resultsTypes';
 
 type ResultsTableProps = {
   results: [];
   columnNames: Array<string>;
-  selectedRows: Array<{ name: string; value: string }>;
+  selectedRows: selectedRows;
   handleRowSelect: (rowId: string) => void;
   handleHeaderClick: (column: string) => void;
   sort: { column: string; direction: string };
@@ -19,21 +20,23 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   selectedRows,
   handleRowSelect,
   handleHeaderClick,
-  sort,
+  sort
 }) => {
-  const columns = columnNames.map((columnName) => {
+  const columns = columnNames.map(columnName => {
     let render;
     if (columnName in FieldToViewMappings) {
       render = (row: any) => FieldToViewMappings[columnName](row);
     } else {
-      render = () => <div className="warning">{`${columnName} has no render method`}</div>;
+      render = () => (
+        <div className="warning">{`${columnName} has no render method`}</div>
+      );
     }
     return {
       label: columnName,
       name: columnName,
       render,
       sortable: columnName in sortableColumns,
-      sorted: columnName === sort.column ? sort.direction : false,
+      sorted: columnName === sort.column ? sort.direction : false
     };
   });
   return (
