@@ -22,9 +22,14 @@ const getItemTypeEvidencePrefix = (itemType: string) => {
   return itemTypeToEvidencePrefixMap[itemType] || '';
 };
 
-const getItemTypeRangePrefix = (itemType: string) => (itemType === 'feature' ? 'ftlen_' : '');
+const getItemTypeRangePrefix = (itemType: string) =>
+  itemType === 'feature' ? 'ftlen_' : '';
 
-const createTermString = (term: string, itemType: string, id: string | undefined) => {
+const createTermString = (
+  term: string,
+  itemType: string,
+  id: string | undefined
+) => {
   if (term === 'ec') {
     if (id) {
       return 'ec:';
@@ -45,7 +50,7 @@ const createValueString = (
   term: string,
   valuePrefix: string | undefined,
   stringValue: string,
-  id: string | undefined,
+  id: string | undefined
 ) => {
   if (term === 'ec') {
     if (id) {
@@ -90,27 +95,33 @@ const getEvidenceSubquery = (clause: Clause) => {
   return `(${itemTypeEvidencePrefix}${term}:${evidenceValue})`;
 };
 
-const createQueryString = (clauses: Array<Clause> = []): string => clauses.reduce((queryAccumulator: string, clause: Clause) => {
-  const query = [];
-  if (
-    (clause.queryInput.id && clause.queryInput.id !== '')
-      || (clause.queryInput.stringValue && clause.queryInput.stringValue !== '')
-  ) {
-    query.push(createSimpleSubquery(clause));
-  }
-  if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
-    query.push(createRangeSubquery(clause));
-  }
-  if (clause.queryInput.evidenceValue && clause.queryInput.evidenceValue !== '') {
-    query.push(getEvidenceSubquery(clause));
-  }
-  let queryJoined = query.join(' AND ');
-  if (query.length > 1) {
-    queryJoined = `(${queryJoined})`;
-  }
-  return `${queryAccumulator}${
-    queryAccumulator.length > 0 && query.length > 0 ? ` ${clause.logicOperator} ` : ''
-  }${queryJoined}`;
-}, '');
+const createQueryString = (clauses: Clause[] = []): string =>
+  clauses.reduce((queryAccumulator: string, clause: Clause) => {
+    const query = [];
+    if (
+      (clause.queryInput.id && clause.queryInput.id !== '') ||
+      (clause.queryInput.stringValue && clause.queryInput.stringValue !== '')
+    ) {
+      query.push(createSimpleSubquery(clause));
+    }
+    if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
+      query.push(createRangeSubquery(clause));
+    }
+    if (
+      clause.queryInput.evidenceValue &&
+      clause.queryInput.evidenceValue !== ''
+    ) {
+      query.push(getEvidenceSubquery(clause));
+    }
+    let queryJoined = query.join(' AND ');
+    if (query.length > 1) {
+      queryJoined = `(${queryJoined})`;
+    }
+    return `${queryAccumulator}${
+      queryAccumulator.length > 0 && query.length > 0
+        ? ` ${clause.logicOperator} `
+        : ''
+    }${queryJoined}`;
+  }, '');
 
 export { createQueryString };

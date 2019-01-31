@@ -9,10 +9,16 @@ const prefix = '//wwwdev.ebi.ac.uk';
 
 const apiUrls = {
   // uniprotkb advanced search terms
-  advanced_search_terms: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/search_terms'),
+  advanced_search_terms: joinUrl(
+    prefix,
+    '/uniprot/api/configure/uniprotkb/search_terms'
+  ),
   // Annotation evidence used by advanced search
   evidences: {
-    annotation: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/annotation_evidences'),
+    annotation: joinUrl(
+      prefix,
+      '/uniprot/api/configure/uniprotkb/annotation_evidences'
+    ),
     // Go evidences used by advanced go search
     // "itemType": "goterm",
     go: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/go_evidences'),
@@ -21,9 +27,15 @@ const apiUrls = {
   database_xefs: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databases'),
   // Database cross reference fields in result column configure
   // "itemType": "database",
-  database_fields: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databasefields'),
+  database_fields: joinUrl(
+    prefix,
+    '/uniprot/api/configure/uniprotkb/databasefields'
+  ),
   // All result fields except database cross reference fields
-  results_fields: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/resultfields'),
+  results_fields: joinUrl(
+    prefix,
+    '/uniprot/api/configure/uniprotkb/resultfields'
+  ),
   // Retrieve results
   advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
 };
@@ -31,17 +43,22 @@ const apiUrls = {
 export default apiUrls;
 
 const RE_QUERY = /\?$/;
-export const getSuggesterUrl = (url: string, value: string) => joinUrl(prefix, url.replace(RE_QUERY, value));
+export const getSuggesterUrl = (url: string, value: string) =>
+  joinUrl(prefix, url.replace(RE_QUERY, value));
 
 export const getQueryUrl = (
   encodedQueryString: string,
-  columns: Array<string>,
+  columns: string[],
   cursor?: string,
   sortBy?: sortableColumns | undefined,
-  sortDirection?: string | undefined,
-) => `${apiUrls.advanced_search}?${queryString.stringify({
-  query: encodedQueryString,
-  fields: columns.join(','),
-  includeFacets: true,
-  sort: sortBy && sortBy in sortableColumns ? `${sortBy} ${sortDirection}` : undefined,
-})}`;
+  sortDirection?: string | undefined
+) =>
+  `${apiUrls.advanced_search}?${queryString.stringify({
+    query: encodedQueryString,
+    fields: columns.join(','),
+    includeFacets: true,
+    sort:
+      sortBy && sortBy in sortableColumns
+        ? `${sortBy} ${sortDirection}`
+        : undefined,
+  })}`;

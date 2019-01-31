@@ -7,7 +7,7 @@ import {
   SearchTermType,
   Operator,
   EvidenceType,
-  Clause
+  Clause,
 } from '../types/searchTypes';
 import { RootState } from '../../state/state-types';
 
@@ -33,7 +33,7 @@ export const selectSearchTerm = (
 ) =>
   action(SELECT_SEARCH_TERM, {
     clauseId,
-    searchTerm
+    searchTerm,
   });
 
 export const updateInputValue = (
@@ -44,13 +44,13 @@ export const updateInputValue = (
   action(UPDATE_INPUT_VALUE, {
     clauseId,
     value,
-    id
+    id,
   });
 
 export const updateEvidence = (clauseId: string, value: string) =>
   action(UPDATE_EVIDENCE, {
     clauseId,
-    value
+    value,
   });
 
 export const updateRangeValue = (
@@ -61,13 +61,13 @@ export const updateRangeValue = (
   action(UPDATE_RANGE_VALUE, {
     clauseId,
     value,
-    from
+    from,
   });
 
 export const updateLogicOperator = (clauseId: string, value: Operator) =>
   action(UPDATE_LOGIC_OPERATOR, {
     clauseId,
-    value
+    value,
   });
 
 export const submitAdvancedQuery = () => action(SUBMIT_ADVANCED_QUERY);
@@ -76,7 +76,7 @@ export const addClause = () => action(ADD_CLAUSE);
 
 export const removeClause = (clauseId: string) =>
   action(REMOVE_CLAUSE, {
-    clauseId
+    clauseId,
   });
 
 export const requestSearchTerms = () => action(REQUEST_SEARCH_TERMS);
@@ -84,12 +84,12 @@ export const requestSearchTerms = () => action(REQUEST_SEARCH_TERMS);
 export const receiveSearchTerms = (data: Array<SearchTermType>) =>
   action(RECEIVE_SEARCH_TERMS, {
     data,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   });
 
 export const updateClauses = (clauses: Array<Clause>) =>
   action(UPDATE_CLAUSES, {
-    clauses
+    clauses,
   });
 
 export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
@@ -115,14 +115,14 @@ export const fetchSearchTermsIfNeeded = () => (
 
 export const requestEvidences = (evidencesType: EvidenceType) =>
   action(REQUEST_EVIDENCES, {
-    evidencesType
+    evidencesType,
   });
 
 export const receiveEvidences = (data: any, evidencesType: EvidenceType) =>
   action(RECEIVE_EVIDENCES, {
     data,
     evidencesType,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   });
 
 export const fetchEvidences = (evidencesType: EvidenceType) => async (
@@ -154,5 +154,5 @@ export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
 
 export const updateQueryString = (queryString: string) =>
   action(UPDATE_QUERY_STRING, {
-    queryString
+    queryString,
   });

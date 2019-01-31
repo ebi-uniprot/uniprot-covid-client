@@ -11,7 +11,7 @@ import {
   SearchTermType,
   Operator,
   EvidenceType,
-  Namespace
+  Namespace,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import { createQueryString } from './utils/QueryStringGenerator';
@@ -52,7 +52,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const { queryString } = props;
     this.state = {
       showAdvanced: false,
-      queryString
+      queryString,
     };
     this.toggleAdvanced = this.toggleAdvanced.bind(this);
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
@@ -64,7 +64,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     const {
       location: { search: queryParamFromUrl },
       queryString,
-      dispatchUpdateQueryString
+      dispatchUpdateQueryString,
     } = this.props;
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
     if (
@@ -148,7 +148,7 @@ const mapStateToProps = (state: RootState) => ({
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
-  queryString: state.query.queryString
+  queryString: state.query.queryString,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
@@ -177,7 +177,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
       dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
       dispatchUpdateQueryString: queryString =>
-        searchActions.updateQueryString(queryString)
+        searchActions.updateQueryString(queryString),
     },
     dispatch
   );

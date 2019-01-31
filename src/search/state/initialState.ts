@@ -2,7 +2,7 @@ import { createEmptyClause } from '../utils/clause';
 import { Clause, Namespace, EvidenceType } from '../types/searchTypes';
 
 export type SearchState = {
-  readonly clauses: Array<Clause>;
+  readonly clauses: Clause[];
   readonly queryString: string;
   readonly namespace: Namespace;
   readonly searchTerms: any;
