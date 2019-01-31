@@ -2,10 +2,10 @@ import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
 import * as resultsActions from './actions';
 import initialState, { ResultsState } from './initialState';
-import { SortDirections } from '../sortTypes';
+import { SortDirections, SortDirectionsType } from '../types/resultsTypes';
 
 export type ResultAction = ActionType<typeof resultsActions>;
-
+// SortDirections.ascend.app as keyof SortDirectionsType
 const results = (state: ResultsState = initialState, action: ResultAction) => {
   switch (action.type) {
     case resultsActions.UPDATE_COLUMN_SORT:
@@ -14,10 +14,10 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
         sort: {
           column: action.payload.column,
           direction:
-            state.sort.column === action.payload.column
-            && state.sort.direction === SortDirections.ascend.app
-              ? SortDirections.descend.app
-              : SortDirections.ascend.app,
+            state.sort.column === action.payload.column &&
+            state.sort.direction === SortDirections.ascend.app
+              ? (SortDirections.descend.app as keyof SortDirectionsType)
+              : (SortDirections.ascend.app as keyof SortDirectionsType),
         },
       };
     case resultsActions.FETCH_RESULTS_REQUEST:
@@ -44,8 +44,9 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
     }
     case resultsActions.REMOVE_FACET: {
       const index = state.selectedFacets.findIndex(
-        selectedFacet => action.payload.facet.name === selectedFacet.name
-          && action.payload.facet.value === selectedFacet.value,
+        selectedFacet =>
+          action.payload.facet.name === selectedFacet.name &&
+          action.payload.facet.value === selectedFacet.value
       );
       return {
         ...state,

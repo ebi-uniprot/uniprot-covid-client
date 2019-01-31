@@ -33,7 +33,7 @@ export type SearchTermType = {
     name: string;
     value: string;
   }>;
-  items?: FieldType[];
+  items?: SearchTermType[];
 };
 
 export type Input = {

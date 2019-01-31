@@ -2,11 +2,11 @@ import { getQueryUrl } from '../../utils/apiUrls';
 import {
   SortDirections,
   SortDirectionsType,
-  sortableColumns
-} from '../sortTypes';
-import { Facet } from '../types/resultsTypes';
+  SortableColumns,
+  SelectedFacet,
+} from '../types/resultsTypes';
 
-const createFacetsQueryString = (facets: Facet[]) =>
+const createFacetsQueryString = (facets: SelectedFacet[]) =>
   facets.reduce(
     (queryAccumulator, facet) =>
       `${queryAccumulator} AND (${facet.name}:${facet.value})`,
@@ -15,10 +15,10 @@ const createFacetsQueryString = (facets: Facet[]) =>
 
 const getAPIQueryUrl = (
   queryString: string,
-  columns: [string],
-  selectedFacets: [],
-  sortBy: sortableColumns | undefined = undefined,
-  sortDirectionKey: keyof SortDirectionsType = SortDirections.ascend
+  columns: string[],
+  selectedFacets: SelectedFacet[],
+  sortBy: SortableColumns | undefined = undefined,
+  sortDirectionKey: keyof SortDirectionsType | undefined = SortDirections.ascend
     .app as keyof SortDirectionsType
 ) => {
   const facetsQueryString = createFacetsQueryString(selectedFacets);
@@ -27,7 +27,7 @@ const getAPIQueryUrl = (
     columns,
     undefined,
     sortBy,
-    sortBy && sortBy in sortableColumns
+    sortBy && sortBy in SortableColumns
       ? SortDirections[sortDirectionKey].api
       : undefined
   );

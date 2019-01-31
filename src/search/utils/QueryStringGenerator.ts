@@ -66,7 +66,7 @@ const createValueString = (
 };
 
 const createSimpleSubquery = (clause: Clause) => {
-  const { itemType, term, valuePrefix } = clause.field;
+  const { itemType, term, valuePrefix } = clause.searchTerm;
   const { stringValue, id } = clause.queryInput;
   if (!stringValue) {
     throw new Error('Value not provided in query');
@@ -77,7 +77,7 @@ const createSimpleSubquery = (clause: Clause) => {
 };
 
 const createRangeSubquery = (clause: Clause) => {
-  const { term, itemType } = clause.field;
+  const { term, itemType } = clause.searchTerm;
   const { rangeFrom, rangeTo } = clause.queryInput;
   const rangeFromChecked = rangeFrom || '';
   const rangeToChecked = rangeTo || '';
@@ -87,7 +87,7 @@ const createRangeSubquery = (clause: Clause) => {
 
 const getEvidenceSubquery = (clause: Clause) => {
   const { evidenceValue } = clause.queryInput;
-  const { term, itemType } = clause.field;
+  const { term, itemType } = clause.searchTerm;
   if (!evidenceValue) {
     throw new Error('Evidence value not provided');
   }

@@ -9,7 +9,7 @@ enum itemType {
   goterm = 'goterm',
   group = 'group',
   groupDisplay = 'groupDisplay',
-  single = 'single'
+  single = 'single',
 }
 
 enum dataType {
@@ -17,7 +17,7 @@ enum dataType {
   date = 'date',
   enum = 'enum',
   integer = 'integer',
-  string = 'string'
+  string = 'string',
 }
 
 type Clause = {
@@ -43,9 +43,9 @@ export const createEmptyClause = (): Clause => ({
     example: 'a4_human, P05067, cdc7 human',
     itemType: itemType.single,
     dataType: dataType.string,
-    id: 'id_Any'
+    id: 'id_Any',
   },
-  queryInput: {}
+  queryInput: {},
 });
 
 export const clausesAreEqual = (clause1: Clause, clause2: Clause) =>
@@ -56,32 +56,36 @@ export const clausesAreEqual = (clause1: Clause, clause2: Clause) =>
 
 const findSearchTermRecursive = (
   queryField: string,
-  searchTerms: Array<SearchTermType>,
+  searchTerms: SearchTermType[],
   valuePrefix = ''
 ): SearchTermType | undefined => {
-  for (let i = 0; i < searchTerms.length; i++) {
-    const searchTerm = searchTerms[i];
+  for (const searchTerm of searchTerms) {
     if (
       valuePrefix &&
       searchTerm.valuePrefix === valuePrefix &&
       searchTerm.term === queryField
-    )
+    ) {
       return searchTerm;
-    if (!valuePrefix && searchTerm.term === queryField) return searchTerm;
+    }
+    if (!valuePrefix && searchTerm.term === queryField) {
+      return searchTerm;
+    }
     if (searchTerm.items) {
       const found = findSearchTermRecursive(
         queryField,
         searchTerm.items,
         valuePrefix
       );
-      if (found) return found;
+      if (found) {
+        return found;
+      }
     }
   }
 };
 
 const findSearchTerm = (
   queryField: string,
-  searchTerms: Array<SearchTermType>,
+  searchTerms: SearchTermType[],
   valuePrefix = ''
 ): SearchTermType | undefined => {
   const searchTerm = findSearchTermRecursive(
@@ -96,14 +100,14 @@ const findSearchTerm = (
 };
 
 const parseRangeValue = (value: string) => {
-  const regex_range = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
-  const capture_groups = regex_range.exec(value);
-  if (!capture_groups || (!capture_groups[1] && !capture_groups[2])) {
+  const regexRange = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
+  const captureGroups = regexRange.exec(value);
+  if (!captureGroups || (!captureGroups[1] && !captureGroups[2])) {
     throw new Error(`${value} value is not a valid range`);
   }
   return {
-    rangeFrom: capture_groups[1],
-    rangeTo: capture_groups[2]
+    rangeFrom: captureGroups[1],
+    rangeTo: captureGroups[2],
   };
 };
 
@@ -111,27 +115,27 @@ const parseXrefClause = (
   term: string,
   value: string,
   conjunction: keyof typeof Operator,
-  searchTerms: Array<SearchTermType>
+  searchTerms: SearchTermType[]
 ) => {
   const clause = {
     id: v1(),
-    logicOperator: conjunction
+    logicOperator: conjunction,
   };
   const tokens = value.split('-');
   if (tokens.length === 1) {
     // Only a value is provided so this is an xref any search
-    return <Clause>{
+    return {
       ...clause,
       searchTerm: findSearchTerm('xref', searchTerms, 'any'),
-      queryInput: { stringValue: tokens[0] }
-    };
+      queryInput: { stringValue: tokens[0] },
+    } as Clause;
   }
   if (tokens.length === 2) {
-    return <Clause>{
+    return {
       ...clause,
       searchTerm: findSearchTerm('xref', searchTerms, tokens[0]),
-      queryInput: { stringValue: tokens[1] }
-    };
+      queryInput: { stringValue: tokens[1] },
+    } as Clause;
   }
   throw new Error(`${value} is not a properly formed xref.`);
 };
@@ -140,18 +144,18 @@ const parseIdNameClause = (
   queryTerm: string,
   value: string,
   conjunction: keyof typeof Operator,
-  searchTerms: Array<SearchTermType>
+  searchTerms: SearchTermType[]
 ) => {
   const [termName, searchType] = queryTerm.split('_');
   const searchTerm = findSearchTerm(termName, searchTerms);
 
   if (searchType === 'id') {
-    return <Clause>{
+    return {
       id: v1(),
       logicOperator: conjunction,
       searchTerm,
-      queryInput: { stringValue: value }
-    };
+      queryInput: { stringValue: value },
+    } as Clause;
   }
   throw new Error(`${queryTerm} not a valid _id or _name style term.`);
 };
@@ -159,7 +163,7 @@ const parseIdNameClause = (
 const parseClause = (
   queryConjunction: string,
   termValue: string,
-  searchTerms: Array<SearchTermType>
+  searchTerms: SearchTermType[]
 ) => {
   if (!searchTerms) {
     return;
@@ -192,30 +196,32 @@ const parseClause = (
   if (!searchTerm) {
     throw new Error(`${term} not a valid term.`);
   }
-  return <Clause>{
+  return {
     id: v1(),
     logicOperator: conjunction,
     searchTerm,
     queryInput: searchTerm.hasRange
       ? parseRangeValue(value)
-      : { stringValue: value }
-  };
+      : { stringValue: value },
+  } as Clause;
 };
 
 export const unpackQueryUrl = (
   query: string,
-  searchTerms: Array<SearchTermType>
+  searchTerms: SearchTermType[]
 ) => {
-  const regex_query = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
-  let match;
-  const clauses: Array<Clause> = [];
-  while ((match = regex_query.exec(query)) !== null) {
-    const termValue = match[1];
-    const conjunction = match[2] || 'AND';
-    const clause = parseClause(conjunction, termValue, searchTerms);
-    if (clause) {
-      clauses.push(clause);
-    }
+  const regexQuery = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  const clauses: Clause[] = [];
+  const matches = regexQuery.exec(query);
+  if (matches) {
+    matches.forEach(match => {
+      const termValue = match[1];
+      const conjunction = match[2] || 'AND';
+      const clause = parseClause(conjunction, termValue, searchTerms);
+      if (clause) {
+        clauses.push(clause);
+      }
+    });
   }
   return clauses;
 };

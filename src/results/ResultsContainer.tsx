@@ -10,32 +10,38 @@ import { Clause } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
 import { RootState, RootAction } from '../state/state-types';
-import { selectedRows } from './types/resultsTypes';
+import {
+  SortDirectionsType,
+  SortableColumns,
+  SelectedRows,
+  SelectedFacet,
+  SortType,
+} from './types/resultsTypes';
 
 interface IResultsProps extends RouteComponentProps {
   queryString: string;
-  selectedFacets: [];
+  selectedFacets: SelectedFacet[];
   dispatchFetchResults: (
     queryString: string,
     columns: Array<string>,
-    selectedFacets: [],
-    sortBy: string,
-    sortDirection: string
+    selectedFacets: SelectedFacet[],
+    sortBy: SortableColumns | undefined,
+    sortDirection: keyof SortDirectionsType | undefined
   ) => void;
   dispatchUpdateQueryString: (type: string) => void;
-  dispatchUpdateColumnSort: (column: string) => void;
+  dispatchUpdateColumnSort: (column: SortableColumns) => void;
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
   dispatchRemoveFacet: (facetName: string, facetValue: string) => void;
   clauses?: Array<Clause>;
   columns: Array<string>;
-  sort: { column: string; direction: string };
-  results: [];
-  facets: [];
+  sort: SortType;
+  results: any[];
+  facets: any[];
   isFetching: boolean;
 }
 
 type ResultsContainerState = {
-  selectedRows: selectedRows;
+  selectedRows: SelectedRows;
 };
 
 export class Results extends Component<IResultsProps, ResultsContainerState> {
@@ -54,7 +60,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchUpdateQueryString,
       columns,
       history,
-      sort: { column, direction }
+      sort: { column, direction },
     } = this.props;
     dispatchFetchResults(
       queryString,
@@ -73,7 +79,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       selectedFacets,
       columns,
       history,
-      sort: { column, direction }
+      sort: { column, direction },
     } = this.props;
     if (
       queryString !== prevProps.queryString ||
@@ -114,7 +120,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchAddFacet,
       dispatchRemoveFacet,
       dispatchUpdateColumnSort,
-      sort
+      sort,
     } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
@@ -152,18 +158,18 @@ const mapStateToProps = (state: RootState) => ({
   results: state.results.results,
   facets: state.results.facets,
   isFetching: state.results.isFetching,
-  sort: state.results.sort
+  sort: state.results.sort,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
       dispatchFetchResults: (
-        query,
-        columns,
-        selectedFacets,
-        sortBy,
-        sortDirection
+        query: string,
+        columns: string[],
+        selectedFacets: SelectedFacet[],
+        sortBy: SortableColumns | undefined,
+        sortDirection: keyof SortDirectionsType | undefined
       ) =>
         resultsActions.fetchResults(
           query,
@@ -172,14 +178,14 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
           sortBy,
           sortDirection
         ),
-      dispatchAddFacet: (facetName, facetValue) =>
+      dispatchAddFacet: (facetName: string, facetValue: string) =>
         resultsActions.addFacet(facetName, facetValue),
-      dispatchRemoveFacet: (facetName, facetValue) =>
+      dispatchRemoveFacet: (facetName: string, facetValue: string) =>
         resultsActions.removeFacet(facetName, facetValue),
-      dispatchUpdateQueryString: queryString =>
+      dispatchUpdateQueryString: (queryString: string) =>
         searchActions.updateQueryString(queryString),
-      dispatchUpdateColumnSort: column =>
-        resultsActions.updateColumnSort(column)
+      dispatchUpdateColumnSort: (column: SortableColumns) =>
+        resultsActions.updateColumnSort(column),
     },
     dispatch
   );

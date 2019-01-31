@@ -1,7 +1,7 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
-import { sortableColumns } from '../results/sortTypes';
+import { SortableColumns } from '../results/types/resultsTypes';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
@@ -50,7 +50,7 @@ export const getQueryUrl = (
   encodedQueryString: string,
   columns: string[],
   cursor?: string,
-  sortBy?: sortableColumns | undefined,
+  sortBy?: SortableColumns | undefined,
   sortDirection?: string | undefined
 ) =>
   `${apiUrls.advanced_search}?${queryString.stringify({
@@ -58,7 +58,7 @@ export const getQueryUrl = (
     fields: columns.join(','),
     includeFacets: true,
     sort:
-      sortBy && sortBy in sortableColumns
+      sortBy && sortBy in SortableColumns
         ? `${sortBy} ${sortDirection}`
         : undefined,
   })}`;

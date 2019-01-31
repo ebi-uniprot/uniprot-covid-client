@@ -2,16 +2,15 @@ import React from 'react';
 import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from './views/FieldToViewMappings';
 import '../styles/alert.scss';
-import { sortableColumns } from './sortTypes';
-import { selectedRows } from './types/resultsTypes';
+import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
 
 type ResultsTableProps = {
-  results: [];
+  results: any[];
   columnNames: Array<string>;
-  selectedRows: selectedRows;
+  selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
-  handleHeaderClick: (column: string) => void;
-  sort: { column: string; direction: string };
+  handleHeaderClick: (column: SortableColumns) => void;
+  sort: SortType;
 };
 
 const ResultsTable: React.FC<ResultsTableProps> = ({
@@ -20,7 +19,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   selectedRows,
   handleRowSelect,
   handleHeaderClick,
-  sort
+  sort,
 }) => {
   const columns = columnNames.map(columnName => {
     let render;
@@ -35,8 +34,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       label: columnName,
       name: columnName,
       render,
-      sortable: columnName in sortableColumns,
-      sorted: columnName === sort.column ? sort.direction : false
+      sortable: columnName in SortableColumns,
+      sorted: columnName === sort.column ? sort.direction : false,
     };
   });
   return (
