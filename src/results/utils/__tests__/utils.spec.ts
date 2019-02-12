@@ -18,7 +18,6 @@ describe('utils', () => {
       { name: 'facet2', value: 'value 3' },
     ];
     const queryString = createFacetsQueryString(facets);
-    console.log(queryString);
     expect(queryString).toBe(' AND (facet1:value 1) AND (facet2:value 3)');
   });
 });

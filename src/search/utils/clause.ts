@@ -204,7 +204,9 @@ const parseSinglePartSubquery = (
     throw new Error(`${conjunctionString} conjunction is not valid.`);
   }
 
-  let [term, value] = termValue.split(':');
+  const tokens = termValue.split(':');
+  const value = tokens[1];
+  let term = tokens[0];
   if (!value) {
     const emptyClause = createEmptyClause();
     return { ...emptyClause, queryInput: { stringValue: term } };
@@ -223,7 +225,7 @@ const parseSinglePartSubquery = (
     try {
       queryInput = parseRangeOrEvidenceSubquery(termValue, value);
     } catch (e) {
-      console.error(e);
+      // console.log(e);
     }
     term = getSinglePartSubqueryTerm(termValue);
   }
@@ -269,10 +271,6 @@ const allStringArrayElementsEqual = (arr: Array<string | null>) => {
 };
 
 const getTermFrom = (queryStringGroup: string[]) => {
-  const itemTypeToPrefixMap: IPrefixMap = {
-    ft: 'feature',
-    cc: 'comment',
-  };
   const prefixes = queryStringGroup.map((queryString: string) =>
     queryString.slice(0, 2)
   );
@@ -352,13 +350,18 @@ const parseSubquery = (
   subquery: string,
   searchTerms: SearchTermType[]
 ) => {
-  const regex_query = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-_\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
-  let subqueryParts = [];
+  const regexQuery = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-_\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  const subqueryParts = [];
   let match;
-  while ((match = regex_query.exec(subquery)) !== null) {
-    const fieldValue = match[1];
-    subqueryParts.push(fieldValue);
-  }
+  do {
+    // Need this so we don't assign within a loop: while ((match = regexQuery.exec(subquery)) !== null)
+    match = regexQuery.exec(subquery);
+    if (match) {
+      const fieldValue = match[1];
+      subqueryParts.push(fieldValue);
+    }
+  } while (match);
+
   switch (subqueryParts.length) {
     case 0:
       throw new Error(`No clauses found in ${subquery}.`);
@@ -373,7 +376,7 @@ const parseSubquery = (
   }
 };
 
-const getTopLevelConjunctionsClauses = query => {
+const getTopLevelConjunctionsClauses = (query: string) => {
   let balance = 0;
   const clauses = [];
   const conjunctions = [];
@@ -412,7 +415,7 @@ export const parseQueryString = (
     topLevelConjunctions,
     topLevelSubqueries,
   ] = getTopLevelConjunctionsClauses(query);
-  let clauses = [];
+  const clauses = [];
   for (let i = 0; i < topLevelConjunctions.length; i += 1) {
     const conjuction = topLevelConjunctions[i];
     const clause = topLevelSubqueries[i];
