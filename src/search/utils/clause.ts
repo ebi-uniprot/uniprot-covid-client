@@ -101,15 +101,23 @@ const findSearchTerm = (
 };
 
 const parseRangeValue = (value: string) => {
-  const regexRange = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
-  const captureGroups = regexRange.exec(value);
-  if (!captureGroups || (!captureGroups[1] && !captureGroups[2])) {
-    throw new Error(`${value} value is not a valid range`);
+  const regeNumberRange = /\[([0-9]+)\s*TO\s*([0-9]+)\]/gi;
+  const captureGroupsNumber = regeNumberRange.exec(value);
+  if (captureGroupsNumber && captureGroupsNumber[1] && captureGroupsNumber[2]) {
+    return {
+      rangeFrom: Number(captureGroupsNumber[1]),
+      rangeTo: Number(captureGroupsNumber[2]),
+    };
   }
-  return {
-    rangeFrom: captureGroups[1],
-    rangeTo: captureGroups[2],
-  };
+  const regexDateRange = /\[([0-9\-]+)\s*TO\s*([0-9\-]+)\]/gi;
+  const captureGroupsDate = regexDateRange.exec(value);
+  if (captureGroupsDate && captureGroupsDate[1] && captureGroupsDate[2]) {
+    return {
+      rangeFrom: captureGroupsDate[1],
+      rangeTo: captureGroupsDate[2],
+    };
+  }
+  throw new Error(`${value} value is not a valid range`);
 };
 
 const parseXrefSubquery = (
