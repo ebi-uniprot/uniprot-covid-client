@@ -201,7 +201,7 @@ const parseSequenceFeatureClause = (
 };
 
 const parseRangeOrEvidenceSubquery = (subquery: string, value: string) => {
-  const regexp = /^ft(len|ev)?_(.*):.*/i;
+  const regexp = /^(?:ft|cc)(len|ev)?_(.*):.*/i;
   const matches = regexp.exec(subquery);
   if (!matches) {
     return {};
