@@ -3,6 +3,7 @@ import '@babel/polyfill';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Results } from '../ResultsContainer';
+import { Namespace } from '../../search/types/searchTypes';
 
 configure({ adapter: new Adapter() });
 
@@ -18,6 +19,7 @@ describe('Results component', () => {
       results: [],
       facets: [],
       isFetching: false,
+      namespace: Namespace.uniprotkb,
       dispatchFetchResults: jest.fn(),
       dispatchAddFacetToQuery: jest.fn(),
       location: {
