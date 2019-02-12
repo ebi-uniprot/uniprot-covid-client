@@ -1,6 +1,7 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input, SearchTermType } from '../types/searchTypes';
+import query, { searchTerms } from '../state/reducers';
 
 enum itemType {
   comment = 'comment',
@@ -111,7 +112,7 @@ const parseRangeValue = (value: string) => {
   };
 };
 
-const parseXrefClause = (
+const parseXrefSubquery = (
   term: string,
   value: string,
   conjunction: keyof typeof Operator,
@@ -140,7 +141,7 @@ const parseXrefClause = (
   throw new Error(`${value} is not a properly formed xref.`);
 };
 
-const parseIdNameClause = (
+const parseIdNameSubquery = (
   queryTerm: string,
   value: string,
   conjunction: keyof typeof Operator,
@@ -160,68 +161,337 @@ const parseIdNameClause = (
   throw new Error(`${queryTerm} not a valid _id or _name style term.`);
 };
 
-const parseClause = (
-  queryConjunction: string,
+const parseSequenceFeatureClause = (
+  queryTerm: string,
+  value: string,
+  conjunction: keyof typeof Operator,
+  searchTerms: SearchTermType[]
+) => {
+  const regexp = /^ft(len|ev)?_(.*)/i;
+  const matches = regexp.exec(queryTerm);
+  let term;
+  if (matches && matches[2]) {
+    term = matches[2];
+  } else {
+    throw new Error(`${queryTerm} does not contain a term.`);
+  }
+  const searchTerm = findSearchTerm(term, searchTerms);
+  let prefix = matches && matches[1] ? matches[1] : null;
+  const emptyClause = createEmptyClause();
+  switch (prefix) {
+    case null:
+      return {
+        id: v1(),
+        logicOperator: conjunction,
+        searchTerm,
+        queryInput: { stringValue: value },
+      } as Clause;
+
+    case 'len':
+    case 'ev':
+  }
+};
+
+const parseRangeOrEvidenceSubquery = (subquery: string, value: string) => {
+  const regexp = /^ft(len|ev)?_(.*):.*/i;
+  const matches = regexp.exec(subquery);
+  if (!matches) {
+    return {};
+  }
+  const rangeOrEvidence = matches[1];
+  if (!rangeOrEvidence) {
+    return { stringValue: value };
+  }
+  if (rangeOrEvidence === 'ev') {
+    return { evidenceValue: value };
+  }
+  if (rangeOrEvidence === 'len') {
+    return { ...parseRangeValue(value) };
+  }
+};
+
+const parseSinglePartSubquery = (
+  conjunctionString: string = 'AND',
   termValue: string,
   searchTerms: SearchTermType[]
 ) => {
   if (!searchTerms) {
     return;
   }
-  const queryConjunctionUpper = queryConjunction
-    ? queryConjunction.toUpperCase()
-    : Operator.AND;
+  const conjunctionUpper = conjunctionString.toUpperCase();
+
   let conjunction: keyof typeof Operator;
-  if (queryConjunctionUpper in Operator) {
-    conjunction = queryConjunctionUpper as keyof typeof Operator;
+  if (conjunctionUpper in Operator) {
+    conjunction = conjunctionUpper as keyof typeof Operator;
   } else {
-    throw new Error(`${queryConjunction} conjunction is not valid.`);
+    throw new Error(`${conjunctionString} conjunction is not valid.`);
   }
 
-  const [term, value] = termValue.split(':');
+  let [term, value] = termValue.split(':');
   if (!value) {
     const emptyClause = createEmptyClause();
     return { ...emptyClause, queryInput: { stringValue: term } };
   }
 
   if (term.match(/^xref/i)) {
-    return parseXrefClause(term, value, conjunction, searchTerms);
+    return parseXrefSubquery(term, value, conjunction, searchTerms);
   }
 
   if (term.match(/^organism|taxonomy/i)) {
-    return parseIdNameClause(term, value, conjunction, searchTerms);
+    return parseIdNameSubquery(term, value, conjunction, searchTerms);
+  }
+
+  if (term.match(/^ft(len|ev)?_/i)) {
+    const queryInput = parseRangeOrEvidenceSubquery(termValue, value);
+    term = getSinglePartSubqueryTerm(termValue);
+    const searchTerm = findSearchTerm(term, searchTerms);
+    return {
+      id: v1(),
+      logicOperator: conjunction,
+      searchTerm,
+      queryInput,
+    } as Clause;
   }
 
   const searchTerm = findSearchTerm(term, searchTerms);
   if (!searchTerm) {
     throw new Error(`${term} not a valid term.`);
   }
+
   return {
     id: v1(),
     logicOperator: conjunction,
     searchTerm,
-    queryInput: searchTerm.hasRange
-      ? parseRangeValue(value)
-      : { stringValue: value },
+    queryInput: {
+      ...(searchTerm.hasRange
+        ? parseRangeValue(value)
+        : { stringValue: value }),
+    },
   } as Clause;
 };
 
-export const unpackQueryUrl = (
+interface IPrefixMap {
+  ft: string;
+  cc: string;
+  [key: string]: string;
+}
+
+const itemTypeToPrefixMap: IPrefixMap = {
+  ft: 'feature',
+  cc: 'comment',
+};
+
+const getSinglePartSubqueryPrefix = (subquery: string) => {
+  const prefix = subquery.slice(0, 2);
+  return prefix in itemTypeToPrefixMap ? prefix : null;
+};
+
+const allStringArrayElementsEqual = (arr: Array<string | null>) => {
+  return arr.every(
+    (element: string | null, i: number) => !!element && element === arr[0]
+  );
+};
+
+const getTermFrom = (queryStringGroup: string[]) => {
+  const itemTypeToPrefixMap: IPrefixMap = {
+    ft: 'feature',
+    cc: 'comment',
+  };
+  const prefixes = queryStringGroup.map((queryString: string) =>
+    queryString.slice(0, 2)
+  );
+  if (prefixes.every((prefix: string, i: number) => prefix === prefixes[0])) {
+    return itemTypeToPrefixMap[prefixes[0]];
+  } else {
+    throw new Error(`${queryStringGroup} has inconsistent item type prefixes.`);
+  }
+};
+
+const getSinglePartSubqueryTerm = (field: string) => {
+  if (field.indexOf('_') < 0) {
+    return field;
+  }
+  const regexp = /^\w*?_(\w+)/g;
+  const match = regexp.exec(field);
+  if (match && match[1]) {
+    return match[1];
+  }
+  throw new Error(`${field} does not contain a searchtype.`);
+};
+
+const getMultiplePartSubqueryTerm = (subqueryParts: string[]) => {
+  const terms = subqueryParts.map(subqueryPart =>
+    getSinglePartSubqueryTerm(subqueryPart)
+  );
+  if (allStringArrayElementsEqual(terms)) {
+    return terms[0];
+  }
+};
+
+const getMultiplePartSubqueryPrefix = (subqueryParts: string[]) => {
+  const prefixes = subqueryParts.map(subqueryPart =>
+    getSinglePartSubqueryPrefix(subqueryPart)
+  );
+  if (allStringArrayElementsEqual(prefixes)) {
+    return prefixes[0];
+  }
+};
+
+const parseMultiplePartSubquery = (
+  conjunction: string,
+  subqueryParts: string[],
+  searchTerms: SearchTermType[]
+) => {
+  const term = getMultiplePartSubqueryTerm(subqueryParts);
+  if (!term) {
+    throw new Error(`${subqueryParts} has inconsistent terms.`);
+  }
+  const searchTerm = findSearchTerm(term, searchTerms);
+  if (!searchTerm) {
+    throw new Error(`Cannot find ${term}: in search_terms.`);
+  }
+  const prefix = getMultiplePartSubqueryPrefix(subqueryParts);
+  if (!prefix) {
+    throw new Error(`${subqueryParts} has inconsistent prefixes.`);
+  }
+  let queryInput = {};
+  subqueryParts.forEach((subqueryPart: string) => {
+    const [field, value] = subqueryPart.split(':');
+    queryInput = {
+      ...queryInput,
+      ...parseRangeOrEvidenceSubquery(subqueryPart, value),
+    };
+  });
+
+  return {
+    id: v1(),
+    logicOperator: conjunction,
+    searchTerm,
+    queryInput,
+  };
+};
+
+const parseSubquery = (
+  conjunction: string,
+  subquery: string,
+  searchTerms: SearchTermType[]
+) => {
+  const regex_query = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-_\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
+  let subqueryParts = [];
+  let match;
+  while ((match = regex_query.exec(subquery)) !== null) {
+    const fieldValue = match[1];
+    subqueryParts.push(fieldValue);
+  }
+  switch (subqueryParts.length) {
+    case 0:
+      throw new Error(`No clauses found in ${subquery}.`);
+    case 1:
+      return parseSinglePartSubquery(
+        conjunction,
+        subqueryParts[0],
+        searchTerms
+      );
+    default:
+      return parseMultiplePartSubquery(conjunction, subqueryParts, searchTerms);
+  }
+};
+
+const getTopLevelConjunctionsClauses = query => {
+  let balance = 0;
+  const clauses = [];
+  const conjunctions = [];
+  let start = 0;
+  for (let i = 0; i < query.length; i += 1) {
+    const character = query[i];
+    if (character === '(') {
+      balance += 1;
+      if (balance === 1) {
+        if (i === 0) {
+          conjunctions.push('AND');
+        } else {
+          conjunctions.push(query.slice(start + 1, i).trim());
+        }
+        start = i;
+      }
+    } else if (character === ')') {
+      balance -= 1;
+      if (balance === 0) {
+        clauses.push(query.slice(start + 1, i));
+        start = i;
+      }
+    }
+  }
+  return [conjunctions, clauses];
+};
+
+export const parseQueryString = (
   query: string,
   searchTerms: SearchTermType[]
 ) => {
-  const regexQuery = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
-  const clauses: Clause[] = [];
-  const matches = regexQuery.exec(query);
-  if (matches) {
-    matches.forEach(match => {
-      const termValue = match[1];
-      const conjunction = match[2] || 'AND';
-      const clause = parseClause(conjunction, termValue, searchTerms);
-      if (clause) {
-        clauses.push(clause);
-      }
-    });
+  const [
+    topLevelConjunctions,
+    topLevelSubqueries,
+  ] = getTopLevelConjunctionsClauses(query);
+  let clauses = [];
+  for (let i = 0; i < topLevelConjunctions.length; i += 1) {
+    const conjuction = topLevelConjunctions[i];
+    const clause = topLevelSubqueries[i];
+    clauses.push(parseSubquery(conjuction, clause, searchTerms));
   }
   return clauses;
 };
+
+// const results = lucene.parse(query);
+// console.log(JSON.stringify(results));
+// const temp = luceneTreeToClauses(results);
+// console.log(temp.length);
+// console.log(JSON.stringify(temp, undefined, 2));
+
+// const luceneNodeToClause = (node) => {
+// Assumption: all conditions found in here will be be joined by the AND operator
+// Find all nodes with:
+//   term
+//   field
+//   term_min
+//   term_max
+// }
+
+// let maxRecursionDepth = -1;
+// let clauses = [];
+// const luceneTreeToClauses = tree => {
+//   maxRecursionDepth = -1;
+//   clauses = [];
+//   luceneTreeToClausesInner(tree);
+//   return clauses;
+// };
+
+// const luceneTreeToClausesInner = (tree, level = 0, recursionDepth = -1) => {
+//   recursionDepth++;
+//   if (!tree) {
+//     return;
+//   }
+
+//   if (tree.left) {
+//     if (tree.parenthesized) {
+//       level++;
+//     }
+//     luceneTreeToClausesInner(tree.left, level, recursionDepth);
+//     if (level === 0 && recursionDepth >= maxRecursionDepth) {
+//       maxRecursionDepth = recursionDepth;
+//       clauses.push(tree.left);
+//     }
+//   }
+
+//   if (tree.right) {
+//     luceneTreeToClausesInner(tree.right, level, recursionDepth);
+//     if (level === 0 && recursionDepth >= maxRecursionDepth) {
+//       maxRecursionDepth = recursionDepth;
+//       clauses.push(tree.right);
+//     }
+
+//     if (tree.parenthesized) {
+//       level--;
+//     }
+//   }
+// };
