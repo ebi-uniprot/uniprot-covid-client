@@ -8,7 +8,7 @@ import * as searchActions from '../search/state/actions';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
-import infoMappings from '../info/Infomappings';
+import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
   SortDirectionsType,
