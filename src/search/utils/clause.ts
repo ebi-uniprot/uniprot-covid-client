@@ -1,7 +1,6 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
 import { Operator, Input, SearchTermType } from '../types/searchTypes';
-import query, { searchTerms } from '../state/reducers';
 
 enum itemType {
   comment = 'comment',
@@ -167,37 +166,6 @@ const parseIdNameSubquery = (
     } as Clause;
   }
   throw new Error(`${queryTerm} not a valid _id or _name style term.`);
-};
-
-const parseSequenceFeatureClause = (
-  queryTerm: string,
-  value: string,
-  conjunction: keyof typeof Operator,
-  searchTerms: SearchTermType[]
-) => {
-  const regexp = /^ft(len|ev)?_(.*)/i;
-  const matches = regexp.exec(queryTerm);
-  let term;
-  if (matches && matches[2]) {
-    term = matches[2];
-  } else {
-    throw new Error(`${queryTerm} does not contain a term.`);
-  }
-  const searchTerm = findSearchTerm(term, searchTerms);
-  let prefix = matches && matches[1] ? matches[1] : null;
-  const emptyClause = createEmptyClause();
-  switch (prefix) {
-    case null:
-      return {
-        id: v1(),
-        logicOperator: conjunction,
-        searchTerm,
-        queryInput: { stringValue: value },
-      } as Clause;
-
-    case 'len':
-    case 'ev':
-  }
 };
 
 const parseRangeOrEvidenceSubquery = (subquery: string, value: string) => {

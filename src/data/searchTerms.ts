@@ -1,4 +1,6 @@
-export const searchTerms = [
+import { SearchTermType } from '../search/types/searchTypes';
+
+export const searchTerms: SearchTermType[] = [
   {
     id: 'id_accession',
     label: 'UniProtKB AC',
@@ -2791,7 +2793,8 @@ export const searchTerms = [
     hasEvidence: true,
     autoComplete: '/uniprot/api/suggester?dict=go&query=?',
     description:
-      'search go term with evidence. If evidence is not consider term is go. If evidence is considered such as iea, the term is go_iea',
+      'search go term with evidence. If evidence is not consider term is go. \
+      If evidence is considered such as iea, the term is go_iea',
     example: '0009986',
   },
   {
