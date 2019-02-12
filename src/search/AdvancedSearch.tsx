@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import ClauseList from './ClauseList';
-import { unpackQueryUrl } from './utils/clause';
+import { parseQueryString } from './utils/clause';
 import {
-  Namespace, EvidenceType, Clause, SearchTermType, Operator,
+  Namespace,
+  EvidenceType,
+  Clause,
+  SearchTermType,
+  Operator,
 } from './types/searchTypes';
 import './styles/AdvancedSearch.scss';
 
@@ -20,7 +24,11 @@ type AdvancedSearchProps = {
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
-  handleRangeInputChange: (clauseId: string, value: string, from?: boolean) => void;
+  handleRangeInputChange: (
+    clauseId: string,
+    value: string,
+    from?: boolean
+  ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
 };
@@ -38,24 +46,31 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
     dispatchFetchSearchTermsIfNeeded();
 
     if (searchTerms.length && queryString) {
-      dispatchUpdateClauses(unpackQueryUrl(queryString, searchTerms));
+      dispatchUpdateClauses(parseQueryString(queryString, searchTerms));
     }
   }
 
   componentDidUpdate(prevProps: AdvancedSearchProps) {
-    const { queryString: prevQueryString, searchTerms: prevSearchTerms } = prevProps;
+    const {
+      queryString: prevQueryString,
+      searchTerms: prevSearchTerms,
+    } = prevProps;
     const { queryString, searchTerms, dispatchUpdateClauses } = this.props;
     if (
-      searchTerms.length
-      && queryString
-      && (queryString !== prevQueryString || searchTerms !== prevSearchTerms)
+      searchTerms.length &&
+      queryString &&
+      (queryString !== prevQueryString || searchTerms !== prevSearchTerms)
     ) {
-      dispatchUpdateClauses(unpackQueryUrl(queryString, searchTerms));
+      dispatchUpdateClauses(parseQueryString(queryString, searchTerms));
     }
   }
 
   render() {
-    const { handleAdvancedSubmitClick, namespace, dispatchAddClause } = this.props;
+    const {
+      handleAdvancedSubmitClick,
+      namespace,
+      dispatchAddClause,
+    } = this.props;
     return (
       <div className="advanced-search">
         <div>
