@@ -216,6 +216,7 @@ const parseRangeOrEvidenceSubquery = (subquery: string, value: string) => {
   if (rangeOrEvidence === 'len') {
     return { ...parseRangeValue(value) };
   }
+  throw new Error(`${subquery} subquery is not valid.`);
 };
 
 const parseSinglePartSubquery = (
@@ -249,16 +250,14 @@ const parseSinglePartSubquery = (
     return parseIdNameSubquery(term, value, conjunction, searchTerms);
   }
 
+  let queryInput = {};
   if (term.match(/^ft(len|ev)?_/i)) {
-    const queryInput = parseRangeOrEvidenceSubquery(termValue, value);
+    try {
+      queryInput = parseRangeOrEvidenceSubquery(termValue, value);
+    } catch (e) {
+      console.error(e);
+    }
     term = getSinglePartSubqueryTerm(termValue);
-    const searchTerm = findSearchTerm(term, searchTerms);
-    return {
-      id: v1(),
-      logicOperator: conjunction,
-      searchTerm,
-      queryInput,
-    } as Clause;
   }
 
   const searchTerm = findSearchTerm(term, searchTerms);
@@ -271,6 +270,7 @@ const parseSinglePartSubquery = (
     logicOperator: conjunction,
     searchTerm,
     queryInput: {
+      ...queryInput,
       ...(searchTerm.hasRange
         ? parseRangeValue(value)
         : { stringValue: value }),
