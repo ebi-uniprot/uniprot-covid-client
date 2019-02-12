@@ -221,7 +221,7 @@ const parseSinglePartSubquery = (
   }
 
   let queryInput = {};
-  if (term.match(/^ft(len|ev)?_/i)) {
+  if (term.match(/^(?:ft|cc)(len|ev)?_/i)) {
     try {
       queryInput = parseRangeOrEvidenceSubquery(termValue, value);
     } catch (e) {
