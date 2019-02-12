@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { default as queryStringModule } from 'query-string';
-import { Facets } from 'franklin-sites';
+import { Facets, PageIntro } from 'franklin-sites';
 import * as resultsActions from './state/actions';
 import * as searchActions from '../search/state/actions';
-import { Clause } from '../search/types/searchTypes';
+import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
+import infoMappings from '../info/Infomappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
   SortDirectionsType,
@@ -20,6 +20,7 @@ import {
 
 interface IResultsProps extends RouteComponentProps {
   queryString: string;
+  namespace: Namespace;
   selectedFacets: SelectedFacet[];
   dispatchFetchResults: (
     queryString: string,
@@ -120,38 +121,48 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchAddFacet,
       dispatchRemoveFacet,
       dispatchUpdateColumnSort,
+      namespace,
       sort,
     } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
+    const info = infoMappings[namespace];
     return (
-      <SideBarLayout
-        sidebar={
-          <Facets
-            data={facets}
-            selectedFacets={selectedFacets}
-            addFacet={dispatchAddFacet}
-            removeFacet={dispatchRemoveFacet}
-          />
-        }
-        content={
-          <ResultsTable
-            results={results}
-            columnNames={columns}
-            handleRowSelect={this.handleRowSelect}
-            selectedRows={selectedRows}
-            handleHeaderClick={dispatchUpdateColumnSort}
-            sort={sort}
-          />
-        }
-      />
+      <Fragment>
+        <SideBarLayout
+          title={
+            <PageIntro title={info.name} links={info.links}>
+              {info.info}
+            </PageIntro>
+          }
+          sidebar={
+            <Facets
+              data={facets}
+              selectedFacets={selectedFacets}
+              addFacet={dispatchAddFacet}
+              removeFacet={dispatchRemoveFacet}
+            />
+          }
+          content={
+            <ResultsTable
+              results={results}
+              columnNames={columns}
+              handleRowSelect={this.handleRowSelect}
+              selectedRows={selectedRows}
+              handleHeaderClick={dispatchUpdateColumnSort}
+              sort={sort}
+            />
+          }
+        />
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = (state: RootState) => ({
+  namespace: state.query.namespace,
   queryString: state.query.queryString,
   columns: state.results.columns,
   selectedFacets: state.results.selectedFacets,
