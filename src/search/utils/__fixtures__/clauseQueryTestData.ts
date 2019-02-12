@@ -26,13 +26,12 @@ const testData = [
     clauses: [
       {
         searchTerm: {
-          id: 'id_mnemonic',
-          label: 'Entry Name [ID]',
+          id: 'id_Any',
+          label: 'Any',
           itemType: 'single',
-          term: 'mnemonic',
+          term: 'All',
           dataType: 'string',
-          description: 'Search by UniProtKB entry name',
-          example: 'P53_HUMAN',
+          example: 'a4_human, P05067, cdc7 human',
         },
         logicOperator: 'AND',
         queryInput: {},
