@@ -2,14 +2,13 @@ import {
   createQueryString,
   createFacetsQueryString,
 } from '../QueryStringGenerator';
-import testData from '../__testData__/clauseQueryTestData';
+import testData from '../__fixtures__/clauseQueryTestData';
 
 describe('QueryHelper', () => {
-  Object.keys(testData).forEach(key => {
-    const { description, queryString, clauses } = testData[key];
+  testData.forEach(({ description, queryString, clauses }) => {
     test(description, () => {
-      const queryString = createQueryString(clauses);
-      expect(queryString).toBe(queryString);
+      const testQueryString = createQueryString(clauses);
+      expect(testQueryString).toBe(queryString);
     });
   });
   // TODO databases

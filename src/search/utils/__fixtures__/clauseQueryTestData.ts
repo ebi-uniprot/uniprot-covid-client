@@ -1,10 +1,11 @@
-const testData = {
-  field_simple: {
+const testData = [
+  {
     description: 'should generate simple query',
     queryString: '(mnemonic:blah)',
     clauses: [
       {
         searchTerm: {
+          id: 'id_mnemonic',
           label: 'Entry Name [ID]',
           itemType: 'single',
           term: 'mnemonic',
@@ -12,19 +13,20 @@ const testData = {
           description: 'Search by UniProtKB entry name',
           example: 'P53_HUMAN',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           stringValue: 'blah',
         },
       },
     ],
   },
-  field_empty_input: {
+  {
     description: 'should ignore empty fields',
     queryString: '',
     clauses: [
       {
         searchTerm: {
+          id: 'id_mnemonic',
           label: 'Entry Name [ID]',
           itemType: 'single',
           term: 'mnemonic',
@@ -32,28 +34,29 @@ const testData = {
           description: 'Search by UniProtKB entry name',
           example: 'P53_HUMAN',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {},
       },
     ],
   },
-  field_cc_evidence: {
+  {
     description: 'should handle cc evidence tags',
     queryString:
       '((cc_cofactor_chebi:blah) AND (ccev_cofactor_chebi:blahvidence))',
     clauses: [
       {
         searchTerm: {
+          id: 'id_cofactor_chebi',
           label: 'ChEBI term',
           itemType: 'comment',
           term: 'cofactor_chebi',
           dataType: 'string',
           hasEvidence: true,
-          autoComplete: 'https://www.ebi.ac.uk/proteins/api/selector?chebi=?',
+          autoComplete: '/uniprot/api/suggester?dict=chebi&query=?',
           description: 'Search by cofactor chebi ',
           example: '29105',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           stringValue: 'blah',
           evidenceValue: 'blahvidence',
@@ -61,12 +64,13 @@ const testData = {
       },
     ],
   },
-  field_ft_evidence: {
+  {
     description: 'should handle ft evidence tags',
     queryString: '((ft_ca_bind:blah) AND (ftev_ca_bind:blahvidence))',
     clauses: [
       {
         searchTerm: {
+          id: 'id_ca_bind',
           label: 'Calcium binding',
           itemType: 'feature',
           term: 'ca_bind',
@@ -76,7 +80,7 @@ const testData = {
           description: 'Search by feature calcium binding',
           example: 'site',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           stringValue: 'blah',
           evidenceValue: 'blahvidence',
@@ -84,13 +88,13 @@ const testData = {
       },
     ],
   },
-
-  field_simple_range: {
+  {
     description: 'should handle range',
     queryString: '(ftlen_sites:[10 TO 100])',
     clauses: [
       {
         searchTerm: {
+          id: 'id_sites',
           label: 'Any',
           itemType: 'feature',
           term: 'sites',
@@ -100,7 +104,7 @@ const testData = {
           description: 'Search by feature sites',
           example: 'translocation',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           rangeFrom: 10,
           rangeTo: 100,
@@ -108,12 +112,13 @@ const testData = {
       },
     ],
   },
-  field_ft_range_evidence: {
+  {
     description: 'should handle ft range and evidence',
     queryString: '((ftlen_sites:[10 TO 100]) AND (ftev_sites:blahvidence))',
     clauses: [
       {
         searchTerm: {
+          id: 'id_sites',
           label: 'Any',
           itemType: 'feature',
           term: 'sites',
@@ -123,7 +128,7 @@ const testData = {
           description: 'Search by feature sites',
           example: 'translocation',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           rangeFrom: 10,
           rangeTo: 100,
@@ -132,12 +137,13 @@ const testData = {
       },
     ],
   },
-  field_range_date: {
+  {
     description: 'should handle date range',
     queryString: '(created:[2018-03-04 TO 2018-03-08])',
     clauses: [
       {
         searchTerm: {
+          id: 'id_created',
           label: 'Date Of Creation',
           itemType: 'single',
           term: 'created',
@@ -146,7 +152,7 @@ const testData = {
           description: 'Search by Date of creation',
           example: '[2018-03-04 TO 2018-03-08]',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           rangeFrom: '2018-03-04',
           rangeTo: '2018-03-08',
@@ -154,26 +160,27 @@ const testData = {
       },
     ],
   },
-  field_xref: {
+  {
     description: 'should handle xrefs',
     queryString: '(xref:pdb-Something)',
     clauses: [
       {
         searchTerm: {
+          id: 'id_xref_pdb',
           label: 'PDB',
           itemType: 'database',
           term: 'xref',
           dataType: 'string',
           valuePrefix: 'pdb',
         },
-        logic: 'AND',
+        logicOperator: 'AND',
         queryInput: {
           stringValue: 'Something',
         },
       },
     ],
   },
-};
+];
 
 export default testData;
 /*
