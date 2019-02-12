@@ -437,6 +437,9 @@ export const parseQueryString = (
   query: string,
   searchTerms: SearchTermType[]
 ) => {
+  if (!query) {
+    return [createEmptyClause()];
+  }
   const [
     topLevelConjunctions,
     topLevelSubqueries,
@@ -449,57 +452,3 @@ export const parseQueryString = (
   }
   return clauses;
 };
-
-// const results = lucene.parse(query);
-// console.log(JSON.stringify(results));
-// const temp = luceneTreeToClauses(results);
-// console.log(temp.length);
-// console.log(JSON.stringify(temp, undefined, 2));
-
-// const luceneNodeToClause = (node) => {
-// Assumption: all conditions found in here will be be joined by the AND operator
-// Find all nodes with:
-//   term
-//   field
-//   term_min
-//   term_max
-// }
-
-// let maxRecursionDepth = -1;
-// let clauses = [];
-// const luceneTreeToClauses = tree => {
-//   maxRecursionDepth = -1;
-//   clauses = [];
-//   luceneTreeToClausesInner(tree);
-//   return clauses;
-// };
-
-// const luceneTreeToClausesInner = (tree, level = 0, recursionDepth = -1) => {
-//   recursionDepth++;
-//   if (!tree) {
-//     return;
-//   }
-
-//   if (tree.left) {
-//     if (tree.parenthesized) {
-//       level++;
-//     }
-//     luceneTreeToClausesInner(tree.left, level, recursionDepth);
-//     if (level === 0 && recursionDepth >= maxRecursionDepth) {
-//       maxRecursionDepth = recursionDepth;
-//       clauses.push(tree.left);
-//     }
-//   }
-
-//   if (tree.right) {
-//     luceneTreeToClausesInner(tree.right, level, recursionDepth);
-//     if (level === 0 && recursionDepth >= maxRecursionDepth) {
-//       maxRecursionDepth = recursionDepth;
-//       clauses.push(tree.right);
-//     }
-
-//     if (tree.parenthesized) {
-//       level--;
-//     }
-//   }
-// };
