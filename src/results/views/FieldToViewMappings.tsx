@@ -76,9 +76,8 @@ const FieldToViewMappings: {
     }
     const props = {
       name: idx(row, _ => _.proteinDescription.recommendedName.fullName.value),
-      shortName: idx(
-        row,
-        _ => _.proteinDescription.recommendedName.shortName.value
+      shortName: idx(row, _ =>
+        _.proteinDescription.shortNames.map(name => name.value).join(', ')
       ),
       alternativeNames,
     };
