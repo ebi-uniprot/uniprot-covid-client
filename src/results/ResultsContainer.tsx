@@ -18,7 +18,7 @@ import {
   SortType,
 } from './types/resultsTypes';
 
-interface IResultsProps extends RouteComponentProps {
+interface ResultsProps extends RouteComponentProps {
   queryString: string;
   namespace: Namespace;
   selectedFacets: SelectedFacet[];
@@ -45,8 +45,8 @@ type ResultsContainerState = {
   selectedRows: SelectedRows;
 };
 
-export class Results extends Component<IResultsProps, ResultsContainerState> {
-  constructor(props: IResultsProps) {
+export class Results extends Component<ResultsProps, ResultsContainerState> {
+  constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedRows: {} };
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -72,7 +72,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
     );
   }
 
-  componentDidUpdate(prevProps: IResultsProps) {
+  componentDidUpdate(prevProps: ResultsProps) {
     const {
       location: { search: queryParamFromUrl },
       dispatchFetchResults,
