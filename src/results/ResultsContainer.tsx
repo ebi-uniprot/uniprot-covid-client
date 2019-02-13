@@ -128,13 +128,13 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
-    const info = infoMappings[namespace];
+    const { name, links, info } = infoMappings[namespace];
     return (
       <Fragment>
         <SideBarLayout
           title={
-            <PageIntro title={info.name} links={info.links}>
-              {info.info}
+            <PageIntro title={name} links={links}>
+              {info}
             </PageIntro>
           }
           sidebar={
