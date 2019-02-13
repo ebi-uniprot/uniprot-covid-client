@@ -1,11 +1,11 @@
-@import "../../styles/settings";
+@import '../../styles/settings';
 
 #sidebar-layout {
-  padding-left: 0.5em;
+  padding-left: 0.5rem;
   display: grid;
   grid-gap: $gutter-size;
   grid-template-columns: 1fr 6fr;
-  grid-template-areas: "sidebar content";
+  grid-template-areas: 'sidebar content';
   &__sidebar {
     grid-area: sidebar;
   }
