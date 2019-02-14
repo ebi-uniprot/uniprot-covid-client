@@ -9,7 +9,8 @@
     "build": "webpack --mode production --config webpack.prod.js",
     "check-types": "tsc",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
-    "test": "yarn check-types && yarn tslint && jest"
+    "test": "yarn check-types && yarn tslint && jest",
+    "clear-test-cache": "jest --clearCache"
   },
   "browserslist": [
     "last 2 version",
