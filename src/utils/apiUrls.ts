@@ -6,7 +6,6 @@ import { SortableColumns } from '../results/types/resultsTypes';
 export const joinUrl = (...args: string[]) => urljoin(args);
 
 const prefix = '//wwwdev.ebi.ac.uk';
-const prefix2 = '//ves-hx-cb:8090';
 
 const apiUrls = {
   // uniprotkb advanced search terms
@@ -38,7 +37,7 @@ const apiUrls = {
     '/uniprot/api/configure/uniprotkb/resultfields'
   ),
   // Retrieve results
-  advanced_search: joinUrl(prefix2, '/uniprot/api/uniprotkb/search'),
+  advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
 };
 
 export default apiUrls;

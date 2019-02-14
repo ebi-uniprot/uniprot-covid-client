@@ -40,6 +40,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   });
   return (
     <DataTable
+      idKey="primaryAccession"
       columns={columns}
       data={results}
       selectable
