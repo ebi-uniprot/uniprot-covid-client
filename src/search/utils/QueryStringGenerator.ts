@@ -71,6 +71,9 @@ const createSimpleSubquery = (clause: Clause) => {
   if (!stringValue) {
     throw new Error('Value not provided in query');
   }
+  if (term === 'All') {
+    return stringValue;
+  }
   const termString = createTermString(term, itemType, id);
   const valueString = createValueString(term, valuePrefix, stringValue, id);
   return `(${termString}${valueString})`;
