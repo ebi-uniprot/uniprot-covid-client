@@ -38,12 +38,12 @@ export const createEmptyClause = (): Clause => ({
   id: v1(),
   logicOperator: Operator.AND,
   searchTerm: {
-    label: 'Any',
+    label: 'All',
     term: 'All',
     example: 'a4_human, P05067, cdc7 human',
     itemType: itemType.single,
     dataType: dataType.string,
-    id: 'id_Any',
+    id: 'id_all',
   },
   queryInput: {},
 });
@@ -350,6 +350,7 @@ const parseSubquery = (
   subquery: string,
   searchTerms: SearchTermType[]
 ) => {
+  console.log(conjunction, subquery);
   const regexQuery = /\(?([0-9a-z_]+:?[0-9a-z\[\]\s\-_\.]*)\)?(?:\s*(AND|OR|NOT)\s*)*/gi;
   const subqueryParts = [];
   let match;
@@ -376,7 +377,29 @@ const parseSubquery = (
   }
 };
 
+const countCharacterOccurence = (string: string, character: string) => {
+  const regexpSpecialCharacters: string = '\\^$*+?.()[]{}=!<>|:-';
+  const pattern =
+    regexpSpecialCharacters.indexOf(character) >= 0
+      ? `\\${character}`
+      : character;
+  const matches = string.match(new RegExp(pattern, 'g')) || [];
+  return matches.length;
+};
+
 const getTopLevelConjunctionsClauses = (query: string) => {
+  // const nOpeningParentheses = countCharacterOccurence(query, '(');
+  // const nClosingParentheses = countCharacterOccurence(query, ')');
+  // if (nOpeningParentheses !== nClosingParentheses) {
+  //   throw Error(`Unbalanced query string: ${query}`);
+  // }
+  // if (nOpeningParentheses === 0 && nClosingParentheses === 0) {
+  //   console.log(
+  //     query,
+  //     'this is just a string and needs to be parsed seperately'
+  //   );
+  // }
+
   let balance = 0;
   const clauses = [];
   const conjunctions = [];
@@ -404,10 +427,126 @@ const getTopLevelConjunctionsClauses = (query: string) => {
   return [conjunctions, clauses];
 };
 
+let maxRecursionDepth = -1;
+let clauses = [];
+const luceneTreeToClauses = tree => {
+  maxRecursionDepth = -1;
+  clauses = [];
+  luceneTreeToClausesInner(tree);
+  return clauses;
+};
+
+const luceneTreeToClausesInner = (
+  tree,
+  level = 0,
+  recursionDepth = -1,
+  operator = 'HAHA'
+) => {
+  recursionDepth++;
+  if (!tree) {
+    return;
+  }
+
+  if (tree.left) {
+    if (tree.parenthesized) {
+      level++;
+    }
+    luceneTreeToClausesInner(tree.left, level, recursionDepth);
+    if (level === 0 && recursionDepth >= maxRecursionDepth) {
+      maxRecursionDepth = recursionDepth;
+      clauses.push({
+        ...tree.left,
+        start: tree.start,
+      });
+    }
+  }
+  if (tree.operator === 'OR') {
+    console.log(
+      'HERE for fucksake',
+      recursionDepth,
+      maxRecursionDepth,
+      !!tree.right
+    );
+  }
+  if (tree.right) {
+    luceneTreeToClausesInner(tree.right, level, recursionDepth, tree.operator);
+    if (level === 0 && recursionDepth >= maxRecursionDepth) {
+      console.log('AND also here?!', tree.operator);
+      maxRecursionDepth = recursionDepth;
+      clauses.push({
+        ...tree.right,
+        operator,
+      });
+    }
+    if (tree.parenthesized) {
+      level--;
+    }
+  }
+};
+
+const isObjectEmpty = (obj: {}) => Object.keys(obj).length === 0;
+
+const getQueryDataFromTree = tree => {
+  const {
+    right,
+    left,
+    field,
+    term,
+    operator,
+    start,
+    term_min,
+    term_max,
+  } = tree;
+  let queryData = [];
+  let queryDatum = {};
+  if (field) {
+    queryDatum['field'] = field;
+  }
+  if (term) {
+    queryDatum['term'] = term;
+  }
+  if (term_min && term_max) {
+    queryDatum['term_min'] = term_min;
+    queryDatum['term_max'] = term_max;
+  }
+  if (operator) {
+    queryDatum['operator'] = operator;
+  }
+  if (start) {
+    queryDatum['operator'] = start;
+  }
+  console.log('queryDatum', queryDatum);
+  if (!isObjectEmpty(queryDatum)) {
+    queryData.push(queryDatum);
+  }
+  if (left) {
+    const leftQueryData = getQueryDataFromTree(left);
+    if (leftQueryData) {
+      queryData = [...queryData, ...leftQueryData];
+    }
+  }
+
+  if (right) {
+    const rightQueryData = getQueryDataFromTree(right);
+    if (rightQueryData) {
+      queryData = [...queryData, ...rightQueryData];
+    }
+  }
+  return queryData;
+};
+
 export const parseQueryString = (
   query: string,
   searchTerms: SearchTermType[]
 ) => {
+  const results = lucene.parse(query);
+  console.log(JSON.stringify(results));
+  const temp = luceneTreeToClauses(results);
+  console.log(temp.length);
+  console.log(JSON.stringify(temp, undefined, 2));
+  const queryData = temp.map(t => getQueryDataFromTree(t));
+  console.log(queryData);
+
   if (!query) {
     return [createEmptyClause()];
   }
@@ -416,6 +555,7 @@ export const parseQueryString = (
     topLevelSubqueries,
   ] = getTopLevelConjunctionsClauses(query);
   const clauses = [];
+  console.log(query, topLevelConjunctions, topLevelSubqueries);
   for (let i = 0; i < topLevelConjunctions.length; i += 1) {
     const conjuction = topLevelConjunctions[i];
     const clause = topLevelSubqueries[i];
