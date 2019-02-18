@@ -26,8 +26,8 @@ const testData = [
     clauses: [
       {
         searchTerm: {
-          id: 'id_Any',
-          label: 'Any',
+          id: 'id_all',
+          label: 'All',
           itemType: 'single',
           term: 'All',
           dataType: 'string',
@@ -179,12 +179,261 @@ const testData = [
       },
     ],
   },
+  {
+    description:
+      'should generate simple query from two subqueries joined by an AND',
+    queryString: '(mnemonic:blah) AND (mnemonic:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should generate simple query from two subqueries joined by an OR',
+    queryString: '(mnemonic:blah) OR (mnemonic:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'OR',
+        queryInput: {
+          stringValue: 'foo',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should generate simple query with a NOT',
+    queryString: 'NOT (mnemonic:blah)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'NOT',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should handle single cc query',
+    queryString: '(cc_cofactor_chebi:blah)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_cofactor_chebi',
+          label: 'ChEBI term',
+          itemType: 'comment',
+          term: 'cofactor_chebi',
+          dataType: 'string',
+          hasEvidence: true,
+          autoComplete: '/uniprot/api/suggester?dict=chebi&query=?',
+          description: 'Search by cofactor chebi ',
+          example: '29105',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle an "All" query (eg without a specific field selected)',
+    queryString: 'blah',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_all',
+          label: 'All',
+          itemType: 'single',
+          term: 'All',
+          dataType: 'string',
+          example: 'a4_human, P05067, cdc7 human',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle an "All" query (eg without a specific field selected) with a NOT logic operator',
+    queryString: 'NOT blah',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_all',
+          label: 'All',
+          itemType: 'single',
+          term: 'All',
+          dataType: 'string',
+          example: 'a4_human, P05067, cdc7 human',
+        },
+        logicOperator: 'NOT',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'An implicit "All" joined to by an OR to a mnemonic search - mixes unbracketed and bracketed terms',
+    queryString: 'blah AND (mnemonic:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_all',
+          label: 'All',
+          itemType: 'single',
+          term: 'All',
+          dataType: 'string',
+          example: 'a4_human, P05067, cdc7 human',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'OR',
+        queryInput: {
+          stringValue: 'foo',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle ft range and evidence, simple mnemonic, and any query',
+    queryString:
+      'NOT ((ftlen_sites:[10 TO 100]) AND (ftev_sites:blahvidence)) OR (mnemonic:foo) NOT blah',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_sites',
+          label: 'Any',
+          itemType: 'feature',
+          term: 'sites',
+          dataType: 'string',
+          hasRange: true,
+          hasEvidence: true,
+          description: 'Search by feature sites',
+          example: 'translocation',
+        },
+        logicOperator: 'NOT',
+        queryInput: {
+          rangeFrom: 10,
+          rangeTo: 100,
+          evidenceValue: 'blahvidence',
+        },
+      },
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'OR',
+        queryInput: {
+          stringValue: 'foo',
+        },
+      },
+      {
+        searchTerm: {
+          id: 'id_all',
+          label: 'All',
+          itemType: 'single',
+          term: 'All',
+          dataType: 'string',
+          example: 'a4_human, P05067, cdc7 human',
+        },
+        logicOperator: 'NOT',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
 ];
 
 export default testData;
 /*
-AND
-NOT
-OR
 pub: any
 */
