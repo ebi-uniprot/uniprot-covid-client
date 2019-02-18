@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ClauseList from './ClauseList';
-import { parseQueryString } from './utils/clause';
 import {
   Namespace,
   EvidenceType,
@@ -16,7 +15,6 @@ type AdvancedSearchProps = {
   namespace: Namespace;
   clauses: Array<Clause>;
   evidences: any;
-  dispatchUpdateClauses: (clauses: Array<Clause>) => void;
   dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   handleAdvancedSubmitClick: () => void;
@@ -35,34 +33,12 @@ type AdvancedSearchProps = {
 class AdvancedSearch extends Component<AdvancedSearchProps> {
   componentDidMount() {
     const {
-      searchTerms,
-      dispatchUpdateClauses,
       dispatchfetchEvidencesIfNeeded,
       dispatchFetchSearchTermsIfNeeded,
-      queryString,
     } = this.props;
     dispatchfetchEvidencesIfNeeded(EvidenceType.GO);
     dispatchfetchEvidencesIfNeeded(EvidenceType.ANNOTATION);
     dispatchFetchSearchTermsIfNeeded();
-
-    if (searchTerms.length && queryString) {
-      dispatchUpdateClauses(parseQueryString(queryString, searchTerms));
-    }
-  }
-
-  componentDidUpdate(prevProps: AdvancedSearchProps) {
-    const {
-      queryString: prevQueryString,
-      searchTerms: prevSearchTerms,
-    } = prevProps;
-    const { queryString, searchTerms, dispatchUpdateClauses } = this.props;
-    if (
-      searchTerms.length &&
-      queryString &&
-      (queryString !== prevQueryString || searchTerms !== prevSearchTerms)
-    ) {
-      dispatchUpdateClauses(parseQueryString(queryString, searchTerms));
-    }
   }
 
   render() {
