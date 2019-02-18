@@ -1,7 +1,4 @@
-import {
-  createQueryString,
-  createFacetsQueryString,
-} from '../QueryStringGenerator';
+import { createQueryString } from '../QueryStringGenerator';
 import testData from '../__fixtures__/clauseQueryTestData';
 
 describe('QueryHelper', () => {
