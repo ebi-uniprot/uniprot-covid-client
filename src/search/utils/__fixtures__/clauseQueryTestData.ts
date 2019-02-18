@@ -342,7 +342,7 @@ const testData = [
   {
     description:
       'An implicit "All" joined to by an OR to a mnemonic search - mixes unbracketed and bracketed terms',
-    queryString: 'blah AND (mnemonic:foo)',
+    queryString: 'blah OR (mnemonic:foo)',
     clauses: [
       {
         searchTerm: {
