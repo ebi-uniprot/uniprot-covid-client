@@ -120,11 +120,18 @@ const createQueryString = (clauses: Clause[] = []): string =>
     if (query.length > 1) {
       queryJoined = `(${queryJoined})`;
     }
-    return `${queryAccumulator}${
-      queryAccumulator.length > 0 && query.length > 0
-        ? ` ${clause.logicOperator} `
-        : ''
-    }${queryJoined}`;
+
+    let logicOperator = '';
+    if (queryAccumulator.length > 0 && query.length > 0) {
+      logicOperator = ` ${clause.logicOperator} `;
+    } else if (
+      queryAccumulator.length === 0 &&
+      clause.logicOperator === 'NOT'
+    ) {
+      logicOperator = `${clause.logicOperator} `;
+    }
+
+    return `${queryAccumulator}${logicOperator}${queryJoined}`;
   }, '');
 
 export { createQueryString };
