@@ -4,26 +4,34 @@ import SimpleView from './SimpleView';
 import NameView from './NameView';
 
 type ProteinNameRow = {
-  protein: {
+  proteinDescription: {
     recommendedName: {
-      ecNumber: {
-        value: string;
-      };
       fullName: {
         value: string;
       };
-      shortName: {
-        value: string;
-      };
     };
-    alternativeName: [{ fullName: { value: string } }];
+    shortNames: [
+      {
+        value: string;
+      }
+    ];
+    alternativeNames: [
+      {
+        fullName: { value: string };
+      }
+    ];
+    ecNumbers: [
+      {
+        value: string;
+      }
+    ];
   };
 };
 
 type GeneNameRow = {
-  gene: [
+  genes: [
     {
-      name: {
+      geneName: {
         value: string;
       };
       synonyms: [{ value: string }];
@@ -34,62 +42,57 @@ type GeneNameRow = {
 
 type OrganismRow = {
   organism: {
-    names: [
-      {
-        type: string;
-        value: string;
-      }
-    ];
+    scientificName: string;
+    commonName: string;
+    synonyms: string[];
+    taxonId: number;
   };
 };
 
-const organismNameReducer = (type: string) => (
-  acc: string,
-  organismName: { type: string; value: string },
-) => {
-  if (organismName.type === type) {
-    if (type === 'scientific') {
-      return `${acc} ${organismName.value}`;
-    }
-    return `${acc} (${organismName.value})`;
-  }
-  return acc;
-};
-
-const FieldToViewMappings: { [index: string]: (row: any) => JSX.Element | undefined } = {
-  accession: (row: { accession: string }) => <SimpleView termValue={row.accession} />,
-  id: (row: { id: string }) => <SimpleView termValue={row.id} />,
+const FieldToViewMappings: {
+  [index: string]: (row: any) => JSX.Element | undefined;
+} = {
+  accession: (row: { primaryAccession: string }) => (
+    <SimpleView termValue={row.primaryAccession} />
+  ),
+  id: (row: { uniProtId: string }) => <SimpleView termValue={row.uniProtId} />,
   protein_name: (row: ProteinNameRow) => {
     const alternativeNames: string[] = [];
-    const ecNumber = idx(row, _ => _.protein.recommendedName.ecNumber.value);
-    if (ecNumber) {
-      alternativeNames.push(ecNumber);
+    const ecNumbers = idx(row, _ => _.proteinDescription.ecNumbers);
+    if (ecNumbers && ecNumbers.length > 0) {
+      alternativeNames.push(...ecNumbers.map(ec => ec.value));
     }
-    const alternativeNameArray = idx(row, _ => _.protein.alternativeName);
+    const alternativeNameArray = idx(
+      row,
+      _ => _.proteinDescription.alternativeNames
+    );
     if (alternativeNameArray) {
-      const alternativeName = alternativeNameArray.map(name => name.fullName.value);
+      const alternativeName = alternativeNameArray.map(
+        name => name.fullName.value
+      );
       if (alternativeName.length) {
         alternativeNames.push(...alternativeName);
       }
     }
     const props = {
-      name: idx(row, _ => _.protein.recommendedName.fullName.value),
-      shortName: idx(row, _ => _.protein.recommendedName.shortName.value),
+      name: idx(row, _ => _.proteinDescription.recommendedName.fullName.value),
+      shortName: idx(row, _ =>
+        _.proteinDescription.shortNames.map(name => name.value).join(', ')
+      ),
       alternativeNames,
     };
     return <NameView {...props} />;
   },
   gene_names: (row: GeneNameRow) => {
-    const genes = idx(row, _ => _.gene);
+    const genes = idx(row, _ => _.genes);
     if (!genes || genes.length <= 0) {
       return;
     }
-    // const name = genes.map(gene => idx(gene, _ => _.name.value)).join(', ');
     const names: string[] = [];
     const alternativeNames: string[] = [];
-    genes.forEach((gene) => {
-      if (gene.name) {
-        names.push(gene.name.value);
+    genes.forEach(gene => {
+      if (gene.geneName) {
+        names.push(gene.geneName.value);
       }
       if (gene.synonyms) {
         alternativeNames.push(...gene.synonyms.map(syn => syn.value));
@@ -103,14 +106,14 @@ const FieldToViewMappings: { [index: string]: (row: any) => JSX.Element | undefi
     return <NameView {...props} />;
   },
   organism: (row: OrganismRow) => {
-    const names = idx(row, _ => _.organism.names);
-    if (!names) {
-      return;
-    }
-    const termValue = ['scientific', 'common', 'synonym'].reduce(
-      (acc, organismName) => `${acc} ${names.reduce(organismNameReducer(organismName), '')}`,
-      '',
-    );
+    const scientificName = idx(row, _ => _.organism.scientificName);
+    const commonName = idx(row, _ => _.organism.commonName);
+    const synonyms = idx(row, _ => _.organism.synonyms);
+
+    const termValue = `${scientificName}${
+      commonName ? ` (${commonName})` : ''
+    } ${synonyms && synonyms.length > 0 ? ` (${synonyms})` : ''}`;
+
     return <SimpleView termValue={termValue} />;
   },
 };

@@ -9,7 +9,8 @@
     "build": "webpack --mode production --config webpack.prod.js",
     "check-types": "tsc",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
-    "test": "jest && yarn check-types && yarn tslint"
+    "test": "yarn check-types && yarn tslint && jest",
+    "clear-test-cache": "jest --clearCache"
   },
   "browserslist": [
     "last 2 version",
@@ -35,7 +36,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
-    "franklin-sites": "0.0.3-dev.24",
+    "franklin-sites": "0.0.3-dev.25",
     "idx": "^2.5.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",

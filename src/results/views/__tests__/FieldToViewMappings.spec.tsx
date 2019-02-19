@@ -7,21 +7,29 @@ configure({ adapter: new Adapter() });
 describe('FieldToViewMappings', () => {
   test('should render protein_name', () => {
     const data = {
-      protein: {
+      proteinDescription: {
         recommendedName: {
           fullName: {
             value: 'My protein',
           },
-          shortName: {
+        },
+        shortNames: [
+          {
             value: 'My prot',
           },
-          ecNumber: {
+        ],
+        ecNumbers: [
+          {
             value: 'ec1234',
           },
-          alternativeName: {
-            value: 'Some protein',
+        ],
+        alternativeNames: [
+          {
+            fullName: {
+              value: 'Some protein',
+            },
           },
-        },
+        ],
       },
     };
     const component = FieldToViewMappings.protein_name(data);
@@ -31,17 +39,35 @@ describe('FieldToViewMappings', () => {
 
   test('should render gene_names', () => {
     const data = {
-      gene: [
+      genes: [
         {
-          name: {
+          geneName: {
             value: 'My gene',
           },
           synonyms: [{ value: 'synonym 1' }, { value: 'synonym 2' }],
-          orfNames: [{ value: 'orfNames 1' }, { value: 'orfNames 2' }, { value: 'orfNames 3' }],
+          orfNames: [
+            { value: 'orfNames 1' },
+            { value: 'orfNames 2' },
+            { value: 'orfNames 3' },
+          ],
         },
       ],
     };
     const component = FieldToViewMappings.gene_names(data);
+    const wrapper = shallow(component);
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
+
+  test('should render organism', () => {
+    const data = {
+      organism: {
+        scientificName: 'Dodo scientifacus',
+        commonName: 'Lesser spotted dodo',
+        synonyms: ['Flightless bird', "Darwin's pet"],
+        taxonId: 1234,
+      },
+    };
+    const component = FieldToViewMappings.organism(data);
     const wrapper = shallow(component);
     expect(wrapper.debug()).toMatchSnapshot();
   });
