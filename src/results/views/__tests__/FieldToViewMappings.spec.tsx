@@ -7,27 +7,29 @@ configure({ adapter: new Adapter() });
 describe('FieldToViewMappings', () => {
   test('should render protein_name', () => {
     const data = {
-      protein: {
+      proteinDescription: {
         recommendedName: {
           fullName: {
             value: 'My protein',
           },
-          shortNames: [
-            {
-              value: 'My prot',
-            },
-          ],
-          ecNumbers: [
-            {
-              value: 'ec1234',
-            },
-          ],
-          alternativeName: [
-            {
+        },
+        shortNames: [
+          {
+            value: 'My prot',
+          },
+        ],
+        ecNumbers: [
+          {
+            value: 'ec1234',
+          },
+        ],
+        alternativeNames: [
+          {
+            fullName: {
               value: 'Some protein',
             },
-          ],
-        },
+          },
+        ],
       },
     };
     const component = FieldToViewMappings.protein_name(data);
