@@ -74,26 +74,11 @@ export const searchTerms: SearchTermType[] = [
     term: 'existence',
     dataType: 'enum',
     values: [
-      {
-        name: 'Evidence at protein level',
-        value: 'protein_level',
-      },
-      {
-        name: 'Evidence at transcript level',
-        value: 'transcript_level',
-      },
-      {
-        name: 'Inferred from homology',
-        value: 'homology',
-      },
-      {
-        name: 'Predicted',
-        value: 'predicted',
-      },
-      {
-        name: 'Uncertain',
-        value: 'uncertain',
-      },
+      { name: 'Evidence at protein level', value: 'protein_level' },
+      { name: 'Evidence at transcript level', value: 'transcript_level' },
+      { name: 'Inferred from homology', value: 'homology' },
+      { name: 'Predicted', value: 'predicted' },
+      { name: 'Uncertain', value: 'uncertain' },
     ],
     description: 'Search by protein existence',
     example: '1',
@@ -158,7 +143,7 @@ export const searchTerms: SearchTermType[] = [
             dataType: 'string',
             hasEvidence: true,
             description: 'Search by biophysicochemical properties',
-            example: '"some value"',
+            example: 'some value',
           },
           {
             id: 'id_bpcp_absorption',
@@ -760,14 +745,8 @@ export const searchTerms: SearchTermType[] = [
         term: 'd3structure',
         dataType: 'enum',
         values: [
-          {
-            name: 'Yes',
-            value: 'true',
-          },
-          {
-            name: 'No',
-            value: 'false',
-          },
+          { name: 'Yes', value: 'true' },
+          { name: 'No', value: 'false' },
         ],
         hasEvidence: false,
         description: 'Search by having pdb cross reference or not',
@@ -1006,7 +985,7 @@ export const searchTerms: SearchTermType[] = [
         dataType: 'string',
         hasEvidence: true,
         description: 'Search by Comment mass spectrometry',
-        example: '"some value"',
+        example: 'some value',
       },
       {
         id: 'id_polymorphism',
@@ -1142,14 +1121,8 @@ export const searchTerms: SearchTermType[] = [
         term: 'fragment',
         dataType: 'enum',
         values: [
-          {
-            name: 'Yes',
-            value: 'true',
-          },
-          {
-            name: 'No',
-            value: 'false',
-          },
+          { name: 'Yes', value: 'true' },
+          { name: 'No', value: 'false' },
         ],
         description: 'Search by fragment',
         example: 'true',
@@ -1171,14 +1144,8 @@ export const searchTerms: SearchTermType[] = [
         term: 'precursor',
         dataType: 'enum',
         values: [
-          {
-            name: 'Yes',
-            value: 'true',
-          },
-          {
-            name: 'No',
-            value: 'false',
-          },
+          { name: 'Yes', value: 'true' },
+          { name: 'No', value: 'false' },
         ],
         description: 'Search by precursor',
         example: 'true',
@@ -2911,16 +2878,7 @@ export const searchTerms: SearchTermType[] = [
     itemType: 'single',
     term: 'reviewed',
     dataType: 'enum',
-    values: [
-      {
-        name: 'Yes',
-        value: 'true',
-      },
-      {
-        name: 'No',
-        value: 'false',
-      },
-    ],
+    values: [{ name: 'Yes', value: 'true' }, { name: 'No', value: 'false' }],
     description: 'Search by reviewed',
     example: 'true',
   },
@@ -2930,16 +2888,7 @@ export const searchTerms: SearchTermType[] = [
     itemType: 'single',
     term: 'active',
     dataType: 'enum',
-    values: [
-      {
-        name: 'Yes',
-        value: 'true',
-      },
-      {
-        name: 'No',
-        value: 'false',
-      },
-    ],
+    values: [{ name: 'Yes', value: 'true' }, { name: 'No', value: 'false' }],
     description: 'Search by active or not',
     example: 'true',
   },
