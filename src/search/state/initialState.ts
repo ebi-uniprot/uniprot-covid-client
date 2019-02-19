@@ -15,7 +15,7 @@ export type SearchState = {
 const initialState = {
   clauses: [...Array(2)].map(() => createEmptyClause()),
   queryString: '',
-  namespace: Namespace.UniProtKB,
+  namespace: Namespace.uniprotkb,
   searchTerms: {
     data: [],
   },

@@ -1,8 +1,5 @@
 export enum Namespace {
-  UniProtKB = 'UniProtKB',
-  UniRef = 'UniRef',
-  UniParc = 'UniParc',
-  Proteomes = 'Proteomes',
+  uniprotkb = 'uniprotkb',
 }
 
 export enum Operator {

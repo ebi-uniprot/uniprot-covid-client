@@ -4,15 +4,21 @@ import BaseLayout from './BaseLayout';
 import './styles/SideBarLayout.scss';
 
 type SideBarLayoutProps = {
+  title: JSX.Element;
   sidebar: JSX.Element;
   content: JSX.Element;
 };
 
-const SideBarLayout: React.FC<SideBarLayoutProps> = ({ sidebar, content }) => (
+const SideBarLayout: React.FC<SideBarLayoutProps> = ({
+  title,
+  sidebar,
+  content,
+}) => (
   <BaseLayout>
-    <section id="sidebar-layout" data-layout="left-sidebar-layout">
-      <section id="sidebar-layout__sidebar">{sidebar}</section>
-      <section id="sidebar-layout__content">{content}</section>
+    <section className="sidebar-layout" data-layout="left-sidebar-layout">
+      <section className="sidebar-layout__title">{title}</section>
+      <section className="sidebar-layout__sidebar">{sidebar}</section>
+      <section className="sidebar-layout__content">{content}</section>
     </section>
   </BaseLayout>
 );
