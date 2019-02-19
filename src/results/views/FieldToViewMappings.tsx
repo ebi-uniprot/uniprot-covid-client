@@ -107,8 +107,8 @@ const FieldToViewMappings: {
   },
   organism: (row: OrganismRow) => {
     const scientificName = idx(row, _ => _.organism.scientificName);
-    const commonName = idx(row, _ => row.organism.commonName);
-    const synonyms = idx(row, _ => row.organism.synonyms);
+    const commonName = idx(row, _ => _.organism.commonName);
+    const synonyms = idx(row, _ => _.organism.synonyms);
 
     const termValue = `${scientificName}${
       commonName ? ` (${commonName})` : ''

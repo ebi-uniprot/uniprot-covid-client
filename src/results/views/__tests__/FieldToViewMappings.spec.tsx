@@ -57,4 +57,18 @@ describe('FieldToViewMappings', () => {
     const wrapper = shallow(component);
     expect(wrapper.debug()).toMatchSnapshot();
   });
+
+  test('should render organism', () => {
+    const data = {
+      organism: {
+        scientificName: 'Dodo scientifacus',
+        commonName: 'Lesser spotted dodo',
+        synonyms: ['Flightless bird', "Darwin's pet"],
+        taxonId: 1234,
+      },
+    };
+    const component = FieldToViewMappings.organism(data);
+    const wrapper = shallow(component);
+    expect(wrapper.debug()).toMatchSnapshot();
+  });
 });
