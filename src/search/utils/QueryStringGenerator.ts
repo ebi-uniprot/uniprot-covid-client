@@ -26,10 +26,13 @@ const getItemTypeRangePrefix = (itemType: string) =>
   itemType === 'feature' ? 'ftlen_' : '';
 
 const createTermString = (
-  term: string,
+  term: string | undefined,
   itemType: string,
   id: string | undefined
 ) => {
+  if (term === undefined) {
+    return '';
+  }
   if (term === 'ec') {
     if (id) {
       return 'ec:';
@@ -47,11 +50,14 @@ const createTermString = (
 };
 
 const createValueString = (
-  term: string,
+  term: string | undefined,
   valuePrefix: string | undefined,
   stringValue: string,
   id: string | undefined
 ) => {
+  if (term === undefined) {
+    return '';
+  }
   if (term === 'ec') {
     if (id) {
       return id;
@@ -66,6 +72,9 @@ const createValueString = (
 };
 
 const createSimpleSubquery = (clause: Clause) => {
+  if (clause.searchTerm.itemType === 'group') {
+    throw Error('Cannot create a query with a group term.');
+  }
   const { itemType, term, valuePrefix } = clause.searchTerm;
   const { stringValue, id } = clause.queryInput;
   if (!stringValue) {

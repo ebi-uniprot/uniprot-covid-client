@@ -14,8 +14,8 @@ export enum Operator {
 export type SearchTermType = {
   id: string;
   label: string;
-  term: string;
-  example: string;
+  term?: string;
+  example?: string;
   itemType: string;
   dataType: string;
   hasRange?: boolean;
