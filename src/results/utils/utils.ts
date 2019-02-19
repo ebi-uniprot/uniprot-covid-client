@@ -6,7 +6,7 @@ import {
   SelectedFacet,
 } from '../types/resultsTypes';
 
-const createFacetsQueryString = (facets: SelectedFacet[]) =>
+export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   facets.reduce(
     (queryAccumulator, facet) =>
       `${queryAccumulator} AND (${facet.name}:${facet.value})`,

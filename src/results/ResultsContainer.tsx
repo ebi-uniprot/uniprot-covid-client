@@ -32,6 +32,7 @@ interface IResultsProps extends RouteComponentProps {
   dispatchUpdateColumnSort: (column: SortableColumns) => void;
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
   dispatchRemoveFacet: (facetName: string, facetValue: string) => void;
+  dispatchReset: () => void;
   clauses?: Array<Clause>;
   columns: Array<string>;
   sort: SortType;
@@ -97,6 +98,11 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
         direction
       );
     }
+  }
+
+  componentWillUnmount() {
+    const { dispatchReset } = this.props;
+    dispatchReset();
   }
 
   handleRowSelect(rowId: string) {
@@ -186,6 +192,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
         searchActions.updateQueryString(queryString),
       dispatchUpdateColumnSort: (column: SortableColumns) =>
         resultsActions.updateColumnSort(column),
+      dispatchReset: () => searchActions.reset(),
     },
     dispatch
   );

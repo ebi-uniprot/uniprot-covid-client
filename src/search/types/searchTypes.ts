@@ -22,6 +22,7 @@ export type SearchTermType = {
   hasEvidence?: boolean;
   valuePrefix?: string;
   autoComplete?: string;
+  description?: string;
   options?: Array<{
     name: string;
     values: Array<{
