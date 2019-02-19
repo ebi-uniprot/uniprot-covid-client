@@ -12,15 +12,21 @@ describe('FieldToViewMappings', () => {
           fullName: {
             value: 'My protein',
           },
-          shortName: {
-            value: 'My prot',
-          },
-          ecNumber: {
-            value: 'ec1234',
-          },
-          alternativeName: {
-            value: 'Some protein',
-          },
+          shortNames: [
+            {
+              value: 'My prot',
+            },
+          ],
+          ecNumbers: [
+            {
+              value: 'ec1234',
+            },
+          ],
+          alternativeName: [
+            {
+              value: 'Some protein',
+            },
+          ],
         },
       },
     };
@@ -31,13 +37,17 @@ describe('FieldToViewMappings', () => {
 
   test('should render gene_names', () => {
     const data = {
-      gene: [
+      genes: [
         {
-          name: {
+          geneName: {
             value: 'My gene',
           },
           synonyms: [{ value: 'synonym 1' }, { value: 'synonym 2' }],
-          orfNames: [{ value: 'orfNames 1' }, { value: 'orfNames 2' }, { value: 'orfNames 3' }],
+          orfNames: [
+            { value: 'orfNames 1' },
+            { value: 'orfNames 2' },
+            { value: 'orfNames 3' },
+          ],
         },
       ],
     };
