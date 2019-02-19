@@ -13,6 +13,13 @@ describe('FieldToViewMappings', () => {
             value: 'My protein',
           },
         },
+        submissionNames: [
+          {
+            fullName: {
+              value: 'A submission',
+            },
+          },
+        ],
         shortNames: [
           {
             value: 'My prot',

@@ -5,22 +5,29 @@ import NameView from './NameView';
 
 type ProteinNameRow = {
   proteinDescription: {
-    recommendedName: {
+    recommendedName?: {
       fullName: {
         value: string;
       };
     };
-    shortNames: [
+    submissionNames?: [
+      {
+        fullName: {
+          value: string;
+        };
+      }
+    ];
+    shortNames?: [
       {
         value: string;
       }
     ];
-    alternativeNames: [
+    alternativeNames?: [
       {
         fullName: { value: string };
       }
     ];
-    ecNumbers: [
+    ecNumbers?: [
       {
         value: string;
       }
@@ -34,17 +41,17 @@ type GeneNameRow = {
       geneName: {
         value: string;
       };
-      synonyms: [{ value: string }];
-      orfNames: [{ value: string }];
+      synonyms?: [{ value: string }];
+      orfNames?: [{ value: string }];
     }
   ];
 };
 
 type OrganismRow = {
   organism: {
-    scientificName: string;
-    commonName: string;
-    synonyms: string[];
+    scientificName?: string;
+    commonName?: string;
+    synonyms?: string[];
     taxonId: number;
   };
 };
@@ -61,6 +68,12 @@ const FieldToViewMappings: {
     const ecNumbers = idx(row, _ => _.proteinDescription.ecNumbers);
     if (ecNumbers && ecNumbers.length > 0) {
       alternativeNames.push(...ecNumbers.map(ec => ec.value));
+    }
+    const submissionNames = idx(row, _ => _.proteinDescription.submissionNames);
+    if (submissionNames && submissionNames.length > 0) {
+      alternativeNames.push(
+        ...submissionNames.map(name => name.fullName.value)
+      );
     }
     const alternativeNameArray = idx(
       row,
