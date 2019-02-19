@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { default as queryStringModule } from 'query-string';
-import { Facets } from 'franklin-sites';
+import { Facets, PageIntro } from 'franklin-sites';
 import * as resultsActions from './state/actions';
 import * as searchActions from '../search/state/actions';
-import { Clause } from '../search/types/searchTypes';
+import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
+import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
   SortDirectionsType,
@@ -18,8 +18,9 @@ import {
   SortType,
 } from './types/resultsTypes';
 
-interface IResultsProps extends RouteComponentProps {
+interface ResultsProps extends RouteComponentProps {
   queryString: string;
+  namespace: Namespace;
   selectedFacets: SelectedFacet[];
   dispatchFetchResults: (
     queryString: string,
@@ -32,6 +33,7 @@ interface IResultsProps extends RouteComponentProps {
   dispatchUpdateColumnSort: (column: SortableColumns) => void;
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
   dispatchRemoveFacet: (facetName: string, facetValue: string) => void;
+  dispatchReset: () => void;
   clauses?: Array<Clause>;
   columns: Array<string>;
   sort: SortType;
@@ -44,8 +46,8 @@ type ResultsContainerState = {
   selectedRows: SelectedRows;
 };
 
-export class Results extends Component<IResultsProps, ResultsContainerState> {
-  constructor(props: IResultsProps) {
+export class Results extends Component<ResultsProps, ResultsContainerState> {
+  constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedRows: {} };
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -71,7 +73,7 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
     );
   }
 
-  componentDidUpdate(prevProps: IResultsProps) {
+  componentDidUpdate(prevProps: ResultsProps) {
     const {
       location: { search: queryParamFromUrl },
       dispatchFetchResults,
@@ -99,6 +101,11 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
     }
   }
 
+  componentWillUnmount() {
+    const { dispatchReset } = this.props;
+    dispatchReset();
+  }
+
   handleRowSelect(rowId: string) {
     const { selectedRows: prevSelectedRows } = this.state;
     if (rowId in prevSelectedRows) {
@@ -120,38 +127,48 @@ export class Results extends Component<IResultsProps, ResultsContainerState> {
       dispatchAddFacet,
       dispatchRemoveFacet,
       dispatchUpdateColumnSort,
+      namespace,
       sort,
     } = this.props;
     const { selectedRows } = this.state;
     if (isFetching) {
       return <h3>Loading...</h3>;
     }
+    const { name, links, info } = infoMappings[namespace];
     return (
-      <SideBarLayout
-        sidebar={
-          <Facets
-            data={facets}
-            selectedFacets={selectedFacets}
-            addFacet={dispatchAddFacet}
-            removeFacet={dispatchRemoveFacet}
-          />
-        }
-        content={
-          <ResultsTable
-            results={results}
-            columnNames={columns}
-            handleRowSelect={this.handleRowSelect}
-            selectedRows={selectedRows}
-            handleHeaderClick={dispatchUpdateColumnSort}
-            sort={sort}
-          />
-        }
-      />
+      <Fragment>
+        <SideBarLayout
+          title={
+            <PageIntro title={name} links={links}>
+              {info}
+            </PageIntro>
+          }
+          sidebar={
+            <Facets
+              data={facets}
+              selectedFacets={selectedFacets}
+              addFacet={dispatchAddFacet}
+              removeFacet={dispatchRemoveFacet}
+            />
+          }
+          content={
+            <ResultsTable
+              results={results}
+              columnNames={columns}
+              handleRowSelect={this.handleRowSelect}
+              selectedRows={selectedRows}
+              handleHeaderClick={dispatchUpdateColumnSort}
+              sort={sort}
+            />
+          }
+        />
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = (state: RootState) => ({
+  namespace: state.query.namespace,
   queryString: state.query.queryString,
   columns: state.results.columns,
   selectedFacets: state.results.selectedFacets,
@@ -186,6 +203,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
         searchActions.updateQueryString(queryString),
       dispatchUpdateColumnSort: (column: SortableColumns) =>
         resultsActions.updateColumnSort(column),
+      dispatchReset: () => searchActions.reset(),
     },
     dispatch
   );
