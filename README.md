@@ -19,23 +19,9 @@ To install JavaScript dependencies, first make sure you are in the root director
 > package manager's online documentation. [This page](https://docs.npmjs.com/getting-started/fixing-npm-permissions) explains the
 > problem and solution for `NPM` users.
 
-### Installing Other Dependencies
-
-Currently, the only other dependency you require to manually install -- it's not handled via JavaScript package managements, is the Ruby's `bundle` package manager. You need to install this, so you can install a `gem` called `scss_lint` which is required for Airbnb's Sass coding-style linter.
-
-Before we begin, you need to make sure Ruby's CLI is installed in your machine. This is a very platform-dependent process, so check the relevant section of Ruby's [online documentation](https://www.ruby-lang.org/en/documentation/installation/) and follow the instructions until you are sure Ruby is properly installed.
-
-After installing _Ruby_, you need to install `bundle` -- Ruby's package manager similar to `NPM`. The [installation process](http://bundler.io/v1.16/guides/using_bundler_in_applications.html) should be as easy as executing the following command in your command-line:
-
-`gem install bundler`
-
-After installing `bundler`, you can go to your project's directory -- where there is a file named `Gemfile`, without extension. Here you can run `bundle install` and it should install all of your _Ruby_ dependencies.
-
-> Please note in the second command we use the word `bundle` -- without `r` in the end, rather `bundler`.
-
 # Usage
 
-Run `yarn run dev-server` and go to [http://localhost:8080](http://localhost:8080) if it didn't open automatically.
+Run `yarn start`
 
 # Coding-styles & Linters
 
@@ -45,11 +31,7 @@ You don't need to read or memorise all the styling rules; Write your code exactl
 
 ### Running JavaScript/React/JSX Linter
 
-Simply execute `yarn jslint`.
-
-### Running CSS/Sass Linter
-
-Just execute `yarn csslint`.
+Simply execute `yarn tslint`.
 
 # Running Unit Tests
 
