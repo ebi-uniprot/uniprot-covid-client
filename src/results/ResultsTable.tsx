@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataTable } from 'franklin-sites';
-import FieldToViewMappings from './views/FieldToViewMappings';
+import FieldToViewMappings from '../views/FieldToViewMappings';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
 
