@@ -7,14 +7,12 @@ type HomePageLayoutProps = {
   children: Array<JSX.Element>;
 };
 
-const HomePageLayout: React.FC<HomePageLayoutProps> = (props) => {
+const HomePageLayout: React.FC<HomePageLayoutProps> = props => {
   const { children } = props;
   return (
-    <BaseLayout isHomePage>
-      <section id="layout" data-layout="home-page">
-        <section id="layout-content">{children}</section>
-      </section>
-    </BaseLayout>
+    <section id="layout" data-layout="home-page">
+      <section id="layout-content">{children}</section>
+    </section>
   );
 };
 

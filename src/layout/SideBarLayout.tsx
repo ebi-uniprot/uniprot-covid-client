@@ -14,13 +14,11 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   sidebar,
   content,
 }) => (
-  <BaseLayout>
-    <section className="sidebar-layout" data-layout="left-sidebar-layout">
-      <section className="sidebar-layout__title">{title}</section>
-      <section className="sidebar-layout__sidebar">{sidebar}</section>
-      <section className="sidebar-layout__content">{content}</section>
-    </section>
-  </BaseLayout>
+  <section className="sidebar-layout" data-layout="left-sidebar-layout">
+    <section className="sidebar-layout__title">{title}</section>
+    <section className="sidebar-layout__sidebar">{sidebar}</section>
+    <section className="sidebar-layout__content">{content}</section>
+  </section>
 );
 
 export default SideBarLayout;

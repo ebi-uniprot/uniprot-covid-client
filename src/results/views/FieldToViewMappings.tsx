@@ -60,7 +60,10 @@ const FieldToViewMappings: {
   [index: string]: (row: any) => JSX.Element | undefined;
 } = {
   accession: (row: { primaryAccession: string }) => (
-    <SimpleView termValue={row.primaryAccession} />
+    <SimpleView
+      termValue={row.primaryAccession}
+      linkTo={`/uniprotkb/${row.primaryAccession}`}
+    />
   ),
   id: (row: { uniProtId: string }) => <SimpleView termValue={row.uniProtId} />,
   protein_name: (row: ProteinNameRow) => {
