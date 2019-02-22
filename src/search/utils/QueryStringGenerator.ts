@@ -68,6 +68,9 @@ const createValueString = (
     return id;
   }
 
+  // We are testing for term=xref and valuePrefix=any because the
+  // search API expects the valuePrefix to be ommited in this case.
+  // eg xref:foo rather than xref_any:foo
   const valuePrefixChecked =
     valuePrefix && !(term === 'xref' && valuePrefix === 'any')
       ? `${valuePrefix}-`
