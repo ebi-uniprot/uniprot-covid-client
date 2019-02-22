@@ -67,7 +67,11 @@ const createValueString = (
   if (['organism', 'taxonomy'].includes(term) && id) {
     return id;
   }
-  const valuePrefixChecked = valuePrefix ? `${valuePrefix}-` : '';
+
+  const valuePrefixChecked =
+    valuePrefix && !(term === 'xref' && valuePrefix === 'any')
+      ? `${valuePrefix}-`
+      : '';
   return `${valuePrefixChecked}${stringValue}`;
 };
 
