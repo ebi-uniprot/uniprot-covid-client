@@ -180,6 +180,26 @@ const testData = [
     ],
   },
   {
+    description: 'should handle any xrefs',
+    queryString: '(xref:Something)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_any',
+          label: 'Any cross-reference',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'any',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'Something',
+        },
+      },
+    ],
+  },
+  {
     description:
       'should generate simple query from two subqueries joined by an AND',
     queryString: '(mnemonic:blah) AND (mnemonic:foo)',
@@ -434,6 +454,3 @@ const testData = [
 ];
 
 export default testData;
-/*
-pub: any
-*/
