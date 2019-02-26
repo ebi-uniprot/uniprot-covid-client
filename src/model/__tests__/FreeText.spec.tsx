@@ -1,14 +1,16 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { ProteinNames } from '../ProteinNames';
+import { FreeText, FreeTextType } from '../FreeText';
 import data from './modelData.json';
 
 configure({ adapter: new Adapter() });
 
-describe('ProteinNames', () => {
-  test('should render protein_name', () => {
-    const wrapper = shallow(<ProteinNames data={data} />);
+describe('FreeText component', () => {
+  test('should render free text CC', () => {
+    const wrapper = shallow(
+      <FreeText data={data} type={FreeTextType.DISRUPTION_PHENOTYPE} />
+    );
     expect(wrapper.debug()).toMatchSnapshot();
   });
 });

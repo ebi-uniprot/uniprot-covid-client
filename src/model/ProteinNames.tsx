@@ -39,7 +39,7 @@ type ProteinNamesDataProps = {
   data: ProteinNamesData;
 };
 
-const processData = (data: ProteinNamesData) => {
+export const processProteinData = (data: ProteinNamesData) => {
   const name = idx(
     data,
     _ => _.proteinDescription.recommendedName.fullName.value
@@ -74,7 +74,7 @@ const processData = (data: ProteinNamesData) => {
 };
 
 export const ProteinNames: React.FC<ProteinNamesDataProps> = ({ data }) => {
-  const { name, shortNames, alternativeNames } = processData(data);
+  const { name, shortNames, alternativeNames } = processProteinData(data);
   const props = {
     name,
     shortNames,
@@ -86,7 +86,7 @@ export const ProteinNames: React.FC<ProteinNamesDataProps> = ({ data }) => {
 export const EntryProteinNames: React.FC<ProteinNamesDataProps> = ({
   data,
 }) => {
-  const { name, shortNames, alternativeNames } = processData(data);
+  const { name, shortNames, alternativeNames } = processProteinData(data);
   const infoData = [
     {
       title: 'Recommended name',

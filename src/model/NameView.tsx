@@ -11,14 +11,14 @@ const NameView = (props: NameViewProps) => {
   let altNames;
   if (alternativeNames && alternativeNames.length > 0) {
     altNames = alternativeNames.map(alternativeName => (
-      <span key={alternativeName}> {alternativeName}</span>
+      <span key={alternativeName}>, {alternativeName}</span>
     ));
   }
   return (
-    <div>
+    <span>
       <strong>{name}</strong> {shortName}{' '}
       {altNames ? <span>{altNames}</span> : undefined}
-    </div>
+    </span>
   );
 };
 

@@ -4,6 +4,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: __dirname,
   entry: ['@babel/polyfill', path.resolve(__dirname, 'src/index.tsx')],
+  output: {
+    publicPath: '/',
+  },
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
   },

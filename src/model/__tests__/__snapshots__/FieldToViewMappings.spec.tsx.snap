@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldToViewMappings component should render accession 1`] = `
+"<Link to=\\"/uniprotkb/P21802\\" replace={false}>
+  P21802
+</Link>"
+`;
+
+exports[`FieldToViewMappings component should render gene_names 1`] = `"<NameView name=\\"some Gene\\" alternativeNames={{...}} />"`;
+
+exports[`FieldToViewMappings component should render id 1`] = `
+"<span>
+  uniprot id
+</span>"
+`;
+
+exports[`FieldToViewMappings component should render organism 1`] = `"<SimpleView termValue=\\"scientific name (common name)  (synonyms 1)\\" />"`;
+
+exports[`FieldToViewMappings component should render protein_name 1`] = `"<NameView name=\\"rec full Name\\" shortNames={[undefined]} alternativeNames={{...}} />"`;

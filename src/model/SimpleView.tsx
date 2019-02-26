@@ -6,7 +6,7 @@ const SimpleView = (props: { termValue: string; linkTo?: string }) => {
   if (typeof linkTo !== 'undefined') {
     return <Link to={linkTo}>{termValue}</Link>;
   } else {
-    return <div>{termValue}</div>;
+    return <span>{termValue}</span>;
   }
 };
 
