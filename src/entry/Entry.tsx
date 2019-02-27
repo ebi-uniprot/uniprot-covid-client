@@ -16,7 +16,11 @@ interface EntryProps extends RouteComponentProps<MatchParams> {}
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
   const data = useDataApi(url);
-  if (Object.keys(data).length <= 0) {
+  if (
+    Object.keys(data).length <= 0 ||
+    !data.results ||
+    data.results.length <= 0
+  ) {
     return null;
   }
   const entryData = data.results[0];
