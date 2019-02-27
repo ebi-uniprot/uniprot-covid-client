@@ -52,7 +52,9 @@ export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
   const freeTextData = data.comments
     .filter(d => d.commentType === type)
     .map((item, i) => (
-      <p key={i}>{item.texts.map(itemText => itemText.value)}</p>
+      <p key={`freetext_${i}_${type}`}>
+        {item.texts.map(itemText => itemText.value)}
+      </p>
     ));
 
   return <Fragment>{freeTextData}</Fragment>;
