@@ -5,15 +5,17 @@ import { GeneNames, GeneNamesData } from './GeneNames';
 import { Organism, OrganismData } from './Organism';
 
 const FieldToViewMappings: {
-  [index: string]: (row: any) => JSX.Element | undefined;
+  [index: string]: (data: any) => JSX.Element | undefined;
 } = {
-  accession: (row: { primaryAccession: string }) => (
+  accession: (data: { primaryAccession: string }) => (
     <SimpleView
-      termValue={row.primaryAccession}
-      linkTo={`/uniprotkb/${row.primaryAccession}`}
+      termValue={data.primaryAccession}
+      linkTo={`/uniprotkb/${data.primaryAccession}`}
     />
   ),
-  id: (row: { uniProtId: string }) => <SimpleView termValue={row.uniProtId} />,
+  id: (data: { uniProtId: string }) => (
+    <SimpleView termValue={data.uniProtId} />
+  ),
   protein_name: (data: ProteinNamesData) => {
     return <ProteinNames data={data} />;
   },

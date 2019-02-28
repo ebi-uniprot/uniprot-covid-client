@@ -2,36 +2,28 @@ import React from 'react';
 import NameView from './NameView';
 import idx from 'idx';
 import { InfoList } from 'franklin-sites';
+import { ValueWihEvidence } from './types/modelTypes';
+
+type ProteinNamesDefault = {
+  fullName: ValueWihEvidence;
+  shortNames?: ValueWihEvidence[];
+  ecNumbers?: ValueWihEvidence[];
+};
+
+type ProteinDescriptionDefault = {
+  recommendedName?: ProteinNamesDefault;
+  submissionNames?: ProteinNamesDefault[];
+  alternativeNames?: ProteinNamesDefault[];
+  allergenName?: ValueWihEvidence;
+  biotechName?: ValueWihEvidence;
+  cdAntigenNames?: ValueWihEvidence;
+  innNames?: ValueWihEvidence;
+};
 
 export type ProteinNamesData = {
-  proteinDescription: {
-    recommendedName?: {
-      fullName: {
-        value: string;
-      };
-    };
-    submissionNames?: [
-      {
-        fullName: {
-          value: string;
-        };
-      }
-    ];
-    shortNames?: [
-      {
-        value: string;
-      }
-    ];
-    alternativeNames?: [
-      {
-        fullName: { value: string };
-      }
-    ];
-    ecNumbers?: [
-      {
-        value: string;
-      }
-    ];
+  proteinDescription: ProteinDescriptionDefault & {
+    includes: ProteinDescriptionDefault[];
+    contains: ProteinDescriptionDefault[];
   };
 };
 
@@ -39,13 +31,25 @@ type ProteinNamesDataProps = {
   data: ProteinNamesData;
 };
 
+const processShortNames = (
+  shortNameList: ProteinNamesDefault['shortNames']
+) => {
+  if (!shortNameList) {
+    return;
+  }
+  return shortNameList.reduce((r, d) => `, ${d.value}`, '');
+};
+
 export const processProteinData = (data: ProteinNamesData) => {
-  const name = idx(
+  const recommendedName = idx(
     data,
     _ => _.proteinDescription.recommendedName.fullName.value
   );
   const alternativeNames: string[] = [];
-  const ecNumbers = idx(data, _ => _.proteinDescription.ecNumbers);
+  const ecNumbers = idx(
+    data,
+    _ => _.proteinDescription.recommendedName.ecNumbers
+  );
   if (ecNumbers && ecNumbers.length > 0) {
     alternativeNames.push(...ecNumbers.map(ec => ec.value));
   }
@@ -68,15 +72,19 @@ export const processProteinData = (data: ProteinNamesData) => {
     }
   }
   const shortNames = idx(data, _ =>
-    _.proteinDescription.shortNames.map(shortName => shortName.value).join(', ')
+    _.proteinDescription.recommendedName.shortNames
+      .map(shortName => shortName.value)
+      .join(', ')
   );
-  return { name, shortNames, alternativeNames };
+  return { recommendedName, shortNames, alternativeNames };
 };
 
 export const ProteinNames: React.FC<ProteinNamesDataProps> = ({ data }) => {
-  const { name, shortNames, alternativeNames } = processProteinData(data);
+  const { recommendedName, shortNames, alternativeNames } = processProteinData(
+    data
+  );
   const props = {
-    name,
+    name: recommendedName,
     shortNames,
     alternativeNames,
   };
@@ -86,11 +94,13 @@ export const ProteinNames: React.FC<ProteinNamesDataProps> = ({ data }) => {
 export const EntryProteinNames: React.FC<ProteinNamesDataProps> = ({
   data,
 }) => {
-  const { name, shortNames, alternativeNames } = processProteinData(data);
+  const { recommendedName, shortNames, alternativeNames } = processProteinData(
+    data
+  );
   const infoData = [
     {
       title: 'Recommended name',
-      content: name,
+      content: recommendedName,
     },
     {
       title: 'Short names',

@@ -18,7 +18,7 @@ type ProteinOverviewDataProps = {
 export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
   data,
 }) => {
-  const { name: proteinName } = processProteinData(data);
+  const { recommendedName } = processProteinData(data);
   const { name: geneName } = processGeneData(data);
   const infoListData = [
     {
@@ -40,7 +40,7 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
       }
     >
       <h5>
-        {proteinName} - <Organism data={data} />
+        {recommendedName} - <Organism data={data} />
       </h5>
       <InfoList infoData={infoListData} />
     </Card>

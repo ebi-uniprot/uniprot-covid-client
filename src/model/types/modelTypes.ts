@@ -3,3 +3,8 @@ export type EvidenceType = {
   source: string;
   id: string;
 };
+
+export type ValueWihEvidence = {
+  value: string;
+  evidences: EvidenceType[];
+};

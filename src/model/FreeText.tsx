@@ -49,6 +49,9 @@ type FreeTextDataProps = {
 };
 
 export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
+  if (!data.comments) {
+    return null;
+  }
   const freeTextData = data.comments
     .filter(d => d.commentType === type)
     .map((item, i) => (

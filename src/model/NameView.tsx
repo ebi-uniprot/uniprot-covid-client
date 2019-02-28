@@ -16,8 +16,7 @@ const NameView = (props: NameViewProps) => {
   }
   return (
     <span>
-      <strong>{name}</strong> {shortName}{' '}
-      {altNames ? <span>{altNames}</span> : undefined}
+      <strong>{name}</strong> {shortName} {altNames && <span>{altNames}</span>}
     </span>
   );
 };
