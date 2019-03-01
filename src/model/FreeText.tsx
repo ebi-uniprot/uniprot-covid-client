@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { EvidenceType } from './types/modelTypes';
+import { EvidenceTag } from 'franklin-sites';
+import { getEvidenceCodeData } from './EvidenceCodes';
 
 export enum FreeTextType {
   FUNCTION = 'FUNCTION',
@@ -38,7 +40,7 @@ export type FreeTextData = {
   comments: [
     {
       commentType: string;
-      texts: [{ value: string; evidences: [EvidenceType] }];
+      texts: [{ value: string; evidences: EvidenceType[] }];
     }
   ];
 };
@@ -56,7 +58,22 @@ export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
     .filter(d => d.commentType === type)
     .map((item, i) => (
       <p key={`freetext_${i}_${type}`}>
-        {item.texts.map(itemText => itemText.value)}
+        {item.texts.map((itemText, j) => {
+          return (
+            <Fragment key={`freetext_${i}_${type}_${j}`}>
+              {itemText.value}
+              {itemText.evidences.map(evidence => {
+                const evidenceData = getEvidenceCodeData(evidence.evidenceCode);
+                return (
+                  <EvidenceTag
+                    label={evidenceData && evidenceData.label}
+                    key={evidence.id}
+                  />
+                );
+              })}
+            </Fragment>
+          );
+        })}
       </p>
     ));
 
