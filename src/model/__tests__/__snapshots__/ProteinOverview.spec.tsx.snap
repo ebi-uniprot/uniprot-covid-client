@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProteinOverview component should render 1`] = `
+"<Component title={{...}}>
+  <h5>
+    rec full Name
+     - 
+    <Organism data={{...}} />
+  </h5>
+  <Component infoData={{...}} />
+</Component>"
+`;

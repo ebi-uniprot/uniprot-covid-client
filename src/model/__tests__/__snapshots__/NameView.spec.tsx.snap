@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NameView component should render 1`] = `
-"<div>
+"<span>
   <strong>
     Name
   </strong>
@@ -10,17 +10,17 @@ exports[`NameView component should render 1`] = `
    
   <span>
     <span>
-       
+      , 
       name1
     </span>
     <span>
-       
+      , 
       name2
     </span>
     <span>
-       
+      , 
       name3
     </span>
   </span>
-</div>"
+</span>"
 `;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { DataTable } from 'franklin-sites';
-import FieldToViewMappings from './views/FieldToViewMappings';
+import FieldToViewMappings from '../model/FieldToViewMappings';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
 
 type ResultsTableProps = {
   results: any[];
-  columnNames: Array<string>;
+  columnNames: string[];
   selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumns) => void;
@@ -43,7 +43,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       idKey="primaryAccession"
       columns={columns}
       data={results}
-      selectable
+      selectable={true}
       selected={selectedRows}
       onSelect={handleRowSelect}
       onHeaderClick={handleHeaderClick}

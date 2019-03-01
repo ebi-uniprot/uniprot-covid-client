@@ -38,6 +38,8 @@ const apiUrls = {
   ),
   // Retrieve results
   advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
+  entry: (accession: string) =>
+    joinUrl(prefix, '/uniprot/api/uniprotkb/accession', accession),
 };
 
 export default apiUrls;

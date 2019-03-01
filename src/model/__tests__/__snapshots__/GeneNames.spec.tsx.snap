@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneNames should render gene_names 1`] = `"<NameView name=\\"some Gene\\" alternativeNames={{...}} />"`;
