@@ -1,27 +1,10 @@
-# Installation
-
-> This installation guide is based on the steps required for an
-> OSX-powered machine with latest updates installed and in clean
-> configuration. You may require more or different steps if you are
-> using any other operating system.
-
 ### Installing JavaScript Dependencies
-
-Now that you have the source code on your local machine, you would need to follow a few steps in order to get it running. Starting with JavaScript dependencies; Our preferred package manager is `yarn`, however, you may use `NPM` or others in your discretion.
-
-> You would need to have a recent version of _Node.JS_, as well as
-> a package manager e.g. _Yarn_ or _NPM_, installed before you can continue.
 
 To install JavaScript dependencies, first make sure you are in the root directory of your `uniprot-website` project -- this directory should contain a file named `package.json`, then type `yarn` in the command-line and press return. This should download and install the required JavaScript packages -- this may take a few minutes to finish.
 
-> If the installation was unsuccessful due to any permission/access
-> denied related errors -- especially if you are using `NPM`, check your
-> package manager's online documentation. [This page](https://docs.npmjs.com/getting-started/fixing-npm-permissions) explains the
-> problem and solution for `NPM` users.
-
 # Usage
 
-Run `yarn start`
+Run `yarn run start`
 
 # Coding-styles & Linters
 
