@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UniProtEvidenceTag components should render 1`] = `"<Component label=\\"Manual assertion according to rules\\" title=\\"\\" reviewed={false} />"`;

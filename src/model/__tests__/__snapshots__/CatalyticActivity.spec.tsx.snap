@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Catalytic activity should render catalytic activity 1`] = `
+"<Fragment>
+  <h4>
+    Catalytic Activity
+  </h4>
+  <p>
+    <strong>
+      1.2.4.5
+    </strong>
+     
+    some reaction
+    <UniProtEvidence evidence={{...}} />
+  </p>
+</Fragment>"
+`;

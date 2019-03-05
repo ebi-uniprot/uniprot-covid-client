@@ -4,7 +4,7 @@ exports[`FreeText component should render free text CC 1`] = `
 "<Fragment>
   <p>
     value
-    <Component label=\\"Automatic assertion according to rules\\" title=\\"\\" reviewed={false} />
+    <UniProtEvidence evidence={{...}} />
   </p>
 </Fragment>"
 `;
