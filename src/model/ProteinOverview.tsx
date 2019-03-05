@@ -22,6 +22,10 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
   const { name: geneName } = processGeneData(data);
   const infoListData = [
     {
+      title: 'Organism',
+      content: <Organism data={data} />,
+    },
+    {
       title: 'Gene',
       content: geneName,
     },
@@ -35,13 +39,13 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
     <Card
       title={
         <Fragment>
-          {data.uniProtId} <small>{data.primaryAccession}</small>
+          {data.uniProtId}{' '}
+          <small>
+            {data.primaryAccession} - {recommendedName}
+          </small>
         </Fragment>
       }
     >
-      <h5>
-        {recommendedName} - <Organism data={data} />
-      </h5>
       <InfoList infoData={infoListData} />
     </Card>
   );

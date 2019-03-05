@@ -47,9 +47,14 @@ export type FreeTextData = {
 type FreeTextDataProps = {
   data: FreeTextData;
   type: FreeTextType;
+  includeTitle?: boolean;
 };
 
-export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
+export const FreeText: React.FC<FreeTextDataProps> = ({
+  data,
+  type,
+  includeTitle = false,
+}) => {
   if (!data.comments) {
     return null;
   }
@@ -70,5 +75,12 @@ export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
       </p>
     ));
 
-  return <Fragment>{freeTextData}</Fragment>;
+  return (
+    <Fragment>
+      {includeTitle && (
+        <h4 style={{ textTransform: 'capitalize' }}>{type.toLowerCase()}</h4>
+      )}
+      {freeTextData}
+    </Fragment>
+  );
 };

@@ -32,6 +32,11 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Function">
         <FreeText data={entryData} type={FreeTextType.FUNCTION} />
         <CatalyticActivity data={entryData} />
+        <FreeText
+          data={entryData}
+          type={FreeTextType.PATHWAY}
+          includeTitle={true}
+        />
       </Card>
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />
