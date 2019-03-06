@@ -3,7 +3,7 @@ import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
 
 type CatalyticActivityData = {
-  comments: [
+  comments?: [
     {
       commentType: string;
       reaction: {
@@ -24,6 +24,9 @@ type CatalyticActivityProps = {
 export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
   data,
 }) => {
+  if (!data.comments) {
+    return null;
+  }
   const catalyticActivityData = data.comments.filter(
     d => d.commentType === 'CATALYTIC ACTIVITY'
   );
