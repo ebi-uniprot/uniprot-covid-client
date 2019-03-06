@@ -8,12 +8,23 @@ Accepted
 
 ## Context
 
-The issue motivating this decision, and any context that influences or constrains the decision.
+Testing is necessary to ensure code quality:
+
+- Unit tests
+- Integration tests
+- Visual regression tests
 
 ## Decision
 
-The change that we're proposing or have agreed to implement.
+Use Jest+Enzyme and snapshot testing.
+
+Jest is used as the main testing framework. Snapshot testing, which is a feature of Jest, is also used and helps prevent visual regression.
+
+Enzyme is used as a utility of Jest to test React components.
+
+The Redux layer is also tested, which provides a certain amount of integration tests.
 
 ## Consequences
 
-What becomes easier or more difficult to do and any risks introduced by the change that will need to be mitigated.
+- Unit tests can work as code documentation and prevent breakage.
+- Jest is developped by Facebook and used by many React developers. This helps make sure they work well together.
