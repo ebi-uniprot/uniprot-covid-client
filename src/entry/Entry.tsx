@@ -4,8 +4,9 @@ import useDataApi from '../utils/useDataApi';
 import apiUrls from '../utils/apiUrls';
 import { EntryProteinNames } from '../model/ProteinNames';
 import { ProteinOverview } from '../model/ProteinOverview';
-import { Card } from 'franklin-sites';
 import { FreeText, FreeTextType } from '../model/FreeText';
+import { CatalyticActivity } from '../model/CatalyticActivity';
+import { Card } from 'franklin-sites';
 
 interface MatchParams {
   accession: string;
@@ -30,6 +31,12 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <ProteinOverview data={entryData} />
       <Card title="Function">
         <FreeText data={entryData} type={FreeTextType.FUNCTION} />
+        <CatalyticActivity data={entryData} />
+        <FreeText
+          data={entryData}
+          type={FreeTextType.PATHWAY}
+          includeTitle={true}
+        />
       </Card>
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />
