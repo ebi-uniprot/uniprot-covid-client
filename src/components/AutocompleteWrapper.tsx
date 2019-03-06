@@ -26,7 +26,7 @@ type State = {
   data: Array<Suggestions>;
 };
 
-type Chosen = {
+type SelectedValue = {
   id: string;
   itemLabel: string;
   pathLabel: string;
@@ -62,12 +62,12 @@ class AutocompleteWrapper extends Component<Props, State> {
       .catch(e => console.error(e));
   };
 
-  handleSelect = (chosen: Chosen | string) => {
+  handleSelect = (inputValue: SelectedValue | string) => {
     const { onSelect } = this.props;
-    if (typeof chosen === 'string') {
-      onSelect(chosen);
+    if (typeof inputValue === 'string') {
+      onSelect(inputValue);
     } else {
-      onSelect(chosen.pathLabel, chosen.apiId);
+      onSelect(inputValue.pathLabel, inputValue.apiId);
     }
   };
 
