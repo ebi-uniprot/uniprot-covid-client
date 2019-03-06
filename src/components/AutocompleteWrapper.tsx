@@ -52,7 +52,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     fetchData(url)
       .then(data =>
         data.data.suggestions.map((suggestion: Suggestion) => ({
-          pathLabel: suggestion.value,
+          pathLabel: `${suggestion.value} [${suggestion.id}]`,
           itemLabel: suggestion.value,
           apiId: suggestion.id,
           id: v1(),
