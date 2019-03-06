@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
-import AutocompleteWrapper from '../autocomplete/AutocompleteWrapper';
+import AutocompleteWrapper from '../components/AutocompleteWrapper';
 import { SearchTermType, Input } from './types/searchTypes';
 
 type FieldProps = {
@@ -16,7 +16,7 @@ const Field = ({
   field,
   handleInputChange,
   handleRangeInputChange,
-  queryInput
+  queryInput,
 }: FieldProps) => {
   const { dataType, hasRange } = field;
   let node;
@@ -82,14 +82,14 @@ const Field = ({
           handleChange: (value, isFrom) =>
             handleRangeInputChange(value, isFrom),
           rangeFrom: queryInput.rangeFrom,
-          rangeTo: queryInput.rangeTo
+          rangeTo: queryInput.rangeTo,
         });
       }
       return TextField({
         field,
         type: 'number',
         handleChange: value => handleInputChange(value),
-        value: queryInput.stringValue
+        value: queryInput.stringValue,
       });
       break;
     default:

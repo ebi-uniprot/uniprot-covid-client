@@ -10,8 +10,8 @@ type ProteinOverviewDataProps = {
     uniProtId: string;
     proteinExistence: string;
     proteinDescription: ProteinNamesData['proteinDescription'];
-    organism: OrganismData['organism'];
-    genes: GeneNamesData['genes'];
+    organism?: OrganismData['organism'];
+    genes?: GeneNamesData['genes'];
   };
 };
 
@@ -21,6 +21,10 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
   const { recommendedName } = processProteinData(data);
   const { name: geneName } = processGeneData(data);
   const infoListData = [
+    {
+      title: 'Organism',
+      content: <Organism data={data} />,
+    },
     {
       title: 'Gene',
       content: geneName,
@@ -35,13 +39,13 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
     <Card
       title={
         <Fragment>
-          {data.uniProtId} <small>{data.primaryAccession}</small>
+          {data.uniProtId}{' '}
+          <small>
+            {data.primaryAccession} - {recommendedName}
+          </small>
         </Fragment>
       }
     >
-      <h5>
-        {recommendedName} - <Organism data={data} />
-      </h5>
       <InfoList infoData={infoListData} />
     </Card>
   );

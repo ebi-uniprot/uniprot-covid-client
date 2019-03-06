@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
 
 export enum FreeTextType {
@@ -35,10 +36,10 @@ export enum FreeTextType {
 }
 
 export type FreeTextData = {
-  comments: [
+  comments?: [
     {
       commentType: string;
-      texts: [{ value: string; evidences: [EvidenceType] }];
+      texts: [{ value: string; evidences: EvidenceType[] }];
     }
   ];
 };
@@ -46,9 +47,14 @@ export type FreeTextData = {
 type FreeTextDataProps = {
   data: FreeTextData;
   type: FreeTextType;
+  includeTitle?: boolean;
 };
 
-export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
+export const FreeText: React.FC<FreeTextDataProps> = ({
+  data,
+  type,
+  includeTitle = false,
+}) => {
   if (!data.comments) {
     return null;
   }
@@ -56,9 +62,25 @@ export const FreeText: React.FC<FreeTextDataProps> = ({ data, type }) => {
     .filter(d => d.commentType === type)
     .map((item, i) => (
       <p key={`freetext_${i}_${type}`}>
-        {item.texts.map(itemText => itemText.value)}
+        {item.texts.map((itemText, j) => {
+          return (
+            <Fragment key={`freetext_${i}_${type}_${j}`}>
+              {itemText.value}
+              {itemText.evidences.map(evidence => (
+                <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
+              ))}
+            </Fragment>
+          );
+        })}
       </p>
     ));
 
-  return <Fragment>{freeTextData}</Fragment>;
+  return (
+    <Fragment>
+      {includeTitle && (
+        <h4 style={{ textTransform: 'capitalize' }}>{type.toLowerCase()}</h4>
+      )}
+      {freeTextData}
+    </Fragment>
+  );
 };

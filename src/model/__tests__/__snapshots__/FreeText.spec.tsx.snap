@@ -4,6 +4,7 @@ exports[`FreeText component should render free text CC 1`] = `
 "<Fragment>
   <p>
     value
+    <UniProtEvidence evidence={{...}} />
   </p>
 </Fragment>"
 `;

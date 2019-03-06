@@ -3,7 +3,7 @@ import idx from 'idx';
 import SimpleView from './SimpleView';
 
 export type OrganismData = {
-  organism: {
+  organism?: {
     scientificName?: string;
     commonName?: string;
     synonyms?: string[];
@@ -16,6 +16,9 @@ type OrganismDataProps = {
 };
 
 export const Organism: React.FC<OrganismDataProps> = ({ data }) => {
+  if (!data.organism) {
+    return null;
+  }
   const scientificName = idx(data, _ => _.organism.scientificName);
   const commonName = idx(data, _ => _.organism.commonName);
   const synonyms = idx(data, _ => _.organism.synonyms);
