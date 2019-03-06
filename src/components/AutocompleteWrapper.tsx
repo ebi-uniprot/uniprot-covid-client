@@ -45,6 +45,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     const { url } = this.props;
     const suggesterUrl = getSuggesterUrl(url, textInputValue);
     this.fetchOptions(suggesterUrl);
+    this.handleSelect(textInputValue);
   };
 
   fetchOptions = (url: string) => {
