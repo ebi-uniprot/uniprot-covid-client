@@ -41,7 +41,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />
       </Card>
-      <Card title="Subcellular Location" />
+      {/* <Card title="Subcellular Location" />
       <Card title="Pathology & Biotech" />
       <Card title="PTM/Processing" />
       <Card title="Expression" />
@@ -52,7 +52,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Similar Proteins" />
       <Card title="Cross-References" />
       <Card title="Entry Information" />
-      <Card title="Miscellaneous" />
+      <Card title="Miscellaneous" /> */}
     </Fragment>
   );
 };
