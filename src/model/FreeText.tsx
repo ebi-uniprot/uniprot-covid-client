@@ -55,7 +55,7 @@ export const FreeText: React.FC<FreeTextDataProps> = ({
   type,
   includeTitle = false,
 }) => {
-  if (!data.comments || !data.comments.find(d => d.commentType === type)) {
+  if (!data.comments || !data.comments.some(d => d.commentType === type)) {
     return null;
   }
   const freeTextData = data.comments

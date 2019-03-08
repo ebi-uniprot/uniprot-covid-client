@@ -26,7 +26,7 @@ export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
 }) => {
   if (
     !data.comments ||
-    !data.comments.find(d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY)
+    !data.comments.some(d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY)
   ) {
     return null;
   }
