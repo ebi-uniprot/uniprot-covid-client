@@ -38,7 +38,7 @@ export enum FreeTextType {
 export type FreeTextData = {
   comments?: [
     {
-      commentType: string;
+      commentType: FreeTextType;
       texts: [{ value: string; evidences: EvidenceType[] }];
     }
   ];
@@ -55,7 +55,7 @@ export const FreeText: React.FC<FreeTextDataProps> = ({
   type,
   includeTitle = false,
 }) => {
-  if (!data.comments) {
+  if (!data.comments || !data.comments.find(d => d.commentType === type)) {
     return null;
   }
   const freeTextData = data.comments

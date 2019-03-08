@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
+import { FreeTextType } from './FreeText';
 
 type CatalyticActivityData = {
   comments?: [
     {
-      commentType: string;
+      commentType: FreeTextType;
       reaction: {
-        commentType: string;
         name: string;
         reactionReferences: Array<{ databaseType: string; id: string }>;
         ecNumber: string;
@@ -24,11 +24,14 @@ type CatalyticActivityProps = {
 export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
   data,
 }) => {
-  if (!data.comments) {
+  if (
+    !data.comments ||
+    !data.comments.find(d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY)
+  ) {
     return null;
   }
   const catalyticActivityData = data.comments.filter(
-    d => d.commentType === 'CATALYTIC ACTIVITY'
+    d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY
   );
   if (!catalyticActivityData || catalyticActivityData.length <= 0) {
     return null;
