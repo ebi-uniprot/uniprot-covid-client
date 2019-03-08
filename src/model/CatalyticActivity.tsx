@@ -11,7 +11,7 @@ type CatalyticActivityData = {
         name: string;
         reactionReferences: Array<{ databaseType: string; id: string }>;
         ecNumber: string;
-        evidences: EvidenceType[];
+        evidences?: EvidenceType[];
       };
     }
   ];
@@ -40,9 +40,10 @@ export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
         <p key={`catalytic-${catalyticActivity.reaction.ecNumber}`}>
           <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
           {catalyticActivity.reaction.name}
-          {catalyticActivity.reaction.evidences.map(evidence => (
-            <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-          ))}
+          {catalyticActivity.reaction.evidences &&
+            catalyticActivity.reaction.evidences.map(evidence => (
+              <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
+            ))}
         </p>
       ))}
     </Fragment>
