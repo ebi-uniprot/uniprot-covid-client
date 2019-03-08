@@ -51,7 +51,7 @@ const Field = ({
               title={field.label}
               value={
                 queryInput.id
-                  ? `${queryInput.id} [${queryInput.stringValue}]`
+                  ? `${queryInput.stringValue} [${queryInput.id}]`
                   : queryInput.stringValue
               }
             />

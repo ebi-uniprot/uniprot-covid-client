@@ -7,7 +7,7 @@ import {
   Clause,
   SearchTermType,
   Operator,
-  EvidenceType
+  EvidenceType,
 } from './types/searchTypes';
 
 // .itemType
@@ -43,7 +43,7 @@ const ClauseList: React.FC<ClauseListProps> = ({
   handleEvidenceChange,
   handleRangeInputChange,
   handleLogicChange,
-  handleRemoveClause
+  handleRemoveClause,
 }) => (
   <Fragment>
     {clauses.map(clause => {
