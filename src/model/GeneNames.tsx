@@ -3,7 +3,7 @@ import idx from 'idx';
 import NameView from './NameView';
 
 export type GeneNamesData = {
-  genes: [
+  genes?: [
     {
       geneName: {
         value: string;
@@ -40,6 +40,9 @@ export const processGeneData = (data: GeneNamesData) => {
 };
 
 export const GeneNames: React.FC<GeneNamesDataProps> = ({ data }) => {
+  if (!data.genes) {
+    return null;
+  }
   const { name, alternativeNames } = processGeneData(data);
   const props = { name, alternativeNames };
   return <NameView {...props} />;

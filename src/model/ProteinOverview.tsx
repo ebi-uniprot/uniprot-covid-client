@@ -10,8 +10,8 @@ type ProteinOverviewDataProps = {
     uniProtId: string;
     proteinExistence: string;
     proteinDescription: ProteinNamesData['proteinDescription'];
-    organism: OrganismData['organism'];
-    genes: GeneNamesData['genes'];
+    organism?: OrganismData['organism'];
+    genes?: GeneNamesData['genes'];
   };
 };
 

@@ -36,7 +36,7 @@ export enum FreeTextType {
 }
 
 export type FreeTextData = {
-  comments: [
+  comments?: [
     {
       commentType: string;
       texts: [{ value: string; evidences: EvidenceType[] }];

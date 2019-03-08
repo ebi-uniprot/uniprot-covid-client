@@ -23,10 +23,10 @@ type Suggestions = {
 };
 
 type State = {
-  data: Array<Suggestions>;
+  data: Array<SelectValue>;
 };
 
-type Chosen = {
+type SelectValue = {
   id: string;
   itemLabel: string;
   pathLabel: string;
@@ -40,6 +40,17 @@ class AutocompleteWrapper extends Component<Props, State> {
     this.state = { data: [] };
     this.id = v1();
   }
+  static prepareData(suggestions: Suggestion[]) {
+    return suggestions.map(
+      (suggestion: Suggestion) =>
+        ({
+          pathLabel: suggestion.value,
+          itemLabel: suggestion.value,
+          apiId: suggestion.id,
+          id: v1(),
+        } as SelectValue)
+    );
+  }
 
   handleChange = (textInputValue: string) => {
     const { url } = this.props;
@@ -50,24 +61,17 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   fetchOptions = (url: string) => {
     fetchData(url)
-      .then(data =>
-        data.data.suggestions.map((suggestion: Suggestion) => ({
-          pathLabel: `${suggestion.value} [${suggestion.id}]`,
-          itemLabel: suggestion.value,
-          apiId: suggestion.id,
-          id: v1(),
-        }))
-      )
+      .then(data => AutocompleteWrapper.prepareData(data.data.suggestions))
       .then(data => this.setState({ data }))
       .catch(e => console.error(e));
   };
 
-  handleSelect = (chosen: Chosen | string) => {
+  handleSelect = (inputValue: SelectValue | string) => {
     const { onSelect } = this.props;
-    if (typeof chosen === 'string') {
-      onSelect(chosen);
+    if (typeof inputValue === 'string') {
+      onSelect(inputValue);
     } else {
-      onSelect(chosen.pathLabel, chosen.apiId);
+      onSelect(inputValue.pathLabel, inputValue.apiId);
     }
   };
 
