@@ -75,6 +75,7 @@ const Field = ({
       if (hasRange) {
         return RangeField({
           field,
+          type: 'number',
           handleChange: (value, isFrom) =>
             handleRangeInputChange(value, isFrom),
           rangeFrom: queryInput.rangeFrom,
