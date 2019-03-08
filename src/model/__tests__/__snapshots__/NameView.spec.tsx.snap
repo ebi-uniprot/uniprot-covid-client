@@ -7,20 +7,8 @@ exports[`NameView component should render 1`] = `
   </strong>
    
   Short Name
-   
-  <span>
-    <span>
-      , 
-      name1
-    </span>
-    <span>
-      , 
-      name2
-    </span>
-    <span>
-      , 
-      name3
-    </span>
-  </span>
+  <div>
+    name1, name2, name3
+  </div>
 </span>"
 `;

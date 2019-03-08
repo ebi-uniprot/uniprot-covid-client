@@ -10,13 +10,12 @@ const NameView = (props: NameViewProps) => {
   const { name, shortName, alternativeNames } = props;
   let altNames;
   if (alternativeNames && alternativeNames.length > 0) {
-    altNames = alternativeNames.map(alternativeName => (
-      <span key={alternativeName}>, {alternativeName}</span>
-    ));
+    altNames = alternativeNames.join(', ');
   }
   return (
     <span>
-      <strong>{name}</strong> {shortName} {altNames && <span>{altNames}</span>}
+      <strong>{name}</strong> {shortName}
+      {altNames && <div>{altNames}</div>}
     </span>
   );
 };
