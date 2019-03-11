@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
-import { default as queryStringModule } from 'query-string';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/actions';
 import {
@@ -23,9 +22,9 @@ interface SearchProps extends RouteComponentProps {
   dispatchUpdateQueryString: (type: string) => void;
   searchTerms: [any];
   namespace: Namespace;
-  clauses: Array<Clause>;
+  clauses: Clause[];
   evidences: any;
-  dispatchUpdateClauses: (clauses: Array<Clause>) => void;
+  dispatchUpdateClauses: (clauses: Clause[]) => void;
   dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   dispatchAddClause: () => void;
@@ -58,22 +57,6 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleAdvancedSubmitClick = this.handleAdvancedSubmitClick.bind(this);
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
-  }
-
-  componentDidMount() {
-    const {
-      location: { search: queryParamFromUrl },
-      queryString,
-      dispatchUpdateQueryString,
-    } = this.props;
-    const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    if (
-      queryFromUrl &&
-      queryFromUrl !== queryString &&
-      typeof queryFromUrl === 'string'
-    ) {
-      dispatchUpdateQueryString(queryFromUrl);
-    }
   }
 
   componentDidUpdate(prevProps: SearchProps) {

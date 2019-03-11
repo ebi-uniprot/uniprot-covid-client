@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Facets, PageIntro } from 'franklin-sites';
+import { default as queryStringModule } from 'query-string';
 import * as resultsActions from './state/actions';
 import * as searchActions from '../search/state/actions';
 import { Clause, Namespace } from '../search/types/searchTypes';
@@ -24,7 +25,7 @@ interface ResultsProps extends RouteComponentProps {
   selectedFacets: SelectedFacet[];
   dispatchFetchResults: (
     queryString: string,
-    columns: Array<string>,
+    columns: string[],
     selectedFacets: SelectedFacet[],
     sortBy: SortableColumns | undefined,
     sortDirection: keyof SortDirectionsType | undefined
@@ -34,8 +35,8 @@ interface ResultsProps extends RouteComponentProps {
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
   dispatchRemoveFacet: (facetName: string, facetValue: string) => void;
   dispatchReset: () => void;
-  clauses?: Array<Clause>;
-  columns: Array<string>;
+  clauses?: Clause[];
+  columns: string[];
   sort: SortType;
   results: any[];
   facets: any[];
@@ -64,6 +65,15 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       history,
       sort: { column, direction },
     } = this.props;
+    const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
+    if (
+      queryFromUrl &&
+      queryFromUrl !== queryString &&
+      typeof queryFromUrl === 'string'
+    ) {
+      dispatchUpdateQueryString(queryFromUrl);
+      return;
+    }
     dispatchFetchResults(
       queryString,
       columns,
@@ -75,7 +85,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
   componentDidUpdate(prevProps: ResultsProps) {
     const {
-      location: { search: queryParamFromUrl },
       dispatchFetchResults,
       queryString,
       selectedFacets,
