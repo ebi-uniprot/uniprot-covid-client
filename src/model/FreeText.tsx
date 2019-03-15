@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
+import v1 from 'uuid';
 
 export enum FreeTextType {
   FUNCTION = 'FUNCTION',
@@ -66,9 +67,10 @@ export const FreeText: React.FC<FreeTextDataProps> = ({
           return (
             <Fragment key={`freetext_${i}_${type}_${j}`}>
               {itemText.value}
-              {itemText.evidences.map(evidence => (
-                <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-              ))}
+              {itemText.evidences &&
+                itemText.evidences.map(evidence => (
+                  <UniProtEvidenceTag evidence={evidence} key={v1()} />
+                ))}
             </Fragment>
           );
         })}
