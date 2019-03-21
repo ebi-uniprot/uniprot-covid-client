@@ -3,6 +3,7 @@ import { DataTable } from 'franklin-sites';
 import FieldToViewMappings from '../model/FieldToViewMappings';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
+import columnAttributes from '../data/columnAttributes';
 
 type ResultsTableProps = {
   results: any[];
@@ -10,6 +11,9 @@ type ResultsTableProps = {
   selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumns) => void;
+  handleLoadMoreRows: any;
+  totalNumberResults: number;
+  nextUrl: string;
   sort: SortType;
 };
 
@@ -19,8 +23,20 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   selectedRows,
   handleRowSelect,
   handleHeaderClick,
+  handleLoadMoreRows,
   sort,
+  nextUrl,
+  totalNumberResults,
 }) => {
+  // const handleLoadMoreRows = ({ startIndex }) => {
+  //   console.log(startIndex);
+  //   const resultUrl = resultsUrls.find(
+  //     ({ start: urlStart, stop: urlStop }) => urlStart <= startIndex
+  //   );
+  //   console.log(resultsUrls);
+  //   // return fetchResultsIfNeeded(resultUrl && resultUrl.url);
+  // };
+
   const columns = columnNames.map(columnName => {
     let render;
     if (columnName in FieldToViewMappings) {
@@ -30,12 +46,14 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
         <div className="warning">{`${columnName} has no render method`}</div>
       );
     }
+
     return {
       label: columnName,
       name: columnName,
       render,
       sortable: columnName in SortableColumns,
       sorted: columnName === sort.column ? sort.direction : false,
+      width: columnAttributes[columnName].width || 200,
     };
   });
   return (
@@ -47,6 +65,11 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       selected={selectedRows}
       onSelect={handleRowSelect}
       onHeaderClick={handleHeaderClick}
+      onLoadMoreRows={handleLoadMoreRows}
+      fixedRowCount={1}
+      showRowNumbers={true}
+      totalNumberRows={totalNumberResults}
+      showHeader={true}
     />
   );
 };

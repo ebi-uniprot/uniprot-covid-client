@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Facets, PageIntro } from 'franklin-sites';
-import { default as queryStringModule } from 'query-string';
+import queryString, * as queryStringParser from 'query-string';
 import * as resultsActions from './state/actions';
 import * as searchActions from '../search/state/actions';
+import { default as queryStringModule } from 'query-string';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsTable from './ResultsTable';
+import { getAPIQueryUrl } from './utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
@@ -23,13 +25,10 @@ interface ResultsProps extends RouteComponentProps {
   queryString: string;
   namespace: Namespace;
   selectedFacets: SelectedFacet[];
-  dispatchFetchResults: (
-    queryString: string,
-    columns: string[],
-    selectedFacets: SelectedFacet[],
-    sortBy: SortableColumns | undefined,
-    sortDirection: keyof SortDirectionsType | undefined
-  ) => void;
+  dispatchFetchResultsIfNeeded: (
+    url: string | undefined,
+    nextPage?: boolean | undefined
+  ) => Promise<any>;
   dispatchUpdateQueryString: (type: string) => void;
   dispatchUpdateColumnSort: (column: SortableColumns) => void;
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
@@ -41,6 +40,8 @@ interface ResultsProps extends RouteComponentProps {
   results: any[];
   facets: any[];
   isFetching: boolean;
+  nextUrl: string;
+  totalNumberResults: number;
 }
 
 type ResultsContainerState = {
@@ -59,10 +60,9 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       location: { search: queryParamFromUrl },
       queryString,
       selectedFacets,
-      dispatchFetchResults,
+      dispatchFetchResultsIfNeeded,
       dispatchUpdateQueryString,
       columns,
-      history,
       sort: { column, direction },
     } = this.props;
     const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
@@ -74,18 +74,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       dispatchUpdateQueryString(queryFromUrl);
       return;
     }
-    dispatchFetchResults(
-      queryString,
-      columns,
-      selectedFacets,
-      column,
-      direction
+    dispatchFetchResultsIfNeeded(
+      getAPIQueryUrl(queryString, columns, selectedFacets, column, direction)
     );
   }
 
   componentDidUpdate(prevProps: ResultsProps) {
     const {
-      dispatchFetchResults,
+      dispatchFetchResultsIfNeeded,
       queryString,
       selectedFacets,
       columns,
@@ -100,12 +96,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       direction !== prevProps.sort.direction
     ) {
       history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-      dispatchFetchResults(
-        queryString,
-        columns,
-        selectedFacets,
-        column,
-        direction
+      dispatchFetchResultsIfNeeded(
+        getAPIQueryUrl(queryString, columns, selectedFacets, column, direction)
       );
     }
   }
@@ -136,11 +128,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       dispatchAddFacet,
       dispatchRemoveFacet,
       dispatchUpdateColumnSort,
+      dispatchFetchResultsIfNeeded,
       namespace,
       sort,
+      nextUrl,
+      totalNumberResults,
     } = this.props;
     const { selectedRows } = this.state;
-    if (isFetching) {
+    if (Object.keys(isFetching).length === 0) {
       return <h3>Loading...</h3>;
     }
     const { name, links, info } = infoMappings[namespace];
@@ -168,6 +163,11 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               selectedRows={selectedRows}
               handleHeaderClick={dispatchUpdateColumnSort}
               sort={sort}
+              nextUrl={nextUrl}
+              handleLoadMoreRows={(url: string) =>
+                dispatchFetchResultsIfNeeded(nextUrl)
+              }
+              totalNumberResults={totalNumberResults}
             />
           }
         />
@@ -185,25 +185,17 @@ const mapStateToProps = (state: RootState) => ({
   facets: state.results.facets,
   isFetching: state.results.isFetching,
   sort: state.results.sort,
+  nextUrl: state.results.nextUrl,
+  totalNumberResults: state.results.totalNumberResults,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
-      dispatchFetchResults: (
-        query: string,
-        columns: string[],
-        selectedFacets: SelectedFacet[],
-        sortBy: SortableColumns | undefined,
-        sortDirection: keyof SortDirectionsType | undefined
-      ) =>
-        resultsActions.fetchResults(
-          query,
-          columns,
-          selectedFacets,
-          sortBy,
-          sortDirection
-        ),
+      dispatchFetchResultsIfNeeded: (
+        url: string | undefined,
+        nextPage?: boolean | undefined
+      ) => resultsActions.fetchResultsIfNeeded(url),
       dispatchAddFacet: (facetName: string, facetValue: string) =>
         resultsActions.addFacet(facetName, facetValue),
       dispatchRemoveFacet: (facetName: string, facetValue: string) =>

@@ -1,8 +1,24 @@
 import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
+import queryString from 'query-string';
 import * as resultsActions from './actions';
 import initialState, { ResultsState } from './initialState';
 import { SortDirections, SortDirectionsType } from '../types/resultsTypes';
+
+// const isSameSearch = (urls, newUrl) => {
+//   if (urls.length === 0) {
+//     return true;
+//   }
+//   const currentUrl = urls[0].url;
+//   const currentParams = queryString.parse(currentUrl);
+//   const newParams = queryString.parse(newUrl);
+//   console.log(currentParams, newParams);
+//   const fieldsToCheck = ['fields', 'includeFacets', 'query'];
+//   return fieldsToCheck.every(field => {
+//     console.log(currentParams[field], newParams[field]);
+//     return currentParams[field] === newParams[field];
+//   });
+// };
 
 export type ResultAction = ActionType<typeof resultsActions>;
 // SortDirections.ascend.app as keyof SortDirectionsType
@@ -20,18 +36,30 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
               : (SortDirections.ascend.app as keyof SortDirectionsType),
         },
       };
-    case resultsActions.FETCH_RESULTS_REQUEST:
+    case resultsActions.REQUEST_RESULTS:
       return {
         ...state,
-        isFetching: true,
+        isFetching: {
+          ...state.isFetching,
+          [action.payload.url]: true,
+        },
       };
-    case resultsActions.FETCH_RESULTS_SUCCESS:
+    case resultsActions.RECEIVE_RESULTS:
       return {
         ...state,
-        results: action.payload.data.results,
+        results: [...state.results, ...action.payload.data.results],
         facets: action.payload.data.facets,
         lastUpdated: action.payload.receivedAt,
-        isFetching: false,
+        totalNumberResults: action.payload.totalNumberResults,
+        isFetching: {
+          ...state.isFetching,
+          [action.payload.url]: false,
+        },
+        isFetched: {
+          ...state.isFetched,
+          [action.payload.url]: true,
+        },
+        nextUrl: action.payload.nextUrl || null,
       };
     case resultsActions.ADD_FACET: {
       return {
