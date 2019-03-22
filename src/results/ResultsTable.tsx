@@ -69,8 +69,6 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       onHeaderClick={handleHeaderClick}
       onLoadMoreRows={handleLoadMoreRows}
       fixedRowCount={1}
-      showRowNumbers={true}
-      numberColumnWidth={60}
       totalNumberRows={totalNumberResults}
       showHeader={true}
     />
