@@ -17,13 +17,14 @@ export const ADD_FACET = 'ADD_FACET';
 export const REMOVE_FACET = 'REMOVE_FACET';
 export const ADD_FACETS_TO_QUERY_STRING = 'ADD_FACETS_TO_QUERY_STRING';
 export const UPDATE_COLUMN_SORT = 'UPDATE_COLUMN_SORT';
+export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 
 export const receiveResults = (
   url: string,
   data: any,
   nextUrl: string | null,
   totalNumberResults: number,
-  nextPage: boolean
+  isNextPage: boolean
 ) =>
   action(RECEIVE_RESULTS, {
     url,
@@ -31,7 +32,7 @@ export const receiveResults = (
     receivedAt: Date.now(),
     nextUrl,
     totalNumberResults,
-    nextPage,
+    isNextPage,
   });
 
 export const requestResults = (url: string) => action(REQUEST_RESULTS, { url });
@@ -50,9 +51,14 @@ const getNextUrlFromResponse = (link: string) => {
   return match && match[1];
 };
 
-export const fetchResults = (url: string, nextPage: boolean) => async (
+export const clearResults = () => action(CLEAR_RESULTS);
+
+export const fetchResults = (url: string, isNextPage: boolean) => async (
   dispatch: Dispatch
 ) => {
+  if (!isNextPage) {
+    dispatch(clearResults());
+  }
   dispatch(requestResults(url));
   fetchData(url).then(response => {
     dispatch(
@@ -61,7 +67,7 @@ export const fetchResults = (url: string, nextPage: boolean) => async (
         response.data,
         getNextUrlFromResponse(response.headers.link),
         response.headers['x-totalrecords'],
-        nextPage
+        isNextPage
       )
     );
   });
@@ -76,13 +82,13 @@ export const shouldFetchResults = (url: string, state: RootState) => {
 
 export const fetchResultsIfNeeded = (
   url: string | undefined,
-  nextPage: boolean = false
+  isNextPage: boolean = false
 ) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState
 ) => {
   if (url && shouldFetchResults(url, getState())) {
-    dispatch(fetchResults(url, nextPage));
+    dispatch(fetchResults(url, isNextPage));
   }
 };
 

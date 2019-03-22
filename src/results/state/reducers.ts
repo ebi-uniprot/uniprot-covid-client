@@ -61,6 +61,14 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
         },
         nextUrl: action.payload.nextUrl || null,
       };
+    case resultsActions.CLEAR_RESULTS: {
+      return {
+        ...state,
+        results: [],
+        isFetching: {},
+        isFetched: {},
+      };
+    }
     case resultsActions.ADD_FACET: {
       return {
         ...state,

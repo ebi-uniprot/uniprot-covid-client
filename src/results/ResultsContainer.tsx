@@ -27,7 +27,7 @@ interface ResultsProps extends RouteComponentProps {
   selectedFacets: SelectedFacet[];
   dispatchFetchResultsIfNeeded: (
     url: string | undefined,
-    nextPage?: boolean | undefined
+    isNextPage?: boolean | undefined
   ) => Promise<any>;
   dispatchUpdateQueryString: (type: string) => void;
   dispatchUpdateColumnSort: (column: SortableColumns) => void;
@@ -164,8 +164,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               handleHeaderClick={dispatchUpdateColumnSort}
               sort={sort}
               nextUrl={nextUrl}
-              handleLoadMoreRows={(url: string) =>
-                dispatchFetchResultsIfNeeded(nextUrl)
+              handleLoadMoreRows={() =>
+                dispatchFetchResultsIfNeeded(nextUrl, true)
               }
               totalNumberResults={totalNumberResults}
             />
@@ -194,8 +194,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchResultsIfNeeded: (
         url: string | undefined,
-        nextPage?: boolean | undefined
-      ) => resultsActions.fetchResultsIfNeeded(url),
+        isNextPage?: boolean | undefined
+      ) => resultsActions.fetchResultsIfNeeded(url, isNextPage),
       dispatchAddFacet: (facetName: string, facetValue: string) =>
         resultsActions.addFacet(facetName, facetValue),
       dispatchRemoveFacet: (facetName: string, facetValue: string) =>
