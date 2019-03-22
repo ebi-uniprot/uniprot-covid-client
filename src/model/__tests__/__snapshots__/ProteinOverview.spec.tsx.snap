@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProteinOverview component should render 1`] = `
-"<Component title={{...}}>
+"<Oe title={{...}} color=\\"\\" subtitle=\\"\\" links={{...}}>
   <Component infoData={{...}} />
-</Component>"
+</Oe>"
 `;
