@@ -5,6 +5,8 @@ import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
 import columnAttributes from '../data/columnAttributes';
 
+const DEFAULT_COLUMN_WIDTH = 200;
+
 type ResultsTableProps = {
   results: any[];
   columnNames: string[];
@@ -46,14 +48,14 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
         <div className="warning">{`${columnName} has no render method`}</div>
       );
     }
-
+    const attributes = columnAttributes[columnName];
     return {
-      label: columnName,
+      label: attributes.label,
       name: columnName,
       render,
       sortable: columnName in SortableColumns,
       sorted: columnName === sort.column ? sort.direction : false,
-      width: columnAttributes[columnName].width || 200,
+      width: attributes.width || DEFAULT_COLUMN_WIDTH,
     };
   });
   return (
