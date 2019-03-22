@@ -156,19 +156,27 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             />
           }
           content={
-            <ResultsTable
-              results={results}
-              columnNames={columns}
-              handleRowSelect={this.handleRowSelect}
-              selectedRows={selectedRows}
-              handleHeaderClick={dispatchUpdateColumnSort}
-              sort={sort}
-              nextUrl={nextUrl}
-              handleLoadMoreRows={() =>
-                dispatchFetchResultsIfNeeded(nextUrl, true)
-              }
-              totalNumberResults={totalNumberResults}
-            />
+            results.length ? (
+              <ResultsTable
+                results={results}
+                columnNames={columns}
+                handleRowSelect={this.handleRowSelect}
+                selectedRows={selectedRows}
+                handleHeaderClick={dispatchUpdateColumnSort}
+                sort={sort}
+                nextUrl={nextUrl}
+                handleLoadMoreRows={() =>
+                  dispatchFetchResultsIfNeeded(nextUrl, true)
+                }
+                totalNumberResults={totalNumberResults}
+              />
+            ) : (
+              // This loading indicator is temporary. UX will decide at some
+              // future date what site-wide indicator will be used.
+              <div style={{ fontSize: '2rem', paddingLeft: '2rem' }}>
+                Loading...
+              </div>
+            )
           }
         />
       </Fragment>
