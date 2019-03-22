@@ -1,4 +1,9 @@
-import { serializableDeepCopy, serializableDeepAreEqual, removeProperty } from '../utils';
+import {
+  serializableDeepCopy,
+  serializableDeepAreEqual,
+  removeProperty,
+  formatLargeNumber,
+} from '../utils';
 
 test('serializableDeepCopy returns a copy that is not a reference ', () => {
   const obj = { foo: { bar: [1] } };
@@ -24,4 +29,9 @@ test('removeProperty removes only specified property and returns a deep copy of 
   const objWithoutProprety = removeProperty(obj, 'baz');
   expect(objWithoutProprety).toEqual({ foo: { bar: [1] } });
   expect(objWithoutProprety).not.toBe(obj);
+});
+
+test('formatLargeNumber', () => {
+  const number = 999999;
+  expect(formatLargeNumber(number)).toEqual('999,999');
 });

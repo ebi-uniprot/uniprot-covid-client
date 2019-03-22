@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SequenceView component should render 1`] = `
+"<Fragment>
+  <Component infoData={{...}} />
+  <p>
+    This entry describes
+     
+    <strong>
+      1
+    </strong>
+     isoforms produced by 
+    <strong>
+      Alternative initiation
+    </strong>
+    .
+  </p>
+  <p>
+    value1
+  </p>
+  <IsoformInfo isoformData={{...}} />
+  <SequenceInfo isoformId=\\"isoID1\\" isoformSequence={[undefined]} lastUpdateDate={[undefined]} />
+</Fragment>"
+`;

@@ -143,7 +143,7 @@ describe('Autocomplete Wrapper', () => {
     const fetchOptions = jest.spyOn(wrapper.instance(), 'fetchOptions');
     const handleSelect = jest.spyOn(wrapper.instance(), 'handleSelect');
     const suggesterUrl = getSuggesterUrl(props.url, props.inputValue);
-    wrapper.find('e').simulate('change', 'human');
+    wrapper.find('[onChange]').simulate('change', 'human');
     mock.onGet(suggesterUrl).reply(200, response);
     expect(fetchOptions).toHaveBeenCalled();
     expect(handleSelect).toHaveBeenCalled();

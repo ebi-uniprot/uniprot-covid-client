@@ -3,6 +3,6 @@
 exports[`Autocomplete Wrapper should render 1`] = `
 "<label htmlFor={0}>
   Taxonomy [OC]
-  <e id={0} data={{...}} onSelect={[Function]} onChange={[Function]} filter={false} value=\\"Homo sapiens (Human) [9606]\\" showDropwdownUpdated={[Function: showDropwdownUpdated]} clearOnSelect={false} placeholder=\\"\\" />
+  <n id={0} data={{...}} onSelect={[Function]} onChange={[Function]} filter={false} value=\\"Homo sapiens (Human) [9606]\\" showDropwdownUpdated={[Function: showDropwdownUpdated]} clearOnSelect={false} placeholder=\\"\\" />
 </label>"
 `;
