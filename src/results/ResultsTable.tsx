@@ -3,7 +3,6 @@ import { DataTable } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
-import columnAttributes from '../data/columnAttributes';
 
 const DEFAULT_COLUMN_WIDTH = 200;
 
@@ -39,7 +38,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
         <div className="warning">{`${columnName} has no render method`}</div>
       );
     }
-    const attributes = columnAttributes[columnName];
+    const attributes = ColumnConfiguration[columnName];
     return {
       label: attributes.label,
       name: columnName,
