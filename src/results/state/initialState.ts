@@ -11,7 +11,7 @@ export type ResultsState = {
   selectedFacets: SelectedFacet[];
   queryString: string;
   nextUrl: string;
-  isFetching: { [url: string]: boolean };
+  isFetching: boolean;
   isFetched: { [url: string]: boolean };
   results: any[];
   sort: SortType;
@@ -24,7 +24,7 @@ const initialState = {
   results: [],
   facets: [],
   queryString: '',
-  isFetching: {},
+  isFetching: false,
   isFetched: {},
   nextUrl: '',
   sort: {

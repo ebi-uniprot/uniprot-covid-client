@@ -39,10 +39,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
     case resultsActions.REQUEST_BATCH_OF_RESULTS:
       return {
         ...state,
-        isFetching: {
-          ...state.isFetching,
-          [action.payload.url]: true,
-        },
+        isFetching: true,
       };
     case resultsActions.RECEIVE_BATCH_OF_RESULTS:
       return {
@@ -51,10 +48,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
         facets: action.payload.data.facets,
         lastUpdated: action.payload.receivedAt,
         totalNumberResults: action.payload.totalNumberResults,
-        isFetching: {
-          ...state.isFetching,
-          [action.payload.url]: false,
-        },
+        isFetching: false,
         isFetched: {
           ...state.isFetched,
           [action.payload.url]: true,
@@ -65,7 +59,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
       return {
         ...state,
         results: [],
-        isFetching: {},
+        isFetching: false,
         isFetched: {},
       };
     }

@@ -37,7 +37,7 @@ interface ResultsProps extends RouteComponentProps {
   sort: SortType;
   results: any[];
   facets: any[];
-  isFetching: { [url: string]: boolean };
+  isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;
 }
@@ -137,7 +137,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       totalNumberResults,
     } = this.props;
     const { selectedRows } = this.state;
-    if (Object.keys(isFetching).length === 0) {
+    if (isFetching && results.length === 0) {
       return <h3>Loading...</h3>;
     }
     const { name, links, info } = infoMappings[namespace];

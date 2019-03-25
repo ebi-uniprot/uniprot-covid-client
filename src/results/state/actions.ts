@@ -79,13 +79,14 @@ export const fetchBatchOfResults = (url: string) => async (
 
 export const shouldFetchBatchOfResults = (url: string, state: RootState) => {
   const { isFetching, isFetched } = state.results;
-  return !isFetching[url] && !isFetched[url];
+  return !isFetching && !isFetched[url];
 };
 
 export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState
 ) => {
+  console.log(url && shouldFetchBatchOfResults(url, getState()));
   if (url && shouldFetchBatchOfResults(url, getState())) {
     dispatch(fetchBatchOfResults(url));
   }
