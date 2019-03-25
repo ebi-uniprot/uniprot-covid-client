@@ -10,12 +10,11 @@ export type ResultsState = {
   facets: any[];
   selectedFacets: SelectedFacet[];
   queryString: string;
-  queryUrl: string;
+  nextUrl: string;
   isFetching: { [url: string]: boolean };
   isFetched: { [url: string]: boolean };
   results: any[];
   sort: SortType;
-  urls: [{ url: string; start: number; stop: number }];
   totalNumberResults: number;
 };
 
@@ -25,14 +24,13 @@ const initialState = {
   results: [],
   facets: [],
   queryString: '',
-  queryUrl: '',
   isFetching: {},
   isFetched: {},
+  nextUrl: '',
   sort: {
     column: undefined,
     direction: undefined,
   },
-  urls: [],
   totalNumberResults: 0,
 };
 

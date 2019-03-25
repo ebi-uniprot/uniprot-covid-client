@@ -6,12 +6,13 @@ import {
   SelectedFacet,
 } from '../types/resultsTypes';
 
-export const createFacetsQueryString = (facets: SelectedFacet[]) =>
-  facets.reduce(
+export const createFacetsQueryString = (facets: SelectedFacet[]) => {
+  return facets.reduce(
     (queryAccumulator, facet) =>
       `${queryAccumulator} AND (${facet.name}:${facet.value})`,
     ''
   );
+};
 
 const getAPIQueryUrl = (
   queryString: string,

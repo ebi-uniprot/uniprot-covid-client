@@ -28,7 +28,7 @@ interface ResultsProps extends RouteComponentProps {
   dispatchFetchResultsIfNeeded: (
     url: string | undefined,
     isNextPage?: boolean | undefined
-  ) => Promise<any>;
+  ) => void;
   dispatchUpdateQueryString: (type: string) => void;
   dispatchUpdateColumnSort: (column: SortableColumns) => void;
   dispatchAddFacet: (facetName: string, facetValue: string) => void;
@@ -39,7 +39,7 @@ interface ResultsProps extends RouteComponentProps {
   sort: SortType;
   results: any[];
   facets: any[];
-  isFetching: boolean;
+  isFetching: { [url: string]: boolean };
   nextUrl: string;
   totalNumberResults: number;
 }

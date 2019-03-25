@@ -30,15 +30,6 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   nextUrl,
   totalNumberResults,
 }) => {
-  // const handleLoadMoreRows = ({ startIndex }) => {
-  //   console.log(startIndex);
-  //   const resultUrl = resultsUrls.find(
-  //     ({ start: urlStart, stop: urlStop }) => urlStart <= startIndex
-  //   );
-  //   console.log(resultsUrls);
-  //   // return fetchResultsIfNeeded(resultUrl && resultUrl.url);
-  // };
-
   const columns = columnNames.map(columnName => {
     let render;
     if (columnName in FieldToViewMappings) {

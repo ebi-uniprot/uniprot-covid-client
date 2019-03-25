@@ -59,7 +59,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
           ...state.isFetched,
           [action.payload.url]: true,
         },
-        nextUrl: action.payload.nextUrl || null,
+        nextUrl: action.payload.nextUrl || '',
       };
     case resultsActions.CLEAR_RESULTS: {
       return {

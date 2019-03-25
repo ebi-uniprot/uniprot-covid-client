@@ -2,7 +2,14 @@ const small = 200; //10rem;
 const medium = 400; //15rem;
 const large = 600; //20rem;
 
-const columnAttributes = {
+export type columnAttributes = {
+  [columnName: string]: {
+    width: number;
+    label: string;
+  };
+};
+
+const columnAttributes: columnAttributes = {
   accession: {
     width: small,
     label: 'Entry',

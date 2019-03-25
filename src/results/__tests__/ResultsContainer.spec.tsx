@@ -15,12 +15,12 @@ describe('Results component', () => {
     props = {
       queryString: '',
       columns: [],
-      selectedFacets: {},
+      selectedFacets: [],
       results: [],
       facets: [],
       isFetching: false,
       namespace: Namespace.uniprotkb,
-      dispatchFetchResults: jest.fn(),
+      dispatchFetchResultsIfNeeded: jest.fn(),
       dispatchAddFacetToQuery: jest.fn(),
       location: {
         search: '',
@@ -35,11 +35,11 @@ describe('Results component', () => {
   });
 
   test('should call to get results', () => {
-    expect(props.dispatchFetchResults).toHaveBeenCalled();
+    expect(props.dispatchFetchResultsIfNeeded).toHaveBeenCalled();
   });
 
   test('should call to get results when query is changed', () => {
     wrapper.setProps({ queryString: 'query' });
-    expect(props.dispatchFetchResults).toHaveBeenCalledTimes(2);
+    expect(props.dispatchFetchResultsIfNeeded).toHaveBeenCalledTimes(2);
   });
 });

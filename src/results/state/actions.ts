@@ -2,6 +2,7 @@ import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
+import idx from 'idx';
 import { ResultsState } from './initialState';
 import {
   SelectedFacet,
@@ -22,7 +23,7 @@ export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const receiveResults = (
   url: string,
   data: any,
-  nextUrl: string | null,
+  nextUrl: string,
   totalNumberResults: number,
   isNextPage: boolean
 ) =>
@@ -45,7 +46,10 @@ export const requestResults = (url: string) => action(REQUEST_RESULTS, { url });
   sortDirection: keyof SortDirectionsType | undefined
 */
 
-const getNextUrlFromResponse = (link: string) => {
+const getNextUrlFromResponse = (link: string | null) => {
+  if (!link) {
+    return;
+  }
   const re = /<([0-9a-zA-Z$\-_.+!*'(),?\/:=&%]+)>; rel="next"/;
   const match = re.exec(link);
   return match && match[1];
@@ -61,15 +65,18 @@ export const fetchResults = (url: string, isNextPage: boolean) => async (
   }
   dispatch(requestResults(url));
   fetchData(url).then(response => {
-    dispatch(
-      receiveResults(
-        url,
-        response.data,
-        getNextUrlFromResponse(response.headers.link),
-        response.headers['x-totalrecords'],
-        isNextPage
-      )
-    );
+    const nextUrl = getNextUrlFromResponse(idx(response, _ => _.headers.link));
+    if (nextUrl) {
+      dispatch(
+        receiveResults(
+          url,
+          response.data,
+          nextUrl,
+          response.headers['x-totalrecords'],
+          isNextPage
+        )
+      );
+    }
   });
   // .catch(error => console.error(error)); // the console creates a tslint ...
   // ... error but we want to catch this in the future
