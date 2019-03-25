@@ -20,8 +20,9 @@ describe('Results component', () => {
       facets: [],
       isFetching: false,
       namespace: Namespace.uniprotkb,
-      dispatchFetchResultsIfNeeded: jest.fn(),
+      dispatchFetchBatchOfResultsIfNeeded: jest.fn(),
       dispatchAddFacetToQuery: jest.fn(),
+      dispatchClearResults: jest.fn(),
       location: {
         search: '',
       },
@@ -35,11 +36,11 @@ describe('Results component', () => {
   });
 
   test('should call to get results', () => {
-    expect(props.dispatchFetchResultsIfNeeded).toHaveBeenCalled();
+    expect(props.dispatchFetchBatchOfResultsIfNeeded).toHaveBeenCalled();
   });
 
   test('should call to get results when query is changed', () => {
     wrapper.setProps({ queryString: 'query' });
-    expect(props.dispatchFetchResultsIfNeeded).toHaveBeenCalledTimes(2);
+    expect(props.dispatchFetchBatchOfResultsIfNeeded).toHaveBeenCalledTimes(2);
   });
 });

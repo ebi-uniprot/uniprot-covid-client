@@ -2,7 +2,7 @@ import results from '../reducers';
 import {
   addFacet,
   removeFacet,
-  requestResults,
+  requestBatchOfResults,
   updateColumnSort,
 } from '../actions';
 
@@ -31,7 +31,7 @@ describe('Results reducer', () => {
     const state = {
       isFetching: false,
     };
-    const action = requestResults('http://some-url');
+    const action = requestBatchOfResults('http://some-url');
     expect(results(state, action)).toEqual({
       isFetching: {
         'http://some-url': true,

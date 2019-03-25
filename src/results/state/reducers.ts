@@ -36,7 +36,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
               : (SortDirections.ascend.app as keyof SortDirectionsType),
         },
       };
-    case resultsActions.REQUEST_RESULTS:
+    case resultsActions.REQUEST_BATCH_OF_RESULTS:
       return {
         ...state,
         isFetching: {
@@ -44,7 +44,7 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
           [action.payload.url]: true,
         },
       };
-    case resultsActions.RECEIVE_RESULTS:
+    case resultsActions.RECEIVE_BATCH_OF_RESULTS:
       return {
         ...state,
         results: [...state.results, ...action.payload.data.results],
