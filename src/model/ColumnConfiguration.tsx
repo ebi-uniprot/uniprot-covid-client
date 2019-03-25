@@ -4,9 +4,11 @@ import { ProteinNames, ProteinNamesData } from './ProteinNames';
 import { GeneNames, GeneNamesData } from './GeneNames';
 import { Organism, OrganismData } from './Organism';
 
-const small = 200;
-const medium = 400;
-const large = 600;
+const WIDTH = {
+  small: 200,
+  medium: 400,
+  large: 600,
+};
 
 const ColumnConfiguration: {
   [index: string]: {
@@ -16,7 +18,7 @@ const ColumnConfiguration: {
   };
 } = {
   accession: {
-    width: small,
+    width: WIDTH.small,
     label: 'Entry',
     render: (data: { primaryAccession: string }) => (
       <SimpleView
@@ -26,24 +28,24 @@ const ColumnConfiguration: {
     ),
   },
   id: {
-    width: small,
+    width: WIDTH.small,
     label: 'Entry Name',
     render: (data: { uniProtId: string }) => (
       <SimpleView termValue={data.uniProtId} />
     ),
   },
   protein_name: {
-    width: large,
+    width: WIDTH.large,
     label: 'Protein names',
     render: (data: ProteinNamesData) => <ProteinNames data={data} />,
   },
   gene_names: {
-    width: medium,
+    width: WIDTH.medium,
     label: 'Gene Names',
     render: (data: GeneNamesData) => <GeneNames data={data} />,
   },
   organism: {
-    width: large,
+    width: WIDTH.large,
     label: 'Organism',
     render: (data: OrganismData) => <Organism data={data} />,
   },

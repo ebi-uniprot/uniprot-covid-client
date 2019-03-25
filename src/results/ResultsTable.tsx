@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataTable } from 'franklin-sites';
-import FieldToViewMappings from '../model/FieldToViewMappings';
+import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
 import columnAttributes from '../data/columnAttributes';
@@ -32,8 +32,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
 }) => {
   const columns = columnNames.map(columnName => {
     let render;
-    if (columnName in FieldToViewMappings) {
-      render = (row: any) => FieldToViewMappings[columnName](row);
+    if (columnName in ColumnConfiguration) {
+      render = (row: any) => ColumnConfiguration[columnName].render(row);
     } else {
       render = () => (
         <div className="warning">{`${columnName} has no render method`}</div>
