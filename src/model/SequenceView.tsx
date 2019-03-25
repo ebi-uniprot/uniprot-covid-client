@@ -30,21 +30,23 @@ type AlternativeProduct = {
   events: string[];
 };
 
+type Sequence = {
+  value: string;
+  length: number;
+  molWeight: number;
+  crc64: string;
+};
+
 type SequenceViewProps = {
   data: {
     entryAudit?: {
-      lastSequenceUpdateDate?: string;
+      lastSequenceUpdateDate: string;
       sequenceVersion: string;
     };
     proteinDescription?: {
       flag?: Flag;
     };
-    sequence?: {
-      value: string;
-      length: number;
-      molWeight: number;
-      crc64: string;
-    };
+    sequence?: Sequence;
     comments?: AlternativeProduct[];
   };
 };
@@ -194,12 +196,17 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
         <strong>{alternativeProducts.isoforms.length}</strong> isoforms produced
         by <strong>{alternativeProducts.events.join(' & ')}</strong>.
       </p>
-      <p>{alternativeProducts.note.texts.map(text => text.value).join(' ')}</p>
+      <p>
+        {alternativeProducts.note &&
+          alternativeProducts.note.texts.map(text => text.value).join(' ')}
+      </p>
       {alternativeProducts.isoforms.map(isoform => {
         let isoformSequence, lastUpdateDate;
         // Canonical
         if (isoform.isoformSequenceStatus === 'Displayed') {
-          isoformSequence = data.sequence;
+          if (data.sequence) {
+            isoformSequence = data.sequence;
+          }
           if (data.entryAudit) {
             lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
               data.entryAudit.sequenceVersion
