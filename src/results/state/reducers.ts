@@ -5,23 +5,7 @@ import * as resultsActions from './actions';
 import initialState, { ResultsState } from './initialState';
 import { SortDirections, SortDirectionsType } from '../types/resultsTypes';
 
-// const isSameSearch = (urls, newUrl) => {
-//   if (urls.length === 0) {
-//     return true;
-//   }
-//   const currentUrl = urls[0].url;
-//   const currentParams = queryString.parse(currentUrl);
-//   const newParams = queryString.parse(newUrl);
-//   console.log(currentParams, newParams);
-//   const fieldsToCheck = ['fields', 'includeFacets', 'query'];
-//   return fieldsToCheck.every(field => {
-//     console.log(currentParams[field], newParams[field]);
-//     return currentParams[field] === newParams[field];
-//   });
-// };
-
 export type ResultAction = ActionType<typeof resultsActions>;
-// SortDirections.ascend.app as keyof SortDirectionsType
 const results = (state: ResultsState = initialState, action: ResultAction) => {
   switch (action.type) {
     case resultsActions.UPDATE_COLUMN_SORT:

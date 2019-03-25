@@ -37,14 +37,6 @@ export const receiveBatchOfResults = (
 export const requestBatchOfResults = (url: string) =>
   action(REQUEST_BATCH_OF_RESULTS, { url });
 
-/*
-  queryString: string,
-  columns: string[],
-  selectedFacets: SelectedFacet[],
-  sortBy: SortableColumns | undefined,
-  sortDirection: keyof SortDirectionsType | undefined
-*/
-
 const getNextUrlFromResponse = (link: string | null): string | undefined => {
   if (!link) {
     return;
