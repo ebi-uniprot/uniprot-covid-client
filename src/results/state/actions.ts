@@ -86,7 +86,6 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState
 ) => {
-  console.log(url && shouldFetchBatchOfResults(url, getState()));
   if (url && shouldFetchBatchOfResults(url, getState())) {
     dispatch(fetchBatchOfResults(url));
   }

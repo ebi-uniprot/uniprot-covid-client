@@ -33,9 +33,7 @@ describe('Results reducer', () => {
     };
     const action = requestBatchOfResults('http://some-url');
     expect(results(state, action)).toEqual({
-      isFetching: {
-        'http://some-url': true,
-      },
+      isFetching: true,
     });
   });
 
