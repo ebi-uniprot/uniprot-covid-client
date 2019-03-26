@@ -1,6 +1,4 @@
-import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
-import queryString from 'query-string';
 import * as resultsActions from './actions';
 import initialState, { ResultsState } from './initialState';
 import { SortDirections, SortDirectionsType } from '../types/resultsTypes';
@@ -45,29 +43,6 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
         results: [],
         isFetching: false,
         isFetched: {},
-      };
-    }
-    case resultsActions.ADD_FACET: {
-      return {
-        ...state,
-        selectedFacets: [
-          ...state.selectedFacets.slice(0, state.selectedFacets.length),
-          action.payload.facet,
-        ],
-      };
-    }
-    case resultsActions.REMOVE_FACET: {
-      const index = state.selectedFacets.findIndex(
-        selectedFacet =>
-          action.payload.facet.name === selectedFacet.name &&
-          action.payload.facet.value === selectedFacet.value
-      );
-      return {
-        ...state,
-        selectedFacets: [
-          ...state.selectedFacets.slice(0, index),
-          ...state.selectedFacets.slice(index + 1),
-        ],
       };
     }
     default:

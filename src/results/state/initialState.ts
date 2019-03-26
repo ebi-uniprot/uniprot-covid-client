@@ -8,8 +8,6 @@ import {
 export type ResultsState = {
   columns: string[];
   facets: any[];
-  selectedFacets: SelectedFacet[];
-  queryString: string;
   nextUrl: string;
   isFetching: boolean;
   isFetched: { [url: string]: boolean };
@@ -20,10 +18,8 @@ export type ResultsState = {
 
 const initialState = {
   columns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
-  selectedFacets: [],
   results: [],
   facets: [],
-  queryString: '',
   isFetching: false,
   isFetched: {},
   nextUrl: '',
