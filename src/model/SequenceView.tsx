@@ -120,9 +120,9 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
     },
     {
       title: 'Synonyms',
-      content:
-        isoformData.synonyms &&
-        isoformData.synonyms.map(syn => syn.value).join(', '),
+      content: (idx(isoformData, _ => _.synonyms) || [])
+        .map(syn => syn.value)
+        .join(', '),
     },
     {
       title: 'Note',
@@ -185,45 +185,62 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
   const alternativeProducts = data.comments.find(
     comment => comment.commentType === FreeTextType.ALTERNATIVE_PRODUCTS
   );
+
   if (!alternativeProducts) {
     return null;
   }
-  return (
-    <Fragment>
-      <InfoList infoData={sequenceInfoData} />
+
+  let isoformCountNode;
+  if (alternativeProducts.isoforms && alternativeProducts.events) {
+    isoformCountNode = (
       <p>
         This entry describes{' '}
         <strong>{alternativeProducts.isoforms.length}</strong> isoforms produced
         by <strong>{alternativeProducts.events.join(' & ')}</strong>.
       </p>
-      <p>
-        {alternativeProducts.note &&
-          alternativeProducts.note.texts.map(text => text.value).join(' ')}
-      </p>
-      {alternativeProducts.isoforms.map(isoform => {
-        let isoformSequence, lastUpdateDate;
-        // Canonical
-        if (isoform.isoformSequenceStatus === 'Displayed') {
-          if (data.sequence) {
-            isoformSequence = data.sequence;
-          }
-          if (data.entryAudit) {
-            lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
-              data.entryAudit.sequenceVersion
-            }`;
-          }
+    );
+  }
+
+  let notesNode;
+  const texts = idx(alternativeProducts, _ => _.note.texts);
+  if (texts) {
+    notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
+  }
+
+  let isoformsNode;
+  if (alternativeProducts.isoforms) {
+    isoformsNode = alternativeProducts.isoforms.map(isoform => {
+      let isoformSequence, lastUpdateDate;
+      // Canonical
+      if (isoform.isoformSequenceStatus === 'Displayed') {
+        if (data.sequence) {
+          isoformSequence = data.sequence;
         }
-        return (
-          <Fragment key={isoform.isoformIds.join('')}>
-            <IsoformInfo isoformData={isoform} />
-            <SequenceInfo
-              isoformId={isoform.isoformIds[0]}
-              isoformSequence={isoformSequence}
-              lastUpdateDate={lastUpdateDate}
-            />
-          </Fragment>
-        );
-      })}
+        if (data.entryAudit) {
+          lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
+            data.entryAudit.sequenceVersion
+          }`;
+        }
+      }
+      return (
+        <Fragment key={isoform.isoformIds.join('')}>
+          <IsoformInfo isoformData={isoform} />
+          <SequenceInfo
+            isoformId={isoform.isoformIds[0]}
+            isoformSequence={isoformSequence}
+            lastUpdateDate={lastUpdateDate}
+          />
+        </Fragment>
+      );
+    });
+  }
+
+  return (
+    <Fragment>
+      <InfoList infoData={sequenceInfoData} />
+      {isoformCountNode}
+      {notesNode}
+      {isoformsNode}
     </Fragment>
   );
 };
