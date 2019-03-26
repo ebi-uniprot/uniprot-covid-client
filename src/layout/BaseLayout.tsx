@@ -20,6 +20,7 @@ const style: React.CSSProperties = {
   right: 0,
   writingMode: 'vertical-rl',
   textOrientation: 'sideways',
+  zIndex: 99,
 };
 
 const BaseLayout: React.FC<BaseLayoutProps> = props => {
