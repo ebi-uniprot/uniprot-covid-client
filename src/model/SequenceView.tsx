@@ -53,7 +53,7 @@ type SequenceViewProps = {
 
 export const SequenceInfo: React.FC<{
   isoformId: string;
-  isoformSequence?: SequenceViewProps['data']['sequence'];
+  isoformSequence?: Sequence;
   lastUpdateDate?: string | null;
 }> = ({ isoformId, isoformSequence, lastUpdateDate }) => {
   const [data, setData] = useState(null);
