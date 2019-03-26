@@ -45,13 +45,13 @@ export type FreeTextData = {
   ];
 };
 
-type FreeTextDataProps = {
+type FreeTextProps = {
   data: FreeTextData;
   type: FreeTextType;
   includeTitle?: boolean;
 };
 
-export const FreeText: React.FC<FreeTextDataProps> = ({
+export const FreeText: React.FC<FreeTextProps> = ({
   data,
   type,
   includeTitle = false,

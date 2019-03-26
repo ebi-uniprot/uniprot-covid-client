@@ -1,11 +1,11 @@
 import { array } from 'prop-types';
 import { ActionType } from 'typesafe-actions';
+import queryString from 'query-string';
 import * as resultsActions from './actions';
 import initialState, { ResultsState } from './initialState';
 import { SortDirections, SortDirectionsType } from '../types/resultsTypes';
 
 export type ResultAction = ActionType<typeof resultsActions>;
-// SortDirections.ascend.app as keyof SortDirectionsType
 const results = (state: ResultsState = initialState, action: ResultAction) => {
   switch (action.type) {
     case resultsActions.UPDATE_COLUMN_SORT:
@@ -20,19 +20,33 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
               : (SortDirections.ascend.app as keyof SortDirectionsType),
         },
       };
-    case resultsActions.FETCH_RESULTS_REQUEST:
+    case resultsActions.REQUEST_BATCH_OF_RESULTS:
       return {
         ...state,
         isFetching: true,
       };
-    case resultsActions.FETCH_RESULTS_SUCCESS:
+    case resultsActions.RECEIVE_BATCH_OF_RESULTS:
       return {
         ...state,
-        results: action.payload.data.results,
+        results: [...state.results, ...action.payload.data.results],
         facets: action.payload.data.facets,
         lastUpdated: action.payload.receivedAt,
+        totalNumberResults: action.payload.totalNumberResults,
         isFetching: false,
+        isFetched: {
+          ...state.isFetched,
+          [action.payload.url]: true,
+        },
+        nextUrl: action.payload.nextUrl || '',
       };
+    case resultsActions.CLEAR_RESULTS: {
+      return {
+        ...state,
+        results: [],
+        isFetching: false,
+        isFetched: {},
+      };
+    }
     case resultsActions.ADD_FACET: {
       return {
         ...state,

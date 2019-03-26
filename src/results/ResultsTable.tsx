@@ -1,8 +1,10 @@
 import React from 'react';
 import { DataTable } from 'franklin-sites';
-import FieldToViewMappings from '../model/FieldToViewMappings';
+import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
+
+const DEFAULT_COLUMN_WIDTH = 200;
 
 type ResultsTableProps = {
   results: any[];
@@ -10,6 +12,9 @@ type ResultsTableProps = {
   selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumns) => void;
+  handleLoadMoreRows: any;
+  totalNumberResults: number;
+  nextUrl: string;
   sort: SortType;
 };
 
@@ -19,23 +24,28 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   selectedRows,
   handleRowSelect,
   handleHeaderClick,
+  handleLoadMoreRows,
   sort,
+  nextUrl,
+  totalNumberResults,
 }) => {
   const columns = columnNames.map(columnName => {
     let render;
-    if (columnName in FieldToViewMappings) {
-      render = (row: any) => FieldToViewMappings[columnName](row);
+    if (columnName in ColumnConfiguration) {
+      render = (row: any) => ColumnConfiguration[columnName].render(row);
     } else {
       render = () => (
         <div className="warning">{`${columnName} has no render method`}</div>
       );
     }
+    const attributes = ColumnConfiguration[columnName];
     return {
-      label: columnName,
+      label: attributes.label,
       name: columnName,
       render,
       sortable: columnName in SortableColumns,
       sorted: columnName === sort.column ? sort.direction : false,
+      width: attributes.width || DEFAULT_COLUMN_WIDTH,
     };
   });
   return (
@@ -44,9 +54,13 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       columns={columns}
       data={results}
       selectable={true}
-      selected={selectedRows}
+      selectedRows={selectedRows}
       onSelect={handleRowSelect}
       onHeaderClick={handleHeaderClick}
+      onLoadMoreRows={handleLoadMoreRows}
+      fixedRowCount={1}
+      totalNumberRows={totalNumberResults}
+      showHeader={true}
     />
   );
 };
