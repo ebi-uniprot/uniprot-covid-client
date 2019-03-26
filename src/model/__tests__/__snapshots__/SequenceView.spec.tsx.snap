@@ -19,6 +19,6 @@ exports[`SequenceView component should render 1`] = `
     value1
   </p>
   <IsoformInfo isoformData={{...}} />
-  <SequenceInfo isoformId=\\"isoID1\\" isoformSequence={[undefined]} lastUpdateDate={[undefined]} />
+  <SequenceInfo isoformId=\\"isoID1\\" />
 </Fragment>"
 `;

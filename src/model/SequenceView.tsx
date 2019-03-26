@@ -39,6 +39,7 @@ type Sequence = {
 
 type SequenceViewProps = {
   data: {
+    accession: string;
     entryAudit?: {
       lastSequenceUpdateDate: string;
       sequenceVersion: string;
@@ -179,6 +180,31 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
     },
   ];
 
+  // Every entry should have a sequence
+  if (!data.sequence) {
+    return null;
+  }
+
+  let lastUpdateDate;
+  if (data.entryAudit) {
+    lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
+      data.entryAudit.sequenceVersion
+    }`;
+  }
+
+  const canonicalComponent = (
+    <SequenceInfo
+      isoformId={data.accession}
+      isoformSequence={data.sequence}
+      lastUpdateDate={lastUpdateDate}
+    />
+  );
+
+  // Trembl entries only have a canonical sequence
+  if (!data.comments && data.sequence) {
+    return canonicalComponent;
+  }
+
   if (!data.comments) {
     return null;
   }
@@ -210,26 +236,15 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
   let isoformsNode;
   if (alternativeProducts.isoforms) {
     isoformsNode = alternativeProducts.isoforms.map(isoform => {
-      let isoformSequence, lastUpdateDate;
-      // Canonical
-      if (isoform.isoformSequenceStatus === 'Displayed') {
-        if (data.sequence) {
-          isoformSequence = data.sequence;
-        }
-        if (data.entryAudit) {
-          lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
-            data.entryAudit.sequenceVersion
-          }`;
-        }
-      }
+      const isoformComponent = (
+        <SequenceInfo isoformId={isoform.isoformIds[0]} />
+      );
       return (
         <Fragment key={isoform.isoformIds.join('')}>
           <IsoformInfo isoformData={isoform} />
-          <SequenceInfo
-            isoformId={isoform.isoformIds[0]}
-            isoformSequence={isoformSequence}
-            lastUpdateDate={lastUpdateDate}
-          />
+          {isoform.isoformSequenceStatus === 'Displayed'
+            ? canonicalComponent
+            : isoformComponent}
         </Fragment>
       );
     });
