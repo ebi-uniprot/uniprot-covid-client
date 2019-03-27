@@ -5,6 +5,7 @@ import apiUrls from '../utils/apiUrls';
 import { EntryProteinNames } from '../model/ProteinNames';
 import { ProteinOverview } from '../model/ProteinOverview';
 import { FreeText, FreeTextType } from '../model/FreeText';
+import { XRef } from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
@@ -32,6 +33,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           type={FreeTextType.PATHWAY}
           includeTitle={true}
         />
+        <XRef data={entryData} section={'Function'} />
       </Card>
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />

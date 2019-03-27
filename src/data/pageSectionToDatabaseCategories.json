@@ -1,8 +1,8 @@
 {
   "Expression": ["ORGANISM", "EXPRESSION"],
   "FamilyAndDomains": ["FAMILY", "PHYLOGENOMIC", "DOMAIN"],
-  "Function": ["PATHWAY", "FAMILY", "CHEMISTRY"],
-  "Interaction": ["MOLECULAR_FUNCTION", "INTERACTION", "CHEMISTRY"],
+  "Function": ["PATHWAY", "FAMILY"],
+  "Interaction": ["INTERACTION", "CHEMISTRY"],
   "NamesAndTaxonomy": ["ORGANISM"],
   "PathologyOrBioTech": [
     "ORGANISM",
