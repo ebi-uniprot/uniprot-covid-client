@@ -3,12 +3,6 @@ import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
 import idx from 'idx';
-import { ResultsState } from './initialState';
-import {
-  SelectedFacet,
-  SortDirectionsType,
-  SortableColumns,
-} from '../types/resultsTypes';
 import { RootState } from '../../state/state-types';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
@@ -78,6 +72,3 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
     dispatch(fetchBatchOfResults(url));
   }
 };
-
-export const updateColumnSort = (column: SortableColumns) =>
-  action(UPDATE_COLUMN_SORT, { column });

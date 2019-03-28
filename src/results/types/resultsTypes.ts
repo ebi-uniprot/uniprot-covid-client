@@ -1,4 +1,4 @@
-export enum SortableColumns {
+export enum SortableColumn {
   accession = 'accession',
   mnemonic = 'mnemonic',
   name = 'name',
@@ -9,30 +9,24 @@ export enum SortableColumns {
   organism = 'organism',
 }
 
-export type SortDirectionsType = {
-  ascend: {
-    app: string;
-    api: string;
-  };
-  descend: {
-    app: string;
-    api: string;
-  };
+export enum SortDirection {
+  ascend = 'ascend',
+  descend = 'descend',
+}
+
+export enum SortDirectionApi {
+  ascend = 'asc',
+  descend = 'desc',
+}
+
+export const getApiSortDirection = (direction: SortDirection) => {
+  switch (direction) {
+    case SortDirection.ascend:
+      return SortDirectionApi.ascend;
+    case SortDirection.descend:
+      return SortDirectionApi.descend;
+  }
 };
 
-export const SortDirections: SortDirectionsType = {
-  ascend: {
-    app: 'ascend',
-    api: 'asc',
-  },
-  descend: {
-    app: 'descend',
-    api: 'desc',
-  },
-};
-export type SortType = {
-  column: SortableColumns | undefined;
-  direction: keyof SortDirectionsType | undefined;
-};
 export type SelectedFacet = { name: string; value: string };
 export type SelectedRows = { [key: string]: boolean };

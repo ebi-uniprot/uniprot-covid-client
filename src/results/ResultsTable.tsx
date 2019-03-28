@@ -2,7 +2,11 @@ import React from 'react';
 import { DataTable } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
-import { SelectedRows, SortType, SortableColumns } from './types/resultsTypes';
+import {
+  SelectedRows,
+  SortableColumn,
+  SortDirection,
+} from './types/resultsTypes';
 
 const DEFAULT_COLUMN_WIDTH = 200;
 
@@ -11,11 +15,11 @@ type ResultsTableProps = {
   columnNames: string[];
   selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
-  handleHeaderClick: (column: SortableColumns) => void;
+  handleHeaderClick: (column: SortableColumn) => void;
   handleLoadMoreRows: any;
   totalNumberResults: number;
-  nextUrl: string;
-  sort: SortType;
+  sortColumn: SortableColumn;
+  sortDirection: SortDirection;
 };
 
 const ResultsTable: React.FC<ResultsTableProps> = ({
@@ -25,8 +29,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   handleRowSelect,
   handleHeaderClick,
   handleLoadMoreRows,
-  sort,
-  nextUrl,
+  sortColumn,
+  sortDirection,
   totalNumberResults,
 }) => {
   const columns = columnNames.map(columnName => {
@@ -43,8 +47,8 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       label: attributes.label,
       name: columnName,
       render,
-      sortable: columnName in SortableColumns,
-      sorted: columnName === sort.column ? sort.direction : false,
+      sortable: columnName in SortableColumn,
+      sorted: columnName === sortColumn ? sortDirection : false,
       width: attributes.width || DEFAULT_COLUMN_WIDTH,
     };
   });
