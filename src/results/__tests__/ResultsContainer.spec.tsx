@@ -22,6 +22,7 @@ describe('Results component', () => {
       namespace: Namespace.uniprotkb,
       dispatchFetchBatchOfResultsIfNeeded: jest.fn(),
       dispatchClearResults: jest.fn(),
+      dispatchReset: jest.fn(),
       location: {
         search: '',
       },
@@ -37,7 +38,7 @@ describe('Results component', () => {
     expect(props.dispatchFetchBatchOfResultsIfNeeded).toHaveBeenCalled();
   });
 
-  test('should fetch query', () => {
+  test('should update if query changes', () => {
     wrapper.setProps({ location: { search: 'query=cdc8' } });
     expect(props.dispatchFetchBatchOfResultsIfNeeded).toHaveBeenCalledTimes(2);
   });
@@ -109,5 +110,22 @@ describe('Results component', () => {
       pathname: '/uniprotkb',
       search: 'query=cdc8&sort=accession&dir=descend',
     });
+  });
+
+  test('should handle row selection', () => {
+    wrapper.instance().handleRowSelect('2');
+    wrapper.instance().handleRowSelect('6');
+    expect(wrapper.state().selectedRows).toEqual({ 2: true, 6: true });
+  });
+
+  test('should handle row deselection', () => {
+    wrapper.instance().handleRowSelect('2');
+    wrapper.instance().handleRowSelect('2');
+    expect(wrapper.state().selectedRows).toEqual({});
+  });
+
+  test('should dispatch reset on unmount', () => {
+    wrapper.unmount();
+    expect(props.dispatchReset).toBeCalled();
   });
 });

@@ -41,7 +41,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedRows: {} };
-    this.handleRowSelect = this.handleRowSelect.bind(this);
   }
 
   componentDidMount() {
@@ -130,7 +129,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     });
   };
 
-  handleRowSelect(rowId: string) {
+  handleRowSelect = (rowId: string) => {
     const { selectedRows: prevSelectedRows } = this.state;
     if (rowId in prevSelectedRows) {
       const { [rowId]: value, ...selectedRows } = prevSelectedRows;
@@ -139,7 +138,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       prevSelectedRows[rowId] = true;
       this.setState({ selectedRows: prevSelectedRows });
     }
-  }
+  };
 
   facetsAsString = (facets: SelectedFacet[]) => {
     if (!facets || facets.length <= 0) {
