@@ -101,7 +101,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     let selectedFacets;
     if (facets && typeof facets === 'string') {
-      selectedFacets = this.getSelectedFacetsFromString(facets);
+      selectedFacets = this.facetsAsArray(facets);
     }
 
     const sortColumn = sort as keyof typeof SortableColumn;
@@ -152,7 +152,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     );
   };
 
-  getSelectedFacetsFromString = (facetString: string): SelectedFacet[] => {
+  facetsAsArray = (facetString: string): SelectedFacet[] => {
     return facetString.split(',').map(stringItem => {
       const item = stringItem.split(':');
       return {
