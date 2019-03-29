@@ -79,4 +79,35 @@ describe('Results component', () => {
       search: 'query=cdc8',
     });
   });
+
+  test('should sort column', () => {
+    wrapper.setProps({ location: { search: 'query=cdc8&sort=accession' } });
+    wrapper.instance().updateColumnSort('name');
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/uniprotkb',
+      search: 'query=cdc8&sort=name',
+    });
+  });
+
+  test('should set different sort direction', () => {
+    wrapper.setProps({
+      location: { search: 'query=cdc8&sort=accession' },
+    });
+    wrapper.instance().updateColumnSort('accession');
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/uniprotkb',
+      search: 'query=cdc8&sort=accession&dir=ascend',
+    });
+  });
+
+  test('should update sort direction', () => {
+    wrapper.setProps({
+      location: { search: 'query=cdc8&sort=accession&dir=ascend' },
+    });
+    wrapper.instance().updateColumnSort('accession');
+    expect(props.history.push).toHaveBeenCalledWith({
+      pathname: '/uniprotkb',
+      search: 'query=cdc8&sort=accession&dir=descend',
+    });
+  });
 });
