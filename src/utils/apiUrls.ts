@@ -58,7 +58,7 @@ export const getQueryUrl = (
   `${apiUrls.advanced_search}?${queryString.stringify({
     query: encodedQueryString,
     fields: columns.join(','),
-    includeFacets: true,
+    facets: 'reviewed,popular_organism,other_organism',
     sort:
       sortBy && sortBy in SortableColumns
         ? `${sortBy} ${sortDirection}`
