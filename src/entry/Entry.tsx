@@ -7,6 +7,7 @@ import { ProteinOverview } from '../model/ProteinOverview';
 import { FreeText, FreeTextType } from '../model/FreeText';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
+import { SequenceViewEntry } from '../model/SequenceView';
 
 interface MatchParams {
   accession: string;
@@ -17,7 +18,7 @@ interface EntryProps extends RouteComponentProps<MatchParams> {}
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
   const entryData = useDataApi(url);
-  if (!entryData) {
+  if (Object.keys(entryData).length <= 0) {
     return null;
   }
   return (
@@ -41,9 +42,11 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Expression" />
       <Card title="Interaction" />
       <Card title="Structure" />
-      <Card title="Family & Domains" />
-      <Card title="Sequences" />
-      <Card title="Similar Proteins" />
+      <Card title="Family & Domains" /> */}
+      <Card title="Sequences">
+        <SequenceViewEntry data={entryData} />
+      </Card>
+      {/* <Card title="Similar Proteins" />
       <Card title="Cross-References" />
       <Card title="Entry Information" />
       <Card title="Miscellaneous" /> */}
