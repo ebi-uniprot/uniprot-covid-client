@@ -6,36 +6,41 @@ import pageSectionToDatabaseCategories from '../data/pageSectionToDatabaseCatego
 import databaseCategoryToDatabases from '../data/databaseCategoryToDatabases.json';
 import databaseCategoryToString from '../data/databaseCategoryToString.json';
 import databaseToDatabaseInfo from '../data/databaseToDatabaseInfo.json';
+import externalLink from '../images/external-link.png';
+import '../styles/links.scss';
+
+enum DatabaseCategory {
+  SEQUENCE,
+  STRUCTURE,
+  INTERACTION,
+  CHEMISTRY,
+  FAMILY,
+  PTM,
+  POLYMORPHISM,
+  GEL,
+  PROTEOMIC,
+  PROTOCOL,
+  GENOME,
+  ORGANISM,
+  PHYLOGENOMIC,
+  PATHWAY,
+  EXPRESSION,
+  DOMAIN,
+  OTHER,
+}
 
 const pageSectionToDatabaseToDatabaseCategory = {};
-
-Object.keys(pageSectionToDatabaseCategories).forEach(pageSection => {
+for (let pageSection in pageSectionToDatabaseCategories) {
   const databaseToDatabaseCategory = {};
-  pageSectionToDatabaseCategories[pageSection].forEach(databaseCategory => {
-    databaseCategoryToDatabases[databaseCategory].forEach(database => {
+  for (let databaseCategory of pageSectionToDatabaseCategories[pageSection]) {
+    for (let database of databaseCategoryToDatabases[databaseCategory]) {
       databaseToDatabaseCategory[database] = databaseCategory;
-    });
-  });
+    }
+  }
   pageSectionToDatabaseToDatabaseCategory[
     pageSection
   ] = databaseToDatabaseCategory;
-});
-
-// Object.keys(pageSectionToDatabaseCategory).forEach(pageSection => {
-//   const dbTypes = pageSectionToDbType[pageSection];
-//   const t = {};
-//   dbTypes.forEach(dbType => {
-//     dbTypeToDbIds[dbType].forEach(dbId => {
-//       t[dbId] = true;
-//     });
-//   });
-//   pageSectionToDbIds[pageSection] = t;
-// });
-
-console.log(
-  'pageSectionToDatabaseToDatabaseCategory',
-  pageSectionToDatabaseToDatabaseCategory
-);
+}
 
 export type XRefData = {
   databaseCrossReferences: [
@@ -65,19 +70,19 @@ const XRefItem = ({ xRefEntry, accession }) => {
   let uri = info.uriLink
     .replace(/%acc/g, accession)
     .replace(/%value/g, xRefEntry.id);
-
-  //www.reactome.org/PathwayBrowser/#%value&FLG=%acc
-  // https: return xRefEntry.id;
   let properties;
   if (xRefEntry.properties) {
     properties = xRefEntry.properties
       .map(property => (property.value === '-' ? '' : property.value))
       .join(' ');
   }
-
   return (
-    <div>
-      <a href={uri}>{xRefEntry.id}</a> {properties}
+    <div class="external-link">
+      <a target="_blank" href={uri}>
+        {xRefEntry.id}
+        <img src={externalLink} />
+      </a>
+      {properties}
     </div>
   );
 };
@@ -112,7 +117,8 @@ const XRefCategoryTable = ({
   console.log('xRefData', xRefData);
   return (
     <div>
-      <h5>{databaseCategoryToString[databaseCategory]}</h5>
+      <hr />
+      <h4>{databaseCategoryToString[databaseCategory]}</h4>
       {databases.sort().map(database => (
         <XRefList
           key={v1()}
@@ -149,13 +155,14 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
       pageSectionToDatabaseToDatabaseCategory,
       _ => _[section][database]
     );
-    if (databaseCategory) {
-      foundDatabaseCategoriesToDatabases[databaseCategory] = {
-        ...foundDatabaseCategoriesToDatabases[databaseCategory],
-        [database]: true,
-      };
-      foundXrefData.push({ databaseCategory, xref });
+    if (!databaseCategory) {
+      return null;
     }
+    foundDatabaseCategoriesToDatabases[databaseCategory] = {
+      ...foundDatabaseCategoriesToDatabases[databaseCategory],
+      [database]: true,
+    };
+    foundXrefData.push({ databaseCategory, xref });
   });
   console.log(foundXrefData);
   console.log(foundDatabaseCategoriesToDatabases);
