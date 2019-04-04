@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { FreeText, FreeTextType } from '../FreeText';
 import data from './modelData.json';
 
+jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 describe('FreeText component', () => {
@@ -11,6 +12,6 @@ describe('FreeText component', () => {
     const wrapper = shallow(
       <FreeText data={data} type={FreeTextType.DISRUPTION_PHENOTYPE} />
     );
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

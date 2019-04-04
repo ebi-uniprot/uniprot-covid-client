@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('SequenceView component', () => {
   test('should render', () => {
     const wrapper = shallow(<SequenceViewEntry data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
 
@@ -32,6 +32,6 @@ describe('SequenceView component', () => {
 //         lastUpdateDate="Some date"
 //       />
 //     );
-//     expect(wrapper.debug()).toMatchSnapshot();
+//     expect(wrapper).toMatchSnapshot();
 //   });
 // });

@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('ProteinOverview component', () => {
   test('should render', () => {
     const wrapper = shallow(<ProteinOverview data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

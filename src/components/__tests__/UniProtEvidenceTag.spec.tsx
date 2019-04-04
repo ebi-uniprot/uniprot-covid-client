@@ -14,6 +14,6 @@ const evidence = {
 describe('UniProtEvidenceTag components', () => {
   test('should render', () => {
     const wrapper = shallow(<UniProtEvidenceTag evidence={evidence} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

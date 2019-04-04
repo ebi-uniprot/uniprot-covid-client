@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { createEmptyClause } from '../utils/clause';
 import AdvancedSearch from '../AdvancedSearch';
 
+jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 let wrapper;
@@ -40,7 +41,7 @@ describe('AdvancedSearch shallow components', () => {
   });
 
   test('should render', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should call to get search terms', () => {
@@ -49,7 +50,9 @@ describe('AdvancedSearch shallow components', () => {
 
   test('should call to get evidences', () => {
     expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('go');
-    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('annotation');
+    expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith(
+      'annotation'
+    );
   });
 
   test('should add field rows', () => {

@@ -1,8 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Autocomplete Wrapper should render 1`] = `
-"<label htmlFor={0}>
-  Taxonomy [OC]
-  <n id={0} data={{...}} onSelect={[Function]} onChange={[Function]} filter={false} value=\\"Homo sapiens (Human) [9606]\\" showDropwdownUpdated={[Function: showDropwdownUpdated]} clearOnSelect={false} placeholder=\\"\\" />
-</label>"
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AutocompleteWrapper
+    inputValue="human"
+    onSelect={[MockFunction]}
+    title="Taxonomy [OC]"
+    url="/uniprot/api/suggester?dict=taxonomy&query=?"
+    value="Homo sapiens (Human) [9606]"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        "Taxonomy [OC]",
+        <n
+          clearOnSelect={false}
+          data={Array []}
+          filter={false}
+          id={0}
+          onChange={[Function]}
+          onSelect={[Function]}
+          placeholder=""
+          showDropwdownUpdated={[Function]}
+          value="Homo sapiens (Human) [9606]"
+        />,
+      ],
+      "htmlFor": 0,
+    },
+    "ref": null,
+    "rendered": Array [
+      "Taxonomy [OC]",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "clearOnSelect": false,
+          "data": Array [],
+          "filter": false,
+          "id": 0,
+          "onChange": [Function],
+          "onSelect": [Function],
+          "placeholder": "",
+          "showDropwdownUpdated": [Function],
+          "value": "Homo sapiens (Human) [9606]",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "label",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Taxonomy [OC]",
+          <n
+            clearOnSelect={false}
+            data={Array []}
+            filter={false}
+            id={0}
+            onChange={[Function]}
+            onSelect={[Function]}
+            placeholder=""
+            showDropwdownUpdated={[Function]}
+            value="Homo sapiens (Human) [9606]"
+          />,
+        ],
+        "htmlFor": 0,
+      },
+      "ref": null,
+      "rendered": Array [
+        "Taxonomy [OC]",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "clearOnSelect": false,
+            "data": Array [],
+            "filter": false,
+            "id": 0,
+            "onChange": [Function],
+            "onSelect": [Function],
+            "placeholder": "",
+            "showDropwdownUpdated": [Function],
+            "value": "Homo sapiens (Human) [9606]",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "label",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
 `;

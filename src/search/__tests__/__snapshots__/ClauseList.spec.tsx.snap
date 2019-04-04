@@ -1,14 +1,469 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ClauseList component should render 1`] = `
-"<Fragment>
-  <div className=\\"advanced-search__clause\\">
-    <LogicalOperator value=\\"AND\\" handleChange={[Function: handleChange]} />
-    <n data={{...}} onSelect={[Function: onSelect]} autocompletePlaceholder=\\"Search for field\\" value={{...}} autocomplete={true} autocompleteFilter={true} />
-    <Field field={{...}} handleInputChange={[Function: handleInputChange]} handleRangeInputChange={[Function: handleRangeInputChange]} queryInput={{...}} />
-    <button type=\\"button\\" className=\\"button-remove\\" onClick={[Function: onClick]}>
-      Remove
-    </button>
-  </div>
-</Fragment>"
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ClauseList
+    clauses={
+      Array [
+        Object {
+          "id": 2,
+          "logicOperator": "AND",
+          "queryInput": Object {},
+          "searchTerm": Object {
+            "dataType": "string",
+            "example": "a4_human, P05067, cdc7 human",
+            "id": "id_all",
+            "itemType": "single",
+            "label": "All",
+            "term": "All",
+          },
+        },
+      ]
+    }
+    evidences={
+      Object {
+        "annotation": Object {
+          "data": Array [],
+          "isFetching": false,
+        },
+        "go": Object {
+          "data": Array [],
+          "isFetching": false,
+        },
+      }
+    }
+    handleRemoveClause={[MockFunction]}
+    searchTerms={
+      Object {
+        "data": Array [],
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <div
+          className="advanced-search__clause"
+        >
+          <LogicalOperator
+            handleChange={[Function]}
+            value="AND"
+          />
+          <n
+            autocomplete={true}
+            autocompleteFilter={true}
+            autocompletePlaceholder="Search for field"
+            data={
+              Object {
+                "data": Array [],
+              }
+            }
+            onSelect={[Function]}
+            value={
+              Object {
+                "dataType": "string",
+                "example": "a4_human, P05067, cdc7 human",
+                "id": "id_all",
+                "itemType": "single",
+                "label": "All",
+                "term": "All",
+              }
+            }
+          />
+          <Field
+            field={
+              Object {
+                "dataType": "string",
+                "example": "a4_human, P05067, cdc7 human",
+                "id": "id_all",
+                "itemType": "single",
+                "label": "All",
+                "term": "All",
+              }
+            }
+            handleInputChange={[Function]}
+            handleRangeInputChange={[Function]}
+            queryInput={Object {}}
+          />
+          <button
+            className="button-remove"
+            onClick={[Function]}
+            type="button"
+          >
+            Remove
+          </button>
+        </div>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": "clause_2",
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <LogicalOperator
+              handleChange={[Function]}
+              value="AND"
+            />,
+            <n
+              autocomplete={true}
+              autocompleteFilter={true}
+              autocompletePlaceholder="Search for field"
+              data={
+                Object {
+                  "data": Array [],
+                }
+              }
+              onSelect={[Function]}
+              value={
+                Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                }
+              }
+            />,
+            <Field
+              field={
+                Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                }
+              }
+              handleInputChange={[Function]}
+              handleRangeInputChange={[Function]}
+              queryInput={Object {}}
+            />,
+            undefined,
+            <button
+              className="button-remove"
+              onClick={[Function]}
+              type="button"
+            >
+              Remove
+            </button>,
+          ],
+          "className": "advanced-search__clause",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "handleChange": [Function],
+              "value": "AND",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "autocomplete": true,
+              "autocompleteFilter": true,
+              "autocompletePlaceholder": "Search for field",
+              "data": Object {
+                "data": Array [],
+              },
+              "onSelect": [Function],
+              "value": Object {
+                "dataType": "string",
+                "example": "a4_human, P05067, cdc7 human",
+                "id": "id_all",
+                "itemType": "single",
+                "label": "All",
+                "term": "All",
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "field": Object {
+                "dataType": "string",
+                "example": "a4_human, P05067, cdc7 human",
+                "id": "id_all",
+                "itemType": "single",
+                "label": "All",
+                "term": "All",
+              },
+              "handleInputChange": [Function],
+              "handleRangeInputChange": [Function],
+              "queryInput": Object {},
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          undefined,
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Remove",
+              "className": "button-remove",
+              "onClick": [Function],
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": "Remove",
+            "type": "button",
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <div
+            className="advanced-search__clause"
+          >
+            <LogicalOperator
+              handleChange={[Function]}
+              value="AND"
+            />
+            <n
+              autocomplete={true}
+              autocompleteFilter={true}
+              autocompletePlaceholder="Search for field"
+              data={
+                Object {
+                  "data": Array [],
+                }
+              }
+              onSelect={[Function]}
+              value={
+                Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                }
+              }
+            />
+            <Field
+              field={
+                Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                }
+              }
+              handleInputChange={[Function]}
+              handleRangeInputChange={[Function]}
+              queryInput={Object {}}
+            />
+            <button
+              className="button-remove"
+              onClick={[Function]}
+              type="button"
+            >
+              Remove
+            </button>
+          </div>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "clause_2",
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <LogicalOperator
+                handleChange={[Function]}
+                value="AND"
+              />,
+              <n
+                autocomplete={true}
+                autocompleteFilter={true}
+                autocompletePlaceholder="Search for field"
+                data={
+                  Object {
+                    "data": Array [],
+                  }
+                }
+                onSelect={[Function]}
+                value={
+                  Object {
+                    "dataType": "string",
+                    "example": "a4_human, P05067, cdc7 human",
+                    "id": "id_all",
+                    "itemType": "single",
+                    "label": "All",
+                    "term": "All",
+                  }
+                }
+              />,
+              <Field
+                field={
+                  Object {
+                    "dataType": "string",
+                    "example": "a4_human, P05067, cdc7 human",
+                    "id": "id_all",
+                    "itemType": "single",
+                    "label": "All",
+                    "term": "All",
+                  }
+                }
+                handleInputChange={[Function]}
+                handleRangeInputChange={[Function]}
+                queryInput={Object {}}
+              />,
+              undefined,
+              <button
+                className="button-remove"
+                onClick={[Function]}
+                type="button"
+              >
+                Remove
+              </button>,
+            ],
+            "className": "advanced-search__clause",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "handleChange": [Function],
+                "value": "AND",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "autocomplete": true,
+                "autocompleteFilter": true,
+                "autocompletePlaceholder": "Search for field",
+                "data": Object {
+                  "data": Array [],
+                },
+                "onSelect": [Function],
+                "value": Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "field": Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                },
+                "handleInputChange": [Function],
+                "handleRangeInputChange": [Function],
+                "queryInput": Object {},
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            undefined,
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Remove",
+                "className": "button-remove",
+                "onClick": [Function],
+                "type": "button",
+              },
+              "ref": null,
+              "rendered": "Remove",
+              "type": "button",
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
 `;

@@ -25,7 +25,7 @@ describe('Range field', () => {
   });
 
   test('should render a text field', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should handle change', () => {
