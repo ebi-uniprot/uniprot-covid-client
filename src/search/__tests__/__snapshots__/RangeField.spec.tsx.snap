@@ -1,14 +1,270 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Range field should render a range field 1`] = `
-"<Fragment>
-  <label htmlFor=\\"from_input_range_field\\">
-    From
-    <input id=\\"from_input_range_field\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"0\\" value=\\"\\" />
-  </label>
-  <label htmlFor=\\"to_input_range_field\\">
-    To
-    <input id=\\"to_input_range_field\\" type={[undefined]} onChange={[Function: onChange]} placeholder=\\"100\\" value=\\"\\" />
-  </label>
-</Fragment>"
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RangeField
+    field={
+      Object {
+        "field": Object {
+          "dataType": "string",
+          "description": "Search by feature sites",
+          "example": "translocation",
+          "hasRange": true,
+          "itemType": "feature",
+          "label": "Any",
+          "term": "sites",
+        },
+        "id": "range_field",
+        "queryInput": Object {},
+      }
+    }
+    handleChange={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <label
+          htmlFor="from_input_range_field"
+        >
+          From
+          <input
+            id="from_input_range_field"
+            onChange={[Function]}
+            placeholder="0"
+            value=""
+          />
+        </label>,
+        <label
+          htmlFor="to_input_range_field"
+        >
+          To
+          <input
+            id="to_input_range_field"
+            onChange={[Function]}
+            placeholder="100"
+            value=""
+          />
+        </label>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "From",
+            <input
+              id="from_input_range_field"
+              onChange={[Function]}
+              placeholder="0"
+              value=""
+            />,
+          ],
+          "htmlFor": "from_input_range_field",
+        },
+        "ref": null,
+        "rendered": Array [
+          "From",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "from_input_range_field",
+              "onChange": [Function],
+              "placeholder": "0",
+              "type": undefined,
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+        ],
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "To",
+            <input
+              id="to_input_range_field"
+              onChange={[Function]}
+              placeholder="100"
+              value=""
+            />,
+          ],
+          "htmlFor": "to_input_range_field",
+        },
+        "ref": null,
+        "rendered": Array [
+          "To",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "to_input_range_field",
+              "onChange": [Function],
+              "placeholder": "100",
+              "type": undefined,
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+        ],
+        "type": "label",
+      },
+    ],
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <label
+            htmlFor="from_input_range_field"
+          >
+            From
+            <input
+              id="from_input_range_field"
+              onChange={[Function]}
+              placeholder="0"
+              value=""
+            />
+          </label>,
+          <label
+            htmlFor="to_input_range_field"
+          >
+            To
+            <input
+              id="to_input_range_field"
+              onChange={[Function]}
+              placeholder="100"
+              value=""
+            />
+          </label>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "From",
+              <input
+                id="from_input_range_field"
+                onChange={[Function]}
+                placeholder="0"
+                value=""
+              />,
+            ],
+            "htmlFor": "from_input_range_field",
+          },
+          "ref": null,
+          "rendered": Array [
+            "From",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "id": "from_input_range_field",
+                "onChange": [Function],
+                "placeholder": "0",
+                "type": undefined,
+                "value": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "To",
+              <input
+                id="to_input_range_field"
+                onChange={[Function]}
+                placeholder="100"
+                value=""
+              />,
+            ],
+            "htmlFor": "to_input_range_field",
+          },
+          "ref": null,
+          "rendered": Array [
+            "To",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "id": "to_input_range_field",
+                "onChange": [Function],
+                "placeholder": "100",
+                "type": undefined,
+                "value": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+          ],
+          "type": "label",
+        },
+      ],
+      "type": Symbol(react.fragment),
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
 `;

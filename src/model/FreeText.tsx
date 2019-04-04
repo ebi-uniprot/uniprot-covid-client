@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
-import v1 from 'uuid';
+import { v1 } from 'uuid';
 
 export enum FreeTextType {
   FUNCTION = 'FUNCTION',

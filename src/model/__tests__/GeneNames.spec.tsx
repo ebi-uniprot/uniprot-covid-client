@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('GeneNames', () => {
   test('should render gene_names', () => {
     const wrapper = shallow(<GeneNames data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

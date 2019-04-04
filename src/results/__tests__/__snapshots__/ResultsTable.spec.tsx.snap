@@ -85,7 +85,7 @@ ShallowWrapper {
             "name": "accession",
             "render": [Function],
             "sortable": true,
-            "sorted": null,
+            "sorted": "descend",
             "width": 200,
           },
         ],

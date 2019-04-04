@@ -136,7 +136,7 @@ describe('Autocomplete Wrapper', () => {
   });
 
   test('should render', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should call fetchOptions and handleSelect on input change', () => {

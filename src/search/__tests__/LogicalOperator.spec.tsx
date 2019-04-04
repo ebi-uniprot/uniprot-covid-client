@@ -24,6 +24,6 @@ describe('LogicalOperator component', () => {
   });
 
   test('should render', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
