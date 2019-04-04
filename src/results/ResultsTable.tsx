@@ -48,7 +48,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       name: columnName,
       render,
       sortable: columnName in SortableColumn,
-      sorted: columnName === sortColumn ? sortDirection : false,
+      sorted: columnName === sortColumn ? sortDirection : null,
       width: attributes.width || DEFAULT_COLUMN_WIDTH,
     };
   });
