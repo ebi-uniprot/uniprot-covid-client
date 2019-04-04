@@ -94,7 +94,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     dispatchReset();
   }
 
-  getURLParams = (url: string) => {
+  getURLParams = (
+    url: string
+  ): {
+    query: string;
+    selectedFacets: SelectedFacet[];
+    sortColumn: SortableColumn;
+    sortDirection: SortDirection;
+  } => {
     const urlParams = queryStringModule.parse(url);
     const { query, facets, sort, dir } = urlParams;
 
@@ -119,7 +126,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     selectedFacets: SelectedFacet[],
     sortColumn: SortableColumn,
     sortDirection: SortDirection
-  ) => {
+  ): void => {
     const { history } = this.props;
     history.push({
       pathname: '/uniprotkb',
@@ -129,7 +136,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     });
   };
 
-  handleRowSelect = (rowId: string) => {
+  handleRowSelect = (rowId: string): void => {
     const { selectedRows: prevSelectedRows } = this.state;
     if (rowId in prevSelectedRows) {
       const { [rowId]: value, ...selectedRows } = prevSelectedRows;
@@ -140,7 +147,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     }
   };
 
-  facetsAsString = (facets: SelectedFacet[]) => {
+  facetsAsString = (facets: SelectedFacet[]): string => {
     if (!facets || facets.length <= 0) {
       return '';
     }
@@ -153,15 +160,15 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
   facetsAsArray = (facetString: string): SelectedFacet[] => {
     return facetString.split(',').map(stringItem => {
-      const item = stringItem.split(':');
+      const [name, value] = stringItem.split(':');
       return {
-        name: item[0],
-        value: item[1],
+        name,
+        value,
       };
     });
   };
 
-  addFacet = (facetName: string, facetValue: string) => {
+  addFacet = (facetName: string, facetValue: string): void => {
     const {
       location: { search: queryParamFromUrl },
     } = this.props;
@@ -176,13 +183,13 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     this.setURLParams(
       query,
-      [...selectedFacets.slice(0, selectedFacets.length), facet],
+      [...selectedFacets.concat(facet)],
       sortColumn,
       sortDirection
     );
   };
 
-  removeFacet = (facetName: string, facetValue: string) => {
+  removeFacet = (facetName: string, facetValue: string): void => {
     const {
       location: { search: queryParamFromUrl },
     } = this.props;
@@ -198,15 +205,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
         selectedFacet.name === facetName && selectedFacet.value === facetValue
     );
 
-    this.setURLParams(
-      query,
-      [...selectedFacets.slice(0, index), ...selectedFacets.slice(index + 1)],
-      sortColumn,
-      sortDirection
-    );
+    selectedFacets.splice(index, 1);
+
+    this.setURLParams(query, selectedFacets, sortColumn, sortDirection);
   };
 
-  updateColumnSort = (column: SortableColumn) => {
+  updateColumnSort = (column: SortableColumn): void => {
     const {
       location: { search: queryParamFromUrl },
     } = this.props;
