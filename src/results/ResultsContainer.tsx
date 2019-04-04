@@ -98,7 +98,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const urlParams = queryStringModule.parse(url);
     const { query, facets, sort, dir } = urlParams;
 
-    let selectedFacets;
+    let selectedFacets: SelectedFacet[] = [];
     if (facets && typeof facets === 'string') {
       selectedFacets = this.facetsAsArray(facets);
     }
@@ -108,7 +108,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     return {
       query: query && typeof query === 'string' ? query : '',
-      selectedFacets: selectedFacets || [],
+      selectedFacets: selectedFacets,
       sortColumn: sortColumn && SortableColumn[sortColumn],
       sortDirection: sortDirection && SortDirection[sortDirection],
     };
