@@ -2,7 +2,7 @@
 
 exports[`ColumnConfiguration component should render accession 1`] = `
 "<Link to=\\"/uniprotkb/P21802\\" replace={false}>
-  P21802
+  P21802 (Swiss-Prot)
 </Link>"
 `;
 
