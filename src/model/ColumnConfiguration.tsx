@@ -20,9 +20,9 @@ const ColumnConfiguration: {
   accession: {
     width: WIDTH.small,
     label: 'Entry',
-    render: (data: { primaryAccession: string }) => (
+    render: (data: { primaryAccession: string; entryType: string }) => (
       <SimpleView
-        termValue={data.primaryAccession}
+        termValue={`${data.primaryAccession} (${data.entryType})`}
         linkTo={`/uniprotkb/${data.primaryAccession}`}
       />
     ),
