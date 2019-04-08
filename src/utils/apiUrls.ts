@@ -1,7 +1,11 @@
 import urljoin from 'url-join';
 import queryString from 'query-string';
 import { v1 } from 'uuid';
-import { SortableColumns } from '../results/types/resultsTypes';
+import {
+  SortableColumn,
+  SortDirection,
+  SortDirectionApi,
+} from '../results/types/resultsTypes';
 
 export const joinUrl = (...args: string[]) => urljoin(args);
 
@@ -51,16 +55,12 @@ export const getSuggesterUrl = (url: string, value: string) =>
 export const getQueryUrl = (
   encodedQueryString: string,
   columns: string[],
-  cursor?: string,
-  sortBy?: SortableColumns | undefined,
-  sortDirection?: string | undefined
+  sortBy?: SortableColumn | undefined,
+  sortDirection?: SortDirectionApi | undefined
 ) =>
   `${apiUrls.advanced_search}?${queryString.stringify({
     query: encodedQueryString,
     fields: columns.join(','),
     facets: 'reviewed,popular_organism,other_organism',
-    sort:
-      sortBy && sortBy in SortableColumns
-        ? `${sortBy} ${sortDirection}`
-        : undefined,
+    sort: sortBy && `${sortBy} ${sortDirection}`,
   })}`;

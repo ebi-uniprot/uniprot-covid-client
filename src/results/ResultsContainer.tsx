@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Facets, PageIntro } from 'franklin-sites';
-import queryString, * as queryStringParser from 'query-string';
 import * as resultsActions from './state/actions';
 import * as searchActions from '../search/state/actions';
 import { default as queryStringModule } from 'query-string';
@@ -14,27 +13,19 @@ import { getAPIQueryUrl } from './utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
-  SortDirectionsType,
-  SortableColumns,
+  SortDirection,
+  SortableColumn,
   SelectedRows,
   SelectedFacet,
-  SortType,
 } from './types/resultsTypes';
 
 interface ResultsProps extends RouteComponentProps {
-  queryString: string;
   namespace: Namespace;
-  selectedFacets: SelectedFacet[];
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
-  dispatchUpdateQueryString: (type: string) => void;
-  dispatchUpdateColumnSort: (column: SortableColumns) => void;
-  dispatchAddFacet: (facetName: string, facetValue: string) => void;
-  dispatchRemoveFacet: (facetName: string, facetValue: string) => void;
   dispatchReset: () => void;
   dispatchClearResults: () => void;
   clauses?: Clause[];
   columns: string[];
-  sort: SortType;
   results: any[];
   facets: any[];
   isFetching: boolean;
@@ -50,56 +41,50 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedRows: {} };
-    this.handleRowSelect = this.handleRowSelect.bind(this);
   }
 
   componentDidMount() {
     const {
       location: { search: queryParamFromUrl },
-      queryString,
-      selectedFacets,
-      dispatchFetchBatchOfResultsIfNeeded,
-      dispatchUpdateQueryString,
-      dispatchClearResults,
       columns,
-      sort: { column, direction },
+      dispatchFetchBatchOfResultsIfNeeded,
+      dispatchClearResults,
     } = this.props;
-    const queryFromUrl = queryStringModule.parse(queryParamFromUrl).query;
-    if (
-      queryFromUrl &&
-      queryFromUrl !== queryString &&
-      typeof queryFromUrl === 'string'
-    ) {
-      dispatchUpdateQueryString(queryFromUrl);
-      return;
-    }
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(queryString, columns, selectedFacets, column, direction)
+      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
   }
 
   componentDidUpdate(prevProps: ResultsProps) {
     const {
+      location: { search: queryParamFromUrl },
+      columns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
-      queryString,
-      selectedFacets,
-      columns,
-      history,
-      sort: { column, direction },
     } = this.props;
-    if (
-      queryString !== prevProps.queryString ||
-      selectedFacets !== prevProps.selectedFacets ||
-      columns !== prevProps.columns ||
-      column !== prevProps.sort.column ||
-      direction !== prevProps.sort.direction
-    ) {
-      history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
+    if (prevProps.location.search !== queryParamFromUrl) {
+      const {
+        query,
+        selectedFacets,
+        sortColumn,
+        sortDirection,
+      } = this.getURLParams(queryParamFromUrl);
       dispatchClearResults();
       dispatchFetchBatchOfResultsIfNeeded(
-        getAPIQueryUrl(queryString, columns, selectedFacets, column, direction)
+        getAPIQueryUrl(
+          query,
+          columns,
+          selectedFacets,
+          sortColumn,
+          sortDirection
+        )
       );
     }
   }
@@ -109,7 +94,51 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     dispatchReset();
   }
 
-  handleRowSelect(rowId: string) {
+  getURLParams = (
+    url: string
+  ): {
+    query: string;
+    selectedFacets: SelectedFacet[];
+    sortColumn: SortableColumn;
+    sortDirection: SortDirection;
+  } => {
+    const urlParams = queryStringModule.parse(url);
+    const { query, facets, sort, dir } = urlParams;
+
+    let selectedFacets: SelectedFacet[] = [];
+    if (facets && typeof facets === 'string') {
+      selectedFacets = this.facetsAsArray(facets);
+    }
+
+    const sortColumn = sort as keyof typeof SortableColumn;
+    const sortDirection = dir as keyof typeof SortDirection;
+
+    return {
+      query: query && typeof query === 'string' ? query : '',
+      selectedFacets: selectedFacets,
+      sortColumn: sortColumn && SortableColumn[sortColumn],
+      sortDirection: sortDirection && SortDirection[sortDirection],
+    };
+  };
+
+  setURLParams = (
+    query: string,
+    selectedFacets: SelectedFacet[],
+    sortColumn: SortableColumn,
+    sortDirection: SortDirection
+  ): void => {
+    const { history } = this.props;
+    history.push({
+      pathname: '/uniprotkb',
+      search: [
+        `query=${query}${this.facetsAsString(selectedFacets)}`,
+        `${sortColumn ? `&sort=${sortColumn}` : ''}`,
+        `${sortDirection ? `&dir=${sortDirection}` : ''}`,
+      ].join(''),
+    });
+  };
+
+  handleRowSelect = (rowId: string): void => {
     const { selectedRows: prevSelectedRows } = this.state;
     if (rowId in prevSelectedRows) {
       const { [rowId]: value, ...selectedRows } = prevSelectedRows;
@@ -118,25 +147,110 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       prevSelectedRows[rowId] = true;
       this.setState({ selectedRows: prevSelectedRows });
     }
-  }
+  };
+
+  facetsAsString = (facets: SelectedFacet[]): string => {
+    if (!facets || facets.length <= 0) {
+      return '';
+    }
+    return facets.reduce(
+      (accumulator, facet, i) =>
+        `${accumulator}${i > 0 ? ',' : ''}${facet.name}:${facet.value}`,
+      '&facets='
+    );
+  };
+
+  facetsAsArray = (facetString: string): SelectedFacet[] => {
+    return facetString.split(',').map(stringItem => {
+      const [name, value] = stringItem.split(':');
+      return {
+        name,
+        value,
+      };
+    });
+  };
+
+  addFacet = (facetName: string, facetValue: string): void => {
+    const {
+      location: { search: queryParamFromUrl },
+    } = this.props;
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
+
+    const facet: SelectedFacet = { name: facetName, value: facetValue };
+
+    this.setURLParams(
+      query,
+      [...selectedFacets.concat(facet)],
+      sortColumn,
+      sortDirection
+    );
+  };
+
+  removeFacet = (facetName: string, facetValue: string): void => {
+    const {
+      location: { search: queryParamFromUrl },
+    } = this.props;
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
+
+    const index = selectedFacets.findIndex(
+      selectedFacet =>
+        selectedFacet.name === facetName && selectedFacet.value === facetValue
+    );
+
+    selectedFacets.splice(index, 1);
+
+    this.setURLParams(query, selectedFacets, sortColumn, sortDirection);
+  };
+
+  updateColumnSort = (column: SortableColumn): void => {
+    const {
+      location: { search: queryParamFromUrl },
+    } = this.props;
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
+
+    // Change sort direction
+    let updatedDirection = sortDirection;
+    if (column === sortColumn) {
+      updatedDirection =
+        sortDirection === SortDirection.ascend
+          ? SortDirection.descend
+          : SortDirection.ascend;
+    }
+
+    this.setURLParams(query, selectedFacets, column, updatedDirection);
+  };
 
   render() {
     const {
+      location: { search: queryParamFromUrl },
       results,
       facets,
       isFetching,
-      selectedFacets,
       columns,
-      dispatchAddFacet,
-      dispatchRemoveFacet,
-      dispatchUpdateColumnSort,
       dispatchFetchBatchOfResultsIfNeeded,
       namespace,
-      sort,
       nextUrl,
       totalNumberResults,
     } = this.props;
     const { selectedRows } = this.state;
+    const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
+      queryParamFromUrl
+    );
     if (isFetching && results.length === 0) {
       return <h3>Loading...</h3>;
     }
@@ -153,8 +267,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             <Facets
               data={facets}
               selectedFacets={selectedFacets}
-              addFacet={dispatchAddFacet}
-              removeFacet={dispatchRemoveFacet}
+              addFacet={this.addFacet}
+              removeFacet={this.removeFacet}
             />
           }
           content={
@@ -164,9 +278,9 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 columnNames={columns}
                 handleRowSelect={this.handleRowSelect}
                 selectedRows={selectedRows}
-                handleHeaderClick={dispatchUpdateColumnSort}
-                sort={sort}
-                nextUrl={nextUrl}
+                handleHeaderClick={this.updateColumnSort}
+                sortColumn={sortColumn}
+                sortDirection={sortDirection}
                 handleLoadMoreRows={() =>
                   dispatchFetchBatchOfResultsIfNeeded(nextUrl)
                 }
@@ -188,13 +302,10 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
 const mapStateToProps = (state: RootState) => ({
   namespace: state.query.namespace,
-  queryString: state.query.queryString,
   columns: state.results.columns,
-  selectedFacets: state.results.selectedFacets,
   results: state.results.results,
   facets: state.results.facets,
   isFetching: state.results.isFetching,
-  sort: state.results.sort,
   nextUrl: state.results.nextUrl,
   totalNumberResults: state.results.totalNumberResults,
 });
@@ -204,14 +315,6 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) =>
         resultsActions.fetchBatchOfResultsIfNeeded(url),
-      dispatchAddFacet: (facetName: string, facetValue: string) =>
-        resultsActions.addFacet(facetName, facetValue),
-      dispatchRemoveFacet: (facetName: string, facetValue: string) =>
-        resultsActions.removeFacet(facetName, facetValue),
-      dispatchUpdateQueryString: (queryString: string) =>
-        searchActions.updateQueryString(queryString),
-      dispatchUpdateColumnSort: (column: SortableColumns) =>
-        resultsActions.updateColumnSort(column),
       dispatchReset: () => searchActions.reset(),
       dispatchClearResults: () => resultsActions.clearResults(),
     },
