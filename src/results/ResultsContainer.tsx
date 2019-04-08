@@ -130,9 +130,11 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const { history } = this.props;
     history.push({
       pathname: '/uniprotkb',
-      search: `query=${query}${this.facetsAsString(selectedFacets)}${
-        sortColumn ? `&sort=${sortColumn}` : ''
-      }${sortDirection ? `&dir=${sortDirection}` : ''}`,
+      search: [
+        `query=${query}${this.facetsAsString(selectedFacets)}`,
+        `${sortColumn ? `&sort=${sortColumn}` : ''}`,
+        `${sortDirection ? `&dir=${sortDirection}` : ''}`,
+      ].join(''),
     });
   };
 
