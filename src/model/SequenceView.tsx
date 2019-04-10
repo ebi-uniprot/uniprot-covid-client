@@ -201,16 +201,16 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
   );
 
   // Trembl entries only have a canonical sequence
-  if (!data.comments && data.sequence) {
-    return canonicalComponent;
+  let alternativeProducts;
+  if (data.comments) {
+    alternativeProducts = data.comments.find(
+      comment => comment.commentType === FreeTextType.ALTERNATIVE_PRODUCTS
+    );
   }
 
-  if (!data.comments) {
-    return null;
+  if (!alternativeProducts && data.sequence) {
+    return canonicalComponent;
   }
-  const alternativeProducts = data.comments.find(
-    comment => comment.commentType === FreeTextType.ALTERNATIVE_PRODUCTS
-  );
 
   if (!alternativeProducts) {
     return null;

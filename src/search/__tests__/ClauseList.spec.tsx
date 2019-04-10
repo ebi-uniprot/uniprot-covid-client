@@ -22,19 +22,19 @@ describe('ClauseList component', () => {
     props = {
       clauses: [createEmptyClause()],
       searchTerms: {
-        data: []
+        data: [],
       },
       evidences: {
         go: {
           data: [],
-          isFetching: false
+          isFetching: false,
         },
         annotation: {
           data: [],
-          isFetching: false
-        }
+          isFetching: false,
+        },
       },
-      handleRemoveClause: jest.fn()
+      handleRemoveClause: jest.fn(),
     };
 
     wrapper = shallow(<ClauseList {...props} />);
@@ -46,6 +46,6 @@ describe('ClauseList component', () => {
   });
 
   test('should render', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

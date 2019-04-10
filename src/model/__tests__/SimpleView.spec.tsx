@@ -8,6 +8,6 @@ configure({ adapter: new Adapter() });
 describe('SimpleView component', () => {
   test('should render', () => {
     const wrapper = shallow(<SimpleView termValue="blah" />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

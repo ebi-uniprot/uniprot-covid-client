@@ -29,7 +29,7 @@ describe('Range field', () => {
   });
 
   test('should render a range field', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should handle from/to change', () => {

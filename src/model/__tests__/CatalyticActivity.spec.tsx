@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('Catalytic activity', () => {
   test('should render catalytic activity', () => {
     const wrapper = shallow(<CatalyticActivity data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

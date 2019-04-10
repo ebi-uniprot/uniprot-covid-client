@@ -35,7 +35,7 @@ describe('Enum field', () => {
   });
 
   test('should render an enum field', () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('should render handle change', () => {

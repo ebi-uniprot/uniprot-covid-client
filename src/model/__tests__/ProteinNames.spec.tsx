@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('ProteinNames', () => {
   test('should render protein_name', () => {
     const wrapper = shallow(<ProteinNames data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

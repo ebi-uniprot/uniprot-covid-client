@@ -9,9 +9,11 @@ configure({ adapter: new Adapter() });
 describe('SequenceView component', () => {
   test('should render', () => {
     const wrapper = shallow(<SequenceViewEntry data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
+
+// TODO test for cases with and without ALTERNATIVE_PRODUCTS
 
 // NOTE: Enzyme doesn't support hooks yet. We might need to switch
 // to react-testing-library
@@ -30,6 +32,6 @@ describe('SequenceView component', () => {
 //         lastUpdateDate="Some date"
 //       />
 //     );
-//     expect(wrapper.debug()).toMatchSnapshot();
+//     expect(wrapper).toMatchSnapshot();
 //   });
 // });

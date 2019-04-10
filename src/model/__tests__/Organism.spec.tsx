@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('Organism', () => {
   test('should render organism', () => {
     const wrapper = shallow(<Organism data={data} />);
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

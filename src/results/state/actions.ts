@@ -3,20 +3,10 @@ import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
 import idx from 'idx';
-import { ResultsState } from './initialState';
-import {
-  SelectedFacet,
-  SortDirectionsType,
-  SortableColumns,
-} from '../types/resultsTypes';
 import { RootState } from '../../state/state-types';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
-export const TOGGLE_FACET = 'TOGGLE_FACET';
-export const ADD_FACET = 'ADD_FACET';
-export const REMOVE_FACET = 'REMOVE_FACET';
-export const ADD_FACETS_TO_QUERY_STRING = 'ADD_FACETS_TO_QUERY_STRING';
 export const UPDATE_COLUMN_SORT = 'UPDATE_COLUMN_SORT';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 
@@ -82,25 +72,3 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
     dispatch(fetchBatchOfResults(url));
   }
 };
-
-export const addFacet = (facetName: string, facetValue: string) =>
-  action(ADD_FACET, {
-    facet: {
-      name: facetName,
-      value: facetValue,
-    },
-  });
-
-export const removeFacet = (facetName: string, facetValue: string) =>
-  action(REMOVE_FACET, {
-    facet: {
-      name: facetName,
-      value: facetValue,
-    },
-  });
-
-export const updateQueryStringWithFacets = () =>
-  action(ADD_FACETS_TO_QUERY_STRING);
-
-export const updateColumnSort = (column: SortableColumns) =>
-  action(UPDATE_COLUMN_SORT, { column });

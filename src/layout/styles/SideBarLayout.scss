@@ -5,6 +5,7 @@
   display: grid;
   grid-gap: $gutter-size;
   grid-template-columns: 1fr 6fr;
+  grid-template-rows: auto 75vh;
   grid-template-areas: 'title title' 'sidebar content';
 
   &__title {
