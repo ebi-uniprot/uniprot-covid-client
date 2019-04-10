@@ -6,7 +6,7 @@ import entrySectionToDatabaseCategories from '../data/EntrySectionToDatabaseCate
 import databaseCategoryToDatabases from '../data/DatabaseCategoryToDatabases';
 import databaseCategoryToString from '../data/DatabaseCategoryToString';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
-import DatabaseToDatabaseInfo from '../data/databaseToDatabaseInfo';
+import DatabaseToDatabaseInfo from '../data/DatabaseToDatabaseInfo';
 import EntrySectionType from '../data/EntrySection';
 import DatabaseCategory from '../data/DatabaseCategory';
 
