@@ -36,7 +36,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
-    "file-loader": "^3.0.1",
     "franklin-sites": "0.0.3-dev.32",
     "idx": "^2.5.2",
     "npm-run-all": "^4.1.2",
