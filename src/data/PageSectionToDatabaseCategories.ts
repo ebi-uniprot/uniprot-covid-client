@@ -1,17 +1,36 @@
+import DatabaseCategory from './DatabaseCategory';
+
 export default {
-  Expression: ['ORGANISM', 'EXPRESSION'],
-  FamilyAndDomains: ['FAMILY', 'PHYLOGENOMIC', 'DOMAIN'],
-  Function: ['PATHWAY', 'FAMILY'],
-  Interaction: ['INTERACTION', 'CHEMISTRY'],
-  NamesAndTaxonomy: ['ORGANISM'],
-  PathologyOrBioTech: [
-    'ORGANISM',
-    'OTHER',
-    'FAMILY',
-    'CHEMISTRY',
-    'POLYMORPHISM',
+  Expression: [DatabaseCategory.ORGANISM, DatabaseCategory.EXPRESSION],
+  FamilyAndDomains: [
+    DatabaseCategory.FAMILY,
+    DatabaseCategory.PHYLOGENOMIC,
+    DatabaseCategory.DOMAIN,
   ],
-  ProteinProcessing: ['PROTEOMIC', 'GEL', 'PTM', 'OTHER'],
-  Sequence: ['SEQUENCE', 'GENOME', 'POLYMORPHISM'],
-  Structure: ['STRUCTURE', 'PROTOCOL', 'OTHER'],
+  Function: [DatabaseCategory.PATHWAY, DatabaseCategory.FAMILY],
+  Interaction: [DatabaseCategory.INTERACTION, DatabaseCategory.CHEMISTRY],
+  NamesAndTaxonomy: [DatabaseCategory.ORGANISM],
+  PathologyOrBioTech: [
+    DatabaseCategory.ORGANISM,
+    DatabaseCategory.OTHER,
+    DatabaseCategory.FAMILY,
+    DatabaseCategory.CHEMISTRY,
+    DatabaseCategory.POLYMORPHISM,
+  ],
+  ProteinProcessing: [
+    DatabaseCategory.PROTEOMIC,
+    DatabaseCategory.GEL,
+    DatabaseCategory.PTM,
+    DatabaseCategory.OTHER,
+  ],
+  Sequence: [
+    DatabaseCategory.SEQUENCE,
+    DatabaseCategory.GENOME,
+    DatabaseCategory.POLYMORPHISM,
+  ],
+  Structure: [
+    DatabaseCategory.STRUCTURE,
+    DatabaseCategory.PROTOCOL,
+    DatabaseCategory.OTHER,
+  ],
 };

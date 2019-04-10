@@ -9,6 +9,7 @@ import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
 import DatabaseToDatabaseInfo from '../data/DatabaseToDatabaseInfo';
 import EntrySectionType from '../data/EntrySection';
 import DatabaseCategory from '../data/DatabaseCategory';
+import Database from '../data/Database';
 
 type Property = {
   key: string;
@@ -50,15 +51,9 @@ type XRefListProps = {
 
 type XRefCategoryTableProps = {
   databaseCategory: DatabaseCategory;
-  databases: string[];
+  databases: Database[];
   xRefData: XrefData[];
   accession: string;
-};
-
-type Attributes = {
-  name: string;
-  xmlTag: string;
-  uriLink?: string | undefined;
 };
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
@@ -128,7 +123,6 @@ const XRefList: React.FC<XRefListProps> = ({
     .map((xRefDatum: XrefData) => {
       const { xref } = xRefDatum;
       if (!xref) {
-        console.log('here');
         return null;
       }
       return (
@@ -196,7 +190,7 @@ const XRef: React.FC<XRefProps> = ({ data, section }) => {
     .map(foundDatabaseCategory => {
       const databases = Object.keys(
         foundDatabaseCategoriesToDatabases[foundDatabaseCategory]
-      );
+      ) as Database[];
       return (
         <XRefCategoryTable
           key={v1()}
