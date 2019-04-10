@@ -9,6 +9,7 @@ import { XRef } from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
+import EntrySectionType from '../data/EntrySection';
 
 interface MatchParams {
   accession: string;
@@ -33,10 +34,11 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           type={FreeTextType.PATHWAY}
           includeTitle={true}
         />
-        <XRef data={entryData} section={'Function'} />
+        <XRef data={entryData} section={EntrySectionType.Function} />
       </Card>
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />
+        <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
       </Card>
       {/* <Card title="Subcellular Location" />
       <Card title="Pathology & Biotech" />
@@ -47,6 +49,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Family & Domains" /> */}
       <Card title="Sequences">
         <SequenceViewEntry data={entryData} />
+        <XRef data={entryData} section={EntrySectionType.Sequence} />
       </Card>
       {/* <Card title="Similar Proteins" />
       <Card title="Cross-References" />

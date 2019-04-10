@@ -1,125 +1,159 @@
 import React, { Fragment } from 'react';
 import v1 from 'uuid';
 import idx from 'idx';
-import { InfoList } from 'franklin-sites';
-import pageSectionToDatabaseCategories from '../data/pageSectionToDatabaseCategories.json';
-import databaseCategoryToDatabases from '../data/databaseCategoryToDatabases.json';
-import databaseCategoryToString from '../data/databaseCategoryToString.json';
-import databaseToDatabaseInfo from '../data/databaseToDatabaseInfo.json';
-import externalLink from '../images/external-link.png';
-import '../styles/links.scss';
+import { InfoList, ExternalLink } from 'franklin-sites';
+import entrySectionToDatabaseCategories from '../data/EntrySectionToDatabaseCategories';
+import databaseCategoryToDatabases from '../data/DatabaseCategoryToDatabases';
+import databaseCategoryToString from '../data/DatabaseCategoryToString';
+import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
+import DatabaseToDatabaseInfo from '../data/databaseToDatabaseInfo';
+import EntrySectionType from '../data/EntrySection';
+import DatabaseCategory from '../data/DatabaseCategory';
 
-enum DatabaseCategory {
-  SEQUENCE,
-  STRUCTURE,
-  INTERACTION,
-  CHEMISTRY,
-  FAMILY,
-  PTM,
-  POLYMORPHISM,
-  GEL,
-  PROTEOMIC,
-  PROTOCOL,
-  GENOME,
-  ORGANISM,
-  PHYLOGENOMIC,
-  PATHWAY,
-  EXPRESSION,
-  DOMAIN,
-  OTHER,
-}
+type Property = {
+  key: string;
+  value: string;
+};
 
-const pageSectionToDatabaseToDatabaseCategory = {};
-for (let pageSection in pageSectionToDatabaseCategories) {
-  const databaseToDatabaseCategory = {};
-  for (let databaseCategory of pageSectionToDatabaseCategories[pageSection]) {
-    for (let database of databaseCategoryToDatabases[databaseCategory]) {
-      databaseToDatabaseCategory[database] = databaseCategory;
-    }
-  }
-  pageSectionToDatabaseToDatabaseCategory[
-    pageSection
-  ] = databaseToDatabaseCategory;
-}
+type DatabaseCrossReference = {
+  databaseType: string;
+  id: string;
+  properties: [Property];
+  isoformId?: string;
+};
 
-export type XRefData = {
-  databaseCrossReferences: [
-    {
-      databaseType: string;
-      id: string;
-      properties: [
-        {
-          key: string;
-          value: string;
-        }
-      ];
-      isoformId?: string;
-    }
-  ];
+type Data = {
+  databaseCrossReferences: [DatabaseCrossReference];
+  primaryAccession: string;
+};
+
+type XrefData = {
+  databaseCategory: string;
+  xref: DatabaseCrossReference;
 };
 
 type XRefProps = {
-  section: string;
-  data: XRefData;
+  section: EntrySectionType;
+  data: Data;
 };
 
-const XRefItem = ({ xRefEntry, accession }) => {
-  console.log(xRefEntry);
-  const info = databaseToDatabaseInfo[xRefEntry.databaseType];
-  console.log(info);
-  let uri = info.uriLink
-    .replace(/%acc/g, accession)
-    .replace(/%value/g, xRefEntry.id);
-  let properties;
-  if (xRefEntry.properties) {
-    properties = xRefEntry.properties
-      .map(property => (property.value === '-' ? '' : property.value))
+type XRefItemProps = {
+  xRefEntry: DatabaseCrossReference;
+  accession: string;
+};
+
+type XRefListProps = {
+  accession: string;
+  xRefData: XrefData[];
+  database: string;
+};
+
+type XRefCategoryTableProps = {
+  databaseCategory: DatabaseCategory;
+  databases: string[];
+  xRefData: XrefData[];
+  accession: string;
+};
+
+type Attributes = {
+  name: string;
+  xmlTag: string;
+  uriLink?: string | undefined;
+};
+
+const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
+
+// Combine multiple maps into single map for quick read access.
+const entrySectionDatabaseToDatabaseCategory = new Map<
+  string,
+  DatabaseCategory
+>();
+for (const [
+  entrySection,
+  databaseCategories,
+] of entrySectionToDatabaseCategories) {
+  if (databaseCategories) {
+    for (const databaseCategory of databaseCategories) {
+      const databases = databaseCategoryToDatabases.get(databaseCategory);
+      if (databases) {
+        for (const database of databases) {
+          entrySectionDatabaseToDatabaseCategory.set(
+            `${entrySection}_${database}`,
+            databaseCategory
+          );
+        }
+      }
+    }
+  }
+}
+
+const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
+  const { databaseType, properties: entryProperties, id } = xRefEntry;
+  if (
+    !id ||
+    !databaseType ||
+    !accession ||
+    !(databaseType in databaseToDatabaseInfo)
+  ) {
+    return null;
+  }
+  const info = databaseToDatabaseInfo[databaseType];
+  let uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
+  let properties: string = '';
+  if (entryProperties) {
+    properties = entryProperties
+      .map((property: Property) =>
+        property.value && property.value === '-' ? '' : property.value
+      )
       .join(' ');
   }
   return (
-    <div class="external-link">
-      <a target="_blank" href={uri}>
-        {xRefEntry.id}
-        <img src={externalLink} />
-      </a>
+    <Fragment>
+      <ExternalLink url={uri}>{xRefEntry.id}</ExternalLink>
       {properties}
-    </div>
+    </Fragment>
   );
 };
 
-const XRefList = ({ database, xRefData, accession }) => {
+const XRefList: React.FC<XRefListProps> = ({
+  database,
+  xRefData,
+  accession,
+}) => {
   const content = xRefData
-    .filter(xRefDatum => xRefDatum.xref.databaseType === database)
-    .map(xRefDatum => {
+    .filter(
+      (xRefDatum: XrefData) =>
+        idx(xRefDatum, _ => _.xref.databaseType) === database
+    )
+    .map((xRefDatum: XrefData) => {
       const { xref } = xRefDatum;
+      if (!xref) {
+        console.log('here');
+        return null;
+      }
       return (
         <ul key={v1()}>
           <XRefItem xRefEntry={xref} accession={accession} />
         </ul>
       );
     });
-  console.log('content', content);
-  console.log('database', database);
   const infoData = [{ title: database, content }];
-  console.log('infoData', infoData);
-
   return <InfoList infoData={infoData} />;
 };
 
-const XRefCategoryTable = ({
+const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   databaseCategory,
   databases,
   xRefData,
   accession,
 }) => {
-  console.log('databaseCategory', databaseCategory);
-  console.log('databases', databases);
-  console.log('xRefData', xRefData);
+  const databaseCategoryString = databaseCategoryToString.get(databaseCategory);
+  const title = databaseCategoryString && <h4>{databaseCategoryString}</h4>;
   return (
     <div>
       <hr />
-      <h4>{databaseCategoryToString[databaseCategory]}</h4>
-      {databases.sort().map(database => (
+      {title}
+      {databases.sort().map((database: string) => (
         <XRefList
           key={v1()}
           database={database}
@@ -136,76 +170,42 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
   if (!databaseCrossReferences || !accession) {
     return null;
   }
-
-  // const dbIds = dbTypes.reduce(
-  //   (dbIds, dbType) => [...dbIds, ...dbTypeToDbIds[dbType]],
-  //   []
-  // );
-  // console.log(dbTypes);
-  // console.log(dbIds);
-  // console.log(databaseCrossReferences);
-  const foundXrefData = [];
-  const foundDatabaseCategoriesToDatabases = {};
-  databaseCrossReferences.forEach(xref => {
+  const foundXrefData: XrefData[] = [];
+  const foundDatabaseCategoriesToDatabases: {
+    [databaseCategory: string]: { [database: string]: boolean };
+  } = {};
+  for (const xref of databaseCrossReferences) {
     const { databaseType: database } = xref;
     if (!database) {
-      return;
+      continue;
     }
-    const databaseCategory = idx(
-      pageSectionToDatabaseToDatabaseCategory,
-      _ => _[section][database]
+    const databaseCategory = entrySectionDatabaseToDatabaseCategory.get(
+      `${section}_${database}`
     );
     if (!databaseCategory) {
-      return null;
+      continue;
     }
     foundDatabaseCategoriesToDatabases[databaseCategory] = {
       ...foundDatabaseCategoriesToDatabases[databaseCategory],
       [database]: true,
     };
     foundXrefData.push({ databaseCategory, xref });
-  });
-  console.log(foundXrefData);
-  console.log(foundDatabaseCategoriesToDatabases);
-  // console.log(Object.keys(foundDatabaseCategories));
-  return Object.keys(foundDatabaseCategoriesToDatabases)
+  }
+  const nodes = Object.keys(foundDatabaseCategoriesToDatabases)
     .sort()
     .map(foundDatabaseCategory => {
-      console.log(foundDatabaseCategory);
       const databases = Object.keys(
         foundDatabaseCategoriesToDatabases[foundDatabaseCategory]
       );
       return (
         <XRefCategoryTable
           key={v1()}
-          databaseCategory={foundDatabaseCategory}
+          databaseCategory={foundDatabaseCategory as DatabaseCategory}
           databases={databases}
           xRefData={foundXrefData}
           accession={accession}
         />
       );
-
-      // const xrefs = foundXrefs.filter(
-      //   foundXref => foundXref.databaseCategory === foundDatabaseCategory
-      // );
-      // console.log(xrefs);
     });
-  // const freeTextData = data.comments
-  //   .filter(d => d.commentType === type)
-  //   .map((item, i) => (
-  //     <p key={`freetext_${i}_${type}`}>
-  //       {item.texts.map((itemText, j) => {
-  //         return (
-  //           <Fragment key={`freetext_${i}_${type}_${j}`}>
-  //             {itemText.value}
-  //             {itemText.evidences &&
-  //               itemText.evidences.map(evidence => (
-  //                 <UniProtEvidenceTag evidence={evidence} key={v1()} />
-  //               ))}
-  //           </Fragment>
-  //         );
-  //       })}
-  //     </p>
-  //   ));
-
-  // return <Fragment>hi {section}</Fragment>;
+  return <Fragment>{nodes}</Fragment>;
 };
