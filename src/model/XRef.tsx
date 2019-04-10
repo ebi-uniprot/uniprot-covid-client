@@ -165,7 +165,7 @@ const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   );
 };
 
-export const XRef: React.FC<XRefProps> = ({ data, section }) => {
+const XRef: React.FC<XRefProps> = ({ data, section }) => {
   const { databaseCrossReferences, primaryAccession: accession } = data;
   if (!databaseCrossReferences || !accession) {
     return null;
@@ -209,3 +209,5 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
     });
   return <Fragment>{nodes}</Fragment>;
 };
+
+export default XRef;
