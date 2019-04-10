@@ -142,11 +142,10 @@ const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   accession,
 }) => {
   const databaseCategoryString = databaseCategoryToString.get(databaseCategory);
-  const title = databaseCategoryString && <h4>{databaseCategoryString}</h4>;
   return (
     <div>
       <hr />
-      {title}
+      {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
       {databases.sort().map((database: string) => (
         <XRefList
           key={v1()}
