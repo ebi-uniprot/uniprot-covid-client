@@ -39,7 +39,7 @@ const createTermString = (
     }
     throw new Error('Value not provided in query');
   }
-  if (['organism', 'taxonomy'].includes(term)) {
+  if (['organism', 'taxonomy', 'host'].includes(term)) {
     if (id) {
       return `${term}_id:`;
     }
@@ -64,7 +64,7 @@ const createValueString = (
     }
     throw new Error('Value not provided in query');
   }
-  if (['organism', 'taxonomy'].includes(term) && id) {
+  if (['organism', 'taxonomy', 'host'].includes(term) && id) {
     return id;
   }
 
