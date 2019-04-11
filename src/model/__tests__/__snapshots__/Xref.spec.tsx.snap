@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`XRef should render cross reference database for FamilyAndDomains section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for Function section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for Interaction section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for NamesAndTaxonomy section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for NamesAndTaxonomy section 2`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for PathologyOrBioTech section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for ProteinProcessing section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render cross reference database for Sequence section 1`] = `
+"<Fragment>
+  <XRefCategoryTable databaseCategory=\\"GENOME\\" databases={{...}} xRefData={{...}} accession=\\"P21802\\" />
+</Fragment>"
+`;
+
+exports[`XRef should render cross reference database for Structure section 1`] = `"<Fragment />"`;
