@@ -2,14 +2,17 @@ import React, { Fragment } from 'react';
 import v1 from 'uuid';
 import idx from 'idx';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import entrySectionToDatabaseCategories from '../data/EntrySectionToDatabaseCategories';
-import databaseCategoryToDatabases from '../data/DatabaseCategoryToDatabases';
-import databaseCategoryToString from '../data/DatabaseCategoryToString';
+import {
+  entrySectionDatabaseToDatabaseCategory,
+  databaseCategoryToString,
+} from '../data/database';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
-import DatabaseToDatabaseInfo from '../data/DatabaseToDatabaseInfo';
-import EntrySectionType from '../data/EntrySection';
-import DatabaseCategory from '../data/DatabaseCategory';
-import Database from '../data/Database';
+import EntrySectionType from '../model/types/EntrySection';
+import {
+  Database,
+  DatabaseCategory,
+  DatabaseToDatabaseInfo,
+} from '../model/types/databaseTypes';
 
 type Property = {
   key: string;
@@ -17,7 +20,7 @@ type Property = {
 };
 
 type DatabaseCrossReference = {
-  databaseType: string;
+  databaseType: Database;
   id: string;
   properties: [Property];
   isoformId?: string;
@@ -46,7 +49,7 @@ type XRefItemProps = {
 type XRefListProps = {
   accession: string;
   xRefData: XrefData[];
-  database: string;
+  database: Database;
 };
 
 type XRefCategoryTableProps = {
@@ -58,41 +61,12 @@ type XRefCategoryTableProps = {
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
-// Combine multiple maps into single map for quick read access.
-const entrySectionDatabaseToDatabaseCategory = new Map<
-  string,
-  DatabaseCategory
->();
-for (const [
-  entrySection,
-  databaseCategories,
-] of entrySectionToDatabaseCategories) {
-  if (databaseCategories) {
-    for (const databaseCategory of databaseCategories) {
-      const databases = databaseCategoryToDatabases.get(databaseCategory);
-      if (databases) {
-        for (const database of databases) {
-          entrySectionDatabaseToDatabaseCategory.set(
-            `${entrySection}_${database}`,
-            databaseCategory
-          );
-        }
-      }
-    }
-  }
-}
-
 const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
-  const { databaseType, properties: entryProperties, id } = xRefEntry;
-  if (
-    !id ||
-    !databaseType ||
-    !accession ||
-    !(databaseType in databaseToDatabaseInfo)
-  ) {
+  const { databaseType: database, properties: entryProperties, id } = xRefEntry;
+  if (!id || !database || !accession || !(database in databaseToDatabaseInfo)) {
     return null;
   }
-  const info = databaseToDatabaseInfo[databaseType as Database];
+  const info = databaseToDatabaseInfo[database];
   const uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
   let properties: string = '';
   if (entryProperties) {
@@ -146,7 +120,7 @@ const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
     <div>
       <hr />
       {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-      {databases.sort().map((database: string) => (
+      {databases.sort().map(database => (
         <XRefList
           key={v1()}
           database={database}

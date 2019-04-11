@@ -3,7 +3,7 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import XRef from '../XRef';
 import data from './modelData.json';
-import EntrySectionType from '../../data/EntrySection';
+import EntrySectionType from '../../model/types/EntrySection';
 
 configure({ adapter: new Adapter() });
 

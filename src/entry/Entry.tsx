@@ -9,7 +9,7 @@ import XRef from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
-import EntrySectionType from '../data/EntrySection';
+import EntrySectionType from '../model/types/EntrySection';
 
 interface MatchParams {
   accession: string;
