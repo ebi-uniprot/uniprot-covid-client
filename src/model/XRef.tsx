@@ -61,7 +61,7 @@ type XRefCategoryTableProps = {
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
-const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
+export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   const { databaseType: database, properties: entryProperties, id } = xRefEntry;
   if (!id || !database || !accession || !(database in databaseToDatabaseInfo)) {
     return null;
@@ -84,7 +84,7 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   );
 };
 
-const XRefList: React.FC<XRefListProps> = ({
+export const XRefList: React.FC<XRefListProps> = ({
   database,
   xRefData,
   accession,
@@ -109,7 +109,7 @@ const XRefList: React.FC<XRefListProps> = ({
   return <InfoList infoData={infoData} />;
 };
 
-const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
+export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   databaseCategory,
   databases,
   xRefData,
@@ -132,7 +132,7 @@ const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   );
 };
 
-const XRef: React.FC<XRefProps> = ({ data, section }) => {
+export const XRef: React.FC<XRefProps> = ({ data, section }) => {
   const { databaseCrossReferences, primaryAccession: accession } = data;
   if (!databaseCrossReferences || !accession) {
     return null;
