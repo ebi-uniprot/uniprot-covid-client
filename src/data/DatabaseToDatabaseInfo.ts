@@ -1,4 +1,5 @@
 import Database from './Database';
+
 interface AttributesItem {
   name: string;
   xmlTag: string;

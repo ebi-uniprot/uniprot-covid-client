@@ -1,34 +1,37 @@
 import DatabaseCategory from './DatabaseCategory';
 import EntrySection from './EntrySection';
 
-const databaseCategoryToDatabases = new Map<EntrySection, DatabaseCategory[]>();
+const entrySectionToDatabaseCategories = new Map<
+  EntrySection,
+  DatabaseCategory[]
+>();
 
-databaseCategoryToDatabases.set(EntrySection.Expression, [
+entrySectionToDatabaseCategories.set(EntrySection.Expression, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.EXPRESSION,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.FamilyAndDomains, [
+entrySectionToDatabaseCategories.set(EntrySection.FamilyAndDomains, [
   DatabaseCategory.FAMILY,
   DatabaseCategory.PHYLOGENOMIC,
   DatabaseCategory.DOMAIN,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.Function, [
+entrySectionToDatabaseCategories.set(EntrySection.Function, [
   DatabaseCategory.PATHWAY,
   DatabaseCategory.FAMILY,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.Interaction, [
+entrySectionToDatabaseCategories.set(EntrySection.Interaction, [
   DatabaseCategory.INTERACTION,
   DatabaseCategory.CHEMISTRY,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.NamesAndTaxonomy, [
+entrySectionToDatabaseCategories.set(EntrySection.NamesAndTaxonomy, [
   DatabaseCategory.ORGANISM,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.PathologyOrBioTech, [
+entrySectionToDatabaseCategories.set(EntrySection.PathologyOrBioTech, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.OTHER,
   DatabaseCategory.FAMILY,
@@ -36,23 +39,23 @@ databaseCategoryToDatabases.set(EntrySection.PathologyOrBioTech, [
   DatabaseCategory.POLYMORPHISM,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.ProteinProcessing, [
+entrySectionToDatabaseCategories.set(EntrySection.ProteinProcessing, [
   DatabaseCategory.PROTEOMIC,
   DatabaseCategory.GEL,
   DatabaseCategory.PTM,
   DatabaseCategory.OTHER,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.Sequence, [
+entrySectionToDatabaseCategories.set(EntrySection.Sequence, [
   DatabaseCategory.SEQUENCE,
   DatabaseCategory.GENOME,
   DatabaseCategory.POLYMORPHISM,
 ]);
 
-databaseCategoryToDatabases.set(EntrySection.Structure, [
+entrySectionToDatabaseCategories.set(EntrySection.Structure, [
   DatabaseCategory.STRUCTURE,
   DatabaseCategory.PROTOCOL,
   DatabaseCategory.OTHER,
 ]);
 
-export default databaseCategoryToDatabases;
+export default entrySectionToDatabaseCategories;

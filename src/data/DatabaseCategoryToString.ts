@@ -1,6 +1,6 @@
 import DatabaseCategory from './DatabaseCategory';
 
-const databaseCategoryToDatabases = new Map<DatabaseCategory, string>([
+const databaseCategoryToString = new Map<DatabaseCategory, string>([
   [DatabaseCategory.SEQUENCE, 'Sequence databases'],
   [DatabaseCategory.STRUCTURE, '3D structure databases'],
   [DatabaseCategory.INTERACTION, 'Protein-protein interaction databases'],
@@ -20,4 +20,4 @@ const databaseCategoryToDatabases = new Map<DatabaseCategory, string>([
   [DatabaseCategory.OTHER, 'Other'],
 ]);
 
-export default databaseCategoryToDatabases;
+export default databaseCategoryToString;
