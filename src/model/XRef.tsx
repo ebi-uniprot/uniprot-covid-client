@@ -92,8 +92,8 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   ) {
     return null;
   }
-  const info = databaseToDatabaseInfo[databaseType];
-  let uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
+  const info = databaseToDatabaseInfo[databaseType as Database];
+  const uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
   let properties: string = '';
   if (entryProperties) {
     properties = entryProperties
