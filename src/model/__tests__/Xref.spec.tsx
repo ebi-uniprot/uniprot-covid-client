@@ -21,14 +21,14 @@ describe('XRef', () => {
 
 describe('XRefCategoryTable', () => {
   test('should render for database category GENOME and Ensembl', () => {
-    const { databaseCrossReferences, primaryAccession: accession } = data;
+    const { databaseCrossReferences, primaryAccession } = data;
     const wrapper = shallow(
       <XRefCategoryTable
         key={1}
         databaseCategory={DatabaseCategory.GENOME}
         databases={[Database.Ensembl]}
         xRefData={databaseCrossReferences}
-        accession={accession}
+        accession={primaryAccession}
       />
     );
     expect(wrapper.debug()).toMatchSnapshot();
@@ -37,13 +37,13 @@ describe('XRefCategoryTable', () => {
 
 describe('XRefList', () => {
   test('should render for database Ensembl', () => {
-    const { databaseCrossReferences, primaryAccession: accession } = data;
+    const { databaseCrossReferences, primaryAccession } = data;
     const wrapper = shallow(
       <XRefList
         key={1}
         database={Database.Ensembl}
         xRefData={databaseCrossReferences}
-        accession={accession}
+        accession={primaryAccession}
       />
     );
     expect(wrapper.debug()).toMatchSnapshot();
@@ -52,9 +52,12 @@ describe('XRefList', () => {
 
 describe('XRefItem', () => {
   test('should render', () => {
-    const { databaseCrossReferences, accession } = data;
+    const { databaseCrossReferences, primaryAccession } = data;
     const wrapper = shallow(
-      <XRefItem xRefEntry={databaseCrossReferences[0]} accession={accession} />
+      <XRefItem
+        xRefEntry={databaseCrossReferences[0]}
+        accession={primaryAccession}
+      />
     );
     expect(wrapper.debug()).toMatchSnapshot();
   });
