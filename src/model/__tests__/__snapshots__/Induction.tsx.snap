@@ -1,0 +1,1400 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Induction should render 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Induction
+    data={
+      Object {
+        "comments": Array [
+          Object {
+            "commentType": "ALTERNATIVE PRODUCTS",
+            "events": Array [
+              "Alternative initiation",
+            ],
+            "isoforms": Array [
+              Object {
+                "isoformIds": Array [
+                  "isoID1",
+                ],
+                "isoformSequenceStatus": "Described",
+                "name": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "name",
+                },
+                "note": Object {
+                  "texts": Array [
+                    Object {
+                      "evidences": Array [
+                        Object {
+                          "evidenceCode": "ECO:0000255",
+                          "id": "PRU10028",
+                          "source": "PROSITE-ProRule",
+                        },
+                      ],
+                      "value": "value1",
+                    },
+                  ],
+                },
+                "sequenceIds": Array [
+                  "SequenceID",
+                ],
+                "synonyms": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10028",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "syn value",
+                  },
+                ],
+              },
+            ],
+            "note": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "value1",
+                },
+              ],
+            },
+          },
+          Object {
+            "absorption": Object {
+              "approximate": true,
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000255",
+                  "id": "PRU10028",
+                  "source": "PROSITE-ProRule",
+                },
+              ],
+              "max": 10,
+              "note": Object {
+                "texts": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10028",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "value1",
+                  },
+                ],
+              },
+            },
+            "commentType": "BIOPHYSICOCHEMICAL PROPERTIES",
+            "kineticParameters": Object {
+              "maximumVelocities": Array [
+                Object {
+                  "enzyme": "enzyme1",
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "unit": "unit1",
+                  "velocity": 1,
+                },
+              ],
+              "michaelisConstants": Array [
+                Object {
+                  "constant": 2.0999999046325684,
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "substrate": "sub1",
+                  "unit": "uM",
+                },
+              ],
+              "note": Object {
+                "texts": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10028",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "value1",
+                  },
+                ],
+              },
+            },
+            "phDependence": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "value1",
+                },
+              ],
+            },
+            "redoxPotential": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "value1",
+                },
+              ],
+            },
+            "temperatureDependence": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "value1",
+                },
+              ],
+            },
+          },
+          Object {
+            "commentType": "CATALYTIC ACTIVITY",
+            "physiologicalReactions": Array [
+              Object {
+                "directionType": "right-to-left",
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000313",
+                    "id": "ENSP0001324",
+                    "source": "Ensembl",
+                  },
+                ],
+                "reactionReference": Object {
+                  "databaseType": "Rhea",
+                  "id": "RHEA:313",
+                },
+              },
+            ],
+            "reaction": Object {
+              "ecNumber": "1.2.4.5",
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000256",
+                  "id": "PIRNR001361",
+                  "source": "PIRNR",
+                },
+              ],
+              "name": "some reaction",
+              "reactionReferences": Array [
+                Object {
+                  "databaseType": "ChEBI",
+                  "id": "ChEBI:3243",
+                },
+              ],
+            },
+          },
+          Object {
+            "cofactors": Array [
+              Object {
+                "cofactorReference": Object {
+                  "databaseType": "ChEBI",
+                  "id": "CHEBI:314",
+                },
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001361",
+                    "source": "PIRNR",
+                  },
+                ],
+                "name": "Cofactor Name",
+              },
+            ],
+            "commentType": "COFACTOR",
+            "molecule": "molecule",
+            "note": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "value": "value2",
+                },
+              ],
+            },
+          },
+          Object {
+            "commentType": "DISEASE",
+            "disease": Object {
+              "acronym": "someAcron",
+              "description": "some description",
+              "diseaseAccession": "Disease AC",
+              "diseaseId": "Disease Id",
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000256",
+                  "id": "PIRNR001362",
+                  "source": "PIRNR",
+                },
+              ],
+              "reference": Object {
+                "databaseType": "MIM",
+                "id": "3124",
+              },
+            },
+            "note": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001362",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "value": "value2",
+                },
+              ],
+            },
+          },
+          Object {
+            "commentType": "DISRUPTION PHENOTYPE",
+            "texts": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001360",
+                    "source": "PIRNR",
+                  },
+                ],
+                "value": "value",
+              },
+            ],
+          },
+          Object {
+            "commentType": "INTERACTION",
+            "interactions": Array [
+              Object {
+                "firstInteractor": "first",
+                "geneName": "gene name",
+                "numberOfExperiments": 10,
+                "secondInteractor": "second",
+                "type": "BINARY",
+                "uniProtAccession": "P12345",
+              },
+            ],
+          },
+          Object {
+            "commentType": "MASS SPECTROMETRY",
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000256",
+                "id": "PIRNR001361",
+                "source": "PIRNR",
+              },
+            ],
+            "method": "LSI",
+            "molWeight": 2.1,
+            "molWeightError": 1.2,
+            "note": "note value",
+            "ranges": Array [
+              Object {
+                "isoformId": "isoformId value",
+                "range": Object {
+                  "end": Object {
+                    "modifier": "EXACT",
+                    "value": 7,
+                  },
+                  "start": Object {
+                    "modifier": "EXACT",
+                    "value": 1,
+                  },
+                },
+              },
+            ],
+          },
+          Object {
+            "commentType": "RNA EDITING",
+            "locationType": "Known",
+            "note": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "value": "value",
+                },
+              ],
+            },
+            "positions": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001361",
+                    "source": "PIRNR",
+                  },
+                ],
+                "position": "rna position",
+              },
+            ],
+          },
+          Object {
+            "commentType": "SEQUENCE CAUTION",
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000256",
+                "id": "PIRNR001361",
+                "source": "PIRNR",
+              },
+            ],
+            "note": "Text note",
+            "positions": Array [
+              "position",
+            ],
+            "sequence": "sequence",
+            "sequenceCautionType": "Erroneous initiation",
+          },
+          Object {
+            "commentType": "SUBCELLULAR LOCATION",
+            "molecule": "molecule value",
+            "note": Object {
+              "texts": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "value": "value",
+                },
+              ],
+            },
+            "subcellularLocations": Array [
+              Object {
+                "location": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "id": "id1",
+                  "value": "location value",
+                },
+                "orientation": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "id": "id2",
+                  "value": "orientation value",
+                },
+                "topology": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000256",
+                      "id": "PIRNR001361",
+                      "source": "PIRNR",
+                    },
+                  ],
+                  "id": "id2",
+                  "value": "topology value",
+                },
+              },
+            ],
+          },
+          Object {
+            "commentType": "WEB RESOURCE",
+            "ftp": true,
+            "note": "Note text",
+            "resourceName": "resource name",
+            "resourceUrl": "resource URL",
+          },
+        ],
+        "databaseCrossReferences": Array [
+          Object {
+            "databaseType": "Ensembl",
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "id": "id value",
+            "isoformId": "Q9NXB0-1",
+            "properties": Array [
+              Object {
+                "key": "ProteinId",
+                "value": "description value",
+              },
+            ],
+          },
+        ],
+        "entryAudit": Object {
+          "entryVersion": 20,
+          "firstPublicDate": "2015-08-02",
+          "lastAnnotationUpdateDate": "2016-04-24",
+          "lastSequenceUpdateDate": "2017-01-21",
+          "sequenceVersion": 5,
+        },
+        "entryType": "Swiss-Prot",
+        "features": Array [
+          Object {
+            "alternativeSequence": Object {
+              "alternativeSequences": Array [
+                "alternative value",
+              ],
+              "originalSequence": "original value",
+            },
+            "dbXref": Object {
+              "databaseType": "dbSNP",
+              "id": "db id",
+            },
+            "description": "description value",
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "featureId": "id value",
+            "location": Object {
+              "end": Object {
+                "modifier": "EXACT",
+                "value": 8,
+              },
+              "start": Object {
+                "modifier": "EXACT",
+                "value": 2,
+              },
+            },
+            "type": "chain",
+          },
+        ],
+        "geneLocations": Array [
+          Object {
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000255",
+                "id": "PRU10025",
+                "source": "PROSITE-ProRule",
+              },
+            ],
+            "geneEncodingType": "Cyanelle",
+            "value": "geneLocation value",
+          },
+        ],
+        "genes": Array [
+          Object {
+            "geneName": Object {
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000256",
+                  "id": "PIRNR001360",
+                  "source": "PIRNR",
+                },
+              ],
+              "value": "some Gene",
+            },
+            "orderedLocusNames": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001362",
+                    "source": "PIRNR",
+                  },
+                ],
+                "value": "some locus",
+              },
+            ],
+            "orfNames": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "value": "some orf",
+              },
+            ],
+            "synonyms": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001361",
+                    "source": "PIRNR",
+                  },
+                ],
+                "value": "some Syn",
+              },
+            ],
+          },
+        ],
+        "internalSection": Object {
+          "evidenceLines": Array [
+            Object {
+              "createDate": "2018-12-25",
+              "curator": "curator value",
+              "evidence": "evidence value",
+            },
+          ],
+          "internalLines": Array [
+            Object {
+              "type": "DR",
+              "value": "line value",
+            },
+          ],
+          "sourceLines": Array [
+            Object {
+              "value": "source line value",
+            },
+          ],
+        },
+        "keywords": Array [
+          Object {
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000255",
+                "id": "PRU10025",
+                "source": "PROSITE-ProRule",
+              },
+            ],
+            "id": "KW-11111",
+            "value": "keyword value",
+          },
+        ],
+        "organism": Object {
+          "commonName": "common name",
+          "evidences": Array [
+            Object {
+              "evidenceCode": "ECO:0000256",
+              "id": "PIRNR001363",
+              "source": "PIRNR",
+            },
+          ],
+          "lineage": Array [
+            "lineage 1",
+          ],
+          "scientificName": "scientific name",
+          "synonyms": Array [
+            "synonyms 1",
+          ],
+          "taxonId": 9606,
+        },
+        "organismHosts": Array [
+          Object {
+            "commonName": "common name",
+            "scientificName": "scientific name",
+            "synonyms": Array [
+              "synonyms 1",
+            ],
+            "taxonId": 9606,
+          },
+        ],
+        "primaryAccession": "P21802",
+        "proteinDescription": Object {
+          "allergenName": Object {
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000255",
+                "id": "PRU10023",
+                "source": "PROSITE-ProRule",
+              },
+            ],
+            "value": "allergen",
+          },
+          "alternativeNames": Array [
+            Object {
+              "ecNumbers": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10029",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "1.2.3.3",
+                },
+              ],
+              "fullName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10022",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "a full alt Name",
+              },
+              "shortNames": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10028",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "short alt name1",
+                },
+              ],
+            },
+          ],
+          "biotechName": Object {
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000255",
+                "id": "PRU10024",
+                "source": "PROSITE-ProRule",
+              },
+            ],
+            "value": "biotech",
+          },
+          "cdAntigenNames": Array [
+            Object {
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000255",
+                  "id": "PRU10025",
+                  "source": "PROSITE-ProRule",
+                },
+              ],
+              "value": "cd antigen",
+            },
+          ],
+          "contains": Array [
+            Object {
+              "allergenName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10023",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "allergen",
+              },
+              "alternativeNames": Array [
+                Object {
+                  "ecNumbers": Array [
+                    Object {
+                      "evidences": Array [
+                        Object {
+                          "evidenceCode": "ECO:0000255",
+                          "id": "PRU10029",
+                          "source": "PROSITE-ProRule",
+                        },
+                      ],
+                      "value": "1.2.3.3",
+                    },
+                  ],
+                  "fullName": Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10022",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "containsa full alt Name",
+                  },
+                  "shortNames": Array [
+                    Object {
+                      "evidences": Array [
+                        Object {
+                          "evidenceCode": "ECO:0000255",
+                          "id": "PRU10028",
+                          "source": "PROSITE-ProRule",
+                        },
+                      ],
+                      "value": "containsshort alt name1",
+                    },
+                  ],
+                },
+              ],
+              "biotechName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10024",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "biotech",
+              },
+              "cdAntigenNames": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10025",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "cd antigen",
+                },
+              ],
+              "innNames": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU100212",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "inn antigen",
+                },
+              ],
+              "recommendedName": Object {
+                "ecNumbers": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU100210",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "1.2.3.4",
+                  },
+                ],
+                "fullName": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10026",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "containsrec full Name",
+                },
+                "shortNames": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10020",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "containsrecommended short name",
+                  },
+                ],
+              },
+            },
+          ],
+          "flag": "Fragment",
+          "includes": Array [
+            Object {
+              "allergenName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10023",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "allergen",
+              },
+              "alternativeNames": Array [
+                Object {
+                  "ecNumbers": Array [
+                    Object {
+                      "evidences": Array [
+                        Object {
+                          "evidenceCode": "ECO:0000255",
+                          "id": "PRU10029",
+                          "source": "PROSITE-ProRule",
+                        },
+                      ],
+                      "value": "1.2.3.3",
+                    },
+                  ],
+                  "fullName": Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10022",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "includesa full alt Name",
+                  },
+                  "shortNames": Array [
+                    Object {
+                      "evidences": Array [
+                        Object {
+                          "evidenceCode": "ECO:0000255",
+                          "id": "PRU10028",
+                          "source": "PROSITE-ProRule",
+                        },
+                      ],
+                      "value": "includesshort alt name1",
+                    },
+                  ],
+                },
+              ],
+              "biotechName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10024",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "biotech",
+              },
+              "cdAntigenNames": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10025",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "cd antigen",
+                },
+              ],
+              "innNames": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU100212",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "inn antigen",
+                },
+              ],
+              "recommendedName": Object {
+                "ecNumbers": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU100210",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "1.2.3.4",
+                  },
+                ],
+                "fullName": Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU10026",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "includesrec full Name",
+                },
+                "shortNames": Array [
+                  Object {
+                    "evidences": Array [
+                      Object {
+                        "evidenceCode": "ECO:0000255",
+                        "id": "PRU10020",
+                        "source": "PROSITE-ProRule",
+                      },
+                    ],
+                    "value": "includesrecommended short name",
+                  },
+                ],
+              },
+            },
+          ],
+          "innNames": Array [
+            Object {
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000255",
+                  "id": "PRU100212",
+                  "source": "PROSITE-ProRule",
+                },
+              ],
+              "value": "inn antigen",
+            },
+          ],
+          "recommendedName": Object {
+            "ecNumbers": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU100210",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "1.2.3.4",
+              },
+            ],
+            "fullName": Object {
+              "evidences": Array [
+                Object {
+                  "evidenceCode": "ECO:0000255",
+                  "id": "PRU10026",
+                  "source": "PROSITE-ProRule",
+                },
+              ],
+              "value": "rec full Name",
+            },
+            "shortNames": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10020",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "recommended short name",
+              },
+            ],
+          },
+          "submissionNames": Array [
+            Object {
+              "ecNumbers": Array [
+                Object {
+                  "evidences": Array [
+                    Object {
+                      "evidenceCode": "ECO:0000255",
+                      "id": "PRU100211",
+                      "source": "PROSITE-ProRule",
+                    },
+                  ],
+                  "value": "1.2.3.5",
+                },
+              ],
+              "fullName": Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000255",
+                    "id": "PRU10027",
+                    "source": "PROSITE-ProRule",
+                  },
+                ],
+                "value": "sub full Name",
+              },
+            },
+          ],
+        },
+        "proteinExistence": "1: Evidence at protein level",
+        "references": Array [
+          Object {
+            "citation": Object {
+              "address": "address value",
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "bookName": "book Name",
+              "citationType": "book",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "editors": Array [
+                "editor Leo",
+              ],
+              "firstPage": "first page",
+              "lastPage": "last page",
+              "publicationDate": "date value",
+              "publisher": "the publisher",
+              "title": "Leo book tittle",
+              "volume": "book volume",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "online journal article",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "journal": "journal name",
+              "locator": "locator value",
+              "publicationDate": "date value",
+              "title": "Leo book tittle",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "journal article",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "firstPage": "first page",
+              "journal": "journal name",
+              "lastPage": "last page",
+              "publicationDate": "date value",
+              "title": "Leo book tittle",
+              "volume": "volume value",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "patent",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "patentNumber": "patent number",
+              "publicationDate": "date value",
+              "title": "Leo book tittle",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "submission",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "publicationDate": "date value",
+              "submissionDatabase": "PIR data bank",
+              "title": "Leo book tittle",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "address": "thesis address",
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "thesis",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "institute": "thesis institute",
+              "publicationDate": "date value",
+              "title": "Leo book tittle",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+          Object {
+            "citation": Object {
+              "authoringGroup": Array [
+                "auth group",
+              ],
+              "authors": Array [
+                "author Leo",
+              ],
+              "citationType": "unpublished observations",
+              "citationXrefs": Array [
+                Object {
+                  "databaseType": "PubMed",
+                  "id": "somepID1",
+                },
+              ],
+              "publicationDate": "date value",
+              "title": "Leo book tittle",
+            },
+            "evidences": Array [
+              Object {
+                "evidenceCode": "ECO:0000269",
+                "id": "11389730",
+                "source": "PubMed",
+              },
+            ],
+            "referenceComments": Array [
+              Object {
+                "evidences": Array [
+                  Object {
+                    "evidenceCode": "ECO:0000269",
+                    "id": "11389730",
+                    "source": "PubMed",
+                  },
+                ],
+                "type": "PLASMID",
+                "value": "reference comment value",
+              },
+            ],
+            "referencePositions": Array [
+              "position 1",
+            ],
+          },
+        ],
+        "schema": "Generated by uk.ac.ebi.uniprot.json.parser.uniprot.UniProtEntryIT",
+        "secondaryAccessions": Array [
+          "P21802",
+        ],
+        "sequence": Object {
+          "crc64": "3997D999CAB6C5A7",
+          "length": 10,
+          "md5": "B1D4A86C222D0ED5500ABE909DD36218",
+          "molWeight": 1185,
+          "value": "SAPSQDFMRF",
+        },
+        "uniProtId": "uniprot id",
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__nodes__): Array [
+    null,
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
