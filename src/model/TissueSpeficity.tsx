@@ -31,7 +31,7 @@ export const TissueSpeficity: React.FC<TissueProps> = ({ data }) => {
     return null;
   }
   const tissueSpecifityData = data.comments.filter(d => isValid(d));
-  if (!tissueSpecifityData || tissueSpecifityData.length <= 0) {
+  if (!tissueSpecifityData || tissueSpecifityData.length === 0) {
     return null;
   }
   return (

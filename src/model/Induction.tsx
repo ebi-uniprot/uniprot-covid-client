@@ -29,7 +29,7 @@ export const Induction: React.FC<InductionProps> = ({ data }) => {
     return null;
   }
   const inductionData = data.comments.filter(d => isValid(d));
-  if (!inductionData || inductionData.length <= 0) {
+  if (!inductionData || inductionData.length === 0) {
     return null;
   }
   return (
