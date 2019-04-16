@@ -15,7 +15,7 @@ type Comments = {
 };
 
 type TissueData = {
-  comments?: [Comments];
+  comments?: Comments[];
 };
 
 type TissueProps = {

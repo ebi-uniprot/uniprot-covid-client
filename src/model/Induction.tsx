@@ -15,7 +15,7 @@ type Comments = {
 };
 
 type InductionData = {
-  comments?: [Comments];
+  comments?: Comments[];
 };
 
 type InductionProps = {
