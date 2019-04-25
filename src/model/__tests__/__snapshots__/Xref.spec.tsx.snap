@@ -28,7 +28,7 @@ exports[`XRefCategoryTable should render for database category GENOME and Ensemb
   <h4>
     Genome annotation databases
   </h4>
-  <XRefList database=\\"Ensembl\\" xRefData={{...}} accession=\\"P21802\\" />
+  <Component infoData={{...}} />
 </div>"
 `;
 
@@ -41,4 +41,4 @@ exports[`XRefItem should render 1`] = `
 </Fragment>"
 `;
 
-exports[`XRefList should render for database Ensembl 1`] = `"<Component infoData={{...}} />"`;
+exports[`XRefList should render for database Ensembl 1`] = `"<Fragment />"`;

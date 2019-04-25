@@ -48,6 +48,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Expression">
         <TissueSpeficity data={entryData} />
         <Induction data={entryData} />
+        <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
       </Card>
       {/* <Card title="Interaction" />
       <Card title="Structure" />

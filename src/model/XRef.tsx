@@ -89,7 +89,7 @@ export const XRefList: React.FC<XRefListProps> = ({
   xRefData,
   accession,
 }) => {
-  const content = xRefData
+  const nodes = xRefData
     .filter(
       (xRefDatum: XrefData) =>
         idx(xRefDatum, _ => _.xref.databaseType) === database
@@ -105,8 +105,7 @@ export const XRefList: React.FC<XRefListProps> = ({
         </ul>
       );
     });
-  const infoData = [{ title: database, content }];
-  return <InfoList infoData={infoData} />;
+  return <Fragment>{nodes}</Fragment>;
 };
 
 export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
@@ -116,18 +115,23 @@ export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   accession,
 }) => {
   const databaseCategoryString = databaseCategoryToString.get(databaseCategory);
+  const infoData = databases.sort().map(database => ({
+    title: database,
+    content: (
+      <XRefList
+        key={v1()}
+        database={database}
+        xRefData={xRefData}
+        accession={accession}
+      />
+    ),
+  }));
+
   return (
     <div>
       <hr />
       {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-      {databases.sort().map(database => (
-        <XRefList
-          key={v1()}
-          database={database}
-          xRefData={xRefData}
-          accession={accession}
-        />
-      ))}
+      {<InfoList infoData={infoData} />}
     </div>
   );
 };
