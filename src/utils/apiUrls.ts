@@ -44,6 +44,7 @@ const apiUrls = {
   advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
   entry: (accession: string) =>
     joinUrl(prefix, '/uniprot/api/uniprotkb/accession', accession),
+  keyword: (id: string) => joinUrl('https://www.uniprot.org/keywords', id),
 };
 
 export default apiUrls;

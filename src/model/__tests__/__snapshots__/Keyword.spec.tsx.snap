@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Keyword should render for Expression section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for FamilyAndDomains section 1`] = `
+"<Fragment>
+  <h4>
+    Keywords
+  </h4>
+  <Component infoData={{...}} />
+</Fragment>"
+`;
+
+exports[`Keyword should render for Function section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for Interaction section 1`] = `""`;
+
+exports[`Keyword should render for Miscellaneous section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for NamesAndTaxonomy section 1`] = `""`;
+
+exports[`Keyword should render for PathologyOrBioTech section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for ProteinProcessing section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for Sequence section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`Keyword should render for Structure section 1`] = `""`;
+
+exports[`Keyword should render for SubCellularLocation section 1`] = `
+"<Fragment>
+  0
+</Fragment>"
+`;
+
+exports[`KeywordItem should render for database Ensembl 1`] = `
+"<a href=\\"https://www.uniprot.org/keywords/KW-11111\\">
+  keyword value
+</a>"
+`;
+
+exports[`KeywordList should render for database category GENOME and Ensembl 1`] = `
+"<Fragment>
+  <KeywordItem id=\\"KW-11111\\" value=\\"keyword value\\" />
+</Fragment>"
+`;

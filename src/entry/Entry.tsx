@@ -12,6 +12,9 @@ import { SequenceViewEntry } from '../model/SequenceView';
 import TissueSpeficity from '../model/TissueSpeficity';
 import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
+import { Keyword } from '../model/Keyword';
+// import entrySectionToKeywordCategories from '../data/keywords';
+import KeywordCategoryType from '../model/types/keywordTypes';
 
 interface MatchParams {
   accession: string;
@@ -36,6 +39,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           type={FreeTextType.PATHWAY}
           includeTitle={true}
         />
+        <Keyword data={entryData} section={EntrySectionType.Function} />
         <XRef data={entryData} section={EntrySectionType.Function} />
       </Card>
       <Card title="Names & Taxonomy">
@@ -48,12 +52,15 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Expression">
         <TissueSpeficity data={entryData} />
         <Induction data={entryData} />
+        <Keyword data={entryData} section={EntrySectionType.Expression} />
+        <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card>
       {/* <Card title="Interaction" />
       <Card title="Structure" />
       <Card title="Family & Domains" /> */}
       <Card title="Sequences">
         <SequenceViewEntry data={entryData} />
+        <Keyword data={entryData} section={EntrySectionType.Sequence} />
         <XRef data={entryData} section={EntrySectionType.Sequence} />
       </Card>
       {/* <Card title="Similar Proteins" />
