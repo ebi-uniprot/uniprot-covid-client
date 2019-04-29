@@ -33,12 +33,12 @@ exports[`XRefCategoryTable should render for database category GENOME and Ensemb
 `;
 
 exports[`XRefItem should render 1`] = `
-"<Fragment>
+"<li>
   <Nr url=\\"https://www.ensembl.org/id/id value\\" newTab={true}>
     id value
   </Nr>
   description value
-</Fragment>"
+</li>"
 `;
 
 exports[`XRefList should render for database Ensembl 1`] = `"<Fragment />"`;

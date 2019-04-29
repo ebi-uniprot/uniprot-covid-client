@@ -77,10 +77,10 @@ export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
       .join(' ');
   }
   return (
-    <Fragment>
+    <li key={v1()}>
       <ExternalLink url={uri}>{xRefEntry.id}</ExternalLink>
       {properties}
-    </Fragment>
+    </li>
   );
 };
 
@@ -100,7 +100,7 @@ export const XRefList: React.FC<XRefListProps> = ({
         return null;
       }
       return (
-        <ul key={v1()}>
+        <ul className="no-bullet" key={v1()}>
           <XRefItem xRefEntry={xref} accession={accession} />
         </ul>
       );
@@ -118,12 +118,7 @@ export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
   const infoData = databases.sort().map(database => ({
     title: database,
     content: (
-      <XRefList
-        key={v1()}
-        database={database}
-        xRefData={xRefData}
-        accession={accession}
-      />
+      <XRefList database={database} xRefData={xRefData} accession={accession} />
     ),
   }));
 
