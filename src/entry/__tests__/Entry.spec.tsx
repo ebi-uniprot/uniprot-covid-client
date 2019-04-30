@@ -9,14 +9,10 @@ jest.mock('../../utils/useDataApi', () =>
   jest.fn().mockImplementation(() => mock_data)
 );
 
-// const useDataApi = jest.fn(() => mock_data);
-// const fn = jest.fn(() => mock_data);
-// jest.mock('../../utils/useDataApi', fn);
 configure({ adapter: new Adapter() });
 
 describe('Entry', () => {
   test('should render', () => {
-    // const props = { match: {  } } as EntryProps;
     const props = {
       match: {
         params: {
