@@ -12,7 +12,7 @@ export const formatLargeNumber = (x: number) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export const loadWebComponent = (name: string, className: Function) => {
+export const loadWebComponent = (name: string, className: any) => {
   if (!window.customElements.get(name)) {
     window.customElements.define(name, className);
   }

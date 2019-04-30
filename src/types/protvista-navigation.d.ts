@@ -1,7 +1,7 @@
 declare module 'protvista-navigation';
 
-declare module JSX {
+declare namespace JSX {
   interface IntrinsicElements {
-    'protvista-navigation': ProtvistaNavigation;
+    'protvista-navigation': any;
   }
 }

@@ -5,7 +5,6 @@ import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
-import { d3 } from 'd3';
 
 type FeatureLocation = {
   value: number;

@@ -1,7 +1,7 @@
 declare module 'protvista-manager';
 
-declare module JSX {
+declare namespace JSX {
   interface IntrinsicElements {
-    'protvista-manager': ProtvistaManager;
+    'protvista-manager': any;
   }
 }

@@ -1,7 +1,7 @@
 declare module 'protvista-datatable';
 
-declare module JSX {
+declare namespace JSX {
   interface IntrinsicElements {
-    'protvista-datatable': ProtvistaDatatable;
+    'protvista-datatable': any;
   }
 }

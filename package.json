@@ -65,6 +65,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/d3": "^5.7.2",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.13",
     "@types/query-string": "^6.2.0",
