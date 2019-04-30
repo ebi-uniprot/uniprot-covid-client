@@ -9,8 +9,6 @@ import XRef from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
-import TissueSpeficity from '../model/TissueSpeficity';
-import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
 
 interface MatchParams {
@@ -46,8 +44,10 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="Pathology & Biotech" />
       <Card title="PTM/Processing" /> */}
       <Card title="Expression">
-        <TissueSpeficity data={entryData} />
-        <Induction data={entryData} />
+        <h4>Tissue specificity</h4>
+        <FreeText data={entryData} type={FreeTextType.TISSUE_SPECIFICITY} />
+        <h4>Induction</h4>
+        <FreeText data={entryData} type={FreeTextType.INDUCTION} />
       </Card>
       {/* <Card title="Interaction" />
       <Card title="Structure" />

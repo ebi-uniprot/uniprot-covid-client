@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
 import { FreeTextType } from './FreeText';
@@ -40,7 +41,7 @@ export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
     <Fragment>
       <h4>Catalytic Activity</h4>
       {catalyticActivityData.map(catalyticActivity => (
-        <p key={`catalytic-${catalyticActivity.reaction.ecNumber}`}>
+        <p key={v1()}>
           <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
           {catalyticActivity.reaction.name}
           {catalyticActivity.reaction.evidences &&

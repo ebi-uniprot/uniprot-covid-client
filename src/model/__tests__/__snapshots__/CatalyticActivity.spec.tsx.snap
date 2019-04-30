@@ -1419,7 +1419,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": "catalytic-1.2.4.5",
+        "key": "0",
         "nodeType": "host",
         "props": Object {
           "children": Array [
@@ -1522,7 +1522,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": "catalytic-1.2.4.5",
+          "key": "0",
           "nodeType": "host",
           "props": Object {
             "children": Array [
