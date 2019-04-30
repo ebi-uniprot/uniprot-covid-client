@@ -15,20 +15,20 @@ import {
 } from '../model/types/databaseTypes';
 
 type Property = {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 };
 
 type DatabaseCrossReference = {
-  databaseType: Database;
-  id: string;
-  properties: [Property];
+  databaseType?: Database;
+  id?: string;
+  properties?: [Property];
   isoformId?: string;
 };
 
 type Data = {
-  databaseCrossReferences: [DatabaseCrossReference];
-  primaryAccession: string;
+  databaseCrossReferences?: [DatabaseCrossReference];
+  primaryAccession?: string;
 };
 
 type XrefData = {
@@ -52,8 +52,7 @@ type XRefListProps = {
   database: Database;
 };
 
-type XRefCategoryTableProps = {
-  databaseCategory: DatabaseCategory;
+type XRefCategoryInfoListProps = {
   databases: Database[];
   xRefData: XrefData[];
   accession: string;
@@ -108,13 +107,11 @@ export const XRefList: React.FC<XRefListProps> = ({
   return <Fragment>{nodes}</Fragment>;
 };
 
-export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
-  databaseCategory,
+export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   xRefData,
   accession,
 }) => {
-  const databaseCategoryString = databaseCategoryToString.get(databaseCategory);
   const infoData = databases.sort().map(database => ({
     title: database,
     content: (
@@ -122,13 +119,7 @@ export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
     ),
   }));
 
-  return (
-    <div>
-      <hr />
-      {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-      {<InfoList infoData={infoData} />}
-    </div>
-  );
+  return <InfoList infoData={infoData} />;
 };
 
 export const XRef: React.FC<XRefProps> = ({ data, section }) => {
@@ -163,14 +154,19 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
       const databases = Object.keys(
         foundDatabaseCategoriesToDatabases[foundDatabaseCategory]
       ) as Database[];
+      const databaseCategoryString = databaseCategoryToString.get(
+        foundDatabaseCategory as DatabaseCategory
+      );
       return (
-        <XRefCategoryTable
-          key={v1()}
-          databaseCategory={foundDatabaseCategory as DatabaseCategory}
-          databases={databases}
-          xRefData={foundXrefData}
-          accession={accession}
-        />
+        <Fragment key={v1()}>
+          <hr />
+          {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
+          <XRefCategoryInfoList
+            databases={databases}
+            xRefData={foundXrefData}
+            accession={accession}
+          />
+        </Fragment>
       );
     });
   return <Fragment>{nodes}</Fragment>;
