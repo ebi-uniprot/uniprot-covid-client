@@ -13,7 +13,7 @@ export const formatLargeNumber = (x: number) => {
 };
 
 export const loadWebComponent = (name: string, className: any) => {
-  if (!window.customElements.get(name)) {
+  if (window.customElements && !window.customElements.get(name)) {
     window.customElements.define(name, className);
   }
 };
