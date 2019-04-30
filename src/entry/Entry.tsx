@@ -13,8 +13,6 @@ import TissueSpeficity from '../model/TissueSpeficity';
 import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
 import { Keyword } from '../model/Keyword';
-// import entrySectionToKeywordCategories from '../data/keywords';
-import KeywordCategoryType from '../model/types/keywordTypes';
 
 interface MatchParams {
   accession: string;

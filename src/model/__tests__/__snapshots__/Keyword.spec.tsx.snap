@@ -58,9 +58,9 @@ exports[`Keyword should render for SubCellularLocation section 1`] = `
 `;
 
 exports[`KeywordItem should render for database Ensembl 1`] = `
-"<a href=\\"https://www.uniprot.org/keywords/KW-11111\\">
+"<Link to=\\"/keywords/KW-11111\\" replace={false}>
   keyword value
-</a>"
+</Link>"
 `;
 
 exports[`KeywordList should render for database category GENOME and Ensembl 1`] = `

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
-import apiUrls from '../utils/apiUrls';
+import { Link } from 'react-router-dom';
 import EntrySectionType from './types/EntrySection';
 import {
   entrySectionToKeywordCategories,
@@ -36,7 +36,7 @@ export const KeywordItem: React.FC<KeywordItempProps> = ({ id, value }) => {
   if (!id || !value) {
     return null;
   }
-  return <a href={apiUrls.keyword(id)}>{value}</a>;
+  return <Link to={`/keywords/${id}`}>{value}</Link>;
 };
 
 export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
