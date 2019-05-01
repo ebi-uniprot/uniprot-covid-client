@@ -16,7 +16,6 @@ exports[`XRef should render for ProteinProcessing section 1`] = `"<Fragment />"`
 
 exports[`XRef should render for Sequence section 1`] = `
 "<Fragment>
-  <hr />
   <h4>
     Genome annotation databases
   </h4>
