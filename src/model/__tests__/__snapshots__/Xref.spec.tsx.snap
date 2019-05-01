@@ -27,6 +27,8 @@ exports[`XRef should render for Sequence section 1`] = `
 
 exports[`XRef should render for Structure section 1`] = `"<Fragment />"`;
 
+exports[`XRef should render for SubCellularLocation section 1`] = `"<Fragment />"`;
+
 exports[`XRefCategoryInfoList should render for database category GENOME and Ensembl 1`] = `"<Component infoData={{...}} />"`;
 
 exports[`XRefItem should render 1`] = `
