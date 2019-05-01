@@ -119,6 +119,9 @@ export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
     ),
   }));
 
+  if (infoData.length === 0) {
+    return null;
+  }
   return <InfoList infoData={infoData} />;
 };
 
@@ -157,15 +160,21 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
       const databaseCategoryString = databaseCategoryToString.get(
         foundDatabaseCategory as DatabaseCategory
       );
+      const infoListNode = (
+        <XRefCategoryInfoList
+          databases={databases}
+          xRefData={foundXrefData}
+          accession={accession}
+        />
+      );
+      if (!infoListNode) {
+        return null;
+      }
       return (
         <Fragment key={v1()}>
           <hr />
           {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-          <XRefCategoryInfoList
-            databases={databases}
-            xRefData={foundXrefData}
-            accession={accession}
-          />
+          {infoListNode}
         </Fragment>
       );
     });
