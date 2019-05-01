@@ -7,15 +7,22 @@ import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
 import FeatureTypes from './types/featureTypes';
 
+enum LocationModifier {
+  EXACT = 'EXACT',
+  OUTSIDE = 'OUTSIDE',
+  UNSURE = 'UNSURE',
+  UNKNOWN = 'UNKNOWN',
+}
+
 type FeatureLocation = {
-  value: number;
-  modifier: string;
+  value?: number;
+  modifier: LocationModifier;
 };
 
 type Feature = {
   type: string;
-  featureId: string;
-  description: string;
+  featureId?: string;
+  description?: string;
   location: {
     start: FeatureLocation;
     end: FeatureLocation;
@@ -57,7 +64,13 @@ const columns = {
 
 const processData = (data: Feature[], types: string[] = []) =>
   data
-    .filter(feature => types.length <= 0 || types.includes(feature.type))
+    .filter(
+      feature =>
+        types.length <= 0 ||
+        (types.includes(feature.type) &&
+          feature.location.start.modifier !== LocationModifier.UNKNOWN &&
+          feature.location.end.modifier !== LocationModifier.UNKNOWN)
+    )
     .map(feature => {
       return {
         accession: feature.featureId,

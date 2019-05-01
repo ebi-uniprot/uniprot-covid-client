@@ -42,6 +42,7 @@
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
+    "protvista-datatable": "^2.0.4",
     "protvista-manager": "^2.0.3",
     "protvista-navigation": "^2.0.0",
     "protvista-sequence": "^2.0.3",
