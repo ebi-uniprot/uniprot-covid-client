@@ -34,6 +34,8 @@ type ProtvistaFeature = {
   description: string;
   start: number;
   end: number;
+  startModifier: LocationModifier;
+  endModifier: LocationModifier;
 };
 
 type FeaturesViewProps = {
@@ -53,8 +55,11 @@ const columns = {
   },
   positions: {
     label: 'Positions',
-    resolver: (d: ProtvistaFeature) =>
-      d.start === d.end ? d.start : `${d.start}-${d.end}`,
+    resolver: (d: ProtvistaFeature) => {
+      return `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
+        d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
+      }`;
+    },
   },
   description: {
     label: 'Description',
@@ -64,18 +69,14 @@ const columns = {
 
 const processData = (data: Feature[], types: string[] = []) =>
   data
-    .filter(
-      feature =>
-        types.length <= 0 ||
-        (types.includes(feature.type) &&
-          feature.location.start.modifier !== LocationModifier.UNKNOWN &&
-          feature.location.end.modifier !== LocationModifier.UNKNOWN)
-    )
+    .filter(feature => types.length <= 0 || types.includes(feature.type))
     .map(feature => {
       return {
         accession: feature.featureId,
         start: feature.location.start.value,
         end: feature.location.end.value,
+        startModifier: feature.location.start.modifier,
+        endModifier: feature.location.end.modifier,
         type: feature.type,
         description: feature.description,
       };
