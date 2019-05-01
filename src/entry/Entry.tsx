@@ -13,6 +13,7 @@ import TissueSpeficity from '../model/TissueSpeficity';
 import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
 import FeaturesView from '../model/FeaturesView';
+import FeatureTypes from '../model/types/featureTypes';
 
 interface MatchParams {
   accession: string;
@@ -40,9 +41,9 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         <FeaturesView
           data={entryData}
           types={[
-            'active site',
-            'Other binding site',
-            'Nucleotide-binding region',
+            FeatureTypes.ACTIVE_SITE,
+            FeatureTypes.OTHER_BINDING_SITE,
+            FeatureTypes.NUCLEOTIDE_BINDING,
           ]}
         />
         <XRef data={entryData} section={EntrySectionType.Function} />
@@ -56,11 +57,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       <Card title="PTM/Processing">
         <FeaturesView
           data={entryData}
-          types={[
-            'chain',
-            'Post-translationally modified residue',
-            'cross-link',
-          ]}
+          types={[FeatureTypes.CHAIN, FeatureTypes.PTM, FeatureTypes.CROSSLINK]}
         />
       </Card>
       <Card title="Expression">

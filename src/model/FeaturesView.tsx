@@ -5,6 +5,7 @@ import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
+import FeatureTypes from './types/featureTypes';
 
 type FeatureLocation = {
   value: number;
@@ -35,7 +36,7 @@ type FeaturesViewProps = {
     };
     features?: Feature[];
   };
-  types?: string[];
+  types?: FeatureTypes[];
 };
 
 const columns = {
@@ -56,14 +57,14 @@ const columns = {
 
 const processData = (data: Feature[], types: string[] = []) =>
   data
-    .filter(d => types.length <= 0 || types.includes(d.type))
-    .map(d => {
+    .filter(feature => types.length <= 0 || types.includes(feature.type))
+    .map(feature => {
       return {
-        accession: d.featureId,
-        start: d.location.start.value,
-        end: d.location.end.value,
-        type: d.type,
-        description: d.description,
+        accession: feature.featureId,
+        start: feature.location.start.value,
+        end: feature.location.end.value,
+        type: feature.type,
+        description: feature.description,
       };
     });
 
@@ -79,15 +80,18 @@ const FeaturesView: React.FC<FeaturesViewProps> = ({ data, types }) => {
   }
 
   const processedData = processData(data.features, types);
+  if (processedData.length <= 0) {
+    return null;
+  }
 
   const setTrackData = useCallback(node => {
-    if (node !== null) {
+    if (!!node) {
       node.data = processedData;
     }
   }, []);
 
   const setTableData = useCallback(node => {
-    if (node !== null) {
+    if (!!node) {
       node.data = processedData;
       node.columns = columns;
     }
