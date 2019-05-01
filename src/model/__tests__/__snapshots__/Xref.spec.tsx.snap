@@ -8,6 +8,8 @@ exports[`XRef should render for Function section 1`] = `"<Fragment />"`;
 
 exports[`XRef should render for Interaction section 1`] = `"<Fragment />"`;
 
+exports[`XRef should render for Miscellaneous section 1`] = `"<Fragment />"`;
+
 exports[`XRef should render for NamesAndTaxonomy section 1`] = `"<Fragment />"`;
 
 exports[`XRef should render for PathologyOrBioTech section 1`] = `"<Fragment />"`;

@@ -12,6 +12,9 @@ import { SequenceViewEntry } from '../model/SequenceView';
 import TissueSpeficity from '../model/TissueSpeficity';
 import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
+import { Keyword } from '../model/Keyword';
+import FeaturesView from '../model/FeaturesView';
+import FeatureTypes from '../model/types/featureTypes';
 
 interface MatchParams {
   accession: string;
@@ -36,25 +39,41 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           type={FreeTextType.PATHWAY}
           includeTitle={true}
         />
+        <Keyword data={entryData} section={EntrySectionType.Function} />
+        <FeaturesView
+          data={entryData}
+          types={[
+            FeatureTypes.ACTIVE_SITE,
+            FeatureTypes.OTHER_BINDING_SITE,
+            FeatureTypes.NUCLEOTIDE_BINDING,
+          ]}
+        />
         <XRef data={entryData} section={EntrySectionType.Function} />
       </Card>
       <Card title="Names & Taxonomy">
         <EntryProteinNames data={entryData} />
         <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
       </Card>
-      {/* <Card title="Subcellular Location" />
-      <Card title="Pathology & Biotech" />
-      <Card title="PTM/Processing" /> */}
+      {/* <Card title="Subcellular Location" /> */}
+      {/* <Card title="Pathology & Biotech" /> */}
+      <Card title="PTM/Processing">
+        <FeaturesView
+          data={entryData}
+          types={[FeatureTypes.CHAIN, FeatureTypes.PTM, FeatureTypes.CROSSLINK]}
+        />
+      </Card>
       <Card title="Expression">
         <TissueSpeficity data={entryData} />
         <Induction data={entryData} />
-        <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
+        <Keyword data={entryData} section={EntrySectionType.Expression} />
+        <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card>
       {/* <Card title="Interaction" />
       <Card title="Structure" />
       <Card title="Family & Domains" /> */}
       <Card title="Sequences">
         <SequenceViewEntry data={entryData} />
+        <Keyword data={entryData} section={EntrySectionType.Sequence} />
         <XRef data={entryData} section={EntrySectionType.Sequence} />
       </Card>
       {/* <Card title="Similar Proteins" />
