@@ -19,7 +19,7 @@
   ],
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "babel-jest",
+      "^.+\\.(tsx|js|ts)?$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
@@ -36,11 +36,17 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
+    "d3": "^5.9.2",
     "franklin-sites": "0.0.3-dev.33",
     "idx": "^2.5.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
+    "protvista-datatable": "^2.0.4",
+    "protvista-manager": "^2.0.3",
+    "protvista-navigation": "^2.0.0",
+    "protvista-sequence": "^2.0.3",
+    "protvista-track": "^2.0.3",
     "query-string": "^6.2.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
@@ -60,6 +66,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@types/d3": "^5.7.2",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.13",
     "@types/query-string": "^6.2.0",
@@ -82,6 +89,7 @@
     "jest-enzyme": "^6.1.2",
     "node-sass": "^4.9.3",
     "react-test-renderer": "^16.5.2",
+    "react-testing-library": "^7.0.0",
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
