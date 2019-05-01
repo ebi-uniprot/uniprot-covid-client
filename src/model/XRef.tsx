@@ -15,20 +15,20 @@ import {
 } from '../model/types/databaseTypes';
 
 type Property = {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 };
 
 type DatabaseCrossReference = {
-  databaseType: Database;
-  id: string;
-  properties: [Property];
+  databaseType?: Database;
+  id?: string;
+  properties?: [Property];
   isoformId?: string;
 };
 
 type Data = {
-  databaseCrossReferences: [DatabaseCrossReference];
-  primaryAccession: string;
+  databaseCrossReferences?: [DatabaseCrossReference];
+  primaryAccession?: string;
 };
 
 type XrefData = {
@@ -52,8 +52,7 @@ type XRefListProps = {
   database: Database;
 };
 
-type XRefCategoryTableProps = {
-  databaseCategory: DatabaseCategory;
+type XRefCategoryInfoListProps = {
   databases: Database[];
   xRefData: XrefData[];
   accession: string;
@@ -77,10 +76,10 @@ export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
       .join(' ');
   }
   return (
-    <Fragment>
+    <li key={v1()}>
       <ExternalLink url={uri}>{xRefEntry.id}</ExternalLink>
       {properties}
-    </Fragment>
+    </li>
   );
 };
 
@@ -89,7 +88,7 @@ export const XRefList: React.FC<XRefListProps> = ({
   xRefData,
   accession,
 }) => {
-  const content = xRefData
+  const nodes = xRefData
     .filter(
       (xRefDatum: XrefData) =>
         idx(xRefDatum, _ => _.xref.databaseType) === database
@@ -100,36 +99,30 @@ export const XRefList: React.FC<XRefListProps> = ({
         return null;
       }
       return (
-        <ul key={v1()}>
+        <ul className="no-bullet" key={v1()}>
           <XRefItem xRefEntry={xref} accession={accession} />
         </ul>
       );
     });
-  const infoData = [{ title: database, content }];
-  return <InfoList infoData={infoData} />;
+  return <Fragment>{nodes}</Fragment>;
 };
 
-export const XRefCategoryTable: React.FC<XRefCategoryTableProps> = ({
-  databaseCategory,
+export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   xRefData,
   accession,
 }) => {
-  const databaseCategoryString = databaseCategoryToString.get(databaseCategory);
-  return (
-    <div>
-      <hr />
-      {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-      {databases.sort().map(database => (
-        <XRefList
-          key={v1()}
-          database={database}
-          xRefData={xRefData}
-          accession={accession}
-        />
-      ))}
-    </div>
-  );
+  const infoData = databases.sort().map(database => ({
+    title: database,
+    content: (
+      <XRefList database={database} xRefData={xRefData} accession={accession} />
+    ),
+  }));
+
+  if (infoData.length === 0) {
+    return null;
+  }
+  return <InfoList infoData={infoData} />;
 };
 
 export const XRef: React.FC<XRefProps> = ({ data, section }) => {
@@ -164,14 +157,24 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
       const databases = Object.keys(
         foundDatabaseCategoriesToDatabases[foundDatabaseCategory]
       ) as Database[];
-      return (
-        <XRefCategoryTable
-          key={v1()}
-          databaseCategory={foundDatabaseCategory as DatabaseCategory}
+      const databaseCategoryString = databaseCategoryToString.get(
+        foundDatabaseCategory as DatabaseCategory
+      );
+      const infoListNode = (
+        <XRefCategoryInfoList
           databases={databases}
           xRefData={foundXrefData}
           accession={accession}
         />
+      );
+      if (!infoListNode) {
+        return null;
+      }
+      return (
+        <Fragment key={v1()}>
+          {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
+          {infoListNode}
+        </Fragment>
       );
     });
   return <Fragment>{nodes}</Fragment>;

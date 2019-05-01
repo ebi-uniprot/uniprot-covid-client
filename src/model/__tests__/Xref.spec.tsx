@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { XRef, XRefItem, XRefList, XRefCategoryTable } from '../XRef';
+import { XRef, XRefItem, XRefList, XRefCategoryInfoList } from '../XRef';
 import data from './modelData.json';
 import EntrySectionType from '../../model/types/EntrySection';
 import { Database, DatabaseCategory } from '../types/databaseTypes';
@@ -19,13 +19,11 @@ describe('XRef', () => {
   }
 });
 
-describe('XRefCategoryTable', () => {
+describe('XRefCategoryInfoList', () => {
   test('should render for database category GENOME and Ensembl', () => {
     const { databaseCrossReferences, primaryAccession } = data;
     const wrapper = shallow(
-      <XRefCategoryTable
-        key={1}
-        databaseCategory={DatabaseCategory.GENOME}
+      <XRefCategoryInfoList
         databases={[Database.Ensembl]}
         xRefData={databaseCrossReferences}
         accession={primaryAccession}
