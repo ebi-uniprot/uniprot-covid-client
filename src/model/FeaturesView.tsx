@@ -15,7 +15,7 @@ enum LocationModifier {
 }
 
 type FeatureLocation = {
-  value?: number;
+  value: number;
   modifier: LocationModifier;
 };
 
