@@ -172,7 +172,6 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
       }
       return (
         <Fragment key={v1()}>
-          <hr />
           {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
           {infoListNode}
         </Fragment>
