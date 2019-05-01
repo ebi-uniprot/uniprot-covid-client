@@ -18,7 +18,10 @@ exports[`XRef should render for ProteinProcessing section 1`] = `"<Fragment />"`
 
 exports[`XRef should render for Sequence section 1`] = `
 "<Fragment>
-  <XRefCategoryTable databaseCategory=\\"GENOME\\" databases={{...}} xRefData={{...}} accession=\\"P21802\\" />
+  <h4>
+    Genome annotation databases
+  </h4>
+  <XRefCategoryInfoList databases={{...}} xRefData={{...}} accession=\\"P21802\\" />
 </Fragment>"
 `;
 
@@ -26,23 +29,15 @@ exports[`XRef should render for Structure section 1`] = `"<Fragment />"`;
 
 exports[`XRef should render for SubCellularLocation section 1`] = `"<Fragment />"`;
 
-exports[`XRefCategoryTable should render for database category GENOME and Ensembl 1`] = `
-"<div>
-  <hr />
-  <h4>
-    Genome annotation databases
-  </h4>
-  <XRefList database=\\"Ensembl\\" xRefData={{...}} accession=\\"P21802\\" />
-</div>"
-`;
+exports[`XRefCategoryInfoList should render for database category GENOME and Ensembl 1`] = `"<Component infoData={{...}} />"`;
 
 exports[`XRefItem should render 1`] = `
-"<Fragment>
+"<li>
   <Nr url=\\"https://www.ensembl.org/id/id value\\" newTab={true}>
     id value
   </Nr>
   description value
-</Fragment>"
+</li>"
 `;
 
-exports[`XRefList should render for database Ensembl 1`] = `"<Component infoData={{...}} />"`;
+exports[`XRefList should render for database Ensembl 1`] = `"<Fragment />"`;
