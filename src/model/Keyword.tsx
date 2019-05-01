@@ -85,13 +85,15 @@ export const Keyword: React.FC<KeywordProps> = ({ data, section }) => {
         <KeywordList keywords={foundCategoryToKeywords[foundCategory]} />
       ),
     }));
-  const node = infoData.length && (
+  if (infoData.length === 0) {
+    return null;
+  }
+  return (
     <Fragment>
       <h4>Keywords</h4>
       <InfoList infoData={infoData} />
     </Fragment>
   );
-  return <Fragment>{node}</Fragment>;
 };
 
 export default Keyword;
