@@ -8,6 +8,8 @@ exports[`XRef should render for Function section 1`] = `"<Fragment />"`;
 
 exports[`XRef should render for Interaction section 1`] = `"<Fragment />"`;
 
+exports[`XRef should render for Miscellaneous section 1`] = `"<Fragment />"`;
+
 exports[`XRef should render for NamesAndTaxonomy section 1`] = `"<Fragment />"`;
 
 exports[`XRef should render for PathologyOrBioTech section 1`] = `"<Fragment />"`;
@@ -21,6 +23,8 @@ exports[`XRef should render for Sequence section 1`] = `
 `;
 
 exports[`XRef should render for Structure section 1`] = `"<Fragment />"`;
+
+exports[`XRef should render for SubCellularLocation section 1`] = `"<Fragment />"`;
 
 exports[`XRefCategoryTable should render for database category GENOME and Ensembl 1`] = `
 "<div>
