@@ -77,6 +77,10 @@ export const FreeText: React.FC<FreeTextProps> = ({
       </p>
     ));
 
+  if (!freeTextData) {
+    return null;
+  }
+
   return (
     <Fragment>
       {includeTitle && (
