@@ -9,8 +9,6 @@ import XRef from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
-import TissueSpeficity from '../model/TissueSpeficity';
-import Induction from '../model/Induction';
 import EntrySectionType from '../model/types/EntrySection';
 import { Keyword } from '../model/Keyword';
 import FeaturesView from '../model/FeaturesView';
@@ -54,8 +52,8 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         <EntryProteinNames data={entryData} />
         <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
       </Card>
-      {/* <Card title="Subcellular Location" /> */}
-      {/* <Card title="Pathology & Biotech" /> */}
+      {/* <Card title="Subcellular Location" />
+      <Card title="Pathology & Biotech" /> */}
       <Card title="PTM/Processing">
         <FeaturesView
           data={entryData}
@@ -63,8 +61,10 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         />
       </Card>
       <Card title="Expression">
-        <TissueSpeficity data={entryData} />
-        <Induction data={entryData} />
+        <h4>Tissue specificity</h4>
+        <FreeText data={entryData} type={FreeTextType.TISSUE_SPECIFICITY} />
+        <h4>Induction</h4>
+        <FreeText data={entryData} type={FreeTextType.INDUCTION} />
         <Keyword data={entryData} section={EntrySectionType.Expression} />
         <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card>
