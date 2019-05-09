@@ -58,18 +58,16 @@ const columns = {
   },
   positions: {
     label: 'Positions',
-    resolver: (d: ProtvistaFeature) => {
-      return `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
+    resolver: (d: ProtvistaFeature) =>
+      `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
         d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
-      }`;
-    },
+      }`,
   },
   description: {
     label: 'Description',
-    resolver: (d: ProtvistaFeature) => {
-      return `${d.description} ${d.evidences &&
-        d.evidences.map(evidence => `(${evidence.evidenceCode}) `)}`;
-    },
+    resolver: (d: ProtvistaFeature) =>
+      `${d.description} ${d.evidences &&
+        d.evidences.map(evidence => `(${evidence.evidenceCode}) `)}`,
   },
 };
 
