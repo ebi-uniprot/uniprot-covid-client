@@ -6,6 +6,7 @@ import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
 import FeatureTypes from './types/featureTypes';
+import { EvidenceType } from './types/modelTypes';
 
 enum LocationModifier {
   EXACT = 'EXACT',
@@ -27,11 +28,13 @@ type Feature = {
     start: FeatureLocation;
     end: FeatureLocation;
   };
+  evidences?: EvidenceType[];
 };
 
 type ProtvistaFeature = {
   type: string;
   description: string;
+  evidences: EvidenceType[];
   start: number;
   end: number;
   startModifier: LocationModifier;
@@ -63,13 +66,18 @@ const columns = {
   },
   description: {
     label: 'Description',
-    resolver: (d: ProtvistaFeature) => d.description,
+    resolver: (d: ProtvistaFeature) => {
+      return `${d.description} ${d.evidences &&
+        d.evidences.map(evidence => `(${evidence.evidenceCode}) `)}`;
+    },
   },
 };
 
 const processData = (data: Feature[], types: string[] = []) =>
   data
-    .filter(feature => types.length <= 0 || types.includes(feature.type))
+    .filter(feature => {
+      return types.length <= 0 || types.includes(feature.type);
+    })
     .map(feature => {
       return {
         accession: feature.featureId,
@@ -79,6 +87,7 @@ const processData = (data: Feature[], types: string[] = []) =>
         endModifier: feature.location.end.modifier,
         type: feature.type,
         description: feature.description,
+        evidences: feature.evidences,
       };
     });
 
