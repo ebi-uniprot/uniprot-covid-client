@@ -41,9 +41,19 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         <FeaturesView
           data={entryData}
           types={[
-            FeatureTypes.ACTIVE_SITE,
-            FeatureTypes.OTHER_BINDING_SITE,
-            FeatureTypes.NUCLEOTIDE_BINDING,
+            FeatureTypes.DOMAIN,
+            FeatureTypes.REPEAT,
+            FeatureTypes.CA_BIND,
+            FeatureTypes.ZN_FING,
+            FeatureTypes.DNA_BIND,
+            FeatureTypes.NP_BINDL,
+            FeatureTypes.REGION,
+            FeatureTypes.COILED,
+            FeatureTypes.MOTIF,
+            FeatureTypes.ACT_SITE,
+            FeatureTypes.METAL,
+            FeatureTypes.BINDING,
+            FeatureTypes.SITE,
           ]}
         />
         <XRef data={entryData} section={EntrySectionType.Function} />
@@ -52,12 +62,35 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         <EntryProteinNames data={entryData} />
         <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
       </Card>
-      {/* <Card title="Subcellular Location" />
-      <Card title="Pathology & Biotech" /> */}
+      <Card title="Subcellular Location">
+        <FeaturesView
+          data={entryData}
+          types={[
+            FeatureTypes.TOPO_DOM,
+            FeatureTypes.TRANSMEM,
+            FeatureTypes.INTRAMEM,
+          ]}
+        />
+      </Card>
+      <Card title="Pathology & Biotech">
+        <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
+      </Card>
       <Card title="PTM/Processing">
         <FeaturesView
           data={entryData}
-          types={[FeatureTypes.CHAIN, FeatureTypes.PTM, FeatureTypes.CROSSLINK]}
+          types={[
+            FeatureTypes.INIT_MET,
+            FeatureTypes.SIGNAL,
+            FeatureTypes.TRANSIT,
+            FeatureTypes.PROPEP,
+            FeatureTypes.CHAIN,
+            FeatureTypes.PEPTIDE,
+            FeatureTypes.MOD_RES,
+            FeatureTypes.LIPID,
+            FeatureTypes.CARBOHYD,
+            FeatureTypes.DISULFID,
+            FeatureTypes.CROSSLNK,
+          ]}
         />
       </Card>
       <Card title="Expression">
@@ -68,11 +101,27 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         <Keyword data={entryData} section={EntrySectionType.Expression} />
         <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card>
-      {/* <Card title="Interaction" />
-      <Card title="Structure" />
-      <Card title="Family & Domains" /> */}
+      {/* <Card title="Interaction" /> */}
+      <Card title="Structure">
+        <FeaturesView
+          data={entryData}
+          types={[FeatureTypes.HELIX, FeatureTypes.TURN, FeatureTypes.STRAND]}
+        />
+      </Card>
+      {/* <Card title="Family & Domains" /> */}
       <Card title="Sequences">
         <SequenceViewEntry data={entryData} />
+        <FeaturesView
+          data={entryData}
+          types={[
+            FeatureTypes.COMPBIAS,
+            FeatureTypes.NON_STD,
+            FeatureTypes.UNSURE,
+            FeatureTypes.CONFLICT,
+            FeatureTypes.NON_CONS,
+            FeatureTypes.NON_TER,
+          ]}
+        />
         <Keyword data={entryData} section={EntrySectionType.Sequence} />
         <XRef data={entryData} section={EntrySectionType.Sequence} />
       </Card>
