@@ -4,7 +4,8 @@ import useDataApi from '../utils/useDataApi';
 import apiUrls from '../utils/apiUrls';
 import { EntryProteinNames } from '../model/ProteinNames';
 import { ProteinOverview } from '../model/ProteinOverview';
-import { FreeText, FreeTextType } from '../model/FreeText';
+import { FreeText } from '../model/FreeText';
+import { CommentType } from '../model/types/commentType';
 import XRef from '../model/XRef';
 import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
@@ -30,11 +31,11 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     <Fragment>
       <ProteinOverview data={entryData} />
       <Card title="Function">
-        <FreeText data={entryData} type={FreeTextType.FUNCTION} />
+        <FreeText data={entryData} type={CommentType.FUNCTION} />
         <CatalyticActivity data={entryData} />
         <FreeText
           data={entryData}
-          type={FreeTextType.PATHWAY}
+          type={CommentType.PATHWAY}
           includeTitle={true}
         />
         <Keyword data={entryData} section={EntrySectionType.Function} />
@@ -73,6 +74,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         />
       </Card>
       <Card title="Pathology & Biotech">
+        <h4>Mutagenesis</h4>
         <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
       </Card>
       <Card title="PTM/Processing">
@@ -95,9 +97,9 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
       </Card>
       <Card title="Expression">
         <h4>Tissue specificity</h4>
-        <FreeText data={entryData} type={FreeTextType.TISSUE_SPECIFICITY} />
+        <FreeText data={entryData} type={CommentType.TISSUE_SPECIFICITY} />
         <h4>Induction</h4>
-        <FreeText data={entryData} type={FreeTextType.INDUCTION} />
+        <FreeText data={entryData} type={CommentType.INDUCTION} />
         <Keyword data={entryData} section={EntrySectionType.Expression} />
         <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card>
