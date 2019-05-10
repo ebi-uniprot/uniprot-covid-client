@@ -14,13 +14,13 @@ type Keyword = {
   category?: KeywordCategory;
 };
 
-type Data = {
+export type KewyordsData = {
   keywords?: Keyword[];
 };
 
 type KeywordProps = {
   section: EntrySectionType;
-  data: Data;
+  data: KewyordsData;
 };
 
 type KeywordListProps = {

@@ -8526,7 +8526,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`XRef should render for PathologyOrBioTech section 1`] = `
+exports[`XRef should render for PathologyAndBioTech section 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <XRef
@@ -9893,7 +9893,7 @@ ShallowWrapper {
         "uniProtId": "uniprot id",
       }
     }
-    section="PathologyOrBioTech"
+    section="PathologyAndBioTech"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

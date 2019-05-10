@@ -2,14 +2,7 @@
 
 exports[`Keyword should render for Expression section 1`] = `""`;
 
-exports[`Keyword should render for FamilyAndDomains section 1`] = `
-"<Fragment>
-  <h4>
-    Keywords
-  </h4>
-  <Component infoData={{...}} />
-</Fragment>"
-`;
+exports[`Keyword should render for FamilyAndDomains section 1`] = `""`;
 
 exports[`Keyword should render for Function section 1`] = `""`;
 
@@ -19,7 +12,7 @@ exports[`Keyword should render for Miscellaneous section 1`] = `""`;
 
 exports[`Keyword should render for NamesAndTaxonomy section 1`] = `""`;
 
-exports[`Keyword should render for PathologyOrBioTech section 1`] = `""`;
+exports[`Keyword should render for PathologyAndBioTech section 1`] = `""`;
 
 exports[`Keyword should render for ProteinProcessing section 1`] = `""`;
 

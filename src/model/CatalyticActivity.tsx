@@ -4,7 +4,7 @@ import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
 import { FreeTextType } from './FreeText';
 
-type CatalyticActivityData = {
+export type CatalyticActivityData = {
   comments?: [
     {
       commentType: FreeTextType;

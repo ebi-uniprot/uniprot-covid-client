@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import useDataApi from '../utils/useDataApi';
+import UniProtKBEntryConfig from './uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { EntryProteinNames } from '../model/ProteinNames';
 import { ProteinOverview } from '../model/ProteinOverview';
 import { FreeText, FreeTextType } from '../model/FreeText';
 import XRef from '../model/XRef';
-import { CatalyticActivity } from '../model/CatalyticActivity';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
 import EntrySectionType from '../model/types/EntrySection';
@@ -26,52 +26,29 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
   if (Object.keys(entryData).length <= 0) {
     return null;
   }
+
+  const sectionArray = [];
+  const inPageNavItems = [];
+  for (const [name, section] of UniProtKBEntryConfig) {
+    const sectionContent = section(entryData);
+    sectionContent &&
+      sectionArray.push(
+        <Card title={name} key={name}>
+          {sectionContent}
+        </Card>
+      );
+    inPageNavItems.push({
+      id: name,
+      name: name,
+      disabled: sectionContent === null,
+    });
+  }
+
   return (
     <Fragment>
       <ProteinOverview data={entryData} />
-      <Card title="Function">
-        <FreeText data={entryData} type={FreeTextType.FUNCTION} />
-        <CatalyticActivity data={entryData} />
-        <FreeText
-          data={entryData}
-          type={FreeTextType.PATHWAY}
-          includeTitle={true}
-        />
-        <Keyword data={entryData} section={EntrySectionType.Function} />
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.DOMAIN,
-            FeatureTypes.REPEAT,
-            FeatureTypes.CA_BIND,
-            FeatureTypes.ZN_FING,
-            FeatureTypes.DNA_BIND,
-            FeatureTypes.NP_BINDL,
-            FeatureTypes.REGION,
-            FeatureTypes.COILED,
-            FeatureTypes.MOTIF,
-            FeatureTypes.ACT_SITE,
-            FeatureTypes.METAL,
-            FeatureTypes.BINDING,
-            FeatureTypes.SITE,
-          ]}
-        />
-        <XRef data={entryData} section={EntrySectionType.Function} />
-      </Card>
-      <Card title="Names & Taxonomy">
-        <EntryProteinNames data={entryData} />
-        <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
-      </Card>
-      <Card title="Subcellular Location">
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.TOPO_DOM,
-            FeatureTypes.TRANSMEM,
-            FeatureTypes.INTRAMEM,
-          ]}
-        />
-      </Card>
+      {sectionArray}
+
       <Card title="Pathology & Biotech">
         <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
       </Card>

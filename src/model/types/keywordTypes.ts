@@ -29,7 +29,7 @@ entrySectionToKeywordCategories.set(EntrySection.SubCellularLocation, [
 entrySectionToKeywordCategories.set(EntrySection.Miscellaneous, [
   KeywordCategory.TECHNICAL_TERM,
 ]);
-entrySectionToKeywordCategories.set(EntrySection.PathologyOrBioTech, [
+entrySectionToKeywordCategories.set(EntrySection.PathologyAndBioTech, [
   KeywordCategory.DISEASE,
 ]);
 entrySectionToKeywordCategories.set(EntrySection.FamilyAndDomains, [

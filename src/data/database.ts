@@ -207,7 +207,7 @@ entrySectionToDatabaseCategories.set(EntrySection.Interaction, [
 entrySectionToDatabaseCategories.set(EntrySection.NamesAndTaxonomy, [
   DatabaseCategory.ORGANISM,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.PathologyOrBioTech, [
+entrySectionToDatabaseCategories.set(EntrySection.PathologyAndBioTech, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.OTHER,
   DatabaseCategory.FAMILY,

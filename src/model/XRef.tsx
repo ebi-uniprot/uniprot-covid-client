@@ -26,19 +26,19 @@ type DatabaseCrossReference = {
   isoformId?: string;
 };
 
-type Data = {
+export type XrefData = {
   databaseCrossReferences?: [DatabaseCrossReference];
   primaryAccession?: string;
 };
 
-type XrefData = {
+export type XrefItem = {
   databaseCategory: string;
   xref: DatabaseCrossReference;
 };
 
 type XRefProps = {
   section: EntrySectionType;
-  data: Data;
+  data: XrefData;
 };
 
 type XRefItemProps = {
@@ -48,13 +48,13 @@ type XRefItemProps = {
 
 type XRefListProps = {
   accession: string;
-  xRefData: XrefData[];
+  xRefData: XrefItem[];
   database: Database;
 };
 
 type XRefCategoryInfoListProps = {
   databases: Database[];
-  xRefData: XrefData[];
+  xRefData: XrefItem[];
   accession: string;
 };
 
@@ -90,10 +90,10 @@ export const XRefList: React.FC<XRefListProps> = ({
 }) => {
   const nodes = xRefData
     .filter(
-      (xRefDatum: XrefData) =>
+      (xRefDatum: XrefItem) =>
         idx(xRefDatum, _ => _.xref.databaseType) === database
     )
-    .map((xRefDatum: XrefData) => {
+    .map((xRefDatum: XrefItem) => {
       const { xref } = xRefDatum;
       if (!xref) {
         return null;
@@ -130,7 +130,7 @@ export const XRef: React.FC<XRefProps> = ({ data, section }) => {
   if (!databaseCrossReferences || !accession) {
     return null;
   }
-  const foundXrefData: XrefData[] = [];
+  const foundXrefData: XrefItem[] = [];
   const foundDatabaseCategoriesToDatabases: {
     [databaseCategory: string]: { [database: string]: boolean };
   } = {};

@@ -41,13 +41,15 @@ type ProtvistaFeature = {
   endModifier: LocationModifier;
 };
 
-type FeaturesViewProps = {
-  data: {
-    sequence: {
-      value: string;
-    };
-    features?: Feature[];
+export type FeatureData = {
+  sequence: {
+    value: string;
   };
+  features?: Feature[];
+};
+
+type FeaturesViewProps = {
+  data: FeatureData;
   types?: FeatureTypes[];
 };
 

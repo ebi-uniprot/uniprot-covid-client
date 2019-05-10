@@ -1,15 +1,15 @@
 enum EntrySectionType {
-  Expression = 'Expression',
-  FamilyAndDomains = 'FamilyAndDomains',
   Function = 'Function',
+  FamilyAndDomains = 'Family & Domains',
+  Expression = 'Expression',
   Interaction = 'Interaction',
   Miscellaneous = 'Miscellaneous',
-  NamesAndTaxonomy = 'NamesAndTaxonomy',
-  PathologyOrBioTech = 'PathologyOrBioTech',
-  ProteinProcessing = 'ProteinProcessing',
+  NamesAndTaxonomy = 'Names & Taxonomy',
+  PathologyAndBioTech = 'Pathology & BioTech',
+  ProteinProcessing = 'Protein Processing',
   Sequence = 'Sequence',
   Structure = 'Structure',
-  SubCellularLocation = 'SubCellularLocation',
+  SubCellularLocation = 'Subcellular Location',
 }
 
 export default EntrySectionType;
