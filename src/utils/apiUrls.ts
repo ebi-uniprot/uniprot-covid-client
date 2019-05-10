@@ -1,13 +1,11 @@
-import urljoin from 'url-join';
+import urlJoin from 'url-join';
 import queryString from 'query-string';
-import { v1 } from 'uuid';
 import {
   SortableColumn,
-  SortDirection,
   SortDirectionApi,
 } from '../results/types/resultsTypes';
 
-export const joinUrl = (...args: string[]) => urljoin(args);
+export const joinUrl = (...args: string[]) => urlJoin(args);
 
 const prefix = '//wwwdev.ebi.ac.uk';
 

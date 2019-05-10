@@ -8,7 +8,6 @@ import AutocompleteWrapper from '../AutocompleteWrapper';
 import { getSuggesterUrl } from '../../utils/apiUrls';
 
 const mock = new MockAdapter(axios);
-jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 const response = {
@@ -63,61 +62,61 @@ const preparedSuggestions = [
     pathLabel: 'Homo sapiens (Human) [9606]',
     itemLabel: 'Homo sapiens (Human)',
     apiId: '9606',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human rotavirus [1906931]',
     itemLabel: 'Human rotavirus',
     apiId: '1906931',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human Bufavirus [1903319]',
     itemLabel: 'Human Bufavirus',
     apiId: '1903319',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human pegivirus [1758225]',
     itemLabel: 'Human pegivirus',
     apiId: '1758225',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human echovirus [1569923]',
     itemLabel: 'Human echovirus',
     apiId: '1569923',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human cosavirus [1233383]',
     itemLabel: 'Human cosavirus',
     apiId: '1233383',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human salivirus [1548189]',
     itemLabel: 'Human salivirus',
     apiId: '1548189',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human DNA virus [1904876]',
     itemLabel: 'Human DNA virus',
     apiId: '1904876',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human bocavirus [329641]',
     itemLabel: 'Human bocavirus',
     apiId: '329641',
-    id: 0,
+    id: 1,
   },
   {
     pathLabel: 'Human orf virus [240708]',
     itemLabel: 'Human orf virus',
     apiId: '240708',
-    id: 0,
+    id: 1,
   },
 ];
 

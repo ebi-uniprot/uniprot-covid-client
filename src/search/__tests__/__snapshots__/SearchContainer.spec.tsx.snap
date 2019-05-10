@@ -7,7 +7,7 @@ ShallowWrapper {
     clauses={
       Array [
         Object {
-          "id": 0,
+          "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -20,7 +20,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -33,7 +33,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -46,7 +46,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {

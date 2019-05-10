@@ -9,6 +9,6 @@ configure({ adapter: new Adapter() });
 describe('HomePage component', () => {
   test('should render', () => {
     const component = shallow(<HomePage />);
-    expect(component.debug()).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

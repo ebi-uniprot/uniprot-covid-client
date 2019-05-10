@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import v1 from 'uuid';
+import { v1 } from 'uuid';
 import idx from 'idx';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import {

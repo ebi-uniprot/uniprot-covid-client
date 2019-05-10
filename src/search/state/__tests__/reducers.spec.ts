@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import '@babel/polyfill';
 import apiUrls from '../../../utils/apiUrls';
-import { clause, searchTerms, evidences } from '../reducers';
+import { clause, searchTerms, evidences } from '../searchReducers';
 import {
   updateInputValue,
   updateEvidence,
@@ -12,8 +12,8 @@ import {
   receiveSearchTerms,
   requestEvidences,
   receiveEvidences,
-  selectSearchTerm
-} from '../actions';
+  selectSearchTerm,
+} from '../searchActions';
 
 const mock = new MockAdapter(axios);
 
@@ -25,13 +25,13 @@ describe('Clause reducer', () => {
     const state = {
       id: '1',
       searchTerm: 'foo',
-      queryInput: { stringValue: 'bar' }
+      queryInput: { stringValue: 'bar' },
     };
     const action = selectSearchTerm('1', 'baz');
     expect(clause(state, action)).toEqual({
       id: '1',
       searchTerm: 'baz',
-      queryInput: {}
+      queryInput: {},
     });
   });
 
@@ -39,13 +39,13 @@ describe('Clause reducer', () => {
     const state = {
       id: '1',
       field: 'foo',
-      queryInput: { stringValue: 'bar' }
+      queryInput: { stringValue: 'bar' },
     };
     const action = updateInputValue('1', 'qux');
     expect(clause(state, action)).toEqual({
       id: '1',
       field: 'foo',
-      queryInput: { stringValue: 'qux' }
+      queryInput: { stringValue: 'qux' },
     });
   });
 
@@ -53,13 +53,13 @@ describe('Clause reducer', () => {
     const state = {
       id: '1',
       field: 'foo',
-      queryInput: { rangeFrom: 1, rangeTo: 100 }
+      queryInput: { rangeFrom: 1, rangeTo: 100 },
     };
     const action = updateRangeValue('1', 2, true);
     expect(clause(state, action)).toEqual({
       id: '1',
       field: 'foo',
-      queryInput: { rangeFrom: 2, rangeTo: 100 }
+      queryInput: { rangeFrom: 2, rangeTo: 100 },
     });
   });
 
@@ -67,13 +67,13 @@ describe('Clause reducer', () => {
     const state = {
       id: '1',
       field: 'foo',
-      queryInput: { stringValue: 'bar', evidenceValue: 'garply' }
+      queryInput: { stringValue: 'bar', evidenceValue: 'garply' },
     };
     const action = updateEvidence('1', 'waldo');
     expect(clause(state, action)).toEqual({
       id: '1',
       field: 'foo',
-      queryInput: { stringValue: 'bar', evidenceValue: 'waldo' }
+      queryInput: { stringValue: 'bar', evidenceValue: 'waldo' },
     });
   });
 
@@ -82,14 +82,14 @@ describe('Clause reducer', () => {
       id: '1',
       field: 'foo',
       queryInput: { stringValue: 'bar' },
-      logicOperator: 'AND'
+      logicOperator: 'AND',
     };
     const action = updateLogicOperator('1', 'OR');
     expect(clause(state, action)).toEqual({
       id: '1',
       field: 'foo',
       queryInput: { stringValue: 'bar' },
-      logicOperator: 'OR'
+      logicOperator: 'OR',
     });
   });
 });
@@ -98,12 +98,12 @@ describe('searchTerms reducer', () => {
   test('should request search terms', () => {
     const state = {
       isFetching: false,
-      data: []
+      data: [],
     };
     const action = requestSearchTerms();
     expect(searchTerms(state, action)).toEqual({
       isFetching: true,
-      data: []
+      data: [],
     });
   });
 
@@ -113,13 +113,13 @@ describe('searchTerms reducer', () => {
 
     const state = {
       isFetching: true,
-      data: []
+      data: [],
     };
     const action = receiveSearchTerms(data);
     expect(searchTerms(state, action)).toEqual({
       isFetching: false,
       lastUpdated: dateNow,
-      data
+      data,
     });
   });
 });
@@ -129,15 +129,15 @@ describe('evidences reducer', () => {
     const state = {
       go: {
         data: [],
-        isFetching: false
-      }
+        isFetching: false,
+      },
     };
     const action = requestEvidences('go');
     expect(evidences(state, action)).toEqual({
       go: {
         data: [],
-        isFetching: true
-      }
+        isFetching: true,
+      },
     });
   });
 
@@ -148,33 +148,33 @@ describe('evidences reducer', () => {
         items: [
           {
             name: 'Any assertion method',
-            code: 'any'
+            code: 'any',
           },
           {
             name: 'Any manual assertion',
-            code: 'manual'
+            code: 'manual',
           },
           {
             name: 'Any automatic assertion',
-            code: 'automatic'
-          }
-        ]
-      }
+            code: 'automatic',
+          },
+        ],
+      },
     ];
     mock.onGet(apiUrls.evidences.go).reply(200, data);
     const state = {
       go: {
         data: [],
-        isFetching: false
-      }
+        isFetching: false,
+      },
     };
     const action = receiveEvidences(data, 'go');
     expect(evidences(state, action)).toEqual({
       go: {
         isFetching: false,
         lastUpdated: dateNow,
-        data
-      }
+        data,
+      },
     });
   });
 });

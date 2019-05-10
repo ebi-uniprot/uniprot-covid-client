@@ -4,7 +4,7 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
-import * as searchActions from './state/actions';
+import * as searchActions from './state/searchActions';
 import {
   Clause,
   SearchTermType,
