@@ -18,12 +18,12 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <R
+        <C
           footer="The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information."
           title="Find your protein"
         >
           <withRouter(Connect(Search)) />
-        </R>,
+        </C>,
         <Block
           columns="4"
         >
@@ -169,12 +169,12 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <R
+          <C
             footer="The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information."
             title="Find your protein"
           >
             <withRouter(Connect(Search)) />
-          </R>,
+          </C>,
           <Block
             columns="4"
           >

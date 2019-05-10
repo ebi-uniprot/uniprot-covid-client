@@ -16090,12 +16090,12 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Dr
+        <Nr
           newTab={true}
           url="https://www.ensembl.org/id/id value"
         >
           id value
-        </Dr>,
+        </Nr>,
         "description value",
       ],
     },
@@ -16125,12 +16125,12 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Dr
+          <Nr
             newTab={true}
             url="https://www.ensembl.org/id/id value"
           >
             id value
-          </Dr>,
+          </Nr>,
           "description value",
         ],
       },
