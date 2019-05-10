@@ -5,6 +5,7 @@ import { v1 } from 'uuid';
 import CommentType from './types/commentType';
 
 export type FreeTextType =
+  | CommentType.DISRUPTION_PHENOTYPE
   | CommentType.DOMAIN
   | CommentType.FUNCTION
   | CommentType.INDUCTION
