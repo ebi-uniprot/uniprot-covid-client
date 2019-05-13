@@ -1,15 +1,335 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HomePage component should render 1`] = `
-"<HomePageLayout>
-  <C title=\\"Find your protein\\" footer=\\"The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.\\">
-    <withRouter(Connect(Search)) />
-  </C>
-  <Block columns=\\"4\\">
-    <Component title=\\"UniProtKB\\" description=\\"This is a short description of what the resource is/provides.\\" namespace=\\"\\" />
-    <Component title=\\"Proteomes\\" namespace=\\"proteomes\\" description=\\"Sets of proteins for reference and other species of interest.\\" />
-    <Component title=\\"UniRef\\" namespace=\\"uniref\\" description=\\"Clusters of protein sequences at 100%, 90% & 50% similarity\\" />
-    <Component title=\\"UniParc\\" namespace=\\"uniparc\\" description=\\"Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)\\" />
-  </Block>
-</HomePageLayout>"
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <HomePage />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <C
+          footer="The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information."
+          title="Find your protein"
+        >
+          <withRouter(Connect(Search)) />
+        </C>,
+        <Block
+          columns="4"
+        >
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            title="UniProtKB"
+          />
+          <Unknown
+            description="Sets of proteins for reference and other species of interest."
+            namespace="proteomes"
+            title="Proteomes"
+          />
+          <Unknown
+            description="Clusters of protein sequences at 100%, 90% & 50% similarity"
+            namespace="uniref"
+            title="UniRef"
+          />
+          <Unknown
+            description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
+            namespace="uniparc"
+            title="UniParc"
+          />
+        </Block>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <withRouter(Connect(Search)) />,
+          "footer": "The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.",
+          "title": "Find your protein",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              title="UniProtKB"
+            />,
+            <Unknown
+              description="Sets of proteins for reference and other species of interest."
+              namespace="proteomes"
+              title="Proteomes"
+            />,
+            <Unknown
+              description="Clusters of protein sequences at 100%, 90% & 50% similarity"
+              namespace="uniref"
+              title="UniRef"
+            />,
+            <Unknown
+              description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
+              namespace="uniparc"
+              title="UniParc"
+            />,
+          ],
+          "columns": "4",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "title": "UniProtKB",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Sets of proteins for reference and other species of interest.",
+              "namespace": "proteomes",
+              "title": "Proteomes",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
+              "namespace": "uniref",
+              "title": "UniRef",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
+              "namespace": "uniparc",
+              "title": "UniParc",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <C
+            footer="The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information."
+            title="Find your protein"
+          >
+            <withRouter(Connect(Search)) />
+          </C>,
+          <Block
+            columns="4"
+          >
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              title="UniProtKB"
+            />
+            <Unknown
+              description="Sets of proteins for reference and other species of interest."
+              namespace="proteomes"
+              title="Proteomes"
+            />
+            <Unknown
+              description="Clusters of protein sequences at 100%, 90% & 50% similarity"
+              namespace="uniref"
+              title="UniRef"
+            />
+            <Unknown
+              description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
+              namespace="uniparc"
+              title="UniParc"
+            />
+          </Block>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <withRouter(Connect(Search)) />,
+            "footer": "The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.",
+            "title": "Find your protein",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                title="UniProtKB"
+              />,
+              <Unknown
+                description="Sets of proteins for reference and other species of interest."
+                namespace="proteomes"
+                title="Proteomes"
+              />,
+              <Unknown
+                description="Clusters of protein sequences at 100%, 90% & 50% similarity"
+                namespace="uniref"
+                title="UniRef"
+              />,
+              <Unknown
+                description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
+                namespace="uniparc"
+                title="UniParc"
+              />,
+            ],
+            "columns": "4",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "title": "UniProtKB",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Sets of proteins for reference and other species of interest.",
+                "namespace": "proteomes",
+                "title": "Proteomes",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
+                "namespace": "uniref",
+                "title": "UniRef",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
+                "namespace": "uniparc",
+                "title": "UniParc",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
 `;

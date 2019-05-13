@@ -4,8 +4,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import '@babel/polyfill';
 import apiUrls from '../../../utils/apiUrls';
-import * as actions from '../actions';
-import initialState from '../initialState';
+import * as actions from '../searchActions';
+import initialState from '../searchInitialState';
 
 const mock = new MockAdapter(axios);
 const middlewares = [thunk];

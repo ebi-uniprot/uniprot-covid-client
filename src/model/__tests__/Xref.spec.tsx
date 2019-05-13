@@ -14,7 +14,7 @@ describe('XRef', () => {
       const wrapper = shallow(
         <XRef data={data} section={section as EntrySectionType} />
       );
-      expect(wrapper.debug()).toMatchSnapshot();
+      expect(wrapper).toMatchSnapshot();
     });
   }
 });
@@ -29,7 +29,7 @@ describe('XRefCategoryInfoList', () => {
         accession={primaryAccession}
       />
     );
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
 
@@ -44,7 +44,7 @@ describe('XRefList', () => {
         accession={primaryAccession}
       />
     );
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
 
@@ -57,6 +57,6 @@ describe('XRefItem', () => {
         accession={primaryAccession}
       />
     );
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

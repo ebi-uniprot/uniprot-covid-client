@@ -8,7 +8,7 @@ export type ResultsState = {
   totalNumberResults: number;
 };
 
-const initialState = {
+const resultsInitialState = {
   columns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
   results: [],
   facets: [],
@@ -18,4 +18,4 @@ const initialState = {
   totalNumberResults: 0,
 };
 
-export default initialState;
+export default resultsInitialState;

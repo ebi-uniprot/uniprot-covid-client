@@ -1,9 +1,12 @@
 import { ActionType } from 'typesafe-actions';
-import * as resultsActions from './actions';
-import initialState, { ResultsState } from './initialState';
+import * as resultsActions from './resultsActions';
+import resultsInitialState, { ResultsState } from './resultsInitialState';
 
 export type ResultAction = ActionType<typeof resultsActions>;
-const results = (state: ResultsState = initialState, action: ResultAction) => {
+const resultsReducers = (
+  state: ResultsState = resultsInitialState,
+  action: ResultAction
+) => {
   switch (action.type) {
     case resultsActions.REQUEST_BATCH_OF_RESULTS:
       return {
@@ -37,4 +40,4 @@ const results = (state: ResultsState = initialState, action: ResultAction) => {
   }
 };
 
-export default results;
+export default resultsReducers;

@@ -1,5 +1,5 @@
-import searchInitialState from '../search/state/initialState';
-import resultsInitialState from '../results/state/initialState';
+import searchInitialState from '../search/state/searchInitialState';
+import resultsInitialState from '../results/state/resultsInitialState';
 
 const initialState = {
   query: searchInitialState,

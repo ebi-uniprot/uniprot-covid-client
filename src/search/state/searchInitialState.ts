@@ -12,7 +12,7 @@ export type SearchState = {
   };
 };
 
-const initialState = {
+const searchInitialState = {
   clauses: [...Array(2)].map(() => createEmptyClause()),
   queryString: '',
   namespace: Namespace.uniprotkb,
@@ -31,4 +31,4 @@ const initialState = {
   },
 };
 
-export default initialState;
+export default searchInitialState;

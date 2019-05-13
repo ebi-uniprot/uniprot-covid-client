@@ -19,9 +19,9 @@ export const receiveBatchOfResults = (
   action(RECEIVE_BATCH_OF_RESULTS, {
     url,
     data,
-    receivedAt: Date.now(),
     nextUrl,
     totalNumberResults,
+    receivedAt: Date.now(),
   });
 
 export const requestBatchOfResults = (url: string) =>

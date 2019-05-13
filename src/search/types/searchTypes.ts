@@ -20,17 +20,17 @@ export type SearchTermType = {
   valuePrefix?: string;
   autoComplete?: string;
   description?: string;
-  options?: Array<{
+  options?: {
     name: string;
-    values: Array<{
+    values: {
       name: string;
       label: string;
-    }>;
-  }>;
-  values?: Array<{
+    }[];
+  }[];
+  values?: {
     name: string;
     value: string;
-  }>;
+  }[];
   items?: SearchTermType[];
 };
 

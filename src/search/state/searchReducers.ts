@@ -1,8 +1,8 @@
 import { ActionType } from 'typesafe-actions';
-import * as searchActions from './actions';
+import * as searchActions from './searchActions';
 import { createEmptyClause } from '../utils/clause';
 import { createQueryString } from '../utils/QueryStringGenerator';
-import initialState, { SearchState } from './initialState';
+import searchInitialState, { SearchState } from './searchInitialState';
 import { Clause } from '../types/searchTypes';
 
 export type SearchAction = ActionType<typeof searchActions>;
@@ -99,8 +99,8 @@ export const evidences = (
   }
 };
 
-const query = (
-  state: SearchState = initialState,
+const searchReducers = (
+  state: SearchState = searchInitialState,
   action: SearchAction
 ): SearchState => {
   switch (action.type) {
@@ -167,4 +167,4 @@ const query = (
   }
 };
 
-export default query;
+export default searchReducers;
