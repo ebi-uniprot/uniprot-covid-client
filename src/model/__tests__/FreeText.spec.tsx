@@ -5,7 +5,6 @@ import { FreeText } from '../FreeText';
 import { CommentType } from '../types/commentType';
 import data from './modelData.json';
 
-jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 describe('FreeText component', () => {

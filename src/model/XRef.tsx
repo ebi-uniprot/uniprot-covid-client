@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import v1 from 'uuid';
+import { v1 } from 'uuid';
 import idx from 'idx';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import {
@@ -19,7 +19,7 @@ type Property = {
   value?: string;
 };
 
-type DatabaseCrossReference = {
+export type DatabaseCrossReference = {
   databaseType?: Database;
   id?: string;
   properties?: [Property];

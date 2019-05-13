@@ -8,7 +8,6 @@ import AutocompleteWrapper from '../AutocompleteWrapper';
 import { getSuggesterUrl } from '../../utils/apiUrls';
 
 const mock = new MockAdapter(axios);
-jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 const response = {

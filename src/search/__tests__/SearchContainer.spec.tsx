@@ -5,7 +5,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import { createEmptyClause } from '../utils/clause';
 import { Search } from '../SearchContainer';
 
-jest.mock('uuid/v1', () => () => 0);
 configure({ adapter: new Adapter() });
 
 let wrapper;

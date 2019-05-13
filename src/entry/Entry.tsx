@@ -14,6 +14,7 @@ import EntrySectionType from '../model/types/EntrySection';
 import { Keyword } from '../model/Keyword';
 import FeaturesView from '../model/FeaturesView';
 import FeatureTypes from '../model/types/featureTypes';
+import DiseaseInvolvement from '../model/DiseaseInvolvement';
 
 interface MatchParams {
   accession: string;
@@ -74,7 +75,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         />
       </Card>
       <Card title="Pathology & Biotech">
-        <h4>Mutagenesis</h4>
+        <DiseaseInvolvement data={entryData} />
         <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
       </Card>
       <Card title="PTM/Processing">
