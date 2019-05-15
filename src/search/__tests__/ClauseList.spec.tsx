@@ -4,14 +4,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import ClauseList from '../ClauseList';
 import { createEmptyClause } from '../utils/clause';
 
-jest.mock('uuid/v1', () => {
-  let value = 0;
-  return () => {
-    value += 1;
-    return value;
-  };
-});
-
 configure({ adapter: new Adapter() });
 
 let wrapper;

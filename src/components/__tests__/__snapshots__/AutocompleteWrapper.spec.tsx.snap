@@ -29,7 +29,7 @@ ShallowWrapper {
           clearOnSelect={false}
           data={Array []}
           filter={false}
-          id={1}
+          id={0}
           onChange={[Function]}
           onSelect={[Function]}
           placeholder=""
@@ -37,7 +37,7 @@ ShallowWrapper {
           value="Homo sapiens (Human) [9606]"
         />,
       ],
-      "htmlFor": 1,
+      "htmlFor": 0,
     },
     "ref": null,
     "rendered": Array [
@@ -50,7 +50,7 @@ ShallowWrapper {
           "clearOnSelect": false,
           "data": Array [],
           "filter": false,
-          "id": 1,
+          "id": 0,
           "onChange": [Function],
           "onSelect": [Function],
           "placeholder": "",
@@ -76,7 +76,7 @@ ShallowWrapper {
             clearOnSelect={false}
             data={Array []}
             filter={false}
-            id={1}
+            id={0}
             onChange={[Function]}
             onSelect={[Function]}
             placeholder=""
@@ -84,7 +84,7 @@ ShallowWrapper {
             value="Homo sapiens (Human) [9606]"
           />,
         ],
-        "htmlFor": 1,
+        "htmlFor": 0,
       },
       "ref": null,
       "rendered": Array [
@@ -97,7 +97,7 @@ ShallowWrapper {
             "clearOnSelect": false,
             "data": Array [],
             "filter": false,
-            "id": 1,
+            "id": 0,
             "onChange": [Function],
             "onSelect": [Function],
             "placeholder": "",

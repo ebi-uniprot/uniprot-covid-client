@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
-import { FreeTextType } from './FreeText';
+import { CommentType } from './types/commentType';
 
 export type CatalyticActivityData = {
-  commentType: FreeTextType;
+  commentType: CommentType;
   reaction: {
     name: string;
     reactionReferences: Array<{ databaseType: string; id: string }>;

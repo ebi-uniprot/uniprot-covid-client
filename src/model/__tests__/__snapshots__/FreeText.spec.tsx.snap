@@ -1452,7 +1452,7 @@ ShallowWrapper {
               "value",
               Object {
                 "instance": null,
-                "key": "1",
+                "key": "0",
                 "nodeType": "function",
                 "props": Object {
                   "evidence": Object {
@@ -1550,7 +1550,7 @@ ShallowWrapper {
                 "value",
                 Object {
                   "instance": null,
-                  "key": "1",
+                  "key": "0",
                   "nodeType": "function",
                   "props": Object {
                     "evidence": Object {

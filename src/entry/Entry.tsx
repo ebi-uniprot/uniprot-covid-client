@@ -4,15 +4,16 @@ import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from './uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { ProteinOverview } from '../model/ProteinOverview';
-import { FreeText, FreeTextType } from '../model/FreeText';
+import { FreeText } from '../model/FreeText';
+import { CommentType } from '../model/types/commentType';
 import XRef from '../model/XRef';
 import { Card } from 'franklin-sites';
 import { SequenceViewEntry } from '../model/SequenceView';
 import EntrySectionType from '../model/types/EntrySection';
-import { Keyword } from '../model/Keyword';
+import { KeywordData } from '../model/Keyword';
 import FeaturesView from '../model/FeaturesView';
 import FeatureTypes from '../model/types/featureTypes';
-import { element } from 'prop-types';
+import DiseaseInvolvement from '../model/DiseaseInvolvement';
 
 interface MatchParams {
   accession: string;
@@ -106,11 +107,15 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           ]}
         />
       </Card>
+      <Card title="Pathology & Biotech">
+        <DiseaseInvolvement data={entryData} />
+        <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
+      </Card>
       <Card title="Expression">
         <h4>Tissue specificity</h4>
-        <FreeText data={entryData} type={FreeTextType.TISSUE_SPECIFICITY} />
+        <FreeText data={entryData} type={CommentType.TISSUE_SPECIFICITY} />
         <h4>Induction</h4>
-        <FreeText data={entryData} type={FreeTextType.INDUCTION} />
+        <FreeText data={entryData} type={CommentType.INDUCTION} />
         <Keyword data={entryData} section={EntrySectionType.Expression} />
         <XRef data={entryData} section={EntrySectionType.Expression} />
       </Card> */}

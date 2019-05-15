@@ -1420,7 +1420,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": "1",
+        "key": "0",
         "nodeType": "host",
         "props": Object {
           "children": Array [
@@ -1523,7 +1523,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": "1",
+          "key": "0",
           "nodeType": "host",
           "props": Object {
             "children": Array [
