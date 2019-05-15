@@ -5,30 +5,70 @@ import {
   CatalyticActivity,
   CatalyticActivityData,
 } from '../../model/CatalyticActivity';
-import { Keyword, KewyordsData } from '../../model/Keyword';
-import { XRef, XrefData } from '../../model/XRef';
-import FeaturesView, { FeatureData } from '../../model/FeaturesView';
+import { Keyword } from '../../model/Keyword';
+import { XRef, DatabaseCrossReference, XrefCategory } from '../../model/XRef';
+import FeaturesView, { Feature } from '../../model/FeaturesView';
 import FeatureTypes from '../../model/types/featureTypes';
+import { getCategoryKeywords } from '../../model/utils/KeywordsUtil';
+import KeywordCategory from '../../model/types/keywordTypes';
+import { getCategoryXrefs } from '../../model/utils/XrefUtils';
 
-type data = FreeTextData &
-  CatalyticActivityData &
-  KewyordsData &
-  FeatureData &
-  XrefData;
+type data = {
+  primaryAccession: string;
+  comments?: FreeTextData & CatalyticActivityData;
+  keywords?: Keyword[];
+  features?: Feature[];
+  databaseCrossReferences?: DatabaseCrossReference[];
+  sequence: { value: string };
+};
+// &
+// keywords?:
+// KewyordsData
 
-const FunctionSection: FC<{ entryData: data }> = ({ entryData }) => (
-  <Fragment>
-    <FreeText data={entryData} type={FreeTextType.FUNCTION} />
-    <CatalyticActivity data={entryData} />
-    <FreeText
-      data={entryData}
-      type={FreeTextType.PATHWAY}
-      includeTitle={true}
-    />
-    <Keyword data={entryData} section={EntrySectionType.Function} />
-    <FeaturesView
-      data={entryData}
-      types={[
+// &
+// FeatureData &
+// XrefData;
+
+const getFunctionData = (data: data) => {
+  let functionData: {
+    functionCommentsData: FreeTextData;
+    catalyticActivityData: CatalyticActivityData;
+    pathwayCommentsData: FreeTextData;
+    keywordData: { [keywordCategory: string]: Keyword[] };
+    featuresData: Feature[];
+    xrefData: XrefCategory[];
+  } = {
+    functionCommentsData: [],
+    catalyticActivityData: [],
+    pathwayCommentsData: [],
+    keywordData: [],
+    featuresData: [],
+    xrefData: [],
+  };
+  if (data.comments) {
+    functionData.functionCommentsData = data.comments.filter(
+      d => d.commentType === FreeTextType.FUNCTION
+    );
+    functionData.catalyticActivityData = data.comments.filter(
+      d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY
+    );
+    functionData.pathwayCommentsData = data.comments.filter(
+      d => d.commentType === FreeTextType.PATHWAY
+    );
+  }
+  if (data.keywords) {
+    const categoryKeywords = getCategoryKeywords(data.keywords, [
+      KeywordCategory.MOLECULAR_FUNCTION,
+      KeywordCategory.BIOLOGICAL_PROCESS,
+      KeywordCategory.LIGAND,
+    ]);
+    if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
+      functionData.keywordData = categoryKeywords;
+    }
+  }
+  if (data.features) {
+    const features = data.features.filter(feature => {
+      return [
         FeatureTypes.DOMAIN,
         FeatureTypes.REPEAT,
         FeatureTypes.CA_BIND,
@@ -42,10 +82,40 @@ const FunctionSection: FC<{ entryData: data }> = ({ entryData }) => (
         FeatureTypes.METAL,
         FeatureTypes.BINDING,
         FeatureTypes.SITE,
-      ]}
-    />
-    <XRef data={entryData} section={EntrySectionType.Function} />
-  </Fragment>
-);
+      ].includes(feature.type);
+    });
+    functionData.featuresData = features;
+  }
+  if (data.databaseCrossReferences) {
+    const xrefs = getCategoryXrefs(
+      data.databaseCrossReferences,
+      EntrySectionType.Function
+    );
+    if (xrefs && typeof xrefs !== 'undefined') {
+      functionData.xrefData = xrefs;
+    }
+  }
+  return functionData;
+};
+
+const FunctionSection: FC<{ entryData: data }> = ({ entryData }) => {
+  const functionData = getFunctionData(entryData);
+  return (
+    <Fragment>
+      <FreeText data={functionData.functionCommentsData} />
+      <CatalyticActivity comments={functionData.catalyticActivityData} />
+      <FreeText data={functionData.pathwayCommentsData} includeTitle={true} />
+      <Keyword keywords={functionData.keywordData} />
+      <FeaturesView
+        features={functionData.featuresData}
+        sequence={entryData.sequence}
+      />
+      <XRef
+        xrefs={functionData.xrefData}
+        primaryAccession={entryData.primaryAccession}
+      />
+    </Fragment>
+  );
+};
 
 export default FunctionSection;

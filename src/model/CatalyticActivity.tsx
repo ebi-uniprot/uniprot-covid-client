@@ -5,42 +5,29 @@ import { EvidenceType } from './types/modelTypes';
 import { FreeTextType } from './FreeText';
 
 export type CatalyticActivityData = {
-  comments?: [
-    {
-      commentType: FreeTextType;
-      reaction: {
-        name: string;
-        reactionReferences: Array<{ databaseType: string; id: string }>;
-        ecNumber: string;
-        evidences?: EvidenceType[];
-      };
-    }
-  ];
-};
+  commentType: FreeTextType;
+  reaction: {
+    name: string;
+    reactionReferences: Array<{ databaseType: string; id: string }>;
+    ecNumber: string;
+    evidences?: EvidenceType[];
+  };
+}[];
 
 type CatalyticActivityProps = {
-  data: CatalyticActivityData;
+  comments: CatalyticActivityData;
 };
 
 export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
-  data,
+  comments,
 }) => {
-  if (
-    !data.comments ||
-    !data.comments.some(d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY)
-  ) {
-    return null;
-  }
-  const catalyticActivityData = data.comments.filter(
-    d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY
-  );
-  if (!catalyticActivityData || catalyticActivityData.length <= 0) {
+  if (!comments || comments.length <= 0) {
     return null;
   }
   return (
     <Fragment>
       <h4>Catalytic Activity</h4>
-      {catalyticActivityData.map(catalyticActivity => (
+      {comments.map(catalyticActivity => (
         <p key={v1()}>
           <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
           {catalyticActivity.reaction.name}

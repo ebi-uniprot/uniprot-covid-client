@@ -5,8 +5,8 @@ import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
-import FeatureTypes from './types/featureTypes';
 import { EvidenceType } from './types/modelTypes';
+import FeatureTypes from './types/featureTypes';
 
 enum LocationModifier {
   EXACT = 'EXACT',
@@ -20,8 +20,8 @@ type FeatureLocation = {
   modifier: LocationModifier;
 };
 
-type Feature = {
-  type: string;
+export type Feature = {
+  type: FeatureTypes;
   featureId?: string;
   description?: string;
   location: {
@@ -41,16 +41,11 @@ type ProtvistaFeature = {
   endModifier: LocationModifier;
 };
 
-export type FeatureData = {
+type FeatureProps = {
   sequence: {
     value: string;
   };
-  features?: Feature[];
-};
-
-type FeaturesViewProps = {
-  data: FeatureData;
-  types?: FeatureTypes[];
+  features: Feature[];
 };
 
 const columns = {
@@ -73,36 +68,29 @@ const columns = {
   },
 };
 
-const processData = (data: Feature[], types: string[] = []) =>
-  data
-    .filter(feature => {
-      return types.length <= 0 || types.includes(feature.type);
-    })
-    .map(feature => {
-      return {
-        accession: feature.featureId,
-        start: feature.location.start.value,
-        end: feature.location.end.value,
-        startModifier: feature.location.start.modifier,
-        endModifier: feature.location.end.modifier,
-        type: feature.type,
-        description: feature.description,
-        evidences: feature.evidences,
-      };
-    });
+const processData = (data: Feature[]) =>
+  data.map(feature => {
+    return {
+      accession: feature.featureId,
+      start: feature.location.start.value,
+      end: feature.location.end.value,
+      startModifier: feature.location.start.modifier,
+      endModifier: feature.location.end.modifier,
+      type: feature.type,
+      description: feature.description,
+      evidences: feature.evidences,
+    };
+  });
 
-const FeaturesView: React.FC<FeaturesViewProps> = ({ data, types }) => {
+const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
   loadWebComponent('protvista-track', ProtvistaTrack);
   loadWebComponent('protvista-manager', ProtvistaManager);
   loadWebComponent('protvista-datatable', ProtvistaDatatable);
   loadWebComponent('protvista-sequence', ProtvistaSequence);
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
-  if (!data.features) {
-    return null;
-  }
+  const processedData = processData(features);
 
-  const processedData = processData(data.features, types);
   if (processedData.length <= 0) {
     return null;
   }
@@ -124,15 +112,15 @@ const FeaturesView: React.FC<FeaturesViewProps> = ({ data, types }) => {
     <Fragment>
       <h4>Features</h4>
       <protvista-manager attributes="highlight displaystart displayend">
-        <protvista-navigation length={data.sequence.value.length} />
+        <protvista-navigation length={sequence.value.length} />
         <protvista-track
           ref={setTrackData}
-          length={data.sequence.value.length}
+          length={sequence.value.length}
           layout="non-overlapping"
         />
         <protvista-sequence
-          sequence={data.sequence.value}
-          length={data.sequence.value.length}
+          sequence={sequence.value}
+          length={sequence.value.length}
           height="20"
         />
         <protvista-datatable ref={setTableData} />

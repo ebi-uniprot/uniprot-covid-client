@@ -2,29 +2,20 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import EntrySectionType from './types/EntrySection';
-import {
-  entrySectionToKeywordCategories,
-  KeywordCategory,
-} from './types/keywordTypes';
+import { KeywordCategory } from './types/keywordTypes';
 
-type Keyword = {
+export type Keyword = {
   id?: string;
   value?: string;
   category?: KeywordCategory;
 };
 
-export type KewyordsData = {
-  keywords?: Keyword[];
-};
-
 type KeywordProps = {
-  section: EntrySectionType;
-  data: KewyordsData;
+  keywords: { [keywordCategory: string]: Keyword[] };
 };
 
 type KeywordListProps = {
-  keywords?: Keyword[];
+  keywords: Keyword[];
 };
 
 type KeywordItempProps = {
@@ -59,31 +50,12 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
   return <Fragment>{nodes}</Fragment>;
 };
 
-export const Keyword: React.FC<KeywordProps> = ({ data, section }) => {
-  const { keywords } = data;
-  const keywordCategories = entrySectionToKeywordCategories.get(section);
-  if (!keywords || !keywordCategories) {
-    return null;
-  }
-  const foundCategoryToKeywords: { [keywordCategory: string]: Keyword[] } = {};
-  for (const keyword of keywords) {
-    const { category, value, id } = keyword;
-    if (!category || !value || !id || !keywordCategories.includes(category)) {
-      continue;
-    }
-    if (category in foundCategoryToKeywords) {
-      foundCategoryToKeywords[category].push(keyword);
-    } else {
-      foundCategoryToKeywords[category] = [keyword];
-    }
-  }
-  const infoData = Object.keys(foundCategoryToKeywords)
+export const Keyword: React.FC<KeywordProps> = ({ keywords }) => {
+  const infoData = Object.keys(keywords)
     .sort()
     .map(foundCategory => ({
       title: foundCategory,
-      content: (
-        <KeywordList keywords={foundCategoryToKeywords[foundCategory]} />
-      ),
+      content: <KeywordList keywords={keywords[foundCategory]} />,
     }));
   if (infoData.length === 0) {
     return null;

@@ -1,13 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import idx from 'idx';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import {
-  entrySectionDatabaseToDatabaseCategory,
-  databaseCategoryToString,
-} from '../data/database';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
-import EntrySectionType from '../model/types/EntrySection';
 import {
   Database,
   DatabaseCategory,
@@ -19,16 +13,21 @@ type Property = {
   value?: string;
 };
 
-type DatabaseCrossReference = {
+export type DatabaseCrossReference = {
   databaseType?: Database;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
-export type XrefData = {
-  databaseCrossReferences?: [DatabaseCrossReference];
-  primaryAccession?: string;
+export type DatabaseXrefs = {
+  database: Database;
+  xrefs: DatabaseCrossReference[];
+};
+
+export type XrefCategory = {
+  category: DatabaseCategory;
+  databases: DatabaseXrefs[];
 };
 
 export type XrefItem = {
@@ -37,36 +36,39 @@ export type XrefItem = {
 };
 
 type XRefProps = {
-  section: EntrySectionType;
-  data: XrefData;
+  xrefs: XrefCategory[];
+  primaryAccession: string;
 };
 
 type XRefItemProps = {
   xRefEntry: DatabaseCrossReference;
-  accession: string;
-};
-
-type XRefListProps = {
-  accession: string;
-  xRefData: XrefItem[];
-  database: Database;
+  primaryAccession: string;
 };
 
 type XRefCategoryInfoListProps = {
-  databases: Database[];
-  xRefData: XrefItem[];
-  accession: string;
+  databases: DatabaseXrefs[];
+  primaryAccession: string;
 };
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
-export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
+export const XRefItem: React.FC<XRefItemProps> = ({
+  xRefEntry,
+  primaryAccession,
+}) => {
   const { databaseType: database, properties: entryProperties, id } = xRefEntry;
-  if (!id || !database || !accession || !(database in databaseToDatabaseInfo)) {
+  if (
+    !id ||
+    !database ||
+    !primaryAccession ||
+    !(database in databaseToDatabaseInfo)
+  ) {
     return null;
   }
   const info = databaseToDatabaseInfo[database];
-  const uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
+  const uri = info.uriLink
+    .replace(/%acc/g, primaryAccession)
+    .replace(/%value/g, id);
   let properties: string = '';
   if (entryProperties) {
     properties = entryProperties
@@ -83,100 +85,45 @@ export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   );
 };
 
-export const XRefList: React.FC<XRefListProps> = ({
-  database,
-  xRefData,
-  accession,
-}) => {
-  const nodes = xRefData
-    .filter(
-      (xRefDatum: XrefItem) =>
-        idx(xRefDatum, _ => _.xref.databaseType) === database
-    )
-    .map((xRefDatum: XrefItem) => {
-      const { xref } = xRefDatum;
-      if (!xref) {
-        return null;
-      }
-      return (
-        <ul className="no-bullet" key={v1()}>
-          <XRefItem xRefEntry={xref} accession={accession} />
-        </ul>
-      );
-    });
-  return <Fragment>{nodes}</Fragment>;
-};
-
 export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
-  xRefData,
-  accession,
+  primaryAccession,
 }) => {
   const infoData = databases.sort().map(database => ({
-    title: database,
+    title: database.database,
     content: (
-      <XRefList database={database} xRefData={xRefData} accession={accession} />
+      <ul className="no-bullet">
+        {database.xrefs.map(xref => (
+          <XRefItem
+            xRefEntry={xref}
+            primaryAccession={primaryAccession}
+            key={v1()}
+          />
+        ))}
+      </ul>
     ),
   }));
-
-  if (infoData.length === 0) {
-    return null;
-  }
   return <InfoList infoData={infoData} />;
 };
 
-export const XRef: React.FC<XRefProps> = ({ data, section }) => {
-  const { databaseCrossReferences, primaryAccession: accession } = data;
-  if (!databaseCrossReferences || !accession) {
+export const XRef: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
+  if (!xrefs) {
     return null;
   }
-  const foundXrefData: XrefItem[] = [];
-  const foundDatabaseCategoriesToDatabases: {
-    [databaseCategory: string]: { [database: string]: boolean };
-  } = {};
-  for (const xref of databaseCrossReferences) {
-    const { databaseType: database } = xref;
-    if (!database) {
-      continue;
-    }
-    const databaseCategory = entrySectionDatabaseToDatabaseCategory.get(
-      `${section}_${database}`
+  const nodes = xrefs.map(xrefCategory => {
+    const infoListNode = (
+      <XRefCategoryInfoList
+        databases={xrefCategory.databases}
+        primaryAccession={primaryAccession}
+      />
     );
-    if (!databaseCategory) {
-      continue;
-    }
-    foundDatabaseCategoriesToDatabases[databaseCategory] = {
-      ...foundDatabaseCategoriesToDatabases[databaseCategory],
-      [database]: true,
-    };
-    foundXrefData.push({ databaseCategory, xref });
-  }
-  const nodes = Object.keys(foundDatabaseCategoriesToDatabases)
-    .sort()
-    .map(foundDatabaseCategory => {
-      const databases = Object.keys(
-        foundDatabaseCategoriesToDatabases[foundDatabaseCategory]
-      ) as Database[];
-      const databaseCategoryString = databaseCategoryToString.get(
-        foundDatabaseCategory as DatabaseCategory
-      );
-      const infoListNode = (
-        <XRefCategoryInfoList
-          databases={databases}
-          xRefData={foundXrefData}
-          accession={accession}
-        />
-      );
-      if (!infoListNode) {
-        return null;
-      }
-      return (
-        <Fragment key={v1()}>
-          {databaseCategoryString && <h4>{databaseCategoryString}</h4>}
-          {infoListNode}
-        </Fragment>
-      );
-    });
+    return (
+      <Fragment key={v1()}>
+        {xrefCategory.category && <h4>{xrefCategory.category}</h4>}
+        {infoListNode}
+      </Fragment>
+    );
+  });
   return <Fragment>{nodes}</Fragment>;
 };
 

@@ -1,24 +1,33 @@
 import React from 'react';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
+import PathologyAndBiotechSection from './PathologyAndBiotechSection';
 import EntrySectionType from '../../model/types/EntrySection';
 
-const UniProtKBEntryConfig = new Map<
-  EntrySectionType,
-  (entryData: any) => JSX.Element
->([
-  [
-    EntrySectionType.Function,
-    entryData => <FunctionSection entryData={entryData} />,
-  ],
-  [
-    EntrySectionType.NamesAndTaxonomy,
-    entryData => <NamesAndTaxonomySection entryData={entryData} />,
-  ],
-  [
-    EntrySectionType.PathologyAndBioTech,
-    entryData => <NamesAndTaxonomySection entryData={entryData} />,
-  ],
-]);
+const UniProtKBEntryConfig: {
+  name: EntrySectionType;
+  sectionContent: (entryData: any) => JSX.Element;
+}[] = [
+  {
+    name: EntrySectionType.Function,
+    sectionContent: entryData => <FunctionSection entryData={entryData} />,
+  },
+  // {
+  //   name: EntrySectionType.Function,
+  //   sectionContent: entryData => <FunctionSection entryData={entryData} />,
+  // },
+  // {
+  //   name: EntrySectionType.NamesAndTaxonomy,
+  //   sectionContent: entryData => (
+  //     <NamesAndTaxonomySection entryData={entryData} />
+  //   ),
+  // },
+  // {
+  //   name: EntrySectionType.PathologyAndBioTech,
+  //   sectionContent: entryData => (
+  //     <PathologyAndBiotechSection entryData={entryData} />
+  //   ),
+  // },
+];
 
 export default UniProtKBEntryConfig;
