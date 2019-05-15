@@ -1,7 +1,4 @@
 language: node_js
-node_js:
-  # lock to 11.10.1 due to https://github.com/facebook/jest/issues/8069
-  - '11.10.1'
 before_script:
   - 'npm run clear-test-cache'
 before_deploy:
