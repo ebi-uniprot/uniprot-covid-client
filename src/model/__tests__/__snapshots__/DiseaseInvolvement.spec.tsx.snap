@@ -1382,9 +1382,9 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <h4>
+        <h3>
           Involvment in disease
-        </h4>,
+        </h3>,
         Array [
           <DiseaseInvolvementEntry
             accession="P21802"
@@ -1439,7 +1439,7 @@ ShallowWrapper {
         },
         "ref": null,
         "rendered": "Involvment in disease",
-        "type": "h4",
+        "type": "h3",
       },
       Object {
         "instance": null,
@@ -1496,9 +1496,9 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <h4>
+          <h3>
             Involvment in disease
-          </h4>,
+          </h3>,
           Array [
             <DiseaseInvolvementEntry
               accession="P21802"
@@ -1553,7 +1553,7 @@ ShallowWrapper {
           },
           "ref": null,
           "rendered": "Involvment in disease",
-          "type": "h4",
+          "type": "h3",
         },
         Object {
           "instance": null,
@@ -1679,11 +1679,12 @@ ShallowWrapper {
     "nodeType": "function",
     "props": Object {
       "children": Array [
-        <h5>
+        <h4>
           Disease Id
            
           (someAcron)
-           
+        </h4>,
+        <p>
           <UniProtEvidence
             evidence={
               Object {
@@ -1693,25 +1694,37 @@ ShallowWrapper {
               }
             }
           />
-        </h5>,
-        <p>
-          value2
-          <br />
-          <React.Fragment>
-            <u>
-              Disease description
-            </u>
-             
-            some description
-          </React.Fragment>
-          <br />
-          <XRefExternalLink
-            id="3124"
-            url="http://www.omim.org/entry/%value"
-          >
-            See also MIM:3124
-          </XRefExternalLink>
         </p>,
+        <Unknown
+          infoData={
+            Array [
+              Object {
+                "content": <ul
+                  className="no-bullet"
+                >
+                  <li>
+                    value2
+                  </li>
+                </ul>,
+                "title": "Note",
+              },
+              Object {
+                "content": "some description",
+                "title": "Description",
+              },
+              Object {
+                "content": <XRefExternalLink
+                  id="3124"
+                  url="http://www.omim.org/entry/%value"
+                >
+                  MIM
+                  :3124
+                </XRefExternalLink>,
+                "title": "See also",
+              },
+            ]
+          }
+        />,
       ],
     },
     "ref": null,
@@ -1725,18 +1738,6 @@ ShallowWrapper {
             "Disease Id",
             " ",
             "(someAcron)",
-            " ",
-            Array [
-              <UniProtEvidence
-                evidence={
-                  Object {
-                    "evidenceCode": "ECO:0000256",
-                    "id": "PIRNR001362",
-                    "source": "PIRNR",
-                  }
-                }
-              />,
-            ],
           ],
         },
         "ref": null,
@@ -1744,7 +1745,28 @@ ShallowWrapper {
           "Disease Id",
           " ",
           "(someAcron)",
-          " ",
+        ],
+        "type": "h4",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <UniProtEvidence
+              evidence={
+                Object {
+                  "evidenceCode": "ECO:0000256",
+                  "id": "PIRNR001362",
+                  "source": "PIRNR",
+                }
+              }
+            />,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
           Object {
             "instance": null,
             "key": "PIRNR001362",
@@ -1761,100 +1783,43 @@ ShallowWrapper {
             "type": [Function],
           },
         ],
-        "type": "h5",
+        "type": "p",
       },
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": Array [
-            "value2",
-            <br />,
-            <React.Fragment>
-              <u>
-                Disease description
-              </u>
-               
-              some description
-            </React.Fragment>,
-            <br />,
-            <XRefExternalLink
-              id="3124"
-              url="http://www.omim.org/entry/%value"
-            >
-              See also MIM:3124
-            </XRefExternalLink>,
+          "infoData": Array [
+            Object {
+              "content": <ul
+                className="no-bullet"
+              >
+                <li>
+                  value2
+                </li>
+              </ul>,
+              "title": "Note",
+            },
+            Object {
+              "content": "some description",
+              "title": "Description",
+            },
+            Object {
+              "content": <XRefExternalLink
+                id="3124"
+                url="http://www.omim.org/entry/%value"
+              >
+                MIM
+                :3124
+              </XRefExternalLink>,
+              "title": "See also",
+            },
           ],
         },
         "ref": null,
-        "rendered": Array [
-          "value2",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": "br",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": Array [
-                <u>
-                  Disease description
-                </u>,
-                " ",
-                "some description",
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Disease description",
-                },
-                "ref": null,
-                "rendered": "Disease description",
-                "type": "u",
-              },
-              " ",
-              "some description",
-            ],
-            "type": Symbol(react.fragment),
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": "br",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "accession": undefined,
-              "children": "See also MIM:3124",
-              "id": "3124",
-              "url": "http://www.omim.org/entry/%value",
-            },
-            "ref": null,
-            "rendered": "See also MIM:3124",
-            "type": [Function],
-          },
-        ],
-        "type": "p",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": Symbol(react.fragment),
@@ -1866,11 +1831,12 @@ ShallowWrapper {
       "nodeType": "function",
       "props": Object {
         "children": Array [
-          <h5>
+          <h4>
             Disease Id
              
             (someAcron)
-             
+          </h4>,
+          <p>
             <UniProtEvidence
               evidence={
                 Object {
@@ -1880,25 +1846,37 @@ ShallowWrapper {
                 }
               }
             />
-          </h5>,
-          <p>
-            value2
-            <br />
-            <React.Fragment>
-              <u>
-                Disease description
-              </u>
-               
-              some description
-            </React.Fragment>
-            <br />
-            <XRefExternalLink
-              id="3124"
-              url="http://www.omim.org/entry/%value"
-            >
-              See also MIM:3124
-            </XRefExternalLink>
           </p>,
+          <Unknown
+            infoData={
+              Array [
+                Object {
+                  "content": <ul
+                    className="no-bullet"
+                  >
+                    <li>
+                      value2
+                    </li>
+                  </ul>,
+                  "title": "Note",
+                },
+                Object {
+                  "content": "some description",
+                  "title": "Description",
+                },
+                Object {
+                  "content": <XRefExternalLink
+                    id="3124"
+                    url="http://www.omim.org/entry/%value"
+                  >
+                    MIM
+                    :3124
+                  </XRefExternalLink>,
+                  "title": "See also",
+                },
+              ]
+            }
+          />,
         ],
       },
       "ref": null,
@@ -1912,18 +1890,6 @@ ShallowWrapper {
               "Disease Id",
               " ",
               "(someAcron)",
-              " ",
-              Array [
-                <UniProtEvidence
-                  evidence={
-                    Object {
-                      "evidenceCode": "ECO:0000256",
-                      "id": "PIRNR001362",
-                      "source": "PIRNR",
-                    }
-                  }
-                />,
-              ],
             ],
           },
           "ref": null,
@@ -1931,7 +1897,28 @@ ShallowWrapper {
             "Disease Id",
             " ",
             "(someAcron)",
-            " ",
+          ],
+          "type": "h4",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <UniProtEvidence
+                evidence={
+                  Object {
+                    "evidenceCode": "ECO:0000256",
+                    "id": "PIRNR001362",
+                    "source": "PIRNR",
+                  }
+                }
+              />,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
             Object {
               "instance": null,
               "key": "PIRNR001362",
@@ -1948,100 +1935,43 @@ ShallowWrapper {
               "type": [Function],
             },
           ],
-          "type": "h5",
+          "type": "p",
         },
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": Array [
-              "value2",
-              <br />,
-              <React.Fragment>
-                <u>
-                  Disease description
-                </u>
-                 
-                some description
-              </React.Fragment>,
-              <br />,
-              <XRefExternalLink
-                id="3124"
-                url="http://www.omim.org/entry/%value"
-              >
-                See also MIM:3124
-              </XRefExternalLink>,
+            "infoData": Array [
+              Object {
+                "content": <ul
+                  className="no-bullet"
+                >
+                  <li>
+                    value2
+                  </li>
+                </ul>,
+                "title": "Note",
+              },
+              Object {
+                "content": "some description",
+                "title": "Description",
+              },
+              Object {
+                "content": <XRefExternalLink
+                  id="3124"
+                  url="http://www.omim.org/entry/%value"
+                >
+                  MIM
+                  :3124
+                </XRefExternalLink>,
+                "title": "See also",
+              },
             ],
           },
           "ref": null,
-          "rendered": Array [
-            "value2",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {},
-              "ref": null,
-              "rendered": null,
-              "type": "br",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "children": Array [
-                  <u>
-                    Disease description
-                  </u>,
-                  " ",
-                  "some description",
-                ],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Disease description",
-                  },
-                  "ref": null,
-                  "rendered": "Disease description",
-                  "type": "u",
-                },
-                " ",
-                "some description",
-              ],
-              "type": Symbol(react.fragment),
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {},
-              "ref": null,
-              "rendered": null,
-              "type": "br",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "accession": undefined,
-                "children": "See also MIM:3124",
-                "id": "3124",
-                "url": "http://www.omim.org/entry/%value",
-              },
-              "ref": null,
-              "rendered": "See also MIM:3124",
-              "type": [Function],
-            },
-          ],
-          "type": "p",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": Symbol(react.fragment),
