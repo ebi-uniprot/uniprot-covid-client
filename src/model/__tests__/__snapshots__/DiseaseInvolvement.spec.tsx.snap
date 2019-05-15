@@ -1387,6 +1387,7 @@ ShallowWrapper {
         </h4>,
         Array [
           <DiseaseInvolvementEntry
+            accession="P21802"
             comment={
               Object {
                 "commentType": "DISEASE",
@@ -1445,6 +1446,7 @@ ShallowWrapper {
         "key": "0",
         "nodeType": "function",
         "props": Object {
+          "accession": "P21802",
           "comment": Object {
             "commentType": "DISEASE",
             "disease": Object {
@@ -1499,6 +1501,7 @@ ShallowWrapper {
           </h4>,
           Array [
             <DiseaseInvolvementEntry
+              accession="P21802"
               comment={
                 Object {
                   "commentType": "DISEASE",
@@ -1557,6 +1560,7 @@ ShallowWrapper {
           "key": "0",
           "nodeType": "function",
           "props": Object {
+            "accession": "P21802",
             "comment": Object {
               "commentType": "DISEASE",
               "disease": Object {
@@ -1701,15 +1705,12 @@ ShallowWrapper {
             some description
           </React.Fragment>
           <br />
-          <Nr
-            newTab={true}
-            url="http://www.omim.org/entry/3124"
+          <XRefExternalLink
+            id="3124"
+            url="http://www.omim.org/entry/%value"
           >
-            See also 
-            MIM
-            :
-            3124
-          </Nr>
+            See also MIM:3124
+          </XRefExternalLink>
         </p>,
       ],
     },
@@ -1778,15 +1779,12 @@ ShallowWrapper {
               some description
             </React.Fragment>,
             <br />,
-            <Nr
-              newTab={true}
-              url="http://www.omim.org/entry/3124"
+            <XRefExternalLink
+              id="3124"
+              url="http://www.omim.org/entry/%value"
             >
-              See also 
-              MIM
-              :
-              3124
-            </Nr>,
+              See also MIM:3124
+            </XRefExternalLink>,
           ],
         },
         "ref": null,
@@ -1846,22 +1844,13 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "children": Array [
-                "See also ",
-                "MIM",
-                ":",
-                "3124",
-              ],
-              "newTab": true,
-              "url": "http://www.omim.org/entry/3124",
+              "accession": undefined,
+              "children": "See also MIM:3124",
+              "id": "3124",
+              "url": "http://www.omim.org/entry/%value",
             },
             "ref": null,
-            "rendered": Array [
-              "See also ",
-              "MIM",
-              ":",
-              "3124",
-            ],
+            "rendered": "See also MIM:3124",
             "type": [Function],
           },
         ],
@@ -1903,15 +1892,12 @@ ShallowWrapper {
               some description
             </React.Fragment>
             <br />
-            <Nr
-              newTab={true}
-              url="http://www.omim.org/entry/3124"
+            <XRefExternalLink
+              id="3124"
+              url="http://www.omim.org/entry/%value"
             >
-              See also 
-              MIM
-              :
-              3124
-            </Nr>
+              See also MIM:3124
+            </XRefExternalLink>
           </p>,
         ],
       },
@@ -1980,15 +1966,12 @@ ShallowWrapper {
                 some description
               </React.Fragment>,
               <br />,
-              <Nr
-                newTab={true}
-                url="http://www.omim.org/entry/3124"
+              <XRefExternalLink
+                id="3124"
+                url="http://www.omim.org/entry/%value"
               >
-                See also 
-                MIM
-                :
-                3124
-              </Nr>,
+                See also MIM:3124
+              </XRefExternalLink>,
             ],
           },
           "ref": null,
@@ -2048,22 +2031,13 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "children": Array [
-                  "See also ",
-                  "MIM",
-                  ":",
-                  "3124",
-                ],
-                "newTab": true,
-                "url": "http://www.omim.org/entry/3124",
+                "accession": undefined,
+                "children": "See also MIM:3124",
+                "id": "3124",
+                "url": "http://www.omim.org/entry/%value",
               },
               "ref": null,
-              "rendered": Array [
-                "See also ",
-                "MIM",
-                ":",
-                "3124",
-              ],
+              "rendered": "See also MIM:3124",
               "type": [Function],
             },
           ],

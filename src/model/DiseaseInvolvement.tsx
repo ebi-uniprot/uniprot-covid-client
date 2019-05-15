@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import { ExternalLink } from 'franklin-sites';
 import CommentType from './types/commentType';
 import { EvidenceType } from './types/modelTypes';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { DatabaseToDatabaseInfo } from './types/databaseTypes';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
-import { DatabaseCrossReference } from './XRef';
+import { DatabaseCrossReference, XRefExternalLink } from './XRef';
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
@@ -25,17 +24,21 @@ export type DiseaseCommentType = {
   note?: { texts?: { value?: string }[] };
 };
 
-type DiseaseInvolvementEntryProps = { comment: DiseaseCommentType };
+type DiseaseInvolvementEntryProps = {
+  comment: DiseaseCommentType;
+  accession: string;
+};
 
 type DiseaseInvolvementProps = {
   data: {
     comments?: DiseaseCommentType[];
+    primaryAccession: string;
   };
 };
 
 export const DiseaseInvolvementEntry: React.FC<
   DiseaseInvolvementEntryProps
-> = ({ comment }) => {
+> = ({ comment, accession }) => {
   const { disease, note } = comment;
   if (!disease) {
     return null;
@@ -78,11 +81,11 @@ export const DiseaseInvolvementEntry: React.FC<
     const { databaseType: database, id } = reference;
     if (database && id && databaseToDatabaseInfo[database]) {
       const info = databaseToDatabaseInfo[database];
-      const uri = info.uriLink.replace(/%value/g, id);
+      const idNode = id && `:${id}`;
       referenceNode = (
-        <ExternalLink url={uri}>
-          See also {info.displayName}:{id}
-        </ExternalLink>
+        <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
+          {`See also ${info.displayName}${idNode}`}
+        </XRefExternalLink>
       );
     }
   }
@@ -105,7 +108,7 @@ export const DiseaseInvolvementEntry: React.FC<
 export const DiseaseInvolvement: React.FC<DiseaseInvolvementProps> = ({
   data,
 }) => {
-  const { comments } = data;
+  const { comments, primaryAccession: accession } = data;
   const isDisease = (comment: DiseaseCommentType) =>
     comment.commentType === CommentType.DISEASE;
   if (!comments || !comments.some(isDisease)) {
@@ -113,7 +116,13 @@ export const DiseaseInvolvement: React.FC<DiseaseInvolvementProps> = ({
   }
   const nodes = comments
     .filter(isDisease)
-    .map(comment => <DiseaseInvolvementEntry key={v1()} comment={comment} />);
+    .map(comment => (
+      <DiseaseInvolvementEntry
+        key={v1()}
+        comment={comment}
+        accession={accession}
+      />
+    ));
   return (
     <Fragment>
       <h4>Involvment in disease</h4>

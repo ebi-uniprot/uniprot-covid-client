@@ -16090,12 +16090,13 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Nr
-          newTab={true}
-          url="https://www.ensembl.org/id/id value"
+        <XRefExternalLink
+          accession="P21802"
+          id="id value"
+          url="https://www.ensembl.org/id/%value"
         >
           id value
-        </Nr>,
+        </XRefExternalLink>,
         "description value",
       ],
     },
@@ -16106,9 +16107,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "accession": "P21802",
           "children": "id value",
-          "newTab": true,
-          "url": "https://www.ensembl.org/id/id value",
+          "id": "id value",
+          "url": "https://www.ensembl.org/id/%value",
         },
         "ref": null,
         "rendered": "id value",
@@ -16125,12 +16127,13 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Nr
-            newTab={true}
-            url="https://www.ensembl.org/id/id value"
+          <XRefExternalLink
+            accession="P21802"
+            id="id value"
+            url="https://www.ensembl.org/id/%value"
           >
             id value
-          </Nr>,
+          </XRefExternalLink>,
           "description value",
         ],
       },
@@ -16141,9 +16144,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "accession": "P21802",
             "children": "id value",
-            "newTab": true,
-            "url": "https://www.ensembl.org/id/id value",
+            "id": "id value",
+            "url": "https://www.ensembl.org/id/%value",
           },
           "ref": null,
           "rendered": "id value",
