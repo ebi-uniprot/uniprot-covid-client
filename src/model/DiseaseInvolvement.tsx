@@ -6,6 +6,7 @@ import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { DatabaseToDatabaseInfo } from './types/databaseTypes';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
 import { DatabaseCrossReference, XRefExternalLink } from './XRef';
+import { InfoList } from 'franklin-sites';
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
@@ -53,54 +54,59 @@ export const DiseaseInvolvementEntry: React.FC<
   if (!diseaseId) {
     return null;
   }
+  const infoData = [];
+
   const evidenceNodes =
     evidences &&
     evidences.map(evidence => (
       <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
     ));
 
-  let notesNode;
   if (note) {
     const { texts } = note;
     if (texts) {
-      notesNode = texts.map(text => text.value).join(' ');
+      infoData.push({
+        title: 'Note',
+        content: (
+          <ul className="no-bullet">
+            {texts.map(text => (
+              <li key={v1()}>{text.value}</li>
+            ))}
+          </ul>
+        ),
+      });
     }
   }
 
-  let descriptionNode;
   if (description) {
-    descriptionNode = (
-      <Fragment>
-        <u>Disease description</u> {description}
-      </Fragment>
-    );
+    infoData.push({
+      title: 'Description',
+      content: description,
+    });
   }
 
-  let referenceNode;
   if (reference) {
     const { databaseType: database, id } = reference;
     if (database && id && databaseToDatabaseInfo[database]) {
       const info = databaseToDatabaseInfo[database];
-      const idNode = id && `:${id}`;
-      referenceNode = (
-        <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
-          {`See also ${info.displayName}${idNode}`}
-        </XRefExternalLink>
-      );
+      infoData.push({
+        title: 'See also',
+        content: (
+          <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
+            {info.displayName}
+            {id && `:${id}`}
+          </XRefExternalLink>
+        ),
+      });
     }
   }
   return (
     <Fragment>
-      <h5>
-        {diseaseId} {acronym && `(${acronym})`} {evidenceNodes}
-      </h5>
-      <p>
-        {notesNode}
-        <br />
-        {descriptionNode}
-        <br />
-        {referenceNode}
-      </p>
+      <h4>
+        {diseaseId} {acronym && `(${acronym})`}
+      </h4>
+      <p>{evidenceNodes}</p>
+      <InfoList infoData={infoData} />
     </Fragment>
   );
 };
@@ -125,7 +131,7 @@ export const DiseaseInvolvement: React.FC<DiseaseInvolvementProps> = ({
     ));
   return (
     <Fragment>
-      <h4>Involvment in disease</h4>
+      <h3>Involvment in disease</h3>
       {nodes}
     </Fragment>
   );

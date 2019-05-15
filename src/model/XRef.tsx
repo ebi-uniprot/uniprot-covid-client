@@ -64,7 +64,7 @@ type XRefExternalLinkProps = {
   url: string;
   accession?: string | null | undefined;
   id?: string | null | undefined;
-  children: string;
+  children: string | string[];
 };
 
 export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
