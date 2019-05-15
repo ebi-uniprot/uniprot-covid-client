@@ -2,20 +2,25 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import { KeywordCategory } from './types/keywordTypes';
+import { KeywordTypes } from './types/keywordTypes';
 
-export type Keyword = {
+export type KeywordData = {
   id?: string;
   value?: string;
-  category?: KeywordCategory;
+  category?: KeywordTypes;
+}[];
+
+export type KeywordCategory = {
+  category: KeywordTypes;
+  keywords: KeywordData;
 };
 
 type KeywordProps = {
-  keywords: { [keywordCategory: string]: Keyword[] };
+  keywords: KeywordCategory[];
 };
 
 type KeywordListProps = {
-  keywords: Keyword[];
+  keywords: KeywordData;
 };
 
 type KeywordItempProps = {
@@ -51,12 +56,10 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
 };
 
 export const Keyword: React.FC<KeywordProps> = ({ keywords }) => {
-  const infoData = Object.keys(keywords)
-    .sort()
-    .map(foundCategory => ({
-      title: foundCategory,
-      content: <KeywordList keywords={keywords[foundCategory]} />,
-    }));
+  const infoData = keywords.map(keywordCategory => ({
+    title: keywordCategory.category,
+    content: <KeywordList keywords={keywordCategory.keywords} />,
+  }));
   if (infoData.length === 0) {
     return null;
   }
@@ -67,5 +70,3 @@ export const Keyword: React.FC<KeywordProps> = ({ keywords }) => {
     </Fragment>
   );
 };
-
-export default Keyword;

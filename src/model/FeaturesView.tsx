@@ -20,7 +20,7 @@ type FeatureLocation = {
   modifier: LocationModifier;
 };
 
-export type Feature = {
+export type FeatureData = {
   type: FeatureTypes;
   featureId?: string;
   description?: string;
@@ -29,7 +29,7 @@ export type Feature = {
     end: FeatureLocation;
   };
   evidences?: EvidenceType[];
-};
+}[];
 
 type ProtvistaFeature = {
   type: string;
@@ -45,7 +45,7 @@ type FeatureProps = {
   sequence: {
     value: string;
   };
-  features: Feature[];
+  features: FeatureData;
 };
 
 const columns = {
@@ -68,7 +68,7 @@ const columns = {
   },
 };
 
-const processData = (data: Feature[]) =>
+const processData = (data: FeatureData) =>
   data.map(feature => {
     return {
       accession: feature.featureId,

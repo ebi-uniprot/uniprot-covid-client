@@ -1,41 +1,35 @@
 import React, { Fragment, FC } from 'react';
 import EntrySectionType from '../../model/types/EntrySection';
-import { FreeText, FreeTextType, FreeTextData } from '../../model/FreeText';
+import { FreeText, FreeTextData } from '../../model/FreeText';
 import {
   CatalyticActivity,
   CatalyticActivityData,
 } from '../../model/CatalyticActivity';
-import { Keyword } from '../../model/Keyword';
+import { Keyword, KeywordData, KeywordCategory } from '../../model/Keyword';
 import { XRef, DatabaseCrossReference, XrefCategory } from '../../model/XRef';
-import FeaturesView, { Feature } from '../../model/FeaturesView';
+import FeaturesView, { FeatureData } from '../../model/FeaturesView';
 import FeatureTypes from '../../model/types/featureTypes';
 import { getCategoryKeywords } from '../../model/utils/KeywordsUtil';
-import KeywordCategory from '../../model/types/keywordTypes';
+import KeywordTypes from '../../model/types/keywordTypes';
 import { getCategoryXrefs } from '../../model/utils/XrefUtils';
+import CommentType from '../../model/types/commentType';
 
 type data = {
   primaryAccession: string;
   comments?: FreeTextData & CatalyticActivityData;
-  keywords?: Keyword[];
-  features?: Feature[];
+  keywords?: KeywordData;
+  features?: FeatureData;
   databaseCrossReferences?: DatabaseCrossReference[];
   sequence: { value: string };
 };
-// &
-// keywords?:
-// KewyordsData
-
-// &
-// FeatureData &
-// XrefData;
 
 const getFunctionData = (data: data) => {
   let functionData: {
     functionCommentsData: FreeTextData;
     catalyticActivityData: CatalyticActivityData;
     pathwayCommentsData: FreeTextData;
-    keywordData: { [keywordCategory: string]: Keyword[] };
-    featuresData: Feature[];
+    keywordData: KeywordCategory[];
+    featuresData: FeatureData;
     xrefData: XrefCategory[];
   } = {
     functionCommentsData: [],
@@ -47,20 +41,20 @@ const getFunctionData = (data: data) => {
   };
   if (data.comments) {
     functionData.functionCommentsData = data.comments.filter(
-      d => d.commentType === FreeTextType.FUNCTION
+      d => d.commentType === CommentType.FUNCTION
     );
     functionData.catalyticActivityData = data.comments.filter(
-      d => d.commentType === FreeTextType.CATALYTIC_ACTIVITY
+      d => d.commentType === CommentType.CATALYTIC_ACTIVITY
     );
     functionData.pathwayCommentsData = data.comments.filter(
-      d => d.commentType === FreeTextType.PATHWAY
+      d => d.commentType === CommentType.PATHWAY
     );
   }
   if (data.keywords) {
     const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordCategory.MOLECULAR_FUNCTION,
-      KeywordCategory.BIOLOGICAL_PROCESS,
-      KeywordCategory.LIGAND,
+      KeywordTypes.MOLECULAR_FUNCTION,
+      KeywordTypes.BIOLOGICAL_PROCESS,
+      KeywordTypes.LIGAND,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       functionData.keywordData = categoryKeywords;
@@ -100,11 +94,24 @@ const getFunctionData = (data: data) => {
 
 const FunctionSection: FC<{ entryData: data }> = ({ entryData }) => {
   const functionData = getFunctionData(entryData);
+  if (
+    functionData.functionCommentsData.length <= 0 &&
+    functionData.catalyticActivityData.length <= 0 &&
+    functionData.featuresData.length <= 0 &&
+    functionData.keywordData.length <= 0 &&
+    functionData.pathwayCommentsData.length <= 0 &&
+    functionData.xrefData.length <= 0
+  ) {
+    return null;
+  }
   return (
     <Fragment>
-      <FreeText data={functionData.functionCommentsData} />
+      <FreeText comments={functionData.functionCommentsData} />
       <CatalyticActivity comments={functionData.catalyticActivityData} />
-      <FreeText data={functionData.pathwayCommentsData} includeTitle={true} />
+      <FreeText
+        comments={functionData.pathwayCommentsData}
+        includeTitle={true}
+      />
       <Keyword keywords={functionData.keywordData} />
       <FeaturesView
         features={functionData.featuresData}

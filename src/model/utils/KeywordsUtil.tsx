@@ -1,24 +1,24 @@
-import KeywordCategory from '../types/keywordTypes';
-import Keyword from '../Keyword';
+import KeywordTypes from '../types/keywordTypes';
+import { KeywordData } from '../Keyword';
 
 export const getCategoryKeywords = (
-  keywords: Keyword[],
-  keywordCategories: KeywordCategory[]
+  keywords: KeywordData,
+  keywordCategories: KeywordTypes[]
 ) => {
   if (!keywords || !keywordCategories) {
     return null;
   }
-  const foundCategoryToKeywords: { [keywordCategory: string]: Keyword[] } = {};
-  for (const keyword of keywords) {
-    const { category, value, id } = keyword;
-    if (!category || !value || !id || !keywordCategories.includes(category)) {
-      continue;
-    }
-    if (category in foundCategoryToKeywords) {
-      foundCategoryToKeywords[category].push(keyword);
-    } else {
-      foundCategoryToKeywords[category] = [keyword];
+  const keywordsByCategories = [];
+  for (const category of keywordCategories) {
+    const categoryKeywords = keywords.filter(
+      keyword => keyword.category === category
+    );
+    if (categoryKeywords && categoryKeywords.length > 0) {
+      keywordsByCategories.push({
+        category: category,
+        keywords: categoryKeywords,
+      });
     }
   }
-  return foundCategoryToKeywords;
+  return keywordsByCategories;
 };

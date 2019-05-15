@@ -1,6 +1,4 @@
-import EntrySection from './EntrySection';
-
-export enum KeywordCategory {
+export enum KeywordTypes {
   BIOLOGICAL_PROCESS = 'Biological process',
   CELLULAR_COMPONENT = 'Cellular component',
   CODING_SEQUENCE_DIVERSITY = 'Coding sequence diversity',
@@ -13,4 +11,4 @@ export enum KeywordCategory {
   TECHNICAL_TERM = 'Technical term',
 }
 
-export default KeywordCategory;
+export default KeywordTypes;
