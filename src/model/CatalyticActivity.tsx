@@ -6,7 +6,7 @@ import { CommentType } from './types/commentType';
 
 export type CatalyticActivityData = {
   commentType: CommentType;
-  reaction: {
+  reaction?: {
     name: string;
     reactionReferences: Array<{ databaseType: string; id: string }>;
     ecNumber: string;
@@ -27,16 +27,19 @@ export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
   return (
     <Fragment>
       <h4>Catalytic Activity</h4>
-      {comments.map(catalyticActivity => (
-        <p key={v1()}>
-          <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
-          {catalyticActivity.reaction.name}
-          {catalyticActivity.reaction.evidences &&
-            catalyticActivity.reaction.evidences.map(evidence => (
-              <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-            ))}
-        </p>
-      ))}
+      {comments.map(
+        catalyticActivity =>
+          catalyticActivity.reaction && (
+            <p key={v1()}>
+              <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
+              {catalyticActivity.reaction.name}
+              {catalyticActivity.reaction.evidences &&
+                catalyticActivity.reaction.evidences.map(evidence => (
+                  <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
+                ))}
+            </p>
+          )
+      )}
     </Fragment>
   );
 };

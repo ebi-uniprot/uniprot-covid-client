@@ -17,7 +17,7 @@ export type FreeTextType =
   | CommentType.TISSUE_SPECIFICITY;
 
 export type FreeTextData = {
-  commentType: FreeTextType;
+  commentType: CommentType;
   texts: [{ value: string; evidences: EvidenceType[] }];
 }[];
 
