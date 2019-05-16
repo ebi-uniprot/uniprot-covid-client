@@ -10,22 +10,21 @@ const UniProtKBEntryConfig: {
 }[] = [
   {
     name: EntrySectionType.Function,
-    sectionContent: entryData => <FunctionSection entryData={entryData} />,
+    sectionContent: data => (
+      <FunctionSection data={data} key={EntrySectionType.Function} />
+    ),
   },
   // {
-  //   name: EntrySectionType.Function,
-  //   sectionContent: entryData => <FunctionSection entryData={entryData} />,
-  // },
-  // {
   //   name: EntrySectionType.NamesAndTaxonomy,
-  //   sectionContent: entryData => (
-  //     <NamesAndTaxonomySection entryData={entryData} />
-  //   ),
+  //   sectionContent: data => <NamesAndTaxonomySection data={data} />,
   // },
   {
     name: EntrySectionType.PathologyAndBioTech,
-    sectionContent: entryData => (
-      <PathologyAndBiotechSection entryData={entryData} />
+    sectionContent: data => (
+      <PathologyAndBiotechSection
+        data={data}
+        key={EntrySectionType.PathologyAndBioTech}
+      />
     ),
   },
 ];

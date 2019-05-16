@@ -1,58 +1,29 @@
 import React, { FC, Fragment } from 'react';
-import FeatureTypes from '../../model/types/featureTypes';
-import FeaturesView, { FeatureData } from '../../model/FeaturesView';
-import DiseaseInvolvement, {
-  DiseaseCommentData,
-} from '../../model/DiseaseInvolvement';
-import CommentType from '../../model/types/commentType';
+import { Card } from 'franklin-sites';
+import FeaturesView from '../../model/FeaturesView';
+import DiseaseInvolvement from '../../model/DiseaseInvolvement';
+import { Keyword } from '../../model/Keyword';
+import EntrySectionType from '../../model/types/EntrySection';
+import { isEmpty } from '../../model/utils/utils';
 
-type data = {
-  primaryAccession: string;
-  features?: FeatureData;
-  comments?: DiseaseCommentData;
-  sequence: { value: string };
-};
-
-const getPathologyAndBiotechData = (data: data) => {
-  let pathologyAndBiotechData: {
-    featuresData: FeatureData;
-    diseaseInvolvementData: DiseaseCommentData;
-  } = {
-    featuresData: [],
-    diseaseInvolvementData: [],
-  };
-  if (data.comments) {
-    pathologyAndBiotechData.diseaseInvolvementData = data.comments.filter(
-      comment => comment.commentType === CommentType.DISEASE
-    );
-  }
-  if (data.features) {
-    const features = data.features.filter(feature => {
-      return [FeatureTypes.MUTAGEN].includes(feature.type);
-    });
-    pathologyAndBiotechData.featuresData = features;
-  }
-  return pathologyAndBiotechData;
-};
-
-const PathologyAndBiotechSection: FC<{ entryData: data }> = ({ entryData }) => {
-  const pathologyAndBiotechData = getPathologyAndBiotechData(entryData);
-  if (
-    pathologyAndBiotechData.featuresData.length <= 0 &&
-    pathologyAndBiotechData.diseaseInvolvementData.length <= 0
-  ) {
+const PathologyAndBiotechSection: FC<{ data }> = ({ data }) => {
+  const pathologyAndBiotechData = data[EntrySectionType.PathologyAndBioTech];
+  if (isEmpty(pathologyAndBiotechData)) {
     return null;
   }
   return (
     <Fragment>
-      <DiseaseInvolvement
-        comments={pathologyAndBiotechData.diseaseInvolvementData}
-        primaryAccession={entryData.primaryAccession}
-      />
-      <FeaturesView
-        features={pathologyAndBiotechData.featuresData}
-        sequence={entryData.sequence}
-      />
+      <Card title={EntrySectionType.PathologyAndBioTech}>
+        <DiseaseInvolvement
+          comments={pathologyAndBiotechData.diseaseInvolvementData}
+          primaryAccession={data.primaryAccession}
+        />
+        <FeaturesView
+          features={pathologyAndBiotechData.featuresData}
+          sequence={data.sequence}
+        />
+        <Keyword keywords={pathologyAndBiotechData.keywordData} />
+      </Card>
     </Fragment>
   );
 };

@@ -4,54 +4,14 @@ import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from './uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { ProteinOverview } from '../model/ProteinOverview';
-import { FreeText } from '../model/FreeText';
-import { CommentType } from '../model/types/commentType';
-import XRef from '../model/XRef';
 import { Card } from 'franklin-sites';
-import { SequenceViewEntry } from '../model/SequenceView';
-import EntrySectionType from '../model/types/EntrySection';
-import { KeywordData } from '../model/Keyword';
-import FeaturesView from '../model/FeaturesView';
-import FeatureTypes from '../model/types/featureTypes';
-import DiseaseInvolvement from '../model/DiseaseInvolvement';
+import uniProtKbConverter from '../model/uniprotkb/UniProtkbConverter';
 
 interface MatchParams {
   accession: string;
 }
 
 interface EntryProps extends RouteComponentProps<MatchParams> {}
-
-// TODO this needs to be removed once added
-// export const entrySectionToKeywordCategories = new Map<
-//   EntrySection,
-//   KeywordCategory[]
-// >();
-// entrySectionToKeywordCategories.set(EntrySection.Expression, [
-//   KeywordCategory.DEVELOPMENTAL_STAGE,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.ProteinProcessing, [
-//   KeywordCategory.PTM,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.SubCellularLocation, [
-//   KeywordCategory.CELLULAR_COMPONENT,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.Miscellaneous, [
-//   KeywordCategory.TECHNICAL_TERM,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.PathologyAndBioTech, [
-//   KeywordCategory.DISEASE,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.FamilyAndDomains, [
-//   KeywordCategory.DOMAIN,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.Sequence, [
-//   KeywordCategory.CODING_SEQUENCE_DIVERSITY,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.Function, [
-//   KeywordCategory.MOLECULAR_FUNCTION,
-//   KeywordCategory.BIOLOGICAL_PROCESS,
-//   KeywordCategory.LIGAND,
-// ]);
 
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
@@ -60,33 +20,14 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     return null;
   }
 
-  const sectionArray = [];
-  const inPageNavItems = [];
-  // for (const [name, section] of UniProtKBEntryConfig) {
-  //   const sectionContent = section(entryData);
-  //   sectionContent &&
-  //     sectionArray.push(
-  //       <Card title={name} key={name}>
-  //         {sectionContent}
-  //       </Card>
-  //     );
-  //   inPageNavItems.push({
-  //     id: name,
-  //     name: name,
-  //     disabled: sectionContent === null,
-  //   });
-  // }
+  const transformedData = uniProtKbConverter(entryData);
 
   return (
     <Fragment>
-      <ProteinOverview data={entryData} />
+      {/* <ProteinOverview data={transformedData} /> */}
 
       {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
-        return (
-          <Card title={name} key={name}>
-            {sectionContent(entryData)}
-          </Card>
-        );
+        return sectionContent(transformedData);
       })}
 
       {/* <Card title="PTM/Processing">

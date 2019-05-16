@@ -56,6 +56,9 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
 };
 
 export const Keyword: React.FC<KeywordProps> = ({ keywords }) => {
+  if (!keywords || keywords.length <= 0) {
+    return null;
+  }
   const infoData = keywords.map(keywordCategory => ({
     title: keywordCategory.category,
     content: <KeywordList keywords={keywordCategory.keywords} />,
