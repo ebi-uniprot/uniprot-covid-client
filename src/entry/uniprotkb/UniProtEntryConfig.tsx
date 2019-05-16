@@ -22,12 +22,12 @@ const UniProtKBEntryConfig: {
   //     <NamesAndTaxonomySection entryData={entryData} />
   //   ),
   // },
-  // {
-  //   name: EntrySectionType.PathologyAndBioTech,
-  //   sectionContent: entryData => (
-  //     <PathologyAndBiotechSection entryData={entryData} />
-  //   ),
-  // },
+  {
+    name: EntrySectionType.PathologyAndBioTech,
+    sectionContent: entryData => (
+      <PathologyAndBiotechSection entryData={entryData} />
+    ),
+  },
 ];
 
 export default UniProtKBEntryConfig;

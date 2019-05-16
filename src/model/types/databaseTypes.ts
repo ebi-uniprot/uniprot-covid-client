@@ -26,7 +26,7 @@ type AttributesItem = {
 
 type DatabaseInfo = {
   name: string;
-  displayName?: string;
+  displayName: string;
   category: string;
   uriLink: string;
   attributes?: AttributesItem[];

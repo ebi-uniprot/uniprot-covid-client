@@ -107,10 +107,6 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           ]}
         />
       </Card>
-      <Card title="Pathology & Biotech">
-        <DiseaseInvolvement data={entryData} />
-        <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
-      </Card>
       <Card title="Expression">
         <h4>Tissue specificity</h4>
         <FreeText data={entryData} type={CommentType.TISSUE_SPECIFICITY} />

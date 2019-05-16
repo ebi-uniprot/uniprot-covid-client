@@ -52,6 +52,29 @@ type XRefCategoryInfoListProps = {
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
+type XRefExternalLinkProps = {
+  url: string;
+  accession?: string | null | undefined;
+  id?: string | null | undefined;
+  children: string | string[];
+};
+
+export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
+  url,
+  accession,
+  id,
+  children,
+}) => {
+  let link = url;
+  if (accession) {
+    link = link.replace(/%acc/g, accession);
+  }
+  if (id) {
+    link = link.replace(/%value/g, id);
+  }
+  return <ExternalLink url={link}>{children}</ExternalLink>;
+};
+
 export const XRefItem: React.FC<XRefItemProps> = ({
   xRefEntry,
   primaryAccession,
@@ -66,9 +89,6 @@ export const XRefItem: React.FC<XRefItemProps> = ({
     return null;
   }
   const info = databaseToDatabaseInfo[database];
-  const uri = info.uriLink
-    .replace(/%acc/g, primaryAccession)
-    .replace(/%value/g, id);
   let properties: string = '';
   if (entryProperties) {
     properties = entryProperties
@@ -79,7 +99,9 @@ export const XRefItem: React.FC<XRefItemProps> = ({
   }
   return (
     <li key={v1()}>
-      <ExternalLink url={uri}>{xRefEntry.id}</ExternalLink>
+      <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
+        {id}
+      </XRefExternalLink>
       {properties}
     </li>
   );
