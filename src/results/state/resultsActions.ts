@@ -2,7 +2,7 @@ import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
-import idx from 'idx';
+import idx, { IDXOptional } from 'idx';
 import { RootState } from '../../state/state-types';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
@@ -27,7 +27,9 @@ export const receiveBatchOfResults = (
 export const requestBatchOfResults = (url: string) =>
   action(REQUEST_BATCH_OF_RESULTS, { url });
 
-const getNextUrlFromResponse = (link: string | null): string | undefined => {
+const getNextUrlFromResponse = (
+  link: string | null | undefined
+): string | undefined => {
   if (!link) {
     return;
   }
@@ -40,11 +42,19 @@ const getNextUrlFromResponse = (link: string | null): string | undefined => {
 
 export const clearResults = () => action(CLEAR_RESULTS);
 
+type Response = {
+  data: any;
+  headers: {
+    ['x-totalrecords']: number;
+    link: string;
+  };
+};
+
 export const fetchBatchOfResults = (url: string) => async (
   dispatch: Dispatch
 ) => {
   dispatch(requestBatchOfResults(url));
-  fetchData(url).then(response => {
+  fetchData(url).then((response: Response) => {
     const nextUrl = getNextUrlFromResponse(idx(response, _ => _.headers.link));
     dispatch(
       receiveBatchOfResults(
