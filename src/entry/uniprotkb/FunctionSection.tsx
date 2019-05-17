@@ -25,7 +25,7 @@ const FunctionSection: FC<{ data }> = ({ data }) => {
         <Keyword keywords={functionData.keywordData} />
         <FeaturesView
           features={functionData.featuresData}
-          sequence={data.sequence}
+          sequence={data[EntrySectionType.Sequence].sequence}
         />
         <XRef
           xrefs={functionData.xrefData}

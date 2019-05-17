@@ -20,7 +20,7 @@ const PathologyAndBiotechSection: FC<{ data }> = ({ data }) => {
         />
         <FeaturesView
           features={pathologyAndBiotechData.featuresData}
-          sequence={data.sequence}
+          sequence={data[EntrySectionType.Sequence].sequence}
         />
         <Keyword keywords={pathologyAndBiotechData.keywordData} />
       </Card>

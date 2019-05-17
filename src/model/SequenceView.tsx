@@ -6,7 +6,7 @@ import fetchData from '../utils/fetchData';
 import { formatLargeNumber } from '../utils/utils';
 import idx from 'idx';
 
-enum Flag {
+export enum Flag {
   PRECURSOR = 'Precursor',
   FRAGMENT = 'Fragment',
   FRAGMENTS = 'Fragments',
@@ -23,7 +23,7 @@ type Isoform = {
   sequenceIds: string[];
 };
 
-type AlternativeProduct = {
+export type AlternativeProducts = {
   commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
   note: { texts: Array<{ value: string }> };
@@ -47,8 +47,8 @@ type SequenceViewProps = {
     proteinDescription?: {
       flag?: Flag;
     };
-    sequence?: Sequence;
-    comments?: AlternativeProduct[];
+    sequence: Sequence;
+    comments?: AlternativeProducts[];
   };
 };
 
@@ -152,31 +152,15 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
 };
 
 export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
-  const flag = idx(data, _ => _.proteinDescription.flag);
+  console.log(data);
   const sequenceInfoData = [
     {
       title: 'Sequence status',
-      content:
-        flag &&
-        [
-          Flag.FRAGMENT,
-          Flag.FRAGMENTS,
-          Flag.FRAGMENTS_PRECURSOR,
-          Flag.FRAGMENT_PRECURSOR,
-        ].includes(flag)
-          ? flag
-          : 'Complete',
+      content: data.status,
     },
     {
       title: 'Sequence processing',
-      content:
-        flag &&
-        [
-          Flag.PRECURSOR,
-          Flag.FRAGMENTS_PRECURSOR,
-          Flag.FRAGMENT_PRECURSOR,
-        ].includes(flag) &&
-        'The displayed sequence is further processed into a mature form.',
+      content: data.processing,
     },
   ];
 
@@ -185,57 +169,43 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
     return null;
   }
 
-  let lastUpdateDate;
-  if (data.entryAudit) {
-    lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${
-      data.entryAudit.sequenceVersion
-    }`;
-  }
-
   const canonicalComponent = (
     <SequenceInfo
       isoformId={data.accession}
       isoformSequence={data.sequence}
-      lastUpdateDate={lastUpdateDate}
+      lastUpdateDate={data.lastUpdateDate}
     />
   );
 
-  // Trembl entries only have a canonical sequence
-  let alternativeProducts;
-  if (data.comments) {
-    alternativeProducts = data.comments.find(
-      comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
-    );
-  }
-
-  if (!alternativeProducts && data.sequence) {
+  if (!data.alternativeProducts && data.sequence) {
     return canonicalComponent;
   }
 
-  if (!alternativeProducts) {
+  if (!data.alternativeProducts) {
     return null;
   }
 
   let isoformCountNode;
-  if (alternativeProducts.isoforms && alternativeProducts.events) {
+  if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
     isoformCountNode = (
       <p>
         This entry describes{' '}
-        <strong>{alternativeProducts.isoforms.length}</strong> isoforms produced
-        by <strong>{alternativeProducts.events.join(' & ')}</strong>.
+        <strong>{data.alternativeProducts.isoforms.length}</strong> isoforms
+        produced by{' '}
+        <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
       </p>
     );
   }
 
   let notesNode;
-  const texts = idx(alternativeProducts, _ => _.note.texts);
+  const texts = idx(data.alternativeProducts, _ => _.note.texts);
   if (texts) {
     notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
   }
 
   let isoformsNode;
-  if (alternativeProducts.isoforms) {
-    isoformsNode = alternativeProducts.isoforms.map(isoform => {
+  if (data.alternativeProducts.isoforms) {
+    isoformsNode = data.alternativeProducts.isoforms.map(isoform => {
       const isoformComponent = (
         <SequenceInfo isoformId={isoform.isoformIds[0]} />
       );

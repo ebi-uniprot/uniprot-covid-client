@@ -15,7 +15,7 @@ const ProteinProcessingSection: FC<{ data }> = ({ data }) => {
       <Card title={EntrySectionType.ProteinProcessing}>
         <FeaturesView
           features={proteinProcessingData.featuresData}
-          sequence={data.sequence}
+          sequence={data[EntrySectionType.Sequence].sequence}
         />
         <Keyword keywords={proteinProcessingData.keywordData} />
       </Card>

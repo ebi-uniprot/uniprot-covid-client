@@ -11,6 +11,7 @@ import namesAndTaxonomyConverter from './sections/NamesAndTaxonomyConverter';
 import proteinProcessingConverter from './sections/ProteinProcessingConverter';
 import expressionConverter from './sections/ExpressionConverter';
 import subcellularLocationConverter from './sections/SubcellularLocationConverter';
+import sequenceConverter from './sections/SequenceConverter';
 
 type data = {
   primaryAccession: string;
@@ -30,23 +31,16 @@ const uniProtKbConverter = (data: data) => {
     [EntrySectionType.PathologyAndBioTech]: pathologyAndBiotechConverter(data),
     [EntrySectionType.ProteinProcessing]: proteinProcessingConverter(data),
     [EntrySectionType.Expression]: expressionConverter(data),
-    sequence: data.sequence,
+    [EntrySectionType.Sequence]: sequenceConverter(data),
   };
 };
 
 export default uniProtKbConverter;
 
 // TODO this needs to be removed once added
-// export const entrySectionToKeywordCategories = new Map<
-//   EntrySection,
-//   KeywordCategory[]
-// >();
 // entrySectionToKeywordCategories.set(EntrySection.Miscellaneous, [
 //   KeywordCategory.TECHNICAL_TERM,
 // ]);
 // entrySectionToKeywordCategories.set(EntrySection.FamilyAndDomains, [
 //   KeywordCategory.DOMAIN,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.Sequence, [
-//   KeywordCategory.CODING_SEQUENCE_DIVERSITY,
 // ]);

@@ -6,6 +6,7 @@ import EntrySectionType from '../../model/types/EntrySection';
 import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';
+import SequenceSection from './SequenceSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySectionType;
@@ -57,6 +58,12 @@ const UniProtKBEntryConfig: {
     name: EntrySectionType.Expression,
     sectionContent: data => (
       <ExpressionSection data={data} key={EntrySectionType.Expression} />
+    ),
+  },
+  {
+    name: EntrySectionType.Sequence,
+    sectionContent: data => (
+      <SequenceSection data={data} key={EntrySectionType.Sequence} />
     ),
   },
 ];

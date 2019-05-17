@@ -35,26 +35,6 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
           types={[FeatureTypes.HELIX, FeatureTypes.TURN, FeatureTypes.STRAND]}
         />
       </Card> */}
-      {/* <Card title="Sequences">
-        <SequenceViewEntry data={entryData} />
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.COMPBIAS,
-            FeatureTypes.NON_STD,
-            FeatureTypes.UNSURE,
-            FeatureTypes.CONFLICT,
-            FeatureTypes.NON_CONS,
-            FeatureTypes.NON_TER,
-          ]}
-        />
-        <Keyword data={entryData} section={EntrySectionType.Sequence} />
-        <XRef data={entryData} section={EntrySectionType.Sequence} />
-      </Card> */}
-      {/* <Card title="Similar Proteins" />
-      <Card title="Cross-References" />
-      <Card title="Entry Information" />
-      <Card title="Miscellaneous" /> */}
     </Fragment>
   );
 };

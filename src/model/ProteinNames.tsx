@@ -2,6 +2,7 @@ import React from 'react';
 import NameView from './NameView';
 import { InfoList } from 'franklin-sites';
 import { ValueWihEvidence } from './types/modelTypes';
+import { Flag } from './SequenceView';
 
 type ProteinNamesDefault = {
   fullName: ValueWihEvidence;
@@ -9,7 +10,7 @@ type ProteinNamesDefault = {
   ecNumbers?: ValueWihEvidence[];
 };
 
-type ProteinDescriptionDefault = {
+export type ProteinDescriptionDefault = {
   recommendedName?: ProteinNamesDefault;
   submissionNames?: ProteinNamesDefault[];
   alternativeNames?: ProteinNamesDefault[];
@@ -17,6 +18,7 @@ type ProteinDescriptionDefault = {
   biotechName?: ValueWihEvidence;
   cdAntigenNames?: ValueWihEvidence;
   innNames?: ValueWihEvidence;
+  flag?: Flag;
 };
 
 export type ProteinNamesData = {
