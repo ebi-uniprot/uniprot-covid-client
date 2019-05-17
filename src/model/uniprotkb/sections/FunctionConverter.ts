@@ -19,15 +19,24 @@ type data = {
   sequence: { value: string };
 };
 
+export type FunctionDataModel = {
+  functionCommentsData: FreeTextData;
+  catalyticActivityData: CatalyticActivityData;
+  pathwayCommentsData: FreeTextData;
+  keywordData: KeywordCategory[];
+  featuresData: FeatureData;
+  xrefData: XrefCategory[];
+};
+
 const functionConverter = (data: data) => {
-  const functionData: {
-    functionCommentsData?: FreeTextData;
-    catalyticActivityData?: CatalyticActivityData;
-    pathwayCommentsData?: FreeTextData;
-    keywordData?: KeywordCategory[];
-    featuresData?: FeatureData;
-    xrefData?: XrefCategory[];
-  } = {};
+  const functionData: FunctionDataModel = {
+    functionCommentsData: [],
+    catalyticActivityData: [],
+    pathwayCommentsData: [],
+    keywordData: [],
+    featuresData: [],
+    xrefData: [],
+  };
   if (data.comments) {
     functionData.functionCommentsData = data.comments.filter(
       d => d.commentType === CommentType.FUNCTION

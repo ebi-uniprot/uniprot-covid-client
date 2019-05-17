@@ -6,9 +6,17 @@ import KeywordTypes from '../../types/keywordTypes';
 import FeatureTypes from '../../types/featureTypes';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySection';
-import { ProteinDescriptionDefault } from '../../ProteinNames';
-import { Flag, AlternativeProducts } from '../../SequenceView';
+import { AlternativeProducts, SequenceData } from '../../SequenceView';
 import CommentType from '../../types/commentType';
+import { ProteinNamesData } from './NamesAndTaxonomyConverter';
+
+export enum Flag {
+  PRECURSOR = 'Precursor',
+  FRAGMENT = 'Fragment',
+  FRAGMENTS = 'Fragments',
+  FRAGMENT_PRECURSOR = 'Fragment,Precursor',
+  FRAGMENTS_PRECURSOR = 'Fragments,Precursor',
+}
 
 type data = {
   primaryAccession: string;
@@ -16,25 +24,32 @@ type data = {
   features?: FeatureData;
   comments?: AlternativeProducts[];
   databaseCrossReferences?: DatabaseCrossReference[];
-  proteinDescription?: ProteinDescriptionDefault;
-  sequence: { value: string };
+  proteinDescription?: ProteinNamesData;
+  sequence: SequenceData;
   entryAudit?: {
     lastSequenceUpdateDate: string;
     sequenceVersion: string;
   };
 };
 
+export type SequenceDataModel = {
+  sequence: SequenceData;
+  status?: string;
+  processing?: string;
+  keywordData: KeywordCategory[];
+  alternativeProducts?: AlternativeProducts;
+  featuresData: FeatureData;
+  xrefData: XrefCategory[];
+  lastUpdateDate?: string;
+};
+
 const sequenceConverter = (data: data) => {
-  const sequenceData: {
-    sequence: { value: string };
-    status?: string;
-    processing?: string;
-    keywordData?: KeywordCategory[];
-    alternativeProducts?: AlternativeProducts;
-    featuresData?: FeatureData;
-    xrefData?: XrefCategory[];
-    lastUpdateDate?: string;
-  } = { sequence: data.sequence };
+  const sequenceData: SequenceDataModel = {
+    sequence: data.sequence,
+    keywordData: [],
+    featuresData: [],
+    xrefData: [],
+  };
 
   // Deal with flags
   if (data.proteinDescription && data.proteinDescription.flag) {

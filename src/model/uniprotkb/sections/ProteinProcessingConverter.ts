@@ -9,11 +9,16 @@ type data = {
   features?: FeatureData;
 };
 
+export type ProteinProcessingDataModel = {
+  featuresData: FeatureData;
+  keywordData: KeywordCategory[];
+};
+
 const proteinProcessingConverter = (data: data) => {
-  const proteinProcessingData: {
-    featuresData?: FeatureData;
-    keywordData?: KeywordCategory[];
-  } = {};
+  const proteinProcessingData: ProteinProcessingDataModel = {
+    featuresData: [],
+    keywordData: [],
+  };
   if (data.keywords) {
     const categoryKeywords = getCategoryKeywords(data.keywords, [
       KeywordTypes.PTM,

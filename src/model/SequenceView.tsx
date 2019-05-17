@@ -5,14 +5,7 @@ import apiUrls from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 import { formatLargeNumber } from '../utils/utils';
 import idx from 'idx';
-
-export enum Flag {
-  PRECURSOR = 'Precursor',
-  FRAGMENT = 'Fragment',
-  FRAGMENTS = 'Fragments',
-  FRAGMENT_PRECURSOR = 'Fragment,Precursor',
-  FRAGMENTS_PRECURSOR = 'Fragments,Precursor',
-}
+import { SequenceDataModel } from './uniprotkb/sections/SequenceConverter';
 
 type Isoform = {
   name: { value: string };
@@ -30,7 +23,7 @@ export type AlternativeProducts = {
   events: string[];
 };
 
-type Sequence = {
+export type SequenceData = {
   value: string;
   length: number;
   molWeight: number;
@@ -38,23 +31,13 @@ type Sequence = {
 };
 
 type SequenceViewProps = {
-  data: {
-    accession: string;
-    entryAudit?: {
-      lastSequenceUpdateDate: string;
-      sequenceVersion: string;
-    };
-    proteinDescription?: {
-      flag?: Flag;
-    };
-    sequence: Sequence;
-    comments?: AlternativeProducts[];
-  };
+  accession: string;
+  data: SequenceDataModel;
 };
 
 export const SequenceInfo: React.FC<{
   isoformId: string;
-  isoformSequence?: Sequence;
+  isoformSequence?: SequenceData;
   lastUpdateDate?: string | null;
 }> = ({ isoformId, isoformSequence, lastUpdateDate }) => {
   const [data, setData] = useState(null);
@@ -151,8 +134,10 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   );
 };
 
-export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
-  console.log(data);
+export const SequenceViewEntry: React.FC<SequenceViewProps> = ({
+  accession,
+  data,
+}) => {
   const sequenceInfoData = [
     {
       title: 'Sequence status',
@@ -171,7 +156,7 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
 
   const canonicalComponent = (
     <SequenceInfo
-      isoformId={data.accession}
+      isoformId={accession}
       isoformSequence={data.sequence}
       lastUpdateDate={data.lastUpdateDate}
     />

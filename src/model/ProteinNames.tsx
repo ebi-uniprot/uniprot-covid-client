@@ -1,35 +1,10 @@
 import React from 'react';
 import NameView from './NameView';
 import { InfoList } from 'franklin-sites';
-import { ValueWihEvidence } from './types/modelTypes';
-import { Flag } from './SequenceView';
-
-type ProteinNamesDefault = {
-  fullName: ValueWihEvidence;
-  shortNames?: ValueWihEvidence[];
-  ecNumbers?: ValueWihEvidence[];
-};
-
-export type ProteinDescriptionDefault = {
-  recommendedName?: ProteinNamesDefault;
-  submissionNames?: ProteinNamesDefault[];
-  alternativeNames?: ProteinNamesDefault[];
-  allergenName?: ValueWihEvidence;
-  biotechName?: ValueWihEvidence;
-  cdAntigenNames?: ValueWihEvidence;
-  innNames?: ValueWihEvidence;
-  flag?: Flag;
-};
-
-export type ProteinNamesData = {
-  proteinDescription: ProteinDescriptionDefault & {
-    includes: ProteinDescriptionDefault[];
-    contains: ProteinDescriptionDefault[];
-  };
-};
+import { ProteinNamesDefault } from './uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type ProteinNamesDataProps = {
-  recommendedName: string;
+  recommendedName?: string;
   shortNames?: string;
   alternativeNames?: string[];
 };

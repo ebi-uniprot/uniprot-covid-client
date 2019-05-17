@@ -5,8 +5,9 @@ import EntrySectionType from '../../model/types/EntrySection';
 import { FreeText } from '../../model/FreeText';
 import { Keyword } from '../../model/Keyword';
 import XRef from '../../model/XRef';
+import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const ExpressionSection: FC<{ data }> = ({ data }) => {
+const ExpressionSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
   const expressionData = data[EntrySectionType.Expression];
   if (isEmpty(expressionData)) {
     return null;

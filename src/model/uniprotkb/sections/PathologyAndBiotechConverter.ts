@@ -14,12 +14,18 @@ type data = {
   sequence: { value: string };
 };
 
+export type PathologyAndBiotechDataModel = {
+  featuresData: FeatureData;
+  keywordData: KeywordCategory[];
+  diseaseInvolvementData: DiseaseCommentData;
+};
+
 const pathologyAndBiotechConverter = (data: data) => {
-  const pathologyAndBiotechData: {
-    featuresData?: FeatureData;
-    keywordData?: KeywordCategory[];
-    diseaseInvolvementData?: DiseaseCommentData;
-  } = {};
+  const pathologyAndBiotechData: PathologyAndBiotechDataModel = {
+    featuresData: [],
+    keywordData: [],
+    diseaseInvolvementData: [],
+  };
   if (data.comments) {
     pathologyAndBiotechData.diseaseInvolvementData = data.comments.filter(
       comment => comment.commentType === CommentType.DISEASE

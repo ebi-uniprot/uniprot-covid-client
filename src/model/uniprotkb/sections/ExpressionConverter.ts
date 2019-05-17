@@ -17,13 +17,20 @@ type data = {
   sequence: { value: string };
 };
 
+export type ExpressionDataModel = {
+  tissueSpecificityData: FreeTextData;
+  inductionData: FreeTextData;
+  xrefData: XrefCategory[];
+  keywordData: KeywordCategory[];
+};
+
 const expressionConverter = (data: data) => {
-  const expressionData: {
-    tissueSpecificityData?: FreeTextData;
-    inductionData?: FreeTextData;
-    xrefData?: XrefCategory[];
-    keywordData?: KeywordCategory[];
-  } = {};
+  const expressionData: ExpressionDataModel = {
+    tissueSpecificityData: [],
+    inductionData: [],
+    xrefData: [],
+    keywordData: [],
+  };
   if (data.comments) {
     expressionData.tissueSpecificityData = data.comments.filter(
       comment => comment.commentType === CommentType.TISSUE_SPECIFICITY

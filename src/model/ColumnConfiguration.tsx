@@ -1,8 +1,9 @@
 import React from 'react';
 import SimpleView from './SimpleView';
-import { ProteinNames, ProteinNamesData } from './ProteinNames';
+import { ProteinNames } from './ProteinNames';
 import { GeneNames, GeneNamesData } from './GeneNames';
 import { Organism, OrganismData } from './Organism';
+import { ProteinNamesData } from './uniprotkb/sections/NamesAndTaxonomyConverter';
 
 const WIDTH = {
   small: 200,

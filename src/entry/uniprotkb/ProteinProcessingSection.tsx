@@ -4,8 +4,11 @@ import { isEmpty } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySection';
 import FeaturesView from '../../model/FeaturesView';
 import { Keyword } from '../../model/Keyword';
+import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const ProteinProcessingSection: FC<{ data }> = ({ data }) => {
+const ProteinProcessingSection: FC<{ data: UniProtkbDataModel }> = ({
+  data,
+}) => {
   const proteinProcessingData = data[EntrySectionType.ProteinProcessing];
   if (isEmpty(proteinProcessingData)) {
     return null;

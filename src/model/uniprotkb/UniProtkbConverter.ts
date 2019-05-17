@@ -1,28 +1,59 @@
 import EntrySectionType from '../types/EntrySection';
-import functionConverter from './sections/FunctionConverter';
+import functionConverter, {
+  FunctionDataModel,
+} from './sections/FunctionConverter';
 import { FreeTextData } from '../FreeText';
 import { CatalyticActivityData } from '../CatalyticActivity';
 import { KeywordData } from '../Keyword';
 import { FeatureData } from '../FeaturesView';
 import { DatabaseCrossReference } from '../XRef';
-import pathologyAndBiotechConverter from './sections/PathologyAndBiotechConverter';
+import pathologyAndBiotechConverter, {
+  PathologyAndBiotechDataModel,
+} from './sections/PathologyAndBiotechConverter';
 import { DiseaseCommentData } from '../DiseaseInvolvement';
-import namesAndTaxonomyConverter from './sections/NamesAndTaxonomyConverter';
-import proteinProcessingConverter from './sections/ProteinProcessingConverter';
-import expressionConverter from './sections/ExpressionConverter';
-import subcellularLocationConverter from './sections/SubcellularLocationConverter';
-import sequenceConverter from './sections/SequenceConverter';
+import namesAndTaxonomyConverter, {
+  NamesAndTaxonomyDataModel,
+  ProteinNamesData,
+} from './sections/NamesAndTaxonomyConverter';
+import proteinProcessingConverter, {
+  ProteinProcessingDataModel,
+} from './sections/ProteinProcessingConverter';
+import expressionConverter, {
+  ExpressionDataModel,
+} from './sections/ExpressionConverter';
+import subcellularLocationConverter, {
+  SubcellularLocationDataModel,
+} from './sections/SubcellularLocationConverter';
+import sequenceConverter, {
+  SequenceDataModel,
+} from './sections/SequenceConverter';
+import { AlternativeProducts, SequenceData } from '../SequenceView';
 
 type data = {
   primaryAccession: string;
-  comments?: FreeTextData & CatalyticActivityData & DiseaseCommentData;
+  proteinDescription?: ProteinNamesData;
+  comments?: FreeTextData &
+    CatalyticActivityData &
+    DiseaseCommentData &
+    AlternativeProducts[];
   keywords?: KeywordData;
   features?: FeatureData;
   databaseCrossReferences?: DatabaseCrossReference[];
-  sequence: { value: string };
+  sequence: SequenceData;
 };
 
-const uniProtKbConverter = (data: data) => {
+export type UniProtkbDataModel = {
+  primaryAccession: string;
+  [EntrySectionType.Function]: FunctionDataModel;
+  [EntrySectionType.NamesAndTaxonomy]: NamesAndTaxonomyDataModel;
+  [EntrySectionType.SubCellularLocation]: SubcellularLocationDataModel;
+  [EntrySectionType.PathologyAndBioTech]: PathologyAndBiotechDataModel;
+  [EntrySectionType.ProteinProcessing]: ProteinProcessingDataModel;
+  [EntrySectionType.Expression]: ExpressionDataModel;
+  [EntrySectionType.Sequence]: SequenceDataModel;
+};
+
+const uniProtKbConverter = (data: data): UniProtkbDataModel => {
   return {
     primaryAccession: data.primaryAccession,
     [EntrySectionType.Function]: functionConverter(data),

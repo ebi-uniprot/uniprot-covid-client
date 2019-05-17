@@ -6,8 +6,9 @@ import FeaturesView from '../../model/FeaturesView';
 import { Keyword } from '../../model/Keyword';
 import XRef from '../../model/XRef';
 import { SequenceViewEntry } from '../../model/SequenceView';
+import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const SequenceSection: FC<{ data }> = ({ data }) => {
+const SequenceSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
   const sequenceData = data[EntrySectionType.Sequence];
   if (isEmpty(sequenceData)) {
     return null;
@@ -15,7 +16,10 @@ const SequenceSection: FC<{ data }> = ({ data }) => {
   return (
     <Fragment>
       <Card title={EntrySectionType.Sequence}>
-        <SequenceViewEntry data={sequenceData} />
+        <SequenceViewEntry
+          data={sequenceData}
+          accession={data.primaryAccession}
+        />
         <FeaturesView
           features={sequenceData.featuresData}
           sequence={data[EntrySectionType.Sequence].sequence}

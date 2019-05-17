@@ -15,10 +15,6 @@ export type KeywordCategory = {
   keywords: KeywordData;
 };
 
-type KeywordProps = {
-  keywords: KeywordCategory[];
-};
-
 type KeywordListProps = {
   keywords: KeywordData;
 };
@@ -55,7 +51,9 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
   return <Fragment>{nodes}</Fragment>;
 };
 
-export const Keyword: React.FC<KeywordProps> = ({ keywords }) => {
+export const Keyword: React.FC<{ keywords: KeywordCategory[] }> = ({
+  keywords,
+}) => {
   if (!keywords || keywords.length <= 0) {
     return null;
   }

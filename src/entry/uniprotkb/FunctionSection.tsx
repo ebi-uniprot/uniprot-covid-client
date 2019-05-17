@@ -7,8 +7,9 @@ import { XRef } from '../../model/XRef';
 import FeaturesView from '../../model/FeaturesView';
 import EntrySectionType from '../../model/types/EntrySection';
 import { isEmpty } from '../../model/utils/utils';
+import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const FunctionSection: FC<{ data }> = ({ data }) => {
+const FunctionSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
   const functionData = data[EntrySectionType.Function];
   if (isEmpty(functionData)) {
     return null;

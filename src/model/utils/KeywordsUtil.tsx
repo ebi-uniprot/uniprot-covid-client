@@ -1,10 +1,10 @@
 import KeywordTypes from '../types/keywordTypes';
-import { KeywordData } from '../Keyword';
+import { KeywordData, KeywordCategory } from '../Keyword';
 
 export const getCategoryKeywords = (
   keywords: KeywordData,
   keywordCategories: KeywordTypes[]
-) => {
+): KeywordCategory[] | null => {
   if (!keywords || !keywordCategories) {
     return null;
   }

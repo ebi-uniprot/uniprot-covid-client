@@ -5,8 +5,11 @@ import DiseaseInvolvement from '../../model/DiseaseInvolvement';
 import { Keyword } from '../../model/Keyword';
 import EntrySectionType from '../../model/types/EntrySection';
 import { isEmpty } from '../../model/utils/utils';
+import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const PathologyAndBiotechSection: FC<{ data }> = ({ data }) => {
+const PathologyAndBiotechSection: FC<{ data: UniProtkbDataModel }> = ({
+  data,
+}) => {
   const pathologyAndBiotechData = data[EntrySectionType.PathologyAndBioTech];
   if (isEmpty(pathologyAndBiotechData)) {
     return null;
