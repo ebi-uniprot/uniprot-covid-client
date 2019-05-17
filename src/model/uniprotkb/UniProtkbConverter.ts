@@ -6,10 +6,14 @@ import { KeywordData } from '../Keyword';
 import { FeatureData } from '../FeaturesView';
 import { DatabaseCrossReference } from '../XRef';
 import pathologyAndBiotechConverter from './sections/PathologyAndBiotechConverter';
+import { DiseaseCommentData } from '../DiseaseInvolvement';
+import namesAndTaxonomyConverter from './sections/NamesAndTaxonomyConverter';
+import proteinProcessingConverter from './sections/ProteinProcessingConverter';
+import expressionConverter from './sections/ExpressionConverter';
 
 type data = {
   primaryAccession: string;
-  comments?: FreeTextData & CatalyticActivityData;
+  comments?: FreeTextData & CatalyticActivityData & DiseaseCommentData;
   keywords?: KeywordData;
   features?: FeatureData;
   databaseCrossReferences?: DatabaseCrossReference[];
@@ -20,7 +24,10 @@ const uniProtKbConverter = (data: data) => {
   return {
     primaryAccession: data.primaryAccession,
     [EntrySectionType.Function]: functionConverter(data),
+    [EntrySectionType.NamesAndTaxonomy]: namesAndTaxonomyConverter(data),
     [EntrySectionType.PathologyAndBioTech]: pathologyAndBiotechConverter(data),
+    [EntrySectionType.ProteinProcessing]: proteinProcessingConverter(data),
+    [EntrySectionType.Expression]: expressionConverter(data),
     sequence: data.sequence,
   };
 };
@@ -32,12 +39,6 @@ export default uniProtKbConverter;
 //   EntrySection,
 //   KeywordCategory[]
 // >();
-// entrySectionToKeywordCategories.set(EntrySection.Expression, [
-//   KeywordCategory.DEVELOPMENTAL_STAGE,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.ProteinProcessing, [
-//   KeywordCategory.PTM,
-// ]);
 // entrySectionToKeywordCategories.set(EntrySection.SubCellularLocation, [
 //   KeywordCategory.CELLULAR_COMPONENT,
 // ]);
@@ -49,9 +50,4 @@ export default uniProtKbConverter;
 // ]);
 // entrySectionToKeywordCategories.set(EntrySection.Sequence, [
 //   KeywordCategory.CODING_SEQUENCE_DIVERSITY,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.Function, [
-//   KeywordCategory.MOLECULAR_FUNCTION,
-//   KeywordCategory.BIOLOGICAL_PROCESS,
-//   KeywordCategory.LIGAND,
 // ]);

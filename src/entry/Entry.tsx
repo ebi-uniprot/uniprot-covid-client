@@ -30,32 +30,6 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         return sectionContent(transformedData);
       })}
 
-      {/* <Card title="PTM/Processing">
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.INIT_MET,
-            FeatureTypes.SIGNAL,
-            FeatureTypes.TRANSIT,
-            FeatureTypes.PROPEP,
-            FeatureTypes.CHAIN,
-            FeatureTypes.PEPTIDE,
-            FeatureTypes.MOD_RES,
-            FeatureTypes.LIPID,
-            FeatureTypes.CARBOHYD,
-            FeatureTypes.DISULFID,
-            FeatureTypes.CROSSLNK,
-          ]}
-        />
-      </Card>
-      <Card title="Expression">
-        <h4>Tissue specificity</h4>
-        <FreeText data={entryData} type={CommentType.TISSUE_SPECIFICITY} />
-        <h4>Induction</h4>
-        <FreeText data={entryData} type={CommentType.INDUCTION} />
-        <Keyword data={entryData} section={EntrySectionType.Expression} />
-        <XRef data={entryData} section={EntrySectionType.Expression} />
-      </Card> */}
       {/* <Card title="Interaction" /> */}
       {/* <Card title="Structure">
         <FeaturesView

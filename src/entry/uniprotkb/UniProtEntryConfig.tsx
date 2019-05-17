@@ -3,6 +3,8 @@ import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
 import EntrySectionType from '../../model/types/EntrySection';
+import ProteinProcessingSection from './ProteinProcessingSection';
+import ExpressionSection from './ExpressionSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySectionType;
@@ -14,10 +16,15 @@ const UniProtKBEntryConfig: {
       <FunctionSection data={data} key={EntrySectionType.Function} />
     ),
   },
-  // {
-  //   name: EntrySectionType.NamesAndTaxonomy,
-  //   sectionContent: data => <NamesAndTaxonomySection data={data} />,
-  // },
+  {
+    name: EntrySectionType.NamesAndTaxonomy,
+    sectionContent: data => (
+      <NamesAndTaxonomySection
+        data={data}
+        key={EntrySectionType.NamesAndTaxonomy}
+      />
+    ),
+  },
   {
     name: EntrySectionType.PathologyAndBioTech,
     sectionContent: data => (
@@ -25,6 +32,21 @@ const UniProtKBEntryConfig: {
         data={data}
         key={EntrySectionType.PathologyAndBioTech}
       />
+    ),
+  },
+  {
+    name: EntrySectionType.ProteinProcessing,
+    sectionContent: data => (
+      <ProteinProcessingSection
+        data={data}
+        key={EntrySectionType.ProteinProcessing}
+      />
+    ),
+  },
+  {
+    name: EntrySectionType.Expression,
+    sectionContent: data => (
+      <ExpressionSection data={data} key={EntrySectionType.Expression} />
     ),
   },
 ];

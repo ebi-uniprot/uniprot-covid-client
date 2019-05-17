@@ -15,7 +15,7 @@ type data = {
 };
 
 const pathologyAndBiotechConverter = (data: data) => {
-  let pathologyAndBiotechData: {
+  const pathologyAndBiotechData: {
     featuresData?: FeatureData;
     keywordData?: KeywordCategory[];
     diseaseInvolvementData?: DiseaseCommentData;

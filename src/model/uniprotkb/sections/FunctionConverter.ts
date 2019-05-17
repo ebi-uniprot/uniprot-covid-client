@@ -20,7 +20,7 @@ type data = {
 };
 
 const functionConverter = (data: data) => {
-  let functionData: {
+  const functionData: {
     functionCommentsData?: FreeTextData;
     catalyticActivityData?: CatalyticActivityData;
     pathwayCommentsData?: FreeTextData;
