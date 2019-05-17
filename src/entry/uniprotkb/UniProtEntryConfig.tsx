@@ -5,6 +5,7 @@ import PathologyAndBiotechSection from './PathologyAndBiotechSection';
 import EntrySectionType from '../../model/types/EntrySection';
 import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
+import SubcellularLocationSection from './SubcellularLocationSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySectionType;
@@ -22,6 +23,15 @@ const UniProtKBEntryConfig: {
       <NamesAndTaxonomySection
         data={data}
         key={EntrySectionType.NamesAndTaxonomy}
+      />
+    ),
+  },
+  {
+    name: EntrySectionType.SubCellularLocation,
+    sectionContent: data => (
+      <SubcellularLocationSection
+        data={data}
+        key={EntrySectionType.SubCellularLocation}
       />
     ),
   },

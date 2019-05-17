@@ -10,6 +10,7 @@ import { DiseaseCommentData } from '../DiseaseInvolvement';
 import namesAndTaxonomyConverter from './sections/NamesAndTaxonomyConverter';
 import proteinProcessingConverter from './sections/ProteinProcessingConverter';
 import expressionConverter from './sections/ExpressionConverter';
+import subcellularLocationConverter from './sections/SubcellularLocationConverter';
 
 type data = {
   primaryAccession: string;
@@ -25,6 +26,7 @@ const uniProtKbConverter = (data: data) => {
     primaryAccession: data.primaryAccession,
     [EntrySectionType.Function]: functionConverter(data),
     [EntrySectionType.NamesAndTaxonomy]: namesAndTaxonomyConverter(data),
+    [EntrySectionType.SubCellularLocation]: subcellularLocationConverter(data),
     [EntrySectionType.PathologyAndBioTech]: pathologyAndBiotechConverter(data),
     [EntrySectionType.ProteinProcessing]: proteinProcessingConverter(data),
     [EntrySectionType.Expression]: expressionConverter(data),
@@ -39,9 +41,6 @@ export default uniProtKbConverter;
 //   EntrySection,
 //   KeywordCategory[]
 // >();
-// entrySectionToKeywordCategories.set(EntrySection.SubCellularLocation, [
-//   KeywordCategory.CELLULAR_COMPONENT,
-// ]);
 // entrySectionToKeywordCategories.set(EntrySection.Miscellaneous, [
 //   KeywordCategory.TECHNICAL_TERM,
 // ]);

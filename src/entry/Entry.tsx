@@ -4,7 +4,6 @@ import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from './uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { ProteinOverview } from '../model/ProteinOverview';
-import { Card } from 'franklin-sites';
 import uniProtKbConverter from '../model/uniprotkb/UniProtkbConverter';
 
 interface MatchParams {
@@ -30,14 +29,12 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         return sectionContent(transformedData);
       })}
 
-      {/* <Card title="Interaction" /> */}
       {/* <Card title="Structure">
         <FeaturesView
           data={entryData}
           types={[FeatureTypes.HELIX, FeatureTypes.TURN, FeatureTypes.STRAND]}
         />
       </Card> */}
-      {/* <Card title="Family & Domains" /> */}
       {/* <Card title="Sequences">
         <SequenceViewEntry data={entryData} />
         <FeaturesView
