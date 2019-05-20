@@ -1,14 +1,14 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { isEmpty } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySection';
+import EntrySectionType from '../../model/types/EntrySectionType';
 import FeaturesView from '../../model/FeaturesView';
 import { Keyword } from '../../model/Keyword';
 import XRef from '../../model/XRef';
 import { SequenceViewEntry } from '../../model/SequenceView';
-import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const SequenceSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
+const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const sequenceData = data[EntrySectionType.Sequence];
   if (isEmpty(sequenceData)) {
     return null;

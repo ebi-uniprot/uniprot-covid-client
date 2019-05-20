@@ -1382,13 +1382,9 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "alternativeNames": Array [
-        "1.2.3.4",
-        "sub full Name",
-        "a full alt Name",
-      ],
-      "name": "rec full Name",
-      "shortNames": "recommended short name",
+      "alternativeNames": undefined,
+      "name": undefined,
+      "shortNames": undefined,
     },
     "ref": null,
     "rendered": null,
@@ -1400,13 +1396,9 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "alternativeNames": Array [
-          "1.2.3.4",
-          "sub full Name",
-          "a full alt Name",
-        ],
-        "name": "rec full Name",
-        "shortNames": "recommended short name",
+        "alternativeNames": undefined,
+        "name": undefined,
+        "shortNames": undefined,
       },
       "ref": null,
       "rendered": null,

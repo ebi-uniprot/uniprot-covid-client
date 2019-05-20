@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import CommentType from './types/commentType';
+import CommentType from './types/CommentType';
 import { EvidenceType } from './types/modelTypes';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
-import { DatabaseToDatabaseInfo } from './types/databaseTypes';
+import { DatabaseToDatabaseInfo } from './types/DatabaseTypes';
 import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
 import { DatabaseCrossReference, XRefExternalLink } from './XRef';
 import { InfoList } from 'franklin-sites';

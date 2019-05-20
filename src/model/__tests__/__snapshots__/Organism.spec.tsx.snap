@@ -1382,7 +1382,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "termValue": "scientific name (common name)  (synonyms 1)",
+      "termValue": "undefined ",
     },
     "ref": null,
     "rendered": null,
@@ -1394,7 +1394,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "termValue": "scientific name (common name)  (synonyms 1)",
+        "termValue": "undefined ",
       },
       "ref": null,
       "rendered": null,

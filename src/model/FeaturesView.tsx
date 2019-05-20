@@ -6,7 +6,7 @@ import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../utils/utils';
 import { EvidenceType } from './types/modelTypes';
-import FeatureTypes from './types/featureTypes';
+import FeatureTypes from './types/FeatureTypes';
 
 enum LocationModifier {
   EXACT = 'EXACT',

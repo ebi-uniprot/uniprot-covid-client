@@ -1,13 +1,13 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { isEmpty } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySection';
+import EntrySectionType from '../../model/types/EntrySectionType';
 import { FreeText } from '../../model/FreeText';
 import { Keyword } from '../../model/Keyword';
 import XRef from '../../model/XRef';
-import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const ExpressionSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
+const ExpressionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const expressionData = data[EntrySectionType.Expression];
   if (isEmpty(expressionData)) {
     return null;

@@ -1,31 +1,19 @@
 import React from 'react';
-import idx from 'idx';
 import SimpleView from './SimpleView';
-
-export type OrganismData = {
-  organism?: {
-    scientificName?: string;
-    commonName?: string;
-    synonyms?: string[];
-    taxonId: number;
-  };
-};
+import { OrganismData } from './uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type OrganismDataProps = {
   data: OrganismData;
 };
 
 export const Organism: React.FC<OrganismDataProps> = ({ data }) => {
-  if (!data.organism) {
+  if (!data) {
     return null;
   }
-  const scientificName = idx(data, _ => _.organism.scientificName);
-  const commonName = idx(data, _ => _.organism.commonName);
-  const synonyms = idx(data, _ => _.organism.synonyms);
 
-  const termValue = `${scientificName}${commonName ? ` (${commonName})` : ''} ${
-    synonyms && synonyms.length > 0 ? ` (${synonyms})` : ''
-  }`;
+  const termValue = `${data.scientificName}${
+    data.commonName ? ` (${data.commonName})` : ''
+  } ${data.synonyms && data.synonyms.length > 0 ? ` (${data.synonyms})` : ''}`;
 
   return <SimpleView termValue={termValue} />;
 };

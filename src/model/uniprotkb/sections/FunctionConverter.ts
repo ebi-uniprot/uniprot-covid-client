@@ -3,12 +3,12 @@ import { CatalyticActivityData } from '../../CatalyticActivity';
 import { KeywordCategory, KeywordData } from '../../Keyword';
 import { FeatureData } from '../../FeaturesView';
 import { XrefCategory, DatabaseCrossReference } from '../../XRef';
-import CommentType from '../../types/commentType';
+import CommentType from '../../types/CommentType';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
-import FeatureTypes from '../../types/featureTypes';
+import KeywordTypes from '../../types/KeywordTypes';
+import FeatureTypes from '../../types/FeatureTypes';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
-import EntrySectionType from '../../types/EntrySection';
+import EntrySectionType from '../../types/EntrySectionType';
 
 type data = {
   primaryAccession: string;
@@ -28,7 +28,7 @@ export type FunctionDataModel = {
   xrefData: XrefCategory[];
 };
 
-const functionConverter = (data: data) => {
+export const convertFunction = (data: data) => {
   const functionData: FunctionDataModel = {
     functionCommentsData: [],
     catalyticActivityData: [],
@@ -89,5 +89,3 @@ const functionConverter = (data: data) => {
   }
   return functionData;
 };
-
-export default functionConverter;

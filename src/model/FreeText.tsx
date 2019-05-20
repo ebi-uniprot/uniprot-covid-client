@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
 import { EvidenceType } from './types/modelTypes';
 import { v1 } from 'uuid';
-import CommentType from './types/commentType';
+import CommentType from './types/CommentType';
 
 export type FreeTextType =
   | CommentType.DISRUPTION_PHENOTYPE

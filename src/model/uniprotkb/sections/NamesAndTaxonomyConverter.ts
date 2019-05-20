@@ -1,7 +1,7 @@
-import processProteinData from '../ProteinNamesConverter';
-import { IDXOptional } from 'idx';
+import { convertProteinNames } from '../ProteinNamesConverter';
 import { ValueWihEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
+import { convertGeneNames } from '../GeneNamesConverter';
 
 export type ProteinNamesDefault = {
   fullName: ValueWihEvidence;
@@ -25,26 +25,49 @@ export type ProteinNamesData = ProteinDescriptionDefault & {
   contains?: ProteinDescriptionDefault[];
 };
 
+export type GeneNamesData = {
+  geneName: {
+    value: string;
+  };
+  synonyms?: [{ value: string }];
+  orfNames?: [{ value: string }];
+}[];
+
+export type OrganismData = {
+  scientificName?: string;
+  commonName?: string;
+  synonyms?: string[];
+  taxonId?: number;
+};
+
 type data = {
   proteinDescription?: ProteinNamesData;
+  genes?: GeneNamesData;
+  organism?: OrganismData;
 };
 
 export type NamesAndTaxonomyDataModel = {
   proteinNamesData?: {
-    recommendedName?: IDXOptional<string>;
-    shortNames?: IDXOptional<string>;
+    recommendedName?: string;
+    shortNames?: string;
     alternativeNames?: string[];
   };
+  geneNamesData?: { name: string; alternativeNames: string[] };
+  organismData?: {};
 };
 
-const namesAndTaxonomyConverter = (data: data) => {
+export const convertNamesAndTaxonomy = (data: data) => {
   const namesAndTaxonomyData: NamesAndTaxonomyDataModel = {};
   if (data.proteinDescription) {
-    namesAndTaxonomyData.proteinNamesData = processProteinData(
+    namesAndTaxonomyData.proteinNamesData = convertProteinNames(
       data.proteinDescription
     );
   }
+  if (data.genes) {
+    namesAndTaxonomyData.geneNamesData = convertGeneNames(data.genes);
+  }
+  if (data.organism) {
+    namesAndTaxonomyData.organismData = data.organism;
+  }
   return namesAndTaxonomyData;
 };
-
-export default namesAndTaxonomyConverter;

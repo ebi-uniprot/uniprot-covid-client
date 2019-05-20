@@ -1,8 +1,17 @@
 import idx from 'idx';
 import { ProteinNamesData } from './sections/NamesAndTaxonomyConverter';
 
-const processProteinData = (data: ProteinNamesData) => {
-  const recommendedName = idx(data, _ => _.recommendedName.fullName.value);
+export const convertProteinNames = (data: ProteinNamesData) => {
+  let recommendedName;
+  let shortNames;
+  if (data.recommendedName) {
+    recommendedName = data.recommendedName.fullName.value;
+    if (data.recommendedName.shortNames) {
+      shortNames = data.recommendedName.shortNames
+        .map(shortName => shortName.value)
+        .join(', ');
+    }
+  }
   const alternativeNames: string[] = [];
   const ecNumbers = idx(data, _ => _.recommendedName.ecNumbers);
   if (ecNumbers && ecNumbers.length > 0) {
@@ -23,10 +32,5 @@ const processProteinData = (data: ProteinNamesData) => {
       alternativeNames.push(...alternativeName);
     }
   }
-  const shortNames = idx(data, _ =>
-    _.recommendedName.shortNames.map(shortName => shortName.value).join(', ')
-  );
   return { recommendedName, shortNames, alternativeNames };
 };
-
-export default processProteinData;

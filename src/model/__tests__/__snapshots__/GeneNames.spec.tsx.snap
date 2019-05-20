@@ -1377,37 +1377,9 @@ ShallowWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "alternativeNames": Array [
-        "some Syn",
-        "some orf",
-      ],
-      "name": "some Gene",
-    },
-    "ref": null,
-    "rendered": null,
-    "type": [Function],
-  },
+  Symbol(enzyme.__node__): null,
   Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "alternativeNames": Array [
-          "some Syn",
-          "some orf",
-        ],
-        "name": "some Gene",
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
+    null,
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {

@@ -1,4 +1,4 @@
-import KeywordTypes from '../types/keywordTypes';
+import KeywordTypes from '../types/KeywordTypes';
 import { KeywordData, KeywordCategory } from '../Keyword';
 
 export const getCategoryKeywords = (

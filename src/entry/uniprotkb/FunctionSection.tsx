@@ -5,11 +5,11 @@ import { CatalyticActivity } from '../../model/CatalyticActivity';
 import { Keyword } from '../../model/Keyword';
 import { XRef } from '../../model/XRef';
 import FeaturesView from '../../model/FeaturesView';
-import EntrySectionType from '../../model/types/EntrySection';
+import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
-import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const FunctionSection: FC<{ data: UniProtkbDataModel }> = ({ data }) => {
+const FunctionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const functionData = data[EntrySectionType.Function];
   if (isEmpty(functionData)) {
     return null;

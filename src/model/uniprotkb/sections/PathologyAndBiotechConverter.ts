@@ -1,10 +1,10 @@
 import { FeatureData } from '../../FeaturesView';
 import { KeywordCategory, KeywordData } from '../../Keyword';
 import { DiseaseCommentData } from '../../DiseaseInvolvement';
-import CommentType from '../../types/commentType';
+import CommentType from '../../types/CommentType';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
-import FeatureTypes from '../../types/featureTypes';
+import KeywordTypes from '../../types/KeywordTypes';
+import FeatureTypes from '../../types/FeatureTypes';
 
 type data = {
   primaryAccession: string;
@@ -20,7 +20,7 @@ export type PathologyAndBiotechDataModel = {
   diseaseInvolvementData: DiseaseCommentData;
 };
 
-const pathologyAndBiotechConverter = (data: data) => {
+export const convertPathologyAndBiotech = (data: data) => {
   const pathologyAndBiotechData: PathologyAndBiotechDataModel = {
     featuresData: [],
     keywordData: [],
@@ -47,5 +47,3 @@ const pathologyAndBiotechConverter = (data: data) => {
   }
   return pathologyAndBiotechData;
 };
-
-export default pathologyAndBiotechConverter;

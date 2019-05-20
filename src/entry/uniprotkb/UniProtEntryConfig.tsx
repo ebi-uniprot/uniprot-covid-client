@@ -2,7 +2,7 @@ import React from 'react';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
-import EntrySectionType from '../../model/types/EntrySection';
+import EntrySectionType from '../../model/types/EntrySectionType';
 import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';

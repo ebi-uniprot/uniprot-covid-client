@@ -6,7 +6,7 @@ import {
   Database,
   DatabaseCategory,
   DatabaseToDatabaseInfo,
-} from '../model/types/databaseTypes';
+} from './types/DatabaseTypes';
 
 type Property = {
   key?: string;

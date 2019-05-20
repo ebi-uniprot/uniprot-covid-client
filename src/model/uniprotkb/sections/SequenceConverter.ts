@@ -2,12 +2,12 @@ import { KeywordCategory, KeywordData } from '../../Keyword';
 import { FeatureData } from '../../FeaturesView';
 import { XrefCategory, DatabaseCrossReference } from '../../XRef';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
-import FeatureTypes from '../../types/featureTypes';
+import KeywordTypes from '../../types/KeywordTypes';
+import FeatureTypes from '../../types/FeatureTypes';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
-import EntrySectionType from '../../types/EntrySection';
+import EntrySectionType from '../../types/EntrySectionType';
 import { AlternativeProducts, SequenceData } from '../../SequenceView';
-import CommentType from '../../types/commentType';
+import CommentType from '../../types/CommentType';
 import { ProteinNamesData } from './NamesAndTaxonomyConverter';
 
 export enum Flag {
@@ -43,7 +43,7 @@ export type SequenceDataModel = {
   lastUpdateDate?: string;
 };
 
-const sequenceConverter = (data: data) => {
+export const convertSequence = (data: data) => {
   const sequenceData: SequenceDataModel = {
     sequence: data.sequence,
     keywordData: [],
@@ -117,5 +117,3 @@ const sequenceConverter = (data: data) => {
   }
   return sequenceData;
 };
-
-export default sequenceConverter;

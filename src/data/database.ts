@@ -1,5 +1,5 @@
-import { Database, DatabaseCategory } from '../model/types/databaseTypes';
-import EntrySection from '../model/types/EntrySection';
+import { Database, DatabaseCategory } from '../model/types/DatabaseTypes';
+import EntrySectionType from '../model/types/EntrySectionType';
 
 export const databaseCategoryToDatabases = new Map<
   DatabaseCategory,
@@ -167,48 +167,48 @@ databaseCategoryToDatabases.set(DatabaseCategory.OTHER, [
 ]);
 
 export const entrySectionToDatabaseCategories = new Map<
-  EntrySection,
+  EntrySectionType,
   DatabaseCategory[]
 >();
-entrySectionToDatabaseCategories.set(EntrySection.Expression, [
+entrySectionToDatabaseCategories.set(EntrySectionType.Expression, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.EXPRESSION,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.FamilyAndDomains, [
+entrySectionToDatabaseCategories.set(EntrySectionType.FamilyAndDomains, [
   DatabaseCategory.FAMILY,
   DatabaseCategory.PHYLOGENOMIC,
   DatabaseCategory.DOMAIN,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.Function, [
+entrySectionToDatabaseCategories.set(EntrySectionType.Function, [
   DatabaseCategory.PATHWAY,
   DatabaseCategory.FAMILY,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.Interaction, [
+entrySectionToDatabaseCategories.set(EntrySectionType.Interaction, [
   DatabaseCategory.INTERACTION,
   DatabaseCategory.CHEMISTRY,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.NamesAndTaxonomy, [
+entrySectionToDatabaseCategories.set(EntrySectionType.NamesAndTaxonomy, [
   DatabaseCategory.ORGANISM,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.PathologyAndBioTech, [
+entrySectionToDatabaseCategories.set(EntrySectionType.PathologyAndBioTech, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.OTHER,
   DatabaseCategory.FAMILY,
   DatabaseCategory.CHEMISTRY,
   DatabaseCategory.POLYMORPHISM,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.ProteinProcessing, [
+entrySectionToDatabaseCategories.set(EntrySectionType.ProteinProcessing, [
   DatabaseCategory.PROTEOMIC,
   DatabaseCategory.GEL,
   DatabaseCategory.PTM,
   DatabaseCategory.OTHER,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.Sequence, [
+entrySectionToDatabaseCategories.set(EntrySectionType.Sequence, [
   DatabaseCategory.SEQUENCE,
   DatabaseCategory.GENOME,
   DatabaseCategory.POLYMORPHISM,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.Structure, [
+entrySectionToDatabaseCategories.set(EntrySectionType.Structure, [
   DatabaseCategory.STRUCTURE,
   DatabaseCategory.PROTOCOL,
   DatabaseCategory.OTHER,

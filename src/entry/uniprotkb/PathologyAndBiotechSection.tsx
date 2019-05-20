@@ -3,11 +3,11 @@ import { Card } from 'franklin-sites';
 import FeaturesView from '../../model/FeaturesView';
 import DiseaseInvolvement from '../../model/DiseaseInvolvement';
 import { Keyword } from '../../model/Keyword';
-import EntrySectionType from '../../model/types/EntrySection';
+import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
-import { UniProtkbDataModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
-const PathologyAndBiotechSection: FC<{ data: UniProtkbDataModel }> = ({
+const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
   data,
 }) => {
   const pathologyAndBiotechData = data[EntrySectionType.PathologyAndBioTech];

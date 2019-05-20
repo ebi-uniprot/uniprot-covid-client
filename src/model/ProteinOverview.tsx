@@ -1,33 +1,22 @@
-import React, { Fragment } from 'react';
-import { processProteinData, ProteinNamesData } from './ProteinNames';
-import { Organism, OrganismData } from './Organism';
-import { processGeneData, GeneNamesData } from './GeneNames';
+import React, { Fragment, FC } from 'react';
+import { Organism } from './Organism';
 import { Card, InfoList } from 'franklin-sites';
+import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
+import EntrySectionType from './types/EntrySectionType';
+import { GeneNames } from './GeneNames';
 
-type ProteinOverviewDataProps = {
-  data: {
-    primaryAccession: string;
-    uniProtId: string;
-    proteinExistence: string;
-    proteinDescription: ProteinNamesData['proteinDescription'];
-    organism?: OrganismData['organism'];
-    genes?: GeneNamesData['genes'];
-  };
-};
-
-export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
-  data,
-}) => {
-  const { recommendedName } = processProteinData(data);
-  const { name: geneName } = processGeneData(data);
+export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
+  const { proteinNamesData, geneNamesData, organismData } = data[
+    EntrySectionType.NamesAndTaxonomy
+  ];
   const infoListData = [
     {
       title: 'Organism',
-      content: <Organism data={data} />,
+      content: organismData && <Organism data={organismData} />,
     },
     {
       title: 'Gene',
-      content: geneName,
+      content: geneNamesData && <GeneNames {...geneNamesData} />,
     },
     {
       title: 'Evidence',
@@ -39,9 +28,10 @@ export const ProteinOverview: React.FC<ProteinOverviewDataProps> = ({
     <Card
       title={
         <Fragment>
-          {data.uniProtId}{' '}
+          {proteinNamesData && data.uniProtId}{' '}
           <small>
-            {data.primaryAccession} - {recommendedName}
+            {data.primaryAccession} -{' '}
+            {proteinNamesData && proteinNamesData.recommendedName}
           </small>
         </Fragment>
       }

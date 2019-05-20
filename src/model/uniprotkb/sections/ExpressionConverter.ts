@@ -1,11 +1,11 @@
 import { FeatureData } from '../../FeaturesView';
 import { KeywordData, KeywordCategory } from '../../Keyword';
 import { FreeTextData } from '../../FreeText';
-import CommentType from '../../types/commentType';
+import CommentType from '../../types/CommentType';
 import { DatabaseCrossReference, XrefCategory } from '../../XRef';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
-import EntrySectionType from '../../types/EntrySection';
+import KeywordTypes from '../../types/KeywordTypes';
+import EntrySectionType from '../../types/EntrySectionType';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
 
 type data = {
@@ -24,7 +24,7 @@ export type ExpressionDataModel = {
   keywordData: KeywordCategory[];
 };
 
-const expressionConverter = (data: data) => {
+export const convertExpression = (data: data) => {
   const expressionData: ExpressionDataModel = {
     tissueSpecificityData: [],
     inductionData: [],
@@ -58,5 +58,3 @@ const expressionConverter = (data: data) => {
   }
   return expressionData;
 };
-
-export default expressionConverter;

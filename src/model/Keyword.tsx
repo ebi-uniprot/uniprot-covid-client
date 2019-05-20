@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import { KeywordTypes } from './types/keywordTypes';
+import { KeywordTypes } from './types/KeywordTypes';
 
 export type KeywordData = {
   id?: string;

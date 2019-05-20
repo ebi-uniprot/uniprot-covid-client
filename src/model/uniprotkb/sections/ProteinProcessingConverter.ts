@@ -1,8 +1,8 @@
 import { FeatureData } from '../../FeaturesView';
-import FeatureTypes from '../../types/featureTypes';
+import FeatureTypes from '../../types/FeatureTypes';
 import { KeywordData, KeywordCategory } from '../../Keyword';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
+import KeywordTypes from '../../types/KeywordTypes';
 
 type data = {
   keywords?: KeywordData;
@@ -14,7 +14,7 @@ export type ProteinProcessingDataModel = {
   keywordData: KeywordCategory[];
 };
 
-const proteinProcessingConverter = (data: data) => {
+export const convertProteinProcessing = (data: data) => {
   const proteinProcessingData: ProteinProcessingDataModel = {
     featuresData: [],
     keywordData: [],
@@ -47,5 +47,3 @@ const proteinProcessingConverter = (data: data) => {
   }
   return proteinProcessingData;
 };
-
-export default proteinProcessingConverter;

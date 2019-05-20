@@ -23,7 +23,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
 
   return (
     <Fragment>
-      {/* <ProteinOverview data={transformedData} /> */}
+      <ProteinOverview data={transformedData} />
 
       {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
         return sectionContent(transformedData);

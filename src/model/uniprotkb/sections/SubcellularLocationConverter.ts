@@ -1,6 +1,6 @@
 import { KeywordData, KeywordCategory } from '../../Keyword';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/keywordTypes';
+import KeywordTypes from '../../types/KeywordTypes';
 
 type data = {
   keywords?: KeywordData;
@@ -10,7 +10,7 @@ export type SubcellularLocationDataModel = {
   keywordData: KeywordCategory[];
 };
 
-const subcellularLocationConverter = (data: data) => {
+export const convertSubcellularLocation = (data: data) => {
   const subcellularLocationData: SubcellularLocationDataModel = {
     keywordData: [],
   };
@@ -24,5 +24,3 @@ const subcellularLocationConverter = (data: data) => {
   }
   return subcellularLocationData;
 };
-
-export default subcellularLocationConverter;

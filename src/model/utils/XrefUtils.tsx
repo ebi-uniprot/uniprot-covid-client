@@ -3,7 +3,7 @@ import {
   databaseCategoryToDatabases,
   entrySectionToDatabaseCategories,
 } from '../../data/database';
-import EntrySectionType from '../types/EntrySection';
+import EntrySectionType from '../types/EntrySectionType';
 
 export const getCategoryXrefs = (
   xrefs: DatabaseCrossReference[],
