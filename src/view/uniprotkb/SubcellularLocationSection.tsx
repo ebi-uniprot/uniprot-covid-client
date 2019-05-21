@@ -3,19 +3,18 @@ import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import KeywordView from '../uniprotkb/components/KeywordView';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { SubcellularLocationUIModel } from '../../model/uniprotkb/sections/SubcellularLocationConverter';
 
-const SubcellularLocationSection: FC<{ data: UniProtkbUIModel }> = ({
+const SubcellularLocationSection: FC<{ data: SubcellularLocationUIModel }> = ({
   data,
 }) => {
-  const subcellularLocationData = data[EntrySectionType.SubCellularLocation];
-  if (!hasContent(subcellularLocationData)) {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.SubCellularLocation}>
-        <KeywordView keywords={subcellularLocationData.keywordData} />
+        <KeywordView keywords={data.keywordData} />
       </Card>
     </Fragment>
   );

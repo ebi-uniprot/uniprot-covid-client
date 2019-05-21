@@ -5,29 +5,25 @@ import EntrySectionType from '../../model/types/EntrySectionType';
 import FreeTextView from '../uniprotkb/components/FreeTextView';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { ExpressionUIModel } from '../../model/uniprotkb/sections/ExpressionConverter';
 
-const ExpressionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const expressionData = data[EntrySectionType.Expression];
-  if (!hasContent(expressionData)) {
+const ExpressionSection: FC<{
+  data: ExpressionUIModel;
+  primaryAccession: string;
+}> = ({ data, primaryAccession }) => {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.Expression}>
         <FreeTextView
-          comments={expressionData.tissueSpecificityData}
+          comments={data.tissueSpecificityData}
           includeTitle={true}
         />
-        <FreeTextView
-          comments={expressionData.inductionData}
-          includeTitle={true}
-        />
-        <KeywordView keywords={expressionData.keywordData} />
-        <XRefView
-          xrefs={expressionData.xrefData}
-          primaryAccession={data.primaryAccession}
-        />
+        <FreeTextView comments={data.inductionData} includeTitle={true} />
+        <KeywordView keywords={data.keywordData} />
+        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>
   );

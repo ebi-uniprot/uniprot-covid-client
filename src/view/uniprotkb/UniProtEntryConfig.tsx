@@ -7,6 +7,7 @@ import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';
 import SequenceSection from './SequenceSection';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const UniProtKBEntryConfig: {
   name: EntrySectionType;
@@ -14,40 +15,47 @@ const UniProtKBEntryConfig: {
 }[] = [
   {
     name: EntrySectionType.Function,
-    sectionContent: data => (
-      <FunctionSection data={data} key={EntrySectionType.Function} />
+    sectionContent: (data: UniProtkbUIModel) => (
+      <FunctionSection
+        data={data[EntrySectionType.Function]}
+        primaryAccession={data.primaryAccession}
+        sequence={data[EntrySectionType.Sequence].sequence.value}
+        key={EntrySectionType.Function}
+      />
     ),
   },
   {
     name: EntrySectionType.NamesAndTaxonomy,
-    sectionContent: data => (
+    sectionContent: (data: UniProtkbUIModel) => (
       <NamesAndTaxonomySection
-        data={data}
+        data={data[EntrySectionType.NamesAndTaxonomy]}
         key={EntrySectionType.NamesAndTaxonomy}
       />
     ),
   },
   {
     name: EntrySectionType.SubCellularLocation,
-    sectionContent: data => (
+    sectionContent: (data: UniProtkbUIModel) => (
       <SubcellularLocationSection
-        data={data}
+        data={data[EntrySectionType.SubCellularLocation]}
         key={EntrySectionType.SubCellularLocation}
       />
     ),
   },
   {
     name: EntrySectionType.PathologyAndBioTech,
-    sectionContent: data => (
+    sectionContent: (data: UniProtkbUIModel) => (
       <PathologyAndBiotechSection
-        data={data}
+        data={data[EntrySectionType.PathologyAndBioTech]}
+        primaryAccession={data.primaryAccession}
+        sequence={data[EntrySectionType.Sequence].sequence.value}
         key={EntrySectionType.PathologyAndBioTech}
       />
     ),
   },
   {
     name: EntrySectionType.ProteinProcessing,
-    sectionContent: data => (
+    sectionContent: (data: UniProtkbUIModel) => (
       <ProteinProcessingSection
         data={data[EntrySectionType.ProteinProcessing]}
         sequence={data[EntrySectionType.Sequence].sequence.value}
@@ -57,14 +65,22 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySectionType.Expression,
-    sectionContent: data => (
-      <ExpressionSection data={data} key={EntrySectionType.Expression} />
+    sectionContent: (data: UniProtkbUIModel) => (
+      <ExpressionSection
+        data={data[EntrySectionType.Expression]}
+        primaryAccession={data.primaryAccession}
+        key={EntrySectionType.Expression}
+      />
     ),
   },
   {
     name: EntrySectionType.Sequence,
-    sectionContent: data => (
-      <SequenceSection data={data} key={EntrySectionType.Sequence} />
+    sectionContent: (data: UniProtkbUIModel) => (
+      <SequenceSection
+        data={data[EntrySectionType.Sequence]}
+        primaryAccession={data.primaryAccession}
+        key={EntrySectionType.Sequence}
+      />
     ),
   },
 ];

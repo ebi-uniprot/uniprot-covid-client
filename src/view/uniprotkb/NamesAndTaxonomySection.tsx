@@ -3,17 +3,18 @@ import { Card } from 'franklin-sites';
 import { EntryProteinNames } from './components/ProteinNamesView';
 import { hasContent } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
-const NamesAndTaxonomySection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const namesAndTaxonomyData = data[EntrySectionType.NamesAndTaxonomy];
-  if (!hasContent(namesAndTaxonomyData)) {
+const NamesAndTaxonomySection: FC<{ data: NamesAndTaxonomyUIModel }> = ({
+  data,
+}) => {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.NamesAndTaxonomy}>
-        <EntryProteinNames {...namesAndTaxonomyData.proteinNamesData} />
+        <EntryProteinNames {...data.proteinNamesData} />
       </Card>
     </Fragment>
   );

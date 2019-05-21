@@ -5,27 +5,25 @@ import DiseaseInvolvementView from '../uniprotkb/components/DiseaseInvolvementVi
 import KeywordView from '../uniprotkb/components/KeywordView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { hasContent } from '../../model/utils/utils';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { PathologyAndBiotechUIModel } from '../../model/uniprotkb/sections/PathologyAndBiotechConverter';
 
-const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
-  data,
-}) => {
-  const pathologyAndBiotechData = data[EntrySectionType.PathologyAndBioTech];
-  if (!hasContent(pathologyAndBiotechData)) {
+const PathologyAndBiotechSection: FC<{
+  data: PathologyAndBiotechUIModel;
+  primaryAccession: string;
+  sequence: string;
+}> = ({ data, primaryAccession, sequence }) => {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.PathologyAndBioTech}>
         <DiseaseInvolvementView
-          comments={pathologyAndBiotechData.diseaseInvolvementData}
-          primaryAccession={data.primaryAccession}
+          comments={data.diseaseInvolvementData}
+          primaryAccession={primaryAccession}
         />
-        <FeaturesView
-          features={pathologyAndBiotechData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence.value}
-        />
-        <KeywordView keywords={pathologyAndBiotechData.keywordData} />
+        <FeaturesView features={data.featuresData} sequence={sequence} />
+        <KeywordView keywords={data.keywordData} />
       </Card>
     </Fragment>
   );

@@ -6,26 +6,25 @@ import FeaturesView from '../uniprotkb/components/FeaturesView';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
 import SequenceView from '../uniprotkb/components/SequenceView';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { SequenceUIModel } from '../../model/uniprotkb/sections/SequenceConverter';
 
-const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const sequenceData = data[EntrySectionType.Sequence];
-  if (!hasContent(sequenceData)) {
+const SequenceSection: FC<{
+  data: SequenceUIModel;
+  primaryAccession: string;
+}> = ({ data, primaryAccession }) => {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.Sequence}>
-        <SequenceView data={sequenceData} accession={data.primaryAccession} />
+        <SequenceView data={data} accession={primaryAccession} />
         <FeaturesView
-          features={sequenceData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence.value}
+          features={data.featuresData}
+          sequence={data.sequence.value}
         />
-        <KeywordView keywords={sequenceData.keywordData} />
-        <XRefView
-          xrefs={sequenceData.xrefData}
-          primaryAccession={data.primaryAccession}
-        />
+        <KeywordView keywords={data.keywordData} />
+        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>
   );

@@ -7,31 +7,25 @@ import XRefView from '../uniprotkb/components/XRefView';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { hasContent } from '../../model/utils/utils';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
 
-const FunctionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const functionData = data[EntrySectionType.Function];
-  if (!hasContent(functionData)) {
+const FunctionSection: FC<{
+  data: FunctionUIModel;
+  sequence: string;
+  primaryAccession: string;
+}> = ({ data, sequence, primaryAccession }) => {
+  if (!hasContent(data)) {
     return null;
   }
   return (
     <Fragment>
       <Card title={EntrySectionType.Function}>
-        <FreeTextView comments={functionData.functionCommentsData} />
-        <CatalyticActivityView comments={functionData.catalyticActivityData} />
-        <FreeTextView
-          comments={functionData.pathwayCommentsData}
-          includeTitle={true}
-        />
-        <KeywordView keywords={functionData.keywordData} />
-        <FeaturesView
-          features={functionData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence.value}
-        />
-        <XRefView
-          xrefs={functionData.xrefData}
-          primaryAccession={data.primaryAccession}
-        />
+        <FreeTextView comments={data.functionCommentsData} />
+        <CatalyticActivityView comments={data.catalyticActivityData} />
+        <FreeTextView comments={data.pathwayCommentsData} includeTitle={true} />
+        <KeywordView keywords={data.keywordData} />
+        <FeaturesView features={data.featuresData} sequence={sequence} />
+        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>
   );
