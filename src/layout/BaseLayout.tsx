@@ -6,6 +6,7 @@ import UniProtFooter from '../footer/UniProtFooter';
 type BaseLayoutProps = {
   children: JSX.Element;
   isHomePage?: boolean;
+  isSearchPage?: boolean;
 };
 
 const style: React.CSSProperties = {
@@ -24,10 +25,10 @@ const style: React.CSSProperties = {
 };
 
 const BaseLayout: React.FC<BaseLayoutProps> = props => {
-  const { children, isHomePage } = props;
+  const { children, isHomePage, isSearchPage } = props;
   return (
     <section id="outer-layout">
-      <UniProtHeader isHomePage={isHomePage} />
+      <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
       <a
         style={style}
         target="_blank"

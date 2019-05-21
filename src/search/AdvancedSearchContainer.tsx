@@ -2,7 +2,6 @@ import React, { Component, Fragment, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
 import {
@@ -12,10 +11,12 @@ import {
   EvidenceType,
   Namespace,
 } from './types/searchTypes';
+import AdvancedSearch from './AdvancedSearch';
+import { createQueryString } from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 
-interface SearchProps extends RouteComponentProps {
+interface Props extends RouteComponentProps {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
   searchTerms: [any];
@@ -38,12 +39,12 @@ interface SearchProps extends RouteComponentProps {
   handleRemoveClause: (clauseId: string) => void;
 }
 
-interface SearchContainerState {
+interface State {
   queryString: string;
 }
 
-export class Search extends Component<SearchProps, SearchContainerState> {
-  constructor(props: SearchProps) {
+export class Search extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     const { queryString } = props;
     this.state = { queryString };
@@ -51,7 +52,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  componentDidUpdate(prevProps: SearchProps) {
+  componentDidUpdate(prevProps: Props) {
     const { queryString: prevQueryString } = prevProps;
     const { queryString } = this.props;
     if (prevQueryString !== queryString) {
@@ -59,10 +60,9 @@ export class Search extends Component<SearchProps, SearchContainerState> {
     }
   }
 
-  handleSubmitClick(e: SyntheticEvent) {
-    e.preventDefault();
-    const { history, dispatchUpdateQueryString } = this.props;
-    const { queryString } = this.state;
+  handleSubmitClick() {
+    const { history, clauses, dispatchUpdateQueryString } = this.props;
+    const queryString = createQueryString(clauses);
     dispatchUpdateQueryString(queryString);
     history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
   }
@@ -74,10 +74,10 @@ export class Search extends Component<SearchProps, SearchContainerState> {
   render() {
     const { queryString } = this.state;
     const search = (
-      <MainSearch
-        onSubmit={this.handleSubmitClick}
-        onChange={this.handleQueryStringChange}
-        searchTerm={queryString}
+      <AdvancedSearch
+        {...this.props}
+        queryString={queryString}
+        handleAdvancedSubmitClick={this.handleSubmitClick}
       />
     );
     return <Fragment>{search}</Fragment>;
@@ -123,11 +123,11 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     dispatch
   );
 
-const SearchContainer = withRouter(
+const AdvancedSearchContainer = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )(Search)
 );
 
-export default SearchContainer;
+export default AdvancedSearchContainer;

@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import BaseLayout from './layout/BaseLayout';
 import ResultsPage from './pages/ResultsPage';
 import EntryPage from './pages/EntryPage';
+import AdvancedSearchPage from './pages/AdvancedSearchPage';
 
 declare const BASE_URL: string;
 
@@ -34,6 +35,14 @@ const App = () => (
           render={() => (
             <BaseLayout>
               <ResultsPage />
+            </BaseLayout>
+          )}
+        />
+        <Route
+          path="/advancedSearch"
+          render={() => (
+            <BaseLayout isSearchPage={true}>
+              <AdvancedSearchPage />
             </BaseLayout>
           )}
         />
