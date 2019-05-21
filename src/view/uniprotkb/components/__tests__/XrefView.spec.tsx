@@ -4,7 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import { XRef, XRefItem, XRefList, XRefCategoryInfoList } from '../XRef';
 import data from './modelData.json';
 import EntrySectionType from '../../model/types/EntrySection';
-import { Database, DatabaseCategory } from '../types/databaseTypes';
+import {
+  Database,
+  DatabaseCategory,
+} from '../../../../model/types/databaseTypes';
 
 configure({ adapter: new Adapter() });
 

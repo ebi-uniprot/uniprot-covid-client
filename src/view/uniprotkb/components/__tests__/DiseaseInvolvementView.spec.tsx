@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 // import { v1 } from 'uuid';
 import Adapter from 'enzyme-adapter-react-16';
-import CommentType from '../types/commentType';
+import CommentType from '../../../../model/types/commentType';
 import data from './modelData.json';
 import {
   DiseaseInvolvement,

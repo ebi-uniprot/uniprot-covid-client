@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { FreeText } from '../FreeText';
-import { CommentType } from '../types/commentType';
+import { CommentType } from '../../../../model/types/commentType';
 import data from './modelData.json';
 
 configure({ adapter: new Adapter() });
