@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ColumnConfiguration from '../ColumnConfiguration';
-import data from './modelData.json';
+import data from '../__mocks__/modelData.json';
 
 configure({ adapter: new Adapter() });
 
