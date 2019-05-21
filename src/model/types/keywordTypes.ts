@@ -1,4 +1,4 @@
-export enum KeywordTypes {
+export enum KeywordCategories {
   BIOLOGICAL_PROCESS = 'Biological process',
   CELLULAR_COMPONENT = 'Cellular component',
   CODING_SEQUENCE_DIVERSITY = 'Coding sequence diversity',
@@ -11,4 +11,4 @@ export enum KeywordTypes {
   TECHNICAL_TERM = 'Technical term',
 }
 
-export default KeywordTypes;
+export default KeywordCategories;

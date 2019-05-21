@@ -1,15 +1,34 @@
 import {
-  DatabaseCrossReference,
-  XrefCategory,
-  DatabaseXrefs,
-} from '../../view/uniprotkb/components/XRefView';
-import {
   databaseCategoryToDatabases,
   entrySectionToDatabaseCategories,
 } from '../../data/database';
 import EntrySectionType from '../types/EntrySectionType';
+import Database, { DatabaseCategory } from '../types/DatabaseTypes';
+import { Property } from '../types/modelTypes';
 
-export const getCategoryXrefs = (
+export type DatabaseCrossReference = {
+  databaseType?: Database;
+  id?: string;
+  properties?: [Property];
+  isoformId?: string;
+};
+
+export type DatabaseXrefs = {
+  database: Database;
+  xrefs: DatabaseCrossReference[];
+};
+
+export type XrefCategory = {
+  category: DatabaseCategory;
+  databases: DatabaseXrefs[];
+};
+
+export type XrefItem = {
+  databaseCategory: string;
+  xref: DatabaseCrossReference;
+};
+
+export const getXrefsForSection = (
   xrefs: DatabaseCrossReference[],
   section: EntrySectionType
 ) => {
@@ -48,25 +67,4 @@ export const getCategoryXrefs = (
     }
   });
   return xrefCategories;
-
-  // return sectionCategories
-  //   .map(category => {
-  //     // Get the database relevant to the given category
-  //     const databases = databaseCategoryToDatabases.get(category);
-  //     if (databases) {
-  //       return {
-  //         category: category,
-  //         databases: databases
-  //           .map(database => {
-  //             // Filter the xref data to only return the ones for
-  //             // the given database
-  //             return {
-  //               database: database,
-  //               xrefs: xrefs.filter(xref => xref.databaseType === database),
-  //             };
-  //           })
-  //           .filter(database => typeof database !== 'undefined'),
-  //       };
-  //     }
-  //   };
 };

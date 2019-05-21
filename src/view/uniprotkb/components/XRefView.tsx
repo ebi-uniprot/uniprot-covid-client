@@ -7,33 +7,12 @@ import {
   DatabaseCategory,
   DatabaseToDatabaseInfo,
 } from '../../../model/types/DatabaseTypes';
-
-type Property = {
-  key?: string;
-  value?: string;
-};
-
-export type DatabaseCrossReference = {
-  databaseType?: Database;
-  id?: string;
-  properties?: [Property];
-  isoformId?: string;
-};
-
-export type DatabaseXrefs = {
-  database: Database;
-  xrefs: DatabaseCrossReference[];
-};
-
-export type XrefCategory = {
-  category: DatabaseCategory;
-  databases: DatabaseXrefs[];
-};
-
-export type XrefItem = {
-  databaseCategory: string;
-  xref: DatabaseCrossReference;
-};
+import {
+  XrefCategory,
+  DatabaseCrossReference,
+  DatabaseXrefs,
+} from '../../../model/utils/XrefUtils.js';
+import { Property } from '../../../model/types/modelTypes.js';
 
 type XRefProps = {
   xrefs: XrefCategory[];
@@ -75,10 +54,7 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   return <ExternalLink url={link}>{children}</ExternalLink>;
 };
 
-export const XRefItem: React.FC<XRefItemProps> = ({
-  xRefEntry,
-  primaryAccession,
-}) => {
+const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   const { databaseType: database, properties: entryProperties, id } = xRefEntry;
   if (
     !id ||
@@ -107,7 +83,7 @@ export const XRefItem: React.FC<XRefItemProps> = ({
   );
 };
 
-export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
+const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
 }) => {

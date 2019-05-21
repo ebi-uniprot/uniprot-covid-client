@@ -1,20 +1,20 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import FeatureTypes from '../../types/FeatureTypes';
 import {
-  KeywordData,
-  KeywordCategory,
-} from '../../../view/uniprotkb/components/KeywordView';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
+  getKeywordsForCategories,
+  KeywordUIModel,
+  Keyword,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
 
 type ProteinProcessingAPIModel = {
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   features?: FeatureData;
 };
 
 export type ProteinProcessingUIModel = {
   featuresData: FeatureData;
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
 };
 
 export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
@@ -23,8 +23,8 @@ export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
     keywordData: [],
   };
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.PTM,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.PTM,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       proteinProcessingData.keywordData = categoryKeywords;

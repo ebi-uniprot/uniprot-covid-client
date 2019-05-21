@@ -1,24 +1,24 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
-import {
-  KeywordData,
-  KeywordCategory,
-} from '../../../view/uniprotkb/components/KeywordView';
 import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
 import CommentType from '../../types/CommentType';
 import {
+  getKeywordsForCategories,
+  Keyword,
+  KeywordUIModel,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
+import EntrySectionType from '../../types/EntrySectionType';
+import {
+  getXrefsForSection,
   DatabaseCrossReference,
   XrefCategory,
-} from '../../../view/uniprotkb/components/XRefView';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
-import EntrySectionType from '../../types/EntrySectionType';
-import { getCategoryXrefs } from '../../utils/XrefUtils';
+} from '../../utils/XrefUtils';
 
 type ExpressionAPIModel = {
   primaryAccession: string;
   features?: FeatureData;
   comments?: FreeTextData;
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   databaseCrossReferences?: DatabaseCrossReference[];
   sequence: { value: string };
 };
@@ -27,7 +27,7 @@ export type ExpressionUIModel = {
   tissueSpecificityData: FreeTextData;
   inductionData: FreeTextData;
   xrefData: XrefCategory[];
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
 };
 
 export const convertExpression = (data: ExpressionAPIModel) => {
@@ -46,15 +46,15 @@ export const convertExpression = (data: ExpressionAPIModel) => {
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.DEVELOPMENTAL_STAGE,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.DEVELOPMENTAL_STAGE,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       expressionData.keywordData = categoryKeywords;
     }
   }
   if (data.databaseCrossReferences) {
-    const xrefs = getCategoryXrefs(
+    const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
       EntrySectionType.Expression
     );

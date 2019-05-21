@@ -1,13 +1,20 @@
-import KeywordTypes from '../types/KeywordTypes';
-import {
-  KeywordData,
-  KeywordCategory,
-} from '../../view/uniprotkb/components/KeywordView';
+import KeywordCategories from '../types/KeywordTypes';
 
-export const getCategoryKeywords = (
-  keywords: KeywordData,
-  keywordCategories: KeywordTypes[]
-): KeywordCategory[] | null => {
+export type Keyword = {
+  id?: string;
+  value?: string;
+  category?: KeywordCategories;
+};
+
+export type KeywordUIModel = {
+  category: KeywordCategories;
+  keywords: Keyword[];
+};
+
+export const getKeywordsForCategories = (
+  keywords: Keyword[],
+  keywordCategories: KeywordCategories[]
+): KeywordUIModel[] | null => {
   if (!keywords || !keywordCategories) {
     return null;
   }

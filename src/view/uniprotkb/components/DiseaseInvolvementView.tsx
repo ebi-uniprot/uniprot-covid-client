@@ -5,8 +5,9 @@ import { EvidenceType } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
 import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
-import { DatabaseCrossReference, XRefExternalLink } from './XRefView';
 import { InfoList } from 'franklin-sites';
+import { DatabaseCrossReference } from '../../../model/utils/XrefUtils';
+import { XRefExternalLink } from './XRefView';
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 

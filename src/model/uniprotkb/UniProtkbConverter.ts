@@ -2,9 +2,7 @@ import EntrySectionType from '../types/EntrySectionType';
 import { convertFunction, FunctionUIModel } from './sections/FunctionConverter';
 import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
 import { CatalyticActivityData } from '../../view/uniprotkb/components/CatalyticActivityView';
-import { KeywordData } from '../../view/uniprotkb/components/KeywordView';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
-import { DatabaseCrossReference } from '../../view/uniprotkb/components/XRefView';
 import {
   convertPathologyAndBiotech,
   PathologyAndBiotechUIModel,
@@ -32,6 +30,8 @@ import {
   AlternativeProducts,
   SequenceData,
 } from '../../view/uniprotkb/components/SequenceView';
+import { Keyword } from '../utils/KeywordsUtil';
+import { DatabaseCrossReference } from '../utils/XrefUtils';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;
@@ -42,7 +42,7 @@ export type UniProtkbAPIModel = {
     CatalyticActivityData &
     DiseaseCommentData &
     AlternativeProducts[];
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   features?: FeatureData;
   databaseCrossReferences?: DatabaseCrossReference[];
   sequence: SequenceData;

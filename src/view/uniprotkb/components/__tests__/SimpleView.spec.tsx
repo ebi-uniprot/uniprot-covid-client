@@ -1,13 +1,19 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from 'react-testing-library';
 import SimpleView from '../SimpleView';
-
-configure({ adapter: new Adapter() });
+import { MemoryRouter as Router } from 'react-router-dom';
 
 describe('SimpleView component', () => {
   test('should render', () => {
-    const wrapper = shallow(<SimpleView termValue="blah" />);
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(<SimpleView termValue="blah" />);
+    expect(asFragment()).toMatchSnapshot();
+  });
+  test('should render with link', () => {
+    const { asFragment } = render(
+      <Router>
+        <SimpleView termValue="blah" linkTo="linkto" />
+      </Router>
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });

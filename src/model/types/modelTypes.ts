@@ -8,3 +8,8 @@ export type ValueWihEvidence = {
   value: string;
   evidences: EvidenceType[];
 };
+
+export type Property = {
+  key?: string;
+  value?: string;
+};

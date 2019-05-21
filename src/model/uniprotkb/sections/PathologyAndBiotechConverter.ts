@@ -1,25 +1,25 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
-import {
-  KeywordCategory,
-  KeywordData,
-} from '../../../view/uniprotkb/components/KeywordView';
 import { DiseaseCommentData } from '../../../view/uniprotkb/components/DiseaseInvolvementView';
 import CommentType from '../../types/CommentType';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
+import {
+  getKeywordsForCategories,
+  Keyword,
+  KeywordUIModel,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
 
 type PathologyAndBiotechAPIModel = {
   primaryAccession: string;
   features?: FeatureData;
   comments?: DiseaseCommentData;
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   sequence: { value: string };
 };
 
 export type PathologyAndBiotechUIModel = {
   featuresData: FeatureData;
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
   diseaseInvolvementData: DiseaseCommentData;
 };
 
@@ -37,8 +37,8 @@ export const convertPathologyAndBiotech = (
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.DISEASE,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.DISEASE,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       pathologyAndBiotechData.keywordData = categoryKeywords;

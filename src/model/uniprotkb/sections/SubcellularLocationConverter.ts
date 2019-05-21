@@ -1,16 +1,16 @@
 import {
-  KeywordData,
-  KeywordCategory,
-} from '../../../view/uniprotkb/components/KeywordView';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
+  getKeywordsForCategories,
+  Keyword,
+  KeywordUIModel,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
 
 type SubcellularLocationAPIModel = {
-  keywords?: KeywordData;
+  keywords?: Keyword[];
 };
 
 export type SubcellularLocationUIModel = {
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
 };
 
 export const convertSubcellularLocation = (
@@ -20,8 +20,8 @@ export const convertSubcellularLocation = (
     keywordData: [],
   };
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.CELLULAR_COMPONENT,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.CELLULAR_COMPONENT,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       subcellularLocationData.keywordData = categoryKeywords;

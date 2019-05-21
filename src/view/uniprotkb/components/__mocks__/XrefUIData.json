@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Chemistry",
+    "databases": [
+      {
+        "database": "EMBL",
+        "xrefs": [
+          {
+            "databaseType": "EMBL",
+            "id": "1234",
+            "properties": [{ "key": "propKey", "value": "propValue" }],
+            "isoformId": "ABCD"
+          }
+        ]
+      }
+    ]
+  }
+]

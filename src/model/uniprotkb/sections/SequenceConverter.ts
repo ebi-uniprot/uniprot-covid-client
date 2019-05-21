@@ -1,16 +1,16 @@
-import {
-  KeywordCategory,
-  KeywordData,
-} from '../../../view/uniprotkb/components/KeywordView';
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import {
-  XrefCategory,
-  DatabaseCrossReference,
-} from '../../../view/uniprotkb/components/XRefView';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
+  getKeywordsForCategories,
+  Keyword,
+  KeywordUIModel,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
-import { getCategoryXrefs } from '../../utils/XrefUtils';
+import {
+  getXrefsForSection,
+  DatabaseCrossReference,
+  XrefCategory,
+} from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
 import {
   AlternativeProducts,
@@ -29,7 +29,7 @@ export enum Flag {
 
 type SequenceAPIModel = {
   primaryAccession: string;
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   features?: FeatureData;
   comments?: AlternativeProducts[];
   databaseCrossReferences?: DatabaseCrossReference[];
@@ -45,7 +45,7 @@ export type SequenceUIModel = {
   sequence: SequenceData;
   status?: string;
   processing?: string;
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
   alternativeProducts?: AlternativeProducts;
   featuresData: FeatureData;
   xrefData: XrefCategory[];
@@ -95,8 +95,8 @@ export const convertSequence = (data: SequenceAPIModel) => {
   }
 
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.CODING_SEQUENCE_DIVERSITY,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.CODING_SEQUENCE_DIVERSITY,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       sequenceData.keywordData = categoryKeywords;
@@ -116,7 +116,7 @@ export const convertSequence = (data: SequenceAPIModel) => {
     sequenceData.featuresData = features;
   }
   if (data.databaseCrossReferences) {
-    const xrefs = getCategoryXrefs(
+    const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
       EntrySectionType.Sequence
     );

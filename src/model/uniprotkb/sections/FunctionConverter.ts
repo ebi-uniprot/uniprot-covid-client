@@ -1,25 +1,25 @@
 import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
 import { CatalyticActivityData } from '../../../view/uniprotkb/components/CatalyticActivityView';
-import {
-  KeywordCategory,
-  KeywordData,
-} from '../../../view/uniprotkb/components/KeywordView';
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
-import {
-  XrefCategory,
-  DatabaseCrossReference,
-} from '../../../view/uniprotkb/components/XRefView';
 import CommentType from '../../types/CommentType';
-import { getCategoryKeywords } from '../../utils/KeywordsUtil';
-import KeywordTypes from '../../types/KeywordTypes';
+import {
+  getKeywordsForCategories,
+  Keyword,
+  KeywordUIModel,
+} from '../../utils/KeywordsUtil';
+import KeywordCategories from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
-import { getCategoryXrefs } from '../../utils/XrefUtils';
+import {
+  getXrefsForSection,
+  DatabaseCrossReference,
+  XrefCategory,
+} from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
 
 type FunctionAPIModel = {
   primaryAccession: string;
   comments?: FreeTextData & CatalyticActivityData;
-  keywords?: KeywordData;
+  keywords?: Keyword[];
   features?: FeatureData;
   databaseCrossReferences?: DatabaseCrossReference[];
   sequence: { value: string };
@@ -29,7 +29,7 @@ export type FunctionUIModel = {
   functionCommentsData: FreeTextData;
   catalyticActivityData: CatalyticActivityData;
   pathwayCommentsData: FreeTextData;
-  keywordData: KeywordCategory[];
+  keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefCategory[];
 };
@@ -55,10 +55,10 @@ export const convertFunction = (data: FunctionAPIModel) => {
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getCategoryKeywords(data.keywords, [
-      KeywordTypes.MOLECULAR_FUNCTION,
-      KeywordTypes.BIOLOGICAL_PROCESS,
-      KeywordTypes.LIGAND,
+    const categoryKeywords = getKeywordsForCategories(data.keywords, [
+      KeywordCategories.MOLECULAR_FUNCTION,
+      KeywordCategories.BIOLOGICAL_PROCESS,
+      KeywordCategories.LIGAND,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       functionData.keywordData = categoryKeywords;
@@ -85,7 +85,7 @@ export const convertFunction = (data: FunctionAPIModel) => {
     functionData.featuresData = features;
   }
   if (data.databaseCrossReferences) {
-    const xrefs = getCategoryXrefs(
+    const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
       EntrySectionType.Function
     );
