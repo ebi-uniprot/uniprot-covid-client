@@ -3,16 +3,16 @@ import {
   convertFunction,
   FunctionDataModel,
 } from './sections/FunctionConverter';
-import { FreeTextData } from '../FreeText';
-import { CatalyticActivityData } from '../CatalyticActivity';
-import { KeywordData } from '../Keyword';
-import { FeatureData } from '../FeaturesView';
-import { DatabaseCrossReference } from '../XRef';
+import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
+import { CatalyticActivityData } from '../../view/uniprotkb/components/CatalyticActivityView';
+import { KeywordData } from '../../view/uniprotkb/components/KeywordView';
+import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
+import { DatabaseCrossReference } from '../../view/uniprotkb/components/XRefView';
 import {
   convertPathologyAndBiotech,
   PathologyAndBiotechDataModel,
 } from './sections/PathologyAndBiotechConverter';
-import { DiseaseCommentData } from '../DiseaseInvolvement';
+import { DiseaseCommentData } from '../../view/uniprotkb/components/DiseaseInvolvementView';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyDataModel,
@@ -34,7 +34,10 @@ import {
   convertSequence,
   SequenceDataModel,
 } from './sections/SequenceConverter';
-import { AlternativeProducts, SequenceData } from '../SequenceView';
+import {
+  AlternativeProducts,
+  SequenceData,
+} from '../../view/uniprotkb/components/SequenceView';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;

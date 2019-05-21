@@ -1,7 +1,7 @@
 import React from 'react';
 import NameView from './NameView';
 import { InfoList } from 'franklin-sites';
-import { ProteinNamesDefault } from './uniprotkb/sections/NamesAndTaxonomyConverter';
+import { ProteinNamesDefault } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type ProteinNamesDataProps = {
   recommendedName?: string;

@@ -1,10 +1,10 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
-import { FreeText } from '../../model/FreeText';
-import { CatalyticActivity } from '../../model/CatalyticActivity';
-import { Keyword } from '../../model/Keyword';
-import { XRef } from '../../model/XRef';
-import FeaturesView from '../../model/FeaturesView';
+import { FreeText } from '../uniprotkb/components/FreeTextView';
+import { CatalyticActivity } from '../uniprotkb/components/CatalyticActivityView';
+import { Keyword } from '../uniprotkb/components/KeywordView';
+import { XRef } from '../uniprotkb/components/XRefView';
+import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';

@@ -1,6 +1,6 @@
 import React from 'react';
-import SimpleView from './SimpleView';
-import { Organism } from './Organism';
+import SimpleView from '../view/uniprotkb/components/SimpleView';
+import { Organism } from '../view/uniprotkb/components/OrganismView';
 import {
   ProteinNamesData,
   GeneNamesData,

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
-import { EvidenceType } from './types/modelTypes';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import { EvidenceType } from '../../../model/types/modelTypes';
 import { v1 } from 'uuid';
-import CommentType from './types/CommentType';
+import CommentType from '../../../model/types/CommentType';
 
 export type FreeTextType =
   | CommentType.DISRUPTION_PHENOTYPE

@@ -1,4 +1,7 @@
-import { KeywordData, KeywordCategory } from '../../Keyword';
+import {
+  KeywordData,
+  KeywordCategory,
+} from '../../../view/uniprotkb/components/KeywordView';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
 

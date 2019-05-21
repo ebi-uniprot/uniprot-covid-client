@@ -1,4 +1,8 @@
-import { DatabaseCrossReference, XrefCategory, DatabaseXrefs } from '../XRef';
+import {
+  DatabaseCrossReference,
+  XrefCategory,
+  DatabaseXrefs,
+} from '../../view/uniprotkb/components/XRefView';
 import {
   databaseCategoryToDatabases,
   entrySectionToDatabaseCategories,

@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleView from './SimpleView';
-import { OrganismData } from './uniprotkb/sections/NamesAndTaxonomyConverter';
+import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type OrganismDataProps = {
   data: OrganismData;

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
+import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
 import {
   Database,
   DatabaseCategory,
   DatabaseToDatabaseInfo,
-} from './types/DatabaseTypes';
+} from '../../../model/types/DatabaseTypes';
 
 type Property = {
   key?: string;

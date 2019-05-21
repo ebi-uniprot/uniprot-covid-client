@@ -1,12 +1,21 @@
-import { KeywordCategory, KeywordData } from '../../Keyword';
-import { FeatureData } from '../../FeaturesView';
-import { XrefCategory, DatabaseCrossReference } from '../../XRef';
+import {
+  KeywordCategory,
+  KeywordData,
+} from '../../../view/uniprotkb/components/KeywordView';
+import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
+import {
+  XrefCategory,
+  DatabaseCrossReference,
+} from '../../../view/uniprotkb/components/XRefView';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
-import { AlternativeProducts, SequenceData } from '../../SequenceView';
+import {
+  AlternativeProducts,
+  SequenceData,
+} from '../../../view/uniprotkb/components/SequenceView';
 import CommentType from '../../types/CommentType';
 import { ProteinNamesData } from './NamesAndTaxonomyConverter';
 

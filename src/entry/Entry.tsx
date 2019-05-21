@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import useDataApi from '../utils/useDataApi';
-import UniProtKBEntryConfig from './uniprotkb/UniProtEntryConfig';
+import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
-import { ProteinOverview } from '../model/ProteinOverview';
+import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import uniProtKbConverter from '../model/uniprotkb/UniProtkbConverter';
 
 interface MatchParams {

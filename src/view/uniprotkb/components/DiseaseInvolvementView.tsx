@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import CommentType from './types/CommentType';
-import { EvidenceType } from './types/modelTypes';
-import UniProtEvidenceTag from '../components/UniProtEvidenceTag';
-import { DatabaseToDatabaseInfo } from './types/DatabaseTypes';
-import databaseToDatabaseInfoJson from '../data/databaseToDatabaseInfo.json';
-import { DatabaseCrossReference, XRefExternalLink } from './XRef';
+import CommentType from '../../../model/types/CommentType';
+import { EvidenceType } from '../../../model/types/modelTypes';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
+import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
+import { DatabaseCrossReference, XRefExternalLink } from './XRefView';
 import { InfoList } from 'franklin-sites';
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;

@@ -1,9 +1,9 @@
 import React, { Fragment, FC } from 'react';
-import { Organism } from './Organism';
+import { Organism } from './OrganismView';
 import { Card, InfoList } from 'franklin-sites';
-import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
-import EntrySectionType from './types/EntrySectionType';
-import { GeneNames } from './GeneNames';
+import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
+import EntrySectionType from '../../../model/types/EntrySectionType';
+import { GeneNames } from './GeneNamesView';
 
 export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const { proteinNamesData, geneNamesData, organismData } = data[

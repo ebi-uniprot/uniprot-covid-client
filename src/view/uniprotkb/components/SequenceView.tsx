@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { InfoList, Sequence } from 'franklin-sites';
-import { CommentType } from './types/CommentType';
-import apiUrls from '../utils/apiUrls';
-import fetchData from '../utils/fetchData';
-import { formatLargeNumber } from '../utils/utils';
+import { CommentType } from '../../../model/types/CommentType';
+import apiUrls from '../../../utils/apiUrls';
+import fetchData from '../../../utils/fetchData';
+import { formatLargeNumber } from '../../../utils/utils';
 import idx from 'idx';
-import { SequenceDataModel } from './uniprotkb/sections/SequenceConverter';
+import { SequenceDataModel } from '../../../model/uniprotkb/sections/SequenceConverter';
 
 type Isoform = {
   name: { value: string };

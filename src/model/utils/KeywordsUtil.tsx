@@ -1,5 +1,8 @@
 import KeywordTypes from '../types/KeywordTypes';
-import { KeywordData, KeywordCategory } from '../Keyword';
+import {
+  KeywordData,
+  KeywordCategory,
+} from '../../view/uniprotkb/components/KeywordView';
 
 export const getCategoryKeywords = (
   keywords: KeywordData,

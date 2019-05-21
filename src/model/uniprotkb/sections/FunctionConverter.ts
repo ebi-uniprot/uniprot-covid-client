@@ -1,8 +1,14 @@
-import { FreeTextData } from '../../FreeText';
-import { CatalyticActivityData } from '../../CatalyticActivity';
-import { KeywordCategory, KeywordData } from '../../Keyword';
-import { FeatureData } from '../../FeaturesView';
-import { XrefCategory, DatabaseCrossReference } from '../../XRef';
+import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
+import { CatalyticActivityData } from '../../../view/uniprotkb/components/CatalyticActivityView';
+import {
+  KeywordCategory,
+  KeywordData,
+} from '../../../view/uniprotkb/components/KeywordView';
+import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
+import {
+  XrefCategory,
+  DatabaseCrossReference,
+} from '../../../view/uniprotkb/components/XRefView';
 import CommentType from '../../types/CommentType';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';

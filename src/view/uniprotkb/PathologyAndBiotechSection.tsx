@@ -1,8 +1,8 @@
 import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
-import FeaturesView from '../../model/FeaturesView';
-import DiseaseInvolvement from '../../model/DiseaseInvolvement';
-import { Keyword } from '../../model/Keyword';
+import FeaturesView from '../uniprotkb/components/FeaturesView';
+import DiseaseInvolvement from '../uniprotkb/components/DiseaseInvolvementView';
+import { Keyword } from '../uniprotkb/components/KeywordView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';

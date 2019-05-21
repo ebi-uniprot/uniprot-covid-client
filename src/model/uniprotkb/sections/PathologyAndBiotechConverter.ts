@@ -1,6 +1,9 @@
-import { FeatureData } from '../../FeaturesView';
-import { KeywordCategory, KeywordData } from '../../Keyword';
-import { DiseaseCommentData } from '../../DiseaseInvolvement';
+import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
+import {
+  KeywordCategory,
+  KeywordData,
+} from '../../../view/uniprotkb/components/KeywordView';
+import { DiseaseCommentData } from '../../../view/uniprotkb/components/DiseaseInvolvementView';
 import CommentType from '../../types/CommentType';
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
