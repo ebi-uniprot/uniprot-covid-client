@@ -6,7 +6,7 @@ type GeneNamesDataProps = {
   alternativeNames: string[];
 };
 
-export const GeneNames: React.FC<GeneNamesDataProps> = ({
+const GeneNamesView: React.FC<GeneNamesDataProps> = ({
   name,
   alternativeNames,
 }) => {
@@ -16,3 +16,5 @@ export const GeneNames: React.FC<GeneNamesDataProps> = ({
   const props = { name, alternativeNames };
   return <NameView {...props} />;
 };
+
+export default GeneNamesView;

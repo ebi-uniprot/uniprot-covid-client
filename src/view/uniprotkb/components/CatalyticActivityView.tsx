@@ -18,7 +18,7 @@ type CatalyticActivityProps = {
   comments: CatalyticActivityData;
 };
 
-export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
+const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   comments,
 }) => {
   if (!comments || comments.length <= 0) {
@@ -43,3 +43,5 @@ export const CatalyticActivity: React.FC<CatalyticActivityProps> = ({
     </Fragment>
   );
 };
+
+export default CatalyticActivityView;

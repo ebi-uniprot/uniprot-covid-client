@@ -134,10 +134,7 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   );
 };
 
-export const SequenceViewEntry: React.FC<SequenceViewProps> = ({
-  accession,
-  data,
-}) => {
+const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   const sequenceInfoData = [
     {
       title: 'Sequence status',
@@ -214,3 +211,5 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({
     </Fragment>
   );
 };
+
+export default SequenceView;

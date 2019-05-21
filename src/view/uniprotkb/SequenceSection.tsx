@@ -3,9 +3,9 @@ import { Card } from 'franklin-sites';
 import { isEmpty } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
-import { Keyword } from '../uniprotkb/components/KeywordView';
-import XRef from '../uniprotkb/components/XRefView';
-import { SequenceViewEntry } from '../uniprotkb/components/SequenceView';
+import KeywordView from '../uniprotkb/components/KeywordView';
+import XRefView from '../uniprotkb/components/XRefView';
+import SequenceView from '../uniprotkb/components/SequenceView';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
@@ -16,16 +16,13 @@ const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   return (
     <Fragment>
       <Card title={EntrySectionType.Sequence}>
-        <SequenceViewEntry
-          data={sequenceData}
-          accession={data.primaryAccession}
-        />
+        <SequenceView data={sequenceData} accession={data.primaryAccession} />
         <FeaturesView
           features={sequenceData.featuresData}
           sequence={data[EntrySectionType.Sequence].sequence}
         />
-        <Keyword keywords={sequenceData.keywordData} />
-        <XRef
+        <KeywordView keywords={sequenceData.keywordData} />
+        <XRefView
           xrefs={sequenceData.xrefData}
           primaryAccession={data.primaryAccession}
         />

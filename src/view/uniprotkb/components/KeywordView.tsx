@@ -51,7 +51,7 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
   return <Fragment>{nodes}</Fragment>;
 };
 
-export const Keyword: React.FC<{ keywords: KeywordCategory[] }> = ({
+const KeywordView: React.FC<{ keywords: KeywordCategory[] }> = ({
   keywords,
 }) => {
   if (!keywords || keywords.length <= 0) {
@@ -71,3 +71,5 @@ export const Keyword: React.FC<{ keywords: KeywordCategory[] }> = ({
     </Fragment>
   );
 };
+
+export default KeywordView;

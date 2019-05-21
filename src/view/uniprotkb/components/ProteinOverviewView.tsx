@@ -3,7 +3,7 @@ import { Organism } from './OrganismView';
 import { Card, InfoList } from 'franklin-sites';
 import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import EntrySectionType from '../../../model/types/EntrySectionType';
-import { GeneNames } from './GeneNamesView';
+import GeneNamesView from './GeneNamesView';
 
 export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const { proteinNamesData, geneNamesData, organismData } = data[
@@ -16,7 +16,7 @@ export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
     },
     {
       title: 'Gene',
-      content: geneNamesData && <GeneNames {...geneNamesData} />,
+      content: geneNamesData && <GeneNamesView {...geneNamesData} />,
     },
     {
       title: 'Evidence',

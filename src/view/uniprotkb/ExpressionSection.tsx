@@ -2,9 +2,9 @@ import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { isEmpty } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
-import { FreeText } from '../uniprotkb/components/FreeTextView';
-import { Keyword } from '../uniprotkb/components/KeywordView';
-import XRef from '../uniprotkb/components/XRefView';
+import FreeTextView from '../uniprotkb/components/FreeTextView';
+import KeywordView from '../uniprotkb/components/KeywordView';
+import XRefView from '../uniprotkb/components/XRefView';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const ExpressionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
@@ -15,13 +15,16 @@ const ExpressionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   return (
     <Fragment>
       <Card title={EntrySectionType.Expression}>
-        <FreeText
+        <FreeTextView
           comments={expressionData.tissueSpecificityData}
           includeTitle={true}
         />
-        <FreeText comments={expressionData.inductionData} includeTitle={true} />
-        <Keyword keywords={expressionData.keywordData} />
-        <XRef
+        <FreeTextView
+          comments={expressionData.inductionData}
+          includeTitle={true}
+        />
+        <KeywordView keywords={expressionData.keywordData} />
+        <XRefView
           xrefs={expressionData.xrefData}
           primaryAccession={data.primaryAccession}
         />

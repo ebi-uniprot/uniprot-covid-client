@@ -1,9 +1,9 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
-import { FreeText } from '../uniprotkb/components/FreeTextView';
-import { CatalyticActivity } from '../uniprotkb/components/CatalyticActivityView';
-import { Keyword } from '../uniprotkb/components/KeywordView';
-import { XRef } from '../uniprotkb/components/XRefView';
+import FreeTextView from '../uniprotkb/components/FreeTextView';
+import CatalyticActivityView from '../uniprotkb/components/CatalyticActivityView';
+import KeywordView from '../uniprotkb/components/KeywordView';
+import XRefView from '../uniprotkb/components/XRefView';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
@@ -17,18 +17,18 @@ const FunctionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   return (
     <Fragment>
       <Card title={EntrySectionType.Function}>
-        <FreeText comments={functionData.functionCommentsData} />
-        <CatalyticActivity comments={functionData.catalyticActivityData} />
-        <FreeText
+        <FreeTextView comments={functionData.functionCommentsData} />
+        <CatalyticActivityView comments={functionData.catalyticActivityData} />
+        <FreeTextView
           comments={functionData.pathwayCommentsData}
           includeTitle={true}
         />
-        <Keyword keywords={functionData.keywordData} />
+        <KeywordView keywords={functionData.keywordData} />
         <FeaturesView
           features={functionData.featuresData}
           sequence={data[EntrySectionType.Sequence].sequence}
         />
-        <XRef
+        <XRefView
           xrefs={functionData.xrefData}
           primaryAccession={data.primaryAccession}
         />

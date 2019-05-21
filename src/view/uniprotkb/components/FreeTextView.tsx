@@ -26,7 +26,7 @@ type FreeTextProps = {
   includeTitle?: boolean;
 };
 
-export const FreeText: React.FC<FreeTextProps> = ({
+const FreeTextView: React.FC<FreeTextProps> = ({
   comments,
   includeTitle = false,
 }) => {
@@ -60,3 +60,5 @@ export const FreeText: React.FC<FreeTextProps> = ({
     </Fragment>
   );
 };
+
+export default FreeTextView;

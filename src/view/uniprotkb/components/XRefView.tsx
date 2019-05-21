@@ -128,7 +128,7 @@ export const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   return <InfoList infoData={infoData} />;
 };
 
-export const XRef: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
+const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
   if (!xrefs) {
     return null;
   }
@@ -149,4 +149,4 @@ export const XRef: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
   return <Fragment>{nodes}</Fragment>;
 };
 
-export default XRef;
+export default XRefView;

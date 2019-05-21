@@ -109,7 +109,7 @@ export const DiseaseInvolvementEntry: React.FC<
   );
 };
 
-export const DiseaseInvolvement: React.FC<DiseaseInvolvementProps> = ({
+export const DiseaseInvolvementView: React.FC<DiseaseInvolvementProps> = ({
   comments,
   primaryAccession: accession,
 }) => {
@@ -131,4 +131,4 @@ export const DiseaseInvolvement: React.FC<DiseaseInvolvementProps> = ({
   );
 };
 
-export default DiseaseInvolvement;
+export default DiseaseInvolvementView;

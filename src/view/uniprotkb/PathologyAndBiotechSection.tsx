@@ -1,8 +1,8 @@
 import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
-import DiseaseInvolvement from '../uniprotkb/components/DiseaseInvolvementView';
-import { Keyword } from '../uniprotkb/components/KeywordView';
+import DiseaseInvolvementView from '../uniprotkb/components/DiseaseInvolvementView';
+import KeywordView from '../uniprotkb/components/KeywordView';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import { isEmpty } from '../../model/utils/utils';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
@@ -17,7 +17,7 @@ const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
   return (
     <Fragment>
       <Card title={EntrySectionType.PathologyAndBioTech}>
-        <DiseaseInvolvement
+        <DiseaseInvolvementView
           comments={pathologyAndBiotechData.diseaseInvolvementData}
           primaryAccession={data.primaryAccession}
         />
@@ -25,7 +25,7 @@ const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
           features={pathologyAndBiotechData.featuresData}
           sequence={data[EntrySectionType.Sequence].sequence}
         />
-        <Keyword keywords={pathologyAndBiotechData.keywordData} />
+        <KeywordView keywords={pathologyAndBiotechData.keywordData} />
       </Card>
     </Fragment>
   );

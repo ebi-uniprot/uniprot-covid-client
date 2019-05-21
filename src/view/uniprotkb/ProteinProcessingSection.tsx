@@ -3,7 +3,7 @@ import { Card } from 'franklin-sites';
 import { isEmpty } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
-import { Keyword } from '../uniprotkb/components/KeywordView';
+import KeywordView from '../uniprotkb/components/KeywordView';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const ProteinProcessingSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
@@ -18,7 +18,7 @@ const ProteinProcessingSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
           features={proteinProcessingData.featuresData}
           sequence={data[EntrySectionType.Sequence].sequence}
         />
-        <Keyword keywords={proteinProcessingData.keywordData} />
+        <KeywordView keywords={proteinProcessingData.keywordData} />
       </Card>
     </Fragment>
   );
