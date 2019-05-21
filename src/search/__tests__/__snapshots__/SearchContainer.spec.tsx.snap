@@ -4,79 +4,7 @@ exports[`Search shallow components should render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Search
-    clauses={
-      Array [
-        Object {
-          "id": 1,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 1,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 1,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 1,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-      ]
-    }
-    dispatchAddClause={[MockFunction]}
     dispatchCopyQueryClausesToSearch={[MockFunction]}
-    dispatchFetchSearchTerms={[MockFunction]}
-    dispatchSubmitQuery={[MockFunction]}
-    dispatchfetchEvidencesIfNeeded={[MockFunction]}
-    evidences={
-      Object {
-        "annotation": Object {
-          "data": Array [],
-          "isFetching": false,
-        },
-        "go": Object {
-          "data": Array [],
-          "isFetching": false,
-        },
-      }
-    }
     history={
       Object {
         "push": [MockFunction],
@@ -86,12 +14,6 @@ ShallowWrapper {
     location={
       Object {
         "search": "",
-      }
-    }
-    namespace="UniProtKB"
-    searchTerms={
-      Object {
-        "data": Array [],
       }
     }
   />,
