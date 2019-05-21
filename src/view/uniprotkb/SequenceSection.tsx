@@ -1,6 +1,6 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
-import { isEmpty } from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import KeywordView from '../uniprotkb/components/KeywordView';
@@ -10,7 +10,7 @@ import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const sequenceData = data[EntrySectionType.Sequence];
-  if (isEmpty(sequenceData)) {
+  if (!hasContent(sequenceData)) {
     return null;
   }
   return (

@@ -6,12 +6,12 @@ import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySectionType from '../../model/types/EntrySectionType';
-import { isEmpty } from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const FunctionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
   const functionData = data[EntrySectionType.Function];
-  if (isEmpty(functionData)) {
+  if (!hasContent(functionData)) {
     return null;
   }
   return (

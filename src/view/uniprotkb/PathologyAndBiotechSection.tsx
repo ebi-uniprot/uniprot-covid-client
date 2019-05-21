@@ -4,14 +4,14 @@ import FeaturesView from '../uniprotkb/components/FeaturesView';
 import DiseaseInvolvementView from '../uniprotkb/components/DiseaseInvolvementView';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import EntrySectionType from '../../model/types/EntrySectionType';
-import { isEmpty } from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
   data,
 }) => {
   const pathologyAndBiotechData = data[EntrySectionType.PathologyAndBioTech];
-  if (isEmpty(pathologyAndBiotechData)) {
+  if (!hasContent(pathologyAndBiotechData)) {
     return null;
   }
   return (
