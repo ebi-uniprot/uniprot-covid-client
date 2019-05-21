@@ -6,7 +6,7 @@ import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
 import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
 import { InfoList } from 'franklin-sites';
-import { DatabaseCrossReference } from '../../../model/utils/XrefUtils';
+import { Xref } from '../../../model/utils/XrefUtils';
 import { XRefExternalLink } from './XRefView';
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
@@ -16,7 +16,7 @@ type DiseaseType = {
   diseaseAccession?: string;
   acronym?: string;
   description?: string;
-  reference?: DatabaseCrossReference;
+  reference?: Xref;
   evidences?: EvidenceType[];
 };
 

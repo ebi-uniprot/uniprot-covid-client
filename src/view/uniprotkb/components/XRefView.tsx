@@ -2,31 +2,32 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
+import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
 import {
-  Database,
-  DatabaseCategory,
-  DatabaseToDatabaseInfo,
-} from '../../../model/types/DatabaseTypes';
-import {
-  XrefCategory,
-  DatabaseCrossReference,
-  DatabaseXrefs,
+  XrefUIModel,
+  Xref,
+  XrefsGoupedByDatabase,
 } from '../../../model/utils/XrefUtils.js';
 import { Property } from '../../../model/types/modelTypes.js';
 
 type XRefProps = {
-  xrefs: XrefCategory[];
+  xrefs: XrefUIModel[];
   primaryAccession: string;
 };
 
 type XRefItemProps = {
-  xRefEntry: DatabaseCrossReference;
+  xRefEntry: Xref;
   primaryAccession: string;
 };
 
 type XRefCategoryInfoListProps = {
-  databases: DatabaseXrefs[];
+  databases: XrefsGoupedByDatabase[];
   primaryAccession: string;
+};
+
+type XrefItem = {
+  databaseCategory: string;
+  xref: Xref;
 };
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;

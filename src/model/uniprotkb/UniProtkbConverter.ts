@@ -31,7 +31,7 @@ import {
   SequenceData,
 } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
-import { DatabaseCrossReference } from '../utils/XrefUtils';
+import { Xref } from '../utils/XrefUtils';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;
@@ -44,7 +44,7 @@ export type UniProtkbAPIModel = {
     AlternativeProducts[];
   keywords?: Keyword[];
   features?: FeatureData;
-  databaseCrossReferences?: DatabaseCrossReference[];
+  databaseCrossReferences?: Xref[];
   sequence: SequenceData;
 };
 

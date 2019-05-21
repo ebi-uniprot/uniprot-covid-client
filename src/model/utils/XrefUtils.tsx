@@ -6,33 +6,28 @@ import EntrySectionType from '../types/EntrySectionType';
 import Database, { DatabaseCategory } from '../types/DatabaseTypes';
 import { Property } from '../types/modelTypes';
 
-export type DatabaseCrossReference = {
+export type Xref = {
   databaseType?: Database;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
-export type DatabaseXrefs = {
+export type XrefsGoupedByDatabase = {
   database: Database;
-  xrefs: DatabaseCrossReference[];
+  xrefs: Xref[];
 };
 
-export type XrefCategory = {
+export type XrefUIModel = {
   category: DatabaseCategory;
-  databases: DatabaseXrefs[];
-};
-
-export type XrefItem = {
-  databaseCategory: string;
-  xref: DatabaseCrossReference;
+  databases: XrefsGoupedByDatabase[];
 };
 
 export const getXrefsForSection = (
-  xrefs: DatabaseCrossReference[],
+  xrefs: Xref[],
   section: EntrySectionType
-) => {
-  const xrefCategories: XrefCategory[] = [];
+): XrefUIModel[] | null => {
+  const xrefCategories: XrefUIModel[] = [];
   // Get the categories relevant to the given entry section
   const sectionCategories = entrySectionToDatabaseCategories.get(section);
   if (!sectionCategories) {
@@ -41,7 +36,7 @@ export const getXrefsForSection = (
   sectionCategories.forEach(category => {
     // Get the database relevant to the given category
     const databases = databaseCategoryToDatabases.get(category);
-    const categoryDatabases: DatabaseXrefs[] = [];
+    const categoryDatabases: XrefsGoupedByDatabase[] = [];
     if (databases) {
       databases.forEach(database => {
         // Filter the xref data to only return the ones for

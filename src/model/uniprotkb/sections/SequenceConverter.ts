@@ -6,11 +6,7 @@ import {
 } from '../../utils/KeywordsUtil';
 import KeywordCategories from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
-import {
-  getXrefsForSection,
-  DatabaseCrossReference,
-  XrefCategory,
-} from '../../utils/XrefUtils';
+import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
 import {
   AlternativeProducts,
@@ -32,7 +28,7 @@ type SequenceAPIModel = {
   keywords?: Keyword[];
   features?: FeatureData;
   comments?: AlternativeProducts[];
-  databaseCrossReferences?: DatabaseCrossReference[];
+  databaseCrossReferences?: Xref[];
   proteinDescription?: ProteinNamesData;
   sequence: SequenceData;
   entryAudit?: {
@@ -48,7 +44,7 @@ export type SequenceUIModel = {
   keywordData: KeywordUIModel[];
   alternativeProducts?: AlternativeProducts;
   featuresData: FeatureData;
-  xrefData: XrefCategory[];
+  xrefData: XrefUIModel[];
   lastUpdateDate?: string;
 };
 

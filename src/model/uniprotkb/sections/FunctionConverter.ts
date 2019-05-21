@@ -9,11 +9,7 @@ import {
 } from '../../utils/KeywordsUtil';
 import KeywordCategories from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
-import {
-  getXrefsForSection,
-  DatabaseCrossReference,
-  XrefCategory,
-} from '../../utils/XrefUtils';
+import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
 
 type FunctionAPIModel = {
@@ -21,7 +17,7 @@ type FunctionAPIModel = {
   comments?: FreeTextData & CatalyticActivityData;
   keywords?: Keyword[];
   features?: FeatureData;
-  databaseCrossReferences?: DatabaseCrossReference[];
+  databaseCrossReferences?: Xref[];
   sequence: { value: string };
 };
 
@@ -31,7 +27,7 @@ export type FunctionUIModel = {
   pathwayCommentsData: FreeTextData;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
-  xrefData: XrefCategory[];
+  xrefData: XrefUIModel[];
 };
 
 export const convertFunction = (data: FunctionAPIModel) => {

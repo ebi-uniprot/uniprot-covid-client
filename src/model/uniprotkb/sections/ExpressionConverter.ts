@@ -8,25 +8,21 @@ import {
 } from '../../utils/KeywordsUtil';
 import KeywordCategories from '../../types/KeywordTypes';
 import EntrySectionType from '../../types/EntrySectionType';
-import {
-  getXrefsForSection,
-  DatabaseCrossReference,
-  XrefCategory,
-} from '../../utils/XrefUtils';
+import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
 
 type ExpressionAPIModel = {
   primaryAccession: string;
   features?: FeatureData;
   comments?: FreeTextData;
   keywords?: Keyword[];
-  databaseCrossReferences?: DatabaseCrossReference[];
+  databaseCrossReferences?: Xref[];
   sequence: { value: string };
 };
 
 export type ExpressionUIModel = {
   tissueSpecificityData: FreeTextData;
   inductionData: FreeTextData;
-  xrefData: XrefCategory[];
+  xrefData: XrefUIModel[];
   keywordData: KeywordUIModel[];
 };
 
