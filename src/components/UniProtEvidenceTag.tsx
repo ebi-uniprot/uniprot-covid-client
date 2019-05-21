@@ -1,6 +1,6 @@
 import React from 'react';
 import { EvidenceTag } from 'franklin-sites';
-import { getEvidenceCodeData } from '../model/EvidenceCodes';
+import { getEvidenceCodeData } from '../model/types/EvidenceCodes';
 import { EvidenceType } from '../model/types/modelTypes';
 
 type UniProtEvidenceProps = {

@@ -14,7 +14,7 @@ import KeywordTypes from '../../types/KeywordTypes';
 import EntrySectionType from '../../types/EntrySectionType';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
 
-type data = {
+type ExpressionAPIModel = {
   primaryAccession: string;
   features?: FeatureData;
   comments?: FreeTextData;
@@ -23,15 +23,15 @@ type data = {
   sequence: { value: string };
 };
 
-export type ExpressionDataModel = {
+export type ExpressionUIModel = {
   tissueSpecificityData: FreeTextData;
   inductionData: FreeTextData;
   xrefData: XrefCategory[];
   keywordData: KeywordCategory[];
 };
 
-export const convertExpression = (data: data) => {
-  const expressionData: ExpressionDataModel = {
+export const convertExpression = (data: ExpressionAPIModel) => {
+  const expressionData: ExpressionUIModel = {
     tissueSpecificityData: [],
     inductionData: [],
     xrefData: [],

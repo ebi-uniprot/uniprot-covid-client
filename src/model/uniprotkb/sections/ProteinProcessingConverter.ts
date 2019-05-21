@@ -7,18 +7,18 @@ import {
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
 
-type data = {
+type ProteinProcessingAPIModel = {
   keywords?: KeywordData;
   features?: FeatureData;
 };
 
-export type ProteinProcessingDataModel = {
+export type ProteinProcessingUIModel = {
   featuresData: FeatureData;
   keywordData: KeywordCategory[];
 };
 
-export const convertProteinProcessing = (data: data) => {
-  const proteinProcessingData: ProteinProcessingDataModel = {
+export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
+  const proteinProcessingData: ProteinProcessingUIModel = {
     featuresData: [],
     keywordData: [],
   };

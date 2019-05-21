@@ -5,16 +5,18 @@ import {
 import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
 
-type data = {
+type SubcellularLocationAPIModel = {
   keywords?: KeywordData;
 };
 
-export type SubcellularLocationDataModel = {
+export type SubcellularLocationUIModel = {
   keywordData: KeywordCategory[];
 };
 
-export const convertSubcellularLocation = (data: data) => {
-  const subcellularLocationData: SubcellularLocationDataModel = {
+export const convertSubcellularLocation = (
+  data: SubcellularLocationAPIModel
+) => {
+  const subcellularLocationData: SubcellularLocationUIModel = {
     keywordData: [],
   };
   if (data.keywords) {

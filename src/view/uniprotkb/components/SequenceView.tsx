@@ -5,7 +5,7 @@ import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
 import idx from 'idx';
-import { SequenceDataModel } from '../../../model/uniprotkb/sections/SequenceConverter';
+import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
 
 type Isoform = {
   name: { value: string };
@@ -32,7 +32,7 @@ export type SequenceData = {
 
 type SequenceViewProps = {
   accession: string;
-  data: SequenceDataModel;
+  data: SequenceUIModel;
 };
 
 export const SequenceInfo: React.FC<{

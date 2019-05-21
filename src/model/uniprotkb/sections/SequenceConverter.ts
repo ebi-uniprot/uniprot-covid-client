@@ -27,7 +27,7 @@ export enum Flag {
   FRAGMENTS_PRECURSOR = 'Fragments,Precursor',
 }
 
-type data = {
+type SequenceAPIModel = {
   primaryAccession: string;
   keywords?: KeywordData;
   features?: FeatureData;
@@ -41,7 +41,7 @@ type data = {
   };
 };
 
-export type SequenceDataModel = {
+export type SequenceUIModel = {
   sequence: SequenceData;
   status?: string;
   processing?: string;
@@ -52,8 +52,8 @@ export type SequenceDataModel = {
   lastUpdateDate?: string;
 };
 
-export const convertSequence = (data: data) => {
-  const sequenceData: SequenceDataModel = {
+export const convertSequence = (data: SequenceAPIModel) => {
+  const sequenceData: SequenceUIModel = {
     sequence: data.sequence,
     keywordData: [],
     featuresData: [],

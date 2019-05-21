@@ -40,13 +40,13 @@ export type OrganismData = {
   taxonId?: number;
 };
 
-type data = {
+type NamesAndTaxonomyAPIModel = {
   proteinDescription?: ProteinNamesData;
   genes?: GeneNamesData;
   organism?: OrganismData;
 };
 
-export type NamesAndTaxonomyDataModel = {
+export type NamesAndTaxonomyUIModel = {
   proteinNamesData?: {
     recommendedName?: string;
     shortNames?: string;
@@ -56,8 +56,8 @@ export type NamesAndTaxonomyDataModel = {
   organismData?: {};
 };
 
-export const convertNamesAndTaxonomy = (data: data) => {
-  const namesAndTaxonomyData: NamesAndTaxonomyDataModel = {};
+export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
+  const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
   if (data.proteinDescription) {
     namesAndTaxonomyData.proteinNamesData = convertProteinNames(
       data.proteinDescription

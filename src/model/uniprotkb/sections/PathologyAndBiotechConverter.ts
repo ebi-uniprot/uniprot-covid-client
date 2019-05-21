@@ -9,7 +9,7 @@ import { getCategoryKeywords } from '../../utils/KeywordsUtil';
 import KeywordTypes from '../../types/KeywordTypes';
 import FeatureTypes from '../../types/FeatureTypes';
 
-type data = {
+type PathologyAndBiotechAPIModel = {
   primaryAccession: string;
   features?: FeatureData;
   comments?: DiseaseCommentData;
@@ -17,14 +17,16 @@ type data = {
   sequence: { value: string };
 };
 
-export type PathologyAndBiotechDataModel = {
+export type PathologyAndBiotechUIModel = {
   featuresData: FeatureData;
   keywordData: KeywordCategory[];
   diseaseInvolvementData: DiseaseCommentData;
 };
 
-export const convertPathologyAndBiotech = (data: data) => {
-  const pathologyAndBiotechData: PathologyAndBiotechDataModel = {
+export const convertPathologyAndBiotech = (
+  data: PathologyAndBiotechAPIModel
+) => {
+  const pathologyAndBiotechData: PathologyAndBiotechUIModel = {
     featuresData: [],
     keywordData: [],
     diseaseInvolvementData: [],

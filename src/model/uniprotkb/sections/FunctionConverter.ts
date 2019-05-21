@@ -16,7 +16,7 @@ import FeatureTypes from '../../types/FeatureTypes';
 import { getCategoryXrefs } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
 
-type data = {
+type FunctionAPIModel = {
   primaryAccession: string;
   comments?: FreeTextData & CatalyticActivityData;
   keywords?: KeywordData;
@@ -25,7 +25,7 @@ type data = {
   sequence: { value: string };
 };
 
-export type FunctionDataModel = {
+export type FunctionUIModel = {
   functionCommentsData: FreeTextData;
   catalyticActivityData: CatalyticActivityData;
   pathwayCommentsData: FreeTextData;
@@ -34,8 +34,8 @@ export type FunctionDataModel = {
   xrefData: XrefCategory[];
 };
 
-export const convertFunction = (data: data) => {
-  const functionData: FunctionDataModel = {
+export const convertFunction = (data: FunctionAPIModel) => {
+  const functionData: FunctionUIModel = {
     functionCommentsData: [],
     catalyticActivityData: [],
     pathwayCommentsData: [],
