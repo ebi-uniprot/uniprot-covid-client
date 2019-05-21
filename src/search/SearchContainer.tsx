@@ -5,37 +5,12 @@ import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
-import {
-  Clause,
-  SearchTermType,
-  Operator,
-  EvidenceType,
-  Namespace,
-} from './types/searchTypes';
 
 import './styles/SearchContainer.scss';
 
 interface SearchProps extends RouteComponentProps {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
-  searchTerms: [any];
-  namespace: Namespace;
-  clauses: Clause[];
-  evidences: any;
-  dispatchUpdateClauses: (clauses: Clause[]) => void;
-  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
-  dispatchFetchSearchTermsIfNeeded: () => void;
-  dispatchAddClause: () => void;
-  handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
-  handleInputChange: (clauseId: string, value: string, id?: string) => void;
-  handleEvidenceChange: (clauseId: string, value: string) => void;
-  handleRangeInputChange: (
-    clauseId: string,
-    value: string,
-    from?: boolean
-  ) => void;
-  handleLogicChange: (clauseId: string, value: Operator) => void;
-  handleRemoveClause: (clauseId: string) => void;
 }
 
 interface SearchContainerState {
@@ -85,38 +60,12 @@ export class Search extends Component<SearchProps, SearchContainerState> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  clauses: state.query.clauses,
-  searchTerms: state.query.searchTerms.data,
-  namespace: state.query.namespace,
-  evidences: state.query.evidences,
   queryString: state.query.queryString,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
-      handleFieldSelect: (clauseId: string, field: SearchTermType) =>
-        searchActions.selectSearchTerm(clauseId, field),
-      handleInputChange: (clauseId: string, value: string, id?: string) =>
-        searchActions.updateInputValue(clauseId, value, id),
-      handleEvidenceChange: (clauseId: string, value: string) =>
-        searchActions.updateEvidence(clauseId, value),
-      handleRangeInputChange: (
-        clauseId: string,
-        value: string,
-        from?: boolean
-      ) => searchActions.updateRangeValue(clauseId, value, from),
-      handleLogicChange: (clauseId: string, value: Operator) =>
-        searchActions.updateLogicOperator(clauseId, value),
-      handleRemoveClause: (clauseId: string) =>
-        searchActions.removeClause(clauseId),
-      dispatchAddClause: () => searchActions.addClause(),
-      dispatchfetchEvidencesIfNeeded: evidencesType =>
-        searchActions.fetchEvidencesIfNeeded(evidencesType),
-      dispatchFetchSearchTermsIfNeeded: () =>
-        searchActions.fetchSearchTermsIfNeeded(),
-      dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
-      dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
     },
