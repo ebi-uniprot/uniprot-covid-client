@@ -49,7 +49,8 @@ const UniProtKBEntryConfig: {
     name: EntrySectionType.ProteinProcessing,
     sectionContent: data => (
       <ProteinProcessingSection
-        data={data}
+        data={data[EntrySectionType.ProteinProcessing]}
+        sequence={data[EntrySectionType.Sequence].sequence.value}
         key={EntrySectionType.ProteinProcessing}
       />
     ),

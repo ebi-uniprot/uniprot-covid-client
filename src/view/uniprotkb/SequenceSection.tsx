@@ -19,7 +19,7 @@ const SequenceSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
         <SequenceView data={sequenceData} accession={data.primaryAccession} />
         <FeaturesView
           features={sequenceData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence}
+          sequence={data[EntrySectionType.Sequence].sequence.value}
         />
         <KeywordView keywords={sequenceData.keywordData} />
         <XRefView

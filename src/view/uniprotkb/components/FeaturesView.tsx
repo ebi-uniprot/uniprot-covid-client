@@ -7,6 +7,7 @@ import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../../../utils/utils';
 import { EvidenceType } from '../../../model/types/modelTypes';
 import FeatureTypes from '../../../model/types/FeatureTypes';
+import { SequenceData } from './SequenceView';
 
 enum LocationModifier {
   EXACT = 'EXACT',
@@ -42,9 +43,7 @@ type ProtvistaFeature = {
 };
 
 type FeatureProps = {
-  sequence: {
-    value: string;
-  };
+  sequence: string;
   features: FeatureData;
 };
 
@@ -112,15 +111,15 @@ const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
     <Fragment>
       <h4>Features</h4>
       <protvista-manager attributes="highlight displaystart displayend">
-        <protvista-navigation length={sequence.value.length} />
+        <protvista-navigation length={sequence.length} />
         <protvista-track
           ref={setTrackData}
-          length={sequence.value.length}
+          length={sequence.length}
           layout="non-overlapping"
         />
         <protvista-sequence
-          sequence={sequence.value}
-          length={sequence.value.length}
+          sequence={sequence}
+          length={sequence.length}
           height="20"
         />
         <protvista-datatable ref={setTableData} />

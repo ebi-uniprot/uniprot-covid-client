@@ -26,7 +26,7 @@ const FunctionSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
         <KeywordView keywords={functionData.keywordData} />
         <FeaturesView
           features={functionData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence}
+          sequence={data[EntrySectionType.Sequence].sequence.value}
         />
         <XRefView
           xrefs={functionData.xrefData}

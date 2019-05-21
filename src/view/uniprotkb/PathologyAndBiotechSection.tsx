@@ -23,7 +23,7 @@ const PathologyAndBiotechSection: FC<{ data: UniProtkbUIModel }> = ({
         />
         <FeaturesView
           features={pathologyAndBiotechData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence}
+          sequence={data[EntrySectionType.Sequence].sequence.value}
         />
         <KeywordView keywords={pathologyAndBiotechData.keywordData} />
       </Card>

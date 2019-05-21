@@ -4,21 +4,21 @@ import { hasContent } from '../../model/utils/utils';
 import EntrySectionType from '../../model/types/EntrySectionType';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import KeywordView from '../uniprotkb/components/KeywordView';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { ProteinProcessingUIModel } from '../../model/uniprotkb/sections/ProteinProcessingConverter';
 
-const ProteinProcessingSection: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const proteinProcessingData = data[EntrySectionType.ProteinProcessing];
-  if (!hasContent(proteinProcessingData)) {
+const ProteinProcessingSection: FC<{
+  data: ProteinProcessingUIModel;
+  sequence: string;
+}> = ({ data, sequence }) => {
+  if (!hasContent(data)) {
     return null;
   }
+  const { featuresData, keywordData } = data;
   return (
     <Fragment>
       <Card title={EntrySectionType.ProteinProcessing}>
-        <FeaturesView
-          features={proteinProcessingData.featuresData}
-          sequence={data[EntrySectionType.Sequence].sequence}
-        />
-        <KeywordView keywords={proteinProcessingData.keywordData} />
+        <FeaturesView features={featuresData} sequence={sequence} />
+        <KeywordView keywords={keywordData} />
       </Card>
     </Fragment>
   );
