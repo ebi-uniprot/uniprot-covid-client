@@ -1,14 +1,11 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { GeneNames } from '../GeneNames';
-import data from './modelData.json';
-
-configure({ adapter: new Adapter() });
+import { render } from 'react-testing-library';
+import GeneNamesView from '../GeneNamesView';
+import GeneNamesUIDataJson from '../__mocks__/GeneNamesUIData.json';
 
 describe('GeneNames', () => {
   test('should render gene_names', () => {
-    const wrapper = shallow(<GeneNames data={data} />);
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(<GeneNamesView {...GeneNamesUIDataJson} />);
+    expect(asFragment()).toMatchSnapshot();
   });
 });

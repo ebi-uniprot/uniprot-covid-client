@@ -1,37 +1,41 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { SequenceViewEntry, SequenceInfo } from '../SequenceView';
-import data from './modelData.json';
-
-configure({ adapter: new Adapter() });
+import { render } from 'react-testing-library';
+import SequenceView, { SequenceInfo } from '../SequenceView';
+import SequenceUIDataJson from '../__mocks__/SequenceUIData.json';
 
 describe('SequenceView component', () => {
-  test('should render', () => {
-    const wrapper = shallow(<SequenceViewEntry data={data} />);
-    expect(wrapper).toMatchSnapshot();
+  beforeEach(() => {
+    window.SVGElement.prototype.getBBox = () => ({
+      width: 10,
+      height: 10,
+    });
+  });
+
+  afterEach(() => {
+    delete window.SVGElement.prototype.getBBox;
+  });
+
+  test('should render SequenceView', () => {
+    const { asFragment } = render(
+      <SequenceView data={SequenceUIDataJson} accession="P05067" />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('should render SequenceInfo with provided sequence info (canonical)', () => {
+    const isoformSequenceData = {
+      value: 'ABCD',
+      length: 100,
+      molWeight: 100000,
+      crc64: 'ABCSSDDD',
+    };
+    const { asFragment } = render(
+      <SequenceInfo
+        isoformId="Isoform"
+        isoformSequence={isoformSequenceData}
+        lastUpdateDate="Some date"
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });
-
-// TODO test for cases with and without ALTERNATIVE_PRODUCTS
-
-// NOTE: Enzyme doesn't support hooks yet. We might need to switch
-// to react-testing-library
-// describe('SequenceInfo component', () => {
-//   test('should render with provided sequence info (canonical)', () => {
-//     const isoformSequenceData = {
-//       value: 'ABCD',
-//       length: 100,
-//       molWeight: 100000,
-//       crc64: 'ABCSSDDD',
-//     };
-//     const wrapper = shallow(
-//       <SequenceInfo
-//         isoformId="Isoform"
-//         isoformSequence={isoformSequenceData}
-//         lastUpdateDate="Some date"
-//       />
-//     );
-//     expect(wrapper).toMatchSnapshot();
-//   });
-// });

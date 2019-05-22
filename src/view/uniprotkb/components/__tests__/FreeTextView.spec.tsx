@@ -1,17 +1,13 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { FreeText } from '../FreeText';
-import { CommentType } from '../../../../model/types/commentType';
-import data from './modelData.json';
-
-configure({ adapter: new Adapter() });
+import { render } from 'react-testing-library';
+import FreeTextView from '../FreeTextView';
+import FreeTextUIDataJson from '../__mocks__/FreeTextUIData.json';
 
 describe('FreeText component', () => {
   test('should render free text CC', () => {
-    const wrapper = shallow(
-      <FreeText data={data} type={CommentType.DISRUPTION_PHENOTYPE} />
+    const { asFragment } = render(
+      <FreeTextView comments={FreeTextUIDataJson} includeTitle={true} />
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 });

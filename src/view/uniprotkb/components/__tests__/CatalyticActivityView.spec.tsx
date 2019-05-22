@@ -1,14 +1,13 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from 'react-testing-library';
 import CatalyticActivityView from '../CatalyticActivityView';
-import data from './modelData.json';
-
-configure({ adapter: new Adapter() });
+import CatalyticActivityUIDataJson from '../__mocks__/CatalyticActivityUIData.json';
 
 describe('Catalytic activity', () => {
   test('should render catalytic activity', () => {
-    const wrapper = shallow(<CatalyticActivityView data={data} />);
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(
+      <CatalyticActivityView comments={CatalyticActivityUIDataJson} />
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });

@@ -18,6 +18,7 @@ const processShortNames = (
   return shortNameList.reduce((r, d) => `, ${d.value}`, '');
 };
 
+// TODO this should be split into 2 components, one for columns and one for entry
 export const ProteinNames: React.FC<ProteinNamesDataProps> = ({
   recommendedName,
   shortNames,

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GeneNames should render gene_names 1`] = `
+<DocumentFragment>
+  <span>
+    <strong>
+      Gene name
+    </strong>
+     
+    <div>
+      name 2, name 3, name 4
+    </div>
+  </span>
+</DocumentFragment>
+`;
