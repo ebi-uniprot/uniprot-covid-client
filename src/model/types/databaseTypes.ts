@@ -196,5 +196,3 @@ export enum Database {
   ProtClustDB = 'ProtClustDB',
   PathwayCommons = 'PathwayCommons',
 }
-
-export default Database;
