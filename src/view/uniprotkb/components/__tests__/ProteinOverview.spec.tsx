@@ -1,14 +1,18 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import ProteinOverview from '../ProteinOverview';
-import data from './modelData.json';
-
-configure({ adapter: new Adapter() });
+import { render } from 'react-testing-library';
+import ProteinOverview from '../ProteinOverviewView';
+import ProteinNamesUIDataJson from '../__mocks__/ProteinNamesUIData.json';
 
 describe('ProteinOverview component', () => {
   test('should render', () => {
-    const wrapper = shallow(<ProteinOverview data={data} />);
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(
+      <ProteinOverview
+        data={ProteinNamesUIDataJson}
+        primaryAccession="P05067"
+        proteinExistence="Exists"
+        uniProtId="Some nameu"
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });

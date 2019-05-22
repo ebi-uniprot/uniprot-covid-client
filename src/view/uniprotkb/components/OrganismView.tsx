@@ -6,7 +6,7 @@ type OrganismDataProps = {
   data: OrganismData;
 };
 
-export const Organism: React.FC<OrganismDataProps> = ({ data }) => {
+const OrganismView: React.FC<OrganismDataProps> = ({ data }) => {
   if (!data) {
     return null;
   }
@@ -17,3 +17,5 @@ export const Organism: React.FC<OrganismDataProps> = ({ data }) => {
 
   return <SimpleView termValue={termValue} />;
 };
+
+export default OrganismView;

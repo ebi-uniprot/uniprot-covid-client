@@ -1,18 +1,20 @@
 import React, { Fragment, FC } from 'react';
-import { Organism } from './OrganismView';
+import OrganismView from './OrganismView';
 import { Card, InfoList } from 'franklin-sites';
-import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
-import EntrySectionType from '../../../model/types/EntrySectionType';
 import GeneNamesView from './GeneNamesView';
+import { NamesAndTaxonomyUIModel } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
-export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
-  const { proteinNamesData, geneNamesData, organismData } = data[
-    EntrySectionType.NamesAndTaxonomy
-  ];
+export const ProteinOverview: FC<{
+  data: NamesAndTaxonomyUIModel;
+  proteinExistence: string;
+  primaryAccession: string;
+  uniProtId: string;
+}> = ({ data, proteinExistence, primaryAccession, uniProtId }) => {
+  const { proteinNamesData, geneNamesData, organismData } = data;
   const infoListData = [
     {
       title: 'Organism',
-      content: organismData && <Organism data={organismData} />,
+      content: organismData && <OrganismView data={organismData} />,
     },
     {
       title: 'Gene',
@@ -20,7 +22,7 @@ export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
     },
     {
       title: 'Evidence',
-      content: data.proteinExistence,
+      content: proteinExistence,
     },
   ];
 
@@ -28,9 +30,9 @@ export const ProteinOverview: FC<{ data: UniProtkbUIModel }> = ({ data }) => {
     <Card
       title={
         <Fragment>
-          {proteinNamesData && data.uniProtId}{' '}
+          {proteinNamesData && uniProtId}{' '}
           <small>
-            {data.primaryAccession} -{' '}
+            {primaryAccession} -{' '}
             {proteinNamesData && proteinNamesData.recommendedName}
           </small>
         </Fragment>

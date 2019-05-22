@@ -5,6 +5,7 @@ import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import uniProtKbConverter from '../model/uniprotkb/UniProtkbConverter';
+import EntrySectionType from '../model/types/EntrySectionType';
 
 interface MatchParams {
   accession: string;
@@ -23,7 +24,12 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
 
   return (
     <Fragment>
-      <ProteinOverview data={transformedData} />
+      <ProteinOverview
+        data={transformedData[EntrySectionType.NamesAndTaxonomy]}
+        proteinExistence={transformedData.proteinExistence}
+        primaryAccession={transformedData.primaryAccession}
+        uniProtId={transformedData.uniProtId}
+      />
 
       {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
         return sectionContent(transformedData);
