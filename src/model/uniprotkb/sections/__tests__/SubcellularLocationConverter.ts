@@ -1,9 +1,9 @@
 import { convertSubcellularLocation } from '../SubcellularLocationConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelDataJson from '../../../__mocks__/modelData.json';
 
 describe('Subcellular data converter', () => {
   test('should convert the data', () => {
-    const convertedData = convertSubcellularLocation(modelData);
+    const convertedData = convertSubcellularLocation(modelDataJson);
     expect(convertedData).toEqual({ keywordData: [] });
   });
 });

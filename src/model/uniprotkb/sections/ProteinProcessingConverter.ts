@@ -5,7 +5,7 @@ import {
   KeywordUIModel,
   Keyword,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordTypes';
+import KeywordCategories from '../../types/KeywordCategories';
 
 type ProteinProcessingAPIModel = {
   keywords?: Keyword[];

@@ -3,7 +3,7 @@ import {
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordTypes';
+import KeywordCategories from '../../types/KeywordCategories';
 
 type SubcellularLocationAPIModel = {
   keywords?: Keyword[];

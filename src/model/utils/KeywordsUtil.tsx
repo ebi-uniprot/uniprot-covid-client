@@ -1,4 +1,4 @@
-import KeywordCategories from '../types/KeywordTypes';
+import KeywordCategories from '../types/KeywordCategories';
 
 export type Keyword = {
   id?: string;

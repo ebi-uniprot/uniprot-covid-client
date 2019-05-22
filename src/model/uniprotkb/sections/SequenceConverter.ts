@@ -4,7 +4,7 @@ import {
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordTypes';
+import KeywordCategories from '../../types/KeywordCategories';
 import FeatureTypes from '../../types/FeatureTypes';
 import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
 import EntrySectionType from '../../types/EntrySectionType';
