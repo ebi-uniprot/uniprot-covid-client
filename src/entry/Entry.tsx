@@ -1,11 +1,16 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { InPageNav } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
-import uniProtKbConverter from '../model/uniprotkb/UniProtkbConverter';
+import uniProtKbConverter, {
+  UniProtkbUIModel,
+} from '../model/uniprotkb/UniProtkbConverter';
 import EntrySectionType from '../model/types/EntrySectionType';
+import { hasContent } from '../model/utils/utils';
+import SideBarLayout from '../layout/SideBarLayout';
 
 interface MatchParams {
   accession: string;
@@ -20,20 +25,35 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     return null;
   }
 
-  const transformedData = uniProtKbConverter(entryData);
+  const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
+
+  const sections = UniProtKBEntryConfig.map(section => {
+    return {
+      label: section.name,
+      id: section.name,
+      disabled: !hasContent((transformedData as any)[section.name]),
+    };
+  });
 
   return (
     <Fragment>
-      <ProteinOverview
-        data={transformedData[EntrySectionType.NamesAndTaxonomy]}
-        proteinExistence={transformedData.proteinExistence}
-        primaryAccession={transformedData.primaryAccession}
-        uniProtId={transformedData.uniProtId}
+      <SideBarLayout
+        invert={true}
+        sidebar={<InPageNav sections={sections} />}
+        content={
+          <Fragment>
+            <ProteinOverview
+              data={transformedData[EntrySectionType.NamesAndTaxonomy]}
+              proteinExistence={transformedData.proteinExistence}
+              primaryAccession={transformedData.primaryAccession}
+              uniProtId={transformedData.uniProtId}
+            />
+            {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
+              return sectionContent(transformedData);
+            })}
+          </Fragment>
+        }
       />
-
-      {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
-        return sectionContent(transformedData);
-      })}
 
       {/* <Card title="Structure">
         <FeaturesView
