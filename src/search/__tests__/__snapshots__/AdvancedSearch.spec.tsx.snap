@@ -7,7 +7,7 @@ ShallowWrapper {
     clauses={
       Array [
         Object {
-          "id": 1,
+          "id": 0,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -20,7 +20,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 1,
+          "id": 0,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -33,7 +33,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 1,
+          "id": 0,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -46,7 +46,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 1,
+          "id": 0,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -124,6 +124,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -154,7 +155,7 @@ ShallowWrapper {
           clauses={
             Array [
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -167,7 +168,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -180,7 +181,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -193,7 +194,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -366,7 +367,7 @@ ShallowWrapper {
         "props": Object {
           "clauses": Array [
             Object {
-              "id": 1,
+              "id": 0,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -379,7 +380,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 1,
+              "id": 0,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -392,7 +393,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 1,
+              "id": 0,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -405,7 +406,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 1,
+              "id": 0,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -548,7 +549,7 @@ ShallowWrapper {
             clauses={
               Array [
                 Object {
-                  "id": 1,
+                  "id": 0,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -561,7 +562,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 1,
+                  "id": 0,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -574,7 +575,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 1,
+                  "id": 0,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -587,7 +588,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 1,
+                  "id": 0,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -760,7 +761,7 @@ ShallowWrapper {
           "props": Object {
             "clauses": Array [
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -773,7 +774,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -786,7 +787,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -799,7 +800,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 1,
+                "id": 0,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -922,11 +923,18 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
           },
-          "getDerivedStateFromProps": true,
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
@@ -935,5 +943,6 @@ ShallowWrapper {
       },
     },
   },
+  Symbol(enzyme.__childContext__): null,
 }
 `;

@@ -19,7 +19,7 @@ type Property = {
   value?: string;
 };
 
-type DatabaseCrossReference = {
+export type DatabaseCrossReference = {
   databaseType?: Database;
   id?: string;
   properties?: [Property];
@@ -60,13 +60,35 @@ type XRefCategoryInfoListProps = {
 
 const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
+type XRefExternalLinkProps = {
+  url: string;
+  accession?: string | null | undefined;
+  id?: string | null | undefined;
+  children: string | string[];
+};
+
+export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
+  url,
+  accession,
+  id,
+  children,
+}) => {
+  let link = url;
+  if (accession) {
+    link = link.replace(/%acc/g, accession);
+  }
+  if (id) {
+    link = link.replace(/%value/g, id);
+  }
+  return <ExternalLink url={link}>{children}</ExternalLink>;
+};
+
 export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   const { databaseType: database, properties: entryProperties, id } = xRefEntry;
   if (!id || !database || !accession || !(database in databaseToDatabaseInfo)) {
     return null;
   }
   const info = databaseToDatabaseInfo[database];
-  const uri = info.uriLink.replace(/%acc/g, accession).replace(/%value/g, id);
   let properties: string = '';
   if (entryProperties) {
     properties = entryProperties
@@ -77,7 +99,9 @@ export const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, accession }) => {
   }
   return (
     <li key={v1()}>
-      <ExternalLink url={uri}>{xRefEntry.id}</ExternalLink>
+      <XRefExternalLink url={info.uriLink} accession={accession} id={id}>
+        {id}
+      </XRefExternalLink>
       {properties}
     </li>
   );

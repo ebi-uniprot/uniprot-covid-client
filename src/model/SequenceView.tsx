@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { InfoList, Sequence } from 'franklin-sites';
-import { FreeTextType } from './FreeText';
+import { CommentType } from './types/commentType';
 import apiUrls from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 import { formatLargeNumber } from '../utils/utils';
@@ -24,7 +24,7 @@ type Isoform = {
 };
 
 type AlternativeProduct = {
-  commentType: FreeTextType.ALTERNATIVE_PRODUCTS;
+  commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
   note: { texts: Array<{ value: string }> };
   events: string[];
@@ -204,7 +204,7 @@ export const SequenceViewEntry: React.FC<SequenceViewProps> = ({ data }) => {
   let alternativeProducts;
   if (data.comments) {
     alternativeProducts = data.comments.find(
-      comment => comment.commentType === FreeTextType.ALTERNATIVE_PRODUCTS
+      comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
     );
   }
 

@@ -12,6 +12,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -29,7 +30,7 @@ ShallowWrapper {
           clearOnSelect={false}
           data={Array []}
           filter={false}
-          id={1}
+          id={0}
           onChange={[Function]}
           onSelect={[Function]}
           placeholder=""
@@ -37,7 +38,7 @@ ShallowWrapper {
           value="Homo sapiens (Human) [9606]"
         />,
       ],
-      "htmlFor": 1,
+      "htmlFor": 0,
     },
     "ref": null,
     "rendered": Array [
@@ -50,7 +51,7 @@ ShallowWrapper {
           "clearOnSelect": false,
           "data": Array [],
           "filter": false,
-          "id": 1,
+          "id": 0,
           "onChange": [Function],
           "onSelect": [Function],
           "placeholder": "",
@@ -76,7 +77,7 @@ ShallowWrapper {
             clearOnSelect={false}
             data={Array []}
             filter={false}
-            id={1}
+            id={0}
             onChange={[Function]}
             onSelect={[Function]}
             placeholder=""
@@ -84,7 +85,7 @@ ShallowWrapper {
             value="Homo sapiens (Human) [9606]"
           />,
         ],
-        "htmlFor": 1,
+        "htmlFor": 0,
       },
       "ref": null,
       "rendered": Array [
@@ -97,7 +98,7 @@ ShallowWrapper {
             "clearOnSelect": false,
             "data": Array [],
             "filter": false,
-            "id": 1,
+            "id": 0,
             "onChange": [Function],
             "onSelect": [Function],
             "placeholder": "",
@@ -116,11 +117,18 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
           },
-          "getDerivedStateFromProps": true,
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
@@ -129,5 +137,6 @@ ShallowWrapper {
       },
     },
   },
+  Symbol(enzyme.__childContext__): null,
 }
 `;
