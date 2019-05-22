@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { EvidenceType } from '../../../model/types/modelTypes';
-import { CommentType } from '../../../model/types/CommentType';
+import CommentType from '../../../model/types/CommentType';
 
 export type CatalyticActivityData = {
   commentType: CommentType;

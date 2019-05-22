@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { InfoList, Sequence } from 'franklin-sites';
-import { CommentType } from '../../../model/types/CommentType';
+import CommentType from '../../../model/types/CommentType';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
