@@ -1,0 +1,19 @@
+[
+  {
+    "commentType": "DISEASE",
+    "disease": {
+      "diseaseId": "Alzheimers",
+      "diseaseAccession": "ASDASDAS",
+      "acronym": "AD",
+      "description": "Some description",
+      "reference": {
+        "databaseType": "EMBL",
+        "id": "some ref id",
+        "properties": [{ "key": "prop1", "value": "value1" }],
+        "isoformId": "some isoform"
+      },
+      "evidences": []
+    },
+    "note": { "texts": [{ "value": "Some disease note" }] }
+  }
+]

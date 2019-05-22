@@ -1,33 +1,16 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-// import { v1 } from 'uuid';
-import Adapter from 'enzyme-adapter-react-16';
-import CommentType from '../../../../model/types/commentType';
-import data from './modelData.json';
-import {
-  DiseaseInvolvement,
-  DiseaseInvolvementEntry,
-  DiseaseCommentType,
-} from '../DiseaseInvolvement';
-
-configure({ adapter: new Adapter() });
+import { render } from 'react-testing-library';
+import DiseaseInvolvement from '../DiseaseInvolvementView';
+import DiseaseInvolvementUIDataJson from '../__mocks__/DiseaseInvolvementUIData.json';
 
 describe('DiseaseInvolvement', () => {
   test('should render DiseaseInvolvement', () => {
-    const wrapper = shallow(<DiseaseInvolvement data={data} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-  test('should render DiseaseInvolvementEntry', () => {
-    const { comments } = data;
-    const diseaseComments = comments.filter(
-      (comment: DiseaseCommentType) =>
-        comment.commentType === CommentType.DISEASE
+    const { asFragment } = render(
+      <DiseaseInvolvement
+        comments={DiseaseInvolvementUIDataJson}
+        primaryAccession="P05067"
+      />
     );
-    diseaseComments.forEach(comment => {
-      const wrapper = shallow(
-        <DiseaseInvolvementEntry key={0} comment={comment} />
-      );
-      expect(wrapper).toMatchSnapshot();
-    });
+    expect(asFragment()).toMatchSnapshot();
   });
 });
