@@ -3,18 +3,18 @@ import {
   entrySectionToDatabaseCategories,
 } from '../../data/database';
 import EntrySectionType from '../types/EntrySectionType';
-import { Database, DatabaseCategory } from '../types/DatabaseTypes';
+import { Databases, DatabaseCategory } from '../types/DatabaseTypes';
 import { Property } from '../types/modelTypes';
 
 export type Xref = {
-  databaseType?: Database;
+  databaseType?: Databases;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
 export type XrefsGoupedByDatabase = {
-  database: Database;
+  database: Databases;
   xrefs: Xref[];
 };
 

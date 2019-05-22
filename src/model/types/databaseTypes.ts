@@ -32,9 +32,9 @@ type DatabaseInfo = {
   attributes?: AttributesItem[];
 };
 
-export type DatabaseToDatabaseInfo = { [key in Database]: DatabaseInfo };
+export type DatabaseToDatabaseInfo = { [key in Databases]: DatabaseInfo };
 
-export enum Database {
+export enum Databases {
   EMBL = 'EMBL',
   CCDS = 'CCDS',
   PIR = 'PIR',
