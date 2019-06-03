@@ -24,13 +24,10 @@ export const convertProteinNames = (data: ProteinNamesData) => {
     );
   }
   const alternativeNameArray = idx(data, _ => _.alternativeNames);
-  if (alternativeNameArray) {
-    const alternativeName = alternativeNameArray.map(
-      altName => altName.fullName.value
+  if (alternativeNameArray && alternativeNameArray.length > 0) {
+    alternativeNames.push(
+      ...alternativeNameArray.map(altName => altName.fullName.value)
     );
-    if (alternativeName.length) {
-      alternativeNames.push(...alternativeName);
-    }
   }
   return { recommendedName, shortNames, alternativeNames };
 };

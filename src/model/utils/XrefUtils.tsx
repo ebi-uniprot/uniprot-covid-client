@@ -37,6 +37,7 @@ export const getXrefsForSection = (
     // Get the database relevant to the given category
     const databases = databaseCategoryToDatabases.get(category);
     const categoryDatabases: XrefsGoupedByDatabase[] = [];
+    // TODO Performance improvement
     if (databases) {
       databases.forEach(database => {
         // Filter the xref data to only return the ones for
