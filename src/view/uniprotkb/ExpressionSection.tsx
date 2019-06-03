@@ -1,7 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import FreeTextView from '../uniprotkb/components/FreeTextView';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
@@ -16,7 +16,7 @@ const ExpressionSection: FC<{
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.Expression}>
+      <Card title={EntrySection.Expression}>
         <FreeTextView
           comments={data.tissueSpecificityData}
           includeTitle={true}

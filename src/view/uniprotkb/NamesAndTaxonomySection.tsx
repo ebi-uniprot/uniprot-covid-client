@@ -2,7 +2,7 @@ import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { EntryProteinNames } from './components/ProteinNamesView';
 import { hasContent } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
 const NamesAndTaxonomySection: FC<{ data: NamesAndTaxonomyUIModel }> = ({
@@ -13,7 +13,7 @@ const NamesAndTaxonomySection: FC<{ data: NamesAndTaxonomyUIModel }> = ({
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.NamesAndTaxonomy}>
+      <Card title={EntrySection.NamesAndTaxonomy}>
         <EntryProteinNames {...data.proteinNamesData} />
       </Card>
     </Fragment>

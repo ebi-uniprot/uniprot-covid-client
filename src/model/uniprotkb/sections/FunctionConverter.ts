@@ -1,16 +1,16 @@
 import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
 import { CatalyticActivityData } from '../../../view/uniprotkb/components/CatalyticActivityView';
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
-import CommentType from '../../types/CommentType';
+import Comment from '../../types/Comment';
 import {
   getKeywordsForCategories,
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
-import FeatureTypes from '../../types/FeatureTypes';
+import KeywordCategory from '../../types/KeywordCategory';
+import FeatureType from '../../types/FeatureType';
 import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
-import EntrySectionType from '../../types/EntrySectionType';
+import EntrySection from '../../types/EntrySection';
 
 type FunctionAPIModel = {
   primaryAccession: string;
@@ -41,20 +41,20 @@ export const convertFunction = (data: FunctionAPIModel) => {
   };
   if (data.comments) {
     functionData.functionCommentsData = data.comments.filter(
-      d => d.commentType === CommentType.FUNCTION
+      d => d.commentType === Comment.FUNCTION
     );
     functionData.catalyticActivityData = data.comments.filter(
-      d => d.commentType === CommentType.CATALYTIC_ACTIVITY
+      d => d.commentType === Comment.CATALYTIC_ACTIVITY
     );
     functionData.pathwayCommentsData = data.comments.filter(
-      d => d.commentType === CommentType.PATHWAY
+      d => d.commentType === Comment.PATHWAY
     );
   }
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.MOLECULAR_FUNCTION,
-      KeywordCategories.BIOLOGICAL_PROCESS,
-      KeywordCategories.LIGAND,
+      KeywordCategory.MOLECULAR_FUNCTION,
+      KeywordCategory.BIOLOGICAL_PROCESS,
+      KeywordCategory.LIGAND,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       functionData.keywordData = categoryKeywords;
@@ -63,19 +63,19 @@ export const convertFunction = (data: FunctionAPIModel) => {
   if (data.features) {
     const features = data.features.filter(feature => {
       return [
-        FeatureTypes.DOMAIN,
-        FeatureTypes.REPEAT,
-        FeatureTypes.CA_BIND,
-        FeatureTypes.ZN_FING,
-        FeatureTypes.DNA_BIND,
-        FeatureTypes.NP_BINDL,
-        FeatureTypes.REGION,
-        FeatureTypes.COILED,
-        FeatureTypes.MOTIF,
-        FeatureTypes.ACT_SITE,
-        FeatureTypes.METAL,
-        FeatureTypes.BINDING,
-        FeatureTypes.SITE,
+        FeatureType.DOMAIN,
+        FeatureType.REPEAT,
+        FeatureType.CA_BIND,
+        FeatureType.ZN_FING,
+        FeatureType.DNA_BIND,
+        FeatureType.NP_BINDL,
+        FeatureType.REGION,
+        FeatureType.COILED,
+        FeatureType.MOTIF,
+        FeatureType.ACT_SITE,
+        FeatureType.METAL,
+        FeatureType.BINDING,
+        FeatureType.SITE,
       ].includes(feature.type);
     });
     functionData.featuresData = features;
@@ -83,7 +83,7 @@ export const convertFunction = (data: FunctionAPIModel) => {
   if (data.databaseCrossReferences) {
     const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
-      EntrySectionType.Function
+      EntrySection.Function
     );
     if (xrefs && typeof xrefs !== 'undefined') {
       functionData.xrefData = xrefs;

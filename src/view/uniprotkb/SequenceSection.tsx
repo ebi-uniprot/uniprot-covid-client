@@ -1,7 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
@@ -17,7 +17,7 @@ const SequenceSection: FC<{
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.Sequence}>
+      <Card title={EntrySection.Sequence}>
         <SequenceView data={data} accession={primaryAccession} />
         <FeaturesView
           features={data.featuresData}

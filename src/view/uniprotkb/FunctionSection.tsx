@@ -5,7 +5,7 @@ import CatalyticActivityView from '../uniprotkb/components/CatalyticActivityView
 import KeywordView from '../uniprotkb/components/KeywordView';
 import XRefView from '../uniprotkb/components/XRefView';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
 
@@ -19,7 +19,7 @@ const FunctionSection: FC<{
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.Function}>
+      <Card title={EntrySection.Function}>
         <FreeTextView comments={data.functionCommentsData} />
         <CatalyticActivityView comments={data.catalyticActivityData} />
         <FreeTextView comments={data.pathwayCommentsData} includeTitle={true} />

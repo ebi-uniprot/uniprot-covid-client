@@ -1,4 +1,4 @@
-enum EntrySectionType {
+enum EntrySection {
   Function = 'Function',
   FamilyAndDomains = 'Family & Domains',
   Expression = 'Expression',
@@ -12,4 +12,4 @@ enum EntrySectionType {
   SubCellularLocation = 'Subcellular Location',
 }
 
-export default EntrySectionType;
+export default EntrySection;

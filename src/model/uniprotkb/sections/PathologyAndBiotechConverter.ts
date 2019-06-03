@@ -1,13 +1,13 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import { DiseaseCommentData } from '../../../view/uniprotkb/components/DiseaseInvolvementView';
-import CommentType from '../../types/CommentType';
+import Comment from '../../types/Comment';
 import {
   getKeywordsForCategories,
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
-import FeatureTypes from '../../types/FeatureTypes';
+import KeywordCategory from '../../types/KeywordCategory';
+import FeatureType from '../../types/FeatureType';
 
 type PathologyAndBiotechAPIModel = {
   primaryAccession: string;
@@ -33,12 +33,12 @@ export const convertPathologyAndBiotech = (
   };
   if (data.comments) {
     pathologyAndBiotechData.diseaseInvolvementData = data.comments.filter(
-      comment => comment.commentType === CommentType.DISEASE
+      comment => comment.commentType === Comment.DISEASE
     );
   }
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.DISEASE,
+      KeywordCategory.DISEASE,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       pathologyAndBiotechData.keywordData = categoryKeywords;
@@ -46,7 +46,7 @@ export const convertPathologyAndBiotech = (
   }
   if (data.features) {
     const features = data.features.filter(feature => {
-      return [FeatureTypes.MUTAGEN].includes(feature.type);
+      return [FeatureType.MUTAGEN].includes(feature.type);
     });
     pathologyAndBiotechData.featuresData = features;
   }

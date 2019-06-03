@@ -1,7 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import KeywordView from '../uniprotkb/components/KeywordView';
 import { SubcellularLocationUIModel } from '../../model/uniprotkb/sections/SubcellularLocationConverter';
 
@@ -13,7 +13,7 @@ const SubcellularLocationSection: FC<{ data: SubcellularLocationUIModel }> = ({
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.SubCellularLocation}>
+      <Card title={EntrySection.SubCellularLocation}>
         <KeywordView keywords={data.keywordData} />
       </Card>
     </Fragment>

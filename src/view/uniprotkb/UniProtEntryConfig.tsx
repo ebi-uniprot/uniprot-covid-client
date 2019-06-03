@@ -2,7 +2,7 @@ import React from 'react';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';
@@ -10,76 +10,76 @@ import SequenceSection from './SequenceSection';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 
 const UniProtKBEntryConfig: {
-  name: EntrySectionType;
+  name: EntrySection;
   sectionContent: (entryData: any) => JSX.Element;
 }[] = [
   {
-    name: EntrySectionType.Function,
+    name: EntrySection.Function,
     sectionContent: (data: UniProtkbUIModel) => (
       <FunctionSection
-        data={data[EntrySectionType.Function]}
+        data={data[EntrySection.Function]}
         primaryAccession={data.primaryAccession}
-        sequence={data[EntrySectionType.Sequence].sequence.value}
-        key={EntrySectionType.Function}
+        sequence={data[EntrySection.Sequence].sequence.value}
+        key={EntrySection.Function}
       />
     ),
   },
   {
-    name: EntrySectionType.NamesAndTaxonomy,
+    name: EntrySection.NamesAndTaxonomy,
     sectionContent: (data: UniProtkbUIModel) => (
       <NamesAndTaxonomySection
-        data={data[EntrySectionType.NamesAndTaxonomy]}
-        key={EntrySectionType.NamesAndTaxonomy}
+        data={data[EntrySection.NamesAndTaxonomy]}
+        key={EntrySection.NamesAndTaxonomy}
       />
     ),
   },
   {
-    name: EntrySectionType.SubCellularLocation,
+    name: EntrySection.SubCellularLocation,
     sectionContent: (data: UniProtkbUIModel) => (
       <SubcellularLocationSection
-        data={data[EntrySectionType.SubCellularLocation]}
-        key={EntrySectionType.SubCellularLocation}
+        data={data[EntrySection.SubCellularLocation]}
+        key={EntrySection.SubCellularLocation}
       />
     ),
   },
   {
-    name: EntrySectionType.PathologyAndBioTech,
+    name: EntrySection.PathologyAndBioTech,
     sectionContent: (data: UniProtkbUIModel) => (
       <PathologyAndBiotechSection
-        data={data[EntrySectionType.PathologyAndBioTech]}
+        data={data[EntrySection.PathologyAndBioTech]}
         primaryAccession={data.primaryAccession}
-        sequence={data[EntrySectionType.Sequence].sequence.value}
-        key={EntrySectionType.PathologyAndBioTech}
+        sequence={data[EntrySection.Sequence].sequence.value}
+        key={EntrySection.PathologyAndBioTech}
       />
     ),
   },
   {
-    name: EntrySectionType.ProteinProcessing,
+    name: EntrySection.ProteinProcessing,
     sectionContent: (data: UniProtkbUIModel) => (
       <ProteinProcessingSection
-        data={data[EntrySectionType.ProteinProcessing]}
-        sequence={data[EntrySectionType.Sequence].sequence.value}
-        key={EntrySectionType.ProteinProcessing}
+        data={data[EntrySection.ProteinProcessing]}
+        sequence={data[EntrySection.Sequence].sequence.value}
+        key={EntrySection.ProteinProcessing}
       />
     ),
   },
   {
-    name: EntrySectionType.Expression,
+    name: EntrySection.Expression,
     sectionContent: (data: UniProtkbUIModel) => (
       <ExpressionSection
-        data={data[EntrySectionType.Expression]}
+        data={data[EntrySection.Expression]}
         primaryAccession={data.primaryAccession}
-        key={EntrySectionType.Expression}
+        key={EntrySection.Expression}
       />
     ),
   },
   {
-    name: EntrySectionType.Sequence,
+    name: EntrySection.Sequence,
     sectionContent: (data: UniProtkbUIModel) => (
       <SequenceSection
-        data={data[EntrySectionType.Sequence]}
+        data={data[EntrySection.Sequence]}
         primaryAccession={data.primaryAccession}
-        key={EntrySectionType.Sequence}
+        key={EntrySection.Sequence}
       />
     ),
   },

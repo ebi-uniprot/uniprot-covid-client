@@ -1,11 +1,11 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
-import FeatureTypes from '../../types/FeatureTypes';
+import FeatureType from '../../types/FeatureType';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
   Keyword,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
+import KeywordCategory from '../../types/KeywordCategory';
 
 type ProteinProcessingAPIModel = {
   keywords?: Keyword[];
@@ -24,7 +24,7 @@ export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
   };
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.PTM,
+      KeywordCategory.PTM,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       proteinProcessingData.keywordData = categoryKeywords;
@@ -33,17 +33,17 @@ export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
   if (data.features) {
     const features = data.features.filter(feature => {
       return [
-        FeatureTypes.INIT_MET,
-        FeatureTypes.SIGNAL,
-        FeatureTypes.TRANSIT,
-        FeatureTypes.PROPEP,
-        FeatureTypes.CHAIN,
-        FeatureTypes.PEPTIDE,
-        FeatureTypes.MOD_RES,
-        FeatureTypes.LIPID,
-        FeatureTypes.CARBOHYD,
-        FeatureTypes.DISULFID,
-        FeatureTypes.CROSSLNK,
+        FeatureType.INIT_MET,
+        FeatureType.SIGNAL,
+        FeatureType.TRANSIT,
+        FeatureType.PROPEP,
+        FeatureType.CHAIN,
+        FeatureType.PEPTIDE,
+        FeatureType.MOD_RES,
+        FeatureType.LIPID,
+        FeatureType.CARBOHYD,
+        FeatureType.DISULFID,
+        FeatureType.CROSSLNK,
       ].includes(feature.type);
     });
     proteinProcessingData.featuresData = features;

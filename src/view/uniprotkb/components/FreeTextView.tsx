@@ -2,22 +2,22 @@ import React, { Fragment } from 'react';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { EvidenceType } from '../../../model/types/modelTypes';
 import { v1 } from 'uuid';
-import CommentType from '../../../model/types/CommentType';
+import Comment from '../../../model/types/Comment';
 
 export type FreeTextType =
-  | CommentType.DISRUPTION_PHENOTYPE
-  | CommentType.DOMAIN
-  | CommentType.FUNCTION
-  | CommentType.INDUCTION
-  | CommentType.MISCELLANEOUS
-  | CommentType.PATHWAY
-  | CommentType.PTM
-  | CommentType.SIMILARITY
-  | CommentType.SUBUNIT
-  | CommentType.TISSUE_SPECIFICITY;
+  | Comment.DISRUPTION_PHENOTYPE
+  | Comment.DOMAIN
+  | Comment.FUNCTION
+  | Comment.INDUCTION
+  | Comment.MISCELLANEOUS
+  | Comment.PATHWAY
+  | Comment.PTM
+  | Comment.SIMILARITY
+  | Comment.SUBUNIT
+  | Comment.TISSUE_SPECIFICITY;
 
 export type FreeTextData = {
-  commentType: CommentType;
+  commentType: Comment;
   texts: [{ value: string; evidences: EvidenceType[] }];
 }[];
 

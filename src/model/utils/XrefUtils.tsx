@@ -2,19 +2,19 @@ import {
   databaseCategoryToDatabases,
   entrySectionToDatabaseCategories,
 } from '../../data/database';
-import EntrySectionType from '../types/EntrySectionType';
-import { Databases, DatabaseCategory } from '../types/DatabaseTypes';
+import EntrySection from '../types/EntrySection';
+import { Database, DatabaseCategory } from '../types/DatabaseTypes';
 import { Property } from '../types/modelTypes';
 
 export type Xref = {
-  databaseType?: Databases;
+  databaseType?: Database;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
 export type XrefsGoupedByDatabase = {
-  database: Databases;
+  database: Database;
   xrefs: Xref[];
 };
 
@@ -25,7 +25,7 @@ export type XrefUIModel = {
 
 export const getXrefsForSection = (
   xrefs: Xref[],
-  section: EntrySectionType
+  section: EntrySection
 ): XrefUIModel[] | null => {
   const xrefCategories: XrefUIModel[] = [];
   // Get the categories relevant to the given entry section

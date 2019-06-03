@@ -3,7 +3,7 @@ import {
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
+import KeywordCategory from '../../types/KeywordCategory';
 
 type SubcellularLocationAPIModel = {
   keywords?: Keyword[];
@@ -21,7 +21,7 @@ export const convertSubcellularLocation = (
   };
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.CELLULAR_COMPONENT,
+      KeywordCategory.CELLULAR_COMPONENT,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       subcellularLocationData.keywordData = categoryKeywords;

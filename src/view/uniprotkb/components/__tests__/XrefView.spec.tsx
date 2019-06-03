@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import XRefView from '../XRefView';
 import xrefUIData from '../__mocks__/XrefUIData.json';
-import EntrySectionType from '../../../../model/types/EntrySectionType';
+import EntrySectionType from '../../../../model/types/EntrySection';
 import { XrefUIModel } from '../../../../model/utils/XrefUtils';
 
 describe('XRef', () => {

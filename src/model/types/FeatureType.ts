@@ -1,4 +1,4 @@
-enum FeatureTypes {
+enum FeatureType {
   INIT_MET = 'initiator methionine',
   SIGNAL = 'signal peptide',
   PROPEP = 'propeptide',
@@ -40,4 +40,4 @@ enum FeatureTypes {
   STRAND = 'strand',
 }
 
-export default FeatureTypes;
+export default FeatureType;

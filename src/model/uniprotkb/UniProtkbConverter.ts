@@ -1,4 +1,4 @@
-import EntrySectionType from '../types/EntrySectionType';
+import EntrySection from '../types/EntrySection';
 import { convertFunction, FunctionUIModel } from './sections/FunctionConverter';
 import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
 import { CatalyticActivityData } from '../../view/uniprotkb/components/CatalyticActivityView';
@@ -52,13 +52,13 @@ export type UniProtkbUIModel = {
   primaryAccession: string;
   uniProtId: string;
   proteinExistence: string;
-  [EntrySectionType.Function]: FunctionUIModel;
-  [EntrySectionType.NamesAndTaxonomy]: NamesAndTaxonomyUIModel;
-  [EntrySectionType.SubCellularLocation]: SubcellularLocationUIModel;
-  [EntrySectionType.PathologyAndBioTech]: PathologyAndBiotechUIModel;
-  [EntrySectionType.ProteinProcessing]: ProteinProcessingUIModel;
-  [EntrySectionType.Expression]: ExpressionUIModel;
-  [EntrySectionType.Sequence]: SequenceUIModel;
+  [EntrySection.Function]: FunctionUIModel;
+  [EntrySection.NamesAndTaxonomy]: NamesAndTaxonomyUIModel;
+  [EntrySection.SubCellularLocation]: SubcellularLocationUIModel;
+  [EntrySection.PathologyAndBioTech]: PathologyAndBiotechUIModel;
+  [EntrySection.ProteinProcessing]: ProteinProcessingUIModel;
+  [EntrySection.Expression]: ExpressionUIModel;
+  [EntrySection.Sequence]: SequenceUIModel;
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
@@ -66,13 +66,13 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     primaryAccession: data.primaryAccession,
     uniProtId: data.uniProtId,
     proteinExistence: data.proteinExistence,
-    [EntrySectionType.Function]: convertFunction(data),
-    [EntrySectionType.NamesAndTaxonomy]: convertNamesAndTaxonomy(data),
-    [EntrySectionType.SubCellularLocation]: convertSubcellularLocation(data),
-    [EntrySectionType.PathologyAndBioTech]: convertPathologyAndBiotech(data),
-    [EntrySectionType.ProteinProcessing]: convertProteinProcessing(data),
-    [EntrySectionType.Expression]: convertExpression(data),
-    [EntrySectionType.Sequence]: convertSequence(data),
+    [EntrySection.Function]: convertFunction(data),
+    [EntrySection.NamesAndTaxonomy]: convertNamesAndTaxonomy(data),
+    [EntrySection.SubCellularLocation]: convertSubcellularLocation(data),
+    [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(data),
+    [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
+    [EntrySection.Expression]: convertExpression(data),
+    [EntrySection.Sequence]: convertSequence(data),
   };
 };
 

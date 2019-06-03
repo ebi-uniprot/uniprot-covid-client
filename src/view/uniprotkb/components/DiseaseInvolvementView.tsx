@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import CommentType from '../../../model/types/CommentType';
+import Comment from '../../../model/types/Comment';
 import { EvidenceType } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
@@ -21,7 +21,7 @@ type DiseaseType = {
 };
 
 export type DiseaseCommentData = {
-  commentType?: CommentType.DISEASE;
+  commentType?: Comment.DISEASE;
   disease?: DiseaseType;
   note?: { texts?: { value?: string }[] };
 }[];

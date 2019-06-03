@@ -8,7 +8,7 @@ import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewVie
 import uniProtKbConverter, {
   UniProtkbUIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
-import EntrySectionType from '../model/types/EntrySectionType';
+import EntrySection from '../model/types/EntrySection';
 import { hasContent } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 
@@ -43,7 +43,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
         content={
           <Fragment>
             <ProteinOverview
-              data={transformedData[EntrySectionType.NamesAndTaxonomy]}
+              data={transformedData[EntrySection.NamesAndTaxonomy]}
               proteinExistence={transformedData.proteinExistence}
               primaryAccession={transformedData.primaryAccession}
               uniProtId={transformedData.uniProtId}

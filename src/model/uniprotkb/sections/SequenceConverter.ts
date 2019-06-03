@@ -4,15 +4,15 @@ import {
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
-import FeatureTypes from '../../types/FeatureTypes';
+import KeywordCategory from '../../types/KeywordCategory';
+import FeatureType from '../../types/FeatureType';
 import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
-import EntrySectionType from '../../types/EntrySectionType';
+import EntrySection from '../../types/EntrySection';
 import {
   AlternativeProducts,
   SequenceData,
 } from '../../../view/uniprotkb/components/SequenceView';
-import CommentType from '../../types/CommentType';
+import Comment from '../../types/Comment';
 import { ProteinNamesData } from './NamesAndTaxonomyConverter';
 
 export enum Flag {
@@ -86,13 +86,13 @@ export const convertSequence = (data: SequenceAPIModel) => {
   // Trembl entries only have a canonical sequence
   if (data.comments) {
     sequenceData.alternativeProducts = data.comments.find(
-      comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
+      comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
     );
   }
 
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.CODING_SEQUENCE_DIVERSITY,
+      KeywordCategory.CODING_SEQUENCE_DIVERSITY,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       sequenceData.keywordData = categoryKeywords;
@@ -101,12 +101,12 @@ export const convertSequence = (data: SequenceAPIModel) => {
   if (data.features) {
     const features = data.features.filter(feature => {
       return [
-        FeatureTypes.COMPBIAS,
-        FeatureTypes.NON_STD,
-        FeatureTypes.UNSURE,
-        FeatureTypes.CONFLICT,
-        FeatureTypes.NON_CONS,
-        FeatureTypes.NON_TER,
+        FeatureType.COMPBIAS,
+        FeatureType.NON_STD,
+        FeatureType.UNSURE,
+        FeatureType.CONFLICT,
+        FeatureType.NON_CONS,
+        FeatureType.NON_TER,
       ].includes(feature.type);
     });
     sequenceData.featuresData = features;
@@ -114,7 +114,7 @@ export const convertSequence = (data: SequenceAPIModel) => {
   if (data.databaseCrossReferences) {
     const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
-      EntrySectionType.Sequence
+      EntrySection.Sequence
     );
     if (xrefs && typeof xrefs !== 'undefined') {
       sequenceData.xrefData = xrefs;

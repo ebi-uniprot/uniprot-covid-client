@@ -3,7 +3,7 @@ import { Card } from 'franklin-sites';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import DiseaseInvolvementView from '../uniprotkb/components/DiseaseInvolvementView';
 import KeywordView from '../uniprotkb/components/KeywordView';
-import EntrySectionType from '../../model/types/EntrySectionType';
+import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import { PathologyAndBiotechUIModel } from '../../model/uniprotkb/sections/PathologyAndBiotechConverter';
 
@@ -17,7 +17,7 @@ const PathologyAndBiotechSection: FC<{
   }
   return (
     <Fragment>
-      <Card title={EntrySectionType.PathologyAndBioTech}>
+      <Card title={EntrySection.PathologyAndBioTech}>
         <DiseaseInvolvementView
           comments={data.diseaseInvolvementData}
           primaryAccession={primaryAccession}

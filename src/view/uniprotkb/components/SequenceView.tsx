@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { InfoList, Sequence } from 'franklin-sites';
-import CommentType from '../../../model/types/CommentType';
+import Comment from '../../../model/types/Comment';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
@@ -17,7 +17,7 @@ type Isoform = {
 };
 
 export type AlternativeProducts = {
-  commentType: CommentType.ALTERNATIVE_PRODUCTS;
+  commentType: Comment.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
   note: { texts: Array<{ value: string }> };
   events: string[];

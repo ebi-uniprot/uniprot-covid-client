@@ -1,19 +1,19 @@
-import KeywordCategories from '../types/KeywordCategories';
+import KeywordCategory from '../types/KeywordCategory';
 
 export type Keyword = {
   id?: string;
   value?: string;
-  category?: KeywordCategories;
+  category?: KeywordCategory;
 };
 
 export type KeywordUIModel = {
-  category: KeywordCategories;
+  category: KeywordCategory;
   keywords: Keyword[];
 };
 
 export const getKeywordsForCategories = (
   keywords: Keyword[],
-  keywordCategories: KeywordCategories[]
+  keywordCategories: KeywordCategory[]
 ): KeywordUIModel[] | null => {
   if (!keywords || !keywordCategories) {
     return null;

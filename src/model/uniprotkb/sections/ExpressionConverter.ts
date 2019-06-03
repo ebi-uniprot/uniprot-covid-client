@@ -1,13 +1,13 @@
 import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
-import CommentType from '../../types/CommentType';
+import Comment from '../../types/Comment';
 import {
   getKeywordsForCategories,
   Keyword,
   KeywordUIModel,
 } from '../../utils/KeywordsUtil';
-import KeywordCategories from '../../types/KeywordCategories';
-import EntrySectionType from '../../types/EntrySectionType';
+import KeywordCategory from '../../types/KeywordCategory';
+import EntrySection from '../../types/EntrySection';
 import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
 
 type ExpressionAPIModel = {
@@ -35,15 +35,15 @@ export const convertExpression = (data: ExpressionAPIModel) => {
   };
   if (data.comments) {
     expressionData.tissueSpecificityData = data.comments.filter(
-      comment => comment.commentType === CommentType.TISSUE_SPECIFICITY
+      comment => comment.commentType === Comment.TISSUE_SPECIFICITY
     );
     expressionData.inductionData = data.comments.filter(
-      comment => comment.commentType === CommentType.INDUCTION
+      comment => comment.commentType === Comment.INDUCTION
     );
   }
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategories.DEVELOPMENTAL_STAGE,
+      KeywordCategory.DEVELOPMENTAL_STAGE,
     ]);
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       expressionData.keywordData = categoryKeywords;
@@ -52,7 +52,7 @@ export const convertExpression = (data: ExpressionAPIModel) => {
   if (data.databaseCrossReferences) {
     const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
-      EntrySectionType.Expression
+      EntrySection.Expression
     );
     if (xrefs && typeof xrefs !== 'undefined') {
       expressionData.xrefData = xrefs;
