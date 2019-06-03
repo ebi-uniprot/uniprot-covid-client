@@ -17,34 +17,39 @@ export type ProteinProcessingUIModel = {
   keywordData: KeywordUIModel[];
 };
 
+const proteinProcessingKeywords = [KeywordCategory.PTM];
+
+const proteinProcessingFeatures = [
+  FeatureType.INIT_MET,
+  FeatureType.SIGNAL,
+  FeatureType.TRANSIT,
+  FeatureType.PROPEP,
+  FeatureType.CHAIN,
+  FeatureType.PEPTIDE,
+  FeatureType.MOD_RES,
+  FeatureType.LIPID,
+  FeatureType.CARBOHYD,
+  FeatureType.DISULFID,
+  FeatureType.CROSSLNK,
+];
+
 export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
   const proteinProcessingData: ProteinProcessingUIModel = {
     featuresData: [],
     keywordData: [],
   };
   if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategory.PTM,
-    ]);
+    const categoryKeywords = getKeywordsForCategories(
+      data.keywords,
+      proteinProcessingKeywords
+    );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       proteinProcessingData.keywordData = categoryKeywords;
     }
   }
   if (data.features) {
     const features = data.features.filter(feature => {
-      return [
-        FeatureType.INIT_MET,
-        FeatureType.SIGNAL,
-        FeatureType.TRANSIT,
-        FeatureType.PROPEP,
-        FeatureType.CHAIN,
-        FeatureType.PEPTIDE,
-        FeatureType.MOD_RES,
-        FeatureType.LIPID,
-        FeatureType.CARBOHYD,
-        FeatureType.DISULFID,
-        FeatureType.CROSSLNK,
-      ].includes(feature.type);
+      return proteinProcessingFeatures.includes(feature.type);
     });
     proteinProcessingData.featuresData = features;
   }

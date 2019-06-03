@@ -23,6 +23,10 @@ export type PathologyAndBiotechUIModel = {
   diseaseInvolvementData: DiseaseCommentData;
 };
 
+const pathologyAndBiotechKeywords = [KeywordCategory.DISEASE];
+
+const pathologyAndBiotechFeatures = [FeatureType.MUTAGEN];
+
 export const convertPathologyAndBiotech = (
   data: PathologyAndBiotechAPIModel
 ) => {
@@ -37,16 +41,17 @@ export const convertPathologyAndBiotech = (
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategory.DISEASE,
-    ]);
+    const categoryKeywords = getKeywordsForCategories(
+      data.keywords,
+      pathologyAndBiotechKeywords
+    );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       pathologyAndBiotechData.keywordData = categoryKeywords;
     }
   }
   if (data.features) {
     const features = data.features.filter(feature => {
-      return [FeatureType.MUTAGEN].includes(feature.type);
+      return pathologyAndBiotechFeatures.includes(feature.type);
     });
     pathologyAndBiotechData.featuresData = features;
   }

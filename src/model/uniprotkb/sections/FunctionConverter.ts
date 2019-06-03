@@ -30,6 +30,28 @@ export type FunctionUIModel = {
   xrefData: XrefUIModel[];
 };
 
+const functionKeywords = [
+  KeywordCategory.MOLECULAR_FUNCTION,
+  KeywordCategory.BIOLOGICAL_PROCESS,
+  KeywordCategory.LIGAND,
+];
+
+const functionFeatures = [
+  FeatureType.DOMAIN,
+  FeatureType.REPEAT,
+  FeatureType.CA_BIND,
+  FeatureType.ZN_FING,
+  FeatureType.DNA_BIND,
+  FeatureType.NP_BINDL,
+  FeatureType.REGION,
+  FeatureType.COILED,
+  FeatureType.MOTIF,
+  FeatureType.ACT_SITE,
+  FeatureType.METAL,
+  FeatureType.BINDING,
+  FeatureType.SITE,
+];
+
 export const convertFunction = (data: FunctionAPIModel) => {
   const functionData: FunctionUIModel = {
     functionCommentsData: [],
@@ -51,32 +73,17 @@ export const convertFunction = (data: FunctionAPIModel) => {
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategory.MOLECULAR_FUNCTION,
-      KeywordCategory.BIOLOGICAL_PROCESS,
-      KeywordCategory.LIGAND,
-    ]);
+    const categoryKeywords = getKeywordsForCategories(
+      data.keywords,
+      functionKeywords
+    );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       functionData.keywordData = categoryKeywords;
     }
   }
   if (data.features) {
     const features = data.features.filter(feature => {
-      return [
-        FeatureType.DOMAIN,
-        FeatureType.REPEAT,
-        FeatureType.CA_BIND,
-        FeatureType.ZN_FING,
-        FeatureType.DNA_BIND,
-        FeatureType.NP_BINDL,
-        FeatureType.REGION,
-        FeatureType.COILED,
-        FeatureType.MOTIF,
-        FeatureType.ACT_SITE,
-        FeatureType.METAL,
-        FeatureType.BINDING,
-        FeatureType.SITE,
-      ].includes(feature.type);
+      return functionFeatures.includes(feature.type);
     });
     functionData.featuresData = features;
   }

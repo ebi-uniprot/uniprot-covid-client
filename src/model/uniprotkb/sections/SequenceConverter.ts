@@ -48,6 +48,17 @@ export type SequenceUIModel = {
   lastUpdateDate?: string;
 };
 
+const sequenceKeywords = [KeywordCategory.CODING_SEQUENCE_DIVERSITY];
+
+const sequenceFeatures = [
+  FeatureType.COMPBIAS,
+  FeatureType.NON_STD,
+  FeatureType.UNSURE,
+  FeatureType.CONFLICT,
+  FeatureType.NON_CONS,
+  FeatureType.NON_TER,
+];
+
 export const convertSequence = (data: SequenceAPIModel) => {
   const sequenceData: SequenceUIModel = {
     sequence: data.sequence,
@@ -91,23 +102,17 @@ export const convertSequence = (data: SequenceAPIModel) => {
   }
 
   if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategory.CODING_SEQUENCE_DIVERSITY,
-    ]);
+    const categoryKeywords = getKeywordsForCategories(
+      data.keywords,
+      sequenceKeywords
+    );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       sequenceData.keywordData = categoryKeywords;
     }
   }
   if (data.features) {
     const features = data.features.filter(feature => {
-      return [
-        FeatureType.COMPBIAS,
-        FeatureType.NON_STD,
-        FeatureType.UNSURE,
-        FeatureType.CONFLICT,
-        FeatureType.NON_CONS,
-        FeatureType.NON_TER,
-      ].includes(feature.type);
+      return sequenceFeatures.includes(feature.type);
     });
     sequenceData.featuresData = features;
   }

@@ -26,6 +26,8 @@ export type ExpressionUIModel = {
   keywordData: KeywordUIModel[];
 };
 
+const expressionKeywords = [KeywordCategory.DEVELOPMENTAL_STAGE];
+
 export const convertExpression = (data: ExpressionAPIModel) => {
   const expressionData: ExpressionUIModel = {
     tissueSpecificityData: [],
@@ -42,9 +44,10 @@ export const convertExpression = (data: ExpressionAPIModel) => {
     );
   }
   if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(data.keywords, [
-      KeywordCategory.DEVELOPMENTAL_STAGE,
-    ]);
+    const categoryKeywords = getKeywordsForCategories(
+      data.keywords,
+      expressionKeywords
+    );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       expressionData.keywordData = categoryKeywords;
     }
