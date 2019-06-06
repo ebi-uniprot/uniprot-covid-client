@@ -1,6 +1,8 @@
 import { createEmptyClause } from '../utils/clause';
 import { Clause, Namespace, EvidenceType } from '../types/searchTypes';
 
+const DEFAULT_CLAUSE_COUNT = 4;
+
 export type SearchState = {
   readonly clauses: Clause[];
   readonly queryString: string;
@@ -13,7 +15,7 @@ export type SearchState = {
 };
 
 const searchInitialState = {
-  clauses: [...Array(2)].map(() => createEmptyClause()),
+  clauses: [...Array(DEFAULT_CLAUSE_COUNT)].map(() => createEmptyClause()),
   queryString: '',
   namespace: Namespace.uniprotkb,
   searchTerms: {

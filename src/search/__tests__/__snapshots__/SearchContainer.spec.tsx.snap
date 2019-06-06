@@ -4,79 +4,7 @@ exports[`Search shallow components should render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Search
-    clauses={
-      Array [
-        Object {
-          "id": 0,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 0,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 0,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 0,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-      ]
-    }
-    dispatchAddClause={[MockFunction]}
     dispatchCopyQueryClausesToSearch={[MockFunction]}
-    dispatchFetchSearchTerms={[MockFunction]}
-    dispatchSubmitQuery={[MockFunction]}
-    dispatchfetchEvidencesIfNeeded={[MockFunction]}
-    evidences={
-      Object {
-        "annotation": Object {
-          "data": Array [],
-          "isFetching": false,
-        },
-        "go": Object {
-          "data": Array [],
-          "isFetching": false,
-        },
-      }
-    }
     history={
       Object {
         "push": [MockFunction],
@@ -86,12 +14,6 @@ ShallowWrapper {
     location={
       Object {
         "search": "",
-      }
-    }
-    namespace="UniProtKB"
-    searchTerms={
-      Object {
-        "data": Array [],
       }
     }
   />,
@@ -109,24 +31,42 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": Array [
-        <Unknown
+      "children": <Unknown
+        onChange={[Function]}
+        onSubmit={[Function]}
+        searchTerm=""
+      />,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "onChange": [Function],
+        "onSubmit": [Function],
+        "searchTerm": "",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+    "type": Symbol(react.fragment),
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": <Unknown
           onChange={[Function]}
           onSubmit={[Function]}
           searchTerm=""
         />,
-        <button
-          className="adv-search-toggle"
-          onClick={[Function]}
-          type="button"
-        >
-          Advanced search
-        </button>,
-      ],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
+      },
+      "ref": null,
+      "rendered": Object {
         "instance": null,
         "key": undefined,
         "nodeType": "function",
@@ -139,74 +79,6 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Advanced search",
-          "className": "adv-search-toggle",
-          "onClick": [Function],
-          "type": "button",
-        },
-        "ref": null,
-        "rendered": "Advanced search",
-        "type": "button",
-      },
-    ],
-    "type": Symbol(react.fragment),
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": Array [
-          <Unknown
-            onChange={[Function]}
-            onSubmit={[Function]}
-            searchTerm=""
-          />,
-          <button
-            className="adv-search-toggle"
-            onClick={[Function]}
-            type="button"
-          >
-            Advanced search
-          </button>,
-        ],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "onChange": [Function],
-            "onSubmit": [Function],
-            "searchTerm": "",
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Advanced search",
-            "className": "adv-search-toggle",
-            "onClick": [Function],
-            "type": "button",
-          },
-          "ref": null,
-          "rendered": "Advanced search",
-          "type": "button",
-        },
-      ],
       "type": Symbol(react.fragment),
     },
   ],

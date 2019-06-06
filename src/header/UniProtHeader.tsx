@@ -15,6 +15,10 @@ const links = [
     path: '/',
   },
   {
+    label: 'Advanced search',
+    path: '/advancedSearch',
+  },
+  {
     label: 'Tools',
     path: '/',
   },
@@ -24,12 +28,15 @@ const links = [
   },
 ];
 
-const UniProtHeader = ({ isHomePage = false }) => (
-  <Header
-    links={links}
-    isNegative={isHomePage}
-    search={!isHomePage && <SearchContainer />}
-    logo={<Logo width={120} height={50} />}
-  />
-);
+const UniProtHeader = ({ isHomePage = false, isSearchPage = false }) => {
+  const shouldShowSearch = !isSearchPage && !isHomePage;
+  return (
+    <Header
+      links={links}
+      isNegative={isHomePage}
+      search={shouldShowSearch && <SearchContainer />}
+      logo={<Logo width={120} height={50} />}
+    />
+  );
+};
 export default UniProtHeader;
