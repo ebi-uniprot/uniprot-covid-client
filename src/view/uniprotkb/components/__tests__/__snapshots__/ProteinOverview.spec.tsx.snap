@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProteinOverview component should render 1`] = `
+<DocumentFragment>
+  <div
+    class="card"
+    id="[object Object]"
+  >
+    <div
+      class="card__header"
+    >
+      <h3
+        class="card__title"
+      >
+         
+        <small>
+          P05067 - 
+        </small>
+      </h3>
+    </div>
+    <div
+      class="card__content"
+    >
+      <div
+        class="info-list"
+      >
+        <div
+          class="info-list__item"
+        >
+          <div
+            class="info-list__item__title"
+          >
+            Evidence
+          </div>
+          <div
+            class="info-list__item__content"
+          >
+            Exists
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

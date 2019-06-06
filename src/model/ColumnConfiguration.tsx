@@ -1,8 +1,10 @@
 import React from 'react';
-import SimpleView from './SimpleView';
-import { ProteinNames, ProteinNamesData } from './ProteinNames';
-import { GeneNames, GeneNamesData } from './GeneNames';
-import { Organism, OrganismData } from './Organism';
+import SimpleView from '../view/uniprotkb/components/SimpleView';
+import {
+  ProteinNamesData,
+  GeneNamesData,
+  OrganismData,
+} from './uniprotkb/sections/NamesAndTaxonomyConverter';
 
 const WIDTH = {
   small: 200,
@@ -37,17 +39,23 @@ const ColumnConfiguration: {
   protein_name: {
     width: WIDTH.large,
     label: 'Protein names',
-    render: (data: ProteinNamesData) => <ProteinNames data={data} />,
+    render: (data: ProteinNamesData) => <span />,
+    // TODO TEMPORARY!!!
+    // <ProteinNames data={data} />,
   },
   gene_names: {
     width: WIDTH.medium,
     label: 'Gene Names',
-    render: (data: GeneNamesData) => <GeneNames data={data} />,
+    render: (data: GeneNamesData) => <span />,
+    // TODO TEMPORARY!!!
+    // <ProteinNames data={data} />,
   },
   organism: {
     width: WIDTH.large,
     label: 'Organism',
-    render: (data: OrganismData) => <Organism data={data} />,
+    render: (data: OrganismData) => <span />,
+    // TODO TEMPORARY!!!
+    // (data: OrganismData) => <Organism data={data} />,
   },
 };
 

@@ -1,0 +1,18 @@
+[
+  {
+    "commentType": "CATALYTIC ACTIVITY",
+    "reaction": {
+      "name": "Reaction name",
+      "reactionReferences": [
+        {
+          "databaseType": "dbType",
+          "id": "1234abc"
+        }
+      ],
+      "ecNumber": "EC:12112",
+      "evidences": [
+        { "evidenceCode": "ECO:1234", "source": "some source", "id": "some id" }
+      ]
+    }
+  }
+]

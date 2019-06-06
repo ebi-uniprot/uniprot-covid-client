@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Organism should render organism 1`] = `
+<DocumentFragment>
+  <span>
+    Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)
+  </span>
+</DocumentFragment>
+`;

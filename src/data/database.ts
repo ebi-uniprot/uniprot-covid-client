@@ -1,27 +1,10 @@
-import { Database, DatabaseCategory } from '../model/types/databaseTypes';
+import { Database, DatabaseCategory } from '../model/types/DatabaseTypes';
 import EntrySection from '../model/types/EntrySection';
 
-export const databaseCategoryToString = new Map<DatabaseCategory, string>([
-  [DatabaseCategory.SEQUENCE, 'Sequence databases'],
-  [DatabaseCategory.STRUCTURE, '3D structure databases'],
-  [DatabaseCategory.INTERACTION, 'Protein-protein interaction databases'],
-  [DatabaseCategory.CHEMISTRY, 'Chemistry'],
-  [DatabaseCategory.FAMILY, 'Protein family/group databases'],
-  [DatabaseCategory.PTM, 'PTM databases'],
-  [DatabaseCategory.POLYMORPHISM, 'Polymorphism and mutation databases'],
-  [DatabaseCategory.GEL, '2D gel databases'],
-  [DatabaseCategory.PROTEOMIC, 'Proteomic databases'],
-  [DatabaseCategory.PROTOCOL, 'Protocols and materials databases'],
-  [DatabaseCategory.GENOME, 'Genome annotation databases'],
-  [DatabaseCategory.ORGANISM, 'Organism-specific databases'],
-  [DatabaseCategory.PHYLOGENOMIC, 'Phylogenomic databases'],
-  [DatabaseCategory.PATHWAY, 'Enzyme and pathway databases'],
-  [DatabaseCategory.EXPRESSION, 'Gene expression databases'],
-  [DatabaseCategory.DOMAIN, 'Family and domain databases'],
-  [DatabaseCategory.OTHER, 'Other'],
-]);
-
-const databaseCategoryToDatabases = new Map<DatabaseCategory, Database[]>();
+export const databaseCategoryToDatabases = new Map<
+  DatabaseCategory,
+  Database[]
+>();
 databaseCategoryToDatabases.set(DatabaseCategory.SEQUENCE, [
   // Not found: EMBL/GenBank/DDBJ
   Database.EMBL,
@@ -183,7 +166,7 @@ databaseCategoryToDatabases.set(DatabaseCategory.OTHER, [
   Database.PRO,
 ]);
 
-const entrySectionToDatabaseCategories = new Map<
+export const entrySectionToDatabaseCategories = new Map<
   EntrySection,
   DatabaseCategory[]
 >();
@@ -207,7 +190,7 @@ entrySectionToDatabaseCategories.set(EntrySection.Interaction, [
 entrySectionToDatabaseCategories.set(EntrySection.NamesAndTaxonomy, [
   DatabaseCategory.ORGANISM,
 ]);
-entrySectionToDatabaseCategories.set(EntrySection.PathologyOrBioTech, [
+entrySectionToDatabaseCategories.set(EntrySection.PathologyAndBioTech, [
   DatabaseCategory.ORGANISM,
   DatabaseCategory.OTHER,
   DatabaseCategory.FAMILY,
@@ -230,29 +213,3 @@ entrySectionToDatabaseCategories.set(EntrySection.Structure, [
   DatabaseCategory.PROTOCOL,
   DatabaseCategory.OTHER,
 ]);
-
-// Combine multiple maps into single map for quick read access.
-export const entrySectionDatabaseToDatabaseCategory = new Map<
-  string,
-  DatabaseCategory
->();
-for (const [
-  entrySection,
-  databaseCategories,
-] of entrySectionToDatabaseCategories) {
-  if (databaseCategories) {
-    for (const databaseCategory of databaseCategories) {
-      const databases = databaseCategoryToDatabases.get(databaseCategory);
-      if (databases) {
-        for (const database of databases) {
-          entrySectionDatabaseToDatabaseCategory.set(
-            `${entrySection}_${database}`,
-            databaseCategory
-          );
-        }
-      }
-    }
-  }
-}
-
-export default entrySectionDatabaseToDatabaseCategory;

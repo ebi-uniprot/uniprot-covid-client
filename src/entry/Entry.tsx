@@ -1,20 +1,16 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { InPageNav } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
+import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
-import { EntryProteinNames } from '../model/ProteinNames';
-import { ProteinOverview } from '../model/ProteinOverview';
-import { FreeText } from '../model/FreeText';
-import { CommentType } from '../model/types/commentType';
-import XRef from '../model/XRef';
-import { CatalyticActivity } from '../model/CatalyticActivity';
-import { Card } from 'franklin-sites';
-import { SequenceViewEntry } from '../model/SequenceView';
-import EntrySectionType from '../model/types/EntrySection';
-import { Keyword } from '../model/Keyword';
-import FeaturesView from '../model/FeaturesView';
-import FeatureTypes from '../model/types/featureTypes';
-import DiseaseInvolvement from '../model/DiseaseInvolvement';
+import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
+import uniProtKbConverter, {
+  UniProtkbUIModel,
+} from '../model/uniprotkb/UniProtkbConverter';
+import EntrySection from '../model/types/EntrySection';
+import { hasContent } from '../model/utils/utils';
+import SideBarLayout from '../layout/SideBarLayout';
 
 interface MatchParams {
   accession: string;
@@ -25,113 +21,46 @@ interface EntryProps extends RouteComponentProps<MatchParams> {}
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
   const entryData = useDataApi(url);
-  if (Object.keys(entryData).length <= 0) {
+  if (Object.keys(entryData).length === 0) {
     return null;
   }
+
+  const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
+
+  const sections = UniProtKBEntryConfig.map(section => {
+    return {
+      label: section.name,
+      id: section.name,
+      disabled: !hasContent((transformedData as any)[section.name]),
+    };
+  });
+
   return (
     <Fragment>
-      <ProteinOverview data={entryData} />
-      <Card title="Function">
-        <FreeText data={entryData} type={CommentType.FUNCTION} />
-        <CatalyticActivity data={entryData} />
-        <FreeText
-          data={entryData}
-          type={CommentType.PATHWAY}
-          includeTitle={true}
-        />
-        <Keyword data={entryData} section={EntrySectionType.Function} />
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.DOMAIN,
-            FeatureTypes.REPEAT,
-            FeatureTypes.CA_BIND,
-            FeatureTypes.ZN_FING,
-            FeatureTypes.DNA_BIND,
-            FeatureTypes.NP_BINDL,
-            FeatureTypes.REGION,
-            FeatureTypes.COILED,
-            FeatureTypes.MOTIF,
-            FeatureTypes.ACT_SITE,
-            FeatureTypes.METAL,
-            FeatureTypes.BINDING,
-            FeatureTypes.SITE,
-          ]}
-        />
-        <XRef data={entryData} section={EntrySectionType.Function} />
-      </Card>
-      <Card title="Names & Taxonomy">
-        <EntryProteinNames data={entryData} />
-        <XRef data={entryData} section={EntrySectionType.NamesAndTaxonomy} />
-      </Card>
-      <Card title="Subcellular Location">
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.TOPO_DOM,
-            FeatureTypes.TRANSMEM,
-            FeatureTypes.INTRAMEM,
-          ]}
-        />
-      </Card>
-      <Card title="Pathology & Biotech">
-        <DiseaseInvolvement data={entryData} />
-        <FeaturesView data={entryData} types={[FeatureTypes.MUTAGEN]} />
-      </Card>
-      <Card title="PTM/Processing">
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.INIT_MET,
-            FeatureTypes.SIGNAL,
-            FeatureTypes.TRANSIT,
-            FeatureTypes.PROPEP,
-            FeatureTypes.CHAIN,
-            FeatureTypes.PEPTIDE,
-            FeatureTypes.MOD_RES,
-            FeatureTypes.LIPID,
-            FeatureTypes.CARBOHYD,
-            FeatureTypes.DISULFID,
-            FeatureTypes.CROSSLNK,
-          ]}
-        />
-      </Card>
-      <Card title="Expression">
-        <h4>Tissue specificity</h4>
-        <FreeText data={entryData} type={CommentType.TISSUE_SPECIFICITY} />
-        <h4>Induction</h4>
-        <FreeText data={entryData} type={CommentType.INDUCTION} />
-        <Keyword data={entryData} section={EntrySectionType.Expression} />
-        <XRef data={entryData} section={EntrySectionType.Expression} />
-      </Card>
-      {/* <Card title="Interaction" /> */}
-      <Card title="Structure">
+      <SideBarLayout
+        invert={true}
+        sidebar={<InPageNav sections={sections} />}
+        content={
+          <Fragment>
+            <ProteinOverview
+              data={transformedData[EntrySection.NamesAndTaxonomy]}
+              proteinExistence={transformedData.proteinExistence}
+              primaryAccession={transformedData.primaryAccession}
+              uniProtId={transformedData.uniProtId}
+            />
+            {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
+              return sectionContent(transformedData);
+            })}
+          </Fragment>
+        }
+      />
+
+      {/* <Card title="Structure">
         <FeaturesView
           data={entryData}
           types={[FeatureTypes.HELIX, FeatureTypes.TURN, FeatureTypes.STRAND]}
         />
-      </Card>
-      {/* <Card title="Family & Domains" /> */}
-      <Card title="Sequences">
-        <SequenceViewEntry data={entryData} />
-        <FeaturesView
-          data={entryData}
-          types={[
-            FeatureTypes.COMPBIAS,
-            FeatureTypes.NON_STD,
-            FeatureTypes.UNSURE,
-            FeatureTypes.CONFLICT,
-            FeatureTypes.NON_CONS,
-            FeatureTypes.NON_TER,
-          ]}
-        />
-        <Keyword data={entryData} section={EntrySectionType.Sequence} />
-        <XRef data={entryData} section={EntrySectionType.Sequence} />
-      </Card>
-      {/* <Card title="Similar Proteins" />
-      <Card title="Cross-References" />
-      <Card title="Entry Information" />
-      <Card title="Miscellaneous" /> */}
+      </Card> */}
     </Fragment>
   );
 };

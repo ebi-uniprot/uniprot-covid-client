@@ -7,6 +7,10 @@
   grid-template-columns: 1fr 6fr;
   grid-template-rows: auto 75vh;
   grid-template-areas: 'title title' 'sidebar content';
+  &--inverted {
+    grid-template-areas: 'title title' 'content sidebar';
+    grid-template-columns: 6fr 1fr;
+  }
 
   &__title {
     grid-column: title;
