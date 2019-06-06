@@ -1,7 +1,7 @@
 import React, { Component, Fragment, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
