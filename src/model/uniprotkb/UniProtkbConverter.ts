@@ -32,6 +32,10 @@ import {
 } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import { Xref } from '../utils/XrefUtils';
+import {
+  InteractionUIModel,
+  convertInteraction,
+} from './sections/InteractionConverter';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;
@@ -59,6 +63,7 @@ export type UniProtkbUIModel = {
   [EntrySection.ProteinProcessing]: ProteinProcessingUIModel;
   [EntrySection.Expression]: ExpressionUIModel;
   [EntrySection.Sequence]: SequenceUIModel;
+  [EntrySection.Interaction]: InteractionUIModel;
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
@@ -72,6 +77,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(data),
     [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
     [EntrySection.Expression]: convertExpression(data),
+    [EntrySection.Interaction]: convertInteraction(data),
     [EntrySection.Sequence]: convertSequence(data),
   };
 };
