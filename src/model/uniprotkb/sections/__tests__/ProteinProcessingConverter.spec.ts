@@ -24,6 +24,8 @@ describe('Protein processing data converter', () => {
           type: 'chain',
         },
       ],
+      commentsData: [],
+      xrefData: [],
       keywordData: [],
     });
   });
