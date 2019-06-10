@@ -35,6 +35,7 @@ describe('Function data converter', () => {
           },
         },
       ],
+      miscellaneousData: [],
       featuresData: [],
       functionCommentsData: [],
       keywordData: [],

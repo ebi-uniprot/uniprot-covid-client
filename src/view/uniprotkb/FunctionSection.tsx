@@ -23,8 +23,9 @@ const FunctionSection: FC<{
         <FreeTextView comments={data.functionCommentsData} />
         <CatalyticActivityView comments={data.catalyticActivityData} />
         <FreeTextView comments={data.pathwayCommentsData} includeTitle={true} />
-        <KeywordView keywords={data.keywordData} />
+        <FreeTextView comments={data.miscellaneousData} includeTitle={true} />
         <FeaturesView features={data.featuresData} sequence={sequence} />
+        <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>

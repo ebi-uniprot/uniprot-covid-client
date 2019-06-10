@@ -25,6 +25,7 @@ export type FunctionUIModel = {
   functionCommentsData: FreeTextData;
   catalyticActivityData: CatalyticActivityData;
   pathwayCommentsData: FreeTextData;
+  miscellaneousData: FreeTextData;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
@@ -57,6 +58,7 @@ export const convertFunction = (data: FunctionAPIModel) => {
     functionCommentsData: [],
     catalyticActivityData: [],
     pathwayCommentsData: [],
+    miscellaneousData: [],
     keywordData: [],
     featuresData: [],
     xrefData: [],
@@ -70,6 +72,9 @@ export const convertFunction = (data: FunctionAPIModel) => {
     );
     functionData.pathwayCommentsData = data.comments.filter(
       d => d.commentType === Comment.PATHWAY
+    );
+    functionData.miscellaneousData = data.comments.filter(
+      d => d.commentType === Comment.MISCELLANEOUS
     );
   }
   if (data.keywords) {
