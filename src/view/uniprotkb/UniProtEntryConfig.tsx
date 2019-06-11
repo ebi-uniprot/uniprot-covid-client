@@ -38,6 +38,7 @@ const UniProtKBEntryConfig: {
     sectionContent: (data: UniProtkbUIModel) => (
       <SubcellularLocationSection
         data={data[EntrySection.SubCellularLocation]}
+        sequence={data[EntrySection.Sequence].sequence.value}
         key={EntrySection.SubCellularLocation}
       />
     ),
