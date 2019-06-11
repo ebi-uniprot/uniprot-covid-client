@@ -73,6 +73,15 @@ exports[`Entry should render 1`] = `
             class=""
           >
             <a
+              href="#Family & Domains"
+            >
+              Family & Domains
+            </a>
+          </li>
+          <li
+            class=""
+          >
+            <a
               href="#Sequence"
             >
               Sequence
@@ -367,6 +376,49 @@ exports[`Entry should render 1`] = `
             />
             <protvista-datatable />
           </protvista-manager>
+        </div>
+      </div>
+      <div
+        class="card"
+        id="Family & Domains"
+      >
+        <div
+          class="card__header"
+        >
+          <h3
+            class="card__title"
+          >
+            Family & Domains
+          </h3>
+        </div>
+        <div
+          class="card__content"
+        >
+          <h4>
+            Keywords
+          </h4>
+          <div
+            class="info-list"
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Domain
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <a
+                  href="/keywords/KW-11111"
+                >
+                  keyword value
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div
