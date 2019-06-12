@@ -5,7 +5,7 @@ describe('Family and Domains data converter', () => {
   test('should convert the data', () => {
     const convertedData = convertFamilyAndDomains(modelDataJson);
     expect(convertedData).toEqual({
-      commentsData: [],
+      commentsData: new Map([['DOMAIN', []], ['SIMILARITY', []]]),
       featuresData: [],
       keywordData: [
         {

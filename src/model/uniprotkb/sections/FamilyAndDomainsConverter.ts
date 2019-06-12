@@ -20,7 +20,7 @@ type FamilyAndDomainsAPIModel = {
 
 export type FamilyAndDomainsUIModel = {
   keywordData: KeywordUIModel[];
-  commentsData: FreeTextData;
+  commentsData: Map<Comment, FreeTextData>;
   similarityCommentsData: FreeTextData;
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
@@ -36,22 +36,24 @@ const familyAndDomainsFeatures = [
   FeatureType.COMPBIAS,
 ];
 
+const familyAndDomainsComments = [Comment.DOMAIN, Comment.SIMILARITY];
+
 export const convertFamilyAndDomains = (data: FamilyAndDomainsAPIModel) => {
   const familyAndDomainsData: FamilyAndDomainsUIModel = {
+    commentsData: new Map(),
     keywordData: [],
     featuresData: [],
     xrefData: [],
-    commentsData: [],
     similarityCommentsData: [],
   };
-  if (data.comments) {
-    familyAndDomainsData.commentsData = data.comments.filter(
-      d => d.commentType === Comment.DOMAIN
-    );
-    familyAndDomainsData.similarityCommentsData = data.comments.filter(
-      d => d.commentType === Comment.SIMILARITY
-    );
-  }
+  familyAndDomainsComments.forEach(commentType => {
+    if (data.comments) {
+      familyAndDomainsData.commentsData.set(
+        commentType,
+        data.comments.filter(comment => comment.commentType === commentType)
+      );
+    }
+  });
   if (data.keywords) {
     const categoryKeywords = getKeywordsForCategories(
       data.keywords,
