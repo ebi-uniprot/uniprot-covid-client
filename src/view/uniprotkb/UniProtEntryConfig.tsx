@@ -8,6 +8,7 @@ import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';
 import SequenceSection from './SequenceSection';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import FamilyAndDomainsSection from './FamilyAndDomainsSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;
@@ -70,6 +71,17 @@ const UniProtKBEntryConfig: {
       <ExpressionSection
         data={data[EntrySection.Expression]}
         primaryAccession={data.primaryAccession}
+        key={EntrySection.FamilyAndDomains}
+      />
+    ),
+  },
+  {
+    name: EntrySection.FamilyAndDomains,
+    sectionContent: (data: UniProtkbUIModel) => (
+      <FamilyAndDomainsSection
+        data={data[EntrySection.FamilyAndDomains]}
+        primaryAccession={data.primaryAccession}
+        sequence={data[EntrySection.Sequence].sequence.value}
         key={EntrySection.Expression}
       />
     ),

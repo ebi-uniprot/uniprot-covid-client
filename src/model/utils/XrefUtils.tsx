@@ -26,12 +26,12 @@ export type XrefUIModel = {
 export const getXrefsForSection = (
   xrefs: Xref[],
   section: EntrySection
-): XrefUIModel[] | null => {
+): XrefUIModel[] => {
   const xrefCategories: XrefUIModel[] = [];
   // Get the categories relevant to the given entry section
   const sectionCategories = entrySectionToDatabaseCategories.get(section);
   if (!sectionCategories) {
-    return null;
+    return [];
   }
   sectionCategories.forEach(category => {
     // Get the database relevant to the given category
@@ -48,7 +48,7 @@ export const getXrefsForSection = (
         // If we have hits, add them too the array
         if (databaseXrefs && databaseXrefs.length > 0) {
           categoryDatabases.push({
-            database: database,
+            database,
             xrefs: databaseXrefs,
           });
         }
@@ -57,7 +57,7 @@ export const getXrefsForSection = (
     // If we have hits, add them too the array
     if (categoryDatabases.length > 0) {
       xrefCategories.push({
-        category: category,
+        category,
         databases: categoryDatabases,
       });
     }

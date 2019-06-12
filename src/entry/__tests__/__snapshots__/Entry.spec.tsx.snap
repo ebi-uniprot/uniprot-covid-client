@@ -25,7 +25,7 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
+            class=""
           >
             <a
               href="#Names & Taxonomy"
@@ -67,6 +67,15 @@ exports[`Entry should render 1`] = `
               href="#Expression"
             >
               Expression
+            </a>
+          </li>
+          <li
+            class=""
+          >
+            <a
+              href="#Family & Domains"
+            >
+              Family & Domains
             </a>
           </li>
           <li
@@ -244,6 +253,70 @@ exports[`Entry should render 1`] = `
       </div>
       <div
         class="card"
+        id="Names & Taxonomy"
+      >
+        <div
+          class="card__header"
+        >
+          <h3
+            class="card__title"
+          >
+            Names & Taxonomy
+          </h3>
+        </div>
+        <div
+          class="card__content"
+        >
+          <div
+            class="info-list"
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Recommended name
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                rec full Name
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Short names
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                recommended short name
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Alternative names
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                1.2.3.4sub full Namea full alt Name
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card"
         id="Pathology & BioTech"
       >
         <div
@@ -391,6 +464,49 @@ exports[`Entry should render 1`] = `
             />
             <protvista-datatable />
           </protvista-manager>
+        </div>
+      </div>
+      <div
+        class="card"
+        id="Family & Domains"
+      >
+        <div
+          class="card__header"
+        >
+          <h3
+            class="card__title"
+          >
+            Family & Domains
+          </h3>
+        </div>
+        <div
+          class="card__content"
+        >
+          <h4>
+            Keywords
+          </h4>
+          <div
+            class="info-list"
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Domain
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <a
+                  href="/keywords/KW-11111"
+                >
+                  keyword value
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div
