@@ -46,37 +46,31 @@ export const convertFamilyAndDomains = (data: FamilyAndDomainsAPIModel) => {
     xrefData: [],
     similarityCommentsData: [],
   };
-  familyAndDomainsComments.forEach(commentType => {
-    if (data.comments) {
+  const { comments, keywords, features, databaseCrossReferences } = data;
+  if (comments) {
+    familyAndDomainsComments.forEach(commentType => {
       familyAndDomainsData.commentsData.set(
         commentType,
-        data.comments.filter(comment => comment.commentType === commentType)
+        comments.filter(comment => comment.commentType === commentType)
       );
-    }
-  });
-  if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(
-      data.keywords,
+    });
+  }
+  if (keywords) {
+    familyAndDomainsData.keywordData = getKeywordsForCategories(
+      keywords,
       familyAndDomainsKeywords
     );
-    if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
-      familyAndDomainsData.keywordData = categoryKeywords;
-    }
   }
-  if (data.features) {
-    const features = data.features.filter(feature => {
-      return familyAndDomainsFeatures.includes(feature.type);
-    });
-    familyAndDomainsData.featuresData = features;
+  if (features) {
+    familyAndDomainsData.featuresData = features.filter(feature =>
+      familyAndDomainsFeatures.includes(feature.type)
+    );
   }
-  if (data.databaseCrossReferences) {
-    const xrefs = getXrefsForSection(
-      data.databaseCrossReferences,
+  if (databaseCrossReferences) {
+    familyAndDomainsData.xrefData = getXrefsForSection(
+      databaseCrossReferences,
       EntrySection.FamilyAndDomains
     );
-    if (xrefs && typeof xrefs !== 'undefined') {
-      familyAndDomainsData.xrefData = xrefs;
-    }
   }
   return familyAndDomainsData;
 };
