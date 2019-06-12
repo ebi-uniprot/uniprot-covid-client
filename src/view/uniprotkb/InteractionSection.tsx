@@ -5,6 +5,7 @@ import EntrySection from '../../model/types/EntrySection';
 import FreeTextView from '../uniprotkb/components/FreeTextView';
 import XRefView from '../uniprotkb/components/XRefView';
 import { InteractionUIModel } from '../../model/uniprotkb/sections/InteractionConverter';
+import Comment from '../../model/types/Comment';
 
 const InteractionSection: FC<{
   data: InteractionUIModel;
@@ -13,10 +14,11 @@ const InteractionSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
+  const comments = data.commentsData.get(Comment.SUBUNIT);
   return (
     <Fragment>
       <Card title={EntrySection.Interaction}>
-        <FreeTextView comments={data.commentsData} includeTitle={true} />
+        {comments && <FreeTextView comments={comments} includeTitle={true} />}
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>

@@ -5,7 +5,7 @@ describe('Interaction data converter', () => {
   test('should convert the data', () => {
     const convertedData = convertInteraction(modelData);
     expect(convertedData).toEqual({
-      commentsData: [],
+      commentsData: new Map([['SUBUNIT', []]]),
       xrefData: [],
     });
   });

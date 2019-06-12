@@ -10,23 +10,29 @@ type InteractionAPIModel = {
 };
 
 export type InteractionUIModel = {
-  commentsData: FreeTextData;
+  commentsData: Map<Comment, FreeTextData>;
   xrefData: XrefUIModel[];
 };
 
+const interactionComments = [Comment.SUBUNIT];
+
 export const convertInteraction = (data: InteractionAPIModel) => {
   const interactionData: InteractionUIModel = {
-    commentsData: [],
+    commentsData: new Map(),
     xrefData: [],
   };
-  if (data.comments) {
-    interactionData.commentsData = data.comments.filter(
-      comment => comment.commentType === Comment.SUBUNIT
-    );
+  const { comments, databaseCrossReferences } = data;
+  if (comments) {
+    interactionComments.forEach(commentType => {
+      interactionData.commentsData.set(
+        commentType,
+        comments.filter(comment => comment.commentType === commentType)
+      );
+    });
   }
-  if (data.databaseCrossReferences) {
+  if (databaseCrossReferences) {
     const xrefs = getXrefsForSection(
-      data.databaseCrossReferences,
+      databaseCrossReferences,
       EntrySection.Interaction
     );
     if (xrefs && typeof xrefs !== 'undefined') {
