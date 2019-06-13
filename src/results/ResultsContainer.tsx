@@ -2,7 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Facets, PageIntro } from 'franklin-sites';
+import {
+  Facets,
+  PageIntro,
+  DownloadIcon,
+  BasketIcon,
+  StatisticsIcon,
+} from 'franklin-sites';
 import * as resultsActions from './state/resultsActions';
 import * as searchActions from '../search/state/searchActions';
 import { default as queryStringModule } from 'query-string';
@@ -273,19 +279,38 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
           }
           content={
             results.length ? (
-              <ResultsTable
-                results={results}
-                columnNames={columns}
-                handleRowSelect={this.handleRowSelect}
-                selectedRows={selectedRows}
-                handleHeaderClick={this.updateColumnSort}
-                sortColumn={sortColumn}
-                sortDirection={sortDirection}
-                handleLoadMoreRows={() =>
-                  dispatchFetchBatchOfResultsIfNeeded(nextUrl)
-                }
-                totalNumberResults={totalNumberResults}
-              />
+              <Fragment>
+                <div className="button-group">
+                  <button className="button link-button disabled">Blast</button>
+                  <button className="button link-button disabled">Align</button>
+                  <button className="button link-button">
+                    <DownloadIcon />
+                    Download
+                  </button>
+                  <button className="button link-button disabled">
+                    <BasketIcon />
+                    Add
+                  </button>
+                  <button className="button link-button">
+                    <StatisticsIcon />
+                    Statistics
+                  </button>
+                  <button className="button link-button">Map to</button>
+                </div>
+                <ResultsTable
+                  results={results}
+                  columnNames={columns}
+                  handleRowSelect={this.handleRowSelect}
+                  selectedRows={selectedRows}
+                  handleHeaderClick={this.updateColumnSort}
+                  sortColumn={sortColumn}
+                  sortDirection={sortDirection}
+                  handleLoadMoreRows={() =>
+                    dispatchFetchBatchOfResultsIfNeeded(nextUrl)
+                  }
+                  totalNumberResults={totalNumberResults}
+                />
+              </Fragment>
             ) : (
               // This loading indicator is temporary. UX will decide at some
               // future date what site-wide indicator will be used.
