@@ -8,6 +8,7 @@ import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
+import Comment from '../../model/types/Comment';
 
 const FunctionSection: FC<{
   data: FunctionUIModel;
@@ -20,10 +21,18 @@ const FunctionSection: FC<{
   return (
     <Fragment>
       <Card title={EntrySection.Function}>
-        <FreeTextView comments={data.functionCommentsData} />
-        <CatalyticActivityView comments={data.catalyticActivityData} />
-        <FreeTextView comments={data.pathwayCommentsData} includeTitle={true} />
-        <FreeTextView comments={data.miscellaneousData} includeTitle={true} />
+        <FreeTextView comments={data.commentsData.get(Comment.FUNCTION)} />
+        <CatalyticActivityView
+          comments={data.commentsData.get(Comment.CATALYTIC_ACTIVITY)}
+        />
+        <FreeTextView
+          comments={data.commentsData.get(Comment.PATHWAY)}
+          includeTitle={true}
+        />
+        <FreeTextView
+          comments={data.commentsData.get(Comment.MISCELLANEOUS)}
+          includeTitle={true}
+        />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
