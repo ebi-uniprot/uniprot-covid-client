@@ -36,6 +36,7 @@ import {
   InteractionUIModel,
   convertInteraction,
 } from './sections/InteractionConverter';
+import {
   FamilyAndDomainsUIModel,
   convertFamilyAndDomains,
 } from './sections/FamilyAndDomainsConverter';

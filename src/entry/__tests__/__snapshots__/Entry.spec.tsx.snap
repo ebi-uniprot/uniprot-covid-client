@@ -70,21 +70,21 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
-          >
-            <a
-              href="#Interaction"
-            >
-              Interaction
-            </a>
-          </li>
-          <li
             class=""
           >
             <a
               href="#Family & Domains"
             >
               Family & Domains
+            </a>
+          </li>
+          <li
+            class="in-page-nav--disabled"
+          >
+            <a
+              href="#Interaction"
+            >
+              Interaction
             </a>
           </li>
           <li
