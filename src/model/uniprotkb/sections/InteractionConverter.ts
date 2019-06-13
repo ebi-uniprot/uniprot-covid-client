@@ -31,13 +31,10 @@ export const convertInteraction = (data: InteractionAPIModel) => {
     });
   }
   if (databaseCrossReferences) {
-    const xrefs = getXrefsForSection(
+    interactionData.xrefData = getXrefsForSection(
       databaseCrossReferences,
       EntrySection.Interaction
     );
-    if (xrefs && typeof xrefs !== 'undefined') {
-      interactionData.xrefData = xrefs;
-    }
   }
   return interactionData;
 };
