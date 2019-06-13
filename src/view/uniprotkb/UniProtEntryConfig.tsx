@@ -62,6 +62,7 @@ const UniProtKBEntryConfig: {
       <ProteinProcessingSection
         data={data[EntrySection.ProteinProcessing]}
         sequence={data[EntrySection.Sequence].sequence.value}
+        primaryAccession={data.primaryAccession}
         key={EntrySection.ProteinProcessing}
       />
     ),

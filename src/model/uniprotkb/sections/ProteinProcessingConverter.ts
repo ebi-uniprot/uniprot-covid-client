@@ -6,15 +6,24 @@ import {
   Keyword,
 } from '../../utils/KeywordsUtil';
 import KeywordCategory from '../../types/KeywordCategory';
+import { FreeTextData } from '../../../view/uniprotkb/components/FreeTextView';
+import { Xref, getXrefsForSection, XrefUIModel } from '../../utils/XrefUtils';
+import EntrySection from '../../types/EntrySection';
+import Comment from '../../types/Comment';
 
 type ProteinProcessingAPIModel = {
+  primaryAccession: string;
   keywords?: Keyword[];
+  comments?: FreeTextData;
   features?: FeatureData;
+  databaseCrossReferences?: Xref[];
 };
 
 export type ProteinProcessingUIModel = {
   featuresData: FeatureData;
   keywordData: KeywordUIModel[];
+  xrefData: XrefUIModel[];
+  commentsData: Map<Comment, FreeTextData>;
 };
 
 const proteinProcessingKeywords = [KeywordCategory.PTM];
@@ -33,25 +42,47 @@ const proteinProcessingFeatures = [
   FeatureType.CROSSLNK,
 ];
 
+const proteinProcessingComments = [Comment.PTM];
+
 export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
   const proteinProcessingData: ProteinProcessingUIModel = {
     featuresData: [],
     keywordData: [],
+    xrefData: [],
+    commentsData: new Map(),
   };
-  if (data.keywords) {
+  const { comments, keywords, features, databaseCrossReferences } = data;
+  if (comments) {
+    proteinProcessingComments.forEach(commentType => {
+      proteinProcessingData.commentsData.set(
+        commentType,
+        comments.filter(comment => comment.commentType === commentType)
+      );
+    });
+  }
+
+  if (keywords) {
     const categoryKeywords = getKeywordsForCategories(
-      data.keywords,
+      keywords,
       proteinProcessingKeywords
     );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       proteinProcessingData.keywordData = categoryKeywords;
     }
   }
-  if (data.features) {
-    const features = data.features.filter(feature => {
+  if (features) {
+    proteinProcessingData.featuresData = features.filter(feature => {
       return proteinProcessingFeatures.includes(feature.type);
     });
-    proteinProcessingData.featuresData = features;
+  }
+  if (databaseCrossReferences) {
+    const xrefs = getXrefsForSection(
+      databaseCrossReferences,
+      EntrySection.ProteinProcessing
+    );
+    if (xrefs && typeof xrefs !== 'undefined') {
+      proteinProcessingData.xrefData = xrefs;
+    }
   }
   return proteinProcessingData;
 };
