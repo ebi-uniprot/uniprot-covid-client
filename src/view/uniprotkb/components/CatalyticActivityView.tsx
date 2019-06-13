@@ -15,7 +15,7 @@ export type CatalyticActivityData = {
 }[];
 
 type CatalyticActivityProps = {
-  comments: CatalyticActivityData;
+  comments?: CatalyticActivityData;
 };
 
 const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({

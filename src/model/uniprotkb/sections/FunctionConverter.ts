@@ -22,9 +22,7 @@ type FunctionAPIModel = {
 };
 
 export type FunctionUIModel = {
-  functionCommentsData: FreeTextData;
-  catalyticActivityData: CatalyticActivityData;
-  pathwayCommentsData: FreeTextData;
+  commentsData: Map<Comment, FreeTextData>;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
@@ -52,49 +50,45 @@ const functionFeatures = [
   FeatureType.SITE,
 ];
 
+const functionComments = [
+  Comment.FUNCTION,
+  Comment.CATALYTIC_ACTIVITY,
+  Comment.PATHWAY,
+  Comment.MISCELLANEOUS,
+];
+
 export const convertFunction = (data: FunctionAPIModel) => {
   const functionData: FunctionUIModel = {
-    functionCommentsData: [],
-    catalyticActivityData: [],
-    pathwayCommentsData: [],
+    commentsData: new Map(),
     keywordData: [],
     featuresData: [],
     xrefData: [],
   };
-  if (data.comments) {
-    functionData.functionCommentsData = data.comments.filter(
-      d => d.commentType === Comment.FUNCTION
-    );
-    functionData.catalyticActivityData = data.comments.filter(
-      d => d.commentType === Comment.CATALYTIC_ACTIVITY
-    );
-    functionData.pathwayCommentsData = data.comments.filter(
-      d => d.commentType === Comment.PATHWAY
-    );
+  const { comments, keywords, features, databaseCrossReferences } = data;
+  if (comments) {
+    functionComments.forEach(commentType => {
+      functionData.commentsData.set(
+        commentType,
+        comments.filter(comment => comment.commentType === commentType)
+      );
+    });
   }
-  if (data.keywords) {
-    const categoryKeywords = getKeywordsForCategories(
-      data.keywords,
+  if (keywords) {
+    functionData.keywordData = getKeywordsForCategories(
+      keywords,
       functionKeywords
     );
-    if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
-      functionData.keywordData = categoryKeywords;
-    }
   }
-  if (data.features) {
-    const features = data.features.filter(feature => {
+  if (features) {
+    functionData.featuresData = features.filter(feature => {
       return functionFeatures.includes(feature.type);
     });
-    functionData.featuresData = features;
   }
-  if (data.databaseCrossReferences) {
-    const xrefs = getXrefsForSection(
-      data.databaseCrossReferences,
+  if (databaseCrossReferences) {
+    functionData.xrefData = getXrefsForSection(
+      databaseCrossReferences,
       EntrySection.Function
     );
-    if (xrefs && typeof xrefs !== 'undefined') {
-      functionData.xrefData = xrefs;
-    }
   }
   return functionData;
 };
