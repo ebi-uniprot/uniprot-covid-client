@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { InPageNav } from 'franklin-sites';
+import { InPageNav, DownloadIcon } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
@@ -38,10 +38,18 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
   return (
     <Fragment>
       <SideBarLayout
-        invert={true}
         sidebar={<InPageNav sections={sections} />}
         content={
           <Fragment>
+            <div className="button-group">
+              <button className="button link-button">Blast</button>
+              <button className="button link-button">Align</button>
+              <button className="button link-button">
+                <DownloadIcon />
+                Download
+              </button>
+              <button className="button link-button">Add</button>
+            </div>
             <ProteinOverview
               data={transformedData[EntrySection.NamesAndTaxonomy]}
               proteinExistence={transformedData.proteinExistence}

@@ -14,9 +14,9 @@ export type KeywordUIModel = {
 export const getKeywordsForCategories = (
   keywords: Keyword[],
   keywordCategories: KeywordCategory[]
-): KeywordUIModel[] | null => {
+): KeywordUIModel[] => {
   if (!keywords || !keywordCategories) {
-    return null;
+    return [];
   }
   const keywordsByCategories = [];
   for (const category of keywordCategories) {
@@ -25,7 +25,7 @@ export const getKeywordsForCategories = (
     );
     if (categoryKeywords && categoryKeywords.length > 0) {
       keywordsByCategories.push({
-        category: category,
+        category,
         keywords: categoryKeywords,
       });
     }
