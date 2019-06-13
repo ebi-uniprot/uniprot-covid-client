@@ -32,6 +32,10 @@ import {
 } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import { Xref } from '../utils/XrefUtils';
+import {
+  FamilyAndDomainsUIModel,
+  convertFamilyAndDomains,
+} from './sections/FamilyAndDomainsConverter';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;
@@ -59,6 +63,7 @@ export type UniProtkbUIModel = {
   [EntrySection.ProteinProcessing]: ProteinProcessingUIModel;
   [EntrySection.Expression]: ExpressionUIModel;
   [EntrySection.Sequence]: SequenceUIModel;
+  [EntrySection.FamilyAndDomains]: FamilyAndDomainsUIModel;
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
@@ -73,6 +78,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
     [EntrySection.Expression]: convertExpression(data),
     [EntrySection.Sequence]: convertSequence(data),
+    [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
   };
 };
 
@@ -81,7 +87,4 @@ export default uniProtKbConverter;
 // TODO this needs to be removed once added
 // entrySectionToKeywordCategories.set(EntrySection.Miscellaneous, [
 //   KeywordCategory.TECHNICAL_TERM,
-// ]);
-// entrySectionToKeywordCategories.set(EntrySection.FamilyAndDomains, [
-//   KeywordCategory.DOMAIN,
 // ]);

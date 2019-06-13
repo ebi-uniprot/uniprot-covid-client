@@ -53,6 +53,13 @@ const functionFeatures = [
   FeatureType.SITE,
 ];
 
+const functionComments = [
+  Comment.FUNCTION,
+  Comment.CATALYTIC_ACTIVITY,
+  Comment.PATHWAY,
+  Comment.MISCELLANEOUS
+]
+
 export const convertFunction = (data: FunctionAPIModel) => {
   const functionData: FunctionUIModel = {
     functionCommentsData: [],

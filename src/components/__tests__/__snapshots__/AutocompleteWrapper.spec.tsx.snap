@@ -26,7 +26,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         "Taxonomy [OC]",
-        <n
+        <t
           clearOnSelect={false}
           data={Array []}
           filter={false}
@@ -73,7 +73,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           "Taxonomy [OC]",
-          <n
+          <t
             clearOnSelect={false}
             data={Array []}
             filter={false}

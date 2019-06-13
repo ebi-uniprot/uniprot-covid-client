@@ -4,6 +4,9 @@ export const hasContent = (obj: any) => {
       const valArray = val as any[];
       return valArray.length > 0;
     }
+    if (typeof val === 'object' && val) {
+      return Object.values(val).length > 0;
+    }
     return false;
   });
 };
