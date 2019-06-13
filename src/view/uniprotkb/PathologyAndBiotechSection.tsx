@@ -7,6 +7,7 @@ import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import Comment from '../../model/types/Comment';
+import XRefView from './components/XRefView';
 
 const PathologyAndBiotechSection: FC<{
   data: UIModel;
@@ -25,6 +26,7 @@ const PathologyAndBiotechSection: FC<{
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <KeywordView keywords={data.keywordData} />
+        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>
   );
