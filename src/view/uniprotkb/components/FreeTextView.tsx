@@ -22,7 +22,7 @@ export type FreeTextData = {
 }[];
 
 type FreeTextProps = {
-  comments: FreeTextData;
+  comments?: FreeTextData;
   includeTitle?: boolean;
 };
 

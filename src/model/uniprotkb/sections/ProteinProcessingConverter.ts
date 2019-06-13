@@ -23,7 +23,7 @@ export type ProteinProcessingUIModel = {
   featuresData: FeatureData;
   keywordData: KeywordUIModel[];
   xrefData: XrefUIModel[];
-  commentsData: FreeTextData;
+  commentsData: Map<Comment, FreeTextData>;
 };
 
 const proteinProcessingKeywords = [KeywordCategory.PTM];
@@ -42,36 +42,42 @@ const proteinProcessingFeatures = [
   FeatureType.CROSSLNK,
 ];
 
+const proteinProcessingComments = [Comment.PTM];
+
 export const convertProteinProcessing = (data: ProteinProcessingAPIModel) => {
   const proteinProcessingData: ProteinProcessingUIModel = {
     featuresData: [],
     keywordData: [],
     xrefData: [],
-    commentsData: [],
+    commentsData: new Map(),
   };
-  if (data.comments) {
-    proteinProcessingData.commentsData = data.comments.filter(
-      d => d.commentType === Comment.PTM
-    );
+  const { comments, keywords, features, databaseCrossReferences } = data;
+  if (comments) {
+    proteinProcessingComments.forEach(commentType => {
+      proteinProcessingData.commentsData.set(
+        commentType,
+        comments.filter(comment => comment.commentType === commentType)
+      );
+    });
   }
-  if (data.keywords) {
+
+  if (keywords) {
     const categoryKeywords = getKeywordsForCategories(
-      data.keywords,
+      keywords,
       proteinProcessingKeywords
     );
     if (categoryKeywords && Object.keys(categoryKeywords).length > 0) {
       proteinProcessingData.keywordData = categoryKeywords;
     }
   }
-  if (data.features) {
-    const features = data.features.filter(feature => {
+  if (features) {
+    proteinProcessingData.featuresData = features.filter(feature => {
       return proteinProcessingFeatures.includes(feature.type);
     });
-    proteinProcessingData.featuresData = features;
   }
-  if (data.databaseCrossReferences) {
+  if (databaseCrossReferences) {
     const xrefs = getXrefsForSection(
-      data.databaseCrossReferences,
+      databaseCrossReferences,
       EntrySection.ProteinProcessing
     );
     if (xrefs && typeof xrefs !== 'undefined') {

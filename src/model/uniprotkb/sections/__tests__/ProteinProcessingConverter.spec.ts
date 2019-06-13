@@ -24,7 +24,7 @@ describe('Protein processing data converter', () => {
           type: 'chain',
         },
       ],
-      commentsData: [],
+      commentsData: new Map([['PTM', []]]),
       xrefData: [],
       keywordData: [],
     });
