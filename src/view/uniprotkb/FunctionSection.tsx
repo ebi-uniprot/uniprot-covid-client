@@ -7,11 +7,11 @@ import XRefView from '../uniprotkb/components/XRefView';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
-import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
 import Comment from '../../model/types/Comment';
+import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const FunctionSection: FC<{
-  data: FunctionUIModel;
+  data: UIModel;
   sequence: string;
   primaryAccession: string;
 }> = ({ data, sequence, primaryAccession }) => {

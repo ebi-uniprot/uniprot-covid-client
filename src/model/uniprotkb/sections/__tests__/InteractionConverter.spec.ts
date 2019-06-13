@@ -7,6 +7,8 @@ describe('Interaction data converter', () => {
     expect(convertedData).toEqual({
       commentsData: new Map([['SUBUNIT', []]]),
       xrefData: [],
+      featuresData: [],
+      keywordData: [],
     });
   });
 });

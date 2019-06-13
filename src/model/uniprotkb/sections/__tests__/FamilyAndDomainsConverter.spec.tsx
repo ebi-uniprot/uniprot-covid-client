@@ -26,7 +26,6 @@ describe('Family and Domains data converter', () => {
           ],
         },
       ],
-      similarityCommentsData: [],
       xrefData: [],
     });
   });
