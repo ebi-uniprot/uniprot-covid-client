@@ -5,6 +5,11 @@ import {
   GeneNamesData,
   OrganismData,
 } from './uniprotkb/sections/NamesAndTaxonomyConverter';
+import { ProteinNames } from '../view/uniprotkb/components/ProteinNamesView';
+import { convertProteinNames } from './uniprotkb/ProteinNamesConverter';
+import OrganismView from '../view/uniprotkb/components/OrganismView';
+import GeneNamesView from '../view/uniprotkb/components/GeneNamesView';
+import { convertGeneNames } from './uniprotkb/GeneNamesConverter';
 
 const WIDTH = {
   small: 200,
@@ -39,23 +44,19 @@ const ColumnConfiguration: {
   protein_name: {
     width: WIDTH.large,
     label: 'Protein names',
-    render: (data: ProteinNamesData) => <span />,
-    // TODO TEMPORARY!!!
-    // <ProteinNames data={data} />,
+    render: data => (
+      <ProteinNames {...convertProteinNames(data.proteinDescription)} />
+    ),
   },
   gene_names: {
     width: WIDTH.medium,
     label: 'Gene Names',
-    render: (data: GeneNamesData) => <span />,
-    // TODO TEMPORARY!!!
-    // <ProteinNames data={data} />,
+    render: data => <GeneNamesView {...convertGeneNames(data.genes)} />,
   },
   organism: {
     width: WIDTH.large,
     label: 'Organism',
-    render: (data: OrganismData) => <span />,
-    // TODO TEMPORARY!!!
-    // (data: OrganismData) => <Organism data={data} />,
+    render: data => <OrganismView data={data.organism} />,
   },
 };
 
