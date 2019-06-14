@@ -74,7 +74,15 @@ ShallowWrapper {
 exports[`ColumnConfiguration component should render gene_names 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <span />,
+  Symbol(enzyme.__unrendered__): <GeneNamesView
+    alternativeNames={
+      Array [
+        "some Syn",
+        "some orf",
+      ]
+    }
+    name="some Gene"
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -87,21 +95,33 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
-    "props": Object {},
+    "nodeType": "function",
+    "props": Object {
+      "alternativeNames": Array [
+        "some Syn",
+        "some orf",
+      ],
+      "name": "some Gene",
+    },
     "ref": null,
     "rendered": null,
-    "type": "span",
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
-      "props": Object {},
+      "nodeType": "function",
+      "props": Object {
+        "alternativeNames": Array [
+          "some Syn",
+          "some orf",
+        ],
+        "name": "some Gene",
+      },
       "ref": null,
       "rendered": null,
-      "type": "span",
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -200,7 +220,28 @@ ShallowWrapper {
 exports[`ColumnConfiguration component should render organism 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <span />,
+  Symbol(enzyme.__unrendered__): <OrganismView
+    data={
+      Object {
+        "commonName": "common name",
+        "evidences": Array [
+          Object {
+            "evidenceCode": "ECO:0000256",
+            "id": "PIRNR001363",
+            "source": "PIRNR",
+          },
+        ],
+        "lineage": Array [
+          "lineage 1",
+        ],
+        "scientificName": "scientific name",
+        "synonyms": Array [
+          "synonyms 1",
+        ],
+        "taxonId": 9606,
+      }
+    }
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -213,21 +254,25 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
-    "props": Object {},
+    "nodeType": "function",
+    "props": Object {
+      "termValue": "scientific name (common name)  (synonyms 1)",
+    },
     "ref": null,
     "rendered": null,
-    "type": "span",
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
-      "props": Object {},
+      "nodeType": "function",
+      "props": Object {
+        "termValue": "scientific name (common name)  (synonyms 1)",
+      },
       "ref": null,
       "rendered": null,
-      "type": "span",
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -260,7 +305,17 @@ ShallowWrapper {
 exports[`ColumnConfiguration component should render protein_name 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <span />,
+  Symbol(enzyme.__unrendered__): <ProteinNames
+    alternativeNames={
+      Array [
+        "1.2.3.4",
+        "sub full Name",
+        "a full alt Name",
+      ]
+    }
+    recommendedName="rec full Name"
+    shortNames="recommended short name"
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -273,21 +328,37 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
-    "props": Object {},
+    "nodeType": "function",
+    "props": Object {
+      "alternativeNames": Array [
+        "1.2.3.4",
+        "sub full Name",
+        "a full alt Name",
+      ],
+      "name": "rec full Name",
+      "shortNames": "recommended short name",
+    },
     "ref": null,
     "rendered": null,
-    "type": "span",
+    "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
-      "props": Object {},
+      "nodeType": "function",
+      "props": Object {
+        "alternativeNames": Array [
+          "1.2.3.4",
+          "sub full Name",
+          "a full alt Name",
+        ],
+        "name": "rec full Name",
+        "shortNames": "recommended short name",
+      },
       "ref": null,
       "rendered": null,
-      "type": "span",
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
