@@ -4,13 +4,13 @@ import FeatureType from '../../types/FeatureType';
 import EntrySection from '../../types/EntrySection';
 import { convertSection, UIModel, APIModel } from '../SectionConverter';
 
-const functionKeywords = [
+const keywordsCategories = [
   KeywordCategory.MOLECULAR_FUNCTION,
   KeywordCategory.BIOLOGICAL_PROCESS,
   KeywordCategory.LIGAND,
 ];
 
-const functionFeatures = [
+const featuresCategories = [
   FeatureType.DOMAIN,
   FeatureType.REPEAT,
   FeatureType.CA_BIND,
@@ -26,7 +26,7 @@ const functionFeatures = [
   FeatureType.SITE,
 ];
 
-const functionComments = [
+const commentsCategories = [
   Comment.FUNCTION,
   Comment.CATALYTIC_ACTIVITY,
   Comment.PATHWAY,
@@ -36,9 +36,9 @@ const functionComments = [
 export const convertFunction = (data: APIModel) => {
   return convertSection(
     data,
-    functionComments,
-    functionKeywords,
-    functionFeatures,
+    commentsCategories,
+    keywordsCategories,
+    featuresCategories,
     EntrySection.Function
   );
 };

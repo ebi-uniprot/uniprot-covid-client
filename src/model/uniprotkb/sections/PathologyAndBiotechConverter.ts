@@ -4,18 +4,18 @@ import FeatureType from '../../types/FeatureType';
 import { APIModel, convertSection } from '../SectionConverter';
 import EntrySection from '../../types/EntrySection';
 
-const pathologyAndBiotechKeywords = [KeywordCategory.DISEASE];
+const keywordsCategories = [KeywordCategory.DISEASE];
 
-const pathologyAndBiotechFeatures = [FeatureType.MUTAGEN];
+const featuresCategories = [FeatureType.MUTAGEN];
 
-const pathologyAndBiotechComments = [Comment.DISEASE];
+const commentsCategories = [Comment.DISEASE];
 
 export const convertPathologyAndBiotech = (data: APIModel) => {
   return convertSection(
     data,
-    pathologyAndBiotechComments,
-    pathologyAndBiotechKeywords,
-    pathologyAndBiotechFeatures,
+    commentsCategories,
+    keywordsCategories,
+    featuresCategories,
     EntrySection.PathologyAndBioTech
   );
 };

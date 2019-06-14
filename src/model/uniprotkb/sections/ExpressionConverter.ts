@@ -4,15 +4,15 @@ import KeywordCategory from '../../types/KeywordCategory';
 import EntrySection from '../../types/EntrySection';
 import { APIModel, convertSection } from '../SectionConverter';
 
-const expressionKeywords = [KeywordCategory.DEVELOPMENTAL_STAGE];
+const keywordsCategories = [KeywordCategory.DEVELOPMENTAL_STAGE];
 
-const expressionComments = [Comment.TISSUE_SPECIFICITY, Comment.INDUCTION];
+const commentsCategories = [Comment.TISSUE_SPECIFICITY, Comment.INDUCTION];
 
 export const convertExpression = (data: APIModel) => {
   return convertSection(
     data,
-    expressionComments,
-    expressionKeywords,
+    commentsCategories,
+    keywordsCategories,
     undefined,
     EntrySection.Expression
   );

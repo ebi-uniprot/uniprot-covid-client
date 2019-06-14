@@ -4,9 +4,9 @@ import EntrySection from '../../types/EntrySection';
 import Comment from '../../types/Comment';
 import { convertSection, APIModel } from '../SectionConverter';
 
-const familyAndDomainsKeywords = [KeywordCategory.DOMAIN];
+const keywordsCategories = [KeywordCategory.DOMAIN];
 
-const familyAndDomainsFeatures = [
+const featuresCategories = [
   FeatureType.DOMAIN,
   FeatureType.REGION,
   FeatureType.REPEAT,
@@ -20,8 +20,8 @@ export const convertFamilyAndDomains = (data: APIModel) => {
   return convertSection(
     data,
     familyAndDomainsComments,
-    familyAndDomainsKeywords,
-    familyAndDomainsFeatures,
+    keywordsCategories,
+    featuresCategories,
     EntrySection.FamilyAndDomains
   );
 };

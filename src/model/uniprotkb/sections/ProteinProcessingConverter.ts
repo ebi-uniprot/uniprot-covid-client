@@ -4,9 +4,9 @@ import EntrySection from '../../types/EntrySection';
 import Comment from '../../types/Comment';
 import { APIModel, convertSection } from '../SectionConverter';
 
-const proteinProcessingKeywords = [KeywordCategory.PTM];
+const keywordsCategories = [KeywordCategory.PTM];
 
-const proteinProcessingFeatures = [
+const featuresCategories = [
   FeatureType.INIT_MET,
   FeatureType.SIGNAL,
   FeatureType.TRANSIT,
@@ -26,8 +26,8 @@ export const convertProteinProcessing = (data: APIModel) => {
   return convertSection(
     data,
     proteinProcessingComments,
-    proteinProcessingKeywords,
-    proteinProcessingFeatures,
+    keywordsCategories,
+    featuresCategories,
     EntrySection.ProteinProcessing
   );
 };
