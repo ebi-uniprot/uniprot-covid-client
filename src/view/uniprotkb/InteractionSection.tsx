@@ -4,11 +4,11 @@ import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import FreeTextView from '../uniprotkb/components/FreeTextView';
 import XRefView from '../uniprotkb/components/XRefView';
-import { InteractionUIModel } from '../../model/uniprotkb/sections/InteractionConverter';
 import Comment from '../../model/types/Comment';
+import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const InteractionSection: FC<{
-  data: InteractionUIModel;
+  data: UIModel;
   primaryAccession: string;
 }> = ({ data, primaryAccession }) => {
   if (!hasContent(data)) {

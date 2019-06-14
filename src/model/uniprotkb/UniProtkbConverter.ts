@@ -1,30 +1,18 @@
 import EntrySection from '../types/EntrySection';
-import { convertFunction, FunctionUIModel } from './sections/FunctionConverter';
+import { convertFunction } from './sections/FunctionConverter';
 import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
 import { CatalyticActivityData } from '../../view/uniprotkb/components/CatalyticActivityView';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
-import {
-  convertPathologyAndBiotech,
-  PathologyAndBiotechUIModel,
-} from './sections/PathologyAndBiotechConverter';
+import { convertPathologyAndBiotech } from './sections/PathologyAndBiotechConverter';
 import { DiseaseCommentData } from '../../view/uniprotkb/components/DiseaseInvolvementView';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
   ProteinNamesData,
 } from './sections/NamesAndTaxonomyConverter';
-import {
-  convertProteinProcessing,
-  ProteinProcessingUIModel,
-} from './sections/ProteinProcessingConverter';
-import {
-  convertExpression,
-  ExpressionUIModel,
-} from './sections/ExpressionConverter';
-import {
-  convertSubcellularLocation,
-  SubcellularLocationUIModel,
-} from './sections/SubcellularLocationConverter';
+import { convertProteinProcessing } from './sections/ProteinProcessingConverter';
+import { convertExpression } from './sections/ExpressionConverter';
+import { convertSubcellularLocation } from './sections/SubcellularLocationConverter';
 import { convertSequence, SequenceUIModel } from './sections/SequenceConverter';
 import {
   AlternativeProducts,
@@ -32,14 +20,9 @@ import {
 } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import { Xref } from '../utils/XrefUtils';
-import {
-  InteractionUIModel,
-  convertInteraction,
-} from './sections/InteractionConverter';
-import {
-  FamilyAndDomainsUIModel,
-  convertFamilyAndDomains,
-} from './sections/FamilyAndDomainsConverter';
+import { convertInteraction } from './sections/InteractionConverter';
+import { convertFamilyAndDomains } from './sections/FamilyAndDomainsConverter';
+import { UIModel } from './SectionConverter';
 
 export type UniProtkbAPIModel = {
   primaryAccession: string;
@@ -60,15 +43,15 @@ export type UniProtkbUIModel = {
   primaryAccession: string;
   uniProtId: string;
   proteinExistence: string;
-  [EntrySection.Function]: FunctionUIModel;
+  [EntrySection.Function]: UIModel;
   [EntrySection.NamesAndTaxonomy]: NamesAndTaxonomyUIModel;
-  [EntrySection.SubCellularLocation]: SubcellularLocationUIModel;
-  [EntrySection.PathologyAndBioTech]: PathologyAndBiotechUIModel;
-  [EntrySection.ProteinProcessing]: ProteinProcessingUIModel;
-  [EntrySection.Expression]: ExpressionUIModel;
+  [EntrySection.SubCellularLocation]: UIModel;
+  [EntrySection.PathologyAndBioTech]: UIModel;
+  [EntrySection.ProteinProcessing]: UIModel;
+  [EntrySection.Expression]: UIModel;
   [EntrySection.Sequence]: SequenceUIModel;
-  [EntrySection.Interaction]: InteractionUIModel;
-  [EntrySection.FamilyAndDomains]: FamilyAndDomainsUIModel;
+  [EntrySection.Interaction]: UIModel;
+  [EntrySection.FamilyAndDomains]: UIModel;
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {

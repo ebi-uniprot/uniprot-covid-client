@@ -61,7 +61,7 @@ export const SequenceInfo: React.FC<{
     return (
       <button
         type="button"
-        className="button"
+        className="button secondary"
         onClick={() => setIsoformToFetch(isoformId)}
       >
         Load sequence

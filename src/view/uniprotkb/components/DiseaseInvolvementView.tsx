@@ -21,7 +21,7 @@ type DiseaseType = {
 };
 
 export type DiseaseCommentData = {
-  commentType?: Comment.DISEASE;
+  commentType?: Comment;
   disease?: DiseaseType;
   note?: { texts?: { value?: string }[] };
 }[];
@@ -32,7 +32,7 @@ type DiseaseInvolvementEntryProps = {
 };
 
 type DiseaseInvolvementProps = {
-  comments: DiseaseCommentData;
+  comments?: DiseaseCommentData;
   primaryAccession: string;
 };
 

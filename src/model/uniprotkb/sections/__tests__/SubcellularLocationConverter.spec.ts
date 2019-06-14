@@ -4,6 +4,11 @@ import modelDataJson from '../../../__mocks__/modelData.json';
 describe('Subcellular data converter', () => {
   test('should convert the data', () => {
     const convertedData = convertSubcellularLocation(modelDataJson);
-    expect(convertedData).toEqual({ keywordData: [], featuresData: [] });
+    expect(convertedData).toEqual({
+      keywordData: [],
+      featuresData: [],
+      commentsData: new Map(),
+      xrefData: [],
+    });
   });
 });

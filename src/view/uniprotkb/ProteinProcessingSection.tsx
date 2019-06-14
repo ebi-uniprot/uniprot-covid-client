@@ -4,13 +4,13 @@ import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import FeaturesView from '../uniprotkb/components/FeaturesView';
 import KeywordView from '../uniprotkb/components/KeywordView';
-import { ProteinProcessingUIModel } from '../../model/uniprotkb/sections/ProteinProcessingConverter';
 import XRefView from './components/XRefView';
 import FreeTextView from './components/FreeTextView';
 import Comment from '../../model/types/Comment';
+import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const ProteinProcessingSection: FC<{
-  data: ProteinProcessingUIModel;
+  data: UIModel;
   primaryAccession: string;
   sequence: string;
 }> = ({ data, sequence, primaryAccession }) => {
