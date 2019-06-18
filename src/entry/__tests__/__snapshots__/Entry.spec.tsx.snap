@@ -229,6 +229,9 @@ exports[`Entry should render 1`] = `
         <div
           class="card__content"
         >
+          <h4>
+            Protein names
+          </h4>
           <div
             class="info-list"
           >
@@ -244,6 +247,60 @@ exports[`Entry should render 1`] = `
                 class="info-list__item__content"
               >
                 rec full Name
+                <span
+                  class="evidence-tag evidence-tag--unreviewed"
+                >
+                  <svg
+                    height="10"
+                    viewBox="0 0 512 512"
+                    width="10"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    Manual assertion according to rules
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                EC number
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                1.2.3.4  
+                <span
+                  class="evidence-tag evidence-tag--unreviewed"
+                >
+                  <svg
+                    height="10"
+                    viewBox="0 0 512 512"
+                    width="10"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    Manual assertion according to rules
+                  </span>
+                </span>
               </div>
             </div>
             <div
@@ -257,7 +314,27 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__content"
               >
-                recommended short name
+                recommended short name  
+                <span
+                  class="evidence-tag evidence-tag--unreviewed"
+                >
+                  <svg
+                    height="10"
+                    viewBox="0 0 512 512"
+                    width="10"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    Manual assertion according to rules
+                  </span>
+                </span>
               </div>
             </div>
             <div
@@ -271,7 +348,238 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__content"
               >
-                1.2.3.4sub full Namea full alt Name
+                <ul
+                  class="no-bullet"
+                >
+                  <li>
+                    a full alt Name
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                     (short alt name1  
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                    ) 
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Cleaved into 1 chains
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="no-bullet"
+                >
+                  <li>
+                    containsrec full Name
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                     (containsrecommended short name  
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                    )  
+                    <strong>
+                      Alternative names: 
+                    </strong>
+                    containsa full alt Name
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                     (containsshort alt name1  
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                    ) 
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Submission names
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="no-bullet"
+                >
+                  <li>
+                    sub full Name
+                    <span
+                      class="evidence-tag evidence-tag--unreviewed"
+                    >
+                      <svg
+                        height="10"
+                        viewBox="0 0 512 512"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        Manual assertion according to rules
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <h4>
+            Gene names
+          </h4>
+          <div
+            class="info-list"
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Name
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                some Gene
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                Alternative names
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                some Synsome orf
               </div>
             </div>
           </div>

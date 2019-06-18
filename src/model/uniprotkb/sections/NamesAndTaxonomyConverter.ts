@@ -1,18 +1,17 @@
-import { convertProteinNames } from '../ProteinNamesConverter';
 import { ValueWihEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { convertGeneNames } from '../GeneNamesConverter';
 
-export type ProteinNamesDefault = {
+export type ProteinNames = {
   fullName: ValueWihEvidence;
   shortNames?: ValueWihEvidence[];
   ecNumbers?: ValueWihEvidence[];
 };
 
-type ProteinDescriptionDefault = {
-  recommendedName?: ProteinNamesDefault;
-  submissionNames?: ProteinNamesDefault[];
-  alternativeNames?: ProteinNamesDefault[];
+export type ProteinDescription = {
+  recommendedName?: ProteinNames;
+  submissionNames?: ProteinNames[];
+  alternativeNames?: ProteinNames[];
   allergenName?: ValueWihEvidence;
   biotechName?: ValueWihEvidence;
   cdAntigenNames?: ValueWihEvidence;
@@ -20,9 +19,9 @@ type ProteinDescriptionDefault = {
   flag?: Flag;
 };
 
-export type ProteinNamesData = ProteinDescriptionDefault & {
-  includes?: ProteinDescriptionDefault[];
-  contains?: ProteinDescriptionDefault[];
+export type ProteinNamesData = ProteinDescription & {
+  includes?: ProteinDescription[];
+  contains?: ProteinDescription[];
 };
 
 export type GeneNamesData = {
@@ -47,11 +46,12 @@ type NamesAndTaxonomyAPIModel = {
 };
 
 export type NamesAndTaxonomyUIModel = {
-  proteinNamesData?: {
-    recommendedName?: string;
-    shortNames?: string;
-    alternativeNames?: string[];
-  };
+  proteinNamesData?: ProteinNamesData;
+  // {
+  //   recommendedName?: string;
+  //   shortNames?: string;
+  //   alternativeNames?: string[];
+  // };
   geneNamesData?: { name: string; alternativeNames: string[] };
   organismData?: {};
 };
@@ -59,9 +59,10 @@ export type NamesAndTaxonomyUIModel = {
 export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
   const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
   if (data.proteinDescription) {
-    namesAndTaxonomyData.proteinNamesData = convertProteinNames(
-      data.proteinDescription
-    );
+    namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
+    // convertProteinNames(
+    //   data.proteinDescription
+    // );
   }
   if (data.genes) {
     namesAndTaxonomyData.geneNamesData = convertGeneNames(data.genes);

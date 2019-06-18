@@ -33,7 +33,9 @@ export const ProteinOverview: FC<{
           {proteinNamesData && uniProtId}{' '}
           <small>
             {primaryAccession} -{' '}
-            {proteinNamesData && proteinNamesData.recommendedName}
+            {proteinNamesData &&
+              proteinNamesData.recommendedName &&
+              proteinNamesData.recommendedName.fullName.value}
           </small>
         </Fragment>
       }

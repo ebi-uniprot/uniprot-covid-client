@@ -305,7 +305,7 @@ ShallowWrapper {
 exports[`ColumnConfiguration component should render protein_name 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ProteinNames
+  Symbol(enzyme.__unrendered__): <ProteinNamesView
     alternativeNames={
       Array [
         "1.2.3.4",
