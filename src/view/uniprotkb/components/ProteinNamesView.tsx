@@ -30,15 +30,12 @@ export const ProteinNamesView: React.FC<ProteinNamesDataProps> = ({
   return <NameView {...props} />;
 };
 
-const formatNameWithEvidence = (nameWithEvidence: ValueWihEvidence) => (
-  <Fragment key={v1()}>
-    {nameWithEvidence.value}{' '}
-    {nameWithEvidence.evidences &&
-      nameWithEvidence.evidences.map(evidence => (
-        <Fragment key={v1()}>
-          {' '}
-          <UniProtEvidence evidence={evidence} key={v1()} />
-        </Fragment>
+const NameWithEvidence: React.FC<{ data: ValueWihEvidence }> = ({ data }) => (
+  <Fragment>
+    {data.value}{' '}
+    {data.evidences &&
+      data.evidences.map(evidence => (
+        <UniProtEvidence evidence={evidence} key={v1()} />
       ))}
   </Fragment>
 );
@@ -51,18 +48,12 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
   }
   return (
     <Fragment>
-      {names.fullName.value}
-      {names.fullName.evidences &&
-        names.fullName.evidences.map(evidence => (
-          <UniProtEvidence evidence={evidence} key={v1()} />
-        ))}
+      <NameWithEvidence data={names.fullName} />
       {names.shortNames && (
         <Fragment>
           {' ('}
           {names.shortNames
-            .map(shortName => (
-              <Fragment>{formatNameWithEvidence(shortName)}</Fragment>
-            ))
+            .map(shortName => <NameWithEvidence data={shortName} key={v1()} />)
             .reduce((acc, shortName) => {
               return acc === null ? (
                 shortName
@@ -110,15 +101,7 @@ const getInfoListForNames = (name: ProteinNames) => {
   if (name.fullName) {
     infoData.push({
       title: 'Recommended name',
-      content: (
-        <Fragment>
-          {name.fullName.value}
-          {name.fullName.evidences &&
-            name.fullName.evidences.map(evidence => (
-              <UniProtEvidence evidence={evidence} key={v1()} />
-            ))}
-        </Fragment>
-      ),
+      content: <NameWithEvidence data={name.fullName} />,
     });
   }
   if (name.ecNumbers) {
@@ -126,7 +109,9 @@ const getInfoListForNames = (name: ProteinNames) => {
       title: 'EC number',
       content: (
         <Fragment>
-          {name.ecNumbers.map(ecNumber => formatNameWithEvidence(ecNumber))}
+          {name.ecNumbers.map(ecNumber => (
+            <NameWithEvidence data={ecNumber} key={v1()} />
+          ))}
         </Fragment>
       ),
     });
@@ -137,7 +122,7 @@ const getInfoListForNames = (name: ProteinNames) => {
       content: (
         <Fragment>
           {name.shortNames
-            .map(shortName => formatNameWithEvidence(shortName))
+            .map(shortName => <NameWithEvidence data={shortName} key={v1()} />)
             .reduce((acc, name) =>
               acc === null ? (
                 name
@@ -204,6 +189,26 @@ export const EntryProteinNames: React.FC<{
           ))}
         </ul>
       ),
+    });
+  }
+  if (proteinNames.biotechName) {
+    infoData.push({
+      title: 'Biotech name',
+      content: <NameWithEvidence data={proteinNames.biotechName} />,
+    });
+  }
+
+  if (proteinNames.cdAntigenNames) {
+    infoData.push({
+      title: 'CD Antigen Name',
+      content: <NameWithEvidence data={proteinNames.cdAntigenNames} />,
+    });
+  }
+
+  if (proteinNames.innNames) {
+    infoData.push({
+      title: 'INN Name',
+      content: <NameWithEvidence data={proteinNames.innNames} />,
     });
   }
 
