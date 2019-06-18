@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProteomesEntryView component should render 1`] = `
+<DocumentFragment>
+  <div
+    class="info-list"
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        Identifier
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <a
+          href="/proteomes/UP000005640"
+        >
+          UP000005640
+        </a>
+      </div>
+    </div>
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        Component
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        Chromosome 21
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
