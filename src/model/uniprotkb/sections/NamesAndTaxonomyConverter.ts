@@ -45,11 +45,6 @@ export type OrganismData = {
 
 export type NamesAndTaxonomyUIModel = {
   proteinNamesData?: ProteinNamesData;
-  // {
-  //   recommendedName?: string;
-  //   shortNames?: string;
-  //   alternativeNames?: string[];
-  // };
   geneNamesData?: { name: string; alternativeNames: string[] };
   organismData?: {};
   proteomesData?: Xref[];
@@ -59,9 +54,6 @@ export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
   const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
   if (data.proteinDescription) {
     namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
-    // convertProteinNames(
-    //   data.proteinDescription
-    // );
   }
   if (data.genes) {
     namesAndTaxonomyData.geneNamesData = convertGeneNames(data.genes);
