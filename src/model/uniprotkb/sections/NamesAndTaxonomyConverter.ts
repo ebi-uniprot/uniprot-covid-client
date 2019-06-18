@@ -1,6 +1,9 @@
 import { ValueWihEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { convertGeneNames } from '../GeneNamesConverter';
+import { UniProtkbAPIModel } from '../UniProtkbConverter';
+import { Database } from '../../types/DatabaseTypes';
+import { Xref } from '../../utils/XrefUtils';
 
 export type ProteinNames = {
   fullName: ValueWihEvidence;
@@ -37,12 +40,7 @@ export type OrganismData = {
   commonName?: string;
   synonyms?: string[];
   taxonId?: number;
-};
-
-type NamesAndTaxonomyAPIModel = {
-  proteinDescription?: ProteinNamesData;
-  genes?: GeneNamesData;
-  organism?: OrganismData;
+  lineage?: string[];
 };
 
 export type NamesAndTaxonomyUIModel = {
@@ -54,9 +52,10 @@ export type NamesAndTaxonomyUIModel = {
   // };
   geneNamesData?: { name: string; alternativeNames: string[] };
   organismData?: {};
+  proteomesData?: Xref[];
 };
 
-export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
+export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
   const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
   if (data.proteinDescription) {
     namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
@@ -70,5 +69,11 @@ export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
   if (data.organism) {
     namesAndTaxonomyData.organismData = data.organism;
   }
+  if (data.databaseCrossReferences) {
+    namesAndTaxonomyData.proteomesData = data.databaseCrossReferences.filter(
+      db => db.databaseType === Database.Proteomes
+    );
+  }
+
   return namesAndTaxonomyData;
 };

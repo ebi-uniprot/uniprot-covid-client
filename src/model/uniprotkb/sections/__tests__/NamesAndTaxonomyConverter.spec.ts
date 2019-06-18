@@ -414,6 +414,7 @@ describe('Names and taxonomy data converter', () => {
           },
         ],
       },
+      proteomesData: [],
     });
   });
 });
