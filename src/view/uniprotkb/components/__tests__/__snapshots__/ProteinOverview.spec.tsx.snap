@@ -3,14 +3,14 @@
 exports[`ProteinOverview component should render 1`] = `
 <DocumentFragment>
   <div
-    class="card"
-    id="[object Object]"
+    class="card "
   >
     <div
       class="card__header"
     >
       <h3
         class="card__title"
+        id="[object Object]"
       >
          
         <small>

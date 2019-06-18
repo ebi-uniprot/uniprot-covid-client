@@ -4,6 +4,8 @@ import { convertGeneNames } from '../GeneNamesConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Database } from '../../types/DatabaseTypes';
 import { Xref } from '../../utils/XrefUtils';
+import { convertSection, UIModel } from '../SectionConverter';
+import EntrySection from '../../types/EntrySection';
 
 export type ProteinNames = {
   fullName: ValueWihEvidence;
@@ -48,10 +50,19 @@ export type NamesAndTaxonomyUIModel = {
   geneNamesData?: { name: string; alternativeNames: string[] };
   organismData?: {};
   proteomesData?: Xref[];
-};
+} & UIModel;
 
 export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
-  const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
+  const namesAndTaxonomyData = <NamesAndTaxonomyUIModel>(
+    convertSection(
+      data,
+      undefined,
+      undefined,
+      undefined,
+      EntrySection.NamesAndTaxonomy
+    )
+  );
+
   if (data.proteinDescription) {
     namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
   }

@@ -137,14 +137,14 @@ exports[`Entry should render 1`] = `
         </button>
       </div>
       <div
-        class="card"
-        id="[object Object]"
+        class="card "
       >
         <div
           class="card__header"
         >
           <h3
             class="card__title"
+            id="[object Object]"
           >
             uniprot id 
             <small>
@@ -214,14 +214,14 @@ exports[`Entry should render 1`] = `
         </div>
       </div>
       <div
-        class="card"
-        id="Names & Taxonomy"
+        class="card "
       >
         <div
           class="card__header"
         >
           <h3
             class="card__title"
+            id="Names & Taxonomy"
           >
             Names & Taxonomy
           </h3>
@@ -720,14 +720,14 @@ exports[`Entry should render 1`] = `
         </div>
       </div>
       <div
-        class="card"
-        id="Protein Processing"
+        class="card "
       >
         <div
           class="card__header"
         >
           <h3
             class="card__title"
+            id="Protein Processing"
           >
             Protein Processing
           </h3>
@@ -758,14 +758,14 @@ exports[`Entry should render 1`] = `
         </div>
       </div>
       <div
-        class="card"
-        id="Family & Domains"
+        class="card "
       >
         <div
           class="card__header"
         >
           <h3
             class="card__title"
+            id="Family & Domains"
           >
             Family & Domains
           </h3>
@@ -801,14 +801,14 @@ exports[`Entry should render 1`] = `
         </div>
       </div>
       <div
-        class="card"
-        id="Sequence"
+        class="card "
       >
         <div
           class="card__header"
         >
           <h3
             class="card__title"
+            id="Sequence"
           >
             Sequence
           </h3>

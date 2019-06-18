@@ -415,6 +415,10 @@ describe('Names and taxonomy data converter', () => {
         ],
       },
       proteomesData: [],
+      commentsData: new Map(),
+      keywordData: [],
+      featuresData: [],
+      xrefData: [],
     });
   });
 });

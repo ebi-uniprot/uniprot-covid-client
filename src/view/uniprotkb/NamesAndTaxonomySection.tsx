@@ -7,10 +7,12 @@ import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAnd
 import { GeneNamesListView } from './components/GeneNamesView';
 import { OrganismEntryView } from './components/OrganismView';
 import { ProteomesEntryView } from './components/ProteomesView';
+import XRefView from './components/XRefView';
 
-const NamesAndTaxonomySection: FC<{ data: NamesAndTaxonomyUIModel }> = ({
-  data,
-}) => {
+const NamesAndTaxonomySection: FC<{
+  data: NamesAndTaxonomyUIModel;
+  primaryAccession: string;
+}> = ({ data, primaryAccession }) => {
   if (!hasContent(data)) {
     return null;
   }
@@ -25,6 +27,7 @@ const NamesAndTaxonomySection: FC<{ data: NamesAndTaxonomyUIModel }> = ({
         <OrganismEntryView data={data.organismData} />
         <h4>Proteome</h4>
         <ProteomesEntryView data={data.proteomesData} />
+        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </Fragment>
   );
