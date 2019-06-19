@@ -592,7 +592,7 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__content"
               >
-                 
+                undefined 
               </div>
             </div>
             <div
@@ -606,7 +606,7 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__content"
               >
-                 
+                undefined 
               </div>
             </div>
           </div>

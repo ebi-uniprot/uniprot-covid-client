@@ -32,7 +32,7 @@ export const ProteinNamesView: React.FC<ProteinNamesDataProps> = ({
 
 const NameWithEvidence: React.FC<{ data: ValueWihEvidence }> = ({ data }) => (
   <Fragment>
-    {data.value}{' '}
+    {`${data.value} `}
     {data.evidences &&
       data.evidences.map(evidence => (
         <UniProtEvidence evidence={evidence} key={v1()} />

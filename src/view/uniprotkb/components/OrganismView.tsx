@@ -42,7 +42,7 @@ export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
       title: 'Taxonomic identifier',
       content: (
         <Fragment>
-          {data.taxonId}{' '}
+          {`${data.taxonId} `}
           <ExternalLink
             url={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${
               data.taxonId
