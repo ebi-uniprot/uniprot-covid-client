@@ -31,6 +31,7 @@ const UniProtKBEntryConfig: {
     sectionContent: (data: UniProtkbUIModel) => (
       <NamesAndTaxonomySection
         data={data[EntrySection.NamesAndTaxonomy]}
+        primaryAccession={data.primaryAccession}
         key={EntrySection.NamesAndTaxonomy}
       />
     ),

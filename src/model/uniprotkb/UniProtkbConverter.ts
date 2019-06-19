@@ -9,6 +9,8 @@ import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
   ProteinNamesData,
+  GeneNamesData,
+  OrganismData,
 } from './sections/NamesAndTaxonomyConverter';
 import { convertProteinProcessing } from './sections/ProteinProcessingConverter';
 import { convertExpression } from './sections/ExpressionConverter';
@@ -25,10 +27,12 @@ import { convertFamilyAndDomains } from './sections/FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
 
 export type UniProtkbAPIModel = {
+  proteinDescription?: ProteinNamesData;
+  genes?: GeneNamesData;
+  organism?: OrganismData;
   primaryAccession: string;
   uniProtId: string;
   proteinExistence: string;
-  proteinDescription?: ProteinNamesData;
   comments?: FreeTextData &
     CatalyticActivityData &
     DiseaseCommentData &

@@ -12,7 +12,11 @@ describe('Names and taxonomy data converter', () => {
       organismData: {
         commonName: 'common name',
         evidences: [
-          { evidenceCode: 'ECO:0000256', id: 'PIRNR001363', source: 'PIRNR' },
+          {
+            evidenceCode: 'ECO:0000256',
+            id: 'PIRNR001363',
+            source: 'PIRNR',
+          },
         ],
         lineage: ['lineage 1'],
         scientificName: 'scientific name',
@@ -20,10 +24,401 @@ describe('Names and taxonomy data converter', () => {
         taxonId: 9606,
       },
       proteinNamesData: {
-        alternativeNames: ['1.2.3.4', 'sub full Name', 'a full alt Name'],
-        recommendedName: 'rec full Name',
-        shortNames: 'recommended short name',
+        allergenName: {
+          evidences: [
+            {
+              evidenceCode: 'ECO:0000255',
+              id: 'PRU10023',
+              source: 'PROSITE-ProRule',
+            },
+          ],
+          value: 'allergen',
+        },
+        alternativeNames: [
+          {
+            ecNumbers: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10029',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: '1.2.3.3',
+              },
+            ],
+            fullName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10022',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'a full alt Name',
+            },
+            shortNames: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10028',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'short alt name1',
+              },
+            ],
+          },
+        ],
+        biotechName: {
+          evidences: [
+            {
+              evidenceCode: 'ECO:0000255',
+              id: 'PRU10024',
+              source: 'PROSITE-ProRule',
+            },
+          ],
+          value: 'biotech',
+        },
+        cdAntigenNames: [
+          {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU10025',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'cd antigen',
+          },
+        ],
+        contains: [
+          {
+            allergenName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10023',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'allergen',
+            },
+            alternativeNames: [
+              {
+                ecNumbers: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10029',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: '1.2.3.3',
+                  },
+                ],
+                fullName: {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU10022',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: 'containsa full alt Name',
+                },
+                shortNames: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: 'containsshort alt name1',
+                  },
+                ],
+              },
+            ],
+            biotechName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10024',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'biotech',
+            },
+            cdAntigenNames: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10025',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'cd antigen',
+              },
+            ],
+            innNames: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU100212',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'inn antigen',
+              },
+            ],
+            recommendedName: {
+              ecNumbers: [
+                {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU100210',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: '1.2.3.4',
+                },
+              ],
+              fullName: {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10026',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'containsrec full Name',
+              },
+              shortNames: [
+                {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU10020',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: 'containsrecommended short name',
+                },
+              ],
+            },
+          },
+        ],
+        flag: 'Fragment',
+        includes: [
+          {
+            allergenName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10023',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'allergen',
+            },
+            alternativeNames: [
+              {
+                ecNumbers: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10029',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: '1.2.3.3',
+                  },
+                ],
+                fullName: {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU10022',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: 'includesa full alt Name',
+                },
+                shortNames: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: 'includesshort alt name1',
+                  },
+                ],
+              },
+            ],
+            biotechName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10024',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'biotech',
+            },
+            cdAntigenNames: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10025',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'cd antigen',
+              },
+            ],
+            innNames: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU100212',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'inn antigen',
+              },
+            ],
+            recommendedName: {
+              ecNumbers: [
+                {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU100210',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: '1.2.3.4',
+                },
+              ],
+              fullName: {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10026',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'includesrec full Name',
+              },
+              shortNames: [
+                {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000255',
+                      id: 'PRU10020',
+                      source: 'PROSITE-ProRule',
+                    },
+                  ],
+                  value: 'includesrecommended short name',
+                },
+              ],
+            },
+          },
+        ],
+        innNames: [
+          {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU100212',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'inn antigen',
+          },
+        ],
+        recommendedName: {
+          ecNumbers: [
+            {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU100210',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: '1.2.3.4',
+            },
+          ],
+          fullName: {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU10026',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'rec full Name',
+          },
+          shortNames: [
+            {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10020',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'recommended short name',
+            },
+          ],
+        },
+        submissionNames: [
+          {
+            ecNumbers: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU100211',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: '1.2.3.5',
+              },
+            ],
+            fullName: {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10027',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              value: 'sub full Name',
+            },
+          },
+        ],
       },
+      proteomesData: [],
+      commentsData: new Map(),
+      keywordData: [],
+      featuresData: [],
+      xrefData: [],
     });
   });
 });

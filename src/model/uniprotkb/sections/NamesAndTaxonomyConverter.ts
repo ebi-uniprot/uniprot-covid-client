@@ -1,18 +1,22 @@
-import { convertProteinNames } from '../ProteinNamesConverter';
 import { ValueWihEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { convertGeneNames } from '../GeneNamesConverter';
+import { UniProtkbAPIModel } from '../UniProtkbConverter';
+import { Database } from '../../types/DatabaseTypes';
+import { Xref } from '../../utils/XrefUtils';
+import { convertSection, UIModel } from '../SectionConverter';
+import EntrySection from '../../types/EntrySection';
 
-export type ProteinNamesDefault = {
+export type ProteinNames = {
   fullName: ValueWihEvidence;
   shortNames?: ValueWihEvidence[];
   ecNumbers?: ValueWihEvidence[];
 };
 
-type ProteinDescriptionDefault = {
-  recommendedName?: ProteinNamesDefault;
-  submissionNames?: ProteinNamesDefault[];
-  alternativeNames?: ProteinNamesDefault[];
+export type ProteinDescription = {
+  recommendedName?: ProteinNames;
+  submissionNames?: ProteinNames[];
+  alternativeNames?: ProteinNames[];
   allergenName?: ValueWihEvidence;
   biotechName?: ValueWihEvidence;
   cdAntigenNames?: ValueWihEvidence;
@@ -20,9 +24,9 @@ type ProteinDescriptionDefault = {
   flag?: Flag;
 };
 
-export type ProteinNamesData = ProteinDescriptionDefault & {
-  includes?: ProteinDescriptionDefault[];
-  contains?: ProteinDescriptionDefault[];
+export type ProteinNamesData = ProteinDescription & {
+  includes?: ProteinDescription[];
+  contains?: ProteinDescription[];
 };
 
 export type GeneNamesData = {
@@ -38,30 +42,29 @@ export type OrganismData = {
   commonName?: string;
   synonyms?: string[];
   taxonId?: number;
-};
-
-type NamesAndTaxonomyAPIModel = {
-  proteinDescription?: ProteinNamesData;
-  genes?: GeneNamesData;
-  organism?: OrganismData;
+  lineage?: string[];
 };
 
 export type NamesAndTaxonomyUIModel = {
-  proteinNamesData?: {
-    recommendedName?: string;
-    shortNames?: string;
-    alternativeNames?: string[];
-  };
+  proteinNamesData?: ProteinNamesData;
   geneNamesData?: { name: string; alternativeNames: string[] };
   organismData?: {};
-};
+  proteomesData?: Xref[];
+} & UIModel;
 
-export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
-  const namesAndTaxonomyData: NamesAndTaxonomyUIModel = {};
+export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
+  const namesAndTaxonomyData = <NamesAndTaxonomyUIModel>(
+    convertSection(
+      data,
+      undefined,
+      undefined,
+      undefined,
+      EntrySection.NamesAndTaxonomy
+    )
+  );
+
   if (data.proteinDescription) {
-    namesAndTaxonomyData.proteinNamesData = convertProteinNames(
-      data.proteinDescription
-    );
+    namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
   }
   if (data.genes) {
     namesAndTaxonomyData.geneNamesData = convertGeneNames(data.genes);
@@ -69,5 +72,11 @@ export const convertNamesAndTaxonomy = (data: NamesAndTaxonomyAPIModel) => {
   if (data.organism) {
     namesAndTaxonomyData.organismData = data.organism;
   }
+  if (data.databaseCrossReferences) {
+    namesAndTaxonomyData.proteomesData = data.databaseCrossReferences.filter(
+      db => db.databaseType === Database.Proteomes
+    );
+  }
+
   return namesAndTaxonomyData;
 };

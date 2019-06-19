@@ -5,7 +5,7 @@ import {
   GeneNamesData,
   OrganismData,
 } from './uniprotkb/sections/NamesAndTaxonomyConverter';
-import { ProteinNames } from '../view/uniprotkb/components/ProteinNamesView';
+import { ProteinNamesView } from '../view/uniprotkb/components/ProteinNamesView';
 import { convertProteinNames } from './uniprotkb/ProteinNamesConverter';
 import OrganismView from '../view/uniprotkb/components/OrganismView';
 import GeneNamesView from '../view/uniprotkb/components/GeneNamesView';
@@ -45,7 +45,7 @@ const ColumnConfiguration: {
     width: WIDTH.large,
     label: 'Protein names',
     render: data => (
-      <ProteinNames {...convertProteinNames(data.proteinDescription)} />
+      <ProteinNamesView {...convertProteinNames(data.proteinDescription)} />
     ),
   },
   gene_names: {
