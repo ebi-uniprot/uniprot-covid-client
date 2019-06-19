@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { InPageNav, DownloadIcon } from 'franklin-sites';
+import { InPageNav, DownloadIcon, Loader } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
@@ -22,7 +22,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {
-    return null;
+    return <Loader />;
   }
 
   const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);

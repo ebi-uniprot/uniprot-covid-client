@@ -8,6 +8,7 @@ import {
   DownloadIcon,
   BasketIcon,
   StatisticsIcon,
+  Loader,
 } from 'franklin-sites';
 import * as resultsActions from './state/resultsActions';
 import * as searchActions from '../search/state/searchActions';
@@ -258,7 +259,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       queryParamFromUrl
     );
     if (isFetching && results.length === 0) {
-      return <h3>Loading...</h3>;
+      return <Loader />;
     }
     const { name, links, info } = infoMappings[namespace];
     return (

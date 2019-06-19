@@ -15,7 +15,9 @@ function configureStore(initialState?: object) {
     store = createStore(
       rootReducer,
       initialState!,
-      debug(applyMiddleware(thunkMiddleware))
+      debug
+        ? debug(applyMiddleware(thunkMiddleware))
+        : applyMiddleware(thunkMiddleware)
     );
   } else {
     store = createStore(
