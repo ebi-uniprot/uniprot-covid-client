@@ -1,4 +1,3 @@
-import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
 import { APIModel, convertSection } from '../SectionConverter';
 import EntrySection from '../../types/EntrySection';
