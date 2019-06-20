@@ -48,7 +48,7 @@
     "protvista-manager": "2.0.4",
     "protvista-navigation": "2.1.0",
     "protvista-sequence": "2.1.0",
-    "protvista-structure": "2.1.8",
+    "protvista-structure": "2.1.9",
     "protvista-track": "2.1.0",
     "query-string": "^6.2.0",
     "react": "^16.8.2",
