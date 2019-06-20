@@ -10,6 +10,7 @@ import SequenceSection from './SequenceSection';
 import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import InteractionSection from './InteractionSection';
 import FamilyAndDomainsSection from './FamilyAndDomainsSection';
+import StructureSection from './StructureSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;
@@ -96,6 +97,17 @@ const UniProtKBEntryConfig: {
         data={data[EntrySection.Interaction]}
         primaryAccession={data.primaryAccession}
         key={EntrySection.Interaction}
+      />
+    ),
+  },
+  {
+    name: EntrySection.Structure,
+    sectionContent: (data: UniProtkbUIModel) => (
+      <StructureSection
+        data={data[EntrySection.Structure]}
+        primaryAccession={data.primaryAccession}
+        sequence={data[EntrySection.Sequence].sequence.value}
+        key={EntrySection.Structure}
       />
     ),
   },

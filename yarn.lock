@@ -1098,6 +1098,13 @@
   dependencies:
     query-string "*"
 
+"@types/react-dom@^15.5.6":
+  version "15.5.10"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.10.tgz#456894b829048a1d7a3ffbb06e81807a6e3a6129"
+  integrity sha512-N30VU1b4xJcWGEKeMvwxPWbQMlxEMj1tTK72771PtQuf0vz6P81wg5i152zqm865wZVYGIZymtYEY+XYTLL+YQ==
+  dependencies:
+    "@types/react" "^15"
+
 "@types/react-dom@^16.0.11":
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.4.tgz#7fb7ba368857c7aa0f4e4511c4710ca2c5a12a88"
@@ -1137,6 +1144,11 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/react@^15", "@types/react@^15.6.16":
+  version "15.6.26"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.6.26.tgz#6a99c2fbe11e072898d321fa1e16d56d5576d1f0"
+  integrity sha512-wNoXCIzRp2dBHch6fekXU6PRbjHs/VjK1yXNFfPRiBM54Vt3yQt9F5Yb4e34AU1c+mdyxLh6e1AVdvfplI1RMQ==
 
 "@types/url-join@^4.0.0":
   version "4.0.0"
@@ -2510,7 +2522,7 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2, commander@^2.12.1, commander@^2.19.0, commander@^2.8.1, commander@~2.20.0:
+commander@2, commander@^2.12.1, commander@^2.17.1, commander@^2.19.0, commander@^2.8.1, commander@~2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
@@ -4053,14 +4065,14 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.3-dev.36:
-  version "0.0.3-dev.36"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.3-dev.36.tgz#960c40943601889ce7df1472786aa51b2ec673b4"
-  integrity sha512-PmUNAVU+FkZJIToJAwCN/+ZP+raQF3neWrKafNYv5/v2ecjOJdVYUVyHGytX5nKY7B/FiMrVACMj6b3JVoymAQ==
+franklin-sites@0.0.3-dev.38:
+  version "0.0.3-dev.38"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.3-dev.38.tgz#1f4ec72d7d496a6801a5bc0e1a59efe12ef2385c"
+  integrity sha512-4bkCWRuVuBOllvAELvDLCx27gGbnpgnczDFlwzzJKJIWt24NHP9tj4JrChu/MeW6R4pqOnznYCIiOXot0ukPEA==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.0-rc.3"
-    lorem-ipsum "^1.0.6"
+    lorem-ipsum "^2.0.2"
     npm-run-all "^4.1.2"
     path "^0.12.7"
     prop-types "^15.6.2"
@@ -5752,6 +5764,14 @@ lit-html@^1.0.0:
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.0.0.tgz#3dc3781a8ca68a9b5c2ff2a61e263662b9b2267b"
   integrity sha512-oeWlpLmBW3gFl7979Wol2LKITpmKTUFNn7PnFbh6YNynF61W74l6x5WhwItAwPRSATpexaX1egNnRzlN4GOtfQ==
 
+litemol@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/litemol/-/litemol-2.4.2.tgz#4a206cadb31659f7f3b13478020b97f373cbb815"
+  integrity sha512-wmgfl5SxJvkHdg0Tq39Y3Dx4D+74lS+M0fnPEpBlVWZM5xooDuxTZkHLDH9N3nFSQVqjHiT80GFBNL/t/APf5A==
+  dependencies:
+    "@types/react" "^15.6.16"
+    "@types/react-dom" "^15.5.6"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -5916,12 +5936,12 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lorem-ipsum@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/lorem-ipsum/-/lorem-ipsum-1.0.6.tgz#69e9ab02bbb0991915d71b5559fe016d526f013f"
-  integrity sha512-Rx4XH8X4KSDCKAVvWGYlhAfNqdUP5ZdT4rRyf0jjrvWgtViZimDIlopWNfn/y3lGM5K4uuiAoY28TaD+7YKFrQ==
+lorem-ipsum@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/lorem-ipsum/-/lorem-ipsum-2.0.3.tgz#9f1fa634780c9f58a349d4e091c3ba74f733164e"
+  integrity sha512-CX2r84DMWjW/DWiuzicTI9aRaJPAw2cvAGMJYZh/nx12OkTGqloj8y8FU0S8ZkKwOdqhfxEA6Ly8CW2P6Yxjwg==
   dependencies:
-    minimist "~1.2.0"
+    commander "^2.17.1"
 
 loud-rejection@^1.0.0:
   version "1.6.0"
@@ -6186,7 +6206,7 @@ minimist@0.0.8:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
 
-minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@~1.2.0:
+minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
@@ -7275,6 +7295,14 @@ protvista-sequence@^2.1.0:
   dependencies:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.1.0"
+
+protvista-structure@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.1.8.tgz#a0eb37a618e655c1f912c147d7b58aab680eec09"
+  integrity sha512-P2QTJmYXMI6ShuTFrpVSU0O/+sgsxIgkOMmPa/1dV3N1LFvtC4SuWPVdrEF/x4ZlSLxeRfLFRMwoaVDLrrs5xQ==
+  dependencies:
+    lodash-es "^4.17.11"
+    whatwg-fetch "^3.0.0"
 
 protvista-track@^2.1.0:
   version "2.1.0"
@@ -9446,6 +9474,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
+  integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.3.0"
