@@ -25,6 +25,7 @@ import { Xref } from '../utils/XrefUtils';
 import { convertInteraction } from './sections/InteractionConverter';
 import { convertFamilyAndDomains } from './sections/FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
+import { convertStructure } from './sections/StructureConverter';
 
 export type UniProtkbAPIModel = {
   proteinDescription?: ProteinNamesData;
@@ -55,6 +56,7 @@ export type UniProtkbUIModel = {
   [EntrySection.Expression]: UIModel;
   [EntrySection.Sequence]: SequenceUIModel;
   [EntrySection.Interaction]: UIModel;
+  [EntrySection.Structure]: UIModel;
   [EntrySection.FamilyAndDomains]: UIModel;
 };
 
@@ -70,6 +72,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
     [EntrySection.Expression]: convertExpression(data),
     [EntrySection.Interaction]: convertInteraction(data),
+    [EntrySection.Structure]: convertStructure(data),
     [EntrySection.Sequence]: convertSequence(data),
     [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
   };

@@ -30,7 +30,8 @@
       "jsx"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "dependencies": {
@@ -39,14 +40,16 @@
     "d3": "^5.9.2",
     "franklin-sites": "0.0.3-dev.38",
     "idx": "^2.5.2",
+    "litemol": "^2.4.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
-    "protvista-datatable": "^2.1.0",
-    "protvista-manager": "^2.0.4",
-    "protvista-navigation": "^2.1.0",
-    "protvista-sequence": "^2.1.0",
-    "protvista-track": "^2.1.0",
+    "protvista-datatable": "2.1.0",
+    "protvista-manager": "2.0.4",
+    "protvista-navigation": "2.1.0",
+    "protvista-sequence": "2.1.0",
+    "protvista-structure": "2.1.9",
+    "protvista-track": "2.1.0",
     "query-string": "^6.2.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",

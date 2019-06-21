@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -30,7 +31,11 @@ module.exports = {
       {
         test: /\.(css|sass|scss)$/,
         include: [
-          path.resolve(__dirname, 'node_modules/franklin-sites/dist'),
+          // We use realpathSync otherwise doesn't work with symlinks
+          fs.realpathSync(__dirname + '/node_modules/litemol/dist/css'),
+          fs.realpathSync(
+            __dirname + '/node_modules/protvista-structure/style'
+          ),
           path.resolve(__dirname, 'src'),
         ],
         use: [
@@ -47,6 +52,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
+        exclude: [path.resolve(__dirname, 'node_modules/litemol/dist/fonts')],
         use: [
           {
             loader: 'babel-loader',
@@ -55,6 +61,19 @@ module.exports = {
             loader: 'react-svg-loader',
             options: {
               jsx: true, // true outputs JSX tags
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        include: [path.resolve(__dirname, 'node_modules/litemol/dist/fonts')],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
             },
           },
         ],

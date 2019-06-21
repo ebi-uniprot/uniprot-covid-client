@@ -88,6 +88,15 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
+            class="in-page-nav--disabled"
+          >
+            <a
+              href="#Structure"
+            >
+              Structure
+            </a>
+          </li>
+          <li
             class=""
           >
             <a
