@@ -7347,11 +7347,12 @@ protvista-sequence@2.1.0:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.1.0"
 
-protvista-structure@2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.1.8.tgz#a0eb37a618e655c1f912c147d7b58aab680eec09"
-  integrity sha512-P2QTJmYXMI6ShuTFrpVSU0O/+sgsxIgkOMmPa/1dV3N1LFvtC4SuWPVdrEF/x4ZlSLxeRfLFRMwoaVDLrrs5xQ==
+protvista-structure@2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.1.11.tgz#03e381e0d6ef0014dd0c8eaf37910c0b770d836c"
+  integrity sha512-sGwd2rixFbAK+GO3slqOWl1iuGqIL/nm40VX+PjhQpPAaAOUw52aIqSBhTbriPu0SneJIRZuZbXLCtqM/OQYGg==
   dependencies:
+    litemol "^2.4.2"
     lodash-es "^4.17.11"
     whatwg-fetch "^3.0.0"
 
