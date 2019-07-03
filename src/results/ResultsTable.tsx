@@ -8,8 +8,6 @@ import {
   SortDirection,
 } from './types/resultsTypes';
 
-const DEFAULT_COLUMN_WIDTH = 200;
-
 type ResultsTableProps = {
   results: any[];
   columnNames: string[];
@@ -49,7 +47,6 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       render,
       sortable: columnName in SortableColumn,
       sorted: columnName === sortColumn ? sortDirection : null,
-      width: attributes.width || DEFAULT_COLUMN_WIDTH,
     };
   });
   return (
@@ -58,13 +55,11 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       columns={columns}
       data={results}
       selectable={true}
-      selectedRows={selectedRows}
+      selected={selectedRows}
       onSelect={handleRowSelect}
       onHeaderClick={handleHeaderClick}
-      onLoadMoreRows={handleLoadMoreRows}
-      fixedRowCount={1}
-      totalNumberRows={totalNumberResults}
-      showHeader={true}
+      onLoadMoreItems={handleLoadMoreRows}
+      hasMoreData={true}
     />
   );
 };

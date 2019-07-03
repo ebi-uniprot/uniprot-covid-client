@@ -266,7 +266,11 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       <Fragment>
         <SideBarLayout
           title={
-            <PageIntro title={name} links={links}>
+            <PageIntro
+              title={name}
+              links={links}
+              resultsCount={totalNumberResults}
+            >
               {info}
             </PageIntro>
           }
@@ -279,46 +283,38 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             />
           }
           content={
-            results.length ? (
-              <Fragment>
-                <div className="button-group">
-                  <button className="button link-button disabled">Blast</button>
-                  <button className="button link-button disabled">Align</button>
-                  <button className="button link-button">
-                    <DownloadIcon />
-                    Download
-                  </button>
-                  <button className="button link-button disabled">
-                    <BasketIcon />
-                    Add
-                  </button>
-                  <button className="button link-button">
-                    <StatisticsIcon />
-                    Statistics
-                  </button>
-                  <button className="button link-button">Map to</button>
-                </div>
-                <ResultsTable
-                  results={results}
-                  columnNames={columns}
-                  handleRowSelect={this.handleRowSelect}
-                  selectedRows={selectedRows}
-                  handleHeaderClick={this.updateColumnSort}
-                  sortColumn={sortColumn}
-                  sortDirection={sortDirection}
-                  handleLoadMoreRows={() =>
-                    dispatchFetchBatchOfResultsIfNeeded(nextUrl)
-                  }
-                  totalNumberResults={totalNumberResults}
-                />
-              </Fragment>
-            ) : (
-              // This loading indicator is temporary. UX will decide at some
-              // future date what site-wide indicator will be used.
-              <div style={{ fontSize: '2rem', paddingLeft: '2rem' }}>
-                Loading...
+            <Fragment>
+              <div className="button-group">
+                <button className="button link-button disabled">Blast</button>
+                <button className="button link-button disabled">Align</button>
+                <button className="button link-button">
+                  <DownloadIcon />
+                  Download
+                </button>
+                <button className="button link-button disabled">
+                  <BasketIcon />
+                  Add
+                </button>
+                <button className="button link-button">
+                  <StatisticsIcon />
+                  Statistics
+                </button>
+                <button className="button link-button">Map to</button>
               </div>
-            )
+              <ResultsTable
+                results={results}
+                columnNames={columns}
+                handleRowSelect={this.handleRowSelect}
+                selectedRows={selectedRows}
+                handleHeaderClick={this.updateColumnSort}
+                sortColumn={sortColumn}
+                sortDirection={sortDirection}
+                handleLoadMoreRows={() =>
+                  dispatchFetchBatchOfResultsIfNeeded(nextUrl)
+                }
+                totalNumberResults={totalNumberResults}
+              />
+            </Fragment>
           }
         />
       </Fragment>
