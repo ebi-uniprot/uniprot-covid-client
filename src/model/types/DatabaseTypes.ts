@@ -1,21 +1,21 @@
 export enum DatabaseCategory {
-  SEQUENCE = 'Sequence databases',
-  STRUCTURE = '3D structure databases',
-  INTERACTION = 'Protein-protein interaction databases',
-  CHEMISTRY = 'Chemistry',
-  FAMILY = 'Protein family/group databases',
-  PTM = 'PTM databases',
-  POLYMORPHISM = 'Polymorphism and mutation databases',
-  GEL = '2D gel databases',
-  PROTEOMIC = 'Proteomic databases',
-  PROTOCOL = 'Protocols and materials databases',
-  GENOME = 'Genome annotation databases',
-  ORGANISM = 'Organism-specific databases',
-  PHYLOGENOMIC = 'Phylogenomic databases',
-  PATHWAY = 'Enzyme and pathway databases',
-  EXPRESSION = 'Gene expression databases',
-  DOMAIN = 'Family and domain databases',
-  OTHER = 'Other',
+  CHEMISTRY = 'CHEMISTRY',
+  DOMAIN = 'FMD',
+  EXPRESSION = 'GEP',
+  FAMILY = 'PFAM',
+  GEL = '2DG',
+  GENOME = 'GMA',
+  INTERACTION = 'PPI',
+  ORGANISM = 'ORG',
+  OTHER = 'OTHER',
+  PATHWAY = 'EAP',
+  PHYLOGENOMIC = 'PLG',
+  POLYMORPHISM = 'PMD',
+  PROTEOMIC = 'PROTEOMIC',
+  PROTOCOL = 'PAM',
+  PTM = 'PTM',
+  SEQUENCE = 'SEQ',
+  STRUCTURE = '3DS',
 }
 
 type AttributesItem = {
@@ -24,7 +24,7 @@ type AttributesItem = {
   uriLink?: string;
 };
 
-type DatabaseInfo = {
+type DatabaseInfoPoint = {
   name: string;
   displayName: string;
   category: string;
@@ -32,7 +32,7 @@ type DatabaseInfo = {
   attributes?: AttributesItem[];
 };
 
-export type DatabaseToDatabaseInfo = { [key in Database]: DatabaseInfo };
+export type DatabaseInfo = DatabaseInfoPoint[];
 
 export enum Database {
   EMBL = 'EMBL',
