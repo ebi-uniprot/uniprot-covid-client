@@ -1,5 +1,5 @@
 import React from 'react';
-import { DataTable } from 'franklin-sites';
+import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import {
@@ -7,10 +7,13 @@ import {
   SortableColumn,
   SortDirection,
 } from './types/resultsTypes';
+import UniProtCard from '../view/uniprotkb/components/UniProtCard';
+import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
+import { ViewMode } from './state/resultsInitialState';
 
 type ResultsTableProps = {
   results: any[];
-  columnNames: string[];
+  tableColumns: string[];
   selectedRows: SelectedRows;
   handleRowSelect: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumn) => void;
@@ -18,20 +21,22 @@ type ResultsTableProps = {
   totalNumberResults: number;
   sortColumn: SortableColumn;
   sortDirection: SortDirection;
+  viewMode: ViewMode;
 };
 
 const ResultsTable: React.FC<ResultsTableProps> = ({
   results = [],
-  columnNames,
+  totalNumberResults,
+  tableColumns,
   selectedRows,
   handleRowSelect,
-  handleHeaderClick,
   handleLoadMoreRows,
+  handleHeaderClick,
   sortColumn,
   sortDirection,
-  totalNumberResults,
+  viewMode,
 }) => {
-  const columns = columnNames.map(columnName => {
+  const columns = tableColumns.map(columnName => {
     let render;
     if (columnName in ColumnConfiguration) {
       render = (row: any) => ColumnConfiguration[columnName].render(row);
@@ -49,18 +54,43 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       sorted: columnName === sortColumn ? sortDirection : null,
     };
   });
-  return (
-    <DataTable
-      idKey="primaryAccession"
-      columns={columns}
-      data={results}
-      selectable={true}
-      selected={selectedRows}
-      onSelect={handleRowSelect}
-      onHeaderClick={handleHeaderClick}
-      onLoadMoreItems={handleLoadMoreRows}
-      hasMoreData={true}
-    />
-  );
+  const hasMoreData = totalNumberResults > results.length;
+  let displayComponent = null;
+  switch (viewMode) {
+    case ViewMode.CARD:
+      displayComponent = (
+        <DataList
+          idKey="primaryAccession"
+          data={results}
+          selectable={true}
+          selected={selectedRows}
+          onSelect={handleRowSelect}
+          dataRenderer={(dataItem: UniProtkbAPIModel) => (
+            <UniProtCard data={dataItem} />
+          )}
+          onLoadMoreItems={handleLoadMoreRows}
+          hasMoreData={hasMoreData}
+        />
+      );
+      break;
+    case ViewMode.TABLE:
+      displayComponent = (
+        <DataTable
+          idKey="primaryAccession"
+          columns={columns}
+          data={results}
+          selectable={true}
+          selected={selectedRows}
+          onSelect={handleRowSelect}
+          onHeaderClick={handleHeaderClick}
+          onLoadMoreItems={handleLoadMoreRows}
+          hasMoreData={hasMoreData}
+        />
+      );
+      break;
+  }
+
+  return displayComponent;
 };
+
 export default ResultsTable;

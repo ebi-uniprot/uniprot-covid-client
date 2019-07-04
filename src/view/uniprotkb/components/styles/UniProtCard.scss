@@ -1,0 +1,8 @@
+.uniprot-card {
+  &__comment {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 12vh;
+    text-overflow: ellipsis;
+  }
+}

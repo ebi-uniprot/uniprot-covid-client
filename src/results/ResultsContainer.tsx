@@ -25,19 +25,23 @@ import {
   SelectedRows,
   SelectedFacet,
 } from './types/resultsTypes';
+import { ViewMode } from './state/resultsInitialState';
 
 interface ResultsProps extends RouteComponentProps {
   namespace: Namespace;
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
   dispatchReset: () => void;
   dispatchClearResults: () => void;
+  dispatchSwitchViewMode: () => void;
   clauses?: Clause[];
-  columns: string[];
+  tableColumns: string[];
+  cardColumns: string[];
   results: any[];
   facets: any[];
   isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;
+  viewMode: ViewMode;
 }
 
 type ResultsContainerState = {
@@ -50,12 +54,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     this.state = { selectedRows: {} };
   }
 
-  componentDidMount() {
+  updateData() {
     const {
       location: { search: queryParamFromUrl },
-      columns,
+      tableColumns,
+      cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
+      viewMode,
     } = this.props;
     const {
       query,
@@ -63,36 +69,23 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
+    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
   }
 
+  componentDidMount() {
+    this.updateData();
+  }
+
   componentDidUpdate(prevProps: ResultsProps) {
     const {
       location: { search: queryParamFromUrl },
-      columns,
-      dispatchFetchBatchOfResultsIfNeeded,
-      dispatchClearResults,
     } = this.props;
     if (prevProps.location.search !== queryParamFromUrl) {
-      const {
-        query,
-        selectedFacets,
-        sortColumn,
-        sortDirection,
-      } = this.getURLParams(queryParamFromUrl);
-      dispatchClearResults();
-      dispatchFetchBatchOfResultsIfNeeded(
-        getAPIQueryUrl(
-          query,
-          columns,
-          selectedFacets,
-          sortColumn,
-          sortDirection
-        )
-      );
+      this.updateData();
     }
   }
 
@@ -248,11 +241,13 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       results,
       facets,
       isFetching,
-      columns,
       dispatchFetchBatchOfResultsIfNeeded,
       namespace,
       nextUrl,
       totalNumberResults,
+      viewMode,
+      tableColumns,
+      dispatchSwitchViewMode,
     } = this.props;
     const { selectedRows } = this.state;
     const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
@@ -300,10 +295,15 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   Statistics
                 </button>
                 <button className="button link-button">Map to</button>
+                <button
+                  className="button link-button"
+                  onClick={() => dispatchSwitchViewMode()}
+                >
+                  View mode:{viewMode}
+                </button>
               </div>
               <ResultsTable
                 results={results}
-                columnNames={columns}
                 handleRowSelect={this.handleRowSelect}
                 selectedRows={selectedRows}
                 handleHeaderClick={this.updateColumnSort}
@@ -313,6 +313,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   dispatchFetchBatchOfResultsIfNeeded(nextUrl)
                 }
                 totalNumberResults={totalNumberResults}
+                tableColumns={tableColumns}
+                viewMode={viewMode}
               />
             </Fragment>
           }
@@ -324,12 +326,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
 const mapStateToProps = (state: RootState) => ({
   namespace: state.query.namespace,
-  columns: state.results.columns,
+  tableColumns: state.results.tableColumns,
+  cardColumns: state.results.cardColumns,
   results: state.results.results,
   facets: state.results.facets,
   isFetching: state.results.isFetching,
   nextUrl: state.results.nextUrl,
   totalNumberResults: state.results.totalNumberResults,
+  viewMode: state.results.viewMode,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
@@ -339,6 +343,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
         resultsActions.fetchBatchOfResultsIfNeeded(url),
       dispatchReset: () => searchActions.reset(),
       dispatchClearResults: () => resultsActions.clearResults(),
+      dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
     },
     dispatch
   );

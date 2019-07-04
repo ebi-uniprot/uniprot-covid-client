@@ -9,6 +9,7 @@ export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
 export const UPDATE_COLUMN_SORT = 'UPDATE_COLUMN_SORT';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
+export const SWITCH_VIEW_MODE = 'SWITCH_VIEW_MODE';
 
 export const receiveBatchOfResults = (
   url: string,
@@ -82,3 +83,5 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
     dispatch(fetchBatchOfResults(url));
   }
 };
+
+export const switchViewMode = () => action(SWITCH_VIEW_MODE);
