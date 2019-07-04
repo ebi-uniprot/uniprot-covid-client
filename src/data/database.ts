@@ -121,11 +121,18 @@ entrySectionToDatabaseNames.set(EntrySection.Structure, [
   Database.EvolutionaryTrace,
 ]);
 
-const entrySectionToDatabaseCategoriesOrder = new Map<EntrySection, String[]>();
+const entrySectionToDatabaseCategoriesOrder = new Map<
+  EntrySection,
+  (String | undefined)[]
+>();
 
 for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
   entrySectionToDatabaseCategoriesOrder.set(entrySection, [
-    ...new Set(databaseNames),
+    ...new Set(
+      databaseNames.map(databaseName =>
+        databaseNamesToDatabaseCategory.get(databaseName)
+      )
+    ),
   ]);
 }
 
