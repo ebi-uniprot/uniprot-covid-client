@@ -1,6 +1,10 @@
-import React, { FC, Fragment } from 'react';
-import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
+import React, { FC } from 'react';
 import idx from 'idx';
+import { SwissProtIcon, TremblIcon } from 'franklin-sites';
+import {
+  UniProtkbAPIModel,
+  EntryType,
+} from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtCard.scss';
 
 const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
@@ -13,6 +17,15 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
   return (
     <div className="uniprot-card">
       <h5>
+        {data.entryType === EntryType.SWISSPROT ? (
+          <span className="uniprot-card__status icon--reviewed">
+            <SwissProtIcon />
+          </span>
+        ) : (
+          <span className="uniprot-card__status icon--unreviewed">
+            <TremblIcon />
+          </span>
+        )}
         {data.primaryAccession} {data.uniProtId}
       </h5>
       <p>

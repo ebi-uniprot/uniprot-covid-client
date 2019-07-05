@@ -8,6 +8,8 @@ import {
   DownloadIcon,
   BasketIcon,
   StatisticsIcon,
+  TableIcon,
+  ListIcon,
   Loader,
 } from 'franklin-sites';
 import * as resultsActions from './state/resultsActions';
@@ -296,10 +298,27 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 </button>
                 <button className="button link-button">Map to</button>
                 <button
-                  className="button link-button"
+                  className="button link-button large-icon"
                   onClick={() => dispatchSwitchViewMode()}
                 >
-                  View mode:{viewMode}
+                  <span
+                    className={
+                      viewMode === ViewMode.CARD
+                        ? 'link-button-icon__active'
+                        : ''
+                    }
+                  >
+                    <TableIcon />
+                  </span>
+                  <span
+                    className={
+                      viewMode === ViewMode.TABLE
+                        ? 'link-button-icon__active'
+                        : ''
+                    }
+                  >
+                    <ListIcon />
+                  </span>
                 </button>
               </div>
               <ResultsTable
