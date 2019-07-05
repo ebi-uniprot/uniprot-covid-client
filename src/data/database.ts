@@ -2,6 +2,7 @@ import { Database, DatabaseCategory } from '../model/types/DatabaseTypes';
 import EntrySection from '../model/types/EntrySection';
 import { DatabaseInfo } from '../model/types/DatabaseTypes';
 import databaseInfoJson from './databaseInfo.json';
+import { flattenArrays } from '../utils/utils';
 
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 
@@ -25,12 +26,8 @@ export const databaseCategoryToString = {
   [DatabaseCategory.STRUCTURE]: '3D structure databases',
 };
 
-// f & g
-// Object.keys(databaseCategoryToString).forEach(category => {
-//   databaseCategoryToDatabaseNames[category] = [];
-// });
-const databaseCategoryToDatabaseNames = new Map<String, String[]>();
-const databaseNamesToDatabaseCategory = new Map<String, String>();
+export const databaseCategoryToDatabaseNames = new Map<string, string[]>();
+export const databaseNameToCategory = new Map<string, string>();
 databaseInfo.forEach(info => {
   const { name, category } = info;
   const databaseNames = databaseCategoryToDatabaseNames.get(category);
@@ -38,28 +35,49 @@ databaseInfo.forEach(info => {
     category,
     databaseNames ? [...databaseNames, name] : [name]
   );
-  databaseNamesToDatabaseCategory.set(name, category);
+  databaseNameToCategory.set(name, category);
 });
 
-export const entrySectionToDatabaseNames = new Map<EntrySection, String[]>();
-entrySectionToDatabaseNames.set(EntrySection.Expression, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.EXPRESSION],
-  Database.HPA,
-]);
-entrySectionToDatabaseNames.set(EntrySection.FamilyAndDomains, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.FAMILY],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.PHYLOGENOMIC],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.DOMAIN],
-]);
-entrySectionToDatabaseNames.set(EntrySection.Function, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.PATHWAY],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.FAMILY],
-  Database.SwissLipids,
-]);
-entrySectionToDatabaseNames.set(EntrySection.Interaction, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.INTERACTION],
-  Database.BindingDB,
-]);
+const getDatabases = ({ categories = [], whitelist = [], blacklist = [] }) =>
+  [
+    ...flattenArrays(
+      categories.map(category => databaseCategoryToDatabaseNames.get(category))
+    ),
+    ...whitelist,
+  ].filter(db => !blacklist.includes(db));
+
+export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
+entrySectionToDatabaseNames.set(
+  EntrySection.Expression,
+  getDatabases({
+    categories: [DatabaseCategory.EXPRESSION],
+    whitelist: [Database.HPA],
+  })
+);
+entrySectionToDatabaseNames.set(
+  EntrySection.FamilyAndDomains,
+  getDatabases({
+    categories: [
+      DatabaseCategory.FAMILY,
+      DatabaseCategory.PHYLOGENOMIC,
+      DatabaseCategory.DOMAIN,
+    ],
+  })
+);
+entrySectionToDatabaseNames.set(
+  EntrySection.Function,
+  getDatabases({
+    categories: [DatabaseCategory.PATHWAY, DatabaseCategory.FAMILY],
+    whitelist: [Database.SwissLipids],
+  })
+);
+entrySectionToDatabaseNames.set(
+  EntrySection.Interaction,
+  getDatabases({
+    categories: [DatabaseCategory.INTERACTION],
+    whitelist: [Database.BindingDB],
+  })
+);
 entrySectionToDatabaseNames.set(EntrySection.NamesAndTaxonomy, [
   Database.ArachnoServer,
   Database.Araport,
@@ -89,51 +107,58 @@ entrySectionToDatabaseNames.set(EntrySection.NamesAndTaxonomy, [
   Database.ZFIN,
 ]);
 entrySectionToDatabaseNames.set(EntrySection.PathologyAndBioTech, [
-  Database.Allergome,
-  Database.BioMuta,
-  Database.ChEMBL,
   Database.DisGeNET,
-  Database.DMDM,
-  Database.DrugBank,
   Database.GeneReviews,
-  Database.GuidetoPHARMACOLOGY,
   Database.MalaCards,
   Database.MIM,
   Database.OpenTargets,
   Database.Orphanet,
   Database.PharmGKB,
+  Database.ChEMBL,
+  Database.DrugBank,
+  Database.GuidetoPHARMACOLOGY,
+  Database.BioMuta,
+  Database.DMDM,
+  Database.Allergome,
 ]);
-entrySectionToDatabaseNames.set(EntrySection.ProteinProcessing, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.PROTEOMIC],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.GEL],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.PTM],
-  Database.PMAP_CutDB,
-]);
-entrySectionToDatabaseNames.set(EntrySection.Sequence, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.SEQUENCE],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.GENOME],
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.POLYMORPHISM],
-]);
-entrySectionToDatabaseNames.set(EntrySection.Structure, [
-  ...databaseCategoryToDatabaseNames[DatabaseCategory.STRUCTURE],
-  Database.PDB,
-  Database.PDBsum,
-  Database.EvolutionaryTrace,
-]);
+entrySectionToDatabaseNames.set(
+  EntrySection.ProteinProcessing,
+  getDatabases({
+    categories: [
+      DatabaseCategory.PROTEOMIC,
+      DatabaseCategory.GEL,
+      DatabaseCategory.PTM,
+    ],
+    whitelist: [Database.PMAP_CutDB],
+  })
+);
+entrySectionToDatabaseNames.set(
+  EntrySection.Sequence,
+  getDatabases({
+    categories: [DatabaseCategory.SEQUENCE, DatabaseCategory.GENOME],
+  })
+);
 
-const entrySectionToDatabaseCategoriesOrder = new Map<
+entrySectionToDatabaseNames.set(
+  EntrySection.Structure,
+  getDatabases({
+    categories: [DatabaseCategory.STRUCTURE],
+    whitelist: [Database.EvolutionaryTrace],
+    blacklist: [Database.PDB, Database.PDBsum],
+  })
+);
+
+export const entrySectionToDatabaseCategoryOrder = new Map<
   EntrySection,
-  (String | undefined)[]
+  (string | undefined)[]
 >();
 
 for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
-  entrySectionToDatabaseCategoriesOrder.set(entrySection, [
+  entrySectionToDatabaseCategoryOrder.set(entrySection, [
     ...new Set(
       databaseNames.map(databaseName =>
-        databaseNamesToDatabaseCategory.get(databaseName)
+        databaseNameToCategory.get(databaseName)
       )
     ),
   ]);
 }
-
-console.log(JSON.stringify([...entrySectionToDatabaseNames]));
