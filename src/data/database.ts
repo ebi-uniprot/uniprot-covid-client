@@ -1,12 +1,11 @@
 import EntrySection from '../model/types/EntrySection';
+import { DatabaseCategory, DatabaseInfo } from '../model/types/DatabaseTypes';
 import {
-  DatabaseCategory,
-  DatabaseInfo,
-  DatabaseInfoPoint,
-} from '../model/types/DatabaseTypes';
+  getDatabaseInfoMaps,
+  selectDatabases,
+  getEntrySectionToDatabaseCategoryOrder,
+} from '../utils/database';
 import databaseInfoJson from './databaseInfo.json';
-import { flattenArrays } from '../utils/utils';
-
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 
 export const databaseCategoryToString = {
@@ -29,70 +28,38 @@ export const databaseCategoryToString = {
   [DatabaseCategory.STRUCTURE]: '3D structure databases',
 };
 
-export const databaseCategoryToDatabaseNames = new Map<
-  DatabaseCategory,
-  string[]
->();
-export const databaseNameToCategory = new Map<string, DatabaseCategory>();
-export const databaseToDatabaseInfo: {
-  [database: string]: DatabaseInfoPoint;
-} = {};
-databaseInfo.forEach(info => {
-  const { name } = info;
-  const category = info.category as DatabaseCategory;
-  const databaseNames = databaseCategoryToDatabaseNames.get(category);
-  databaseCategoryToDatabaseNames.set(
-    category,
-    databaseNames ? [...databaseNames, name] : [name]
-  );
-  databaseNameToCategory.set(name, category);
-  databaseToDatabaseInfo[name] = info;
-});
+export const {
+  databaseCategoryToNames,
+  databaseNameToCategory,
+  databaseToDatabaseInfo,
+} = getDatabaseInfoMaps(databaseInfo);
 
-const selectDatabases = ({
-  categories = [],
-  whitelist = [],
-  blacklist = [],
-}: {
-  categories?: string[];
-  whitelist?: string[];
-  blacklist?: string[];
-}) =>
-  [
-    ...flattenArrays(
-      categories.map(
-        category =>
-          databaseCategoryToDatabaseNames.get(category as DatabaseCategory) ||
-          []
-      )
-    ),
-    ...whitelist,
-  ].filter(db => !blacklist.includes(db));
+const select = selectDatabases(databaseCategoryToNames);
 
 export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
 entrySectionToDatabaseNames.set(
   EntrySection.Expression,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.EXPRESSION],
     whitelist: ['HPA'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.FamilyAndDomains,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.PHYLOGENOMIC, DatabaseCategory.DOMAIN],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Function,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.PATHWAY, DatabaseCategory.FAMILY],
     whitelist: ['SwissLipids'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Interaction,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.INTERACTION],
     whitelist: ['BindingDB'],
   })
@@ -142,7 +109,7 @@ entrySectionToDatabaseNames.set(EntrySection.PathologyAndBioTech, [
 ]);
 entrySectionToDatabaseNames.set(
   EntrySection.ProteinProcessing,
-  selectDatabases({
+  select({
     categories: [
       DatabaseCategory.PROTEOMIC,
       DatabaseCategory.GEL,
@@ -153,31 +120,20 @@ entrySectionToDatabaseNames.set(
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Sequence,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.SEQUENCE, DatabaseCategory.GENOME],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Structure,
-  selectDatabases({
+  select({
     categories: [DatabaseCategory.STRUCTURE],
     whitelist: ['EvolutionaryTrace'],
     blacklist: ['PDB', 'PDBsum'],
   })
 );
 
-export const entrySectionToDatabaseCategoryOrder = new Map<
-  EntrySection,
-  (string)[]
->();
-for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
-  const uniqueCategories: DatabaseCategory[] = [];
-  for (const databaseName of databaseNames) {
-    const databaseCategory = databaseNameToCategory.get(databaseName);
-    if (!databaseCategory || uniqueCategories.includes(databaseCategory)) {
-      continue;
-    }
-    uniqueCategories.push(databaseCategory);
-  }
-  entrySectionToDatabaseCategoryOrder.set(entrySection, uniqueCategories);
-}
+export const entrySectionToDatabaseCategoryOrder = getEntrySectionToDatabaseCategoryOrder(
+  entrySectionToDatabaseNames,
+  databaseNameToCategory
+);
