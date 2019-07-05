@@ -24,7 +24,7 @@ type ResultsTableProps = {
   viewMode: ViewMode;
 };
 
-const ResultsTable: React.FC<ResultsTableProps> = ({
+const ResultsView: React.FC<ResultsTableProps> = ({
   results = [],
   totalNumberResults,
   tableColumns,
@@ -93,4 +93,4 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   return displayComponent;
 };
 
-export default ResultsTable;
+export default ResultsView;

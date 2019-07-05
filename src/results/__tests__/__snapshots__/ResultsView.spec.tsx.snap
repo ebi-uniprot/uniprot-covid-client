@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ResultsTable component should render cards 1`] = `
+exports[`ResultsView component should render cards 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ResultsTable
+  Symbol(enzyme.__unrendered__): <ResultsView
     handleHeaderClick={[MockFunction]}
     handleLoadMoreRows={[MockFunction]}
     handleRowSelect={[MockFunction]}
@@ -124,10 +124,10 @@ ShallowWrapper {
 }
 `;
 
-exports[`ResultsTable component should render table 1`] = `
+exports[`ResultsView component should render table 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ResultsTable
+  Symbol(enzyme.__unrendered__): <ResultsView
     handleHeaderClick={[MockFunction]}
     handleLoadMoreRows={[MockFunction]}
     handleRowSelect={[MockFunction]}

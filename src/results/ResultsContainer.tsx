@@ -17,7 +17,7 @@ import * as searchActions from '../search/state/searchActions';
 import { default as queryStringModule } from 'query-string';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
-import ResultsTable from './ResultsTable';
+import ResultsTable from './ResultsView';
 import { getAPIQueryUrl } from './utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';

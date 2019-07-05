@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ResultsTable from '../ResultsTable';
+import ResultsView from '../ResultsView';
 import { ViewMode } from '../state/resultsInitialState';
 
 configure({ adapter: new Adapter() });
 
-describe('ResultsTable component', () => {
+describe('ResultsView component', () => {
   test('should render table', () => {
     const props = {
       viewMode: ViewMode.TABLE,
@@ -21,7 +21,7 @@ describe('ResultsTable component', () => {
       sortColumn: null,
       sortDirection: null,
     };
-    const wrapper = shallow(<ResultsTable {...props} />);
+    const wrapper = shallow(<ResultsView {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -39,7 +39,7 @@ describe('ResultsTable component', () => {
       sortColumn: null,
       sortDirection: null,
     };
-    const wrapper = shallow(<ResultsTable {...props} />);
+    const wrapper = shallow(<ResultsView {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
