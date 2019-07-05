@@ -80,7 +80,7 @@ describe('Sequence data converter', () => {
       status: 'Fragment',
       xrefData: [
         {
-          category: 'Genome annotation databases',
+          category: 'GMA',
           databases: [
             {
               database: 'Ensembl',
