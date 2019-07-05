@@ -11,7 +11,7 @@ let props;
 describe('ResultsTable component', () => {
   beforeEach(() => {
     props = {
-      columnNames: ['accession'],
+      tableColumns: ['accession'],
       results: [{ accession: '1234' }, { accession: '5678' }],
       sort: { column: 'accession', direction: 'descend' },
     };

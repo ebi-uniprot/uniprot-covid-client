@@ -4,11 +4,6 @@ exports[`ResultsTable component should render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ResultsTable
-    columnNames={
-      Array [
-        "accession",
-      ]
-    }
     results={
       Array [
         Object {
@@ -25,6 +20,11 @@ ShallowWrapper {
         "direction": "descend",
       }
     }
+    tableColumns={
+      Array [
+        "accession",
+      ]
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -35,85 +35,9 @@ ShallowWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "columns": Array [
-        Object {
-          "label": "Entry",
-          "name": "accession",
-          "render": [Function],
-          "sortable": true,
-          "sorted": null,
-          "width": 200,
-        },
-      ],
-      "data": Array [
-        Object {
-          "accession": "1234",
-        },
-        Object {
-          "accession": "5678",
-        },
-      ],
-      "fixedColumnCount": 0,
-      "fixedRowCount": 1,
-      "idKey": "primaryAccession",
-      "onHeaderClick": [Function],
-      "onLoadMoreRows": undefined,
-      "onSelect": [Function],
-      "selectable": true,
-      "selectedRows": Object {},
-      "showHeader": true,
-      "showRowNumbers": false,
-      "totalNumberRows": undefined,
-    },
-    "ref": null,
-    "rendered": null,
-    "type": [Function],
-  },
+  Symbol(enzyme.__node__): null,
   Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "columns": Array [
-          Object {
-            "label": "Entry",
-            "name": "accession",
-            "render": [Function],
-            "sortable": true,
-            "sorted": null,
-            "width": 200,
-          },
-        ],
-        "data": Array [
-          Object {
-            "accession": "1234",
-          },
-          Object {
-            "accession": "5678",
-          },
-        ],
-        "fixedColumnCount": 0,
-        "fixedRowCount": 1,
-        "idKey": "primaryAccession",
-        "onHeaderClick": [Function],
-        "onLoadMoreRows": undefined,
-        "onSelect": [Function],
-        "selectable": true,
-        "selectedRows": Object {},
-        "showHeader": true,
-        "showRowNumbers": false,
-        "totalNumberRows": undefined,
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
+    null,
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {

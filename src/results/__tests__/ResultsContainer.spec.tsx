@@ -16,7 +16,7 @@ const facetArray = [{ name: 'f1', value: 'v1' }, { name: 'f2', value: 'v2' }];
 describe('Results component', () => {
   beforeEach(() => {
     props = {
-      columns: [],
+      tableColumns: [],
       results: [],
       isFetching: false,
       namespace: Namespace.uniprotkb,
