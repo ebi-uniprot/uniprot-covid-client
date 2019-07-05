@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UniProtCard component should render 1`] = `
+<DocumentFragment>
+  <div
+    class="uniprot-card"
+  >
+    <h5>
+      P21802 uniprot id
+    </h5>
+    <p>
+      rec full Name 
+      <a
+        href="#"
+      >
+        scientific name
+      </a>
+    </p>
+    <p
+      class="uniprot-card__comment"
+    >
+      value
+    </p>
+  </div>
+</DocumentFragment>
+`;
