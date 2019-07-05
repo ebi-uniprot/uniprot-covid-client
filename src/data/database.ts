@@ -80,11 +80,7 @@ entrySectionToDatabaseNames.set(
 entrySectionToDatabaseNames.set(
   EntrySection.FamilyAndDomains,
   selectDatabases({
-    categories: [
-      DatabaseCategory.FAMILY,
-      DatabaseCategory.PHYLOGENOMIC,
-      DatabaseCategory.DOMAIN,
-    ],
+    categories: [DatabaseCategory.PHYLOGENOMIC, DatabaseCategory.DOMAIN],
   })
 );
 entrySectionToDatabaseNames.set(
