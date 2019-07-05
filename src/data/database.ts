@@ -34,7 +34,6 @@ export const databaseNameToCategory = new Map<string, DatabaseCategory>();
 export const databaseToDatabaseInfo: {
   [database: string]: DatabaseInfoPoint;
 } = {};
-
 databaseInfo.forEach(info => {
   const { name } = info;
   const category = info.category as DatabaseCategory;

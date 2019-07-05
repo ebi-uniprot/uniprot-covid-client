@@ -61,7 +61,6 @@ export const getXrefsForSection = (
   }
   const xrefCategories: XrefUIModel[] = [];
   databaseCategoryOrder.forEach(category => {
-    console.log(category, categoryToNameToXrefs);
     const nameToXrefs = categoryToNameToXrefs.get(category);
     if (!nameToXrefs) {
       return [];
