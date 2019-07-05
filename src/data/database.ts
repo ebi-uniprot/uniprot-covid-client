@@ -1,6 +1,6 @@
-import { Database, DatabaseCategory } from '../model/types/DatabaseTypes';
+import { DatabaseCategory } from '../model/types/DatabaseTypes';
 import EntrySection from '../model/types/EntrySection';
-import { DatabaseInfo } from '../model/types/DatabaseTypes';
+import { DatabaseInfo, DatabaseInfoPoint } from '../model/types/DatabaseTypes';
 import databaseInfoJson from './databaseInfo.json';
 import { flattenArrays } from '../utils/utils';
 
@@ -26,12 +26,18 @@ export const databaseCategoryToString = {
   [DatabaseCategory.STRUCTURE]: '3D structure databases',
 };
 
-export const databaseCategoryToDatabaseNames = new Map<string, string[]>();
-export const databaseNameToCategory = new Map<string, string>();
-export const databaseToDatabaseInfo = {};
+export const databaseCategoryToDatabaseNames = new Map<
+  DatabaseCategory,
+  string[]
+>();
+export const databaseNameToCategory = new Map<string, DatabaseCategory>();
+export const databaseToDatabaseInfo: {
+  [database: string]: DatabaseInfoPoint;
+} = {};
 
 databaseInfo.forEach(info => {
-  const { name, category } = info;
+  const { name } = info;
+  const category = info.category as DatabaseCategory;
   const databaseNames = databaseCategoryToDatabaseNames.get(category);
   databaseCategoryToDatabaseNames.set(
     category,
@@ -41,10 +47,22 @@ databaseInfo.forEach(info => {
   databaseToDatabaseInfo[name] = info;
 });
 
-const getDatabases = ({ categories = [], whitelist = [], blacklist = [] }) =>
+const selectDatabases = ({
+  categories = [],
+  whitelist = [],
+  blacklist = [],
+}: {
+  categories?: string[];
+  whitelist?: string[];
+  blacklist?: string[];
+}) =>
   [
     ...flattenArrays(
-      categories.map(category => databaseCategoryToDatabaseNames.get(category))
+      categories.map(
+        category =>
+          databaseCategoryToDatabaseNames.get(category as DatabaseCategory) ||
+          []
+      )
     ),
     ...whitelist,
   ].filter(db => !blacklist.includes(db));
@@ -52,14 +70,14 @@ const getDatabases = ({ categories = [], whitelist = [], blacklist = [] }) =>
 export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
 entrySectionToDatabaseNames.set(
   EntrySection.Expression,
-  getDatabases({
+  selectDatabases({
     categories: [DatabaseCategory.EXPRESSION],
-    whitelist: [Database.HPA],
+    whitelist: ['HPA'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.FamilyAndDomains,
-  getDatabases({
+  selectDatabases({
     categories: [
       DatabaseCategory.FAMILY,
       DatabaseCategory.PHYLOGENOMIC,
@@ -69,100 +87,99 @@ entrySectionToDatabaseNames.set(
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Function,
-  getDatabases({
+  selectDatabases({
     categories: [DatabaseCategory.PATHWAY, DatabaseCategory.FAMILY],
-    whitelist: [Database.SwissLipids],
+    whitelist: ['SwissLipids'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Interaction,
-  getDatabases({
+  selectDatabases({
     categories: [DatabaseCategory.INTERACTION],
-    whitelist: [Database.BindingDB],
+    whitelist: ['BindingDB'],
   })
 );
 entrySectionToDatabaseNames.set(EntrySection.NamesAndTaxonomy, [
-  Database.ArachnoServer,
-  Database.Araport,
-  Database.CGD,
-  Database.ConoServer,
-  Database.dictyBase,
-  Database.EcoGene,
-  Database.EuPathDB,
-  Database.FlyBase,
-  Database.Gramene,
-  Database.HGNC,
-  Database.LegioList,
-  Database.Leproma,
-  Database.MaizeGDB,
-  Database.MGI,
-  Database.MIM,
-  Database.neXtProt,
-  Database.PomBase,
-  Database.PseudoCAP,
-  Database.RGD,
-  Database.SGD,
-  Database.TAIR,
-  Database.TubercuList,
-  Database.VGNC,
-  Database.WormBase,
-  Database.Xenbase,
-  Database.ZFIN,
+  'ArachnoServer',
+  'Araport',
+  'CGD',
+  'ConoServer',
+  'dictyBase',
+  'EcoGene',
+  'EuPathDB',
+  'FlyBase',
+  'Gramene',
+  'HGNC',
+  'LegioList',
+  'Leproma',
+  'MaizeGDB',
+  'MGI',
+  'MIM',
+  'neXtProt',
+  'PomBase',
+  'PseudoCAP',
+  'RGD',
+  'SGD',
+  'TAIR',
+  'TubercuList',
+  'VGNC',
+  'WormBase',
+  'Xenbase',
+  'ZFIN',
 ]);
 entrySectionToDatabaseNames.set(EntrySection.PathologyAndBioTech, [
-  Database.DisGeNET,
-  Database.GeneReviews,
-  Database.MalaCards,
-  Database.MIM,
-  Database.OpenTargets,
-  Database.Orphanet,
-  Database.PharmGKB,
-  Database.ChEMBL,
-  Database.DrugBank,
-  Database.GuidetoPHARMACOLOGY,
-  Database.BioMuta,
-  Database.DMDM,
-  Database.Allergome,
+  'DisGeNET',
+  'GeneReviews',
+  'MalaCards',
+  'MIM',
+  'OpenTargets',
+  'Orphanet',
+  'PharmGKB',
+  'ChEMBL',
+  'DrugBank',
+  'GuidetoPHARMACOLOGY',
+  'BioMuta',
+  'DMDM',
+  'Allergome',
 ]);
 entrySectionToDatabaseNames.set(
   EntrySection.ProteinProcessing,
-  getDatabases({
+  selectDatabases({
     categories: [
       DatabaseCategory.PROTEOMIC,
       DatabaseCategory.GEL,
       DatabaseCategory.PTM,
     ],
-    whitelist: [Database.PMAP_CutDB],
+    whitelist: ['PMAP_CutDB'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Sequence,
-  getDatabases({
+  selectDatabases({
     categories: [DatabaseCategory.SEQUENCE, DatabaseCategory.GENOME],
   })
 );
-
 entrySectionToDatabaseNames.set(
   EntrySection.Structure,
-  getDatabases({
+  selectDatabases({
     categories: [DatabaseCategory.STRUCTURE],
-    whitelist: [Database.EvolutionaryTrace],
-    blacklist: [Database.PDB, Database.PDBsum],
+    whitelist: ['EvolutionaryTrace'],
+    blacklist: ['PDB', 'PDBsum'],
   })
 );
 
 export const entrySectionToDatabaseCategoryOrder = new Map<
   EntrySection,
-  (string | undefined)[]
+  (string)[]
 >();
 for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
-  entrySectionToDatabaseCategoryOrder.set(entrySection, [
-    ...new Set(
-      databaseNames.map(databaseName =>
-        databaseNameToCategory.get(databaseName)
-      )
-    ),
-  ]);
+  const uniqueCategories: DatabaseCategory[] = [];
+  for (const databaseName of databaseNames) {
+    const databaseCategory = databaseNameToCategory.get(databaseName);
+    if (!databaseCategory || uniqueCategories.includes(databaseCategory)) {
+      continue;
+    }
+    uniqueCategories.push(databaseCategory);
+  }
+  entrySectionToDatabaseCategoryOrder.set(entrySection, uniqueCategories);
 }
-
-databaseInfo;

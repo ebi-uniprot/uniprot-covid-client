@@ -4,18 +4,18 @@ import {
   entrySectionToDatabaseCategoryOrder,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
-import { Database, DatabaseCategory } from '../types/DatabaseTypes';
+import { DatabaseCategory } from '../types/DatabaseTypes';
 import { Property } from '../types/modelTypes';
 
 export type Xref = {
-  databaseType?: Database;
+  databaseType?: string;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
 export type XrefsGoupedByDatabase = {
-  database: Database;
+  database: string;
   xrefs: Xref[];
 };
 
@@ -32,7 +32,11 @@ export const getXrefsForSection = (
   if (!databasesForSection) {
     return [];
   }
-  const categoryToNameToXrefs = {};
+  const categoryToNameToXrefs = new Map<
+    DatabaseCategory,
+    { [name: string]: Xref[] }
+  >();
+
   xrefs.forEach(xref => {
     const { databaseType: name } = xref;
     if (!name || !databasesForSection.includes(name)) {
@@ -42,26 +46,28 @@ export const getXrefsForSection = (
     if (!category) {
       return [];
     }
-    if (!categoryToNameToXrefs[category]) {
-      categoryToNameToXrefs[category] = {};
+    const nametoXrefs = categoryToNameToXrefs.get(category) || {};
+    if (!nametoXrefs[name]) {
+      nametoXrefs[name] = [];
     }
-    if (!categoryToNameToXrefs[category][name]) {
-      categoryToNameToXrefs[category][name] = [];
-    }
-    categoryToNameToXrefs[category][name].push(xref);
+    nametoXrefs[name].push(xref);
+    categoryToNameToXrefs.set(category, nametoXrefs);
   });
-  console.log(JSON.stringify(categoryToNameToXrefs, null, 2));
   const databaseCategoryOrder = entrySectionToDatabaseCategoryOrder.get(
     section
-  );
+  ) as DatabaseCategory[];
+  if (!databaseCategoryOrder) {
+    return [];
+  }
   const xrefCategories: XrefUIModel[] = [];
   databaseCategoryOrder.forEach(category => {
-    const nameToXrefs = categoryToNameToXrefs[category];
+    console.log(category, categoryToNameToXrefs);
+    const nameToXrefs = categoryToNameToXrefs.get(category);
     if (!nameToXrefs) {
       return [];
     }
     xrefCategories.push({
-      category: category as DatabaseCategory,
+      category: category,
       databases: Object.keys(nameToXrefs).map(name => ({
         database: name,
         xrefs: nameToXrefs[name],

@@ -8,7 +8,7 @@ import {
   ProteinDescription,
 } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import UniProtEvidence from '../../../components/UniProtEvidenceTag';
-import { ValueWihEvidence } from '../../../model/types/modelTypes';
+import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
 type ProteinNamesDataProps = {
   recommendedName?: string;
@@ -30,7 +30,7 @@ export const ProteinNamesView: React.FC<ProteinNamesDataProps> = ({
   return <NameView {...props} />;
 };
 
-const NameWithEvidence: React.FC<{ data: ValueWihEvidence }> = ({ data }) => (
+const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({ data }) => (
   <Fragment>
     {`${data.value} `}
     {data.evidences &&

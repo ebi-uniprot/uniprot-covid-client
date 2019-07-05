@@ -18,4 +18,5 @@ export const loadWebComponent = (name: string, className: any) => {
   }
 };
 
-export const flattenArrays = arrays => [].concat(...arrays);
+export const flattenArrays = (arrays: any[][]) =>
+  [].concat(...(arrays as any[]));
