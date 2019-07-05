@@ -1,6 +1,9 @@
-import { DatabaseCategory } from '../model/types/DatabaseTypes';
 import EntrySection from '../model/types/EntrySection';
-import { DatabaseInfo, DatabaseInfoPoint } from '../model/types/DatabaseTypes';
+import {
+  DatabaseCategory,
+  DatabaseInfo,
+  DatabaseInfoPoint,
+} from '../model/types/DatabaseTypes';
 import databaseInfoJson from './databaseInfo.json';
 import { flattenArrays } from '../utils/utils';
 
