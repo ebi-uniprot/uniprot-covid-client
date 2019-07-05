@@ -28,6 +28,8 @@ export const databaseCategoryToString = {
 
 export const databaseCategoryToDatabaseNames = new Map<string, string[]>();
 export const databaseNameToCategory = new Map<string, string>();
+export const databaseToDatabaseInfo = {};
+
 databaseInfo.forEach(info => {
   const { name, category } = info;
   const databaseNames = databaseCategoryToDatabaseNames.get(category);
@@ -36,6 +38,7 @@ databaseInfo.forEach(info => {
     databaseNames ? [...databaseNames, name] : [name]
   );
   databaseNameToCategory.set(name, category);
+  databaseToDatabaseInfo[name] = info;
 });
 
 const getDatabases = ({ categories = [], whitelist = [], blacklist = [] }) =>
@@ -152,7 +155,6 @@ export const entrySectionToDatabaseCategoryOrder = new Map<
   EntrySection,
   (string | undefined)[]
 >();
-
 for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
   entrySectionToDatabaseCategoryOrder.set(entrySection, [
     ...new Set(
@@ -162,3 +164,5 @@ for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
     ),
   ]);
 }
+
+databaseInfo;
