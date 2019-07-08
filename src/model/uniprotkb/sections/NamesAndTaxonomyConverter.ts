@@ -1,26 +1,25 @@
-import { ValueWihEvidence } from '../../types/modelTypes';
+import { ValueWithEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { convertGeneNames } from '../GeneNamesConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
-import { Database } from '../../types/DatabaseTypes';
 import { Xref } from '../../utils/XrefUtils';
 import { convertSection, UIModel } from '../SectionConverter';
 import EntrySection from '../../types/EntrySection';
 
 export type ProteinNames = {
-  fullName: ValueWihEvidence;
-  shortNames?: ValueWihEvidence[];
-  ecNumbers?: ValueWihEvidence[];
+  fullName: ValueWithEvidence;
+  shortNames?: ValueWithEvidence[];
+  ecNumbers?: ValueWithEvidence[];
 };
 
 export type ProteinDescription = {
   recommendedName?: ProteinNames;
   submissionNames?: ProteinNames[];
   alternativeNames?: ProteinNames[];
-  allergenName?: ValueWihEvidence;
-  biotechName?: ValueWihEvidence;
-  cdAntigenNames?: ValueWihEvidence;
-  innNames?: ValueWihEvidence;
+  allergenName?: ValueWithEvidence;
+  biotechName?: ValueWithEvidence;
+  cdAntigenNames?: ValueWithEvidence;
+  innNames?: ValueWithEvidence;
   flag?: Flag;
 };
 
@@ -74,7 +73,7 @@ export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
   }
   if (data.databaseCrossReferences) {
     namesAndTaxonomyData.proteomesData = data.databaseCrossReferences.filter(
-      db => db.databaseType === Database.Proteomes
+      db => db.databaseType === 'Proteomes'
     );
   }
 
