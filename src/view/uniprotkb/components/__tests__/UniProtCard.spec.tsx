@@ -6,7 +6,11 @@ import data from '../../../../model/__mocks__/modelData.json';
 
 describe('UniProtCard component', () => {
   test('should render', () => {
-    const { asFragment } = render(<UniProtCard data={data} />);
+    const { asFragment } = render(
+      <Router>
+        <UniProtCard data={data} />
+      </Router>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

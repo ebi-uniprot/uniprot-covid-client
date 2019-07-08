@@ -21,7 +21,12 @@ exports[`UniProtCard component should render 1`] = `
           />
         </svg>
       </span>
-      P21802 uniprot id
+      <a
+        href="/uniprotkb/P21802"
+      >
+        P21802
+      </a>
+       uniprot id
     </h5>
     <p>
       rec full Name 

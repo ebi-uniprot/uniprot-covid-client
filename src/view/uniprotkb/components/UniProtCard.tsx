@@ -6,9 +6,9 @@ import {
   EntryType,
 } from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtCard.scss';
+import { Link } from 'react-router-dom';
 
 const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
-  // console.log(data);
   const recommendedName = idx(
     data,
     _ => _.proteinDescription.recommendedName.fullName.value
@@ -26,7 +26,10 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
             <TremblIcon />
           </span>
         )}
-        {data.primaryAccession} {data.uniProtId}
+        <Link to={`/uniprotkb/${data.primaryAccession}`}>
+          {data.primaryAccession}
+        </Link>{' '}
+        {data.uniProtId}
       </h5>
       <p>
         {recommendedName} <a href="#">{organismName}</a>
