@@ -3,13 +3,13 @@ import { v1 } from 'uuid';
 import Comment from '../../../model/types/Comment';
 import { EvidenceType } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
-import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
+import {
+  databaseCategoryToString,
+  databaseToDatabaseInfo,
+} from '../../../data/database';
 import { InfoList } from 'franklin-sites';
 import { Xref } from '../../../model/utils/XrefUtils';
 import { XRefExternalLink } from './XRefView';
-
-const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
 type DiseaseType = {
   diseaseId?: string;

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import databaseToDatabaseInfoJson from '../../../data/databaseToDatabaseInfo.json';
-import { DatabaseToDatabaseInfo } from '../../../model/types/DatabaseTypes';
+import {
+  databaseCategoryToString,
+  databaseToDatabaseInfo,
+} from '../../../data/database';
 import {
   XrefUIModel,
   Xref,
@@ -29,8 +31,6 @@ type XrefItem = {
   databaseCategory: string;
   xref: Xref;
 };
-
-const databaseToDatabaseInfo: DatabaseToDatabaseInfo = databaseToDatabaseInfoJson;
 
 type XRefExternalLinkProps = {
   url: string;
@@ -116,9 +116,14 @@ const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
         primaryAccession={primaryAccession}
       />
     );
+    let title;
+    const { category } = xrefCategory;
+    if (category && databaseCategoryToString[category]) {
+      title = databaseCategoryToString[category];
+    }
     return (
       <Fragment key={v1()}>
-        {xrefCategory.category && <h4>{xrefCategory.category}</h4>}
+        <h4>{title}</h4>
         {infoListNode}
       </Fragment>
     );

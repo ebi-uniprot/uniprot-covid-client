@@ -17,3 +17,6 @@ export const loadWebComponent = (name: string, className: any) => {
     window.customElements.define(name, className);
   }
 };
+
+export const flattenArrays = (arrays: any[][]) =>
+  [].concat(...(arrays as any[]));

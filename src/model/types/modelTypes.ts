@@ -4,7 +4,7 @@ export type EvidenceType = {
   id: string;
 };
 
-export type ValueWihEvidence = {
+export type ValueWithEvidence = {
   value: string;
   evidences: EvidenceType[];
 };

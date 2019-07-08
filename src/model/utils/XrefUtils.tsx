@@ -1,20 +1,21 @@
 import {
-  databaseCategoryToDatabases,
-  entrySectionToDatabaseCategories,
+  databaseNameToCategory,
+  entrySectionToDatabaseNames,
+  entrySectionToDatabaseCategoryOrder,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
-import { Database, DatabaseCategory } from '../types/DatabaseTypes';
+import { DatabaseCategory } from '../types/DatabaseTypes';
 import { Property } from '../types/modelTypes';
 
 export type Xref = {
-  databaseType?: Database;
+  databaseType?: string;
   id?: string;
   properties?: [Property];
   isoformId?: string;
 };
 
 export type XrefsGoupedByDatabase = {
-  database: Database;
+  database: string;
   xrefs: Xref[];
 };
 
@@ -27,40 +28,51 @@ export const getXrefsForSection = (
   xrefs: Xref[],
   section: EntrySection
 ): XrefUIModel[] => {
-  const xrefCategories: XrefUIModel[] = [];
-  // Get the categories relevant to the given entry section
-  const sectionCategories = entrySectionToDatabaseCategories.get(section);
-  if (!sectionCategories) {
+  const databasesForSection = entrySectionToDatabaseNames.get(section);
+  if (!databasesForSection) {
     return [];
   }
-  sectionCategories.forEach(category => {
-    // Get the database relevant to the given category
-    const databases = databaseCategoryToDatabases.get(category);
-    const categoryDatabases: XrefsGoupedByDatabase[] = [];
-    // TODO Performance improvement
-    if (databases) {
-      databases.forEach(database => {
-        // Filter the xref data to only return the ones for
-        // the given database
-        const databaseXrefs = xrefs.filter(
-          xref => xref.databaseType === database
-        );
-        // If we have hits, add them too the array
-        if (databaseXrefs && databaseXrefs.length > 0) {
-          categoryDatabases.push({
-            database,
-            xrefs: databaseXrefs,
-          });
-        }
-      });
+  const categoryToNameToXrefs = new Map<
+    DatabaseCategory,
+    { [name: string]: Xref[] }
+  >();
+
+  xrefs.forEach(xref => {
+    const { databaseType: name } = xref;
+    if (!name || !databasesForSection.includes(name)) {
+      return [];
     }
-    // If we have hits, add them too the array
-    if (categoryDatabases.length > 0) {
-      xrefCategories.push({
-        category,
-        databases: categoryDatabases,
-      });
+    const category = databaseNameToCategory.get(name);
+    if (!category) {
+      return [];
     }
+    const nametoXrefs = categoryToNameToXrefs.get(category) || {};
+    if (!nametoXrefs[name]) {
+      nametoXrefs[name] = [];
+    }
+    nametoXrefs[name].push(xref);
+    categoryToNameToXrefs.set(category, nametoXrefs);
   });
+  const databaseCategoryOrder = entrySectionToDatabaseCategoryOrder.get(
+    section
+  ) as DatabaseCategory[];
+  if (!databaseCategoryOrder) {
+    return [];
+  }
+  const xrefCategories: XrefUIModel[] = [];
+  databaseCategoryOrder.forEach(category => {
+    const nameToXrefs = categoryToNameToXrefs.get(category);
+    if (!nameToXrefs) {
+      return [];
+    }
+    xrefCategories.push({
+      category: category,
+      databases: Object.keys(nameToXrefs).map(name => ({
+        database: name,
+        xrefs: nameToXrefs[name],
+      })),
+    });
+  });
+
   return xrefCategories;
 };

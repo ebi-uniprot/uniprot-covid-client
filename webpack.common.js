@@ -33,9 +33,6 @@ module.exports = {
         include: [
           // We use realpathSync otherwise doesn't work with symlinks
           fs.realpathSync(__dirname + '/node_modules/litemol/dist/css'),
-          fs.realpathSync(
-            __dirname + '/node_modules/protvista-structure/style'
-          ),
           path.resolve(__dirname, 'src'),
         ],
         use: [
