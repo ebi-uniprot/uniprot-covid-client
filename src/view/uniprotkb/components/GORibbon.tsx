@@ -22,7 +22,17 @@ const binaryColor = false;
 
 const GORibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   <RibbonDataProvider subject={`UniProtKB:${primaryAccession}`}>
-    {({ entities, config, dataError, dataReceived }) => (
+    {({
+      entities,
+      config,
+      dataError,
+      dataReceived,
+    }: {
+      entities: any;
+      config: any;
+      dataError: any;
+      dataReceived: any;
+    }) => (
       <div>
         {dataReceived ? (
           <Ribbon
