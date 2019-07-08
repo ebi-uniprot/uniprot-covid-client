@@ -3,7 +3,7 @@ import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import {
-  SelectedRows,
+  SelectedEntries,
   SortableColumn,
   SortDirection,
 } from './types/resultsTypes';
@@ -14,8 +14,8 @@ import { ViewMode } from './state/resultsInitialState';
 type ResultsTableProps = {
   results: any[];
   tableColumns: string[];
-  selectedRows: SelectedRows;
-  handleRowSelect: (rowId: string) => void;
+  selectedEntries: SelectedEntries;
+  handleEntrySelection: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumn) => void;
   handleLoadMoreRows: any;
   totalNumberResults: number;
@@ -28,8 +28,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   results = [],
   totalNumberResults,
   tableColumns,
-  selectedRows,
-  handleRowSelect,
+  selectedEntries,
+  handleEntrySelection,
   handleLoadMoreRows,
   handleHeaderClick,
   sortColumn,
@@ -63,8 +63,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           idKey="primaryAccession"
           data={results}
           selectable={true}
-          selected={selectedRows}
-          onSelect={handleRowSelect}
+          selected={selectedEntries}
+          onSelect={handleEntrySelection}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
             <UniProtCard data={dataItem} />
           )}
@@ -80,8 +80,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           columns={columns}
           data={results}
           selectable={true}
-          selected={selectedRows}
-          onSelect={handleRowSelect}
+          selected={selectedEntries}
+          onSelect={handleEntrySelection}
           onHeaderClick={handleHeaderClick}
           onLoadMoreItems={handleLoadMoreRows}
           hasMoreData={hasMoreData}

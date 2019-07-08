@@ -24,7 +24,7 @@ import { RootState, RootAction } from '../state/state-types';
 import {
   SortDirection,
   SortableColumn,
-  SelectedRows,
+  SelectedEntries,
   SelectedFacet,
 } from './types/resultsTypes';
 import { ViewMode } from './state/resultsInitialState';
@@ -47,13 +47,13 @@ interface ResultsProps extends RouteComponentProps {
 }
 
 type ResultsContainerState = {
-  selectedRows: SelectedRows;
+  selectedEntries: SelectedEntries;
 };
 
 export class Results extends Component<ResultsProps, ResultsContainerState> {
   constructor(props: ResultsProps) {
     super(props);
-    this.state = { selectedRows: {} };
+    this.state = { selectedEntries: {} };
   }
 
   updateData() {
@@ -140,14 +140,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     });
   };
 
-  handleRowSelect = (rowId: string): void => {
-    const { selectedRows: prevSelectedRows } = this.state;
-    if (rowId in prevSelectedRows) {
-      const { [rowId]: value, ...selectedRows } = prevSelectedRows;
-      this.setState({ selectedRows });
+  handleEntrySelection = (rowId: string): void => {
+    const { selectedEntries: prevSelectedEntries } = this.state;
+    if (rowId in prevSelectedEntries) {
+      const { [rowId]: value, ...selectedEntries } = prevSelectedEntries;
+      this.setState({ selectedEntries: selectedEntries });
     } else {
-      prevSelectedRows[rowId] = true;
-      this.setState({ selectedRows: prevSelectedRows });
+      prevSelectedEntries[rowId] = true;
+      this.setState({ selectedEntries: prevSelectedEntries });
     }
   };
 
@@ -251,7 +251,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       tableColumns,
       dispatchSwitchViewMode,
     } = this.props;
-    const { selectedRows } = this.state;
+    const { selectedEntries } = this.state;
     const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
       queryParamFromUrl
     );
@@ -325,8 +325,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               )}
               <ResultsTable
                 results={results}
-                handleRowSelect={this.handleRowSelect}
-                selectedRows={selectedRows}
+                handleEntrySelection={this.handleEntrySelection}
+                selectedEntries={selectedEntries}
                 handleHeaderClick={this.updateColumnSort}
                 sortColumn={sortColumn}
                 sortDirection={sortDirection}

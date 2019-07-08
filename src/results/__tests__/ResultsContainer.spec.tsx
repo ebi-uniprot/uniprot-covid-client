@@ -113,15 +113,15 @@ describe('Results component', () => {
   });
 
   test('should handle row selection', () => {
-    wrapper.instance().handleRowSelect('2');
-    wrapper.instance().handleRowSelect('6');
-    expect(wrapper.state().selectedRows).toEqual({ 2: true, 6: true });
+    wrapper.instance().handleEntrySelection('2');
+    wrapper.instance().handleEntrySelection('6');
+    expect(wrapper.state().selectedEntries).toEqual({ 2: true, 6: true });
   });
 
   test('should handle row deselection', () => {
-    wrapper.instance().handleRowSelect('2');
-    wrapper.instance().handleRowSelect('2');
-    expect(wrapper.state().selectedRows).toEqual({});
+    wrapper.instance().handleEntrySelection('2');
+    wrapper.instance().handleEntrySelection('2');
+    expect(wrapper.state().selectedEntries).toEqual({});
   });
 
   test('should dispatch reset on unmount', () => {

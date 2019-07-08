@@ -4,9 +4,9 @@ exports[`ResultsView component should render cards 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ResultsView
+    handleEntrySelection={[MockFunction]}
     handleHeaderClick={[MockFunction]}
     handleLoadMoreRows={[MockFunction]}
-    handleRowSelect={[MockFunction]}
     results={
       Array [
         Object {
@@ -17,7 +17,7 @@ ShallowWrapper {
         },
       ]
     }
-    selectedRows={Object {}}
+    selectedEntries={Object {}}
     sort={
       Object {
         "column": "accession",
@@ -128,9 +128,9 @@ exports[`ResultsView component should render table 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ResultsView
+    handleEntrySelection={[MockFunction]}
     handleHeaderClick={[MockFunction]}
     handleLoadMoreRows={[MockFunction]}
-    handleRowSelect={[MockFunction]}
     results={
       Array [
         Object {
@@ -141,7 +141,7 @@ ShallowWrapper {
         },
       ]
     }
-    selectedRows={Object {}}
+    selectedEntries={Object {}}
     sort={
       Object {
         "column": "accession",
