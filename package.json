@@ -35,6 +35,7 @@
     }
   },
   "dependencies": {
+    "@geneontology/ribbon": "^1.9.32",
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
     "d3": "^5.9.2",

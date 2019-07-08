@@ -36,6 +36,7 @@ module.exports = {
           fs.realpathSync(
             __dirname + '/node_modules/protvista-structure/style'
           ),
+          fs.realpathSync(__dirname + '/node_modules/@geneontology/ribbon/es'),
           path.resolve(__dirname, 'src'),
         ],
         use: [

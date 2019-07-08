@@ -9,6 +9,13 @@ import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import Comment from '../../model/types/Comment';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
+import GORibbon from '../uniprotkb/components/GORibbon';
+
+const subject = 'MGI:MGI:97490';
+const mode = undefined;
+const entityLabel = 2;
+const colorBy = 0;
+const binaryColor = false;
 
 const FunctionSection: FC<{
   data: UIModel;
@@ -34,6 +41,7 @@ const FunctionSection: FC<{
           includeTitle={true}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
+        <GORibbon primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
