@@ -281,46 +281,48 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
           }
           content={
             <Fragment>
-              <div className="button-group">
-                <button className="button link-button disabled">Blast</button>
-                <button className="button link-button disabled">Align</button>
-                <button className="button link-button">
-                  <DownloadIcon />
-                  Download
-                </button>
-                <button className="button link-button disabled">
-                  <BasketIcon />
-                  Add
-                </button>
-                <button className="button link-button">
-                  <StatisticsIcon />
-                  Statistics
-                </button>
-                <button className="button link-button">Map to</button>
-                <button
-                  className="button link-button large-icon"
-                  onClick={() => dispatchSwitchViewMode()}
-                >
-                  <span
-                    className={
-                      viewMode === ViewMode.CARD
-                        ? 'link-button-icon__active'
-                        : ''
-                    }
+              {results.length > 0 && (
+                <div className="button-group">
+                  <button className="button link-button disabled">Blast</button>
+                  <button className="button link-button disabled">Align</button>
+                  <button className="button link-button">
+                    <DownloadIcon />
+                    Download
+                  </button>
+                  <button className="button link-button disabled">
+                    <BasketIcon />
+                    Add
+                  </button>
+                  <button className="button link-button">
+                    <StatisticsIcon />
+                    Statistics
+                  </button>
+                  <button className="button link-button">Map to</button>
+                  <button
+                    className="button link-button large-icon"
+                    onClick={() => dispatchSwitchViewMode()}
                   >
-                    <TableIcon />
-                  </span>
-                  <span
-                    className={
-                      viewMode === ViewMode.TABLE
-                        ? 'link-button-icon__active'
-                        : ''
-                    }
-                  >
-                    <ListIcon />
-                  </span>
-                </button>
-              </div>
+                    <span
+                      className={
+                        viewMode === ViewMode.CARD
+                          ? 'link-button-icon__active'
+                          : ''
+                      }
+                    >
+                      <TableIcon />
+                    </span>
+                    <span
+                      className={
+                        viewMode === ViewMode.TABLE
+                          ? 'link-button-icon__active'
+                          : ''
+                      }
+                    >
+                      <ListIcon />
+                    </span>
+                  </button>
+                </div>
+              )}
               <ResultsTable
                 results={results}
                 handleRowSelect={this.handleRowSelect}
