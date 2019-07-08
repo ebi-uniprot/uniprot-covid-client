@@ -12,8 +12,6 @@ import {
 } from '../../../model/utils/XrefUtils.js';
 import { Property } from '../../../model/types/modelTypes.js';
 
-const a = [1];
-
 type XRefProps = {
   xrefs: XrefUIModel[];
   primaryAccession: string;

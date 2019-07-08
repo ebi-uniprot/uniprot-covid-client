@@ -34,32 +34,32 @@ export const {
   databaseToDatabaseInfo,
 } = getDatabaseInfoMaps(databaseInfo);
 
-const select = selectDatabases(databaseCategoryToNames);
+const databaseSelector = selectDatabases(databaseCategoryToNames);
 
 export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
 entrySectionToDatabaseNames.set(
   EntrySection.Expression,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.EXPRESSION],
     whitelist: ['HPA'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.FamilyAndDomains,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.PHYLOGENOMIC, DatabaseCategory.DOMAIN],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Function,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.PATHWAY, DatabaseCategory.FAMILY],
     whitelist: ['SwissLipids'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Interaction,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.INTERACTION],
     whitelist: ['BindingDB'],
   })
@@ -109,24 +109,24 @@ entrySectionToDatabaseNames.set(EntrySection.PathologyAndBioTech, [
 ]);
 entrySectionToDatabaseNames.set(
   EntrySection.ProteinProcessing,
-  select({
+  databaseSelector({
     categories: [
       DatabaseCategory.PROTEOMIC,
       DatabaseCategory.GEL,
       DatabaseCategory.PTM,
     ],
-    whitelist: ['PMAP_CutDB'],
+    whitelist: ['PMAP-CutDB'],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Sequence,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.SEQUENCE, DatabaseCategory.GENOME],
   })
 );
 entrySectionToDatabaseNames.set(
   EntrySection.Structure,
-  select({
+  databaseSelector({
     categories: [DatabaseCategory.STRUCTURE],
     whitelist: ['EvolutionaryTrace'],
     blacklist: ['PDB', 'PDBsum'],
