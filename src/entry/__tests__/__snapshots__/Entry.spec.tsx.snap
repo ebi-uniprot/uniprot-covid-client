@@ -961,7 +961,7 @@ exports[`Entry should render 1`] = `
                         />
                       </svg>
                     </a>
-                    description value
+                     description value
                   </li>
                 </ul>
               </div>
