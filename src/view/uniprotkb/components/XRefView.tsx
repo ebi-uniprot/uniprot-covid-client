@@ -87,7 +87,6 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
       .map((property: Property) => getPropertyString(property))
       .join('');
   }
-  console.log(properties);
   return (
     <li key={v1()}>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
