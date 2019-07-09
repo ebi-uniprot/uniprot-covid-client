@@ -47,4 +47,11 @@ describe('getPropertyString', () => {
     });
     expect(propertyString).toEqual(', 2 hits');
   });
+  test('should if empty string if key is MatchStatus but value <= 0', () => {
+    const propertyString = getPropertyString({
+      key: PropertyKey.MatchStatus,
+      value: '0',
+    });
+    expect(propertyString).toEqual('');
+  });
 });
