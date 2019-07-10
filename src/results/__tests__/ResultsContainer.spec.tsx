@@ -112,7 +112,7 @@ describe('Results component', () => {
     expect(history.location.search).toEqual('?query=blah');
   });
 
-  test('should sort should toggle card view to table', async () => {
+  test('should toggle card view to table', async () => {
     const { container, getByTestId, getByText } = renderWithRedux(
       <ResultsContainer />
     );
