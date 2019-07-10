@@ -14,6 +14,9 @@ describe('ResultsTable component', () => {
       columnNames: ['accession'],
       results: [{ accession: '1234' }, { accession: '5678' }],
       sort: { column: 'accession', direction: 'descend' },
+      selectedRows: {},
+      handleRowSelect: jest.fn(),
+      handleHeaderClick: jest.fn(),
     };
     wrapper = shallow(<ResultsTable {...props} />);
   });

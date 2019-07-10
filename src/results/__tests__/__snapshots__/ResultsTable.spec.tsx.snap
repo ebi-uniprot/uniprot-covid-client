@@ -9,6 +9,8 @@ ShallowWrapper {
         "accession",
       ]
     }
+    handleHeaderClick={[MockFunction]}
+    handleRowSelect={[MockFunction]}
     results={
       Array [
         Object {
@@ -19,6 +21,7 @@ ShallowWrapper {
         },
       ]
     }
+    selectedRows={Object {}}
     sort={
       Object {
         "column": "accession",
@@ -58,16 +61,14 @@ ShallowWrapper {
           "accession": "5678",
         },
       ],
-      "fixedColumnCount": 0,
       "fixedRowCount": 1,
       "idKey": "primaryAccession",
-      "onHeaderClick": [Function],
+      "onHeaderClick": [MockFunction],
       "onLoadMoreRows": undefined,
-      "onSelect": [Function],
+      "onSelect": [MockFunction],
       "selectable": true,
       "selectedRows": Object {},
       "showHeader": true,
-      "showRowNumbers": false,
       "totalNumberRows": undefined,
     },
     "ref": null,
@@ -98,16 +99,14 @@ ShallowWrapper {
             "accession": "5678",
           },
         ],
-        "fixedColumnCount": 0,
         "fixedRowCount": 1,
         "idKey": "primaryAccession",
-        "onHeaderClick": [Function],
+        "onHeaderClick": [MockFunction],
         "onLoadMoreRows": undefined,
-        "onSelect": [Function],
+        "onSelect": [MockFunction],
         "selectable": true,
         "selectedRows": Object {},
         "showHeader": true,
-        "showRowNumbers": false,
         "totalNumberRows": undefined,
       },
       "ref": null,

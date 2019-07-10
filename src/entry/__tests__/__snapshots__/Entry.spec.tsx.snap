@@ -153,7 +153,6 @@ exports[`Entry should render 1`] = `
         >
           <h3
             class="card__title"
-            id="[object Object]"
           >
             uniprot id 
             <small>
@@ -233,7 +232,6 @@ exports[`Entry should render 1`] = `
           >
             <h3
               class="card__title"
-              id="Names & Taxonomy"
             >
               Names & Taxonomy
             </h3>
@@ -754,7 +752,6 @@ exports[`Entry should render 1`] = `
           >
             <h3
               class="card__title"
-              id="Protein Processing"
             >
               Protein Processing
             </h3>
@@ -796,7 +793,6 @@ exports[`Entry should render 1`] = `
           >
             <h3
               class="card__title"
-              id="Family & Domains"
             >
               Family & Domains
             </h3>
@@ -843,7 +839,6 @@ exports[`Entry should render 1`] = `
           >
             <h3
               class="card__title"
-              id="Sequence"
             >
               Sequence
             </h3>
