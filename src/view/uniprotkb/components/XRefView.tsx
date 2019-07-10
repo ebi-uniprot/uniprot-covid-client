@@ -71,7 +71,12 @@ export const getPropertyString = (property: Property) => {
 };
 
 const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
-  const { databaseType: database, properties: entryProperties, id } = xRefEntry;
+  const {
+    databaseType: database,
+    properties: entryProperties,
+    isoformId,
+    id,
+  } = xRefEntry;
   if (
     !id ||
     !database ||
@@ -87,12 +92,16 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
       .map((property: Property) => getPropertyString(property))
       .join('');
   }
+  let isoformLink;
+  if (isoformId) {
+    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
+  }
   return (
     <li key={v1()}>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
       </XRefExternalLink>{' '}
-      {properties}
+      {properties} {isoformLink}
     </li>
   );
 };
