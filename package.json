@@ -38,7 +38,7 @@
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
     "d3": "^5.9.2",
-    "franklin-sites": "0.0.3-dev.38",
+    "franklin-sites": "0.0.3-dev.44",
     "idx": "^2.5.2",
     "litemol": "^2.4.2",
     "npm-run-all": "^4.1.2",
