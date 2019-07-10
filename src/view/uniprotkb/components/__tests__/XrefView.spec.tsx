@@ -31,7 +31,7 @@ describe('getPropertyString', () => {
       key: PropertyKey.PathwayName,
       value: 'Amyloid fiber formation',
     });
-    expect(propertyString).toEqual('Amyloid fiber formation');
+    expect(propertyString).toEqual(' Amyloid fiber formation');
   });
   test('should append value and "hit"', () => {
     const propertyString = getPropertyString({
