@@ -17,7 +17,7 @@ import * as searchActions from '../search/state/searchActions';
 import { default as queryStringModule } from 'query-string';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
-import ResultsTable from './ResultsView';
+import ResultsView from './ResultsView';
 import { getAPIQueryUrl } from './utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
@@ -301,6 +301,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   <button
                     className="button link-button large-icon"
                     onClick={() => dispatchSwitchViewMode()}
+                    data-testid="table-card-toggle"
                   >
                     <span
                       className={
@@ -323,7 +324,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   </button>
                 </div>
               )}
-              <ResultsTable
+              <ResultsView
                 results={results}
                 handleEntrySelection={this.handleEntrySelection}
                 selectedEntries={selectedEntries}
@@ -345,17 +346,19 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  namespace: state.query.namespace,
-  tableColumns: state.results.tableColumns,
-  cardColumns: state.results.cardColumns,
-  results: state.results.results,
-  facets: state.results.facets,
-  isFetching: state.results.isFetching,
-  nextUrl: state.results.nextUrl,
-  totalNumberResults: state.results.totalNumberResults,
-  viewMode: state.results.viewMode,
-});
+const mapStateToProps = (state: RootState) => {
+  return {
+    namespace: state.query.namespace,
+    tableColumns: state.results.tableColumns,
+    cardColumns: state.results.cardColumns,
+    results: state.results.results,
+    facets: state.results.facets,
+    isFetching: state.results.isFetching,
+    nextUrl: state.results.nextUrl,
+    totalNumberResults: state.results.totalNumberResults,
+    viewMode: state.results.viewMode,
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
