@@ -67,7 +67,7 @@ export const getPropertyString = (property: Property) => {
     }
     return `, ${value} hit${hits > 1 ? 's' : ''}`;
   }
-  return value;
+  return ` ${value}`;
 };
 
 const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
