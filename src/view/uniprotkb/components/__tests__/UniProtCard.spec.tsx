@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UniProtCard from '../UniProtCard';
 import data from '../../../../model/__mocks__/modelData.json';

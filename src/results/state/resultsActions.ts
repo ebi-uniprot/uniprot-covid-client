@@ -4,6 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
 import idx, { IDXOptional } from 'idx';
 import { RootState } from '../../state/state-types';
+import 'regenerator-runtime/runtime';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';

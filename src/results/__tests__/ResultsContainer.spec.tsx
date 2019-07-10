@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import '@babel/polyfill';
+import 'core-js/stable';
 import { Router } from 'react-router-dom';
 import {
   render,
   cleanup,
   waitForElement,
   fireEvent,
-} from 'react-testing-library';
+} from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../../state/rootReducer';
