@@ -7,7 +7,7 @@ import {
   cleanup,
   waitForElement,
   fireEvent,
-} from 'react-testing-library';
+} from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../../state/rootReducer';
