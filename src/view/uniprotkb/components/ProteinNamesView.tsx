@@ -153,7 +153,7 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: 'Alternative names',
       content: (
-        <ExpandableList>
+        <ExpandableList descriptionString="alternative names">
           {proteinNames.alternativeNames.map(alternativeName => ({
             id: v1(),
             content: <ProteinNamesViewFlat names={alternativeName} />,
@@ -166,7 +166,7 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: `Cleaved into ${proteinNames.contains.length} chains`,
       content: (
-        <ExpandableList>
+        <ExpandableList descriptionString="chains">
           {proteinNames.contains.map(contains => ({
             id: v1(),
             content: <ProteinDescriptionView proteinDescription={contains} />,
@@ -179,7 +179,7 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: 'Submission names',
       content: (
-        <ExpandableList>
+        <ExpandableList descriptionString="submission names">
           {proteinNames.submissionNames.map(submission => ({
             id: v1(),
             content: <ProteinNamesViewFlat names={submission} />,

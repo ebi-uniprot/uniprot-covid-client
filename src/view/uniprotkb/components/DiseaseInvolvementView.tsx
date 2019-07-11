@@ -67,7 +67,7 @@ export const DiseaseInvolvementEntry: React.FC<
       infoData.push({
         title: 'Note',
         content: (
-          <ExpandableList>
+          <ExpandableList descriptionString="notes">
             {texts.map(text => ({
               id: v1(),
               content: text.value,
