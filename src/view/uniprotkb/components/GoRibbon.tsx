@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
 import '@geneontology/ribbon/es/main.scss';
 import '../../../styles/go-ribbon.scss';
@@ -17,7 +17,7 @@ enum COLOR_BY {
   ANNOTATION_COUNT = 1,
 }
 
-const GoRibbon2: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
+const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   <div className="GoRibbon">
     <h4>GO Annotations</h4>
     <RibbonDataProvider subject={`UniProtKB:${primaryAccession}`}>
@@ -56,4 +56,4 @@ const GoRibbon2: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   </div>
 );
 
-export default GoRibbon2;
+export default GoRibbon;

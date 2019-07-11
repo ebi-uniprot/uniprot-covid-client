@@ -9,7 +9,7 @@ import FeaturesView from '../uniprotkb/components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import Comment from '../../model/types/Comment';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
-import GoRibbon from './components/GoRibbon2';
+import GoRibbon from './components/GoRibbon';
 
 const FunctionSection: FC<{
   data: UIModel;
