@@ -4,9 +4,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: ['@babel/polyfill', path.resolve(__dirname, 'src/index.tsx')],
+  entry: ['core-js/stable', path.resolve(__dirname, 'src/index.tsx')],
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
+    alias: {
+      react: path.resolve('./node_modules/react'),
+    },
   },
   module: {
     rules: [
