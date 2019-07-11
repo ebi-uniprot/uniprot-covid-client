@@ -16,8 +16,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "types": ["jest"],
-    "forceConsistentCasingInFileNames": true
+    "types": ["jest"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "src/**/*.spec.ts*"]

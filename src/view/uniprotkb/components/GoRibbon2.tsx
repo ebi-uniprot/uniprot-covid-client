@@ -17,7 +17,7 @@ enum COLOR_BY {
   ANNOTATION_COUNT = 1,
 }
 
-const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
+const GoRibbon2: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   <div className="GoRibbon">
     <h4>GO Annotations</h4>
     <RibbonDataProvider subject={`UniProtKB:${primaryAccession}`}>
@@ -56,4 +56,4 @@ const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   </div>
 );
 
-export default GoRibbon;
+export default GoRibbon2;
