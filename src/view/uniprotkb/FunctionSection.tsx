@@ -1,4 +1,4 @@
-import React, { Fragment, FC } from 'react';
+import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import FreeTextView from '../uniprotkb/components/FreeTextView';
 import CatalyticActivityView from '../uniprotkb/components/CatalyticActivityView';
@@ -19,7 +19,7 @@ const FunctionSection: FC<{
     return null;
   }
   return (
-    <Fragment>
+    <div id={EntrySection.Function}>
       <Card title={EntrySection.Function}>
         <FreeTextView comments={data.commentsData.get(Comment.FUNCTION)} />
         <CatalyticActivityView
@@ -37,7 +37,7 @@ const FunctionSection: FC<{
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
-    </Fragment>
+    </div>
   );
 };
 

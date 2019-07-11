@@ -4118,10 +4118,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.3-dev.40:
-  version "0.0.3-dev.40"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.3-dev.40.tgz#c747853ba77755f8ac16ca9bb49a320c7eb05ef7"
-  integrity sha512-SOTeSa1SEDn4nTYCu+AOa8KnJ9lmyg/gChyr8XoCZZ5/cU3TsIjvoHO40ZCfdNpiXdqtIDQVRmkd2b6pGh+RQw==
+franklin-sites@0.0.3-dev.44:
+  version "0.0.3-dev.44"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.3-dev.44.tgz#8aadc744b4fb0aa8e764fe65772d8a8394a5fd81"
+  integrity sha512-1tLeYAOkigKZmM/c80o6H2M6bFeE1hvf/mcZ7xkq0cK2oB4tnWU4B3RDqdD0wmr+KVatOpjQRkeOTu6QykExqw==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.0-rc.3"
@@ -6012,9 +6012,9 @@ lodash.tail@^4.1.1:
   integrity sha1-0jM6NtnncXyK0vfKyv7HwytERmQ=
 
 lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
-  version "4.17.13"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
-  integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
 loglevel@^1.6.3:
   version "1.6.3"
