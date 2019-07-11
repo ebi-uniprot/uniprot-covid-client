@@ -70,15 +70,6 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class=""
-          >
-            <a
-              href="#Family & Domains"
-            >
-              Family & Domains
-            </a>
-          </li>
-          <li
             class="in-page-nav--disabled"
           >
             <a
@@ -94,6 +85,15 @@ exports[`Entry should render 1`] = `
               href="#Structure"
             >
               Structure
+            </a>
+          </li>
+          <li
+            class=""
+          >
+            <a
+              href="#Family & Domains"
+            >
+              Family & Domains
             </a>
           </li>
           <li
