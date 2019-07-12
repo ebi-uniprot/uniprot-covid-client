@@ -90,7 +90,7 @@ export const SequenceInfo: React.FC<{
   return (
     <Fragment>
       {dataToDisplay && <InfoList infoData={infoData} />}
-      <Sequence sequence={dataToDisplay.value} />
+      <Sequence sequence={dataToDisplay.value} id={isoformId} />
     </Fragment>
   );
 };
