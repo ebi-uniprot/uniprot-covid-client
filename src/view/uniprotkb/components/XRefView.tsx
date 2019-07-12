@@ -91,7 +91,7 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   const infoData = databases.sort().map(database => ({
     title: database.database,
     content: (
-      <ExpandableList descriptionString={`${database.database} references`}>
+      <ExpandableList descriptionString={`${database.database} links`}>
         {database.xrefs.map(xref => ({
           id: v1(),
           content: (
