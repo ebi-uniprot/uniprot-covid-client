@@ -7,7 +7,7 @@ import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
 } from '../../../data/database';
-import { InfoList } from 'franklin-sites';
+import { InfoList, ExpandableList } from 'franklin-sites';
 import { Xref } from '../../../model/utils/XrefUtils';
 import { XRefExternalLink } from './XRefView';
 
@@ -67,11 +67,12 @@ export const DiseaseInvolvementEntry: React.FC<
       infoData.push({
         title: 'Note',
         content: (
-          <ul className="no-bullet">
-            {texts.map(text => (
-              <li key={v1()}>{text.value}</li>
-            ))}
-          </ul>
+          <ExpandableList descriptionString="notes">
+            {texts.map(text => ({
+              id: v1(),
+              content: text.value,
+            }))}
+          </ExpandableList>
         ),
       });
     }
