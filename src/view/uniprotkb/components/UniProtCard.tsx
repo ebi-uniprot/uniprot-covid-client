@@ -32,14 +32,28 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
         {data.uniProtId}
       </h5>
       <p>
-        {recommendedName} <a href="#">{organismName}</a>
+        {recommendedName && `${recommendedName} · `}
+        <a href="#">{organismName}</a> · {data.sequence.length} amino-acids
       </p>
-      <p className="uniprot-card__comment">
-        {data.comments &&
-          data.comments.map(
-            comment => comment.texts && comment.texts.map(text => text.value)
-          )}
-      </p>
+      {data.genes && (
+        <p>
+          <strong>Gene: </strong>
+          {data.genes.map(gene => gene.geneName && gene.geneName.value)}
+        </p>
+      )}
+      {data.keywords && (
+        <p>
+          <strong>Keywords:</strong>{' '}
+          {data.keywords.map(keyword => {
+            return (
+              <Link to="/" key={keyword.value}>
+                {' '}
+                #{keyword.value}
+              </Link>
+            );
+          })}
+        </p>
+      )}
     </div>
   );
 };

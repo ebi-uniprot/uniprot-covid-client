@@ -29,17 +29,30 @@ exports[`UniProtCard component should render 1`] = `
        uniprot id
     </h5>
     <p>
-      rec full Name 
+      rec full Name · 
       <a
         href="#"
       >
         scientific name
       </a>
+       · 10 amino-acids
     </p>
-    <p
-      class="uniprot-card__comment"
-    >
-      value
+    <p>
+      <strong>
+        Gene: 
+      </strong>
+      some Gene
+    </p>
+    <p>
+      <strong>
+        Keywords:
+      </strong>
+       
+      <a
+        href="/"
+      >
+         #keyword value
+      </a>
     </p>
   </div>
 </DocumentFragment>

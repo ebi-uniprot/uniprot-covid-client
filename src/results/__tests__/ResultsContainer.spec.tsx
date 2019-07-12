@@ -55,6 +55,7 @@ axios.get.mockResolvedValue({
             },
           },
         },
+        sequence: ['A', 'B', 'C'],
       },
     ],
   },

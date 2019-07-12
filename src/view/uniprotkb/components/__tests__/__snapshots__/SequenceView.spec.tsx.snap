@@ -81,19 +81,19 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           class="dropdown-menu__content"
         >
           <label
-            for="Isoform-Polar"
+            for="Polar"
           >
             <input
-              id="Isoform-Polar"
+              id="Polar"
               type="checkbox"
             />
             Polar
           </label>
           <label
-            for="Isoform-Hydrophobic"
+            for="Hydrophobic"
           >
             <input
-              id="Isoform-Hydrophobic"
+              id="Hydrophobic"
               type="checkbox"
             />
             Hydrophobic
@@ -324,19 +324,19 @@ exports[`SequenceView component should render SequenceView 1`] = `
           class="dropdown-menu__content"
         >
           <label
-            for="P05067-Polar"
+            for="Polar"
           >
             <input
-              id="P05067-Polar"
+              id="Polar"
               type="checkbox"
             />
             Polar
           </label>
           <label
-            for="P05067-Hydrophobic"
+            for="Hydrophobic"
           >
             <input
-              id="P05067-Hydrophobic"
+              id="Hydrophobic"
               type="checkbox"
             />
             Hydrophobic

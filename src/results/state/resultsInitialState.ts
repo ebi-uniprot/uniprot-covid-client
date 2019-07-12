@@ -17,16 +17,16 @@ export type ResultsState = {
 
 const resultsInitialState = {
   tableColumns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
-  cardColumns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
-  // cardColumns: [
-  //   'accession',
-  //   'id',
-  //   'protein_name',
-  //   'gene_names',
-  //   'organism',
-  //   'keyword',
-  //   'cc:function',
-  // ],
+  cardColumns: [
+    'accession',
+    'id',
+    'protein_name',
+    'gene_names',
+    'organism',
+    'keyword',
+    'cc:function',
+    'sequence',
+  ],
   results: [],
   facets: [],
   isFetching: false,
