@@ -8,9 +8,8 @@
     "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
     "build": "webpack --mode production --config webpack.prod.js",
     "check-types": "tsc",
-    "tslint": "tslint -c tslint.json 'src/**/*.ts' --project tsconfig.json",
     "lint": "eslint 'src/**/*.ts*'",
-    "test": "yarn check-types && yarn tslint && jest",
+    "test": "yarn check-types && yarn lint && jest",
     "clear-test-cache": "jest --clearCache"
   },
   "browserslist": [
@@ -107,10 +106,6 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "ts-jest": "^23.10.5",
-    "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.0.0",
     "typesafe-actions": "^3.0.0",
     "typescript": "^3.2.2",
     "webpack": "^4.20.2",
