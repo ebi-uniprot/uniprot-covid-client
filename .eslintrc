@@ -1,0 +1,67 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "rules": {
+    "jsx-no-multiline-js": 0,
+    "jsx-no-lambda": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx"]
+      }
+    ],
+    "react/prop-types": 0
+  },
+  "overrides": [
+    {
+      "files": ["src"],
+      "excludedFiles": ["**/*.spec.ts"]
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
+
+// {
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:@typescript-eslint/eslint-recommended",
+//     "plugin:@typescript-eslint/recommended"
+//   ],
+//   "parser": "@typescript-eslint/parser",
+//   "plugins": [
+//     "@typescript-eslint"
+//   ],
+//   "env": {
+//     "node": true
+//   },
+//   "parserOptions": {
+//     "ecmaVersion": 5,
+//     "sourceType": "module",
+//     "project": "./tsconfig.json"
+//   },
+//   "rules": {}
+// }
