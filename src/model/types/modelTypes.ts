@@ -10,6 +10,7 @@ export type ValueWithEvidence = {
 };
 
 export enum PropertyKey {
+  AllergenName = 'AllergenName',
   Chains = 'Chains',
   Component = 'Component',
   Description = 'Description',
@@ -18,6 +19,7 @@ export enum PropertyKey {
   ExpressionPatterns = 'ExpressionPatterns',
   FamilyName = 'FamilyName',
   Fingerprint = 'Fingerprint',
+  GeneDesignation = 'GeneDesignation',
   GeneId = 'GeneId',
   GeneName = 'GeneName',
   GenericName = 'GenericName',
@@ -31,11 +33,14 @@ export enum PropertyKey {
   OrganismId = 'OrganismId',
   OrganismName = 'OrganismName',
   PathwayName = 'PathwayName',
+  Project = 'Project',
   ProteinId = 'ProteinId',
+  RectionId = 'RectionId',
   Resolution = 'Resolution',
   Status = 'Status',
+  ToxinName = 'ToxinName',
   ToxonomicScope = 'ToxonomicScope',
-  type = 'type',
+  Type = 'Type',
 }
 
 export type Property = {
