@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
-import FeaturesView from '../uniprotkb/components/FeaturesView';
-import KeywordView from '../uniprotkb/components/KeywordView';
-import XRefView from '../uniprotkb/components/XRefView';
-import SequenceView from '../uniprotkb/components/SequenceView';
+import FeaturesView from './components/FeaturesView';
+import KeywordView from './components/KeywordView';
+import XRefView from './components/XRefView';
+import SequenceView from './components/SequenceView';
 import { SequenceUIModel } from '../../model/uniprotkb/sections/SequenceConverter';
 
 const SequenceSection: FC<{

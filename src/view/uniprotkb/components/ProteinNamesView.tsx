@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import NameView from './NameView';
 import { InfoList, ExpandableList } from 'franklin-sites';
 import { v1 } from 'uuid';
+import NameView from './NameView';
 import {
   ProteinNames,
   ProteinNamesData,
@@ -59,7 +59,9 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
                 shortName
               ) : (
                 <Fragment>
-                  {acc}; {shortName}
+                  {acc}
+;
+                  {shortName}
                 </Fragment>
               );
             })}
@@ -128,7 +130,9 @@ const getInfoListForNames = (name: ProteinNames) => {
                 name
               ) : (
                 <Fragment>
-                  {acc}; {name}
+                  {acc}
+;
+                  {name}
                 </Fragment>
               )
             )}

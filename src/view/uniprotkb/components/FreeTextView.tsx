@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
+import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { EvidenceType } from '../../../model/types/modelTypes';
-import { v1 } from 'uuid';
 import Comment from '../../../model/types/Comment';
 
 export type FreeTextType =

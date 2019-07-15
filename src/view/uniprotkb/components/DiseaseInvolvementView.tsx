@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
+import { InfoList, ExpandableList } from 'franklin-sites';
 import Comment from '../../../model/types/Comment';
 import { EvidenceType } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import {
-  databaseCategoryToString,
-  databaseToDatabaseInfo,
-} from '../../../data/database';
-import { InfoList, ExpandableList } from 'franklin-sites';
+import { databaseToDatabaseInfo } from '../../../data/database';
 import { Xref } from '../../../model/utils/XrefUtils';
 import { XRefExternalLink } from './XRefView';
 
@@ -103,7 +100,9 @@ export const DiseaseInvolvementEntry: React.FC<
   return (
     <Fragment>
       <h4>
-        {diseaseId} {acronym && `(${acronym})`}
+        {diseaseId} 
+        {' '}
+        {acronym && `(${acronym})`}
       </h4>
       <p>{evidenceNodes}</p>
       <InfoList infoData={infoData} />

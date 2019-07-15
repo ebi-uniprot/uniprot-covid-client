@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import FeaturesView from '../uniprotkb/components/FeaturesView';
-import DiseaseInvolvementView from '../uniprotkb/components/DiseaseInvolvementView';
-import KeywordView from '../uniprotkb/components/KeywordView';
+import FeaturesView from './components/FeaturesView';
+import DiseaseInvolvementView from './components/DiseaseInvolvementView';
+import KeywordView from './components/KeywordView';
 import EntrySection from '../../model/types/EntrySection';
 import { hasContent } from '../../model/utils/utils';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';

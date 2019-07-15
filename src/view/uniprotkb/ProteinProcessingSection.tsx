@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
-import FeaturesView from '../uniprotkb/components/FeaturesView';
-import KeywordView from '../uniprotkb/components/KeywordView';
+import FeaturesView from './components/FeaturesView';
+import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import FreeTextView from './components/FreeTextView';
 import Comment from '../../model/types/Comment';
@@ -22,10 +22,7 @@ const ProteinProcessingSection: FC<{
     <div id={EntrySection.ProteinProcessing}>
       <Card title={EntrySection.ProteinProcessing}>
         <FeaturesView features={featuresData} sequence={sequence} />
-        <FreeTextView
-          comments={commentsData.get(Comment.PTM)}
-          includeTitle={true}
-        />
+        <FreeTextView comments={commentsData.get(Comment.PTM)} includeTitle />
         <KeywordView keywords={keywordData} />
         <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
       </Card>
