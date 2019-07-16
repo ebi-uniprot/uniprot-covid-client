@@ -20,6 +20,8 @@
   "rules": {
     "jsx-no-multiline-js": 0,
     "jsx-no-lambda": 0,
+    "@typescript-eslint/prefer-interface": 0,
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [
