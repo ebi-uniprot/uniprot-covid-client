@@ -79,7 +79,7 @@ const VariationView: FC<{ accession: string }> = ({ accession }) => {
   );
 
   const addTooltipEventListener = useCallback(node => {
-    node.addEventListener('change', e => console.log(e));
+    node.addEventListener('change', (e: ChangeEvent) => console.log(e));
   }, []);
 
   if (!data.sequence) {

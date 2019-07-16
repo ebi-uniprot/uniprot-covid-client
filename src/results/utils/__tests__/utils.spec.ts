@@ -8,7 +8,7 @@ describe('utils', () => {
     ];
     const queryString = getAPIQueryUrl('cdc7', [], facets);
     expect(queryString).toBe(
-      '//wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/search?facets=reviewed%2Cpopular_organism%2Cother_organism&fields=&query=cdc7%20AND%20%28facet1%3Avalue%201%29%20AND%20%28facet2%3Avalue%203%29'
+      'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/search?facets=reviewed%2Cpopular_organism%2Cother_organism&fields=&query=cdc7%20AND%20%28facet1%3Avalue%201%29%20AND%20%28facet2%3Avalue%203%29'
     );
   });
 
