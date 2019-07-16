@@ -35,11 +35,7 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
       <p>
         {recommendedName && `${recommendedName} · `}
         <a href="#">{organismName}</a>
-        {' '}
-·
-        {data.sequence.length}
-        {' '}
-amino-acids
+        {` · ${data.sequence.length} amino-acids`}
       </p>
       {data.genes && (
         <p>

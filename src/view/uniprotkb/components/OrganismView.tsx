@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import SimpleView from './SimpleView';
-import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
+import SimpleView from './SimpleView';
+import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type OrganismDataProps = {
   data: OrganismData;
@@ -32,7 +32,11 @@ export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
       title: 'Organism',
       content: (
         <Link to={`/taxonomy/${data.taxonId}`}>
-          {data.scientificName} ({data.commonName})
+          {data.scientificName}
+          {' '}
+(
+          {data.commonName}
+)
         </Link>
       ),
     });

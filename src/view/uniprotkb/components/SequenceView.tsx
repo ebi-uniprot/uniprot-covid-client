@@ -1,26 +1,26 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence } from 'franklin-sites';
+import idx from 'idx';
 import Comment from '../../../model/types/Comment';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
-import idx from 'idx';
 import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
 
 type Isoform = {
   name: { value: string };
   isoformSequenceStatus: string;
   isoformIds: string[];
-  synonyms: Array<{ value: string }>;
-  note: { texts: Array<{ value: string }> };
+  synonyms: { value: string }[];
+  note: { texts: { value: string }[] };
   sequenceIds: string[];
 };
 
 export type AlternativeProducts = {
   commentType: Comment.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
-  note: { texts: Array<{ value: string }> };
+  note: { texts: { value: string }[] };
   events: string[];
 };
 
@@ -56,7 +56,7 @@ export const SequenceInfo: React.FC<{
     fetchIsoformData();
   }, [isoformToFetch]);
 
-  const dataToDisplay = data ? data : isoformSequence;
+  const dataToDisplay = data || isoformSequence;
 
   if (!dataToDisplay) {
     return (
@@ -124,7 +124,10 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
       <h4>{isoformData.isoformIds.join(', ')}</h4>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
-          This isoform has been chosen as the <strong>canonical</strong>{' '}
+          This isoform has been chosen as the 
+          {' '}
+          <strong>canonical</strong>
+          {' '}
           sequence. All positional information in this entry refers to it. This
           is also the sequence that appears in the downloadable versions of the
           entry.
@@ -172,10 +175,15 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
     isoformCountNode = (
       <p>
-        This entry describes{' '}
-        <strong>{data.alternativeProducts.isoforms.length}</strong> isoforms
-        produced by{' '}
-        <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
+        This entry describes
+        {' '}
+        <strong>{data.alternativeProducts.isoforms.length}</strong>
+        {' '}
+isoforms
+        produced by
+        {' '}
+        <strong>{data.alternativeProducts.events.join(' & ')}</strong>
+.
       </p>
     );
   }

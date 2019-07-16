@@ -93,18 +93,24 @@ const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
     return null;
   }
 
-  const setTrackData = useCallback(node => {
-    if (!!node) {
-      node.data = processedData;
-    }
-  }, []);
+  const setTrackData = useCallback(
+    node => {
+      if (node) {
+        node.data = processedData;
+      }
+    },
+    [processedData]
+  );
 
-  const setTableData = useCallback(node => {
-    if (!!node) {
-      node.data = processedData;
-      node.columns = columns;
-    }
-  }, []);
+  const setTableData = useCallback(
+    node => {
+      if (node) {
+        node.data = processedData;
+        node.columns = columns;
+      }
+    },
+    [processedData]
+  );
 
   return (
     <Fragment>

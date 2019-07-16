@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { InfoList } from 'franklin-sites';
-import { Xref } from '../../../model/utils/XrefUtils';
 import { Link } from 'react-router-dom';
+import { Xref } from '../../../model/utils/XrefUtils';
 
-export const ProteomesEntryView: React.FC<{ data?: Xref[] }> = ({ data }) => {
+const ProteomesEntryView: React.FC<{ data?: Xref[] }> = ({ data }) => {
   if (!data) {
     return null;
   }
@@ -37,3 +37,5 @@ export const ProteomesEntryView: React.FC<{ data?: Xref[] }> = ({ data }) => {
     </Fragment>
   );
 };
+
+export default ProteomesEntryView;

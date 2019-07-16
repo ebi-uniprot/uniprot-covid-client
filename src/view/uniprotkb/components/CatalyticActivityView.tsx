@@ -8,7 +8,7 @@ export type CatalyticActivityData = {
   commentType: Comment;
   reaction?: {
     name: string;
-    reactionReferences: Array<{ databaseType: string; id: string }>;
+    reactionReferences: { databaseType: string; id: string }[];
     ecNumber: string;
     evidences?: EvidenceType[];
   };
@@ -31,7 +31,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         catalyticActivity =>
           catalyticActivity.reaction && (
             <p key={v1()}>
-              <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
+              <strong>{catalyticActivity.reaction.ecNumber}</strong>
+              {' '}
               {catalyticActivity.reaction.name}
               {catalyticActivity.reaction.evidences &&
                 catalyticActivity.reaction.evidences.map(evidence => (

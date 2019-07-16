@@ -125,14 +125,14 @@ const getInfoListForNames = (name: ProteinNames) => {
         <Fragment>
           {name.shortNames
             .map(shortName => <NameWithEvidence data={shortName} key={v1()} />)
-            .reduce((acc, name) =>
+            .reduce((acc, shortName) =>
               acc === null ? (
-                name
+                shortName
               ) : (
                 <Fragment>
                   {acc}
 ;
-                  {name}
+                  {shortName}
                 </Fragment>
               )
             )}

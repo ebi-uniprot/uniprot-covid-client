@@ -6,7 +6,7 @@ import EntrySection from '../../model/types/EntrySection';
 import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import { GeneNamesListView } from './components/GeneNamesView';
 import { OrganismEntryView } from './components/OrganismView';
-import { ProteomesEntryView } from './components/ProteomesView';
+import ProteomesEntryView from './components/ProteomesView';
 import XRefView from './components/XRefView';
 
 const NamesAndTaxonomySection: FC<{

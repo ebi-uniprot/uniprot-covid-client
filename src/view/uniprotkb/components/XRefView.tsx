@@ -9,8 +9,8 @@ import {
   XrefUIModel,
   Xref,
   XrefsGoupedByDatabase,
-} from '../../../model/utils/XrefUtils.js';
-import { Property } from '../../../model/types/modelTypes.js';
+} from '../../../model/utils/XrefUtils';
+import { Property } from '../../../model/types/modelTypes';
 
 type XRefProps = {
   xrefs: XrefUIModel[];
@@ -66,7 +66,7 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
     return null;
   }
   const info = databaseToDatabaseInfo[database];
-  let properties: string = '';
+  let properties = '';
   if (entryProperties) {
     properties = entryProperties
       .map((property: Property) =>
