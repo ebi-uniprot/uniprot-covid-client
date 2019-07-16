@@ -46,17 +46,6 @@ interface ChangeEvent extends Event {
   detail?: { type: string; value: string[] };
 }
 
-const getColor = (variant: Variant) => {
-  if (
-    variant.association &&
-    variant.association.filter(association => association.disease).length > 0
-  ) {
-    return '#B22222';
-  } else {
-    return 'blue';
-  }
-};
-
 const VariationView: FC<{ accession: string }> = ({ accession }) => {
   loadWebComponent('protvista-variation', ProtvistaVariation);
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
@@ -70,7 +59,7 @@ const VariationView: FC<{ accession: string }> = ({ accession }) => {
 
   const setTrackData = useCallback(
     node => {
-      if (!!node && data.features) {
+      if (node !== null && data.features) {
         node.data = data;
         node.length = data.sequence.length;
       }
@@ -79,7 +68,9 @@ const VariationView: FC<{ accession: string }> = ({ accession }) => {
   );
 
   const addTooltipEventListener = useCallback(node => {
-    node.addEventListener('change', (e: ChangeEvent) => console.log(e));
+    if (node !== null) {
+      node.addEventListener('change', (e: ChangeEvent) => console.log(e));
+    }
   }, []);
 
   if (!data.sequence) {
