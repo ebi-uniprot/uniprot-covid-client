@@ -1,10 +1,10 @@
 import React from 'react';
 import { EvidenceTag } from 'franklin-sites';
 import { getEvidenceCodeData } from '../model/types/EvidenceCodes';
-import { EvidenceType } from '../model/types/modelTypes';
+import { Evidence } from '../model/types/modelTypes';
 
 type UniProtEvidenceProps = {
-  evidence: EvidenceType;
+  evidence: Evidence;
 };
 
 const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidence }) => {

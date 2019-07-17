@@ -159,7 +159,7 @@ describe('async actions', () => {
 
   it('creates RECEIVE_SEARCH_TERMS when fetching has been done', () => {
     const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
-    mock.onGet(apiUrls.advanced_search_terms).reply(200, data);
+    mock.onGet(apiUrls.advancedSearchTerms).reply(200, data);
     const expectedActions = [
       {
         type: actions.REQUEST_SEARCH_TERMS,

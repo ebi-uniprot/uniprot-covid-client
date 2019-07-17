@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
 import '@geneontology/ribbon/es/main.scss';

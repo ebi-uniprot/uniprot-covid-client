@@ -1,4 +1,4 @@
-export type EvidenceType = {
+export type Evidence = {
   evidenceCode: string; // TODO this needs to be an ECO instead of string
   source: string;
   id: string;
@@ -6,7 +6,7 @@ export type EvidenceType = {
 
 export type ValueWithEvidence = {
   value: string;
-  evidences: EvidenceType[];
+  evidences: Evidence[];
 };
 
 export type Property = {

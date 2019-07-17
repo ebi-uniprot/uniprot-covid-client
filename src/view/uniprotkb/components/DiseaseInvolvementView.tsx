@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExpandableList } from 'franklin-sites';
 import Comment from '../../../model/types/Comment';
-import { EvidenceType } from '../../../model/types/modelTypes';
+import { Evidence } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { databaseToDatabaseInfo } from '../../../data/database';
 import { Xref } from '../../../model/utils/XrefUtils';
@@ -14,7 +14,7 @@ type DiseaseType = {
   acronym?: string;
   description?: string;
   reference?: Xref;
-  evidences?: EvidenceType[];
+  evidences?: Evidence[];
 };
 
 export type DiseaseCommentData = {

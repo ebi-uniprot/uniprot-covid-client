@@ -21,7 +21,8 @@
     "jsx-no-multiline-js": 0,
     "jsx-no-lambda": 0,
     "@typescript-eslint/prefer-interface": 0,
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/consistent-type-definitions": 0,
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

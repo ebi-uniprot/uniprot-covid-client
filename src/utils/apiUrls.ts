@@ -11,7 +11,7 @@ const prefix = '//wwwdev.ebi.ac.uk';
 
 const apiUrls = {
   // uniprotkb advanced search terms
-  advanced_search_terms: joinUrl(
+  advancedSearchTerms: joinUrl(
     prefix,
     '/uniprot/api/configure/uniprotkb/search_terms'
   ),
@@ -26,20 +26,20 @@ const apiUrls = {
     go: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/go_evidences'),
   },
   // Database cross references used by advanced search
-  database_xefs: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databases'),
+  databaseXrefs: joinUrl(prefix, '/uniprot/api/configure/uniprotkb/databases'),
   // Database cross reference fields in result column configure
   // "itemType": "database",
-  database_fields: joinUrl(
+  databaseFields: joinUrl(
     prefix,
     '/uniprot/api/configure/uniprotkb/databasefields'
   ),
   // All result fields except database cross reference fields
-  results_fields: joinUrl(
+  resultsFields: joinUrl(
     prefix,
     '/uniprot/api/configure/uniprotkb/resultfields'
   ),
   // Retrieve results
-  advanced_search: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
+  advancedSearch: joinUrl(prefix, '/uniprot/api/uniprotkb/search'),
   entry: (accession: string) =>
     joinUrl(prefix, '/uniprot/api/uniprotkb/accession', accession),
 };
@@ -56,7 +56,7 @@ export const getQueryUrl = (
   sortBy?: SortableColumn | undefined,
   sortDirection?: SortDirectionApi | undefined
 ) =>
-  `${apiUrls.advanced_search}?${queryString.stringify({
+  `${apiUrls.advancedSearch}?${queryString.stringify({
     query: encodedQueryString,
     fields: columns.join(','),
     facets: 'reviewed,popular_organism,other_organism',

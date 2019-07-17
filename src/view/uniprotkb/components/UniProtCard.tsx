@@ -8,12 +8,14 @@ import {
 } from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtCard.scss';
 
-const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
+const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({
+  data,
+}): JSX.Element => {
   const recommendedName = idx(
     data,
-    _ => _.proteinDescription.recommendedName.fullName.value
+    (_): string => _.proteinDescription.recommendedName.fullName.value
   );
-  const organismName = idx(data, _ => _.organism.scientificName);
+  const organismName = idx(data, (_): string => _.organism.scientificName);
   return (
     <div className="uniprot-card">
       <h5>

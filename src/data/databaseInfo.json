@@ -1472,7 +1472,7 @@
         "xmlTag": "term"
       },
       {
-        "name": "GoEvidenceType",
+        "name": "GoEvidence",
         "xmlTag": "evidence"
       },
       {

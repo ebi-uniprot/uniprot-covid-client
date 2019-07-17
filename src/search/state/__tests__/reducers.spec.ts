@@ -109,7 +109,7 @@ describe('searchTerms reducer', () => {
 
   test('should receive search terms', () => {
     const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
-    mock.onGet(apiUrls.advanced_search_terms).reply(200, data);
+    mock.onGet(apiUrls.advancedSearchTerms).reply(200, data);
 
     const state = {
       isFetching: true,

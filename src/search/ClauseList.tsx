@@ -7,7 +7,8 @@ import {
   Clause,
   SearchTermType,
   Operator,
-  EvidenceType,
+  Evidence,
+  Evidences,
 } from './types/searchTypes';
 
 // .itemType
@@ -21,7 +22,7 @@ import {
 type ClauseListProps = {
   clauses: Clause[];
   searchTerms: SearchTermType[];
-  evidences: any;
+  evidences: Evidences;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
@@ -54,9 +55,9 @@ const ClauseList: React.FC<ClauseListProps> = ({
       let evidencesData;
       if (clause.searchTerm.hasEvidence) {
         const evidencesType =
-          clause.searchTerm.term === EvidenceType.GO
-            ? EvidenceType.GO
-            : EvidenceType.ANNOTATION;
+          clause.searchTerm.term === Evidence.GO
+            ? Evidence.GO
+            : Evidence.ANNOTATION;
         evidencesData = evidences[evidencesType].data || [];
       }
 

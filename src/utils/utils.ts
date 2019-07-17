@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const serializableDeepCopy = (x: object) =>
   JSON.parse(JSON.stringify(x));
 
@@ -5,7 +6,6 @@ export const serializableDeepAreEqual = (obj1: object, obj2: object) =>
   JSON.stringify(obj1) === JSON.stringify(obj2);
 
 export const removeProperty = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   obj: { [key: string]: any },
   property: string | number
 ): { [key: string]: object } => {
@@ -23,7 +23,5 @@ export const loadWebComponent = (name: string, className: Function) => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const flattenArrays = (arrays: any[][]) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [].concat(...(arrays as any[]));

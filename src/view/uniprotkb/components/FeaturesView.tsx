@@ -5,7 +5,7 @@ import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../../../utils/utils';
-import { EvidenceType } from '../../../model/types/modelTypes';
+import { Evidence } from '../../../model/types/modelTypes';
 import FeatureType from '../../../model/types/FeatureType';
 
 enum LocationModifier {
@@ -28,13 +28,13 @@ export type FeatureData = {
     start: FeatureLocation;
     end: FeatureLocation;
   };
-  evidences?: EvidenceType[];
+  evidences?: Evidence[];
 }[];
 
 type ProtvistaFeature = {
   type: string;
   description: string;
-  evidences: EvidenceType[];
+  evidences: Evidence[];
   start: number;
   end: number;
   startModifier: LocationModifier;
@@ -74,7 +74,7 @@ type ProcessedDatum = {
   endModifier: LocationModifier;
   type: FeatureType;
   description: string | undefined;
-  evidences: EvidenceType[] | undefined;
+  evidences: Evidence[] | undefined;
 }
 
 const processData = (data: FeatureData): ProcessedDatum[] =>

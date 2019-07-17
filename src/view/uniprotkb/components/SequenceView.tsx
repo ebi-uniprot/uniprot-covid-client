@@ -40,7 +40,7 @@ export const SequenceInfo: React.FC<{
   isoformId: string;
   isoformSequence?: SequenceData;
   lastUpdateDate?: string | null;
-}> = ({ isoformId, isoformSequence, lastUpdateDate }) => {
+}> = ({ isoformId, isoformSequence, lastUpdateDate }): JSX.Element => {
   const [data, setData] = useState(null);
   const [isoformToFetch, setIsoformToFetch] = useState('');
 

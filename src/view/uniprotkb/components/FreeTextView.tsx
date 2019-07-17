@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { EvidenceType } from '../../../model/types/modelTypes';
+import { Evidence } from '../../../model/types/modelTypes';
 import Comment from '../../../model/types/Comment';
 
 export type FreeTextType =
@@ -18,7 +18,7 @@ export type FreeTextType =
 
 export type FreeTextData = {
   commentType: Comment;
-  texts: [{ value: string; evidences: EvidenceType[] }];
+  texts: [{ value: string; evidences: Evidence[] }];
 }[];
 
 type FreeTextProps = {
@@ -33,11 +33,11 @@ const FreeTextView: React.FC<FreeTextProps> = ({
   if (!comments || comments.length <= 0) {
     return null;
   }
-  const freeTextData = comments.map((item, i) => (
-    <p key={`freetext_${i}_${item.commentType}`}>
-      {item.texts.map((itemText, j) => {
+  const freeTextData = comments.map(item => (
+    <p key={v1()}>
+      {item.texts.map(itemText => {
         return (
-          <Fragment key={`freetext_${i}_${item.commentType}_${j}`}>
+          <Fragment key={v1()}>
             {itemText.value}
             {itemText.evidences &&
               itemText.evidences.map(evidence => (

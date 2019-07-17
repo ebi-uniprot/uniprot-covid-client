@@ -1,14 +1,15 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { RootState, RootAction } from '../state/state-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RootState, RootAction } from '../state/state-types.d';
 import * as searchActions from './state/searchActions';
 import {
   Clause,
   SearchTermType,
   Operator,
-  EvidenceType,
+  Evidence,
+  Evidences,
   Namespace,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
@@ -19,12 +20,12 @@ import './styles/SearchContainer.scss';
 type Props = {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
-  searchTerms: [any];
+  searchTerms: SearchTermType[];
   namespace: Namespace;
   clauses: Clause[];
-  evidences: any;
+  evidences: Evidences;
   dispatchUpdateClauses: (clauses: Clause[]) => void;
-  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
+  dispatchfetchEvidencesIfNeeded: (type: Evidence) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   dispatchAddClause: () => void;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
@@ -37,14 +38,14 @@ type Props = {
   ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
-} & RouteComponentProps
+} & RouteComponentProps;
 
 type State = {
   queryString: string;
-}
+};
 
 export class Search extends Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     const { queryString } = props;
     this.state = { queryString };
@@ -52,26 +53,27 @@ export class Search extends Component<Props, State> {
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     const { queryString: prevQueryString } = prevProps;
     const { queryString } = this.props;
     if (prevQueryString !== queryString) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ queryString });
     }
   }
 
-  handleSubmitClick() {
+  private handleSubmitClick() {
     const { history, clauses, dispatchUpdateQueryString } = this.props;
     const queryString = createQueryString(clauses);
     dispatchUpdateQueryString(queryString);
     history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
   }
 
-  handleQueryStringChange(queryString: string) {
+  private handleQueryStringChange(queryString: string) {
     this.setState({ queryString });
   }
 
-  render() {
+  public render() {
     const { queryString } = this.state;
     const search = (
       <AdvancedSearch

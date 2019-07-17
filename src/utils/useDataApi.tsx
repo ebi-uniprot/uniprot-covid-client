@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
-import 'regenerator-runtime/runtime';
 
 const useDataApi = (url: string) => {
   const [data, setData] = useState<any>({});

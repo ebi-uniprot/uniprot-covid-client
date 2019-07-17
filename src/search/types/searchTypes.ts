@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export enum Namespace {
   uniprotkb = 'uniprotkb',
 }
@@ -33,6 +34,9 @@ export type SearchTermType = {
   }[];
   items?: SearchTermType[];
 };
+export type SearchTerms = {
+  data: SearchTermType[];
+};
 
 export type Input = {
   stringValue?: string;
@@ -49,7 +53,17 @@ export type Clause = {
   queryInput: Input;
 };
 
-export enum EvidenceType {
+export enum Evidence {
   GO = 'go',
   ANNOTATION = 'annotation',
 }
+
+type EvidenceData = {
+  data: any[];
+  isFetching: boolean;
+};
+
+export type Evidences = {
+  [Evidence.GO]: EvidenceData;
+  [Evidence.ANNOTATION]: EvidenceData;
+};
