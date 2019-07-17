@@ -49,25 +49,36 @@ type FeatureProps = {
 const columns = {
   type: {
     label: 'Type',
-    resolver: (d: ProtvistaFeature) => d.type,
+    resolver: (d: ProtvistaFeature): string => d.type,
   },
   positions: {
     label: 'Positions',
-    resolver: (d: ProtvistaFeature) =>
+    resolver: (d: ProtvistaFeature): string =>
       `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
         d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
       }`,
   },
   description: {
     label: 'Description',
-    resolver: (d: ProtvistaFeature) =>
+    resolver: (d: ProtvistaFeature): string =>
       `${d.description} ${d.evidences &&
-        d.evidences.map(evidence => `(${evidence.evidenceCode}) `)}`,
+        d.evidences.map((evidence): string => `(${evidence.evidenceCode}) `)}`,
   },
 };
 
-const processData = (data: FeatureData) =>
-  data.map(feature => {
+type ProcessedDatum = {
+  accession: string | undefined;
+  start: number;
+  end: number;
+  startModifier: LocationModifier;
+  endModifier: LocationModifier;
+  type: FeatureType;
+  description: string | undefined;
+  evidences: EvidenceType[] | undefined;
+}
+
+const processData = (data: FeatureData): ProcessedDatum[] =>
+  data.map((feature): ProcessedDatum => {
     return {
       accession: feature.featureId,
       start: feature.location.start.value,
@@ -80,7 +91,7 @@ const processData = (data: FeatureData) =>
     };
   });
 
-const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
+const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }): JSX.Element | null => {
   loadWebComponent('protvista-track', ProtvistaTrack);
   loadWebComponent('protvista-manager', ProtvistaManager);
   loadWebComponent('protvista-datatable', ProtvistaDatatable);
@@ -89,13 +100,10 @@ const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
 
   const processedData = processData(features);
 
-  if (processedData.length <= 0) {
-    return null;
-  }
-
   const setTrackData = useCallback(
-    node => {
+    (node): void => {
       if (node) {
+        // eslint-disable-next-line no-param-reassign
         node.data = processedData;
       }
     },
@@ -103,14 +111,20 @@ const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
   );
 
   const setTableData = useCallback(
-    node => {
+    (node): void => {
       if (node) {
+        // eslint-disable-next-line no-param-reassign
         node.data = processedData;
+        // eslint-disable-next-line no-param-reassign
         node.columns = columns;
       }
     },
     [processedData]
   );
+
+  if (processedData.length <= 0) {
+    return null;
+  }
 
   return (
     <Fragment>
