@@ -8,7 +8,9 @@ type OrganismDataProps = {
   data: OrganismData;
 };
 
-const OrganismView: React.FC<OrganismDataProps> = ({ data }) => {
+const OrganismView: React.FC<OrganismDataProps> = ({
+  data,
+}): JSX.Element | null => {
   if (!data) {
     return null;
   }
@@ -22,7 +24,7 @@ const OrganismView: React.FC<OrganismDataProps> = ({ data }) => {
 
 export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
   data,
-}) => {
+}): JSX.Element | null => {
   if (!data) {
     return null;
   }
@@ -63,10 +65,11 @@ export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
       title: 'Taxonomic lineage',
       content: (
         <Fragment>
-          {data.lineage.reduce((accumulator, lineageItem) =>
-            accumulator === null
-              ? lineageItem
-              : `${accumulator} > ${lineageItem}`
+          {data.lineage.reduce(
+            (accumulator, lineageItem): string =>
+              accumulator === null
+                ? lineageItem
+                : `${accumulator} > ${lineageItem}`
           )}
         </Fragment>
       ),
