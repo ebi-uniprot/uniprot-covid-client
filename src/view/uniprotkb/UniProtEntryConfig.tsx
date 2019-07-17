@@ -14,11 +14,11 @@ import StructureSection from './StructureSection';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;
-  sectionContent: (entryData: any) => JSX.Element;
+  sectionContent: (entryData: UniProtkbUIModel) => JSX.Element;
 }[] = [
   {
     name: EntrySection.Function,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <FunctionSection
         data={data[EntrySection.Function]}
         primaryAccession={data.primaryAccession}
@@ -29,7 +29,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.NamesAndTaxonomy,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <NamesAndTaxonomySection
         data={data[EntrySection.NamesAndTaxonomy]}
         primaryAccession={data.primaryAccession}
@@ -39,7 +39,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.SubCellularLocation,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <SubcellularLocationSection
         data={data[EntrySection.SubCellularLocation]}
         sequence={data[EntrySection.Sequence].sequence.value}
@@ -49,7 +49,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.PathologyAndBioTech,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <PathologyAndBiotechSection
         data={data[EntrySection.PathologyAndBioTech]}
         primaryAccession={data.primaryAccession}
@@ -60,7 +60,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.ProteinProcessing,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <ProteinProcessingSection
         data={data[EntrySection.ProteinProcessing]}
         sequence={data[EntrySection.Sequence].sequence.value}
@@ -71,7 +71,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.Expression,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <ExpressionSection
         data={data[EntrySection.Expression]}
         primaryAccession={data.primaryAccession}
@@ -81,7 +81,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.Interaction,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <InteractionSection
         data={data[EntrySection.Interaction]}
         primaryAccession={data.primaryAccession}
@@ -91,7 +91,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.Structure,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <StructureSection
         data={data[EntrySection.Structure]}
         primaryAccession={data.primaryAccession}
@@ -102,7 +102,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.FamilyAndDomains,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <FamilyAndDomainsSection
         data={data[EntrySection.FamilyAndDomains]}
         primaryAccession={data.primaryAccession}
@@ -113,7 +113,7 @@ const UniProtKBEntryConfig: {
   },
   {
     name: EntrySection.Sequence,
-    sectionContent: (data: UniProtkbUIModel) => (
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <SequenceSection
         data={data[EntrySection.Sequence]}
         primaryAccession={data.primaryAccession}
