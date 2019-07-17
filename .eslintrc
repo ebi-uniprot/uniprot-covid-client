@@ -38,12 +38,6 @@
     ],
     "react/prop-types": 0
   },
-  "overrides": [
-    {
-      "files": ["src"],
-      "excludedFiles": ["**/*.spec.ts"]
-    }
-  ],
   "settings": {
     "import/resolver": {
       "node": {
