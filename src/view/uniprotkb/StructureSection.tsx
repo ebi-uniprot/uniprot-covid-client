@@ -13,7 +13,7 @@ const StructureSection: FC<{
   data: UIModel;
   primaryAccession: string;
   sequence: string;
-}> = ({ data, primaryAccession, sequence }) => {
+}> = ({ data, primaryAccession, sequence }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
