@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RootState, RootAction } from '../state/state-types.d';
+import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
 import {
   Clause,
@@ -13,7 +13,7 @@ import {
   Namespace,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
-import { createQueryString } from './utils/QueryStringGenerator';
+import createQueryString from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 
@@ -45,7 +45,7 @@ type State = {
 };
 
 export class Search extends Component<Props, State> {
-  public constructor(props: Props) {
+  constructor(props: Props) {
     super(props);
     const { queryString } = props;
     this.state = { queryString };
@@ -53,27 +53,26 @@ export class Search extends Component<Props, State> {
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  public componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props) {
     const { queryString: prevQueryString } = prevProps;
     const { queryString } = this.props;
     if (prevQueryString !== queryString) {
-      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ queryString });
     }
   }
 
-  private handleSubmitClick() {
+  handleSubmitClick() {
     const { history, clauses, dispatchUpdateQueryString } = this.props;
     const queryString = createQueryString(clauses);
     dispatchUpdateQueryString(queryString);
     history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
   }
 
-  private handleQueryStringChange(queryString: string) {
+  handleQueryStringChange(queryString: string) {
     this.setState({ queryString });
   }
 
-  public render() {
+  render() {
     const { queryString } = this.state;
     const search = (
       <AdvancedSearch

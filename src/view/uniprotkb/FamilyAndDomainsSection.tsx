@@ -5,7 +5,7 @@ import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import Comment from '../../model/types/Comment';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 

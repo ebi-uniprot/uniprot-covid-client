@@ -10,7 +10,7 @@ import {
   Evidence,
   Clause,
 } from '../types/searchTypes';
-import { RootState } from '../../state/state-types.d';
+import { RootState } from '../../state/state-types';
 
 export const SELECT_SEARCH_TERM = 'SELECT_SEARCH_TERM';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
@@ -120,6 +120,7 @@ export const requestEvidences = (evidencesType: Evidence) =>
     evidencesType,
   });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const receiveEvidences = (data: any, evidencesType: Evidence) =>
   action(RECEIVE_EVIDENCES, {
     data,

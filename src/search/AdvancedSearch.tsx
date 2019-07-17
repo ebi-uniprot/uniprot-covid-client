@@ -33,7 +33,7 @@ type AdvancedSearchProps = {
   handleRemoveClause: (clauseId: string) => void;
 };
 class AdvancedSearch extends Component<AdvancedSearchProps> {
-  public componentDidMount() {
+  componentDidMount() {
     const {
       dispatchfetchEvidencesIfNeeded,
       dispatchFetchSearchTermsIfNeeded,
@@ -43,7 +43,7 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
     dispatchFetchSearchTermsIfNeeded();
   }
 
-  public render() {
+  render() {
     const {
       handleAdvancedSubmitClick,
       namespace,

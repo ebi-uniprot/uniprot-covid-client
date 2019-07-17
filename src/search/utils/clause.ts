@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
-import { Operator, Input, SearchTermType } from '../types/searchTypes';
+import { Operator, Input } from '../types/searchTypes';
 
 enum itemType {
   comment = 'comment',

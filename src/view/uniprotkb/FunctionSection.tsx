@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import FreeTextView from './components/FreeTextView';
 import CatalyticActivityView from './components/CatalyticActivityView';
 import KeywordView from './components/KeywordView';

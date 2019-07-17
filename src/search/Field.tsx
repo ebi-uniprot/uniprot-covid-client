@@ -88,7 +88,6 @@ const Field = ({
         handleChange: value => handleInputChange(value),
         value: queryInput.stringValue,
       });
-      break;
     default:
       return null;
   }

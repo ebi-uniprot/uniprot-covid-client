@@ -12,7 +12,7 @@ import {
   ListIcon,
   Loader,
 } from 'franklin-sites';
-import { default as queryStringModule } from 'query-string';
+import queryStringModule from 'query-string';
 import * as resultsActions from './state/resultsActions';
 import * as searchActions from '../search/state/searchActions';
 import { Clause, Namespace } from '../search/types/searchTypes';
@@ -28,6 +28,7 @@ import {
   SelectedFacet,
 } from './types/resultsTypes';
 import { ViewMode } from './state/resultsInitialState';
+import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -38,7 +39,7 @@ type ResultsProps = {
   clauses?: Clause[];
   tableColumns: string[];
   cardColumns: string[];
-  results: any[];
+  results: UniProtkbAPIModel[];
   facets: any[];
   isFetching: boolean;
   nextUrl: string;
@@ -54,28 +55,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedEntries: {} };
-  }
-
-  updateData() {
-    const {
-      location: { search: queryParamFromUrl },
-      tableColumns,
-      cardColumns,
-      dispatchFetchBatchOfResultsIfNeeded,
-      dispatchClearResults,
-      viewMode,
-    } = this.props;
-    const {
-      query,
-      selectedFacets,
-      sortColumn,
-      sortDirection,
-    } = this.getURLParams(queryParamFromUrl);
-    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
-    dispatchClearResults();
-    dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
-    );
   }
 
   componentDidMount() {
@@ -236,6 +215,28 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     this.setURLParams(query, selectedFacets, column, updatedDirection);
   };
+  
+  updateData() {
+    const {
+      location: { search: queryParamFromUrl },
+      tableColumns,
+      cardColumns,
+      dispatchFetchBatchOfResultsIfNeeded,
+      dispatchClearResults,
+      viewMode,
+    } = this.props;
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
+    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
+    dispatchClearResults();
+    dispatchFetchBatchOfResultsIfNeeded(
+      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+    );
+  }
 
   render() {
     const {
@@ -283,22 +284,23 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             <Fragment>
               {results.length > 0 && (
               <div className="button-group">
-                <button className="button link-button disabled">Blast</button>
-                <button className="button link-button disabled">Align</button>
-                <button className="button link-button">
+                <button type="button" className="button link-button disabled">Blast</button>
+                <button type="button" className="button link-button disabled">Align</button>
+                <button type="button" className="button link-button">
                   <DownloadIcon />
                     Download
                 </button>
-                <button className="button link-button disabled">
+                <button type="button" className="button link-button disabled">
                   <BasketIcon />
-                    Add
+                  Add
                 </button>
-                <button className="button link-button">
+                <button type="button" className="button link-button">
                   <StatisticsIcon />
                     Statistics
                 </button>
-                <button className="button link-button">Map to</button>
+                <button type="button" className="button link-button">Map to</button>
                 <button
+                  type="button"
                   className="button link-button large-icon"
                   onClick={() => dispatchSwitchViewMode()}
                   data-testid="table-card-toggle"

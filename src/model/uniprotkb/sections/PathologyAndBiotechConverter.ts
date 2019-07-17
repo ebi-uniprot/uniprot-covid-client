@@ -10,7 +10,7 @@ const featuresCategories = [FeatureType.MUTAGEN];
 
 const commentsCategories = [Comment.DISEASE];
 
-export const convertPathologyAndBiotech = (data: APIModel) => {
+const convertPathologyAndBiotech = (data: APIModel) => {
   return convertSection(
     data,
     commentsCategories,
@@ -19,3 +19,5 @@ export const convertPathologyAndBiotech = (data: APIModel) => {
     EntrySection.PathologyAndBioTech
   );
 };
+
+export default convertPathologyAndBiotech;

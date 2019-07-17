@@ -4,7 +4,7 @@ import FeaturesView from './components/FeaturesView';
 import DiseaseInvolvementView from './components/DiseaseInvolvementView';
 import KeywordView from './components/KeywordView';
 import EntrySection from '../../model/types/EntrySection';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import Comment from '../../model/types/Comment';
 import XRefView from './components/XRefView';

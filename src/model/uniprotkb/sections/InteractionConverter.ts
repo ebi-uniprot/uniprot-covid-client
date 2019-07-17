@@ -13,3 +13,5 @@ export const convertInteraction = (data: APIModel) => {
     EntrySection.Interaction
   );
 };
+
+export default convertInteraction;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { EntryProteinNames } from './components/ProteinNamesView';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import { GeneNamesListView } from './components/GeneNamesView';

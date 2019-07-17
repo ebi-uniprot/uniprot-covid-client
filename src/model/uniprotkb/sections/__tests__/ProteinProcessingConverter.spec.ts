@@ -1,4 +1,4 @@
-import { convertProteinProcessing } from '../ProteinProcessingConverter';
+import convertProteinProcessing from '../ProteinProcessingConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Protein processing data converter', () => {

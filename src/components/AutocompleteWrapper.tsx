@@ -34,24 +34,23 @@ type SelectValue = {
 };
 
 class AutocompleteWrapper extends Component<Props, State> {
+  static prepareData(suggestions: Suggestion[]) {
+    return suggestions.map(
+      (suggestion: Suggestion): SelectValue => ({
+        pathLabel: `${suggestion.value} [${suggestion.id}]`,
+        itemLabel: suggestion.value,
+        apiId: suggestion.id,
+        id: v1(),
+      })
+    );
+  }
+
   id: string;
 
   constructor(props: Props) {
     super(props);
     this.state = { data: [] };
     this.id = v1();
-  }
-
-  static prepareData(suggestions: Suggestion[]) {
-    return suggestions.map(
-      (suggestion: Suggestion) =>
-        ({
-          pathLabel: `${suggestion.value} [${suggestion.id}]`,
-          itemLabel: suggestion.value,
-          apiId: suggestion.id,
-          id: v1(),
-        } as SelectValue)
-    );
   }
 
   handleChange = (textInputValue: string) => {
@@ -65,6 +64,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     fetchData(url)
       .then(data => AutocompleteWrapper.prepareData(data.data.suggestions))
       .then(data => this.setState({ data }))
+      // eslint-disable-next-line no-console
       .catch(e => console.error(e));
   };
 

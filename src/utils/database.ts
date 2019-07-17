@@ -4,7 +4,7 @@ import {
   DatabaseInfo,
   DatabaseInfoPoint,
 } from '../model/types/DatabaseTypes';
-import { flattenArrays } from "./utils";
+import { flattenArrays } from './utils';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseCategoryToNames = new Map<DatabaseCategory, string[]>();
@@ -59,14 +59,15 @@ export const getEntrySectionToDatabaseCategoryOrder = (
     EntrySection,
     (string)[]
   >();
+  // eslint-disable-next-line no-restricted-syntax
   for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
     const uniqueCategories: DatabaseCategory[] = [];
+    // eslint-disable-next-line no-restricted-syntax
     for (const databaseName of databaseNames) {
       const databaseCategory = databaseNameToCategory.get(databaseName);
-      if (!databaseCategory || uniqueCategories.includes(databaseCategory)) {
-        continue;
+      if (databaseCategory && !uniqueCategories.includes(databaseCategory)) {
+        uniqueCategories.push(databaseCategory);
       }
-      uniqueCategories.push(databaseCategory);
     }
     entrySectionToDatabaseCategoryOrder.set(entrySection, uniqueCategories);
   }

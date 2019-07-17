@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React from 'react';
 import SimpleView from '../view/uniprotkb/components/SimpleView';
 import { ProteinNamesView } from '../view/uniprotkb/components/ProteinNamesView';
-import { convertProteinNames } from './uniprotkb/ProteinNamesConverter';
+import convertProteinNames from './uniprotkb/ProteinNamesConverter';
 import OrganismView from '../view/uniprotkb/components/OrganismView';
 import GeneNamesView from '../view/uniprotkb/components/GeneNamesView';
-import { convertGeneNames } from './uniprotkb/GeneNamesConverter';
+import convertGeneNames from './uniprotkb/GeneNamesConverter';
+import { UniProtkbAPIModel } from './uniprotkb/UniProtkbConverter';
 
 const ColumnConfiguration: {
   [index: string]: {
     label: string;
-    render: (data: any) => JSX.Element | undefined;
+    render: (data: UniProtkbAPIModel) => JSX.Element | undefined;
   };
 } = {
   accession: {

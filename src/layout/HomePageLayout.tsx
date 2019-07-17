@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseLayout from './BaseLayout';
 
 import './styles/HomePageLayout.scss';
 

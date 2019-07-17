@@ -4,7 +4,7 @@ import EntrySection from '../../types/EntrySection';
 
 const featuresCategories = [FeatureType.HELIX, FeatureType.STRAND];
 
-export const convertStructure = (data: APIModel) => {
+const convertStructure = (data: APIModel) => {
   return convertSection(
     data,
     undefined,
@@ -13,3 +13,5 @@ export const convertStructure = (data: APIModel) => {
     EntrySection.Structure
   );
 };
+
+export default convertStructure;

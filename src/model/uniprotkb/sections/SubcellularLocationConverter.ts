@@ -6,7 +6,7 @@ const keywordsCategories = [KeywordCategory.CELLULAR_COMPONENT];
 
 const featuresCategories = [FeatureType.TOPO_DOM, FeatureType.TRANSMEM];
 
-export const convertSubcellularLocation = (data: APIModel) => {
+const convertSubcellularLocation = (data: APIModel) => {
   return convertSection(
     data,
     undefined,
@@ -15,3 +15,5 @@ export const convertSubcellularLocation = (data: APIModel) => {
     undefined
   );
 };
+
+export default convertSubcellularLocation;

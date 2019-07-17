@@ -1,4 +1,4 @@
-import { convertInteraction } from '../InteractionConverter';
+import convertInteraction from '../InteractionConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Interaction data converter', () => {

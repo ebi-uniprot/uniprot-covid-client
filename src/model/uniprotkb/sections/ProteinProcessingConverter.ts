@@ -22,7 +22,7 @@ const featuresCategories = [
 
 const proteinProcessingComments = [Comment.PTM];
 
-export const convertProteinProcessing = (data: APIModel) => {
+const convertProteinProcessing = (data: APIModel) => {
   return convertSection(
     data,
     proteinProcessingComments,
@@ -31,3 +31,5 @@ export const convertProteinProcessing = (data: APIModel) => {
     EntrySection.ProteinProcessing
   );
 };
+
+export default convertProteinProcessing;

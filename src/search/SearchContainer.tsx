@@ -11,11 +11,11 @@ import './styles/SearchContainer.scss';
 type SearchProps = {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
-} & RouteComponentProps
+} & RouteComponentProps;
 
 type SearchContainerState = {
   queryString: string;
-}
+};
 
 export class Search extends Component<SearchProps, SearchContainerState> {
   constructor(props: SearchProps) {

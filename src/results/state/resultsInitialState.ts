@@ -1,3 +1,5 @@
+import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+
 export enum ViewMode {
   TABLE,
   CARD,
@@ -10,7 +12,7 @@ export type ResultsState = {
   nextUrl: string;
   isFetching: boolean;
   isFetched: { [url: string]: boolean };
-  results: any[];
+  results: UniProtkbAPIModel[];
   totalNumberResults: number;
   viewMode: ViewMode;
 };

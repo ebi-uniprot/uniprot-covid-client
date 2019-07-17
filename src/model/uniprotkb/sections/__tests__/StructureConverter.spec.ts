@@ -1,4 +1,4 @@
-import { convertStructure } from '../StructureConverter';
+import convertStructure from '../StructureConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Structure data converter', () => {
