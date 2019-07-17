@@ -4,7 +4,7 @@ import {
   DatabaseInfo,
   DatabaseInfoPoint,
 } from '../model/types/DatabaseTypes';
-import { flattenArrays } from '../utils/utils';
+import { flattenArrays } from "./utils";
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseCategoryToNames = new Map<DatabaseCategory, string[]>();

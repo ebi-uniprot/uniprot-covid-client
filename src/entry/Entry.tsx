@@ -12,11 +12,11 @@ import EntrySection from '../model/types/EntrySection';
 import { hasContent } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 
-interface MatchParams {
+type MatchParams = {
   accession: string;
 }
 
-interface EntryProps extends RouteComponentProps<MatchParams> {}
+type EntryProps = {} & RouteComponentProps<MatchParams>
 
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
@@ -39,7 +39,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     <Fragment>
       <SideBarLayout
         sidebar={<InPageNav sections={sections} />}
-        content={
+        content={(
           <Fragment>
             <div className="button-group">
               <button className="button link-button">Blast</button>
@@ -60,7 +60,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
               return sectionContent(transformedData);
             })}
           </Fragment>
-        }
+)}
       />
 
       {/* <Card title="Structure">

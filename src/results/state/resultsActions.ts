@@ -1,8 +1,8 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import fetchData from '../../utils/fetchData';
 import idx, { IDXOptional } from 'idx';
+import fetchData from '../../utils/fetchData';
 import { RootState } from '../../state/state-types';
 import 'regenerator-runtime/runtime';
 

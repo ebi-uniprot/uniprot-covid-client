@@ -62,7 +62,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         <DataList
           idKey="primaryAccession"
           data={results}
-          selectable={true}
+          selectable
           selected={selectedEntries}
           onSelect={handleEntrySelection}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
@@ -79,7 +79,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           idKey="primaryAccession"
           columns={columns}
           data={results}
-          selectable={true}
+          selectable
           selected={selectedEntries}
           onSelect={handleEntrySelection}
           onHeaderClick={handleHeaderClick}

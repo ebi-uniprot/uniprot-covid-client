@@ -8,14 +8,14 @@ import {
   waitForElement,
   fireEvent,
 } from '@testing-library/react';
-import ResultsContainer from '../ResultsContainer';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from '../../state/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { createMemoryHistory } from 'history';
+import ResultsContainer from '../ResultsContainer';
+import rootReducer from '../../state/rootReducer';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
-import { createMemoryHistory } from 'history';
 
 jest.mock('axios');
 
@@ -117,7 +117,7 @@ describe('Results component', () => {
     const { container, getByTestId, getByText } = renderWithRedux(
       <ResultsContainer />
     );
-    let toggle = await waitForElement(() => getByTestId('table-card-toggle'));
+    const toggle = await waitForElement(() => getByTestId('table-card-toggle'));
     expect(container.querySelector('div')).toBeNull;
     fireEvent.click(toggle);
     const table = await waitForElement(() => getByText('Entry'));
@@ -133,13 +133,13 @@ describe('Results component', () => {
       <ResultsContainer />,
       { initialState: state }
     );
-    let checkbox = await waitForElement(() =>
+    const checkbox = await waitForElement(() =>
       container.querySelector('input[type=checkbox]')
     );
     // As the checkbox selection currently has no effect on the
     // UI we can't test much at the moment
     expect(checkbox.checked).toBeFalsy;
-    fireEvent.click(checkbox); //de-select
+    fireEvent.click(checkbox); // de-select
     expect(checkbox.checked).toBeTruthy;
   });
 

@@ -4,7 +4,7 @@ import BaseLayout from './BaseLayout';
 import './styles/HomePageLayout.scss';
 
 type HomePageLayoutProps = {
-  children: Array<JSX.Element>;
+  children: JSX.Element[];
 };
 
 const HomePageLayout: React.FC<HomePageLayoutProps> = props => {

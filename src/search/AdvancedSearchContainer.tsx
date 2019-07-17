@@ -16,7 +16,7 @@ import { createQueryString } from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 
-interface Props extends RouteComponentProps {
+type Props = {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
   searchTerms: [any];
@@ -37,9 +37,9 @@ interface Props extends RouteComponentProps {
   ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
-}
+} & RouteComponentProps
 
-interface State {
+type State = {
   queryString: string;
 }
 

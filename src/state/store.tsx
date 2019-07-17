@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import rootReducer from './rootReducer';
 
 declare global {
-  interface Window {
+  type Window = {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
   }
 }

@@ -1,6 +1,6 @@
 import { Clause } from '../types/searchTypes';
 
-interface IPrefixMap {
+type IPrefixMap = {
   feature: string;
   comment: string;
   [key: string]: string;

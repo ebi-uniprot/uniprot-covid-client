@@ -12,7 +12,7 @@ const useDataApi = (url: string) => {
 
   useEffect(() => {
     getData();
-  }, [url]);
+  }, [getData, url]);
 
   return data;
 };

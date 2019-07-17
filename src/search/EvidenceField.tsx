@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 type EvidenceFieldProps = {
   value: string | undefined;
   handleChange: (value: string) => void;
-  data: Array<any>;
+  data: any[];
 };
 
 const EvidenceField: React.FC<EvidenceFieldProps> = ({ value = '', handleChange, data = [] }) => {

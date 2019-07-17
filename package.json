@@ -9,6 +9,7 @@
     "build": "webpack --mode production --config webpack.prod.js",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts'",
+    "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts' --fix",
     "test": "yarn check-types && yarn lint && jest",
     "clear-test-cache": "jest --clearCache"
   },

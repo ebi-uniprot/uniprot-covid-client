@@ -19,8 +19,8 @@ import {
 // Group: this item type is a group type, grouping a list of search items
 
 type ClauseListProps = {
-  clauses: Array<Clause>;
-  searchTerms: Array<SearchTermType>;
+  clauses: Clause[];
+  searchTerms: SearchTermType[];
   evidences: any;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;

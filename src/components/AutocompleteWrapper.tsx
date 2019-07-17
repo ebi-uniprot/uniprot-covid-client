@@ -19,11 +19,11 @@ type Suggestion = {
 type Suggestions = {
   dictionary: string;
   query: string;
-  suggestions: Array<Suggestion>;
+  suggestions: Suggestion[];
 };
 
 type State = {
-  data: Array<SelectValue>;
+  data: SelectValue[];
 };
 
 type SelectValue = {
@@ -35,11 +35,13 @@ type SelectValue = {
 
 class AutocompleteWrapper extends Component<Props, State> {
   id: string;
+
   constructor(props: Props) {
     super(props);
     this.state = { data: [] };
     this.id = v1();
   }
+
   static prepareData(suggestions: Suggestion[]) {
     return suggestions.map(
       (suggestion: Suggestion) =>

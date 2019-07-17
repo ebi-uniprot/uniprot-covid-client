@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { SearchTermType } from './types/searchTypes';
 
-interface RangeFieldProps {
+type RangeFieldProps = {
   field: SearchTermType;
   type?: string;
   handleChange: (value: string, isFrom: boolean) => void;

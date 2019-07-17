@@ -1,7 +1,7 @@
 import React from 'react';
 import { Operator } from './types/searchTypes';
 
-const operators: Array<Operator> = [Operator.AND, Operator.OR, Operator.NOT];
+const operators: Operator[] = [Operator.AND, Operator.OR, Operator.NOT];
 
 const LogicalOperator = ({ value, handleChange }: { value: Operator; handleChange: Function }) => (
   <select

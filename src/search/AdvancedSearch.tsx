@@ -13,7 +13,7 @@ type AdvancedSearchProps = {
   searchTerms: [any];
   queryString: string;
   namespace: Namespace;
-  clauses: Array<Clause>;
+  clauses: Clause[];
   evidences: any;
   dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
