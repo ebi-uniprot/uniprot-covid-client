@@ -9,7 +9,7 @@ import { UIModel } from '../../model/uniprotkb/SectionConverter';
 const SubcellularLocationSection: FC<{
   data: UIModel;
   sequence: string;
-}> = ({ data, sequence }) => {
+}> = ({ data, sequence }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
