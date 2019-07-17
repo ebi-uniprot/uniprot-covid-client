@@ -13,7 +13,7 @@ const ProteinProcessingSection: FC<{
   data: UIModel;
   primaryAccession: string;
   sequence: string;
-}> = ({ data, sequence, primaryAccession }) => {
+}> = ({ data, sequence, primaryAccession }): JSX.Element | null=> {
   if (!hasContent(data)) {
     return null;
   }

@@ -11,7 +11,7 @@ import Comment from '../../model/types/Comment';
 const ExpressionSection: FC<{
   data: UIModel;
   primaryAccession: string;
-}> = ({ data, primaryAccession }) => {
+}> = ({ data, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }

@@ -12,7 +12,7 @@ import XRefView from './components/XRefView';
 const NamesAndTaxonomySection: FC<{
   data: NamesAndTaxonomyUIModel;
   primaryAccession: string;
-}> = ({ data, primaryAccession }) => {
+}> = ({ data, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }

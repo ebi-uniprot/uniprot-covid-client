@@ -13,7 +13,7 @@ const FamilyAndDomainsSection: FC<{
   data: UIModel;
   sequence: string;
   primaryAccession: string;
-}> = ({ data, sequence, primaryAccession }) => {
+}> = ({ data, sequence, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }

@@ -44,7 +44,7 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   accession,
   id,
   children,
-}) => {
+}): JSX.Element=> {
   let link = url;
   if (accession) {
     link = link.replace(/%acc/g, accession);
@@ -55,7 +55,7 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   return <ExternalLink url={link}>{children}</ExternalLink>;
 };
 
-const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
+const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }): JSX.Element | null=> {
   const { databaseType: database, properties: entryProperties, id } = xRefEntry;
   if (
     !id ||
@@ -69,8 +69,8 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   let properties = '';
   if (entryProperties) {
     properties = entryProperties
-      .map((property: Property) =>
-        property.value && property.value === '-' ? '' : property.value
+      .map((property: Property): string =>
+        !property.value || (property.value && property.value === '-') ? '' : property.value
       )
       .join(' ');
   }
@@ -87,12 +87,12 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
 const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
-}) => {
-  const infoData = databases.sort().map(database => ({
+}): JSX.Element => {
+  const infoData = databases.sort().map((database): {title: string, content: JSX.Element} => ({
     title: database.database,
     content: (
       <ExpandableList descriptionString={`${database.database} links`}>
-        {database.xrefs.map(xref => ({
+        {database.xrefs.map((xref): { id: string, content: JSX.Element} => ({
           id: v1(),
           content: (
             <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
@@ -104,11 +104,11 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   return <InfoList infoData={infoData} />;
 };
 
-const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
+const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }): JSX.Element | null => {
   if (!xrefs) {
     return null;
   }
-  const nodes = xrefs.map(xrefCategory => {
+  const nodes = xrefs.map((xrefCategory): JSX.Element => {
     const infoListNode = (
       <XRefCategoryInfoList
         databases={xrefCategory.databases}

@@ -11,7 +11,7 @@ import { SequenceUIModel } from '../../model/uniprotkb/sections/SequenceConverte
 const SequenceSection: FC<{
   data: SequenceUIModel;
   primaryAccession: string;
-}> = ({ data, primaryAccession }) => {
+}> = ({ data, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
