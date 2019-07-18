@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { EntryProteinNames } from './components/ProteinNamesView';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import { GeneNamesListView } from './components/GeneNamesView';
 import { OrganismEntryView } from './components/OrganismView';
-import { ProteomesEntryView } from './components/ProteomesView';
+import ProteomesEntryView from './components/ProteomesView';
 import XRefView from './components/XRefView';
 
 const NamesAndTaxonomySection: FC<{
   data: NamesAndTaxonomyUIModel;
   primaryAccession: string;
-}> = ({ data, primaryAccession }) => {
+}> = ({ data, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }

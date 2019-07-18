@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
-import FreeTextView from '../uniprotkb/components/FreeTextView';
-import CatalyticActivityView from '../uniprotkb/components/CatalyticActivityView';
-import KeywordView from '../uniprotkb/components/KeywordView';
-import XRefView from '../uniprotkb/components/XRefView';
-import FeaturesView from '../uniprotkb/components/FeaturesView';
+import hasContent from '../../model/utils/utils';
+import FreeTextView from './components/FreeTextView';
+import CatalyticActivityView from './components/CatalyticActivityView';
+import KeywordView from './components/KeywordView';
+import XRefView from './components/XRefView';
+import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import Comment from '../../model/types/Comment';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
@@ -15,7 +15,7 @@ const FunctionSection: FC<{
   data: UIModel;
   sequence: string;
   primaryAccession: string;
-}> = ({ data, sequence, primaryAccession }) => {
+}> = ({ data, sequence, primaryAccession }): JSX.Element | null=> {
   if (!hasContent(data)) {
     return null;
   }
@@ -28,11 +28,11 @@ const FunctionSection: FC<{
         />
         <FreeTextView
           comments={data.commentsData.get(Comment.PATHWAY)}
-          includeTitle={true}
+          includeTitle
         />
         <FreeTextView
           comments={data.commentsData.get(Comment.MISCELLANEOUS)}
-          includeTitle={true}
+          includeTitle
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <GoRibbon primaryAccession={primaryAccession} />

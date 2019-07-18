@@ -1,7 +1,7 @@
 import React from 'react';
 import { SearchTermType } from './types/searchTypes';
 
-interface TextFieldProps {
+type TextFieldProps = {
   field: SearchTermType;
   type: string;
   value?: string;

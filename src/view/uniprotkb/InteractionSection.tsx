@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
-import FreeTextView from '../uniprotkb/components/FreeTextView';
-import XRefView from '../uniprotkb/components/XRefView';
+import FreeTextView from './components/FreeTextView';
+import XRefView from './components/XRefView';
 import Comment from '../../model/types/Comment';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const InteractionSection: FC<{
   data: UIModel;
   primaryAccession: string;
-}> = ({ data, primaryAccession }) => {
+}> = ({ data, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
@@ -18,7 +18,7 @@ const InteractionSection: FC<{
   return (
     <div id={EntrySection.Interaction}>
       <Card title={EntrySection.Interaction}>
-        {comments && <FreeTextView comments={comments} includeTitle={true} />}
+        {comments && <FreeTextView comments={comments} includeTitle />}
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </div>

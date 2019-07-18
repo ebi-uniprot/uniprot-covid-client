@@ -12,9 +12,9 @@ Our preferred coding-style conventions are the [Airbnb's](http://airbnb.io/proje
 
 You don't need to read or memorise all the styling rules; Write your code exactly the same way you always do, but when you are finished with editing a file or a even better, after modifying a few lines, go ahead and run the relevant linter in your terminal and the result of linter should be clear and self-explanatory enough for you to easily modify your changes to satisfy the linters.
 
-### Running JavaScript/React/JSX Linter
+### Running TypeScript/TSX/React Linter
 
-Simply execute `yarn tslint`.
+Simply execute `yarn lint`.
 
 # Running Unit Tests
 

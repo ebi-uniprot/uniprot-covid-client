@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import ClauseList from './ClauseList';
 import {
   Namespace,
-  EvidenceType,
+  Evidence,
   Clause,
   SearchTermType,
   Operator,
+  Evidences,
 } from './types/searchTypes';
 import './styles/AdvancedSearch.scss';
 
 type AdvancedSearchProps = {
-  searchTerms: [any];
+  searchTerms: SearchTermType[];
   queryString: string;
   namespace: Namespace;
-  clauses: Array<Clause>;
-  evidences: any;
-  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
+  clauses: Clause[];
+  evidences: Evidences;
+  dispatchfetchEvidencesIfNeeded: (type: Evidence) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   handleAdvancedSubmitClick: () => void;
   dispatchAddClause: () => void;
@@ -36,8 +37,8 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
       dispatchfetchEvidencesIfNeeded,
       dispatchFetchSearchTermsIfNeeded,
     } = this.props;
-    dispatchfetchEvidencesIfNeeded(EvidenceType.GO);
-    dispatchfetchEvidencesIfNeeded(EvidenceType.ANNOTATION);
+    dispatchfetchEvidencesIfNeeded(Evidence.GO);
+    dispatchfetchEvidencesIfNeeded(Evidence.ANNOTATION);
     dispatchFetchSearchTermsIfNeeded();
   }
 

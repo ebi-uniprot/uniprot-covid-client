@@ -1,4 +1,5 @@
-export const hasContent = (obj: any) => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const hasContent = (obj: any) => {
   return Object.values(obj).some(val => {
     if (Array.isArray(val)) {
       const valArray = val as any[];
@@ -10,3 +11,5 @@ export const hasContent = (obj: any) => {
     return false;
   });
 };
+
+export default hasContent;

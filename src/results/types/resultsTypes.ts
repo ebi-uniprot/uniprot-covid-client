@@ -2,6 +2,7 @@ export enum SortableColumn {
   accession = 'accession',
   mnemonic = 'mnemonic',
   name = 'name',
+  // eslint-disable-next-line @typescript-eslint/camelcase
   annotation_score = 'annotation_score',
   gene = 'gene',
   length = 'length',
@@ -19,14 +20,10 @@ export enum SortDirectionApi {
   descend = 'desc',
 }
 
-export const getApiSortDirection = (direction: SortDirection) => {
-  switch (direction) {
-    case SortDirection.ascend:
-      return SortDirectionApi.ascend;
-    case SortDirection.descend:
-      return SortDirectionApi.descend;
-  }
-};
+export const getApiSortDirection = (direction: SortDirection) =>
+  direction === SortDirection.ascend
+    ? SortDirectionApi.ascend
+    : SortDirectionApi.descend;
 
 export type SelectedFacet = { name: string; value: string };
 export type SelectedEntries = { [key: string]: boolean };

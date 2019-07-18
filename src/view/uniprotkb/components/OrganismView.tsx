@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react';
-import SimpleView from './SimpleView';
-import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
+import SimpleView from './SimpleView';
+import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
 type OrganismDataProps = {
   data: OrganismData;
 };
 
-const OrganismView: React.FC<OrganismDataProps> = ({ data }) => {
+const OrganismView: React.FC<OrganismDataProps> = ({
+  data,
+}): JSX.Element | null => {
   if (!data) {
     return null;
   }
@@ -22,7 +24,7 @@ const OrganismView: React.FC<OrganismDataProps> = ({ data }) => {
 
 export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
   data,
-}) => {
+}): JSX.Element | null => {
   if (!data) {
     return null;
   }
@@ -32,7 +34,11 @@ export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
       title: 'Organism',
       content: (
         <Link to={`/taxonomy/${data.taxonId}`}>
-          {data.scientificName} ({data.commonName})
+          {data.scientificName}
+          {' '}
+(
+          {data.commonName}
+)
         </Link>
       ),
     });
@@ -59,10 +65,11 @@ export const OrganismEntryView: React.FC<{ data?: OrganismData }> = ({
       title: 'Taxonomic lineage',
       content: (
         <Fragment>
-          {data.lineage.reduce((accumulator, lineageItem) =>
-            accumulator === null
-              ? lineageItem
-              : `${accumulator} > ${lineageItem}`
+          {data.lineage.reduce(
+            (accumulator, lineageItem): string =>
+              accumulator === null
+                ? lineageItem
+                : `${accumulator} > ${lineageItem}`
           )}
         </Fragment>
       ),

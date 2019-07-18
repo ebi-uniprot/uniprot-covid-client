@@ -1,4 +1,4 @@
-import { combineReducers, Action, Reducer, ReducersMapObject } from 'redux';
+import { combineReducers } from 'redux';
 import searchReducers, { SearchAction } from '../search/state/searchReducers';
 import resultsReducers, {
   ResultAction,

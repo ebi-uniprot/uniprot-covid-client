@@ -16,7 +16,7 @@ const featuresCategories = [
 
 const familyAndDomainsComments = [Comment.DOMAIN, Comment.SIMILARITY];
 
-export const convertFamilyAndDomains = (data: APIModel) => {
+const convertFamilyAndDomains = (data: APIModel) => {
   return convertSection(
     data,
     familyAndDomainsComments,
@@ -25,3 +25,5 @@ export const convertFamilyAndDomains = (data: APIModel) => {
     EntrySection.FamilyAndDomains
   );
 };
+
+export default convertFamilyAndDomains;

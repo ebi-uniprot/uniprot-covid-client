@@ -6,7 +6,7 @@ const infoMappings: {
   [index in Namespace]: {
     name: string;
     info: JSX.Element;
-    links: Array<{ title: string; destination: string }>;
+    links: { title: string; destination: string }[];
   }
 } = {
   uniprotkb: {

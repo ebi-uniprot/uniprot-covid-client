@@ -15,9 +15,9 @@ const App = () => (
       <Switch>
         <Route
           path="/"
-          exact={true}
+          exact
           render={() => (
-            <BaseLayout isHomePage={true}>
+            <BaseLayout isHomePage>
               <HomePage />
             </BaseLayout>
           )}
@@ -41,7 +41,7 @@ const App = () => (
         <Route
           path="/advancedSearch"
           render={() => (
-            <BaseLayout isSearchPage={true}>
+            <BaseLayout isSearchPage>
               <AdvancedSearchPage />
             </BaseLayout>
           )}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
 import '@geneontology/ribbon/es/main.scss';
@@ -37,7 +38,7 @@ const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
             <Ribbon
               entities={entities}
               config={config}
-              showing={true}
+              showing
               entityLabel={POSITION.RIGHT}
               colorBy={COLOR_BY.CLASS_COUNT}
               binaryColor={false}

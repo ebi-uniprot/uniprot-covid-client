@@ -1,20 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './rootReducer';
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
-  }
-}
-
 function configureStore(initialState?: object) {
   let store;
   if (process.env.NODE_ENV === 'development') {
-    const debug = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+    const debug = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     store = createStore(
       rootReducer,
-      initialState!,
+      initialState,
       debug
         ? debug(applyMiddleware(thunkMiddleware))
         : applyMiddleware(thunkMiddleware)
@@ -22,7 +17,7 @@ function configureStore(initialState?: object) {
   } else {
     store = createStore(
       rootReducer,
-      initialState!,
+      initialState,
       applyMiddleware(thunkMiddleware)
     );
   }

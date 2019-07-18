@@ -1,7 +1,7 @@
 import idx from 'idx';
 import { ProteinNamesData } from './sections/NamesAndTaxonomyConverter';
 
-export const convertProteinNames = (data: ProteinNamesData) => {
+const convertProteinNames = (data: ProteinNamesData) => {
   let recommendedName;
   let shortNames;
   if (data.recommendedName) {
@@ -31,3 +31,5 @@ export const convertProteinNames = (data: ProteinNamesData) => {
   }
   return { recommendedName, shortNames, alternativeNames };
 };
+
+export default convertProteinNames;

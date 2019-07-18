@@ -44,7 +44,7 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   accession,
   id,
   children,
-}) => {
+}): JSX.Element => {
   let link = url;
   if (accession) {
     link = link.replace(/%acc/g, accession);
@@ -61,7 +61,7 @@ export const getPropertyString = (property: Property) => {
     return '';
   }
   if (key === PropertyKey.MatchStatus) {
-    const hits = parseInt(value);
+    const hits = parseInt(value, 10);
     if (hits <= 0) {
       return '';
     }
@@ -86,7 +86,7 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
     return null;
   }
   const info = databaseToDatabaseInfo[database];
-  let properties: string = '';
+  let properties = '';
   if (entryProperties) {
     properties = entryProperties
       .map((property: Property) => getPropertyString(property))
@@ -94,14 +94,23 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   }
   let isoformLink;
   if (isoformId) {
-    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
+    isoformLink = (
+      <a href={`#${isoformId}`}>
+[
+        {isoformId}
+]
+      </a>
+);
   }
   return (
     <Fragment>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
-      </XRefExternalLink>{' '}
-      {properties} {isoformLink}
+      </XRefExternalLink>
+      {' '}
+      {properties} 
+      {' '}
+      {isoformLink}
     </Fragment>
   );
 };
@@ -109,46 +118,58 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
 const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
-}) => {
-  const infoData = databases.sort().map(database => ({
-    title: database.database,
-    content: (
-      <ExpandableList descriptionString={`${database.database} links`}>
-        {database.xrefs.map(xref => ({
-          id: v1(),
-          content: (
-            <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
-          ),
-        }))}
-      </ExpandableList>
-    ),
-  }));
+}): JSX.Element => {
+  const infoData = databases.sort().map(
+    (database): { title: string; content: JSX.Element } => ({
+      title: database.database,
+      content: (
+        <ExpandableList descriptionString={`${database.database} links`}>
+          {database.xrefs.map(
+            (xref): { id: string; content: JSX.Element } => ({
+              id: v1(),
+              content: (
+                <XRefItem
+                  xRefEntry={xref}
+                  primaryAccession={primaryAccession}
+                />
+              ),
+            })
+          )}
+        </ExpandableList>
+      ),
+    })
+  );
   return <InfoList infoData={infoData} />;
 };
 
-const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }) => {
+const XRefView: React.FC<XRefProps> = ({
+  xrefs,
+  primaryAccession,
+}): JSX.Element | null => {
   if (!xrefs) {
     return null;
   }
-  const nodes = xrefs.map(xrefCategory => {
-    const infoListNode = (
-      <XRefCategoryInfoList
-        databases={xrefCategory.databases}
-        primaryAccession={primaryAccession}
-      />
-    );
-    let title;
-    const { category } = xrefCategory;
-    if (category && databaseCategoryToString[category]) {
-      title = databaseCategoryToString[category];
+  const nodes = xrefs.map(
+    (xrefCategory): JSX.Element => {
+      const infoListNode = (
+        <XRefCategoryInfoList
+          databases={xrefCategory.databases}
+          primaryAccession={primaryAccession}
+        />
+      );
+      let title;
+      const { category } = xrefCategory;
+      if (category && databaseCategoryToString[category]) {
+        title = databaseCategoryToString[category];
+      }
+      return (
+        <Fragment key={v1()}>
+          <h4>{title}</h4>
+          {infoListNode}
+        </Fragment>
+      );
     }
-    return (
-      <Fragment key={v1()}>
-        <h4>{title}</h4>
-        {infoListNode}
-      </Fragment>
-    );
-  });
+  );
   return <Fragment>{nodes}</Fragment>;
 };
 

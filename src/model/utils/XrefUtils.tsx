@@ -40,11 +40,11 @@ export const getXrefsForSection = (
   xrefs.forEach(xref => {
     const { databaseType: name } = xref;
     if (!name || !databasesForSection.includes(name)) {
-      return [];
+      return;
     }
     const category = databaseNameToCategory.get(name);
     if (!category) {
-      return [];
+      return;
     }
     const nametoXrefs = categoryToNameToXrefs.get(category) || {};
     if (!nametoXrefs[name]) {
@@ -63,10 +63,10 @@ export const getXrefsForSection = (
   databaseCategoryOrder.forEach(category => {
     const nameToXrefs = categoryToNameToXrefs.get(category);
     if (!nameToXrefs) {
-      return [];
+      return;
     }
     xrefCategories.push({
-      category: category,
+      category,
       databases: Object.keys(nameToXrefs).map(name => ({
         database: name,
         xrefs: nameToXrefs[name],

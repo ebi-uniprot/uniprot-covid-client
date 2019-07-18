@@ -1,6 +1,6 @@
 import { ValueWithEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
-import { convertGeneNames } from '../GeneNamesConverter';
+import convertGeneNames from '../GeneNamesConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Xref } from '../../utils/XrefUtils';
 import { convertSection, UIModel } from '../SectionConverter';
@@ -52,14 +52,12 @@ export type NamesAndTaxonomyUIModel = {
 } & UIModel;
 
 export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
-  const namesAndTaxonomyData = <NamesAndTaxonomyUIModel>(
-    convertSection(
-      data,
-      undefined,
-      undefined,
-      undefined,
-      EntrySection.NamesAndTaxonomy
-    )
+  const namesAndTaxonomyData: NamesAndTaxonomyUIModel = convertSection(
+    data,
+    undefined,
+    undefined,
+    undefined,
+    EntrySection.NamesAndTaxonomy
   );
 
   if (data.proteinDescription) {

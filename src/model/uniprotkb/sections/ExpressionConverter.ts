@@ -1,4 +1,3 @@
-import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import Comment from '../../types/Comment';
 import KeywordCategory from '../../types/KeywordCategory';
 import EntrySection from '../../types/EntrySection';
@@ -8,7 +7,7 @@ const keywordsCategories = [KeywordCategory.DEVELOPMENTAL_STAGE];
 
 const commentsCategories = [Comment.TISSUE_SPECIFICITY, Comment.INDUCTION];
 
-export const convertExpression = (data: APIModel) => {
+const convertExpression = (data: APIModel) => {
   return convertSection(
     data,
     commentsCategories,
@@ -17,3 +16,5 @@ export const convertExpression = (data: APIModel) => {
     EntrySection.Expression
   );
 };
+
+export default convertExpression;

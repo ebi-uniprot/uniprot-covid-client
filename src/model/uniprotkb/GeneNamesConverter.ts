@@ -19,3 +19,5 @@ export const convertGeneNames = (data: GeneNamesData) => {
   const nameString = names.join(', ');
   return { alternativeNames, name: nameString };
 };
+
+export default convertGeneNames;

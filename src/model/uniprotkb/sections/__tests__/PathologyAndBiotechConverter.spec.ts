@@ -1,4 +1,4 @@
-import { convertPathologyAndBiotech } from '../PathologyAndBiotechConverter';
+import convertPathologyAndBiotech from '../PathologyAndBiotechConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Pathology/Biotech data converter', () => {

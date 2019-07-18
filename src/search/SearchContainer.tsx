@@ -8,14 +8,14 @@ import * as searchActions from './state/searchActions';
 
 import './styles/SearchContainer.scss';
 
-interface SearchProps extends RouteComponentProps {
+type SearchProps = {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
-}
+} & RouteComponentProps;
 
-interface SearchContainerState {
+type SearchContainerState = {
   queryString: string;
-}
+};
 
 export class Search extends Component<SearchProps, SearchContainerState> {
   constructor(props: SearchProps) {

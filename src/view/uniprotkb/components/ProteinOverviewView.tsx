@@ -1,6 +1,6 @@
 import React, { Fragment, FC } from 'react';
-import OrganismView from './OrganismView';
 import { Card, InfoList } from 'franklin-sites';
+import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
 import { NamesAndTaxonomyUIModel } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
@@ -28,9 +28,10 @@ export const ProteinOverview: FC<{
 
   return (
     <Card
-      title={
+      title={(
         <Fragment>
-          {proteinNamesData && uniProtId}{' '}
+          {proteinNamesData && uniProtId}
+          {' '}
           <small>
             {`${primaryAccession} - `}
             {proteinNamesData &&
@@ -38,7 +39,7 @@ export const ProteinOverview: FC<{
               proteinNamesData.recommendedName.fullName.value}
           </small>
         </Fragment>
-      }
+)}
     >
       <InfoList infoData={infoListData} />
     </Card>

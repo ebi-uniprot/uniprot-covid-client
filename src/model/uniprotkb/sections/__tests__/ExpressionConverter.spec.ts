@@ -1,4 +1,4 @@
-import { convertExpression } from '../ExpressionConverter';
+import convertExpression from '../ExpressionConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Expression data converter', () => {

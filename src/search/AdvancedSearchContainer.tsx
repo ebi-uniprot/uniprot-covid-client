@@ -1,30 +1,31 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
 import {
   Clause,
   SearchTermType,
   Operator,
-  EvidenceType,
+  Evidence,
+  Evidences,
   Namespace,
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
-import { createQueryString } from './utils/QueryStringGenerator';
+import createQueryString from './utils/QueryStringGenerator';
 
 import './styles/SearchContainer.scss';
 
-interface Props extends RouteComponentProps {
+type Props = {
   queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
-  searchTerms: [any];
+  searchTerms: SearchTermType[];
   namespace: Namespace;
   clauses: Clause[];
-  evidences: any;
+  evidences: Evidences;
   dispatchUpdateClauses: (clauses: Clause[]) => void;
-  dispatchfetchEvidencesIfNeeded: (type: EvidenceType) => void;
+  dispatchfetchEvidencesIfNeeded: (type: Evidence) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
   dispatchAddClause: () => void;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
@@ -37,11 +38,11 @@ interface Props extends RouteComponentProps {
   ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
-}
+} & RouteComponentProps;
 
-interface State {
+type State = {
   queryString: string;
-}
+};
 
 export class Search extends Component<Props, State> {
   constructor(props: Props) {

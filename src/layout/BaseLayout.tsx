@@ -33,6 +33,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = props => {
         style={style}
         target="_blank"
         href="https://goo.gl/forms/VrAGbqg2XFg6Mpbh1"
+        rel="noopener noreferrer"
       >
         Report bug
       </a>

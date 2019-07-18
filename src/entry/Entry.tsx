@@ -9,14 +9,14 @@ import uniProtKbConverter, {
   UniProtkbUIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import EntrySection from '../model/types/EntrySection';
-import { hasContent } from '../model/utils/utils';
+import hasContent from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 
-interface MatchParams {
+type MatchParams = {
   accession: string;
 }
 
-interface EntryProps extends RouteComponentProps<MatchParams> {}
+type EntryProps = {} & RouteComponentProps<MatchParams>
 
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
@@ -31,6 +31,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     return {
       label: section.name,
       id: section.name,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       disabled: !hasContent((transformedData as any)[section.name]),
     };
   });
@@ -39,16 +40,16 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     <Fragment>
       <SideBarLayout
         sidebar={<InPageNav sections={sections} />}
-        content={
+        content={(
           <Fragment>
             <div className="button-group">
-              <button className="button link-button">Blast</button>
-              <button className="button link-button">Align</button>
-              <button className="button link-button">
+              <button type="button" className="button link-button">Blast</button>
+              <button type="button" className="button link-button">Align</button>
+              <button type="button" className="button link-button">
                 <DownloadIcon />
                 Download
               </button>
-              <button className="button link-button">Add</button>
+              <button type="button" className="button link-button">Add</button>
             </div>
             <ProteinOverview
               data={transformedData[EntrySection.NamesAndTaxonomy]}
@@ -56,11 +57,11 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
               primaryAccession={transformedData.primaryAccession}
               uniProtId={transformedData.uniProtId}
             />
-            {UniProtKBEntryConfig.map(({ name, sectionContent }) => {
+            {UniProtKBEntryConfig.map(({ sectionContent }) => {
               return sectionContent(transformedData);
             })}
           </Fragment>
-        }
+)}
       />
 
       {/* <Card title="Structure">

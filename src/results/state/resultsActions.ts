@@ -1,10 +1,12 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import idx from 'idx';
 import fetchData from '../../utils/fetchData';
-import idx, { IDXOptional } from 'idx';
 import { RootState } from '../../state/state-types';
 import 'regenerator-runtime/runtime';
+import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { Facet } from '../ResultsContainer';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
@@ -14,7 +16,7 @@ export const SWITCH_VIEW_MODE = 'SWITCH_VIEW_MODE';
 
 export const receiveBatchOfResults = (
   url: string,
-  data: any,
+  data: Response['data'],
   nextUrl: string | undefined,
   totalNumberResults: number
 ) =>
@@ -35,9 +37,10 @@ const getNextUrlFromResponse = (
   if (!link) {
     return;
   }
-  const re = /<([0-9a-zA-Z$\-_.+!*'(),?\/:=&%]+)>; rel="next"/;
+  const re = /<([0-9a-zA-Z$\-_.+!*'(),?/:=&%]+)>; rel="next"/;
   const match = re.exec(link);
   if (match) {
+    // eslint-disable-next-line consistent-return
     return match[1];
   }
 };
@@ -45,7 +48,7 @@ const getNextUrlFromResponse = (
 export const clearResults = () => action(CLEAR_RESULTS);
 
 type Response = {
-  data: any;
+  data: { results: UniProtkbAPIModel[]; facets: Facet[] };
   headers: {
     ['x-totalrecords']: number;
     link: string;

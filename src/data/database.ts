@@ -6,6 +6,7 @@ import {
   getEntrySectionToDatabaseCategoryOrder,
 } from '../utils/database';
 import databaseInfoJson from './databaseInfo.json';
+
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 
 export const databaseCategoryToString = {

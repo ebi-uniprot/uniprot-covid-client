@@ -6,7 +6,7 @@ import FreeTextUIDataJson from '../__mocks__/FreeTextUIData.json';
 describe('FreeText component', () => {
   test('should render free text CC', () => {
     const { asFragment } = render(
-      <FreeTextView comments={FreeTextUIDataJson} includeTitle={true} />
+      <FreeTextView comments={FreeTextUIDataJson} includeTitle />
     );
     expect(asFragment()).toMatchSnapshot();
   });

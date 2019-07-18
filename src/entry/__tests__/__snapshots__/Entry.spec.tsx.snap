@@ -116,16 +116,19 @@ exports[`Entry should render 1`] = `
       >
         <button
           class="button link-button"
+          type="button"
         >
           Blast
         </button>
         <button
           class="button link-button"
+          type="button"
         >
           Align
         </button>
         <button
           class="button link-button"
+          type="button"
         >
           <svg
             height="32"
@@ -141,6 +144,7 @@ exports[`Entry should render 1`] = `
         </button>
         <button
           class="button link-button"
+          type="button"
         >
           Add
         </button>

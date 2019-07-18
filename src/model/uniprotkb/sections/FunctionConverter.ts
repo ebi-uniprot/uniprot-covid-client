@@ -2,7 +2,7 @@ import Comment from '../../types/Comment';
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
 import EntrySection from '../../types/EntrySection';
-import { convertSection, UIModel, APIModel } from '../SectionConverter';
+import { convertSection, APIModel } from '../SectionConverter';
 
 const keywordsCategories = [
   KeywordCategory.MOLECULAR_FUNCTION,
@@ -33,7 +33,7 @@ const commentsCategories = [
   Comment.MISCELLANEOUS,
 ];
 
-export const convertFunction = (data: APIModel) => {
+const convertFunction = (data: APIModel) => {
   return convertSection(
     data,
     commentsCategories,
@@ -42,3 +42,5 @@ export const convertFunction = (data: APIModel) => {
     EntrySection.Function
   );
 };
+
+export default convertFunction;

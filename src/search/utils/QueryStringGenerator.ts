@@ -1,10 +1,10 @@
 import { Clause } from '../types/searchTypes';
 
-interface IPrefixMap {
+type IPrefixMap = {
   feature: string;
   comment: string;
   [key: string]: string;
-}
+};
 
 const getItemTypePrefix = (itemType: string) => {
   const itemTypeToPrefixMap: IPrefixMap = {
@@ -150,4 +150,4 @@ const createQueryString = (clauses: Clause[] = []): string =>
     return `${queryAccumulator}${logicOperator}${queryJoined}`;
   }, '');
 
-export { createQueryString };
+export default createQueryString;

@@ -4,7 +4,7 @@ import './styles/Block.scss';
 
 type BlockProps = {
   columns: string;
-  children: Array<JSX.Element>;
+  children: JSX.Element[];
 };
 
 const Block: React.FC<BlockProps> = (props) => {

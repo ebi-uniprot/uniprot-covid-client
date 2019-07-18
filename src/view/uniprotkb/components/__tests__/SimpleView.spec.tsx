@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import SimpleView from '../SimpleView';
 import { MemoryRouter as Router } from 'react-router-dom';
+import SimpleView from '../SimpleView';
 
 describe('SimpleView component', () => {
   test('should render', () => {

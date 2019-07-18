@@ -7,7 +7,8 @@ import {
   Clause,
   SearchTermType,
   Operator,
-  EvidenceType,
+  Evidence,
+  Evidences,
 } from './types/searchTypes';
 
 // .itemType
@@ -19,9 +20,9 @@ import {
 // Group: this item type is a group type, grouping a list of search items
 
 type ClauseListProps = {
-  clauses: Array<Clause>;
-  searchTerms: Array<SearchTermType>;
-  evidences: any;
+  clauses: Clause[];
+  searchTerms: SearchTermType[];
+  evidences: Evidences;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
   handleEvidenceChange: (clauseId: string, value: string) => void;
@@ -54,9 +55,9 @@ const ClauseList: React.FC<ClauseListProps> = ({
       let evidencesData;
       if (clause.searchTerm.hasEvidence) {
         const evidencesType =
-          clause.searchTerm.term === EvidenceType.GO
-            ? EvidenceType.GO
-            : EvidenceType.ANNOTATION;
+          clause.searchTerm.term === Evidence.GO
+            ? Evidence.GO
+            : Evidence.ANNOTATION;
         evidencesData = evidences[evidencesType].data || [];
       }
 
@@ -87,7 +88,7 @@ const ClauseList: React.FC<ClauseListProps> = ({
             }
             queryInput={clause.queryInput}
           />
-          {clause.searchTerm.hasEvidence && (
+          {evidencesData && (
             <EvidenceField
               handleChange={(value: string) =>
                 handleEvidenceChange(clause.id, value)

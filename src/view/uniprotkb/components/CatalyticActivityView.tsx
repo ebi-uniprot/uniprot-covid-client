@@ -1,16 +1,16 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { EvidenceType } from '../../../model/types/modelTypes';
+import { Evidence } from '../../../model/types/modelTypes';
 import Comment from '../../../model/types/Comment';
 
 export type CatalyticActivityData = {
   commentType: Comment;
   reaction?: {
     name: string;
-    reactionReferences: Array<{ databaseType: string; id: string }>;
+    reactionReferences: { databaseType: string; id: string }[];
     ecNumber: string;
-    evidences?: EvidenceType[];
+    evidences?: Evidence[];
   };
 }[];
 
@@ -31,7 +31,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         catalyticActivity =>
           catalyticActivity.reaction && (
             <p key={v1()}>
-              <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
+              <strong>{catalyticActivity.reaction.ecNumber}</strong>
+              {' '}
               {catalyticActivity.reaction.name}
               {catalyticActivity.reaction.evidences &&
                 catalyticActivity.reaction.evidences.map(evidence => (

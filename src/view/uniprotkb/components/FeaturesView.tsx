@@ -5,7 +5,7 @@ import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../../../utils/utils';
-import { EvidenceType } from '../../../model/types/modelTypes';
+import { Evidence } from '../../../model/types/modelTypes';
 import FeatureType from '../../../model/types/FeatureType';
 
 enum LocationModifier {
@@ -28,13 +28,13 @@ export type FeatureData = {
     start: FeatureLocation;
     end: FeatureLocation;
   };
-  evidences?: EvidenceType[];
+  evidences?: Evidence[];
 }[];
 
 type ProtvistaFeature = {
   type: string;
   description: string;
-  evidences: EvidenceType[];
+  evidences: Evidence[];
   start: number;
   end: number;
   startModifier: LocationModifier;
@@ -49,25 +49,36 @@ type FeatureProps = {
 const columns = {
   type: {
     label: 'Type',
-    resolver: (d: ProtvistaFeature) => d.type,
+    resolver: (d: ProtvistaFeature): string => d.type,
   },
   positions: {
     label: 'Positions',
-    resolver: (d: ProtvistaFeature) =>
+    resolver: (d: ProtvistaFeature): string =>
       `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
         d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
       }`,
   },
   description: {
     label: 'Description',
-    resolver: (d: ProtvistaFeature) =>
+    resolver: (d: ProtvistaFeature): string =>
       `${d.description} ${d.evidences &&
-        d.evidences.map(evidence => `(${evidence.evidenceCode}) `)}`,
+        d.evidences.map((evidence): string => `(${evidence.evidenceCode}) `)}`,
   },
 };
 
-const processData = (data: FeatureData) =>
-  data.map(feature => {
+type ProcessedDatum = {
+  accession: string | undefined;
+  start: number;
+  end: number;
+  startModifier: LocationModifier;
+  endModifier: LocationModifier;
+  type: FeatureType;
+  description: string | undefined;
+  evidences: Evidence[] | undefined;
+}
+
+const processData = (data: FeatureData): ProcessedDatum[] =>
+  data.map((feature): ProcessedDatum => {
     return {
       accession: feature.featureId,
       start: feature.location.start.value,
@@ -80,7 +91,7 @@ const processData = (data: FeatureData) =>
     };
   });
 
-const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
+const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }): JSX.Element | null => {
   loadWebComponent('protvista-track', ProtvistaTrack);
   loadWebComponent('protvista-manager', ProtvistaManager);
   loadWebComponent('protvista-datatable', ProtvistaDatatable);
@@ -89,22 +100,31 @@ const FeaturesView: React.FC<FeatureProps> = ({ sequence, features }) => {
 
   const processedData = processData(features);
 
+  const setTrackData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = processedData;
+      }
+    },
+    [processedData]
+  );
+
+  const setTableData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = processedData;
+        // eslint-disable-next-line no-param-reassign
+        node.columns = columns;
+      }
+    },
+    [processedData]
+  );
+
   if (processedData.length <= 0) {
     return null;
   }
-
-  const setTrackData = useCallback(node => {
-    if (!!node) {
-      node.data = processedData;
-    }
-  }, []);
-
-  const setTableData = useCallback(node => {
-    if (!!node) {
-      node.data = processedData;
-      node.columns = columns;
-    }
-  }, []);
 
   return (
     <Fragment>

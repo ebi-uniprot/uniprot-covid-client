@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import idx from 'idx';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
 import {
@@ -6,14 +8,15 @@ import {
   EntryType,
 } from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtCard.scss';
-import { Link } from 'react-router-dom';
 
-const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
+const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({
+  data,
+}): JSX.Element => {
   const recommendedName = idx(
     data,
-    _ => _.proteinDescription.recommendedName.fullName.value
+    (_): string => _.proteinDescription.recommendedName.fullName.value
   );
-  const organismName = idx(data, _ => _.organism.scientificName);
+  const organismName = idx(data, (_): string => _.organism.scientificName);
   return (
     <div className="uniprot-card">
       <h5>
@@ -28,12 +31,14 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
         )}
         <Link to={`/uniprotkb/${data.primaryAccession}`}>
           {data.primaryAccession}
-        </Link>{' '}
+        </Link>
+        {' '}
         {data.uniProtId}
       </h5>
       <p>
         {recommendedName && `${recommendedName} · `}
-        <a href="#">{organismName}</a> · {data.sequence.length} amino-acids
+        <a href="#">{organismName}</a>
+        {` · ${data.sequence.length} amino-acids`}
       </p>
       {data.genes && (
         <p>
@@ -43,12 +48,14 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
       )}
       {data.keywords && (
         <p>
-          <strong>Keywords:</strong>{' '}
+          <strong>Keywords:</strong>
+          {' '}
           {data.keywords.map(keyword => {
             return (
               <Link to="/" key={keyword.value}>
                 {' '}
-                #{keyword.value}
+                #
+                {keyword.value}
               </Link>
             );
           })}

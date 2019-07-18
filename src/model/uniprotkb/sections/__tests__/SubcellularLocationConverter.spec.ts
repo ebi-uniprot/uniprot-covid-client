@@ -1,4 +1,4 @@
-import { convertSubcellularLocation } from '../SubcellularLocationConverter';
+import convertSubcellularLocation from '../SubcellularLocationConverter';
 import modelDataJson from '../../../__mocks__/modelData.json';
 
 describe('Subcellular data converter', () => {

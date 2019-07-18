@@ -12,9 +12,9 @@ import {
   ListIcon,
   Loader,
 } from 'franklin-sites';
+import queryStringModule from 'query-string';
 import * as resultsActions from './state/resultsActions';
 import * as searchActions from '../search/state/searchActions';
-import { default as queryStringModule } from 'query-string';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
@@ -28,8 +28,17 @@ import {
   SelectedFacet,
 } from './types/resultsTypes';
 import { ViewMode } from './state/resultsInitialState';
+import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 
-interface ResultsProps extends RouteComponentProps {
+export type Facet = {
+  label: string,
+            name: string,
+            allowMultipleSelection: boolean,
+            values: {label: string, value: string, count: number}[
+            ]
+}
+
+type ResultsProps = {
   namespace: Namespace;
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
   dispatchReset: () => void;
@@ -38,13 +47,13 @@ interface ResultsProps extends RouteComponentProps {
   clauses?: Clause[];
   tableColumns: string[];
   cardColumns: string[];
-  results: any[];
-  facets: any[];
+  results: UniProtkbAPIModel[];
+  facets: Facet[];
   isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;
   viewMode: ViewMode;
-}
+} & RouteComponentProps
 
 type ResultsContainerState = {
   selectedEntries: SelectedEntries;
@@ -54,28 +63,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   constructor(props: ResultsProps) {
     super(props);
     this.state = { selectedEntries: {} };
-  }
-
-  updateData() {
-    const {
-      location: { search: queryParamFromUrl },
-      tableColumns,
-      cardColumns,
-      dispatchFetchBatchOfResultsIfNeeded,
-      dispatchClearResults,
-      viewMode,
-    } = this.props;
-    const {
-      query,
-      selectedFacets,
-      sortColumn,
-      sortDirection,
-    } = this.getURLParams(queryParamFromUrl);
-    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
-    dispatchClearResults();
-    dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
-    );
   }
 
   componentDidMount() {
@@ -117,7 +104,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     return {
       query: query && typeof query === 'string' ? query : '',
-      selectedFacets: selectedFacets,
+      selectedFacets,
       sortColumn: sortColumn && SortableColumn[sortColumn],
       sortDirection: sortDirection && SortDirection[sortDirection],
     };
@@ -144,7 +131,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const { selectedEntries: prevSelectedEntries } = this.state;
     if (rowId in prevSelectedEntries) {
       const { [rowId]: value, ...selectedEntries } = prevSelectedEntries;
-      this.setState({ selectedEntries: selectedEntries });
+      this.setState({ selectedEntries });
     } else {
       prevSelectedEntries[rowId] = true;
       this.setState({ selectedEntries: prevSelectedEntries });
@@ -236,6 +223,28 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     this.setURLParams(query, selectedFacets, column, updatedDirection);
   };
+  
+  updateData() {
+    const {
+      location: { search: queryParamFromUrl },
+      tableColumns,
+      cardColumns,
+      dispatchFetchBatchOfResultsIfNeeded,
+      dispatchClearResults,
+      viewMode,
+    } = this.props;
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
+    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
+    dispatchClearResults();
+    dispatchFetchBatchOfResultsIfNeeded(
+      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+    );
+  }
 
   render() {
     const {
@@ -262,7 +271,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     return (
       <Fragment>
         <SideBarLayout
-          title={
+          title={(
             <PageIntro
               title={name}
               links={links}
@@ -270,59 +279,60 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             >
               {info}
             </PageIntro>
-          }
-          sidebar={
+)}
+          sidebar={(
             <Facets
               data={facets}
               selectedFacets={selectedFacets}
               addFacet={this.addFacet}
               removeFacet={this.removeFacet}
             />
-          }
-          content={
+)}
+          content={(
             <Fragment>
               {results.length > 0 && (
-                <div className="button-group">
-                  <button className="button link-button disabled">Blast</button>
-                  <button className="button link-button disabled">Align</button>
-                  <button className="button link-button">
-                    <DownloadIcon />
+              <div className="button-group">
+                <button type="button" className="button link-button disabled">Blast</button>
+                <button type="button" className="button link-button disabled">Align</button>
+                <button type="button" className="button link-button">
+                  <DownloadIcon />
                     Download
-                  </button>
-                  <button className="button link-button disabled">
-                    <BasketIcon />
-                    Add
-                  </button>
-                  <button className="button link-button">
-                    <StatisticsIcon />
+                </button>
+                <button type="button" className="button link-button disabled">
+                  <BasketIcon />
+                  Add
+                </button>
+                <button type="button" className="button link-button">
+                  <StatisticsIcon />
                     Statistics
-                  </button>
-                  <button className="button link-button">Map to</button>
-                  <button
-                    className="button link-button large-icon"
-                    onClick={() => dispatchSwitchViewMode()}
-                    data-testid="table-card-toggle"
-                  >
-                    <span
-                      className={
+                </button>
+                <button type="button" className="button link-button">Map to</button>
+                <button
+                  type="button"
+                  className="button link-button large-icon"
+                  onClick={() => dispatchSwitchViewMode()}
+                  data-testid="table-card-toggle"
+                >
+                  <span
+                    className={
                         viewMode === ViewMode.CARD
                           ? 'link-button-icon__active'
                           : ''
                       }
-                    >
-                      <TableIcon />
-                    </span>
-                    <span
-                      className={
+                  >
+                    <TableIcon />
+                  </span>
+                  <span
+                    className={
                         viewMode === ViewMode.TABLE
                           ? 'link-button-icon__active'
                           : ''
                       }
-                    >
-                      <ListIcon />
-                    </span>
-                  </button>
-                </div>
+                  >
+                    <ListIcon />
+                  </span>
+                </button>
+              </div>
               )}
               <ResultsView
                 results={results}
@@ -339,7 +349,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 viewMode={viewMode}
               />
             </Fragment>
-          }
+)}
         />
       </Fragment>
     );

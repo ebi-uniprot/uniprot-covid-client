@@ -7,7 +7,7 @@ import apiUrls from '../../utils/apiUrls';
 import {
   SearchTermType,
   Operator,
-  EvidenceType,
+  Evidence,
   Clause,
 } from '../types/searchTypes';
 import { RootState } from '../../state/state-types';
@@ -96,7 +96,7 @@ export const updateClauses = (clauses: Clause[]) =>
 
 export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
   dispatch(requestSearchTerms());
-  return fetchData(apiUrls.advanced_search_terms).then(response =>
+  return fetchData(apiUrls.advancedSearchTerms).then(response =>
     dispatch(receiveSearchTerms(response.data))
   );
 };
@@ -115,19 +115,20 @@ export const fetchSearchTermsIfNeeded = () => (
   }
 };
 
-export const requestEvidences = (evidencesType: EvidenceType) =>
+export const requestEvidences = (evidencesType: Evidence) =>
   action(REQUEST_EVIDENCES, {
     evidencesType,
   });
 
-export const receiveEvidences = (data: any, evidencesType: EvidenceType) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const receiveEvidences = (data: any, evidencesType: Evidence) =>
   action(RECEIVE_EVIDENCES, {
     data,
     evidencesType,
     receivedAt: Date.now(),
   });
 
-export const fetchEvidences = (evidencesType: EvidenceType) => async (
+export const fetchEvidences = (evidencesType: Evidence) => async (
   dispatch: ThunkDispatch<RootState, void, Action>
 ) => {
   const url = apiUrls.evidences[evidencesType];
@@ -137,15 +138,12 @@ export const fetchEvidences = (evidencesType: EvidenceType) => async (
   );
 };
 
-export const shouldFetchEvidences = (
-  state: RootState,
-  evidenceType: EvidenceType
-) => {
-  const evidences = state.query.evidences[evidenceType];
+export const shouldFetchEvidences = (state: RootState, evidence: Evidence) => {
+  const evidences = state.query.evidences[evidence];
   return !evidences.isFetching && !evidences.data.length;
 };
 
-export const fetchEvidencesIfNeeded = (evidencesType: EvidenceType) => (
+export const fetchEvidencesIfNeeded = (evidencesType: Evidence) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState
 ) => {

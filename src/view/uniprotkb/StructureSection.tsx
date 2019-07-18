@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import ProtvistaStructure from 'protvista-structure';
 import { loadWebComponent } from '../../utils/utils';
-import { hasContent } from '../../model/utils/utils';
+import hasContent from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import FeaturesView from './components/FeaturesView';
@@ -13,7 +13,7 @@ const StructureSection: FC<{
   data: UIModel;
   primaryAccession: string;
   sequence: string;
-}> = ({ data, primaryAccession, sequence }) => {
+}> = ({ data, primaryAccession, sequence }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
