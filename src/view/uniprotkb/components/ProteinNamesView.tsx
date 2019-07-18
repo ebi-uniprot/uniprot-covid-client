@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import NameView from './NameView';
-import { InfoList } from 'franklin-sites';
+import { InfoList, ExpandableList } from 'franklin-sites';
 import { v1 } from 'uuid';
 import {
   ProteinNames,
@@ -153,13 +153,12 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: 'Alternative names',
       content: (
-        <ul className="no-bullet">
-          {proteinNames.alternativeNames.map(alternativeName => (
-            <li key={v1()}>
-              <ProteinNamesViewFlat names={alternativeName} />
-            </li>
-          ))}
-        </ul>
+        <ExpandableList descriptionString="alternative names">
+          {proteinNames.alternativeNames.map(alternativeName => ({
+            id: v1(),
+            content: <ProteinNamesViewFlat names={alternativeName} />,
+          }))}
+        </ExpandableList>
       ),
     });
   }
@@ -167,13 +166,12 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: `Cleaved into ${proteinNames.contains.length} chains`,
       content: (
-        <ul className="no-bullet">
-          {proteinNames.contains.map(contains => (
-            <li key={v1()}>
-              <ProteinDescriptionView proteinDescription={contains} />
-            </li>
-          ))}
-        </ul>
+        <ExpandableList descriptionString="chains">
+          {proteinNames.contains.map(contains => ({
+            id: v1(),
+            content: <ProteinDescriptionView proteinDescription={contains} />,
+          }))}
+        </ExpandableList>
       ),
     });
   }
@@ -181,13 +179,12 @@ export const EntryProteinNames: React.FC<{
     infoData.push({
       title: 'Submission names',
       content: (
-        <ul className="no-bullet">
-          {proteinNames.submissionNames.map(submission => (
-            <li key={v1()}>
-              <ProteinNamesViewFlat names={submission} />
-            </li>
-          ))}
-        </ul>
+        <ExpandableList descriptionString="submission names">
+          {proteinNames.submissionNames.map(submission => ({
+            id: v1(),
+            content: <ProteinNamesViewFlat names={submission} />,
+          }))}
+        </ExpandableList>
       ),
     });
   }

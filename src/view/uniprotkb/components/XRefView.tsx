@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import { InfoList, ExternalLink } from 'franklin-sites';
+import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
@@ -97,12 +97,12 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
     isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
   }
   return (
-    <li key={v1()}>
+    <Fragment>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
       </XRefExternalLink>{' '}
       {properties} {isoformLink}
-    </li>
+    </Fragment>
   );
 };
 
@@ -113,15 +113,14 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   const infoData = databases.sort().map(database => ({
     title: database.database,
     content: (
-      <ul className="no-bullet">
-        {database.xrefs.map(xref => (
-          <XRefItem
-            xRefEntry={xref}
-            primaryAccession={primaryAccession}
-            key={v1()}
-          />
-        ))}
-      </ul>
+      <ExpandableList descriptionString={`${database.database} links`}>
+        {database.xrefs.map(xref => ({
+          id: v1(),
+          content: (
+            <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
+          ),
+        }))}
+      </ExpandableList>
     ),
   }));
   return <InfoList infoData={infoData} />;

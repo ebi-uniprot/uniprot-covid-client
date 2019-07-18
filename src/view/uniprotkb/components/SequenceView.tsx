@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import 'regenerator-runtime/runtime';
 import { InfoList, Sequence } from 'franklin-sites';
 import Comment from '../../../model/types/Comment';
 import apiUrls from '../../../utils/apiUrls';
@@ -89,7 +90,7 @@ export const SequenceInfo: React.FC<{
   return (
     <Fragment>
       {dataToDisplay && <InfoList infoData={infoData} />}
-      <Sequence sequence={dataToDisplay.value} />
+      <Sequence sequence={dataToDisplay.value} id={isoformId} />
     </Fragment>
   );
 };
