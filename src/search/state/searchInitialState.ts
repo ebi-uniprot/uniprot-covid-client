@@ -13,7 +13,7 @@ export type SearchState = {
   readonly clauses: Clause[];
   readonly queryString: string;
   readonly namespace: Namespace;
-  readonly searchTerms: { data: SearchTermType[] };
+  readonly searchTerms: { data: SearchTermType[]; isFetching: boolean };
   readonly evidences: Evidences;
 };
 
@@ -23,6 +23,7 @@ const searchInitialState: SearchState = {
   namespace: Namespace.uniprotkb,
   searchTerms: {
     data: [],
+    isFetching: false,
   },
   evidences: {
     [Evidence.GO]: {
