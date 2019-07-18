@@ -58,8 +58,13 @@ export enum Evidence {
   ANNOTATION = 'annotation',
 }
 
+export type EvidenceDataPoint = {
+  groupName: string;
+  items: { name: string; code: string }[];
+};
+
 type EvidenceData = {
-  data: any[];
+  data: EvidenceDataPoint[];
   isFetching: boolean;
 };
 

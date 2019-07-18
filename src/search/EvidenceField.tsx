@@ -1,12 +1,17 @@
 import React, { Fragment } from 'react';
+import { EvidenceDataPoint } from './types/searchTypes';
 
 type EvidenceFieldProps = {
   value: string | undefined;
   handleChange: (value: string) => void;
-  data: any[];
+  data: EvidenceDataPoint[];
 };
 
-const EvidenceField: React.FC<EvidenceFieldProps> = ({ value = '', handleChange, data = [] }) => {
+const EvidenceField: React.FC<EvidenceFieldProps> = ({
+  value = '',
+  handleChange,
+  data = [],
+}) => {
   if (!data) {
     return null;
   }
@@ -15,7 +20,11 @@ const EvidenceField: React.FC<EvidenceFieldProps> = ({ value = '', handleChange,
     <Fragment>
       <label htmlFor="evidence_select">
         Evidence
-        <select id="evidence_select" value={value} onChange={e => handleChange(e.target.value)}>
+        <select
+          id="evidence_select"
+          value={value}
+          onChange={e => handleChange(e.target.value)}
+        >
           {data.map(group => (
             <optgroup label={group.groupName} key={group.groupName}>
               {group.items.map((item: { code: string; name: string }) => (
