@@ -62,7 +62,9 @@ const VariationView: FC<{ primaryAccession: string }> = ({
   const setTrackData = useCallback(
     node => {
       if (node !== null && data.features) {
+        // eslint-disable-next-line no-param-reassign
         node.data = data;
+        // eslint-disable-next-line no-param-reassign
         node.length = data.sequence.length;
       }
     },
@@ -71,6 +73,7 @@ const VariationView: FC<{ primaryAccession: string }> = ({
 
   const addTooltipEventListener = useCallback(node => {
     if (node !== null) {
+      // eslint-disable-next-line no-console
       node.addEventListener('change', (e: ChangeEvent) => console.log(e));
     }
   }, []);
