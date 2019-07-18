@@ -31,17 +31,19 @@ const ColumnConfiguration: {
   },
   protein_name: {
     label: 'Protein names',
-    render: data => (
-      <ProteinNamesView {...convertProteinNames(data.proteinDescription)} />
-    ),
+    render: data =>
+      data.proteinDescription && (
+        <ProteinNamesView {...convertProteinNames(data.proteinDescription)} />
+      ),
   },
   gene_names: {
     label: 'Gene Names',
-    render: data => <GeneNamesView {...convertGeneNames(data.genes)} />,
+    render: data =>
+      data.genes && <GeneNamesView {...convertGeneNames(data.genes)} />,
   },
   organism: {
     label: 'Organism',
-    render: data => <OrganismView data={data.organism} />,
+    render: data => data.organism && <OrganismView data={data.organism} />,
   },
 };
 
