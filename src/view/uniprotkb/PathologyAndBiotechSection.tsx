@@ -8,6 +8,7 @@ import { hasContent } from '../../model/utils/utils';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import Comment from '../../model/types/Comment';
 import XRefView from './components/XRefView';
+import VariationView from './components/VariationView';
 
 const PathologyAndBiotechSection: FC<{
   data: UIModel;
@@ -25,6 +26,7 @@ const PathologyAndBiotechSection: FC<{
           primaryAccession={primaryAccession}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
+        <VariationView primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
