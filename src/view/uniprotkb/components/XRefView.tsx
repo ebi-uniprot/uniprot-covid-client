@@ -61,7 +61,7 @@ export const getPropertyString = (property: Property) => {
     return '';
   }
   if (key === PropertyKey.MatchStatus) {
-    const hits = parseInt(value);
+    const hits = parseInt(value, 10);
     if (hits <= 0) {
       return '';
     }
@@ -94,14 +94,23 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   }
   let isoformLink;
   if (isoformId) {
-    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
+    isoformLink = (
+      <a href={`#${isoformId}`}>
+[
+        {isoformId}
+]
+      </a>
+);
   }
   return (
     <Fragment>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
-      </XRefExternalLink>{' '}
-      {properties} {isoformLink}
+      </XRefExternalLink>
+      {' '}
+      {properties} 
+      {' '}
+      {isoformLink}
     </Fragment>
   );
 };
