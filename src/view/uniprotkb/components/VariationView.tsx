@@ -9,8 +9,8 @@ import { loadWebComponent } from '../../../utils/utils';
 import useDataApi from '../../../utils/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
-import { EvidenceType } from '../../../search/types/searchTypes';
 import './styles/VariationView.scss';
+import { Evidence } from '../../../model/types/modelTypes';
 
 type Variant = {
   begin: number;
@@ -32,7 +32,7 @@ type Variant = {
     description: string;
     disease: boolean;
     name: string;
-    evidences: EvidenceType[];
+    evidences: Evidence[];
   }[];
   xrefs: {
     alternativeUrl?: string;
