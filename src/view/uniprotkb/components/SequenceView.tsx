@@ -118,10 +118,11 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   ];
   // TODO isoformData.sequenceIds is used to get the features for
   // splice variants - they need to be somehow displayed
+  const name = isoformData.isoformIds.join(', ');
   return (
     <Fragment key={isoformData.isoformIds.join('')}>
       <hr />
-      <h4>{isoformData.isoformIds.join(', ')}</h4>
+      <h4 id={name}>{name}</h4>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
           This isoform has been chosen as the 

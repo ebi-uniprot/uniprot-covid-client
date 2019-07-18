@@ -189,7 +189,9 @@ exports[`SequenceView component should render SequenceView 1`] = `
     some text
   </p>
   <hr />
-  <h4>
+  <h4
+    id="P05067-1"
+  >
     P05067-1
   </h4>
   <p>

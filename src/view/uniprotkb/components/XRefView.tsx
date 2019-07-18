@@ -10,7 +10,7 @@ import {
   Xref,
   XrefsGoupedByDatabase,
 } from '../../../model/utils/XrefUtils';
-import { Property } from '../../../model/types/modelTypes';
+import { Property, PropertyKey } from '../../../model/types/modelTypes';
 
 type XRefProps = {
   xrefs: XrefUIModel[];
@@ -44,7 +44,7 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   accession,
   id,
   children,
-}): JSX.Element=> {
+}): JSX.Element => {
   let link = url;
   if (accession) {
     link = link.replace(/%acc/g, accession);
@@ -55,8 +55,28 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   return <ExternalLink url={link}>{children}</ExternalLink>;
 };
 
-const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }): JSX.Element | null=> {
-  const { databaseType: database, properties: entryProperties, id } = xRefEntry;
+export const getPropertyString = (property: Property) => {
+  const { key, value } = property;
+  if (!value || value === '-') {
+    return '';
+  }
+  if (key === PropertyKey.MatchStatus) {
+    const hits = parseInt(value);
+    if (hits <= 0) {
+      return '';
+    }
+    return `- ${value} hit${hits > 1 ? 's' : ''}`;
+  }
+  return `${value}`;
+};
+
+const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
+  const {
+    databaseType: database,
+    properties: entryProperties,
+    isoformId,
+    id,
+  } = xRefEntry;
   if (
     !id ||
     !database ||
@@ -69,17 +89,19 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }): JSX
   let properties = '';
   if (entryProperties) {
     properties = entryProperties
-      .map((property: Property): string =>
-        !property.value || (property.value && property.value === '-') ? '' : property.value
-      )
+      .map((property: Property) => getPropertyString(property))
       .join(' ');
+  }
+  let isoformLink;
+  if (isoformId) {
+    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
   }
   return (
     <Fragment>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
-      </XRefExternalLink>
-      {properties}
+      </XRefExternalLink>{' '}
+      {properties} {isoformLink}
     </Fragment>
   );
 };
@@ -88,45 +110,57 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
 }): JSX.Element => {
-  const infoData = databases.sort().map((database): {title: string, content: JSX.Element} => ({
-    title: database.database,
-    content: (
-      <ExpandableList descriptionString={`${database.database} links`}>
-        {database.xrefs.map((xref): { id: string, content: JSX.Element} => ({
-          id: v1(),
-          content: (
-            <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
-          ),
-        }))}
-      </ExpandableList>
-    ),
-  }));
+  const infoData = databases.sort().map(
+    (database): { title: string; content: JSX.Element } => ({
+      title: database.database,
+      content: (
+        <ExpandableList descriptionString={`${database.database} links`}>
+          {database.xrefs.map(
+            (xref): { id: string; content: JSX.Element } => ({
+              id: v1(),
+              content: (
+                <XRefItem
+                  xRefEntry={xref}
+                  primaryAccession={primaryAccession}
+                />
+              ),
+            })
+          )}
+        </ExpandableList>
+      ),
+    })
+  );
   return <InfoList infoData={infoData} />;
 };
 
-const XRefView: React.FC<XRefProps> = ({ xrefs, primaryAccession }): JSX.Element | null => {
+const XRefView: React.FC<XRefProps> = ({
+  xrefs,
+  primaryAccession,
+}): JSX.Element | null => {
   if (!xrefs) {
     return null;
   }
-  const nodes = xrefs.map((xrefCategory): JSX.Element => {
-    const infoListNode = (
-      <XRefCategoryInfoList
-        databases={xrefCategory.databases}
-        primaryAccession={primaryAccession}
-      />
-    );
-    let title;
-    const { category } = xrefCategory;
-    if (category && databaseCategoryToString[category]) {
-      title = databaseCategoryToString[category];
+  const nodes = xrefs.map(
+    (xrefCategory): JSX.Element => {
+      const infoListNode = (
+        <XRefCategoryInfoList
+          databases={xrefCategory.databases}
+          primaryAccession={primaryAccession}
+        />
+      );
+      let title;
+      const { category } = xrefCategory;
+      if (category && databaseCategoryToString[category]) {
+        title = databaseCategoryToString[category];
+      }
+      return (
+        <Fragment key={v1()}>
+          <h4>{title}</h4>
+          {infoListNode}
+        </Fragment>
+      );
     }
-    return (
-      <Fragment key={v1()}>
-        <h4>{title}</h4>
-        {infoListNode}
-      </Fragment>
-    );
-  });
+  );
   return <Fragment>{nodes}</Fragment>;
 };
 
