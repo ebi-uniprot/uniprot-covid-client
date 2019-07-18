@@ -1,7 +1,7 @@
 declare module 'protvista-datatable';
 
 declare namespace JSX {
-  type IntrinsicElements = {
+  interface IntrinsicElements {
     'protvista-datatable': any;
   }
 }

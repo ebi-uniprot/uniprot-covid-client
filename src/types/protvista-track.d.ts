@@ -2,7 +2,7 @@
 declare module 'protvista-track';
 
 declare namespace JSX {
-  type IntrinsicElements = {
+  interface IntrinsicElements {
     'protvista-track': any;
-  };
+  }
 }

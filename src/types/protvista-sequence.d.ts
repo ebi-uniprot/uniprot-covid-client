@@ -2,7 +2,7 @@
 declare module 'protvista-sequence';
 
 declare namespace JSX {
-  type IntrinsicElements = {
+  interface IntrinsicElements {
     'protvista-sequence': any;
-  };
+  }
 }
