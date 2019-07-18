@@ -30,6 +30,14 @@ import {
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 
+export type Facet = {
+  label: string,
+            name: string,
+            allowMultipleSelection: boolean,
+            values: {label: string, value: string, count: Number}[
+            ]
+}
+
 type ResultsProps = {
   namespace: Namespace;
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
@@ -40,7 +48,7 @@ type ResultsProps = {
   tableColumns: string[];
   cardColumns: string[];
   results: UniProtkbAPIModel[];
-  facets: any[];
+  facets: Facet[];
   isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;

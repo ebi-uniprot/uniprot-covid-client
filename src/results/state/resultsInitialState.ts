@@ -1,4 +1,5 @@
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { Facet } from '../ResultsContainer';
 
 export enum ViewMode {
   TABLE,
@@ -8,7 +9,7 @@ export enum ViewMode {
 export type ResultsState = {
   tableColumns: string[];
   cardColumns: string[];
-  facets: any[];
+  facets: Facet[];
   nextUrl: string;
   isFetching: boolean;
   isFetched: { [url: string]: boolean };

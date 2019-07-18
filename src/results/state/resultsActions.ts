@@ -6,6 +6,7 @@ import fetchData from '../../utils/fetchData';
 import { RootState } from '../../state/state-types';
 import 'regenerator-runtime/runtime';
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { Facet } from '../ResultsContainer';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
@@ -15,7 +16,7 @@ export const SWITCH_VIEW_MODE = 'SWITCH_VIEW_MODE';
 
 export const receiveBatchOfResults = (
   url: string,
-  data: UniProtkbAPIModel[],
+  data: Response['data'],
   nextUrl: string | undefined,
   totalNumberResults: number
 ) =>
@@ -47,7 +48,7 @@ const getNextUrlFromResponse = (
 export const clearResults = () => action(CLEAR_RESULTS);
 
 type Response = {
-  data: UniProtkbAPIModel[];
+  data: { results: UniProtkbAPIModel[]; facets: Facet[] };
   headers: {
     ['x-totalrecords']: number;
     link: string;
