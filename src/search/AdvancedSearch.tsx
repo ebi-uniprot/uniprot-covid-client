@@ -4,7 +4,6 @@ import {
   Namespace,
   Evidence,
   Clause,
-  SearchTerms,
   SearchTermType,
   Operator,
   Evidences,
@@ -12,7 +11,7 @@ import {
 import './styles/AdvancedSearch.scss';
 
 type AdvancedSearchProps = {
-  searchTerms: SearchTerms;
+  searchTerms: SearchTermType[];
   queryString: string;
   namespace: Namespace;
   clauses: Clause[];

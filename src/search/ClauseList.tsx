@@ -88,7 +88,7 @@ const ClauseList: React.FC<ClauseListProps> = ({
             }
             queryInput={clause.queryInput}
           />
-          {clause.searchTerm.hasEvidence && (
+          {evidencesData && (
             <EvidenceField
               handleChange={(value: string) =>
                 handleEvidenceChange(clause.id, value)

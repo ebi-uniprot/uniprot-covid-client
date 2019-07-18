@@ -1,4 +1,4 @@
-import { convertFunction } from '../FunctionConverter';
+import convertFunction from '../FunctionConverter';
 import modelData from '../../../__mocks__/modelData.json';
 
 describe('Function data converter', () => {

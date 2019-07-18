@@ -34,9 +34,6 @@ export type SearchTermType = {
   }[];
   items?: SearchTermType[];
 };
-export type SearchTerms = {
-  data: SearchTermType[];
-};
 
 export type Input = {
   stringValue?: string;
