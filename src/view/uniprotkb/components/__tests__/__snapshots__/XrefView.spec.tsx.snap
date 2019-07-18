@@ -37,7 +37,7 @@ exports[`XRefView should render for Expression section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -88,7 +88,7 @@ exports[`XRefView should render for FamilyAndDomains section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -139,7 +139,7 @@ exports[`XRefView should render for Function section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -190,7 +190,7 @@ exports[`XRefView should render for Interaction section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -241,7 +241,7 @@ exports[`XRefView should render for Miscellaneous section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -292,7 +292,7 @@ exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -343,7 +343,7 @@ exports[`XRefView should render for PathologyAndBioTech section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -394,7 +394,7 @@ exports[`XRefView should render for ProteinProcessing section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -445,7 +445,7 @@ exports[`XRefView should render for Sequence section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -496,7 +496,7 @@ exports[`XRefView should render for Structure section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >
@@ -547,7 +547,7 @@ exports[`XRefView should render for SubCellularLocation section 1`] = `
                 />
               </svg>
             </a>
-              propValue 
+             propValue 
             <a
               href="#ABCD"
             >

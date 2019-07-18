@@ -65,9 +65,9 @@ export const getPropertyString = (property: Property) => {
     if (hits <= 0) {
       return '';
     }
-    return `, ${value} hit${hits > 1 ? 's' : ''}`;
+    return `- ${value} hit${hits > 1 ? 's' : ''}`;
   }
-  return ` ${value}`;
+  return `${value}`;
 };
 
 const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
@@ -90,7 +90,7 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   if (entryProperties) {
     properties = entryProperties
       .map((property: Property) => getPropertyString(property))
-      .join('');
+      .join(' ');
   }
   let isoformLink;
   if (isoformId) {

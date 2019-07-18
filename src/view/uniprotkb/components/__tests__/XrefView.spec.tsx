@@ -31,21 +31,21 @@ describe('getPropertyString', () => {
       key: PropertyKey.PathwayName,
       value: 'Amyloid fiber formation',
     });
-    expect(propertyString).toEqual(' Amyloid fiber formation');
+    expect(propertyString).toEqual('Amyloid fiber formation');
   });
   test('should append value and "hit"', () => {
     const propertyString = getPropertyString({
       key: PropertyKey.MatchStatus,
       value: '1',
     });
-    expect(propertyString).toEqual(', 1 hit');
+    expect(propertyString).toEqual('- 1 hit');
   });
   test('should append value and "hits"', () => {
     const propertyString = getPropertyString({
       key: PropertyKey.MatchStatus,
       value: '2',
     });
-    expect(propertyString).toEqual(', 2 hits');
+    expect(propertyString).toEqual('- 2 hits');
   });
   test('should if empty string if key is MatchStatus but value <= 0', () => {
     const propertyString = getPropertyString({
