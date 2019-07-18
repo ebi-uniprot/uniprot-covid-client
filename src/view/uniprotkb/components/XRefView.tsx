@@ -9,8 +9,8 @@ import {
   XrefUIModel,
   Xref,
   XrefsGoupedByDatabase,
-} from '../../../model/utils/XrefUtils.js';
-import { Property } from '../../../model/types/modelTypes.js';
+} from '../../../model/utils/XrefUtils';
+import { Property, PropertyKey } from '../../../model/types/modelTypes';
 
 type XRefProps = {
   xrefs: XrefUIModel[];
@@ -55,8 +55,28 @@ export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
   return <ExternalLink url={link}>{children}</ExternalLink>;
 };
 
+export const getPropertyString = (property: Property) => {
+  const { key, value } = property;
+  if (!value || value === '-') {
+    return '';
+  }
+  if (key === PropertyKey.MatchStatus) {
+    const hits = parseInt(value);
+    if (hits <= 0) {
+      return '';
+    }
+    return `- ${value} hit${hits > 1 ? 's' : ''}`;
+  }
+  return `${value}`;
+};
+
 const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
-  const { databaseType: database, properties: entryProperties, id } = xRefEntry;
+  const {
+    databaseType: database,
+    properties: entryProperties,
+    isoformId,
+    id,
+  } = xRefEntry;
   if (
     !id ||
     !database ||
@@ -69,17 +89,19 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   let properties: string = '';
   if (entryProperties) {
     properties = entryProperties
-      .map((property: Property) =>
-        property.value && property.value === '-' ? '' : property.value
-      )
+      .map((property: Property) => getPropertyString(property))
       .join(' ');
+  }
+  let isoformLink;
+  if (isoformId) {
+    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
   }
   return (
     <Fragment>
       <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
         {id}
-      </XRefExternalLink>
-      {properties}
+      </XRefExternalLink>{' '}
+      {properties} {isoformLink}
     </Fragment>
   );
 };
