@@ -26,7 +26,7 @@ const PathologyAndBiotechSection: FC<{
           primaryAccession={primaryAccession}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
-        <VariationView accession={primaryAccession} />
+        <VariationView primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>

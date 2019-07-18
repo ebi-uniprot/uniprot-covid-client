@@ -15,7 +15,9 @@ describe('VariationView component', () => {
   test('it renders without crashing', () => {
     axios.get.mockResolvedValue(resp);
     act(() => {
-      const { asFragment } = render(<VariationView accession="P05067" />);
+      const { asFragment } = render(
+        <VariationView primaryAccession="P05067" />
+      );
       expect(asFragment()).toMatchSnapshot();
     });
   });

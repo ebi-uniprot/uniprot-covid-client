@@ -46,7 +46,9 @@ interface ChangeEvent extends Event {
   detail?: { type: string; value: string[] };
 }
 
-const VariationView: FC<{ accession: string }> = ({ accession }) => {
+const VariationView: FC<{ primaryAccession: string }> = ({
+  primaryAccession,
+}) => {
   loadWebComponent('protvista-variation', ProtvistaVariation);
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
   loadWebComponent('protvista-sequence', ProtvistaSequence);
@@ -55,7 +57,7 @@ const VariationView: FC<{ accession: string }> = ({ accession }) => {
   loadWebComponent('protvista-checkbox', ProtvistaCheckbox);
   loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
 
-  const data = useDataApi(joinUrl(apiUrls.variation, accession));
+  const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
 
   const setTrackData = useCallback(
     node => {
