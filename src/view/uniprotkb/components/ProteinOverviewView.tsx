@@ -1,15 +1,18 @@
 import React, { Fragment, FC } from 'react';
-import { Card, InfoList } from 'franklin-sites';
+import { Card, InfoList, SwissProtIcon, TremblIcon } from 'franklin-sites';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
 import { NamesAndTaxonomyUIModel } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
+import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
+import './styles/ProteinOverviewView.scss';
 
 export const ProteinOverview: FC<{
   data: NamesAndTaxonomyUIModel;
   proteinExistence: string;
   primaryAccession: string;
   uniProtId: string;
-}> = ({ data, proteinExistence, primaryAccession, uniProtId }) => {
+  entryType: EntryType;
+}> = ({ data, proteinExistence, primaryAccession, uniProtId, entryType }) => {
   const { proteinNamesData, geneNamesData, organismData } = data;
   const infoListData = [
     {
@@ -28,12 +31,22 @@ export const ProteinOverview: FC<{
 
   return (
     <Card
+      className="protein-overview"
       title={(
         <Fragment>
-          {proteinNamesData && uniProtId}
+          {entryType === EntryType.SWISSPROT ? (
+            <span className="protein-overview__status icon--reviewed">
+              <SwissProtIcon />
+            </span>
+          ) : (
+            <span className="protein-overview__status icon--unreviewed">
+              <TremblIcon />
+            </span>
+          )}
+          {primaryAccession}
           {' '}
           <small>
-            {`${primaryAccession} - `}
+            {`${proteinNamesData && uniProtId} - `}
             {proteinNamesData &&
               proteinNamesData.recommendedName &&
               proteinNamesData.recommendedName.fullName.value}

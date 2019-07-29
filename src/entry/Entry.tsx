@@ -56,6 +56,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
               proteinExistence={transformedData.proteinExistence}
               primaryAccession={transformedData.primaryAccession}
               uniProtId={transformedData.uniProtId}
+              entryType={transformedData.entryType}
             />
             {UniProtKBEntryConfig.map(({ sectionContent }) => {
               return sectionContent(transformedData);
