@@ -306,7 +306,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   <StatisticsIcon />
                     Statistics
                 </button>
-                <button type="button" className="button link-button">Map to</button>
                 <button
                   type="button"
                   className="button link-button large-icon"
