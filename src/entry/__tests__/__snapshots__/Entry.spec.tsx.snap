@@ -944,7 +944,7 @@ exports[`Entry should render 1`] = `
               Genome annotation databases
             </h4>
             <div
-              class="info-list"
+              class="info-list info-list--columns"
             >
               <div
                 class="info-list__item"
