@@ -35,7 +35,12 @@ exports[`UniProtCard component should render 1`] = `
       >
         scientific name
       </a>
-       · 10 amino-acids
+       · 10 amino-acids · 
+      <span
+        class="bubble--small colour-uniprot-blue"
+      >
+        2
+      </span>
     </p>
     <p>
       <strong>
