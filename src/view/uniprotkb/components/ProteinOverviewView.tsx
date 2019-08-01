@@ -1,5 +1,11 @@
 import React, { Fragment, FC } from 'react';
-import { Card, InfoList, SwissProtIcon, TremblIcon } from 'franklin-sites';
+import {
+  Card,
+  InfoList,
+  SwissProtIcon,
+  TremblIcon,
+  Bubble,
+} from 'franklin-sites';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
 import { NamesAndTaxonomyUIModel } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
@@ -12,7 +18,15 @@ export const ProteinOverview: FC<{
   primaryAccession: string;
   uniProtId: string;
   entryType: EntryType;
-}> = ({ data, proteinExistence, primaryAccession, uniProtId, entryType }) => {
+  annotationScore: number;
+}> = ({
+  data,
+  proteinExistence,
+  primaryAccession,
+  uniProtId,
+  entryType,
+  annotationScore,
+}) => {
   const { proteinNamesData, geneNamesData, organismData } = data;
   const infoListData = [
     {
@@ -26,6 +40,10 @@ export const ProteinOverview: FC<{
     {
       title: 'Evidence',
       content: proteinExistence,
+    },
+    {
+      title: 'Annotation score',
+      content: <Bubble value={annotationScore} />,
     },
   ];
 
@@ -44,9 +62,10 @@ export const ProteinOverview: FC<{
             </span>
           )}
           {primaryAccession}
-          {' '}
+          {` · `}
           <small>
-            {`${proteinNamesData && uniProtId} - `}
+            {`${proteinNamesData && uniProtId}`}
+            {` · `}
             {proteinNamesData &&
               proteinNamesData.recommendedName &&
               proteinNamesData.recommendedName.fullName.value}

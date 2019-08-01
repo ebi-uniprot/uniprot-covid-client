@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import idx from 'idx';
-import { SwissProtIcon, TremblIcon } from 'franklin-sites';
+import { SwissProtIcon, TremblIcon, Bubble } from 'franklin-sites';
 import {
   UniProtkbAPIModel,
   EntryType,
@@ -39,6 +39,12 @@ const UniProtCard: FC<{ data: UniProtkbAPIModel }> = ({
         {recommendedName && `${recommendedName} · `}
         <a href="#">{organismName}</a>
         {` · ${data.sequence.length} amino-acids`}
+        {` · `}
+        <Bubble
+          value={data.annotationScore}
+          size="small"
+          title="Annotation score"
+        />
       </p>
       {data.genes && (
         <p>
