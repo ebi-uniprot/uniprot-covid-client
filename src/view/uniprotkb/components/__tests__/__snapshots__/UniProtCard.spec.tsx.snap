@@ -42,23 +42,32 @@ exports[`UniProtCard component should render 1`] = `
         2
       </span>
     </p>
-    <p>
-      <strong>
-        Gene: 
-      </strong>
-      some Gene
-    </p>
-    <p>
-      <strong>
-        Keywords:
-      </strong>
-       
-      <a
-        href="/"
+    <div
+      class="info-list"
+    >
+      <div
+        class="info-list__item"
       >
-         #keyword value
-      </a>
-    </p>
+        <div
+          class="info-list__item__title"
+        >
+          Gene
+        </div>
+        <div
+          class="info-list__item__content"
+        >
+          <span>
+            <strong>
+              some Gene
+            </strong>
+             
+            <div>
+              some Syn, some orf
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;

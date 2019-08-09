@@ -857,7 +857,7 @@ exports[`Entry should render 1`] = `
                   <a
                     href="/keywords/KW-11111"
                   >
-                    keyword value
+                     #keyword value
                   </a>
                 </div>
               </div>
