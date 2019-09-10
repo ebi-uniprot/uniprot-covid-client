@@ -16,6 +16,7 @@ export type ResultsState = {
   results: UniProtkbAPIModel[];
   totalNumberResults: number;
   viewMode: ViewMode;
+  summaryAccession: string | null;
 };
 
 const resultsInitialState = {
@@ -37,6 +38,7 @@ const resultsInitialState = {
   nextUrl: '',
   totalNumberResults: 0,
   viewMode: ViewMode.CARD,
+  summaryAccession: null,
 };
 
 export default resultsInitialState;

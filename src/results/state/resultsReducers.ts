@@ -34,6 +34,7 @@ const resultsReducers = (
       return {
         ...state,
         results: [],
+        overviewAccession: null,
         isFetching: false,
         isFetched: {},
       };
@@ -43,6 +44,12 @@ const resultsReducers = (
         ...state,
         viewMode:
           state.viewMode === ViewMode.CARD ? ViewMode.TABLE : ViewMode.CARD,
+      };
+    }
+    case resultsActions.UPDATE_SUMMARY_ACCESSION: {
+      return {
+        ...state,
+        summaryAccession: action.payload.accession,
       };
     }
     default:

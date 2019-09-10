@@ -8,27 +8,35 @@ import {
 } from 'franklin-sites';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
-import { NamesAndTaxonomyUIModel } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
+import {
+  EntryType,
+  UniProtkbUIModel,
+} from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/ProteinOverviewView.scss';
+import EntrySection from '../../../model/types/EntrySection';
+import UniProtTitle from './UniProtTitle';
 
 export const ProteinOverview: FC<{
-  data: NamesAndTaxonomyUIModel;
-  proteinExistence: string;
-  primaryAccession: string;
-  uniProtId: string;
-  entryType: EntryType;
-  annotationScore: number;
-}> = ({
-  data,
-  proteinExistence,
-  primaryAccession,
-  uniProtId,
-  entryType,
-  annotationScore,
-}) => {
-  const { proteinNamesData, geneNamesData, organismData } = data;
+  transformedData: UniProtkbUIModel;
+}> = ({ transformedData }) => {
+  const {
+    proteinExistence,
+    primaryAccession,
+    uniProtId,
+    entryType,
+    annotationScore,
+  } = transformedData;
+  const { proteinNamesData, geneNamesData, organismData } = transformedData[
+    EntrySection.NamesAndTaxonomy
+  ];
   const infoListData = [
+    {
+      title: 'Name',
+      content:
+        proteinNamesData &&
+        proteinNamesData.recommendedName &&
+        proteinNamesData.recommendedName.fullName.value,
+    },
     {
       title: 'Organism',
       content: organismData && <OrganismView data={organismData} />,
@@ -50,28 +58,15 @@ export const ProteinOverview: FC<{
   return (
     <Card
       className="protein-overview"
-      title={(
+      title={
         <Fragment>
-          {entryType === EntryType.SWISSPROT ? (
-            <span className="protein-overview__status icon--reviewed">
-              <SwissProtIcon />
-            </span>
-          ) : (
-            <span className="protein-overview__status icon--unreviewed">
-              <TremblIcon />
-            </span>
-          )}
-          {primaryAccession}
-          {` · `}
-          <small>
-            {`${proteinNamesData && uniProtId}`}
-            {` · `}
-            {proteinNamesData &&
-              proteinNamesData.recommendedName &&
-              proteinNamesData.recommendedName.fullName.value}
-          </small>
+          <UniProtTitle
+            primaryAccession={primaryAccession}
+            entryType={entryType}
+            uniProtId={uniProtId}
+          />
         </Fragment>
-)}
+      }
     >
       <InfoList infoData={infoListData} />
     </Card>

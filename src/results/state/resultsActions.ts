@@ -13,6 +13,7 @@ export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
 export const UPDATE_COLUMN_SORT = 'UPDATE_COLUMN_SORT';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const SWITCH_VIEW_MODE = 'SWITCH_VIEW_MODE';
+export const UPDATE_SUMMARY_ACCESSION = 'UPDATE_SUMMARY_ACCESSION';
 
 export const receiveBatchOfResults = (
   url: string,
@@ -27,7 +28,6 @@ export const receiveBatchOfResults = (
     totalNumberResults,
     receivedAt: Date.now(),
   });
-
 export const requestBatchOfResults = (url: string) =>
   action(REQUEST_BATCH_OF_RESULTS, { url });
 
@@ -69,6 +69,10 @@ export const fetchBatchOfResults = (url: string) => async (
         response.headers['x-totalrecords']
       )
     );
+    const firstAccession = response.data.results[0].primaryAccession;
+    if (firstAccession) {
+      dispatch(action(UPDATE_SUMMARY_ACCESSION, { accession: firstAccession }));
+    }
   });
   // .catch(error => console.error(error)); // the console creates a tslint ...
   // ... error but we want to catch this in the future
@@ -87,5 +91,8 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
     dispatch(fetchBatchOfResults(url));
   }
 };
+
+export const updateSummaryAccession = (accession: string) =>
+  action(UPDATE_SUMMARY_ACCESSION, { accession });
 
 export const switchViewMode = () => action(SWITCH_VIEW_MODE);

@@ -5,4 +5,13 @@
       height: 3rem;
     }
   }
+  &__bubble-count {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    &__item {
+      margin: 0.2rem 0;
+      flex-basis: 33%;
+    }
+  }
 }

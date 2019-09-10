@@ -14,9 +14,9 @@ import SideBarLayout from '../layout/SideBarLayout';
 
 type MatchParams = {
   accession: string;
-}
+};
 
-type EntryProps = {} & RouteComponentProps<MatchParams>
+type EntryProps = {} & RouteComponentProps<MatchParams>;
 
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
@@ -40,30 +40,29 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     <Fragment>
       <SideBarLayout
         sidebar={<InPageNav sections={sections} />}
-        content={(
+        content={
           <Fragment>
             <div className="button-group">
-              <button type="button" className="button link-button">Blast</button>
-              <button type="button" className="button link-button">Align</button>
+              <button type="button" className="button link-button">
+                Blast
+              </button>
+              <button type="button" className="button link-button">
+                Align
+              </button>
               <button type="button" className="button link-button">
                 <DownloadIcon />
                 Download
               </button>
-              <button type="button" className="button link-button">Add</button>
+              <button type="button" className="button link-button">
+                Add
+              </button>
             </div>
-            <ProteinOverview
-              data={transformedData[EntrySection.NamesAndTaxonomy]}
-              proteinExistence={transformedData.proteinExistence}
-              primaryAccession={transformedData.primaryAccession}
-              annotationScore={transformedData.annotationScore}
-              uniProtId={transformedData.uniProtId}
-              entryType={transformedData.entryType}
-            />
+            <ProteinOverview transformedData={transformedData} />
             {UniProtKBEntryConfig.map(({ sectionContent }) => {
               return sectionContent(transformedData);
             })}
           </Fragment>
-)}
+        }
       />
 
       {/* <Card title="Structure">
