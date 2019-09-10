@@ -8,7 +8,8 @@ import { FeatureData } from '../components/FeaturesView';
 import { AlternativeProducts } from '../components/SequenceView';
 import { DiseaseCommentData } from '../components/DiseaseInvolvementView';
 import './ProteinHighlights.scss';
-import { DatabaseCategory } from '../../../model/types/DatabaseTypes';
+import { HashLink as Link } from 'react-router-hash-link';
+import EntrySection from '../../../model/types/EntrySection';
 
 enum highlightSection {
   domains = 'domains',
@@ -23,6 +24,20 @@ enum highlightSection {
   subcell = 'subcellular location',
   publications = 'reviewed publications',
 }
+
+const highlightToEntrySection = {
+  [highlightSection.domains]: EntrySection.Function,
+  [highlightSection.PTM]: EntrySection.ProteinProcessing,
+  [highlightSection.variants]: EntrySection.PathologyAndBioTech,
+  [highlightSection.mutagenesis]: EntrySection.PathologyAndBioTech,
+  [highlightSection.activeSites]: EntrySection.Function,
+  [highlightSection.isoforms]: EntrySection.Sequence,
+  [highlightSection.structures]: EntrySection.Structure,
+  [highlightSection.disease]: EntrySection.PathologyAndBioTech,
+  [highlightSection.interactions]: EntrySection.Interaction,
+  [highlightSection.subcell]: EntrySection.SubCellularLocation,
+  // [highlightSection.publications ] : EntrySection.Publication,
+};
 
 const getFeatureCount = (features: FeatureData, type: FeatureType) =>
   features.filter(feature => feature.type === type).length;
@@ -116,11 +131,15 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
     <div className="protein-highlights">
       {Array.from(highlightsMap.keys()).map(name => (
         <div key={name} className="protein-highlights__item">
-          <Bubble
-            value={highlightsMap.get(name)}
-            colourClass="colour-medium-blue"
-          />
-          {name}
+          <Link
+            to={`/uniprotkb/${data.primaryAccession}#${highlightToEntrySection[name]}`}
+          >
+            <Bubble
+              value={highlightsMap.get(name)}
+              colourClass="colour-medium-blue"
+            />
+            {name}
+          </Link>
         </div>
       ))}
     </div>

@@ -1,7 +1,6 @@
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
 import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
 import {
-  Keyword,
   getKeywordsForCategories,
   KeywordUIModel,
 } from '../utils/KeywordsUtil';
