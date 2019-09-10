@@ -1,88 +1,129 @@
 import React, { FC, Fragment } from 'react';
 import { Bubble } from 'franklin-sites';
-import {
-  UniProtkbUIModel,
-  UniProtkbAPIModel,
-} from '../../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import FeatureType from '../../../model/types/FeatureType';
 import Comment from '../../../model/types/Comment';
 import { InteractionComment } from '../components/InteractionView';
+import { FeatureData } from '../components/FeaturesView';
+import { AlternativeProducts } from '../components/SequenceView';
+import { DiseaseCommentData } from '../components/DiseaseInvolvementView';
+import './ProteinHighlights.scss';
+import { DatabaseCategory } from '../../../model/types/DatabaseTypes';
+
+enum highlightSection {
+  domains = 'domains',
+  PTM = 'PTM',
+  variants = 'variants',
+  mutagenesis = 'mutagenesis',
+  activeSites = 'active sites',
+  isoforms = 'isoforms',
+  structures = '3D structures',
+  disease = 'disease',
+  interactions = 'interactions',
+  subcell = 'subcellular location',
+  publications = 'reviewed publications',
+}
+
+const getFeatureCount = (features: FeatureData, type: FeatureType) =>
+  features.filter(feature => feature.type === type).length;
 
 const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
+  const highlightsMap = new Map<highlightSection, number>();
+
   // FEATURES
-  // domains
-  let domains, PTMs, variants, mutagenesis, activeSites;
   if (data.features) {
-    domains = data.features.filter(
-      feature => feature.type === FeatureType.DOMAIN
+    // domains
+    highlightsMap.set(
+      highlightSection.domains,
+      getFeatureCount(data.features, FeatureType.DOMAIN)
     );
+
     // PTMs
-    PTMs = data.features.filter(
-      feature => feature.type === FeatureType.MOD_RES
+    highlightsMap.set(
+      highlightSection.PTM,
+      getFeatureCount(data.features, FeatureType.MOD_RES)
     );
+
     // variants
-    variants = data.features.filter(
-      feature => feature.type === FeatureType.VARIANT
+    highlightsMap.set(
+      highlightSection.variants,
+      getFeatureCount(data.features, FeatureType.VARIANT)
     );
+
     // mutagenesis
-    mutagenesis = data.features.filter(
-      feature => feature.type === FeatureType.MUTAGEN
+    highlightsMap.set(
+      highlightSection.mutagenesis,
+      getFeatureCount(data.features, FeatureType.MUTAGEN)
     );
+
     // active sites
-    activeSites = data.features.filter(
-      feature => feature.type === FeatureType.ACT_SITE
+    highlightsMap.set(
+      highlightSection.activeSites,
+      getFeatureCount(data.features, FeatureType.ACT_SITE)
     );
   }
 
-  // isoforms
   if (data.comments) {
+    // isoforms
+    const isoformsComments = (data.comments.find(
+      comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
+    ) as unknown) as AlternativeProducts;
+    highlightsMap.set(
+      highlightSection.isoforms,
+      isoformsComments ? isoformsComments.isoforms.length : 0
+    );
+
+    // interactions
     const interactionComments = (data.comments.find(
       comment => comment.commentType === Comment.INTERACTION
     ) as unknown) as InteractionComment;
-    if (interactionComments) {
-      console.log(interactionComments.interactions);
-    }
+    highlightsMap.set(
+      highlightSection.interactions,
+      interactionComments ? interactionComments.interactions.length : 0
+    );
+
+    // diseases
+    const diseaseComments = (data.comments.filter(
+      comment => comment.commentType === Comment.DISEASE
+    ) as unknown) as DiseaseCommentData;
+    highlightsMap.set(highlightSection.disease, diseaseComments.length);
+
+    // subcellular location
+    const subcellComments = data.comments.filter(
+      comment => comment.commentType === Comment.SUBCELLULAR_LOCATION
+    );
+    highlightsMap.set(highlightSection.subcell, subcellComments.length);
   }
+
+  // XREFS
   // 3D structures
-  // diseases
-  // interactions/tors
+  if (data.databaseCrossReferences) {
+    const structures = data.databaseCrossReferences.filter(
+      databaseCrossReference => databaseCrossReference.databaseType === 'PDB'
+    );
+    highlightsMap.set(highlightSection.structures, structures.length);
+  }
+
   // publications
+  if (data.references) {
+    highlightsMap.set(highlightSection.publications, data.references.length);
+  }
+
+  // TODO later
   // expression
-  // subcellular location
-  // biotach / distruption phenotype
+  // biotech / distruption phenotype
   return (
-    <Fragment>
-      {domains && (
-        <div>
-          <Bubble value={domains.length} />
-          Domains
+    <div className="protein-highlights">
+      {Array.from(highlightsMap.keys()).map(name => (
+        <div key={name} className="protein-highlights__item">
+          <Bubble
+            value={highlightsMap.get(name)}
+            colourClass="colour-medium-blue"
+          />
+          {name}
         </div>
-      )}
-      {PTMs && (
-        <div>
-          <Bubble value={PTMs.length} />
-          PTMs
-        </div>
-      )}
-      {variants && (
-        <div>
-          <Bubble value={variants.length} />
-          Variants
-        </div>
-      )}
-      {mutagenesis && (
-        <div>
-          <Bubble value={mutagenesis.length} />
-          Mutagenesis
-        </div>
-      )}
-      {activeSites && (
-        <div>
-          <Bubble value={activeSites.length} />
-          Active sites
-        </div>
-      )}
-    </Fragment>
+      ))}
+    </div>
   );
 };
 

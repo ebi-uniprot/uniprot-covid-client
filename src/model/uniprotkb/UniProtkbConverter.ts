@@ -55,6 +55,24 @@ export type UniProtkbAPIModel = {
     lastSequenceUpdateDate: string;
     sequenceVersion: string;
   };
+  references?: {
+    citation: {
+      citationType?: string;
+      authors?: string[];
+      citationXrefs?: Xref[];
+      title?: string;
+      publicationDate?: number;
+      journal?: string;
+      firstPage?: number;
+      lastPage?: number;
+      volume?: number;
+    };
+    referencePositions?: string[];
+    referenceComments?: {
+      value: string;
+      type: string;
+    };
+  }[];
 };
 
 export type UniProtkbUIModel = {

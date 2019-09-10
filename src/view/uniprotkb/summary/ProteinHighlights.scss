@@ -1,0 +1,8 @@
+.protein-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  &__item {
+    margin: 0.2rem 0;
+    width: 50%;
+  }
+}
