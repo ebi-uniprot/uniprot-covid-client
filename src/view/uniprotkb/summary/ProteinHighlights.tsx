@@ -36,7 +36,7 @@ const highlightToEntrySection = {
   [highlightSection.disease]: EntrySection.PathologyAndBioTech,
   [highlightSection.interactions]: EntrySection.Interaction,
   [highlightSection.subcell]: EntrySection.SubCellularLocation,
-  // [highlightSection.publications ] : EntrySection.Publication,
+  [highlightSection.publications]: null,
 };
 
 const getFeatureCount = (features: FeatureData, type: FeatureType) =>
@@ -127,21 +127,28 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
   // TODO later
   // expression
   // biotech / distruption phenotype
+
   return (
     <div className="protein-highlights">
-      {Array.from(highlightsMap.keys()).map(name => (
-        <div key={name} className="protein-highlights__item">
-          <Link
-            to={`/uniprotkb/${data.primaryAccession}#${highlightToEntrySection[name]}`}
-          >
-            <Bubble
-              value={highlightsMap.get(name)}
-              colourClass="colour-medium-blue"
-            />
-            {name}
-          </Link>
-        </div>
-      ))}
+      {Array.from(highlightsMap.keys()).map(name => {
+        const count = highlightsMap.get(name);
+        if (count === 0) {
+          return null;
+        }
+        return (
+          <div key={name} className="protein-highlights__item">
+            <Link
+              to={`/uniprotkb/${data.primaryAccession}#${highlightToEntrySection[name]}`}
+            >
+              <Bubble
+                value={highlightsMap.get(name)}
+                colourClass="colour-medium-blue"
+              />
+              {name}
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 };
