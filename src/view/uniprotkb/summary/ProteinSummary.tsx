@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { Loader, Card, Bubble } from 'franklin-sites';
+import { Loader, Card } from 'franklin-sites';
 import useDataApi from '../../../utils/useDataApi';
 import apiUrls from '../../../utils/apiUrls';
 import UniProtTitle from '../components/UniProtTitle';
@@ -12,10 +12,7 @@ import FreeTextView from '../components/FreeTextView';
 import EntrySection from '../../../model/types/EntrySection';
 import Comment from '../../../model/types/Comment';
 
-const ProteinSummary: FC<{ accession: string | null }> = ({ accession }) => {
-  if (!accession) {
-    return null;
-  }
+const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
   const url = apiUrls.entry(accession);
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {

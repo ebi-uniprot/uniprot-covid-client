@@ -5,7 +5,7 @@ import {
 } from '../../utils/KeywordsUtil';
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
-import { getXrefsForSection, Xref, XrefUIModel } from '../../utils/XrefUtils';
+import { getXrefsForSection, XrefUIModel } from '../../utils/XrefUtils';
 import EntrySection from '../../types/EntrySection';
 import {
   AlternativeProducts,

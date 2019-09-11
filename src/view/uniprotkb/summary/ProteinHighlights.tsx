@@ -1,5 +1,6 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { Bubble } from 'franklin-sites';
+import { HashLink as Link } from 'react-router-hash-link';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import FeatureType from '../../../model/types/FeatureType';
 import Comment from '../../../model/types/Comment';
@@ -8,7 +9,6 @@ import { FeatureData } from '../components/FeaturesView';
 import { AlternativeProducts } from '../components/SequenceView';
 import { DiseaseCommentData } from '../components/DiseaseInvolvementView';
 import './ProteinHighlights.scss';
-import { HashLink as Link } from 'react-router-hash-link';
 import EntrySection from '../../../model/types/EntrySection';
 
 enum highlightSection {

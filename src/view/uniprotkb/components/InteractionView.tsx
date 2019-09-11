@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import Comment from '../../../model/types/Comment';
 
 enum InteractionType {
@@ -22,6 +22,6 @@ export type InteractionComment = {
   interactions: Interaction[];
 };
 
-const InteractionView: FC<{}> = () => null;
+const InteractionView: FC<{}> = () => <Fragment />;
 
 export default InteractionView;

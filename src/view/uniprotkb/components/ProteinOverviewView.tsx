@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { InfoList, Bubble } from 'franklin-sites';
+import idx from 'idx';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
 import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import EntrySection from '../../../model/types/EntrySection';
-import idx from 'idx';
 
 export const ProteinOverview: FC<{
   transformedData: UniProtkbUIModel;

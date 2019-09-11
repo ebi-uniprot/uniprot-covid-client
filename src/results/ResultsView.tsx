@@ -81,7 +81,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           />
         </div>
         <div className="datalist__column">
-          <ProteinSummary accession={summaryAccession} />
+          {summaryAccession && <ProteinSummary accession={summaryAccession} />}
         </div>
       </div>
     );

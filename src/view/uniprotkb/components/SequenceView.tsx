@@ -125,7 +125,10 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
       <h4 id={name}>{name}</h4>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
-          This isoform has been chosen as the <strong>canonical</strong>{' '}
+          This isoform has been chosen as the 
+          {' '}
+          <strong>canonical</strong>
+          {' '}
           sequence. All positional information in this entry refers to it. This
           is also the sequence that appears in the downloadable versions of the
           entry.
@@ -173,10 +176,15 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
     isoformCountNode = (
       <p>
-        This entry describes{' '}
-        <strong>{data.alternativeProducts.isoforms.length}</strong> isoforms
-        produced by{' '}
-        <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
+        This entry describes
+        {' '}
+        <strong>{data.alternativeProducts.isoforms.length}</strong>
+        {' '}
+isoforms
+        produced by
+        {' '}
+        <strong>{data.alternativeProducts.events.join(' & ')}</strong>
+.
       </p>
     );
   }

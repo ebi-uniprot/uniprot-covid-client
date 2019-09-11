@@ -1,7 +1,7 @@
-import React, { Fragment, FC } from 'react';
-import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
+import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { Link } from 'react-router-dom';
+import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtTitle.scss';
 
 const UniProtTitle: FC<{
@@ -19,7 +19,7 @@ const UniProtTitle: FC<{
         <TremblIcon />
       </span>
     )}
-    <Link to={`/uniprotkb/${primaryAccession}`}>{primaryAccession}</Link>{' '}
+    <Link to={`/uniprotkb/${primaryAccession}`}>{primaryAccession}</Link>
     {` · `}
     {uniProtId}
   </div>
