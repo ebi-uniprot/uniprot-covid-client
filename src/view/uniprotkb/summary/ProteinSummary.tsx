@@ -19,17 +19,16 @@ const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
     return <Loader />;
   }
   const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
+  const title = (
+    <UniProtTitle
+      primaryAccession={entryData.primaryAccession}
+      entryType={entryData.entryType}
+      uniProtId={entryData.uniProtId}
+    />
+  );
   return (
     <Fragment>
-      <Card
-        title={
-          <UniProtTitle
-            primaryAccession={entryData.primaryAccession}
-            entryType={entryData.entryType}
-            uniProtId={entryData.uniProtId}
-          />
-        }
-      >
+      <Card title={title}>
         <ProteinOverview transformedData={transformedData} />
         <FreeTextView
           comments={transformedData[
