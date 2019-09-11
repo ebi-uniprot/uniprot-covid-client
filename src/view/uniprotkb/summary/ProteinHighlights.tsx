@@ -130,6 +130,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
 
   return (
     <div className="protein-highlights">
+      <h4>Protein Highlights</h4>
       {Array.from(highlightsMap.keys()).map(name => {
         const count = highlightsMap.get(name);
         if (count === 0) {
@@ -142,7 +143,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
             >
               <Bubble
                 value={highlightsMap.get(name)}
-                colourClass="colour-medium-blue"
+                colourClass="colour-uniprot-blue"
               />
               {name}
             </Link>

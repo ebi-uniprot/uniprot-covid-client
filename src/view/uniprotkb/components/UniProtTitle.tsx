@@ -9,7 +9,7 @@ const UniProtTitle: FC<{
   entryType: EntryType;
   uniProtId: string;
 }> = ({ primaryAccession, entryType, uniProtId }) => (
-  <Fragment>
+  <div className="uniprot-title">
     {entryType === EntryType.SWISSPROT ? (
       <span className="uniprot-title__status icon--reviewed">
         <SwissProtIcon />
@@ -22,7 +22,7 @@ const UniProtTitle: FC<{
     <Link to={`/uniprotkb/${primaryAccession}`}>{primaryAccession}</Link>{' '}
     {` · `}
     {uniProtId}
-  </Fragment>
+  </div>
 );
 
 export default UniProtTitle;

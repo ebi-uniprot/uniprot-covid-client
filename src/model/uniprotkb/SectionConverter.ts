@@ -60,13 +60,3 @@ export const convertSection = (
   }
   return convertedData;
 };
-
-export const countSectionContent = (convertedData: UIModel) => {
-  return convertedData.featuresData.length;
-  // return (
-  //   convertedData.commentsData.size +
-  //   convertedData.featuresData.length +
-  //   convertedData.keywordData.length +
-  //   convertedData.xrefData.length
-  // );
-};

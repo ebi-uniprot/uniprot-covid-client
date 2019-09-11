@@ -1,12 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import idx from 'idx';
-import { SwissProtIcon, TremblIcon, Bubble, InfoList } from 'franklin-sites';
-import {
-  UniProtkbAPIModel,
-  EntryType,
-} from '../../../model/uniprotkb/UniProtkbConverter';
+import { Bubble, InfoList } from 'franklin-sites';
+import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
 import KeywordCategory from '../../../model/types/KeywordCategory';
 import convertGeneNames from '../../../model/uniprotkb/GeneNamesConverter';
@@ -63,13 +59,13 @@ const UniProtCard: FC<{
 
   return (
     <div className="uniprot-card">
-      <h5>
+      <h4>
         <UniProtTitle
           primaryAccession={data.primaryAccession}
           entryType={data.entryType}
           uniProtId={data.uniProtId}
         />
-      </h5>
+      </h4>
       <p>
         {recommendedName && `${recommendedName} · `}
         <a href="#">{organismName}</a>

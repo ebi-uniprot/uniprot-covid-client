@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { InPageNav, DownloadIcon, Loader } from 'franklin-sites';
+import { Card, InPageNav, DownloadIcon, Loader } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
@@ -8,9 +8,9 @@ import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewVie
 import uniProtKbConverter, {
   UniProtkbUIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
-import EntrySection from '../model/types/EntrySection';
 import hasContent from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
+import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
 
 type MatchParams = {
   accession: string;
@@ -57,7 +57,17 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
                 Add
               </button>
             </div>
-            <ProteinOverview transformedData={transformedData} />
+            <Card
+              title={
+                <UniProtTitle
+                  primaryAccession={transformedData.primaryAccession}
+                  entryType={transformedData.entryType}
+                  uniProtId={transformedData.uniProtId}
+                />
+              }
+            >
+              <ProteinOverview transformedData={transformedData} />
+            </Card>
             {UniProtKBEntryConfig.map(({ sectionContent }) => {
               return sectionContent(transformedData);
             })}

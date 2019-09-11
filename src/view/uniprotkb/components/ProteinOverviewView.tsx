@@ -1,41 +1,32 @@
-import React, { Fragment, FC } from 'react';
-import {
-  Card,
-  InfoList,
-  SwissProtIcon,
-  TremblIcon,
-  Bubble,
-} from 'franklin-sites';
+import React, { FC } from 'react';
+import { InfoList, Bubble } from 'franklin-sites';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
-import {
-  EntryType,
-  UniProtkbUIModel,
-} from '../../../model/uniprotkb/UniProtkbConverter';
-import './styles/ProteinOverviewView.scss';
+import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import EntrySection from '../../../model/types/EntrySection';
-import UniProtTitle from './UniProtTitle';
+import idx from 'idx';
 
 export const ProteinOverview: FC<{
   transformedData: UniProtkbUIModel;
 }> = ({ transformedData }) => {
-  const {
-    proteinExistence,
-    primaryAccession,
-    uniProtId,
-    entryType,
-    annotationScore,
-  } = transformedData;
+  const { proteinExistence, annotationScore } = transformedData;
   const { proteinNamesData, geneNamesData, organismData } = transformedData[
     EntrySection.NamesAndTaxonomy
   ];
+  const proteinName = idx(
+    proteinNamesData,
+    _ => _.recommendedName.fullName.value
+  );
+  const ECnumbers = idx(proteinNamesData, _ => _.recommendedName.ecNumbers);
   const infoListData = [
     {
       title: 'Name',
+      content: proteinName,
+    },
+    {
+      title: 'EC number',
       content:
-        proteinNamesData &&
-        proteinNamesData.recommendedName &&
-        proteinNamesData.recommendedName.fullName.value,
+        ECnumbers && ECnumbers.map(ec => <div key={ec.value}>{ec.value}</div>),
     },
     {
       title: 'Organism',
@@ -55,22 +46,7 @@ export const ProteinOverview: FC<{
     },
   ];
 
-  return (
-    <Card
-      className="protein-overview"
-      title={
-        <Fragment>
-          <UniProtTitle
-            primaryAccession={primaryAccession}
-            entryType={entryType}
-            uniProtId={uniProtId}
-          />
-        </Fragment>
-      }
-    >
-      <InfoList infoData={infoListData} />
-    </Card>
-  );
+  return <InfoList infoData={infoListData} />;
 };
 
 export default ProteinOverview;
