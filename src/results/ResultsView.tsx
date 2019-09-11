@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
+import '../styles/ResultsView.scss';
 import {
   SelectedEntries,
   SortableColumn,
@@ -63,21 +64,25 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const hasMoreData = totalNumberResults > results.length;
   if (viewMode === ViewMode.CARD) {
     return (
-      <div style={{ height: '100%', display: 'flex' }}>
-        <DataList
-          idKey="primaryAccession"
-          data={results}
-          selectable
-          selected={selectedEntries}
-          onSelect={handleEntrySelection}
-          dataRenderer={(dataItem: UniProtkbAPIModel) => (
-            <UniProtCard data={dataItem} />
-          )}
-          onLoadMoreItems={handleLoadMoreRows}
-          onCardClick={handleCardClick}
-          hasMoreData={hasMoreData}
-        />
-        <ProteinSummary accession={summaryAccession} />
+      <div className="datalist">
+        <div className="datalist__column">
+          <DataList
+            idKey="primaryAccession"
+            data={results}
+            selectable
+            selected={selectedEntries}
+            onSelect={handleEntrySelection}
+            dataRenderer={(dataItem: UniProtkbAPIModel) => (
+              <UniProtCard data={dataItem} />
+            )}
+            onLoadMoreItems={handleLoadMoreRows}
+            onCardClick={handleCardClick}
+            hasMoreData={hasMoreData}
+          />
+        </div>
+        <div className="datalist__column">
+          <ProteinSummary accession={summaryAccession} />
+        </div>
       </div>
     );
   } // viewMode === ViewMode.TABLE
