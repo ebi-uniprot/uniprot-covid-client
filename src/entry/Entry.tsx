@@ -16,7 +16,7 @@ type MatchParams = {
   accession: string;
 };
 
-type EntryProps = {} & RouteComponentProps<MatchParams>;
+type EntryProps = RouteComponentProps<MatchParams>;
 
 const Entry: React.FC<EntryProps> = ({ match }) => {
   const url = apiUrls.entry(match.params.accession);
