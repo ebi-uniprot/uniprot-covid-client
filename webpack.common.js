@@ -9,6 +9,7 @@ module.exports = {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
     alias: {
       react: path.resolve('./node_modules/react'),
+      'react-router-dom': path.resolve('./node_modules/react-router-dom'),
     },
   },
   module: {
