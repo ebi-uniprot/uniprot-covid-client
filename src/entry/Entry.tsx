@@ -40,7 +40,7 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
     <Fragment>
       <SideBarLayout
         sidebar={<InPageNav sections={sections} />}
-        content={(
+        content={
           <Fragment>
             <div className="button-group">
               <button type="button" className="button link-button">
@@ -58,21 +58,21 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
               </button>
             </div>
             <Card
-              title={(
+              title={
                 <UniProtTitle
                   primaryAccession={transformedData.primaryAccession}
                   entryType={transformedData.entryType}
                   uniProtId={transformedData.uniProtId}
                 />
-)}
+              }
             >
               <ProteinOverview transformedData={transformedData} />
             </Card>
-            {UniProtKBEntryConfig.map(({ sectionContent }) => {
-              return sectionContent(transformedData);
-            })}
+            {UniProtKBEntryConfig.map(({ sectionContent }) =>
+              sectionContent(transformedData)
+            )}
           </Fragment>
-)}
+        }
       />
 
       {/* <Card title="Structure">
