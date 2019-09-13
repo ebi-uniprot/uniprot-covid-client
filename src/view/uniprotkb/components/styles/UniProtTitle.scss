@@ -3,12 +3,11 @@
   &__status {
     display: inline-flex;
     align-self: center;
-  }
-
-  &__status svg {
-    width: 2rem;
-    height: 2rem;
-    top: 0.125em;
-    position: relative;
+    svg {
+      width: 2rem;
+      height: 2rem;
+      top: 0.125em;
+      position: relative;
+    }
   }
 }
