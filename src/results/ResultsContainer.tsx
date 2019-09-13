@@ -31,12 +31,11 @@ import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 
 export type Facet = {
-  label: string,
-            name: string,
-            allowMultipleSelection: boolean,
-            values: {label: string, value: string, count: number}[
-            ]
-}
+  label: string;
+  name: string;
+  allowMultipleSelection: boolean;
+  values: { label: string; value: string; count: number }[];
+};
 
 type ResultsProps = {
   namespace: Namespace;
@@ -44,6 +43,7 @@ type ResultsProps = {
   dispatchReset: () => void;
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
+  dispatchUpdateSummaryAccession: (accession: string) => void;
   clauses?: Clause[];
   tableColumns: string[];
   cardColumns: string[];
@@ -53,7 +53,8 @@ type ResultsProps = {
   nextUrl: string;
   totalNumberResults: number;
   viewMode: ViewMode;
-} & RouteComponentProps
+  summaryAccession: string | null;
+} & RouteComponentProps;
 
 type ResultsContainerState = {
   selectedEntries: SelectedEntries;
@@ -223,7 +224,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     this.setURLParams(query, selectedFacets, column, updatedDirection);
   };
-  
+
   updateData() {
     const {
       location: { search: queryParamFromUrl },
@@ -253,12 +254,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       facets,
       isFetching,
       dispatchFetchBatchOfResultsIfNeeded,
+      dispatchUpdateSummaryAccession,
       namespace,
       nextUrl,
       totalNumberResults,
       viewMode,
       tableColumns,
       dispatchSwitchViewMode,
+      summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
     const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
@@ -292,15 +295,19 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             <Fragment>
               {results.length > 0 && (
               <div className="button-group">
-                <button type="button" className="button link-button disabled">Blast</button>
-                <button type="button" className="button link-button disabled">Align</button>
+                <button type="button" className="button link-button disabled">
+                    Blast
+                </button>
+                <button type="button" className="button link-button disabled">
+                    Align
+                </button>
                 <button type="button" className="button link-button">
                   <DownloadIcon />
                     Download
                 </button>
                 <button type="button" className="button link-button disabled">
                   <BasketIcon />
-                  Add
+                    Add
                 </button>
                 <button type="button" className="button link-button">
                   <StatisticsIcon />
@@ -338,6 +345,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 handleEntrySelection={this.handleEntrySelection}
                 selectedEntries={selectedEntries}
                 handleHeaderClick={this.updateColumnSort}
+                handleCardClick={dispatchUpdateSummaryAccession}
+                summaryAccession={summaryAccession}
                 sortColumn={sortColumn}
                 sortDirection={sortDirection}
                 handleLoadMoreRows={() =>
@@ -366,6 +375,7 @@ const mapStateToProps = (state: RootState) => {
     nextUrl: state.results.nextUrl,
     totalNumberResults: state.results.totalNumberResults,
     viewMode: state.results.viewMode,
+    summaryAccession: state.results.summaryAccession,
   };
 };
 
@@ -377,6 +387,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchReset: () => searchActions.reset(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
+      dispatchUpdateSummaryAccession: (accession: string) =>
+        resultsActions.updateSummaryAccession(accession),
     },
     dispatch
   );
