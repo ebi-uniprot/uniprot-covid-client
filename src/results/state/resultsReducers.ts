@@ -34,7 +34,7 @@ const resultsReducers = (
       return {
         ...state,
         results: [],
-        overviewAccession: null,
+        summaryAccession: null,
         isFetching: false,
         isFetched: {},
       };

@@ -55,7 +55,7 @@ type Response = {
   };
 };
 
-export const fetchBatchOfResults = (url: string) => async (
+export const fetchBatchOfResults = (url: string, state: RootState) => async (
   dispatch: Dispatch
 ) => {
   dispatch(requestBatchOfResults(url));
@@ -69,9 +69,13 @@ export const fetchBatchOfResults = (url: string) => async (
         response.headers['x-totalrecords']
       )
     );
-    const firstAccession = response.data.results[0].primaryAccession;
-    if (firstAccession) {
-      dispatch(action(UPDATE_SUMMARY_ACCESSION, { accession: firstAccession }));
+    if (response.data.results.length > 0 && !state.results.summaryAccession) {
+      const firstAccession = response.data.results[0].primaryAccession;
+      if (firstAccession) {
+        dispatch(
+          action(UPDATE_SUMMARY_ACCESSION, { accession: firstAccession })
+        );
+      }
     }
   });
   // .catch(error => console.error(error)); // the console creates a tslint ...
@@ -88,7 +92,7 @@ export const fetchBatchOfResultsIfNeeded = (url: string | undefined) => (
   getState: () => RootState
 ) => {
   if (url && shouldFetchBatchOfResults(url, getState())) {
-    dispatch(fetchBatchOfResults(url));
+    dispatch(fetchBatchOfResults(url, getState()));
   }
 };
 
