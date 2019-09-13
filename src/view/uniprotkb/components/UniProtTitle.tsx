@@ -20,8 +20,7 @@ const UniProtTitle: FC<{
       </span>
     )}
     <Link to={`/uniprotkb/${primaryAccession}`}>{primaryAccession}</Link>
-    {` · `}
-    {uniProtId}
+    {` · ${uniProtId}`}
   </div>
 );
 

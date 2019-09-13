@@ -20,7 +20,9 @@ describe('ProteinSummary component', () => {
         <ProteinSummary accession="P05067" />
       </Router>
     );
-    const resolved = await waitForElement(() => getByText('P21802'));
+    const resolved = await waitForElement(() =>
+      getByText(modelData.primaryAccession)
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
