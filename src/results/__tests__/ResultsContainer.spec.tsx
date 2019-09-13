@@ -90,80 +90,80 @@ describe('Results component', () => {
     expect(axios.get).toHaveBeenCalled();
   });
 
-  // test('should select a facet', async () => {
-  //   const { getByText, history } = renderWithRedux(<ResultsContainer />);
-  //   const unreviewedButton = await waitForElement(() =>
-  //     getByText('Unreviewed (TrEMBL) (68,526)')
-  //   );
-  //   fireEvent.click(unreviewedButton);
-  //   expect(history.location.search).toEqual(
-  //     '?query=blah&facets=reviewed:false'
-  //   );
-  // });
+  test('should select a facet', async () => {
+    const { getByText, history } = renderWithRedux(<ResultsContainer />);
+    const unreviewedButton = await waitForElement(() =>
+      getByText('Unreviewed (TrEMBL) (68,526)')
+    );
+    fireEvent.click(unreviewedButton);
+    expect(history.location.search).toEqual(
+      '?query=blah&facets=reviewed:false'
+    );
+  });
 
-  // test('should deselect a facet', async () => {
-  //   const { getByText, history } = renderWithRedux(<ResultsContainer />);
-  //   let unreviewedButton = await waitForElement(() =>
-  //     getByText('Unreviewed (TrEMBL) (68,526)')
-  //   );
-  //   fireEvent.click(unreviewedButton);
-  //   unreviewedButton = await waitForElement(() =>
-  //     getByText('Unreviewed (TrEMBL) (68,526)')
-  //   );
-  //   fireEvent.click(unreviewedButton);
-  //   expect(history.location.search).toEqual('?query=blah');
-  // });
+  test('should deselect a facet', async () => {
+    const { getByText, history } = renderWithRedux(<ResultsContainer />);
+    let unreviewedButton = await waitForElement(() =>
+      getByText('Unreviewed (TrEMBL) (68,526)')
+    );
+    fireEvent.click(unreviewedButton);
+    unreviewedButton = await waitForElement(() =>
+      getByText('Unreviewed (TrEMBL) (68,526)')
+    );
+    fireEvent.click(unreviewedButton);
+    expect(history.location.search).toEqual('?query=blah');
+  });
 
-  // test('should toggle card view to table', async () => {
-  //   const { container, getByTestId, getByText } = renderWithRedux(
-  //     <ResultsContainer />
-  //   );
-  //   const toggle = await waitForElement(() => getByTestId('table-card-toggle'));
-  //   expect(container.querySelector('div')).toBeNull;
-  //   fireEvent.click(toggle);
-  //   const table = await waitForElement(() => getByText('Entry'));
-  //   expect(table).toBeTruthy;
-  // });
+  test('should toggle card view to table', async () => {
+    const { container, getByTestId, getByText } = renderWithRedux(
+      <ResultsContainer />
+    );
+    const toggle = await waitForElement(() => getByTestId('table-card-toggle'));
+    expect(container.querySelector('div')).toBeNull;
+    fireEvent.click(toggle);
+    const table = await waitForElement(() => getByText('Entry'));
+    expect(table).toBeTruthy;
+  });
 
-  // test('should handle selection', async () => {
-  //   const state = {
-  //     query: searchInitialState,
-  //     results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
-  //   };
-  //   const { container, debug, getByText } = renderWithRedux(
-  //     <ResultsContainer />,
-  //     { initialState: state }
-  //   );
-  //   const checkbox = await waitForElement(() =>
-  //     container.querySelector('input[type=checkbox]')
-  //   );
-  //   // As the checkbox selection currently has no effect on the
-  //   // UI we can't test much at the moment
-  //   expect(checkbox.checked).toBeFalsy;
-  //   fireEvent.click(checkbox); // de-select
-  //   expect(checkbox.checked).toBeTruthy;
-  // });
+  test('should handle selection', async () => {
+    const state = {
+      query: searchInitialState,
+      results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
+    };
+    const { container, debug, getByText } = renderWithRedux(
+      <ResultsContainer />,
+      { initialState: state }
+    );
+    const checkbox = await waitForElement(() =>
+      container.querySelector('input[type=checkbox]')
+    );
+    // As the checkbox selection currently has no effect on the
+    // UI we can't test much at the moment
+    expect(checkbox.checked).toBeFalsy;
+    fireEvent.click(checkbox); // de-select
+    expect(checkbox.checked).toBeTruthy;
+  });
 
-  // test('should set sorting', async () => {
-  //   const state = {
-  //     query: searchInitialState,
-  //     results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
-  //   };
-  //   const { getByText, history } = renderWithRedux(<ResultsContainer />, {
-  //     initialState: state,
-  //   });
-  //   let columnHeader = await waitForElement(() => getByText('Entry'));
-  //   fireEvent.click(columnHeader);
-  //   expect(history.location.search).toBe('?query=blah&sort=accession');
-  //   columnHeader = await waitForElement(() => getByText('Entry'));
-  //   fireEvent.click(columnHeader);
-  //   expect(history.location.search).toBe(
-  //     '?query=blah&sort=accession&dir=ascend'
-  //   );
-  //   columnHeader = await waitForElement(() => getByText('Entry'));
-  //   fireEvent.click(columnHeader);
-  //   expect(history.location.search).toBe(
-  //     '?query=blah&sort=accession&dir=descend'
-  //   );
-  // });
+  test('should set sorting', async () => {
+    const state = {
+      query: searchInitialState,
+      results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
+    };
+    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
+      initialState: state,
+    });
+    let columnHeader = await waitForElement(() => getByText('Entry'));
+    fireEvent.click(columnHeader);
+    expect(history.location.search).toBe('?query=blah&sort=accession');
+    columnHeader = await waitForElement(() => getByText('Entry'));
+    fireEvent.click(columnHeader);
+    expect(history.location.search).toBe(
+      '?query=blah&sort=accession&dir=ascend'
+    );
+    columnHeader = await waitForElement(() => getByText('Entry'));
+    fireEvent.click(columnHeader);
+    expect(history.location.search).toBe(
+      '?query=blah&sort=accession&dir=descend'
+    );
+  });
 });
