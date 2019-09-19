@@ -18,7 +18,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   facets.reduce(
     (queryAccumulator, facet) =>
       `${queryAccumulator} AND (${facet.name}:${
-        facet.value.indexOf(' ') >= 0 && !facet.value.match(/^\[.*]$/)
+        facet.value.indexOf(' ') >= 0 && !facet.value.match(/^\[.*\]$/)
           ? `"${facet.value}"`
           : facet.value
       })`,
