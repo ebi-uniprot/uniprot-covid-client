@@ -18,6 +18,7 @@
 
   &__sidebar {
     grid-area: sidebar;
+    overflow-y: auto;
   }
 
   &__content {
