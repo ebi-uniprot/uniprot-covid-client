@@ -37,7 +37,7 @@ const createTermString = (
     if (id) {
       return 'ec:';
     }
-    throw new Error('Value not provided in query');
+    throw new Error('ID value not provided in query');
   }
   if (['organism', 'taxonomy', 'host'].includes(term)) {
     if (id) {
@@ -62,7 +62,7 @@ const createValueString = (
     if (id) {
       return id;
     }
-    throw new Error('Value not provided in query');
+    throw new Error('ID value not provided in query');
   }
   if (id) {
     if (['cofactor_chebi', 'catalytic_activity'].includes(term)) {

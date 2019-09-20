@@ -1,4 +1,4 @@
-const testData = [
+export const errorFreeTestData = [
   {
     description: 'should generate simple query',
     queryString: '(mnemonic:blah)',
@@ -550,4 +550,49 @@ const testData = [
   },
 ];
 
-export default testData;
+export const errorThrowingTestData = [
+  {
+    description: 'should throw "term is undefined" Error',
+    error: Error('term is undefined'),
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+          id: '1234',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should throw error when term is enzyme classification [EC] and no id is present',
+    error: Error('ID value not provided in query'),
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ec',
+          label: 'Enzyme classification [EC]',
+          itemType: 'single',
+          term: 'ec',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
+          description: 'Search by Enzyme EC number',
+          example: '1.1.2.3',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo [1.2.3.4]',
+        },
+      },
+    ],
+  },
+];
