@@ -25,6 +25,9 @@ const getItemTypeEvidencePrefix = (itemType: string) => {
 const getItemTypeRangePrefix = (itemType: string) =>
   itemType === 'feature' ? 'ftlen_' : '';
 
+const getSubstringAfterLastColon = (string: string) =>
+  string.split(':').slice(-1);
+
 const createTermString = (
   term: string | undefined,
   itemType: string,
@@ -64,7 +67,11 @@ const createValueString = (
     }
     throw new Error('Value not provided in query');
   }
-  if (['organism', 'taxonomy', 'host'].includes(term) && id) {
+  if (['cofactor_chebi', 'catalytic_activity'].includes(term) && id) {
+    return getSubstringAfterLastColon(id);
+  }
+
+  if (['organism', 'taxonomy', 'host', 'keyword'].includes(term) && id) {
     return id;
   }
 
