@@ -31,7 +31,7 @@ const createTermString = (
   id: string | undefined
 ) => {
   if (term === undefined) {
-    return '';
+    throw new Error('term is undefined');
   }
   if (term === 'ec') {
     if (id) {
@@ -56,7 +56,7 @@ const createValueString = (
   id: string | undefined
 ) => {
   if (term === undefined) {
-    return '';
+    throw new Error('term is undefined');
   }
   if (term === 'ec') {
     if (id) {
