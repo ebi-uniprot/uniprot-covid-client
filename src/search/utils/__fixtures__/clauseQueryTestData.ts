@@ -41,7 +41,7 @@ const testData = [
   {
     description: 'should handle cc evidence tags',
     queryString:
-      '((cc_cofactor_chebi:blah) AND (ccev_cofactor_chebi:blahvidence))',
+      '((cc_cofactor_chebi:"CHEBI:12345") AND (ccev_cofactor_chebi:blahvidence))',
     clauses: [
       {
         searchTerm: {
@@ -57,7 +57,8 @@ const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          stringValue: 'blah',
+          stringValue: 'blah [CHEBI:12345]',
+          id: 'CHEBI:12345',
           evidenceValue: 'blahvidence',
         },
       },
@@ -296,7 +297,7 @@ const testData = [
   },
   {
     description: 'should handle single cc query',
-    queryString: '(cc_cofactor_chebi:blah)',
+    queryString: '(cc_cofactor_chebi:"CHEBI:12345")',
     clauses: [
       {
         searchTerm: {
@@ -312,7 +313,8 @@ const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          stringValue: 'blah',
+          stringValue: 'blah [CHEBI:12345]',
+          id: 'CHEBI:12345',
         },
       },
     ],
