@@ -18,6 +18,20 @@ const GeneNamesView: React.FC<GeneNamesDataProps> = ({
   return <NameView {...props} />;
 };
 
+export const GeneNamesViewFlat = ({
+  name,
+  alternativeNames = [],
+}: GeneNamesDataProps): string => {
+  const geneNames = [];
+  if (name) {
+    geneNames.push(name);
+  }
+  if (alternativeNames.length) {
+    geneNames.push(...alternativeNames);
+  }
+  return geneNames.join(', ');
+};
+
 export const GeneNamesListView: React.FC<GeneNamesDataProps> = ({
   name,
   alternativeNames,
