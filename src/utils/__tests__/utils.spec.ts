@@ -4,7 +4,7 @@ import {
   removeProperty,
   formatLargeNumber,
   flattenArrays,
-  truncateStringWithEllipses,
+  truncateStringWithEllipsis,
 } from '../utils';
 
 test('serializableDeepCopy returns a copy that is not a reference ', () => {
@@ -43,10 +43,10 @@ test('flattenArrays', () => {
   expect(flattenArrays(arrays)).toEqual([1, 2, 3, 'ab', 4, '5']);
 });
 
-test('truncateStringWithEllipses to return truncated string with ellipses appended', () => {
-  expect(truncateStringWithEllipses('foo bar baz', 10)).toEqual('foo bar...');
+test('truncateStringWithEllipsis to return truncated string with ellipsis appended', () => {
+  expect(truncateStringWithEllipsis('foo bar baz', 10)).toEqual('foo bar...');
 });
 
-test('truncateStringWithEllipses to return string if less than maxLength', () => {
-  expect(truncateStringWithEllipses('foo bar baz', 11)).toEqual('foo bar baz');
+test('truncateStringWithEllipsis to return string if less than maxLength', () => {
+  expect(truncateStringWithEllipsis('foo bar baz', 11)).toEqual('foo bar baz');
 });

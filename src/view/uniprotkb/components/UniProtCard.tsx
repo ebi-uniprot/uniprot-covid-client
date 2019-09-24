@@ -4,7 +4,7 @@ import idx from 'idx';
 import { Bubble } from 'franklin-sites';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
-import { truncateStringWithEllipses } from '../../../utils/utils';
+import { truncateStringWithEllipsis } from '../../../utils/utils';
 import KeywordCategory from '../../../model/types/KeywordCategory';
 import convertGeneNames from '../../../model/uniprotkb/GeneNamesConverter';
 import { GeneNamesViewFlat } from './GeneNamesView';
@@ -75,7 +75,7 @@ const UniProtCard: FC<{
       (_): string => _.comments[0].texts[0].value
     );
     if (firstCommentValue) {
-      functionNode = truncateStringWithEllipses(
+      functionNode = truncateStringWithEllipsis(
         firstCommentValue,
         CHAR_LENGTH_FUNCTION_SUMMARY
       );
