@@ -21,8 +21,7 @@ export const errorFreeTestData = [
     ],
   },
   {
-    description:
-      'should search with id if term is one of ["organism", "taxonomy", "host", "keyword", "scl_term"]',
+    description: 'should search with id if term one is present',
     queryString: '(cc_scl_term:"SL-12345")',
     clauses: [
       {
@@ -47,7 +46,7 @@ export const errorFreeTestData = [
   },
   {
     description:
-      'should append _id to term if term is one of ["organism", "taxonomy", "host"] and id is present',
+      'should append _id to term if termSuffix=true and id is present',
     queryString: '(organism_id:"1234")',
     clauses: [
       {
@@ -60,6 +59,7 @@ export const errorFreeTestData = [
           autoComplete: '/uniprot/api/suggester?dict=organism&query=?',
           description: 'Search by Organism name',
           example: 'saccharomyces',
+          termSuffix: true,
         },
         logicOperator: 'AND',
         queryInput: {
@@ -71,7 +71,7 @@ export const errorFreeTestData = [
   },
   {
     description:
-      'should append _name to term if term is one of ["organism", "taxonomy", "host"] and id is not present',
+      'should append _name to term if termSuffix=true and id is not present',
     queryString: '(organism_name:blah)',
     clauses: [
       {
@@ -84,6 +84,7 @@ export const errorFreeTestData = [
           autoComplete: '/uniprot/api/suggester?dict=organism&query=?',
           description: 'Search by Organism name',
           example: 'saccharomyces',
+          termSuffix: true,
         },
         logicOperator: 'AND',
         queryInput: {
