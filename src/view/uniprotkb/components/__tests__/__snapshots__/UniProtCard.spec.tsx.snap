@@ -39,39 +39,15 @@ exports[`UniProtCard component should render 1`] = `
       >
         scientific name
       </a>
-       · 10 amino-acids · 
+       · Gene: some Gene, some Syn, some orf · 10 amino-acids · 
       <span
         class="bubble--small colour-uniprot-blue"
       >
         2
       </span>
     </p>
-    <div
-      class="info-list"
-    >
-      <div
-        class="info-list__item"
-      >
-        <div
-          class="info-list__item__title"
-        >
-          Gene
-        </div>
-        <div
-          class="info-list__item__content"
-        >
-          <span>
-            <strong>
-              some Gene
-            </strong>
-             
-            <div>
-              some Syn, some orf
-            </div>
-          </span>
-        </div>
-      </div>
-    </div>
+    <p />
+    <p />
   </div>
 </DocumentFragment>
 `;

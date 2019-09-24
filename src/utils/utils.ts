@@ -25,3 +25,13 @@ export const loadWebComponent = (name: string, className: Function) => {
 
 export const flattenArrays = (arrays: any[][]) =>
   [].concat(...(arrays as any[]));
+
+export const truncateStringWithEllipsis = (
+  string: string,
+  maxLength: number
+) => {
+  if (string.length <= maxLength) {
+    return string;
+  }
+  return `${string.slice(0, maxLength - 3)}...`;
+};
