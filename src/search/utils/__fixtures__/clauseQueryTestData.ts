@@ -23,7 +23,7 @@ export const errorFreeTestData = [
   {
     description:
       'should search with id if term is one of ["organism", "taxonomy", "host", "keyword", "scl_term"]',
-    queryString: '(cc_scl_term:SL-12345)',
+    queryString: '(cc_scl_term:"SL-12345")',
     clauses: [
       {
         searchTerm: {
@@ -48,7 +48,7 @@ export const errorFreeTestData = [
   {
     description:
       'should append _id to term if term is one of ["organism", "taxonomy", "host"] and id is present',
-    queryString: '(organism_id:1234)',
+    queryString: '(organism_id:"1234")',
     clauses: [
       {
         searchTerm: {
@@ -94,7 +94,7 @@ export const errorFreeTestData = [
   },
   {
     description: 'should handle enzyme classification [EC] search',
-    queryString: '(ec:1.2.3.4)',
+    queryString: '(ec:"1.2.3.4")',
     clauses: [
       {
         searchTerm: {
@@ -568,29 +568,6 @@ export const errorThrowingTestData = [
         queryInput: {
           stringValue: 'blah',
           id: '1234',
-        },
-      },
-    ],
-  },
-  {
-    description:
-      'should throw error when term is enzyme classification [EC] and no id is present',
-    error: Error('ID value not provided in query'),
-    clauses: [
-      {
-        searchTerm: {
-          id: 'id_ec',
-          label: 'Enzyme classification [EC]',
-          itemType: 'single',
-          term: 'ec',
-          dataType: 'string',
-          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
-          description: 'Search by Enzyme EC number',
-          example: '1.1.2.3',
-        },
-        logicOperator: 'AND',
-        queryInput: {
-          stringValue: 'foo [1.2.3.4]',
         },
       },
     ],
