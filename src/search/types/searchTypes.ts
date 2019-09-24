@@ -19,6 +19,7 @@ export type SearchTermType = {
   hasRange?: boolean;
   hasEvidence?: boolean;
   valuePrefix?: string;
+  termSuffix?: boolean;
   autoComplete?: string;
   description?: string;
   options?: {

@@ -28,19 +28,14 @@ const getItemTypeRangePrefix = (itemType: string) =>
 const createTermString = (
   term: string | undefined,
   itemType: string,
-  id: string | undefined
+  id: string | undefined,
+  termSuffix: boolean | undefined
 ) => {
   if (term === undefined) {
     throw new Error('term is undefined');
   }
-  // These are temporary as the config will eventually contain
-  // a termSuffix attribute to indicate the need for this
-  // behavior.
-  if (['organism', 'taxonomy', 'host'].includes(term)) {
-    if (id) {
-      return `${term}_id:`;
-    }
-    return `${term}_name:`;
+  if (termSuffix) {
+    return id ? `${term}_id:` : `${term}_name:`;
   }
   const itemTypePrefix = getItemTypePrefix(itemType);
   return `${itemTypePrefix}${term}${term ? ':' : ''}`;
@@ -73,7 +68,7 @@ const createSimpleSubquery = (clause: Clause) => {
   if (clause.searchTerm.itemType === 'group') {
     throw Error('Cannot create a query with a group term.');
   }
-  const { itemType, term, valuePrefix } = clause.searchTerm;
+  const { itemType, term, valuePrefix, termSuffix } = clause.searchTerm;
   const { stringValue, id } = clause.queryInput;
   if (!stringValue) {
     throw new Error('Value not provided in query');
@@ -81,7 +76,7 @@ const createSimpleSubquery = (clause: Clause) => {
   if (term === 'All') {
     return stringValue;
   }
-  const termString = createTermString(term, itemType, id);
+  const termString = createTermString(term, itemType, id, termSuffix);
   const valueString = createValueString(term, valuePrefix, stringValue, id);
   return `(${termString}${valueString})`;
 };
