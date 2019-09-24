@@ -69,7 +69,9 @@ const createValueString = (
       return `"${id}"`;
     }
     if (
-      ['organism', 'taxonomy', 'host', 'keyword', 'scl_term'].includes(term)
+      ['organism', 'taxonomy', 'host', 'keyword', 'scl_term', 'go'].includes(
+        term
+      )
     ) {
       return id;
     }
