@@ -9,9 +9,9 @@ type GeneNamesDataProps = {
 
 const GeneNamesView: React.FC<GeneNamesDataProps> = ({
   name,
-  alternativeNames,
+  alternativeNames = [],
 }) => {
-  if (!name && !alternativeNames) {
+  if (!name) {
     return null;
   }
   const props = { name, alternativeNames };
@@ -34,7 +34,7 @@ export const GeneNamesViewFlat = ({
 
 export const GeneNamesListView: React.FC<GeneNamesDataProps> = ({
   name,
-  alternativeNames,
+  alternativeNames = [],
 }) => {
   if (!name) {
     return null;

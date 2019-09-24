@@ -36,7 +36,7 @@ const UniProtCard: FC<{
   let geneNameListNode;
   if (data.genes) {
     const convertedGeneNames = convertGeneNames(data.genes);
-    geneNameListNode = `Gene ${GeneNamesViewFlat(convertedGeneNames)} · `;
+    geneNameListNode = `Gene: ${GeneNamesViewFlat(convertedGeneNames)} · `;
   }
 
   const sequenceLengthNode = `${data.sequence.length} amino-acids · `;
