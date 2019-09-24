@@ -33,12 +33,9 @@ const createTermString = (
   if (term === undefined) {
     throw new Error('term is undefined');
   }
-  if (term === 'ec') {
-    if (id) {
-      return 'ec:';
-    }
-    throw new Error('ID value not provided in query');
-  }
+  // These are temporary as the config will eventually contain
+  // a termSuffix attribute to indicate the need for this
+  // behavior.
   if (['organism', 'taxonomy', 'host'].includes(term)) {
     if (id) {
       return `${term}_id:`;
@@ -58,23 +55,8 @@ const createValueString = (
   if (term === undefined) {
     throw new Error('term is undefined');
   }
-  if (term === 'ec') {
-    if (id) {
-      return id;
-    }
-    throw new Error('ID value not provided in query');
-  }
   if (id) {
-    if (['cofactor_chebi', 'catalytic_activity'].includes(term)) {
-      return `"${id}"`;
-    }
-    if (
-      ['organism', 'taxonomy', 'host', 'keyword', 'scl_term', 'go'].includes(
-        term
-      )
-    ) {
-      return id;
-    }
+    return `"${id}"`;
   }
 
   // We are testing for term=xref and valuePrefix=any because the
