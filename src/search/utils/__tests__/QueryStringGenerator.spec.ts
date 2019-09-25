@@ -1,17 +1,17 @@
 import createQueryString from '../QueryStringGenerator';
 import {
-  errorFreeTestData,
-  errorThrowingTestData,
+  testData,
+  exceptionThrowingTestData,
 } from '../__fixtures__/clauseQueryTestData';
 
 describe('QueryHelper', () => {
-  errorFreeTestData.forEach(({ description, queryString, clauses }) => {
+  testData.forEach(({ description, queryString, clauses }) => {
     test(description, () => {
       const testQueryString = createQueryString(clauses);
       expect(testQueryString).toBe(queryString);
     });
   });
-  errorThrowingTestData.forEach(({ description, error, clauses }) => {
+  exceptionThrowingTestData.forEach(({ description, error, clauses }) => {
     test(description, () => {
       expect(() => {
         createQueryString(clauses);

@@ -1,4 +1,4 @@
-export const errorFreeTestData = [
+export const testData = [
   {
     description: 'should generate simple query',
     queryString: '(mnemonic:blah)',
@@ -94,8 +94,8 @@ export const errorFreeTestData = [
     ],
   },
   {
-    description: 'should handle enzyme classification [EC] search',
-    queryString: '(ec:"1.2.3.4")',
+    description: 'should handle enzyme classification [EC] search with an ID',
+    queryString: '(ec:1.2.3.4)',
     clauses: [
       {
         searchTerm: {
@@ -112,6 +112,29 @@ export const errorFreeTestData = [
         queryInput: {
           stringValue: 'foo [1.2.3.4]',
           id: '1.2.3.4',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle enzyme classification [EC] search without an ID',
+    queryString: '(ec:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ec',
+          label: 'Enzyme classification [EC]',
+          itemType: 'single',
+          term: 'ec',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
+          description: 'Search by Enzyme EC number',
+          example: '1.1.2.3',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo',
         },
       },
     ],
@@ -551,7 +574,7 @@ export const errorFreeTestData = [
   },
 ];
 
-export const errorThrowingTestData = [
+export const exceptionThrowingTestData = [
   {
     description: 'should throw "term is undefined" Error',
     error: Error('term is undefined'),
