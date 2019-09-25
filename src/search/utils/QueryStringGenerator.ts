@@ -6,6 +6,8 @@ type IPrefixMap = {
   [key: string]: string;
 };
 
+const doubleQuote = (string: string) => `"${string}"`;
+
 const getItemTypePrefix = (itemType: string) => {
   const itemTypeToPrefixMap: IPrefixMap = {
     feature: 'ft_',
@@ -28,22 +30,14 @@ const getItemTypeRangePrefix = (itemType: string) =>
 const createTermString = (
   term: string | undefined,
   itemType: string,
-  id: string | undefined
+  id: string | undefined,
+  termSuffix: boolean | undefined
 ) => {
   if (term === undefined) {
-    return '';
+    throw new Error('term is undefined');
   }
-  if (term === 'ec') {
-    if (id) {
-      return 'ec:';
-    }
-    throw new Error('Value not provided in query');
-  }
-  if (['organism', 'taxonomy', 'host'].includes(term)) {
-    if (id) {
-      return `${term}_id:`;
-    }
-    return `${term}_name:`;
+  if (termSuffix) {
+    return id ? `${term}_id:` : `${term}_name:`;
   }
   const itemTypePrefix = getItemTypePrefix(itemType);
   return `${itemTypePrefix}${term}${term ? ':' : ''}`;
@@ -56,33 +50,28 @@ const createValueString = (
   id: string | undefined
 ) => {
   if (term === undefined) {
-    return '';
+    throw new Error('term is undefined');
   }
-  if (term === 'ec') {
-    if (id) {
-      return id;
-    }
-    throw new Error('Value not provided in query');
-  }
-  if (['organism', 'taxonomy', 'host'].includes(term) && id) {
-    return id;
+  if (id) {
+    return doubleQuote(id);
   }
 
   // We are testing for term=xref and valuePrefix=any because the
   // search API expects the valuePrefix to be ommited in this case.
   // eg xref:foo rather than xref_any:foo
-  const valuePrefixChecked =
-    valuePrefix && !(term === 'xref' && valuePrefix === 'any')
-      ? `${valuePrefix}-`
-      : '';
-  return `${valuePrefixChecked}${stringValue}`;
+  let valueString = stringValue;
+  if (valuePrefix && !(term === 'xref' && valuePrefix === 'any')) {
+    valueString = `${valuePrefix}-${stringValue}`;
+  }
+
+  return valueString.includes(' ') ? doubleQuote(valueString) : valueString;
 };
 
 const createSimpleSubquery = (clause: Clause) => {
   if (clause.searchTerm.itemType === 'group') {
     throw Error('Cannot create a query with a group term.');
   }
-  const { itemType, term, valuePrefix } = clause.searchTerm;
+  const { itemType, term, valuePrefix, termSuffix } = clause.searchTerm;
   const { stringValue, id } = clause.queryInput;
   if (!stringValue) {
     throw new Error('Value not provided in query');
@@ -90,7 +79,7 @@ const createSimpleSubquery = (clause: Clause) => {
   if (term === 'All') {
     return stringValue;
   }
-  const termString = createTermString(term, itemType, id);
+  const termString = createTermString(term, itemType, id, termSuffix);
   const valueString = createValueString(term, valuePrefix, stringValue, id);
   return `(${termString}${valueString})`;
 };
