@@ -13,7 +13,6 @@ const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
     evidences,
     (evidence: Evidence) => evidence.evidenceCode
   );
-  console.log(evidenceMap);
   return Array.from(evidenceMap.keys()).map(evidenceCode => {
     const evidenceData = getEvidenceCodeData(evidenceCode);
     const references = evidenceMap.get(evidenceCode);
@@ -33,11 +32,13 @@ const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
         <div>
           <h5>{evidenceData.label}</h5>
           {references &&
-            references.map(reference => (
-              <div key={reference.id}>
-                {reference.source}:{reference.id}
-              </div>
-            ))}
+            references
+              .filter(reference => reference.source)
+              .map(reference => (
+                <div key={reference.id}>
+                  {reference.source}:{reference.id}
+                </div>
+              ))}
         </div>
       </EvidenceTag>
     );

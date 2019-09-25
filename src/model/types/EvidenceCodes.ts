@@ -44,6 +44,8 @@ type EvidenceData = {
 const publicationCountRenderer = (n: Number) =>
   `${n} publication${n > 1 ? 's' : ''}`;
 
+const rulesCountRenderer = (n: Number) => `${n} annotation${n > 1 ? 's' : ''}`;
+
 export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
   const num = Number(eco.split(':')[1]);
   switch (num) {
@@ -138,6 +140,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion according to rules',
         description: 'Inferred from sequence model',
+        labelRender: rulesCountRenderer,
       };
     case ECO.IGC:
       return {
