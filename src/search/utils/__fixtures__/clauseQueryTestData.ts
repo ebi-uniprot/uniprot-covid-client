@@ -1,4 +1,4 @@
-export const errorFreeTestData = [
+export const testData = [
   {
     description: 'should generate simple query',
     queryString: '(mnemonic:blah)',
@@ -16,6 +16,28 @@ export const errorFreeTestData = [
         logicOperator: 'AND',
         queryInput: {
           stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should generate query with value surrounded by double quotes when stringValue has a space',
+    queryString: '(mnemonic:"foo bar")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo bar',
         },
       },
     ],
@@ -94,7 +116,7 @@ export const errorFreeTestData = [
     ],
   },
   {
-    description: 'should handle enzyme classification [EC] search',
+    description: 'should handle enzyme classification [EC] search with an ID',
     queryString: '(ec:"1.2.3.4")',
     clauses: [
       {
@@ -112,6 +134,29 @@ export const errorFreeTestData = [
         queryInput: {
           stringValue: 'foo [1.2.3.4]',
           id: '1.2.3.4',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle enzyme classification [EC] search without an ID',
+    queryString: '(ec:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ec',
+          label: 'Enzyme classification [EC]',
+          itemType: 'single',
+          term: 'ec',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
+          description: 'Search by Enzyme EC number',
+          example: '1.1.2.3',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo',
         },
       },
     ],
@@ -272,6 +317,26 @@ export const errorFreeTestData = [
         logicOperator: 'AND',
         queryInput: {
           stringValue: 'Something',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should handle xrefs when input string value has spaces',
+    queryString: '(xref:"pdb-Something or another")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_pdb',
+          label: 'PDB',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'pdb',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'Something or another',
         },
       },
     ],
@@ -551,7 +616,7 @@ export const errorFreeTestData = [
   },
 ];
 
-export const errorThrowingTestData = [
+export const exceptionThrowingTestData = [
   {
     description: 'should throw "term is undefined" Error',
     error: Error('term is undefined'),

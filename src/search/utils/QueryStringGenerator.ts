@@ -6,6 +6,8 @@ type IPrefixMap = {
   [key: string]: string;
 };
 
+const doubleQuote = (string: string) => `"${string}"`;
+
 const getItemTypePrefix = (itemType: string) => {
   const itemTypeToPrefixMap: IPrefixMap = {
     feature: 'ft_',
@@ -51,17 +53,18 @@ const createValueString = (
     throw new Error('term is undefined');
   }
   if (id) {
-    return `"${id}"`;
+    return doubleQuote(id);
   }
 
   // We are testing for term=xref and valuePrefix=any because the
   // search API expects the valuePrefix to be ommited in this case.
   // eg xref:foo rather than xref_any:foo
-  const valuePrefixChecked =
-    valuePrefix && !(term === 'xref' && valuePrefix === 'any')
-      ? `${valuePrefix}-`
-      : '';
-  return `${valuePrefixChecked}${stringValue}`;
+  let valueString = stringValue;
+  if (valuePrefix && !(term === 'xref' && valuePrefix === 'any')) {
+    valueString = `${valuePrefix}-${stringValue}`;
+  }
+
+  return valueString.includes(' ') ? doubleQuote(valueString) : valueString;
 };
 
 const createSimpleSubquery = (clause: Clause) => {
