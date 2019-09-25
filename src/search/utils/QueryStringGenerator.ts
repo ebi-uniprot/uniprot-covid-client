@@ -6,6 +6,8 @@ type IPrefixMap = {
   [key: string]: string;
 };
 
+const doubleQuote = (string: string) => `"${string}"`;
+
 const getItemTypePrefix = (itemType: string) => {
   const itemTypeToPrefixMap: IPrefixMap = {
     feature: 'ft_',
@@ -53,17 +55,18 @@ const createValueString = (
   if (id) {
     // We need to not quote ec numbers because this will cause the
     // API's query parser to ignore any wildcards (eg 2.4.*.*)
-    return term === 'ec' ? id : `"${id}"`;
+    return term === 'ec' ? id : doubleQuote(id);
   }
 
   // We are testing for term=xref and valuePrefix=any because the
   // search API expects the valuePrefix to be ommited in this case.
   // eg xref:foo rather than xref_any:foo
-  const valuePrefixChecked =
-    valuePrefix && !(term === 'xref' && valuePrefix === 'any')
-      ? `${valuePrefix}-`
-      : '';
-  return `${valuePrefixChecked}${stringValue}`;
+  let valueString = stringValue;
+  if (valuePrefix && !(term === 'xref' && valuePrefix === 'any')) {
+    valueString = `${valuePrefix}-${stringValue}`;
+  }
+
+  return valueString.includes(' ') ? doubleQuote(valueString) : valueString;
 };
 
 const createSimpleSubquery = (clause: Clause) => {
