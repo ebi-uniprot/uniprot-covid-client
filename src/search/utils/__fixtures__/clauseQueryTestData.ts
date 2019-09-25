@@ -21,6 +21,28 @@ export const testData = [
     ],
   },
   {
+    description:
+      'should generate query with value surrounded by double quotes when stringValue has a space',
+    queryString: '(mnemonic:"foo bar")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo bar',
+        },
+      },
+    ],
+  },
+  {
     description: 'should search with id if term one is present',
     queryString: '(cc_scl_term:"SL-12345")',
     clauses: [
@@ -295,6 +317,26 @@ export const testData = [
         logicOperator: 'AND',
         queryInput: {
           stringValue: 'Something',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should handle xrefs when input string value has spaces',
+    queryString: '(xref:"pdb-Something or another")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_pdb',
+          label: 'PDB',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'pdb',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'Something or another',
         },
       },
     ],
