@@ -52,11 +52,9 @@ export const DiseaseInvolvementEntry: React.FC<
   }
   const infoData = [];
 
-  const evidenceNodes =
-    evidences &&
-    evidences.map(evidence => (
-      <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-    ));
+  const evidenceNodes = evidences && (
+    <UniProtEvidenceTag evidences={evidences} />
+  );
 
   if (note) {
     const { texts } = note;
@@ -100,9 +98,7 @@ export const DiseaseInvolvementEntry: React.FC<
   return (
     <Fragment>
       <h4>
-        {diseaseId} 
-        {' '}
-        {acronym && `(${acronym})`}
+        {diseaseId} {acronym && `(${acronym})`}
       </h4>
       <p>{evidenceNodes}</p>
       <InfoList infoData={infoData} />

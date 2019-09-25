@@ -38,7 +38,11 @@ type EvidenceData = {
   manual: boolean;
   label: string;
   description: string;
+  labelRender?: Function;
 };
+
+const publicationCountRenderer = (n: Number) =>
+  `${n} publication${n > 1 ? 's' : ''}`;
 
 export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
   const num = Number(eco.split(':')[1]);
@@ -48,6 +52,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion based on experiment',
         description: 'Inferred from experiment',
+        labelRender: publicationCountRenderer,
       };
     case ECO.HTP:
       return {
@@ -114,6 +119,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion inferred from sequence similarity',
         description: 'Inferred from sequence or structural similarity',
+        labelRender: () => 'By similarity',
       };
     case ECO.ISO:
       return {
@@ -180,12 +186,14 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion based on opinion',
         description: 'Non-traceable author statement',
+        labelRender: publicationCountRenderer,
       };
     case ECO.IC:
       return {
         manual: true,
         label: 'Manual assertion inferred by curator',
         description: 'Inferred by curator',
+        labelRender: publicationCountRenderer,
       };
     case ECO.ND:
       return {

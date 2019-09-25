@@ -31,13 +31,13 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         catalyticActivity =>
           catalyticActivity.reaction && (
             <p key={v1()}>
-              <strong>{catalyticActivity.reaction.ecNumber}</strong>
-              {' '}
+              <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
               {catalyticActivity.reaction.name}
-              {catalyticActivity.reaction.evidences &&
-                catalyticActivity.reaction.evidences.map(evidence => (
-                  <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-                ))}
+              {catalyticActivity.reaction.evidences && (
+                <UniProtEvidenceTag
+                  evidences={catalyticActivity.reaction.evidences}
+                />
+              )}
             </p>
           )
       )}

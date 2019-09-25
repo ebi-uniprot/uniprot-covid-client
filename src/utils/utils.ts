@@ -35,3 +35,16 @@ export const truncateStringWithEllipsis = (
   }
   return `${string.slice(0, maxLength - 3)}...`;
 };
+
+export const groupBy = (list: any[], keyGetter: Function) => {
+  const map = new Map();
+  list.forEach(item => {
+    const key = keyGetter(item);
+    if (!map.get(key)) {
+      map.set(key, [item]);
+    } else {
+      map.get(key).push(item);
+    }
+  });
+  return map;
+};
