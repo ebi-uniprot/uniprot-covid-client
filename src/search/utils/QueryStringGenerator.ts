@@ -53,9 +53,7 @@ const createValueString = (
     throw new Error('term is undefined');
   }
   if (id) {
-    // We need to not quote ec numbers because this will cause the
-    // API's query parser to ignore any wildcards (eg 2.4.*.*)
-    return term === 'ec' ? id : doubleQuote(id);
+    return doubleQuote(id);
   }
 
   // We are testing for term=xref and valuePrefix=any because the

@@ -117,7 +117,7 @@ export const testData = [
   },
   {
     description: 'should handle enzyme classification [EC] search with an ID',
-    queryString: '(ec:1.2.3.4)',
+    queryString: '(ec:"1.2.3.4")',
     clauses: [
       {
         searchTerm: {
