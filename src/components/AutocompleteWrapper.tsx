@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Autocomplete } from 'franklin-sites';
 import { v1 } from 'uuid';
-import { timingSafeEqual } from 'crypto';
 import fetchData from '../utils/fetchData';
 import { getSuggesterUrl } from '../utils/apiUrls';
 
