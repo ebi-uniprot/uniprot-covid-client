@@ -23,7 +23,7 @@ const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
       <EvidenceTag
         label={
           evidenceData.labelRender
-            ? evidenceData.labelRender(references ? references.length : '')
+            ? evidenceData.labelRender(references ? references : '')
             : evidenceData.label
         }
         labelClassName=""

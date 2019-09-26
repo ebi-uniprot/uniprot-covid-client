@@ -1,3 +1,5 @@
+import { Evidence } from './modelTypes';
+
 export enum ECO {
   EXP = 269,
   HTP = 6056,
@@ -34,6 +36,17 @@ export enum ECO {
   SGNA = 259,
 }
 
+enum labels {
+  IMPORTED = 'Imported',
+  COMBINED = 'Combined sources',
+  INTERPRO = 'InterPro annotation',
+  SIMILARITY = 'By similarity',
+  CURATED = 'Curated',
+  PUBLICATION = 'publication',
+  AA = 'automatic annotation',
+  SEQ_ANA = 'Sequence analysis',
+}
+
 type EvidenceData = {
   manual: boolean;
   label: string;
@@ -41,10 +54,25 @@ type EvidenceData = {
   labelRender?: Function;
 };
 
-const publicationCountRenderer = (n: Number) =>
-  `${n} publication${n > 1 ? 's' : ''}`;
+const publicationCountRenderer = (evidences: Evidence[]) => {
+  const length = evidences.length;
+  return length > 0
+    ? `${length} ${labels.PUBLICATION}${length > 1 ? 's' : ''}`
+    : labels.CURATED;
+};
 
-const rulesCountRenderer = (n: Number) => `${n} annotation${n > 1 ? 's' : ''}`;
+const rulesCountRenderer = (evidences: Evidence[]) => {
+  const length = evidences.length;
+  const isSAMPhobius = evidences.some(
+    evidence =>
+      evidence.source && evidence.source === 'SAM' && evidence.id === 'Phobius'
+  );
+  if (isSAMPhobius) {
+    return labels.SEQ_ANA;
+  } else {
+    return `${length} ${labels.AA}${length > 1 ? 's' : ''}`;
+  }
+};
 
 export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
   const num = Number(eco.split(':')[1]);
@@ -121,7 +149,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion inferred from sequence similarity',
         description: 'Inferred from sequence or structural similarity',
-        labelRender: () => 'By similarity',
+        labelRender: () => labels.SIMILARITY,
       };
     case ECO.ISO:
       return {
@@ -138,7 +166,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
     case ECO.ISM:
       return {
         manual: true,
-        label: 'Manual assertion according to rules',
+        label: 'Automatic assertion according to rules',
         description: 'Inferred from sequence model',
         labelRender: rulesCountRenderer,
       };
@@ -194,7 +222,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
     case ECO.IC:
       return {
         manual: true,
-        label: 'Manual assertion inferred by curator',
+        label: 'Manual assertion inferred from experiment',
         description: 'Inferred by curator',
         labelRender: publicationCountRenderer,
       };
@@ -215,18 +243,21 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion inferred from database entries',
         description: 'Manually imported',
+        labelRender: () => labels.IMPORTED,
       };
     case ECO.AI:
       return {
         manual: false,
         label: 'Automatic assertion inferred from database entries',
         description: 'Automatically imported',
+        labelRender: () => labels.IMPORTED,
       };
     case ECO.AA:
       return {
         manual: false,
         label: 'Automatic assertion according to rules',
         description: 'Automatically inferred from sequence model',
+        labelRender: rulesCountRenderer,
       };
     case ECO.MIXM:
       return {
@@ -234,6 +265,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         label:
           'Manual assertion inferred from combination of experimental and computational evidence',
         description: 'Combinatorial evidence used in manual assertion',
+        labelRender: () => labels.COMBINED,
       };
     case ECO.MIXA:
       return {
@@ -241,6 +273,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         label:
           'Automatic assertion inferred from combination of experimental and computational evidence',
         description: 'Combinatorial evidence used in automatic assertion',
+        labelRender: () => labels.COMBINED,
       };
     case ECO.SGNM:
       return {
@@ -255,6 +288,7 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         label: 'Automatic assertion inferred from signature match',
         description:
           'Match to InterPro member signature evidence used in automatic assertion',
+        labelRender: () => labels.INTERPRO,
       };
     default:
       return null;
