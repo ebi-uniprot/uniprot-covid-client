@@ -71,7 +71,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     // If the previous text input and the current text input are
     // subsets of each other then don't reset the state's data.
     // Fetch new suggestions after previousTextInputValue has been
-    // set.
+    // set. Use the callback to prevent race conditions.
     else if (
       trimmedTextInputValue.includes(previousTextInputValue) ||
       previousTextInputValue.includes(trimmedTextInputValue)
@@ -82,6 +82,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     }
     // This is a "new" or "unrelated" text input so erase the old string
     // and then fetch the new suggestions after the state has been set.
+    // Use the callback to prevent race conditions.
     else {
       this.setState(
         {
