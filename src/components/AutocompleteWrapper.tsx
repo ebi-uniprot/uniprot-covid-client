@@ -82,7 +82,7 @@ class AutocompleteWrapper extends Component<Props, State> {
         this.fetchOptions(trimmedTextInputValue)
       );
     }
-    // This is a "new" or "unrelated" text input so erase the old string
+    // This is a "new" or "unrelated" text input so erase the old data
     // and then fetch the new suggestions after the state has been set.
     // Use the callback to prevent race conditions.
     else {
