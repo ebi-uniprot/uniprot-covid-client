@@ -11,12 +11,15 @@ exports[`Catalytic activity should render catalytic activity 1`] = `
     </strong>
      Reaction name
     <span
-      class="evidence-tag evidence-tag--unreviewed"
+      class="evidence-tag "
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
     >
       <svg
-        height="10"
+        height="12"
         viewBox="0 0 512 512"
-        width="10"
+        width="12"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
