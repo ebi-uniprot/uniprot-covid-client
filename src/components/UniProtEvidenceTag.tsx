@@ -1,19 +1,15 @@
-import React from 'react';
-import { EvidenceTag } from 'franklin-sites';
+import React, { FC, Fragment } from 'react';
+import { EvidenceTag, SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { getEvidenceCodeData } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
 import { groupBy } from '../utils/utils';
 
-type UniProtEvidenceProps = {
-  evidences: Evidence[];
-};
-
-const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
+const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   const evidenceMap: Map<string, Evidence[]> = groupBy(
     evidences,
     (evidence: Evidence) => evidence.evidenceCode
   );
-  return Array.from(evidenceMap.keys()).map(evidenceCode => {
+  const evidenceTags = Array.from(evidenceMap.keys()).map(evidenceCode => {
     const evidenceData = getEvidenceCodeData(evidenceCode);
     const references = evidenceMap.get(evidenceCode);
     if (!evidenceData) {
@@ -23,10 +19,13 @@ const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
       <EvidenceTag
         label={
           evidenceData.labelRender
-            ? evidenceData.labelRender(references ? references : '')
+            ? evidenceData.labelRender(references)
             : evidenceData.label
         }
-        labelClassName=""
+        IconComponent={evidenceData.manual ? SwissProtIcon : TremblIcon}
+        className={
+          evidenceData.manual ? 'svg-colour-reviewed' : 'svg-colour-unreviewed'
+        }
         key={evidenceCode}
       >
         <div>
@@ -36,13 +35,14 @@ const UniProtEvidence: React.FC<UniProtEvidenceProps> = ({ evidences }) => {
               .filter(reference => reference.source)
               .map(reference => (
                 <div key={reference.id}>
-                  {reference.source}:{reference.id}
+                  {`${reference.source}:${reference.id}`}
                 </div>
               ))}
         </div>
       </EvidenceTag>
     );
   });
+  return <Fragment>{evidenceTags}</Fragment>;
 };
 
-export default UniProtEvidence;
+export default UniProtEvidenceTag;

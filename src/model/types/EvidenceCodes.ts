@@ -55,23 +55,24 @@ type EvidenceData = {
 };
 
 const publicationCountRenderer = (evidences: Evidence[]) => {
-  const length = evidences.length;
+  const { length } = evidences;
   return length > 0
     ? `${length} ${labels.PUBLICATION}${length > 1 ? 's' : ''}`
     : labels.CURATED;
 };
 
 const rulesCountRenderer = (evidences: Evidence[]) => {
-  const length = evidences.length;
+  const { length } = evidences;
   const isSAMPhobius = evidences.some(
     evidence =>
-      evidence.source && evidence.source === 'SAM' && evidence.id === 'Phobius'
+      typeof evidence.source !== 'undefined' &&
+      evidence.source === 'SAM' &&
+      evidence.id === 'Phobius'
   );
   if (isSAMPhobius) {
     return labels.SEQ_ANA;
-  } else {
-    return `${length} ${labels.AA}${length > 1 ? 's' : ''}`;
   }
+  return `${length} ${labels.AA}${length > 1 ? 's' : ''}`;
 };
 
 export const getEvidenceCodeData = (eco: string): EvidenceData | null => {

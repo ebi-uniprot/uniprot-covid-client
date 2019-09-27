@@ -31,8 +31,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         catalyticActivity =>
           catalyticActivity.reaction && (
             <p key={v1()}>
-              <strong>{catalyticActivity.reaction.ecNumber}</strong>{' '}
-              {catalyticActivity.reaction.name}
+              <strong>{catalyticActivity.reaction.ecNumber}</strong>
+              {` ${catalyticActivity.reaction.name}`}
               {catalyticActivity.reaction.evidences && (
                 <UniProtEvidenceTag
                   evidences={catalyticActivity.reaction.evidences}

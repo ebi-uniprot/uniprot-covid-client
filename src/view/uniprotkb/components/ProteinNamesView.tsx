@@ -7,7 +7,7 @@ import {
   ProteinNamesData,
   ProteinDescription,
 } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import UniProtEvidence from '../../../components/UniProtEvidenceTag';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
 type ProteinNamesDataProps = {
@@ -35,7 +35,7 @@ const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
 }): JSX.Element => (
   <Fragment>
     {`${data.value} `}
-    {data.evidences && <UniProtEvidence evidences={data.evidences} />}
+    {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
   </Fragment>
 );
 
@@ -62,9 +62,7 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
                 return acc === null ? (
                   shortName
                 ) : (
-                  <Fragment>
-                    {acc};{shortName}
-                  </Fragment>
+                  <Fragment>{`${acc};${shortName}`}</Fragment>
                 );
               }
             )}
@@ -144,7 +142,9 @@ const getInfoListForNames = (
                   shortName
                 ) : (
                   <Fragment>
-                    {acc};{shortName}
+                    {acc}
+                    {`; `}
+                    {shortName}
                   </Fragment>
                 )
             )}
