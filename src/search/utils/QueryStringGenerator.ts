@@ -31,10 +31,14 @@ const createTermString = (
   term: string | undefined,
   itemType: string,
   id: string | undefined,
-  termSuffix: boolean | undefined
+  termSuffix: boolean | undefined,
+  stringValue: string | undefined
 ) => {
   if (term === undefined) {
     throw new Error('term is undefined');
+  }
+  if (term === 'xref' && stringValue === '*') {
+    return 'database';
   }
   if (termSuffix) {
     return id ? `${term}_id:` : `${term}_name:`;
@@ -60,7 +64,15 @@ const createValueString = (
   // search API expects the valuePrefix to be ommited in this case.
   // eg xref:foo rather than xref_any:foo
   let valueString = stringValue;
-  if (valuePrefix && !(term === 'xref' && valuePrefix === 'any')) {
+  if (term === 'xref') {
+    if (!valuePrefix) {
+      throw new Error('valuePrefix not provided in xref query');
+    } else if (term === 'xref' && stringValue === '*') {
+      valueString = valuePrefix;
+    } else if (valuePrefix !== 'any') {
+      valueString = `${valuePrefix}-${stringValue}`;
+    }
+  } else if (valuePrefix) {
     valueString = `${valuePrefix}-${stringValue}`;
   }
 
@@ -79,7 +91,13 @@ const createSimpleSubquery = (clause: Clause) => {
   if (term === 'All') {
     return stringValue;
   }
-  const termString = createTermString(term, itemType, id, termSuffix);
+  const termString = createTermString(
+    term,
+    itemType,
+    id,
+    termSuffix,
+    stringValue
+  );
   const valueString = createValueString(term, valuePrefix, stringValue, id);
   return `(${termString}${valueString})`;
 };
