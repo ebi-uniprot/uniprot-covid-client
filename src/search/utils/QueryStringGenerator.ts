@@ -60,16 +60,20 @@ const createValueString = (
     return doubleQuote(id);
   }
 
-  // We are testing for term=xref and valuePrefix=any because the
-  // search API expects the valuePrefix to be ommited in this case.
-  // eg xref:foo rather than xref_any:foo
   let valueString = stringValue;
   if (term === 'xref') {
     if (!valuePrefix) {
       throw new Error('valuePrefix not provided in xref query');
-    } else if (term === 'xref' && stringValue === '*') {
+    }
+    // The API will run more quickly when all database entries are
+    // requested by the user if xref-X:* becomes database:X
+    else if (term === 'xref' && stringValue === '*') {
       valueString = valuePrefix;
-    } else if (valuePrefix !== 'any') {
+    }
+    // We are testing for term=xref and valuePrefix=any because the
+    // search API expects the valuePrefix to be ommited in this case.
+    // eg xref:foo rather than xref_any:foo
+    else if (valuePrefix !== 'any') {
       valueString = `${valuePrefix}-${stringValue}`;
     }
   } else if (valuePrefix) {
