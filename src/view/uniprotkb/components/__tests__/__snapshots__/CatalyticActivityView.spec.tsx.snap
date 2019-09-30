@@ -5,11 +5,13 @@ exports[`Catalytic activity should render catalytic activity 1`] = `
   <h4>
     Catalytic Activity
   </h4>
-  <p>
+  <span
+    class="text-block"
+  >
     <strong>
       EC:12112
     </strong>
      Reaction name
-  </p>
+  </span>
 </DocumentFragment>
 `;

@@ -330,43 +330,43 @@ exports[`Entry should render 1`] = `
                   class="info-list__item__content"
                 >
                   rec full Name 
-                  <span>
+                  <span
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <svg
+                      height="12"
+                      viewBox="0 0 512 512"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        id="Shape"
+                      />
+                    </svg>
                     <span
-                      class="evidence-tag svg-colour-reviewed"
-                      role="button"
-                      tabindex="0"
+                      class="evidence-tag__label"
+                      title=""
                     >
-                      <svg
-                        height="12"
-                        viewBox="0 0 426 512"
-                        width="12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                          id="Shape"
-                        />
-                      </svg>
-                      <span
-                        class="evidence-tag__label"
-                        title=""
-                      >
-                        1 automatic annotation
-                      </span>
+                      1 automatic annotation
                     </span>
-                    <div
-                      class="evidence-tag-content "
-                    >
+                  </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
                       <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <div>
-                          PROSITE-ProRule:PRU10026
-                        </div>
+                        PROSITE-ProRule:PRU10026
                       </div>
                     </div>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -381,43 +381,43 @@ exports[`Entry should render 1`] = `
                   class="info-list__item__content"
                 >
                   1.2.3.4 
-                  <span>
+                  <span
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <svg
+                      height="12"
+                      viewBox="0 0 512 512"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        id="Shape"
+                      />
+                    </svg>
                     <span
-                      class="evidence-tag svg-colour-reviewed"
-                      role="button"
-                      tabindex="0"
+                      class="evidence-tag__label"
+                      title=""
                     >
-                      <svg
-                        height="12"
-                        viewBox="0 0 426 512"
-                        width="12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                          id="Shape"
-                        />
-                      </svg>
-                      <span
-                        class="evidence-tag__label"
-                        title=""
-                      >
-                        1 automatic annotation
-                      </span>
+                      1 automatic annotation
                     </span>
-                    <div
-                      class="evidence-tag-content "
-                    >
+                  </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
                       <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <div>
-                          PROSITE-ProRule:PRU100210
-                        </div>
+                        PROSITE-ProRule:PRU100210
                       </div>
                     </div>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -432,43 +432,43 @@ exports[`Entry should render 1`] = `
                   class="info-list__item__content"
                 >
                   recommended short name 
-                  <span>
+                  <span
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <svg
+                      height="12"
+                      viewBox="0 0 512 512"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        id="Shape"
+                      />
+                    </svg>
                     <span
-                      class="evidence-tag svg-colour-reviewed"
-                      role="button"
-                      tabindex="0"
+                      class="evidence-tag__label"
+                      title=""
                     >
-                      <svg
-                        height="12"
-                        viewBox="0 0 426 512"
-                        width="12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                          id="Shape"
-                        />
-                      </svg>
-                      <span
-                        class="evidence-tag__label"
-                        title=""
-                      >
-                        1 automatic annotation
-                      </span>
+                      1 automatic annotation
                     </span>
-                    <div
-                      class="evidence-tag-content "
-                    >
+                  </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
                       <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <div>
-                          PROSITE-ProRule:PRU10020
-                        </div>
+                        PROSITE-ProRule:PRU10020
                       </div>
                     </div>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div
@@ -487,81 +487,81 @@ exports[`Entry should render 1`] = `
                   >
                     <li>
                       a full alt Name 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10022
-                            </div>
+                            PROSITE-ProRule:PRU10022
                           </div>
                         </div>
-                      </span>
+                      </div>
                        (short alt name1 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10028
-                            </div>
+                            PROSITE-ProRule:PRU10028
                           </div>
                         </div>
-                      </span>
+                      </div>
                       ) 
                     </li>
                   </ul>
@@ -583,161 +583,161 @@ exports[`Entry should render 1`] = `
                   >
                     <li>
                       containsrec full Name 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10026
-                            </div>
+                            PROSITE-ProRule:PRU10026
                           </div>
                         </div>
-                      </span>
+                      </div>
                        (containsrecommended short name 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10020
-                            </div>
+                            PROSITE-ProRule:PRU10020
                           </div>
                         </div>
-                      </span>
+                      </div>
                       )  
                       <strong>
                         Alternative names: 
                       </strong>
                       containsa full alt Name 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10022
-                            </div>
+                            PROSITE-ProRule:PRU10022
                           </div>
                         </div>
-                      </span>
+                      </div>
                        (containsshort alt name1 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10028
-                            </div>
+                            PROSITE-ProRule:PRU10028
                           </div>
                         </div>
-                      </span>
+                      </div>
                       ) 
                     </li>
                   </ul>
@@ -759,43 +759,43 @@ exports[`Entry should render 1`] = `
                   >
                     <li>
                       sub full Name 
-                      <span>
+                      <span
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
+                      >
+                        <svg
+                          height="12"
+                          viewBox="0 0 512 512"
+                          width="12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            id="Shape"
+                          />
+                        </svg>
                         <span
-                          class="evidence-tag svg-colour-reviewed"
-                          role="button"
-                          tabindex="0"
+                          class="evidence-tag__label"
+                          title=""
                         >
-                          <svg
-                            height="12"
-                            viewBox="0 0 426 512"
-                            width="12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                              id="Shape"
-                            />
-                          </svg>
-                          <span
-                            class="evidence-tag__label"
-                            title=""
-                          >
-                            1 automatic annotation
-                          </span>
+                          1 automatic annotation
                         </span>
-                        <div
-                          class="evidence-tag-content "
-                        >
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
                           <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <div>
-                              PROSITE-ProRule:PRU10027
-                            </div>
+                            PROSITE-ProRule:PRU10027
                           </div>
                         </div>
-                      </span>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -812,43 +812,43 @@ exports[`Entry should render 1`] = `
                   class="info-list__item__content"
                 >
                   biotech 
-                  <span>
+                  <span
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <svg
+                      height="12"
+                      viewBox="0 0 512 512"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        id="Shape"
+                      />
+                    </svg>
                     <span
-                      class="evidence-tag svg-colour-reviewed"
-                      role="button"
-                      tabindex="0"
+                      class="evidence-tag__label"
+                      title=""
                     >
-                      <svg
-                        height="12"
-                        viewBox="0 0 426 512"
-                        width="12"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                          id="Shape"
-                        />
-                      </svg>
-                      <span
-                        class="evidence-tag__label"
-                        title=""
-                      >
-                        1 automatic annotation
-                      </span>
+                      1 automatic annotation
                     </span>
-                    <div
-                      class="evidence-tag-content "
-                    >
+                  </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
                       <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <div>
-                          PROSITE-ProRule:PRU10024
-                        </div>
+                        PROSITE-ProRule:PRU10024
                       </div>
                     </div>
-                  </span>
+                  </div>
                 </div>
               </div>
               <div

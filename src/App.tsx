@@ -6,6 +6,7 @@ import BaseLayout from './layout/BaseLayout';
 import ResultsPage from './pages/ResultsPage';
 import EntryPage from './pages/EntryPage';
 import AdvancedSearchPage from './pages/AdvancedSearchPage';
+import './styles/App.scss';
 
 declare const BASE_URL: string;
 

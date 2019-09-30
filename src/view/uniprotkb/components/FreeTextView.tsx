@@ -34,7 +34,7 @@ const FreeTextView: React.FC<FreeTextProps> = ({
     return null;
   }
   const freeTextData = comments.map(item => (
-    <p key={v1()}>
+    <span className="text-block" key={v1()}>
       {item.texts.map(itemText => {
         return (
           <Fragment key={v1()}>
@@ -45,7 +45,7 @@ const FreeTextView: React.FC<FreeTextProps> = ({
           </Fragment>
         );
       })}
-    </p>
+    </span>
   ));
 
   return (

@@ -31,10 +31,11 @@ ShallowWrapper {
           data={Array []}
           filter={false}
           id={0}
+          minCharsToShowDropdown={0}
           onChange={[Function]}
           onSelect={[Function]}
           placeholder=""
-          showDropwdownUpdated={[Function]}
+          showDropdownUpdated={[Function]}
           value="Homo sapiens (Human) [9606]"
         />,
       ],
@@ -52,10 +53,11 @@ ShallowWrapper {
           "data": Array [],
           "filter": false,
           "id": 0,
+          "minCharsToShowDropdown": 0,
           "onChange": [Function],
           "onSelect": [Function],
           "placeholder": "",
-          "showDropwdownUpdated": [Function],
+          "showDropdownUpdated": [Function],
           "value": "Homo sapiens (Human) [9606]",
         },
         "ref": null,
@@ -78,10 +80,11 @@ ShallowWrapper {
             data={Array []}
             filter={false}
             id={0}
+            minCharsToShowDropdown={0}
             onChange={[Function]}
             onSelect={[Function]}
             placeholder=""
-            showDropwdownUpdated={[Function]}
+            showDropdownUpdated={[Function]}
             value="Homo sapiens (Human) [9606]"
           />,
         ],
@@ -99,10 +102,11 @@ ShallowWrapper {
             "data": Array [],
             "filter": false,
             "id": 0,
+            "minCharsToShowDropdown": 0,
             "onChange": [Function],
             "onSelect": [Function],
             "placeholder": "",
-            "showDropwdownUpdated": [Function],
+            "showDropdownUpdated": [Function],
             "value": "Homo sapiens (Human) [9606]",
           },
           "ref": null,

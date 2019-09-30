@@ -30,7 +30,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
       {comments.map(
         catalyticActivity =>
           catalyticActivity.reaction && (
-            <p key={v1()}>
+            <span className="text-block" key={v1()}>
               <strong>{catalyticActivity.reaction.ecNumber}</strong>
               {` ${catalyticActivity.reaction.name}`}
               {catalyticActivity.reaction.evidences && (
@@ -38,7 +38,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
                   evidences={catalyticActivity.reaction.evidences}
                 />
               )}
-            </p>
+            </span>
           )
       )}
     </Fragment>

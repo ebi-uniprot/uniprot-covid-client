@@ -31,21 +31,25 @@ ShallowWrapper {
           <Unknown
             description="This is a short description of what the resource is/provides."
             namespace=""
+            small={false}
             title="UniProtKB"
           />
           <Unknown
             description="Sets of proteins for reference and other species of interest."
             namespace="proteomes"
+            small={false}
             title="Proteomes"
           />
           <Unknown
             description="Clusters of protein sequences at 100%, 90% & 50% similarity"
             namespace="uniref"
+            small={false}
             title="UniRef"
           />
           <Unknown
             description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
             namespace="uniparc"
+            small={false}
             title="UniParc"
           />
         </Block>,
@@ -83,21 +87,25 @@ ShallowWrapper {
             <Unknown
               description="This is a short description of what the resource is/provides."
               namespace=""
+              small={false}
               title="UniProtKB"
             />,
             <Unknown
               description="Sets of proteins for reference and other species of interest."
               namespace="proteomes"
+              small={false}
               title="Proteomes"
             />,
             <Unknown
               description="Clusters of protein sequences at 100%, 90% & 50% similarity"
               namespace="uniref"
+              small={false}
               title="UniRef"
             />,
             <Unknown
               description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
               namespace="uniparc"
+              small={false}
               title="UniParc"
             />,
           ],
@@ -112,6 +120,7 @@ ShallowWrapper {
             "props": Object {
               "description": "This is a short description of what the resource is/provides.",
               "namespace": "",
+              "small": false,
               "title": "UniProtKB",
             },
             "ref": null,
@@ -125,6 +134,7 @@ ShallowWrapper {
             "props": Object {
               "description": "Sets of proteins for reference and other species of interest.",
               "namespace": "proteomes",
+              "small": false,
               "title": "Proteomes",
             },
             "ref": null,
@@ -138,6 +148,7 @@ ShallowWrapper {
             "props": Object {
               "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
               "namespace": "uniref",
+              "small": false,
               "title": "UniRef",
             },
             "ref": null,
@@ -151,6 +162,7 @@ ShallowWrapper {
             "props": Object {
               "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
               "namespace": "uniparc",
+              "small": false,
               "title": "UniParc",
             },
             "ref": null,
@@ -182,21 +194,25 @@ ShallowWrapper {
             <Unknown
               description="This is a short description of what the resource is/provides."
               namespace=""
+              small={false}
               title="UniProtKB"
             />
             <Unknown
               description="Sets of proteins for reference and other species of interest."
               namespace="proteomes"
+              small={false}
               title="Proteomes"
             />
             <Unknown
               description="Clusters of protein sequences at 100%, 90% & 50% similarity"
               namespace="uniref"
+              small={false}
               title="UniRef"
             />
             <Unknown
               description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
               namespace="uniparc"
+              small={false}
               title="UniParc"
             />
           </Block>,
@@ -234,21 +250,25 @@ ShallowWrapper {
               <Unknown
                 description="This is a short description of what the resource is/provides."
                 namespace=""
+                small={false}
                 title="UniProtKB"
               />,
               <Unknown
                 description="Sets of proteins for reference and other species of interest."
                 namespace="proteomes"
+                small={false}
                 title="Proteomes"
               />,
               <Unknown
                 description="Clusters of protein sequences at 100%, 90% & 50% similarity"
                 namespace="uniref"
+                small={false}
                 title="UniRef"
               />,
               <Unknown
                 description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
                 namespace="uniparc"
+                small={false}
                 title="UniParc"
               />,
             ],
@@ -263,6 +283,7 @@ ShallowWrapper {
               "props": Object {
                 "description": "This is a short description of what the resource is/provides.",
                 "namespace": "",
+                "small": false,
                 "title": "UniProtKB",
               },
               "ref": null,
@@ -276,6 +297,7 @@ ShallowWrapper {
               "props": Object {
                 "description": "Sets of proteins for reference and other species of interest.",
                 "namespace": "proteomes",
+                "small": false,
                 "title": "Proteomes",
               },
               "ref": null,
@@ -289,6 +311,7 @@ ShallowWrapper {
               "props": Object {
                 "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
                 "namespace": "uniref",
+                "small": false,
                 "title": "UniRef",
               },
               "ref": null,
@@ -302,6 +325,7 @@ ShallowWrapper {
               "props": Object {
                 "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
                 "namespace": "uniparc",
+                "small": false,
                 "title": "UniParc",
               },
               "ref": null,
