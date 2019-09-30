@@ -70,7 +70,7 @@ class AutocompleteWrapper extends Component<Props, State> {
     }
     // If the previous text input and the current text input are
     // subsets of each other then don't reset the state's data. The
-    // point of this check is to prevent the dropdown disappering
+    // point of this check is to prevent the dropdown disappearing
     // and reappearing between successive suggester requests.
     // Fetch new suggestions after previousTextInputValue has been
     // set. Use the callback to prevent race conditions.
