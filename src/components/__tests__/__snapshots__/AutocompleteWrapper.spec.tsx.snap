@@ -31,7 +31,7 @@ ShallowWrapper {
           data={Array []}
           filter={false}
           id={0}
-          minCharsToShowDropdown={0}
+          minCharsToShowDropdown={3}
           onChange={[Function]}
           onSelect={[Function]}
           placeholder=""
@@ -53,7 +53,7 @@ ShallowWrapper {
           "data": Array [],
           "filter": false,
           "id": 0,
-          "minCharsToShowDropdown": 0,
+          "minCharsToShowDropdown": 3,
           "onChange": [Function],
           "onSelect": [Function],
           "placeholder": "",
@@ -80,7 +80,7 @@ ShallowWrapper {
             data={Array []}
             filter={false}
             id={0}
-            minCharsToShowDropdown={0}
+            minCharsToShowDropdown={3}
             onChange={[Function]}
             onSelect={[Function]}
             placeholder=""
@@ -102,7 +102,7 @@ ShallowWrapper {
             "data": Array [],
             "filter": false,
             "id": 0,
-            "minCharsToShowDropdown": 0,
+            "minCharsToShowDropdown": 3,
             "onChange": [Function],
             "onSelect": [Function],
             "placeholder": "",

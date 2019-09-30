@@ -138,14 +138,18 @@ describe('Autocomplete Wrapper', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('should call fetchOptions and handleSelect on input change', () => {
+  test('should call fetchOptions on input change', () => {
     const fetchOptions = jest.spyOn(wrapper.instance(), 'fetchOptions');
-    const handleSelect = jest.spyOn(wrapper.instance(), 'handleSelect');
     const suggesterUrl = getSuggesterUrl(props.url, props.inputValue);
     wrapper.find('[onChange]').simulate('change', 'human');
     mock.onGet(suggesterUrl).reply(200, response);
     expect(fetchOptions).toHaveBeenCalled();
-    expect(handleSelect).toHaveBeenCalled();
+  });
+
+  test('should not call fetchOptions when input is less than minCharsToShowDropdown (=3)', () => {
+    const fetchOptions = jest.spyOn(wrapper.instance(), 'fetchOptions');
+    wrapper.find('[onChange]').simulate('change', 'hu');
+    expect(fetchOptions).toHaveBeenCalledTimes(0);
   });
 
   test('should prepare API data for Autocomplete', () => {
