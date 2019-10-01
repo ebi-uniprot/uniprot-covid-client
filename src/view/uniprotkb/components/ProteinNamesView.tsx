@@ -53,9 +53,9 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
           {' ('}
           {names.shortNames.map(
             (shortName, index): JSX.Element => (
-              <Fragment>
+              <Fragment key={v1()}>
                 {index > 0 && '; '}
-                <NameWithEvidence data={shortName} key={v1()} />
+                <NameWithEvidence data={shortName} />
               </Fragment>
             )
           )}
@@ -125,9 +125,9 @@ const getInfoListForNames = (
         <Fragment>
           {name.shortNames.map(
             (shortName, i): JSX.Element => (
-              <Fragment>
+              <Fragment key={v1()}>
                 {i > 0 && '; '}
-                <NameWithEvidence data={shortName} key={v1()} />
+                <NameWithEvidence data={shortName} />
               </Fragment>
             )
           )}
