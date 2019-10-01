@@ -38,7 +38,7 @@ const createTermString = (
     throw new Error('term is undefined');
   }
   if (term === 'xref' && stringValue === '*') {
-    return 'database';
+    return 'database:';
   }
   if (termSuffix) {
     return id ? `${term}_id:` : `${term}_name:`;
