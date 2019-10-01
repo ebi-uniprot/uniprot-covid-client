@@ -614,6 +614,27 @@ export const testData = [
       },
     ],
   },
+  {
+    description:
+      'if embl xref selected and * value provided should generate query: database:embl',
+    queryString: '(database:embl)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_embl',
+          label: 'EMBL',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'embl',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: '*',
+        },
+      },
+    ],
+  },
 ];
 
 export const exceptionThrowingTestData = [
@@ -634,6 +655,25 @@ export const exceptionThrowingTestData = [
         queryInput: {
           stringValue: 'blah',
           id: '1234',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should throw "valuePrefix not provided in xref query" Error',
+    error: Error('valuePrefix not provided in xref query'),
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_embl',
+          label: 'EMBL',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
         },
       },
     ],
