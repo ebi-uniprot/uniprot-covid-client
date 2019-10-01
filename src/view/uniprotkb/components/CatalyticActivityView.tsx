@@ -30,15 +30,15 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
       {comments.map(
         catalyticActivity =>
           catalyticActivity.reaction && (
-            <p key={v1()}>
+            <span className="text-block" key={v1()}>
               <strong>{catalyticActivity.reaction.ecNumber}</strong>
-              {' '}
-              {catalyticActivity.reaction.name}
-              {catalyticActivity.reaction.evidences &&
-                catalyticActivity.reaction.evidences.map(evidence => (
-                  <UniProtEvidenceTag evidence={evidence} key={evidence.id} />
-                ))}
-            </p>
+              {` ${catalyticActivity.reaction.name}`}
+              {catalyticActivity.reaction.evidences && (
+                <UniProtEvidenceTag
+                  evidences={catalyticActivity.reaction.evidences}
+                />
+              )}
+            </span>
           )
       )}
     </Fragment>
