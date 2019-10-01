@@ -76,8 +76,6 @@ const createValueString = (
     else if (valuePrefix !== 'any') {
       valueString = `${valuePrefix}-${stringValue}`;
     }
-  } else if (valuePrefix) {
-    valueString = `${valuePrefix}-${stringValue}`;
   }
 
   return valueString.includes(' ') ? doubleQuote(valueString) : valueString;
