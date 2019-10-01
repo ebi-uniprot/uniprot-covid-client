@@ -51,21 +51,14 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
       {names.shortNames && (
         <Fragment>
           {' ('}
-          {names.shortNames
-            .map(
-              (shortName): JSX.Element => (
+          {names.shortNames.map(
+            (shortName, index): JSX.Element => (
+              <Fragment>
+                {index > 0 && '; '}
                 <NameWithEvidence data={shortName} key={v1()} />
-              )
+              </Fragment>
             )
-            .reduce(
-              (acc, shortName): JSX.Element => {
-                return acc === null ? (
-                  shortName
-                ) : (
-                  <Fragment>{`${acc};${shortName}`}</Fragment>
-                );
-              }
-            )}
+          )}
           {') '}
         </Fragment>
       )}
@@ -130,24 +123,14 @@ const getInfoListForNames = (
       title: 'Short names',
       content: (
         <Fragment>
-          {name.shortNames
-            .map(
-              (shortName): JSX.Element => (
+          {name.shortNames.map(
+            (shortName, i): JSX.Element => (
+              <Fragment>
+                {i > 0 && '; '}
                 <NameWithEvidence data={shortName} key={v1()} />
-              )
+              </Fragment>
             )
-            .reduce(
-              (acc, shortName): JSX.Element =>
-                acc === null ? (
-                  shortName
-                ) : (
-                  <Fragment>
-                    {acc}
-                    {`; `}
-                    {shortName}
-                  </Fragment>
-                )
-            )}
+          )}
         </Fragment>
       ),
     });

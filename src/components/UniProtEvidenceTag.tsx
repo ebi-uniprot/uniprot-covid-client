@@ -32,7 +32,7 @@ const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
           <h5>{evidenceData.label}</h5>
           {references &&
             references
-              .filter(reference => reference.source)
+              .filter(reference => reference.id && reference.source)
               .map(reference => (
                 <div key={reference.id}>
                   {`${reference.source}:${reference.id}`}

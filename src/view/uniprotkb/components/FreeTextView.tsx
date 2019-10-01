@@ -40,7 +40,7 @@ const FreeTextView: React.FC<FreeTextProps> = ({
           <Fragment key={v1()}>
             {itemText.value}
             {itemText.evidences && (
-              <UniProtEvidenceTag evidences={itemText.evidences} key={v1()} />
+              <UniProtEvidenceTag evidences={itemText.evidences} />
             )}
           </Fragment>
         );
