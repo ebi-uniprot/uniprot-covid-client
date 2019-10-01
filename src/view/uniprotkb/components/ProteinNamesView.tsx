@@ -7,7 +7,7 @@ import {
   ProteinNamesData,
   ProteinDescription,
 } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import UniProtEvidence from '../../../components/UniProtEvidenceTag';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
 type ProteinNamesDataProps = {
@@ -35,12 +35,7 @@ const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
 }): JSX.Element => (
   <Fragment>
     {`${data.value} `}
-    {data.evidences &&
-      data.evidences.map(
-        (evidence): JSX.Element => (
-          <UniProtEvidence evidence={evidence} key={v1()} />
-        )
-      )}
+    {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
   </Fragment>
 );
 
@@ -56,25 +51,14 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
       {names.shortNames && (
         <Fragment>
           {' ('}
-          {names.shortNames
-            .map(
-              (shortName): JSX.Element => (
+          {names.shortNames.map(
+            (shortName, index): JSX.Element => (
+              <Fragment>
+                {index > 0 && '; '}
                 <NameWithEvidence data={shortName} key={v1()} />
-              )
+              </Fragment>
             )
-            .reduce(
-              (acc, shortName): JSX.Element => {
-                return acc === null ? (
-                  shortName
-                ) : (
-                  <Fragment>
-                    {acc}
-;
-                    {shortName}
-                  </Fragment>
-                );
-              }
-            )}
+          )}
           {') '}
         </Fragment>
       )}
@@ -109,7 +93,9 @@ const ProteinDescriptionView: React.FC<{
   );
 };
 
-const getInfoListForNames = (name: ProteinNames): {title: string; content: JSX.Element}[] => {
+const getInfoListForNames = (
+  name: ProteinNames
+): { title: string; content: JSX.Element }[] => {
   const infoData = [];
 
   if (name.fullName) {
@@ -123,9 +109,11 @@ const getInfoListForNames = (name: ProteinNames): {title: string; content: JSX.E
       title: 'EC number',
       content: (
         <Fragment>
-          {name.ecNumbers.map((ecNumber): JSX.Element => (
-            <NameWithEvidence data={ecNumber} key={v1()} />
-          ))}
+          {name.ecNumbers.map(
+            (ecNumber): JSX.Element => (
+              <NameWithEvidence data={ecNumber} key={v1()} />
+            )
+          )}
         </Fragment>
       ),
     });
@@ -135,19 +123,14 @@ const getInfoListForNames = (name: ProteinNames): {title: string; content: JSX.E
       title: 'Short names',
       content: (
         <Fragment>
-          {name.shortNames
-            .map((shortName):JSX.Element => <NameWithEvidence data={shortName} key={v1()} />)
-            .reduce((acc, shortName): JSX.Element =>
-              acc === null ? (
-                shortName
-              ) : (
-                <Fragment>
-                  {acc}
-;
-                  {shortName}
-                </Fragment>
-              )
-            )}
+          {name.shortNames.map(
+            (shortName, i): JSX.Element => (
+              <Fragment>
+                {i > 0 && '; '}
+                <NameWithEvidence data={shortName} key={v1()} />
+              </Fragment>
+            )
+          )}
         </Fragment>
       ),
     });
@@ -157,8 +140,8 @@ const getInfoListForNames = (name: ProteinNames): {title: string; content: JSX.E
 
 type ListElement = {
   id: string;
-  content: JSX.Element
-}
+  content: JSX.Element;
+};
 
 export const EntryProteinNames: React.FC<{
   proteinNames?: ProteinNamesData;
@@ -175,10 +158,12 @@ export const EntryProteinNames: React.FC<{
       title: 'Alternative names',
       content: (
         <ExpandableList descriptionString="alternative names">
-          {proteinNames.alternativeNames.map((alternativeName): ListElement => ({
-            id: v1(),
-            content: <ProteinNamesViewFlat names={alternativeName} />,
-          }))}
+          {proteinNames.alternativeNames.map(
+            (alternativeName): ListElement => ({
+              id: v1(),
+              content: <ProteinNamesViewFlat names={alternativeName} />,
+            })
+          )}
         </ExpandableList>
       ),
     });
@@ -188,10 +173,12 @@ export const EntryProteinNames: React.FC<{
       title: `Cleaved into ${proteinNames.contains.length} chains`,
       content: (
         <ExpandableList descriptionString="chains">
-          {proteinNames.contains.map((contains): ListElement => ({
-            id: v1(),
-            content: <ProteinDescriptionView proteinDescription={contains} />,
-          }))}
+          {proteinNames.contains.map(
+            (contains): ListElement => ({
+              id: v1(),
+              content: <ProteinDescriptionView proteinDescription={contains} />,
+            })
+          )}
         </ExpandableList>
       ),
     });
@@ -201,10 +188,12 @@ export const EntryProteinNames: React.FC<{
       title: 'Submission names',
       content: (
         <ExpandableList descriptionString="submission names">
-          {proteinNames.submissionNames.map((submission): ListElement => ({
-            id: v1(),
-            content: <ProteinNamesViewFlat names={submission} />,
-          }))}
+          {proteinNames.submissionNames.map(
+            (submission): ListElement => ({
+              id: v1(),
+              content: <ProteinNamesViewFlat names={submission} />,
+            })
+          )}
         </ExpandableList>
       ),
     });

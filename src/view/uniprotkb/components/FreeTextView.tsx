@@ -34,19 +34,18 @@ const FreeTextView: React.FC<FreeTextProps> = ({
     return null;
   }
   const freeTextData = comments.map(item => (
-    <p key={v1()}>
+    <span className="text-block" key={v1()}>
       {item.texts.map(itemText => {
         return (
           <Fragment key={v1()}>
             {itemText.value}
-            {itemText.evidences &&
-              itemText.evidences.map(evidence => (
-                <UniProtEvidenceTag evidence={evidence} key={v1()} />
-              ))}
+            {itemText.evidences && (
+              <UniProtEvidenceTag evidences={itemText.evidences} />
+            )}
           </Fragment>
         );
       })}
-    </p>
+    </span>
   ));
 
   return (
