@@ -11,10 +11,10 @@ const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   );
   const evidenceTags = Array.from(evidenceMap.keys()).map(evidenceCode => {
     const evidenceData = getEvidenceCodeData(evidenceCode);
-    const references = evidenceMap.get(evidenceCode);
     if (!evidenceData) {
       return null;
     }
+    const references = evidenceMap.get(evidenceCode);
     return (
       <EvidenceTag
         label={
@@ -22,7 +22,7 @@ const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
             ? evidenceData.labelRender(references)
             : evidenceData.label
         }
-        IconComponent={evidenceData.manual ? SwissProtIcon : TremblIcon}
+        iconComponent={evidenceData.manual ? <SwissProtIcon /> : <TremblIcon />}
         className={
           evidenceData.manual ? 'svg-colour-reviewed' : 'svg-colour-unreviewed'
         }
