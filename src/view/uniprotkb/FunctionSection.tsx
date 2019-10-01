@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
+import '@swissprot/rhea-reaction-visualizer';
 import hasContent from '../../model/utils/utils';
 import FreeTextView from './components/FreeTextView';
 import CatalyticActivityView from './components/CatalyticActivityView';
@@ -15,13 +16,14 @@ const FunctionSection: FC<{
   data: UIModel;
   sequence: string;
   primaryAccession: string;
-}> = ({ data, sequence, primaryAccession }): JSX.Element | null=> {
+}> = ({ data, sequence, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
   return (
     <div id={EntrySection.Function}>
       <Card title={EntrySection.Function}>
+        <rhea-reaction rheaid="32727" zoom showids />
         <FreeTextView comments={data.commentsData.get(Comment.FUNCTION)} />
         <CatalyticActivityView
           comments={data.commentsData.get(Comment.CATALYTIC_ACTIVITY)}
