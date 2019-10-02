@@ -7,25 +7,24 @@ import Comment from '../../../model/types/Comment';
 const getRheaId = (referenceId: string) => {
   const reRhea = /^RHEA:(\d+)$/;
   const match = referenceId.match(reRhea);
-  if (match && match[1]) {
-    return match[1];
-  }
+  return match && match[1];
 };
+
 const isRhea = ({ databaseType, id }) =>
   databaseType === 'Rhea' && getRheaId(id);
 
-const RheaReaction = ({ rheaid, viewViz: initialViewViz }) => {
-  const [viewViz, setViewViz] = useState(initialViewViz);
+const RheaReactionVisualizer = ({ rheaId, show: initialShow }) => {
+  const [show, setShow] = useState(initialShow);
   return (
     <Fragment>
       <button
         type="button"
         className="button secondary"
-        onClick={() => setViewViz(!viewViz)}
+        onClick={() => setShow(!show)}
       >
-        {`${viewViz ? 'Hide' : 'View'} Rhea reaction`}
+        {`${show ? 'Hide' : 'View'} Rhea reaction`}
       </button>
-      {viewViz && <rhea-reaction rheaid={rheaid} zoom showids />}
+      {show && <rhea-reaction rheaid={rheaId} zoom showids />}
     </Fragment>
   );
 };
@@ -50,6 +49,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   if (!comments || comments.length <= 0) {
     return null;
   }
+
   let rheaReactionCount = 0;
   return (
     <Fragment>
@@ -77,7 +77,10 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
               )}
             </span>
             {!!rheaId && (
-              <RheaReaction rheaid={rheaId} viewViz={rheaReactionCount === 1} />
+              <RheaReactionVisualizer
+                rheaId={rheaId}
+                show={rheaReactionCount === 1}
+              />
             )}
           </Fragment>
         );
