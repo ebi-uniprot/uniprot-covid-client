@@ -4,6 +4,7 @@ import Block from '../layout/Block';
 import HomePageLayout from '../layout/HomePageLayout';
 import SearchContainer from '../search/SearchContainer';
 
+
 const mission =
   'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.';
 
