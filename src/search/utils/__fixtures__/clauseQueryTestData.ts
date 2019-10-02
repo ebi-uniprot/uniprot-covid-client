@@ -22,6 +22,28 @@ export const testData = [
   },
   {
     description:
+      'should generate simple query with padded spaces around stringVaule',
+    queryString: '(mnemonic:blah)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: ' blah ',
+        },
+      },
+    ],
+  },
+  {
+    description:
       'should generate query with value surrounded by double quotes when stringValue has a space',
     queryString: '(mnemonic:"foo bar")',
     clauses: [
@@ -230,6 +252,31 @@ export const testData = [
     ],
   },
   {
+    description:
+      'should evidence query with padded spaces around evidence string input',
+    queryString: '((ft_ca_bind:blah) AND (ftev_ca_bind:blahvidence))',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ca_bind',
+          label: 'Calcium binding',
+          itemType: 'feature',
+          term: 'ca_bind',
+          dataType: 'string',
+          hasRange: true,
+          hasEvidence: true,
+          description: 'Search by feature calcium binding',
+          example: 'site',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+          evidenceValue: '        blahvidence    ',
+        },
+      },
+    ],
+  },
+  {
     description: 'should handle range',
     queryString: '(ftlen_sites:[10 TO 100])',
     clauses: [
@@ -247,8 +294,33 @@ export const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          rangeFrom: 10,
-          rangeTo: 100,
+          rangeFrom: '10',
+          rangeTo: '100',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle range with padded space around the input rangeFrom and rangeTo',
+    queryString: '(ftlen_sites:[10 TO 100])',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_sites',
+          label: 'Any',
+          itemType: 'feature',
+          term: 'sites',
+          dataType: 'string',
+          hasRange: true,
+          hasEvidence: true,
+          description: 'Search by feature sites',
+          example: 'translocation',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          rangeFrom: ' 10 ',
+          rangeTo: ' 100 ',
         },
       },
     ],
@@ -271,8 +343,8 @@ export const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          rangeFrom: 10,
-          rangeTo: 100,
+          rangeFrom: '10',
+          rangeTo: '100',
           evidenceValue: 'blahvidence',
         },
       },
@@ -578,8 +650,8 @@ export const testData = [
         },
         logicOperator: 'NOT',
         queryInput: {
-          rangeFrom: 10,
-          rangeTo: 100,
+          rangeFrom: '10',
+          rangeTo: '100',
           evidenceValue: 'blahvidence',
         },
       },
@@ -614,6 +686,27 @@ export const testData = [
       },
     ],
   },
+  {
+    description:
+      'if embl xref selected and * value provided should generate query: database:embl',
+    queryString: '(database:embl)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_embl',
+          label: 'EMBL',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'embl',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: '*',
+        },
+      },
+    ],
+  },
 ];
 
 export const exceptionThrowingTestData = [
@@ -634,6 +727,25 @@ export const exceptionThrowingTestData = [
         queryInput: {
           stringValue: 'blah',
           id: '1234',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should throw "valuePrefix not provided in xref query" Error',
+    error: Error('valuePrefix not provided in xref query'),
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_embl',
+          label: 'EMBL',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
         },
       },
     ],
