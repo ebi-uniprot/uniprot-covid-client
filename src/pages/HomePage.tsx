@@ -33,16 +33,16 @@ const HomePage = () => (
       />
     </Block>
     <Block columns="4">
-      <Tile title="Literature Citations" small={true} />
-      <Tile title="Taxonomy" small={true} />
-      <Tile title="Subcellular locations" small={true} />
-      <Tile title="Cross-ref databases" small={true} />
+      <Tile title="Literature Citations" small />
+      <Tile title="Taxonomy" small />
+      <Tile title="Subcellular locations" small />
+      <Tile title="Cross-ref databases" small />
     </Block>
     <Block columns="4">
-      <Tile title="Diseases" small={true} />
-      <Tile title="Keywords" small={true} />
-      <Tile title="UniRule" small={true} />
-      <Tile title="SAAS" small={true} />
+      <Tile title="Diseases" small />
+      <Tile title="Keywords" small />
+      <Tile title="UniRule" small />
+      <Tile title="SAAS" small />
     </Block>
     <HeroContainer title="News">
       <PlaceHolder />

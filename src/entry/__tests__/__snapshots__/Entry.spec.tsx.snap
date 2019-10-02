@@ -331,12 +331,15 @@ exports[`Entry should render 1`] = `
                 >
                   rec full Name 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag "
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
+                      height="12"
                       viewBox="0 0 512 512"
-                      width="10"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -366,12 +369,15 @@ exports[`Entry should render 1`] = `
                 >
                   1.2.3.4 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag "
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
+                      height="12"
                       viewBox="0 0 512 512"
-                      width="10"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -401,12 +407,15 @@ exports[`Entry should render 1`] = `
                 >
                   recommended short name 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag "
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
+                      height="12"
                       viewBox="0 0 512 512"
-                      width="10"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -440,12 +449,15 @@ exports[`Entry should render 1`] = `
                     <li>
                       a full alt Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -462,12 +474,15 @@ exports[`Entry should render 1`] = `
                       </span>
                        (short alt name1 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -504,12 +519,15 @@ exports[`Entry should render 1`] = `
                     <li>
                       containsrec full Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -526,12 +544,15 @@ exports[`Entry should render 1`] = `
                       </span>
                        (containsrecommended short name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -552,12 +573,15 @@ exports[`Entry should render 1`] = `
                       </strong>
                       containsa full alt Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -574,12 +598,15 @@ exports[`Entry should render 1`] = `
                       </span>
                        (containsshort alt name1 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -616,12 +643,15 @@ exports[`Entry should render 1`] = `
                     <li>
                       sub full Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag "
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
+                          height="12"
                           viewBox="0 0 512 512"
-                          width="10"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
@@ -653,12 +683,15 @@ exports[`Entry should render 1`] = `
                 >
                   biotech 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag "
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
+                      height="12"
                       viewBox="0 0 512 512"
-                      width="10"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
