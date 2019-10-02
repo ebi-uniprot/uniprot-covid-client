@@ -31,25 +31,21 @@ ShallowWrapper {
           <Unknown
             description="This is a short description of what the resource is/provides."
             namespace=""
-            small={false}
             title="UniProtKB"
           />
           <Unknown
             description="Sets of proteins for reference and other species of interest."
             namespace="proteomes"
-            small={false}
             title="Proteomes"
           />
           <Unknown
             description="Clusters of protein sequences at 100%, 90% & 50% similarity"
             namespace="uniref"
-            small={false}
             title="UniRef"
           />
           <Unknown
             description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
             namespace="uniparc"
-            small={false}
             title="UniParc"
           />
         </Block>,
@@ -109,63 +105,56 @@ ShallowWrapper {
             title="SAAS"
           />
         </Block>,
-        <Unknown
+        <UNDEFINED
           title="News"
         >
           <PlaceHolder />
-        </Unknown>,
+        </UNDEFINED>,
         <Block
           columns="4"
         >
           <Unknown
             description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
             namespace=""
-            small={false}
             title="BLAST"
           />
           <Unknown
             description="Align two or more protein sequences with the Clust Omega program."
             namespace=""
-            small={false}
             title="ALIGN"
           />
           <Unknown
             description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
             namespace=""
-            small={false}
             title="Retrieve/ID Mapping"
           />
           <Unknown
             description="Find all UniProtKB sequences that exactly match a query peptide sequence."
             namespace=""
-            small={false}
             title="Peptide Search"
           />
         </Block>,
-        <Unknown
+        <UNDEFINED
           title="Need Help?"
         >
           <PlaceHolder />
-        </Unknown>,
+        </UNDEFINED>,
         <Block
           columns="3"
         >
           <Unknown
             description="Query UniProt data using APIs providing REST, SPARQL and Java services."
             namespace=""
-            small={false}
             title="Programmatic access"
           />
           <Unknown
             description="Get the UniProt data directly."
             namespace=""
-            small={false}
             title="FTP Download"
           />
           <Unknown
             description="Access extensive technical documents to help you use UniProt to its full potential."
             namespace=""
-            small={false}
             title="Technical Documentation"
           />
         </Block>,
@@ -203,25 +192,21 @@ ShallowWrapper {
             <Unknown
               description="This is a short description of what the resource is/provides."
               namespace=""
-              small={false}
               title="UniProtKB"
             />,
             <Unknown
               description="Sets of proteins for reference and other species of interest."
               namespace="proteomes"
-              small={false}
               title="Proteomes"
             />,
             <Unknown
               description="Clusters of protein sequences at 100%, 90% & 50% similarity"
               namespace="uniref"
-              small={false}
               title="UniRef"
             />,
             <Unknown
               description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
               namespace="uniparc"
-              small={false}
               title="UniParc"
             />,
           ],
@@ -236,7 +221,6 @@ ShallowWrapper {
             "props": Object {
               "description": "This is a short description of what the resource is/provides.",
               "namespace": "",
-              "small": false,
               "title": "UniProtKB",
             },
             "ref": null,
@@ -250,7 +234,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Sets of proteins for reference and other species of interest.",
               "namespace": "proteomes",
-              "small": false,
               "title": "Proteomes",
             },
             "ref": null,
@@ -264,7 +247,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
               "namespace": "uniref",
-              "small": false,
               "title": "UniRef",
             },
             "ref": null,
@@ -278,7 +260,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
               "namespace": "uniparc",
-              "small": false,
               "title": "UniParc",
             },
             "ref": null,
@@ -494,7 +475,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        "type": [Function],
+        "type": undefined,
       },
       Object {
         "instance": null,
@@ -505,25 +486,21 @@ ShallowWrapper {
             <Unknown
               description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
               namespace=""
-              small={false}
               title="BLAST"
             />,
             <Unknown
               description="Align two or more protein sequences with the Clust Omega program."
               namespace=""
-              small={false}
               title="ALIGN"
             />,
             <Unknown
               description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
               namespace=""
-              small={false}
               title="Retrieve/ID Mapping"
             />,
             <Unknown
               description="Find all UniProtKB sequences that exactly match a query peptide sequence."
               namespace=""
-              small={false}
               title="Peptide Search"
             />,
           ],
@@ -538,7 +515,6 @@ ShallowWrapper {
             "props": Object {
               "description": "The Basic Local Alignment Search Tool finds regions of local similarity between sequences.",
               "namespace": "",
-              "small": false,
               "title": "BLAST",
             },
             "ref": null,
@@ -552,7 +528,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Align two or more protein sequences with the Clust Omega program.",
               "namespace": "",
-              "small": false,
               "title": "ALIGN",
             },
             "ref": null,
@@ -566,7 +541,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Retrieve and/or convert non UniProt identifiers to download lists for use on this website.",
               "namespace": "",
-              "small": false,
               "title": "Retrieve/ID Mapping",
             },
             "ref": null,
@@ -580,7 +554,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Find all UniProtKB sequences that exactly match a query peptide sequence.",
               "namespace": "",
-              "small": false,
               "title": "Peptide Search",
             },
             "ref": null,
@@ -608,7 +581,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        "type": [Function],
+        "type": undefined,
       },
       Object {
         "instance": null,
@@ -619,19 +592,16 @@ ShallowWrapper {
             <Unknown
               description="Query UniProt data using APIs providing REST, SPARQL and Java services."
               namespace=""
-              small={false}
               title="Programmatic access"
             />,
             <Unknown
               description="Get the UniProt data directly."
               namespace=""
-              small={false}
               title="FTP Download"
             />,
             <Unknown
               description="Access extensive technical documents to help you use UniProt to its full potential."
               namespace=""
-              small={false}
               title="Technical Documentation"
             />,
           ],
@@ -646,7 +616,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Query UniProt data using APIs providing REST, SPARQL and Java services.",
               "namespace": "",
-              "small": false,
               "title": "Programmatic access",
             },
             "ref": null,
@@ -660,7 +629,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Get the UniProt data directly.",
               "namespace": "",
-              "small": false,
               "title": "FTP Download",
             },
             "ref": null,
@@ -674,7 +642,6 @@ ShallowWrapper {
             "props": Object {
               "description": "Access extensive technical documents to help you use UniProt to its full potential.",
               "namespace": "",
-              "small": false,
               "title": "Technical Documentation",
             },
             "ref": null,
@@ -706,25 +673,21 @@ ShallowWrapper {
             <Unknown
               description="This is a short description of what the resource is/provides."
               namespace=""
-              small={false}
               title="UniProtKB"
             />
             <Unknown
               description="Sets of proteins for reference and other species of interest."
               namespace="proteomes"
-              small={false}
               title="Proteomes"
             />
             <Unknown
               description="Clusters of protein sequences at 100%, 90% & 50% similarity"
               namespace="uniref"
-              small={false}
               title="UniRef"
             />
             <Unknown
               description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
               namespace="uniparc"
-              small={false}
               title="UniParc"
             />
           </Block>,
@@ -784,63 +747,56 @@ ShallowWrapper {
               title="SAAS"
             />
           </Block>,
-          <Unknown
+          <UNDEFINED
             title="News"
           >
             <PlaceHolder />
-          </Unknown>,
+          </UNDEFINED>,
           <Block
             columns="4"
           >
             <Unknown
               description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
               namespace=""
-              small={false}
               title="BLAST"
             />
             <Unknown
               description="Align two or more protein sequences with the Clust Omega program."
               namespace=""
-              small={false}
               title="ALIGN"
             />
             <Unknown
               description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
               namespace=""
-              small={false}
               title="Retrieve/ID Mapping"
             />
             <Unknown
               description="Find all UniProtKB sequences that exactly match a query peptide sequence."
               namespace=""
-              small={false}
               title="Peptide Search"
             />
           </Block>,
-          <Unknown
+          <UNDEFINED
             title="Need Help?"
           >
             <PlaceHolder />
-          </Unknown>,
+          </UNDEFINED>,
           <Block
             columns="3"
           >
             <Unknown
               description="Query UniProt data using APIs providing REST, SPARQL and Java services."
               namespace=""
-              small={false}
               title="Programmatic access"
             />
             <Unknown
               description="Get the UniProt data directly."
               namespace=""
-              small={false}
               title="FTP Download"
             />
             <Unknown
               description="Access extensive technical documents to help you use UniProt to its full potential."
               namespace=""
-              small={false}
               title="Technical Documentation"
             />
           </Block>,
@@ -878,25 +834,21 @@ ShallowWrapper {
               <Unknown
                 description="This is a short description of what the resource is/provides."
                 namespace=""
-                small={false}
                 title="UniProtKB"
               />,
               <Unknown
                 description="Sets of proteins for reference and other species of interest."
                 namespace="proteomes"
-                small={false}
                 title="Proteomes"
               />,
               <Unknown
                 description="Clusters of protein sequences at 100%, 90% & 50% similarity"
                 namespace="uniref"
-                small={false}
                 title="UniRef"
               />,
               <Unknown
                 description="Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)"
                 namespace="uniparc"
-                small={false}
                 title="UniParc"
               />,
             ],
@@ -911,7 +863,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "This is a short description of what the resource is/provides.",
                 "namespace": "",
-                "small": false,
                 "title": "UniProtKB",
               },
               "ref": null,
@@ -925,7 +876,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Sets of proteins for reference and other species of interest.",
                 "namespace": "proteomes",
-                "small": false,
                 "title": "Proteomes",
               },
               "ref": null,
@@ -939,7 +889,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Clusters of protein sequences at 100%, 90% & 50% similarity",
                 "namespace": "uniref",
-                "small": false,
                 "title": "UniRef",
               },
               "ref": null,
@@ -953,7 +902,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Non-redundant archive of protein sequences publicly available (UniProt, RefSeq, Ensembl,...)",
                 "namespace": "uniparc",
-                "small": false,
                 "title": "UniParc",
               },
               "ref": null,
@@ -1169,7 +1117,7 @@ ShallowWrapper {
             "rendered": null,
             "type": [Function],
           },
-          "type": [Function],
+          "type": undefined,
         },
         Object {
           "instance": null,
@@ -1180,25 +1128,21 @@ ShallowWrapper {
               <Unknown
                 description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
                 namespace=""
-                small={false}
                 title="BLAST"
               />,
               <Unknown
                 description="Align two or more protein sequences with the Clust Omega program."
                 namespace=""
-                small={false}
                 title="ALIGN"
               />,
               <Unknown
                 description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
                 namespace=""
-                small={false}
                 title="Retrieve/ID Mapping"
               />,
               <Unknown
                 description="Find all UniProtKB sequences that exactly match a query peptide sequence."
                 namespace=""
-                small={false}
                 title="Peptide Search"
               />,
             ],
@@ -1213,7 +1157,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "The Basic Local Alignment Search Tool finds regions of local similarity between sequences.",
                 "namespace": "",
-                "small": false,
                 "title": "BLAST",
               },
               "ref": null,
@@ -1227,7 +1170,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Align two or more protein sequences with the Clust Omega program.",
                 "namespace": "",
-                "small": false,
                 "title": "ALIGN",
               },
               "ref": null,
@@ -1241,7 +1183,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Retrieve and/or convert non UniProt identifiers to download lists for use on this website.",
                 "namespace": "",
-                "small": false,
                 "title": "Retrieve/ID Mapping",
               },
               "ref": null,
@@ -1255,7 +1196,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Find all UniProtKB sequences that exactly match a query peptide sequence.",
                 "namespace": "",
-                "small": false,
                 "title": "Peptide Search",
               },
               "ref": null,
@@ -1283,7 +1223,7 @@ ShallowWrapper {
             "rendered": null,
             "type": [Function],
           },
-          "type": [Function],
+          "type": undefined,
         },
         Object {
           "instance": null,
@@ -1294,19 +1234,16 @@ ShallowWrapper {
               <Unknown
                 description="Query UniProt data using APIs providing REST, SPARQL and Java services."
                 namespace=""
-                small={false}
                 title="Programmatic access"
               />,
               <Unknown
                 description="Get the UniProt data directly."
                 namespace=""
-                small={false}
                 title="FTP Download"
               />,
               <Unknown
                 description="Access extensive technical documents to help you use UniProt to its full potential."
                 namespace=""
-                small={false}
                 title="Technical Documentation"
               />,
             ],
@@ -1321,7 +1258,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Query UniProt data using APIs providing REST, SPARQL and Java services.",
                 "namespace": "",
-                "small": false,
                 "title": "Programmatic access",
               },
               "ref": null,
@@ -1335,7 +1271,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Get the UniProt data directly.",
                 "namespace": "",
-                "small": false,
                 "title": "FTP Download",
               },
               "ref": null,
@@ -1349,7 +1284,6 @@ ShallowWrapper {
               "props": Object {
                 "description": "Access extensive technical documents to help you use UniProt to its full potential.",
                 "namespace": "",
-                "small": false,
                 "title": "Technical Documentation",
               },
               "ref": null,

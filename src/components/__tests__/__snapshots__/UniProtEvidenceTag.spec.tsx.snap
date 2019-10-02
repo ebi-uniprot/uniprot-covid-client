@@ -26,10 +26,8 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": null,
-      "className": "",
-      "iconComponent": <qn />,
       "label": "Manual assertion according to rules",
+      "reviewed": false,
       "title": "",
     },
     "ref": null,
@@ -42,10 +40,8 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": null,
-        "className": "",
-        "iconComponent": <qn />,
         "label": "Manual assertion according to rules",
+        "reviewed": false,
         "title": "",
       },
       "ref": null,
