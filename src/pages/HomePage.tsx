@@ -3,6 +3,7 @@ import { Tile, HeroHeader, HeroContainer } from 'franklin-sites';
 import Block from '../layout/Block';
 import HomePageLayout from '../layout/HomePageLayout';
 import SearchContainer from '../search/SearchContainer';
+import PlaceHolder from '../components/PlaceHolder';
 
 const mission =
   'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.';
@@ -44,28 +45,7 @@ const HomePage = () => (
       <Tile title="SAAS" small={true} />
     </Block>
     <HeroContainer title="News">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius
-        leo velit, ut maximus ante pretium a. Nulla diam elit, consectetur
-        pulvinar dolor sit amet, dictum mattis lectus. Phasellus libero dui,
-        aliquam non molestie nec, scelerisque id neque. Morbi sit amet varius
-        ipsum. Pellentesque faucibus auctor ornare. Etiam enim ante, iaculis sit
-        amet sagittis quis, cursus vitae massa. Etiam sit amet molestie tellus.
-        Aliquam rutrum cursus eros non finibus. Orci varius natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Morbi faucibus
-        libero felis, eget fermentum urna sagittis ut. Integer enim nisi,
-        euismod quis ex quis, elementum tincidunt justo. Curabitur nec urna quis
-        leo rutrum cursus. Phasellus mi risus, faucibus a faucibus sit amet,
-        porttitor vel ex. Mauris suscipit metus in convallis venenatis.
-      </p>
-      <p>
-        Praesent lacinia malesuada lacus, venenatis ultricies leo viverra eu.
-        Nulla vitae euismod ex. Praesent a sem nec ipsum fringilla ornare id
-        eget sem. Sed euismod nibh quis lacus suscipit vulputate. In vel
-        condimentum tortor, at mattis nibh. Donec vel ipsum rhoncus, laoreet
-        quam vitae, commodo enim. Aliquam a tortor et nisl iaculis vehicula sed
-        quis justo. Phasellus tempus lectus et posuere tempus.
-      </p>
+      <PlaceHolder />
     </HeroContainer>
     <Block columns="4">
       <Tile
@@ -86,28 +66,7 @@ const HomePage = () => (
       />
     </Block>
     <HeroContainer title="Need Help?">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius
-        leo velit, ut maximus ante pretium a. Nulla diam elit, consectetur
-        pulvinar dolor sit amet, dictum mattis lectus. Phasellus libero dui,
-        aliquam non molestie nec, scelerisque id neque. Morbi sit amet varius
-        ipsum. Pellentesque faucibus auctor ornare. Etiam enim ante, iaculis sit
-        amet sagittis quis, cursus vitae massa. Etiam sit amet molestie tellus.
-        Aliquam rutrum cursus eros non finibus. Orci varius natoque penatibus et
-        magnis dis parturient montes, nascetur ridiculus mus. Morbi faucibus
-        libero felis, eget fermentum urna sagittis ut. Integer enim nisi,
-        euismod quis ex quis, elementum tincidunt justo. Curabitur nec urna quis
-        leo rutrum cursus. Phasellus mi risus, faucibus a faucibus sit amet,
-        porttitor vel ex. Mauris suscipit metus in convallis venenatis.
-      </p>
-      <p>
-        Praesent lacinia malesuada lacus, venenatis ultricies leo viverra eu.
-        Nulla vitae euismod ex. Praesent a sem nec ipsum fringilla ornare id
-        eget sem. Sed euismod nibh quis lacus suscipit vulputate. In vel
-        condimentum tortor, at mattis nibh. Donec vel ipsum rhoncus, laoreet
-        quam vitae, commodo enim. Aliquam a tortor et nisl iaculis vehicula sed
-        quis justo. Phasellus tempus lectus et posuere tempus.
-      </p>
+      <PlaceHolder />
     </HeroContainer>
     <Block columns="3">
       <Tile
