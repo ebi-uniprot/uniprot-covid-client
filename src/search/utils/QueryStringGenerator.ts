@@ -37,7 +37,7 @@ const createTermString = (
   if (term === undefined) {
     throw new Error('term is undefined');
   }
-  if (term === 'xref' && stringValue.trim() === '*') {
+  if (term === 'xref' && stringValue === '*') {
     return 'database:';
   }
   if (termSuffix) {
@@ -53,7 +53,6 @@ const createValueString = (
   stringValue: string,
   id: string | undefined
 ) => {
-  const stringValueTrimmed = stringValue.trim();
   if (term === undefined) {
     throw new Error('term is undefined');
   }
@@ -61,21 +60,21 @@ const createValueString = (
     return doubleQuote(id);
   }
 
-  let valueString = stringValueTrimmed;
+  let valueString = stringValue;
   if (term === 'xref') {
     if (!valuePrefix) {
       throw new Error('valuePrefix not provided in xref query');
     }
     // The API will run more quickly when all database entries are
     // requested by the user if xref-X:* becomes database:X
-    else if (stringValueTrimmed === '*') {
+    else if (stringValue === '*') {
       valueString = valuePrefix;
     }
     // We are testing for term=xref and valuePrefix=any because the
     // search API expects the valuePrefix to be ommited in this case.
     // eg xref:foo rather than xref_any:foo
     else if (valuePrefix !== 'any') {
-      valueString = `${valuePrefix}-${stringValueTrimmed}`;
+      valueString = `${valuePrefix}-${stringValue}`;
     }
   }
 
