@@ -32,12 +32,12 @@ const createTermString = (
   itemType: string,
   id: string | undefined,
   termSuffix: boolean | undefined,
-  stringValue: string | undefined
+  stringValue: string = ''
 ) => {
   if (term === undefined) {
     throw new Error('term is undefined');
   }
-  if (term === 'xref' && stringValue === '*') {
+  if (term === 'xref' && stringValue.trim() === '*') {
     return 'database:';
   }
   if (termSuffix) {
@@ -53,6 +53,7 @@ const createValueString = (
   stringValue: string,
   id: string | undefined
 ) => {
+  const stringValueTrimmed = stringValue.trim();
   if (term === undefined) {
     throw new Error('term is undefined');
   }
@@ -60,21 +61,21 @@ const createValueString = (
     return doubleQuote(id);
   }
 
-  let valueString = stringValue;
+  let valueString = stringValueTrimmed;
   if (term === 'xref') {
     if (!valuePrefix) {
       throw new Error('valuePrefix not provided in xref query');
     }
     // The API will run more quickly when all database entries are
     // requested by the user if xref-X:* becomes database:X
-    else if (term === 'xref' && stringValue === '*') {
+    else if (stringValueTrimmed === '*') {
       valueString = valuePrefix;
     }
     // We are testing for term=xref and valuePrefix=any because the
     // search API expects the valuePrefix to be ommited in this case.
     // eg xref:foo rather than xref_any:foo
     else if (valuePrefix !== 'any') {
-      valueString = `${valuePrefix}-${stringValue}`;
+      valueString = `${valuePrefix}-${stringValueTrimmed}`;
     }
   }
 
@@ -86,59 +87,64 @@ const createSimpleSubquery = (clause: Clause) => {
     throw Error('Cannot create a query with a group term.');
   }
   const { itemType, term, valuePrefix, termSuffix } = clause.searchTerm;
-  const { stringValue, id } = clause.queryInput;
-  if (!stringValue) {
+  const { stringValue = '', id } = clause.queryInput;
+  const stringValueTrimmed = stringValue.trim();
+  if (!stringValueTrimmed) {
     throw new Error('Value not provided in query');
   }
   if (term === 'All') {
-    return stringValue;
+    return stringValueTrimmed;
   }
   const termString = createTermString(
     term,
     itemType,
     id,
     termSuffix,
-    stringValue
+    stringValueTrimmed
   );
-  const valueString = createValueString(term, valuePrefix, stringValue, id);
+  const valueString = createValueString(
+    term,
+    valuePrefix,
+    stringValueTrimmed,
+    id
+  );
   return `(${termString}${valueString})`;
 };
 
 const createRangeSubquery = (clause: Clause) => {
   const { term, itemType } = clause.searchTerm;
-  const { rangeFrom, rangeTo } = clause.queryInput;
-  const rangeFromChecked = rangeFrom || '';
-  const rangeToChecked = rangeTo || '';
+  const { rangeFrom = '', rangeTo = '' } = clause.queryInput;
   const itemTypeRangePrefix = getItemTypeRangePrefix(itemType);
-  return `(${itemTypeRangePrefix}${term}:[${rangeFromChecked} TO ${rangeToChecked}])`;
+  return `(${itemTypeRangePrefix}${term}:[${rangeFrom.trim()} TO ${rangeTo.trim()}])`;
 };
 
 const getEvidenceSubquery = (clause: Clause) => {
-  const { evidenceValue } = clause.queryInput;
+  const { evidenceValue = '' } = clause.queryInput;
   const { term, itemType } = clause.searchTerm;
   if (!evidenceValue) {
     throw new Error('Evidence value not provided');
   }
   const itemTypeEvidencePrefix = getItemTypeEvidencePrefix(itemType);
-  return `(${itemTypeEvidencePrefix}${term}:${evidenceValue})`;
+  return `(${itemTypeEvidencePrefix}${term}:${evidenceValue.trim()})`;
 };
 
 const createQueryString = (clauses: Clause[] = []): string =>
   clauses.reduce((queryAccumulator: string, clause: Clause) => {
     const query = [];
-    if (
-      (clause.queryInput.id && clause.queryInput.id !== '') ||
-      (clause.queryInput.stringValue && clause.queryInput.stringValue !== '')
-    ) {
+    const {
+      id,
+      stringValue = '',
+      rangeFrom = '',
+      rangeTo = '',
+      evidenceValue = '',
+    } = clause.queryInput;
+    if (id || stringValue.trim()) {
       query.push(createSimpleSubquery(clause));
     }
-    if (clause.queryInput.rangeFrom || clause.queryInput.rangeTo) {
+    if (rangeFrom.trim() || rangeTo.trim()) {
       query.push(createRangeSubquery(clause));
     }
-    if (
-      clause.queryInput.evidenceValue &&
-      clause.queryInput.evidenceValue !== ''
-    ) {
+    if (evidenceValue.trim()) {
       query.push(getEvidenceSubquery(clause));
     }
     let queryJoined = query.join(' AND ');
