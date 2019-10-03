@@ -11,13 +11,13 @@ export const getRheaId = (referenceId: string) => {
   return match && match[1];
 };
 
-export const isRhea = ({
+export const isRheaReactReference = ({
   databaseType,
   id,
 }: {
   databaseType: string;
   id: string;
-}) => databaseType === 'Rhea' && getRheaId(id);
+}) => databaseType === 'Rhea' && !!getRheaId(id);
 
 type RheaReactionVisualizerProps = {
   rheaId: string;
@@ -76,8 +76,9 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         if (!catalyticActivity.reaction) {
           return null;
         }
+        console.log(catalyticActivity.reaction.reactionReferences);
         const rheaReactionReferences = catalyticActivity.reaction.reactionReferences.filter(
-          isRhea
+          isRheaReactReference
         );
         const rheaId =
           rheaReactionReferences.length > 0 &&
