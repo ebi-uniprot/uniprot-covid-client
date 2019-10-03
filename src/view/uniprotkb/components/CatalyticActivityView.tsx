@@ -76,7 +76,6 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         if (!catalyticActivity.reaction) {
           return null;
         }
-        console.log(catalyticActivity.reaction.reactionReferences);
         const rheaReactionReferences = catalyticActivity.reaction.reactionReferences.filter(
           isRheaReactReference
         );
