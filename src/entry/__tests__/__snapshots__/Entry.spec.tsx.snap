@@ -331,16 +331,19 @@ exports[`Entry should render 1`] = `
                 >
                   rec full Name 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
-                      viewBox="0 0 512 512"
-                      width="10"
+                      height="12"
+                      viewBox="0 0 426 512"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                         id="Shape"
                       />
                     </svg>
@@ -348,9 +351,22 @@ exports[`Entry should render 1`] = `
                       class="evidence-tag__label"
                       title=""
                     >
-                      Manual assertion according to rules
+                      1 automatic annotation
                     </span>
                   </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
+                      <div>
+                        PROSITE-ProRule:PRU10026
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
@@ -366,16 +382,19 @@ exports[`Entry should render 1`] = `
                 >
                   1.2.3.4 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
-                      viewBox="0 0 512 512"
-                      width="10"
+                      height="12"
+                      viewBox="0 0 426 512"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                         id="Shape"
                       />
                     </svg>
@@ -383,9 +402,22 @@ exports[`Entry should render 1`] = `
                       class="evidence-tag__label"
                       title=""
                     >
-                      Manual assertion according to rules
+                      1 automatic annotation
                     </span>
                   </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
+                      <div>
+                        PROSITE-ProRule:PRU100210
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
@@ -401,16 +433,19 @@ exports[`Entry should render 1`] = `
                 >
                   recommended short name 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
-                      viewBox="0 0 512 512"
-                      width="10"
+                      height="12"
+                      viewBox="0 0 426 512"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                         id="Shape"
                       />
                     </svg>
@@ -418,9 +453,22 @@ exports[`Entry should render 1`] = `
                       class="evidence-tag__label"
                       title=""
                     >
-                      Manual assertion according to rules
+                      1 automatic annotation
                     </span>
                   </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
+                      <div>
+                        PROSITE-ProRule:PRU10020
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
@@ -440,16 +488,19 @@ exports[`Entry should render 1`] = `
                     <li>
                       a full alt Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -457,21 +508,37 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10022
+                          </div>
+                        </div>
+                      </div>
                        (short alt name1 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -479,9 +546,22 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10028
+                          </div>
+                        </div>
+                      </div>
                       ) 
                     </li>
                   </ul>
@@ -504,16 +584,19 @@ exports[`Entry should render 1`] = `
                     <li>
                       containsrec full Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -521,21 +604,37 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10026
+                          </div>
+                        </div>
+                      </div>
                        (containsrecommended short name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -543,25 +642,41 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10020
+                          </div>
+                        </div>
+                      </div>
                       )  
                       <strong>
                         Alternative names: 
                       </strong>
                       containsa full alt Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -569,21 +684,37 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10022
+                          </div>
+                        </div>
+                      </div>
                        (containsshort alt name1 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -591,9 +722,22 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10028
+                          </div>
+                        </div>
+                      </div>
                       ) 
                     </li>
                   </ul>
@@ -616,16 +760,19 @@ exports[`Entry should render 1`] = `
                     <li>
                       sub full Name 
                       <span
-                        class="evidence-tag evidence-tag--unreviewed"
+                        class="evidence-tag svg-colour-reviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
                         <svg
-                          height="10"
-                          viewBox="0 0 512 512"
-                          width="10"
+                          height="12"
+                          viewBox="0 0 426 512"
+                          width="12"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                             id="Shape"
                           />
                         </svg>
@@ -633,9 +780,22 @@ exports[`Entry should render 1`] = `
                           class="evidence-tag__label"
                           title=""
                         >
-                          Manual assertion according to rules
+                          1 automatic annotation
                         </span>
                       </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <div>
+                            PROSITE-ProRule:PRU10027
+                          </div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -653,16 +813,19 @@ exports[`Entry should render 1`] = `
                 >
                   biotech 
                   <span
-                    class="evidence-tag evidence-tag--unreviewed"
+                    class="evidence-tag svg-colour-reviewed"
+                    data-testid="evidence-tag-trigger"
+                    role="button"
+                    tabindex="0"
                   >
                     <svg
-                      height="10"
-                      viewBox="0 0 512 512"
-                      width="10"
+                      height="12"
+                      viewBox="0 0 426 512"
+                      width="12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"
+                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
                         id="Shape"
                       />
                     </svg>
@@ -670,9 +833,22 @@ exports[`Entry should render 1`] = `
                       class="evidence-tag__label"
                       title=""
                     >
-                      Manual assertion according to rules
+                      1 automatic annotation
                     </span>
                   </span>
+                  <div
+                    class="evidence-tag-content "
+                    data-testid="evidence-tag-content"
+                  >
+                    <div>
+                      <h5>
+                        Automatic assertion according to rules
+                      </h5>
+                      <div>
+                        PROSITE-ProRule:PRU10024
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div

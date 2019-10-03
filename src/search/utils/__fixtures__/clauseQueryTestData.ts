@@ -1,4 +1,4 @@
-const testData = [
+export const testData = [
   {
     description: 'should generate simple query',
     queryString: '(mnemonic:blah)',
@@ -16,6 +16,147 @@ const testData = [
         logicOperator: 'AND',
         queryInput: {
           stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should generate query with value surrounded by double quotes when stringValue has a space',
+    queryString: '(mnemonic:"foo bar")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          term: 'mnemonic',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo bar',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should search with id if term one is present',
+    queryString: '(cc_scl_term:"SL-12345")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_scl_term',
+          label: 'Subcellular location term',
+          itemType: 'comment',
+          term: 'scl_term',
+          dataType: 'string',
+          hasEvidence: true,
+          autoComplete: '/uniprot/api/suggester?dict=subcell&query=?',
+          description: 'Search by comment subcellular location term',
+          example: 'membrane',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+          id: 'SL-12345',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should append _id to term if termSuffix=true and id is present',
+    queryString: '(organism_id:"1234")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_organism',
+          label: 'Organism [OS]',
+          itemType: 'single',
+          term: 'organism',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=organism&query=?',
+          description: 'Search by Organism name',
+          example: 'saccharomyces',
+          termSuffix: true,
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+          id: '1234',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should append _name to term if termSuffix=true and id is not present',
+    queryString: '(organism_name:blah)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_organism',
+          label: 'Organism [OS]',
+          itemType: 'single',
+          term: 'organism',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=organism&query=?',
+          description: 'Search by Organism name',
+          example: 'saccharomyces',
+          termSuffix: true,
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+        },
+      },
+    ],
+  },
+  {
+    description: 'should handle enzyme classification [EC] search with an ID',
+    queryString: '(ec:"1.2.3.4")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ec',
+          label: 'Enzyme classification [EC]',
+          itemType: 'single',
+          term: 'ec',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
+          description: 'Search by Enzyme EC number',
+          example: '1.1.2.3',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo [1.2.3.4]',
+          id: '1.2.3.4',
+        },
+      },
+    ],
+  },
+  {
+    description:
+      'should handle enzyme classification [EC] search without an ID',
+    queryString: '(ec:foo)',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_ec',
+          label: 'Enzyme classification [EC]',
+          itemType: 'single',
+          term: 'ec',
+          dataType: 'string',
+          autoComplete: '/uniprot/api/suggester?dict=ec&query=?',
+          description: 'Search by Enzyme EC number',
+          example: '1.1.2.3',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'foo',
         },
       },
     ],
@@ -41,7 +182,7 @@ const testData = [
   {
     description: 'should handle cc evidence tags',
     queryString:
-      '((cc_cofactor_chebi:blah) AND (ccev_cofactor_chebi:blahvidence))',
+      '((cc_cofactor_chebi:"CHEBI:12345") AND (ccev_cofactor_chebi:blahvidence))',
     clauses: [
       {
         searchTerm: {
@@ -57,7 +198,8 @@ const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          stringValue: 'blah',
+          stringValue: 'blah [CHEBI:12345]',
+          id: 'CHEBI:12345',
           evidenceValue: 'blahvidence',
         },
       },
@@ -180,6 +322,26 @@ const testData = [
     ],
   },
   {
+    description: 'should handle xrefs when input string value has spaces',
+    queryString: '(xref:"pdb-Something or another")',
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_xref_pdb',
+          label: 'PDB',
+          itemType: 'database',
+          term: 'xref',
+          dataType: 'string',
+          valuePrefix: 'pdb',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'Something or another',
+        },
+      },
+    ],
+  },
+  {
     description: 'should handle any xrefs',
     queryString: '(xref:Something)',
     clauses: [
@@ -296,7 +458,7 @@ const testData = [
   },
   {
     description: 'should handle single cc query',
-    queryString: '(cc_cofactor_chebi:blah)',
+    queryString: '(cc_cofactor_chebi:"CHEBI:12345")',
     clauses: [
       {
         searchTerm: {
@@ -312,7 +474,8 @@ const testData = [
         },
         logicOperator: 'AND',
         queryInput: {
-          stringValue: 'blah',
+          stringValue: 'blah [CHEBI:12345]',
+          id: 'CHEBI:12345',
         },
       },
     ],
@@ -453,4 +616,26 @@ const testData = [
   },
 ];
 
-export default testData;
+export const exceptionThrowingTestData = [
+  {
+    description: 'should throw "term is undefined" Error',
+    error: Error('term is undefined'),
+    clauses: [
+      {
+        searchTerm: {
+          id: 'id_mnemonic',
+          label: 'Entry Name [ID]',
+          itemType: 'single',
+          dataType: 'string',
+          description: 'Search by UniProtKB entry name',
+          example: 'P53_HUMAN',
+        },
+        logicOperator: 'AND',
+        queryInput: {
+          stringValue: 'blah',
+          id: '1234',
+        },
+      },
+    ],
+  },
+];
