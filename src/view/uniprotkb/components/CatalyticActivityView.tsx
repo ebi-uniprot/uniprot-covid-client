@@ -5,21 +5,26 @@ import { Evidence } from '../../../model/types/modelTypes';
 import Comment from '../../../model/types/Comment';
 import './styles/CatalyticActivityView.scss';
 
-const getRheaId = (referenceId: string) => {
+export const getRheaId = (referenceId: string) => {
   const re = /^RHEA:(\d+)$/;
   const match = referenceId.match(re);
   return match && match[1];
 };
 
-const isRhea = ({ databaseType, id }: { databaseType: string; id: string }) =>
-  databaseType === 'Rhea' && getRheaId(id);
+export const isRhea = ({
+  databaseType,
+  id,
+}: {
+  databaseType: string;
+  id: string;
+}) => databaseType === 'Rhea' && getRheaId(id);
 
 type RheaReactionVisualizerProps = {
   rheaId: string;
   show: boolean;
 };
 
-const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
+export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   rheaId,
   show: initialShow,
 }) => {
