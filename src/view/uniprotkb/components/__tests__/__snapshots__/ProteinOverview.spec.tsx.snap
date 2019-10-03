@@ -30,11 +30,33 @@ exports[`ProteinOverview component should render 1`] = `
       <div
         class="info-list__item__content"
       >
-        <span
-          class="bubble--medium colour-uniprot-blue"
+        <div
+          class="doughnut-chart--medium colour-light-grey"
         >
-          12.4
-        </span>
+          <div
+            class="doughnut-chart--medium__left-wrap"
+          >
+            <div
+              class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+              style="transform: rotate(0deg);"
+            />
+          </div>
+          <div
+            class="doughnut-chart--medium__right-wrap"
+          >
+            <div
+              class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+              style="transform: rotate(72deg);"
+            />
+          </div>
+          <div
+            class="doughnut-chart--medium__inner-circle"
+          >
+            <span>
+              20%
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
