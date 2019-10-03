@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, Fragment } from 'react';
 import idx from 'idx';
-import { Bubble } from 'franklin-sites';
+import { DoughnutChart } from 'franklin-sites';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
 import { truncateStringWithEllipsis } from '../../../utils/utils';
@@ -10,6 +10,7 @@ import convertGeneNames from '../../../model/uniprotkb/GeneNamesConverter';
 import { GeneNamesViewFlat } from './GeneNamesView';
 import { KeywordList } from './KeywordView';
 import UniProtTitle from './UniProtTitle';
+import { annotationScoreToPercentage } from './ProteinOverviewView';
 import Comment from '../../../model/types/Comment';
 
 const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
@@ -41,12 +42,14 @@ const UniProtCard: FC<{
 
   const sequenceLengthNode = `${data.sequence.length} amino-acids · `;
 
+  const { annotationScore } = data;
   const annotationScoreNode = (
-    <Bubble
-      value={data.annotationScore}
+    <DoughnutChart
+      percent={annotationScoreToPercentage(annotationScore)}
       size="small"
-      title="Annotation score"
-    />
+    >
+      {annotationScore > 99 ? '99+' : annotationScore}
+    </DoughnutChart>
   );
 
   let keywordsNode;
@@ -83,7 +86,7 @@ const UniProtCard: FC<{
   }
 
   return (
-    <div className="uniprot-card">
+    <div>
       <h4>
         <UniProtTitle
           primaryAccession={data.primaryAccession}

@@ -55,7 +55,9 @@ export const ProteinOverview: FC<{
     {
       title: 'Annotation score',
       content: (
-        <DoughnutChart percent={annotationScoreToPercentage(annotationScore)} />
+        <DoughnutChart percent={annotationScoreToPercentage(annotationScore)}>
+          {annotationScore > 99 ? '99+' : annotationScore}
+        </DoughnutChart>
       ),
     },
   ];
