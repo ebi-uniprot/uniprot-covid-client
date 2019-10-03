@@ -3,6 +3,7 @@ import '@swissprot/rhea-reaction-visualizer';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
 import Comment from '../../../model/types/Comment';
+import './styles/CatalyticActivityView.scss';
 
 const getRheaId = (referenceId: string) => {
   const reRhea = /^RHEA:(\d+)$/;
@@ -19,12 +20,16 @@ const RheaReactionVisualizer = ({ rheaId, show: initialShow }) => {
     <Fragment>
       <button
         type="button"
-        className="button secondary"
+        className="button link-button rhea-reaction-visualizer__button"
         onClick={() => setShow(!show)}
       >
         {`${show ? 'Hide' : 'View'} Rhea reaction`}
       </button>
-      {show && <rhea-reaction rheaid={rheaId} zoom showids />}
+      {show && (
+        <div className="rhea-reaction-visualizer__component">
+          <rhea-reaction rheaid={rheaId} zoom showids />
+        </div>
+      )}
     </Fragment>
   );
 };
@@ -66,23 +71,21 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
           getRheaId(rheaReactionReferences[0].id);
         rheaReactionCount += +!!rheaId;
         return (
-          <Fragment key={catalyticActivity.reaction.name}>
-            <span className="text-block">
-              <strong>{catalyticActivity.reaction.ecNumber}</strong>
-              {` ${catalyticActivity.reaction.name}`}
-              {catalyticActivity.reaction.evidences && (
-                <UniProtEvidenceTag
-                  evidences={catalyticActivity.reaction.evidences}
-                />
-              )}
-            </span>
+          <span className="text-block" key={catalyticActivity.reaction.name}>
+            <strong>{catalyticActivity.reaction.ecNumber}</strong>
+            {` ${catalyticActivity.reaction.name}`}
+            {catalyticActivity.reaction.evidences && (
+              <UniProtEvidenceTag
+                evidences={catalyticActivity.reaction.evidences}
+              />
+            )}
             {!!rheaId && (
               <RheaReactionVisualizer
                 rheaId={rheaId}
                 show={rheaReactionCount === 1}
               />
             )}
-          </Fragment>
+          </span>
         );
       })}
     </Fragment>
