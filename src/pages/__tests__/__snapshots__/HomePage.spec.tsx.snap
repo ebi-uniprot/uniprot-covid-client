@@ -53,6 +53,122 @@ ShallowWrapper {
             title="UniParc"
           />
         </Block>,
+        <Block
+          columns="4"
+        >
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Literature Citations"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Taxonomy"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Subcellular locations"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Cross-ref databases"
+          />
+        </Block>,
+        <Block
+          columns="4"
+        >
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Diseases"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="Keywords"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="UniRule"
+          />
+          <Unknown
+            description="This is a short description of what the resource is/provides."
+            namespace=""
+            small={true}
+            title="SAAS"
+          />
+        </Block>,
+        <Unknown
+          title="News"
+        >
+          <PlaceHolder />
+        </Unknown>,
+        <Block
+          columns="4"
+        >
+          <Unknown
+            description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
+            namespace=""
+            small={false}
+            title="BLAST"
+          />
+          <Unknown
+            description="Align two or more protein sequences with the Clust Omega program."
+            namespace=""
+            small={false}
+            title="ALIGN"
+          />
+          <Unknown
+            description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
+            namespace=""
+            small={false}
+            title="Retrieve/ID Mapping"
+          />
+          <Unknown
+            description="Find all UniProtKB sequences that exactly match a query peptide sequence."
+            namespace=""
+            small={false}
+            title="Peptide Search"
+          />
+        </Block>,
+        <Unknown
+          title="Need Help?"
+        >
+          <PlaceHolder />
+        </Unknown>,
+        <Block
+          columns="3"
+        >
+          <Unknown
+            description="Query UniProt data using APIs providing REST, SPARQL and Java services."
+            namespace=""
+            small={false}
+            title="Programmatic access"
+          />
+          <Unknown
+            description="Get the UniProt data directly."
+            namespace=""
+            small={false}
+            title="FTP Download"
+          />
+          <Unknown
+            description="Access extensive technical documents to help you use UniProt to its full potential."
+            namespace=""
+            small={false}
+            title="Technical Documentation"
+          />
+        </Block>,
       ],
     },
     "ref": null,
@@ -172,6 +288,402 @@ ShallowWrapper {
         ],
         "type": [Function],
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Literature Citations"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Taxonomy"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Subcellular locations"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Cross-ref databases"
+            />,
+          ],
+          "columns": "4",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Literature Citations",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Taxonomy",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Subcellular locations",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Cross-ref databases",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Diseases"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Keywords"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="UniRule"
+            />,
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="SAAS"
+            />,
+          ],
+          "columns": "4",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Diseases",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "Keywords",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "UniRule",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "This is a short description of what the resource is/provides.",
+              "namespace": "",
+              "small": true,
+              "title": "SAAS",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <PlaceHolder />,
+          "title": "News",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Unknown
+              description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
+              namespace=""
+              small={false}
+              title="BLAST"
+            />,
+            <Unknown
+              description="Align two or more protein sequences with the Clust Omega program."
+              namespace=""
+              small={false}
+              title="ALIGN"
+            />,
+            <Unknown
+              description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
+              namespace=""
+              small={false}
+              title="Retrieve/ID Mapping"
+            />,
+            <Unknown
+              description="Find all UniProtKB sequences that exactly match a query peptide sequence."
+              namespace=""
+              small={false}
+              title="Peptide Search"
+            />,
+          ],
+          "columns": "4",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "The Basic Local Alignment Search Tool finds regions of local similarity between sequences.",
+              "namespace": "",
+              "small": false,
+              "title": "BLAST",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Align two or more protein sequences with the Clust Omega program.",
+              "namespace": "",
+              "small": false,
+              "title": "ALIGN",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Retrieve and/or convert non UniProt identifiers to download lists for use on this website.",
+              "namespace": "",
+              "small": false,
+              "title": "Retrieve/ID Mapping",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Find all UniProtKB sequences that exactly match a query peptide sequence.",
+              "namespace": "",
+              "small": false,
+              "title": "Peptide Search",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": <PlaceHolder />,
+          "title": "Need Help?",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Unknown
+              description="Query UniProt data using APIs providing REST, SPARQL and Java services."
+              namespace=""
+              small={false}
+              title="Programmatic access"
+            />,
+            <Unknown
+              description="Get the UniProt data directly."
+              namespace=""
+              small={false}
+              title="FTP Download"
+            />,
+            <Unknown
+              description="Access extensive technical documents to help you use UniProt to its full potential."
+              namespace=""
+              small={false}
+              title="Technical Documentation"
+            />,
+          ],
+          "columns": "3",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Query UniProt data using APIs providing REST, SPARQL and Java services.",
+              "namespace": "",
+              "small": false,
+              "title": "Programmatic access",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Get the UniProt data directly.",
+              "namespace": "",
+              "small": false,
+              "title": "FTP Download",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "description": "Access extensive technical documents to help you use UniProt to its full potential.",
+              "namespace": "",
+              "small": false,
+              "title": "Technical Documentation",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
     ],
     "type": [Function],
   },
@@ -214,6 +726,122 @@ ShallowWrapper {
               namespace="uniparc"
               small={false}
               title="UniParc"
+            />
+          </Block>,
+          <Block
+            columns="4"
+          >
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Literature Citations"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Taxonomy"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Subcellular locations"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Cross-ref databases"
+            />
+          </Block>,
+          <Block
+            columns="4"
+          >
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Diseases"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="Keywords"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="UniRule"
+            />
+            <Unknown
+              description="This is a short description of what the resource is/provides."
+              namespace=""
+              small={true}
+              title="SAAS"
+            />
+          </Block>,
+          <Unknown
+            title="News"
+          >
+            <PlaceHolder />
+          </Unknown>,
+          <Block
+            columns="4"
+          >
+            <Unknown
+              description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
+              namespace=""
+              small={false}
+              title="BLAST"
+            />
+            <Unknown
+              description="Align two or more protein sequences with the Clust Omega program."
+              namespace=""
+              small={false}
+              title="ALIGN"
+            />
+            <Unknown
+              description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
+              namespace=""
+              small={false}
+              title="Retrieve/ID Mapping"
+            />
+            <Unknown
+              description="Find all UniProtKB sequences that exactly match a query peptide sequence."
+              namespace=""
+              small={false}
+              title="Peptide Search"
+            />
+          </Block>,
+          <Unknown
+            title="Need Help?"
+          >
+            <PlaceHolder />
+          </Unknown>,
+          <Block
+            columns="3"
+          >
+            <Unknown
+              description="Query UniProt data using APIs providing REST, SPARQL and Java services."
+              namespace=""
+              small={false}
+              title="Programmatic access"
+            />
+            <Unknown
+              description="Get the UniProt data directly."
+              namespace=""
+              small={false}
+              title="FTP Download"
+            />
+            <Unknown
+              description="Access extensive technical documents to help you use UniProt to its full potential."
+              namespace=""
+              small={false}
+              title="Technical Documentation"
             />
           </Block>,
         ],
@@ -327,6 +955,402 @@ ShallowWrapper {
                 "namespace": "uniparc",
                 "small": false,
                 "title": "UniParc",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Literature Citations"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Taxonomy"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Subcellular locations"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Cross-ref databases"
+              />,
+            ],
+            "columns": "4",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Literature Citations",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Taxonomy",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Subcellular locations",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Cross-ref databases",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Diseases"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="Keywords"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="UniRule"
+              />,
+              <Unknown
+                description="This is a short description of what the resource is/provides."
+                namespace=""
+                small={true}
+                title="SAAS"
+              />,
+            ],
+            "columns": "4",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Diseases",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "Keywords",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "UniRule",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "This is a short description of what the resource is/provides.",
+                "namespace": "",
+                "small": true,
+                "title": "SAAS",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <PlaceHolder />,
+            "title": "News",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <Unknown
+                description="The Basic Local Alignment Search Tool finds regions of local similarity between sequences."
+                namespace=""
+                small={false}
+                title="BLAST"
+              />,
+              <Unknown
+                description="Align two or more protein sequences with the Clust Omega program."
+                namespace=""
+                small={false}
+                title="ALIGN"
+              />,
+              <Unknown
+                description="Retrieve and/or convert non UniProt identifiers to download lists for use on this website."
+                namespace=""
+                small={false}
+                title="Retrieve/ID Mapping"
+              />,
+              <Unknown
+                description="Find all UniProtKB sequences that exactly match a query peptide sequence."
+                namespace=""
+                small={false}
+                title="Peptide Search"
+              />,
+            ],
+            "columns": "4",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "The Basic Local Alignment Search Tool finds regions of local similarity between sequences.",
+                "namespace": "",
+                "small": false,
+                "title": "BLAST",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Align two or more protein sequences with the Clust Omega program.",
+                "namespace": "",
+                "small": false,
+                "title": "ALIGN",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Retrieve and/or convert non UniProt identifiers to download lists for use on this website.",
+                "namespace": "",
+                "small": false,
+                "title": "Retrieve/ID Mapping",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Find all UniProtKB sequences that exactly match a query peptide sequence.",
+                "namespace": "",
+                "small": false,
+                "title": "Peptide Search",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <PlaceHolder />,
+            "title": "Need Help?",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <Unknown
+                description="Query UniProt data using APIs providing REST, SPARQL and Java services."
+                namespace=""
+                small={false}
+                title="Programmatic access"
+              />,
+              <Unknown
+                description="Get the UniProt data directly."
+                namespace=""
+                small={false}
+                title="FTP Download"
+              />,
+              <Unknown
+                description="Access extensive technical documents to help you use UniProt to its full potential."
+                namespace=""
+                small={false}
+                title="Technical Documentation"
+              />,
+            ],
+            "columns": "3",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Query UniProt data using APIs providing REST, SPARQL and Java services.",
+                "namespace": "",
+                "small": false,
+                "title": "Programmatic access",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Get the UniProt data directly.",
+                "namespace": "",
+                "small": false,
+                "title": "FTP Download",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "description": "Access extensive technical documents to help you use UniProt to its full potential.",
+                "namespace": "",
+                "small": false,
+                "title": "Technical Documentation",
               },
               "ref": null,
               "rendered": null,
