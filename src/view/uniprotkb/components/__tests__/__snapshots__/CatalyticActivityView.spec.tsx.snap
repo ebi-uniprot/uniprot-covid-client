@@ -15,3 +15,14 @@ exports[`Catalytic activity should render catalytic activity 1`] = `
   </span>
 </DocumentFragment>
 `;
+
+exports[`RheaReactionVisualizer should render RheaReactionVisualizer 1`] = `
+<DocumentFragment>
+  <button
+    class="button link-button rhea-reaction-visualizer__button"
+    type="button"
+  >
+    View Rhea reaction
+  </button>
+</DocumentFragment>
+`;
