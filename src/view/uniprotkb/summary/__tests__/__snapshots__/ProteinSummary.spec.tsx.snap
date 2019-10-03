@@ -137,33 +137,31 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__content"
           >
-            <div
+            <span
               class="doughnut-chart--medium colour-light-grey"
             >
-              <div
+              <span
                 class="doughnut-chart--medium__left-wrap"
               >
-                <div
+                <span
                   class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
                   style="transform: rotate(0deg);"
                 />
-              </div>
-              <div
+              </span>
+              <span
                 class="doughnut-chart--medium__right-wrap"
               >
-                <div
+                <span
                   class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
                   style="transform: rotate(72deg);"
                 />
-              </div>
-              <div
+              </span>
+              <span
                 class="doughnut-chart--medium__inner-circle"
               >
-                <span>
-                  20%
-                </span>
-              </div>
-            </div>
+                2
+              </span>
+            </span>
           </div>
         </div>
       </div>
