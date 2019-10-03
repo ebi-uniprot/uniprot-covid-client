@@ -6,15 +6,23 @@ import Comment from '../../../model/types/Comment';
 import './styles/CatalyticActivityView.scss';
 
 const getRheaId = (referenceId: string) => {
-  const reRhea = /^RHEA:(\d+)$/;
-  const match = referenceId.match(reRhea);
+  const re = /^RHEA:(\d+)$/;
+  const match = referenceId.match(re);
   return match && match[1];
 };
 
-const isRhea = ({ databaseType, id }) =>
+const isRhea = ({ databaseType, id }: { databaseType: string; id: string }) =>
   databaseType === 'Rhea' && getRheaId(id);
 
-const RheaReactionVisualizer = ({ rheaId, show: initialShow }) => {
+type RheaReactionVisualizerProps = {
+  rheaId: string;
+  show: boolean;
+};
+
+const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
+  rheaId,
+  show: initialShow,
+}) => {
   const [show, setShow] = useState(initialShow);
   return (
     <Fragment>
