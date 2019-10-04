@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { DoughnutChart } from 'franklin-sites';
 
 export const annotationScoreToBin = (annotationScore: number) => {
@@ -25,9 +25,10 @@ type AnnotationScoreDoughnutChartProps = {
   size?: DoughnutChartSize;
 };
 
-const AnnotationScoreDoughnutChart: React.FC<
-  AnnotationScoreDoughnutChartProps
-> = ({ children: annotationScore, size = DoughnutChartSize.medium }) => {
+const AnnotationScoreDoughnutChart: FC<AnnotationScoreDoughnutChartProps> = ({
+  children: annotationScore,
+  size = DoughnutChartSize.medium,
+}) => {
   const annotationScoreBin = annotationScoreToBin(annotationScore);
   return (
     <DoughnutChart percent={annotationScoreBin * 20} size={size}>

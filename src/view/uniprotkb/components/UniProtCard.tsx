@@ -46,7 +46,10 @@ const UniProtCard: FC<{
 
   const { annotationScore } = data;
   const annotationScoreNode = (
-    <span className="uniprot-card__annotation-score-doughnut-chart">
+    <span
+      className="uniprot-card__annotation-score-doughnut-chart"
+      title="Annotation Score"
+    >
       <AnnotationScoreDoughnutChart size={DoughnutChartSize.small}>
         {annotationScore}
       </AnnotationScoreDoughnutChart>
