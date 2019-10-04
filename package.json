@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@geneontology/ribbon": "^1.9.32",
+    "@sentry/browser": "^5.6.3",
     "@types/react": "^16.9.2",
     "@types/react-router-dom": "^4.3.5",
     "axios": "^0.18.0",
