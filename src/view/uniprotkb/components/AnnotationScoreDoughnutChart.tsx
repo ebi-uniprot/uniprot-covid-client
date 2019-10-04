@@ -31,7 +31,7 @@ const AnnotationScoreDoughnutChart: React.FC<
   const annotationScoreBin = annotationScoreToBin(annotationScore);
   return (
     <DoughnutChart percent={annotationScoreBin * 20} size={size}>
-      {annotationScoreBin}
+      {`${annotationScoreBin}/5`}
     </DoughnutChart>
   );
 };
