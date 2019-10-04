@@ -159,7 +159,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
               <span
                 class="doughnut-chart--medium__inner-circle"
               >
-                2
+                1
               </span>
             </span>
           </div>

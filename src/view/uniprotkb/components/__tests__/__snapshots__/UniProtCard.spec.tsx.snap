@@ -60,7 +60,7 @@ exports[`UniProtCard component should render 1`] = `
         <span
           class="doughnut-chart--small__inner-circle"
         >
-          2
+          1
         </span>
       </span>
     </p>

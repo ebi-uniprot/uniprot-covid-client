@@ -306,7 +306,7 @@ exports[`Entry should render 1`] = `
                   <span
                     class="doughnut-chart--medium__inner-circle"
                   >
-                    2
+                    1
                   </span>
                 </span>
               </div>

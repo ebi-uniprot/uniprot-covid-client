@@ -52,7 +52,7 @@ exports[`ProteinOverview component should render 1`] = `
           <span
             class="doughnut-chart--medium__inner-circle"
           >
-            12.4
+            1
           </span>
         </span>
       </div>
