@@ -22,7 +22,7 @@ describe('annotationScoreToBin function', () => {
     >=80  | bin 5
   */
   const annotationScoreToBinTestPoints = [
-    // [annotation score, percentage]
+    // [annotation score, bin]
     [0, 1],
     [1, 1],
     [19, 1],
