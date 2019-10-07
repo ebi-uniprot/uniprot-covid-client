@@ -39,28 +39,32 @@ exports[`UniProtCard component should render 1`] = `
       </a>
        · Gene: some Gene, some Syn, some orf · 10 amino-acids · 
       <span
-        class="doughnut-chart--small colour-light-grey"
+        title="Annotation Score"
       >
         <span
-          class="doughnut-chart--small__left-wrap"
+          class="doughnut-chart--small colour-light-grey"
         >
           <span
-            class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
-            style="transform: rotate(0deg);"
-          />
-        </span>
-        <span
-          class="doughnut-chart--small__right-wrap"
-        >
+            class="doughnut-chart--small__left-wrap"
+          >
+            <span
+              class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+              style="transform: rotate(0deg);"
+            />
+          </span>
           <span
-            class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
-            style="transform: rotate(72deg);"
-          />
-        </span>
-        <span
-          class="doughnut-chart--small__inner-circle"
-        >
-          1
+            class="doughnut-chart--small__right-wrap"
+          >
+            <span
+              class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+              style="transform: rotate(72deg);"
+            />
+          </span>
+          <span
+            class="doughnut-chart--small__inner-circle"
+          >
+            1/5
+          </span>
         </span>
       </span>
     </p>

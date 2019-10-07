@@ -138,28 +138,32 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             class="info-list__item__content"
           >
             <span
-              class="doughnut-chart--medium colour-light-grey"
+              title="Annotation Score"
             >
               <span
-                class="doughnut-chart--medium__left-wrap"
+                class="doughnut-chart--medium colour-light-grey"
               >
                 <span
-                  class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
-                  style="transform: rotate(0deg);"
-                />
-              </span>
-              <span
-                class="doughnut-chart--medium__right-wrap"
-              >
+                  class="doughnut-chart--medium__left-wrap"
+                >
+                  <span
+                    class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+                    style="transform: rotate(0deg);"
+                  />
+                </span>
                 <span
-                  class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
-                  style="transform: rotate(72deg);"
-                />
-              </span>
-              <span
-                class="doughnut-chart--medium__inner-circle"
-              >
-                1
+                  class="doughnut-chart--medium__right-wrap"
+                >
+                  <span
+                    class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+                    style="transform: rotate(72deg);"
+                  />
+                </span>
+                <span
+                  class="doughnut-chart--medium__inner-circle"
+                >
+                  1/5
+                </span>
               </span>
             </span>
           </div>
