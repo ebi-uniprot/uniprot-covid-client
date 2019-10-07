@@ -13,7 +13,6 @@ import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
 import Comment from '../../../model/types/Comment';
-import './styles/UniProtCard.scss';
 
 const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
 
@@ -46,14 +45,9 @@ const UniProtCard: FC<{
 
   const { annotationScore } = data;
   const annotationScoreNode = (
-    <span
-      className="uniprot-card__annotation-score-doughnut-chart"
-      title="Annotation Score"
-    >
-      <AnnotationScoreDoughnutChart size={DoughnutChartSize.small}>
-        {annotationScore}
-      </AnnotationScoreDoughnutChart>
-    </span>
+    <AnnotationScoreDoughnutChart size={DoughnutChartSize.small}>
+      {annotationScore}
+    </AnnotationScoreDoughnutChart>
   );
 
   let keywordsNode;

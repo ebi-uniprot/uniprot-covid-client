@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { DoughnutChart } from 'franklin-sites';
 
 export const annotationScoreToBin = (annotationScore: number) => {
@@ -31,9 +30,11 @@ const AnnotationScoreDoughnutChart: FC<AnnotationScoreDoughnutChartProps> = ({
 }) => {
   const annotationScoreBin = annotationScoreToBin(annotationScore);
   return (
-    <DoughnutChart percent={annotationScoreBin * 20} size={size}>
-      {`${annotationScoreBin}/5`}
-    </DoughnutChart>
+    <span title="Annotation Score">
+      <DoughnutChart percent={annotationScoreBin * 20} size={size}>
+        {`${annotationScoreBin}/5`}
+      </DoughnutChart>
+    </span>
   );
 };
 
