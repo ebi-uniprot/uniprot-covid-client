@@ -1028,6 +1028,9 @@ exports[`Entry should render 1`] = `
               />
               <protvista-datatable />
             </protvista-manager>
+            <div
+              class="evidence-tag-content false"
+            />
           </div>
         </div>
       </div>
