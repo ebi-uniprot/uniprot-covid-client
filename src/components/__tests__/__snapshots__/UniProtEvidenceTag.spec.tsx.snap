@@ -119,7 +119,7 @@ exports[`UniProtEvidenceTag components should render publications count 1`] = `
         PubMed:12345
       </div>
       <div>
-        PubMed:12345
+        PubMed:12346
       </div>
     </div>
   </div>
