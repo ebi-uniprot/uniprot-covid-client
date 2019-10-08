@@ -16,9 +16,9 @@ export const ProteinOverview: FC<{
   ];
   const proteinName = idx(
     proteinNamesData,
-    _ => _.recommendedName.fullName.value
+    o => o.recommendedName.fullName.value
   );
-  const ECnumbers = idx(proteinNamesData, _ => _.recommendedName.ecNumbers);
+  const ECnumbers = idx(proteinNamesData, o => o.recommendedName.ecNumbers);
 
   const infoListData = [
     {
