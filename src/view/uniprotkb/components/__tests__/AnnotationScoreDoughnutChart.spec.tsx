@@ -6,9 +6,7 @@ import AnnotationScoreDoughnutChart, {
 
 describe('AnnotationScoreDoughnutChart component', () => {
   test('should render', () => {
-    const { asFragment } = render(
-      <AnnotationScoreDoughnutChart>{50}</AnnotationScoreDoughnutChart>
-    );
+    const { asFragment } = render(<AnnotationScoreDoughnutChart score={50} />);
     expect(asFragment()).toMatchSnapshot();
   });
 });

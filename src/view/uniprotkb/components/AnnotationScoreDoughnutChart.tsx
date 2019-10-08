@@ -20,15 +20,15 @@ export enum DoughnutChartSize {
 }
 
 type AnnotationScoreDoughnutChartProps = {
-  children: number;
+  score: number;
   size?: DoughnutChartSize;
 };
 
 const AnnotationScoreDoughnutChart: FC<AnnotationScoreDoughnutChartProps> = ({
-  children: annotationScore,
+  score,
   size = DoughnutChartSize.medium,
 }) => {
-  const annotationScoreBin = annotationScoreToBin(annotationScore);
+  const annotationScoreBin = annotationScoreToBin(score);
   return (
     <span title="Annotation Score">
       <DoughnutChart percent={annotationScoreBin * 20} size={size}>

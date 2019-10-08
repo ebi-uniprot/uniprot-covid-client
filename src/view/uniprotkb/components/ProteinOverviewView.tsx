@@ -44,11 +44,7 @@ export const ProteinOverview: FC<{
     },
     {
       title: 'Annotation score',
-      content: (
-        <AnnotationScoreDoughnutChart>
-          {annotationScore}
-        </AnnotationScoreDoughnutChart>
-      ),
+      content: <AnnotationScoreDoughnutChart score={annotationScore} />,
     },
   ];
 
