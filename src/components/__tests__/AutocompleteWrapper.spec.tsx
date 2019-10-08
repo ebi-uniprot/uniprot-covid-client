@@ -5,7 +5,7 @@ import axios from 'axios';
 import AutocompleteWrapper from '../AutocompleteWrapper';
 import { resetUuidV1 } from '../../../__mocks__/uuid';
 import {
-  suggesterMock,
+  mockSuggesterApi,
   preparedSuggestions,
 } from '../__fixtures__/AutocompleteWrapper';
 
@@ -13,7 +13,7 @@ describe('Autocomplete Wrapper static methods', () => {
   test('should prepare API data for Autocomplete', () => {
     resetUuidV1();
     expect(
-      AutocompleteWrapper.prepareData(suggesterMock.response.suggestions)
+      AutocompleteWrapper.prepareData(mockSuggesterApi.response.suggestions)
     ).toEqual(preparedSuggestions);
   });
 });
@@ -21,12 +21,12 @@ describe('Autocomplete Wrapper static methods', () => {
 const props = {
   title: 'Taxonomy [OC]',
   value: 'Homo sapiens (Human) [9606]',
-  inputValue: suggesterMock.query,
-  url: suggesterMock.baseUrl,
+  inputValue: mockSuggesterApi.query,
+  url: mockSuggesterApi.baseUrl,
   onSelect: jest.fn(),
 };
 const mock = new MockAdapter(axios);
-mock.onGet().reply(200, suggesterMock.response);
+mock.onGet(mockSuggesterApi.request).reply(200, mockSuggesterApi.response);
 
 let rendered;
 describe('Autocomplete Wrapper', () => {
@@ -43,12 +43,14 @@ describe('Autocomplete Wrapper', () => {
   test('should render the correct number of AutocompleteItems when input is human', async () => {
     const { queryByTestId, getAllByTestId } = rendered;
     const searchInput = queryByTestId('search-input');
-    fireEvent.change(searchInput, { target: { value: suggesterMock.query } });
+    fireEvent.change(searchInput, {
+      target: { value: mockSuggesterApi.query },
+    });
     const autocompleteItems = await waitForElement(() =>
       getAllByTestId('autocomplete-item')
     );
     expect(autocompleteItems.length).toEqual(
-      suggesterMock.response.suggestions.length
+      mockSuggesterApi.response.suggestions.length
     );
   });
 

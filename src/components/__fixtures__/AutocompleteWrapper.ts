@@ -3,7 +3,7 @@ import { getSuggesterUrl } from '../../utils/apiUrls';
 const query = 'human';
 const baseUrl = '/uniprot/api/suggester?dict=taxonomy&query=?';
 
-export const suggesterMock = {
+export const mockSuggesterApi = {
   query,
   baseUrl,
   request: getSuggesterUrl(baseUrl, query),
