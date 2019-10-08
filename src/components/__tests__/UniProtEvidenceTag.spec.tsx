@@ -1,6 +1,8 @@
 import React from 'react';
+import UniProtEvidenceTag, {
+  UniProtProtvistaEvidenceTag,
+} from '../UniProtEvidenceTag';
 import { render, cleanup } from '@testing-library/react';
-import UniProtEvidenceTag from '../UniProtEvidenceTag';
 
 describe('UniProtEvidenceTag components', () => {
   test('should render automatic annotation', () => {
@@ -40,6 +42,16 @@ describe('UniProtEvidenceTag components', () => {
     ];
     const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('should render ProtVista evidence tag', () => {
+    const evidences = [
+      {
+        evidenceCode: 'ECO:0000313',
+      },
+    ];
+    const htmlTemplate = UniProtProtvistaEvidenceTag(evidences, () => {});
+    expect(htmlTemplate).toMatchSnapshot();
   });
 
   afterEach(() => cleanup());

@@ -30,6 +30,9 @@
       "js",
       "jsx"
     ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lit-html).+\\.js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
@@ -50,11 +53,12 @@
     "eslint-config-prettier": "^6.0.0",
     "franklin-sites": "0.0.15",
     "idx": "^2.5.2",
+    "lit-html": "^1.1.2",
     "litemol": "^2.4.2",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
-    "protvista-datatable": "^2.1.13",
+    "protvista-datatable": "^2.2.8",
     "protvista-feature-adapter": "^2.1.15",
     "protvista-filter": "^2.1.17",
     "protvista-manager": "^2.1.13",
