@@ -7,7 +7,7 @@ ShallowWrapper {
     clauses={
       Array [
         Object {
-          "id": 1,
+          "id": 0,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -112,7 +112,7 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": "clause_1",
+        "key": "clause_0",
         "nodeType": "host",
         "props": Object {
           "children": Array [
@@ -312,7 +312,7 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": "clause_1",
+          "key": "clause_0",
           "nodeType": "host",
           "props": Object {
             "children": Array [

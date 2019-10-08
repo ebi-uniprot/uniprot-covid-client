@@ -3,7 +3,7 @@
 exports[`Autocomplete Wrapper should render 1`] = `
 <DocumentFragment>
   <label
-    for="1"
+    for="0"
   >
     Taxonomy [OC]
     <div
@@ -44,7 +44,6 @@ exports[`Autocomplete Wrapper should render 1`] = `
       >
         <div
           class="dropdown-menu__panel"
-          data-testid="autocomplete-items"
         />
       </div>
     </div>

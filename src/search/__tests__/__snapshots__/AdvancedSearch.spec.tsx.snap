@@ -7,6 +7,19 @@ ShallowWrapper {
     clauses={
       Array [
         Object {
+          "id": 0,
+          "logicOperator": "AND",
+          "queryInput": Object {},
+          "searchTerm": Object {
+            "dataType": "string",
+            "example": "a4_human, P05067, cdc7 human",
+            "id": "id_all",
+            "itemType": "single",
+            "label": "All",
+            "term": "All",
+          },
+        },
+        Object {
           "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
@@ -34,19 +47,6 @@ ShallowWrapper {
         },
         Object {
           "id": 3,
-          "logicOperator": "AND",
-          "queryInput": Object {},
-          "searchTerm": Object {
-            "dataType": "string",
-            "example": "a4_human, P05067, cdc7 human",
-            "id": "id_all",
-            "itemType": "single",
-            "label": "All",
-            "term": "All",
-          },
-        },
-        Object {
-          "id": 4,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -155,6 +155,19 @@ ShallowWrapper {
           clauses={
             Array [
               Object {
+                "id": 0,
+                "logicOperator": "AND",
+                "queryInput": Object {},
+                "searchTerm": Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                },
+              },
+              Object {
                 "id": 1,
                 "logicOperator": "AND",
                 "queryInput": Object {},
@@ -182,19 +195,6 @@ ShallowWrapper {
               },
               Object {
                 "id": 3,
-                "logicOperator": "AND",
-                "queryInput": Object {},
-                "searchTerm": Object {
-                  "dataType": "string",
-                  "example": "a4_human, P05067, cdc7 human",
-                  "id": "id_all",
-                  "itemType": "single",
-                  "label": "All",
-                  "term": "All",
-                },
-              },
-              Object {
-                "id": 4,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -367,6 +367,19 @@ ShallowWrapper {
         "props": Object {
           "clauses": Array [
             Object {
+              "id": 0,
+              "logicOperator": "AND",
+              "queryInput": Object {},
+              "searchTerm": Object {
+                "dataType": "string",
+                "example": "a4_human, P05067, cdc7 human",
+                "id": "id_all",
+                "itemType": "single",
+                "label": "All",
+                "term": "All",
+              },
+            },
+            Object {
               "id": 1,
               "logicOperator": "AND",
               "queryInput": Object {},
@@ -394,19 +407,6 @@ ShallowWrapper {
             },
             Object {
               "id": 3,
-              "logicOperator": "AND",
-              "queryInput": Object {},
-              "searchTerm": Object {
-                "dataType": "string",
-                "example": "a4_human, P05067, cdc7 human",
-                "id": "id_all",
-                "itemType": "single",
-                "label": "All",
-                "term": "All",
-              },
-            },
-            Object {
-              "id": 4,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -549,6 +549,19 @@ ShallowWrapper {
             clauses={
               Array [
                 Object {
+                  "id": 0,
+                  "logicOperator": "AND",
+                  "queryInput": Object {},
+                  "searchTerm": Object {
+                    "dataType": "string",
+                    "example": "a4_human, P05067, cdc7 human",
+                    "id": "id_all",
+                    "itemType": "single",
+                    "label": "All",
+                    "term": "All",
+                  },
+                },
+                Object {
                   "id": 1,
                   "logicOperator": "AND",
                   "queryInput": Object {},
@@ -576,19 +589,6 @@ ShallowWrapper {
                 },
                 Object {
                   "id": 3,
-                  "logicOperator": "AND",
-                  "queryInput": Object {},
-                  "searchTerm": Object {
-                    "dataType": "string",
-                    "example": "a4_human, P05067, cdc7 human",
-                    "id": "id_all",
-                    "itemType": "single",
-                    "label": "All",
-                    "term": "All",
-                  },
-                },
-                Object {
-                  "id": 4,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -761,6 +761,19 @@ ShallowWrapper {
           "props": Object {
             "clauses": Array [
               Object {
+                "id": 0,
+                "logicOperator": "AND",
+                "queryInput": Object {},
+                "searchTerm": Object {
+                  "dataType": "string",
+                  "example": "a4_human, P05067, cdc7 human",
+                  "id": "id_all",
+                  "itemType": "single",
+                  "label": "All",
+                  "term": "All",
+                },
+              },
+              Object {
                 "id": 1,
                 "logicOperator": "AND",
                 "queryInput": Object {},
@@ -788,19 +801,6 @@ ShallowWrapper {
               },
               Object {
                 "id": 3,
-                "logicOperator": "AND",
-                "queryInput": Object {},
-                "searchTerm": Object {
-                  "dataType": "string",
-                  "example": "a4_human, P05067, cdc7 human",
-                  "id": "id_all",
-                  "itemType": "single",
-                  "label": "All",
-                  "term": "All",
-                },
-              },
-              Object {
-                "id": 4,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {

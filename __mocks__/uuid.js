@@ -1,4 +1,4 @@
-let value = 0;
+let value = -1;
 module.exports = {
   v1: jest.fn(() => {
     value += 1;
@@ -9,6 +9,6 @@ module.exports = {
   // to be changed and the stored snapshot key value will
   // not be effected
   resetUuidV1: () => {
-    value = 0;
+    value = -1;
   },
 };
