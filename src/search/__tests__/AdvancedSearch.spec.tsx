@@ -3,6 +3,7 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createEmptyClause } from '../utils/clause';
 import AdvancedSearch from '../AdvancedSearch';
+import { resetUuidV1 } from '../../../__mocks__/uuid';
 
 configure({ adapter: new Adapter() });
 
@@ -11,6 +12,7 @@ let props;
 
 describe('AdvancedSearch shallow components', () => {
   beforeEach(() => {
+    resetUuidV1();
     props = {
       dispatchAddClause: jest.fn(),
       handleAdvancedSubmitClick: jest.fn(),

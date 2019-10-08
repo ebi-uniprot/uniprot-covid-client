@@ -7,7 +7,7 @@ ShallowWrapper {
     clauses={
       Array [
         Object {
-          "id": 0,
+          "id": 1,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -20,7 +20,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 2,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -33,7 +33,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 3,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -46,7 +46,7 @@ ShallowWrapper {
           },
         },
         Object {
-          "id": 0,
+          "id": 4,
           "logicOperator": "AND",
           "queryInput": Object {},
           "searchTerm": Object {
@@ -155,7 +155,7 @@ ShallowWrapper {
           clauses={
             Array [
               Object {
-                "id": 0,
+                "id": 1,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -168,7 +168,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 2,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -181,7 +181,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 3,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -194,7 +194,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 4,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -367,7 +367,7 @@ ShallowWrapper {
         "props": Object {
           "clauses": Array [
             Object {
-              "id": 0,
+              "id": 1,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -380,7 +380,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 0,
+              "id": 2,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -393,7 +393,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 0,
+              "id": 3,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -406,7 +406,7 @@ ShallowWrapper {
               },
             },
             Object {
-              "id": 0,
+              "id": 4,
               "logicOperator": "AND",
               "queryInput": Object {},
               "searchTerm": Object {
@@ -549,7 +549,7 @@ ShallowWrapper {
             clauses={
               Array [
                 Object {
-                  "id": 0,
+                  "id": 1,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -562,7 +562,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 0,
+                  "id": 2,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -575,7 +575,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 0,
+                  "id": 3,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -588,7 +588,7 @@ ShallowWrapper {
                   },
                 },
                 Object {
-                  "id": 0,
+                  "id": 4,
                   "logicOperator": "AND",
                   "queryInput": Object {},
                   "searchTerm": Object {
@@ -761,7 +761,7 @@ ShallowWrapper {
           "props": Object {
             "clauses": Array [
               Object {
-                "id": 0,
+                "id": 1,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -774,7 +774,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 2,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -787,7 +787,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 3,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
@@ -800,7 +800,7 @@ ShallowWrapper {
                 },
               },
               Object {
-                "id": 0,
+                "id": 4,
                 "logicOperator": "AND",
                 "queryInput": Object {},
                 "searchTerm": Object {
