@@ -11,7 +11,11 @@ import './styles/App.scss';
 
 declare const BASE_URL: string;
 
-Sentry.init({dsn: "https://be99e24b352b42019d5b9f53dd7b68c3@sentry.io/1770286"});
+if (process.env.NODE_ENV !== 'development') {
+  Sentry.init({
+    dsn: 'https://be99e24b352b42019d5b9f53dd7b68c3@sentry.io/1770286',
+  });
+}
 
 const App = () => (
   <FranklinSite>
