@@ -1,6 +1,6 @@
 import React from 'react';
-import UniProtEvidenceTag from '../UniProtEvidenceTag';
 import { render, cleanup } from '@testing-library/react';
+import UniProtEvidenceTag from '../UniProtEvidenceTag';
 
 describe('UniProtEvidenceTag components', () => {
   test('should render automatic annotation', () => {
@@ -25,7 +25,7 @@ describe('UniProtEvidenceTag components', () => {
       {
         evidenceCode: 'ECO:0000269',
         source: 'PubMed',
-        id: '12345',
+        id: '12346',
       },
     ];
     const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
