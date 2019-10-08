@@ -1,6 +1,8 @@
 import React, { FC, Fragment } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { EvidenceTag, SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { html } from 'lit-html';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import {
   getEvidenceCodeData,
   EvidenceData,
@@ -61,6 +63,7 @@ export const UniProtProtvistaEvidenceTag = (
   evidences: Evidence[],
   callback: Function
 ) => {
+  const size = 12;
   const evidenceMap: Map<string, Evidence[]> = groupBy(
     evidences,
     (evidence: Evidence) => evidence.evidenceCode
@@ -73,9 +76,20 @@ export const UniProtProtvistaEvidenceTag = (
     const references = evidenceMap.get(evidenceCode);
     return html`
       <span
-        class="evidence-tag"
+        class=${`evidence-tag ${
+          evidenceData.manual ? 'svg-colour-reviewed' : 'svg-colour-unreviewed'
+        }`}
         @click=${() => callback(evidenceData, references)}
       >
+        ${unsafeHTML(
+          ReactDOMServer.renderToStaticMarkup(
+            evidenceData.manual ? (
+              <SwissProtIcon width={size} height={size} />
+            ) : (
+              <TremblIcon width={size} height={size} />
+            )
+          )
+        )}
         ${evidenceData.labelRender
           ? evidenceData.labelRender(references)
           : evidenceData.label}</span

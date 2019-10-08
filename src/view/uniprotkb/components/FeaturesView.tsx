@@ -121,7 +121,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
         html`
           ${d.description}
           ${d.evidences &&
-            UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)};
+            UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)}
         `,
     },
   };
@@ -145,7 +145,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
         node.columns = columns;
       }
     },
-    [processedData]
+    [processedData, columns]
   );
 
   if (processedData.length <= 0) {
