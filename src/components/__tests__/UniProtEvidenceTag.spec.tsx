@@ -3,7 +3,6 @@ import UniProtEvidenceTag, {
   UniProtProtvistaEvidenceTag,
 } from '../UniProtEvidenceTag';
 import { render, cleanup } from '@testing-library/react';
-import UniProtEvidenceTag from '../UniProtEvidenceTag';
 
 describe('UniProtEvidenceTag components', () => {
   test('should render automatic annotation', () => {
