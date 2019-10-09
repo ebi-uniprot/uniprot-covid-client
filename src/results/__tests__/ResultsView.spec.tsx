@@ -4,7 +4,7 @@ import ResultsView from '../ResultsView';
 import { ViewMode } from '../state/resultsInitialState';
 import { render } from '@testing-library/react';
 
-import data from '../../../__mockData__/results.json';
+import data from '../../__mockData__/results.json';
 
 describe('ResultsView component', () => {
   test('should render table', () => {
