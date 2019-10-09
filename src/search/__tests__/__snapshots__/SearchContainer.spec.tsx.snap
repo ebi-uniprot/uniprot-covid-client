@@ -4,6 +4,7 @@ exports[`Search shallow components should render 1`] = `
 <DocumentFragment>
   <form
     class="main-search"
+    data-testid="main-search-form"
   >
     <div
       class="dropdown-container"
@@ -65,6 +66,7 @@ exports[`Search shallow components should render 1`] = `
     </div>
     <input
       class="main-search__input"
+      data-testid="main-search-input"
       type="text"
       value=""
     />
