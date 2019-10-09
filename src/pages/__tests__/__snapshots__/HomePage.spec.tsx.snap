@@ -24,7 +24,6 @@ exports[`HomePage component should render 1`] = `
         >
           <form
             class="main-search"
-            data-testid="main-search-form"
           >
             <div
               class="dropdown-container"
@@ -86,7 +85,6 @@ exports[`HomePage component should render 1`] = `
             </div>
             <input
               class="main-search__input"
-              data-testid="main-search-input"
               type="text"
               value=""
             />
