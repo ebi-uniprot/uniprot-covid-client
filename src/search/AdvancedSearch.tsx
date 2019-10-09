@@ -59,13 +59,19 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
           </label>
         </div>
         <ClauseList {...this.props} />
-        <button type="button" id="add-field" onClick={dispatchAddClause}>
+        <button
+          type="button"
+          id="add-field"
+          data-testid="advanced-search-add-field"
+          onClick={dispatchAddClause}
+        >
           Add Field
         </button>
         <div>
           <button
             type="button"
             id="submit-query"
+            data-testid="advanced-search-submit"
             className="button"
             onClick={handleAdvancedSubmitClick}
           >
