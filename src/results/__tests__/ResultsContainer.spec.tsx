@@ -6,13 +6,17 @@ import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
 import results from '../../../__mockData__/results.json';
+import entry from '../../../__mockData__/swissprot_entry.json';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 var mock = new MockAdapter(axios);
 
-mock.onGet().reply(200, results, { 'x-total-records': 25 });
+mock
+  .onGet(/\/uniprotkb\/search/)
+  .reply(200, results, { 'x-total-records': 25 });
+mock.onGet(/\/uniprotkb\//).reply(200, entry);
 
 describe('Results component', () => {
   afterEach(cleanup);
