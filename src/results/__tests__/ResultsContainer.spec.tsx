@@ -1,21 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import 'core-js/stable';
-import { Router } from 'react-router-dom';
-import {
-  render,
-  cleanup,
-  waitForElement,
-  fireEvent,
-} from '@testing-library/react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createMemoryHistory } from 'history';
+import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
-import rootReducer from '../../state/rootReducer';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
+import renderWithRedux from '../../__tests__/renderWithRedux.spec';
 
 jest.mock('axios');
 
@@ -65,33 +55,15 @@ axios.get.mockResolvedValue({
 describe('Results component', () => {
   afterEach(cleanup);
 
-  const renderWithRedux = (
-    ui,
-    {
-      route = '/uniprotkb?query=blah',
-      history = createMemoryHistory({ initialEntries: [route] }),
-      initialState,
-      store = createStore(rootReducer, initialState, applyMiddleware(thunk)),
-    } = {}
-  ) => {
-    return {
-      ...render(
-        <Provider store={store}>
-          <Router history={history}>{ui}</Router>
-        </Provider>
-      ),
-      store,
-      history,
-    };
-  };
-
   test('should call to get results', () => {
-    renderWithRedux(<ResultsContainer />);
+    renderWithRedux(<ResultsContainer />, { route: '/uniprotkb?query=blah' });
     expect(axios.get).toHaveBeenCalled();
   });
 
   test('should select a facet', async () => {
-    const { getByText, history } = renderWithRedux(<ResultsContainer />);
+    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
+      route: '/uniprotkb?query=blah',
+    });
     const unreviewedButton = await waitForElement(() =>
       getByText('Unreviewed (TrEMBL) (68,526)')
     );
@@ -102,7 +74,9 @@ describe('Results component', () => {
   });
 
   test('should deselect a facet', async () => {
-    const { getByText, history } = renderWithRedux(<ResultsContainer />);
+    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
+      route: '/uniprotkb?query=blah',
+    });
     let unreviewedButton = await waitForElement(() =>
       getByText('Unreviewed (TrEMBL) (68,526)')
     );
@@ -116,7 +90,8 @@ describe('Results component', () => {
 
   test('should toggle card view to table', async () => {
     const { container, getByTestId, getByText } = renderWithRedux(
-      <ResultsContainer />
+      <ResultsContainer />,
+      { route: '/uniprotkb?query=blah' }
     );
     const toggle = await waitForElement(() => getByTestId('table-card-toggle'));
     expect(container.querySelector('div')).toBeNull;
@@ -132,7 +107,7 @@ describe('Results component', () => {
     };
     const { container, debug, getByText } = renderWithRedux(
       <ResultsContainer />,
-      { initialState: state }
+      { initialState: state, route: '/uniprotkb?query=blah' }
     );
     const checkbox = await waitForElement(() =>
       container.querySelector('input[type=checkbox]')
@@ -151,6 +126,7 @@ describe('Results component', () => {
     };
     const { getByText, history } = renderWithRedux(<ResultsContainer />, {
       initialState: state,
+      route: '/uniprotkb?query=blah',
     });
     let columnHeader = await waitForElement(() => getByText('Entry'));
     fireEvent.click(columnHeader);
