@@ -1,11 +1,9 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render, fireEvent } from '@testing-library/react';
 import EnumField from '../EnumField';
 
-configure({ adapter: new Adapter() });
 let props;
-let wrapper;
+let rendered;
 
 describe('Enum field', () => {
   beforeEach(() => {
@@ -31,15 +29,18 @@ describe('Enum field', () => {
       handleChange: jest.fn(),
       queryInput: { stringValue: '1' },
     };
-    wrapper = shallow(<EnumField {...props} />);
+    rendered = render(<EnumField {...props} />);
   });
 
   test('should render an enum field', () => {
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = rendered;
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test('should render handle change', () => {
-    wrapper.find(`#select_${props.field.term}`).simulate('change', { target: { value: 'val1' } });
+    const { queryAllByTestId } = rendered;
+    const nodes = queryAllByTestId('enum-field-select');
+    fireEvent.change(nodes[0], { target: { value: 'val1' } });
     expect(props.handleChange).toBeCalled();
   });
 });
