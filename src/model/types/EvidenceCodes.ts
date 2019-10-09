@@ -47,7 +47,7 @@ enum labels {
   SEQ_ANA = 'Sequence analysis',
 }
 
-type EvidenceData = {
+export type EvidenceData = {
   manual: boolean;
   label: string;
   description: string;

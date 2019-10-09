@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`UniProtEvidenceTag components should render ProtVista evidence tag 1`] = `
+Array [
+  TemplateResult {
+    "processor": DefaultTemplateProcessor {},
+    "strings": Array [
+      "
+      <span
+        class=",
+      "
+        @click=",
+      "
+      >
+        ",
+      "
+        ",
+      "</span
+      >
+    ",
+    ],
+    "type": "html",
+    "values": Array [
+      "evidence-tag svg-colour-unreviewed",
+      [Function],
+      [Function],
+      "Imported",
+    ],
+  },
+]
+`;
+
 exports[`UniProtEvidenceTag components should render automatic  1`] = `
 <DocumentFragment>
   <span
@@ -119,7 +149,7 @@ exports[`UniProtEvidenceTag components should render publications count 1`] = `
         PubMed:12345
       </div>
       <div>
-        PubMed:12345
+        PubMed:12346
       </div>
     </div>
   </div>

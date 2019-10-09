@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { InfoList, Bubble } from 'franklin-sites';
+import { InfoList } from 'franklin-sites';
 import idx from 'idx';
 import OrganismView from './OrganismView';
 import GeneNamesView from './GeneNamesView';
 import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import EntrySection from '../../../model/types/EntrySection';
+import AnnotationScoreDoughnutChart from './AnnotationScoreDoughnutChart';
 
 export const ProteinOverview: FC<{
   transformedData: UniProtkbUIModel;
@@ -15,9 +16,10 @@ export const ProteinOverview: FC<{
   ];
   const proteinName = idx(
     proteinNamesData,
-    _ => _.recommendedName.fullName.value
+    o => o.recommendedName.fullName.value
   );
-  const ECnumbers = idx(proteinNamesData, _ => _.recommendedName.ecNumbers);
+  const ECnumbers = idx(proteinNamesData, o => o.recommendedName.ecNumbers);
+
   const infoListData = [
     {
       title: 'Name',
@@ -42,7 +44,7 @@ export const ProteinOverview: FC<{
     },
     {
       title: 'Annotation score',
-      content: <Bubble value={annotationScore} />,
+      content: <AnnotationScoreDoughnutChart score={annotationScore} />,
     },
   ];
 

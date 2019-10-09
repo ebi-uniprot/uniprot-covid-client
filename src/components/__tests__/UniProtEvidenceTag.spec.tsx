@@ -1,5 +1,7 @@
 import React from 'react';
-import UniProtEvidenceTag from '../UniProtEvidenceTag';
+import UniProtEvidenceTag, {
+  UniProtProtvistaEvidenceTag,
+} from '../UniProtEvidenceTag';
 import { render, cleanup } from '@testing-library/react';
 
 describe('UniProtEvidenceTag components', () => {
@@ -25,7 +27,7 @@ describe('UniProtEvidenceTag components', () => {
       {
         evidenceCode: 'ECO:0000269',
         source: 'PubMed',
-        id: '12345',
+        id: '12346',
       },
     ];
     const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
@@ -40,6 +42,16 @@ describe('UniProtEvidenceTag components', () => {
     ];
     const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('should render ProtVista evidence tag', () => {
+    const evidences = [
+      {
+        evidenceCode: 'ECO:0000313',
+      },
+    ];
+    const htmlTemplate = UniProtProtvistaEvidenceTag(evidences, () => {});
+    expect(htmlTemplate).toMatchSnapshot();
   });
 
   afterEach(() => cleanup());
