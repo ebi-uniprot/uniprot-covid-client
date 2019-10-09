@@ -1,34 +1,36 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import ColumnConfiguration from '../ColumnConfiguration';
 import data from '../__mocks__/modelData.json';
 
-configure({ adapter: new Adapter() });
-
 describe('ColumnConfiguration component', () => {
   test('should render accession', () => {
-    const wrapper = shallow(ColumnConfiguration.accession.render(data));
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(
+      <MemoryRouter>{ColumnConfiguration.accession.render(data)}</MemoryRouter>
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test('should render id', () => {
-    const wrapper = shallow(ColumnConfiguration.id.render(data));
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(ColumnConfiguration.id.render(data));
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test('should render protein_name', () => {
-    const wrapper = shallow(ColumnConfiguration.protein_name.render(data));
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(
+      ColumnConfiguration.protein_name.render(data)
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test('should render gene_names', () => {
-    const wrapper = shallow(ColumnConfiguration.gene_names.render(data));
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(ColumnConfiguration.gene_names.render(data));
+    expect(asFragment()).toMatchSnapshot();
   });
 
   test('should render organism', () => {
-    const wrapper = shallow(ColumnConfiguration.organism.render(data));
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = render(ColumnConfiguration.organism.render(data));
+    expect(asFragment()).toMatchSnapshot();
   });
 });
