@@ -105,7 +105,7 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
     },
     {
       title: 'Synonyms',
-      content: (idx(isoformData, _ => _.synonyms) || [])
+      content: (idx(isoformData, o => o.synonyms) || [])
         .map(syn => syn.value)
         .join(', '),
     },
@@ -190,7 +190,7 @@ isoforms
   }
 
   let notesNode;
-  const texts = idx(data.alternativeProducts, _ => _.note.texts);
+  const texts = idx(data.alternativeProducts, o => o.note.texts);
   if (texts) {
     notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
   }
