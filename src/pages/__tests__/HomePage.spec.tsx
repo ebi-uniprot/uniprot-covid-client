@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from '../HomePage';
-import renderWithRedux from '../../__tests__/renderWithRedux.spec';
+import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 describe('HomePage component', () => {
   test('should render', () => {

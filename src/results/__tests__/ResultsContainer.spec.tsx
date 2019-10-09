@@ -1,103 +1,64 @@
 import React from 'react';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import 'core-js/stable';
 import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
+import { act } from 'react-dom/test-utils';
+import results from '../../../__mockData__/results.json';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
-import renderWithRedux from '../../__tests__/renderWithRedux.spec';
+import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
-jest.mock('axios');
+var mock = new MockAdapter(axios);
 
-axios.get.mockResolvedValue({
-  headers: {
-    'x-totalrecords': 1,
-  },
-  data: {
-    facets: [
-      {
-        label: 'Status',
-        name: 'reviewed',
-        allowMultipleSelection: false,
-        values: [
-          {
-            label: 'Unreviewed (TrEMBL)',
-            value: 'false',
-            count: 68526,
-          },
-          {
-            label: 'Reviewed (Swiss-Prot)',
-            value: 'true',
-            count: 4631,
-          },
-        ],
-      },
-    ],
-    results: [
-      {
-        entryType: 'Swiss-Prot',
-        primaryAccession: 'O00311',
-        uniProtId: 'CDC7_HUMAN',
-        annotationScore: 12.45,
-        proteinDescription: {
-          recommendedName: {
-            fullName: {
-              value: 'Full protein name',
-            },
-          },
-        },
-        sequence: ['A', 'B', 'C'],
-      },
-    ],
-  },
-});
+mock.onGet().reply(200, results, { 'x-total-records': 25 });
 
 describe('Results component', () => {
   afterEach(cleanup);
 
-  test('should call to get results', () => {
-    renderWithRedux(<ResultsContainer />, { route: '/uniprotkb?query=blah' });
-    expect(axios.get).toHaveBeenCalled();
+  test('should call to get results', async () => {
+    const getSpy = jest.spyOn(axios, 'get');
+    await act(async () =>
+      renderWithRedux(<ResultsContainer />, { route: '/uniprotkb?query=blah' })
+    );
+    expect(getSpy).toHaveBeenCalled();
   });
 
-  test('should select a facet', async () => {
-    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
-      route: '/uniprotkb?query=blah',
+  test('should select/deselect a facet', async () => {
+    await act(async () => {
+      const { getByText, history } = renderWithRedux(<ResultsContainer />, {
+        route: '/uniprotkb?query=blah',
+      });
+      let unreviewedButton = await waitForElement(() =>
+        getByText('Unreviewed (TrEMBL) (455)')
+      );
+      fireEvent.click(unreviewedButton);
+      expect(history.location.search).toEqual(
+        '?query=blah&facets=reviewed:false'
+      );
+      unreviewedButton = await waitForElement(() =>
+        getByText('Unreviewed (TrEMBL) (455)')
+      );
+      fireEvent.click(unreviewedButton);
+      expect(history.location.search).toEqual('?query=blah');
     });
-    const unreviewedButton = await waitForElement(() =>
-      getByText('Unreviewed (TrEMBL) (68,526)')
-    );
-    fireEvent.click(unreviewedButton);
-    expect(history.location.search).toEqual(
-      '?query=blah&facets=reviewed:false'
-    );
-  });
-
-  test('should deselect a facet', async () => {
-    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
-      route: '/uniprotkb?query=blah',
-    });
-    let unreviewedButton = await waitForElement(() =>
-      getByText('Unreviewed (TrEMBL) (68,526)')
-    );
-    fireEvent.click(unreviewedButton);
-    unreviewedButton = await waitForElement(() =>
-      getByText('Unreviewed (TrEMBL) (68,526)')
-    );
-    fireEvent.click(unreviewedButton);
-    expect(history.location.search).toEqual('?query=blah');
   });
 
   test('should toggle card view to table', async () => {
-    const { container, getByTestId, getByText } = renderWithRedux(
-      <ResultsContainer />,
-      { route: '/uniprotkb?query=blah' }
-    );
-    const toggle = await waitForElement(() => getByTestId('table-card-toggle'));
-    expect(container.querySelector('div')).toBeNull;
-    fireEvent.click(toggle);
-    const table = await waitForElement(() => getByText('Entry'));
-    expect(table).toBeTruthy;
+    await act(async () => {
+      const { container, getByTestId, getByText } = renderWithRedux(
+        <ResultsContainer />,
+        { route: '/uniprotkb?query=blah' }
+      );
+      const toggle = await waitForElement(() =>
+        getByTestId('table-card-toggle')
+      );
+      expect(container.querySelector('div')).toBeNull;
+      fireEvent.click(toggle);
+      const table = await waitForElement(() => getByText('Entry'));
+      expect(table).toBeTruthy;
+    });
   });
 
   test('should handle selection', async () => {
