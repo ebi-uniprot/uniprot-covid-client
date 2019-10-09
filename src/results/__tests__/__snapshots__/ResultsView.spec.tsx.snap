@@ -27,9 +27,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -66,9 +64,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: CDC7, CDC7L1 · 574 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -121,9 +143,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -160,9 +180,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: Cdc7, Cdc7l1 · 564 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -215,9 +259,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -254,9 +296,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: CDC7, OAF2, D2855 · 507 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -321,9 +387,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -360,9 +424,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: cdc7, SPBC21.06c · 1062 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -415,9 +503,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -454,9 +540,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: cdc7, DDB_G0292152 · 1061 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    59.1
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(36deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        3/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p />
@@ -495,9 +605,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -534,9 +642,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: hsk1, SPBC776.12c · 507 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -589,9 +721,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -628,9 +758,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: PPHLN1, HSPC206, HSPC232 · 458 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -677,9 +831,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -715,9 +867,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: Cdc7, anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742 · 699 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    83
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p />
@@ -750,9 +926,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -788,9 +962,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: Cdc7, anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742 · 700 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    91.9
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p />
@@ -823,9 +1021,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -862,9 +1058,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: DBF4B, ASKL1, DRF1 · 615 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -893,9 +1113,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -932,9 +1150,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: DBF4, DNA52, D4205, YD9609.07C · 704 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -999,9 +1241,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1038,9 +1278,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: DBF4, ASK, DBF4A, ZDBF1 · 674 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1075,9 +1339,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1114,9 +1376,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: MCM2, BM28, CCNL1, CDCL1, KIAA0030 · 904 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1187,9 +1473,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1226,9 +1510,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: CINP · 212 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1281,9 +1589,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1320,9 +1626,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: Dbf4, Dbf4a · 663 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    85.6
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1357,9 +1687,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1396,9 +1724,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: CDC7-2 · 351 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    47.8
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(36deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        3/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1463,9 +1815,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1502,9 +1852,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: Mcm2, Bm28, Cdcl1, Kiaa0030, Mcmd2 · 904 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1557,9 +1931,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1596,9 +1968,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: CDC7-1 · 351 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    47.9
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(36deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        3/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1663,9 +2059,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1702,9 +2096,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: mcm2 · 886 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1757,9 +2175,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1796,9 +2212,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: spg1, sid3, SPAC1565.06c · 198 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    83.1
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1839,9 +2279,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1878,9 +2316,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: mcm4-a · 858 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -1933,9 +2395,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -1972,9 +2432,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: spo4, SPBC21C3.18 · 429 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -2039,9 +2523,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -2078,9 +2560,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: cdc11, SPCC1739.11c · 1045 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -2103,9 +2609,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -2142,9 +2646,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: mcm4-b · 863 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
@@ -2197,9 +2725,7 @@ exports[`ResultsView component should render cards 1`] = `
                   type="checkbox"
                 />
               </div>
-              <div
-                class="uniprot-card"
-              >
+              <div>
                 <h4>
                   <div
                     class="uniprot-title"
@@ -2236,9 +2762,33 @@ exports[`ResultsView component should render cards 1`] = `
                   </a>
                    · Gene: MCM4, CDC21 · 863 amino-acids · 
                   <span
-                    class="bubble--small colour-uniprot-blue"
+                    title="Annotation Score"
                   >
-                    99+
+                    <span
+                      class="doughnut-chart--small colour-light-grey"
+                    >
+                      <span
+                        class="doughnut-chart--small__left-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__left-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__right-wrap"
+                      >
+                        <span
+                          class="doughnut-chart--small__right-wrap__loader colour-uniprot-blue"
+                          style="transform: rotate(180deg);"
+                        />
+                      </span>
+                      <span
+                        class="doughnut-chart--small__inner-circle"
+                      >
+                        5/5
+                      </span>
+                    </span>
                   </span>
                 </p>
                 <p>
