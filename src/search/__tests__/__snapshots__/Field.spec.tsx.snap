@@ -31,11 +31,11 @@ exports[`Clause component should render an \`integer\` \`range\` field 1`] = `
 "<Fragment>
   <label htmlFor=\\"from_input_undefined\\">
     From
-    <input id=\\"from_input_undefined\\" type=\\"number\\" onChange={[Function: onChange]} placeholder=\\"0\\" value=\\"\\" />
+    <input id=\\"from_input_undefined\\" data-testid=\\"range-field-from-input\\" type=\\"number\\" onChange={[Function: onChange]} placeholder=\\"0\\" value=\\"\\" />
   </label>
   <label htmlFor=\\"to_input_undefined\\">
     To
-    <input id=\\"to_input_undefined\\" type=\\"number\\" onChange={[Function: onChange]} placeholder=\\"100\\" value=\\"\\" />
+    <input id=\\"to_input_undefined\\" data-testid=\\"range-field-to-input\\" type=\\"number\\" onChange={[Function: onChange]} placeholder=\\"100\\" value=\\"\\" />
   </label>
 </Fragment>"
 `;
