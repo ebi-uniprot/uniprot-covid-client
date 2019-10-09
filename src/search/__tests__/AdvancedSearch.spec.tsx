@@ -1,13 +1,10 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render, fireEvent } from '@testing-library/react';
 import { createEmptyClause } from '../utils/clause';
 import AdvancedSearch from '../AdvancedSearch';
 import { resetUuidV1 } from '../../../__mocks__/uuid';
 
-configure({ adapter: new Adapter() });
-
-let wrapper;
+let rendered;
 let props;
 
 describe('AdvancedSearch shallow components', () => {
@@ -24,9 +21,7 @@ describe('AdvancedSearch shallow components', () => {
       },
       clauses: [...Array(4)].map(() => createEmptyClause()),
       namespace: 'UniProtKB',
-      searchTerms: {
-        data: [],
-      },
+      searchTerms: [],
       evidences: {
         go: {
           data: [],
@@ -38,18 +33,19 @@ describe('AdvancedSearch shallow components', () => {
         },
       },
     };
-    wrapper = shallow(<AdvancedSearch {...props} />);
+    rendered = render(<AdvancedSearch {...props} />);
   });
 
   test('should render', () => {
-    expect(wrapper).toMatchSnapshot();
+    const { asFragment } = rendered;
+    expect(asFragment()).toMatchSnapshot();
   });
 
-  test('should call to get search terms', () => {
+  test('should call to fetch search terms', () => {
     expect(props.dispatchFetchSearchTermsIfNeeded).toHaveBeenCalled();
   });
 
-  test('should call to get evidences', () => {
+  test('should call to fetch evidences', () => {
     expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith('go');
     expect(props.dispatchfetchEvidencesIfNeeded).toHaveBeenCalledWith(
       'annotation'
@@ -57,12 +53,14 @@ describe('AdvancedSearch shallow components', () => {
   });
 
   test('should add field rows', () => {
-    wrapper.find('#add-field').simulate('click');
+    const { getByTestId } = rendered;
+    fireEvent.click(getByTestId('advanced-search-add-field'));
     expect(props.dispatchAddClause).toHaveBeenCalled();
   });
 
   test('should submit a query', () => {
-    wrapper.find('#submit-query').simulate('click');
+    const { getByTestId } = rendered;
+    fireEvent.click(getByTestId('advanced-search-submit'));
     expect(props.handleAdvancedSubmitClick).toHaveBeenCalled();
   });
 });
