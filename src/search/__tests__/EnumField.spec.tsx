@@ -32,6 +32,7 @@ describe('Enum field', () => {
     expect(select.value).toBe('1');
     fireEvent.change(select, { target: { value: '2' } });
     expect(select.value).toBe('2');
+    expect(props.handleChange).toBeCalled();
     expect(asFragment()).toMatchSnapshot();
   });
 });

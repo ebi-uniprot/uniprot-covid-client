@@ -18,8 +18,8 @@ const EnumField: React.FC<EnumFieldProps> = ({
       <select
         onChange={e => handleChange(e.target.value)}
         id={`select_${field.term}`}
-        value={value}
         data-testid="enum-field-select"
+        value={value}
       >
         {field.values &&
           field.values.map(item => (

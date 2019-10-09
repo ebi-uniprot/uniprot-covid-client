@@ -11,19 +11,25 @@ describe('Range field', () => {
       description: 'Search by UniProtKB Accession',
       example: 'P12345',
     },
-    type: 'string',
+    type: 'text',
     queryInput: {},
     handleChange: jest.fn(),
   };
 
   test('should render a text field', () => {
-    const { asFragment, getByPlaceholderText } = render(
-      <TextField {...props} />
-    );
+    const updatedValue = 'Some term';
+    const { getByPlaceholderText, rerender } = render(<TextField {...props} />);
     const inputElt = getByPlaceholderText('P12345');
     expect(inputElt.value).toBe('');
-    fireEvent.change(inputElt, { target: { value: 'Some term' } });
-    expect(inputElt.value).toBe('Some term');
+    fireEvent.change(inputElt, { target: { value: updatedValue } });
+    expect(props.handleChange).toBeCalled();
+    props.value = updatedValue;
+    rerender(<TextField {...props} />);
+    expect(inputElt.value).toBe(updatedValue);
+  });
+
+  test('should render', () => {
+    const { asFragment } = render(<TextField {...props} />);
     expect(asFragment()).toMatchSnapshot();
   });
 });

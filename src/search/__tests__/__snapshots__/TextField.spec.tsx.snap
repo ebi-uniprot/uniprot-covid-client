@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Range field should render 1`] = `
+<DocumentFragment>
+  <div
+    class="advanced-search__inputs"
+  >
+    <label
+      for="input_accession"
+    >
+      UniProtKB AC
+      <input
+        id="input_accession"
+        placeholder="P12345"
+        type="text"
+        value="Some term"
+      />
+    </label>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Range field should render a text field 1`] = `
 <DocumentFragment>
   <div
@@ -12,7 +32,7 @@ exports[`Range field should render a text field 1`] = `
       <input
         id="input_accession"
         placeholder="P12345"
-        type="string"
+        type="text"
         value=""
       />
     </label>
