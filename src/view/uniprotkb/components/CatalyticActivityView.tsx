@@ -55,6 +55,11 @@ export type CatalyticActivityData = {
     ecNumber: string;
     evidences?: Evidence[];
   };
+  physiologicalReactions?: {
+    direction: string;
+    dbReference: { type: string; id: string }[];
+    evidences?: Evidence[];
+  };
 }[];
 
 type CatalyticActivityProps = {
