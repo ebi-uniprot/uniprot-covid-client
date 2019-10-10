@@ -19,6 +19,17 @@ export const isRheaReactionReference = ({
   id: string;
 }) => databaseType === 'Rhea' && !!getRheaId(id);
 
+enum PhysiologicalReactionDirection {
+  LeftToRight = 'left-to-right',
+  RightToLeft = 'right-to-left',
+}
+
+type PhysiologicalReaction = {
+  directionType: PhysiologicalReactionDirection;
+  reactionReference: { databaseType: string; id: string };
+  evidences: Evidence[];
+};
+
 type RheaReactionVisualizerProps = {
   rheaId: number;
   show: boolean;
@@ -47,6 +58,45 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   );
 };
 
+const physiologicalReactionDirectionToString = new Map<
+  PhysiologicalReactionDirection,
+  string
+>([
+  [PhysiologicalReactionDirection.LeftToRight, 'forward'],
+  [PhysiologicalReactionDirection.RightToLeft, 'backward'],
+]);
+
+type ReactionDirectionProps = {
+  physiologicalReactions: PhysiologicalReaction[];
+};
+
+const ReactionDirection: React.FC<ReactionDirectionProps> = ({
+  physiologicalReactions,
+}) => (
+  /*
+  Possible output:
+    1. This reaction proceeds in the backward direction <Evidence>
+    2. This reaction proceeds in the forward direction <Evidence>
+    3. This reaction proceeds in the forward <Evidence> and the backward <Evidence> directions.
+  */
+  <Fragment>
+    {`This reaction proceeds in `}
+    {physiologicalReactions
+      // Ensure that left-to-right/forward comes before right-to-left/backeward
+      .sort((a, b) => a.directionType.localeCompare(b.directionType))
+      .map(({ reactionReference, directionType, evidences }, index) => (
+        <Fragment key={reactionReference.id}>
+          {index > 0 && ' and '}
+          {`the `}
+          {physiologicalReactionDirectionToString.get(directionType)}
+          {physiologicalReactions.length === 1 && ' direction '}
+          <UniProtEvidenceTag evidences={evidences} />
+          {physiologicalReactions.length === 2 && index === 1 && ' directions '}
+        </Fragment>
+      ))}
+  </Fragment>
+);
+
 export type CatalyticActivityData = {
   commentType: Comment;
   reaction?: {
@@ -55,11 +105,7 @@ export type CatalyticActivityData = {
     ecNumber: string;
     evidences?: Evidence[];
   };
-  physiologicalReactions?: {
-    direction: string;
-    dbReference: { type: string; id: string }[];
-    evidences?: Evidence[];
-  };
+  physiologicalReactions?: PhysiologicalReaction[];
 }[];
 
 type CatalyticActivityProps = {
@@ -81,8 +127,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         if (!catalyticActivity.reaction) {
           return null;
         }
-        // We are grabbing only the first rhea reaction reference because FW have informed
-        // us that there will be either 0 or 1 types of this reference (ie never > 1)
+        // Using only the first rhea reaction reference because FW has assured us that
+        // there will be either 0 or 1 types of this reference (ie never > 1)
         const rheaReactionReference = catalyticActivity.reaction.reactionReferences.find(
           isRheaReactionReference
         );
@@ -100,6 +146,14 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
                 evidences={catalyticActivity.reaction.evidences}
               />
             )}
+            {catalyticActivity.physiologicalReactions &&
+              catalyticActivity.physiologicalReactions.length && (
+                <ReactionDirection
+                  physiologicalReactions={
+                    catalyticActivity.physiologicalReactions
+                  }
+                />
+              )}
             {!!rheaId && (
               <RheaReactionVisualizer
                 rheaId={rheaId}
