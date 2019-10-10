@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import CatalyticActivityView, {
   getRheaId,
-  isRheaReactReference,
+  isRheaReactionReference,
   RheaReactionVisualizer,
 } from '../CatalyticActivityView';
 import CatalyticActivityUIDataJson from '../__mocks__/CatalyticActivityUIData.json';
@@ -19,7 +19,7 @@ describe('Catalytic activity', () => {
 describe('RheaReactionVisualizer', () => {
   test('should render RheaReactionVisualizer', () => {
     const { asFragment } = render(
-      <RheaReactionVisualizer rheaId="12345" show={false} />
+      <RheaReactionVisualizer rheaId={12345} show={false} />
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -27,7 +27,7 @@ describe('RheaReactionVisualizer', () => {
 
 describe('getRheaId', () => {
   test('should return id 12345 from RHEA:12345', () => {
-    expect(getRheaId('RHEA:12345')).toEqual('12345');
+    expect(getRheaId('RHEA:12345')).toEqual(12345);
   });
   test('should return null from RHEA-COMP:12345', () => {
     expect(getRheaId('RHEA-COMP:12345')).toEqual(null);
@@ -37,12 +37,12 @@ describe('getRheaId', () => {
 describe('isRheaReactReference', () => {
   test('should return true when database=Rhea and id string is RHEA:12345', () => {
     expect(
-      isRheaReactReference({ databaseType: 'Rhea', id: 'RHEA:12345' })
+      isRheaReactionReference({ databaseType: 'Rhea', id: 'RHEA:12345' })
     ).toEqual(true);
   });
   test('should return true when database=ChEBI and id string is CHEBI:57287', () => {
     expect(
-      isRheaReactReference({ databaseType: 'ChEBI', id: 'CHEBI:57287' })
+      isRheaReactionReference({ databaseType: 'ChEBI', id: 'CHEBI:57287' })
     ).toEqual(false);
   });
 });

@@ -6,12 +6,12 @@ import Comment from '../../../model/types/Comment';
 import './styles/CatalyticActivityView.scss';
 
 export const getRheaId = (referenceId: string) => {
-  const re = /^RHEA:(\d+)$/;
+  const re = /^RHEA:(\d+)$/i;
   const match = referenceId.match(re);
-  return match && match[1];
+  return match && parseInt(match[1], 10);
 };
 
-export const isRheaReactReference = ({
+export const isRheaReactionReference = ({
   databaseType,
   id,
 }: {
@@ -20,7 +20,7 @@ export const isRheaReactReference = ({
 }) => databaseType === 'Rhea' && !!getRheaId(id);
 
 type RheaReactionVisualizerProps = {
-  rheaId: string;
+  rheaId: number;
   show: boolean;
 };
 
@@ -68,7 +68,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
     return null;
   }
 
-  let rheaReactionCount = 0;
+  let firstRheaId: number | null = null;
   return (
     <Fragment>
       <h4>Catalytic Activity</h4>
@@ -76,13 +76,16 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         if (!catalyticActivity.reaction) {
           return null;
         }
-        const rheaReactionReferences = catalyticActivity.reaction.reactionReferences.filter(
-          isRheaReactReference
+        // We are grabbing only the first rhea reaction reference because FW have informed
+        // us that there will be either 0 or 1 types of this reference (ie never > 1)
+        const rheaReactionReference = catalyticActivity.reaction.reactionReferences.find(
+          isRheaReactionReference
         );
         const rheaId =
-          rheaReactionReferences.length > 0 &&
-          getRheaId(rheaReactionReferences[0].id);
-        rheaReactionCount += +!!rheaId;
+          rheaReactionReference && getRheaId(rheaReactionReference.id);
+        if (rheaId && !firstRheaId) {
+          firstRheaId = rheaId;
+        }
         return (
           <span className="text-block" key={catalyticActivity.reaction.name}>
             <strong>{catalyticActivity.reaction.ecNumber}</strong>
@@ -95,7 +98,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
             {!!rheaId && (
               <RheaReactionVisualizer
                 rheaId={rheaId}
-                show={rheaReactionCount === 1}
+                show={rheaId === firstRheaId}
               />
             )}
           </span>
