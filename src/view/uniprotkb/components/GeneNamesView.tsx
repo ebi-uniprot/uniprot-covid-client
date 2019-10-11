@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { GeneNamesData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
@@ -21,9 +22,9 @@ const GeneNamesView: React.FC<{ geneNamesData: GeneNamesData }> = ({
 }) => (
   <Fragment>
     {geneNamesData.map((geneNames, index) => (
-      <span key={geneNames.geneName.value}>
+      <span key={geneNames.geneName ? geneNames.geneName.value : v1()}>
         {index > 0 ? ', ' : ''}
-        <strong>{geneNames.geneName.value}</strong>
+        <strong>{geneNames.geneName && geneNames.geneName.value}</strong>
         {geneNames.synonyms && (
           <GeneAlternativeNamesView alternativeNames={geneNames.synonyms} />
         )}
@@ -48,7 +49,7 @@ export const GeneNamesListView: React.FC<{ geneNamesData: GeneNamesData }> = ({
       const infoData = [
         {
           title: 'Name',
-          content: geneNames.geneName.value,
+          content: geneNames.geneName && geneNames.geneName.value,
         },
         {
           title: 'Alternative names',
@@ -82,7 +83,12 @@ export const GeneNamesListView: React.FC<{ geneNamesData: GeneNamesData }> = ({
           ),
         },
       ];
-      return <InfoList infoData={infoData} key={geneNames.geneName.value} />;
+      return (
+        <InfoList
+          infoData={infoData}
+          key={geneNames.geneName ? geneNames.geneName.value : v1()}
+        />
+      );
     })}
   </Fragment>
 );

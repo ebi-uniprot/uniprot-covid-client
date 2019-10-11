@@ -26,7 +26,10 @@ const resultsInitialState = {
     'protein_name',
     'gene_names',
     'organism',
+    'gene_primary',
     'gene_oln',
+    'gene_orf',
+    'gene_synonym',
   ],
   cardColumns: [
     'accession',

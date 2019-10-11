@@ -53,8 +53,28 @@ const ColumnConfiguration: {
         <NumberView value={data.sequence.length} unit={Unit.DA} />
       ),
   },
+  gene_primary: {
+    label: 'Gene names (Primary)',
+    render: data => (
+      <Fragment>
+        {data.genes &&
+          data.genes.map(geneData => {
+            if (!geneData.geneName) {
+              return null;
+            }
+            return (
+              geneData.geneName && (
+                <div key={geneData.geneName.value}>
+                  {geneData.geneName.value}
+                </div>
+              )
+            );
+          })}
+      </Fragment>
+    ),
+  },
   gene_oln: {
-    label: 'Gene names (ordered locus)',
+    label: 'Gene names (Ordered locus)',
     render: data => (
       <Fragment>
         {data.genes &&
@@ -63,6 +83,7 @@ const ColumnConfiguration: {
               geneData.orderedLocusNames && (
                 <GeneAlternativeNamesView
                   alternativeNames={geneData.orderedLocusNames}
+                  firstComma={false}
                   key={geneData.orderedLocusNames.reduce(
                     (acc, val) => `${acc}${val}`,
                     ''
@@ -73,9 +94,48 @@ const ColumnConfiguration: {
       </Fragment>
     ),
   },
-  // gene_orf ,
-  // gene_primary ,
-  // gene_synonym ,
+  gene_orf: {
+    label: 'Gene names (ORF)',
+    render: data => (
+      <Fragment>
+        {data.genes &&
+          data.genes.map(
+            geneData =>
+              geneData.orfNames && (
+                <GeneAlternativeNamesView
+                  alternativeNames={geneData.orfNames}
+                  firstComma={false}
+                  key={geneData.orfNames.reduce(
+                    (acc, val) => `${acc}${val}`,
+                    ''
+                  )}
+                />
+              )
+          )}
+      </Fragment>
+    ),
+  },
+  gene_synonym: {
+    label: 'Gene names (Synonyms)',
+    render: data => (
+      <Fragment>
+        {data.genes &&
+          data.genes.map(
+            geneData =>
+              geneData.synonyms && (
+                <GeneAlternativeNamesView
+                  alternativeNames={geneData.synonyms}
+                  firstComma={false}
+                  key={geneData.synonyms.reduce(
+                    (acc, val) => `${acc}${val}`,
+                    ''
+                  )}
+                />
+              )
+          )}
+      </Fragment>
+    ),
+  },
   // organism ,
   // organism_id ,
   // protein_name ,

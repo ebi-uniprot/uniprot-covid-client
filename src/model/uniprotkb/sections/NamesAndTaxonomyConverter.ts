@@ -28,7 +28,7 @@ export type ProteinNamesData = ProteinDescription & {
 };
 
 export type GeneNamesData = {
-  geneName: {
+  geneName?: {
     value: string;
   };
   synonyms?: [{ value: string }];
