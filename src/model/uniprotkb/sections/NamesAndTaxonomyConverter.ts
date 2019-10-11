@@ -1,6 +1,5 @@
 import { ValueWithEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
-import convertGeneNames from '../GeneNamesConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Xref } from '../../utils/XrefUtils';
 import { convertSection, UIModel } from '../SectionConverter';
@@ -34,6 +33,7 @@ export type GeneNamesData = {
   };
   synonyms?: [{ value: string }];
   orfNames?: [{ value: string }];
+  orderedLocusNames?: [{ value: string }];
 }[];
 
 export type OrganismData = {
@@ -46,7 +46,7 @@ export type OrganismData = {
 
 export type NamesAndTaxonomyUIModel = {
   proteinNamesData?: ProteinNamesData;
-  geneNamesData?: { name: string; alternativeNames: string[] };
+  geneNamesData?: GeneNamesData;
   organismData?: {};
   proteomesData?: Xref[];
 } & UIModel;
@@ -64,7 +64,7 @@ export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
     namesAndTaxonomyData.proteinNamesData = data.proteinDescription;
   }
   if (data.genes) {
-    namesAndTaxonomyData.geneNamesData = convertGeneNames(data.genes);
+    namesAndTaxonomyData.geneNamesData = data.genes;
   }
   if (data.organism) {
     namesAndTaxonomyData.organismData = data.organism;

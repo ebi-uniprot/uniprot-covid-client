@@ -62,7 +62,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: CDC7, CDC7L1 · 574 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      CDC7
+                    </strong>
+                    , CDC7L1
+                  </span>
+                   · 574 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -178,7 +185,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Mus musculus
                   </a>
-                   · Gene: Cdc7, Cdc7l1 · 564 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      Cdc7
+                    </strong>
+                    , Cdc7l1
+                  </span>
+                   · 564 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -294,7 +308,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
                   </a>
-                   · Gene: CDC7, OAF2, D2855 · 507 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      CDC7
+                    </strong>
+                    , OAF2, D2855, YDL017W
+                  </span>
+                   · 507 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -422,7 +443,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Schizosaccharomyces pombe (strain 972 / ATCC 24843)
                   </a>
-                   · Gene: cdc7, SPBC21.06c · 1062 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      cdc7
+                    </strong>
+                    , SPBC21.06c
+                  </span>
+                   · 1062 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -538,7 +566,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Dictyostelium discoideum
                   </a>
-                   · Gene: cdc7, DDB_G0292152 · 1061 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      cdc7
+                    </strong>
+                    , DDB_G0292152
+                  </span>
+                   · 1061 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -640,7 +675,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Schizosaccharomyces pombe (strain 972 / ATCC 24843)
                   </a>
-                   · Gene: hsk1, SPBC776.12c · 507 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      hsk1
+                    </strong>
+                    , SPBC776.12c
+                  </span>
+                   · 507 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -756,7 +798,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: PPHLN1, HSPC206, HSPC232 · 458 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      PPHLN1
+                    </strong>
+                    , HSPC206, HSPC232
+                  </span>
+                   · 458 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -865,7 +914,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Drosophila melanogaster
                   </a>
-                   · Gene: Cdc7, anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742 · 699 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      Cdc7
+                    </strong>
+                    , anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742
+                  </span>
+                   · 699 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -960,7 +1016,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Drosophila melanogaster
                   </a>
-                   · Gene: Cdc7, anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742 · 700 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      Cdc7
+                    </strong>
+                    , anon-WO03040301.250, cdc7, cdc7-related, CG8655, CG8656, CT25076, Dmel\\CG32742, L(1)G0148, l(1)G0148, l(1)G0149, l(1)G0461, CG32742, Dmel_CG32742
+                  </span>
+                   · 700 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1056,7 +1119,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: DBF4B, ASKL1, DRF1 · 615 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      DBF4B
+                    </strong>
+                    , ASKL1, DRF1
+                  </span>
+                   · 615 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1148,7 +1218,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
                   </a>
-                   · Gene: DBF4, DNA52, D4205, YD9609.07C · 704 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      DBF4
+                    </strong>
+                    , DNA52, D4205, YD9609.07C, YDR052C
+                  </span>
+                   · 704 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1276,7 +1353,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: DBF4, ASK, DBF4A, ZDBF1 · 674 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      DBF4
+                    </strong>
+                    , ASK, DBF4A, ZDBF1
+                  </span>
+                   · 674 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1374,7 +1458,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: MCM2, BM28, CCNL1, CDCL1, KIAA0030 · 904 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      MCM2
+                    </strong>
+                    , BM28, CCNL1, CDCL1, KIAA0030
+                  </span>
+                   · 904 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1508,7 +1599,13 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: CINP · 212 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      CINP
+                    </strong>
+                  </span>
+                   · 212 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1624,7 +1721,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Mus musculus
                   </a>
-                   · Gene: Dbf4, Dbf4a · 663 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      Dbf4
+                    </strong>
+                    , Dbf4a
+                  </span>
+                   · 663 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1722,7 +1826,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Encephalitozoon cuniculi (strain GB-M1)
                   </a>
-                   · Gene: CDC7-2 · 351 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      CDC7-2
+                    </strong>
+                    , ECU10_0120
+                  </span>
+                   · 351 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1850,7 +1961,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Mus musculus
                   </a>
-                   · Gene: Mcm2, Bm28, Cdcl1, Kiaa0030, Mcmd2 · 904 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      Mcm2
+                    </strong>
+                    , Bm28, Cdcl1, Kiaa0030, Mcmd2
+                  </span>
+                   · 904 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -1966,7 +2084,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Encephalitozoon cuniculi (strain GB-M1)
                   </a>
-                   · Gene: CDC7-1 · 351 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      CDC7-1
+                    </strong>
+                    , ECU08_1960
+                  </span>
+                   · 351 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2094,7 +2219,13 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Xenopus laevis
                   </a>
-                   · Gene: mcm2 · 886 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      mcm2
+                    </strong>
+                  </span>
+                   · 886 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2210,7 +2341,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Schizosaccharomyces pombe (strain 972 / ATCC 24843)
                   </a>
-                   · Gene: spg1, sid3, SPAC1565.06c · 198 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      spg1
+                    </strong>
+                    , sid3, SPAC1565.06c
+                  </span>
+                   · 198 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2314,7 +2452,13 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Xenopus laevis
                   </a>
-                   · Gene: mcm4-a · 858 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      mcm4-a
+                    </strong>
+                  </span>
+                   · 858 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2430,7 +2574,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Schizosaccharomyces pombe (strain 972 / ATCC 24843)
                   </a>
-                   · Gene: spo4, SPBC21C3.18 · 429 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      spo4
+                    </strong>
+                    , SPBC21C3.18
+                  </span>
+                   · 429 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2558,7 +2709,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Schizosaccharomyces pombe (strain 972 / ATCC 24843)
                   </a>
-                   · Gene: cdc11, SPCC1739.11c · 1045 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      cdc11
+                    </strong>
+                    , SPCC1739.11c
+                  </span>
+                   · 1045 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2644,7 +2802,13 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Xenopus laevis
                   </a>
-                   · Gene: mcm4-b · 863 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      mcm4-b
+                    </strong>
+                  </span>
+                   · 863 amino-acids · 
                   <span
                     title="Annotation Score"
                   >
@@ -2760,7 +2924,14 @@ exports[`ResultsView component should render cards 1`] = `
                   >
                     Homo sapiens
                   </a>
-                   · Gene: MCM4, CDC21 · 863 amino-acids · 
+                   · Gene: 
+                  <span>
+                    <strong>
+                      MCM4
+                    </strong>
+                    , CDC21
+                  </span>
+                   · 863 amino-acids · 
                   <span
                     title="Annotation Score"
                   >

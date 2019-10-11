@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
 import { EntryProteinNames } from './components/ProteinNamesView';
 import hasContent from '../../model/utils/utils';
@@ -21,8 +21,12 @@ const NamesAndTaxonomySection: FC<{
       <Card title={EntrySection.NamesAndTaxonomy}>
         <h4>Protein names</h4>
         <EntryProteinNames proteinNames={data.proteinNamesData} />
-        <h4>Gene names</h4>
-        <GeneNamesListView {...data.geneNamesData} />
+        {data.geneNamesData && (
+          <Fragment>
+            <h4>Gene names</h4>
+            <GeneNamesListView geneNamesData={data.geneNamesData} />
+          </Fragment>
+        )}
         <h4>Organism names</h4>
         <OrganismEntryView data={data.organismData} />
         <h4>Proteome</h4>

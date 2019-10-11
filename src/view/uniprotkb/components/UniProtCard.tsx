@@ -5,8 +5,7 @@ import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
 import { truncateStringWithEllipsis } from '../../../utils/utils';
 import KeywordCategory from '../../../model/types/KeywordCategory';
-import convertGeneNames from '../../../model/uniprotkb/GeneNamesConverter';
-import { GeneNamesViewFlat } from './GeneNamesView';
+import GeneNamesView from './GeneNamesView';
 import { KeywordList } from './KeywordView';
 import UniProtTitle from './UniProtTitle';
 import AnnotationScoreDoughnutChart, {
@@ -37,8 +36,13 @@ const UniProtCard: FC<{
 
   let geneNameListNode;
   if (data.genes) {
-    const convertedGeneNames = convertGeneNames(data.genes);
-    geneNameListNode = `Gene: ${GeneNamesViewFlat(convertedGeneNames)} · `;
+    geneNameListNode = (
+      <Fragment>
+        {'Gene: '}
+        <GeneNamesView geneNamesData={data.genes} />
+        {' · '}
+      </Fragment>
+    );
   }
 
   const sequenceLengthNode = `${data.sequence.length} amino-acids · `;

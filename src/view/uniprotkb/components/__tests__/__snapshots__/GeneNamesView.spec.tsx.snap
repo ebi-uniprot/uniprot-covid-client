@@ -4,12 +4,9 @@ exports[`GeneNames should render gene_names 1`] = `
 <DocumentFragment>
   <span>
     <strong>
-      Gene name
+      some Gene
     </strong>
-     
-    <div>
-      name 2, name 3, name 4
-    </div>
+    , some Syn, some orf, some locus
   </span>
 </DocumentFragment>
 `;

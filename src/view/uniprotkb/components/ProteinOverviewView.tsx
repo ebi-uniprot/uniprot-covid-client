@@ -36,7 +36,7 @@ export const ProteinOverview: FC<{
     },
     {
       title: 'Gene',
-      content: geneNamesData && <GeneNamesView {...geneNamesData} />,
+      content: geneNamesData && <GeneNamesView geneNamesData={geneNamesData} />,
     },
     {
       title: 'Evidence',

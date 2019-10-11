@@ -16,10 +16,7 @@ exports[`ColumnConfiguration component should render gene_names 1`] = `
     <strong>
       some Gene
     </strong>
-     
-    <div>
-      some Syn, some orf
-    </div>
+    , some Syn, some orf, some locus
   </span>
 </DocumentFragment>
 `;

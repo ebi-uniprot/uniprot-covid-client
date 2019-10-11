@@ -252,10 +252,7 @@ exports[`Entry should render 1`] = `
                   <strong>
                     some Gene
                   </strong>
-                   
-                  <div>
-                    some Syn, some orf
-                  </div>
+                  , some Syn, some orf, some locus
                 </span>
               </div>
             </div>
@@ -935,7 +932,15 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__content"
                 >
-                  some Synsome orf
+                  <div>
+                    some Syn
+                  </div>
+                  <div>
+                    some orf
+                  </div>
+                  <div>
+                    some locus
+                  </div>
                 </div>
               </div>
             </div>
