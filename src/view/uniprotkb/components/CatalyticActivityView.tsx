@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
@@ -40,6 +40,18 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   show: initialShow,
 }) => {
   const [show, setShow] = useState(initialShow);
+
+  const callback = useCallback((node): void => {
+    if (node) {
+      node.addEventListener(
+        'zoomClicked',
+        ({ detail }: { detail: { chebi: string; imgURL: string } }) =>
+          // eslint-disable-next-line no-console
+          console.log('zoomClicked:', detail)
+      );
+    }
+  }, []);
+
   return (
     <Fragment>
       <button
@@ -51,7 +63,7 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
       </button>
       {show && (
         <div className="rhea-reaction-visualizer__component">
-          <rhea-reaction rheaid={rheaId} zoom showids />
+          <rhea-reaction rheaid={rheaId} zoom showids ref={callback} />
         </div>
       )}
     </Fragment>
