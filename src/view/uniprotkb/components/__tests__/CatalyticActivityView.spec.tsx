@@ -4,19 +4,20 @@ import CatalyticActivityView, {
   getRheaId,
   isRheaReactionReference,
   RheaReactionVisualizer,
+  ReactionDirection,
 } from '../CatalyticActivityView';
-import CatalyticActivityUIDataJson from '../__mocks__/CatalyticActivityUIData.json';
+import catalyticActivityUIDataJson from '../__mocks__/CatalyticActivityUIData.json';
 
-describe('Catalytic activity', () => {
+describe('CatalyticActivityView component', () => {
   test('should render catalytic activity', () => {
     const { asFragment } = render(
-      <CatalyticActivityView comments={CatalyticActivityUIDataJson} />
+      <CatalyticActivityView comments={catalyticActivityUIDataJson} />
     );
     expect(asFragment()).toMatchSnapshot();
   });
 });
 
-describe('RheaReactionVisualizer', () => {
+describe('RheaReactionVisualizer component', () => {
   test('should render RheaReactionVisualizer', () => {
     const { asFragment } = render(
       <RheaReactionVisualizer rheaId={12345} show={false} />
@@ -25,7 +26,7 @@ describe('RheaReactionVisualizer', () => {
   });
 });
 
-describe('getRheaId', () => {
+describe('getRheaId function', () => {
   test('should return id 12345 from RHEA:12345', () => {
     expect(getRheaId('RHEA:12345')).toEqual(12345);
   });
@@ -34,7 +35,7 @@ describe('getRheaId', () => {
   });
 });
 
-describe('isRheaReactReference', () => {
+describe('isRheaReactReference function', () => {
   test('should return true when database=Rhea and id string is RHEA:12345', () => {
     expect(
       isRheaReactionReference({ databaseType: 'Rhea', id: 'RHEA:12345' })
@@ -44,5 +45,39 @@ describe('isRheaReactReference', () => {
     expect(
       isRheaReactionReference({ databaseType: 'ChEBI', id: 'CHEBI:57287' })
     ).toEqual(false);
+  });
+});
+
+describe('ReactionDirection component', () => {
+  const { physiologicalReactions } = catalyticActivityUIDataJson[0];
+  test('should render ReactionDirection when one physiologicalReactions is present ', () => {
+    const { asFragment } = render(
+      <ReactionDirection
+        physiologicalReactions={physiologicalReactions.slice(0, 1)}
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('should render ReactionDirection when two physiologicalReactions are present and should be in correct order (forwards then backwards) ', () => {
+    const { asFragment, getAllByTestId } = render(
+      <ReactionDirection physiologicalReactions={physiologicalReactions} />
+    );
+    expect(asFragment()).toMatchSnapshot();
+    const directions = getAllByTestId('direction-text');
+    expect(directions[0].textContent).toBe('forward');
+    expect(directions[1].textContent).toBe('backward');
+  });
+
+  test('should not render a ReactionDirection when more than two physiologicalReactions are present ', () => {
+    const { asFragment } = render(
+      <ReactionDirection
+        physiologicalReactions={[
+          ...physiologicalReactions,
+          ...physiologicalReactions,
+        ]}
+      />
+    );
+    expect(asFragment().childElementCount).toEqual(0);
   });
 });

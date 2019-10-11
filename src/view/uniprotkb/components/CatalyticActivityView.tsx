@@ -58,7 +58,7 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   );
 };
 
-const physiologicalReactionDirectionToString = new Map<
+export const physiologicalReactionDirectionToString = new Map<
   PhysiologicalReactionDirection,
   string
 >([
@@ -66,36 +66,52 @@ const physiologicalReactionDirectionToString = new Map<
   [PhysiologicalReactionDirection.RightToLeft, 'backward'],
 ]);
 
-type ReactionDirectionProps = {
+export type ReactionDirectionProps = {
   physiologicalReactions: PhysiologicalReaction[];
 };
 
-const ReactionDirection: React.FC<ReactionDirectionProps> = ({
+export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
   physiologicalReactions,
-}) => (
+}) => {
   /*
   Possible output:
     1. This reaction proceeds in the backward direction <Evidence>
     2. This reaction proceeds in the forward direction <Evidence>
     3. This reaction proceeds in the forward <Evidence> and the backward <Evidence> directions.
   */
-  <Fragment>
-    {`This reaction proceeds in `}
-    {physiologicalReactions
-      // Ensure that left-to-right/forward comes before right-to-left/backeward
-      .sort((a, b) => a.directionType.localeCompare(b.directionType))
-      .map(({ reactionReference, directionType, evidences }, index) => (
-        <Fragment key={reactionReference.id}>
-          {index > 0 && ' and '}
-          {`the `}
-          {physiologicalReactionDirectionToString.get(directionType)}
-          {physiologicalReactions.length === 1 && ' direction '}
-          <UniProtEvidenceTag evidences={evidences} />
-          {physiologicalReactions.length === 2 && index === 1 && ' directions '}
-        </Fragment>
-      ))}
-  </Fragment>
-);
+  if (!physiologicalReactions || physiologicalReactions.length === 0) {
+    return null;
+  }
+  if (physiologicalReactions.length > 2) {
+    // eslint-disable-next-line no-console
+    console.error(
+      'More than two physiological reactions encountered when rendering catalytic activity'
+    );
+    return null;
+  }
+  return (
+    <Fragment>
+      {`This reaction proceeds in `}
+      {physiologicalReactions
+        // Ensure that left-to-right/forward comes before right-to-left/backward
+        .sort((a, b) => a.directionType.localeCompare(b.directionType))
+        .map(({ reactionReference, directionType, evidences }, index) => (
+          <Fragment key={reactionReference.id}>
+            {index > 0 && ' and '}
+            {`the `}
+            <span data-testid="direction-text">
+              {physiologicalReactionDirectionToString.get(directionType)}
+            </span>
+            {physiologicalReactions.length === 1 && ' direction '}
+            <UniProtEvidenceTag evidences={evidences} />
+            {physiologicalReactions.length === 2 &&
+              index === 1 &&
+              ' directions '}
+          </Fragment>
+        ))}
+    </Fragment>
+  );
+};
 
 export type CatalyticActivityData = {
   commentType: Comment;
@@ -118,7 +134,6 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   if (!comments || comments.length <= 0) {
     return null;
   }
-
   let firstRheaId: number | null = null;
   return (
     <Fragment>
