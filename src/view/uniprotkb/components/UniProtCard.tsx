@@ -5,7 +5,6 @@ import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
 import { truncateStringWithEllipsis } from '../../../utils/utils';
 import KeywordCategory from '../../../model/types/KeywordCategory';
-import GeneNamesView from './GeneNamesView';
 import { KeywordList } from './KeywordView';
 import UniProtTitle from './UniProtTitle';
 import AnnotationScoreDoughnutChart, {
@@ -39,7 +38,11 @@ const UniProtCard: FC<{
     geneNameListNode = (
       <Fragment>
         {'Gene: '}
-        <GeneNamesView geneNamesData={data.genes} />
+        {data.genes.map(
+          (geneName, index) =>
+            geneName.geneName &&
+            `${index > 0 ? ', ' : ''}${geneName.geneName.value}`
+        )}
         {' · '}
       </Fragment>
     );

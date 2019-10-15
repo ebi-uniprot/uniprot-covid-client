@@ -12,12 +12,20 @@ exports[`ColumnConfiguration component should render accession 1`] = `
 
 exports[`ColumnConfiguration component should render gene_names 1`] = `
 <DocumentFragment>
-  <span>
+  <div>
     <strong>
       some Gene
     </strong>
-    , some Syn, some orf, some locus
-  </span>
+  </div>
+  <div>
+    some Syn
+  </div>
+  <div>
+    some orf
+  </div>
+  <div>
+    some locus
+  </div>
 </DocumentFragment>
 `;
 
@@ -31,22 +39,62 @@ exports[`ColumnConfiguration component should render id 1`] = `
 
 exports[`ColumnConfiguration component should render organism 1`] = `
 <DocumentFragment>
-  <span>
+  <a
+    href="/taxonomy/9606"
+  >
     scientific name (common name)  (synonyms 1)
-  </span>
+  </a>
 </DocumentFragment>
 `;
 
 exports[`ColumnConfiguration component should render protein_name 1`] = `
 <DocumentFragment>
-  <span>
+  <div>
     <strong>
       rec full Name
     </strong>
-     
-    <div>
-      1.2.3.4, sub full Name, a full alt Name
-    </div>
-  </span>
+  </div>
+  <div>
+    1.2.3.4
+  </div>
+  <div>
+    recommended short name
+  </div>
+  <div>
+    <ul
+      class="no-bullet"
+    >
+      <li>
+        a full alt Name (short alt name1) 
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul
+      class="no-bullet"
+    >
+      <li>
+        containsrec full Name (containsrecommended short name)  
+        <strong>
+          Alternative names: 
+        </strong>
+        containsa full alt Name (containsshort alt name1) 
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul
+      class="no-bullet"
+    >
+      <li>
+        sub full Name
+      </li>
+    </ul>
+  </div>
+  <div>
+    biotech
+  </div>
+  <div />
+  <div />
 </DocumentFragment>
 `;

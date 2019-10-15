@@ -9,7 +9,9 @@ import {
   SortDirection,
 } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
-import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
+import uniProtKbConverter, {
+  UniProtkbAPIModel,
+} from '../model/uniprotkb/UniProtkbConverter';
 import { ViewMode } from './state/resultsInitialState';
 import ProteinSummary from '../view/uniprotkb/summary/ProteinSummary';
 
@@ -71,7 +73,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     let render;
     if (columnName in ColumnConfiguration) {
       render = (row: UniProtkbAPIModel) =>
-        ColumnConfiguration[columnName].render(row);
+        ColumnConfiguration[columnName].render(uniProtKbConverter(row));
     } else {
       render = () => (
         <div className="warning">{`${columnName} has no render method`}</div>

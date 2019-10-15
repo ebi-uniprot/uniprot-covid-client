@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
 import SimpleView from '../view/uniprotkb/components/SimpleView';
-import { ProteinNamesView } from '../view/uniprotkb/components/ProteinNamesView';
-import convertProteinNames from './uniprotkb/ProteinNamesConverter';
-import OrganismView from '../view/uniprotkb/components/OrganismView';
+import ProteinNamesView from '../view/uniprotkb/components/ProteinNamesView';
+import OrganismView, {
+  OrganismLineage,
+  OrganismId,
+} from '../view/uniprotkb/components/OrganismView';
 import GeneNamesView, {
   GeneAlternativeNamesView,
 } from '../view/uniprotkb/components/GeneNamesView';
-import { UniProtkbAPIModel } from './uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
 import NumberView, { Unit } from '../view/uniprotkb/components/NumberView';
+import { ProteomesView } from '../view/uniprotkb/components/ProteomesView';
+import FeaturesView from '../view/uniprotkb/components/FeaturesView';
+import EntrySection from './types/EntrySection';
 
 const ColumnConfiguration: {
   [index: string]: {
     label: string;
-    render: (data: UniProtkbAPIModel) => JSX.Element | undefined;
+    render: (data: UniProtkbUIModel) => JSX.Element | undefined;
   };
 } = {
   accession: {
@@ -31,120 +36,199 @@ const ColumnConfiguration: {
       <SimpleView termValue={data.uniProtId} />
     ),
   },
-  protein_name: {
-    label: 'Protein names',
-    render: data =>
-      data.proteinDescription && (
-        <ProteinNamesView {...convertProteinNames(data.proteinDescription)} />
-      ),
-  },
   gene_names: {
     label: 'Gene Names',
-    render: data => data.genes && <GeneNamesView geneNamesData={data.genes} />,
-  },
-  organism: {
-    label: 'Organism',
-    render: data => data.organism && <OrganismView data={data.organism} />,
+    render: data => {
+      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        geneNamesData && <GeneNamesView geneNamesData={geneNamesData} isFlat />
+      );
+    },
   },
   length: {
     label: 'Length',
-    render: data =>
-      data.sequence && (
-        <NumberView value={data.sequence.length} unit={Unit.DA} />
-      ),
+    render: data => {
+      const { sequence } = data[EntrySection.Sequence];
+      return sequence && <NumberView value={sequence.length} unit={Unit.DA} />;
+    },
   },
   gene_primary: {
     label: 'Gene names (Primary)',
-    render: data => (
-      <Fragment>
-        {data.genes &&
-          data.genes.map(geneData => {
-            if (!geneData.geneName) {
-              return null;
-            }
-            return (
-              geneData.geneName && (
-                <div key={geneData.geneName.value}>
-                  {geneData.geneName.value}
-                </div>
-              )
-            );
-          })}
-      </Fragment>
-    ),
+    render: data => {
+      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        <Fragment>
+          {geneNamesData &&
+            geneNamesData.map(geneData => {
+              if (!geneData.geneName) {
+                return null;
+              }
+              return (
+                geneData.geneName && (
+                  <div key={geneData.geneName.value}>
+                    {geneData.geneName.value}
+                  </div>
+                )
+              );
+            })}
+        </Fragment>
+      );
+    },
   },
   gene_oln: {
     label: 'Gene names (Ordered locus)',
-    render: data => (
-      <Fragment>
-        {data.genes &&
-          data.genes.map(
-            geneData =>
-              geneData.orderedLocusNames && (
-                <GeneAlternativeNamesView
-                  alternativeNames={geneData.orderedLocusNames}
-                  firstComma={false}
-                  key={geneData.orderedLocusNames.reduce(
-                    (acc, val) => `${acc}${val}`,
-                    ''
-                  )}
-                />
-              )
-          )}
-      </Fragment>
-    ),
+    render: data => {
+      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        <Fragment>
+          {geneNamesData &&
+            geneNamesData.map(
+              geneData =>
+                geneData.orderedLocusNames && (
+                  <GeneAlternativeNamesView
+                    alternativeNames={geneData.orderedLocusNames}
+                    firstComma={false}
+                    key={geneData.orderedLocusNames.reduce(
+                      (acc, val) => `${acc}${val}`,
+                      ''
+                    )}
+                  />
+                )
+            )}
+        </Fragment>
+      );
+    },
   },
   gene_orf: {
     label: 'Gene names (ORF)',
-    render: data => (
-      <Fragment>
-        {data.genes &&
-          data.genes.map(
-            geneData =>
-              geneData.orfNames && (
-                <GeneAlternativeNamesView
-                  alternativeNames={geneData.orfNames}
-                  firstComma={false}
-                  key={geneData.orfNames.reduce(
-                    (acc, val) => `${acc}${val}`,
-                    ''
-                  )}
-                />
-              )
-          )}
-      </Fragment>
-    ),
+    render: data => {
+      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        <Fragment>
+          {geneNamesData &&
+            geneNamesData.map(
+              geneData =>
+                geneData.orfNames && (
+                  <GeneAlternativeNamesView
+                    alternativeNames={geneData.orfNames}
+                    firstComma={false}
+                    key={geneData.orfNames.reduce(
+                      (acc, val) => `${acc}${val}`,
+                      ''
+                    )}
+                  />
+                )
+            )}
+        </Fragment>
+      );
+    },
   },
   gene_synonym: {
     label: 'Gene names (Synonyms)',
-    render: data => (
-      <Fragment>
-        {data.genes &&
-          data.genes.map(
-            geneData =>
-              geneData.synonyms && (
-                <GeneAlternativeNamesView
-                  alternativeNames={geneData.synonyms}
-                  firstComma={false}
-                  key={geneData.synonyms.reduce(
-                    (acc, val) => `${acc}${val}`,
-                    ''
-                  )}
-                />
-              )
-          )}
-      </Fragment>
-    ),
+    render: data => {
+      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        <Fragment>
+          {geneNamesData &&
+            geneNamesData.map(
+              geneData =>
+                geneData.synonyms && (
+                  <GeneAlternativeNamesView
+                    alternativeNames={geneData.synonyms}
+                    firstComma={false}
+                    key={geneData.synonyms.reduce(
+                      (acc, val) => `${acc}${val}`,
+                      ''
+                    )}
+                  />
+                )
+            )}
+        </Fragment>
+      );
+    },
   },
-  // organism ,
-  // organism_id ,
-  // protein_name ,
-  // dr:proteomes ,
-  // lineage ,
-  // organism_host ,
+  organism: {
+    label: 'Organism',
+    render: data => {
+      const { organismData } = data[EntrySection.NamesAndTaxonomy];
+      return organismData && <OrganismView data={organismData} />;
+    },
+  },
+  organism_id: {
+    label: 'Organism',
+    render: data => {
+      const { organismData } = data[EntrySection.NamesAndTaxonomy];
+      return organismData && <OrganismId taxonId={organismData.taxonId} />;
+    },
+  },
+  protein_name: {
+    label: 'Protein names',
+    render: data => {
+      const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        proteinNamesData && (
+          <ProteinNamesView proteinNames={proteinNamesData} isFlat />
+        )
+      );
+    },
+  },
+  'dr:proteomes': {
+    label: 'Proteomes',
+    render: data => {
+      const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
+      return proteomesData && <ProteomesView data={proteomesData} />;
+    },
+  },
+  lineage: {
+    label: 'Lineage',
+    render: data => {
+      const { organismData } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        organismData &&
+        organismData.lineage && (
+          <OrganismLineage lineage={organismData.lineage} />
+        )
+      );
+    },
+  },
+  organism_host: {
+    label: 'Virus hosts',
+    render: data => {
+      const { organismHosts } = data[EntrySection.NamesAndTaxonomy];
+      return (
+        organismHosts && (
+          <Fragment>
+            {organismHosts.map(host => (
+              <p key={host.taxonId}>
+                <OrganismView data={host} />
+              </p>
+            ))}
+          </Fragment>
+        )
+      );
+    },
+  },
+
+  // TODO split isoforms from main sequence view
   // cc:alternative_products ,
-  // ft:var_seq ,
-  // error_gmodel_pred ,
+
+  'ft:var_seq': {
+    label: 'Alternative sequence',
+    render: data => {
+      const { featuresData } = data[EntrySection.Sequence];
+      return (
+        <Fragment>
+          {featuresData && <FeaturesView features={featuresData} />}
+        </Fragment>
+      );
+    },
+  },
+  // error_gmodel_pred: {
+  //   label: 'Erroneous gene model prediction',
+  //   render: data => {
+  //     console.log(data);
+  //   },
+  // },
   // fragment ,
   // gene_location ,
   // length ,
@@ -275,6 +359,7 @@ const ColumnConfiguration: {
   // tl:tribe ,
   // tl:varietas ,
   // tax_id ,
+
   // dr:embl ,
   // dr:ccds ,
   // dr:pir ,

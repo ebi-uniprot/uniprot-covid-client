@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { InfoList } from 'franklin-sites';
 import idx from 'idx';
 import OrganismView from './OrganismView';
-import GeneNamesView from './GeneNamesView';
 import { UniProtkbUIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import EntrySection from '../../../model/types/EntrySection';
 import AnnotationScoreDoughnutChart from './AnnotationScoreDoughnutChart';
+import GeneNamesView from './GeneNamesView';
 
 export const ProteinOverview: FC<{
   transformedData: UniProtkbUIModel;
@@ -36,7 +36,9 @@ export const ProteinOverview: FC<{
     },
     {
       title: 'Gene',
-      content: geneNamesData && <GeneNamesView geneNamesData={geneNamesData} />,
+      content: geneNamesData && (
+        <GeneNamesView geneNamesData={geneNamesData} isFlat />
+      ),
     },
     {
       title: 'Evidence',

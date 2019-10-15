@@ -37,14 +37,7 @@ exports[`UniProtCard component should render 1`] = `
       >
         scientific name
       </a>
-       · Gene: 
-      <span>
-        <strong>
-          some Gene
-        </strong>
-        , some Syn, some orf, some locus
-      </span>
-       · 10 amino-acids · 
+       · Gene: some Gene · 10 amino-acids · 
       <span
         title="Annotation Score"
       >

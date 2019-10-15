@@ -42,6 +42,7 @@ const sequenceFeatures = [
   FeatureType.CONFLICT,
   FeatureType.NON_CONS,
   FeatureType.NON_TER,
+  FeatureType.VAR_SEQ,
 ];
 
 export const convertSequence = (data: UniProtkbAPIModel) => {

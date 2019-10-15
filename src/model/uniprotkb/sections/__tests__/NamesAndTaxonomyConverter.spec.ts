@@ -460,6 +460,14 @@ describe('Names and taxonomy data converter', () => {
           },
         ],
       },
+      organismHosts: [
+        {
+          commonName: 'common name',
+          scientificName: 'scientific name',
+          synonyms: ['synonyms 1'],
+          taxonId: 9606,
+        },
+      ],
       proteomesData: [],
       commentsData: new Map(),
       keywordData: [],

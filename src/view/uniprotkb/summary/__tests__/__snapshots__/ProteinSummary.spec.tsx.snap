@@ -85,9 +85,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__content"
           >
-            <span>
+            <a
+              href="/taxonomy/9606"
+            >
               scientific name (common name)  (synonyms 1)
-            </span>
+            </a>
           </div>
         </div>
         <div
@@ -101,12 +103,20 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__content"
           >
-            <span>
+            <div>
               <strong>
                 some Gene
               </strong>
-              , some Syn, some orf, some locus
-            </span>
+            </div>
+            <div>
+              some Syn
+            </div>
+            <div>
+              some orf
+            </div>
+            <div>
+              some locus
+            </div>
           </div>
         </div>
         <div

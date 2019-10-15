@@ -17,76 +17,58 @@ export const GeneAlternativeNamesView: React.FC<{
   </Fragment>
 );
 
-const GeneNamesView: React.FC<{ geneNamesData: GeneNamesData }> = ({
-  geneNamesData,
-}) => (
-  <Fragment>
-    {geneNamesData.map((geneNames, index) => (
-      <span key={geneNames.geneName ? geneNames.geneName.value : v1()}>
-        {index > 0 ? ', ' : ''}
-        <strong>{geneNames.geneName && geneNames.geneName.value}</strong>
-        {geneNames.synonyms && (
-          <GeneAlternativeNamesView alternativeNames={geneNames.synonyms} />
-        )}
-        {geneNames.orfNames && (
-          <GeneAlternativeNamesView alternativeNames={geneNames.orfNames} />
-        )}
-        {geneNames.orderedLocusNames && (
-          <GeneAlternativeNamesView
-            alternativeNames={geneNames.orderedLocusNames}
-          />
-        )}
-      </span>
-    ))}
-  </Fragment>
-);
-
-export const GeneNamesListView: React.FC<{ geneNamesData: GeneNamesData }> = ({
-  geneNamesData,
-}) => (
+const GeneNamesView: React.FC<{
+  geneNamesData: GeneNamesData;
+  isFlat?: boolean;
+}> = ({ geneNamesData, isFlat = false }) => (
   <Fragment>
     {geneNamesData.map(geneNames => {
       const infoData = [
         {
           title: 'Name',
-          content: geneNames.geneName && geneNames.geneName.value,
-        },
-        {
-          title: 'Alternative names',
-          content: (
-            <Fragment>
-              {geneNames.synonyms && (
-                <div>
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneNames.synonyms}
-                    firstComma={false}
-                  />
-                </div>
-              )}
-              {geneNames.orfNames && (
-                <div>
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneNames.orfNames}
-                    firstComma={false}
-                  />
-                </div>
-              )}
-              {geneNames.orderedLocusNames && (
-                <div>
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneNames.orderedLocusNames}
-                    firstComma={false}
-                  />
-                </div>
-              )}
-            </Fragment>
+          content: geneNames.geneName && (
+            <Fragment>{geneNames.geneName.value}</Fragment>
           ),
         },
       ];
+      if (geneNames.synonyms) {
+        infoData.push({
+          title: 'Synonyms',
+          content: (
+            <GeneAlternativeNamesView
+              alternativeNames={geneNames.synonyms}
+              firstComma={false}
+            />
+          ),
+        });
+      }
+      if (geneNames.orfNames) {
+        infoData.push({
+          title: 'ORF names',
+          content: (
+            <GeneAlternativeNamesView
+              alternativeNames={geneNames.orfNames}
+              firstComma={false}
+            />
+          ),
+        });
+      }
+      if (geneNames.orderedLocusNames) {
+        infoData.push({
+          title: 'Ordered locus names',
+          content: (
+            <GeneAlternativeNamesView
+              alternativeNames={geneNames.orderedLocusNames}
+              firstComma={false}
+            />
+          ),
+        });
+      }
       return (
         <InfoList
           infoData={infoData}
           key={geneNames.geneName ? geneNames.geneName.value : v1()}
+          isFlat={isFlat}
         />
       );
     })}

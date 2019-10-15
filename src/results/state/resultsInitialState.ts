@@ -20,17 +20,7 @@ export type ResultsState = {
 };
 
 const resultsInitialState = {
-  tableColumns: [
-    'accession',
-    'id',
-    'protein_name',
-    'gene_names',
-    'organism',
-    'gene_primary',
-    'gene_oln',
-    'gene_orf',
-    'gene_synonym',
-  ],
+  tableColumns: ['accession', 'id', 'protein_name', 'gene_names', 'ft:var_seq'],
   cardColumns: [
     'accession',
     'id',
