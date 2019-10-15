@@ -14,6 +14,7 @@ import NumberView, { Unit } from '../view/uniprotkb/components/NumberView';
 import { ProteomesView } from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
+import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
 
 const ColumnConfiguration: {
   [index: string]: {
@@ -223,12 +224,13 @@ const ColumnConfiguration: {
       );
     },
   },
-  // error_gmodel_pred: {
-  //   label: 'Erroneous gene model prediction',
-  //   render: data => {
-  //     console.log(data);
-  //   },
-  // },
+  error_gmodel_pred: {
+    label: 'Erroneous gene model prediction',
+    render: data => {
+      const { sequenceCaution } = data[EntrySection.Sequence];
+      return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
+    },
+  },
   // fragment ,
   // gene_location ,
   // length ,

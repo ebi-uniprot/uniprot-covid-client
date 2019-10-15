@@ -10,6 +10,7 @@ import EntrySection from '../../types/EntrySection';
 import {
   AlternativeProducts,
   SequenceData,
+  SequenceCaution,
 } from '../../../view/uniprotkb/components/SequenceView';
 import Comment from '../../types/Comment';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
@@ -28,6 +29,7 @@ export type SequenceUIModel = {
   processing?: string;
   keywordData: KeywordUIModel[];
   alternativeProducts?: AlternativeProducts;
+  sequenceCaution?: SequenceCaution[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
@@ -84,6 +86,10 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
       comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
     );
     sequenceData.alternativeProducts = (alternativeProducts as unknown) as AlternativeProducts;
+    const sequenceCaution = data.comments.filter(
+      comment => comment.commentType === Comment.SEQUENCE_CAUTION
+    );
+    sequenceData.sequenceCaution = (sequenceCaution as unknown) as SequenceCaution[];
   }
 
   if (data.keywords) {

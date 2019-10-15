@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
-import { InfoList, Sequence } from 'franklin-sites';
+import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import Comment from '../../../model/types/Comment';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
 import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
+import { Evidence } from '../../../model/types/modelTypes';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 
 type Isoform = {
   name: { value: string };
@@ -22,6 +24,14 @@ export type AlternativeProducts = {
   isoforms: Isoform[];
   note: { texts: { value: string }[] };
   events: string[];
+};
+
+export type SequenceCaution = {
+  commentType: Comment;
+  sequenceCautionType: string;
+  sequence: string;
+  note?: string;
+  evidences?: Evidence[];
 };
 
 export type SequenceData = {
@@ -125,16 +135,37 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
       <h4 id={name}>{name}</h4>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
-          This isoform has been chosen as the 
-          {' '}
-          <strong>canonical</strong>
-          {' '}
-          sequence. All positional information in this entry refers to it. This
-          is also the sequence that appears in the downloadable versions of the
-          entry.
+          This isoform has been chosen as the
+          <strong>canonical</strong> sequence. All positional information in
+          this entry refers to it. This is also the sequence that appears in the
+          downloadable versions of the entry.
         </p>
       )}
       <InfoList infoData={infoListData} />
+    </Fragment>
+  );
+};
+
+export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
+  data,
+}) => {
+  return (
+    <Fragment>
+      {data.map(cautionData => (
+        <section className="text-block" key={cautionData.sequence}>
+          The sequence{' '}
+          <ExternalLink
+            url={`//www.ebi.ac.uk/ena/data/view/${cautionData.sequence}`}
+          >
+            {cautionData.sequence}
+          </ExternalLink>{' '}
+          differs from that shown. Reason: {cautionData.sequenceCautionType}{' '}
+          {cautionData.note}
+          {cautionData.evidences && (
+            <UniProtEvidenceTag evidences={cautionData.evidences} />
+          )}
+        </section>
+      ))}
     </Fragment>
   );
 };
@@ -176,15 +207,10 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
     isoformCountNode = (
       <p>
-        This entry describes
-        {' '}
-        <strong>{data.alternativeProducts.isoforms.length}</strong>
-        {' '}
-isoforms
-        produced by
-        {' '}
-        <strong>{data.alternativeProducts.events.join(' & ')}</strong>
-.
+        This entry describes{' '}
+        <strong>{data.alternativeProducts.isoforms.length}</strong> isoforms
+        produced by{' '}
+        <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
       </p>
     );
   }
