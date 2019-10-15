@@ -850,6 +850,11 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
+"@swissprot/rhea-reaction-visualizer@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@swissprot/rhea-reaction-visualizer/-/rhea-reaction-visualizer-0.0.2.tgz#9a5b37e10b41c93d2f1a89f3e4002391c4ef4fa2"
+  integrity sha512-bIjnacUsbIlh0VN6HYJnIRMG6VTryblvqwfzkyRYGcKh6yuSWiqdRQq9j7XeMDBnoaST/gbVk7VVKm3UU5QJOg==
+
 "@testing-library/dom@^6.3.0":
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-6.6.0.tgz#74139051e6b6743b244b2590bbba7387f51805c7"
