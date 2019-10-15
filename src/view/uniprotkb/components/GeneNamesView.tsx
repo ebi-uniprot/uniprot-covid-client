@@ -68,7 +68,8 @@ const GeneNamesView: React.FC<{
         <InfoList
           infoData={infoData}
           key={geneNames.geneName ? geneNames.geneName.value : v1()}
-          isFlat={isFlat}
+          isCompact={isFlat}
+          highlightFirstItem={isFlat}
         />
       );
     })}

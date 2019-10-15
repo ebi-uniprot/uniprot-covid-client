@@ -242,7 +242,13 @@ const ProteinNamesView: React.FC<{
     });
   }
 
-  return <InfoList infoData={infoData} isFlat={isFlat} />;
+  return (
+    <InfoList
+      infoData={infoData}
+      isCompact={isFlat}
+      highlightFirstItem={isFlat}
+    />
+  );
 };
 
 export default ProteinNamesView;
