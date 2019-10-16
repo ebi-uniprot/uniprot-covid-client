@@ -1,38 +1,45 @@
-import React, { useCallback, FC } from 'react';
+import React, { useCallback, FC, useState } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
+import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaVariation from 'protvista-variation';
 import ProtvistaVariationAdapter from 'protvista-variation-adapter';
 import ProtvistaFilter, { ProtvistaCheckbox } from 'protvista-filter';
+import { html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
 import useDataApi from '../../../utils/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
+import {
+  UniProtProtvistaEvidenceTag,
+  UniProtEvidenceTagContent,
+} from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
+import { EvidenceData } from '../../../model/types/EvidenceCodes';
 
-type Variant = {
+type ProtvistaVariant = {
   begin: number;
   end: number;
   type: FeatureType.VARIANT;
   wildType: string;
   alternativeSequence: string;
-  description?: string;
-  consequenceType: string;
-  cytogeneticBand?: string;
-  genomicLocation?: string;
   polyphenPrediction?: string;
   polyphenScore?: number;
   siftPrediction?: string;
   siftScore?: number;
+  description?: string;
+  consequenceType: string;
+  cytogeneticBand?: string;
+  genomicLocation?: string;
   somaticStatus?: number;
   sourceType: string;
   association?: {
     description: string;
     disease: boolean;
     name: string;
-    evidences: Evidence[];
+    evidences: { code: string; source: { name: string; id: string } }[];
   }[];
   xrefs: {
     alternativeUrl?: string;
@@ -46,6 +53,13 @@ interface ChangeEvent extends Event {
   detail?: { type: string; value: string[] };
 }
 
+const formatVariantDescription = (description: string) => {
+  /* eslint-disable no-useless-escape */
+  const pattern = /\[(\w+)\]: ([^\[]+)/g;
+  const match = description.match(pattern);
+  return match;
+};
+
 const VariationView: FC<{ primaryAccession: string }> = ({
   primaryAccession,
 }) => {
@@ -53,9 +67,99 @@ const VariationView: FC<{ primaryAccession: string }> = ({
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
   loadWebComponent('protvista-sequence', ProtvistaSequence);
   loadWebComponent('protvista-manager', ProtvistaManager);
+  loadWebComponent('protvista-datatable', ProtvistaDatatable);
   loadWebComponent('protvista-filter', ProtvistaFilter);
   loadWebComponent('protvista-checkbox', ProtvistaCheckbox);
   loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
+
+  const [showEvidenceTagData, setShowEvidenceTagData] = useState(false);
+  const [selectedEvidenceData, setSelectedEvidenceData] = useState();
+  const [selectedReferences, setSelectedReferences] = useState();
+
+  const evidenceTagCallback = (
+    evidenceData: EvidenceData,
+    references: Evidence[] | undefined
+  ) => {
+    setSelectedEvidenceData(evidenceData);
+    setSelectedReferences(references);
+    setShowEvidenceTagData(true);
+  };
+
+  const columns = {
+    positions: {
+      label: 'Position(s)',
+      resolver: (d: ProtvistaVariant) =>
+        d.begin === d.end ? d.begin : `${d.begin}-${d.end}`,
+    },
+    change: {
+      label: 'Change',
+      resolver: (d: ProtvistaVariant) =>
+        `${d.wildType}>${d.alternativeSequence}`,
+    },
+    consequence: {
+      label: 'Consequence',
+      resolver: (d: ProtvistaVariant) => d.consequenceType,
+    },
+    sift: {
+      label: 'SIFT prediction',
+      resolver: (d: ProtvistaVariant) => `${d.siftPrediction} (${d.siftScore})`,
+    },
+    polyphen: {
+      label: 'Polyphen prediction',
+      resolver: (d: ProtvistaVariant) =>
+        `${d.polyphenPrediction} (${d.polyphenScore})`,
+    },
+    description: {
+      label: 'Description',
+      resolver: (d: ProtvistaVariant) => {
+        if (!d.description) {
+          return html``;
+        }
+        const formatedDescription = formatVariantDescription(d.description);
+        return (
+          formatedDescription &&
+          formatedDescription.map(
+            descriptionLine =>
+              html`
+                <p>${descriptionLine}</p>
+              `
+          )
+        );
+      },
+    },
+    // sourceType: {
+    //   label: 'Source',
+    //   resolver: (d: ProtvistaVariant) => d.sourceType,
+    // },
+    somaticStatus: {
+      label: 'Somatic',
+      resolver: (d: ProtvistaVariant) => (d.somaticStatus === 1 ? 'Yes' : 'No'),
+    },
+    association: {
+      label: 'Disease association',
+      resolver: (d: ProtvistaVariant) =>
+        d.association
+          ? d.association.map(association => {
+              return html`
+                <p>
+                  ${association.name}
+                  ${association.evidences &&
+                    UniProtProtvistaEvidenceTag(
+                      association.evidences.map(evidence => {
+                        return ({
+                          evidenceCode: evidence.code,
+                          source: evidence.source.name,
+                          id: evidence.source.id,
+                        } as unknown) as Evidence;
+                      }),
+                      evidenceTagCallback
+                    )}
+                </p>
+              `;
+            })
+          : '',
+    },
+  };
 
   const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
 
@@ -71,12 +175,17 @@ const VariationView: FC<{ primaryAccession: string }> = ({
     [data]
   );
 
-  const addTooltipEventListener = useCallback(node => {
-    if (node !== null) {
-      // eslint-disable-next-line no-console
-      node.addEventListener('change', (e: ChangeEvent) => console.log(e));
-    }
-  }, []);
+  const setTableData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = data.features;
+        // eslint-disable-next-line no-param-reassign
+        node.columns = columns;
+      }
+    },
+    [data, columns]
+  );
 
   if (!data.sequence) {
     return null;
@@ -85,10 +194,7 @@ const VariationView: FC<{ primaryAccession: string }> = ({
   return (
     <div className="variation-view">
       <h4>Variants</h4>
-      <protvista-manager
-        attributes="highlight displaystart displayend activefilters filters"
-        ref={addTooltipEventListener}
-      >
+      <protvista-manager attributes="highlight displaystart displayend activefilters filters">
         <protvista-navigation length={data.sequence.length} />
         <protvista-sequence
           length={data.sequence.length}
@@ -99,8 +205,19 @@ const VariationView: FC<{ primaryAccession: string }> = ({
         <protvista-variation length={data.sequence.length}>
           <protvista-variation-adapter ref={setTrackData} />
         </protvista-variation>
+        <protvista-datatable ref={setTableData} />
       </protvista-manager>
-      <protvista-tooltip />
+      <div
+        className={`evidence-tag-content ${showEvidenceTagData &&
+          'evidence-tag-content--visible'}`}
+      >
+        {selectedEvidenceData && selectedReferences && (
+          <UniProtEvidenceTagContent
+            evidenceData={selectedEvidenceData}
+            references={selectedReferences}
+          />
+        )}
+      </div>
     </div>
   );
 };
