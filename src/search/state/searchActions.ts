@@ -19,6 +19,7 @@ export const UPDATE_RANGE_VALUE = 'UPDATE_RANGE_VALUE';
 export const UPDATE_LOGIC_OPERATOR = 'UPDATE_LOGIC_OPERATOR';
 export const HANDLE_FIELD_SELECT = 'HANDLE_FIELD_SELECT';
 export const SUBMIT_ADVANCED_QUERY = 'SUBMIT_ADVANCED_QUERY';
+export const ADD_PRE_SELECTED_CLAUSES = 'ADD_PRE_SELECTED_CLAUSES';
 export const ADD_CLAUSE = 'ADD_CLAUSE';
 export const REMOVE_CLAUSE = 'REMOVE_CLAUSE';
 export const REQUEST_SEARCH_TERMS = 'REQUEST_SEARCH_TERMS';
@@ -73,6 +74,8 @@ export const updateLogicOperator = (clauseId: string, value: Operator) =>
   });
 
 export const submitAdvancedQuery = () => action(SUBMIT_ADVANCED_QUERY);
+
+export const addPreSelectedClauses = () => action(ADD_PRE_SELECTED_CLAUSES);
 
 export const addClause = () => action(ADD_CLAUSE);
 
