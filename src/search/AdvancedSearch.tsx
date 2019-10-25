@@ -30,19 +30,19 @@ type AdvancedSearchProps = {
   ) => void;
   handleLogicChange: (clauseId: string, value: Operator) => void;
   handleRemoveClause: (clauseId: string) => void;
-  dispatchInitWithPreSelectedClauses: () => void;
+  dispatchSetPreSelectedClauses: () => void;
 };
 class AdvancedSearch extends Component<AdvancedSearchProps> {
   componentDidMount() {
     const {
       dispatchfetchEvidencesIfNeeded,
       dispatchFetchSearchTermsIfNeeded,
-      dispatchInitWithPreSelectedClauses,
+      dispatchSetPreSelectedClauses,
     } = this.props;
     dispatchfetchEvidencesIfNeeded(Evidence.GO);
     dispatchfetchEvidencesIfNeeded(Evidence.ANNOTATION);
     dispatchFetchSearchTermsIfNeeded();
-    dispatchInitWithPreSelectedClauses();
+    dispatchSetPreSelectedClauses();
   }
 
   render() {

@@ -16,7 +16,7 @@ describe('AdvancedSearch shallow components', () => {
       dispatchFetchSearchTermsIfNeeded: jest.fn(),
       dispatchfetchEvidencesIfNeeded: jest.fn(),
       dispatchCopyQueryClausesToSearch: jest.fn(),
-      dispatchInitWithPreSelectedClauses: jest.fn(),
+      dispatchSetPreSelectedClauses: jest.fn(),
       history: {
         push: jest.fn(),
       },

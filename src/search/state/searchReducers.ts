@@ -123,7 +123,7 @@ const searchReducers = (
         ...state,
         queryString: createQueryString(state.clauses),
       };
-    case searchActions.ADD_PRE_SELECTED_CLAUSES:
+    case searchActions.SET_PRE_SELECTED_CLAUSES:
       return {
         ...state,
         clauses: createPreSelectedClauses(),
