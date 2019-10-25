@@ -122,7 +122,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
       dispatchSetPreSelectedClauses: () =>
-        searchActions.addPreSelectedClauses(),
+        searchActions.setPreSelectedClauses(),
     },
     dispatch
   );

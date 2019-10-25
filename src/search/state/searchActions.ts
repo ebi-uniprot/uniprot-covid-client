@@ -75,7 +75,7 @@ export const updateLogicOperator = (clauseId: string, value: Operator) =>
 
 export const submitAdvancedQuery = () => action(SUBMIT_ADVANCED_QUERY);
 
-export const addPreSelectedClauses = () => action(SET_PRE_SELECTED_CLAUSES);
+export const setPreSelectedClauses = () => action(SET_PRE_SELECTED_CLAUSES);
 
 export const addClause = () => action(ADD_CLAUSE);
 
