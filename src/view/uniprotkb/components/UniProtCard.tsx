@@ -39,11 +39,10 @@ const UniProtCard: FC<{
     geneNameListNode = (
       <Fragment>
         {'Gene: '}
-        {data.genes.map(
-          (geneName, index) =>
-            geneName.geneName &&
-            `${index > 0 ? ', ' : ''}${geneName.geneName.value}`
-        )}
+        {data.genes
+          .filter(geneName => geneName.geneName)
+          .map(geneName => geneName.geneName && geneName.geneName.value)
+          .join(', ')}
         {' · '}
       </Fragment>
     );

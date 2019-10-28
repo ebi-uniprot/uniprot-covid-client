@@ -10,13 +10,7 @@ type OrganismDataProps = {
 
 export const OrganismLineage: React.FC<{ lineage: string[] }> = ({
   lineage,
-}) => (
-  <Fragment>
-    {lineage.reduce((accumulator, lineageItem): string =>
-      accumulator === null ? lineageItem : `${accumulator} > ${lineageItem}`
-    )}
-  </Fragment>
-);
+}) => <Fragment>{lineage.join(' > ')}</Fragment>;
 
 export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
   taxonId,

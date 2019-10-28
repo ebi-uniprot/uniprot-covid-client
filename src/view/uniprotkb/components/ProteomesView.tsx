@@ -13,14 +13,10 @@ const ProteomesComponents: React.FC<{ components?: Property[] }> = ({
 }) => (
   <Fragment>
     {components &&
-      components.reduce(
-        (accumulator, component) =>
-          !accumulator && component.value
-            ? component.value
-            : `$
-          {accumulator}, ${component.value}`,
-        ''
-      )}
+      components
+        .filter(component => component.value)
+        .map(component => component.value)
+        .join(', ')}
   </Fragment>
 );
 

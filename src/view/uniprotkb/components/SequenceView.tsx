@@ -207,9 +207,9 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
     isoformCountNode = (
       <p>
-        This entry describes{' '}
-        <strong>{data.alternativeProducts.isoforms.length}</strong> isoforms
-        produced by{' '}
+        {`This entry describes `}
+        <strong>{data.alternativeProducts.isoforms.length}</strong>
+        {` isoforms produced by `}
         <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
       </p>
     );

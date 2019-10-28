@@ -79,9 +79,9 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         <div className="warning">{`${columnName} has no render method`}</div>
       );
     }
-    const attributes = ColumnConfiguration[columnName];
+    const { label } = ColumnConfiguration[columnName];
     return {
-      label: attributes.label,
+      label,
       name: columnName,
       render,
       sortable: columnName in SortableColumn,
