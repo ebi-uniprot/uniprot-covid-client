@@ -7,7 +7,7 @@ import OrganismView, {
   OrganismId,
 } from '../view/uniprotkb/components/OrganismView';
 import GeneNamesView, {
-  GeneAlternativeNamesView,
+  geneAlternativeNamesView,
 } from '../view/uniprotkb/components/GeneNamesView';
 import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
 import NumberView, { Unit } from '../view/uniprotkb/components/NumberView';
@@ -85,11 +85,12 @@ const ColumnConfiguration: {
             geneNamesData.map(
               geneData =>
                 geneData.orderedLocusNames && (
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneData.orderedLocusNames}
-                    firstComma={false}
-                    key={geneData.orderedLocusNames.join('')}
-                  />
+                  <Fragment key={geneData.orderedLocusNames.join('')}>
+                    {geneAlternativeNamesView(
+                      geneData.orderedLocusNames,
+                      false
+                    )}
+                  </Fragment>
                 )
             )}
         </Fragment>
@@ -106,11 +107,9 @@ const ColumnConfiguration: {
             geneNamesData.map(
               geneData =>
                 geneData.orfNames && (
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneData.orfNames}
-                    firstComma={false}
-                    key={geneData.orfNames.join('')}
-                  />
+                  <Fragment key={geneData.orfNames.join('')}>
+                    {geneAlternativeNamesView(geneData.orfNames, false)}
+                  </Fragment>
                 )
             )}
         </Fragment>
@@ -127,11 +126,9 @@ const ColumnConfiguration: {
             geneNamesData.map(
               geneData =>
                 geneData.synonyms && (
-                  <GeneAlternativeNamesView
-                    alternativeNames={geneData.synonyms}
-                    firstComma={false}
-                    key={geneData.synonyms.join('')}
-                  />
+                  <Fragment key={geneData.synonyms.join('')}>
+                    {geneAlternativeNamesView(geneData.synonyms, false)}
+                  </Fragment>
                 )
             )}
         </Fragment>

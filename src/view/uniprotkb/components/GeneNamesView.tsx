@@ -3,19 +3,13 @@ import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { GeneNamesData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 
-export const GeneAlternativeNamesView: React.FC<{
-  alternativeNames: { value: string }[];
-  firstComma?: boolean;
-}> = ({ alternativeNames, firstComma = true }) => (
-  <Fragment>
-    {alternativeNames.map((altName, i) => (
-      <Fragment key={altName.value}>
-        {firstComma || (!firstComma && i > 0) ? ', ' : ''}
-        {altName.value}
-      </Fragment>
-    ))}
-  </Fragment>
-);
+export const geneAlternativeNamesView = (
+  alternativeNames: { value: string }[],
+  firstComma: boolean = true
+) => {
+  const altNames = alternativeNames.map(altName => altName.value).join(', ');
+  return `${firstComma ? ', ' : ''}${altNames}`;
+};
 
 const GeneNamesView: React.FC<{
   geneNamesData: GeneNamesData;
@@ -35,10 +29,9 @@ const GeneNamesView: React.FC<{
         infoData.push({
           title: 'Synonyms',
           content: (
-            <GeneAlternativeNamesView
-              alternativeNames={geneNames.synonyms}
-              firstComma={false}
-            />
+            <Fragment>
+              {geneAlternativeNamesView(geneNames.synonyms, false)}
+            </Fragment>
           ),
         });
       }
@@ -46,10 +39,9 @@ const GeneNamesView: React.FC<{
         infoData.push({
           title: 'ORF names',
           content: (
-            <GeneAlternativeNamesView
-              alternativeNames={geneNames.orfNames}
-              firstComma={false}
-            />
+            <Fragment>
+              {geneAlternativeNamesView(geneNames.orfNames, false)}
+            </Fragment>
           ),
         });
       }
@@ -57,10 +49,9 @@ const GeneNamesView: React.FC<{
         infoData.push({
           title: 'Ordered locus names',
           content: (
-            <GeneAlternativeNamesView
-              alternativeNames={geneNames.orderedLocusNames}
-              firstComma={false}
-            />
+            <Fragment>
+              {geneAlternativeNamesView(geneNames.orderedLocusNames, false)}
+            </Fragment>
           ),
         });
       }
