@@ -83,14 +83,14 @@ const ProteinDescriptionView: React.FC<{
 
 const getInfoListForNames = (
   name: ProteinNames,
-  isFlat: boolean
+  isCompact: boolean
 ): { title: string; content: JSX.Element }[] => {
   const infoData = [];
 
   if (name.fullName) {
     infoData.push({
       title: 'Recommended name',
-      content: isFlat ? (
+      content: isCompact ? (
         <Fragment>{name.fullName.value}</Fragment>
       ) : (
         <NameWithEvidence data={name.fullName} />
@@ -104,7 +104,7 @@ const getInfoListForNames = (
         <Fragment>
           {name.ecNumbers.map(
             (ecNumber): JSX.Element =>
-              isFlat ? (
+              isCompact ? (
                 <Fragment key={v1()}>{ecNumber.value}</Fragment>
               ) : (
                 <NameWithEvidence data={ecNumber} key={v1()} />
@@ -123,7 +123,7 @@ const getInfoListForNames = (
             (shortName, i): JSX.Element => (
               <Fragment key={v1()}>
                 {i > 0 && '; '}
-                {isFlat ? (
+                {isCompact ? (
                   shortName.value
                 ) : (
                   <NameWithEvidence data={shortName} />
@@ -145,14 +145,14 @@ type ListElement = {
 
 const ProteinNamesView: React.FC<{
   proteinNames?: ProteinNamesData;
-  isFlat?: boolean;
-}> = ({ proteinNames, isFlat = false }): JSX.Element | null => {
+  isCompact?: boolean;
+}> = ({ proteinNames, isCompact = false }): JSX.Element | null => {
   if (!proteinNames) {
     return null;
   }
   let infoData: { title: string; content: JSX.Element }[] = [];
   if (proteinNames.recommendedName) {
-    infoData = getInfoListForNames(proteinNames.recommendedName, isFlat);
+    infoData = getInfoListForNames(proteinNames.recommendedName, isCompact);
   }
   if (proteinNames.alternativeNames) {
     infoData.push({
@@ -165,7 +165,7 @@ const ProteinNamesView: React.FC<{
               content: (
                 <ProteinNamesViewFlat
                   names={alternativeName}
-                  includeEvidence={!isFlat}
+                  includeEvidence={!isCompact}
                 />
               ),
             })
@@ -200,7 +200,7 @@ const ProteinNamesView: React.FC<{
               content: (
                 <ProteinNamesViewFlat
                   names={submission}
-                  includeEvidence={!isFlat}
+                  includeEvidence={!isCompact}
                 />
               ),
             })
@@ -212,7 +212,7 @@ const ProteinNamesView: React.FC<{
   if (proteinNames.biotechName) {
     infoData.push({
       title: 'Biotech name',
-      content: isFlat ? (
+      content: isCompact ? (
         <Fragment>{proteinNames.biotechName.value}</Fragment>
       ) : (
         <NameWithEvidence data={proteinNames.biotechName} />
@@ -223,7 +223,7 @@ const ProteinNamesView: React.FC<{
   if (proteinNames.cdAntigenNames) {
     infoData.push({
       title: 'CD Antigen Name',
-      content: isFlat ? (
+      content: isCompact ? (
         <Fragment>{proteinNames.cdAntigenNames.value}</Fragment>
       ) : (
         <NameWithEvidence data={proteinNames.cdAntigenNames} />
@@ -234,7 +234,7 @@ const ProteinNamesView: React.FC<{
   if (proteinNames.innNames) {
     infoData.push({
       title: 'INN Name',
-      content: isFlat ? (
+      content: isCompact ? (
         <Fragment>{proteinNames.innNames.value}</Fragment>
       ) : (
         <NameWithEvidence data={proteinNames.innNames} />
@@ -245,8 +245,8 @@ const ProteinNamesView: React.FC<{
   return (
     <InfoList
       infoData={infoData}
-      isCompact={isFlat}
-      highlightFirstItem={isFlat}
+      isCompact={isCompact}
+      highlightFirstItem={isCompact}
     />
   );
 };

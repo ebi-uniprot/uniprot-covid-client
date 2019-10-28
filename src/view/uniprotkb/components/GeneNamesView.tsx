@@ -19,8 +19,8 @@ export const GeneAlternativeNamesView: React.FC<{
 
 const GeneNamesView: React.FC<{
   geneNamesData: GeneNamesData;
-  isFlat?: boolean;
-}> = ({ geneNamesData, isFlat = false }) => (
+  isCompact?: boolean;
+}> = ({ geneNamesData, isCompact = false }) => (
   <Fragment>
     {geneNamesData.map(geneNames => {
       const infoData = [
@@ -68,8 +68,8 @@ const GeneNamesView: React.FC<{
         <InfoList
           infoData={infoData}
           key={geneNames.geneName ? geneNames.geneName.value : v1()}
-          isCompact={isFlat}
-          highlightFirstItem={isFlat}
+          isCompact={isCompact}
+          highlightFirstItem={isCompact}
         />
       );
     })}

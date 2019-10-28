@@ -42,7 +42,9 @@ const ColumnConfiguration: {
     render: data => {
       const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
       return (
-        geneNamesData && <GeneNamesView geneNamesData={geneNamesData} isFlat />
+        geneNamesData && (
+          <GeneNamesView geneNamesData={geneNamesData} isCompact />
+        )
       );
     },
   },
@@ -89,10 +91,7 @@ const ColumnConfiguration: {
                   <GeneAlternativeNamesView
                     alternativeNames={geneData.orderedLocusNames}
                     firstComma={false}
-                    key={geneData.orderedLocusNames.reduce(
-                      (acc, val) => `${acc}${val}`,
-                      ''
-                    )}
+                    key={geneData.orderedLocusNames.join('')}
                   />
                 )
             )}
@@ -113,10 +112,7 @@ const ColumnConfiguration: {
                   <GeneAlternativeNamesView
                     alternativeNames={geneData.orfNames}
                     firstComma={false}
-                    key={geneData.orfNames.reduce(
-                      (acc, val) => `${acc}${val}`,
-                      ''
-                    )}
+                    key={geneData.orfNames.join('')}
                   />
                 )
             )}
@@ -137,10 +133,7 @@ const ColumnConfiguration: {
                   <GeneAlternativeNamesView
                     alternativeNames={geneData.synonyms}
                     firstComma={false}
-                    key={geneData.synonyms.reduce(
-                      (acc, val) => `${acc}${val}`,
-                      ''
-                    )}
+                    key={geneData.synonyms.join('')}
                   />
                 )
             )}
@@ -168,7 +161,7 @@ const ColumnConfiguration: {
       const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
       return (
         proteinNamesData && (
-          <ProteinNamesView proteinNames={proteinNamesData} isFlat />
+          <ProteinNamesView proteinNames={proteinNamesData} isCompact />
         )
       );
     },

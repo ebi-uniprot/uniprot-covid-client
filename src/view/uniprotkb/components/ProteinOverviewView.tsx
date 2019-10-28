@@ -37,7 +37,7 @@ export const ProteinOverview: FC<{
     {
       title: 'Gene',
       content: geneNamesData && (
-        <GeneNamesView geneNamesData={geneNamesData} isFlat />
+        <GeneNamesView geneNamesData={geneNamesData} isCompact />
       ),
     },
     {
