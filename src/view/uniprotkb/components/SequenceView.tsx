@@ -20,14 +20,14 @@ type Isoform = {
 };
 
 export type AlternativeProducts = {
-  commentType: Comment;
+  commentType: Comment.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
   note: { texts: { value: string }[] };
   events: string[];
 };
 
 export type SequenceCaution = {
-  commentType: Comment;
+  commentType: Comment.SEQUENCE_CAUTION;
   sequenceCautionType: string;
   sequence: string;
   note?: string;
