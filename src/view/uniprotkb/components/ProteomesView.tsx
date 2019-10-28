@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { InfoList } from 'franklin-sites';
-import { v1 } from 'uuid';
 import { Link } from 'react-router-dom';
 import { Xref } from '../../../model/utils/XrefUtils';
 import { Property } from '../../../model/types/modelTypes';
@@ -25,24 +24,10 @@ const ProteomesComponents: React.FC<{ components?: Property[] }> = ({
   </Fragment>
 );
 
-export const ProteomesView: React.FC<{ data?: Xref[] }> = ({ data }) => {
-  if (!data) {
-    return null;
-  }
-  return (
-    <Fragment>
-      {data.map(proteome => (
-        <div key={v1()}>
-          <ProteomesId id={proteome.id} />
-          {': '}
-          <ProteomesComponents components={proteome.properties} />
-        </div>
-      ))}
-    </Fragment>
-  );
-};
-
-const ProteomesListView: React.FC<{ data?: Xref[] }> = ({ data }) => {
+const ProteomesView: React.FC<{ data?: Xref[]; isCompact?: boolean }> = ({
+  data,
+  isCompact = false,
+}) => {
   if (!data) {
     return null;
   }
@@ -51,6 +36,7 @@ const ProteomesListView: React.FC<{ data?: Xref[] }> = ({ data }) => {
       {data.map(proteome => (
         <InfoList
           key={proteome.id}
+          isCompact={isCompact}
           infoData={[
             {
               title: 'Identifier',
@@ -67,4 +53,4 @@ const ProteomesListView: React.FC<{ data?: Xref[] }> = ({ data }) => {
   );
 };
 
-export default ProteomesListView;
+export default ProteomesView;

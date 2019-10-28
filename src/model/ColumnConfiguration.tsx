@@ -11,7 +11,7 @@ import GeneNamesView, {
 } from '../view/uniprotkb/components/GeneNamesView';
 import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
 import NumberView, { Unit } from '../view/uniprotkb/components/NumberView';
-import { ProteomesView } from '../view/uniprotkb/components/ProteomesView';
+import ProteomesView from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
 import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
@@ -63,9 +63,6 @@ const ColumnConfiguration: {
         <Fragment>
           {geneNamesData &&
             geneNamesData.map(geneData => {
-              if (!geneData.geneName) {
-                return null;
-              }
               return (
                 geneData.geneName && (
                   <div key={geneData.geneName.value}>
@@ -170,7 +167,7 @@ const ColumnConfiguration: {
     label: 'Proteomes',
     render: data => {
       const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
-      return proteomesData && <ProteomesView data={proteomesData} />;
+      return proteomesData && <ProteomesView data={proteomesData} isCompact />;
     },
   },
   lineage: {
