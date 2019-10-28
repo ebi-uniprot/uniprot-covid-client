@@ -1,10 +1,10 @@
 import EntrySection from '../types/EntrySection';
 import convertFunction from './sections/FunctionConverter';
-import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
-import { CatalyticActivityData } from '../../view/uniprotkb/components/CatalyticActivityView';
+import { FreeText } from '../../view/uniprotkb/components/FreeTextView';
+import { CatalyticActivity } from '../../view/uniprotkb/components/CatalyticActivityView';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
 import convertPathologyAndBiotech from './sections/PathologyAndBiotechConverter';
-import { DiseaseCommentData } from '../../view/uniprotkb/components/DiseaseInvolvementView';
+import { DiseaseComment } from '../../view/uniprotkb/components/DiseaseInvolvementView';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
@@ -19,6 +19,7 @@ import { convertSequence, SequenceUIModel } from './sections/SequenceConverter';
 import {
   AlternativeProducts,
   SequenceData,
+  SequenceCaution,
 } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import { Xref } from '../utils/XrefUtils';
@@ -42,11 +43,13 @@ export type UniProtkbAPIModel = {
   uniProtId: string;
   proteinExistence: string;
   entryType: EntryType;
-  comments?: FreeTextData &
-    CatalyticActivityData &
-    DiseaseCommentData &
-    InteractionComment[] &
-    AlternativeProducts[];
+  comments?: (
+    | FreeText
+    | CatalyticActivity
+    | DiseaseComment
+    | InteractionComment
+    | AlternativeProducts
+    | SequenceCaution)[];
   keywords?: Keyword[];
   features?: FeatureData;
   databaseCrossReferences?: Xref[];

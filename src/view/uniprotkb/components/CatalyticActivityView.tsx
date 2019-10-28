@@ -4,7 +4,7 @@ import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
 import Comment from '../../../model/types/Comment';
 
-export type CatalyticActivityData = {
+export type CatalyticActivity = {
   commentType: Comment;
   reaction?: {
     name: string;
@@ -12,10 +12,10 @@ export type CatalyticActivityData = {
     ecNumber: string;
     evidences?: Evidence[];
   };
-}[];
+};
 
 type CatalyticActivityProps = {
-  comments?: CatalyticActivityData;
+  comments?: CatalyticActivity[];
 };
 
 const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({

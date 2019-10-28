@@ -7,7 +7,7 @@ import Comment from '../../../model/types/Comment';
 import { InteractionComment } from '../components/InteractionView';
 import { FeatureData } from '../components/FeaturesView';
 import { AlternativeProducts } from '../components/SequenceView';
-import { DiseaseCommentData } from '../components/DiseaseInvolvementView';
+import { DiseaseComment } from '../components/DiseaseInvolvementView';
 import './ProteinHighlights.scss';
 import EntrySection from '../../../model/types/EntrySection';
 
@@ -80,27 +80,27 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
 
   if (data.comments) {
     // isoforms
-    const isoformsComments = (data.comments.find(
+    const isoformsComments = data.comments.find(
       comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
-    ) as unknown) as AlternativeProducts;
+    ) as AlternativeProducts;
     highlightsMap.set(
       highlightSection.isoforms,
       isoformsComments ? isoformsComments.isoforms.length : 0
     );
 
     // interactions
-    const interactionComments = (data.comments.find(
+    const interactionComments = data.comments.find(
       comment => comment.commentType === Comment.INTERACTION
-    ) as unknown) as InteractionComment;
+    ) as InteractionComment;
     highlightsMap.set(
       highlightSection.interactions,
       interactionComments ? interactionComments.interactions.length : 0
     );
 
     // diseases
-    const diseaseComments = (data.comments.filter(
+    const diseaseComments = data.comments.filter(
       comment => comment.commentType === Comment.DISEASE
-    ) as unknown) as DiseaseCommentData;
+    ) as DiseaseComment[];
     highlightsMap.set(highlightSection.disease, diseaseComments.length);
 
     // subcellular location

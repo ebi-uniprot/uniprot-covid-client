@@ -1,5 +1,5 @@
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
-import { FreeTextData } from '../../view/uniprotkb/components/FreeTextView';
+import { FreeText } from '../../view/uniprotkb/components/FreeTextView';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
@@ -12,7 +12,7 @@ import FeatureType from '../types/FeatureType';
 import { UniProtkbAPIModel } from './UniProtkbConverter';
 
 export type UIModel = {
-  commentsData: Map<Comment, FreeTextData>;
+  commentsData: Map<Comment, FreeText[]>;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];

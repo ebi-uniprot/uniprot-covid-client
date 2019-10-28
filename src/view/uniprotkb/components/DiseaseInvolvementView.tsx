@@ -17,19 +17,19 @@ type DiseaseType = {
   evidences?: Evidence[];
 };
 
-export type DiseaseCommentData = {
-  commentType?: Comment;
+export type DiseaseComment = {
+  commentType: Comment;
   disease?: DiseaseType;
   note?: { texts?: { value?: string }[] };
-}[];
+};
 
 type DiseaseInvolvementEntryProps = {
-  comment: DiseaseCommentData[0];
+  comment: DiseaseComment[][0];
   accession: string;
 };
 
 type DiseaseInvolvementProps = {
-  comments?: DiseaseCommentData;
+  comments?: DiseaseComment[];
   primaryAccession: string;
 };
 

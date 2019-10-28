@@ -85,11 +85,11 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
     const alternativeProducts = data.comments.find(
       comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
     );
-    sequenceData.alternativeProducts = (alternativeProducts as unknown) as AlternativeProducts;
+    sequenceData.alternativeProducts = alternativeProducts as AlternativeProducts;
     const sequenceCaution = data.comments.filter(
       comment => comment.commentType === Comment.SEQUENCE_CAUTION
     );
-    sequenceData.sequenceCaution = (sequenceCaution as unknown) as SequenceCaution[];
+    sequenceData.sequenceCaution = sequenceCaution as SequenceCaution[];
   }
 
   if (data.keywords) {

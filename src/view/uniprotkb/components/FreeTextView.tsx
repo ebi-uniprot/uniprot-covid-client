@@ -16,13 +16,13 @@ export type FreeTextType =
   | Comment.SUBUNIT
   | Comment.TISSUE_SPECIFICITY;
 
-export type FreeTextData = {
+export type FreeText = {
   commentType: Comment;
-  texts: [{ value: string; evidences: Evidence[] }];
-}[];
+  texts?: [{ value: string; evidences: Evidence[] }];
+};
 
 type FreeTextProps = {
-  comments?: FreeTextData;
+  comments?: FreeText[];
   includeTitle?: boolean;
 };
 
@@ -35,16 +35,17 @@ const FreeTextView: React.FC<FreeTextProps> = ({
   }
   const freeTextData = comments.map(item => (
     <span className="text-block" key={v1()}>
-      {item.texts.map(itemText => {
-        return (
-          <Fragment key={v1()}>
-            {itemText.value}
-            {itemText.evidences && (
-              <UniProtEvidenceTag evidences={itemText.evidences} />
-            )}
-          </Fragment>
-        );
-      })}
+      {item.texts &&
+        item.texts.map(itemText => {
+          return (
+            <Fragment key={v1()}>
+              {itemText.value}
+              {itemText.evidences && (
+                <UniProtEvidenceTag evidences={itemText.evidences} />
+              )}
+            </Fragment>
+          );
+        })}
     </span>
   ));
 
