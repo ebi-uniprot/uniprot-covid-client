@@ -15,7 +15,7 @@ const FunctionSection: FC<{
   data: UIModel;
   sequence: string;
   primaryAccession: string;
-}> = ({ data, sequence, primaryAccession }): JSX.Element | null=> {
+}> = ({ data, sequence, primaryAccession }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
