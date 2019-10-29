@@ -1,28 +1,10 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { Evidence } from '../../../model/types/modelTypes';
-import Comment from '../../../model/types/Comment';
-
-export type FreeTextType =
-  | Comment.DISRUPTION_PHENOTYPE
-  | Comment.DOMAIN
-  | Comment.FUNCTION
-  | Comment.INDUCTION
-  | Comment.MISCELLANEOUS
-  | Comment.PATHWAY
-  | Comment.PTM
-  | Comment.SIMILARITY
-  | Comment.SUBUNIT
-  | Comment.TISSUE_SPECIFICITY;
-
-export type FreeTextData = {
-  commentType: Comment;
-  texts: [{ value: string; evidences: Evidence[] }];
-}[];
+import { FreeText } from '../../../model/types/CommentTypes';
 
 type FreeTextProps = {
-  comments?: FreeTextData;
+  comments?: FreeText[];
   includeTitle?: boolean;
 };
 
@@ -35,16 +17,17 @@ const FreeTextView: React.FC<FreeTextProps> = ({
   }
   const freeTextData = comments.map(item => (
     <span className="text-block" key={v1()}>
-      {item.texts.map(itemText => {
-        return (
-          <Fragment key={v1()}>
-            {itemText.value}
-            {itemText.evidences && (
-              <UniProtEvidenceTag evidences={itemText.evidences} />
-            )}
-          </Fragment>
-        );
-      })}
+      {item.texts &&
+        item.texts.map(itemText => {
+          return (
+            <Fragment key={v1()}>
+              {itemText.value}
+              {itemText.evidences && (
+                <UniProtEvidenceTag evidences={itemText.evidences} />
+              )}
+            </Fragment>
+          );
+        })}
     </span>
   ));
 

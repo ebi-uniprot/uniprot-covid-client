@@ -48,7 +48,7 @@ type ProtvistaFeature = {
 };
 
 type FeatureProps = {
-  sequence: string;
+  sequence?: string;
   features: FeatureData;
 };
 
@@ -156,17 +156,21 @@ const FeaturesView: React.FC<FeatureProps> = ({
     <Fragment>
       <h4>Features</h4>
       <protvista-manager attributes="highlight displaystart displayend">
-        <protvista-navigation length={sequence.length} />
-        <protvista-track
-          ref={setTrackData}
-          length={sequence.length}
-          layout="non-overlapping"
-        />
-        <protvista-sequence
-          sequence={sequence}
-          length={sequence.length}
-          height="20"
-        />
+        {sequence && (
+          <Fragment>
+            <protvista-navigation length={sequence.length} />
+            <protvista-track
+              ref={setTrackData}
+              length={sequence.length}
+              layout="non-overlapping"
+            />
+            <protvista-sequence
+              sequence={sequence}
+              length={sequence.length}
+              height="20"
+            />
+          </Fragment>
+        )}
         <protvista-datatable ref={setTableData} />
       </protvista-manager>
       <div
