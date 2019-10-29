@@ -10,7 +10,7 @@ import GeneNamesView, {
   geneAlternativeNamesView,
 } from '../view/uniprotkb/components/GeneNamesView';
 import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
-import NumberView, { Unit } from '../view/uniprotkb/components/NumberView';
+import numberView, { Unit } from '../view/uniprotkb/components/NumberView';
 import ProteomesView from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
@@ -19,7 +19,7 @@ import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
 const ColumnConfiguration: {
   [index: string]: {
     label: string;
-    render: (data: UniProtkbUIModel) => JSX.Element | undefined;
+    render: (data: UniProtkbUIModel) => JSX.Element | string | undefined;
   };
 } = {
   accession: {
@@ -52,7 +52,7 @@ const ColumnConfiguration: {
     label: 'Length',
     render: data => {
       const { sequence } = data[EntrySection.Sequence];
-      return sequence && <NumberView value={sequence.length} unit={Unit.DA} />;
+      return sequence && numberView({value: sequence.length, unit:Unit.DA});
     },
   },
   gene_primary: {

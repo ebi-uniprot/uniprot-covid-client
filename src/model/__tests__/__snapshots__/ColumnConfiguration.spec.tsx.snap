@@ -39,11 +39,7 @@ exports[`ColumnConfiguration component should render all columns 3`] = `
 
 exports[`ColumnConfiguration component should render all columns 4`] = `
 <DocumentFragment>
-  <span
-    class="number"
-  >
-    10 Da
-  </span>
+  10 Da
 </DocumentFragment>
 `;
 

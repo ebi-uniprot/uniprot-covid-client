@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { formatLargeNumber } from '../../../utils/utils';
 
 export enum Unit {
@@ -6,11 +5,7 @@ export enum Unit {
   AA = 'AA',
 }
 
-const NumberView: FC<{ value: number; unit?: Unit }> = ({ value, unit }) => (
-  <span className="number">
-    {formatLargeNumber(value)}
-    {unit && ` ${unit}`}
-  </span>
-);
+const numberView = ({ value, unit }: { value: number; unit?: Unit }): string =>
+  `${formatLargeNumber(value)}${unit ? ` ${unit}` : ''}`;
 
-export default NumberView;
+export default numberView;
