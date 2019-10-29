@@ -1,27 +1,10 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExpandableList } from 'franklin-sites';
-import CommentType from '../../../model/types/CommentType';
-import { Evidence } from '../../../model/types/modelTypes';
+import { DiseaseComment } from '../../../model/types/CommentTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { databaseToDatabaseInfo } from '../../../data/database';
-import { Xref } from '../../../model/utils/XrefUtils';
 import { XRefExternalLink } from './XRefView';
-
-type DiseaseType = {
-  diseaseId?: string;
-  diseaseAccession?: string;
-  acronym?: string;
-  description?: string;
-  reference?: Xref;
-  evidences?: Evidence[];
-};
-
-export type DiseaseComment = {
-  commentType: CommentType;
-  disease?: DiseaseType;
-  note?: { texts?: { value?: string }[] };
-};
 
 type DiseaseInvolvementEntryProps = {
   comment: DiseaseComment[][0];

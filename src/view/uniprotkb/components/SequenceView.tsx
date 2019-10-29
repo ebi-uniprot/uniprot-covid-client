@@ -2,37 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
-import CommentType from '../../../model/types/CommentType';
+import { Isoform, SequenceCaution } from '../../../model/types/CommentTypes';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
 import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
-import { Evidence } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-
-type Isoform = {
-  name: { value: string };
-  isoformSequenceStatus: string;
-  isoformIds: string[];
-  synonyms: { value: string }[];
-  note: { texts: { value: string }[] };
-  sequenceIds: string[];
-};
-
-export type AlternativeProducts = {
-  commentType: CommentType.ALTERNATIVE_PRODUCTS;
-  isoforms: Isoform[];
-  note: { texts: { value: string }[] };
-  events: string[];
-};
-
-export type SequenceCaution = {
-  commentType: CommentType.SEQUENCE_CAUTION;
-  sequenceCautionType: string;
-  sequence: string;
-  note?: string;
-  evidences?: Evidence[];
-};
 
 export type SequenceData = {
   value: string;

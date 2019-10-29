@@ -1,7 +1,7 @@
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
 import EntrySection from '../../types/EntrySection';
-import CommentType from '../../types/CommentType';
+import { CommentType } from '../../types/CommentTypes';
 import { convertSection } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 

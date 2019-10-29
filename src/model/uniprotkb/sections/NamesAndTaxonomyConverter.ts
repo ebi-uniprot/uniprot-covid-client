@@ -1,7 +1,7 @@
 import { ValueWithEvidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
-import { Xref } from '../../utils/XrefUtils';
+import { Xref } from '../../types/CommentTypes';
 import { convertSection, UIModel } from '../SectionConverter';
 import EntrySection from '../../types/EntrySection';
 

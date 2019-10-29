@@ -1,4 +1,4 @@
-import CommentType from '../../types/CommentType';
+import { CommentType } from '../../types/CommentTypes';
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
 import { convertSection } from '../SectionConverter';

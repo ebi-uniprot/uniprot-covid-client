@@ -10,8 +10,7 @@ import UniProtTitle from './UniProtTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
-import CommentType from '../../../model/types/CommentType';
-import { FreeText } from './FreeTextView';
+import { CommentType, FreeText } from '../../../model/types/CommentTypes';
 
 const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
 

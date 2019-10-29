@@ -1,8 +1,11 @@
 import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { Evidence } from '../../../model/types/modelTypes';
-import CommentType from '../../../model/types/CommentType';
+import {
+  CatalyticActivity,
+  PhysiologicalReactionDirection,
+  PhysiologicalReaction,
+} from '../../../model/types/CommentTypes';
 import './styles/CatalyticActivityView.scss';
 
 export const getRheaId = (referenceId: string) => {
@@ -18,17 +21,6 @@ export const isRheaReactionReference = ({
   databaseType: string;
   id: string;
 }) => databaseType === 'Rhea' && !!getRheaId(id);
-
-enum PhysiologicalReactionDirection {
-  LeftToRight = 'left-to-right',
-  RightToLeft = 'right-to-left',
-}
-
-type PhysiologicalReaction = {
-  directionType: PhysiologicalReactionDirection;
-  reactionReference: { databaseType: string; id: string };
-  evidences: Evidence[];
-};
 
 type RheaReactionVisualizerProps = {
   rheaId: number;
@@ -123,17 +115,6 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
         ))}
     </Fragment>
   );
-};
-
-export type CatalyticActivity = {
-  commentType: CommentType;
-  reaction?: {
-    name: string;
-    reactionReferences: { databaseType: string; id: string }[];
-    ecNumber: string;
-    evidences?: Evidence[];
-  };
-  physiologicalReactions?: PhysiologicalReaction[];
 };
 
 type CatalyticActivityProps = {

@@ -1,25 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { Evidence } from '../../../model/types/modelTypes';
-import CommentType from '../../../model/types/CommentType';
-
-export type FreeTextType =
-  | CommentType.DISRUPTION_PHENOTYPE
-  | CommentType.DOMAIN
-  | CommentType.FUNCTION
-  | CommentType.INDUCTION
-  | CommentType.MISCELLANEOUS
-  | CommentType.PATHWAY
-  | CommentType.PTM
-  | CommentType.SIMILARITY
-  | CommentType.SUBUNIT
-  | CommentType.TISSUE_SPECIFICITY;
-
-export type FreeText = {
-  commentType: FreeTextType;
-  texts?: [{ value: string; evidences: Evidence[] }];
-};
+import { FreeText } from '../../../model/types/CommentTypes';
 
 type FreeTextProps = {
   comments?: FreeText[];

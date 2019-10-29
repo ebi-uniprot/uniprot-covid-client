@@ -1,4 +1,4 @@
-import CommentType from '../../types/CommentType';
+import { CommentType } from '../../types/CommentTypes';
 import EntrySection from '../../types/EntrySection';
 import { convertSection } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';

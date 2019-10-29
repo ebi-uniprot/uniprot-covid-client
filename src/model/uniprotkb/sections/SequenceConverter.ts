@@ -7,12 +7,12 @@ import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
 import { getXrefsForSection, XrefUIModel } from '../../utils/XrefUtils';
 import EntrySection from '../../types/EntrySection';
+import { SequenceData } from '../../../view/uniprotkb/components/SequenceView';
 import {
+  CommentType,
   AlternativeProducts,
-  SequenceData,
   SequenceCaution,
-} from '../../../view/uniprotkb/components/SequenceView';
-import CommentType from '../../types/CommentType';
+} from '../../types/CommentTypes';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 
 export enum Flag {

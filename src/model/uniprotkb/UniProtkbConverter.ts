@@ -1,10 +1,7 @@
 import EntrySection from '../types/EntrySection';
 import convertFunction from './sections/FunctionConverter';
-import { FreeText } from '../../view/uniprotkb/components/FreeTextView';
-import { CatalyticActivity } from '../../view/uniprotkb/components/CatalyticActivityView';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
 import convertPathologyAndBiotech from './sections/PathologyAndBiotechConverter';
-import { DiseaseComment } from '../../view/uniprotkb/components/DiseaseInvolvementView';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
@@ -16,18 +13,13 @@ import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
 import convertSubcellularLocation from './sections/SubcellularLocationConverter';
 import { convertSequence, SequenceUIModel } from './sections/SequenceConverter';
-import {
-  AlternativeProducts,
-  SequenceData,
-  SequenceCaution,
-} from '../../view/uniprotkb/components/SequenceView';
+import { SequenceData } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
-import { Xref } from '../utils/XrefUtils';
 import convertInteraction from './sections/InteractionConverter';
 import convertFamilyAndDomains from './sections/FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
 import convertStructure from './sections/StructureConverter';
-import { InteractionComment } from '../../view/uniprotkb/components/InteractionView';
+import Comment, { Xref } from '../types/CommentTypes';
 
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
@@ -43,13 +35,7 @@ export type UniProtkbAPIModel = {
   uniProtId: string;
   proteinExistence: string;
   entryType: EntryType;
-  comments?: (
-    | FreeText
-    | CatalyticActivity
-    | DiseaseComment
-    | InteractionComment
-    | AlternativeProducts
-    | SequenceCaution)[];
+  comments?: Comment[];
   keywords?: Keyword[];
   features?: FeatureData;
   databaseCrossReferences?: Xref[];

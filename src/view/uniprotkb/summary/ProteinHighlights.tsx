@@ -3,11 +3,14 @@ import { Bubble } from 'franklin-sites';
 import { HashLink as Link } from 'react-router-hash-link';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import FeatureType from '../../../model/types/FeatureType';
-import CommentType from '../../../model/types/CommentType';
-import { InteractionComment } from '../components/InteractionView';
+import {
+  CommentType,
+  InteractionComment,
+  DiseaseComment,
+  AlternativeProducts,
+} from '../../../model/types/CommentTypes';
+import {} from '../components/InteractionView';
 import { FeatureData } from '../components/FeaturesView';
-import { AlternativeProducts } from '../components/SequenceView';
-import { DiseaseComment } from '../components/DiseaseInvolvementView';
 import './ProteinHighlights.scss';
 import EntrySection from '../../../model/types/EntrySection';
 
