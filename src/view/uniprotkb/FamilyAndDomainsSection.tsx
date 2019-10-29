@@ -6,7 +6,7 @@ import XRefView from './components/XRefView';
 import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import hasContent from '../../model/utils/utils';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const FamilyAndDomainsSection: FC<{
@@ -22,11 +22,11 @@ const FamilyAndDomainsSection: FC<{
       <Card title={EntrySection.FamilyAndDomains}>
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <FreeTextView
-          comments={data.commentsData.get(Comment.DOMAIN)}
+          comments={data.commentsData.get(CommentType.DOMAIN)}
           includeTitle
         />
         <FreeTextView
-          comments={data.commentsData.get(Comment.SIMILARITY)}
+          comments={data.commentsData.get(CommentType.SIMILARITY)}
           includeTitle
         />
         <KeywordView keywords={data.keywordData} />

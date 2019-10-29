@@ -6,7 +6,7 @@ import FeaturesView from './components/FeaturesView';
 import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import FreeTextView from './components/FreeTextView';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const ProteinProcessingSection: FC<{
@@ -22,7 +22,7 @@ const ProteinProcessingSection: FC<{
     <div id={EntrySection.ProteinProcessing}>
       <Card title={EntrySection.ProteinProcessing}>
         <FeaturesView features={featuresData} sequence={sequence} />
-        <FreeTextView comments={commentsData.get(Comment.PTM)} includeTitle />
+        <FreeTextView comments={commentsData.get(CommentType.PTM)} includeTitle />
         <KeywordView keywords={keywordData} />
         <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
       </Card>

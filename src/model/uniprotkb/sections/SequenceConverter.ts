@@ -12,7 +12,7 @@ import {
   SequenceData,
   SequenceCaution,
 } from '../../../view/uniprotkb/components/SequenceView';
-import Comment from '../../types/Comment';
+import CommentType from '../../types/CommentType';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 
 export enum Flag {
@@ -83,11 +83,11 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
   // Trembl entries only have a canonical sequence
   if (data.comments) {
     const alternativeProducts = data.comments.find(
-      comment => comment.commentType === Comment.ALTERNATIVE_PRODUCTS
+      comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
     );
     sequenceData.alternativeProducts = alternativeProducts as AlternativeProducts;
     const sequenceCaution = data.comments.filter(
-      comment => comment.commentType === Comment.SEQUENCE_CAUTION
+      comment => comment.commentType === CommentType.SEQUENCE_CAUTION
     );
     sequenceData.sequenceCaution = sequenceCaution as SequenceCaution[];
   }

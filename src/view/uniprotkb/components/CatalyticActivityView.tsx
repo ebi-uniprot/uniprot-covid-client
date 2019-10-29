@@ -2,7 +2,7 @@ import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
-import Comment from '../../../model/types/Comment';
+import CommentType from '../../../model/types/CommentType';
 import './styles/CatalyticActivityView.scss';
 
 export const getRheaId = (referenceId: string) => {
@@ -126,7 +126,7 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
 };
 
 export type CatalyticActivity = {
-  commentType: Comment;
+  commentType: CommentType;
   reaction?: {
     name: string;
     reactionReferences: { databaseType: string; id: string }[];

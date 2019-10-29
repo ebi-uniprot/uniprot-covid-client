@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
-import Comment from '../../../model/types/Comment';
+import CommentType from '../../../model/types/CommentType';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
@@ -20,14 +20,14 @@ type Isoform = {
 };
 
 export type AlternativeProducts = {
-  commentType: Comment.ALTERNATIVE_PRODUCTS;
+  commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
   note: { texts: { value: string }[] };
   events: string[];
 };
 
 export type SequenceCaution = {
-  commentType: Comment.SEQUENCE_CAUTION;
+  commentType: CommentType.SEQUENCE_CAUTION;
   sequenceCautionType: string;
   sequence: string;
   note?: string;

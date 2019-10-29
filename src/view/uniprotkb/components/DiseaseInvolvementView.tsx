@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExpandableList } from 'franklin-sites';
-import Comment from '../../../model/types/Comment';
+import CommentType from '../../../model/types/CommentType';
 import { Evidence } from '../../../model/types/modelTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { databaseToDatabaseInfo } from '../../../data/database';
@@ -18,7 +18,7 @@ type DiseaseType = {
 };
 
 export type DiseaseComment = {
-  commentType: Comment;
+  commentType: CommentType;
   disease?: DiseaseType;
   note?: { texts?: { value?: string }[] };
 };

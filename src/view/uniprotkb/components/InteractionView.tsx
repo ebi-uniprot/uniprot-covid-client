@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import Comment from '../../../model/types/Comment';
+import CommentType from '../../../model/types/CommentType';
 
 enum InteractionType {
   SELF = 'SELF',
@@ -18,7 +18,7 @@ type Interaction = {
 };
 
 export type InteractionComment = {
-  commentType: Comment;
+  commentType: CommentType;
   interactions: Interaction[];
 };
 

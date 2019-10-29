@@ -6,13 +6,13 @@ import {
 } from '../utils/KeywordsUtil';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
 import EntrySection from '../types/EntrySection';
-import Comment from '../types/Comment';
+import CommentType from '../types/CommentType';
 import KeywordCategory from '../types/KeywordCategory';
 import FeatureType from '../types/FeatureType';
 import { UniProtkbAPIModel } from './UniProtkbConverter';
 
 export type UIModel = {
-  commentsData: Map<Comment, FreeText[]>;
+  commentsData: Map<CommentType, FreeText[]>;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
@@ -20,7 +20,7 @@ export type UIModel = {
 
 export const convertSection = (
   data: UniProtkbAPIModel,
-  sectionComments?: Comment[],
+  sectionComments?: CommentType[],
   sectionKeywords?: KeywordCategory[],
   sectionFeatures?: FeatureType[],
   section?: EntrySection

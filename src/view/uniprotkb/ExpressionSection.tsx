@@ -6,7 +6,7 @@ import FreeTextView from './components/FreeTextView';
 import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 
 const ExpressionSection: FC<{
   data: UIModel;
@@ -19,11 +19,11 @@ const ExpressionSection: FC<{
     <div id={EntrySection.Expression}>
       <Card title={EntrySection.Expression}>
         <FreeTextView
-          comments={data.commentsData.get(Comment.TISSUE_SPECIFICITY)}
+          comments={data.commentsData.get(CommentType.TISSUE_SPECIFICITY)}
           includeTitle
         />
         <FreeTextView
-          comments={data.commentsData.get(Comment.INDUCTION)}
+          comments={data.commentsData.get(CommentType.INDUCTION)}
           includeTitle
         />
         <KeywordView keywords={data.keywordData} />

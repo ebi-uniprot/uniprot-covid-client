@@ -10,7 +10,7 @@ import UniProtTitle from './UniProtTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
-import Comment from '../../../model/types/Comment';
+import CommentType from '../../../model/types/CommentType';
 import { FreeText } from './FreeTextView';
 
 const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
@@ -78,7 +78,7 @@ const UniProtCard: FC<{
 
   let functionNode;
   const firstCommentType = idx(data, (_): string => _.comments[0].commentType);
-  if (data.comments && firstCommentType === Comment.FUNCTION) {
+  if (data.comments && firstCommentType === CommentType.FUNCTION) {
     const firstComment = data.comments[0] as FreeText;
     const firstCommentValue = idx(
       firstComment,

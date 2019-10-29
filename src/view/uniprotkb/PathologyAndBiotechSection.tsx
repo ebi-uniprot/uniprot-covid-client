@@ -6,7 +6,7 @@ import KeywordView from './components/KeywordView';
 import EntrySection from '../../model/types/EntrySection';
 import hasContent from '../../model/utils/utils';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 import XRefView from './components/XRefView';
 import VariationView from './components/VariationView';
 
@@ -22,7 +22,7 @@ const PathologyAndBiotechSection: FC<{
     <div id={EntrySection.PathologyAndBioTech}>
       <Card title={EntrySection.PathologyAndBioTech}>
         <DiseaseInvolvementView
-          comments={data.commentsData.get(Comment.DISEASE)}
+          comments={data.commentsData.get(CommentType.DISEASE)}
           primaryAccession={primaryAccession}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />

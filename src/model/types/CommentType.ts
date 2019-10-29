@@ -1,4 +1,4 @@
-export enum Comment {
+export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',
   ALLERGEN = 'ALLERGEN',
   ALTERNATIVE_PRODUCTS = 'ALTERNATIVE PRODUCTS',
@@ -31,4 +31,4 @@ export enum Comment {
   WEBRESOURCE = 'WEB RESOURCE',
 }
 
-export default Comment;
+export default CommentType;

@@ -7,7 +7,7 @@ import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import GoRibbon from './components/GoRibbon';
 
@@ -22,16 +22,16 @@ const FunctionSection: FC<{
   return (
     <div id={EntrySection.Function}>
       <Card title={EntrySection.Function}>
-        <FreeTextView comments={data.commentsData.get(Comment.FUNCTION)} />
+        <FreeTextView comments={data.commentsData.get(CommentType.FUNCTION)} />
         <CatalyticActivityView
-          comments={data.commentsData.get(Comment.CATALYTIC_ACTIVITY)}
+          comments={data.commentsData.get(CommentType.CATALYTIC_ACTIVITY)}
         />
         <FreeTextView
-          comments={data.commentsData.get(Comment.PATHWAY)}
+          comments={data.commentsData.get(CommentType.PATHWAY)}
           includeTitle
         />
         <FreeTextView
-          comments={data.commentsData.get(Comment.MISCELLANEOUS)}
+          comments={data.commentsData.get(CommentType.MISCELLANEOUS)}
           includeTitle
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />

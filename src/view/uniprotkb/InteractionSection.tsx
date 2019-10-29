@@ -4,7 +4,7 @@ import hasContent from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import FreeTextView from './components/FreeTextView';
 import XRefView from './components/XRefView';
-import Comment from '../../model/types/Comment';
+import CommentType from '../../model/types/CommentType';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 
 const InteractionSection: FC<{
@@ -14,7 +14,7 @@ const InteractionSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
-  const comments = data.commentsData.get(Comment.SUBUNIT);
+  const comments = data.commentsData.get(CommentType.SUBUNIT);
   return (
     <div id={EntrySection.Interaction}>
       <Card title={EntrySection.Interaction}>
