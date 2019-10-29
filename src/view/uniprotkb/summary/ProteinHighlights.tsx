@@ -9,7 +9,6 @@ import {
   DiseaseComment,
   AlternativeProducts,
 } from '../../../model/types/CommentTypes';
-import {} from '../components/InteractionView';
 import { FeatureData } from '../components/FeaturesView';
 import './ProteinHighlights.scss';
 import EntrySection from '../../../model/types/EntrySection';

@@ -138,12 +138,20 @@ export type SequenceCaution = {
   evidences?: Evidence[];
 };
 
+export type SubcellularLocation = {
+  commentType: CommentType.SUBCELLULAR_LOCATION;
+  locations: (
+    | { location: { value: string; evidences: Evidence[] } }
+    | { topology: { value: string; evidences: Evidence[] } })[];
+};
+
 type Comment =
   | FreeText
   | CatalyticActivity
   | DiseaseComment
   | InteractionComment
   | AlternativeProducts
-  | SequenceCaution;
+  | SequenceCaution
+  | SubcellularLocation;
 
 export default Comment;
