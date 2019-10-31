@@ -34,7 +34,7 @@ const resultsInitialState = {
     'gene_names',
     'organism',
     'keyword',
-    'cc:function',
+    'cc_function',
     'sequence',
   ],
   results: [],
