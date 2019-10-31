@@ -98,14 +98,17 @@ const VariationView: FC<{ primaryAccession: string }> = ({
     },
     consequence: {
       label: 'Consequence',
+      child: true,
       resolver: (d: ProtvistaVariant) => d.consequenceType,
     },
     sift: {
       label: 'SIFT prediction',
+      child: true,
       resolver: (d: ProtvistaVariant) => `${d.siftPrediction} (${d.siftScore})`,
     },
     polyphen: {
       label: 'Polyphen prediction',
+      child: true,
       resolver: (d: ProtvistaVariant) =>
         `${d.polyphenPrediction} (${d.polyphenScore})`,
     },
@@ -127,16 +130,19 @@ const VariationView: FC<{ primaryAccession: string }> = ({
         );
       },
     },
-    // sourceType: {
-    //   label: 'Source',
-    //   resolver: (d: ProtvistaVariant) => d.sourceType,
-    // },
     somaticStatus: {
       label: 'Somatic',
+      child: true,
       resolver: (d: ProtvistaVariant) => (d.somaticStatus === 1 ? 'Yes' : 'No'),
+    },
+    hasDisease: {
+      label: 'Disease association',
+      resolver: (d: ProtvistaVariant) =>
+        d.association && d.association.length > 0 ? 'Y' : 'N',
     },
     association: {
       label: 'Disease association',
+      child: true,
       resolver: (d: ProtvistaVariant) =>
         d.association
           ? d.association.map(association => {
@@ -192,19 +198,21 @@ const VariationView: FC<{ primaryAccession: string }> = ({
   }
 
   return (
-    <div className="variation-view">
+    <div>
       <h4>Variants</h4>
       <protvista-manager attributes="highlight displaystart displayend activefilters filters">
-        <protvista-navigation length={data.sequence.length} />
-        <protvista-sequence
-          length={data.sequence.length}
-          sequence={data.sequence}
-          height="20"
-        />
-        <protvista-filter />
-        <protvista-variation length={data.sequence.length}>
-          <protvista-variation-adapter ref={setTrackData} />
-        </protvista-variation>
+        <div className="variation-view">
+          <protvista-navigation length={data.sequence.length} />
+          <protvista-sequence
+            length={data.sequence.length}
+            sequence={data.sequence}
+            height="20"
+          />
+          <protvista-filter />
+          <protvista-variation length={data.sequence.length}>
+            <protvista-variation-adapter ref={setTrackData} />
+          </protvista-variation>
+        </div>
         <protvista-datatable ref={setTableData} />
       </protvista-manager>
       <div
