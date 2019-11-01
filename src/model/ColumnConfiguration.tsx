@@ -15,6 +15,7 @@ import ProteomesView from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
 import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
+import { Flag } from './uniprotkb/sections/SequenceConverter';
 
 const ColumnConfiguration: {
   [index: string]: {
@@ -52,7 +53,7 @@ const ColumnConfiguration: {
     label: 'Length',
     render: data => {
       const { sequence } = data[EntrySection.Sequence];
-      return sequence && numberView({value: sequence.length, unit:Unit.DA});
+      return sequence && numberView({ value: sequence.length, unit: Unit.AA });
     },
   },
   gene_primary: {
@@ -160,7 +161,7 @@ const ColumnConfiguration: {
       );
     },
   },
-  'dr:proteomes': {
+  dr_proteomes: {
     label: 'Proteomes',
     render: data => {
       const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
@@ -218,10 +219,29 @@ const ColumnConfiguration: {
       return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
     },
   },
-  // fragment ,
-  // gene_location ,
-  // length ,
-  // mass ,
+  fragment: {
+    label: 'Fragment',
+    render: data => {
+      const { flag } = data[EntrySection.Sequence];
+      const isFragment =
+        flag &&
+        [
+          Flag.FRAGMENT,
+          Flag.FRAGMENTS,
+          Flag.FRAGMENTS_PRECURSOR,
+          Flag.FRAGMENT_PRECURSOR,
+        ].includes(flag);
+      return flag && <Fragment>{isFragment ? flag : 'N'}</Fragment>;
+    },
+  },
+  // gene_location ,  "Invalid fields parameter value 'gene_location'"
+  mass: {
+    label: 'Mass',
+    render: data => {
+      const { molWeight } = data[EntrySection.Sequence];
+      return numberView({ value: molWeight, unit: Unit.DA });
+    },
+  },
   // cc:mass_spectrometry ,
   // ft:variant ,
   // ft:non_con ,

@@ -39,7 +39,7 @@ exports[`ColumnConfiguration component should render all columns 3`] = `
 
 exports[`ColumnConfiguration component should render all columns 4`] = `
 <DocumentFragment>
-  10 Da
+  10 AA
 </DocumentFragment>
 `;
 
@@ -240,5 +240,17 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
       </div>
     </div>
   </section>
+</DocumentFragment>
+`;
+
+exports[`ColumnConfiguration component should render all columns 17`] = `
+<DocumentFragment>
+  Fragment
+</DocumentFragment>
+`;
+
+exports[`ColumnConfiguration component should render all columns 18`] = `
+<DocumentFragment>
+  1,185 Da
 </DocumentFragment>
 `;

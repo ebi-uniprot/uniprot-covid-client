@@ -94,6 +94,8 @@ describe('Sequence data converter', () => {
         value: 'SAPSQDFMRF',
       },
       status: 'Fragment',
+      flag: 'Fragment',
+      molWeight: 1185,
       xrefData: [
         {
           category: 'GMA',

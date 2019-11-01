@@ -20,13 +20,7 @@ export type ResultsState = {
 };
 
 const resultsInitialState = {
-  tableColumns: [
-    'accession',
-    'id',
-    'protein_name',
-    'gene_names',
-    'error_gmodel_pred',
-  ],
+  tableColumns: ['accession', 'id', 'protein_name', 'gene_names', 'mass'],
   cardColumns: [
     'accession',
     'id',

@@ -5,7 +5,7 @@ export enum Unit {
   AA = 'AA',
 }
 
-const numberView = ({ value, unit }: { value: number; unit?: Unit }): string =>
-  `${formatLargeNumber(value)}${unit ? ` ${unit}` : ''}`;
+const numberView = ({ value, unit }: { value?: number; unit?: Unit }): string =>
+  value ? `${formatLargeNumber(value)}${unit ? ` ${unit}` : ''}` : '';
 
 export default numberView;

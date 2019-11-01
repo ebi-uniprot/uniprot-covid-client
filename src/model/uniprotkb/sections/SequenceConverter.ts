@@ -25,6 +25,7 @@ export enum Flag {
 
 export type SequenceUIModel = {
   sequence: SequenceData;
+  flag?: Flag;
   status?: string;
   processing?: string;
   keywordData: KeywordUIModel[];
@@ -33,6 +34,7 @@ export type SequenceUIModel = {
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
+  molWeight?: number;
 };
 
 const sequenceKeywords = [KeywordCategory.CODING_SEQUENCE_DIVERSITY];
@@ -55,8 +57,12 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
     xrefData: [],
   };
 
+  sequenceData.molWeight = data.sequence.molWeight;
+
   // Deal with flags
   if (data.proteinDescription && data.proteinDescription.flag) {
+    sequenceData.flag = data.proteinDescription.flag;
+
     sequenceData.status = [
       Flag.FRAGMENT,
       Flag.FRAGMENTS,
