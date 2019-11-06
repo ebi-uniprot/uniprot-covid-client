@@ -19,6 +19,23 @@ import {
   MassSpectrometryView,
 } from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
+import FeatureType from './types/FeatureType';
+
+const getFeatureColumn = (type: FeatureType) => {
+  return {
+    label: type,
+    render: (data: UniProtkbUIModel) => {
+      const { featuresData } = data[EntrySection.Sequence];
+      return (
+        featuresData && (
+          <FeaturesView
+            features={featuresData.filter(feature => feature.type === type)}
+          />
+        )
+      );
+    },
+  };
+};
 
 const ColumnConfiguration: {
   [index: string]: {
@@ -204,7 +221,7 @@ const ColumnConfiguration: {
   // TODO split isoforms from main sequence view
   // cc:alternative_products ,
 
-  'ft:var_seq': {
+  ft_var_seq: {
     label: 'Alternative sequence',
     render: data => {
       const { featuresData } = data[EntrySection.Sequence];
@@ -254,35 +271,34 @@ const ColumnConfiguration: {
       );
     },
   },
-  // cc:mass_spectrometry ,
   // ft:variant ,
-  // ft:non_con ,
-  // ft:non_std ,
-  // ft:non_ter ,
+  ft_non_con: getFeatureColumn(FeatureType.NON_CONS),
+  ft_non_std: getFeatureColumn(FeatureType.NON_STD),
+  ft_non_ter: getFeatureColumn(FeatureType.NON_TER),
   // cc:polymorphism ,
   // cc:rna_editing ,
   // sequence ,
   // cc:sequence_caution ,
-  // ft:conflict ,
-  // ft:unsure ,
+  ft_conflict: getFeatureColumn(FeatureType.CONFLICT),
+  ft_unsure: getFeatureColumn(FeatureType.UNSURE),
   // sequence_version ,
   // absorption ,
-  // ft:act_site ,
-  // ft:binding ,
-  // ft:ca_bind ,
+  ft_act_site: getFeatureColumn(FeatureType.ACT_SITE),
+  ft_binding: getFeatureColumn(FeatureType.BINDING),
+  ft_ca_bind: getFeatureColumn(FeatureType.CA_BIND),
   // cc:catalytic_activity ,
   // cc:cofactor ,
-  // ft:dna_bind ,
+  ft_dna_bind: getFeatureColumn(FeatureType.DNA_BIND),
   // ec ,
   // cc:enzyme_regulation ,
   // cc:function ,
   // kinetics ,
-  // ft:metal ,
-  // ft:np_bind ,
+  ft_metal: getFeatureColumn(FeatureType.METAL),
+  ft_np_bind: getFeatureColumn(FeatureType.NP_BINDL),
   // cc:pathway ,
   // ph_dependence ,
   // redox_potential ,
-  // ft:site ,
+  ft_site: getFeatureColumn(FeatureType.SITE),
   // temp_dependence ,
   // score ,
   // cc:caution ,
@@ -309,45 +325,45 @@ const ColumnConfiguration: {
   // cc:biotechnology ,
   // cc:disruption_phenotype ,
   // cc:disease ,
-  // ft:mutagen ,
+  ft_mutagen: getFeatureColumn(FeatureType.MUTAGEN),
   // cc:pharmaceutical ,
   // cc:toxic_dose ,
-  // ft:intramem ,
+  ft_intramem: getFeatureColumn(FeatureType.INTRAMEM),
   // cc:subcellular_location ,
-  // ft:top_dom ,
-  // ft:transmem ,
-  // ft:chain ,
-  // ft:crosslnk ,
-  // ft:disulfide ,
-  // ft:carbohyd ,
-  // ft:init_met ,
-  // ft:lipid ,
-  // ft:mod_res ,
-  // ft:peptide ,
+  ft_top_dom: getFeatureColumn(FeatureType.TOPO_DOM),
+  ft_transmem: getFeatureColumn(FeatureType.TRANSMEM),
+  ft_chain: getFeatureColumn(FeatureType.CHAIN),
+  ft_crosslnk: getFeatureColumn(FeatureType.CROSSLNK),
+  ft_disulfide: getFeatureColumn(FeatureType.DISULFID),
+  ft_carbohyd: getFeatureColumn(FeatureType.CARBOHYD),
+  ft_init_met: getFeatureColumn(FeatureType.INIT_MET),
+  ft_lipid: getFeatureColumn(FeatureType.LIPID),
+  ft_mod_res: getFeatureColumn(FeatureType.MOD_RES),
+  ft_peptide: getFeatureColumn(FeatureType.PEPTIDE),
   // cc:ptm ,
-  // ft:propep ,
-  // ft:signal ,
-  // ft:transit ,
+  ft_propep: getFeatureColumn(FeatureType.PROPEP),
+  ft_signal: getFeatureColumn(FeatureType.SIGNAL),
+  ft_transit: getFeatureColumn(FeatureType.TRANSIT),
   // 3d ,
-  // ft:strand ,
-  // ft:helix ,
-  // ft:turn ,
+  ft_strand: getFeatureColumn(FeatureType.STRAND),
+  ft_helix: getFeatureColumn(FeatureType.HELIX),
+  ft_turn: getFeatureColumn(FeatureType.TURN),
   // mapped_pm_id ,
   // pm_id ,
   // date_create ,
   // date_mod ,
   // date_seq_mod ,
   // version ,
-  // ft:coiled ,
-  // ft:compbias ,
+  ft_coiled: getFeatureColumn(FeatureType.COILED),
+  ft_compbias: getFeatureColumn(FeatureType.COMPBIAS),
   // cc:domain ,
-  // ft:domain ,
-  // ft:motif ,
+  ft_domain: getFeatureColumn(FeatureType.DOMAIN),
+  ft_motif: getFeatureColumn(FeatureType.MOTIF),
   // protein_families ,
-  // ft:region ,
-  // ft:repeat ,
+  ft_region: getFeatureColumn(FeatureType.REGION),
+  ft_repeat: getFeatureColumn(FeatureType.REPEAT),
   // cc:similarity ,
-  // ft:zn_fing ,
+  ft_zn_fing: getFeatureColumn(FeatureType.ZN_FING),
   // tl:all ,
   // tl:class ,
   // tl:cohort ,

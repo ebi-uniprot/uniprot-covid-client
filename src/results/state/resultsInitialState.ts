@@ -30,6 +30,7 @@ const resultsInitialState = {
     'keyword',
     'cc_function',
     'sequence',
+    'ft_variant',
   ],
   results: [],
   facets: [],
