@@ -254,3 +254,54 @@ exports[`ColumnConfiguration component should render all columns 18`] = `
   1,185 Da
 </DocumentFragment>
 `;
+
+exports[`ColumnConfiguration component should render all columns 19`] = `
+<DocumentFragment>
+  <section
+    class="text-block"
+  >
+    Molecular mass is 2.1 Da from positions 
+    <span>
+      1-7
+    </span>
+    . Determined by LSI. note value 
+    <span
+      class="evidence-tag svg-colour-unreviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 400 512"
+        width="12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+          id="Shape"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 automatic annotation
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Automatic assertion according to rules
+        </h5>
+        <div>
+          PIRNR:PIRNR001361
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;

@@ -14,7 +14,10 @@ import numberView, { Unit } from '../view/uniprotkb/components/NumberView';
 import ProteomesView from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
-import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
+import {
+  SequenceCautionView,
+  MassSpectrometryView,
+} from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
 
 const ColumnConfiguration: {
@@ -240,6 +243,15 @@ const ColumnConfiguration: {
     render: data => {
       const { molWeight } = data[EntrySection.Sequence];
       return numberView({ value: molWeight, unit: Unit.DA });
+    },
+  },
+  cc_mass_spectrometry: {
+    label: 'Mass Spectrometry',
+    render: data => {
+      const { massSpectrometry } = data[EntrySection.Sequence];
+      return (
+        massSpectrometry && <MassSpectrometryView data={massSpectrometry} />
+      );
     },
   },
   // cc:mass_spectrometry ,

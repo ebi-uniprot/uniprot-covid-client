@@ -20,7 +20,7 @@ export type ResultsState = {
 };
 
 const resultsInitialState = {
-  tableColumns: ['accession', 'id', 'protein_name', 'gene_names', 'mass'],
+  tableColumns: ['accession', 'id', 'protein_name', 'gene_names'],
   cardColumns: [
     'accession',
     'id',

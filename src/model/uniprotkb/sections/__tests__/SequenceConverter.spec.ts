@@ -96,6 +96,27 @@ describe('Sequence data converter', () => {
       status: 'Fragment',
       flag: 'Fragment',
       molWeight: 1185,
+      massSpectrometry: [
+        {
+          commentType: 'MASS SPECTROMETRY',
+          evidences: [
+            { evidenceCode: 'ECO:0000256', id: 'PIRNR001361', source: 'PIRNR' },
+          ],
+          method: 'LSI',
+          molWeight: 2.1,
+          molWeightError: 1.2,
+          note: 'note value',
+          ranges: [
+            {
+              isoformId: 'isoformId value',
+              range: {
+                end: { modifier: 'EXACT', value: 7 },
+                start: { modifier: 'EXACT', value: 1 },
+              },
+            },
+          ],
+        },
+      ],
       xrefData: [
         {
           category: 'GMA',

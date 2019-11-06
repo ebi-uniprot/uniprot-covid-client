@@ -138,11 +138,34 @@ export type SequenceCaution = {
   evidences?: Evidence[];
 };
 
+export type MassSpectrometry = {
+  commentType: CommentType.MASS_SPECTROMETRY;
+  method?: string;
+  note?: string;
+  molWeight: number;
+  molWeightError: number;
+  ranges: Range[];
+  evidences: Evidence[];
+};
+
 export type SubcellularLocation = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
   locations: (
     | { location: { value: string; evidences: Evidence[] } }
     | { topology: { value: string; evidences: Evidence[] } })[];
+};
+
+export type Range = {
+  range: {
+    start: {
+      value: number;
+      modifier?: string;
+    };
+    end: {
+      value: number;
+      modifier?: string;
+    };
+  };
 };
 
 type Comment =
@@ -152,6 +175,7 @@ type Comment =
   | InteractionComment
   | AlternativeProducts
   | SequenceCaution
-  | SubcellularLocation;
+  | SubcellularLocation
+  | MassSpectrometry;
 
 export default Comment;

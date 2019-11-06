@@ -12,6 +12,7 @@ import {
   CommentType,
   AlternativeProducts,
   SequenceCaution,
+  MassSpectrometry,
 } from '../../types/CommentTypes';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 
@@ -31,6 +32,7 @@ export type SequenceUIModel = {
   keywordData: KeywordUIModel[];
   alternativeProducts?: AlternativeProducts;
   sequenceCaution?: SequenceCaution[];
+  massSpectrometry?: MassSpectrometry[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
@@ -57,7 +59,9 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
     xrefData: [],
   };
 
-  sequenceData.molWeight = data.sequence.molWeight;
+  if (data.sequence) {
+    sequenceData.molWeight = data.sequence.molWeight;
+  }
 
   // Deal with flags
   if (data.proteinDescription && data.proteinDescription.flag) {
@@ -96,6 +100,10 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
       comment => comment.commentType === CommentType.SEQUENCE_CAUTION
     );
     sequenceData.sequenceCaution = sequenceCaution as SequenceCaution[];
+    const massSpec = data.comments.filter(
+      comment => comment.commentType === CommentType.MASS_SPECTROMETRY
+    );
+    sequenceData.massSpectrometry = massSpec as MassSpectrometry[];
   }
 
   if (data.keywords) {
