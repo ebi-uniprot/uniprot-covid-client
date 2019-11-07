@@ -122,27 +122,29 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
     association: {
       label: 'Disease association',
       child: true,
-      resolver: (d: ProtvistaVariant) =>
-        d.association
-          ? d.association.map(association => {
-              return html`
-                <p>
-                  ${association.name}
-                  ${association.evidences &&
-                    UniProtProtvistaEvidenceTag(
-                      association.evidences.map(evidence => {
-                        return ({
-                          evidenceCode: evidence.code,
-                          source: evidence.source.name,
-                          id: evidence.source.id,
-                        } as unknown) as Evidence;
-                      }),
-                      evidenceTagCallback
-                    )}
-                </p>
-              `;
-            })
-          : '',
+      resolver: (d: ProtvistaVariant) => {
+        if (!d.association) {
+          return '';
+        }
+        return d.association.map(association => {
+          return html`
+            <p>
+              ${association.name}
+              ${association.evidences &&
+                UniProtProtvistaEvidenceTag(
+                  association.evidences.map(evidence => {
+                    return ({
+                      evidenceCode: evidence.code,
+                      source: evidence.source.name,
+                      id: evidence.source.id,
+                    } as unknown) as Evidence;
+                  }),
+                  evidenceTagCallback
+                )}
+            </p>
+          `;
+        });
+      },
     },
   };
 };
