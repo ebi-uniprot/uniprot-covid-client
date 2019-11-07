@@ -1,8 +1,7 @@
-import React, { useCallback, FC, useState } from 'react';
+import React, { useCallback, FC } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
-import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaVariation from 'protvista-variation';
 import ProtvistaVariationAdapter from 'protvista-variation-adapter';
 import ProtvistaFilter, { ProtvistaCheckbox } from 'protvista-filter';
@@ -12,14 +11,11 @@ import useDataApi from '../../../utils/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
-import {
-  UniProtProtvistaEvidenceTag,
-  UniProtEvidenceTagContent,
-} from '../../../components/UniProtEvidenceTag';
+import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
-import { EvidenceData } from '../../../model/types/EvidenceCodes';
+import FeaturesTableView from './FeaturesTableView';
 
-type ProtvistaVariant = {
+export type ProtvistaVariant = {
   begin: number;
   end: number;
   type: FeatureType.VARIANT;
@@ -53,6 +49,14 @@ interface ChangeEvent extends Event {
   detail?: { type: string; value: string[] };
 }
 
+loadWebComponent('protvista-variation', ProtvistaVariation);
+loadWebComponent('protvista-navigation', ProtvistaNavigation);
+loadWebComponent('protvista-sequence', ProtvistaSequence);
+loadWebComponent('protvista-manager', ProtvistaManager);
+loadWebComponent('protvista-filter', ProtvistaFilter);
+loadWebComponent('protvista-checkbox', ProtvistaCheckbox);
+loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
+
 const formatVariantDescription = (description: string) => {
   /* eslint-disable no-useless-escape */
   const pattern = /\[(\w+)\]: ([^\[]+)/g;
@@ -60,32 +64,8 @@ const formatVariantDescription = (description: string) => {
   return match;
 };
 
-const VariationView: FC<{ primaryAccession: string }> = ({
-  primaryAccession,
-}) => {
-  loadWebComponent('protvista-variation', ProtvistaVariation);
-  loadWebComponent('protvista-navigation', ProtvistaNavigation);
-  loadWebComponent('protvista-sequence', ProtvistaSequence);
-  loadWebComponent('protvista-manager', ProtvistaManager);
-  loadWebComponent('protvista-datatable', ProtvistaDatatable);
-  loadWebComponent('protvista-filter', ProtvistaFilter);
-  loadWebComponent('protvista-checkbox', ProtvistaCheckbox);
-  loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
-
-  const [showEvidenceTagData, setShowEvidenceTagData] = useState(false);
-  const [selectedEvidenceData, setSelectedEvidenceData] = useState();
-  const [selectedReferences, setSelectedReferences] = useState();
-
-  const evidenceTagCallback = (
-    evidenceData: EvidenceData,
-    references: Evidence[] | undefined
-  ) => {
-    setSelectedEvidenceData(evidenceData);
-    setSelectedReferences(references);
-    setShowEvidenceTagData(true);
-  };
-
-  const columns = {
+const getColumnConfig = (evidenceTagCallback: any) => {
+  return {
     positions: {
       label: 'Position(s)',
       resolver: (d: ProtvistaVariant) =>
@@ -119,15 +99,14 @@ const VariationView: FC<{ primaryAccession: string }> = ({
           return html``;
         }
         const formatedDescription = formatVariantDescription(d.description);
-        return (
-          formatedDescription &&
-          formatedDescription.map(
-            descriptionLine =>
-              html`
-                <p>${descriptionLine}</p>
-              `
-          )
-        );
+        return formatedDescription
+          ? formatedDescription.map(
+              descriptionLine =>
+                html`
+                  <p>${descriptionLine}</p>
+                `
+            )
+          : html``;
       },
     },
     somaticStatus: {
@@ -166,7 +145,11 @@ const VariationView: FC<{ primaryAccession: string }> = ({
           : '',
     },
   };
+};
 
+const VariationView: FC<{ primaryAccession: string }> = ({
+  primaryAccession,
+}) => {
   const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
 
   const setTrackData = useCallback(
@@ -179,18 +162,6 @@ const VariationView: FC<{ primaryAccession: string }> = ({
       }
     },
     [data]
-  );
-
-  const setTableData = useCallback(
-    (node): void => {
-      if (node) {
-        // eslint-disable-next-line no-param-reassign
-        node.data = data.features;
-        // eslint-disable-next-line no-param-reassign
-        node.columns = columns;
-      }
-    },
-    [data, columns]
   );
 
   if (!data.sequence) {
@@ -213,19 +184,11 @@ const VariationView: FC<{ primaryAccession: string }> = ({
             <protvista-variation-adapter ref={setTrackData} />
           </protvista-variation>
         </div>
-        <protvista-datatable ref={setTableData} />
+        <FeaturesTableView
+          data={data.features}
+          getColumnConfig={getColumnConfig}
+        />
       </protvista-manager>
-      <div
-        className={`evidence-tag-content ${showEvidenceTagData &&
-          'evidence-tag-content--visible'}`}
-      >
-        {selectedEvidenceData && selectedReferences && (
-          <UniProtEvidenceTagContent
-            evidenceData={selectedEvidenceData}
-            references={selectedReferences}
-          />
-        )}
-      </div>
     </div>
   );
 };
