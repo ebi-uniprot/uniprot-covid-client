@@ -3,7 +3,7 @@ import { TemplateResult } from 'lit-html';
 import ProtvistaDatatable from 'protvista-datatable';
 import { UniProtEvidenceTagContent } from '../../../components/UniProtEvidenceTag';
 import { loadWebComponent } from '../../../utils/utils';
-import { ProtvistaFeature } from './FeaturesView';
+import { ProtvistaFeature, ProcessedFeature } from './FeaturesView';
 import { ProtvistaVariant } from './VariationView';
 import { EvidenceData } from '../../../model/types/EvidenceCodes';
 import { Evidence } from '../../../model/types/modelTypes';
@@ -20,8 +20,13 @@ type FeatureColumns = {
 };
 
 const FeaturesTableView: FC<{
-  data: any;
-  getColumnConfig: (callback: any) => FeatureColumns;
+  data: ProcessedFeature[] | ProtvistaVariant[];
+  getColumnConfig: (
+    callback: (
+      evidenceData: EvidenceData,
+      references: Evidence[] | undefined
+    ) => void
+  ) => FeatureColumns;
 }> = ({ data, getColumnConfig }) => {
   const [showEvidenceTagData, setShowEvidenceTagData] = useState(false);
   const [selectedEvidenceData, setSelectedEvidenceData] = useState();

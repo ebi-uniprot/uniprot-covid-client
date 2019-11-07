@@ -9,6 +9,7 @@ import { Evidence } from '../../../model/types/modelTypes';
 import FeatureType from '../../../model/types/FeatureType';
 import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
 import FeaturesTableView from './FeaturesTableView';
+import { EvidenceData } from '../../../model/types/EvidenceCodes';
 
 enum LocationModifier {
   EXACT = 'EXACT',
@@ -48,7 +49,7 @@ type FeatureProps = {
   features: FeatureData;
 };
 
-type ProcessedDatum = {
+export type ProcessedFeature = {
   accession: string | undefined;
   start: number;
   end: number;
@@ -59,9 +60,9 @@ type ProcessedDatum = {
   evidences: Evidence[] | undefined;
 };
 
-const processData = (data: FeatureData): ProcessedDatum[] =>
+const processData = (data: FeatureData): ProcessedFeature[] =>
   data.map(
-    (feature): ProcessedDatum => {
+    (feature): ProcessedFeature => {
       return {
         accession: feature.featureId,
         start: feature.location.start.value,
@@ -86,7 +87,12 @@ const FeaturesView: React.FC<FeatureProps> = ({
 
   const processedData = processData(features);
 
-  const getColumnConfig = (evidenceTagCallback: any) => {
+  const getColumnConfig = (
+    evidenceTagCallback: (
+      evidenceData: EvidenceData,
+      references: Evidence[] | undefined
+    ) => void
+  ) => {
     return {
       type: {
         label: 'Type',

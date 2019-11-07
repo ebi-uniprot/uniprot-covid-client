@@ -14,6 +14,7 @@ import './styles/VariationView.scss';
 import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
 import FeaturesTableView from './FeaturesTableView';
+import { EvidenceData } from '../../../model/types/EvidenceCodes';
 
 export type ProtvistaVariant = {
   begin: number;
@@ -64,7 +65,12 @@ const formatVariantDescription = (description: string) => {
   return match;
 };
 
-const getColumnConfig = (evidenceTagCallback: any) => {
+const getColumnConfig = (
+  evidenceTagCallback: (
+    evidenceData: EvidenceData,
+    references: Evidence[] | undefined
+  ) => void
+) => {
   return {
     positions: {
       label: 'Position(s)',
@@ -106,13 +112,13 @@ const getColumnConfig = (evidenceTagCallback: any) => {
                   <p>${descriptionLine}</p>
                 `
             )
-          : html``;
+          : '';
       },
     },
     somaticStatus: {
       label: 'Somatic',
       child: true,
-      resolver: (d: ProtvistaVariant) => (d.somaticStatus === 1 ? 'Yes' : 'No'),
+      resolver: (d: ProtvistaVariant) => (d.somaticStatus === 1 ? 'Y' : 'N'),
     },
     hasDisease: {
       label: 'Disease association',
