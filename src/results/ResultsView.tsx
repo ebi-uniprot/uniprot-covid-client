@@ -9,7 +9,9 @@ import {
   SortDirection,
 } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
-import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
+import uniProtKbConverter, {
+  UniProtkbAPIModel,
+} from '../model/uniprotkb/UniProtkbConverter';
 import { ViewMode } from './state/resultsInitialState';
 import ProteinSummary from '../view/uniprotkb/summary/ProteinSummary';
 
@@ -42,25 +44,6 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   viewMode,
   summaryAccession,
 }) => {
-  const columns = tableColumns.map(columnName => {
-    let render;
-    if (columnName in ColumnConfiguration) {
-      render = (row: UniProtkbAPIModel) =>
-        ColumnConfiguration[columnName].render(row);
-    } else {
-      render = () => (
-        <div className="warning">{`${columnName} has no render method`}</div>
-      );
-    }
-    const attributes = ColumnConfiguration[columnName];
-    return {
-      label: attributes.label,
-      name: columnName,
-      render,
-      sortable: columnName in SortableColumn,
-      sorted: columnName === sortColumn ? sortDirection : null,
-    };
-  });
   const hasMoreData = totalNumberResults > results.length;
   if (viewMode === ViewMode.CARD) {
     return (
@@ -86,6 +69,25 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
+  const columns = tableColumns.map(columnName => {
+    let render;
+    if (columnName in ColumnConfiguration) {
+      render = (row: UniProtkbAPIModel) =>
+        ColumnConfiguration[columnName].render(uniProtKbConverter(row));
+    } else {
+      render = () => (
+        <div className="warning">{`${columnName} has no render method`}</div>
+      );
+    }
+    const { label } = ColumnConfiguration[columnName];
+    return {
+      label,
+      name: columnName,
+      render,
+      sortable: columnName in SortableColumn,
+      sorted: columnName === sortColumn ? sortDirection : null,
+    };
+  });
   return (
     <DataTable
       idKey="primaryAccession"

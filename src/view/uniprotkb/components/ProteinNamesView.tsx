@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { InfoList, ExpandableList } from 'franklin-sites';
 import { v1 } from 'uuid';
-import NameView from './NameView';
 import {
   ProteinNames,
   ProteinNamesData,
@@ -9,26 +8,6 @@ import {
 } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { ValueWithEvidence } from '../../../model/types/modelTypes';
-
-type ProteinNamesDataProps = {
-  recommendedName?: string;
-  shortNames?: string;
-  alternativeNames?: string[];
-};
-
-// TODO this should be split into 2 components, one for columns and one for entry
-export const ProteinNamesView: React.FC<ProteinNamesDataProps> = ({
-  recommendedName,
-  shortNames,
-  alternativeNames,
-}): JSX.Element => {
-  const props = {
-    name: recommendedName,
-    shortNames,
-    alternativeNames,
-  };
-  return <NameView {...props} />;
-};
 
 const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
   data,
@@ -39,15 +18,20 @@ const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
   </Fragment>
 );
 
-const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
-  names,
-}): JSX.Element | null => {
+const ProteinNamesViewFlat: React.FC<{
+  names?: ProteinNames;
+  includeEvidence?: boolean;
+}> = ({ names, includeEvidence = false }): JSX.Element | null => {
   if (!names) {
     return null;
   }
   return (
     <Fragment>
-      <NameWithEvidence data={names.fullName} />
+      {includeEvidence ? (
+        <NameWithEvidence data={names.fullName} />
+      ) : (
+        `${names.fullName.value}`
+      )}
       {names.shortNames && (
         <Fragment>
           {' ('}
@@ -55,7 +39,11 @@ const ProteinNamesViewFlat: React.FC<{ names?: ProteinNames }> = ({
             (shortName, index): JSX.Element => (
               <Fragment key={v1()}>
                 {index > 0 && '; '}
-                <NameWithEvidence data={shortName} />
+                {includeEvidence ? (
+                  <NameWithEvidence data={shortName} />
+                ) : (
+                  `${shortName.value}`
+                )}
               </Fragment>
             )
           )}
@@ -94,14 +82,19 @@ const ProteinDescriptionView: React.FC<{
 };
 
 const getInfoListForNames = (
-  name: ProteinNames
+  name: ProteinNames,
+  isCompact: boolean
 ): { title: string; content: JSX.Element }[] => {
   const infoData = [];
 
   if (name.fullName) {
     infoData.push({
       title: 'Recommended name',
-      content: <NameWithEvidence data={name.fullName} />,
+      content: isCompact ? (
+        <Fragment>{name.fullName.value}</Fragment>
+      ) : (
+        <NameWithEvidence data={name.fullName} />
+      ),
     });
   }
   if (name.ecNumbers) {
@@ -110,9 +103,12 @@ const getInfoListForNames = (
       content: (
         <Fragment>
           {name.ecNumbers.map(
-            (ecNumber): JSX.Element => (
-              <NameWithEvidence data={ecNumber} key={v1()} />
-            )
+            (ecNumber): JSX.Element =>
+              isCompact ? (
+                <Fragment key={v1()}>{ecNumber.value}</Fragment>
+              ) : (
+                <NameWithEvidence data={ecNumber} key={v1()} />
+              )
           )}
         </Fragment>
       ),
@@ -127,7 +123,11 @@ const getInfoListForNames = (
             (shortName, i): JSX.Element => (
               <Fragment key={v1()}>
                 {i > 0 && '; '}
-                <NameWithEvidence data={shortName} />
+                {isCompact ? (
+                  shortName.value
+                ) : (
+                  <NameWithEvidence data={shortName} />
+                )}
               </Fragment>
             )
           )}
@@ -143,15 +143,16 @@ type ListElement = {
   content: JSX.Element;
 };
 
-export const EntryProteinNames: React.FC<{
+const ProteinNamesView: React.FC<{
   proteinNames?: ProteinNamesData;
-}> = ({ proteinNames }): JSX.Element | null => {
+  isCompact?: boolean;
+}> = ({ proteinNames, isCompact = false }): JSX.Element | null => {
   if (!proteinNames) {
     return null;
   }
   let infoData: { title: string; content: JSX.Element }[] = [];
   if (proteinNames.recommendedName) {
-    infoData = getInfoListForNames(proteinNames.recommendedName);
+    infoData = getInfoListForNames(proteinNames.recommendedName, isCompact);
   }
   if (proteinNames.alternativeNames) {
     infoData.push({
@@ -161,7 +162,12 @@ export const EntryProteinNames: React.FC<{
           {proteinNames.alternativeNames.map(
             (alternativeName): ListElement => ({
               id: v1(),
-              content: <ProteinNamesViewFlat names={alternativeName} />,
+              content: (
+                <ProteinNamesViewFlat
+                  names={alternativeName}
+                  includeEvidence={!isCompact}
+                />
+              ),
             })
           )}
         </ExpandableList>
@@ -191,7 +197,12 @@ export const EntryProteinNames: React.FC<{
           {proteinNames.submissionNames.map(
             (submission): ListElement => ({
               id: v1(),
-              content: <ProteinNamesViewFlat names={submission} />,
+              content: (
+                <ProteinNamesViewFlat
+                  names={submission}
+                  includeEvidence={!isCompact}
+                />
+              ),
             })
           )}
         </ExpandableList>
@@ -201,27 +212,43 @@ export const EntryProteinNames: React.FC<{
   if (proteinNames.biotechName) {
     infoData.push({
       title: 'Biotech name',
-      content: <NameWithEvidence data={proteinNames.biotechName} />,
+      content: isCompact ? (
+        <Fragment>{proteinNames.biotechName.value}</Fragment>
+      ) : (
+        <NameWithEvidence data={proteinNames.biotechName} />
+      ),
     });
   }
 
   if (proteinNames.cdAntigenNames) {
     infoData.push({
       title: 'CD Antigen Name',
-      content: <NameWithEvidence data={proteinNames.cdAntigenNames} />,
+      content: isCompact ? (
+        <Fragment>{proteinNames.cdAntigenNames.value}</Fragment>
+      ) : (
+        <NameWithEvidence data={proteinNames.cdAntigenNames} />
+      ),
     });
   }
 
   if (proteinNames.innNames) {
     infoData.push({
       title: 'INN Name',
-      content: <NameWithEvidence data={proteinNames.innNames} />,
+      content: isCompact ? (
+        <Fragment>{proteinNames.innNames.value}</Fragment>
+      ) : (
+        <NameWithEvidence data={proteinNames.innNames} />
+      ),
     });
   }
 
   return (
-    <Fragment>
-      <InfoList infoData={infoData} />
-    </Fragment>
+    <InfoList
+      infoData={infoData}
+      isCompact={isCompact}
+      highlightFirstItem={isCompact}
+    />
   );
 };
+
+export default ProteinNamesView;

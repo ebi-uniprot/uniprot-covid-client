@@ -20,7 +20,13 @@ export type ResultsState = {
 };
 
 const resultsInitialState = {
-  tableColumns: ['accession', 'id', 'protein_name', 'gene_names', 'organism'],
+  tableColumns: [
+    'accession',
+    'id',
+    'protein_name',
+    'gene_names',
+    'error_gmodel_pred',
+  ],
   cardColumns: [
     'accession',
     'id',
@@ -28,7 +34,7 @@ const resultsInitialState = {
     'gene_names',
     'organism',
     'keyword',
-    'cc:function',
+    'cc_function',
     'sequence',
   ],
   results: [],
