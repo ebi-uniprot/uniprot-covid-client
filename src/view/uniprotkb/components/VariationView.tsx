@@ -84,13 +84,16 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
     sift: {
       label: 'SIFT prediction',
       child: true,
-      resolver: (d: ProtvistaVariant) => `${d.siftPrediction} (${d.siftScore})`,
+      resolver: (d: ProtvistaVariant) =>
+        d.siftPrediction ? `${d.siftPrediction} (${d.siftScore})` : '',
     },
     polyphen: {
       label: 'Polyphen prediction',
       child: true,
       resolver: (d: ProtvistaVariant) =>
-        `${d.polyphenPrediction} (${d.polyphenScore})`,
+        d.polyphenPrediction
+          ? `${d.polyphenPrediction} (${d.polyphenScore})`
+          : '',
     },
     description: {
       label: 'Description',
