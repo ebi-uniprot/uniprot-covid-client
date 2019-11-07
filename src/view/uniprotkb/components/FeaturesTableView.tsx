@@ -19,6 +19,11 @@ type FeatureColumns = {
   };
 };
 
+export type FeaturesTableCallback = (
+  evidenceData: EvidenceData,
+  references: Evidence[] | undefined
+) => void;
+
 const FeaturesTableView: FC<{
   data: ProcessedFeature[] | ProtvistaVariant[];
   getColumnConfig: (
@@ -32,9 +37,9 @@ const FeaturesTableView: FC<{
   const [selectedEvidenceData, setSelectedEvidenceData] = useState();
   const [selectedReferences, setSelectedReferences] = useState();
 
-  const evidenceTagCallback = (
-    evidenceData: EvidenceData,
-    references: Evidence[] | undefined
+  const evidenceTagCallback: FeaturesTableCallback = (
+    evidenceData,
+    references
   ) => {
     setSelectedEvidenceData(evidenceData);
     setSelectedReferences(references);

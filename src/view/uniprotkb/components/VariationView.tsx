@@ -13,8 +13,7 @@ import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
 import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
-import FeaturesTableView from './FeaturesTableView';
-import { EvidenceData } from '../../../model/types/EvidenceCodes';
+import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
 
 export type ProtvistaVariant = {
   begin: number;
@@ -65,12 +64,7 @@ const formatVariantDescription = (description: string) => {
   return match;
 };
 
-const getColumnConfig = (
-  evidenceTagCallback: (
-    evidenceData: EvidenceData,
-    references: Evidence[] | undefined
-  ) => void
-) => {
+const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
   return {
     positions: {
       label: 'Position(s)',

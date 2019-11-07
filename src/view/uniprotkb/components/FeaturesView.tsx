@@ -8,8 +8,7 @@ import { loadWebComponent } from '../../../utils/utils';
 import { Evidence } from '../../../model/types/modelTypes';
 import FeatureType from '../../../model/types/FeatureType';
 import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
-import FeaturesTableView from './FeaturesTableView';
-import { EvidenceData } from '../../../model/types/EvidenceCodes';
+import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
 
 enum LocationModifier {
   EXACT = 'EXACT',
@@ -87,12 +86,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
 
   const processedData = processData(features);
 
-  const getColumnConfig = (
-    evidenceTagCallback: (
-      evidenceData: EvidenceData,
-      references: Evidence[] | undefined
-    ) => void
-  ) => {
+  const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
     return {
       type: {
         label: 'Type',
