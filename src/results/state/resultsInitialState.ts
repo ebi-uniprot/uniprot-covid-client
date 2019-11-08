@@ -25,7 +25,8 @@ const resultsInitialState = {
     'id',
     'protein_name',
     'gene_names',
-    'cc_rna_editing',
+    'organism',
+    'length',
   ],
   cardColumns: [
     'accession',

@@ -292,7 +292,13 @@ const ColumnConfiguration: {
     },
   },
   // sequence ,
-  // cc:sequence_caution ,
+  cc_sequence_caution: {
+    label: 'Sequence Caution',
+    render: data => {
+      const { sequenceCaution } = data[EntrySection.Sequence];
+      return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
+    },
+  },
   ft_conflict: getFeatureColumn(FeatureType.CONFLICT),
   ft_unsure: getFeatureColumn(FeatureType.UNSURE),
   // sequence_version ,
