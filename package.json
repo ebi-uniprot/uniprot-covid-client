@@ -59,7 +59,7 @@
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
-    "protvista-datatable": "^2.2.8",
+    "protvista-datatable": "^2.2.15",
     "protvista-feature-adapter": "^2.1.15",
     "protvista-filter": "^2.1.17",
     "protvista-manager": "^2.1.13",

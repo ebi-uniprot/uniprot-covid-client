@@ -7568,10 +7568,10 @@ prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-protvista-datatable@^2.2.8:
-  version "2.2.13"
-  resolved "https://registry.yarnpkg.com/protvista-datatable/-/protvista-datatable-2.2.13.tgz#291654a82baeffe21bcca49ffbf7d236d3d74d85"
-  integrity sha512-xATDbGfWvP1fXgQbNAf7/huSyCNM/qBOBSWcEdl6lV03U/1EQqitzc2ivFpkJ/5hNFkLmiamB/jkYe19Zau8nw==
+protvista-datatable@^2.2.15:
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/protvista-datatable/-/protvista-datatable-2.2.15.tgz#dfd1a09e374a2ded87c80294e4b6081233991e2a"
+  integrity sha512-EOhzBFAUcjM9SVHm6qIsjFGfNVmQLdZu+OWrbR8ZIZ9KZJyeBYeaHnEejd9vWyBnkke7t7lhTitpgZt2tvMeOA==
   dependencies:
     lit-element "^2.1.0"
     uuid "^3.3.2"
