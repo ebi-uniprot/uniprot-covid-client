@@ -13,6 +13,8 @@ import {
   AlternativeProducts,
   SequenceCaution,
   MassSpectrometry,
+  FreeText,
+  RNAEditing,
 } from '../../types/CommentTypes';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 
@@ -33,6 +35,8 @@ export type SequenceUIModel = {
   alternativeProducts?: AlternativeProducts;
   sequenceCaution?: SequenceCaution[];
   massSpectrometry?: MassSpectrometry[];
+  polymorphysm?: FreeText[];
+  rnaEditing?: RNAEditing[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
@@ -104,6 +108,14 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
       comment => comment.commentType === CommentType.MASS_SPECTROMETRY
     );
     sequenceData.massSpectrometry = massSpec as MassSpectrometry[];
+    const polymorphysm = data.comments.filter(
+      comment => comment.commentType === CommentType.POLYMORPHISM
+    );
+    sequenceData.polymorphysm = polymorphysm as FreeText[];
+    const rnaEditing = data.comments.filter(
+      comment => comment.commentType === CommentType.RNA_EDITING
+    );
+    sequenceData.rnaEditing = rnaEditing as RNAEditing[];
   }
 
   if (data.keywords) {

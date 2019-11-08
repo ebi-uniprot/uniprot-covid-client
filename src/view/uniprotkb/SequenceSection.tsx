@@ -8,8 +8,10 @@ import XRefView from './components/XRefView';
 import SequenceView, {
   SequenceCautionView,
   MassSpectrometryView,
+  RNAEditingView,
 } from './components/SequenceView';
 import { SequenceUIModel } from '../../model/uniprotkb/sections/SequenceConverter';
+import FreeTextView from './components/FreeTextView';
 
 const SequenceSection: FC<{
   data: SequenceUIModel;
@@ -32,10 +34,22 @@ const SequenceSection: FC<{
             <SequenceCautionView data={data.sequenceCaution} />
           </Fragment>
         )}
-        {data.massSpectrometry && (
+        {data.massSpectrometry && data.massSpectrometry.length > 0 && (
           <Fragment>
             <h4>Mass Spectrometry</h4>
             <MassSpectrometryView data={data.massSpectrometry} />
+          </Fragment>
+        )}
+        {data.polymorphysm && data.polymorphysm.length > 0 && (
+          <Fragment>
+            <h4>Polymorphysm</h4>
+            <FreeTextView comments={data.polymorphysm} />
+          </Fragment>
+        )}
+        {data.rnaEditing && data.rnaEditing.length > 0 && (
+          <Fragment>
+            <h4>RNA Editing</h4>
+            <RNAEditingView data={data.rnaEditing} />
           </Fragment>
         )}
         <KeywordView keywords={data.keywordData} />

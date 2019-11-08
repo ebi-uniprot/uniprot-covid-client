@@ -6,6 +6,7 @@ import {
   Isoform,
   SequenceCaution,
   MassSpectrometry,
+  RNAEditing,
 } from '../../../model/types/CommentTypes';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
@@ -166,6 +167,41 @@ export const MassSpectrometryView: React.FC<{ data: MassSpectrometry[] }> = ({
         ))}
         . Determined by {item.method}. {item.note}{' '}
         <UniProtEvidenceTag evidences={item.evidences} />
+      </section>
+    ))}
+  </Fragment>
+);
+
+export const RNAEditingView: React.FC<{ data: RNAEditing[] }> = ({ data }) => (
+  <Fragment>
+    {data.map(item => (
+      <section
+        className="text-block"
+        key={`${item.positions.map(pos => pos.position).join('')}`}
+      >
+        {item.positions && (
+          <div>
+            {'Edited at positions '}
+            {item.positions.map(position => (
+              <span key={position.position}>
+                {position.position}{' '}
+                <UniProtEvidenceTag evidences={position.evidences} />
+              </span>
+            ))}
+          </div>
+        )}
+        {item.note && (
+          <div>
+            {item.note.texts.map(text => (
+              <span key={text.value}>
+                {text.value}{' '}
+                {text.evidences && (
+                  <UniProtEvidenceTag evidences={text.evidences} />
+                )}
+              </span>
+            ))}
+          </div>
+        )}
       </section>
     ))}
   </Fragment>

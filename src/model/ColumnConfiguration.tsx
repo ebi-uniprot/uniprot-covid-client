@@ -17,9 +17,11 @@ import EntrySection from './types/EntrySection';
 import {
   SequenceCautionView,
   MassSpectrometryView,
+  RNAEditingView,
 } from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
 import FeatureType from './types/FeatureType';
+import FreeTextView from '../view/uniprotkb/components/FreeTextView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -275,8 +277,20 @@ const ColumnConfiguration: {
   ft_non_con: getFeatureColumn(FeatureType.NON_CONS),
   ft_non_std: getFeatureColumn(FeatureType.NON_STD),
   ft_non_ter: getFeatureColumn(FeatureType.NON_TER),
-  // cc:polymorphism ,
-  // cc:rna_editing ,
+  cc_polymorphism: {
+    label: 'Polymorphysm',
+    render: data => {
+      const { polymorphysm } = data[EntrySection.Sequence];
+      return polymorphysm && <FreeTextView comments={polymorphysm} />;
+    },
+  },
+  cc_rna_editing: {
+    label: 'RNA Editing',
+    render: data => {
+      const { rnaEditing } = data[EntrySection.Sequence];
+      return rnaEditing && <RNAEditingView data={rnaEditing} />;
+    },
+  },
   // sequence ,
   // cc:sequence_caution ,
   ft_conflict: getFeatureColumn(FeatureType.CONFLICT),

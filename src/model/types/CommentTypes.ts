@@ -42,7 +42,8 @@ export type FreeTextType =
   | CommentType.PTM
   | CommentType.SIMILARITY
   | CommentType.SUBUNIT
-  | CommentType.TISSUE_SPECIFICITY;
+  | CommentType.TISSUE_SPECIFICITY
+  | CommentType.POLYMORPHISM;
 
 export type FreeText = {
   commentType: FreeTextType;
@@ -148,6 +149,18 @@ export type MassSpectrometry = {
   evidences: Evidence[];
 };
 
+export type RNAEditing = {
+  commentType: CommentType.RNA_EDITING;
+  locationType?: string;
+  positions: { position: number; evidences: Evidence[] }[];
+  note?: {
+    texts: {
+      value: string;
+      evidences?: Evidence[];
+    }[];
+  };
+};
+
 export type SubcellularLocation = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
   locations: (
@@ -176,6 +189,7 @@ type Comment =
   | AlternativeProducts
   | SequenceCaution
   | SubcellularLocation
-  | MassSpectrometry;
+  | MassSpectrometry
+  | RNAEditing;
 
 export default Comment;

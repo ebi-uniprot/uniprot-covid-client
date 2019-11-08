@@ -117,6 +117,39 @@ describe('Sequence data converter', () => {
           ],
         },
       ],
+      polymorphysm: [],
+      rnaEditing: [
+        {
+          commentType: 'RNA EDITING',
+          locationType: 'Known',
+          note: {
+            texts: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000256',
+                    id: 'PIRNR001361',
+                    source: 'PIRNR',
+                  },
+                ],
+                value: 'value',
+              },
+            ],
+          },
+          positions: [
+            {
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000256',
+                  id: 'PIRNR001361',
+                  source: 'PIRNR',
+                },
+              ],
+              position: 'rna position',
+            },
+          ],
+        },
+      ],
       xrefData: [
         {
           category: 'GMA',

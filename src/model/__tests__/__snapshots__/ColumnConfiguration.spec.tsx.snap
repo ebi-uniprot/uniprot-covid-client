@@ -314,7 +314,99 @@ exports[`ColumnConfiguration component should render all columns 22`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 23`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 24`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 24`] = `
+<DocumentFragment>
+  <section
+    class="text-block"
+  >
+    <div>
+      Edited at positions 
+      <span>
+        rna position 
+        <span
+          class="evidence-tag svg-colour-unreviewed"
+          data-testid="evidence-tag-trigger"
+          role="button"
+          tabindex="0"
+        >
+          <svg
+            height="12"
+            viewBox="0 0 400 512"
+            width="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+              id="Shape"
+            />
+          </svg>
+          <span
+            class="evidence-tag__label"
+            title=""
+          >
+            1 automatic annotation
+          </span>
+        </span>
+        <div
+          class="evidence-tag-content "
+          data-testid="evidence-tag-content"
+        >
+          <div>
+            <h5>
+              Automatic assertion according to rules
+            </h5>
+            <div>
+              PIRNR:PIRNR001361
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+    <div>
+      <span>
+        value 
+        <span
+          class="evidence-tag svg-colour-unreviewed"
+          data-testid="evidence-tag-trigger"
+          role="button"
+          tabindex="0"
+        >
+          <svg
+            height="12"
+            viewBox="0 0 400 512"
+            width="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+              id="Shape"
+            />
+          </svg>
+          <span
+            class="evidence-tag__label"
+            title=""
+          >
+            1 automatic annotation
+          </span>
+        </span>
+        <div
+          class="evidence-tag-content "
+          data-testid="evidence-tag-content"
+        >
+          <div>
+            <h5>
+              Automatic assertion according to rules
+            </h5>
+            <div>
+              PIRNR:PIRNR001361
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </section>
+</DocumentFragment>
+`;
 
 exports[`ColumnConfiguration component should render all columns 25`] = `<DocumentFragment />`;
 
@@ -379,3 +471,7 @@ exports[`ColumnConfiguration component should render all columns 54`] = `<Docume
 exports[`ColumnConfiguration component should render all columns 55`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 56`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 57`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 58`] = `<DocumentFragment />`;
