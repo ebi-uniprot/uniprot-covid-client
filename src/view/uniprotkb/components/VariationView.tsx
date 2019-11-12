@@ -99,7 +99,7 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
       label: 'Description',
       resolver: (d: ProtvistaVariant) => {
         if (!d.description) {
-          return html``;
+          return '';
         }
         const formatedDescription = formatVariantDescription(d.description);
         return formatedDescription
