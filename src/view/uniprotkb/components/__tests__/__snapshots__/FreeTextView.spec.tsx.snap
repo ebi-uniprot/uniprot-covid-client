@@ -2,11 +2,6 @@
 
 exports[`FreeText component should render free text CC 1`] = `
 <DocumentFragment>
-  <h4
-    style="text-transform: capitalize;"
-  >
-    function
-  </h4>
   <span
     class="text-block"
   >

@@ -45,9 +45,59 @@ export type FreeTextType =
   | CommentType.TISSUE_SPECIFICITY
   | CommentType.POLYMORPHISM;
 
+export type TextWithEvidence = { value: string; evidences: Evidence[] };
+
 export type FreeText = {
   commentType: FreeTextType;
-  texts?: [{ value: string; evidences: Evidence[] }];
+  texts?: TextWithEvidence[];
+};
+
+export type Absorption = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  absorption?: {
+    max: number;
+    approximate: boolean;
+    note?: {
+      texts: TextWithEvidence[];
+    };
+    evidences?: Evidence[];
+  };
+};
+
+export type Kinetics = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  kineticParameters?: {
+    michaelisConstants?: {
+      constant: number;
+      unit: string;
+      substrate: string;
+      evidences: Evidence[];
+    }[];
+    note: {
+      texts: TextWithEvidence[];
+    };
+  };
+};
+
+export type pHDependence = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  phDependence: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type RedoxPotential = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  redoxPotential: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type TemperatureDependence = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  temperatureDependence: {
+    texts: TextWithEvidence[];
+  };
 };
 
 export type CatalyticActivity = {
@@ -120,14 +170,14 @@ export type Isoform = {
   isoformSequenceStatus: string;
   isoformIds: string[];
   synonyms: { value: string }[];
-  note: { texts: { value: string }[] };
+  note: { texts: TextWithEvidence[] };
   sequenceIds: string[];
 };
 
 export type AlternativeProducts = {
   commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
-  note: { texts: { value: string }[] };
+  note: { texts: TextWithEvidence[] };
   events: string[];
 };
 
@@ -164,8 +214,8 @@ export type RNAEditing = {
 export type SubcellularLocation = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
   locations: (
-    | { location: { value: string; evidences: Evidence[] } }
-    | { topology: { value: string; evidences: Evidence[] } })[];
+    | { location: TextWithEvidence }
+    | { topology: TextWithEvidence })[];
 };
 
 export type Range = {
@@ -190,6 +240,11 @@ type Comment =
   | SequenceCaution
   | SubcellularLocation
   | MassSpectrometry
-  | RNAEditing;
+  | RNAEditing
+  | Absorption
+  | Kinetics
+  | pHDependence
+  | RedoxPotential
+  | TemperatureDependence;
 
 export default Comment;

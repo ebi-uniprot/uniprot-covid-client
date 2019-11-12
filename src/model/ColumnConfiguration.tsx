@@ -301,7 +301,13 @@ const ColumnConfiguration: {
   },
   ft_conflict: getFeatureColumn(FeatureType.CONFLICT),
   ft_unsure: getFeatureColumn(FeatureType.UNSURE),
-  // sequence_version ,
+  sequence_version: {
+    label: 'Sequence Version',
+    render: data => {
+      const { entryAudit } = data[EntrySection.Sequence];
+      return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
+    },
+  },
   // absorption ,
   ft_act_site: getFeatureColumn(FeatureType.ACT_SITE),
   ft_binding: getFeatureColumn(FeatureType.BINDING),
@@ -370,10 +376,34 @@ const ColumnConfiguration: {
   ft_turn: getFeatureColumn(FeatureType.TURN),
   // mapped_pm_id ,
   // pm_id ,
-  // date_create ,
-  // date_mod ,
-  // date_seq_mod ,
-  // version ,
+  date_create: {
+    label: 'Date Created',
+    render: data => {
+      const { entryAudit } = data[EntrySection.Sequence];
+      return entryAudit && entryAudit.firstPublicDate;
+    },
+  },
+  date_mod: {
+    label: 'Date Modified',
+    render: data => {
+      const { entryAudit } = data[EntrySection.Sequence];
+      return entryAudit && entryAudit.lastAnnotationUpdateDate;
+    },
+  },
+  date_seq_mod: {
+    label: 'Date Sequence Modified',
+    render: data => {
+      const { entryAudit } = data[EntrySection.Sequence];
+      return entryAudit && entryAudit.lastSequenceUpdateDate;
+    },
+  },
+  version: {
+    label: 'Version',
+    render: data => {
+      const { entryAudit } = data[EntrySection.Sequence];
+      return entryAudit && <span>{entryAudit.entryVersion}</span>;
+    },
+  },
   ft_coiled: getFeatureColumn(FeatureType.COILED),
   ft_compbias: getFeatureColumn(FeatureType.COMPBIAS),
   // cc:domain ,

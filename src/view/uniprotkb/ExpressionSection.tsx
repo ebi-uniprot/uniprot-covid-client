@@ -22,11 +22,11 @@ const ExpressionSection: FC<{
           comments={
             data.commentsData.get(CommentType.TISSUE_SPECIFICITY) as FreeText[]
           }
-          includeTitle
+          title={CommentType.TISSUE_SPECIFICITY.toLowerCase()}
         />
         <FreeTextView
           comments={data.commentsData.get(CommentType.INDUCTION) as FreeText[]}
-          includeTitle
+          title={CommentType.INDUCTION.toLowerCase()}
         />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />

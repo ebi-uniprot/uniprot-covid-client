@@ -12,7 +12,11 @@ import {
 import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
 import convertSubcellularLocation from './sections/SubcellularLocationConverter';
-import { convertSequence, SequenceUIModel } from './sections/SequenceConverter';
+import {
+  convertSequence,
+  SequenceUIModel,
+  EntryAudit,
+} from './sections/SequenceConverter';
 import { SequenceData } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import convertInteraction from './sections/InteractionConverter';
@@ -41,10 +45,7 @@ export type UniProtkbAPIModel = {
   databaseCrossReferences?: Xref[];
   sequence: SequenceData;
   annotationScore: number;
-  entryAudit?: {
-    lastSequenceUpdateDate: string;
-    sequenceVersion: string;
-  };
+  entryAudit?: EntryAudit;
   references?: {
     citation: {
       citationType?: string;

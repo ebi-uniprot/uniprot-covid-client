@@ -18,7 +18,12 @@ const InteractionSection: FC<{
   return (
     <div id={EntrySection.Interaction}>
       <Card title={EntrySection.Interaction}>
-        {comments && <FreeTextView comments={comments} includeTitle />}
+        {comments && (
+          <FreeTextView
+            comments={comments}
+            title={CommentType.SUBUNIT.toLowerCase()}
+          />
+        )}
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </div>

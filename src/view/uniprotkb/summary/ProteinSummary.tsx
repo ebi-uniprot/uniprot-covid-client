@@ -36,7 +36,7 @@ const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
               CommentType.SIMILARITY
             ) as FreeText[]
           }
-          includeTitle
+          title={CommentType.SIMILARITY.toLowerCase()}
         />
         <ProteinHighlights data={entryData} />
       </Card>

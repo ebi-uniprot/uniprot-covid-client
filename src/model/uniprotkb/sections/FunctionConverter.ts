@@ -30,18 +30,20 @@ const featuresCategories = [
 const commentsCategories = [
   CommentType.FUNCTION,
   CommentType.CATALYTIC_ACTIVITY,
+  CommentType.BIOPHYSICOCHEMICAL_PROPERTIES,
   CommentType.PATHWAY,
   CommentType.MISCELLANEOUS,
 ];
 
 const convertFunction = (data: UniProtkbAPIModel) => {
-  return convertSection(
+  const convertedSection = convertSection(
     data,
     commentsCategories,
     keywordsCategories,
     featuresCategories,
     EntrySection.Function
   );
+  return convertedSection;
 };
 
 export default convertFunction;

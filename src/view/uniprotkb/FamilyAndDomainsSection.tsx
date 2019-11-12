@@ -23,11 +23,11 @@ const FamilyAndDomainsSection: FC<{
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <FreeTextView
           comments={data.commentsData.get(CommentType.DOMAIN) as FreeText[]}
-          includeTitle
+          title={CommentType.DOMAIN.toLowerCase()}
         />
         <FreeTextView
           comments={data.commentsData.get(CommentType.SIMILARITY) as FreeText[]}
-          includeTitle
+          title={CommentType.SIMILARITY.toLowerCase()}
         />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />

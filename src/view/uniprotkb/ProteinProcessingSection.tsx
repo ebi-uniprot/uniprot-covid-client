@@ -24,7 +24,7 @@ const ProteinProcessingSection: FC<{
         <FeaturesView features={featuresData} sequence={sequence} />
         <FreeTextView
           comments={commentsData.get(CommentType.PTM) as FreeText[]}
-          includeTitle
+          title={CommentType.PTM.toLowerCase()}
         />
         <KeywordView keywords={keywordData} />
         <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />

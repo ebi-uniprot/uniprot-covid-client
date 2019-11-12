@@ -26,6 +26,14 @@ export enum Flag {
   FRAGMENTS_PRECURSOR = 'Fragments,Precursor',
 }
 
+export type EntryAudit = {
+  firstPublicDate: string;
+  lastAnnotationUpdateDate: string;
+  lastSequenceUpdateDate: string;
+  entryVersion: number;
+  sequenceVersion: number;
+};
+
 export type SequenceUIModel = {
   sequence: SequenceData;
   flag?: Flag;
@@ -40,6 +48,7 @@ export type SequenceUIModel = {
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
+  entryAudit?: EntryAudit;
   molWeight?: number;
 };
 
@@ -92,6 +101,7 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
   // Add the last update
   if (data.entryAudit) {
     sequenceData.lastUpdateDate = `${data.entryAudit.lastSequenceUpdateDate} v${data.entryAudit.sequenceVersion}`;
+    sequenceData.entryAudit = data.entryAudit;
   }
 
   // Trembl entries only have a canonical sequence

@@ -66,36 +66,17 @@ describe('Sequence data converter', () => {
           ],
         },
       },
-      sequenceCaution: [
-        {
-          commentType: 'SEQUENCE CAUTION',
-          evidences: [
-            {
-              evidenceCode: 'ECO:0000256',
-              id: 'PIRNR001361',
-              source: 'PIRNR',
-            },
-          ],
-          note: 'Text note',
-          positions: ['position'],
-          sequence: 'sequence',
-          sequenceCautionType: 'Erroneous initiation',
-        },
-      ],
+      entryAudit: {
+        entryVersion: 20,
+        firstPublicDate: '2015-08-02',
+        lastAnnotationUpdateDate: '2016-04-24',
+        lastSequenceUpdateDate: '2017-01-21',
+        sequenceVersion: 5,
+      },
       featuresData: [],
+      flag: 'Fragment',
       keywordData: [],
       lastUpdateDate: '2017-01-21 v5',
-      processing: undefined,
-      sequence: {
-        crc64: '3997D999CAB6C5A7',
-        length: 10,
-        md5: 'B1D4A86C222D0ED5500ABE909DD36218',
-        molWeight: 1185,
-        value: 'SAPSQDFMRF',
-      },
-      status: 'Fragment',
-      flag: 'Fragment',
-      molWeight: 1185,
       massSpectrometry: [
         {
           commentType: 'MASS SPECTROMETRY',
@@ -117,7 +98,9 @@ describe('Sequence data converter', () => {
           ],
         },
       ],
+      molWeight: 1185,
       polymorphysm: [],
+      processing: undefined,
       rnaEditing: [
         {
           commentType: 'RNA EDITING',
@@ -150,6 +133,26 @@ describe('Sequence data converter', () => {
           ],
         },
       ],
+      sequence: {
+        crc64: '3997D999CAB6C5A7',
+        length: 10,
+        md5: 'B1D4A86C222D0ED5500ABE909DD36218',
+        molWeight: 1185,
+        value: 'SAPSQDFMRF',
+      },
+      sequenceCaution: [
+        {
+          commentType: 'SEQUENCE CAUTION',
+          evidences: [
+            { evidenceCode: 'ECO:0000256', id: 'PIRNR001361', source: 'PIRNR' },
+          ],
+          note: 'Text note',
+          positions: ['position'],
+          sequence: 'sequence',
+          sequenceCautionType: 'Erroneous initiation',
+        },
+      ],
+      status: 'Fragment',
       xrefData: [
         {
           category: 'GMA',
