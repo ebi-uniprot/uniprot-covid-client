@@ -13,7 +13,7 @@ describe('ColumnConfiguration component', () => {
   });
 
   test('should render all columns', () => {
-    Object.values(ColumnConfiguration).forEach(column => {
+    ColumnConfiguration.forEach(column => {
       const { asFragment } = render(
         <MemoryRouter>{column.render(transformedData)}</MemoryRouter>
       );

@@ -128,13 +128,13 @@ export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
     <Fragment>
       {data.map(cautionData => (
         <section className="text-block" key={cautionData.sequence}>
-          The sequence{' '}
+          {`The sequence `}
           <ExternalLink
             url={`//www.ebi.ac.uk/ena/data/view/${cautionData.sequence}`}
           >
             {cautionData.sequence}
-          </ExternalLink>{' '}
-          differs from that shown. Reason: {cautionData.sequenceCautionType}{' '}
+          </ExternalLink>
+          {` differs from that shown. Reason: ${cautionData.sequenceCautionType} `}
           {cautionData.note}
           {cautionData.evidences && (
             <UniProtEvidenceTag evidences={cautionData.evidences} />

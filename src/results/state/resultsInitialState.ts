@@ -1,5 +1,7 @@
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import { Facet } from '../ResultsContainer';
+import { Column } from '../../model/types/ColumnTypes';
+import { FieldData, ColumnSelectTab } from '../types/resultsTypes';
 
 export enum ViewMode {
   TABLE,
@@ -7,43 +9,60 @@ export enum ViewMode {
 }
 
 export type ResultsState = {
-  tableColumns: string[];
-  cardColumns: string[];
+  tableColumns: Column[];
+  cardColumns: Column[];
   facets: Facet[];
   nextUrl: string;
-  isFetching: boolean;
-  isFetched: { [url: string]: boolean };
-  results: UniProtkbAPIModel[];
+  results: {
+    data: UniProtkbAPIModel[];
+    isFetching: boolean;
+    isFetched: { [url: string]: boolean };
+  };
   totalNumberResults: number;
   viewMode: ViewMode;
+  fields: {
+    data: FieldData;
+    isFetching: boolean;
+  };
   summaryAccession: string | null;
 };
 
+export const defaultTableColumns = [
+  Column.accession,
+  Column.id,
+  Column.proteinName,
+  Column.geneNames,
+  Column.organism,
+];
+
 const resultsInitialState = {
-  tableColumns: [
-    'accession',
-    'id',
-    'protein_name',
-    'gene_names',
-    'error_gmodel_pred',
-  ],
+  tableColumns: defaultTableColumns,
   cardColumns: [
-    'accession',
-    'id',
-    'protein_name',
-    'gene_names',
-    'organism',
-    'keyword',
-    'cc_function',
-    'sequence',
+    Column.accession,
+    Column.id,
+    Column.proteinName,
+    Column.geneNames,
+    Column.organism,
+    Column.keyword,
+    Column.ccFunction,
+    Column.sequence,
   ],
-  results: [],
+  results: {
+    data: [],
+    isFetching: false,
+    isFetched: {},
+  },
   facets: [],
-  isFetching: false,
-  isFetched: {},
   nextUrl: '',
   totalNumberResults: 0,
   viewMode: ViewMode.CARD,
+  fields: {
+    data: {
+      [ColumnSelectTab.data]: [],
+      [ColumnSelectTab.links]: [],
+    },
+    isFetching: false,
+  },
   summaryAccession: null,
 };
 
