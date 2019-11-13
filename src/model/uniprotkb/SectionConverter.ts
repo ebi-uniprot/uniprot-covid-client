@@ -10,12 +10,12 @@ import KeywordCategory from '../types/KeywordCategory';
 import FeatureType from '../types/FeatureType';
 import { UniProtkbAPIModel } from './UniProtkbConverter';
 
-export type UIModel = {
+export interface UIModel {
   commentsData: Map<CommentType, Comment[]>;
   keywordData: KeywordUIModel[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
-};
+}
 
 export const convertSection = (
   data: UniProtkbAPIModel,

@@ -27,6 +27,11 @@ const resultsInitialState = {
     'gene_names',
     'organism',
     'length',
+    'absorption',
+    'kinetics',
+    'redox_potential',
+    'ph_dependence',
+    'temp_dependence',
   ],
   cardColumns: [
     'accession',

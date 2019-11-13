@@ -11,7 +11,7 @@ type FreeTextProps = {
 export const TextView: React.FC<{ comments: TextWithEvidence[] }> = ({
   comments,
 }) => (
-  <Fragment>
+  <section className="text-block" key={v1()}>
     {comments.map(comment => (
       <Fragment key={v1()}>
         {comment.value}
@@ -20,18 +20,16 @@ export const TextView: React.FC<{ comments: TextWithEvidence[] }> = ({
         )}
       </Fragment>
     ))}
-  </Fragment>
+  </section>
 );
 
 const FreeTextView: React.FC<FreeTextProps> = ({ comments, title }) => {
   if (!comments || comments.length <= 0) {
     return null;
   }
-  const freeTextData = comments.map(item => (
-    <span className="text-block" key={v1()}>
-      {item.texts && <TextView comments={item.texts} />}
-    </span>
-  ));
+  const freeTextData = comments.map(
+    item => item.texts && <TextView comments={item.texts} key={v1()} />
+  );
 
   return (
     <Fragment>

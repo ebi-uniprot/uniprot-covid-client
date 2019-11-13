@@ -21,7 +21,14 @@ import {
 } from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
 import FeatureType from './types/FeatureType';
-import FreeTextView from '../view/uniprotkb/components/FreeTextView';
+import FreeTextView, {
+  TextView,
+} from '../view/uniprotkb/components/FreeTextView';
+import {
+  AbsorptionView,
+  KineticsView,
+} from '../view/uniprotkb/FunctionSection';
+import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -308,7 +315,19 @@ const ColumnConfiguration: {
       return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
     },
   },
-  // absorption ,
+  absorption: {
+    label: 'Absorption',
+    render: data => {
+      const { bioPhysicoChemicalProperties } = data[
+        EntrySection.Function
+      ] as FunctionUIModel;
+      return (
+        bioPhysicoChemicalProperties.absorption && (
+          <AbsorptionView data={bioPhysicoChemicalProperties.absorption} />
+        )
+      );
+    },
+  },
   ft_act_site: getFeatureColumn(FeatureType.ACT_SITE),
   ft_binding: getFeatureColumn(FeatureType.BINDING),
   ft_ca_bind: getFeatureColumn(FeatureType.CA_BIND),
@@ -318,14 +337,64 @@ const ColumnConfiguration: {
   // ec ,
   // cc:enzyme_regulation ,
   // cc:function ,
-  // kinetics ,
+  kinetics: {
+    label: 'Kinetics',
+    render: data => {
+      const { bioPhysicoChemicalProperties } = data[
+        EntrySection.Function
+      ] as FunctionUIModel;
+      return (
+        bioPhysicoChemicalProperties.kinetics && (
+          <KineticsView data={bioPhysicoChemicalProperties.kinetics} />
+        )
+      );
+    },
+  },
   ft_metal: getFeatureColumn(FeatureType.METAL),
   ft_np_bind: getFeatureColumn(FeatureType.NP_BINDL),
   // cc:pathway ,
-  // ph_dependence ,
-  // redox_potential ,
+  ph_dependence: {
+    label: 'pH Dependence',
+    render: data => {
+      const { bioPhysicoChemicalProperties } = data[
+        EntrySection.Function
+      ] as FunctionUIModel;
+      return (
+        bioPhysicoChemicalProperties.pHDependence && (
+          <TextView comments={bioPhysicoChemicalProperties.pHDependence} />
+        )
+      );
+    },
+  },
+  redox_potential: {
+    label: 'Redox Potential',
+    render: data => {
+      const { bioPhysicoChemicalProperties } = data[
+        EntrySection.Function
+      ] as FunctionUIModel;
+      return (
+        bioPhysicoChemicalProperties.redoxPotential && (
+          <TextView comments={bioPhysicoChemicalProperties.redoxPotential} />
+        )
+      );
+    },
+  },
   ft_site: getFeatureColumn(FeatureType.SITE),
-  // temp_dependence ,
+  temp_dependence: {
+    label: 'Temperature Dependence',
+    render: data => {
+      const { bioPhysicoChemicalProperties } = data[
+        EntrySection.Function
+      ] as FunctionUIModel;
+      return (
+        bioPhysicoChemicalProperties.temperatureDependence && (
+          <TextView
+            comments={bioPhysicoChemicalProperties.temperatureDependence}
+          />
+        )
+      );
+    },
+  },
   // score ,
   // cc:caution ,
   // feature ,

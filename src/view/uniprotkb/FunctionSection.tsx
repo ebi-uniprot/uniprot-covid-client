@@ -7,54 +7,42 @@ import KeywordView from './components/KeywordView';
 import XRefView from './components/XRefView';
 import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
-import Comment, {
-  Absorption,
-  Kinetics,
-  pHDependence,
-  RedoxPotential,
-  TemperatureDependence,
+import {
   CommentType,
   CatalyticActivity,
   FreeText,
 } from '../../model/types/CommentTypes';
-import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import GoRibbon from './components/GoRibbon';
 import UniProtEvidenceTag from '../../components/UniProtEvidenceTag';
+import {
+  FunctionUIModel,
+  BioPhysicoChemicalProperties,
+  Absorption,
+  KineticParameters,
+} from '../../model/uniprotkb/sections/FunctionConverter';
 
-const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
-  if (!data.absorption) {
-    return null;
-  }
+export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
     <Fragment>
-      <h4>Absorption</h4>
       <section className="text-block">
-        Abs(max) = {data.absorption.approximate && '~'}
-        {data.absorption.max}nm
+        Abs(max) = {data.approximate && '~'}
+        {data.max}nm
       </section>
       <section className="text-block">
-        {data.absorption.note && (
-          <TextView comments={data.absorption.note.texts} />
-        )}
-        {data.absorption.evidences && (
-          <UniProtEvidenceTag evidences={data.absorption.evidences} />
-        )}
+        {data.note && <TextView comments={data.note.texts} />}
+        {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
       </section>
     </Fragment>
   );
 };
 
-const KineticsView: FC<{ data: Kinetics }> = ({ data }) => {
-  if (!data.kineticParameters) {
-    return null;
-  }
+export const KineticsView: FC<{ data: KineticParameters }> = ({ data }) => {
   return (
     <Fragment>
-      <h4>Kinetics</h4>
       <section className="text-block">
-        {data.kineticParameters.michaelisConstants && (
+        {data.michaelisConstants && (
           <ul className="no-bullet">
-            {data.kineticParameters.michaelisConstants.map(km => (
+            {data.michaelisConstants.map(km => (
               <li key={km.constant}>
                 K<sub>M</sub>={km.constant}
                 {km.unit} for {km.substrate}{' '}
@@ -65,53 +53,56 @@ const KineticsView: FC<{ data: Kinetics }> = ({ data }) => {
         )}
       </section>
       <section className="text-block">
-        {data.kineticParameters.note && (
-          <TextView comments={data.kineticParameters.note.texts} />
-        )}
+        {data.note && <TextView comments={data.note.texts} />}
       </section>
     </Fragment>
   );
 };
 
-const BioPhysicoChemicalPropertiesView: FC<{ data: Comment[] | undefined }> = ({
-  data,
-}) => {
+const BioPhysicoChemicalPropertiesView: FC<{
+  data: BioPhysicoChemicalProperties;
+}> = ({ data }) => {
   if (!data) {
     return null;
   }
   return (
     <Fragment>
-      {data.map(comment => (
+      {data.absorption && (
         <Fragment>
-          {(comment as Absorption).absorption && (
-            <AbsorptionView data={comment as Absorption} />
-          )}
-          {(comment as Kinetics).kineticParameters && (
-            <KineticsView data={comment as Kinetics} />
-          )}
-          {(comment as pHDependence).phDependence && (
-            <TextView comments={(comment as pHDependence).phDependence.texts} />
-          )}
-          {(comment as RedoxPotential).redoxPotential && (
-            <TextView
-              comments={(comment as RedoxPotential).redoxPotential.texts}
-            />
-          )}
-          {(comment as TemperatureDependence).temperatureDependence && (
-            <TextView
-              comments={
-                (comment as TemperatureDependence).temperatureDependence.texts
-              }
-            />
-          )}
+          <h4>Absorption</h4>
+          <AbsorptionView data={data.absorption} />
         </Fragment>
-      ))}
+      )}
+      {data.kinetics && (
+        <Fragment>
+          <h4>Kinetics</h4>
+          <KineticsView data={data.kinetics} />
+        </Fragment>
+      )}
+      {data.pHDependence && (
+        <Fragment>
+          <h4>pH Dependence</h4>
+          <TextView comments={data.pHDependence} />
+        </Fragment>
+      )}
+      {data.redoxPotential && (
+        <Fragment>
+          <h4>Redox Potential</h4>
+          <TextView comments={data.redoxPotential} />
+        </Fragment>
+      )}
+      {data.temperatureDependence && (
+        <Fragment>
+          <h4>Temperature Dependence</h4>
+          <TextView comments={data.temperatureDependence} />
+        </Fragment>
+      )}
     </Fragment>
   );
 };
 
 const FunctionSection: FC<{
-  data: UIModel;
+  data: FunctionUIModel;
   sequence: string;
   primaryAccession: string;
 }> = ({ data, sequence, primaryAccession }): JSX.Element | null => {
@@ -141,13 +132,9 @@ const FunctionSection: FC<{
           }
           title={CommentType.MISCELLANEOUS.toLowerCase()}
         />
-        {data.commentsData.get(CommentType.BIOPHYSICOCHEMICAL_PROPERTIES) && (
-          <BioPhysicoChemicalPropertiesView
-            data={data.commentsData.get(
-              CommentType.BIOPHYSICOCHEMICAL_PROPERTIES
-            )}
-          />
-        )}
+        <BioPhysicoChemicalPropertiesView
+          data={data.bioPhysicoChemicalProperties}
+        />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <GoRibbon primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />

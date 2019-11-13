@@ -1,4 +1,8 @@
 import { Evidence, Property } from './modelTypes';
+import {
+  Absorption,
+  KineticParameters,
+} from '../uniprotkb/sections/FunctionConverter';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',
@@ -52,31 +56,14 @@ export type FreeText = {
   texts?: TextWithEvidence[];
 };
 
-export type Absorption = {
+export type AbsorptionComment = {
   commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
-  absorption?: {
-    max: number;
-    approximate: boolean;
-    note?: {
-      texts: TextWithEvidence[];
-    };
-    evidences?: Evidence[];
-  };
+  absorption?: Absorption;
 };
 
-export type Kinetics = {
+export type KineticsComment = {
   commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
-  kineticParameters?: {
-    michaelisConstants?: {
-      constant: number;
-      unit: string;
-      substrate: string;
-      evidences: Evidence[];
-    }[];
-    note: {
-      texts: TextWithEvidence[];
-    };
-  };
+  kineticParameters?: KineticParameters;
 };
 
 export type pHDependence = {
@@ -215,7 +202,8 @@ export type SubcellularLocation = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
   locations: (
     | { location: TextWithEvidence }
-    | { topology: TextWithEvidence })[];
+    | { topology: TextWithEvidence }
+  )[];
 };
 
 export type Range = {
@@ -241,8 +229,8 @@ type Comment =
   | SubcellularLocation
   | MassSpectrometry
   | RNAEditing
-  | Absorption
-  | Kinetics
+  | AbsorptionComment
+  | KineticsComment
   | pHDependence
   | RedoxPotential
   | TemperatureDependence;
