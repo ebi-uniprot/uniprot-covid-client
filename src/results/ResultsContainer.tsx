@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import {
   Facets,
   PageIntro,
@@ -10,6 +10,7 @@ import {
   StatisticsIcon,
   TableIcon,
   ListIcon,
+  EditIcon,
   Loader,
 } from 'franklin-sites';
 import queryStringModule from 'query-string';
@@ -23,10 +24,10 @@ import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
   SortDirection,
-  SortableColumn,
   SelectedEntries,
   SelectedFacet,
 } from './types/resultsTypes';
+import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 
@@ -45,7 +46,7 @@ type ResultsProps = {
   dispatchSwitchViewMode: () => void;
   dispatchUpdateSummaryAccession: (accession: string) => void;
   clauses?: Clause[];
-  tableColumns: string[];
+  tableColumns: Column[];
   cardColumns: string[];
   results: UniProtkbAPIModel[];
   facets: Facet[];
@@ -99,14 +100,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     if (facets && typeof facets === 'string') {
       selectedFacets = this.facetsAsArray(facets);
     }
-
-    const sortColumn = sort as keyof typeof SortableColumn;
     const sortDirection = dir as keyof typeof SortDirection;
 
     return {
       query: query && typeof query === 'string' ? query : '',
       selectedFacets,
-      sortColumn: sortColumn && SortableColumn[sortColumn],
+      sortColumn: sort as SortableColumn,
       sortDirection: sortDirection && SortDirection[sortDirection],
     };
   };
@@ -267,14 +266,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
       queryParamFromUrl
     );
-    if (isFetching && results.length === 0) {
+    if (isFetching && !results.length) {
       return <Loader />;
     }
     const { name, links, info } = infoMappings[namespace];
     return (
       <Fragment>
         <SideBarLayout
-          title={(
+          title={
             <PageIntro
               title={name}
               links={links}
@@ -282,63 +281,71 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             >
               {info}
             </PageIntro>
-)}
-          sidebar={(
+          }
+          sidebar={
             <Facets
               data={facets}
               selectedFacets={selectedFacets}
               addFacet={this.addFacet}
               removeFacet={this.removeFacet}
             />
-)}
-          content={(
+          }
+          content={
             <Fragment>
               {results.length > 0 && (
-              <div className="button-group">
-                <button type="button" className="button link-button disabled">
+                <div className="button-group">
+                  <button type="button" className="button link-button disabled">
                     Blast
-                </button>
-                <button type="button" className="button link-button disabled">
+                  </button>
+                  <button type="button" className="button link-button disabled">
                     Align
-                </button>
-                <button type="button" className="button link-button">
-                  <DownloadIcon />
+                  </button>
+                  <button type="button" className="button link-button">
+                    <DownloadIcon />
                     Download
-                </button>
-                <button type="button" className="button link-button disabled">
-                  <BasketIcon />
+                  </button>
+                  <button type="button" className="button link-button disabled">
+                    <BasketIcon />
                     Add
-                </button>
-                <button type="button" className="button link-button">
-                  <StatisticsIcon />
+                  </button>
+                  <button type="button" className="button link-button">
+                    <StatisticsIcon />
                     Statistics
-                </button>
-                <button
-                  type="button"
-                  className="button link-button large-icon"
-                  onClick={() => dispatchSwitchViewMode()}
-                  data-testid="table-card-toggle"
-                >
-                  <span
-                    className={
+                  </button>
+                  <button
+                    type="button"
+                    className="button link-button large-icon"
+                    onClick={() => dispatchSwitchViewMode()}
+                    data-testid="table-card-toggle"
+                  >
+                    <span
+                      className={
                         viewMode === ViewMode.CARD
                           ? 'link-button-icon__active'
                           : ''
                       }
-                  >
-                    <TableIcon />
-                  </span>
-                  <span
-                    className={
+                    >
+                      <TableIcon />
+                    </span>
+                    <span
+                      className={
                         viewMode === ViewMode.TABLE
                           ? 'link-button-icon__active'
                           : ''
                       }
-                  >
-                    <ListIcon />
-                  </span>
-                </button>
-              </div>
+                    >
+                      <ListIcon />
+                    </span>
+                  </button>
+                  {viewMode === ViewMode.TABLE && (
+                    <Link to="/customise-table">
+                      <button type="button" className="button link-button">
+                        <EditIcon />
+                        Customise data
+                      </button>
+                    </Link>
+                  )}
+                </div>
               )}
               <ResultsView
                 results={results}
@@ -357,7 +364,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 viewMode={viewMode}
               />
             </Fragment>
-)}
+          }
         />
       </Fragment>
     );
@@ -369,9 +376,9 @@ const mapStateToProps = (state: RootState) => {
     namespace: state.query.namespace,
     tableColumns: state.results.tableColumns,
     cardColumns: state.results.cardColumns,
-    results: state.results.results,
+    results: state.results.results.data,
     facets: state.results.facets,
-    isFetching: state.results.isFetching,
+    isFetching: state.results.results.isFetching,
     nextUrl: state.results.nextUrl,
     totalNumberResults: state.results.totalNumberResults,
     viewMode: state.results.viewMode,

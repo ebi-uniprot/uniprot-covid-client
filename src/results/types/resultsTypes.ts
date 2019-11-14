@@ -1,14 +1,4 @@
-export enum SortableColumn {
-  accession = 'accession',
-  mnemonic = 'mnemonic',
-  name = 'name',
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  annotation_score = 'annotation_score',
-  gene = 'gene',
-  length = 'length',
-  mass = 'mass',
-  organism = 'organism',
-}
+import { Column } from '../../model/types/ColumnTypes';
 
 export enum SortDirection {
   ascend = 'ascend',
@@ -27,3 +17,39 @@ export const getApiSortDirection = (direction: SortDirection) =>
 
 export type SelectedFacet = { name: string; value: string };
 export type SelectedEntries = { [key: string]: boolean };
+
+export enum ColumnSelectTab {
+  data = 'data',
+  links = 'links',
+}
+
+export type SelectedColumn = {
+  tabId: ColumnSelectTab;
+  accordionId: string;
+  itemId: Column;
+  label: string;
+};
+
+export type FieldDatum = {
+  id: string;
+  title: string;
+  items: {
+    id: Column;
+    label: string;
+  }[];
+};
+
+export type FieldData = {
+  [tab in ColumnSelectTab]: FieldDatum[];
+};
+
+export type ReceivedField = {
+  name: Column;
+  label: string;
+};
+
+export type ReceivedFieldData = {
+  groupName: string;
+  isDatabase: boolean;
+  fields: ReceivedField[];
+}[];

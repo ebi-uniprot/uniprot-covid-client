@@ -3,21 +3,18 @@ import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
 import '../styles/ResultsView.scss';
-import {
-  SelectedEntries,
-  SortableColumn,
-  SortDirection,
-} from './types/resultsTypes';
+import { SelectedEntries, SortDirection } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
   UniProtkbAPIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import { ViewMode } from './state/resultsInitialState';
 import ProteinSummary from '../view/uniprotkb/summary/ProteinSummary';
+import { SortableColumn, Column } from '../model/types/ColumnTypes';
 
 type ResultsTableProps = {
   results: UniProtkbAPIModel[];
-  tableColumns: string[];
+  tableColumns: (Column | SortableColumn)[];
   selectedEntries: SelectedEntries;
   handleEntrySelection: (rowId: string) => void;
   handleHeaderClick: (column: SortableColumn) => void;
@@ -70,22 +67,25 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     );
   } // viewMode === ViewMode.TABLE
   const columns = tableColumns.map(columnName => {
-    let render;
-    if (columnName in ColumnConfiguration) {
-      render = (row: UniProtkbAPIModel) =>
-        ColumnConfiguration[columnName].render(uniProtKbConverter(row));
-    } else {
-      render = () => (
-        <div className="warning">{`${columnName} has no render method`}</div>
-      );
+    const columnConfig = ColumnConfiguration.get(columnName);
+    if (columnConfig) {
+      return {
+        label: columnConfig.label,
+        name: columnName,
+        render: (row: UniProtkbAPIModel) =>
+          columnConfig.render(uniProtKbConverter(row)),
+        sortable: columnConfig.sortable,
+        sorted: columnName === sortColumn && sortDirection,
+      };
     }
-    const { label } = ColumnConfiguration[columnName];
     return {
-      label,
+      label: columnName,
       name: columnName,
-      render,
-      sortable: columnName in SortableColumn,
-      sorted: columnName === sortColumn ? sortDirection : null,
+      render: () => (
+        <div className="warning">{`${columnName} has no config`}</div>
+      ),
+      sortable: false,
+      sorted: false,
     };
   });
   return (

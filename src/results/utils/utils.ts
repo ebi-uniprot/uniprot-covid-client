@@ -1,10 +1,10 @@
 import { getQueryUrl } from '../../utils/apiUrls';
 import {
   SortDirection,
-  SortableColumn,
   SelectedFacet,
   getApiSortDirection,
 } from '../types/resultsTypes';
+import { SortableColumn } from '../../model/types/ColumnTypes';
 
 export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   /**
@@ -25,7 +25,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
     ''
   );
 
-const getAPIQueryUrl = (
+export const getAPIQueryUrl = (
   queryString: string,
   columns: string[],
   selectedFacets: SelectedFacet[],
@@ -40,5 +40,3 @@ const getAPIQueryUrl = (
     getApiSortDirection(SortDirection[sortDirection])
   );
 };
-
-export { getAPIQueryUrl };

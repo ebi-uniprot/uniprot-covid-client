@@ -45,793 +45,862 @@ const getFeatureColumn = (type: FeatureType) => {
     },
   };
 };
+import { Column } from './types/ColumnTypes';
 
-const ColumnConfiguration: {
-  [index: string]: {
+export const ColumnConfiguration = new Map<
+  Column,
+  {
     label: string;
+    sortable?: boolean | undefined;
     render: (data: UniProtkbUIModel) => JSX.Element | string | undefined;
-  };
-} = {
-  accession: {
-    label: 'Entry',
-    render: (data: { primaryAccession: string; entryType: string }) => (
-      <SimpleView
-        termValue={`${data.primaryAccession} (${data.entryType})`}
-        linkTo={`/uniprotkb/${data.primaryAccession}`}
-      />
-    ),
-  },
-  id: {
-    label: 'Entry Name',
-    render: (data: { uniProtId: string }) => (
-      <SimpleView termValue={data.uniProtId} />
-    ),
-  },
-  gene_names: {
-    label: 'Gene Names',
-    render: data => {
-      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        geneNamesData && (
-          <GeneNamesView geneNamesData={geneNamesData} isCompact />
-        )
-      );
-    },
-  },
-  length: {
-    label: 'Length',
-    render: data => {
-      const { sequence } = data[EntrySection.Sequence];
-      return sequence && numberView({ value: sequence.length, unit: Unit.AA });
-    },
-  },
-  gene_primary: {
-    label: 'Gene names (Primary)',
-    render: data => {
-      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        <Fragment>
-          {geneNamesData &&
-            geneNamesData.map(geneData => {
-              return (
-                geneData.geneName && (
-                  <div key={geneData.geneName.value}>
-                    {geneData.geneName.value}
-                  </div>
-                )
-              );
-            })}
-        </Fragment>
-      );
-    },
-  },
-  gene_oln: {
-    label: 'Gene names (Ordered locus)',
-    render: data => {
-      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        <Fragment>
-          {geneNamesData &&
-            geneNamesData.map(
-              geneData =>
-                geneData.orderedLocusNames && (
-                  <Fragment key={geneData.orderedLocusNames.join('')}>
-                    {geneAlternativeNamesView(
-                      geneData.orderedLocusNames,
-                      false
-                    )}
-                  </Fragment>
-                )
-            )}
-        </Fragment>
-      );
-    },
-  },
-  gene_orf: {
-    label: 'Gene names (ORF)',
-    render: data => {
-      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        <Fragment>
-          {geneNamesData &&
-            geneNamesData.map(
-              geneData =>
-                geneData.orfNames && (
-                  <Fragment key={geneData.orfNames.join('')}>
-                    {geneAlternativeNamesView(geneData.orfNames, false)}
-                  </Fragment>
-                )
-            )}
-        </Fragment>
-      );
-    },
-  },
-  gene_synonym: {
-    label: 'Gene names (Synonyms)',
-    render: data => {
-      const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        <Fragment>
-          {geneNamesData &&
-            geneNamesData.map(
-              geneData =>
-                geneData.synonyms && (
-                  <Fragment key={geneData.synonyms.join('')}>
-                    {geneAlternativeNamesView(geneData.synonyms, false)}
-                  </Fragment>
-                )
-            )}
-        </Fragment>
-      );
-    },
-  },
-  organism: {
-    label: 'Organism',
-    render: data => {
-      const { organismData } = data[EntrySection.NamesAndTaxonomy];
-      return organismData && <OrganismView data={organismData} />;
-    },
-  },
-  organism_id: {
-    label: 'Organism',
-    render: data => {
-      const { organismData } = data[EntrySection.NamesAndTaxonomy];
-      return organismData && <OrganismId taxonId={organismData.taxonId} />;
-    },
-  },
-  protein_name: {
-    label: 'Protein names',
-    render: data => {
-      const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        proteinNamesData && (
-          <ProteinNamesView proteinNames={proteinNamesData} isCompact />
-        )
-      );
-    },
-  },
-  dr_proteomes: {
-    label: 'Proteomes',
-    render: data => {
-      const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
-      return proteomesData && <ProteomesView data={proteomesData} isCompact />;
-    },
-  },
-  lineage: {
-    label: 'Lineage',
-    render: data => {
-      const { organismData } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        organismData &&
-        organismData.lineage && (
-          <OrganismLineage lineage={organismData.lineage} />
-        )
-      );
-    },
-  },
-  organism_host: {
-    label: 'Virus hosts',
-    render: data => {
-      const { organismHosts } = data[EntrySection.NamesAndTaxonomy];
-      return (
-        organismHosts && (
-          <Fragment>
-            {organismHosts.map(host => (
-              <p key={host.taxonId}>
-                <OrganismView data={host} />
-              </p>
-            ))}
-          </Fragment>
-        )
-      );
-    },
-  },
+  }
+>();
 
-  // TODO split isoforms from main sequence view
-  // cc:alternative_products ,
+ColumnConfiguration.set(Column.accession, {
+  label: 'Entry',
+  sortable: true,
+  render: (data: { primaryAccession: string; entryType: string }) => (
+    <SimpleView
+      termValue={`${data.primaryAccession} (${data.entryType})`}
+      linkTo={`/uniprotkb/${data.primaryAccession}`}
+    />
+  ),
+});
 
-  ft_var_seq: {
-    label: 'Alternative sequence',
-    render: data => {
-      const { featuresData } = data[EntrySection.Sequence];
-      return (
+ColumnConfiguration.set(Column.id, {
+  label: 'Entry Name',
+  sortable: true,
+  render: (data: { uniProtId: string }) => (
+    <SimpleView termValue={data.uniProtId} />
+  ),
+});
+
+ColumnConfiguration.set(Column.proteinName, {
+  label: 'Protein names',
+  sortable: true,
+  render: data => {
+    const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      proteinNamesData && (
+        <ProteinNamesView proteinNames={proteinNamesData} isCompact />
+      )
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.geneNames, {
+  label: 'Gene Names',
+  sortable: true,
+  render: data => {
+    const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      geneNamesData && <GeneNamesView geneNamesData={geneNamesData} isCompact />
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.organism, {
+  label: 'Organism',
+  sortable: true,
+  render: data => {
+    const { organismData } = data[EntrySection.NamesAndTaxonomy];
+    return organismData && <OrganismView data={organismData} />;
+  },
+});
+
+ColumnConfiguration.set(Column.length, {
+  label: 'Length',
+  render: data => {
+    const { sequence } = data[EntrySection.Sequence];
+    return sequence && numberView({ value: sequence.length, unit: Unit.AA });
+  },
+});
+
+ColumnConfiguration.set(Column.genePrimary, {
+  label: 'Gene names (Primary)',
+  render: data => {
+    const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      <Fragment>
+        {geneNamesData &&
+          geneNamesData.map(geneData => {
+            return (
+              geneData.geneName && (
+                <div key={geneData.geneName.value}>
+                  {geneData.geneName.value}
+                </div>
+              )
+            );
+          })}
+      </Fragment>
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.geneOln, {
+  label: 'Gene names (Ordered locus)',
+  render: data => {
+    const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      <Fragment>
+        {geneNamesData &&
+          geneNamesData.map(
+            geneData =>
+              geneData.orderedLocusNames && (
+                <Fragment key={geneData.orderedLocusNames.join('')}>
+                  {geneAlternativeNamesView(geneData.orderedLocusNames, false)}
+                </Fragment>
+              )
+          )}
+      </Fragment>
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.geneOrf, {
+  label: 'Gene names (ORF)',
+  render: data => {
+    const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      <Fragment>
+        {geneNamesData &&
+          geneNamesData.map(
+            geneData =>
+              geneData.orfNames && (
+                <Fragment key={geneData.orfNames.join('')}>
+                  {geneAlternativeNamesView(geneData.orfNames, false)}
+                </Fragment>
+              )
+          )}
+      </Fragment>
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.geneSynonym, {
+  label: 'Gene names (Synonyms)',
+  render: data => {
+    const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      <Fragment>
+        {geneNamesData &&
+          geneNamesData.map(
+            geneData =>
+              geneData.synonyms && (
+                <Fragment key={geneData.synonyms.join('')}>
+                  {geneAlternativeNamesView(geneData.synonyms, false)}
+                </Fragment>
+              )
+          )}
+      </Fragment>
+    );
+  },
+});
+ColumnConfiguration.set(Column.organismId, {
+  label: 'Organism',
+  render: data => {
+    const { organismData } = data[EntrySection.NamesAndTaxonomy];
+    return organismData && <OrganismId taxonId={organismData.taxonId} />;
+  },
+});
+
+ColumnConfiguration.set(Column.proteinName, {
+  label: 'Protein names',
+  render: data => {
+    const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      proteinNamesData && (
+        <ProteinNamesView proteinNames={proteinNamesData} isCompact />
+      )
+    );
+  },
+});
+
+ColumnConfiguration.set(Column.drProteomes, {
+  label: 'Proteomes',
+  render: data => {
+    const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
+    return proteomesData && <ProteomesView data={proteomesData} isCompact />;
+  },
+});
+ColumnConfiguration.set(Column.lineage, {
+  label: 'Lineage',
+  render: data => {
+    const { organismData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      organismData &&
+      organismData.lineage && <OrganismLineage lineage={organismData.lineage} />
+    );
+  },
+});
+ColumnConfiguration.set(Column.organismHost, {
+  label: 'Virus hosts',
+  render: data => {
+    const { organismHosts } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      organismHosts && (
         <Fragment>
-          {featuresData && <FeaturesView features={featuresData} />}
+          {organismHosts.map(host => (
+            <p key={host.taxonId}>
+              <OrganismView data={host} />
+            </p>
+          ))}
         </Fragment>
-      );
-    },
+      )
+    );
   },
-  error_gmodel_pred: {
-    label: 'Erroneous gene model prediction',
-    render: data => {
-      const { sequenceCaution } = data[EntrySection.Sequence];
-      return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
-    },
-  },
-  fragment: {
-    label: 'Fragment',
-    render: data => {
-      const { flag } = data[EntrySection.Sequence];
-      const isFragment =
-        flag &&
-        [
-          Flag.FRAGMENT,
-          Flag.FRAGMENTS,
-          Flag.FRAGMENTS_PRECURSOR,
-          Flag.FRAGMENT_PRECURSOR,
-        ].includes(flag);
-      return flag && <Fragment>{isFragment ? flag : 'N'}</Fragment>;
-    },
-  },
-  // gene_location ,  "Invalid fields parameter value 'gene_location'"
-  mass: {
-    label: 'Mass',
-    render: data => {
-      const { molWeight } = data[EntrySection.Sequence];
-      return numberView({ value: molWeight, unit: Unit.DA });
-    },
-  },
-  cc_mass_spectrometry: {
-    label: 'Mass Spectrometry',
-    render: data => {
-      const { massSpectrometry } = data[EntrySection.Sequence];
-      return (
-        massSpectrometry && <MassSpectrometryView data={massSpectrometry} />
-      );
-    },
-  },
-  // ft:variant ,
-  ft_non_con: getFeatureColumn(FeatureType.NON_CONS),
-  ft_non_std: getFeatureColumn(FeatureType.NON_STD),
-  ft_non_ter: getFeatureColumn(FeatureType.NON_TER),
-  cc_polymorphism: {
-    label: 'Polymorphysm',
-    render: data => {
-      const { polymorphysm } = data[EntrySection.Sequence];
-      return polymorphysm && <FreeTextView comments={polymorphysm} />;
-    },
-  },
-  cc_rna_editing: {
-    label: 'RNA Editing',
-    render: data => {
-      const { rnaEditing } = data[EntrySection.Sequence];
-      return rnaEditing && <RNAEditingView data={rnaEditing} />;
-    },
-  },
-  // sequence ,
-  cc_sequence_caution: {
-    label: 'Sequence Caution',
-    render: data => {
-      const { sequenceCaution } = data[EntrySection.Sequence];
-      return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
-    },
-  },
-  ft_conflict: getFeatureColumn(FeatureType.CONFLICT),
-  ft_unsure: getFeatureColumn(FeatureType.UNSURE),
-  sequence_version: {
-    label: 'Sequence Version',
-    render: data => {
-      const { entryAudit } = data[EntrySection.Sequence];
-      return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
-    },
-  },
-  absorption: {
-    label: 'Absorption',
-    render: data => {
-      const { bioPhysicoChemicalProperties } = data[
-        EntrySection.Function
-      ] as FunctionUIModel;
-      return (
-        bioPhysicoChemicalProperties.absorption && (
-          <AbsorptionView data={bioPhysicoChemicalProperties.absorption} />
-        )
-      );
-    },
-  },
-  ft_act_site: getFeatureColumn(FeatureType.ACT_SITE),
-  ft_binding: getFeatureColumn(FeatureType.BINDING),
-  ft_ca_bind: getFeatureColumn(FeatureType.CA_BIND),
-  // cc:catalytic_activity ,
-  // cc:cofactor ,
-  ft_dna_bind: getFeatureColumn(FeatureType.DNA_BIND),
-  // ec ,
-  // cc:enzyme_regulation ,
-  // cc:function ,
-  kinetics: {
-    label: 'Kinetics',
-    render: data => {
-      const { bioPhysicoChemicalProperties } = data[
-        EntrySection.Function
-      ] as FunctionUIModel;
-      return (
-        bioPhysicoChemicalProperties.kinetics && (
-          <KineticsView data={bioPhysicoChemicalProperties.kinetics} />
-        )
-      );
-    },
-  },
-  ft_metal: getFeatureColumn(FeatureType.METAL),
-  ft_np_bind: getFeatureColumn(FeatureType.NP_BINDL),
-  // cc:pathway ,
-  ph_dependence: {
-    label: 'pH Dependence',
-    render: data => {
-      const { bioPhysicoChemicalProperties } = data[
-        EntrySection.Function
-      ] as FunctionUIModel;
-      return (
-        bioPhysicoChemicalProperties.pHDependence && (
-          <TextView comments={bioPhysicoChemicalProperties.pHDependence} />
-        )
-      );
-    },
-  },
-  redox_potential: {
-    label: 'Redox Potential',
-    render: data => {
-      const { bioPhysicoChemicalProperties } = data[
-        EntrySection.Function
-      ] as FunctionUIModel;
-      return (
-        bioPhysicoChemicalProperties.redoxPotential && (
-          <TextView comments={bioPhysicoChemicalProperties.redoxPotential} />
-        )
-      );
-    },
-  },
-  ft_site: getFeatureColumn(FeatureType.SITE),
-  temp_dependence: {
-    label: 'Temperature Dependence',
-    render: data => {
-      const { bioPhysicoChemicalProperties } = data[
-        EntrySection.Function
-      ] as FunctionUIModel;
-      return (
-        bioPhysicoChemicalProperties.temperatureDependence && (
-          <TextView
-            comments={bioPhysicoChemicalProperties.temperatureDependence}
-          />
-        )
-      );
-    },
-  },
-  // score ,
-  // cc:caution ,
-  // feature ,
-  // keyword ,
-  // keywordid ,
-  // matched_text ,
-  // cc:miscellaneous ,
-  // protein_existence ,
-  // reviewed ,
-  // tools ,
-  // uniparc_id ,
-  // cc:interaction ,
-  // cc:subunit ,
-  // cc:developmental_stage ,
-  // cc:induction ,
-  // cc:tissue_specificity ,
-  // go_p ,
-  // go_c ,
-  // go ,
-  // go_f ,
-  // go_id ,
-  // cc:allergen ,
-  // cc:biotechnology ,
-  // cc:disruption_phenotype ,
-  // cc:disease ,
-  ft_mutagen: getFeatureColumn(FeatureType.MUTAGEN),
-  // cc:pharmaceutical ,
-  // cc:toxic_dose ,
-  ft_intramem: getFeatureColumn(FeatureType.INTRAMEM),
-  // cc:subcellular_location ,
-  ft_top_dom: getFeatureColumn(FeatureType.TOPO_DOM),
-  ft_transmem: getFeatureColumn(FeatureType.TRANSMEM),
-  ft_chain: getFeatureColumn(FeatureType.CHAIN),
-  ft_crosslnk: getFeatureColumn(FeatureType.CROSSLNK),
-  ft_disulfide: getFeatureColumn(FeatureType.DISULFID),
-  ft_carbohyd: getFeatureColumn(FeatureType.CARBOHYD),
-  ft_init_met: getFeatureColumn(FeatureType.INIT_MET),
-  ft_lipid: getFeatureColumn(FeatureType.LIPID),
-  ft_mod_res: getFeatureColumn(FeatureType.MOD_RES),
-  ft_peptide: getFeatureColumn(FeatureType.PEPTIDE),
-  // cc:ptm ,
-  ft_propep: getFeatureColumn(FeatureType.PROPEP),
-  ft_signal: getFeatureColumn(FeatureType.SIGNAL),
-  ft_transit: getFeatureColumn(FeatureType.TRANSIT),
-  // 3d ,
-  ft_strand: getFeatureColumn(FeatureType.STRAND),
-  ft_helix: getFeatureColumn(FeatureType.HELIX),
-  ft_turn: getFeatureColumn(FeatureType.TURN),
-  // mapped_pm_id ,
-  // pm_id ,
-  date_create: {
-    label: 'Date Created',
-    render: data => {
-      const { entryAudit } = data[EntrySection.Sequence];
-      return entryAudit && entryAudit.firstPublicDate;
-    },
-  },
-  date_mod: {
-    label: 'Date Modified',
-    render: data => {
-      const { entryAudit } = data[EntrySection.Sequence];
-      return entryAudit && entryAudit.lastAnnotationUpdateDate;
-    },
-  },
-  date_seq_mod: {
-    label: 'Date Sequence Modified',
-    render: data => {
-      const { entryAudit } = data[EntrySection.Sequence];
-      return entryAudit && entryAudit.lastSequenceUpdateDate;
-    },
-  },
-  version: {
-    label: 'Version',
-    render: data => {
-      const { entryAudit } = data[EntrySection.Sequence];
-      return entryAudit && <span>{entryAudit.entryVersion}</span>;
-    },
-  },
-  ft_coiled: getFeatureColumn(FeatureType.COILED),
-  ft_compbias: getFeatureColumn(FeatureType.COMPBIAS),
-  // cc:domain ,
-  ft_domain: getFeatureColumn(FeatureType.DOMAIN),
-  ft_motif: getFeatureColumn(FeatureType.MOTIF),
-  // protein_families ,
-  ft_region: getFeatureColumn(FeatureType.REGION),
-  ft_repeat: getFeatureColumn(FeatureType.REPEAT),
-  // cc:similarity ,
-  ft_zn_fing: getFeatureColumn(FeatureType.ZN_FING),
-  // tl:all ,
-  // tl:class ,
-  // tl:cohort ,
-  // tl:family ,
-  // tl:forma ,
-  // tl:genus ,
-  // tl:infraclass ,
-  // tl:infraorder ,
-  // tl:kingdom ,
-  // tl:order ,
-  // tl:parvorder ,
-  // tl:phylum ,
-  // tl:species ,
-  // tl:species_group ,
-  // tl:species_subgroup ,
-  // tl:subclass ,
-  // tl:subcohort ,
-  // tl:subfamily ,
-  // tl:subgenus ,
-  // tl:subkingdom ,
-  // tl:suborder ,
-  // tl:subphylum ,
-  // tl:subspecies ,
-  // tl:subtribe ,
-  // tl:superclass ,
-  // tl:superfamily ,
-  // tl:superkingdom ,
-  // tl:superorder ,
-  // tl:superphylum ,
-  // tl:tribe ,
-  // tl:varietas ,
-  // tax_id ,
+});
 
-  // dr:embl ,
-  // dr:ccds ,
-  // dr:pir ,
-  // dr:refseq ,
-  // dr:pdb ,
-  // dr:pdbsum ,
-  // dr:smr ,
-  // dr:biogrid ,
-  // dr:complexportal ,
-  // dr:corum ,
-  // dr:dip ,
-  // dr:elm ,
-  // dr:intact ,
-  // dr:mint ,
-  // dr:string ,
-  // dr:bindingdb ,
-  // dr:chembl ,
-  // dr:drugbank ,
-  // dr:guidetopharmacology ,
-  // dr:swisslipids ,
-  // dr:drugcentral ,
-  // dr:allergome ,
-  // dr:cazy ,
-  // dr:esther ,
-  // dr:imgt_gene-db ,
-  // dr:merops ,
-  // dr:moondb ,
-  // dr:moonprot ,
-  // dr:mycoclap ,
-  // dr:peroxibase ,
-  // dr:rebase ,
-  // dr:tcdb ,
-  // dr:unilectin ,
-  // dr:carbonyldb ,
-  // dr:depod ,
-  // dr:glyconnect ,
-  // dr:iptmnet ,
-  // dr:phosphositeplus ,
-  // dr:swisspalm ,
-  // dr:unicarbkb ,
-  // dr:biomuta ,
-  // dr:dmdm ,
-  // dr:dbsnp ,
-  // dr:compluyeast-2dpage ,
-  // dr:dosac-cobs-2dpage ,
-  // dr:ogp ,
-  // dr:reproduction-2dpage ,
-  // dr:swiss-2dpage ,
-  // dr:ucd-2dpage ,
-  // dr:world-2dpage ,
-  // dr:cptac ,
-  // dr:epd ,
-  // dr:maxqb ,
-  // dr:paxdb ,
-  // dr:peptideatlas ,
-  // dr:pride ,
-  // dr:promex ,
-  // dr:proteomicsdb ,
-  // dr:topdownproteomics ,
-  // dr:jpost ,
-  // dr:massive ,
-  // dr:dnasu ,
-  // dr:abcd ,
-  // dr:ensembl ,
-  // dr:ensemblbacteria ,
-  // dr:ensemblfungi ,
-  // dr:ensemblmetazoa ,
-  // dr:ensemblplants ,
-  // dr:ensemblprotists ,
-  // dr:genedb ,
-  // dr:geneid ,
-  // dr:gramene ,
-  // dr:kegg ,
-  // dr:patric ,
-  // dr:ucsc ,
-  // dr:vectorbase ,
-  // dr:wbparasite ,
-  // dr:arachnoserver ,
-  // dr:araport ,
-  // dr:cgd ,
-  // dr:conoserver ,
-  // dr:ctd ,
-  // dr:dictybase ,
-  // dr:disgenet ,
-  // dr:echobase ,
-  // dr:ecogene ,
-  // dr:euhcvdb ,
-  // dr:eupathdb ,
-  // dr:flybase ,
-  // dr:genecards ,
-  // dr:genereviews ,
-  // dr:hgnc ,
-  // dr:hpa ,
-  // dr:legiolist ,
-  // dr:leproma ,
-  // dr:maizegdb ,
-  // dr:malacards ,
-  // dr:mgi ,
-  // dr:mim ,
-  // dr:niagads ,
-  // dr:nextprot ,
-  // dr:opentargets ,
-  // dr:orphanet ,
-  // dr:pharmgkb ,
-  // dr:pombase ,
-  // dr:pseudocap ,
-  // dr:rgd ,
-  // dr:sgd ,
-  // dr:tair ,
-  // dr:tuberculist ,
-  // dr:vgnc ,
-  // dr:wormbase ,
-  // dr:xenbase ,
-  // dr:zfin ,
-  // dr:eggnog ,
-  // dr:genetree ,
-  // dr:hogenom ,
-  // dr:inparanoid ,
-  // dr:ko ,
-  // dr:oma ,
-  // dr:orthodb ,
-  // dr:phylomedb ,
-  // dr:treefam ,
-  // dr:biocyc ,
-  // dr:brenda ,
-  // dr:reactome ,
-  // dr:sabio-rk ,
-  // dr:signalink ,
-  // dr:signor ,
-  // dr:unipathway ,
-  // dr:plantreactome ,
-  // dr:chitars ,
-  // dr:evolutionarytrace ,
-  // dr:genewiki ,
-  // dr:genomernai ,
-  // dr:pmap-cutdb ,
-  // dr:pro ,
-  // dr:pharos ,
-  // dr:bgee ,
-  // dr:cleanex ,
-  // dr:collectf ,
-  // dr:expressionatlas ,
-  // dr:genevisible ,
-  // dr:disprot ,
-  // dr:cdd ,
-  // dr:gene3d ,
-  // dr:hamap ,
-  // dr:interpro ,
-  // dr:panther ,
-  // dr:pfam ,
-  // dr:pirsf ,
-  // dr:prints ,
-  // dr:prodom ,
-  // dr:sfld ,
-  // dr:smart ,
-  // dr:supfam ,
-  // dr:tigrfams ,
-  // dr:prosite ,
-  // dr:embl ,
-  // dr:ccds ,
-  // dr:pir ,
-  // dr:refseq ,
-  // dr:pdb ,
-  // dr:pdbsum ,
-  // dr:smr ,
-  // dr:biogrid ,
-  // dr:complexportal ,
-  // dr:corum ,
-  // dr:dip ,
-  // dr:elm ,
-  // dr:intact ,
-  // dr:mint ,
-  // dr:string ,
-  // dr:bindingdb ,
-  // dr:chembl ,
-  // dr:drugbank ,
-  // dr:guidetopharmacology ,
-  // dr:swisslipids ,
-  // dr:drugcentral ,
-  // dr:allergome ,
-  // dr:cazy ,
-  // dr:esther ,
-  // dr:imgt_gene-db ,
-  // dr:merops ,
-  // dr:moondb ,
-  // dr:moonprot ,
-  // dr:mycoclap ,
-  // dr:peroxibase ,
-  // dr:rebase ,
-  // dr:tcdb ,
-  // dr:unilectin ,
-  // dr:carbonyldb ,
-  // dr:depod ,
-  // dr:glyconnect ,
-  // dr:iptmnet ,
-  // dr:phosphositeplus ,
-  // dr:swisspalm ,
-  // dr:unicarbkb ,
-  // dr:biomuta ,
-  // dr:dmdm ,
-  // dr:dbsnp ,
-  // dr:compluyeast-2dpage ,
-  // dr:dosac-cobs-2dpage ,
-  // dr:ogp ,
-  // dr:reproduction-2dpage ,
-  // dr:swiss-2dpage ,
-  // dr:ucd-2dpage ,
-  // dr:world-2dpage ,
-  // dr:cptac ,
-  // dr:epd ,
-  // dr:maxqb ,
-  // dr:paxdb ,
-  // dr:peptideatlas ,
-  // dr:pride ,
-  // dr:promex ,
-  // dr:proteomicsdb ,
-  // dr:topdownproteomics ,
-  // dr:jpost ,
-  // dr:massive ,
-  // dr:dnasu ,
-  // dr:abcd ,
-  // dr:ensembl ,
-  // dr:ensemblbacteria ,
-  // dr:ensemblfungi ,
-  // dr:ensemblmetazoa ,
-  // dr:ensemblplants ,
-  // dr:ensemblprotists ,
-  // dr:genedb ,
-  // dr:geneid ,
-  // dr:gramene ,
-  // dr:kegg ,
-  // dr:patric ,
-  // dr:ucsc ,
-  // dr:vectorbase ,
-  // dr:wbparasite ,
-  // dr:arachnoserver ,
-  // dr:araport ,
-  // dr:cgd ,
-  // dr:conoserver ,
-  // dr:ctd ,
-  // dr:dictybase ,
-  // dr:disgenet ,
-  // dr:echobase ,
-  // dr:ecogene ,
-  // dr:euhcvdb ,
-  // dr:eupathdb ,
-  // dr:flybase ,
-  // dr:genecards ,
-  // dr:genereviews ,
-  // dr:hgnc ,
-  // dr:hpa ,
-  // dr:legiolist ,
-  // dr:leproma ,
-  // dr:maizegdb ,
-  // dr:malacards ,
-  // dr:mgi ,
-  // dr:mim ,
-  // dr:niagads ,
-  // dr:nextprot ,
-  // dr:opentargets ,
-  // dr:orphanet ,
-  // dr:pharmgkb ,
-  // dr:pombase ,
-  // dr:pseudocap ,
-  // dr:rgd ,
-  // dr:sgd ,
-  // dr:tair ,
-  // dr:tuberculist ,
-  // dr:vgnc ,
-  // dr:wormbase ,
-  // dr:xenbase ,
-  // dr:zfin ,
-  // dr:eggnog ,
-  // dr:genetree ,
-  // dr:hogenom ,
-  // dr:inparanoid ,
-  // dr:ko ,
-  // dr:oma ,
-  // dr:orthodb ,
-  // dr:phylomedb ,
-  // dr:treefam ,
-  // dr:biocyc ,
-  // dr:brenda ,
-  // dr:reactome ,
-  // dr:sabio-rk ,
-  // dr:signalink ,
-  // dr:signor ,
-  // dr:unipathway ,
-  // dr:plantreactome ,
-  // dr:chitars ,
-  // dr:evolutionarytrace ,
-  // dr:genewiki ,
-  // dr:genomernai ,
-  // dr:pmap-cutdb ,
-  // dr:pro ,
-  // dr:pharos ,
-  // dr:bgee ,
-  // dr:cleanex ,
-  // dr:collectf ,
-  // dr:expressionatlas ,
-  // dr:genevisible ,
-  // dr:disprot ,
-  // dr:cdd ,
-  // dr:gene3d ,
-  // dr:hamap ,
-  // dr:interpro ,
-  // dr:panther ,
-  // dr:pfam ,
-  // dr:pirsf ,
-  // dr:prints ,
-  // dr:prodom ,
-  // dr:sfld ,
-  // dr:smart ,
-  // dr:supfam ,
-  // dr:tigrfams ,
-  // dr:prosite
-};
+// TODO split isoforms from main sequence view
+// cc:alternative_products ,
+ColumnConfiguration.set(Column.ftVarSeq, {
+  label: 'Alternative sequence',
+  render: data => {
+    const { featuresData } = data[EntrySection.Sequence];
+    return (
+      <Fragment>
+        {featuresData && <FeaturesView features={featuresData} />}
+      </Fragment>
+    );
+  },
+});
+ColumnConfiguration.set(Column.fragment, {
+  label: 'Fragment',
+  render: data => {
+    const { flag } = data[EntrySection.Sequence];
+    const isFragment =
+      flag &&
+      [
+        Flag.FRAGMENT,
+        Flag.FRAGMENTS,
+        Flag.FRAGMENTS_PRECURSOR,
+        Flag.FRAGMENT_PRECURSOR,
+      ].includes(flag);
+    return flag && <Fragment>{isFragment ? flag : 'N'}</Fragment>;
+  },
+});
+// gene_location ,  "Invalid fields parameter value 'gene_location'"
+ColumnConfiguration.set(Column.mass, {
+  label: 'Mass',
+  render: data => {
+    const { molWeight } = data[EntrySection.Sequence];
+    return numberView({ value: molWeight, unit: Unit.DA });
+  },
+});
+
+ColumnConfiguration.set(Column.ccMassSpectrometry, {
+  label: 'Mass Spectrometry',
+  render: data => {
+    const { massSpectrometry } = data[EntrySection.Sequence];
+    return massSpectrometry && <MassSpectrometryView data={massSpectrometry} />;
+  },
+});
+
+// ft:variant ,
+ColumnConfiguration.set(
+  Column.ftNonCon,
+  getFeatureColumn(FeatureType.NON_CONS)
+);
+ColumnConfiguration.set(Column.ftNonStd, getFeatureColumn(FeatureType.NON_STD));
+ColumnConfiguration.set(Column.ftNonTer, getFeatureColumn(FeatureType.NON_TER));
+
+ColumnConfiguration.set(Column.ccPolymorphism, {
+  label: 'Polymorphysm',
+  render: data => {
+    const { polymorphysm } = data[EntrySection.Sequence];
+    return polymorphysm && <FreeTextView comments={polymorphysm} />;
+  },
+});
+
+ColumnConfiguration.set(Column.ccRnaEditing, {
+  label: 'RNA Editing',
+  render: data => {
+    const { rnaEditing } = data[EntrySection.Sequence];
+    return rnaEditing && <RNAEditingView data={rnaEditing} />;
+  },
+});
+// sequence ,
+ColumnConfiguration.set(Column.errorGmodelPred, {
+  label: 'Sequence Caution',
+  render: data => {
+    const { sequenceCaution } = data[EntrySection.Sequence];
+    return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
+  },
+});
+
+ColumnConfiguration.set(
+  Column.ftConflict,
+  getFeatureColumn(FeatureType.CONFLICT)
+);
+ColumnConfiguration.set(Column.ftUnsure, getFeatureColumn(FeatureType.UNSURE));
+ColumnConfiguration.set(Column.sequenceVersion, {
+  label: 'Sequence Version',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
+  },
+});
+ColumnConfiguration.set(Column.absorption, {
+  label: 'Absorption',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.absorption && (
+        <AbsorptionView data={bioPhysicoChemicalProperties.absorption} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(
+  Column.ftActSite,
+  getFeatureColumn(FeatureType.ACT_SITE)
+);
+ColumnConfiguration.set(
+  Column.ftBinding,
+  getFeatureColumn(FeatureType.BINDING)
+);
+ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
+// cc:catalytic_activity ,
+// cc:cofactor ,
+ColumnConfiguration.set(
+  Column.ftDnaBind,
+  getFeatureColumn(FeatureType.DNA_BIND)
+);
+// ec ,
+// cc:enzyme_regulation ,
+// cc:function ,
+ColumnConfiguration.set(Column.kinetics, {
+  label: 'Kinetics',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.kinetics && (
+        <KineticsView data={bioPhysicoChemicalProperties.kinetics} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ftMetal, getFeatureColumn(FeatureType.METAL));
+ColumnConfiguration.set(
+  Column.ftNpBind,
+  getFeatureColumn(FeatureType.NP_BINDL)
+);
+// cc:pathway ,
+ColumnConfiguration.set(Column.phDependence, {
+  label: 'pH Dependence',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.pHDependence && (
+        <TextView comments={bioPhysicoChemicalProperties.pHDependence} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.redoxPotential, {
+  label: 'Redox Potential',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.redoxPotential && (
+        <TextView comments={bioPhysicoChemicalProperties.redoxPotential} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ftSite, getFeatureColumn(FeatureType.SITE));
+ColumnConfiguration.set(Column.tempDependence, {
+  label: 'Temperature Dependence',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.temperatureDependence && (
+        <TextView
+          comments={bioPhysicoChemicalProperties.temperatureDependence}
+        />
+      )
+    );
+  },
+});
+// score ,
+// cc:caution ,
+// feature ,
+// keyword ,
+// keywordid ,
+// matched_text ,
+// cc:miscellaneous ,
+// protein_existence ,
+// reviewed ,
+// tools ,
+// uniparc_id ,
+// cc:interaction ,
+// cc:subunit ,
+// cc:developmental_stage ,
+// cc:induction ,
+// cc:tissue_specificity ,
+// go_p ,
+// go_c ,
+// go ,
+// go_f ,
+// go_id ,
+// cc:allergen ,
+// cc:biotechnology ,
+// cc:disruption_phenotype ,
+// cc:disease ,
+ColumnConfiguration.set(
+  Column.ftMutagen,
+  getFeatureColumn(FeatureType.MUTAGEN)
+);
+// cc:pharmaceutical ,
+// cc:toxic_dose ,
+ColumnConfiguration.set(
+  Column.ftIntramem,
+  getFeatureColumn(FeatureType.INTRAMEM)
+);
+// cc:subcellular_location ,
+ColumnConfiguration.set(
+  Column.ftTopDom,
+  getFeatureColumn(FeatureType.TOPO_DOM)
+);
+ColumnConfiguration.set(
+  Column.ftTransmem,
+  getFeatureColumn(FeatureType.TRANSMEM)
+);
+ColumnConfiguration.set(Column.ftChain, getFeatureColumn(FeatureType.CHAIN));
+ColumnConfiguration.set(
+  Column.ftCrosslnk,
+  getFeatureColumn(FeatureType.CROSSLNK)
+);
+ColumnConfiguration.set(
+  Column.ftDisulfide,
+  getFeatureColumn(FeatureType.DISULFID)
+);
+ColumnConfiguration.set(
+  Column.ftCarbohyd,
+  getFeatureColumn(FeatureType.CARBOHYD)
+);
+ColumnConfiguration.set(
+  Column.ftInitMet,
+  getFeatureColumn(FeatureType.INIT_MET)
+);
+ColumnConfiguration.set(Column.ftLipid, getFeatureColumn(FeatureType.LIPID));
+ColumnConfiguration.set(Column.ftModRes, getFeatureColumn(FeatureType.MOD_RES));
+ColumnConfiguration.set(
+  Column.ftPeptide,
+  getFeatureColumn(FeatureType.PEPTIDE)
+);
+// cc:ptm ,
+ColumnConfiguration.set(Column.ftPropep, getFeatureColumn(FeatureType.PROPEP));
+ColumnConfiguration.set(Column.ftSignal, getFeatureColumn(FeatureType.SIGNAL));
+ColumnConfiguration.set(
+  Column.ftTransit,
+  getFeatureColumn(FeatureType.TRANSIT)
+);
+// 3d ,
+ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
+ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
+ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
+// mapped_pm_id ,
+// pm_id ,
+ColumnConfiguration.set(Column.dateCreate, {
+  label: 'Date Created',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.firstPublicDate;
+  },
+});
+ColumnConfiguration.set(Column.dateMod, {
+  label: 'Date Modified',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.lastAnnotationUpdateDate;
+  },
+});
+ColumnConfiguration.set(Column.dateSeqMod, {
+  label: 'Date Sequence Modified',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.lastSequenceUpdateDate;
+  },
+});
+ColumnConfiguration.set(Column.version, {
+  label: 'Version',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && <span>{entryAudit.entryVersion}</span>;
+  },
+});
+ColumnConfiguration.set(Column.ftCoiled, getFeatureColumn(FeatureType.COILED));
+ColumnConfiguration.set(
+  Column.ftCompbias,
+  getFeatureColumn(FeatureType.COMPBIAS)
+);
+// cc:domain ,
+ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
+ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
+// protein_families ,
+ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
+ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
+// cc:similarity ,
+ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
+// tl:all ,
+// tl:class ,
+// tl:cohort ,
+// tl:family ,
+// tl:forma ,
+// tl:genus ,
+// tl:infraclass ,
+// tl:infraorder ,
+// tl:kingdom ,
+// tl:order ,
+// tl:parvorder ,
+// tl:phylum ,
+// tl:species ,
+// tl:species_group ,
+// tl:species_subgroup ,
+// tl:subclass ,
+// tl:subcohort ,
+// tl:subfamily ,
+// tl:subgenus ,
+// tl:subkingdom ,
+// tl:suborder ,
+// tl:subphylum ,
+// tl:subspecies ,
+// tl:subtribe ,
+// tl:superclass ,
+// tl:superfamily ,
+// tl:superkingdom ,
+// tl:superorder ,
+// tl:superphylum ,
+// tl:tribe ,
+// tl:varietas ,
+// tax_id ,
+
+// dr:embl ,
+// dr:ccds ,
+// dr:pir ,
+// dr:refseq ,
+// dr:pdb ,
+// dr:pdbsum ,
+// dr:smr ,
+// dr:biogrid ,
+// dr:complexportal ,
+// dr:corum ,
+// dr:dip ,
+// dr:elm ,
+// dr:intact ,
+// dr:mint ,
+// dr:string ,
+// dr:bindingdb ,
+// dr:chembl ,
+// dr:drugbank ,
+// dr:guidetopharmacology ,
+// dr:swisslipids ,
+// dr:drugcentral ,
+// dr:allergome ,
+// dr:cazy ,
+// dr:esther ,
+// dr:imgt_gene-db ,
+// dr:merops ,
+// dr:moondb ,
+// dr:moonprot ,
+// dr:mycoclap ,
+// dr:peroxibase ,
+// dr:rebase ,
+// dr:tcdb ,
+// dr:unilectin ,
+// dr:carbonyldb ,
+// dr:depod ,
+// dr:glyconnect ,
+// dr:iptmnet ,
+// dr:phosphositeplus ,
+// dr:swisspalm ,
+// dr:unicarbkb ,
+// dr:biomuta ,
+// dr:dmdm ,
+// dr:dbsnp ,
+// dr:compluyeast-2dpage ,
+// dr:dosac-cobs-2dpage ,
+// dr:ogp ,
+// dr:reproduction-2dpage ,
+// dr:swiss-2dpage ,
+// dr:ucd-2dpage ,
+// dr:world-2dpage ,
+// dr:cptac ,
+// dr:epd ,
+// dr:maxqb ,
+// dr:paxdb ,
+// dr:peptideatlas ,
+// dr:pride ,
+// dr:promex ,
+// dr:proteomicsdb ,
+// dr:topdownproteomics ,
+// dr:jpost ,
+// dr:massive ,
+// dr:dnasu ,
+// dr:abcd ,
+// dr:ensembl ,
+// dr:ensemblbacteria ,
+// dr:ensemblfungi ,
+// dr:ensemblmetazoa ,
+// dr:ensemblplants ,
+// dr:ensemblprotists ,
+// dr:genedb ,
+// dr:geneid ,
+// dr:gramene ,
+// dr:kegg ,
+// dr:patric ,
+// dr:ucsc ,
+// dr:vectorbase ,
+// dr:wbparasite ,
+// dr:arachnoserver ,
+// dr:araport ,
+// dr:cgd ,
+// dr:conoserver ,
+// dr:ctd ,
+// dr:dictybase ,
+// dr:disgenet ,
+// dr:echobase ,
+// dr:ecogene ,
+// dr:euhcvdb ,
+// dr:eupathdb ,
+// dr:flybase ,
+// dr:genecards ,
+// dr:genereviews ,
+// dr:hgnc ,
+// dr:hpa ,
+// dr:legiolist ,
+// dr:leproma ,
+// dr:maizegdb ,
+// dr:malacards ,
+// dr:mgi ,
+// dr:mim ,
+// dr:niagads ,
+// dr:nextprot ,
+// dr:opentargets ,
+// dr:orphanet ,
+// dr:pharmgkb ,
+// dr:pombase ,
+// dr:pseudocap ,
+// dr:rgd ,
+// dr:sgd ,
+// dr:tair ,
+// dr:tuberculist ,
+// dr:vgnc ,
+// dr:wormbase ,
+// dr:xenbase ,
+// dr:zfin ,
+// dr:eggnog ,
+// dr:genetree ,
+// dr:hogenom ,
+// dr:inparanoid ,
+// dr:ko ,
+// dr:oma ,
+// dr:orthodb ,
+// dr:phylomedb ,
+// dr:treefam ,
+// dr:biocyc ,
+// dr:brenda ,
+// dr:reactome ,
+// dr:sabio-rk ,
+// dr:signalink ,
+// dr:signor ,
+// dr:unipathway ,
+// dr:plantreactome ,
+// dr:chitars ,
+// dr:evolutionarytrace ,
+// dr:genewiki ,
+// dr:genomernai ,
+// dr:pmap-cutdb ,
+// dr:pro ,
+// dr:pharos ,
+// dr:bgee ,
+// dr:cleanex ,
+// dr:collectf ,
+// dr:expressionatlas ,
+// dr:genevisible ,
+// dr:disprot ,
+// dr:cdd ,
+// dr:gene3d ,
+// dr:hamap ,
+// dr:interpro ,
+// dr:panther ,
+// dr:pfam ,
+// dr:pirsf ,
+// dr:prints ,
+// dr:prodom ,
+// dr:sfld ,
+// dr:smart ,
+// dr:supfam ,
+// dr:tigrfams ,
+// dr:prosite ,
+// dr:embl ,
+// dr:ccds ,
+// dr:pir ,
+// dr:refseq ,
+// dr:pdb ,
+// dr:pdbsum ,
+// dr:smr ,
+// dr:biogrid ,
+// dr:complexportal ,
+// dr:corum ,
+// dr:dip ,
+// dr:elm ,
+// dr:intact ,
+// dr:mint ,
+// dr:string ,
+// dr:bindingdb ,
+// dr:chembl ,
+// dr:drugbank ,
+// dr:guidetopharmacology ,
+// dr:swisslipids ,
+// dr:drugcentral ,
+// dr:allergome ,
+// dr:cazy ,
+// dr:esther ,
+// dr:imgt_gene-db ,
+// dr:merops ,
+// dr:moondb ,
+// dr:moonprot ,
+// dr:mycoclap ,
+// dr:peroxibase ,
+// dr:rebase ,
+// dr:tcdb ,
+// dr:unilectin ,
+// dr:carbonyldb ,
+// dr:depod ,
+// dr:glyconnect ,
+// dr:iptmnet ,
+// dr:phosphositeplus ,
+// dr:swisspalm ,
+// dr:unicarbkb ,
+// dr:biomuta ,
+// dr:dmdm ,
+// dr:dbsnp ,
+// dr:compluyeast-2dpage ,
+// dr:dosac-cobs-2dpage ,
+// dr:ogp ,
+// dr:reproduction-2dpage ,
+// dr:swiss-2dpage ,
+// dr:ucd-2dpage ,
+// dr:world-2dpage ,
+// dr:cptac ,
+// dr:epd ,
+// dr:maxqb ,
+// dr:paxdb ,
+// dr:peptideatlas ,
+// dr:pride ,
+// dr:promex ,
+// dr:proteomicsdb ,
+// dr:topdownproteomics ,
+// dr:jpost ,
+// dr:massive ,
+// dr:dnasu ,
+// dr:abcd ,
+// dr:ensembl ,
+// dr:ensemblbacteria ,
+// dr:ensemblfungi ,
+// dr:ensemblmetazoa ,
+// dr:ensemblplants ,
+// dr:ensemblprotists ,
+// dr:genedb ,
+// dr:geneid ,
+// dr:gramene ,
+// dr:kegg ,
+// dr:patric ,
+// dr:ucsc ,
+// dr:vectorbase ,
+// dr:wbparasite ,
+// dr:arachnoserver ,
+// dr:araport ,
+// dr:cgd ,
+// dr:conoserver ,
+// dr:ctd ,
+// dr:dictybase ,
+// dr:disgenet ,
+// dr:echobase ,
+// dr:ecogene ,
+// dr:euhcvdb ,
+// dr:eupathdb ,
+// dr:flybase ,
+// dr:genecards ,
+// dr:genereviews ,
+// dr:hgnc ,
+// dr:hpa ,
+// dr:legiolist ,
+// dr:leproma ,
+// dr:maizegdb ,
+// dr:malacards ,
+// dr:mgi ,
+// dr:mim ,
+// dr:niagads ,
+// dr:nextprot ,
+// dr:opentargets ,
+// dr:orphanet ,
+// dr:pharmgkb ,
+// dr:pombase ,
+// dr:pseudocap ,
+// dr:rgd ,
+// dr:sgd ,
+// dr:tair ,
+// dr:tuberculist ,
+// dr:vgnc ,
+// dr:wormbase ,
+// dr:xenbase ,
+// dr:zfin ,
+// dr:eggnog ,
+// dr:genetree ,
+// dr:hogenom ,
+// dr:inparanoid ,
+// dr:ko ,
+// dr:oma ,
+// dr:orthodb ,
+// dr:phylomedb ,
+// dr:treefam ,
+// dr:biocyc ,
+// dr:brenda ,
+// dr:reactome ,
+// dr:sabio-rk ,
+// dr:signalink ,
+// dr:signor ,
+// dr:unipathway ,
+// dr:plantreactome ,
+// dr:chitars ,
+// dr:evolutionarytrace ,
+// dr:genewiki ,
+// dr:genomernai ,
+// dr:pmap-cutdb ,
+// dr:pro ,
+// dr:pharos ,
+// dr:bgee ,
+// dr:cleanex ,
+// dr:collectf ,
+// dr:expressionatlas ,
+// dr:genevisible ,
+// dr:disprot ,
+// dr:cdd ,
+// dr:gene3d ,
+// dr:hamap ,
+// dr:interpro ,
+// dr:panther ,
+// dr:pfam ,
+// dr:pirsf ,
+// dr:prints ,
+// dr:prodom ,
+// dr:sfld ,
+// dr:smart ,
+// dr:supfam ,
+// dr:tigrfams ,
+// dr:prosite
 
 export default ColumnConfiguration;
