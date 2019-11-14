@@ -29,6 +29,7 @@ import {
   KineticsView,
 } from '../view/uniprotkb/FunctionSection';
 import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
+import { Column } from './types/ColumnTypes';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -45,7 +46,6 @@ const getFeatureColumn = (type: FeatureType) => {
     },
   };
 };
-import { Column } from './types/ColumnTypes';
 
 export const ColumnConfiguration = new Map<
   Column,
