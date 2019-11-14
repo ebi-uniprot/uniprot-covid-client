@@ -135,6 +135,10 @@ const FunctionSection: FC<{
         <BioPhysicoChemicalPropertiesView
           data={data.bioPhysicoChemicalProperties}
         />
+        <FreeTextView
+          comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}
+          title={CommentType.PATHWAY.toLowerCase()}
+        />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <GoRibbon primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />

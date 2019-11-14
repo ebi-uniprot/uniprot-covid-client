@@ -628,52 +628,7 @@ exports[`ColumnConfiguration component should render all columns 34`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 35`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 36`] = `
-<DocumentFragment>
-  <section
-    class="text-block"
-  >
-    value1
-    <span
-      class="evidence-tag svg-colour-reviewed"
-      data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
-    >
-      <svg
-        height="12"
-        viewBox="0 0 426 512"
-        width="12"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-          id="Shape"
-        />
-      </svg>
-      <span
-        class="evidence-tag__label"
-        title=""
-      >
-        1 automatic annotation
-      </span>
-    </span>
-    <div
-      class="evidence-tag-content "
-      data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
-      </div>
-    </div>
-  </section>
-</DocumentFragment>
-`;
+exports[`ColumnConfiguration component should render all columns 36`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 37`] = `
 <DocumentFragment>
@@ -722,9 +677,7 @@ exports[`ColumnConfiguration component should render all columns 37`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 38`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 39`] = `
+exports[`ColumnConfiguration component should render all columns 38`] = `
 <DocumentFragment>
   <section
     class="text-block"
@@ -771,11 +724,152 @@ exports[`ColumnConfiguration component should render all columns 39`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 40`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 39`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 41`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 40`] = `
+<DocumentFragment>
+  <section
+    class="text-block"
+  >
+    value1
+    <span
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 426 512"
+        width="12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+          id="Shape"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 automatic annotation
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Automatic assertion according to rules
+        </h5>
+        <div>
+          PROSITE-ProRule:PRU10028
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
 
-exports[`ColumnConfiguration component should render all columns 42`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 41`] = `
+<DocumentFragment>
+  <span
+    title="Annotation Score"
+  >
+    <span
+      class="doughnut-chart--medium colour-light-grey"
+    >
+      <span
+        class="doughnut-chart--medium__left-wrap"
+      >
+        <span
+          class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+          style="transform: rotate(0deg);"
+        />
+      </span>
+      <span
+        class="doughnut-chart--medium__right-wrap"
+      >
+        <span
+          class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+          style="transform: rotate(72deg);"
+        />
+      </span>
+      <span
+        class="doughnut-chart--medium__inner-circle"
+      >
+        1/5
+      </span>
+    </span>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`ColumnConfiguration component should render all columns 42`] = `
+<DocumentFragment>
+  <section
+    class="text-block"
+  >
+    The sequence 
+    <a
+      class="external-link"
+      href="//www.ebi.ac.uk/ena/data/view/sequence"
+      target="_blank"
+    >
+      sequence
+      <svg
+        viewBox="0 0 576 512"
+        width="12.5"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+        />
+      </svg>
+    </a>
+     differs from that shown. Reason: Erroneous initiation Text note
+    <span
+      class="evidence-tag svg-colour-unreviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 400 512"
+        width="12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+          id="Shape"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 automatic annotation
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Automatic assertion according to rules
+        </h5>
+        <div>
+          PIRNR:PIRNR001361
+        </div>
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
 
 exports[`ColumnConfiguration component should render all columns 43`] = `<DocumentFragment />`;
 
@@ -807,37 +901,37 @@ exports[`ColumnConfiguration component should render all columns 56`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 57`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 58`] = `
+exports[`ColumnConfiguration component should render all columns 58`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 59`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 60`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 61`] = `
 <DocumentFragment>
   2015-08-02
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 59`] = `
+exports[`ColumnConfiguration component should render all columns 62`] = `
 <DocumentFragment>
   2016-04-24
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 60`] = `
+exports[`ColumnConfiguration component should render all columns 63`] = `
 <DocumentFragment>
   2017-01-21
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 61`] = `
+exports[`ColumnConfiguration component should render all columns 64`] = `
 <DocumentFragment>
   <span>
     20
   </span>
 </DocumentFragment>
 `;
-
-exports[`ColumnConfiguration component should render all columns 62`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 63`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 64`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 65`] = `<DocumentFragment />`;
 
@@ -846,3 +940,9 @@ exports[`ColumnConfiguration component should render all columns 66`] = `<Docume
 exports[`ColumnConfiguration component should render all columns 67`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 68`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 69`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 70`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 71`] = `<DocumentFragment />`;

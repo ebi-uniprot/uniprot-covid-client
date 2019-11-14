@@ -30,6 +30,10 @@ import {
 } from '../view/uniprotkb/FunctionSection';
 import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
+import { CommentType, FreeText } from './types/CommentTypes';
+import AnnotationScoreDoughnutChart, {
+  DoughnutChartSize,
+} from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -389,7 +393,15 @@ ColumnConfiguration.set(
   Column.ftNpBind,
   getFeatureColumn(FeatureType.NP_BINDL)
 );
-// cc:pathway ,
+ColumnConfiguration.set(Column.ccPathway, {
+  label: 'Pathway',
+  render: data => {
+    const pathwayComments = data[EntrySection.Function].commentsData.get(
+      CommentType.PATHWAY
+    ) as FreeText[];
+    return pathwayComments && <FreeTextView comments={pathwayComments} />;
+  },
+});
 ColumnConfiguration.set(Column.phDependence, {
   label: 'pH Dependence',
   render: data => {
@@ -432,8 +444,22 @@ ColumnConfiguration.set(Column.tempDependence, {
     );
   },
 });
-// score ,
-// cc:caution ,
+ColumnConfiguration.set(Column.score, {
+  label: 'Score',
+  render: data => (
+    <AnnotationScoreDoughnutChart
+      score={data.annotationScore}
+      size={DoughnutChartSize.medium}
+    />
+  ),
+});
+ColumnConfiguration.set(Column.ccSequenceCaution, {
+  label: 'Sequence Caution',
+  render: data => {
+    const { sequenceCaution } = data[EntrySection.Sequence];
+    return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
+  },
+});
 // feature ,
 // keyword ,
 // keywordid ,
