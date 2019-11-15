@@ -8,6 +8,8 @@ import ResultsPage from './pages/ResultsPage';
 import EntryPage from './pages/EntryPage';
 import AdvancedSearchPage from './pages/AdvancedSearchPage';
 import CustomiseTablePage from './pages/CustomiseTablePage';
+import DownloadPage from './pages/DownloadPage';
+
 import './styles/App.scss';
 
 declare const BASE_URL: string;
@@ -52,6 +54,14 @@ const App = () => (
           render={() => (
             <BaseLayout>
               <CustomiseTablePage />
+            </BaseLayout>
+          )}
+        />
+        <Route
+          path="/download"
+          render={() => (
+            <BaseLayout>
+              <DownloadPage />
             </BaseLayout>
           )}
         />
