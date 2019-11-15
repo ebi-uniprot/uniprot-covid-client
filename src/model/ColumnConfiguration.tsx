@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
+import idx from 'idx';
 import SimpleView from '../view/uniprotkb/components/SimpleView';
-import ProteinNamesView from '../view/uniprotkb/components/ProteinNamesView';
+import ProteinNamesView, {
+  NameWithEvidence,
+} from '../view/uniprotkb/components/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
   OrganismId,
@@ -34,6 +37,7 @@ import { CommentType, FreeText } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
+import { ValueWithEvidence } from './types/modelTypes';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -372,9 +376,49 @@ ColumnConfiguration.set(
   Column.ftDnaBind,
   getFeatureColumn(FeatureType.DNA_BIND)
 );
+ColumnConfiguration.set(Column.ec, {
+  label: 'EC Number',
+  render: data => {
+    const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
+    const ecNumbers = idx(
+      proteinNamesData,
+      proteinName => proteinName.recommendedName.ecNumbers
+    ) as ValueWithEvidence[];
+    return (
+      ecNumbers && (
+        <Fragment>
+          {ecNumbers.map(ecNumber => (
+            <NameWithEvidence data={ecNumber} key={ecNumber.value} />
+          ))}
+        </Fragment>
+      )
+    );
+  },
+});
 // ec ,
-// cc:enzyme_regulation ,
-// cc:function ,
+//  "Invalid fields parameter value 'cc_enzyme_regulation'"
+ColumnConfiguration.set(Column.ccEnzymeRegulation, {
+  label: 'Enzyme Regulation',
+  render: data => {
+    const activityRegulationComments = data[
+      EntrySection.Function
+    ].commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeText[];
+    return (
+      activityRegulationComments && (
+        <FreeTextView comments={activityRegulationComments} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccFunction, {
+  label: 'Function',
+  render: data => {
+    const functionComments = data[EntrySection.Function].commentsData.get(
+      CommentType.FUNCTION
+    ) as FreeText[];
+    return functionComments && <FreeTextView comments={functionComments} />;
+  },
+});
 ColumnConfiguration.set(Column.kinetics, {
   label: 'Kinetics',
   render: data => {

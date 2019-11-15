@@ -33,6 +33,7 @@ export const defaultTableColumns = [
   Column.proteinName,
   Column.geneNames,
   Column.organism,
+  Column.ec,
 ];
 
 const resultsInitialState = {

@@ -9,6 +9,7 @@ describe('Function data converter', () => {
         ['FUNCTION', []],
         ['PATHWAY', []],
         ['MISCELLANEOUS', []],
+        ['ACTIVITY REGULATION', []],
         [
           'CATALYTIC ACTIVITY',
           [
