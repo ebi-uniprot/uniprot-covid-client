@@ -1,7 +1,8 @@
 import React from 'react';
 import ColumnSelectContainer from './ColumnSelectContainer';
+import { FileFormat } from './DownloadContainer';
 import { Column } from '../model/types/ColumnTypes';
-import './styles/CustomiseTable.scss';
+import './styles/Download.scss';
 
 type DownloadViewProps = {
   selectedColumns: Column[];
@@ -11,19 +12,82 @@ type DownloadViewProps = {
 };
 
 const DownloadView: React.FC<DownloadViewProps> = ({
-  selectedColumns,
-  onChange,
   onSubmit,
   onCancel,
+  selectedColumns,
+  downloadAll,
+  fileFormat,
+  compressed,
+  onSelectedColumnsChange,
+  onDownloadAllChange,
+  onFileFormatChange,
+  onCompressedChange,
 }) => (
   <form
     onSubmit={onSubmit}
-    className="customise-table"
+    className="download"
     data-testid="customise-table-form"
   >
-    <h1>Download</h1>
+    <h3>Download</h3>
+    <label>
+      <input
+        type="radio"
+        name="data-selection"
+        value="false"
+        checked={!downloadAll}
+        onChange={onDownloadAllChange}
+      />
+      Download selected
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="data-selection"
+        value="true"
+        checked={downloadAll}
+        onChange={onDownloadAllChange}
+      />
+      Download all
+    </label>
+    <fieldset>
+      <legend>Format</legend>
+      <select
+        id="file-format-select"
+        value={fileFormat}
+        onChange={onFileFormatChange}
+      >
+        {Object.values(FileFormat).map(format => (
+          <option value={format} key={format}>
+            {format}
+          </option>
+        ))}
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>Compressed</legend>
+      <label>
+        <input
+          type="radio"
+          name="compressed"
+          value="true"
+          checked={compressed}
+          onChange={onCompressedChange}
+        />
+        Yes
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="compressed"
+          value="false"
+          checked={!compressed}
+          onChange={onCompressedChange}
+        />
+        No
+      </label>
+    </fieldset>
     <ColumnSelectContainer
-      onChange={onChange}
+      onChange={onSelectedColumnsChange}
       selectedColumns={selectedColumns}
     />
     <div className="button-group customise-table--cancel-submit-buttons">
@@ -34,6 +98,14 @@ const DownloadView: React.FC<DownloadViewProps> = ({
         data-testid="customise-table-cancel-button"
       >
         Cancel
+      </button>
+      <button
+        className="button secondary"
+        type="button"
+        onClick={onCancel}
+        data-testid="customise-table-cancel-button"
+      >
+        Preview
       </button>
       <button className="button" type="submit">
         Save

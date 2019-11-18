@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -6,6 +6,19 @@ import { RootState, RootAction } from '../state/state-types';
 import * as resultsActions from './state/resultsActions';
 import DownloadView from './DownloadView';
 import { Column } from '../model/types/ColumnTypes';
+
+export enum FileFormat {
+  fastaCanonical = 'FASTA (canonical)',
+  fastaCanonicalIsoform = 'FASTA (canonical & isoform)',
+  tsv = 'TSV',
+  excel = 'Excel',
+  xml = 'XML',
+  rdfXml = 'RDF/XML',
+  text = 'Text',
+  gff = 'GFF',
+  list = 'List',
+  json = 'JSON',
+}
 
 type DownloadTableProps = {
   tableColumns: Column[];
@@ -18,10 +31,9 @@ const Download: React.FC<DownloadTableProps> = ({
   history,
 }) => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
-
-  const handleChange = (columnIds: Column[]) => {
-    setSelectedColumns(columnIds);
-  };
+  const [downloadAll, setDownloadAll] = useState(true);
+  const [fileFormat, setFileFormat] = useState(FileFormat.fastaCanonical);
+  const [compressed, setCompressed] = useState(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,10 +47,16 @@ const Download: React.FC<DownloadTableProps> = ({
 
   return (
     <DownloadView
-      selectedColumns={selectedColumns}
-      onChange={handleChange}
       onSubmit={handleSubmit}
       onCancel={handleCancel}
+      selectedColumns={selectedColumns}
+      downloadAll={downloadAll}
+      fileFormat={fileFormat}
+      compressed={compressed}
+      onSelectedColumnsChange={setSelectedColumns}
+      onDownloadAllChange={e => setDownloadAll(e.target.value === 'true')}
+      onFileFormatChange={e => setFileFormat(e.target.value)}
+      onCompressedChange={e => setCompressed(e.target.value === 'true')}
     />
   );
 };
