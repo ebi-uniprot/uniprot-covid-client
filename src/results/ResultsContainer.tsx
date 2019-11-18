@@ -300,10 +300,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   <button type="button" className="button link-button disabled">
                     Align
                   </button>
-                  <button type="button" className="button link-button">
-                    <DownloadIcon />
-                    Download
-                  </button>
+                  <Link to="/download">
+                    <button type="button" className="button link-button">
+                      <DownloadIcon />
+                      Download
+                    </button>
+                  </Link>
                   <button type="button" className="button link-button disabled">
                     <BasketIcon />
                     Add
@@ -401,10 +403,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const ResultsContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Results)
+  connect(mapStateToProps, mapDispatchToProps)(Results)
 );
 
 export default ResultsContainer;
