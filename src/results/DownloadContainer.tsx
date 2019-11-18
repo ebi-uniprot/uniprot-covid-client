@@ -54,9 +54,15 @@ const Download: React.FC<DownloadTableProps> = ({
       fileFormat={fileFormat}
       compressed={compressed}
       onSelectedColumnsChange={setSelectedColumns}
-      onDownloadAllChange={e => setDownloadAll(e.target.value === 'true')}
-      onFileFormatChange={e => setFileFormat(e.target.value)}
-      onCompressedChange={e => setCompressed(e.target.value === 'true')}
+      onDownloadAllChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        setDownloadAll(e.target.value === 'true')
+      }
+      onFileFormatChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        setFileFormat(e.target.value as FileFormat)
+      }
+      onCompressedChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        setCompressed(e.target.value === 'true')
+      }
     />
   );
 };
