@@ -1,4 +1,4 @@
-import { getAPIQueryUrl, createFacetsQueryString } from '../utils';
+import { getQueryUrl, createFacetsQueryString } from '../apiUrls';
 
 describe('utils', () => {
   test('should generate facet query', () => {
@@ -6,7 +6,7 @@ describe('utils', () => {
       { name: 'facet1', value: 'value 1' },
       { name: 'facet2', value: 'value 3' },
     ];
-    const queryString = getAPIQueryUrl('cdc7', [], facets);
+    const queryString = getQueryUrl('cdc7', [], facets);
     expect(queryString).toBe(
       'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/search?facets=reviewed%2Cpopular_organism%2Cproteins_with%2Cexistence%2Cannotation_score%2Clength&fields=&query=cdc7%20AND%20%28facet1%3A%22value%201%22%29%20AND%20%28facet2%3A%22value%203%22%29'
     );
