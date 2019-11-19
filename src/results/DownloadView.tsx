@@ -1,6 +1,6 @@
 import React from 'react';
 import ColumnSelectContainer from './ColumnSelectContainer';
-import { FileFormat } from './DownloadContainer';
+import { FileFormat } from './types/resultsTypes';
 import { Column } from '../model/types/ColumnTypes';
 import './styles/Download.scss';
 
@@ -86,10 +86,12 @@ const DownloadView: React.FC<DownloadViewProps> = ({
         No
       </label>
     </fieldset>
-    <ColumnSelectContainer
-      onChange={onSelectedColumnsChange}
-      selectedColumns={selectedColumns}
-    />
+    {[FileFormat.tsv, FileFormat.excel].includes(fileFormat) && (
+      <ColumnSelectContainer
+        onChange={onSelectedColumnsChange}
+        selectedColumns={selectedColumns}
+      />
+    )}
     <div className="button-group customise-table--cancel-submit-buttons">
       <button
         className="button secondary"

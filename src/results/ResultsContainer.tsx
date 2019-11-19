@@ -19,7 +19,7 @@ import * as searchActions from '../search/state/searchActions';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
-import { getAPIQueryUrl } from './utils/utils';
+import { getQueryUrl } from '../utils/apiUrls';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
@@ -242,7 +242,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+      getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
   }
 
