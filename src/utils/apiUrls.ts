@@ -5,9 +5,10 @@ import {
   getApiSortDirection,
   SortDirection,
   SelectedFacet,
+  FileFormat,
+  fileFormatsWithColumns,
 } from '../results/types/resultsTypes';
 import { SortableColumn } from '../model/types/ColumnTypes';
-import { FileFormat } from '../results/types/resultsTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
@@ -48,7 +49,8 @@ const apiUrls = {
     '/uniprot/api/configure/uniprotkb/resultfields'
   ),
   // Retrieve results
-  advancedSearch: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
+  search: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
+  download: joinUrl(devPrefix, '/uniprot/api/uniprotkb/download'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
 
   entry: (accession: string) =>
@@ -86,7 +88,7 @@ export const getQueryUrl = (
   sortColumn: SortableColumn | undefined = undefined,
   sortDirection: SortDirection | undefined = SortDirection.ascend
 ) =>
-  `${apiUrls.advancedSearch}?${queryString.stringify({
+  `${apiUrls.search}?${queryString.stringify({
     query: `${query}${createFacetsQueryString(selectedFacets)}`,
     fields: columns.join(','),
     facets:
@@ -109,16 +111,53 @@ const fileFormatToAcceptHeader = new Map<FileFormat, string>([
   [FileFormat.json, 'JSON'],
 ]);
 
-// export const getDownloadUrl = (
-//   query: string,
-//   format: FileFormat
-//   columns?: string[],
-//   sortBy?: SortableColumn | undefined,
-//   sortDirection?: SortDirectionApi | undefined
-// ) =>
-//   `${apiUrls.advancedSearch}?${queryString.stringify({
-//     query: encodedQueryString,
-//     fields: columns.join(','),
-//     facets: 'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
-//     sort: sortBy && `${sortBy} ${sortDirection}`,
-//   })}`;
+export const getDownloadUrl = (
+  query: string,
+  columns: string[] | undefined = undefined,
+  selectedFacets: SelectedFacet[],
+  sortColumn: SortableColumn | undefined = undefined,
+  sortDirection: SortDirection | undefined = SortDirection.ascend,
+  downloadAll: boolean,
+  fileFormat: FileFormat,
+  compressed: boolean
+) => {
+  console.log(
+    'query',
+    query,
+    'columns',
+    columns,
+    'selectedFacets',
+    selectedFacets,
+    'sortColumn',
+    sortColumn,
+    'sortDirection',
+    sortDirection,
+    'downloadAll',
+    downloadAll,
+    'fileFormat',
+    fileFormat,
+    'compressed',
+    compressed
+  );
+  const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
+  const parameters: {
+    query: string;
+    fields?: string;
+    sort?: string;
+    includeIsoform?: boolean;
+  } = {
+    query: `${query}${createFacetsQueryString(selectedFacets)}`,
+  };
+  if (isColumnFileFormat && sortColumn) {
+    parameters.sort = `${sortColumn} ${getApiSortDirection(
+      SortDirection[sortDirection]
+    )}`;
+  }
+  if (fileFormat === FileFormat.fastaCanonicalIsoform) {
+    parameters.includeIsoform = true;
+  }
+  if (isColumnFileFormat && columns) {
+    parameters.fields = columns.join(',');
+  }
+  return `${apiUrls.download}?${queryString.stringify(parameters)}`;
+};

@@ -66,3 +66,18 @@ export enum FileFormat {
   list = 'List',
   json = 'JSON',
 }
+
+export const fileFormatToAcceptHeader = new Map<FileFormat, string>([
+  [FileFormat.fastaCanonical, 'text/fasta'],
+  [FileFormat.fastaCanonicalIsoform, 'text/fasta'],
+  [FileFormat.tsv, 'text/tsv'],
+  [FileFormat.excel, 'application/vnd.ms-excel'],
+  [FileFormat.xml, 'application/xml'],
+  [FileFormat.rdfXml, 'application/rdf+xml'],
+  [FileFormat.text, 'text/flatfile'],
+  [FileFormat.gff, 'text/gff'],
+  [FileFormat.list, 'text/list'],
+  [FileFormat.json, 'application/json'],
+]);
+
+export const fileFormatsWithColumns = [FileFormat.tsv, FileFormat.excel];

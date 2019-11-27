@@ -263,9 +263,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
-    const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
-      queryParamFromUrl
-    );
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
     if (isFetching && !results.length) {
       return <Loader />;
     }
@@ -300,7 +303,17 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                   <button type="button" className="button link-button disabled">
                     Align
                   </button>
-                  <Link to="/download">
+                  <Link
+                    to={{
+                      pathname: '/download',
+                      state: {
+                        query,
+                        selectedFacets,
+                        sortColumn,
+                        sortDirection,
+                      },
+                    }}
+                  >
                     <button type="button" className="button link-button">
                       <DownloadIcon />
                       Download

@@ -1,6 +1,6 @@
 import React from 'react';
 import ColumnSelectContainer from './ColumnSelectContainer';
-import { FileFormat } from './types/resultsTypes';
+import { FileFormat, fileFormatsWithColumns } from './types/resultsTypes';
 import { Column } from '../model/types/ColumnTypes';
 import './styles/Download.scss';
 
@@ -14,6 +14,7 @@ type DownloadViewProps = {
 const DownloadView: React.FC<DownloadViewProps> = ({
   onSubmit,
   onCancel,
+  onPreview,
   selectedColumns,
   downloadAll,
   fileFormat,
@@ -22,98 +23,103 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   onDownloadAllChange,
   onFileFormatChange,
   onCompressedChange,
-}) => (
-  <form
-    onSubmit={onSubmit}
-    className="download"
-    data-testid="customise-table-form"
-  >
-    <h3>Download</h3>
-    <label>
-      <input
-        type="radio"
-        name="data-selection"
-        value="false"
-        checked={!downloadAll}
-        onChange={onDownloadAllChange}
-      />
-      Download selected
-    </label>
-    <label>
-      <input
-        type="radio"
-        name="data-selection"
-        value="true"
-        checked={downloadAll}
-        onChange={onDownloadAllChange}
-      />
-      Download all
-    </label>
-    <fieldset>
-      <legend>Format</legend>
-      <select
-        id="file-format-select"
-        value={fileFormat}
-        onChange={onFileFormatChange}
-      >
-        {Object.values(FileFormat).map(format => (
-          <option value={format} key={format}>
-            {format}
-          </option>
-        ))}
-      </select>
-    </fieldset>
-    <fieldset>
-      <legend>Compressed</legend>
+}) => {
+  const fileFormatHasColumns = fileFormatsWithColumns.includes(fileFormat);
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="download"
+      data-testid="customise-table-form"
+    >
+      <h3>Download</h3>
       <label>
         <input
           type="radio"
-          name="compressed"
-          value="true"
-          checked={compressed}
-          onChange={onCompressedChange}
-        />
-        Yes
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="compressed"
+          name="data-selection"
           value="false"
-          checked={!compressed}
-          onChange={onCompressedChange}
+          checked={!downloadAll}
+          onChange={onDownloadAllChange}
         />
-        No
+        Download selected
       </label>
-    </fieldset>
-    {[FileFormat.tsv, FileFormat.excel].includes(fileFormat) && (
-      <ColumnSelectContainer
-        onChange={onSelectedColumnsChange}
-        selectedColumns={selectedColumns}
-      />
-    )}
-    <div className="button-group customise-table--cancel-submit-buttons">
-      <button
-        className="button secondary"
-        type="button"
-        onClick={onCancel}
-        data-testid="customise-table-cancel-button"
-      >
-        Cancel
-      </button>
-      <button
-        className="button secondary"
-        type="button"
-        onClick={onCancel}
-        data-testid="customise-table-cancel-button"
-      >
-        Preview
-      </button>
-      <button className="button" type="submit">
-        Save
-      </button>
-    </div>
-  </form>
-);
+      <label>
+        <input
+          type="radio"
+          name="data-selection"
+          value="true"
+          checked={downloadAll}
+          onChange={onDownloadAllChange}
+        />
+        Download all
+      </label>
+      <fieldset>
+        <legend>Format</legend>
+        <select
+          id="file-format-select"
+          value={fileFormat}
+          onChange={onFileFormatChange}
+        >
+          {Object.values(FileFormat).map(format => (
+            <option value={format} key={format}>
+              {format}
+            </option>
+          ))}
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Compressed</legend>
+        <label>
+          <input
+            type="radio"
+            name="compressed"
+            value="true"
+            checked={compressed}
+            onChange={onCompressedChange}
+          />
+          Yes
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="compressed"
+            value="false"
+            checked={!compressed}
+            onChange={onCompressedChange}
+          />
+          No
+        </label>
+      </fieldset>
+      {fileFormatHasColumns && (
+        <ColumnSelectContainer
+          onChange={onSelectedColumnsChange}
+          selectedColumns={selectedColumns}
+        />
+      )}
+      <div className="button-group customise-table--cancel-submit-buttons">
+        <button
+          className="button secondary"
+          type="button"
+          onClick={onCancel}
+          data-testid="customise-table-cancel-button"
+        >
+          Cancel
+        </button>
+        {fileFormatHasColumns && (
+          <button
+            className="button secondary"
+            type="button"
+            onClick={onPreview}
+            data-testid="customise-table-cancel-button"
+          >
+            Preview
+          </button>
+        )}
+        <button className="button" type="submit">
+          Download
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default DownloadView;
