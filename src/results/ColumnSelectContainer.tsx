@@ -122,10 +122,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const ColumnSelectContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ColumnSelect)
+  connect(mapStateToProps, mapDispatchToProps)(ColumnSelect)
 );
 
 export default ColumnSelectContainer;

@@ -113,13 +113,14 @@ const fileFormatToAcceptHeader = new Map<FileFormat, string>([
 
 export const getDownloadUrl = (
   query: string,
-  columns: string[] | undefined = undefined,
+  columns: string[] | null = null,
   selectedFacets: SelectedFacet[],
-  sortColumn: SortableColumn | undefined = undefined,
-  sortDirection: SortDirection | undefined = SortDirection.ascend,
+  sortColumn: SortableColumn | null = null,
+  sortDirection: SortDirection = SortDirection.ascend,
   downloadAll: boolean,
   fileFormat: FileFormat,
-  compressed: boolean
+  compressed: boolean,
+  size: number | null = null
 ) => {
   console.log(
     'query',
@@ -137,7 +138,8 @@ export const getDownloadUrl = (
     'fileFormat',
     fileFormat,
     'compressed',
-    compressed
+    compressed,
+    size
   );
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   const parameters: {
@@ -145,6 +147,7 @@ export const getDownloadUrl = (
     fields?: string;
     sort?: string;
     includeIsoform?: boolean;
+    size?: number;
   } = {
     query: `${query}${createFacetsQueryString(selectedFacets)}`,
   };
@@ -158,6 +161,9 @@ export const getDownloadUrl = (
   }
   if (isColumnFileFormat && columns) {
     parameters.fields = columns.join(',');
+  }
+  if (size) {
+    parameters.size = size;
   }
   return `${apiUrls.download}?${queryString.stringify(parameters)}`;
 };

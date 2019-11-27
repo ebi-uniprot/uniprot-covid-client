@@ -26,6 +26,12 @@ const Download: React.FC<DownloadTableProps> = ({
   const [downloadAll, setDownloadAll] = useState(true);
   const [fileFormat, setFileFormat] = useState(FileFormat.fastaCanonical);
   const [compressed, setCompressed] = useState(true);
+  const [preview, setPreview] = useState({
+    loading: false,
+    query: '',
+    selectedColumns: [],
+    data: [],
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const url = getDownloadUrl(
@@ -39,24 +45,22 @@ const Download: React.FC<DownloadTableProps> = ({
       compressed
     );
     console.log(url);
-    // getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
-    e.preventDefault();
-    // history.goBack();
-    // curl -s -H 'accept:text/flatfile'
-    axios
-      .get(
-        'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=a4&size=1',
-        {
-          headers: {
-            Accept: fileFormatToAcceptHeader.get(fileFormat),
-          },
-        }
-      )
-      .then(response => {
-        // console.log(response.headers['content-disposition']);
-        console.log(response.request);
-        console.log(JSON.stringify(response));
-      });
+    // // getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+    // e.preventDefault();
+    // // history.goBack();
+    // // curl -s -H 'accept:text/flatfile'
+    // axios
+    //   .get(
+    //     'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=a4&size=1',
+    //     {
+    //       headers: {
+    //         Accept: fileFormatToAcceptHeader.get(fileFormat),
+    //       },
+    //     }
+    //   )
+    //   .then(response => {
+    //     setPreview(response.data);
+    //   });
   };
 
   const handleCancel = () => {
@@ -71,20 +75,27 @@ const Download: React.FC<DownloadTableProps> = ({
       sortColumn,
       sortDirection,
       downloadAll,
-      fileFormat,
-      compressed
+      FileFormat.tsv,
+      compressed,
+      10
     );
-    console.log(url);
+    setPreview({ ...preview, loading: true });
     axios
       .get(url, {
         headers: {
-          Accept: fileFormatToAcceptHeader.get(fileFormat),
+          Accept: fileFormatToAcceptHeader.get(FileFormat.tsv),
         },
       })
       .then(response => {
-        // console.log(response.headers['content-disposition']);
-        console.log(response.request);
-        console.log(JSON.stringify(response));
+        setPreview({
+          query,
+          selectedColumns,
+          data: response.data,
+          loaded: true,
+        });
+      })
+      .catch(() => {
+        setPreview({ ...preview, loading: false });
       });
   };
 
@@ -107,6 +118,12 @@ const Download: React.FC<DownloadTableProps> = ({
       onCompressedChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setCompressed(e.target.value === 'true')
       }
+      preview={
+        preview.query === query && preview.selectedColumns === selectedColumns
+          ? preview.data
+          : []
+      }
+      loadingPreview={preview.loading}
     />
   );
 };
