@@ -157,8 +157,10 @@ export const MassSpectrometryView: React.FC<{ data: MassSpectrometry[] }> = ({
   <Fragment>
     {data.map(item => (
       <section className="text-block" key={`${item.molWeight}${item.method}`}>
-        Molecular mass is {numberView({ value: item.molWeight, unit: Unit.DA })}{' '}
-        from positions{' '}
+        {`Molecular mass is ${numberView({
+          value: item.molWeight,
+          unit: Unit.DA,
+        })} from positions `}
         {item.ranges.map(range => (
           // TODO this links to be a link to BLAST later on
           <span key={range.range.start.value + range.range.end.value}>

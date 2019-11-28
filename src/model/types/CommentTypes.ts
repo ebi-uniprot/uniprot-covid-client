@@ -157,14 +157,14 @@ export type Isoform = {
   isoformSequenceStatus: string;
   isoformIds: string[];
   synonyms: { value: string }[];
-  note: { texts: TextWithEvidence[] };
+  note?: { texts: TextWithEvidence[] };
   sequenceIds: string[];
 };
 
 export type AlternativeProducts = {
   commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
-  note: { texts: TextWithEvidence[] };
+  note?: { texts: TextWithEvidence[] };
   events: string[];
 };
 

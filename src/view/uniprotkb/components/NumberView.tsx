@@ -6,6 +6,8 @@ export enum Unit {
 }
 
 const numberView = ({ value, unit }: { value?: number; unit?: Unit }): string =>
-  value ? `${formatLargeNumber(value)}${unit ? ` ${unit}` : ''}` : '';
+  typeof value !== 'undefined'
+    ? `${formatLargeNumber(value)}${unit ? ` ${unit}` : ''}`
+    : '';
 
 export default numberView;

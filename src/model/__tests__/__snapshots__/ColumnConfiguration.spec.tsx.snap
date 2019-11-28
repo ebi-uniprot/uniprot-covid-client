@@ -827,9 +827,7 @@ exports[`ColumnConfiguration component should render all columns 60`] = `
 
 exports[`ColumnConfiguration component should render all columns 61`] = `
 <DocumentFragment>
-  <span>
-    20
-  </span>
+  20
 </DocumentFragment>
 `;
 

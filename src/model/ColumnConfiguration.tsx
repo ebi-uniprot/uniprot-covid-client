@@ -537,7 +537,7 @@ ColumnConfiguration.set(Column.version, {
   label: 'Version',
   render: data => {
     const { entryAudit } = data[EntrySection.Sequence];
-    return entryAudit && <span>{entryAudit.entryVersion}</span>;
+    return entryAudit && <Fragment>{entryAudit.entryVersion}</Fragment>;
   },
 });
 ColumnConfiguration.set(Column.ftCoiled, getFeatureColumn(FeatureType.COILED));

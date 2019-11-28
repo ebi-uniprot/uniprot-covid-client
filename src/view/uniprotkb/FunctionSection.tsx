@@ -25,8 +25,7 @@ export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
     <Fragment>
       <section className="text-block">
-        Abs(max) = {data.approximate && '~'}
-        {data.max}nm
+        {`Abs(max) = ${data.approximate && '~'}${data.max}nm`}
       </section>
       <section className="text-block">
         {data.note && <TextView comments={data.note.texts} />}
@@ -44,8 +43,8 @@ export const KineticsView: FC<{ data: KineticParameters }> = ({ data }) => {
           <ul className="no-bullet">
             {data.michaelisConstants.map(km => (
               <li key={km.constant}>
-                K<sub>M</sub>={km.constant}
-                {km.unit} for {km.substrate}{' '}
+                K<sub>M</sub>
+                {`=${km.constant}${km.unit} for ${km.substrate} `}
                 <UniProtEvidenceTag evidences={km.evidences} />
               </li>
             ))}
