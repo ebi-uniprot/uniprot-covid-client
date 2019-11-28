@@ -42,9 +42,9 @@ export type BioPhysicoChemicalProperties = {
   redoxPotential?: TextWithEvidence[];
   temperatureDependence?: TextWithEvidence[];
 };
-export interface FunctionUIModel extends UIModel {
+export type FunctionUIModel = {
   bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
-}
+} & UIModel;
 
 const keywordsCategories = [
   KeywordCategory.MOLECULAR_FUNCTION,
