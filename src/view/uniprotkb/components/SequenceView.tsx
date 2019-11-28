@@ -4,9 +4,9 @@ import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import {
   Isoform,
-  SequenceCaution,
-  MassSpectrometry,
-  RNAEditing,
+  SequenceCautionComment,
+  MassSpectrometryComment,
+  RNAEditingComment,
 } from '../../../model/types/CommentTypes';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
@@ -127,9 +127,9 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   );
 };
 
-export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
-  data,
-}) => {
+export const SequenceCautionView: React.FC<{
+  data: SequenceCautionComment[];
+}> = ({ data }) => {
   return (
     <Fragment>
       {data.map(cautionData => (
@@ -151,9 +151,9 @@ export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
   );
 };
 
-export const MassSpectrometryView: React.FC<{ data: MassSpectrometry[] }> = ({
-  data,
-}) => (
+export const MassSpectrometryView: React.FC<{
+  data: MassSpectrometryComment[];
+}> = ({ data }) => (
   <Fragment>
     {data.map(item => (
       <section className="text-block" key={`${item.molWeight}${item.method}`}>
@@ -174,7 +174,9 @@ export const MassSpectrometryView: React.FC<{ data: MassSpectrometry[] }> = ({
   </Fragment>
 );
 
-export const RNAEditingView: React.FC<{ data: RNAEditing[] }> = ({ data }) => (
+export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
+  data,
+}) => (
   <Fragment>
     {data.map(item => (
       <section

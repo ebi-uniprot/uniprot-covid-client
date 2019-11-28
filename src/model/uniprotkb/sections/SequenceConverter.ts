@@ -10,11 +10,11 @@ import EntrySection from '../../types/EntrySection';
 import { SequenceData } from '../../../view/uniprotkb/components/SequenceView';
 import {
   CommentType,
-  AlternativeProducts,
-  SequenceCaution,
-  MassSpectrometry,
-  FreeText,
-  RNAEditing,
+  AlternativeProductsComment,
+  SequenceCautionComment,
+  MassSpectrometryComment,
+  FreeTextComment,
+  RNAEditingComment,
 } from '../../types/CommentTypes';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 
@@ -40,11 +40,11 @@ export type SequenceUIModel = {
   status?: string;
   processing?: string;
   keywordData: KeywordUIModel[];
-  alternativeProducts?: AlternativeProducts;
-  sequenceCaution?: SequenceCaution[];
-  massSpectrometry?: MassSpectrometry[];
-  polymorphysm?: FreeText[];
-  rnaEditing?: RNAEditing[];
+  alternativeProducts?: AlternativeProductsComment;
+  sequenceCaution?: SequenceCautionComment[];
+  massSpectrometry?: MassSpectrometryComment[];
+  polymorphysm?: FreeTextComment[];
+  rnaEditing?: RNAEditingComment[];
   featuresData: FeatureData;
   xrefData: XrefUIModel[];
   lastUpdateDate?: string;
@@ -109,23 +109,23 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
     const alternativeProducts = data.comments.find(
       comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
     );
-    sequenceData.alternativeProducts = alternativeProducts as AlternativeProducts;
+    sequenceData.alternativeProducts = alternativeProducts as AlternativeProductsComment;
     const sequenceCaution = data.comments.filter(
       comment => comment.commentType === CommentType.SEQUENCE_CAUTION
     );
-    sequenceData.sequenceCaution = sequenceCaution as SequenceCaution[];
+    sequenceData.sequenceCaution = sequenceCaution as SequenceCautionComment[];
     const massSpec = data.comments.filter(
       comment => comment.commentType === CommentType.MASS_SPECTROMETRY
     );
-    sequenceData.massSpectrometry = massSpec as MassSpectrometry[];
+    sequenceData.massSpectrometry = massSpec as MassSpectrometryComment[];
     const polymorphysm = data.comments.filter(
       comment => comment.commentType === CommentType.POLYMORPHISM
     );
-    sequenceData.polymorphysm = polymorphysm as FreeText[];
+    sequenceData.polymorphysm = polymorphysm as FreeTextComment[];
     const rnaEditing = data.comments.filter(
       comment => comment.commentType === CommentType.RNA_EDITING
     );
-    sequenceData.rnaEditing = rnaEditing as RNAEditing[];
+    sequenceData.rnaEditing = rnaEditing as RNAEditingComment[];
   }
 
   if (data.keywords) {

@@ -9,8 +9,8 @@ import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import {
   CommentType,
-  CatalyticActivity,
-  FreeText,
+  CatalyticActivityComment,
+  FreeTextComment,
 } from '../../model/types/CommentTypes';
 import GoRibbon from './components/GoRibbon';
 import UniProtEvidenceTag from '../../components/UniProtEvidenceTag';
@@ -112,22 +112,28 @@ const FunctionSection: FC<{
     <div id={EntrySection.Function}>
       <Card title={EntrySection.Function}>
         <FreeTextView
-          comments={data.commentsData.get(CommentType.FUNCTION) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.FUNCTION) as FreeTextComment[]
+          }
         />
         <CatalyticActivityView
           comments={
             data.commentsData.get(
               CommentType.CATALYTIC_ACTIVITY
-            ) as CatalyticActivity[]
+            ) as CatalyticActivityComment[]
           }
         />
         <FreeTextView
-          comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.PATHWAY) as FreeTextComment[]
+          }
           title={CommentType.PATHWAY.toLowerCase()}
         />
         <FreeTextView
           comments={
-            data.commentsData.get(CommentType.MISCELLANEOUS) as FreeText[]
+            data.commentsData.get(
+              CommentType.MISCELLANEOUS
+            ) as FreeTextComment[]
           }
           title={CommentType.MISCELLANEOUS.toLowerCase()}
         />

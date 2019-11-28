@@ -2,9 +2,9 @@ import {
   CommentType,
   AbsorptionComment,
   KineticsComment,
-  pHDependence,
-  RedoxPotential,
-  TemperatureDependence,
+  pHDependenceComment,
+  RedoxPotentialComment,
+  TemperatureDependenceComment,
   TextWithEvidence,
 } from '../../types/CommentTypes';
 import KeywordCategory from '../../types/KeywordCategory';
@@ -96,14 +96,14 @@ const convertFunction = (data: UniProtkbAPIModel) => {
       if ((bpcProperty as KineticsComment).kineticParameters) {
         convertedSection.bioPhysicoChemicalProperties.kinetics = (bpcProperty as KineticsComment).kineticParameters;
       }
-      if ((bpcProperty as pHDependence).phDependence) {
-        convertedSection.bioPhysicoChemicalProperties.pHDependence = (bpcProperty as pHDependence).phDependence.texts;
+      if ((bpcProperty as pHDependenceComment).phDependence) {
+        convertedSection.bioPhysicoChemicalProperties.pHDependence = (bpcProperty as pHDependenceComment).phDependence.texts;
       }
-      if ((bpcProperty as RedoxPotential).redoxPotential) {
-        convertedSection.bioPhysicoChemicalProperties.redoxPotential = (bpcProperty as RedoxPotential).redoxPotential.texts;
+      if ((bpcProperty as RedoxPotentialComment).redoxPotential) {
+        convertedSection.bioPhysicoChemicalProperties.redoxPotential = (bpcProperty as RedoxPotentialComment).redoxPotential.texts;
       }
-      if ((bpcProperty as TemperatureDependence).temperatureDependence) {
-        convertedSection.bioPhysicoChemicalProperties.temperatureDependence = (bpcProperty as TemperatureDependence).temperatureDependence.texts;
+      if ((bpcProperty as TemperatureDependenceComment).temperatureDependence) {
+        convertedSection.bioPhysicoChemicalProperties.temperatureDependence = (bpcProperty as TemperatureDependenceComment).temperatureDependence.texts;
       }
     });
   }

@@ -9,7 +9,7 @@ import FreeTextView from './components/FreeTextView';
 import XRefView from './components/XRefView';
 import {
   CommentType,
-  FreeText,
+  FreeTextComment,
   InteractionComment,
   Interaction,
 } from '../../model/types/CommentTypes';
@@ -98,12 +98,19 @@ const InteractionSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
-  const comments = data.commentsData.get(CommentType.SUBUNIT) as FreeText[];
+  const comments = data.commentsData.get(
+    CommentType.SUBUNIT
+  ) as FreeTextComment[];
 
   return (
     <div id={EntrySection.Interaction}>
       <Card title={EntrySection.Interaction}>
-        {comments && <FreeTextView comments={comments} title={CommentType.SUBUNIT.toLowerCase()} />}
+        {comments && (
+          <FreeTextView
+            comments={comments}
+            title={CommentType.SUBUNIT.toLowerCase()}
+          />
+        )}
         <interaction-viewer accession={primaryAccession} />
         <protvista-datatable ref={datatableContainer} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />

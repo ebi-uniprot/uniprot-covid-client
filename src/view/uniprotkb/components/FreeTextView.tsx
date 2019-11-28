@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { FreeText, TextWithEvidence } from '../../../model/types/CommentTypes';
+import {
+  FreeTextComment,
+  TextWithEvidence,
+} from '../../../model/types/CommentTypes';
 
 type FreeTextProps = {
-  comments?: FreeText[];
+  comments?: FreeTextComment[];
   title?: string;
 };
 
