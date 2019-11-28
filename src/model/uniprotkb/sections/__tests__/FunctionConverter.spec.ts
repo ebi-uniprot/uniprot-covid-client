@@ -44,7 +44,233 @@ describe('Function data converter', () => {
             },
           ],
         ],
+        [
+          'BIOPHYSICOCHEMICAL PROPERTIES',
+          [
+            {
+              absorption: {
+                approximate: true,
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10028',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                max: 10,
+                note: {
+                  texts: [
+                    {
+                      evidences: [
+                        {
+                          evidenceCode: 'ECO:0000255',
+                          id: 'PRU10028',
+                          source: 'PROSITE-ProRule',
+                        },
+                      ],
+                      value: 'value1',
+                    },
+                  ],
+                },
+              },
+              commentType: 'BIOPHYSICOCHEMICAL PROPERTIES',
+              kineticParameters: {
+                maximumVelocities: [
+                  {
+                    enzyme: 'enzyme1',
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    unit: 'unit1',
+                    velocity: 1,
+                  },
+                ],
+                michaelisConstants: [
+                  {
+                    constant: 2.0999999046325684,
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    substrate: 'sub1',
+                    unit: 'uM',
+                  },
+                ],
+                note: {
+                  texts: [
+                    {
+                      evidences: [
+                        {
+                          evidenceCode: 'ECO:0000255',
+                          id: 'PRU10028',
+                          source: 'PROSITE-ProRule',
+                        },
+                      ],
+                      value: 'value1',
+                    },
+                  ],
+                },
+              },
+              phDependence: {
+                texts: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: 'value1',
+                  },
+                ],
+              },
+              redoxPotential: {
+                texts: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: 'value1',
+                  },
+                ],
+              },
+              temperatureDependence: {
+                texts: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000255',
+                        id: 'PRU10028',
+                        source: 'PROSITE-ProRule',
+                      },
+                    ],
+                    value: 'value1',
+                  },
+                ],
+              },
+            },
+          ],
+        ],
       ]),
+      bioPhysicoChemicalProperties: {
+        absorption: {
+          approximate: true,
+          evidences: [
+            {
+              evidenceCode: 'ECO:0000255',
+              id: 'PRU10028',
+              source: 'PROSITE-ProRule',
+            },
+          ],
+          max: 10,
+          note: {
+            texts: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10028',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'value1',
+              },
+            ],
+          },
+        },
+        kinetics: {
+          maximumVelocities: [
+            {
+              enzyme: 'enzyme1',
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10028',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              unit: 'unit1',
+              velocity: 1,
+            },
+          ],
+          michaelisConstants: [
+            {
+              constant: 2.0999999046325684,
+              evidences: [
+                {
+                  evidenceCode: 'ECO:0000255',
+                  id: 'PRU10028',
+                  source: 'PROSITE-ProRule',
+                },
+              ],
+              substrate: 'sub1',
+              unit: 'uM',
+            },
+          ],
+          note: {
+            texts: [
+              {
+                evidences: [
+                  {
+                    evidenceCode: 'ECO:0000255',
+                    id: 'PRU10028',
+                    source: 'PROSITE-ProRule',
+                  },
+                ],
+                value: 'value1',
+              },
+            ],
+          },
+        },
+        pHDependence: [
+          {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU10028',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'value1',
+          },
+        ],
+        redoxPotential: [
+          {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU10028',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'value1',
+          },
+        ],
+        temperatureDependence: [
+          {
+            evidences: [
+              {
+                evidenceCode: 'ECO:0000255',
+                id: 'PRU10028',
+                source: 'PROSITE-ProRule',
+              },
+            ],
+            value: 'value1',
+          },
+        ],
+      },
       featuresData: [],
       keywordData: [],
       xrefData: [],

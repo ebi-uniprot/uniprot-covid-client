@@ -14,8 +14,38 @@ import numberView, { Unit } from '../view/uniprotkb/components/NumberView';
 import ProteomesView from '../view/uniprotkb/components/ProteomesView';
 import FeaturesView from '../view/uniprotkb/components/FeaturesView';
 import EntrySection from './types/EntrySection';
-import { SequenceCautionView } from '../view/uniprotkb/components/SequenceView';
+import {
+  SequenceCautionView,
+  MassSpectrometryView,
+  RNAEditingView,
+} from '../view/uniprotkb/components/SequenceView';
+import { Flag } from './uniprotkb/sections/SequenceConverter';
+import FeatureType from './types/FeatureType';
+import FreeTextView, {
+  TextView,
+} from '../view/uniprotkb/components/FreeTextView';
+import {
+  AbsorptionView,
+  KineticsView,
+} from '../view/uniprotkb/FunctionSection';
+import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
+
+const getFeatureColumn = (type: FeatureType) => {
+  return {
+    label: type,
+    render: (data: UniProtkbUIModel) => {
+      const { featuresData } = data[EntrySection.Sequence];
+      return (
+        featuresData && (
+          <FeaturesView
+            features={featuresData.filter(feature => feature.type === type)}
+          />
+        )
+      );
+    },
+  };
+};
 
 export const ColumnConfiguration = new Map<
   Column,
@@ -82,7 +112,7 @@ ColumnConfiguration.set(Column.length, {
   label: 'Length',
   render: data => {
     const { sequence } = data[EntrySection.Sequence];
-    return sequence && numberView({ value: sequence.length, unit: Unit.DA });
+    return sequence && numberView({ value: sequence.length, unit: Unit.AA });
   },
 });
 
@@ -234,49 +264,174 @@ ColumnConfiguration.set(Column.ftVarSeq, {
     );
   },
 });
+ColumnConfiguration.set(Column.fragment, {
+  label: 'Fragment',
+  render: data => {
+    const { flag } = data[EntrySection.Sequence];
+    const isFragment =
+      flag &&
+      [
+        Flag.FRAGMENT,
+        Flag.FRAGMENTS,
+        Flag.FRAGMENTS_PRECURSOR,
+        Flag.FRAGMENT_PRECURSOR,
+      ].includes(flag);
+    return flag && <Fragment>{isFragment ? flag : 'N'}</Fragment>;
+  },
+});
+// gene_location ,  "Invalid fields parameter value 'gene_location'"
+ColumnConfiguration.set(Column.mass, {
+  label: 'Mass',
+  render: data => {
+    const { molWeight } = data[EntrySection.Sequence];
+    return numberView({ value: molWeight, unit: Unit.DA });
+  },
+});
 
+ColumnConfiguration.set(Column.ccMassSpectrometry, {
+  label: 'Mass Spectrometry',
+  render: data => {
+    const { massSpectrometry } = data[EntrySection.Sequence];
+    return massSpectrometry && <MassSpectrometryView data={massSpectrometry} />;
+  },
+});
+
+// ft:variant ,
+ColumnConfiguration.set(
+  Column.ftNonCon,
+  getFeatureColumn(FeatureType.NON_CONS)
+);
+ColumnConfiguration.set(Column.ftNonStd, getFeatureColumn(FeatureType.NON_STD));
+ColumnConfiguration.set(Column.ftNonTer, getFeatureColumn(FeatureType.NON_TER));
+
+ColumnConfiguration.set(Column.ccPolymorphism, {
+  label: 'Polymorphysm',
+  render: data => {
+    const { polymorphysm } = data[EntrySection.Sequence];
+    return polymorphysm && <FreeTextView comments={polymorphysm} />;
+  },
+});
+
+ColumnConfiguration.set(Column.ccRnaEditing, {
+  label: 'RNA Editing',
+  render: data => {
+    const { rnaEditing } = data[EntrySection.Sequence];
+    return rnaEditing && <RNAEditingView data={rnaEditing} />;
+  },
+});
+// sequence ,
 ColumnConfiguration.set(Column.errorGmodelPred, {
-  label: 'Erroneous gene model prediction',
+  label: 'Sequence Caution',
   render: data => {
     const { sequenceCaution } = data[EntrySection.Sequence];
     return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
   },
 });
 
-// fragment ,
-// gene_location ,
-// length ,
-// mass ,
-// cc:mass_spectrometry ,
-// ft:variant ,
-// ft:non_con ,
-// ft:non_std ,
-// ft:non_ter ,
-// cc:polymorphism ,
-// cc:rna_editing ,
-// sequence ,
-// cc:sequence_caution ,
-// ft:conflict ,
-// ft:unsure ,
-// sequence_version ,
-// absorption ,
-// ft:act_site ,
-// ft:binding ,
-// ft:ca_bind ,
+ColumnConfiguration.set(
+  Column.ftConflict,
+  getFeatureColumn(FeatureType.CONFLICT)
+);
+ColumnConfiguration.set(Column.ftUnsure, getFeatureColumn(FeatureType.UNSURE));
+ColumnConfiguration.set(Column.sequenceVersion, {
+  label: 'Sequence Version',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
+  },
+});
+ColumnConfiguration.set(Column.absorption, {
+  label: 'Absorption',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.absorption && (
+        <AbsorptionView data={bioPhysicoChemicalProperties.absorption} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(
+  Column.ftActSite,
+  getFeatureColumn(FeatureType.ACT_SITE)
+);
+ColumnConfiguration.set(
+  Column.ftBinding,
+  getFeatureColumn(FeatureType.BINDING)
+);
+ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
 // cc:catalytic_activity ,
 // cc:cofactor ,
-// ft:dna_bind ,
+ColumnConfiguration.set(
+  Column.ftDnaBind,
+  getFeatureColumn(FeatureType.DNA_BIND)
+);
 // ec ,
 // cc:enzyme_regulation ,
 // cc:function ,
-// kinetics ,
-// ft:metal ,
-// ft:np_bind ,
+ColumnConfiguration.set(Column.kinetics, {
+  label: 'Kinetics',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.kinetics && (
+        <KineticsView data={bioPhysicoChemicalProperties.kinetics} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ftMetal, getFeatureColumn(FeatureType.METAL));
+ColumnConfiguration.set(
+  Column.ftNpBind,
+  getFeatureColumn(FeatureType.NP_BINDL)
+);
 // cc:pathway ,
-// ph_dependence ,
-// redox_potential ,
-// ft:site ,
-// temp_dependence ,
+ColumnConfiguration.set(Column.phDependence, {
+  label: 'pH Dependence',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.pHDependence && (
+        <TextView comments={bioPhysicoChemicalProperties.pHDependence} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.redoxPotential, {
+  label: 'Redox Potential',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.redoxPotential && (
+        <TextView comments={bioPhysicoChemicalProperties.redoxPotential} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ftSite, getFeatureColumn(FeatureType.SITE));
+ColumnConfiguration.set(Column.tempDependence, {
+  label: 'Temperature Dependence',
+  render: data => {
+    const { bioPhysicoChemicalProperties } = data[
+      EntrySection.Function
+    ] as FunctionUIModel;
+    return (
+      bioPhysicoChemicalProperties.temperatureDependence && (
+        <TextView
+          comments={bioPhysicoChemicalProperties.temperatureDependence}
+        />
+      )
+    );
+  },
+});
 // score ,
 // cc:caution ,
 // feature ,
@@ -302,45 +457,102 @@ ColumnConfiguration.set(Column.errorGmodelPred, {
 // cc:biotechnology ,
 // cc:disruption_phenotype ,
 // cc:disease ,
-// ft:mutagen ,
+ColumnConfiguration.set(
+  Column.ftMutagen,
+  getFeatureColumn(FeatureType.MUTAGEN)
+);
 // cc:pharmaceutical ,
 // cc:toxic_dose ,
-// ft:intramem ,
+ColumnConfiguration.set(
+  Column.ftIntramem,
+  getFeatureColumn(FeatureType.INTRAMEM)
+);
 // cc:subcellular_location ,
-// ft:top_dom ,
-// ft:transmem ,
-// ft:chain ,
-// ft:crosslnk ,
-// ft:disulfide ,
-// ft:carbohyd ,
-// ft:init_met ,
-// ft:lipid ,
-// ft:mod_res ,
-// ft:peptide ,
+ColumnConfiguration.set(
+  Column.ftTopDom,
+  getFeatureColumn(FeatureType.TOPO_DOM)
+);
+ColumnConfiguration.set(
+  Column.ftTransmem,
+  getFeatureColumn(FeatureType.TRANSMEM)
+);
+ColumnConfiguration.set(Column.ftChain, getFeatureColumn(FeatureType.CHAIN));
+ColumnConfiguration.set(
+  Column.ftCrosslnk,
+  getFeatureColumn(FeatureType.CROSSLNK)
+);
+ColumnConfiguration.set(
+  Column.ftDisulfide,
+  getFeatureColumn(FeatureType.DISULFID)
+);
+ColumnConfiguration.set(
+  Column.ftCarbohyd,
+  getFeatureColumn(FeatureType.CARBOHYD)
+);
+ColumnConfiguration.set(
+  Column.ftInitMet,
+  getFeatureColumn(FeatureType.INIT_MET)
+);
+ColumnConfiguration.set(Column.ftLipid, getFeatureColumn(FeatureType.LIPID));
+ColumnConfiguration.set(Column.ftModRes, getFeatureColumn(FeatureType.MOD_RES));
+ColumnConfiguration.set(
+  Column.ftPeptide,
+  getFeatureColumn(FeatureType.PEPTIDE)
+);
 // cc:ptm ,
-// ft:propep ,
-// ft:signal ,
-// ft:transit ,
+ColumnConfiguration.set(Column.ftPropep, getFeatureColumn(FeatureType.PROPEP));
+ColumnConfiguration.set(Column.ftSignal, getFeatureColumn(FeatureType.SIGNAL));
+ColumnConfiguration.set(
+  Column.ftTransit,
+  getFeatureColumn(FeatureType.TRANSIT)
+);
 // 3d ,
-// ft:strand ,
-// ft:helix ,
-// ft:turn ,
+ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
+ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
+ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
 // mapped_pm_id ,
 // pm_id ,
-// date_create ,
-// date_mod ,
-// date_seq_mod ,
-// version ,
-// ft:coiled ,
-// ft:compbias ,
+ColumnConfiguration.set(Column.dateCreate, {
+  label: 'Date Created',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.firstPublicDate;
+  },
+});
+ColumnConfiguration.set(Column.dateMod, {
+  label: 'Date Modified',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.lastAnnotationUpdateDate;
+  },
+});
+ColumnConfiguration.set(Column.dateSeqMod, {
+  label: 'Date Sequence Modified',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && entryAudit.lastSequenceUpdateDate;
+  },
+});
+ColumnConfiguration.set(Column.version, {
+  label: 'Version',
+  render: data => {
+    const { entryAudit } = data[EntrySection.Sequence];
+    return entryAudit && <Fragment>{entryAudit.entryVersion}</Fragment>;
+  },
+});
+ColumnConfiguration.set(Column.ftCoiled, getFeatureColumn(FeatureType.COILED));
+ColumnConfiguration.set(
+  Column.ftCompbias,
+  getFeatureColumn(FeatureType.COMPBIAS)
+);
 // cc:domain ,
-// ft:domain ,
-// ft:motif ,
+ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
+ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
 // protein_families ,
-// ft:region ,
-// ft:repeat ,
+ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
+ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
 // cc:similarity ,
-// ft:zn_fing ,
+ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
 // tl:all ,
 // tl:class ,
 // tl:cohort ,

@@ -7,7 +7,7 @@ import {
   CommentType,
   InteractionComment,
   DiseaseComment,
-  AlternativeProducts,
+  AlternativeProductsComment,
 } from '../../../model/types/CommentTypes';
 import { FeatureData } from '../components/FeaturesView';
 import './ProteinHighlights.scss';
@@ -84,7 +84,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
     // isoforms
     const isoformsComments = data.comments.find(
       comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
-    ) as AlternativeProducts;
+    ) as AlternativeProductsComment;
     highlightsMap.set(
       highlightSection.isoforms,
       isoformsComments ? isoformsComments.isoforms.length : 0

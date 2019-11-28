@@ -2,12 +2,18 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
-import { Isoform, SequenceCaution } from '../../../model/types/CommentTypes';
+import {
+  Isoform,
+  SequenceCautionComment,
+  MassSpectrometryComment,
+  RNAEditingComment,
+} from '../../../model/types/CommentTypes';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
 import { formatLargeNumber } from '../../../utils/utils';
 import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import numberView, { Unit } from './NumberView';
 
 export type SequenceData = {
   value: string;
@@ -121,9 +127,9 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   );
 };
 
-export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
-  data,
-}) => {
+export const SequenceCautionView: React.FC<{
+  data: SequenceCautionComment[];
+}> = ({ data }) => {
   return (
     <Fragment>
       {data.map(cautionData => (
@@ -144,6 +150,66 @@ export const SequenceCautionView: React.FC<{ data: SequenceCaution[] }> = ({
     </Fragment>
   );
 };
+
+export const MassSpectrometryView: React.FC<{
+  data: MassSpectrometryComment[];
+}> = ({ data }) => (
+  <Fragment>
+    {data.map(item => (
+      <section className="text-block" key={`${item.molWeight}${item.method}`}>
+        {`Molecular mass is ${numberView({
+          value: item.molWeight,
+          unit: Unit.DA,
+        })} from positions `}
+        {item.ranges.map(range => (
+          // TODO this links to be a link to BLAST later on
+          <span key={range.range.start.value + range.range.end.value}>
+            {range.range.start.value}-{range.range.end.value}
+          </span>
+        ))}
+        . Determined by {item.method}. {item.note}{' '}
+        <UniProtEvidenceTag evidences={item.evidences} />
+      </section>
+    ))}
+  </Fragment>
+);
+
+export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
+  data,
+}) => (
+  <Fragment>
+    {data.map(item => (
+      <section
+        className="text-block"
+        key={`${item.positions.map(pos => pos.position).join('')}`}
+      >
+        {item.positions && (
+          <div>
+            {'Edited at positions '}
+            {item.positions.map(position => (
+              <span key={position.position}>
+                {position.position}{' '}
+                <UniProtEvidenceTag evidences={position.evidences} />
+              </span>
+            ))}
+          </div>
+        )}
+        {item.note && (
+          <div>
+            {item.note.texts.map(text => (
+              <span key={text.value}>
+                {text.value}{' '}
+                {text.evidences && (
+                  <UniProtEvidenceTag evidences={text.evidences} />
+                )}
+              </span>
+            ))}
+          </div>
+        )}
+      </section>
+    ))}
+  </Fragment>
+);
 
 const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   const sequenceInfoData = [

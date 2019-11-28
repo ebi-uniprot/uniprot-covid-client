@@ -2,7 +2,7 @@ import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import {
-  CatalyticActivity,
+  CatalyticActivityComment,
   PhysiologicalReactionDirection,
   PhysiologicalReaction,
 } from '../../../model/types/CommentTypes';
@@ -118,7 +118,7 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
 };
 
 type CatalyticActivityProps = {
-  comments?: CatalyticActivity[];
+  comments?: CatalyticActivityComment[];
 };
 
 const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({

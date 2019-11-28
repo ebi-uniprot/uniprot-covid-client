@@ -1,4 +1,8 @@
 import { Evidence, Property } from './modelTypes';
+import {
+  Absorption,
+  KineticParameters,
+} from '../uniprotkb/sections/FunctionConverter';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',
@@ -42,14 +46,48 @@ export type FreeTextType =
   | CommentType.PTM
   | CommentType.SIMILARITY
   | CommentType.SUBUNIT
-  | CommentType.TISSUE_SPECIFICITY;
+  | CommentType.TISSUE_SPECIFICITY
+  | CommentType.POLYMORPHISM;
 
-export type FreeText = {
+export type TextWithEvidence = { value: string; evidences: Evidence[] };
+
+export type FreeTextComment = {
   commentType: FreeTextType;
-  texts?: [{ value: string; evidences: Evidence[] }];
+  texts?: TextWithEvidence[];
 };
 
-export type CatalyticActivity = {
+export type AbsorptionComment = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  absorption?: Absorption;
+};
+
+export type KineticsComment = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  kineticParameters?: KineticParameters;
+};
+
+export type pHDependenceComment = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  phDependence: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type RedoxPotentialComment = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  redoxPotential: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type TemperatureDependenceComment = {
+  commentType: CommentType.BIOPHYSICOCHEMICAL_PROPERTIES;
+  temperatureDependence: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type CatalyticActivityComment = {
   commentType: CommentType.CATALYTIC_ACTIVITY;
   reaction?: {
     name: string;
@@ -119,18 +157,18 @@ export type Isoform = {
   isoformSequenceStatus: string;
   isoformIds: string[];
   synonyms: { value: string }[];
-  note: { texts: { value: string }[] };
+  note?: { texts: TextWithEvidence[] };
   sequenceIds: string[];
 };
 
-export type AlternativeProducts = {
+export type AlternativeProductsComment = {
   commentType: CommentType.ALTERNATIVE_PRODUCTS;
   isoforms: Isoform[];
-  note: { texts: { value: string }[] };
+  note?: { texts: TextWithEvidence[] };
   events: string[];
 };
 
-export type SequenceCaution = {
+export type SequenceCautionComment = {
   commentType: CommentType.SEQUENCE_CAUTION;
   sequenceCautionType: string;
   sequence: string;
@@ -138,20 +176,63 @@ export type SequenceCaution = {
   evidences?: Evidence[];
 };
 
-export type SubcellularLocation = {
+export type MassSpectrometryComment = {
+  commentType: CommentType.MASS_SPECTROMETRY;
+  method?: string;
+  note?: string;
+  molWeight: number;
+  molWeightError: number;
+  ranges: Range[];
+  evidences: Evidence[];
+};
+
+export type RNAEditingComment = {
+  commentType: CommentType.RNA_EDITING;
+  locationType?: string;
+  positions: { position: number; evidences: Evidence[] }[];
+  note?: {
+    texts: {
+      value: string;
+      evidences?: Evidence[];
+    }[];
+  };
+};
+
+export type SubcellularLocationComment = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
   locations: (
-    | { location: { value: string; evidences: Evidence[] } }
-    | { topology: { value: string; evidences: Evidence[] } })[];
+    | { location: TextWithEvidence }
+    | { topology: TextWithEvidence }
+  )[];
+};
+
+export type Range = {
+  range: {
+    start: {
+      value: number;
+      modifier?: string;
+    };
+    end: {
+      value: number;
+      modifier?: string;
+    };
+  };
 };
 
 type Comment =
-  | FreeText
-  | CatalyticActivity
+  | FreeTextComment
+  | CatalyticActivityComment
   | DiseaseComment
   | InteractionComment
-  | AlternativeProducts
-  | SequenceCaution
-  | SubcellularLocation;
+  | AlternativeProductsComment
+  | SequenceCautionComment
+  | SubcellularLocationComment
+  | MassSpectrometryComment
+  | RNAEditingComment
+  | AbsorptionComment
+  | KineticsComment
+  | pHDependenceComment
+  | RedoxPotentialComment
+  | TemperatureDependenceComment;
 
 export default Comment;
