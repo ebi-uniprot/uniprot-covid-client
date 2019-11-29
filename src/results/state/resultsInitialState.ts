@@ -33,7 +33,8 @@ export const defaultTableColumns = [
   Column.proteinName,
   Column.geneNames,
   Column.organism,
-  Column.ec,
+  Column.pmId,
+  Column.mappedPmId,
 ];
 
 const resultsInitialState = {
@@ -56,7 +57,7 @@ const resultsInitialState = {
   facets: [],
   nextUrl: '',
   totalNumberResults: 0,
-  viewMode: ViewMode.CARD,
+  viewMode: ViewMode.TABLE,
   fields: {
     data: {
       [ColumnSelectTab.data]: [],

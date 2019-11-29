@@ -30,6 +30,25 @@ export enum EntryType {
   TREMBL = 'TrEMBL',
 }
 
+export type Citation = {
+  citation: {
+    citationType?: string;
+    authors?: string[];
+    citationXrefs?: Xref[];
+    title?: string;
+    publicationDate?: number;
+    journal?: string;
+    firstPage?: number;
+    lastPage?: number;
+    volume?: number;
+  };
+  referencePositions?: string[];
+  referenceComments?: {
+    value: string;
+    type: string;
+  };
+};
+
 export type UniProtkbAPIModel = {
   proteinDescription?: ProteinNamesData;
   genes?: GeneNamesData;
@@ -46,24 +65,7 @@ export type UniProtkbAPIModel = {
   sequence: SequenceData;
   annotationScore: number;
   entryAudit?: EntryAudit;
-  references?: {
-    citation: {
-      citationType?: string;
-      authors?: string[];
-      citationXrefs?: Xref[];
-      title?: string;
-      publicationDate?: number;
-      journal?: string;
-      firstPage?: number;
-      lastPage?: number;
-      volume?: number;
-    };
-    referencePositions?: string[];
-    referenceComments?: {
-      value: string;
-      type: string;
-    };
-  }[];
+  references?: Citation[];
 };
 
 export type UniProtkbUIModel = {
@@ -82,6 +84,7 @@ export type UniProtkbUIModel = {
   [EntrySection.Interaction]: UIModel;
   [EntrySection.Structure]: UIModel;
   [EntrySection.FamilyAndDomains]: UIModel;
+  references: Citation[];
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
@@ -101,6 +104,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     [EntrySection.Structure]: convertStructure(data),
     [EntrySection.Sequence]: convertSequence(data),
     [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
+    references: data.references ? data.references : [],
   };
 };
 

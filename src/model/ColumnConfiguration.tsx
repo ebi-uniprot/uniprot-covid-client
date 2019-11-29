@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
+import { ExpandableList } from 'franklin-sites';
 import idx from 'idx';
+import { v1 } from 'uuid';
 import SimpleView from '../view/uniprotkb/components/SimpleView';
 import ProteinNamesView, {
   NameWithEvidence,
@@ -38,6 +40,7 @@ import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
 import { ValueWithEvidence } from './types/modelTypes';
+import { Link } from 'react-router-dom';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -580,8 +583,53 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
-// mapped_pm_id ,
-// pm_id ,
+ColumnConfiguration.set(Column.pmId, {
+  label: 'PubMed ID',
+  render: data => {
+    let ids: string[] = [];
+    data.references.forEach(citation => {
+      if (citation.citation.citationXrefs) {
+        ids.push(
+          ...citation.citation.citationXrefs
+            .filter(xref => xref.databaseType === 'PubMed')
+            .map(xref => xref.id)
+        );
+      }
+    });
+    return (
+      <ExpandableList>
+        {ids.map(id => ({
+          id: id,
+          content: <Link to={`citations/${id}`}>{id}</Link>,
+        }))}
+      </ExpandableList>
+    );
+  },
+});
+ColumnConfiguration.set(Column.mappedPmId, {
+  label: 'Mapped PubMed ID',
+  render: data => {
+    // TODO Where is this???
+    // let ids: string[] = [];
+    // data.references.forEach(citation => {
+    //   if (citation.citation.citationXrefs) {
+    //     ids.push(
+    //       ...citation.citation.citationXrefs
+    //         .filter(xref => xref.databaseType === 'PubMed')
+    //         .map(xref => xref.id)
+    //     );
+    //   }
+    // });
+    // return (
+    //   <ExpandableList>
+    //     {ids.map(id => ({
+    //       id: id,
+    //       content: <Link to={`citations/${id}`}>{id}</Link>,
+    //     }))}
+    //   </ExpandableList>
+    // );
+  },
+});
 ColumnConfiguration.set(Column.dateCreate, {
   label: 'Date Created',
   render: data => {
@@ -622,6 +670,7 @@ ColumnConfiguration.set(Column.proteinFamilies, {
   label: 'Protein Families',
   render: data => {
     // TODO this actually seems to be a subset of this with a query on link?
+    // Could maybe be removed
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.SIMILARITY
     ) as FreeText[];
