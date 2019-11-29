@@ -2,12 +2,22 @@ import React, { useState, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import axios from 'axios';
 import { RootState, RootAction } from '../state/state-types';
 import DownloadView from './DownloadView';
 import { Column } from '../model/types/ColumnTypes';
-import { FileFormat, fileFormatToAcceptHeader } from './types/resultsTypes';
+import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
 import { getDownloadUrl } from '../utils/apiUrls';
+import idx from 'idx';
+import fetchData from '../utils/fetchData';
+import content from '*.svg';
+
+const replaceExcelWithTsv = (fileFormat: FileFormat) =>
+  fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;
+
+const compareDownloadsUrlsDisregardSize = (url1: string, url2: string) => {
+  const reSize = /&size=\d+/;
+  return url1.replace(reSize, '') === url2.replace(reSize, '');
+};
 
 type DownloadTableProps = {
   tableColumns: Column[];
@@ -21,19 +31,19 @@ const Download: React.FC<DownloadTableProps> = ({
     state: { query, selectedFacets, sortColumn, sortDirection },
   },
 }) => {
-  console.log(query, selectedFacets, sortColumn, sortDirection);
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
   const [downloadAll, setDownloadAll] = useState(true);
   const [fileFormat, setFileFormat] = useState(FileFormat.fastaCanonical);
   const [compressed, setCompressed] = useState(true);
+  const [loadingPreview, setLoadingPreview] = useState(false);
   const [preview, setPreview] = useState({
-    loading: false,
-    query: '',
-    selectedColumns: [],
+    url: '',
+    contentType: '',
     data: [],
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const url = getDownloadUrl(
       query,
       selectedColumns,
@@ -42,11 +52,20 @@ const Download: React.FC<DownloadTableProps> = ({
       sortDirection,
       downloadAll,
       fileFormat,
-      compressed
+      compressed,
+      10
     );
-    console.log(url);
+    const link = document.createElement('a');
+    link.href =
+      'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=gene:Aba';
+    link.setAttribute('download', '');
+    document.body.appendChild(link);
+    console.log(link);
+    // link.click();
+    // document.body.removeChild(link);
+
     // // getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
-    // e.preventDefault();
+
     // // history.goBack();
     // // curl -s -H 'accept:text/flatfile'
     // axios
@@ -54,7 +73,7 @@ const Download: React.FC<DownloadTableProps> = ({
     //     'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=a4&size=1',
     //     {
     //       headers: {
-    //         Accept: fileFormatToAcceptHeader.get(fileFormat),
+    //         Accept: fileFormatToContentType.get(fileFormat),
     //       },
     //     }
     //   )
@@ -68,6 +87,7 @@ const Download: React.FC<DownloadTableProps> = ({
   };
 
   const handlePreview = () => {
+    const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
     const url = getDownloadUrl(
       query,
       selectedColumns,
@@ -75,30 +95,47 @@ const Download: React.FC<DownloadTableProps> = ({
       sortColumn,
       sortDirection,
       downloadAll,
-      FileFormat.tsv,
+      fileFormatExcelReplaced,
       compressed,
       10
     );
-    setPreview({ ...preview, loading: true });
-    axios
-      .get(url, {
-        headers: {
-          Accept: fileFormatToAcceptHeader.get(FileFormat.tsv),
-        },
-      })
+    setLoadingPreview(true);
+    fetchData(url, {
+      Accept: fileFormatToContentType.get(fileFormatExcelReplaced),
+    })
       .then(response => {
+        const contentType = idx(
+          response,
+          o => o.headers['content-type']
+        ) as FileFormat;
         setPreview({
-          query,
-          selectedColumns,
-          data: response.data,
-          loaded: true,
+          data:
+            contentType === fileFormatToContentType.get(FileFormat.json)
+              ? JSON.stringify(response.data, null, 2)
+              : response.data,
+          url: idx(response, o => o.config.url) || '',
+          contentType,
         });
       })
-      .catch(() => {
-        setPreview({ ...preview, loading: false });
+      .catch(e => {
+        console.error(e);
+      })
+      .finally(() => {
+        setLoadingPreview(false);
       });
   };
 
+  const downloadUrl = getDownloadUrl(
+    query,
+    selectedColumns,
+    selectedFacets,
+    sortColumn,
+    sortDirection,
+    downloadAll,
+    fileFormat,
+    compressed,
+    10
+  );
   return (
     <DownloadView
       onSubmit={handleSubmit}
@@ -109,6 +146,7 @@ const Download: React.FC<DownloadTableProps> = ({
       fileFormat={fileFormat}
       compressed={compressed}
       onSelectedColumnsChange={setSelectedColumns}
+      downloadUrl={downloadUrl}
       onDownloadAllChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setDownloadAll(e.target.value === 'true')
       }
@@ -119,11 +157,13 @@ const Download: React.FC<DownloadTableProps> = ({
         setCompressed(e.target.value === 'true')
       }
       preview={
-        preview.query === query && preview.selectedColumns === selectedColumns
+        compareDownloadsUrlsDisregardSize(preview.url, downloadUrl) &&
+        preview.contentType ===
+          fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
           ? preview.data
           : []
       }
-      loadingPreview={preview.loading}
+      loadingPreview={loadingPreview}
     />
   );
 };

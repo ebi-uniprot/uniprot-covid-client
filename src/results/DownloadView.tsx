@@ -27,38 +27,35 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   onFileFormatChange,
   onCompressedChange,
 }) => {
-  const fileFormatHasColumns = fileFormatsWithColumns.includes(fileFormat);
   let previewNode;
-  if (fileFormatHasColumns) {
-    if (loadingPreview) {
-      previewNode = <Loader />;
-    }
-    if (preview && preview.length) {
-      previewNode = (
-        <div style={{ margin: '1rem' }}>
-          <h4>Preview</h4>
-          <div
+  if (loadingPreview) {
+    previewNode = <Loader />;
+  } else if (preview && preview.length) {
+    previewNode = (
+      <div style={{ margin: '1rem' }}>
+        <h4>Preview</h4>
+        <div
+          style={{
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            border: '1px solid black',
+            overflowX: 'auto',
+            overflowY: 'auto',
+          }}
+        >
+          <pre
             style={{
-              overflow: 'hidden',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              border: '1px solid black',
               padding: '0.5rem',
+              height: '17.5rem',
             }}
           >
-            <pre
-              style={{
-                overflowY: 'auto',
-              }}
-            >
-              {preview}
-            </pre>
-          </div>
+            {preview}
+          </pre>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   return (
@@ -126,11 +123,14 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             No
           </label>
         </fieldset>
-        {fileFormatHasColumns && (
-          <ColumnSelectContainer
-            onChange={onSelectedColumnsChange}
-            selectedColumns={selectedColumns}
-          />
+        {fileFormatsWithColumns.includes(fileFormat) && (
+          <fieldset>
+            <legend>Customise data</legend>
+            <ColumnSelectContainer
+              onChange={onSelectedColumnsChange}
+              selectedColumns={selectedColumns}
+            />
+          </fieldset>
         )}
         <div className="button-group customise-table--cancel-submit-buttons">
           <button
@@ -141,16 +141,14 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           >
             Cancel
           </button>
-          {fileFormatHasColumns && (
-            <button
-              className="button secondary"
-              type="button"
-              onClick={onPreview}
-              data-testid="customise-table-cancel-button"
-            >
-              Preview
-            </button>
-          )}
+          <button
+            className="button secondary"
+            type="button"
+            onClick={onPreview}
+            data-testid="customise-table-cancel-button"
+          >
+            Preview 10
+          </button>
           <button className="button" type="submit">
             Download
           </button>

@@ -67,7 +67,7 @@ export enum FileFormat {
   json = 'JSON',
 }
 
-export const fileFormatToAcceptHeader = new Map<FileFormat, string>([
+export const fileFormatToContentType = new Map<FileFormat, string>([
   [FileFormat.fastaCanonical, 'text/fasta'],
   [FileFormat.fastaCanonicalIsoform, 'text/fasta'],
   [FileFormat.tsv, 'text/tsv'],

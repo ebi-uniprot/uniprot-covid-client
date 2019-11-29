@@ -122,25 +122,6 @@ export const getDownloadUrl = (
   compressed: boolean,
   size: number | null = null
 ) => {
-  console.log(
-    'query',
-    query,
-    'columns',
-    columns,
-    'selectedFacets',
-    selectedFacets,
-    'sortColumn',
-    sortColumn,
-    'sortDirection',
-    sortDirection,
-    'downloadAll',
-    downloadAll,
-    'fileFormat',
-    fileFormat,
-    'compressed',
-    compressed,
-    size
-  );
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   const parameters: {
     query: string;
