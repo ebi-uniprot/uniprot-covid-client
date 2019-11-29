@@ -621,6 +621,7 @@ ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
 ColumnConfiguration.set(Column.proteinFamilies, {
   label: 'Protein Families',
   render: data => {
+    // TODO this actually seems to be a subset of this with a query on link?
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.SIMILARITY
     ) as FreeText[];
@@ -629,7 +630,15 @@ ColumnConfiguration.set(Column.proteinFamilies, {
 });
 ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
 ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
-// cc:similarity ,
+ColumnConfiguration.set(Column.ccSimilarity, {
+  label: 'Sequence Similarities',
+  render: data => {
+    const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
+      CommentType.SIMILARITY
+    ) as FreeText[];
+    return familiesData && <FreeTextView comments={familiesData} />;
+  },
+});
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
 // tl:all ,
 // tl:class ,
