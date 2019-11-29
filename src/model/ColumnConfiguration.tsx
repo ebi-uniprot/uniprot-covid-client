@@ -618,7 +618,15 @@ ColumnConfiguration.set(
 // cc:domain ,
 ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
 ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
-// protein_families ,
+ColumnConfiguration.set(Column.proteinFamilies, {
+  label: 'Protein Families',
+  render: data => {
+    const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
+      CommentType.SIMILARITY
+    ) as FreeText[];
+    return familiesData && <FreeTextView comments={familiesData} />;
+  },
+});
 ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
 ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
 // cc:similarity ,
