@@ -36,7 +36,13 @@ import {
 } from '../view/uniprotkb/FunctionSection';
 import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
-import { CommentType, FreeText, Xref } from './types/CommentTypes';
+import {
+  CommentType,
+  FreeText,
+  Xref,
+  InteractionComment,
+  InteractionType,
+} from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
@@ -402,7 +408,6 @@ ColumnConfiguration.set(Column.ec, {
   },
 });
 // ec ,
-//  "Invalid fields parameter value 'cc_enzyme_regulation'"
 // "cc_activity_regulation"
 ColumnConfiguration.set(Column.ccEnzymeRegulation, {
   label: 'Enzyme Regulation',
@@ -546,10 +551,41 @@ ColumnConfiguration.set(Column.reviewed, {
   label: '',
   render: data => <ReviewedUnreviewed entryType={data.entryType} />,
 });
-// reviewed ,
 // tools: UX review is this needed?? ,
-// uniparc_id ,
-// cc:interaction ,
+// uniparc_id: leo re-indexing today 02/12/2019,
+ColumnConfiguration.set(Column.ccInteraction, {
+  label: '',
+  render: data => {
+    const interactionComments = data[EntrySection.Interaction].commentsData.get(
+      CommentType.INTERACTION
+    ) as InteractionComment[];
+    return (
+      interactionComments && (
+        <Fragment>
+          {interactionComments.map(interaction =>
+            interaction.interactions.map(interaction => (
+              <div
+                key={
+                  interaction.type === InteractionType.SELF
+                    ? 'self'
+                    : interaction.uniProtAccession
+                }
+              >
+                {interaction.type === InteractionType.SELF ? (
+                  'Itself'
+                ) : (
+                  <Link to={`/uniprotkb/${interaction.uniProtAccession}`}>
+                    {interaction.uniProtAccession}
+                  </Link>
+                )}
+              </div>
+            ))
+          )}
+        </Fragment>
+      )
+    );
+  },
+});
 // cc:subunit ,
 // cc:developmental_stage ,
 // cc:induction ,

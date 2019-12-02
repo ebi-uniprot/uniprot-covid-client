@@ -131,7 +131,7 @@ export type DiseaseComment = {
   note?: { texts?: { value?: string }[] };
 };
 
-enum InteractionType {
+export enum InteractionType {
   SELF = 'SELF',
   XENO = 'XENO',
   BINARY = 'BINARY',
