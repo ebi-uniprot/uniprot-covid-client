@@ -2,7 +2,8 @@
 import React, { Fragment } from 'react';
 import { ExpandableList } from 'franklin-sites';
 import idx from 'idx';
-import { v1 } from 'uuid';
+import { Link } from 'react-router-dom';
+
 import SimpleView from '../view/uniprotkb/components/SimpleView';
 import ProteinNamesView, {
   NameWithEvidence,
@@ -35,12 +36,11 @@ import {
 } from '../view/uniprotkb/FunctionSection';
 import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
-import { CommentType, FreeText } from './types/CommentTypes';
+import { CommentType, FreeText, Xref } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
 import { ValueWithEvidence } from './types/modelTypes';
-import { Link } from 'react-router-dom';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -586,21 +586,18 @@ ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
 ColumnConfiguration.set(Column.pmId, {
   label: 'PubMed ID',
   render: data => {
-    let ids: string[] = [];
-    data.references.forEach(citation => {
-      if (citation.citation.citationXrefs) {
-        ids.push(
-          ...citation.citation.citationXrefs
-            .filter(xref => xref.databaseType === 'PubMed')
-            .map(xref => xref.id)
-        );
+    const ids = data.references.reduce<Xref[]>((acc, citation) => {
+      const xrefs = citation.citation.citationXrefs;
+      if (xrefs) {
+        acc.push(...xrefs.filter(xref => xref.databaseType === 'PubMed'));
       }
-    });
+      return acc;
+    }, []);
     return (
       <ExpandableList>
-        {ids.map(id => ({
-          id: id,
-          content: <Link to={`citations/${id}`}>{id}</Link>,
+        {ids.map(xref => ({
+          id: xref.id,
+          content: <Link to={`citations/${xref.id}`}>{xref.id}</Link>,
         }))}
       </ExpandableList>
     );
@@ -608,26 +605,10 @@ ColumnConfiguration.set(Column.pmId, {
 });
 ColumnConfiguration.set(Column.mappedPmId, {
   label: 'Mapped PubMed ID',
-  render: data => {
-    // TODO Where is this???
-    // let ids: string[] = [];
-    // data.references.forEach(citation => {
-    //   if (citation.citation.citationXrefs) {
-    //     ids.push(
-    //       ...citation.citation.citationXrefs
-    //         .filter(xref => xref.databaseType === 'PubMed')
-    //         .map(xref => xref.id)
-    //     );
-    //   }
-    // });
-    // return (
-    //   <ExpandableList>
-    //     {ids.map(id => ({
-    //       id: id,
-    //       content: <Link to={`citations/${id}`}>{id}</Link>,
-    //     }))}
-    //   </ExpandableList>
-    // );
+  render: () => {
+    // TODO This is currently not implemented in the backend see TRM-23257
+    // depending on the format, this could use the same processing as PubMed ID
+    return '';
   },
 });
 ColumnConfiguration.set(Column.dateCreate, {
