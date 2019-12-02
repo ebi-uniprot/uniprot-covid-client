@@ -41,6 +41,8 @@ import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
 import { ValueWithEvidence } from './types/modelTypes';
+import { getAllKeywords } from './utils/KeywordsUtil';
+import { KeywordList } from '../view/uniprotkb/components/KeywordView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -400,6 +402,7 @@ ColumnConfiguration.set(Column.ec, {
 });
 // ec ,
 //  "Invalid fields parameter value 'cc_enzyme_regulation'"
+// "cc_activity_regulation"
 ColumnConfiguration.set(Column.ccEnzymeRegulation, {
   label: 'Enzyme Regulation',
   render: data => {
@@ -508,8 +511,20 @@ ColumnConfiguration.set(Column.ccSequenceCaution, {
   },
 });
 // feature ,
-// keyword ,
-// keywordid ,
+ColumnConfiguration.set(Column.keyword, {
+  label: 'Keywords',
+  render: data => {
+    const keywords = getAllKeywords(data);
+    return <KeywordList keywords={keywords} />;
+  },
+});
+ColumnConfiguration.set(Column.keywordid, {
+  label: 'Keyword IDs',
+  render: data => {
+    const keywords = getAllKeywords(data);
+    return <KeywordList keywords={keywords} idOnly />;
+  },
+});
 // matched_text ,
 // cc:miscellaneous ,
 // protein_existence ,
@@ -670,40 +685,10 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   },
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-// tl:all ,
-// tl:class ,
-// tl:cohort ,
-// tl:family ,
-// tl:forma ,
-// tl:genus ,
-// tl:infraclass ,
-// tl:infraorder ,
-// tl:kingdom ,
-// tl:order ,
-// tl:parvorder ,
-// tl:phylum ,
-// tl:species ,
-// tl:species_group ,
-// tl:species_subgroup ,
-// tl:subclass ,
-// tl:subcohort ,
-// tl:subfamily ,
-// tl:subgenus ,
-// tl:subkingdom ,
-// tl:suborder ,
-// tl:subphylum ,
-// tl:subspecies ,
-// tl:subtribe ,
-// tl:superclass ,
-// tl:superfamily ,
-// tl:superkingdom ,
-// tl:superorder ,
-// tl:superphylum ,
-// tl:tribe ,
-// tl:varietas ,
+// lineage
 // tax_id ,
 
-// dr:embl ,
+// dr:embl
 // dr:ccds ,
 // dr:pir ,
 // dr:refseq ,
