@@ -562,8 +562,8 @@ ColumnConfiguration.set(Column.ccInteraction, {
     return (
       interactionComments && (
         <Fragment>
-          {interactionComments.map(interaction =>
-            interaction.interactions.map(interaction => (
+          {interactionComments.map(interactionCC =>
+            interactionCC.interactions.map(interaction => (
               <div
                 key={
                   interaction.type === InteractionType.SELF
