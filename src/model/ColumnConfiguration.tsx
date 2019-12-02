@@ -43,6 +43,7 @@ import AnnotationScoreDoughnutChart, {
 import { ValueWithEvidence } from './types/modelTypes';
 import { getAllKeywords } from './utils/KeywordsUtil';
 import { KeywordList } from '../view/uniprotkb/components/KeywordView';
+import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtTitle';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -540,6 +541,10 @@ ColumnConfiguration.set(Column.ccMiscellaneous, {
 ColumnConfiguration.set(Column.proteinExistence, {
   label: 'Protein existence',
   render: data => data.proteinExistence,
+});
+ColumnConfiguration.set(Column.reviewed, {
+  label: '',
+  render: data => <ReviewedUnreviewed entryType={data.entryType} />,
 });
 // reviewed ,
 // tools: UX review is this needed?? ,

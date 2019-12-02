@@ -29,6 +29,7 @@ export type ResultsState = {
 
 export const defaultTableColumns = [
   Column.accession,
+  Column.reviewed,
   Column.id,
   Column.proteinName,
   Column.geneNames,
