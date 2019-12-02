@@ -1070,3 +1070,7 @@ exports[`ColumnConfiguration component should render all columns 78`] = `<Docume
 exports[`ColumnConfiguration component should render all columns 79`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 80`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 81`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 82`] = `<DocumentFragment />`;

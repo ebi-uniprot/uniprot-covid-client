@@ -525,11 +525,24 @@ ColumnConfiguration.set(Column.keywordid, {
     return <KeywordList keywords={keywords} idOnly />;
   },
 });
-// matched_text ,
-// cc:miscellaneous ,
-// protein_existence ,
+// matched_text: this field is not provided anymore ,
+ColumnConfiguration.set(Column.ccMiscellaneous, {
+  label: 'Miscellaneous [CC]',
+  render: data => {
+    const miscellaneousComments = data[EntrySection.Function].commentsData.get(
+      CommentType.MISCELLANEOUS
+    ) as FreeText[];
+    return (
+      miscellaneousComments && <FreeTextView comments={miscellaneousComments} />
+    );
+  },
+});
+ColumnConfiguration.set(Column.proteinExistence, {
+  label: 'Protein existence',
+  render: data => data.proteinExistence,
+});
 // reviewed ,
-// tools ,
+// tools: UX review is this needed?? ,
 // uniparc_id ,
 // cc:interaction ,
 // cc:subunit ,
