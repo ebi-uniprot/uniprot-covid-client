@@ -34,6 +34,8 @@ export const defaultTableColumns = [
   Column.proteinName,
   Column.geneNames,
   Column.organism,
+  Column.drEmbl,
+  Column.drPir,
 ];
 
 const resultsInitialState = {
@@ -45,8 +47,6 @@ const resultsInitialState = {
     Column.geneNames,
     Column.organism,
     Column.keyword,
-    Column.ccFunction,
-    Column.sequence,
   ],
   results: {
     data: [],
