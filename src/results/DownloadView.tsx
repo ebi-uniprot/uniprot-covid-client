@@ -26,6 +26,8 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   onDownloadAllChange,
   onFileFormatChange,
   onCompressedChange,
+  nSelectedEntries,
+  nResults,
 }) => {
   let previewNode;
   if (loadingPreview) {
@@ -58,6 +60,8 @@ const DownloadView: React.FC<DownloadViewProps> = ({
     );
   }
 
+  const nPreview = Math.min(10, downloadAll ? nResults : nSelectedEntries);
+
   return (
     <Fragment>
       <form
@@ -73,8 +77,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             value="false"
             checked={!downloadAll}
             onChange={onDownloadAllChange}
+            disabled={nSelectedEntries === 0}
           />
-          Download selected
+          Download selected ({nSelectedEntries})
         </label>
         <label>
           <input
@@ -84,7 +89,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             checked={downloadAll}
             onChange={onDownloadAllChange}
           />
-          Download all
+          Download all ({nResults})
         </label>
         <fieldset>
           <legend>Format</legend>
@@ -144,10 +149,10 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           <button
             className="button secondary"
             type="button"
-            onClick={onPreview}
+            onClick={() => onPreview(nPreview)}
             data-testid="customise-table-cancel-button"
           >
-            Preview 10
+            Preview {nPreview}
           </button>
           <button className="button" type="submit">
             Download

@@ -28,7 +28,14 @@ const Download: React.FC<DownloadTableProps> = ({
   tableColumns,
   history,
   location: {
-    state: { query, selectedFacets, sortColumn, sortDirection },
+    state: {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+      selectedEntries,
+      nResults,
+    },
   },
 }) => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
@@ -86,7 +93,7 @@ const Download: React.FC<DownloadTableProps> = ({
     history.goBack();
   };
 
-  const handlePreview = () => {
+  const handlePreview = (nPreview: number) => {
     const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
     const url = getDownloadUrl(
       query,
@@ -97,7 +104,7 @@ const Download: React.FC<DownloadTableProps> = ({
       downloadAll,
       fileFormatExcelReplaced,
       compressed,
-      10
+      nPreview
     );
     setLoadingPreview(true);
     fetchData(url, {
@@ -147,6 +154,7 @@ const Download: React.FC<DownloadTableProps> = ({
       compressed={compressed}
       onSelectedColumnsChange={setSelectedColumns}
       downloadUrl={downloadUrl}
+      nSelectedEntries={selectedEntries.length}
       onDownloadAllChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setDownloadAll(e.target.value === 'true')
       }
@@ -164,6 +172,7 @@ const Download: React.FC<DownloadTableProps> = ({
           : []
       }
       loadingPreview={loadingPreview}
+      nResults={nResults}
     />
   );
 };
