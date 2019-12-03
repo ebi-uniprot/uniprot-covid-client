@@ -34,27 +34,10 @@ const DownloadView: React.FC<DownloadViewProps> = ({
     previewNode = <Loader />;
   } else if (preview && preview.length) {
     previewNode = (
-      <div style={{ margin: '1rem' }}>
+      <div className="preview">
         <h4>Preview</h4>
-        <div
-          style={{
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            border: '1px solid black',
-            overflowX: 'auto',
-            overflowY: 'auto',
-          }}
-        >
-          <pre
-            style={{
-              padding: '0.5rem',
-              height: '17.5rem',
-            }}
-          >
-            {preview}
-          </pre>
+        <div className="preview__container">
+          <pre className="preview__inner">{preview}</pre>
         </div>
       </div>
     );
