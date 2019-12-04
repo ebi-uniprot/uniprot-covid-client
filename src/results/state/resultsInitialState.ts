@@ -47,6 +47,7 @@ const resultsInitialState = {
     Column.geneNames,
     Column.organism,
     Column.keyword,
+    Column.sequence,
   ],
   results: {
     data: [],
