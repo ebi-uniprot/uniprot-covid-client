@@ -71,10 +71,10 @@ export const fileFormatToContentType = new Map<FileFormat, string>([
   [FileFormat.fastaCanonical, 'text/fasta'],
   [FileFormat.fastaCanonicalIsoform, 'text/fasta'],
   [FileFormat.tsv, 'text/tsv'],
-  [FileFormat.excel, 'application/vnd.ms-excel'],
+  [FileFormat.excel, 'application/vnd.ms-excel'], //excel
   [FileFormat.xml, 'application/xml'],
-  [FileFormat.rdfXml, 'application/rdf+xml'],
-  [FileFormat.text, 'text/flatfile'],
+  [FileFormat.rdfXml, 'application/rdf+xml'], //rdf
+  [FileFormat.text, 'text/flatfile'], // txt
   [FileFormat.gff, 'text/gff'],
   [FileFormat.list, 'text/list'],
   [FileFormat.json, 'application/json'],

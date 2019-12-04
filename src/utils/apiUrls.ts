@@ -81,6 +81,9 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
     ''
   );
 
+export const createAccessionsQueryString = (accessions: string[]) =>
+  accessions.map(accession => `accession:${accession}`).join(' OR ');
+
 export const getQueryUrl = (
   query: string,
   columns: string[],
@@ -98,30 +101,27 @@ export const getQueryUrl = (
       `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
   })}`;
 
-const fileFormatToAcceptHeader = new Map<FileFormat, string>([
-  [FileFormat.fastaCanonical, 'FASTA (canonical)'],
-  [FileFormat.fastaCanonicalIsoform, 'FASTA (canonical & isoform)'],
-  [FileFormat.tsv, 'TSV'],
-  [FileFormat.excel, 'Excel'],
-  [FileFormat.xml, 'XML'],
-  [FileFormat.rdfXml, 'RDF/XML'],
-  [FileFormat.text, 'Text'],
-  [FileFormat.gff, 'GFF'],
-  [FileFormat.list, 'List'],
-  [FileFormat.json, 'JSON'],
-]);
-
-export const getDownloadUrl = (
-  query: string,
-  columns: string[] | null = null,
-  selectedFacets: SelectedFacet[],
-  sortColumn: SortableColumn | null = null,
-  sortDirection: SortDirection = SortDirection.ascend,
-  downloadAll: boolean,
-  fileFormat: FileFormat,
-  compressed: boolean,
-  size: number | null = null
-) => {
+export const getDownloadUrl = ({
+  query,
+  columns,
+  selectedFacets,
+  sortColumn,
+  sortDirection = SortDirection.ascend,
+  fileFormat,
+  compressed = false,
+  size,
+  selectedAccessions = [],
+}: {
+  query: string;
+  columns: string[];
+  selectedFacets: SelectedFacet[];
+  sortColumn: SortableColumn;
+  sortDirection: SortDirection;
+  fileFormat: FileFormat;
+  compressed: boolean;
+  size: number;
+  selectedAccessions: string[];
+}) => {
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   const parameters: {
     query: string;
@@ -129,8 +129,11 @@ export const getDownloadUrl = (
     sort?: string;
     includeIsoform?: boolean;
     size?: number;
+    compressed?: boolean;
   } = {
-    query: `${query}${createFacetsQueryString(selectedFacets)}`,
+    query: selectedAccessions.length
+      ? createAccessionsQueryString(selectedAccessions)
+      : `${query}${createFacetsQueryString(selectedFacets)}`,
   };
   if (isColumnFileFormat && sortColumn) {
     parameters.sort = `${sortColumn} ${getApiSortDirection(
@@ -143,8 +146,11 @@ export const getDownloadUrl = (
   if (isColumnFileFormat && columns) {
     parameters.fields = columns.join(',');
   }
-  if (size) {
+  if (size && !selectedAccessions.length) {
     parameters.size = size;
+  }
+  if (compressed) {
+    parameters.compressed = true;
   }
   return `${apiUrls.download}?${queryString.stringify(parameters)}`;
 };

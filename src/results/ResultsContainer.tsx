@@ -273,7 +273,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       return <Loader />;
     }
     const { name, links, info } = infoMappings[namespace];
-    console.log(selectedEntries);
     return (
       <Fragment>
         <SideBarLayout

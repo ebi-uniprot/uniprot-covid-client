@@ -67,7 +67,6 @@ const Download: React.FC<DownloadTableProps> = ({
       'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=gene:Aba';
     link.setAttribute('download', '');
     document.body.appendChild(link);
-    console.log(link);
     // link.click();
     // document.body.removeChild(link);
 
@@ -95,17 +94,18 @@ const Download: React.FC<DownloadTableProps> = ({
 
   const handlePreview = (nPreview: number) => {
     const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
-    const url = getDownloadUrl(
+    const url = getDownloadUrl({
       query,
-      selectedColumns,
+      columns: selectedColumns,
       selectedFacets,
       sortColumn,
       sortDirection,
       downloadAll,
-      fileFormatExcelReplaced,
+      fileFormat: fileFormatExcelReplaced,
       compressed,
-      nPreview
-    );
+      size: nPreview,
+      selectedAccessions: downloadAll ? [] : selectedEntries,
+    });
     setLoadingPreview(true);
     fetchData(url, {
       Accept: fileFormatToContentType.get(fileFormatExcelReplaced),
@@ -131,18 +131,30 @@ const Download: React.FC<DownloadTableProps> = ({
         setLoadingPreview(false);
       });
   };
-
-  const downloadUrl = getDownloadUrl(
+  const downloadUrl = getDownloadUrl({
     query,
-    selectedColumns,
+    columns: selectedColumns,
     selectedFacets,
     sortColumn,
     sortDirection,
     downloadAll,
     fileFormat,
     compressed,
-    10
-  );
+    size: 10,
+    selectedAccessions: downloadAll ? [] : selectedEntries,
+  });
+  // const downloadUrl = getDownloadUrl(
+  //   query,
+  //   selectedColumns,
+  //   selectedFacets,
+  //   sortColumn,
+  //   sortDirection,
+  //   downloadAll,
+  //   fileFormat,
+  //   compressed,
+  //   10,
+  //   downloadAll ? [] : selectedEntries
+  // );
   return (
     <DownloadView
       onSubmit={handleSubmit}

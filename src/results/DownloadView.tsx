@@ -42,7 +42,6 @@ const DownloadView: React.FC<DownloadViewProps> = ({
       </div>
     );
   }
-
   const nPreview = Math.min(10, downloadAll ? nResults : nSelectedEntries);
 
   return (
