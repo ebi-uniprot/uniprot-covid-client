@@ -601,9 +601,33 @@ ColumnConfiguration.set(Column.ccInteraction, {
 // go ,
 // go_f ,
 // go_id ,
-// cc:allergen ,
-// cc:biotechnology ,
-// cc:disruption_phenotype ,
+ColumnConfiguration.set(Column.ccAllergen, {
+  label: 'Allergenic Properties',
+  render: data => {
+    const allergenData = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.ALLERGEN) as FreeText[];
+    return allergenData && <FreeTextView comments={allergenData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccBiotechnology, {
+  label: 'Biotechnological Use',
+  render: data => {
+    const biotechData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.BIOTECHNOLOGY
+    ) as FreeText[];
+    return biotechData && <FreeTextView comments={biotechData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
+  label: 'Disruption Phenotype',
+  render: data => {
+    const disruptionData = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.DISRUPTION_PHENOTYPE) as FreeText[];
+    return disruptionData && <FreeTextView comments={disruptionData} />;
+  },
+});
 // cc:disease ,
 ColumnConfiguration.set(
   Column.ftMutagen,

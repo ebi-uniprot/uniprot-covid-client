@@ -9,7 +9,12 @@ const keywordsCategories = [KeywordCategory.DISEASE];
 
 const featuresCategories = [FeatureType.MUTAGEN];
 
-const commentsCategories = [CommentType.DISEASE];
+const commentsCategories = [
+  CommentType.DISEASE,
+  CommentType.ALLERGEN,
+  CommentType.BIOTECHNOLOGY,
+  CommentType.DISRUPTION_PHENOTYPE,
+];
 
 const convertPathologyAndBiotech = (data: UniProtkbAPIModel) => {
   return convertSection(

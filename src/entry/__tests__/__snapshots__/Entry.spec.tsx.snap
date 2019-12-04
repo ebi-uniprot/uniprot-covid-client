@@ -43,7 +43,7 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
+            class=""
           >
             <a
               href="#Pathology & BioTech"
@@ -61,7 +61,7 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
+            class=""
           >
             <a
               href="#Expression"
@@ -70,7 +70,7 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
+            class=""
           >
             <a
               href="#Interaction"
@@ -1378,6 +1378,219 @@ exports[`Entry should render 1`] = `
         </div>
       </div>
       <div
+        id="Pathology & BioTech"
+      >
+        <div
+          class="card "
+        >
+          <div
+            class="card__header"
+          >
+            <h3
+              class="card__title"
+            >
+              Pathology & BioTech
+            </h3>
+          </div>
+          <div
+            class="card__content"
+          >
+            <h3>
+              Involvment in disease
+            </h3>
+            <h4>
+              Disease Id (someAcron)
+            </h4>
+            <span
+              class="text-block"
+            >
+              <span
+                class="evidence-tag svg-colour-unreviewed"
+                data-testid="evidence-tag-trigger"
+                role="button"
+                tabindex="0"
+              >
+                <svg
+                  height="12"
+                  viewBox="0 0 400 512"
+                  width="12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    id="Shape"
+                  />
+                </svg>
+                <span
+                  class="evidence-tag__label"
+                  title=""
+                >
+                  1 automatic annotation
+                </span>
+              </span>
+              <div
+                class="evidence-tag-content "
+                data-testid="evidence-tag-content"
+              >
+                <div>
+                  <h5>
+                    Automatic assertion according to rules
+                  </h5>
+                  <div>
+                    PIRNR:PIRNR001362
+                  </div>
+                </div>
+              </div>
+            </span>
+            <div
+              class="info-list"
+            >
+              <div
+                class="info-list__item"
+              >
+                <div
+                  class="info-list__item__title"
+                >
+                  Note
+                </div>
+                <div
+                  class="info-list__item__content"
+                >
+                  <ul
+                    class="no-bullet"
+                  >
+                    <li>
+                      value2
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div
+                class="info-list__item"
+              >
+                <div
+                  class="info-list__item__title"
+                >
+                  Description
+                </div>
+                <div
+                  class="info-list__item__content"
+                >
+                  some description
+                </div>
+              </div>
+              <div
+                class="info-list__item"
+              >
+                <div
+                  class="info-list__item__title"
+                >
+                  See also
+                </div>
+                <div
+                  class="info-list__item__content"
+                >
+                  <a
+                    class="external-link"
+                    href="http://www.omim.org/entry/3124"
+                    target="_blank"
+                  >
+                    MIM:3124
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <h4
+              style="text-transform: capitalize;"
+            >
+              disruption phenotype
+            </h4>
+            <section
+              class="text-block"
+            >
+              value
+              <span
+                class="evidence-tag svg-colour-unreviewed"
+                data-testid="evidence-tag-trigger"
+                role="button"
+                tabindex="0"
+              >
+                <svg
+                  height="12"
+                  viewBox="0 0 400 512"
+                  width="12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    id="Shape"
+                  />
+                </svg>
+                <span
+                  class="evidence-tag__label"
+                  title=""
+                >
+                  1 automatic annotation
+                </span>
+              </span>
+              <div
+                class="evidence-tag-content "
+                data-testid="evidence-tag-content"
+              >
+                <div>
+                  <h5>
+                    Automatic assertion according to rules
+                  </h5>
+                  <div>
+                    PIRNR:PIRNR001360
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div>
+              <h4>
+                Variants
+              </h4>
+              <protvista-manager
+                attributes="highlight displaystart displayend activefilters filters"
+              >
+                <div
+                  class="variation-view"
+                >
+                  <protvista-navigation
+                    length="10"
+                  />
+                  <protvista-sequence
+                    height="20"
+                    length="10"
+                    sequence="[object Object]"
+                  />
+                  <protvista-filter />
+                  <protvista-variation
+                    length="10"
+                  >
+                    <protvista-variation-adapter />
+                  </protvista-variation>
+                </div>
+                <protvista-datatable />
+                <div
+                  class="evidence-tag-content false"
+                />
+              </protvista-manager>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
         id="Protein Processing"
       >
         <div
@@ -1418,6 +1631,51 @@ exports[`Entry should render 1`] = `
                 class="evidence-tag-content false"
               />
             </protvista-manager>
+          </div>
+        </div>
+      </div>
+      <div
+        id="Expression"
+      >
+        <div
+          class="card "
+        >
+          <div
+            class="card__header"
+          >
+            <h3
+              class="card__title"
+            >
+              Expression
+            </h3>
+          </div>
+          <div
+            class="card__content"
+          />
+        </div>
+      </div>
+      <div
+        id="Interaction"
+      >
+        <div
+          class="card "
+        >
+          <div
+            class="card__header"
+          >
+            <h3
+              class="card__title"
+            >
+              Interaction
+            </h3>
+          </div>
+          <div
+            class="card__content"
+          >
+            <interaction-viewer
+              accession="P21802"
+            />
+            <protvista-datatable />
           </div>
         </div>
       </div>
