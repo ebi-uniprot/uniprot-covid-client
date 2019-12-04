@@ -62,8 +62,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
         data-testid="customise-table-form"
       >
         <h3>Download</h3>
-        <label>
+        <label htmlFor="data-selection-false">
           <input
+            id="data-selection-false"
             type="radio"
             name="data-selection"
             value="false"
@@ -73,8 +74,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           />
           Download selected ({nSelectedEntries})
         </label>
-        <label>
+        <label htmlFor="data-selection-true">
           <input
+            id="data-selection-true"
             type="radio"
             name="data-selection"
             value="true"
@@ -99,8 +101,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
         </fieldset>
         <fieldset>
           <legend>Compressed</legend>
-          <label>
+          <label htmlFor="compressed-true">
             <input
+              id="compressed-true"
               type="radio"
               name="compressed"
               value="true"
@@ -109,8 +112,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             />
             Yes
           </label>
-          <label>
+          <label htmlFor="compressed-false">
             <input
+              id="compressed-false"
               type="radio"
               name="compressed"
               value="false"

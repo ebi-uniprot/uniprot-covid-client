@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 
-const useDataApi = (url: string, headers: any) => {
+const useDataApi = (url: string, headers: object = {}) => {
   const [data, setData] = useState<any>({});
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const useDataApi = (url: string, headers: any) => {
       setData(result.data);
     };
     getData();
-  }, [url]);
+  }, [url, headers]);
 
   return data;
 };

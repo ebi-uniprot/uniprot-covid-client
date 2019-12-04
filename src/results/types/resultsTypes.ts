@@ -67,14 +67,20 @@ export enum FileFormat {
   json = 'JSON',
 }
 
+/* Note, eventually these will be the formats for these files
+  [FileFormat.excel, 'application/vnd.ms-excel'], //excel
+  [FileFormat.rdfXml, 'application/rdf+xml'], //rdf
+  [FileFormat.text, 'text/flatfile'], // txt
+*/
+
 export const fileFormatToContentType = new Map<FileFormat, string>([
   [FileFormat.fastaCanonical, 'text/fasta'],
   [FileFormat.fastaCanonicalIsoform, 'text/fasta'],
   [FileFormat.tsv, 'text/tsv'],
-  [FileFormat.excel, 'application/vnd.ms-excel'], //excel
+  [FileFormat.excel, 'application/vnd.ms-excel'],
   [FileFormat.xml, 'application/xml'],
-  [FileFormat.rdfXml, 'application/rdf+xml'], //rdf
-  [FileFormat.text, 'text/flatfile'], // txt
+  [FileFormat.rdfXml, 'application/rdf+xml'],
+  [FileFormat.text, 'text/flatfile'],
   [FileFormat.gff, 'text/gff'],
   [FileFormat.list, 'text/list'],
   [FileFormat.json, 'application/json'],

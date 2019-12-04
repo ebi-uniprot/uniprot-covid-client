@@ -1,7 +1,6 @@
 import urlJoin from 'url-join';
 import queryString from 'query-string';
 import {
-  SortDirectionApi,
   getApiSortDirection,
   SortDirection,
   SelectedFacet,

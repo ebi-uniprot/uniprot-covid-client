@@ -1,15 +1,13 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RootState, RootAction } from '../state/state-types';
+import idx from 'idx';
+import { RootState } from '../state/state-types';
 import DownloadView from './DownloadView';
 import { Column } from '../model/types/ColumnTypes';
 import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
 import { getDownloadUrl } from '../utils/apiUrls';
-import idx from 'idx';
 import fetchData from '../utils/fetchData';
-import content from '*.svg';
 
 const replaceExcelWithTsv = (fileFormat: FileFormat) =>
   fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;
@@ -21,7 +19,6 @@ const compareDownloadsUrlsDisregardSize = (url1: string, url2: string) => {
 
 type DownloadTableProps = {
   tableColumns: Column[];
-  updateTableColumns: (columnIds: Column[]) => void;
 } & RouteComponentProps;
 
 const Download: React.FC<DownloadTableProps> = ({
@@ -107,6 +104,7 @@ const Download: React.FC<DownloadTableProps> = ({
         });
       })
       .catch(e => {
+        // eslint-disable-next-line no-console
         console.error(e);
       })
       .finally(() => {
