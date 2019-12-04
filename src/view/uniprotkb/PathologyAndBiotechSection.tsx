@@ -31,6 +31,7 @@ const PathologyAndBiotechSection: FC<{
             data.commentsData.get(CommentType.DISEASE) as DiseaseComment[]
           }
           primaryAccession={primaryAccession}
+          includeTitle
         />
         <FreeTextView
           comments={data.commentsData.get(CommentType.ALLERGEN) as FreeText[]}

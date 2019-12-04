@@ -1396,7 +1396,7 @@ exports[`Entry should render 1`] = `
             class="card__content"
           >
             <h3>
-              Involvment in disease
+              Involvement in disease
             </h3>
             <h4>
               Disease Id (someAcron)

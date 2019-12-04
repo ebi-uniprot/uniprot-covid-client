@@ -2,9 +2,6 @@
 
 exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
 <DocumentFragment>
-  <h3>
-    Involvment in disease
-  </h3>
   <h4>
     Alzheimers (AD)
   </h4>

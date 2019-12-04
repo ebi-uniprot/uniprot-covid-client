@@ -42,6 +42,7 @@ import {
   Xref,
   InteractionComment,
   InteractionType,
+  DiseaseComment,
 } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
@@ -56,6 +57,7 @@ import {
   getDatabaseNameToEntrySection,
   getDatabaseInfoByName,
 } from '../data/database';
+import DiseaseInvolvementView from '../view/uniprotkb/components/DiseaseInvolvementView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -628,7 +630,22 @@ ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
     return disruptionData && <FreeTextView comments={disruptionData} />;
   },
 });
-// cc:disease ,
+ColumnConfiguration.set(Column.ccDisease, {
+  label: 'Disruption Phenotype',
+  render: data => {
+    const diseaseComments = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.DISEASE) as DiseaseComment[];
+    return (
+      diseaseComments && (
+        <DiseaseInvolvementView
+          comments={diseaseComments}
+          primaryAccession={data.primaryAccession}
+        />
+      )
+    );
+  },
+});
 ColumnConfiguration.set(
   Column.ftMutagen,
   getFeatureColumn(FeatureType.MUTAGEN)
