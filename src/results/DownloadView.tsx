@@ -7,9 +7,20 @@ import './styles/Download.scss';
 
 type DownloadViewProps = {
   selectedColumns: Column[];
-  onChange: (columndIds: Column[]) => void;
+  onPreview: (nPreview: number) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onCancel: () => void;
+  downloadAll: boolean;
+  fileFormat: FileFormat;
+  compressed: boolean;
+  preview: string;
+  loadingPreview: boolean;
+  onSelectedColumnsChange: (columns: Column[]) => void;
+  onFileFormatChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onDownloadAllChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onCompressedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  nSelectedEntries: number;
+  nResults: number;
 };
 
 const DownloadView: React.FC<DownloadViewProps> = ({
@@ -43,7 +54,6 @@ const DownloadView: React.FC<DownloadViewProps> = ({
     );
   }
   const nPreview = Math.min(10, downloadAll ? nResults : nSelectedEntries);
-
   return (
     <Fragment>
       <form

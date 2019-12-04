@@ -119,12 +119,13 @@ export const getDownloadUrl = ({
   sortDirection: SortDirection;
   fileFormat: FileFormat;
   compressed: boolean;
-  size: number;
+  size?: number;
   selectedAccessions: string[];
 }) => {
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   const parameters: {
     query: string;
+    format: string;
     fields?: string;
     sort?: string;
     includeIsoform?: boolean;
@@ -134,6 +135,7 @@ export const getDownloadUrl = ({
     query: selectedAccessions.length
       ? createAccessionsQueryString(selectedAccessions)
       : `${query}${createFacetsQueryString(selectedFacets)}`,
+    format: fileFormat,
   };
   if (isColumnFileFormat && sortColumn) {
     parameters.sort = `${sortColumn} ${getApiSortDirection(

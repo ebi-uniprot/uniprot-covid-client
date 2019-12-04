@@ -46,46 +46,29 @@ const Download: React.FC<DownloadTableProps> = ({
   const [preview, setPreview] = useState({
     url: '',
     contentType: '',
-    data: [],
+    data: '',
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const url = getDownloadUrl(
+    const url = getDownloadUrl({
       query,
-      selectedColumns,
+      columns: selectedColumns,
       selectedFacets,
       sortColumn,
       sortDirection,
-      downloadAll,
       fileFormat,
       compressed,
-      10
-    );
+      selectedAccessions: downloadAll ? [] : selectedEntries,
+    });
     const link = document.createElement('a');
-    link.href =
-      'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=gene:Aba';
+    link.href = url;
+    link.target = '_blank';
     link.setAttribute('download', '');
     document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
-
-    // // getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
-
-    // // history.goBack();
-    // // curl -s -H 'accept:text/flatfile'
-    // axios
-    //   .get(
-    //     'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/download?query=a4&size=1',
-    //     {
-    //       headers: {
-    //         Accept: fileFormatToContentType.get(fileFormat),
-    //       },
-    //     }
-    //   )
-    //   .then(response => {
-    //     setPreview(response.data);
-    //   });
+    link.click();
+    document.body.removeChild(link);
+    history.goBack();
   };
 
   const handleCancel = () => {
@@ -100,7 +83,6 @@ const Download: React.FC<DownloadTableProps> = ({
       selectedFacets,
       sortColumn,
       sortDirection,
-      downloadAll,
       fileFormat: fileFormatExcelReplaced,
       compressed,
       size: nPreview,
@@ -137,24 +119,10 @@ const Download: React.FC<DownloadTableProps> = ({
     selectedFacets,
     sortColumn,
     sortDirection,
-    downloadAll,
     fileFormat,
     compressed,
-    size: 10,
     selectedAccessions: downloadAll ? [] : selectedEntries,
   });
-  // const downloadUrl = getDownloadUrl(
-  //   query,
-  //   selectedColumns,
-  //   selectedFacets,
-  //   sortColumn,
-  //   sortDirection,
-  //   downloadAll,
-  //   fileFormat,
-  //   compressed,
-  //   10,
-  //   downloadAll ? [] : selectedEntries
-  // );
   return (
     <DownloadView
       onSubmit={handleSubmit}
@@ -165,12 +133,11 @@ const Download: React.FC<DownloadTableProps> = ({
       fileFormat={fileFormat}
       compressed={compressed}
       onSelectedColumnsChange={setSelectedColumns}
-      downloadUrl={downloadUrl}
       nSelectedEntries={selectedEntries.length}
       onDownloadAllChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setDownloadAll(e.target.value === 'true')
       }
-      onFileFormatChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+      onFileFormatChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
         setFileFormat(e.target.value as FileFormat)
       }
       onCompressedChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -178,10 +145,11 @@ const Download: React.FC<DownloadTableProps> = ({
       }
       preview={
         compareDownloadsUrlsDisregardSize(preview.url, downloadUrl) &&
+        preview.data &&
         preview.contentType ===
           fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
           ? preview.data
-          : []
+          : ''
       }
       loadingPreview={loadingPreview}
       nResults={nResults}
