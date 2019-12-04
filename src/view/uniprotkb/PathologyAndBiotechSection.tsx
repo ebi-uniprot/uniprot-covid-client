@@ -51,6 +51,16 @@ const PathologyAndBiotechSection: FC<{
           }
           title={CommentType.DISRUPTION_PHENOTYPE.toLowerCase()}
         />
+        <FreeTextView
+          comments={
+            data.commentsData.get(CommentType.PHARMACEUTICAL) as FreeText[]
+          }
+          title={CommentType.PHARMACEUTICAL.toLowerCase()}
+        />
+        <FreeTextView
+          comments={data.commentsData.get(CommentType.TOXIC_DOSE) as FreeText[]}
+          title={CommentType.TOXIC_DOSE.toLowerCase()}
+        />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <VariationView primaryAccession={primaryAccession} />
         <KeywordView keywords={data.keywordData} />

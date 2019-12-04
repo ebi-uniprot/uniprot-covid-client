@@ -14,6 +14,8 @@ const commentsCategories = [
   CommentType.ALLERGEN,
   CommentType.BIOTECHNOLOGY,
   CommentType.DISRUPTION_PHENOTYPE,
+  CommentType.TOXIC_DOSE,
+  CommentType.PHARMACEUTICAL,
 ];
 
 const convertPathologyAndBiotech = (data: UniProtkbAPIModel) => {

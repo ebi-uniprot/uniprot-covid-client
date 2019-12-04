@@ -44,6 +44,8 @@ describe('Pathology/Biotech data converter', () => {
         ],
         ['ALLERGEN', []],
         ['BIOTECHNOLOGY', []],
+        ['TOXIC DOSE', []],
+        ['PHARMACEUTICAL', []],
         [
           'DISRUPTION PHENOTYPE',
           [

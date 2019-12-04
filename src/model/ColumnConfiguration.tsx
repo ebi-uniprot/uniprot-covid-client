@@ -631,7 +631,7 @@ ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
   },
 });
 ColumnConfiguration.set(Column.ccDisease, {
-  label: 'Disruption Phenotype',
+  label: 'Disease Involvement',
   render: data => {
     const diseaseComments = data[
       EntrySection.PathologyAndBioTech
@@ -650,8 +650,24 @@ ColumnConfiguration.set(
   Column.ftMutagen,
   getFeatureColumn(FeatureType.MUTAGEN)
 );
-// cc:pharmaceutical ,
-// cc:toxic_dose ,
+ColumnConfiguration.set(Column.ccPharmaceutical, {
+  label: 'Pharmaceutical Use',
+  render: data => {
+    const pharmaData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.PHARMACEUTICAL
+    ) as FreeText[];
+    return pharmaData && <FreeTextView comments={pharmaData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccToxicDose, {
+  label: 'Toxic Dose',
+  render: data => {
+    const toxicData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.TOXIC_DOSE
+    ) as FreeText[];
+    return toxicData && <FreeTextView comments={toxicData} />;
+  },
+});
 ColumnConfiguration.set(
   Column.ftIntramem,
   getFeatureColumn(FeatureType.INTRAMEM)
