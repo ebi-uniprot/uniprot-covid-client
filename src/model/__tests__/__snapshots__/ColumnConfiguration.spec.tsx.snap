@@ -1028,30 +1028,30 @@ exports[`ColumnConfiguration component should render all columns 70`] = `
     </li>
     <li>
       <a
-        href="/citations/somepID1"
+        href="/citations/somepID2"
       >
-        somepID1
+        somepID2
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID1"
+        href="/citations/somepID3"
       >
-        somepID1
+        somepID3
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID1"
+        href="/citations/somepID4"
       >
-        somepID1
+        somepID4
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID1"
+        href="/citations/somepID5"
       >
-        somepID1
+        somepID5
       </a>
     </li>
     <button

@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
