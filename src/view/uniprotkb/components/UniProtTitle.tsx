@@ -6,19 +6,16 @@ import './styles/UniProtTitle.scss';
 
 export const ReviewedUnreviewed: FC<{ entryType: EntryType }> = ({
   entryType,
-}) => (
-  <Fragment>
-    {entryType === EntryType.SWISSPROT ? (
-      <span className="uniprot-title__status icon--reviewed">
-        <SwissProtIcon />
-      </span>
-    ) : (
-      <span className="uniprot-title__status icon--unreviewed">
-        <TremblIcon />
-      </span>
-    )}
-  </Fragment>
-);
+}) =>
+  entryType === EntryType.SWISSPROT ? (
+    <span className="uniprot-title__status icon--reviewed">
+      <SwissProtIcon />
+    </span>
+  ) : (
+    <span className="uniprot-title__status icon--unreviewed">
+      <TremblIcon />
+    </span>
+  );
 
 const UniProtTitle: FC<{
   primaryAccession: string;
