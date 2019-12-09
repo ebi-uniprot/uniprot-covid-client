@@ -1,4 +1,5 @@
 import React, { FC, Fragment } from 'react';
+import { v1 } from 'uuid';
 import { Card } from 'franklin-sites';
 import hasContent from '../../model/utils/utils';
 import FreeTextView, { TextView } from './components/FreeTextView';
@@ -19,6 +20,7 @@ import {
   BioPhysicoChemicalProperties,
   Absorption,
   KineticParameters,
+  Cofactor,
 } from '../../model/uniprotkb/sections/FunctionConverter';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
@@ -101,6 +103,31 @@ const BioPhysicoChemicalPropertiesView: FC<{
   );
 };
 
+export const CofactorView: FC<{ cofactors: Cofactor[]; title?: string }> = ({
+  cofactors,
+  title,
+}) => (
+  <Fragment>
+    {title && <h3>{title}</h3>}
+    {cofactors.map(cofactorComment => (
+      <section className="text-block" key={v1()}>
+        {cofactorComment.cofactors &&
+          cofactorComment.cofactors.map(cofactor => (
+            <span key={cofactor.name}>
+              {cofactor.name}{' '}
+              {cofactor.evidences && (
+                <UniProtEvidenceTag evidences={cofactor.evidences} />
+              )}
+            </span>
+          ))}
+        {cofactorComment.note && (
+          <TextView comments={cofactorComment.note.texts} />
+        )}
+      </section>
+    ))}
+  </Fragment>
+);
+
 const FunctionSection: FC<{
   data: FunctionUIModel;
   sequence: string;
@@ -121,6 +148,10 @@ const FunctionSection: FC<{
               CommentType.CATALYTIC_ACTIVITY
             ) as CatalyticActivity[]
           }
+        />
+        <CofactorView
+          cofactors={data.commentsData.get(CommentType.COFACTOR) as Cofactor[]}
+          title={CommentType.COFACTOR.toLocaleLowerCase()}
         />
         <FreeTextView
           comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}

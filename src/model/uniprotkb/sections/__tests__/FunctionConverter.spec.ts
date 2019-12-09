@@ -11,6 +11,42 @@ describe('Function data converter', () => {
         ['MISCELLANEOUS', []],
         ['ACTIVITY REGULATION', []],
         [
+          ['COFACTOR'],
+          [
+            {
+              cofactors: [
+                {
+                  cofactorReference: { databaseType: 'ChEBI', id: 'CHEBI:314' },
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000256',
+                      id: 'PIRNR001361',
+                      source: 'PIRNR',
+                    },
+                  ],
+                  name: 'Cofactor Name',
+                },
+              ],
+              commentType: 'COFACTOR',
+              molecule: 'molecule',
+              note: {
+                texts: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000256',
+                        id: 'PIRNR001361',
+                        source: 'PIRNR',
+                      },
+                    ],
+                    value: 'value2',
+                  },
+                ],
+              },
+            },
+          ],
+        ],
+        [
           'CATALYTIC ACTIVITY',
           [
             {

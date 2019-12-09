@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import SimpleView from '../view/uniprotkb/components/SimpleView';
 import ProteinNamesView, {
-  NameWithEvidence,
+  ECNumbersView,
 } from '../view/uniprotkb/components/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
@@ -33,8 +33,12 @@ import FreeTextView, {
 import {
   AbsorptionView,
   KineticsView,
+  CofactorView,
 } from '../view/uniprotkb/FunctionSection';
-import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
+import {
+  FunctionUIModel,
+  Cofactor,
+} from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
   CommentType,
@@ -281,6 +285,7 @@ ColumnConfiguration.set(Column.organismHost, {
 
 // TODO split isoforms from main sequence view
 // cc:alternative_products ,
+// sequence ,
 ColumnConfiguration.set(Column.ftVarSeq, {
   label: 'Alternative sequence',
   render: data => {
@@ -347,7 +352,6 @@ ColumnConfiguration.set(Column.ccRnaEditing, {
     return rnaEditing && <RNAEditingView data={rnaEditing} />;
   },
 });
-// sequence ,
 ColumnConfiguration.set(Column.errorGmodelPred, {
   label: 'Sequence Caution',
   render: data => {
@@ -392,6 +396,15 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
 // cc:catalytic_activity ,
 // cc:cofactor ,
+ColumnConfiguration.set(Column.ccCofactor, {
+  label: 'Cofactor',
+  render: data => {
+    const cofactorComments = data[EntrySection.Function].commentsData.get(
+      CommentType.COFACTOR
+    ) as Cofactor[];
+    return cofactorComments && <CofactorView cofactors={cofactorComments} />;
+  },
+});
 ColumnConfiguration.set(
   Column.ftDnaBind,
   getFeatureColumn(FeatureType.DNA_BIND)
@@ -404,21 +417,11 @@ ColumnConfiguration.set(Column.ec, {
       proteinNamesData,
       proteinName => proteinName.recommendedName.ecNumbers
     ) as ValueWithEvidence[];
-    return (
-      ecNumbers && (
-        <Fragment>
-          {ecNumbers.map(ecNumber => (
-            <NameWithEvidence data={ecNumber} key={ecNumber.value} />
-          ))}
-        </Fragment>
-      )
-    );
+    return ecNumbers && <ECNumbersView ecNumbers={ecNumbers} />;
   },
 });
-// ec ,
-// "cc_activity_regulation"
-ColumnConfiguration.set(Column.ccEnzymeRegulation, {
-  label: 'Enzyme Regulation',
+ColumnConfiguration.set(Column.ccActivityRegulation, {
+  label: 'Activity Regulation',
   render: data => {
     const activityRegulationComments = data[
       EntrySection.Function
@@ -803,7 +806,19 @@ ColumnConfiguration.set(Column.ccSimilarity, {
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
 // lineage
-// tax_id ,
+ColumnConfiguration.set(Column.taxId, {
+  label: 'Taxon ID',
+  render: data => {
+    const { organismData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      organismData && (
+        <Link to={`/taxonomy/${organismData.taxonId}`}>
+          {organismData.taxonId}
+        </Link>
+      )
+    );
+  },
+});
 
 const getXrefColumn = (databaseName: string) => ({
   label: `${databaseName} cross-reference`,

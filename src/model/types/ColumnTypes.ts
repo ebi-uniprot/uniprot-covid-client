@@ -12,7 +12,7 @@ export enum Column {
   ccDisease = 'cc_disease',
   ccDisruptionPhenotype = 'cc_disruption_phenotype',
   ccDomain = 'cc_domain',
-  ccEnzymeRegulation = 'cc_enzyme_regulation',
+  ccActivityRegulation = 'cc_activity_regulation',
   ccFunction = 'cc_function',
   ccInduction = 'cc_induction',
   ccInteraction = 'cc_interaction',
