@@ -663,10 +663,9 @@ ColumnConfiguration.set(Column.pmId, {
   render: data => {
     const ids = data.references.reduce<Xref[]>((acc, citation) => {
       const xrefs = citation.citation.citationXrefs;
-      if (xrefs) {
-        acc.push(...xrefs.filter(xref => xref.databaseType === 'PubMed'));
-      }
-      return acc;
+      return xrefs
+        ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
+        : acc;
     }, []);
     return (
       <ExpandableList>
