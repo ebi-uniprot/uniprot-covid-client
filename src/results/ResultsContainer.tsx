@@ -41,7 +41,7 @@ export type Facet = {
 type ResultsProps = {
   namespace: Namespace;
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
-  dispatchReset: () => void;
+  dispatchResetSearchInput: () => void;
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
   dispatchUpdateSummaryAccession: (accession: string) => void;
@@ -81,8 +81,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   }
 
   componentWillUnmount() {
-    const { dispatchReset } = this.props;
-    dispatchReset();
+    const { dispatchResetSearchInput } = this.props;
+    dispatchResetSearchInput();
   }
 
   getURLParams = (
@@ -391,7 +391,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) =>
         resultsActions.fetchBatchOfResultsIfNeeded(url),
-      dispatchReset: () => searchActions.reset(),
+      dispatchResetSearchInput: () => searchActions.resetSearchInput(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
       dispatchUpdateSummaryAccession: (accession: string) =>
