@@ -8,9 +8,10 @@ import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewVie
 import uniProtKbConverter, {
   UniProtkbUIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
-import hasContent from '../model/utils/utils';
+import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
+import EntrySection from '../model/types/EntrySection';
 
 type MatchParams = {
   accession: string;
@@ -32,14 +33,15 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
 
   const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
 
-  const sections = UniProtKBEntryConfig.map(section => {
-    return {
-      label: section.name,
-      id: section.name,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      disabled: !hasContent((transformedData as any)[section.name]),
-    };
-  });
+  const sections = UniProtKBEntryConfig.map(section => ({
+    label: section.name,
+    id: section.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    disabled:
+      section.name === EntrySection.ExternalLinks
+        ? !hasExternalLinks(transformedData)
+        : !hasContent((transformedData as any)[section.name]),
+  }));
 
   return (
     <Fragment>

@@ -11,6 +11,7 @@ import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import InteractionSection from './InteractionSection';
 import FamilyAndDomainsSection from './FamilyAndDomainsSection';
 import StructureSection from './StructureSection';
+import ExternalLinksSection, { ExternalLinks } from './ExternalLinksSection';
 import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
 
 const UniProtKBEntryConfig: {
@@ -119,6 +120,16 @@ const UniProtKBEntryConfig: {
         data={data[EntrySection.Sequence]}
         primaryAccession={data.primaryAccession}
         key={EntrySection.Sequence}
+      />
+    ),
+  },
+  {
+    name: EntrySection.ExternalLinks,
+    sectionContent: (data: UniProtkbUIModel): JSX.Element => (
+      <ExternalLinksSection
+        data={data[EntrySection.ExternalLinks]}
+        primaryAccession={data.primaryAccession}
+        key={EntrySection.ExternalLinks}
       />
     ),
   },

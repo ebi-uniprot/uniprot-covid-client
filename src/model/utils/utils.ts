@@ -1,5 +1,8 @@
+import { ExternalLinks } from '../../view/uniprotkb/ExternalLinksSection';
+import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const hasContent = (obj: any) => {
+export const hasContent = (obj: any) => {
   return Object.values(obj).some(val => {
     if (Array.isArray(val)) {
       const valArray = val as any[];
@@ -12,4 +15,10 @@ const hasContent = (obj: any) => {
   });
 };
 
-export default hasContent;
+export const hasExternalLinks = (transformedData: UniProtkbUIModel) =>
+  Object.keys(transformedData).some(key => {
+    const value = transformedData[key as keyof UniProtkbUIModel];
+    return (
+      typeof value === 'object' && value.xrefData && value.xrefData.length > 0
+    );
+  });

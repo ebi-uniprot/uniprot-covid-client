@@ -10,6 +10,7 @@ enum EntrySection {
   Sequence = 'Sequence',
   Structure = 'Structure',
   SubCellularLocation = 'Subcellular Location',
+  ExternalLinks = 'External Links',
 }
 
 export default EntrySection;
