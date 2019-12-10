@@ -141,12 +141,16 @@ const FunctionSection: FC<{
           data={data.bioPhysicoChemicalProperties}
         />
         <FreeTextView
-          comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.PATHWAY) as FreeTextComment[]
+          }
           title={CommentType.PATHWAY.toLowerCase()}
         />
         <FreeTextView
           comments={
-            data.commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeText[]
+            data.commentsData.get(
+              CommentType.ACTIVITY_REGULATION
+            ) as FreeTextComment[]
           }
           title={CommentType.ACTIVITY_REGULATION.toLowerCase()}
         />

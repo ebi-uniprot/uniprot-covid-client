@@ -38,7 +38,7 @@ import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
   CommentType,
-  FreeText,
+  FreeTextComment,
   Xref,
   InteractionComment,
   InteractionType,
@@ -420,7 +420,7 @@ ColumnConfiguration.set(Column.ccEnzymeRegulation, {
   render: data => {
     const activityRegulationComments = data[
       EntrySection.Function
-    ].commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeText[];
+    ].commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeTextComment[];
     return (
       activityRegulationComments && (
         <FreeTextView comments={activityRegulationComments} />
@@ -433,7 +433,7 @@ ColumnConfiguration.set(Column.ccFunction, {
   render: data => {
     const functionComments = data[EntrySection.Function].commentsData.get(
       CommentType.FUNCTION
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return functionComments && <FreeTextView comments={functionComments} />;
   },
 });
@@ -460,7 +460,7 @@ ColumnConfiguration.set(Column.ccPathway, {
   render: data => {
     const pathwayComments = data[EntrySection.Function].commentsData.get(
       CommentType.PATHWAY
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return pathwayComments && <FreeTextView comments={pathwayComments} />;
   },
 });
@@ -543,7 +543,7 @@ ColumnConfiguration.set(Column.ccMiscellaneous, {
   render: data => {
     const miscellaneousComments = data[EntrySection.Function].commentsData.get(
       CommentType.MISCELLANEOUS
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return (
       miscellaneousComments && <FreeTextView comments={miscellaneousComments} />
     );
@@ -728,7 +728,7 @@ ColumnConfiguration.set(Column.proteinFamilies, {
     // Could maybe be removed
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.SIMILARITY
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return familiesData && <FreeTextView comments={familiesData} />;
   },
 });
@@ -739,7 +739,7 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   render: data => {
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.SIMILARITY
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return familiesData && <FreeTextView comments={familiesData} />;
   },
 });
