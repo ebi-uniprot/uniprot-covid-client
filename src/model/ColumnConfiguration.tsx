@@ -565,7 +565,7 @@ ColumnConfiguration.set(Column.reviewed, {
 // tools: UX review is this needed?? ,
 // uniparc_id: leo re-indexing today 02/12/2019,
 ColumnConfiguration.set(Column.ccInteraction, {
-  label: '',
+  label: 'Interacts with',
   render: data => {
     const interactionComments = data[EntrySection.Interaction].commentsData.get(
       CommentType.INTERACTION
@@ -597,10 +597,44 @@ ColumnConfiguration.set(Column.ccInteraction, {
     );
   },
 });
-// cc:subunit ,
-// cc:developmental_stage ,
-// cc:induction ,
-// cc:tissue_specificity ,
+ColumnConfiguration.set(Column.ccSubunit, {
+  label: 'Subunit structure',
+  render: data => {
+    const subunitComments = data[EntrySection.Interaction].commentsData.get(
+      CommentType.SUBUNIT
+    ) as FreeTextComment[];
+    return subunitComments && <FreeTextView comments={subunitComments} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDevelopmentalStage, {
+  label: 'Developmental stage',
+  render: data => {
+    const developmentComments = data[EntrySection.Expression].commentsData.get(
+      CommentType.DEVELOPMENTAL_STAGE
+    ) as FreeTextComment[];
+    return (
+      developmentComments && <FreeTextView comments={developmentComments} />
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccInduction, {
+  label: 'Induction',
+  render: data => {
+    const inductionComments = data[EntrySection.Expression].commentsData.get(
+      CommentType.INDUCTION
+    ) as FreeTextComment[];
+    return inductionComments && <FreeTextView comments={inductionComments} />;
+  },
+});
+ColumnConfiguration.set(Column.ccTissueSpecificity, {
+  label: 'Tissue Specificity',
+  render: data => {
+    const tissueComment = data[EntrySection.Expression].commentsData.get(
+      CommentType.TISSUE_SPECIFICITY
+    ) as FreeTextComment[];
+    return tissueComment && <FreeTextView comments={tissueComment} />;
+  },
+});
 // go_p ,
 // go_c ,
 // go ,

@@ -32,6 +32,14 @@ const ExpressionSection: FC<{
           }
           title={CommentType.INDUCTION.toLowerCase()}
         />
+        <FreeTextView
+          comments={
+            data.commentsData.get(
+              CommentType.DEVELOPMENTAL_STAGE
+            ) as FreeTextComment[]
+          }
+          title={CommentType.DEVELOPMENTAL_STAGE.toLowerCase()}
+        />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
