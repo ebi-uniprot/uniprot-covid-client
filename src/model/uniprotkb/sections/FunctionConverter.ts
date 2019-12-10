@@ -36,7 +36,7 @@ export type KineticParameters = {
   };
 };
 
-export type Cofactor = {
+export type CofactorComment = {
   commentType: CommentType.COFACTOR;
   cofactors?: {
     name: string;

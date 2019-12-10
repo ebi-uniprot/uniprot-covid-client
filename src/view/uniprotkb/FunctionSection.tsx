@@ -20,7 +20,7 @@ import {
   BioPhysicoChemicalProperties,
   Absorption,
   KineticParameters,
-  Cofactor,
+  CofactorComment,
 } from '../../model/uniprotkb/sections/FunctionConverter';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
@@ -102,10 +102,10 @@ const BioPhysicoChemicalPropertiesView: FC<{
   );
 };
 
-export const CofactorView: FC<{ cofactors: Cofactor[]; title?: string }> = ({
-  cofactors,
-  title,
-}) => (
+export const CofactorView: FC<{
+  cofactors: CofactorComment[];
+  title?: string;
+}> = ({ cofactors, title }) => (
   <Fragment>
     {title && <h3>{title}</h3>}
     {cofactors.map(cofactorComment => (
@@ -151,7 +151,9 @@ const FunctionSection: FC<{
           }
         />
         <CofactorView
-          cofactors={data.commentsData.get(CommentType.COFACTOR) as Cofactor[]}
+          cofactors={
+            data.commentsData.get(CommentType.COFACTOR) as CofactorComment[]
+          }
           title={CommentType.COFACTOR.toLocaleLowerCase()}
         />
         <FreeTextView

@@ -37,7 +37,7 @@ import {
 } from '../view/uniprotkb/FunctionSection';
 import {
   FunctionUIModel,
-  Cofactor,
+  CofactorComment,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -401,7 +401,7 @@ ColumnConfiguration.set(Column.ccCofactor, {
   render: data => {
     const cofactorComments = data[EntrySection.Function].commentsData.get(
       CommentType.COFACTOR
-    ) as Cofactor[];
+    ) as CofactorComment[];
     return cofactorComments && <CofactorView cofactors={cofactorComments} />;
   },
 });
@@ -611,7 +611,7 @@ ColumnConfiguration.set(Column.ccAllergen, {
   render: data => {
     const allergenData = data[
       EntrySection.PathologyAndBioTech
-    ].commentsData.get(CommentType.ALLERGEN) as FreeText[];
+    ].commentsData.get(CommentType.ALLERGEN) as FreeTextComment[];
     return allergenData && <FreeTextView comments={allergenData} />;
   },
 });
@@ -620,7 +620,7 @@ ColumnConfiguration.set(Column.ccBiotechnology, {
   render: data => {
     const biotechData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.BIOTECHNOLOGY
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return biotechData && <FreeTextView comments={biotechData} />;
   },
 });
@@ -629,7 +629,7 @@ ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
   render: data => {
     const disruptionData = data[
       EntrySection.PathologyAndBioTech
-    ].commentsData.get(CommentType.DISRUPTION_PHENOTYPE) as FreeText[];
+    ].commentsData.get(CommentType.DISRUPTION_PHENOTYPE) as FreeTextComment[];
     return disruptionData && <FreeTextView comments={disruptionData} />;
   },
 });
@@ -658,7 +658,7 @@ ColumnConfiguration.set(Column.ccPharmaceutical, {
   render: data => {
     const pharmaData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.PHARMACEUTICAL
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return pharmaData && <FreeTextView comments={pharmaData} />;
   },
 });
@@ -667,7 +667,7 @@ ColumnConfiguration.set(Column.ccToxicDose, {
   render: data => {
     const toxicData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.TOXIC_DOSE
-    ) as FreeText[];
+    ) as FreeTextComment[];
     return toxicData && <FreeTextView comments={toxicData} />;
   },
 });
