@@ -104,7 +104,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
     [EntrySection.Structure]: convertStructure(data),
     [EntrySection.Sequence]: convertSequence(data),
     [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
-    references: data.references ? data.references : [],
+    references: data.references || [],
   };
 };
 

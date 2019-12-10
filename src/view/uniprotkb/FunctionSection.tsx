@@ -10,8 +10,8 @@ import FeaturesView from './components/FeaturesView';
 import EntrySection from '../../model/types/EntrySection';
 import {
   CommentType,
-  CatalyticActivity,
-  FreeText,
+  CatalyticActivityComment,
+  FreeTextComment,
 } from '../../model/types/CommentTypes';
 import GoRibbon from './components/GoRibbon';
 import UniProtEvidenceTag from '../../components/UniProtEvidenceTag';
@@ -27,8 +27,7 @@ export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
     <Fragment>
       <section className="text-block">
-        Abs(max) = {data.approximate && '~'}
-        {data.max}nm
+        {`Abs(max) = ${data.approximate && '~'}${data.max}nm`}
       </section>
       <section className="text-block">
         {data.note && <TextView comments={data.note.texts} />}
@@ -46,8 +45,8 @@ export const KineticsView: FC<{ data: KineticParameters }> = ({ data }) => {
           <ul className="no-bullet">
             {data.michaelisConstants.map(km => (
               <li key={km.constant}>
-                K<sub>M</sub>={km.constant}
-                {km.unit} for {km.substrate}{' '}
+                K<sub>M</sub>
+                {`=${km.constant}${km.unit} for ${km.substrate} `}
                 <UniProtEvidenceTag evidences={km.evidences} />
               </li>
             ))}
@@ -140,13 +139,15 @@ const FunctionSection: FC<{
     <div id={EntrySection.Function}>
       <Card title={EntrySection.Function}>
         <FreeTextView
-          comments={data.commentsData.get(CommentType.FUNCTION) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.FUNCTION) as FreeTextComment[]
+          }
         />
         <CatalyticActivityView
           comments={
             data.commentsData.get(
               CommentType.CATALYTIC_ACTIVITY
-            ) as CatalyticActivity[]
+            ) as CatalyticActivityComment[]
           }
         />
         <CofactorView
@@ -154,12 +155,16 @@ const FunctionSection: FC<{
           title={CommentType.COFACTOR.toLocaleLowerCase()}
         />
         <FreeTextView
-          comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.PATHWAY) as FreeTextComment[]
+          }
           title={CommentType.PATHWAY.toLowerCase()}
         />
         <FreeTextView
           comments={
-            data.commentsData.get(CommentType.MISCELLANEOUS) as FreeText[]
+            data.commentsData.get(
+              CommentType.MISCELLANEOUS
+            ) as FreeTextComment[]
           }
           title={CommentType.MISCELLANEOUS.toLowerCase()}
         />
@@ -167,12 +172,16 @@ const FunctionSection: FC<{
           data={data.bioPhysicoChemicalProperties}
         />
         <FreeTextView
-          comments={data.commentsData.get(CommentType.PATHWAY) as FreeText[]}
+          comments={
+            data.commentsData.get(CommentType.PATHWAY) as FreeTextComment[]
+          }
           title={CommentType.PATHWAY.toLowerCase()}
         />
         <FreeTextView
           comments={
-            data.commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeText[]
+            data.commentsData.get(
+              CommentType.ACTIVITY_REGULATION
+            ) as FreeTextComment[]
           }
           title={CommentType.ACTIVITY_REGULATION.toLowerCase()}
         />

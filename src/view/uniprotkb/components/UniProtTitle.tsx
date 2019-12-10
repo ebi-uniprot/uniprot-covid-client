@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
@@ -6,19 +6,16 @@ import './styles/UniProtTitle.scss';
 
 export const ReviewedUnreviewed: FC<{ entryType: EntryType }> = ({
   entryType,
-}) => (
-  <Fragment>
-    {entryType === EntryType.SWISSPROT ? (
-      <span className="uniprot-title__status icon--reviewed">
-        <SwissProtIcon />
-      </span>
-    ) : (
-      <span className="uniprot-title__status icon--unreviewed">
-        <TremblIcon />
-      </span>
-    )}
-  </Fragment>
-);
+}) =>
+  entryType === EntryType.SWISSPROT ? (
+    <span className="uniprot-title__status icon--reviewed">
+      <SwissProtIcon />
+    </span>
+  ) : (
+    <span className="uniprot-title__status icon--unreviewed">
+      <TremblIcon />
+    </span>
+  );
 
 const UniProtTitle: FC<{
   primaryAccession: string;
