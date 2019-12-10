@@ -9,7 +9,7 @@ import {
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
-const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
+export const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
   data,
 }): JSX.Element => (
   <Fragment>
