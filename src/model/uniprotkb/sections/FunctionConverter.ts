@@ -122,6 +122,9 @@ const convertFunction = (data: UniProtkbAPIModel) => {
       }
     });
   }
+  convertedSection.commentsData.delete(
+    CommentType.BIOPHYSICOCHEMICAL_PROPERTIES
+  );
   return convertedSection;
 };
 
