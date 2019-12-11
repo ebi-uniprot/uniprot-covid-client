@@ -1,13 +1,13 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { v1 } from 'uuid';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import XRefView from '../view/uniprotkb/components/XRefView';
 import EntrySection from '../model/types/EntrySection';
 import { hasContent } from '../model/utils/utils';
 import { XrefUIModel } from '../model/utils/XrefUtils';
 import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
-import { v1 } from 'uuid';
 
 type ExternalLinksProps = {
   transformedData: UniProtkbUIModel;

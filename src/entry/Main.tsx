@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from 'react';
 import { Card, DownloadIcon } from 'franklin-sites';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';

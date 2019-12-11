@@ -361,7 +361,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             viewMode={viewMode}
           />
         </Fragment>
-        }
       </SideBarLayout>
     );
   }

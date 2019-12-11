@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React from 'react';
 import {
   withRouter,
   RouteComponentProps,
@@ -6,21 +6,18 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Card, InPageNav, DownloadIcon, Loader } from 'franklin-sites';
+import { InPageNav, Loader } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import apiUrls from '../utils/apiUrls';
-import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import uniProtKbConverter, {
   UniProtkbUIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
-import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
 import EntrySection from '../model/types/EntrySection';
 import Main from './Main';
 import ExternalLinks from './ExternalLinks';
-import { WebResourceComment } from '../model/types/CommentTypes';
 
 type MatchParams = {
   accession: string;
@@ -28,7 +25,7 @@ type MatchParams = {
 
 type EntryProps = RouteComponentProps<MatchParams>;
 
-const Entry: React.FC<EntryProps> = ({ match, history, location }) => {
+const Entry: React.FC<EntryProps> = ({ match, history }) => {
   const url = apiUrls.entry(match.params.accession);
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {
@@ -40,11 +37,12 @@ const Entry: React.FC<EntryProps> = ({ match, history, location }) => {
   const sections = UniProtKBEntryConfig.map(section => ({
     label: section.name,
     id: section.name,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     disabled:
       section.name === EntrySection.ExternalLinks
         ? !hasExternalLinks(transformedData)
-        : !hasContent((transformedData as any)[section.name]),
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          !hasContent((transformedData as any)[section.name]),
   }));
 
   return (
