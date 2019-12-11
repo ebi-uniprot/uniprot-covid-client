@@ -344,7 +344,7 @@ exports[`Entry should render 1`] = `
             class="card__content"
           >
             <h4>
-              Catalytic Activity
+              catalytic activity
             </h4>
             <span
               class="text-block"

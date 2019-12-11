@@ -149,6 +149,7 @@ const FunctionSection: FC<{
               CommentType.CATALYTIC_ACTIVITY
             ) as CatalyticActivityComment[]
           }
+          title={CommentType.CATALYTIC_ACTIVITY.toLocaleLowerCase()}
         />
         <CofactorView
           cofactors={

@@ -152,9 +152,11 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
   };
 };
 
-const VariationView: FC<{ primaryAccession: string }> = ({
-  primaryAccession,
-}) => {
+const VariationView: FC<{
+  primaryAccession: string;
+  title?: string;
+  noTable?: boolean;
+}> = ({ primaryAccession, title, noTable }) => {
   const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
 
   const setTrackData = useCallback(
@@ -175,20 +177,22 @@ const VariationView: FC<{ primaryAccession: string }> = ({
 
   return (
     <div>
-      <h4>Variants</h4>
+      {title && <h4>{title}</h4>}
       <protvista-manager attributes="highlight displaystart displayend activefilters filters">
-        <div className="variation-view">
-          <protvista-navigation length={data.sequence.length} />
-          <protvista-sequence
-            length={data.sequence.length}
-            sequence={data.sequence}
-            height="20"
-          />
-          <protvista-filter />
-          <protvista-variation length={data.sequence.length}>
-            <protvista-variation-adapter ref={setTrackData} />
-          </protvista-variation>
-        </div>
+        {!noTable && (
+          <div className="variation-view">
+            <protvista-navigation length={data.sequence.length} />
+            <protvista-sequence
+              length={data.sequence.length}
+              sequence={data.sequence}
+              height="20"
+            />
+            <protvista-filter />
+            <protvista-variation length={data.sequence.length}>
+              <protvista-variation-adapter ref={setTrackData} />
+            </protvista-variation>
+          </div>
+        )}
         <FeaturesTableView
           data={data.features}
           getColumnConfig={getColumnConfig}

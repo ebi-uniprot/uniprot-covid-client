@@ -2884,7 +2884,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/O00311"
               >
-                O00311 (Swiss-Prot)
+                O00311
               </a>
             </td>
           </tr>
@@ -2902,7 +2902,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9Z0H0"
               >
-                Q9Z0H0 (Swiss-Prot)
+                Q9Z0H0
               </a>
             </td>
           </tr>
@@ -2920,7 +2920,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P06243"
               >
-                P06243 (Swiss-Prot)
+                P06243
               </a>
             </td>
           </tr>
@@ -2938,7 +2938,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P41892"
               >
-                P41892 (Swiss-Prot)
+                P41892
               </a>
             </td>
           </tr>
@@ -2956,7 +2956,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q54DK3"
               >
-                Q54DK3 (Swiss-Prot)
+                Q54DK3
               </a>
             </td>
           </tr>
@@ -2974,7 +2974,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P50582"
               >
-                P50582 (Swiss-Prot)
+                P50582
               </a>
             </td>
           </tr>
@@ -2992,7 +2992,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q8NEY8"
               >
-                Q8NEY8 (Swiss-Prot)
+                Q8NEY8
               </a>
             </td>
           </tr>
@@ -3010,7 +3010,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/X2JCT3"
               >
-                X2JCT3 (TrEMBL)
+                X2JCT3
               </a>
             </td>
           </tr>
@@ -3028,7 +3028,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9W3Y1"
               >
-                Q9W3Y1 (TrEMBL)
+                Q9W3Y1
               </a>
             </td>
           </tr>
@@ -3046,7 +3046,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q8NFT6"
               >
-                Q8NFT6 (Swiss-Prot)
+                Q8NFT6
               </a>
             </td>
           </tr>
@@ -3064,7 +3064,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P32325"
               >
-                P32325 (Swiss-Prot)
+                P32325
               </a>
             </td>
           </tr>
@@ -3082,7 +3082,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9UBU7"
               >
-                Q9UBU7 (Swiss-Prot)
+                Q9UBU7
               </a>
             </td>
           </tr>
@@ -3100,7 +3100,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P49736"
               >
-                P49736 (Swiss-Prot)
+                P49736
               </a>
             </td>
           </tr>
@@ -3118,7 +3118,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9BW66"
               >
-                Q9BW66 (Swiss-Prot)
+                Q9BW66
               </a>
             </td>
           </tr>
@@ -3136,7 +3136,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9QZ41"
               >
-                Q9QZ41 (Swiss-Prot)
+                Q9QZ41
               </a>
             </td>
           </tr>
@@ -3154,7 +3154,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q8SR83"
               >
-                Q8SR83 (Swiss-Prot)
+                Q8SR83
               </a>
             </td>
           </tr>
@@ -3172,7 +3172,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P97310"
               >
-                P97310 (Swiss-Prot)
+                P97310
               </a>
             </td>
           </tr>
@@ -3190,7 +3190,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q8SR85"
               >
-                Q8SR85 (Swiss-Prot)
+                Q8SR85
               </a>
             </td>
           </tr>
@@ -3208,7 +3208,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P55861"
               >
-                P55861 (Swiss-Prot)
+                P55861
               </a>
             </td>
           </tr>
@@ -3226,7 +3226,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P87027"
               >
-                P87027 (Swiss-Prot)
+                P87027
               </a>
             </td>
           </tr>
@@ -3244,7 +3244,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q5XK83"
               >
-                Q5XK83 (Swiss-Prot)
+                Q5XK83
               </a>
             </td>
           </tr>
@@ -3262,7 +3262,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/Q9UQY9"
               >
-                Q9UQY9 (Swiss-Prot)
+                Q9UQY9
               </a>
             </td>
           </tr>
@@ -3280,7 +3280,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/O74473"
               >
-                O74473 (Swiss-Prot)
+                O74473
               </a>
             </td>
           </tr>
@@ -3298,7 +3298,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P30664"
               >
-                P30664 (Swiss-Prot)
+                P30664
               </a>
             </td>
           </tr>
@@ -3316,7 +3316,7 @@ exports[`ResultsView component should render table 1`] = `
               <a
                 href="/uniprotkb/P33991"
               >
-                P33991 (Swiss-Prot)
+                P33991
               </a>
             </td>
           </tr>

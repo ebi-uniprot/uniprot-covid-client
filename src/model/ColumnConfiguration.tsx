@@ -47,6 +47,7 @@ import {
   InteractionComment,
   InteractionType,
   DiseaseComment,
+  CatalyticActivityComment,
 } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
@@ -62,6 +63,8 @@ import {
   getDatabaseInfoByName,
 } from '../data/database';
 import DiseaseInvolvementView from '../view/uniprotkb/components/DiseaseInvolvementView';
+import CatalyticActivityView from '../view/uniprotkb/components/CatalyticActivityView';
+import VariationView from '../view/uniprotkb/components/VariationView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -93,7 +96,7 @@ ColumnConfiguration.set(Column.accession, {
   sortable: true,
   render: (data: { primaryAccession: string; entryType: string }) => (
     <SimpleView
-      termValue={`${data.primaryAccession} (${data.entryType})`}
+      termValue={data.primaryAccession}
       linkTo={`/uniprotkb/${data.primaryAccession}`}
     />
   ),
@@ -329,7 +332,13 @@ ColumnConfiguration.set(Column.ccMassSpectrometry, {
   },
 });
 
-// ft:variant ,
+ColumnConfiguration.set(Column.ftVariant, {
+  label: 'Variants',
+  render: data => (
+    <VariationView primaryAccession={data.primaryAccession} noTable />
+  ),
+});
+
 ColumnConfiguration.set(
   Column.ftNonCon,
   getFeatureColumn(FeatureType.NON_CONS)
@@ -394,8 +403,21 @@ ColumnConfiguration.set(
   getFeatureColumn(FeatureType.BINDING)
 );
 ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
-// cc:catalytic_activity ,
-// cc:cofactor ,
+ColumnConfiguration.set(Column.ccCatalyticActivity, {
+  label: 'Catalytic Activity',
+  render: data => {
+    const catalyticActivityComments = data[
+      EntrySection.Function
+    ].commentsData.get(
+      CommentType.CATALYTIC_ACTIVITY
+    ) as CatalyticActivityComment[];
+    return (
+      catalyticActivityComments && (
+        <CatalyticActivityView comments={catalyticActivityComments} />
+      )
+    );
+  },
+});
 ColumnConfiguration.set(Column.ccCofactor, {
   label: 'Cofactor',
   render: data => {
@@ -838,7 +860,6 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   },
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-// lineage
 ColumnConfiguration.set(Column.taxId, {
   label: 'Taxon ID',
   render: data => {
@@ -852,7 +873,6 @@ ColumnConfiguration.set(Column.taxId, {
     );
   },
 });
-
 const getXrefColumn = (databaseName: string) => ({
   label: `${databaseName} cross-reference`,
   render: (data: UniProtkbUIModel) => {

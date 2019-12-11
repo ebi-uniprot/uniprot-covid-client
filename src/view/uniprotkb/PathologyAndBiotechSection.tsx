@@ -70,7 +70,7 @@ const PathologyAndBiotechSection: FC<{
           title={CommentType.TOXIC_DOSE.toLowerCase()}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
-        <VariationView primaryAccession={primaryAccession} />
+        <VariationView primaryAccession={primaryAccession} title="Variants" />
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
