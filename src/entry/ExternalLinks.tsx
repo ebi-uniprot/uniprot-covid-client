@@ -1,7 +1,6 @@
 import React, { Fragment, memo } from 'react';
-import { Card, ExpandableList } from 'franklin-sites';
+import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
 import { RouteComponentProps, withRouter } from 'react-router';
-import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import XRefView from '../view/uniprotkb/components/XRefView';
 import EntrySection from '../model/types/EntrySection';
@@ -26,10 +25,10 @@ const WebResourceLink: React.FC<WebResourceLinkProps> = ({ comment }) => {
   const { note, resourceName, resourceUrl } = comment;
   const noteNode = note && ` (${note})`;
   return (
-    <a href={resourceUrl}>
+    <ExternalLink url={resourceUrl}>
       {resourceName}
       {noteNode}
-    </a>
+    </ExternalLink>
   );
 };
 
