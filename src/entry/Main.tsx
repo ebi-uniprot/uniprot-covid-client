@@ -18,40 +18,38 @@ function arePropsEqual(prevProps: MainProps, nextProps: MainProps) {
   );
 }
 
-const Main: React.FC<MainProps> = ({ transformedData }) => {
-  return (
-    <Fragment>
-      <div className="button-group">
-        <button type="button" className="button link-button">
-          Blast
-        </button>
-        <button type="button" className="button link-button">
-          Align
-        </button>
-        <button type="button" className="button link-button">
-          <DownloadIcon />
-          Download
-        </button>
-        <button type="button" className="button link-button">
-          Add
-        </button>
-      </div>
-      <Card
-        title={
-          <UniProtTitle
-            primaryAccession={transformedData.primaryAccession}
-            entryType={transformedData.entryType}
-            uniProtId={transformedData.uniProtId}
-          />
-        }
-      >
-        <ProteinOverview transformedData={transformedData} />
-      </Card>
-      {UniProtKBEntryConfig.map(({ sectionContent }) =>
-        sectionContent(transformedData)
-      )}
-    </Fragment>
-  );
-};
+const Main: React.FC<MainProps> = ({ transformedData }) => (
+  <Fragment>
+    <div className="button-group">
+      <button type="button" className="button link-button">
+        Blast
+      </button>
+      <button type="button" className="button link-button">
+        Align
+      </button>
+      <button type="button" className="button link-button">
+        <DownloadIcon />
+        Download
+      </button>
+      <button type="button" className="button link-button">
+        Add
+      </button>
+    </div>
+    <Card
+      title={
+        <UniProtTitle
+          primaryAccession={transformedData.primaryAccession}
+          entryType={transformedData.entryType}
+          uniProtId={transformedData.uniProtId}
+        />
+      }
+    >
+      <ProteinOverview transformedData={transformedData} />
+    </Card>
+    {UniProtKBEntryConfig.map(({ sectionContent }) =>
+      sectionContent(transformedData)
+    )}
+  </Fragment>
+);
 
 export default withRouter(memo(Main, arePropsEqual));

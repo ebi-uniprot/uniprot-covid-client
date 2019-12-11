@@ -1,4 +1,3 @@
-import { ExternalLinks } from '../../view/uniprotkb/ExternalLinksSection';
 import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

@@ -1,5 +1,11 @@
 import React, { Fragment, memo } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import { Card, InPageNav, DownloadIcon, Loader } from 'franklin-sites';
 import useDataApi from '../utils/useDataApi';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
@@ -13,6 +19,8 @@ import SideBarLayout from '../layout/SideBarLayout';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
 import EntrySection from '../model/types/EntrySection';
 import Main from './Main';
+import ExternalLinks from './ExternalLinks';
+import { WebResourceComment } from '../model/types/CommentTypes';
 
 type MatchParams = {
   accession: string;
@@ -20,7 +28,7 @@ type MatchParams = {
 
 type EntryProps = RouteComponentProps<MatchParams>;
 
-const Entry: React.FC<EntryProps> = ({ match }) => {
+const Entry: React.FC<EntryProps> = ({ match, history, location }) => {
   const url = apiUrls.entry(match.params.accession);
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {
@@ -41,7 +49,19 @@ const Entry: React.FC<EntryProps> = ({ match }) => {
 
   return (
     <SideBarLayout sidebar={<InPageNav sections={sections} />}>
-      <Main transformedData={transformedData} />
+      <Router history={history}>
+        <Switch>
+          <Route
+            path={`${match.url}/`}
+            render={() => <Main transformedData={transformedData} />}
+            exact
+          />
+          <Route
+            path={`${match.url}/external-links`}
+            render={() => <ExternalLinks transformedData={transformedData} />}
+          />
+        </Switch>
+      </Router>
     </SideBarLayout>
   );
 };

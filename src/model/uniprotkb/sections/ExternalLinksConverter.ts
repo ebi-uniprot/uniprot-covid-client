@@ -1,8 +1,7 @@
-import { convertSection, UIModel } from '../SectionConverter';
+import { UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { getXrefsForSection } from '../../utils/XrefUtils';
 import UniProtKBEntryConfig from '../../../view/uniprotkb/UniProtEntryConfig';
-import EntrySection from '../../types/EntrySection';
 import { flattenArrays } from '../../../utils/utils';
 import { CommentType } from '../../types/CommentTypes';
 
@@ -17,18 +16,18 @@ const convertExternalLinks = (data: UniProtkbAPIModel) => {
 
   if (comments) {
     convertedData.commentsData.set(
-      CommentType.WEBRESOURCE,
+      CommentType.WEB_RESOURCE,
       comments.filter(
-        comment => comment.commentType === CommentType.WEBRESOURCE
+        comment => comment.commentType === CommentType.WEB_RESOURCE
       )
     );
   }
 
   if (databaseCrossReferences) {
     convertedData.xrefData = flattenArrays(
-      UniProtKBEntryConfig.filter(
-        ({ name }) => name !== EntrySection.ExternalLinks
-      ).map(({ name }) => getXrefsForSection(databaseCrossReferences, name))
+      UniProtKBEntryConfig.map(({ name }) =>
+        getXrefsForSection(databaseCrossReferences, name)
+      )
     );
   }
   return convertedData;
