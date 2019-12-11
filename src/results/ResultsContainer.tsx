@@ -271,102 +271,98 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     }
     const { name, links, info } = infoMappings[namespace];
     return (
-      <Fragment>
-        <SideBarLayout
-          title={
-            <PageIntro
-              title={name}
-              links={links}
-              resultsCount={totalNumberResults}
-            >
-              {info}
-            </PageIntro>
-          }
-          sidebar={
-            <Facets
-              data={facets}
-              selectedFacets={selectedFacets}
-              addFacet={this.addFacet}
-              removeFacet={this.removeFacet}
-            />
-          }
-          content={
-            <Fragment>
-              {results.length > 0 && (
-                <div className="button-group">
-                  <button type="button" className="button link-button disabled">
-                    Blast
-                  </button>
-                  <button type="button" className="button link-button disabled">
-                    Align
-                  </button>
+      <SideBarLayout
+        title={
+          <PageIntro
+            title={name}
+            links={links}
+            resultsCount={totalNumberResults}
+          >
+            {info}
+          </PageIntro>
+        }
+        sidebar={
+          <Facets
+            data={facets}
+            selectedFacets={selectedFacets}
+            addFacet={this.addFacet}
+            removeFacet={this.removeFacet}
+          />
+        }
+      >
+        <Fragment>
+          {results.length > 0 && (
+            <div className="button-group">
+              <button type="button" className="button link-button disabled">
+                Blast
+              </button>
+              <button type="button" className="button link-button disabled">
+                Align
+              </button>
+              <button type="button" className="button link-button">
+                <DownloadIcon />
+                Download
+              </button>
+              <button type="button" className="button link-button disabled">
+                <BasketIcon />
+                Add
+              </button>
+              <button type="button" className="button link-button">
+                <StatisticsIcon />
+                Statistics
+              </button>
+              <button
+                type="button"
+                className="button link-button large-icon"
+                onClick={() => dispatchSwitchViewMode()}
+                data-testid="table-card-toggle"
+              >
+                <span
+                  className={
+                    viewMode === ViewMode.CARD ? 'link-button-icon__active' : ''
+                  }
+                >
+                  <TableIcon />
+                </span>
+                <span
+                  className={
+                    viewMode === ViewMode.TABLE
+                      ? 'link-button-icon__active'
+                      : ''
+                  }
+                >
+                  <ListIcon />
+                </span>
+              </button>
+              {viewMode === ViewMode.TABLE && (
+                <Link to="/customise-table">
                   <button type="button" className="button link-button">
-                    <DownloadIcon />
-                    Download
+                    <EditIcon />
+                    Customise data
                   </button>
-                  <button type="button" className="button link-button disabled">
-                    <BasketIcon />
-                    Add
-                  </button>
-                  <button type="button" className="button link-button">
-                    <StatisticsIcon />
-                    Statistics
-                  </button>
-                  <button
-                    type="button"
-                    className="button link-button large-icon"
-                    onClick={() => dispatchSwitchViewMode()}
-                    data-testid="table-card-toggle"
-                  >
-                    <span
-                      className={
-                        viewMode === ViewMode.CARD
-                          ? 'link-button-icon__active'
-                          : ''
-                      }
-                    >
-                      <TableIcon />
-                    </span>
-                    <span
-                      className={
-                        viewMode === ViewMode.TABLE
-                          ? 'link-button-icon__active'
-                          : ''
-                      }
-                    >
-                      <ListIcon />
-                    </span>
-                  </button>
-                  {viewMode === ViewMode.TABLE && (
-                    <Link to="/customise-table">
-                      <button type="button" className="button link-button">
-                        <EditIcon />
-                        Customise data
-                      </button>
-                    </Link>
-                  )}
-                </div>
+                </Link>
               )}
-              <ResultsView
-                results={results}
-                handleEntrySelection={this.handleEntrySelection}
-                selectedEntries={selectedEntries}
-                handleHeaderClick={this.updateColumnSort}
-                handleCardClick={dispatchUpdateSummaryAccession}
-                summaryAccession={summaryAccession}
-                sortColumn={sortColumn}
-                sortDirection={sortDirection}
-                handleLoadMoreRows={() =>
-                  dispatchFetchBatchOfResultsIfNeeded(nextUrl)
-                }
-                totalNumberResults={totalNumberResults}
-                tableColumns={tableColumns}
-                viewMode={viewMode}
-              />
-            </Fragment>
-          }
-        />
-      </Fragment>
+            </div>
+          )}
+          <ResultsView
+            results={results}
+            handleEntrySelection={this.handleEntrySelection}
+            selectedEntries={selectedEntries}
+            handleHeaderClick={this.updateColumnSort}
+            handleCardClick={dispatchUpdateSummaryAccession}
+            summaryAccession={summaryAccession}
+            sortColumn={sortColumn}
+            sortDirection={sortDirection}
+            handleLoadMoreRows={() =>
+              dispatchFetchBatchOfResultsIfNeeded(nextUrl)
+            }
+            totalNumberResults={totalNumberResults}
+            tableColumns={tableColumns}
+            viewMode={viewMode}
+          />
+        </Fragment>
+        }
+      </SideBarLayout>
     );
   }
 }
@@ -401,10 +397,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const ResultsContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Results)
+  connect(mapStateToProps, mapDispatchToProps)(Results)
 );
 
 export default ResultsContainer;
