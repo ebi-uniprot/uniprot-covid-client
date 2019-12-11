@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
-import { ExpandableList } from 'franklin-sites';
+import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
 import { Link } from 'react-router-dom';
 
@@ -24,6 +24,7 @@ import {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
+  IsoformView,
 } from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
 import FeatureType from './types/FeatureType';
@@ -146,8 +147,11 @@ ColumnConfiguration.set(Column.organism, {
 ColumnConfiguration.set(Column.length, {
   label: 'Length',
   render: data => {
-    const { sequence } = data[EntrySection.Sequence];
-    return sequence && numberView({ value: sequence.length, unit: Unit.AA });
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      sequenceData.sequence &&
+      numberView({ value: sequenceData.sequence.length, unit: Unit.AA })
+    );
   },
 });
 
@@ -287,8 +291,33 @@ ColumnConfiguration.set(Column.organismHost, {
 });
 
 // TODO split isoforms from main sequence view
-// cc:alternative_products ,
-// sequence ,
+ColumnConfiguration.set(Column.ccAlternativeProducts, {
+  label: 'Alternative Products',
+  render: data => {
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      sequenceData.alternativeProducts && (
+        <IsoformView
+          alternativeProducts={sequenceData.alternativeProducts}
+          includeSequences={false}
+        />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.sequence, {
+  label: 'Sequence',
+  render: data => {
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      <Sequence
+        sequence={sequenceData.sequence.value}
+        id={data.primaryAccession}
+      />
+    );
+  },
+});
+
 ColumnConfiguration.set(Column.ftVarSeq, {
   label: 'Alternative sequence',
   render: data => {

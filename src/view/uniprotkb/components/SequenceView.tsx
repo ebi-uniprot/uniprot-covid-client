@@ -7,6 +7,7 @@ import {
   SequenceCautionComment,
   MassSpectrometryComment,
   RNAEditingComment,
+  AlternativeProductsComment,
 } from '../../../model/types/CommentTypes';
 import apiUrls from '../../../utils/apiUrls';
 import fetchData from '../../../utils/fetchData';
@@ -116,10 +117,11 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
       <h4 id={name}>{name}</h4>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
-          This isoform has been chosen as the
-          <strong>canonical</strong> sequence. All positional information in
-          this entry refers to it. This is also the sequence that appears in the
-          downloadable versions of the entry.
+          {'This isoform has been chosen as the '}
+          <strong>canonical</strong>
+          {' sequence. All positional information in '}
+          {'this entry refers to it. This is also the sequence '}
+          {'that appears in the downloadable versions of the entry.'}
         </p>
       )}
       <InfoList infoData={infoListData} />
@@ -211,6 +213,59 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
   </Fragment>
 );
 
+export const IsoformView: React.FC<{
+  alternativeProducts: AlternativeProductsComment;
+  canonicalComponent?: JSX.Element;
+  includeSequences?: boolean;
+}> = ({ alternativeProducts, canonicalComponent, includeSequences = true }) => {
+  let isoformCountNode;
+  if (alternativeProducts.isoforms && alternativeProducts.events) {
+    isoformCountNode = (
+      <p>
+        {`This entry describes `}
+        <strong>{alternativeProducts.isoforms.length}</strong>
+        {` isoforms produced by `}
+        <strong>{alternativeProducts.events.join(' & ')}</strong>.
+      </p>
+    );
+  }
+
+  let notesNode;
+  const texts = idx(alternativeProducts, o => o.note.texts);
+  if (texts) {
+    notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
+  }
+
+  let isoformsNode;
+  if (alternativeProducts.isoforms) {
+    isoformsNode = alternativeProducts.isoforms.map(isoform => {
+      const isoformComponent = (
+        <SequenceInfo isoformId={isoform.isoformIds[0]} />
+      );
+      return (
+        <Fragment key={isoform.isoformIds.join('')}>
+          <IsoformInfo isoformData={isoform} />
+          {includeSequences && (
+            <Fragment>
+              {canonicalComponent &&
+              isoform.isoformSequenceStatus === 'Displayed'
+                ? canonicalComponent
+                : isoformComponent}
+            </Fragment>
+          )}
+        </Fragment>
+      );
+    });
+  }
+  return (
+    <Fragment>
+      {isoformCountNode}
+      {notesNode}
+      {isoformsNode}
+    </Fragment>
+  );
+};
+
 const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
   const sequenceInfoData = [
     {
@@ -244,47 +299,13 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
     return null;
   }
 
-  let isoformCountNode;
-  if (data.alternativeProducts.isoforms && data.alternativeProducts.events) {
-    isoformCountNode = (
-      <p>
-        {`This entry describes `}
-        <strong>{data.alternativeProducts.isoforms.length}</strong>
-        {` isoforms produced by `}
-        <strong>{data.alternativeProducts.events.join(' & ')}</strong>.
-      </p>
-    );
-  }
-
-  let notesNode;
-  const texts = idx(data.alternativeProducts, o => o.note.texts);
-  if (texts) {
-    notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
-  }
-
-  let isoformsNode;
-  if (data.alternativeProducts.isoforms) {
-    isoformsNode = data.alternativeProducts.isoforms.map(isoform => {
-      const isoformComponent = (
-        <SequenceInfo isoformId={isoform.isoformIds[0]} />
-      );
-      return (
-        <Fragment key={isoform.isoformIds.join('')}>
-          <IsoformInfo isoformData={isoform} />
-          {isoform.isoformSequenceStatus === 'Displayed'
-            ? canonicalComponent
-            : isoformComponent}
-        </Fragment>
-      );
-    });
-  }
-
   return (
     <Fragment>
       <InfoList infoData={sequenceInfoData} />
-      {isoformCountNode}
-      {notesNode}
-      {isoformsNode}
+      <IsoformView
+        alternativeProducts={data.alternativeProducts}
+        canonicalComponent={canonicalComponent}
+      />
     </Fragment>
   );
 };
