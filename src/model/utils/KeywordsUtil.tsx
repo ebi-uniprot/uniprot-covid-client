@@ -1,4 +1,7 @@
 import KeywordCategory from '../types/KeywordCategory';
+import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
+import { flattenArrays } from '../../utils/utils';
+import { UIModel } from '../uniprotkb/SectionConverter';
 
 export type Keyword = {
   id?: string;
@@ -9,6 +12,20 @@ export type Keyword = {
 export type KeywordUIModel = {
   category: KeywordCategory;
   keywords: Keyword[];
+};
+
+export const getAllKeywords = (data: UniProtkbUIModel) => {
+  const allKeywords: Keyword[] = [];
+  Object.values(data).forEach(attributes => {
+    const UIModelAttribute = attributes as UIModel;
+    if (UIModelAttribute && UIModelAttribute.keywordData) {
+      const keywordData = flattenArrays(
+        UIModelAttribute.keywordData.map(categ => categ.keywords)
+      );
+      allKeywords.push(...keywordData);
+    }
+  });
+  return allKeywords;
 };
 
 export const getKeywordsForCategories = (

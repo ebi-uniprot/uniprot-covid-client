@@ -6,6 +6,7 @@ import { Keyword, KeywordUIModel } from '../../../model/utils/KeywordsUtil';
 
 type KeywordListProps = {
   keywords: Keyword[];
+  idOnly?: boolean;
 };
 
 type KeywordItempProps = {
@@ -20,7 +21,10 @@ export const KeywordItem: React.FC<KeywordItempProps> = ({ id, value }) => {
   return <Link to={`/keywords/${id}`}>{` #${value}`}</Link>;
 };
 
-export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
+export const KeywordList: React.FC<KeywordListProps> = ({
+  keywords,
+  idOnly = false,
+}) => {
   if (!keywords) {
     return null;
   }
@@ -31,7 +35,7 @@ export const KeywordList: React.FC<KeywordListProps> = ({ keywords }) => {
     }
     return (
       <Fragment key={v1()}>
-        <KeywordItem id={id} value={value} />
+        <KeywordItem id={id} value={idOnly ? id : value} />
         {index < keywords.length - 1 && ' '}
       </Fragment>
     );

@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
+import { ExpandableList } from 'franklin-sites';
+import idx from 'idx';
+import { Link } from 'react-router-dom';
+
 import SimpleView from '../view/uniprotkb/components/SimpleView';
-import ProteinNamesView from '../view/uniprotkb/components/ProteinNamesView';
+import ProteinNamesView, {
+  NameWithEvidence,
+} from '../view/uniprotkb/components/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
   OrganismId,
@@ -30,6 +36,26 @@ import {
 } from '../view/uniprotkb/FunctionSection';
 import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
+import {
+  CommentType,
+  FreeTextComment,
+  Xref,
+  InteractionComment,
+  InteractionType,
+} from './types/CommentTypes';
+import AnnotationScoreDoughnutChart, {
+  DoughnutChartSize,
+} from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
+import { ValueWithEvidence } from './types/modelTypes';
+import { getAllKeywords } from './utils/KeywordsUtil';
+import { KeywordList } from '../view/uniprotkb/components/KeywordView';
+import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtTitle';
+import { XrefCategoryContent } from '../view/uniprotkb/components/XRefView';
+import {
+  databaseNameToCategory,
+  getDatabaseNameToEntrySection,
+  getDatabaseInfoByName,
+} from '../data/database';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -368,9 +394,49 @@ ColumnConfiguration.set(
   Column.ftDnaBind,
   getFeatureColumn(FeatureType.DNA_BIND)
 );
+ColumnConfiguration.set(Column.ec, {
+  label: 'EC Number',
+  render: data => {
+    const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
+    const ecNumbers = idx(
+      proteinNamesData,
+      proteinName => proteinName.recommendedName.ecNumbers
+    ) as ValueWithEvidence[];
+    return (
+      ecNumbers && (
+        <Fragment>
+          {ecNumbers.map(ecNumber => (
+            <NameWithEvidence data={ecNumber} key={ecNumber.value} />
+          ))}
+        </Fragment>
+      )
+    );
+  },
+});
 // ec ,
-// cc:enzyme_regulation ,
-// cc:function ,
+// "cc_activity_regulation"
+ColumnConfiguration.set(Column.ccEnzymeRegulation, {
+  label: 'Enzyme Regulation',
+  render: data => {
+    const activityRegulationComments = data[
+      EntrySection.Function
+    ].commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeTextComment[];
+    return (
+      activityRegulationComments && (
+        <FreeTextView comments={activityRegulationComments} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccFunction, {
+  label: 'Function',
+  render: data => {
+    const functionComments = data[EntrySection.Function].commentsData.get(
+      CommentType.FUNCTION
+    ) as FreeTextComment[];
+    return functionComments && <FreeTextView comments={functionComments} />;
+  },
+});
 ColumnConfiguration.set(Column.kinetics, {
   label: 'Kinetics',
   render: data => {
@@ -389,7 +455,15 @@ ColumnConfiguration.set(
   Column.ftNpBind,
   getFeatureColumn(FeatureType.NP_BINDL)
 );
-// cc:pathway ,
+ColumnConfiguration.set(Column.ccPathway, {
+  label: 'Pathway',
+  render: data => {
+    const pathwayComments = data[EntrySection.Function].commentsData.get(
+      CommentType.PATHWAY
+    ) as FreeTextComment[];
+    return pathwayComments && <FreeTextView comments={pathwayComments} />;
+  },
+});
 ColumnConfiguration.set(Column.phDependence, {
   label: 'pH Dependence',
   render: data => {
@@ -432,18 +506,92 @@ ColumnConfiguration.set(Column.tempDependence, {
     );
   },
 });
-// score ,
-// cc:caution ,
+ColumnConfiguration.set(Column.score, {
+  label: 'Score',
+  render: data => (
+    <AnnotationScoreDoughnutChart
+      score={data.annotationScore}
+      size={DoughnutChartSize.medium}
+    />
+  ),
+});
+ColumnConfiguration.set(Column.ccSequenceCaution, {
+  label: 'Sequence Caution',
+  render: data => {
+    const { sequenceCaution } = data[EntrySection.Sequence];
+    return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
+  },
+});
 // feature ,
-// keyword ,
-// keywordid ,
-// matched_text ,
-// cc:miscellaneous ,
-// protein_existence ,
-// reviewed ,
-// tools ,
-// uniparc_id ,
-// cc:interaction ,
+ColumnConfiguration.set(Column.keyword, {
+  label: 'Keywords',
+  render: data => {
+    const keywords = getAllKeywords(data);
+    return <KeywordList keywords={keywords} />;
+  },
+});
+ColumnConfiguration.set(Column.keywordid, {
+  label: 'Keyword IDs',
+  render: data => {
+    const keywords = getAllKeywords(data);
+    return <KeywordList keywords={keywords} idOnly />;
+  },
+});
+// matched_text: this field is not provided anymore ,
+ColumnConfiguration.set(Column.ccMiscellaneous, {
+  label: 'Miscellaneous [CC]',
+  render: data => {
+    const miscellaneousComments = data[EntrySection.Function].commentsData.get(
+      CommentType.MISCELLANEOUS
+    ) as FreeTextComment[];
+    return (
+      miscellaneousComments && <FreeTextView comments={miscellaneousComments} />
+    );
+  },
+});
+ColumnConfiguration.set(Column.proteinExistence, {
+  label: 'Protein existence',
+  render: data => data.proteinExistence,
+});
+ColumnConfiguration.set(Column.reviewed, {
+  label: '',
+  render: data => <ReviewedUnreviewed entryType={data.entryType} />,
+});
+// tools: UX review is this needed?? ,
+// uniparc_id: leo re-indexing today 02/12/2019,
+ColumnConfiguration.set(Column.ccInteraction, {
+  label: '',
+  render: data => {
+    const interactionComments = data[EntrySection.Interaction].commentsData.get(
+      CommentType.INTERACTION
+    ) as InteractionComment[];
+    return (
+      interactionComments && (
+        <Fragment>
+          {interactionComments.map(interactionCC =>
+            interactionCC.interactions.map(interaction => (
+              <div
+                key={
+                  interaction.type === InteractionType.SELF
+                    ? 'self'
+                    : interaction.uniProtAccession
+                }
+              >
+                {interaction.type === InteractionType.SELF ? (
+                  'Itself'
+                ) : (
+                  <Link to={`/uniprotkb/${interaction.uniProtAccession}`}>
+                    {interaction.uniProtAccession}
+                  </Link>
+                )}
+              </div>
+            ))
+          )}
+        </Fragment>
+      )
+    );
+  },
+});
 // cc:subunit ,
 // cc:developmental_stage ,
 // cc:induction ,
@@ -510,8 +658,36 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
-// mapped_pm_id ,
-// pm_id ,
+ColumnConfiguration.set(Column.pmId, {
+  label: 'PubMed ID',
+  render: data => {
+    let ids: Xref[] = [];
+    if (data.references) {
+      ids = data.references.reduce<Xref[]>((acc, citation) => {
+        const xrefs = citation.citation.citationXrefs;
+        return xrefs
+          ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
+          : acc;
+      }, []);
+    }
+    return (
+      <ExpandableList>
+        {ids.map(xref => ({
+          id: xref.id,
+          content: <Link to={`citations/${xref.id}`}>{xref.id}</Link>,
+        }))}
+      </ExpandableList>
+    );
+  },
+});
+ColumnConfiguration.set(Column.mappedPmId, {
+  label: 'Mapped PubMed ID',
+  render: () => {
+    // TODO This is currently not implemented in the backend see TRM-23257
+    // depending on the format, this could use the same processing as PubMed ID
+    return '';
+  },
+});
 ColumnConfiguration.set(Column.dateCreate, {
   label: 'Date Created',
   render: data => {
@@ -548,359 +724,75 @@ ColumnConfiguration.set(
 // cc:domain ,
 ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
 ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
-// protein_families ,
+ColumnConfiguration.set(Column.proteinFamilies, {
+  label: 'Protein Families',
+  render: data => {
+    // TODO this actually seems to be a subset of this with a query on link?
+    // Could maybe be removed
+    const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
+      CommentType.SIMILARITY
+    ) as FreeTextComment[];
+    return familiesData && <FreeTextView comments={familiesData} />;
+  },
+});
 ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
 ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
-// cc:similarity ,
+ColumnConfiguration.set(Column.ccSimilarity, {
+  label: 'Sequence Similarities',
+  render: data => {
+    const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
+      CommentType.SIMILARITY
+    ) as FreeTextComment[];
+    return familiesData && <FreeTextView comments={familiesData} />;
+  },
+});
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-// tl:all ,
-// tl:class ,
-// tl:cohort ,
-// tl:family ,
-// tl:forma ,
-// tl:genus ,
-// tl:infraclass ,
-// tl:infraorder ,
-// tl:kingdom ,
-// tl:order ,
-// tl:parvorder ,
-// tl:phylum ,
-// tl:species ,
-// tl:species_group ,
-// tl:species_subgroup ,
-// tl:subclass ,
-// tl:subcohort ,
-// tl:subfamily ,
-// tl:subgenus ,
-// tl:subkingdom ,
-// tl:suborder ,
-// tl:subphylum ,
-// tl:subspecies ,
-// tl:subtribe ,
-// tl:superclass ,
-// tl:superfamily ,
-// tl:superkingdom ,
-// tl:superorder ,
-// tl:superphylum ,
-// tl:tribe ,
-// tl:varietas ,
+// lineage
 // tax_id ,
 
-// dr:embl ,
-// dr:ccds ,
-// dr:pir ,
-// dr:refseq ,
-// dr:pdb ,
-// dr:pdbsum ,
-// dr:smr ,
-// dr:biogrid ,
-// dr:complexportal ,
-// dr:corum ,
-// dr:dip ,
-// dr:elm ,
-// dr:intact ,
-// dr:mint ,
-// dr:string ,
-// dr:bindingdb ,
-// dr:chembl ,
-// dr:drugbank ,
-// dr:guidetopharmacology ,
-// dr:swisslipids ,
-// dr:drugcentral ,
-// dr:allergome ,
-// dr:cazy ,
-// dr:esther ,
-// dr:imgt_gene-db ,
-// dr:merops ,
-// dr:moondb ,
-// dr:moonprot ,
-// dr:mycoclap ,
-// dr:peroxibase ,
-// dr:rebase ,
-// dr:tcdb ,
-// dr:unilectin ,
-// dr:carbonyldb ,
-// dr:depod ,
-// dr:glyconnect ,
-// dr:iptmnet ,
-// dr:phosphositeplus ,
-// dr:swisspalm ,
-// dr:unicarbkb ,
-// dr:biomuta ,
-// dr:dmdm ,
-// dr:dbsnp ,
-// dr:compluyeast-2dpage ,
-// dr:dosac-cobs-2dpage ,
-// dr:ogp ,
-// dr:reproduction-2dpage ,
-// dr:swiss-2dpage ,
-// dr:ucd-2dpage ,
-// dr:world-2dpage ,
-// dr:cptac ,
-// dr:epd ,
-// dr:maxqb ,
-// dr:paxdb ,
-// dr:peptideatlas ,
-// dr:pride ,
-// dr:promex ,
-// dr:proteomicsdb ,
-// dr:topdownproteomics ,
-// dr:jpost ,
-// dr:massive ,
-// dr:dnasu ,
-// dr:abcd ,
-// dr:ensembl ,
-// dr:ensemblbacteria ,
-// dr:ensemblfungi ,
-// dr:ensemblmetazoa ,
-// dr:ensemblplants ,
-// dr:ensemblprotists ,
-// dr:genedb ,
-// dr:geneid ,
-// dr:gramene ,
-// dr:kegg ,
-// dr:patric ,
-// dr:ucsc ,
-// dr:vectorbase ,
-// dr:wbparasite ,
-// dr:arachnoserver ,
-// dr:araport ,
-// dr:cgd ,
-// dr:conoserver ,
-// dr:ctd ,
-// dr:dictybase ,
-// dr:disgenet ,
-// dr:echobase ,
-// dr:ecogene ,
-// dr:euhcvdb ,
-// dr:eupathdb ,
-// dr:flybase ,
-// dr:genecards ,
-// dr:genereviews ,
-// dr:hgnc ,
-// dr:hpa ,
-// dr:legiolist ,
-// dr:leproma ,
-// dr:maizegdb ,
-// dr:malacards ,
-// dr:mgi ,
-// dr:mim ,
-// dr:niagads ,
-// dr:nextprot ,
-// dr:opentargets ,
-// dr:orphanet ,
-// dr:pharmgkb ,
-// dr:pombase ,
-// dr:pseudocap ,
-// dr:rgd ,
-// dr:sgd ,
-// dr:tair ,
-// dr:tuberculist ,
-// dr:vgnc ,
-// dr:wormbase ,
-// dr:xenbase ,
-// dr:zfin ,
-// dr:eggnog ,
-// dr:genetree ,
-// dr:hogenom ,
-// dr:inparanoid ,
-// dr:ko ,
-// dr:oma ,
-// dr:orthodb ,
-// dr:phylomedb ,
-// dr:treefam ,
-// dr:biocyc ,
-// dr:brenda ,
-// dr:reactome ,
-// dr:sabio-rk ,
-// dr:signalink ,
-// dr:signor ,
-// dr:unipathway ,
-// dr:plantreactome ,
-// dr:chitars ,
-// dr:evolutionarytrace ,
-// dr:genewiki ,
-// dr:genomernai ,
-// dr:pmap-cutdb ,
-// dr:pro ,
-// dr:pharos ,
-// dr:bgee ,
-// dr:cleanex ,
-// dr:collectf ,
-// dr:expressionatlas ,
-// dr:genevisible ,
-// dr:disprot ,
-// dr:cdd ,
-// dr:gene3d ,
-// dr:hamap ,
-// dr:interpro ,
-// dr:panther ,
-// dr:pfam ,
-// dr:pirsf ,
-// dr:prints ,
-// dr:prodom ,
-// dr:sfld ,
-// dr:smart ,
-// dr:supfam ,
-// dr:tigrfams ,
-// dr:prosite ,
-// dr:embl ,
-// dr:ccds ,
-// dr:pir ,
-// dr:refseq ,
-// dr:pdb ,
-// dr:pdbsum ,
-// dr:smr ,
-// dr:biogrid ,
-// dr:complexportal ,
-// dr:corum ,
-// dr:dip ,
-// dr:elm ,
-// dr:intact ,
-// dr:mint ,
-// dr:string ,
-// dr:bindingdb ,
-// dr:chembl ,
-// dr:drugbank ,
-// dr:guidetopharmacology ,
-// dr:swisslipids ,
-// dr:drugcentral ,
-// dr:allergome ,
-// dr:cazy ,
-// dr:esther ,
-// dr:imgt_gene-db ,
-// dr:merops ,
-// dr:moondb ,
-// dr:moonprot ,
-// dr:mycoclap ,
-// dr:peroxibase ,
-// dr:rebase ,
-// dr:tcdb ,
-// dr:unilectin ,
-// dr:carbonyldb ,
-// dr:depod ,
-// dr:glyconnect ,
-// dr:iptmnet ,
-// dr:phosphositeplus ,
-// dr:swisspalm ,
-// dr:unicarbkb ,
-// dr:biomuta ,
-// dr:dmdm ,
-// dr:dbsnp ,
-// dr:compluyeast-2dpage ,
-// dr:dosac-cobs-2dpage ,
-// dr:ogp ,
-// dr:reproduction-2dpage ,
-// dr:swiss-2dpage ,
-// dr:ucd-2dpage ,
-// dr:world-2dpage ,
-// dr:cptac ,
-// dr:epd ,
-// dr:maxqb ,
-// dr:paxdb ,
-// dr:peptideatlas ,
-// dr:pride ,
-// dr:promex ,
-// dr:proteomicsdb ,
-// dr:topdownproteomics ,
-// dr:jpost ,
-// dr:massive ,
-// dr:dnasu ,
-// dr:abcd ,
-// dr:ensembl ,
-// dr:ensemblbacteria ,
-// dr:ensemblfungi ,
-// dr:ensemblmetazoa ,
-// dr:ensemblplants ,
-// dr:ensemblprotists ,
-// dr:genedb ,
-// dr:geneid ,
-// dr:gramene ,
-// dr:kegg ,
-// dr:patric ,
-// dr:ucsc ,
-// dr:vectorbase ,
-// dr:wbparasite ,
-// dr:arachnoserver ,
-// dr:araport ,
-// dr:cgd ,
-// dr:conoserver ,
-// dr:ctd ,
-// dr:dictybase ,
-// dr:disgenet ,
-// dr:echobase ,
-// dr:ecogene ,
-// dr:euhcvdb ,
-// dr:eupathdb ,
-// dr:flybase ,
-// dr:genecards ,
-// dr:genereviews ,
-// dr:hgnc ,
-// dr:hpa ,
-// dr:legiolist ,
-// dr:leproma ,
-// dr:maizegdb ,
-// dr:malacards ,
-// dr:mgi ,
-// dr:mim ,
-// dr:niagads ,
-// dr:nextprot ,
-// dr:opentargets ,
-// dr:orphanet ,
-// dr:pharmgkb ,
-// dr:pombase ,
-// dr:pseudocap ,
-// dr:rgd ,
-// dr:sgd ,
-// dr:tair ,
-// dr:tuberculist ,
-// dr:vgnc ,
-// dr:wormbase ,
-// dr:xenbase ,
-// dr:zfin ,
-// dr:eggnog ,
-// dr:genetree ,
-// dr:hogenom ,
-// dr:inparanoid ,
-// dr:ko ,
-// dr:oma ,
-// dr:orthodb ,
-// dr:phylomedb ,
-// dr:treefam ,
-// dr:biocyc ,
-// dr:brenda ,
-// dr:reactome ,
-// dr:sabio-rk ,
-// dr:signalink ,
-// dr:signor ,
-// dr:unipathway ,
-// dr:plantreactome ,
-// dr:chitars ,
-// dr:evolutionarytrace ,
-// dr:genewiki ,
-// dr:genomernai ,
-// dr:pmap-cutdb ,
-// dr:pro ,
-// dr:pharos ,
-// dr:bgee ,
-// dr:cleanex ,
-// dr:collectf ,
-// dr:expressionatlas ,
-// dr:genevisible ,
-// dr:disprot ,
-// dr:cdd ,
-// dr:gene3d ,
-// dr:hamap ,
-// dr:interpro ,
-// dr:panther ,
-// dr:pfam ,
-// dr:pirsf ,
-// dr:prints ,
-// dr:prodom ,
-// dr:sfld ,
-// dr:smart ,
-// dr:supfam ,
-// dr:tigrfams ,
-// dr:prosite
+const getXrefColumn = (databaseName: string) => ({
+  label: `${databaseName} cross-reference`,
+  render: (data: UniProtkbUIModel) => {
+    // Get the entry section for the database name
+    const entrySection = getDatabaseNameToEntrySection(databaseName);
+    if (!entrySection) {
+      return undefined;
+    }
+    const { xrefData } = data[entrySection];
+    // Get the category for the database name in the section
+    const category = xrefData.find(
+      xrefCategory =>
+        xrefCategory.category === databaseNameToCategory.get(databaseName)
+    );
+    if (!category) {
+      return undefined;
+    }
+    // Get the database based on the name
+    const database = category.databases.find(
+      databaseGroup => databaseGroup.database === databaseName
+    );
+    return (
+      database && (
+        <XrefCategoryContent
+          database={database}
+          primaryAccession={data.primaryAccession}
+        />
+      )
+    );
+  },
+});
+
+// Add all database cross-reference columns
+Object.values(Column)
+  .filter(col => col.startsWith('dr_'))
+  .forEach(colName => {
+    const databaseInfo = getDatabaseInfoByName(colName.substring(3));
+    if (!databaseInfo || !databaseInfo.name) {
+      /* eslint-disable no-console */
+      console.error(`No database found for ${colName}`);
+      return;
+    }
+    ColumnConfiguration.set(colName, getXrefColumn(databaseInfo.name));
+  });
 
 export default ColumnConfiguration;

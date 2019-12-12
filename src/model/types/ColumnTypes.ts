@@ -261,7 +261,7 @@ export enum Column {
   phDependence = 'ph_dependence',
   pmId = 'pm_id',
   proteinExistence = 'protein_existence',
-  proteinFamilies = 'protein_families',
+  proteinFamilies = 'family',
   proteinName = 'protein_name',
   redoxPotential = 'redox_potential',
   reviewed = 'reviewed',

@@ -71,6 +71,7 @@ const featuresCategories = [
 const commentsCategories = [
   CommentType.FUNCTION,
   CommentType.CATALYTIC_ACTIVITY,
+  CommentType.ACTIVITY_REGULATION,
   CommentType.BIOPHYSICOCHEMICAL_PROPERTIES,
   CommentType.PATHWAY,
   CommentType.MISCELLANEOUS,

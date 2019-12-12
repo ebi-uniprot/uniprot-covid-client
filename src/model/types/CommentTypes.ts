@@ -92,7 +92,7 @@ export type CatalyticActivityComment = {
   commentType: CommentType.CATALYTIC_ACTIVITY;
   reaction?: {
     name: string;
-    reactionReferences: { databaseType: string; id: string }[];
+    reactionReferences?: { databaseType: string; id: string }[];
     ecNumber: string;
     evidences?: Evidence[];
   };
@@ -132,7 +132,7 @@ export type DiseaseComment = {
   note?: { texts?: { value?: string }[] };
 };
 
-enum InteractionType {
+export enum InteractionType {
   SELF = 'SELF',
   XENO = 'XENO',
   BINARY = 'BINARY',

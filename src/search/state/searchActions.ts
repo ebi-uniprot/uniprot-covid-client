@@ -29,6 +29,7 @@ export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 export const UPDATE_CLAUSES = 'UPDATE_CLAUSES';
 export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 export const RESET = 'RESET';
+export const RESET_SEARCH_INPUT = 'RESET_SEARCH_INPUT';
 
 export const selectSearchTerm = (
   clauseId: string,
@@ -161,3 +162,5 @@ export const updateQueryString = (queryString: string) =>
   });
 
 export const reset = () => action(RESET);
+
+export const resetSearchInput = () => action(RESET_SEARCH_INPUT);
