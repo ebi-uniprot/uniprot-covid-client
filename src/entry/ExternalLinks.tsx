@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { v1 } from 'uuid';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import XRefView from '../view/uniprotkb/components/XRefView';
@@ -11,7 +10,7 @@ import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
 
 type ExternalLinksProps = {
   transformedData: UniProtkbUIModel;
-} & RouteComponentProps;
+};
 
 export type ExternalLinks = {
   xrefData: XrefUIModel[];
@@ -65,4 +64,4 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({ transformedData }) => {
   );
 };
 
-export default withRouter(ExternalLinks);
+export default ExternalLinks;

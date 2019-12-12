@@ -1,6 +1,5 @@
 import React, { Fragment, memo } from 'react';
 import { Card, DownloadIcon } from 'franklin-sites';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
@@ -8,7 +7,7 @@ import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
 
 type MainProps = {
   transformedData: UniProtkbUIModel;
-} & RouteComponentProps;
+};
 
 function arePropsEqual(prevProps: MainProps, nextProps: MainProps) {
   // Do NOT re-render the page, as long as the 'accession' value is the same.
@@ -52,4 +51,4 @@ const Main: React.FC<MainProps> = ({ transformedData }) => (
   </Fragment>
 );
 
-export default withRouter(memo(Main, arePropsEqual));
+export default memo(Main, arePropsEqual);
