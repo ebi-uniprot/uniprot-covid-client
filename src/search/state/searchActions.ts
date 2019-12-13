@@ -9,6 +9,7 @@ import {
   Operator,
   Evidence,
   Clause,
+  dataType,
 } from '../types/searchTypes';
 import { RootState } from '../../state/state-types';
 
@@ -38,6 +39,12 @@ export const selectSearchTerm = (
   action(SELECT_SEARCH_TERM, {
     clauseId,
     searchTerm,
+    queryInput:
+      searchTerm.dataType === dataType.enum &&
+      searchTerm.values &&
+      searchTerm.values.length
+        ? { stringValue: searchTerm.values[0].value }
+        : {},
   });
 
 export const updateInputValue = (
