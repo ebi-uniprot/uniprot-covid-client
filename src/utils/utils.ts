@@ -92,3 +92,5 @@ export const groupBy = (list: any[], keyGetter: Function) => {
   });
   return map;
 };
+
+export const removeDuplicates = (list: any[]) => Array.from(new Set(list));
