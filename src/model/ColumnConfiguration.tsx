@@ -289,8 +289,6 @@ ColumnConfiguration.set(Column.organismHost, {
     );
   },
 });
-
-// TODO split isoforms from main sequence view
 ColumnConfiguration.set(Column.ccAlternativeProducts, {
   label: 'Alternative Products',
   render: data => {
@@ -691,6 +689,10 @@ ColumnConfiguration.set(Column.ccTissueSpecificity, {
 // go ,
 // go_f ,
 // go_id ,
+// cc:subcellular_location ,
+// 3d ,
+// cc:domain ,
+// cc:ptm ,
 ColumnConfiguration.set(Column.ccAllergen, {
   label: 'Allergenic Properties',
   render: data => {
@@ -760,7 +762,6 @@ ColumnConfiguration.set(
   Column.ftIntramem,
   getFeatureColumn(FeatureType.INTRAMEM)
 );
-// cc:subcellular_location ,
 ColumnConfiguration.set(
   Column.ftTopDom,
   getFeatureColumn(FeatureType.TOPO_DOM)
@@ -792,14 +793,12 @@ ColumnConfiguration.set(
   Column.ftPeptide,
   getFeatureColumn(FeatureType.PEPTIDE)
 );
-// cc:ptm ,
 ColumnConfiguration.set(Column.ftPropep, getFeatureColumn(FeatureType.PROPEP));
 ColumnConfiguration.set(Column.ftSignal, getFeatureColumn(FeatureType.SIGNAL));
 ColumnConfiguration.set(
   Column.ftTransit,
   getFeatureColumn(FeatureType.TRANSIT)
 );
-// 3d ,
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
@@ -863,7 +862,6 @@ ColumnConfiguration.set(
   Column.ftCompbias,
   getFeatureColumn(FeatureType.COMPBIAS)
 );
-// cc:domain ,
 ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
 ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
 ColumnConfiguration.set(Column.proteinFamilies, {
