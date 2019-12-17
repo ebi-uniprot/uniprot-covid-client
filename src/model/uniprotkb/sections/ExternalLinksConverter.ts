@@ -23,13 +23,6 @@ const convertExternalLinks = (data: UniProtkbAPIModel) => {
     );
   }
 
-  if (databaseCrossReferences) {
-    convertedData.xrefData = flattenArrays(
-      UniProtKBEntryConfig.map(({ name }) =>
-        getXrefsForSection(databaseCrossReferences, name)
-      )
-    );
-  }
   return convertedData;
 };
 export default convertExternalLinks;

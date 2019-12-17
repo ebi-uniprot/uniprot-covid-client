@@ -16,8 +16,8 @@ import uniProtKbConverter, {
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 import EntrySection from '../model/types/EntrySection';
-import Main from './Main';
-import ExternalLinks from './ExternalLinks';
+import EntryMain from './EntryMain';
+import EntryExternalLinks from './EntryExternalLinks';
 
 type MatchParams = {
   accession: string;
@@ -51,12 +51,14 @@ const Entry: React.FC<EntryProps> = ({ match, history }) => {
         <Switch>
           <Route
             path={`${match.url}/`}
-            render={() => <Main transformedData={transformedData} />}
+            render={() => <EntryMain transformedData={transformedData} />}
             exact
           />
           <Route
             path={`${match.url}/external-links`}
-            render={() => <ExternalLinks transformedData={transformedData} />}
+            render={() => (
+              <EntryExternalLinks transformedData={transformedData} />
+            )}
           />
         </Switch>
       </Router>

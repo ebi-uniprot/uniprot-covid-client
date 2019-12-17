@@ -5,11 +5,11 @@ import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewVie
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
 
-type MainProps = {
+type EntryMainProps = {
   transformedData: UniProtkbUIModel;
 };
 
-function arePropsEqual(prevProps: MainProps, nextProps: MainProps) {
+function arePropsEqual(prevProps: EntryMainProps, nextProps: EntryMainProps) {
   // Do NOT re-render the page, as long as the 'accession' value is the same.
   return (
     prevProps.transformedData.primaryAccession ===
@@ -17,7 +17,7 @@ function arePropsEqual(prevProps: MainProps, nextProps: MainProps) {
   );
 }
 
-const Main: React.FC<MainProps> = ({ transformedData }) => (
+const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
     <div className="button-group">
       <button type="button" className="button link-button">
@@ -51,4 +51,4 @@ const Main: React.FC<MainProps> = ({ transformedData }) => (
   </Fragment>
 );
 
-export default memo(Main, arePropsEqual);
+export default memo(EntryMain, arePropsEqual);

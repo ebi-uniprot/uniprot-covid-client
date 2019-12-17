@@ -5,7 +5,7 @@ import './styles/SideBarLayout.scss';
 type SideBarLayoutProps = {
   title?: JSX.Element;
   sidebar: JSX.Element;
-  children: (string | JSX.Element)[] | JSX.Element;
+  children: JSX.Element;
   invert?: boolean;
 };
 

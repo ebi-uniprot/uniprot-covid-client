@@ -8,11 +8,11 @@ import { hasContent } from '../model/utils/utils';
 import { XrefUIModel } from '../model/utils/XrefUtils';
 import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
 
-type ExternalLinksProps = {
+type EntryExternalLinksProps = {
   transformedData: UniProtkbUIModel;
 };
 
-export type ExternalLinks = {
+export type EntryExternalLinks = {
   xrefData: XrefUIModel[];
 };
 
@@ -31,7 +31,9 @@ const WebResourceLink: React.FC<WebResourceLinkProps> = ({ comment }) => {
   );
 };
 
-const ExternalLinks: React.FC<ExternalLinksProps> = ({ transformedData }) => {
+const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
+  transformedData,
+}) => {
   const {
     [EntrySection.ExternalLinks]: data,
     primaryAccession,
@@ -64,4 +66,4 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({ transformedData }) => {
   );
 };
 
-export default ExternalLinks;
+export default EntryExternalLinks;
