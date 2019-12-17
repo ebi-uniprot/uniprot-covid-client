@@ -171,7 +171,7 @@ const VariationView: FC<{
     [data]
   );
 
-  if (!data.sequence) {
+  if (!data.sequence || data.features.length <= 0) {
     return null;
   }
 
