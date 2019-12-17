@@ -7,7 +7,9 @@ const hasContent = (obj: any) => {
     }
     if (typeof val === 'object' && val) {
       if (val instanceof Map) {
-        return Array.from(val.entries()).some(entry => entry.length > 0);
+        return Array.from(val.values()).some(
+          value => value && value.length > 0
+        );
       }
       return Object.values(val).length > 0;
     }
