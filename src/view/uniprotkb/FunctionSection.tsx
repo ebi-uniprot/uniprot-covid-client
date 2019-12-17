@@ -155,7 +155,7 @@ const FunctionSection: FC<{
           cofactors={
             data.commentsData.get(CommentType.COFACTOR) as CofactorComment[]
           }
-          title={CommentType.COFACTOR.toLocaleLowerCase()}
+          title={CommentType.COFACTOR.toLowerCase()}
         />
         <FreeTextView
           comments={
