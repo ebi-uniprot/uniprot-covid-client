@@ -9,6 +9,7 @@ describe('DiseaseInvolvement', () => {
       <DiseaseInvolvement
         comments={DiseaseInvolvementUIDataJson}
         primaryAccession="P05067"
+        includeTitle
       />
     );
     expect(asFragment()).toMatchSnapshot();

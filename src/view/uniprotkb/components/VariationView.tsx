@@ -155,8 +155,8 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
 const VariationView: FC<{
   primaryAccession: string;
   title?: string;
-  noTable?: boolean;
-}> = ({ primaryAccession, title, noTable }) => {
+  hasTable?: boolean;
+}> = ({ primaryAccession, title, hasTable = true }) => {
   const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
 
   const setTrackData = useCallback(
@@ -179,7 +179,7 @@ const VariationView: FC<{
     <div>
       {title && <h4>{title}</h4>}
       <protvista-manager attributes="highlight displaystart displayend activefilters filters">
-        {!noTable && (
+        {hasTable && (
           <div className="variation-view">
             <protvista-navigation length={data.sequence.length} />
             <protvista-sequence

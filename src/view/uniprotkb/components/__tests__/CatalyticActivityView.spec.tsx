@@ -12,7 +12,10 @@ import { removeProperty } from '../../../../utils/utils';
 describe('CatalyticActivityView component', () => {
   test('should render catalytic activity', () => {
     const { asFragment } = render(
-      <CatalyticActivityView comments={catalyticActivityUIDataJson} />
+      <CatalyticActivityView
+        comments={catalyticActivityUIDataJson}
+        title="Catalytic activity"
+      />
     );
     expect(asFragment()).toMatchSnapshot();
   });

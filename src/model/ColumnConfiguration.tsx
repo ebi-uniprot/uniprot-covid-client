@@ -362,7 +362,7 @@ ColumnConfiguration.set(Column.ccMassSpectrometry, {
 ColumnConfiguration.set(Column.ftVariant, {
   label: 'Variants',
   render: data => (
-    <VariationView primaryAccession={data.primaryAccession} noTable />
+    <VariationView primaryAccession={data.primaryAccession} hasTable={false} />
   ),
 });
 
