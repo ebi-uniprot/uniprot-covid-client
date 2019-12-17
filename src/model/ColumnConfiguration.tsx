@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
-import { ExpandableList } from 'franklin-sites';
+import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
 import { Link } from 'react-router-dom';
 
 import SimpleView from '../view/uniprotkb/components/SimpleView';
 import ProteinNamesView, {
-  NameWithEvidence,
+  ECNumbersView,
 } from '../view/uniprotkb/components/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
@@ -24,6 +24,7 @@ import {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
+  IsoformView,
 } from '../view/uniprotkb/components/SequenceView';
 import { Flag } from './uniprotkb/sections/SequenceConverter';
 import FeatureType from './types/FeatureType';
@@ -33,8 +34,12 @@ import FreeTextView, {
 import {
   AbsorptionView,
   KineticsView,
+  CofactorView,
 } from '../view/uniprotkb/FunctionSection';
-import { FunctionUIModel } from './uniprotkb/sections/FunctionConverter';
+import {
+  FunctionUIModel,
+  CofactorComment,
+} from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
   CommentType,
@@ -42,6 +47,8 @@ import {
   Xref,
   InteractionComment,
   InteractionType,
+  DiseaseComment,
+  CatalyticActivityComment,
 } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
@@ -56,6 +63,9 @@ import {
   getDatabaseNameToEntrySection,
   getDatabaseInfoByName,
 } from '../data/database';
+import DiseaseInvolvementView from '../view/uniprotkb/components/DiseaseInvolvementView';
+import CatalyticActivityView from '../view/uniprotkb/components/CatalyticActivityView';
+import VariationView from '../view/uniprotkb/components/VariationView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -87,7 +97,7 @@ ColumnConfiguration.set(Column.accession, {
   sortable: true,
   render: (data: { primaryAccession: string; entryType: string }) => (
     <SimpleView
-      termValue={`${data.primaryAccession} (${data.entryType})`}
+      termValue={data.primaryAccession}
       linkTo={`/uniprotkb/${data.primaryAccession}`}
     />
   ),
@@ -137,8 +147,11 @@ ColumnConfiguration.set(Column.organism, {
 ColumnConfiguration.set(Column.length, {
   label: 'Length',
   render: data => {
-    const { sequence } = data[EntrySection.Sequence];
-    return sequence && numberView({ value: sequence.length, unit: Unit.AA });
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      sequenceData.sequence &&
+      numberView({ value: sequenceData.sequence.length, unit: Unit.AA })
+    );
   },
 });
 
@@ -276,9 +289,33 @@ ColumnConfiguration.set(Column.organismHost, {
     );
   },
 });
+ColumnConfiguration.set(Column.ccAlternativeProducts, {
+  label: 'Alternative Products',
+  render: data => {
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      sequenceData.alternativeProducts && (
+        <IsoformView
+          alternativeProducts={sequenceData.alternativeProducts}
+          includeSequences={false}
+        />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.sequence, {
+  label: 'Sequence',
+  render: data => {
+    const sequenceData = data[EntrySection.Sequence];
+    return (
+      <Sequence
+        sequence={sequenceData.sequence.value}
+        id={data.primaryAccession}
+      />
+    );
+  },
+});
 
-// TODO split isoforms from main sequence view
-// cc:alternative_products ,
 ColumnConfiguration.set(Column.ftVarSeq, {
   label: 'Alternative sequence',
   render: data => {
@@ -322,7 +359,13 @@ ColumnConfiguration.set(Column.ccMassSpectrometry, {
   },
 });
 
-// ft:variant ,
+ColumnConfiguration.set(Column.ftVariant, {
+  label: 'Variants',
+  render: data => (
+    <VariationView primaryAccession={data.primaryAccession} hasTable={false} />
+  ),
+});
+
 ColumnConfiguration.set(
   Column.ftNonCon,
   getFeatureColumn(FeatureType.NON_CONS)
@@ -345,7 +388,6 @@ ColumnConfiguration.set(Column.ccRnaEditing, {
     return rnaEditing && <RNAEditingView data={rnaEditing} />;
   },
 });
-// sequence ,
 ColumnConfiguration.set(Column.errorGmodelPred, {
   label: 'Sequence Caution',
   render: data => {
@@ -388,8 +430,30 @@ ColumnConfiguration.set(
   getFeatureColumn(FeatureType.BINDING)
 );
 ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
-// cc:catalytic_activity ,
-// cc:cofactor ,
+ColumnConfiguration.set(Column.ccCatalyticActivity, {
+  label: 'Catalytic Activity',
+  render: data => {
+    const catalyticActivityComments = data[
+      EntrySection.Function
+    ].commentsData.get(
+      CommentType.CATALYTIC_ACTIVITY
+    ) as CatalyticActivityComment[];
+    return (
+      catalyticActivityComments && (
+        <CatalyticActivityView comments={catalyticActivityComments} />
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccCofactor, {
+  label: 'Cofactor',
+  render: data => {
+    const cofactorComments = data[EntrySection.Function].commentsData.get(
+      CommentType.COFACTOR
+    ) as CofactorComment[];
+    return cofactorComments && <CofactorView cofactors={cofactorComments} />;
+  },
+});
 ColumnConfiguration.set(
   Column.ftDnaBind,
   getFeatureColumn(FeatureType.DNA_BIND)
@@ -402,21 +466,11 @@ ColumnConfiguration.set(Column.ec, {
       proteinNamesData,
       proteinName => proteinName.recommendedName.ecNumbers
     ) as ValueWithEvidence[];
-    return (
-      ecNumbers && (
-        <Fragment>
-          {ecNumbers.map(ecNumber => (
-            <NameWithEvidence data={ecNumber} key={ecNumber.value} />
-          ))}
-        </Fragment>
-      )
-    );
+    return ecNumbers && <ECNumbersView ecNumbers={ecNumbers} />;
   },
 });
-// ec ,
-// "cc_activity_regulation"
-ColumnConfiguration.set(Column.ccEnzymeRegulation, {
-  label: 'Enzyme Regulation',
+ColumnConfiguration.set(Column.ccActivityRegulation, {
+  label: 'Activity Regulation',
   render: data => {
     const activityRegulationComments = data[
       EntrySection.Function
@@ -560,7 +614,7 @@ ColumnConfiguration.set(Column.reviewed, {
 // tools: UX review is this needed?? ,
 // uniparc_id: leo re-indexing today 02/12/2019,
 ColumnConfiguration.set(Column.ccInteraction, {
-  label: '',
+  label: 'Interacts with',
   render: data => {
     const interactionComments = data[EntrySection.Interaction].commentsData.get(
       CommentType.INTERACTION
@@ -592,30 +646,122 @@ ColumnConfiguration.set(Column.ccInteraction, {
     );
   },
 });
-// cc:subunit ,
-// cc:developmental_stage ,
-// cc:induction ,
-// cc:tissue_specificity ,
+ColumnConfiguration.set(Column.ccSubunit, {
+  label: 'Subunit structure',
+  render: data => {
+    const subunitComments = data[EntrySection.Interaction].commentsData.get(
+      CommentType.SUBUNIT
+    ) as FreeTextComment[];
+    return subunitComments && <FreeTextView comments={subunitComments} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDevelopmentalStage, {
+  label: 'Developmental stage',
+  render: data => {
+    const developmentComments = data[EntrySection.Expression].commentsData.get(
+      CommentType.DEVELOPMENTAL_STAGE
+    ) as FreeTextComment[];
+    return (
+      developmentComments && <FreeTextView comments={developmentComments} />
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccInduction, {
+  label: 'Induction',
+  render: data => {
+    const inductionComments = data[EntrySection.Expression].commentsData.get(
+      CommentType.INDUCTION
+    ) as FreeTextComment[];
+    return inductionComments && <FreeTextView comments={inductionComments} />;
+  },
+});
+ColumnConfiguration.set(Column.ccTissueSpecificity, {
+  label: 'Tissue Specificity',
+  render: data => {
+    const tissueComment = data[EntrySection.Expression].commentsData.get(
+      CommentType.TISSUE_SPECIFICITY
+    ) as FreeTextComment[];
+    return tissueComment && <FreeTextView comments={tissueComment} />;
+  },
+});
 // go_p ,
 // go_c ,
 // go ,
 // go_f ,
 // go_id ,
-// cc:allergen ,
-// cc:biotechnology ,
-// cc:disruption_phenotype ,
-// cc:disease ,
+// cc:subcellular_location ,
+// 3d ,
+// cc:domain ,
+// cc:ptm ,
+ColumnConfiguration.set(Column.ccAllergen, {
+  label: 'Allergenic Properties',
+  render: data => {
+    const allergenData = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.ALLERGEN) as FreeTextComment[];
+    return allergenData && <FreeTextView comments={allergenData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccBiotechnology, {
+  label: 'Biotechnological Use',
+  render: data => {
+    const biotechData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.BIOTECHNOLOGY
+    ) as FreeTextComment[];
+    return biotechData && <FreeTextView comments={biotechData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
+  label: 'Disruption Phenotype',
+  render: data => {
+    const disruptionData = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.DISRUPTION_PHENOTYPE) as FreeTextComment[];
+    return disruptionData && <FreeTextView comments={disruptionData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDisease, {
+  label: 'Disease Involvement',
+  render: data => {
+    const diseaseComments = data[
+      EntrySection.PathologyAndBioTech
+    ].commentsData.get(CommentType.DISEASE) as DiseaseComment[];
+    return (
+      diseaseComments && (
+        <DiseaseInvolvementView
+          comments={diseaseComments}
+          primaryAccession={data.primaryAccession}
+        />
+      )
+    );
+  },
+});
 ColumnConfiguration.set(
   Column.ftMutagen,
   getFeatureColumn(FeatureType.MUTAGEN)
 );
-// cc:pharmaceutical ,
-// cc:toxic_dose ,
+ColumnConfiguration.set(Column.ccPharmaceutical, {
+  label: 'Pharmaceutical Use',
+  render: data => {
+    const pharmaData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.PHARMACEUTICAL
+    ) as FreeTextComment[];
+    return pharmaData && <FreeTextView comments={pharmaData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccToxicDose, {
+  label: 'Toxic Dose',
+  render: data => {
+    const toxicData = data[EntrySection.PathologyAndBioTech].commentsData.get(
+      CommentType.TOXIC_DOSE
+    ) as FreeTextComment[];
+    return toxicData && <FreeTextView comments={toxicData} />;
+  },
+});
 ColumnConfiguration.set(
   Column.ftIntramem,
   getFeatureColumn(FeatureType.INTRAMEM)
 );
-// cc:subcellular_location ,
 ColumnConfiguration.set(
   Column.ftTopDom,
   getFeatureColumn(FeatureType.TOPO_DOM)
@@ -647,14 +793,12 @@ ColumnConfiguration.set(
   Column.ftPeptide,
   getFeatureColumn(FeatureType.PEPTIDE)
 );
-// cc:ptm ,
 ColumnConfiguration.set(Column.ftPropep, getFeatureColumn(FeatureType.PROPEP));
 ColumnConfiguration.set(Column.ftSignal, getFeatureColumn(FeatureType.SIGNAL));
 ColumnConfiguration.set(
   Column.ftTransit,
   getFeatureColumn(FeatureType.TRANSIT)
 );
-// 3d ,
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
@@ -718,7 +862,6 @@ ColumnConfiguration.set(
   Column.ftCompbias,
   getFeatureColumn(FeatureType.COMPBIAS)
 );
-// cc:domain ,
 ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
 ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
 ColumnConfiguration.set(Column.proteinFamilies, {
@@ -744,9 +887,19 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   },
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-// lineage
-// tax_id ,
-
+ColumnConfiguration.set(Column.taxId, {
+  label: 'Taxon ID',
+  render: data => {
+    const { organismData } = data[EntrySection.NamesAndTaxonomy];
+    return (
+      organismData && (
+        <Link to={`/taxonomy/${organismData.taxonId}`}>
+          {organismData.taxonId}
+        </Link>
+      )
+    );
+  },
+});
 const getXrefColumn = (databaseName: string) => ({
   label: `${databaseName} cross-reference`,
   render: (data: UniProtkbUIModel) => {

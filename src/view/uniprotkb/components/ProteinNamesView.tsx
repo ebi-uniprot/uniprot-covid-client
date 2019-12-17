@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { InfoList, ExpandableList } from 'franklin-sites';
 import { v1 } from 'uuid';
 import {
@@ -81,6 +81,22 @@ const ProteinDescriptionView: React.FC<{
   );
 };
 
+export const ECNumbersView: FC<{
+  ecNumbers: ValueWithEvidence[];
+  isCompact?: boolean;
+}> = ({ ecNumbers, isCompact = false }) => (
+  <Fragment>
+    {ecNumbers.map(
+      (ecNumber): JSX.Element =>
+        isCompact ? (
+          <Fragment key={v1()}>{ecNumber.value}</Fragment>
+        ) : (
+          <NameWithEvidence data={ecNumber} key={v1()} />
+        )
+    )}
+  </Fragment>
+);
+
 const getInfoListForNames = (
   name: ProteinNames,
   isCompact: boolean
@@ -101,16 +117,7 @@ const getInfoListForNames = (
     infoData.push({
       title: 'EC number',
       content: (
-        <Fragment>
-          {name.ecNumbers.map(
-            (ecNumber): JSX.Element =>
-              isCompact ? (
-                <Fragment key={v1()}>{ecNumber.value}</Fragment>
-              ) : (
-                <NameWithEvidence data={ecNumber} key={v1()} />
-              )
-          )}
-        </Fragment>
+        <ECNumbersView ecNumbers={name.ecNumbers} isCompact={isCompact} />
       ),
     });
   }

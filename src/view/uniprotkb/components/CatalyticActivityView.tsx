@@ -119,10 +119,12 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
 
 type CatalyticActivityProps = {
   comments?: CatalyticActivityComment[];
+  title?: string;
 };
 
 const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   comments,
+  title,
 }) => {
   if (!comments || comments.length <= 0) {
     return null;
@@ -130,7 +132,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   let firstRheaId: number | null = null;
   return (
     <Fragment>
-      <h4>Catalytic Activity</h4>
+      {title && <h4>{title}</h4>}
       {comments.map(({ reaction, physiologicalReactions }) => {
         if (!reaction) {
           return null;

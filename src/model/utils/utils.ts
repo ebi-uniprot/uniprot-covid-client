@@ -6,6 +6,11 @@ const hasContent = (obj: any) => {
       return valArray.length > 0;
     }
     if (typeof val === 'object' && val) {
+      if (val instanceof Map) {
+        return Array.from(val.values()).some(
+          value => value && value.length > 0
+        );
+      }
       return Object.values(val).length > 0;
     }
     return false;

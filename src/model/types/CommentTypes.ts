@@ -2,6 +2,7 @@ import { Evidence, Property } from './modelTypes';
 import {
   Absorption,
   KineticParameters,
+  CofactorComment,
 } from '../uniprotkb/sections/FunctionConverter';
 
 export enum CommentType {
@@ -231,6 +232,7 @@ type Comment =
   | RNAEditingComment
   | AbsorptionComment
   | KineticsComment
+  | CofactorComment
   | pHDependenceComment
   | RedoxPotentialComment
   | TemperatureDependenceComment;

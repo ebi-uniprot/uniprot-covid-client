@@ -6,6 +6,7 @@ import {
   RedoxPotentialComment,
   TemperatureDependenceComment,
   TextWithEvidence,
+  Xref,
 } from '../../types/CommentTypes';
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
@@ -29,6 +30,18 @@ export type KineticParameters = {
     unit: string;
     substrate: string;
     evidences: Evidence[];
+  }[];
+  note: {
+    texts: TextWithEvidence[];
+  };
+};
+
+export type CofactorComment = {
+  commentType: CommentType.COFACTOR;
+  cofactors?: {
+    name: string;
+    evidences?: Evidence[];
+    cofactorReference?: Xref;
   }[];
   note: {
     texts: TextWithEvidence[];
@@ -71,6 +84,7 @@ const featuresCategories = [
 const commentsCategories = [
   CommentType.FUNCTION,
   CommentType.CATALYTIC_ACTIVITY,
+  CommentType.COFACTOR,
   CommentType.ACTIVITY_REGULATION,
   CommentType.BIOPHYSICOCHEMICAL_PROPERTIES,
   CommentType.PATHWAY,
@@ -108,6 +122,9 @@ const convertFunction = (data: UniProtkbAPIModel) => {
       }
     });
   }
+  convertedSection.commentsData.delete(
+    CommentType.BIOPHYSICOCHEMICAL_PROPERTIES
+  );
   return convertedSection;
 };
 

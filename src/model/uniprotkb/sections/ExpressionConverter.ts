@@ -8,6 +8,7 @@ const keywordsCategories = [KeywordCategory.DEVELOPMENTAL_STAGE];
 
 const commentsCategories = [
   CommentType.TISSUE_SPECIFICITY,
+  CommentType.DEVELOPMENTAL_STAGE,
   CommentType.INDUCTION,
 ];
 
