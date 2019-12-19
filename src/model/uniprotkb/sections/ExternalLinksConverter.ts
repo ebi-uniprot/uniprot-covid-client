@@ -1,8 +1,5 @@
 import { UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
-import { getXrefsForSection } from '../../utils/XrefUtils';
-import UniProtKBEntryConfig from '../../../view/uniprotkb/UniProtEntryConfig';
-import { flattenArrays } from '../../../utils/utils';
 import { CommentType } from '../../types/CommentTypes';
 
 const convertExternalLinks = (data: UniProtkbAPIModel) => {
@@ -12,7 +9,7 @@ const convertExternalLinks = (data: UniProtkbAPIModel) => {
     featuresData: [],
     xrefData: [],
   };
-  const { comments, databaseCrossReferences } = data;
+  const { comments } = data;
 
   if (comments) {
     convertedData.commentsData.set(

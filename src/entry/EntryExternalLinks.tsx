@@ -4,9 +4,10 @@ import { v1 } from 'uuid';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import XRefView from '../view/uniprotkb/components/XRefView';
 import EntrySection from '../model/types/EntrySection';
-import { hasContent } from '../model/utils/utils';
-import { XrefUIModel } from '../model/utils/XrefUtils';
+import { XrefUIModel, XrefsGoupedByDatabase } from '../model/utils/XrefUtils';
 import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
+import { groupBy } from '../utils/utils';
+import { DatabaseCategory } from '../model/types/DatabaseTypes';
 
 type EntryExternalLinksProps = {
   transformedData: UniProtkbUIModel;
@@ -38,11 +39,39 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
     [EntrySection.ExternalLinks]: data,
     primaryAccession,
   } = transformedData;
-  if (!hasContent(data)) {
-    return null;
-  }
-
   const webResourceComments = data.commentsData.get(CommentType.WEB_RESOURCE);
+
+  // Merge all of the external links from the entry page sections
+  const databaseCategoryToXrefsGoupedByDatabase = new Map<
+    DatabaseCategory,
+    XrefsGoupedByDatabase[]
+  >();
+  Object.values(EntrySection).forEach(entrySection => {
+    transformedData[entrySection as EntrySection].xrefData.forEach(
+      ({ category, databases }) => {
+        const currentDatabases = databaseCategoryToXrefsGoupedByDatabase.get(
+          category
+        );
+        const newDatabases = currentDatabases
+          ? [...currentDatabases, ...databases]
+          : databases;
+        databaseCategoryToXrefsGoupedByDatabase.set(category, newDatabases);
+      }
+    );
+  });
+  const xrefData = Array.from(
+    databaseCategoryToXrefsGoupedByDatabase.entries()
+  ).map(([category, xrefsGoupedByDatabase]) => ({
+    category,
+    databases: Array.from(
+      groupBy(
+        xrefsGoupedByDatabase,
+        (xrefs: XrefsGoupedByDatabase) => xrefs.database
+      ).values()
+      // Only need the first entry as it assumed that each database
+      // list is the same across all of the sections
+    ).map(v => v[0]),
+  }));
 
   return (
     <div id={EntrySection.ExternalLinks}>
@@ -60,7 +89,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
             </ExpandableList>
           </Fragment>
         )}
-        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
+        <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
       </Card>
     </div>
   );
