@@ -34,7 +34,7 @@ exports[`Entry should render 1`] = `
             </a>
           </li>
           <li
-            class="in-page-nav--disabled"
+            class=""
           >
             <a
               href="#Subcellular Location"
@@ -1463,6 +1463,157 @@ exports[`Entry should render 1`] = `
             <h4>
               Proteome
             </h4>
+          </div>
+        </div>
+      </div>
+      <div
+        id="Subcellular Location"
+      >
+        <div
+          class="card "
+        >
+          <div
+            class="card__header"
+          >
+            <h3
+              class="card__title"
+            >
+              Subcellular Location
+            </h3>
+          </div>
+          <div
+            class="card__content"
+          >
+            <section
+              class="text-block"
+            >
+              <h4>
+                molecule value
+              </h4>
+              <div>
+                <strong>
+                  location value
+                </strong>
+                 
+                <span
+                  class="evidence-tag svg-colour-unreviewed"
+                  data-testid="evidence-tag-trigger"
+                  role="button"
+                  tabindex="0"
+                >
+                  <svg
+                    height="12"
+                    viewBox="0 0 400 512"
+                    width="12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      id="Shape"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    1 automatic annotation
+                  </span>
+                </span>
+                <div
+                  class="evidence-tag-content "
+                  data-testid="evidence-tag-content"
+                >
+                  <div>
+                    <h5>
+                      Automatic assertion according to rules
+                    </h5>
+                    <div>
+                      PIRNR:PIRNR001361
+                    </div>
+                  </div>
+                </div>
+                : topology value 
+                <span
+                  class="evidence-tag svg-colour-unreviewed"
+                  data-testid="evidence-tag-trigger"
+                  role="button"
+                  tabindex="0"
+                >
+                  <svg
+                    height="12"
+                    viewBox="0 0 400 512"
+                    width="12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      id="Shape"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    1 automatic annotation
+                  </span>
+                </span>
+                <div
+                  class="evidence-tag-content "
+                  data-testid="evidence-tag-content"
+                >
+                  <div>
+                    <h5>
+                      Automatic assertion according to rules
+                    </h5>
+                    <div>
+                      PIRNR:PIRNR001361
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <section
+                class="text-block"
+              >
+                value
+                <span
+                  class="evidence-tag svg-colour-unreviewed"
+                  data-testid="evidence-tag-trigger"
+                  role="button"
+                  tabindex="0"
+                >
+                  <svg
+                    height="12"
+                    viewBox="0 0 400 512"
+                    width="12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      id="Shape"
+                    />
+                  </svg>
+                  <span
+                    class="evidence-tag__label"
+                    title=""
+                  >
+                    1 automatic annotation
+                  </span>
+                </span>
+                <div
+                  class="evidence-tag-content "
+                  data-testid="evidence-tag-content"
+                >
+                  <div>
+                    <h5>
+                      Automatic assertion according to rules
+                    </h5>
+                    <div>
+                      PIRNR:PIRNR001361
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </section>
           </div>
         </div>
       </div>

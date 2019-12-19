@@ -1330,9 +1330,150 @@ exports[`ColumnConfiguration component should render all columns 60`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 61`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 62`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 62`] = `
+<DocumentFragment>
+  <section
+    class="text-block"
+  >
+    <h4>
+      molecule value
+    </h4>
+    <div>
+      <strong>
+        location value
+      </strong>
+       
+      <span
+        class="evidence-tag svg-colour-unreviewed"
+        data-testid="evidence-tag-trigger"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          height="12"
+          viewBox="0 0 400 512"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+            id="Shape"
+          />
+        </svg>
+        <span
+          class="evidence-tag__label"
+          title=""
+        >
+          1 automatic annotation
+        </span>
+      </span>
+      <div
+        class="evidence-tag-content "
+        data-testid="evidence-tag-content"
+      >
+        <div>
+          <h5>
+            Automatic assertion according to rules
+          </h5>
+          <div>
+            PIRNR:PIRNR001361
+          </div>
+        </div>
+      </div>
+      : topology value 
+      <span
+        class="evidence-tag svg-colour-unreviewed"
+        data-testid="evidence-tag-trigger"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          height="12"
+          viewBox="0 0 400 512"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+            id="Shape"
+          />
+        </svg>
+        <span
+          class="evidence-tag__label"
+          title=""
+        >
+          1 automatic annotation
+        </span>
+      </span>
+      <div
+        class="evidence-tag-content "
+        data-testid="evidence-tag-content"
+      >
+        <div>
+          <h5>
+            Automatic assertion according to rules
+          </h5>
+          <div>
+            PIRNR:PIRNR001361
+          </div>
+        </div>
+      </div>
+    </div>
+    <section
+      class="text-block"
+    >
+      value
+      <span
+        class="evidence-tag svg-colour-unreviewed"
+        data-testid="evidence-tag-trigger"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          height="12"
+          viewBox="0 0 400 512"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+            id="Shape"
+          />
+        </svg>
+        <span
+          class="evidence-tag__label"
+          title=""
+        >
+          1 automatic annotation
+        </span>
+      </span>
+      <div
+        class="evidence-tag-content "
+        data-testid="evidence-tag-content"
+      >
+        <div>
+          <h5>
+            Automatic assertion according to rules
+          </h5>
+          <div>
+            PIRNR:PIRNR001361
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</DocumentFragment>
+`;
 
-exports[`ColumnConfiguration component should render all columns 63`] = `
+exports[`ColumnConfiguration component should render all columns 63`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 64`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 65`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 66`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 67`] = `
 <DocumentFragment>
   <section
     class="text-block"
@@ -1379,7 +1520,7 @@ exports[`ColumnConfiguration component should render all columns 63`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 64`] = `
+exports[`ColumnConfiguration component should render all columns 68`] = `
 <DocumentFragment>
   <h4>
     Disease Id (someAcron)
@@ -1495,14 +1636,6 @@ exports[`ColumnConfiguration component should render all columns 64`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 65`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 66`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 67`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 68`] = `<DocumentFragment />`;
-
 exports[`ColumnConfiguration component should render all columns 69`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 70`] = `<DocumentFragment />`;
@@ -1535,7 +1668,15 @@ exports[`ColumnConfiguration component should render all columns 83`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 84`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 85`] = `
+exports[`ColumnConfiguration component should render all columns 85`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 86`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 87`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 88`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 89`] = `
 <DocumentFragment>
   <ul
     class="no-bullet"
@@ -1586,39 +1727,31 @@ exports[`ColumnConfiguration component should render all columns 85`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 86`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 90`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 87`] = `
+exports[`ColumnConfiguration component should render all columns 91`] = `
 <DocumentFragment>
   2015-08-02
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 88`] = `
+exports[`ColumnConfiguration component should render all columns 92`] = `
 <DocumentFragment>
   2016-04-24
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 89`] = `
+exports[`ColumnConfiguration component should render all columns 93`] = `
 <DocumentFragment>
   2017-01-21
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 90`] = `
+exports[`ColumnConfiguration component should render all columns 94`] = `
 <DocumentFragment>
   20
 </DocumentFragment>
 `;
-
-exports[`ColumnConfiguration component should render all columns 91`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 92`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 93`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 94`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 95`] = `<DocumentFragment />`;
 
@@ -1630,7 +1763,15 @@ exports[`ColumnConfiguration component should render all columns 98`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 99`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 100`] = `
+exports[`ColumnConfiguration component should render all columns 100`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 101`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 102`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 103`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 104`] = `
 <DocumentFragment>
   <a
     href="/taxonomy/9606"
@@ -1639,14 +1780,6 @@ exports[`ColumnConfiguration component should render all columns 100`] = `
   </a>
 </DocumentFragment>
 `;
-
-exports[`ColumnConfiguration component should render all columns 101`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 102`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 103`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 104`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 105`] = `<DocumentFragment />`;
 
@@ -1716,7 +1849,15 @@ exports[`ColumnConfiguration component should render all columns 137`] = `<Docum
 
 exports[`ColumnConfiguration component should render all columns 138`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 139`] = `
+exports[`ColumnConfiguration component should render all columns 139`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 140`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 141`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 142`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 143`] = `
 <DocumentFragment>
   <ul
     class="no-bullet"
@@ -1748,14 +1889,6 @@ exports[`ColumnConfiguration component should render all columns 139`] = `
   </ul>
 </DocumentFragment>
 `;
-
-exports[`ColumnConfiguration component should render all columns 140`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 141`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 142`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 143`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 144`] = `<DocumentFragment />`;
 
@@ -1976,3 +2109,11 @@ exports[`ColumnConfiguration component should render all columns 251`] = `<Docum
 exports[`ColumnConfiguration component should render all columns 252`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns 253`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 254`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 255`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 256`] = `<DocumentFragment />`;
+
+exports[`ColumnConfiguration component should render all columns 257`] = `<DocumentFragment />`;

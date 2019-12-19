@@ -5,9 +5,70 @@ describe('Subcellular data converter', () => {
   test('should convert the data', () => {
     const convertedData = convertSubcellularLocation(modelDataJson);
     expect(convertedData).toEqual({
-      keywordData: [],
+      commentsData: new Map([
+        [
+          'SUBCELLULAR LOCATION',
+          [
+            {
+              commentType: 'SUBCELLULAR LOCATION',
+              molecule: 'molecule value',
+              note: {
+                texts: [
+                  {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000256',
+                        id: 'PIRNR001361',
+                        source: 'PIRNR',
+                      },
+                    ],
+                    value: 'value',
+                  },
+                ],
+              },
+              subcellularLocations: [
+                {
+                  location: {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000256',
+                        id: 'PIRNR001361',
+                        source: 'PIRNR',
+                      },
+                    ],
+                    id: 'id1',
+                    value: 'location value',
+                  },
+                  orientation: {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000256',
+                        id: 'PIRNR001361',
+                        source: 'PIRNR',
+                      },
+                    ],
+                    id: 'id2',
+                    value: 'orientation value',
+                  },
+                  topology: {
+                    evidences: [
+                      {
+                        evidenceCode: 'ECO:0000256',
+                        id: 'PIRNR001361',
+                        source: 'PIRNR',
+                      },
+                    ],
+                    id: 'id2',
+                    value: 'topology value',
+                  },
+                },
+              ],
+            },
+          ],
+        ],
+      ]),
       featuresData: [],
-      commentsData: new Map(),
+      keywordData: [],
       xrefData: [],
     });
   });
