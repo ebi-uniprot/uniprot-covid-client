@@ -3,7 +3,7 @@
 exports[`CatalyticActivityView component should render catalytic activity 1`] = `
 <DocumentFragment>
   <h4>
-    Catalytic Activity
+    Catalytic activity
   </h4>
   <span
     class="text-block"
@@ -104,9 +104,6 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
 
 exports[`CatalyticActivityView component should render catalytic activity when comment does not have reactionReferences 1`] = `
 <DocumentFragment>
-  <h4>
-    Catalytic Activity
-  </h4>
   <span
     class="text-block"
   >

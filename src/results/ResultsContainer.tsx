@@ -20,6 +20,7 @@ import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
 import { getAPIQueryUrl } from './utils/utils';
+import { removeDuplicates } from '../utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
@@ -231,7 +232,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
-      viewMode,
     } = this.props;
     const {
       query,
@@ -239,7 +239,10 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
-    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
+    // Always fetch at least the card columns so these can be rendered
+    // Eg if no columns are selected for the table view ensure sufficient
+    // columns will be fetched to render each card.
+    const columns = removeDuplicates([...cardColumns, ...tableColumns]);
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)

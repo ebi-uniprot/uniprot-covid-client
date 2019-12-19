@@ -6,6 +6,7 @@ import {
   flattenArrays,
   truncateStringWithEllipsis,
   getBEMClassName,
+  removeDuplicates,
 } from '../utils';
 
 test('serializableDeepCopy returns a copy that is not a reference ', () => {
@@ -105,4 +106,8 @@ describe('getBEMClassName', () => {
       })
     ).toEqual('block block--modifier_1');
   });
+});
+
+test('removeDuplicates should remove duplicate entries from provided list', () => {
+  expect(removeDuplicates(['a', 'b', 'a', 'c'])).toEqual(['a', 'b', 'c']);
 });
