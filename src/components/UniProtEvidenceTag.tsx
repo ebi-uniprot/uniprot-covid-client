@@ -13,17 +13,29 @@ import { groupBy } from '../utils/utils';
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
-}> = ({ evidenceData, references }) => (
-  <div>
-    <h5>{evidenceData.label}</h5>
-    {references &&
-      references
-        .filter((reference: Evidence) => reference.id && reference.source)
-        .map((reference: Evidence) => (
-          <div key={reference.id}>{`${reference.source}:${reference.id}`}</div>
-        ))}
-  </div>
-);
+}> = ({ evidenceData, references }) => {
+  if (!references) {
+    return null;
+  }
+  // For GO terms the backend currently returns duplicates, so we need
+  // to only use unique values
+  const uniqueReferences = [
+    ...new Set(references.map(reference => JSON.stringify(reference))),
+  ].map(referenceString => JSON.parse(referenceString));
+  return (
+    <div>
+      <h5>{evidenceData.label}</h5>
+      {uniqueReferences &&
+        uniqueReferences
+          .filter((reference: Evidence) => reference.id && reference.source)
+          .map((reference: Evidence) => (
+            <div
+              key={`${reference.id}_${reference.source}`}
+            >{`${reference.source}:${reference.id}`}</div>
+          ))}
+    </div>
+  );
+};
 
 const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   const evidenceMap: Map<string, Evidence[]> = groupBy(

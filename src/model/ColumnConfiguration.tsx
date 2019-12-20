@@ -39,6 +39,7 @@ import {
 import {
   FunctionUIModel,
   CofactorComment,
+  GO_ASPECT,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -69,6 +70,7 @@ import CatalyticActivityView from '../view/uniprotkb/components/CatalyticActivit
 import VariationView from '../view/uniprotkb/components/VariationView';
 import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
 import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
+import { GOTermsView } from '../view/uniprotkb/components/GOView';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -687,10 +689,31 @@ ColumnConfiguration.set(Column.ccTissueSpecificity, {
     return tissueComment && <FreeTextView comments={tissueComment} />;
   },
 });
-// go_p ,
-// go_c ,
+ColumnConfiguration.set(Column.goP, {
+  label: 'Gene Ontology - Biological Process',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.P);
+    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
+  },
+});
+ColumnConfiguration.set(Column.goC, {
+  label: 'Gene Ontology - Cellular Component',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.C);
+    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
+  },
+});
+ColumnConfiguration.set(Column.goF, {
+  label: 'Gene Ontology - Molecular Function',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.F);
+    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
+  },
+});
 // go ,
-// go_f ,
 // go_id ,
 ColumnConfiguration.set(Column.threeD, {
   label: '3D structures',
