@@ -15,7 +15,6 @@
     // Import non-ES modules as default imports.
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "module": "esnext",
     "jsx": "react",
     "types": ["jest"]
   },
