@@ -1032,6 +1032,12 @@ const getXrefColumn = (databaseName: string) => ({
   },
 });
 
+// sc_epred:  can't see in current website
+// organelle: can't see in current website
+// cc_caution
+// feature: do we need? UX
+// similarity: this field is wrongly named in the API json (should be cc_similarity). Jira.
+
 // Add all database cross-reference columns
 Object.values(Column)
   .filter(col => col.startsWith('dr_'))
