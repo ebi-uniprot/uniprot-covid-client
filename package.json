@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "./src/ui/index.tsx",
   "repository": "",
+  "homepage": "https://ebi-uniprot.github.io/uniprot-website/",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
