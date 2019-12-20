@@ -40,6 +40,7 @@ import {
   FunctionUIModel,
   CofactorComment,
   GO_ASPECT,
+  GoTerm,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -71,6 +72,7 @@ import VariationView from '../view/uniprotkb/components/VariationView';
 import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
 import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
 import { GOTermsView } from '../view/uniprotkb/components/GOView';
+import { flattenArrays } from '../utils/utils';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -713,8 +715,37 @@ ColumnConfiguration.set(Column.goF, {
     return goProcessTerms && <GOTermsView data={goProcessTerms} />;
   },
 });
-// go ,
-// go_id ,
+ColumnConfiguration.set(Column.go, {
+  label: 'Gene Ontology',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const allGOTerms = goTerms && [
+      ...flattenArrays(Array.from(goTerms.values())),
+    ];
+    return allGOTerms && <GOTermsView data={allGOTerms} />;
+  },
+});
+ColumnConfiguration.set(Column.goId, {
+  label: 'Gene Ontology',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const allGOTerms = goTerms && [
+      ...flattenArrays(Array.from(goTerms.values())),
+    ];
+    return (
+      allGOTerms && (
+        <ExpandableList descriptionString="terms">
+          {allGOTerms.map((term: GoTerm) => ({
+            id: term.id,
+            content: (
+              <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>{term.id}</a>
+            ),
+          }))}
+        </ExpandableList>
+      )
+    );
+  },
+});
 ColumnConfiguration.set(Column.threeD, {
   label: '3D structures',
   render: data => {
