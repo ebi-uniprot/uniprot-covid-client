@@ -11,6 +11,7 @@
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
+    "analyse": "webpack-bundle-analyzer build/stats.json",
     "test": "yarn check-types && yarn lint && jest",
     "clear-test-cache": "jest --clearCache"
   },
@@ -110,8 +111,8 @@
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.0",
     "eslint": "5.3.0",
-    "eslint-config-prettier": "^6.0.0",
     "eslint-config-airbnb": "17.1.1",
+    "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "7.14.3",
@@ -130,6 +131,7 @@
     "ts-jest": "^23.10.5",
     "typescript": "<3.6.0",
     "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.1.4"
