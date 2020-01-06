@@ -3,7 +3,7 @@ import { Card } from 'franklin-sites';
 import { html, TemplateResult } from 'lit-html';
 import ProtvistaDatatable from 'protvista-datatable';
 import InteractionViewer from 'interaction-viewer';
-import hasContent from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import FreeTextView from './components/FreeTextView';
 import XRefView from './components/XRefView';

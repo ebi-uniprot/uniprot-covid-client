@@ -1,4 +1,4 @@
-import hasContent from '../utils';
+import { hasContent } from '../utils';
 
 describe('Model Utils', () => {
   it('should check whether an object is empty', () => {

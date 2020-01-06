@@ -805,12 +805,15 @@ ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
 ColumnConfiguration.set(Column.pmId, {
   label: 'PubMed ID',
   render: data => {
-    const ids = data.references.reduce<Xref[]>((acc, citation) => {
-      const xrefs = citation.citation.citationXrefs;
-      return xrefs
-        ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
-        : acc;
-    }, []);
+    let ids: Xref[] = [];
+    if (data.references) {
+      ids = data.references.reduce<Xref[]>((acc, citation) => {
+        const xrefs = citation.citation.citationXrefs;
+        return xrefs
+          ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
+          : acc;
+      }, []);
+    }
     return (
       <ExpandableList>
         {ids.map(xref => ({

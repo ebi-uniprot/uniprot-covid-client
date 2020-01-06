@@ -35,8 +35,9 @@ export enum CommentType {
   TISSUE_SPECIFICITY = 'TISSUE SPECIFICITY',
   TOXIC_DOSE = 'TOXIC DOSE',
   UNKNOWN = 'UNKNOWN',
-  WEBRESOURCE = 'WEB RESOURCE',
+  WEB_RESOURCE = 'WEB RESOURCE',
 }
+
 export type FreeTextType =
   | CommentType.DISRUPTION_PHENOTYPE
   | CommentType.DOMAIN
@@ -207,6 +208,13 @@ export type SubcellularLocationComment = {
   )[];
 };
 
+export type WebResourceComment = {
+  commentType: CommentType.WEB_RESOURCE;
+  note?: string;
+  resourceName: string;
+  resourceUrl: string;
+};
+
 export type Range = {
   range: {
     start: {
@@ -235,6 +243,7 @@ type Comment =
   | CofactorComment
   | pHDependenceComment
   | RedoxPotentialComment
-  | TemperatureDependenceComment;
+  | TemperatureDependenceComment
+  | WebResourceComment;
 
 export default Comment;
