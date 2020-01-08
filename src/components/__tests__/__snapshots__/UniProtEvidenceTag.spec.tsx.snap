@@ -103,6 +103,11 @@ exports[`UniProtEvidenceTag components should render automatic annotation 1`] = 
       <h5>
         Automatic assertion according to rules
       </h5>
+      <a
+        href="//prosite.expasy.org/unirule/PRU10023"
+      >
+        PRU10023
+      </a>
     </div>
   </div>
 </DocumentFragment>

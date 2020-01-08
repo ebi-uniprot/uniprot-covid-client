@@ -611,6 +611,11 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
+          <a
+            href="//prosite.expasy.org/unirule/PRU10028"
+          >
+            PRU10028
+          </a>
         </div>
       </div>
     </section>
@@ -646,6 +651,11 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -868,6 +878,11 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
       <h5>
         Automatic assertion according to rules
       </h5>
+      <a
+        href="//prosite.expasy.org/unirule/PRU100210"
+      >
+        PRU100210
+      </a>
     </div>
   </div>
 </DocumentFragment>
@@ -923,6 +938,11 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
+            <a
+              href="//prosite.expasy.org/unirule/PRU10028"
+            >
+              PRU10028
+            </a>
           </div>
         </div>
       </li>
@@ -967,6 +987,11 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
+          <a
+            href="//prosite.expasy.org/unirule/PRU10028"
+          >
+            PRU10028
+          </a>
         </div>
       </div>
     </section>
@@ -1018,6 +1043,11 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -1062,6 +1092,11 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -1108,6 +1143,11 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>

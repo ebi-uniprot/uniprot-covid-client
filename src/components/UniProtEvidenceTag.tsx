@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { EvidenceTag, SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { Link } from 'react-router-dom';
 import {
   getEvidenceCodeData,
   EvidenceData,
@@ -11,22 +12,61 @@ import { Evidence } from '../model/types/modelTypes';
 import { groupBy } from '../utils/utils';
 import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
 
+enum evidenceTagSourceTypes {
+  PUBMED = 'PubMed',
+  UNIPROT = 'UniProtKB',
+  PROSITE_PRORULE = 'PROSITE-ProRule',
+}
+
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
 }> = ({ evidenceData, references }) => {
+  const groupedReferences =
+    references &&
+    groupBy(references, (reference: Evidence) => reference.source);
+  // TODO it looks like there's more source types than defined here
   return (
     <div>
       <h5>{evidenceData.label}</h5>
-      {references && (
-        <UniProtKBEntryPublications
-          pubmedIds={
-            references
-              .map((reference: Evidence) => reference.id)
-              .filter(id => id) as string[]
-          }
-        />
-      )}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.PUBMED) && (
+          <UniProtKBEntryPublications
+            pubmedIds={
+              groupedReferences
+                .get(evidenceTagSourceTypes.PUBMED)
+                .map((reference: Evidence) => reference.id)
+                .filter((id: string) => id) as string[]
+            }
+          />
+        )}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.UNIPROT) && (
+          <Fragment>
+            {groupedReferences
+              .get(evidenceTagSourceTypes.UNIPROT)
+              .map((reference: Evidence) => (
+                <Link to={`/uniprotkb/${reference.id}`} key={reference.id}>
+                  {reference.id}
+                </Link>
+              ))}
+          </Fragment>
+        )}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.PROSITE_PRORULE) && (
+          <Fragment>
+            {groupedReferences
+              .get(evidenceTagSourceTypes.PROSITE_PRORULE)
+              .map((reference: Evidence) => (
+                <a
+                  href={`//prosite.expasy.org/unirule/${reference.id}`}
+                  key={reference.id}
+                >
+                  {reference.id}
+                </a>
+              ))}
+          </Fragment>
+        )}
     </div>
   );
 };
