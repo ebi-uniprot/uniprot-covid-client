@@ -6,6 +6,7 @@ import apiUrls from '../../utils/apiUrls';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
+export const RESET_ENTRY = 'RESET_ENTRY';
 
 export const receiveEntry = (accession: string, data: UniProtkbAPIModel) => {
   return action(RECEIVE_ENTRY, {
@@ -26,3 +27,5 @@ export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
     }) /* eslint-disable no-console */
     .catch(error => console.error(error));
 };
+
+export const resetEntry = () => action(RESET_ENTRY);

@@ -29,6 +29,7 @@ type MatchParams = {
 type EntryProps = RouteComponentProps<MatchParams> & {
   entryData: UniProtkbAPIModel | null;
   dispatchFetchEntry: (accesion: string) => void;
+  dispatchResetEntry: () => void;
 };
 
 const Entry: React.FC<EntryProps> = ({
@@ -36,10 +37,14 @@ const Entry: React.FC<EntryProps> = ({
   history,
   entryData,
   dispatchFetchEntry,
+  dispatchResetEntry,
 }) => {
   useEffect(() => {
     dispatchFetchEntry(match.params.accession);
-  }, [match, dispatchFetchEntry]);
+    return function cleanup() {
+      dispatchResetEntry();
+    };
+  }, [match, dispatchFetchEntry, dispatchResetEntry]);
 
   if (!entryData || Object.keys(entryData).length === 0) {
     return <Loader />;
@@ -89,6 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchEntry: (accession: string) =>
         entryActions.fetchEntry(accession),
+      dispatchResetEntry: () => entryActions.resetEntry(),
     },
     dispatch
   );

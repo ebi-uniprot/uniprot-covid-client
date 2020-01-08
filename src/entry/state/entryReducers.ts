@@ -19,6 +19,12 @@ const entryReducers = (
         data: action.payload.data,
         accession: action.payload.accession,
       };
+    case entryActions.RESET_ENTRY:
+      return {
+        ...state,
+        data: null,
+        accession: null,
+      };
     default:
       return state;
   }
