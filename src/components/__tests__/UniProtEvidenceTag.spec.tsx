@@ -3,6 +3,7 @@ import UniProtEvidenceTag, {
   UniProtProtvistaEvidenceTag,
 } from '../UniProtEvidenceTag';
 import { render, cleanup } from '@testing-library/react';
+import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 describe('UniProtEvidenceTag components', () => {
   test('should render automatic annotation', () => {
@@ -13,7 +14,9 @@ describe('UniProtEvidenceTag components', () => {
         id: 'PRU10023',
       },
     ];
-    const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
+    const { asFragment } = renderWithRedux(
+      <UniProtEvidenceTag evidences={evidences} />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 
@@ -30,7 +33,9 @@ describe('UniProtEvidenceTag components', () => {
         id: '12346',
       },
     ];
-    const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
+    const { asFragment } = renderWithRedux(
+      <UniProtEvidenceTag evidences={evidences} />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 
@@ -40,7 +45,9 @@ describe('UniProtEvidenceTag components', () => {
         evidenceCode: 'ECO:0000313',
       },
     ];
-    const { asFragment } = render(<UniProtEvidenceTag evidences={evidences} />);
+    const { asFragment } = renderWithRedux(
+      <UniProtEvidenceTag evidences={evidences} />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 

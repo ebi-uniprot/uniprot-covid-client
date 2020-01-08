@@ -388,9 +388,6 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -448,9 +445,6 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PIRNR:PIRNR001361
-            </div>
           </div>
         </div>
       </span>
@@ -490,9 +484,6 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PIRNR:PIRNR001361
-            </div>
           </div>
         </div>
       </span>
@@ -556,9 +547,6 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -623,9 +611,6 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PROSITE-ProRule:PRU10028
-          </div>
         </div>
       </div>
     </section>
@@ -661,9 +646,6 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
       </div>
     </div>
   </section>
@@ -717,9 +699,6 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
     This reaction proceeds in the 
@@ -761,9 +740,6 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         <h5>
           Automatic assertion inferred from database entries
         </h5>
-        <div>
-          Ensembl:ENSP0001324
-        </div>
       </div>
     </div>
   </span>
@@ -809,9 +785,6 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </span>
@@ -851,9 +824,6 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </section>
@@ -898,9 +868,6 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
       <h5>
         Automatic assertion according to rules
       </h5>
-      <div>
-        PROSITE-ProRule:PRU100210
-      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -956,9 +923,6 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PROSITE-ProRule:PRU10028
-            </div>
           </div>
         </div>
       </li>
@@ -1003,9 +967,6 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PROSITE-ProRule:PRU10028
-          </div>
         </div>
       </div>
     </section>
@@ -1057,9 +1018,6 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
       </div>
     </div>
   </section>
@@ -1104,9 +1062,6 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
       </div>
     </div>
   </section>
@@ -1153,9 +1108,6 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
       </div>
     </div>
   </section>
@@ -1251,9 +1203,6 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -1370,9 +1319,6 @@ exports[`ColumnConfiguration component should render all columns 63`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001360
-        </div>
       </div>
     </div>
   </section>
@@ -1419,9 +1365,6 @@ exports[`ColumnConfiguration component should render all columns 64`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001362
-        </div>
       </div>
     </div>
   </span>

@@ -8,10 +8,11 @@ import CatalyticActivityView, {
 } from '../CatalyticActivityView';
 import catalyticActivityUIDataJson from '../__mocks__/CatalyticActivityUIData.json';
 import { removeProperty } from '../../../../utils/utils';
+import renderWithRedux from '../../../../__testHelpers__/renderWithRedux';
 
 describe('CatalyticActivityView component', () => {
   test('should render catalytic activity', () => {
-    const { asFragment } = render(
+    const { asFragment } = renderWithRedux(
       <CatalyticActivityView
         comments={catalyticActivityUIDataJson}
         title="Catalytic activity"
@@ -25,7 +26,7 @@ describe('CatalyticActivityView component', () => {
       ...comment,
       reaction: removeProperty(comment.reaction, 'reactionReferences'),
     };
-    const { asFragment } = render(
+    const { asFragment } = renderWithRedux(
       <CatalyticActivityView comments={[commentWithoutReactionReferences]} />
     );
     expect(asFragment()).toMatchSnapshot();
@@ -66,7 +67,7 @@ describe('isRheaReactReference function', () => {
 describe('ReactionDirection component', () => {
   const { physiologicalReactions } = catalyticActivityUIDataJson[0];
   test('should render ReactionDirection when one physiologicalReactions is present ', () => {
-    const { asFragment } = render(
+    const { asFragment } = renderWithRedux(
       <ReactionDirection
         physiologicalReactions={physiologicalReactions.slice(0, 1)}
       />
@@ -75,7 +76,7 @@ describe('ReactionDirection component', () => {
   });
 
   test('should render ReactionDirection when two physiologicalReactions are present and should be in correct order (forwards then backwards) ', () => {
-    const { asFragment, getAllByTestId } = render(
+    const { asFragment, getAllByTestId } = renderWithRedux(
       <ReactionDirection physiologicalReactions={physiologicalReactions} />
     );
     expect(asFragment()).toMatchSnapshot();
@@ -85,7 +86,7 @@ describe('ReactionDirection component', () => {
   });
 
   test('should not render a ReactionDirection when more than two physiologicalReactions are present ', () => {
-    const { asFragment } = render(
+    const { asFragment } = renderWithRedux(
       <ReactionDirection
         physiologicalReactions={[
           ...physiologicalReactions,

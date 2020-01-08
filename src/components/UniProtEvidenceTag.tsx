@@ -9,21 +9,27 @@ import {
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
 import { groupBy } from '../utils/utils';
+import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
 
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
-}> = ({ evidenceData, references }) => (
-  <div>
-    <h5>{evidenceData.label}</h5>
-    {references &&
-      references
-        .filter((reference: Evidence) => reference.id && reference.source)
-        .map((reference: Evidence) => (
-          <div key={reference.id}>{`${reference.source}:${reference.id}`}</div>
-        ))}
-  </div>
-);
+}> = ({ evidenceData, references }) => {
+  return (
+    <div>
+      <h5>{evidenceData.label}</h5>
+      {references && (
+        <UniProtKBEntryPublications
+          pubmedIds={
+            references
+              .map((reference: Evidence) => reference.id)
+              .filter(id => id) as string[]
+          }
+        />
+      )}
+    </div>
+  );
+};
 
 const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   const evidenceMap: Map<string, Evidence[]> = groupBy(
