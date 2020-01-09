@@ -709,9 +709,7 @@ ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && [
-      ...flattenArrays(Array.from(goTerms.values())),
-    ];
+    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
     return allGOTerms && <GOTermsView data={allGOTerms} />;
   },
 });
@@ -719,9 +717,7 @@ ColumnConfiguration.set(Column.goId, {
   label: 'Gene Ontology IDs',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && [
-      ...flattenArrays(Array.from(goTerms.values())),
-    ];
+    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
     return (
       allGOTerms && (
         <ExpandableList descriptionString="terms">
