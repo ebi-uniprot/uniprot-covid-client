@@ -31,8 +31,8 @@ export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
 const GOView: React.FC<{ data: Map<GoAspect, GoTerm[]> }> = ({ data }) => (
   <Fragment>
     {Array.from(data.keys()).map(aspect => (
-      <section className="text-block" key={aspect.toString()}>
-        <h5>{aspect.toString()}</h5>
+      <section className="text-block" key={aspect}>
+        <h5>{aspect}</h5>
         {data.get(aspect) && (
           <GOTermsView data={data.get(aspect) as GoTerm[]} />
         )}
