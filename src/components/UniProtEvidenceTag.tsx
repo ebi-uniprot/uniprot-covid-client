@@ -14,7 +14,7 @@ export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
 }> = ({ evidenceData, references }) => {
-  if (!references) {
+  if (!references || references.length <= 0) {
     return null;
   }
   // For GO terms the backend currently returns duplicates, so we need
