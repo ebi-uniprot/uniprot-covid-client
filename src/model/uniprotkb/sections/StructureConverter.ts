@@ -27,7 +27,7 @@ const convertStructure = (data: UniProtkbAPIModel) => {
         const method =
           item.properties &&
           item.properties.find(property => property.key === 'Method');
-        return { ...item, method: method && method.value };
+        return { ...item, method: method ? method.value : '' };
       });
     const groupedStructureInfo = groupBy(
       structureInfo,
