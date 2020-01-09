@@ -720,14 +720,18 @@ ColumnConfiguration.set(Column.goId, {
     const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
     return (
       allGOTerms && (
-        <ExpandableList descriptionString="terms">
-          {allGOTerms.map((term: GoTerm) => ({
-            id: term.id,
-            content: (
-              <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>{term.id}</a>
-            ),
-          }))}
-        </ExpandableList>
+        <section className="text-block">
+          <ExpandableList descriptionString="terms">
+            {allGOTerms.map((term: GoTerm) => ({
+              id: term.id,
+              content: (
+                <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>
+                  {term.id}
+                </a>
+              ),
+            }))}
+          </ExpandableList>
+        </section>
       )
     );
   },
