@@ -742,9 +742,11 @@ ColumnConfiguration.set(Column.threeD, {
         <Fragment>
           {Array.from(structureData.keys()).map(method => (
             <div key={method}>
-              {method}:{' '}
-              {structureData.get(method) &&
-                (structureData.get(method) as Xref[]).length > 0}
+              {structureData.get(method) && (
+                <Fragment>
+                  {method}: {(structureData.get(method) as Xref[]).length}
+                </Fragment>
+              )}
             </div>
           ))}
         </Fragment>
