@@ -8,7 +8,7 @@ import {
   EvidenceData,
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
-import { groupBy } from '../utils/utils';
+import { groupBy, uniq } from '../utils/utils';
 
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
@@ -19,9 +19,7 @@ export const UniProtEvidenceTagContent: FC<{
   }
   // For GO terms the backend currently returns duplicates, so we need
   // to only use unique values
-  const uniqueReferences = [
-    ...new Set(references.map(reference => JSON.stringify(reference))),
-  ].map(referenceString => JSON.parse(referenceString));
+  const uniqueReferences = uniq(references);
   return (
     <div>
       <h5>{evidenceData.label}</h5>
