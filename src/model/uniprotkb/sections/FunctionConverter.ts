@@ -157,7 +157,7 @@ const convertFunction = (data: UniProtkbAPIModel) => {
         goTermProperty.value.substring(2);
       return {
         ...term,
-        aspect: GoAspect[aspect as keyof typeof GoAspect].toString(),
+        aspect: GoAspect[aspect as keyof typeof GoAspect],
         termDescription,
       };
     });

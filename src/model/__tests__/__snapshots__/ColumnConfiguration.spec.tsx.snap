@@ -1348,9 +1348,13 @@ exports[`ColumnConfiguration component should render all columns 64`] = `
 
 exports[`ColumnConfiguration component should render all columns 65`] = `
 <DocumentFragment>
-  <ul
-    class="no-bullet"
-  />
+  <section
+    class="text-block"
+  >
+    <ul
+      class="no-bullet"
+    />
+  </section>
 </DocumentFragment>
 `;
 
