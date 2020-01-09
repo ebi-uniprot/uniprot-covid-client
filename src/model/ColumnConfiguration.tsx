@@ -90,6 +90,17 @@ const getFeatureColumn = (type: FeatureType) => {
   };
 };
 
+const getGOColumnForAspect = (aspect: GoAspect) => {
+  return {
+    label: `Gene Ontology - ${aspect}`,
+    render: (data: UniProtkbUIModel) => {
+      const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+      const goProcessTerms = goTerms && goTerms.get(aspect);
+      return goProcessTerms && <GOTermsView data={goProcessTerms} />;
+    },
+  };
+};
+
 export const ColumnConfiguration = new Map<
   Column,
   {
@@ -691,30 +702,9 @@ ColumnConfiguration.set(Column.ccTissueSpecificity, {
     return tissueComment && <FreeTextView comments={tissueComment} />;
   },
 });
-ColumnConfiguration.set(Column.goP, {
-  label: 'Gene Ontology - Biological Process',
-  render: data => {
-    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GoAspect.P);
-    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
-  },
-});
-ColumnConfiguration.set(Column.goC, {
-  label: 'Gene Ontology - Cellular Component',
-  render: data => {
-    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GoAspect.C);
-    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
-  },
-});
-ColumnConfiguration.set(Column.goF, {
-  label: 'Gene Ontology - Molecular Function',
-  render: data => {
-    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GoAspect.F);
-    return goProcessTerms && <GOTermsView data={goProcessTerms} />;
-  },
-});
+ColumnConfiguration.set(Column.goP, getGOColumnForAspect(GoAspect.P));
+ColumnConfiguration.set(Column.goC, getGOColumnForAspect(GoAspect.C));
+ColumnConfiguration.set(Column.goF, getGOColumnForAspect(GoAspect.F));
 ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
   render: data => {
