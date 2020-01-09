@@ -716,7 +716,7 @@ ColumnConfiguration.set(Column.go, {
   },
 });
 ColumnConfiguration.set(Column.goId, {
-  label: 'Gene Ontology',
+  label: 'Gene Ontology IDs',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
     const allGOTerms = goTerms && [
