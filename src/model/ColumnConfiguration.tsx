@@ -39,7 +39,7 @@ import {
 import {
   FunctionUIModel,
   CofactorComment,
-  GO_ASPECT,
+  GoAspect,
   GoTerm,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
@@ -695,7 +695,7 @@ ColumnConfiguration.set(Column.goP, {
   label: 'Gene Ontology - Biological Process',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.P);
+    const goProcessTerms = goTerms && goTerms.get(GoAspect.P);
     return goProcessTerms && <GOTermsView data={goProcessTerms} />;
   },
 });
@@ -703,7 +703,7 @@ ColumnConfiguration.set(Column.goC, {
   label: 'Gene Ontology - Cellular Component',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.C);
+    const goProcessTerms = goTerms && goTerms.get(GoAspect.C);
     return goProcessTerms && <GOTermsView data={goProcessTerms} />;
   },
 });
@@ -711,7 +711,7 @@ ColumnConfiguration.set(Column.goF, {
   label: 'Gene Ontology - Molecular Function',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const goProcessTerms = goTerms && goTerms.get(GO_ASPECT.F);
+    const goProcessTerms = goTerms && goTerms.get(GoAspect.F);
     return goProcessTerms && <GOTermsView data={goProcessTerms} />;
   },
 });

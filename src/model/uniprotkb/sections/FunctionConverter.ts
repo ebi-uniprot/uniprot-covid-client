@@ -58,17 +58,17 @@ export type BioPhysicoChemicalProperties = {
 };
 export type FunctionUIModel = {
   bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
-  goTerms?: Map<GO_ASPECT, GoTerm[]>;
+  goTerms?: Map<GoAspect, GoTerm[]>;
 } & UIModel;
 
-export enum GO_ASPECT {
+export enum GoAspect {
   P = 'Biological Process',
   F = 'Molecular Function',
   C = 'Cellular Component',
 }
 
 export type GoTerm = {
-  aspect?: GO_ASPECT;
+  aspect?: GoAspect;
   termDescription?: string;
   evidences?: Evidence[];
 } & Xref;
@@ -158,7 +158,7 @@ const convertFunction = (data: UniProtkbAPIModel) => {
           goTermProperty.value.substring(2);
         return {
           ...term,
-          aspect: GO_ASPECT[aspect as keyof typeof GO_ASPECT].toString(),
+          aspect: GoAspect[aspect as keyof typeof GoAspect].toString(),
           termDescription,
         };
       }

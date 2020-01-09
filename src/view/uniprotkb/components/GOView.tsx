@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { ExpandableList } from 'franklin-sites';
 import {
   GoTerm,
-  GO_ASPECT,
+  GoAspect,
 } from '../../../model/uniprotkb/sections/FunctionConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 
@@ -28,7 +28,7 @@ export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
   </section>
 );
 
-const GOView: React.FC<{ data: Map<GO_ASPECT, GoTerm[]> }> = ({ data }) => (
+const GOView: React.FC<{ data: Map<GoAspect, GoTerm[]> }> = ({ data }) => (
   <Fragment>
     {Array.from(data.keys()).map(aspect => (
       <section className="text-block" key={aspect.toString()}>
