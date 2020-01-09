@@ -1,4 +1,5 @@
 import React, { FC, Fragment } from 'react';
+import { v1 } from 'uuid';
 import { SubcellularLocationComment } from '../../../model/types/CommentTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { TextView } from './FreeTextView';
@@ -13,7 +14,7 @@ const SubcellularLocationView: FC<{
           subcellData.subcellularLocations && (
             <section
               className="text-block"
-              key={subcellData.molecule ? subcellData.molecule : 'undef'}
+              key={subcellData.molecule ? subcellData.molecule : v1()}
             >
               <h4>{subcellData.molecule}</h4>
               {subcellData.subcellularLocations.map(subcellularLocation => (
