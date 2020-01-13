@@ -4,6 +4,7 @@ import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from './layout/BaseLayout';
 import './styles/App.scss';
+import AdvancedSearchReset from './search/AdvancedSearchReset';
 
 declare const BASE_URL: string;
 
@@ -19,6 +20,8 @@ const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
+
+export const queryBuilderPath = '/advancedSearch';
 
 const App = () => (
   <FranklinSite>
@@ -59,7 +62,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/advancedSearch"
+            path={`${queryBuilderPath}(\/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />
