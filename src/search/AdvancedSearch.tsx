@@ -37,12 +37,10 @@ class AdvancedSearch extends Component<AdvancedSearchProps> {
     const {
       dispatchfetchEvidencesIfNeeded,
       dispatchFetchSearchTermsIfNeeded,
-      dispatchSetPreSelectedClauses,
     } = this.props;
     dispatchfetchEvidencesIfNeeded(Evidence.GO);
     dispatchfetchEvidencesIfNeeded(Evidence.ANNOTATION);
     dispatchFetchSearchTermsIfNeeded();
-    dispatchSetPreSelectedClauses();
   }
 
   render() {
