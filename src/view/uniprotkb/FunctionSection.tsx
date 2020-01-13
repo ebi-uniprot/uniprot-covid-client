@@ -104,29 +104,34 @@ const BioPhysicoChemicalPropertiesView: FC<{
 };
 
 export const CofactorView: FC<{
-  cofactors: CofactorComment[];
+  cofactors?: CofactorComment[];
   title?: string;
-}> = ({ cofactors, title }) => (
-  <Fragment>
-    {title && <h3>{title}</h3>}
-    {cofactors.map(cofactorComment => (
-      <section className="text-block" key={v1()}>
-        {cofactorComment.cofactors &&
-          cofactorComment.cofactors.map(cofactor => (
-            <span key={cofactor.name}>
-              {cofactor.name}{' '}
-              {cofactor.evidences && (
-                <UniProtEvidenceTag evidences={cofactor.evidences} />
-              )}
-            </span>
-          ))}
-        {cofactorComment.note && (
-          <TextView comments={cofactorComment.note.texts} />
-        )}
-      </section>
-    ))}
-  </Fragment>
-);
+}> = ({ cofactors, title }) => {
+  if (!cofactors || cofactors.length <= 0) {
+    return null;
+  }
+  return (
+    <Fragment>
+      {title && <h3>{title}</h3>}
+      {cofactors.map(cofactorComment => (
+        <section className="text-block" key={v1()}>
+          {cofactorComment.cofactors &&
+            cofactorComment.cofactors.map(cofactor => (
+              <span key={cofactor.name}>
+                {cofactor.name}{' '}
+                {cofactor.evidences && (
+                  <UniProtEvidenceTag evidences={cofactor.evidences} />
+                )}
+              </span>
+            ))}
+          {cofactorComment.note && (
+            <TextView comments={cofactorComment.note.texts} />
+          )}
+        </section>
+      ))}
+    </Fragment>
+  );
+};
 
 const FunctionSection: FC<{
   data: FunctionUIModel;
