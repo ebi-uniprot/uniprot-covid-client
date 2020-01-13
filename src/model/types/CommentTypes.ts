@@ -51,7 +51,7 @@ export type FreeTextType =
   | CommentType.TISSUE_SPECIFICITY
   | CommentType.POLYMORPHISM;
 
-export type TextWithEvidence = { value: string; evidences: Evidence[] };
+export type TextWithEvidence = { value: string; evidences?: Evidence[] };
 
 export type FreeTextComment = {
   commentType: FreeTextType;
@@ -192,20 +192,17 @@ export type RNAEditingComment = {
   commentType: CommentType.RNA_EDITING;
   locationType?: string;
   positions: { position: number; evidences: Evidence[] }[];
-  note?: {
-    texts: {
-      value: string;
-      evidences?: Evidence[];
-    }[];
-  };
+  note?: { texts: TextWithEvidence[] };
 };
 
 export type SubcellularLocationComment = {
   commentType: CommentType.SUBCELLULAR_LOCATION;
-  locations: (
-    | { location: TextWithEvidence }
-    | { topology: TextWithEvidence }
-  )[];
+  molecule?: string;
+  note?: { texts: TextWithEvidence[] };
+  subcellularLocations?: {
+    location: TextWithEvidence;
+    topology?: TextWithEvidence;
+  }[];
 };
 
 export type WebResourceComment = {
@@ -244,6 +241,7 @@ type Comment =
   | pHDependenceComment
   | RedoxPotentialComment
   | TemperatureDependenceComment
+  | SubcellularLocationComment
   | WebResourceComment;
 
 export default Comment;

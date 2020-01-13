@@ -22,6 +22,7 @@ import {
   KineticParameters,
   CofactorComment,
 } from '../../model/uniprotkb/sections/FunctionConverter';
+import GOView from './components/GOView';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
@@ -190,6 +191,7 @@ const FunctionSection: FC<{
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <GoRibbon primaryAccession={primaryAccession} />
+        {data.goTerms && <GOView data={data.goTerms} />}
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>

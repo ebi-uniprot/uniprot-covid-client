@@ -39,6 +39,8 @@ import {
 import {
   FunctionUIModel,
   CofactorComment,
+  GoAspect,
+  GoTerm,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -49,6 +51,7 @@ import {
   InteractionType,
   DiseaseComment,
   CatalyticActivityComment,
+  SubcellularLocationComment,
 } from './types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
@@ -66,6 +69,10 @@ import {
 import DiseaseInvolvementView from '../view/uniprotkb/components/DiseaseInvolvementView';
 import CatalyticActivityView from '../view/uniprotkb/components/CatalyticActivityView';
 import VariationView from '../view/uniprotkb/components/VariationView';
+import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
+import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
+import { GOTermsView } from '../view/uniprotkb/components/GOView';
+import { flattenArrays } from '../utils/utils';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -79,6 +86,17 @@ const getFeatureColumn = (type: FeatureType) => {
           />
         )
       );
+    },
+  };
+};
+
+const getGOColumnForAspect = (aspect: GoAspect) => {
+  return {
+    label: `Gene Ontology - ${aspect}`,
+    render: (data: UniProtkbUIModel) => {
+      const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+      const goProcessTerms = goTerms && goTerms.get(aspect);
+      return goProcessTerms && <GOTermsView data={goProcessTerms} />;
     },
   };
 };
@@ -684,15 +702,89 @@ ColumnConfiguration.set(Column.ccTissueSpecificity, {
     return tissueComment && <FreeTextView comments={tissueComment} />;
   },
 });
-// go_p ,
-// go_c ,
-// go ,
-// go_f ,
-// go_id ,
-// cc:subcellular_location ,
-// 3d ,
-// cc:domain ,
-// cc:ptm ,
+ColumnConfiguration.set(Column.goP, getGOColumnForAspect(GoAspect.P));
+ColumnConfiguration.set(Column.goC, getGOColumnForAspect(GoAspect.C));
+ColumnConfiguration.set(Column.goF, getGOColumnForAspect(GoAspect.F));
+ColumnConfiguration.set(Column.go, {
+  label: 'Gene Ontology',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    return allGOTerms && <GOTermsView data={allGOTerms} />;
+  },
+});
+ColumnConfiguration.set(Column.goId, {
+  label: 'Gene Ontology IDs',
+  render: data => {
+    const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
+    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    return (
+      allGOTerms && (
+        <section className="text-block">
+          <ExpandableList descriptionString="terms">
+            {allGOTerms.map((term: GoTerm) => ({
+              id: term.id,
+              content: (
+                <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>
+                  {term.id}
+                </a>
+              ),
+            }))}
+          </ExpandableList>
+        </section>
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.threeD, {
+  label: '3D structures',
+  render: data => {
+    const structureData = (data[EntrySection.Structure] as StructureUIModel)
+      .structures;
+    return (
+      structureData && (
+        <Fragment>
+          {Array.from(structureData.keys()).map(method => (
+            <div key={method}>
+              {structureData.get(method) && (
+                <Fragment>
+                  {method}: {(structureData.get(method) as Xref[]).length}
+                </Fragment>
+              )}
+            </div>
+          ))}
+        </Fragment>
+      )
+    );
+  },
+});
+ColumnConfiguration.set(Column.ccSubcellularLocation, {
+  label: 'Subcellular Location',
+  render: data => {
+    const subcellData = data[EntrySection.SubCellularLocation].commentsData.get(
+      CommentType.SUBCELLULAR_LOCATION
+    ) as SubcellularLocationComment[];
+    return subcellData && <SubcellularLocationView comments={subcellData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccDomain, {
+  label: 'Domain',
+  render: data => {
+    const domainData = data[EntrySection.FamilyAndDomains].commentsData.get(
+      CommentType.DOMAIN
+    ) as FreeTextComment[];
+    return domainData && <FreeTextView comments={domainData} />;
+  },
+});
+ColumnConfiguration.set(Column.ccPtm, {
+  label: 'Post-Translational Modification',
+  render: data => {
+    const ptmData = data[EntrySection.ProteinProcessing].commentsData.get(
+      CommentType.PTM
+    ) as FreeTextComment[];
+    return ptmData && <FreeTextView comments={ptmData} />;
+  },
+});
 ColumnConfiguration.set(Column.ccAllergen, {
   label: 'Allergenic Properties',
   render: data => {
@@ -934,6 +1026,12 @@ const getXrefColumn = (databaseName: string) => ({
     );
   },
 });
+
+// sc_epred:  can't see in current website
+// organelle: can't see in current website
+// cc_caution
+// feature: do we need? UX
+// similarity: this field is wrongly named in the API json (should be cc_similarity). Jira.
 
 // Add all database cross-reference columns
 Object.values(Column)
