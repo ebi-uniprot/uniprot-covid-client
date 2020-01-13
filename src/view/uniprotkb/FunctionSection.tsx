@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
 import { Card } from 'franklin-sites';
-import hasContent from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import FreeTextView, { TextView } from './components/FreeTextView';
 import CatalyticActivityView from './components/CatalyticActivityView';
 import KeywordView from './components/KeywordView';

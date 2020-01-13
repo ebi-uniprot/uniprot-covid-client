@@ -6,6 +6,7 @@ import 'core-js/stable';
 import apiUrls from '../../../utils/apiUrls';
 import * as actions from '../searchActions';
 import initialState from '../searchInitialState';
+import { itemType, dataType } from '../../types/searchTypes';
 
 const mock = new MockAdapter(axios);
 const middlewares = [thunk];
@@ -17,13 +18,57 @@ const store = mockStore({ query: initialState });
 describe('sync actions', () => {
   it('should create a SELECT_SEARCH_TERM action', () => {
     const clauseId = '1';
-    const searchTerm = 'foo';
+    const searchTerm = {
+      id: 'id_accession',
+      label: 'UniProtKB AC',
+      itemType: itemType.single,
+      term: 'accession',
+      dataType: dataType.string,
+      description: 'Search by UniProtKB Accession',
+      example: 'P12345',
+    };
     const expectedAction = {
       type: actions.SELECT_SEARCH_TERM,
       meta: undefined,
       payload: {
         clauseId,
         searchTerm,
+        queryInput: {},
+      },
+    };
+    expect(actions.selectSearchTerm(clauseId, searchTerm)).toEqual(
+      expectedAction
+    );
+  });
+
+  it('should create a SELECT_SEARCH_TERM action with the first enum value when enum search term selected', () => {
+    const clauseId = '1';
+    const searchTerm = {
+      id: 'id_reviewed',
+      label: 'Reviewed',
+      itemType: itemType.single,
+      term: 'reviewed',
+      dataType: dataType.enum,
+      values: [
+        {
+          name: 'Yes',
+          value: 'true',
+        },
+        {
+          name: 'No',
+          value: 'false',
+        },
+      ],
+      description: 'Search by reviewed',
+      example: 'true',
+    };
+    const expectedAction = {
+      type: actions.SELECT_SEARCH_TERM,
+      meta: undefined,
+      payload: {
+        clauseId,
+        searchTerm,
+        queryInput: { stringValue: searchTerm.values[0].value },
       },
     };
     expect(actions.selectSearchTerm(clauseId, searchTerm)).toEqual(
@@ -158,7 +203,10 @@ describe('async actions', () => {
   ];
 
   it('creates RECEIVE_SEARCH_TERMS when fetching has been done', () => {
-    const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
+    const data = [
+      { id: '1', label: 'foo' },
+      { id: '2', label: 'bar' },
+    ];
     mock.onGet(apiUrls.advancedSearchTerms).reply(200, data);
     const expectedActions = [
       {
