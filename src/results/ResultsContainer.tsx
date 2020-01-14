@@ -46,6 +46,7 @@ type ResultsProps = {
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
   dispatchUpdateSummaryAccession: (accession: string) => void;
+  dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
   cardColumns: string[];
@@ -232,6 +233,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
+      dispatchUpdateQueryString,
     } = this.props;
     const {
       query,
@@ -247,6 +249,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     dispatchFetchBatchOfResultsIfNeeded(
       getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
+    dispatchUpdateQueryString(query);
   }
 
   render() {
@@ -394,6 +397,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
       dispatchUpdateSummaryAccession: (accession: string) =>
         resultsActions.updateSummaryAccession(accession),
+      dispatchUpdateQueryString: queryString =>
+        searchActions.updateQueryString(queryString),
     },
     dispatch
   );

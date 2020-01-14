@@ -169,6 +169,7 @@ const searchReducers = (
     case searchActions.RESET_SEARCH_INPUT:
       return {
         ...state,
+        queryString: '',
       };
     default:
       return state;
