@@ -7,7 +7,7 @@ import { TextView } from './FreeTextView';
 const SubcellularLocationView: FC<{
   comments?: SubcellularLocationComment[];
 }> = ({ comments }) => {
-  if (!comments || comments.length <= 0) {
+  if (!comments || comments.length) {
     return null;
   }
   return (

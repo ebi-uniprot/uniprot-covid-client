@@ -107,7 +107,7 @@ export const CofactorView: FC<{
   cofactors?: CofactorComment[];
   title?: string;
 }> = ({ cofactors, title }) => {
-  if (!cofactors || cofactors.length <= 0) {
+  if (!cofactors || !cofactors.length) {
     return null;
   }
   return (
