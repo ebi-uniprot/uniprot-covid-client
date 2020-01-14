@@ -73,10 +73,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const SearchContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
+  connect(mapStateToProps, mapDispatchToProps)(Search)
 );
 
 export default SearchContainer;
