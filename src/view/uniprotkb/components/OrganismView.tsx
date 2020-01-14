@@ -3,6 +3,7 @@ import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import SimpleView from './SimpleView';
 import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
+import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 
 type OrganismDataProps = {
   data: OrganismData;
@@ -58,9 +59,12 @@ export const OrganismListView: React.FC<{
     infoListData.push({
       title: 'Organism',
       content: (
-        <Link to={`/taxonomy/${data.taxonId}`}>
-          {`${data.scientificName} (${data.commonName})`}
-        </Link>
+        <Fragment>
+          <Link to={`/taxonomy/${data.taxonId}`}>
+            {`${data.scientificName} (${data.commonName})`}
+          </Link>
+          {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
+        </Fragment>
       ),
     });
   }
