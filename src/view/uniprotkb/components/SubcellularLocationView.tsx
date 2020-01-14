@@ -5,8 +5,11 @@ import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { TextView } from './FreeTextView';
 
 const SubcellularLocationView: FC<{
-  comments: SubcellularLocationComment[];
+  comments?: SubcellularLocationComment[];
 }> = ({ comments }) => {
+  if (!comments || !comments.length) {
+    return null;
+  }
   return (
     <Fragment>
       {comments.map(
