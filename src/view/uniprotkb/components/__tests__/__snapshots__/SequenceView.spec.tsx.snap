@@ -197,7 +197,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
     P05067-1
   </h4>
   <p>
-    This isoform has been chosen as the
+    This isoform has been chosen as the 
     <strong>
       canonical
     </strong>

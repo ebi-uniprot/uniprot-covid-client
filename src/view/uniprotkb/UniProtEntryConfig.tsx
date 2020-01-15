@@ -11,6 +11,7 @@ import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import InteractionSection from './InteractionSection';
 import FamilyAndDomainsSection from './FamilyAndDomainsSection';
 import StructureSection from './StructureSection';
+import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;
@@ -20,7 +21,7 @@ const UniProtKBEntryConfig: {
     name: EntrySection.Function,
     sectionContent: (data: UniProtkbUIModel): JSX.Element => (
       <FunctionSection
-        data={data[EntrySection.Function]}
+        data={data[EntrySection.Function] as FunctionUIModel}
         primaryAccession={data.primaryAccession}
         sequence={data[EntrySection.Sequence].sequence.value}
         key={EntrySection.Function}

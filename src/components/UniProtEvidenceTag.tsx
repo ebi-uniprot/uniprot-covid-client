@@ -8,22 +8,32 @@ import {
   EvidenceData,
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
-import { groupBy } from '../utils/utils';
+import { groupBy, uniq } from '../utils/utils';
 
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
-}> = ({ evidenceData, references }) => (
-  <div>
-    <h5>{evidenceData.label}</h5>
-    {references &&
-      references
-        .filter((reference: Evidence) => reference.id && reference.source)
-        .map((reference: Evidence) => (
-          <div key={reference.id}>{`${reference.source}:${reference.id}`}</div>
-        ))}
-  </div>
-);
+}> = ({ evidenceData, references }) => {
+  if (!references || references.length <= 0) {
+    return null;
+  }
+  // For GO terms the backend currently returns duplicates, so we need
+  // to only use unique values
+  const uniqueReferences = uniq(references);
+  return (
+    <div>
+      <h5>{evidenceData.label}</h5>
+      {uniqueReferences &&
+        uniqueReferences
+          .filter((reference: Evidence) => reference.id && reference.source)
+          .map((reference: Evidence) => (
+            <div
+              key={`${reference.id}_${reference.source}`}
+            >{`${reference.source}:${reference.id}`}</div>
+          ))}
+    </div>
+  );
+};
 
 const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   const evidenceMap: Map<string, Evidence[]> = groupBy(

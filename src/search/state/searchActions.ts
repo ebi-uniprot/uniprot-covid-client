@@ -9,6 +9,7 @@ import {
   Operator,
   Evidence,
   Clause,
+  dataType,
 } from '../types/searchTypes';
 import { RootState } from '../../state/state-types';
 
@@ -29,6 +30,7 @@ export const RECEIVE_EVIDENCES = 'RECEIVE_EVIDENCES';
 export const UPDATE_CLAUSES = 'UPDATE_CLAUSES';
 export const UPDATE_QUERY_STRING = 'UPDATE_QUERY_STRING';
 export const RESET = 'RESET';
+export const RESET_SEARCH_INPUT = 'RESET_SEARCH_INPUT';
 
 export const selectSearchTerm = (
   clauseId: string,
@@ -37,6 +39,12 @@ export const selectSearchTerm = (
   action(SELECT_SEARCH_TERM, {
     clauseId,
     searchTerm,
+    queryInput:
+      searchTerm.dataType === dataType.enum &&
+      searchTerm.values &&
+      searchTerm.values.length
+        ? { stringValue: searchTerm.values[0].value }
+        : {},
   });
 
 export const updateInputValue = (
@@ -161,3 +169,5 @@ export const updateQueryString = (queryString: string) =>
   });
 
 export const reset = () => action(RESET);
+
+export const resetSearchInput = () => action(RESET_SEARCH_INPUT);
