@@ -48,7 +48,7 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
     <Fragment>
       <button
         type="button"
-        className="button link-button rhea-reaction-visualizer__button"
+        className="button tertiary rhea-reaction-visualizer__button"
         onClick={() => setShow(!show)}
       >
         {`${show ? 'Hide' : 'View'} Rhea reaction`}

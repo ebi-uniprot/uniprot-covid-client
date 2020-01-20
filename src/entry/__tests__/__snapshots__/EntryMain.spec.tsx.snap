@@ -6,19 +6,19 @@ exports[`Entry view should render 1`] = `
     class="button-group"
   >
     <button
-      class="button link-button"
+      class="button tertiary"
       type="button"
     >
       Blast
     </button>
     <button
-      class="button link-button"
+      class="button tertiary"
       type="button"
     >
       Align
     </button>
     <button
-      class="button link-button"
+      class="button tertiary"
       type="button"
     >
       <svg
@@ -34,7 +34,7 @@ exports[`Entry view should render 1`] = `
       Download
     </button>
     <button
-      class="button link-button"
+      class="button tertiary"
       type="button"
     >
       Add

@@ -145,7 +145,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
             >
               <Bubble
                 value={highlightsMap.get(name)}
-                colourClass="colour-uniprot-blue"
+                colourClass="colour-sea-blue"
               />
               {name}
             </Link>

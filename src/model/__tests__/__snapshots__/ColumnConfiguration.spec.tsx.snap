@@ -1747,7 +1747,7 @@ exports[`ColumnConfiguration component should render all columns 94`] = `
       </a>
     </li>
     <button
-      class="button link-button"
+      class="button tertiary"
       data-testid="expandable-message"
       type="button"
     >
