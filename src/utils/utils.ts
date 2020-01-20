@@ -93,6 +93,30 @@ export const groupBy = (list: any[], keyGetter: Function) => {
   return map;
 };
 
+export const sortBy = (items: any[], key: string) => {
+  const compare = (a: any, b: any) => {
+    let valA, valB;
+    if (key in a) {
+      valA = a[key];
+    }
+    if (key in b) {
+      valB = b[key];
+    }
+    // Neither have the attribute so consider them equal
+    if (!valA && !valB) {
+      return 0;
+    }
+    if (!valA || valA < valB) {
+      return -1;
+    }
+    if (!valB || valA > valB) {
+      return 1;
+    }
+    return 0;
+  };
+  return items.sort(compare);
+};
+
 export const uniq = (items: any[]) => {
   return [
     ...new Set(items.map(item => JSON.stringify(item))),

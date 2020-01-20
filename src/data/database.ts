@@ -134,6 +134,38 @@ entrySectionToDatabaseNames.set(
   })
 );
 
+export const implicitEntrySectionToDatabaseNames = new Map<
+  EntrySection,
+  string[]
+>();
+implicitEntrySectionToDatabaseNames.set(EntrySection.Structure, [
+  'ModBase',
+  'PDBe-KB',
+]);
+implicitEntrySectionToDatabaseNames.set(EntrySection.FamilyAndDomains, [
+  'ProtoNet',
+  'MobiDB',
+]);
+
+// This is used to catch those that aren't listed in the page sections
+implicitEntrySectionToDatabaseNames.set(EntrySection.ExternalLinks, [
+  'GenAtlas',
+  'SOURCE_MIM', // Misc
+  'SOURCE_MGI', // Misc
+]);
+
+// Do we need a two more maps to catch these cases:
+//  - explicit, all external links
+//  - implicit, all external links
+
+/*
+SWISS-MODEL-Workspace
+GPCRDB
+HUGE
+Rouge
+ENZYME
+*/
+
 export const getDatabaseNameToEntrySection = (
   databaseName: string
 ): EntrySection | undefined => {

@@ -13,9 +13,11 @@ module.exports = {
       'react-router-dom': path.resolve('./node_modules/react-router-dom'),
     },
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
@@ -24,28 +26,25 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-            },
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true,
           },
-        ],
+        }, ],
       },
       {
         test: /\.(css|sass|scss)$/,
         include: [
           // We use realpathSync otherwise doesn't work with symlinks
-          fs.realpathSync(__dirname + '/node_modules/litemol/dist/css'),
-          fs.realpathSync(__dirname + '/node_modules/@geneontology/ribbon/es'),
+          fs.realpathSync(`${__dirname  }/node_modules/litemol/dist/css`),
+          fs.realpathSync(`${__dirname  }/node_modules/@geneontology/ribbon/es`),
           fs.realpathSync(
-            __dirname + '/node_modules/interaction-viewer/styles'
+            `${__dirname  }/node_modules/interaction-viewer/styles`
           ),
           path.resolve(__dirname, 'src'),
         ],
-        use: [
-          {
+        use: [{
             loader: 'style-loader', // creates style nodes from JS strings
           },
           {
@@ -62,8 +61,7 @@ module.exports = {
           path.resolve(__dirname, 'node_modules/litemol/dist/fonts'),
           path.resolve(__dirname, 'node_modules/protvista-datatable'),
         ],
-        use: [
-          {
+        use: [{
             loader: 'babel-loader',
           },
           {
@@ -77,15 +75,13 @@ module.exports = {
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         include: [path.resolve(__dirname, 'node_modules/litemol/dist/fonts')],
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',
           },
-        ],
+        }, ],
       },
       {
         test: /\.svg$/,

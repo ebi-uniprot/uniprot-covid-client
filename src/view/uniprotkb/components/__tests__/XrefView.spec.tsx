@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import XRefView, { getPropertyString } from '../XRefView';
+import XRefView, { getPropertyString, getXrefUrl } from '../XRefView';
 import xrefUIData from '../__mocks__/XrefUIData.json';
 import EntrySectionType from '../../../../model/types/EntrySection';
 import { XrefUIModel } from '../../../../model/utils/XrefUtils';
@@ -16,6 +16,38 @@ describe('XRefView', () => {
       expect(asFragment()).toMatchSnapshot();
     });
   }
+});
+
+const xRefUrlTestData = [
+  {
+    input: {
+      config: {
+        name: 'BRENDA',
+        displayName: 'BRENDA',
+        category: 'EAP',
+        uriLink:
+          'https://www.brenda-enzymes.org/enzyme.php?ecno=%id&UniProtAcc=%accession&OrganismID=%organismId',
+        attributes: [
+          {
+            name: 'OrganismId',
+            xmlTag: 'organism ID',
+          },
+        ],
+      },
+      dbReference: {
+        type: 'BRENDA',
+        id: '2.3.1.88',
+        properties: { 'organism ID': '3474' },
+      },
+    },
+    expected:
+      'https://www.brenda-enzymes.org/enzyme.php?ecno=2.3.1.88&UniProtAcc=Q80UM3&OrganismID=3474',
+  },
+];
+
+describe('getXrefUrl', () => {
+  const d = xRefUrlTestData[0];
+  getXrefUrl(d['input']);
 });
 
 describe('getPropertyString', () => {

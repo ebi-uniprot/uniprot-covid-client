@@ -72,10 +72,11 @@ export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = (
       infoData.push({
         title: 'See also',
         content: (
-          <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
-            {info.displayName}
-            {id && `:${id}`}
-          </XRefExternalLink>
+          <h2>hiya!</h2>
+          // <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
+          //   {info.displayName}
+          //   {id && `:${id}`}
+          // </XRefExternalLink>
         ),
       });
     }

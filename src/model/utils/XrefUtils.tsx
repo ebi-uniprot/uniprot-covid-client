@@ -2,6 +2,7 @@ import {
   databaseNameToCategory,
   entrySectionToDatabaseNames,
   entrySectionToDatabaseCategoryOrder,
+  implicitEntrySectionToDatabaseNames,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
 import { DatabaseCategory } from '../types/DatabaseTypes';
@@ -39,13 +40,20 @@ export const getXrefsForSection = (
     if (!category) {
       return;
     }
-    const nametoXrefs = categoryToNameToXrefs.get(category) || {};
-    if (!nametoXrefs[name]) {
-      nametoXrefs[name] = [];
+    const nameToXrefs = categoryToNameToXrefs.get(category) || {};
+    if (!nameToXrefs[name]) {
+      nameToXrefs[name] = [];
     }
-    nametoXrefs[name].push(xref);
-    categoryToNameToXrefs.set(category, nametoXrefs);
+    nameToXrefs[name].push(xref);
+    categoryToNameToXrefs.set(category, nameToXrefs);
   });
+
+  const implicitDatabasesForSection = implicitEntrySectionToDatabaseNames.get(
+    section
+  );
+  if (implicitDatabasesForSection && implicitDatabasesForSection.length) {
+  }
+
   const databaseCategoryOrder = entrySectionToDatabaseCategoryOrder.get(
     section
   ) as DatabaseCategory[];

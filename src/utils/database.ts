@@ -13,8 +13,10 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
     [database: string]: DatabaseInfoPoint;
   } = {};
   databaseInfo.forEach(info => {
-    const { name } = info;
-    const category = info.category as DatabaseCategory;
+    const { name, category } = info as {
+      name: string;
+      category: DatabaseCategory;
+    };
     const databaseNames = databaseCategoryToNames.get(category);
     databaseCategoryToNames.set(
       category,
@@ -55,10 +57,7 @@ export const getEntrySectionToDatabaseCategoryOrder = (
   entrySectionToDatabaseNames: Map<EntrySection, string[]>,
   databaseNameToCategory: Map<string, DatabaseCategory>
 ) => {
-  const entrySectionToDatabaseCategoryOrder = new Map<
-    EntrySection,
-    (string)[]
-  >();
+  const entrySectionToDatabaseCategoryOrder = new Map<EntrySection, string[]>();
   // eslint-disable-next-line no-restricted-syntax
   for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
     const uniqueCategories: DatabaseCategory[] = [];
