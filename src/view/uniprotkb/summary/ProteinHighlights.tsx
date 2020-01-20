@@ -132,7 +132,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
 
   return (
     <div className="protein-highlights">
-      <h4>Protein Highlights</h4>
+      <h3>Protein Highlights</h3>
       {Array.from(highlightsMap.keys()).map(name => {
         const count = highlightsMap.get(name);
         if (count === 0) {

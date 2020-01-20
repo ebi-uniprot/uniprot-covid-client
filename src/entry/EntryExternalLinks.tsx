@@ -78,7 +78,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
       <Card title={EntrySection.ExternalLinks}>
         {webResourceComments && (
           <Fragment>
-            <h4>Web resources</h4>
+            <h3>Web resources</h3>
             <ExpandableList descriptionString="alternative names">
               {webResourceComments.map(comment => ({
                 id: v1(),

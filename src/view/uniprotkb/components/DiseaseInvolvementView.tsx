@@ -82,7 +82,7 @@ export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = (
   }
   return (
     <Fragment>
-      <h4>{`${diseaseId} ${acronym && `(${acronym})`}`}</h4>
+      <h3>{`${diseaseId} ${acronym && `(${acronym})`}`}</h3>
       <span className="text-block">{evidenceNodes}</span>
       <InfoList infoData={infoData} />
     </Fragment>

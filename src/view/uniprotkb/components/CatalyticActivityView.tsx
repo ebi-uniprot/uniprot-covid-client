@@ -132,7 +132,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   let firstRheaId: number | null = null;
   return (
     <Fragment>
-      {title && <h4>{title}</h4>}
+      {title && <h3>{title}</h3>}
       {comments.map(({ reaction, physiologicalReactions }) => {
         if (!reaction) {
           return null;

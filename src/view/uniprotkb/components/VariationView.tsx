@@ -177,7 +177,7 @@ const VariationView: FC<{
 
   return (
     <div>
-      {title && <h4>{title}</h4>}
+      {title && <h3>{title}</h3>}
       <protvista-manager attributes="highlight displaystart displayend activefilters filters">
         {hasTable && (
           <div className="variation-view">
