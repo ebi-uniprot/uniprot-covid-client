@@ -3,7 +3,7 @@ import { Header } from 'franklin-sites';
 
 import SearchContainer from '../search/SearchContainer';
 
-import Logo from '../svg/uniprot-rgb.svg';
+import Logo from '../svg/uniprot-logo.svg';
 
 const tools = [
   {
