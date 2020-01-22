@@ -86,4 +86,17 @@ export const fileFormatToContentType = new Map<FileFormat, string>([
   [FileFormat.json, 'application/json'],
 ]);
 
+export const fileFormatToUrlParameter = new Map<FileFormat, string>([
+  [FileFormat.fastaCanonical, 'fasta'],
+  [FileFormat.fastaCanonicalIsoform, 'fasta'],
+  [FileFormat.tsv, 'tsv'],
+  [FileFormat.excel, 'xlsx'],
+  [FileFormat.xml, 'xml'],
+  [FileFormat.rdfXml, 'rdf'],
+  [FileFormat.text, 'txt'],
+  [FileFormat.gff, 'gff'],
+  [FileFormat.list, 'list'],
+  [FileFormat.json, 'json'],
+]);
+
 export const fileFormatsWithColumns = [FileFormat.tsv, FileFormat.excel];

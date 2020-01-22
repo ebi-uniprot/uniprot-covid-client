@@ -56,11 +56,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   const nPreview = Math.min(10, downloadAll ? nResults : nSelectedEntries);
   return (
     <Fragment>
-      <form
-        onSubmit={onSubmit}
-        className="download"
-        data-testid="customise-table-form"
-      >
+      <form onSubmit={onSubmit} className="download">
         <h3>Download</h3>
         <label htmlFor="data-selection-false">
           <input
@@ -134,19 +130,13 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           </fieldset>
         )}
         <div className="button-group customise-table--cancel-submit-buttons">
-          <button
-            className="button secondary"
-            type="button"
-            onClick={onCancel}
-            data-testid="customise-table-cancel-button"
-          >
+          <button className="button secondary" type="button" onClick={onCancel}>
             Cancel
           </button>
           <button
             className="button secondary"
             type="button"
             onClick={() => onPreview(nPreview)}
-            data-testid="customise-table-cancel-button"
           >
             Preview {nPreview}
           </button>

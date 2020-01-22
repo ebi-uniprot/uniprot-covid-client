@@ -6,6 +6,7 @@ import {
   SelectedFacet,
   FileFormat,
   fileFormatsWithColumns,
+  fileFormatToUrlParameter,
 } from '../results/types/resultsTypes';
 import { SortableColumn } from '../model/types/ColumnTypes';
 
@@ -121,7 +122,6 @@ export const getDownloadUrl = ({
   size?: number;
   selectedAccessions: string[];
 }) => {
-  const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   const parameters: {
     query: string;
     format: string;
@@ -134,8 +134,10 @@ export const getDownloadUrl = ({
     query: selectedAccessions.length
       ? createAccessionsQueryString(selectedAccessions)
       : `${query}${createFacetsQueryString(selectedFacets)}`,
-    format: fileFormat,
+    // fallback to json if something goes wrong
+    format: fileFormatToUrlParameter.get(fileFormat) || 'json',
   };
+  const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   if (isColumnFileFormat && sortColumn) {
     parameters.sort = `${sortColumn} ${getApiSortDirection(
       SortDirection[sortDirection]
