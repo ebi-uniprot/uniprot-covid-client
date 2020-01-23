@@ -20,6 +20,8 @@ const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 
+export const queryBuilderPath = '/advancedSearch';
+
 const App = () => (
   <FranklinSite>
     <Router basename={BASE_URL}>
@@ -59,7 +61,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/advancedSearch"
+            path={`${queryBuilderPath}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />
