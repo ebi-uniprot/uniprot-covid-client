@@ -1324,9 +1324,7 @@ exports[`Entry view should render 1`] = `
             </div>
             <div
               class="info-list__item__content"
-            >
-              undefined 
-            </div>
+            />
           </div>
           <div
             class="info-list__item"
@@ -1338,9 +1336,7 @@ exports[`Entry view should render 1`] = `
             </div>
             <div
               class="info-list__item__content"
-            >
-              undefined 
-            </div>
+            />
           </div>
         </div>
         <h4>
