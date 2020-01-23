@@ -63,7 +63,9 @@ export const OrganismListView: React.FC<{
           <Link to={`/taxonomy/${data.taxonId}`}>
             {`${data.scientificName} (${data.commonName})`}
           </Link>
-          {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
+          {data.evidences && data.evidences.length && (
+            <UniProtEvidenceTag evidences={data.evidences} />
+          )}
         </Fragment>
       ),
     });
