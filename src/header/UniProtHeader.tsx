@@ -27,7 +27,7 @@ const tools = [
 const links = [
   {
     label: 'Query Builder',
-    path: '/advancedSearch',
+    path: '/advancedSearch/reset',
   },
   {
     label: 'API',

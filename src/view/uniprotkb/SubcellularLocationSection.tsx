@@ -5,6 +5,11 @@ import EntrySection from '../../model/types/EntrySection';
 import KeywordView from './components/KeywordView';
 import FeaturesView from './components/FeaturesView';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
+import SubcellularLocationView from './components/SubcellularLocationView';
+import {
+  SubcellularLocationComment,
+  CommentType,
+} from '../../model/types/CommentTypes';
 
 const SubcellularLocationSection: FC<{
   data: UIModel;
@@ -16,6 +21,13 @@ const SubcellularLocationSection: FC<{
   return (
     <div id={EntrySection.SubCellularLocation}>
       <Card title={EntrySection.SubCellularLocation}>
+        <SubcellularLocationView
+          comments={
+            data.commentsData.get(
+              CommentType.SUBCELLULAR_LOCATION
+            ) as SubcellularLocationComment[]
+          }
+        />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <KeywordView keywords={data.keywordData} />
       </Card>

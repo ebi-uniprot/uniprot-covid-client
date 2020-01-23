@@ -9,7 +9,7 @@ import {
   EvidenceData,
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
-import { groupBy } from '../utils/utils';
+import { groupBy, uniq } from '../utils/utils';
 import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
 
 enum evidenceTagSourceTypes {
@@ -22,9 +22,15 @@ export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
   references: Evidence[] | undefined;
 }> = ({ evidenceData, references }) => {
+  if (!references || references.length <= 0) {
+    return null;
+  }
+  // For GO terms the backend currently returns duplicates, so we need
+  // to only use unique values
+  const uniqueReferences = uniq(references);
   const groupedReferences =
-    references &&
-    groupBy(references, (reference: Evidence) => reference.source);
+    uniqueReferences &&
+    groupBy(uniqueReferences, (reference: Evidence) => reference.source);
   // TODO it looks like there's more source types than defined here
   return (
     <div>

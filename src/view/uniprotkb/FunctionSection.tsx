@@ -22,6 +22,7 @@ import {
   KineticParameters,
   CofactorComment,
 } from '../../model/uniprotkb/sections/FunctionConverter';
+import GOView from './components/GOView';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
@@ -103,29 +104,34 @@ const BioPhysicoChemicalPropertiesView: FC<{
 };
 
 export const CofactorView: FC<{
-  cofactors: CofactorComment[];
+  cofactors?: CofactorComment[];
   title?: string;
-}> = ({ cofactors, title }) => (
-  <Fragment>
-    {title && <h3>{title}</h3>}
-    {cofactors.map(cofactorComment => (
-      <section className="text-block" key={v1()}>
-        {cofactorComment.cofactors &&
-          cofactorComment.cofactors.map(cofactor => (
-            <span key={cofactor.name}>
-              {cofactor.name}{' '}
-              {cofactor.evidences && (
-                <UniProtEvidenceTag evidences={cofactor.evidences} />
-              )}
-            </span>
-          ))}
-        {cofactorComment.note && (
-          <TextView comments={cofactorComment.note.texts} />
-        )}
-      </section>
-    ))}
-  </Fragment>
-);
+}> = ({ cofactors, title }) => {
+  if (!cofactors || !cofactors.length) {
+    return null;
+  }
+  return (
+    <Fragment>
+      {title && <h3>{title}</h3>}
+      {cofactors.map(cofactorComment => (
+        <section className="text-block" key={v1()}>
+          {cofactorComment.cofactors &&
+            cofactorComment.cofactors.map(cofactor => (
+              <span key={cofactor.name}>
+                {cofactor.name}{' '}
+                {cofactor.evidences && (
+                  <UniProtEvidenceTag evidences={cofactor.evidences} />
+                )}
+              </span>
+            ))}
+          {cofactorComment.note && (
+            <TextView comments={cofactorComment.note.texts} />
+          )}
+        </section>
+      ))}
+    </Fragment>
+  );
+};
 
 const FunctionSection: FC<{
   data: FunctionUIModel;
@@ -190,6 +196,7 @@ const FunctionSection: FC<{
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         <GoRibbon primaryAccession={primaryAccession} />
+        {data.goTerms && <GOView data={data.goTerms} />}
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>

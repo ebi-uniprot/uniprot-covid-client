@@ -14,6 +14,7 @@ import EntrySection from '../../types/EntrySection';
 import { convertSection, UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Evidence } from '../../types/modelTypes';
+import { groupBy } from '../../../utils/utils';
 
 export type Absorption = {
   max: number;
@@ -57,7 +58,20 @@ export type BioPhysicoChemicalProperties = {
 };
 export type FunctionUIModel = {
   bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
+  goTerms?: Map<GoAspect, GoTerm[]>;
 } & UIModel;
+
+export enum GoAspect {
+  P = 'Biological Process',
+  F = 'Molecular Function',
+  C = 'Cellular Component',
+}
+
+export type GoTerm = {
+  aspect?: GoAspect;
+  termDescription?: string;
+  evidences?: Evidence[];
+} & Xref;
 
 const keywordsCategories = [
   KeywordCategory.MOLECULAR_FUNCTION,
@@ -125,6 +139,30 @@ const convertFunction = (data: UniProtkbAPIModel) => {
   convertedSection.commentsData.delete(
     CommentType.BIOPHYSICOCHEMICAL_PROPERTIES
   );
+
+  if (data.databaseCrossReferences) {
+    const goTerms = (data.databaseCrossReferences.filter(
+      xref => xref.databaseType === 'GO' && xref.properties
+    ) as GoTerm[]).map(term => {
+      const goTermProperty =
+        term.properties &&
+        term.properties.find(property => property.key === 'GoTerm');
+      const aspect =
+        goTermProperty &&
+        goTermProperty.value &&
+        goTermProperty.value.substring(0, 1);
+      const termDescription =
+        goTermProperty &&
+        goTermProperty.value &&
+        goTermProperty.value.substring(2);
+      return {
+        ...term,
+        aspect: GoAspect[aspect as keyof typeof GoAspect],
+        termDescription,
+      };
+    });
+    convertedSection.goTerms = groupBy(goTerms, (term: GoTerm) => term.aspect);
+  }
   return convertedSection;
 };
 

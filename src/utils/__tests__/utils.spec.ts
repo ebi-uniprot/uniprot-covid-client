@@ -6,7 +6,7 @@ import {
   flattenArrays,
   truncateStringWithEllipsis,
   getBEMClassName,
-  removeDuplicates,
+  uniq,
 } from '../utils';
 
 test('serializableDeepCopy returns a copy that is not a reference ', () => {
@@ -106,8 +106,15 @@ describe('getBEMClassName', () => {
       })
     ).toEqual('block block--modifier_1');
   });
-});
 
-test('removeDuplicates should remove duplicate entries from provided list', () => {
-  expect(removeDuplicates(['a', 'b', 'a', 'c'])).toEqual(['a', 'b', 'c']);
+  test('get unique array of strings', () => {
+    expect(uniq(['A', 'B', 'B', 'C'])).toEqual(['A', 'B', 'C']);
+  });
+
+  test('get unique array of objects', () => {
+    expect(uniq([{ item1: 'A' }, { item1: 'A' }, { item1: 'B' }])).toEqual([
+      { item1: 'A' },
+      { item1: 'B' },
+    ]);
+  });
 });
