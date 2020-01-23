@@ -19,10 +19,12 @@ const compareDownloadsUrlsDisregardSize = (url1: string, url2: string) => {
 
 type DownloadTableProps = {
   tableColumns: Column[];
+  totalNumberResults: number;
 } & RouteComponentProps;
 
 const Download: React.FC<DownloadTableProps> = ({
   tableColumns,
+  totalNumberResults,
   history,
   location: {
     state: {
@@ -31,7 +33,6 @@ const Download: React.FC<DownloadTableProps> = ({
       sortColumn,
       sortDirection,
       selectedEntries,
-      nResults,
     },
   },
 }) => {
@@ -150,13 +151,14 @@ const Download: React.FC<DownloadTableProps> = ({
           : ''
       }
       loadingPreview={loadingPreview}
-      nResults={nResults}
+      totalNumberResults={totalNumberResults}
     />
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
   tableColumns: state.results.tableColumns,
+  totalNumberResults: state.results.totalNumberResults,
 });
 
 const DownloadContainer = withRouter(connect(mapStateToProps)(Download));

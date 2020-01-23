@@ -20,7 +20,7 @@ type DownloadViewProps = {
   onDownloadAllChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCompressedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nSelectedEntries: number;
-  nResults: number;
+  totalNumberResults: number;
 };
 
 const DownloadView: React.FC<DownloadViewProps> = ({
@@ -38,7 +38,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   onFileFormatChange,
   onCompressedChange,
   nSelectedEntries,
-  nResults,
+  totalNumberResults,
 }) => {
   let previewNode;
   if (loadingPreview) {
@@ -53,7 +53,10 @@ const DownloadView: React.FC<DownloadViewProps> = ({
       </div>
     );
   }
-  const nPreview = Math.min(10, downloadAll ? nResults : nSelectedEntries);
+  const nPreview = Math.min(
+    10,
+    downloadAll ? totalNumberResults : nSelectedEntries
+  );
   return (
     <Fragment>
       <form onSubmit={onSubmit} className="download">
@@ -79,7 +82,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             checked={downloadAll}
             onChange={onDownloadAllChange}
           />
-          Download all ({nResults})
+          Download all ({totalNumberResults})
         </label>
         <fieldset>
           <legend>Format</legend>

@@ -17,7 +17,6 @@ import {
 
 const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
   const url = apiUrls.entry(accession);
-  console.log('here here');
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {
     return <Loader />;
