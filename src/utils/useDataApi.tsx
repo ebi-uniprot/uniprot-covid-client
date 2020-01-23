@@ -2,16 +2,16 @@
 import { useState, useEffect } from 'react';
 import fetchData from './fetchData';
 
-const useDataApi = (url: string, headers: object = {}) => {
+const useDataApi = (url: string) => {
   const [data, setData] = useState<any>({});
 
   useEffect(() => {
     const getData = async () => {
-      const result = await fetchData(url, headers);
+      const result = await fetchData(url);
       setData(result.data);
     };
     getData();
-  }, [url, headers]);
+  }, [url]);
 
   return data;
 };

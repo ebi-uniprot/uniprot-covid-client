@@ -134,7 +134,24 @@ entrySectionToDatabaseNames.set(
   })
 );
 
+export const getDatabaseNameToEntrySection = (
+  databaseName: string
+): EntrySection | undefined => {
+  let entrySection;
+  entrySectionToDatabaseNames.forEach((value, key) => {
+    if (value.includes(databaseName)) {
+      entrySection = key;
+    }
+  });
+  return entrySection;
+};
+
 export const entrySectionToDatabaseCategoryOrder = getEntrySectionToDatabaseCategoryOrder(
   entrySectionToDatabaseNames,
   databaseNameToCategory
 );
+
+export const getDatabaseInfoByName = (dbName: string) =>
+  databaseInfo.find(
+    dbInfo => dbInfo.name.toLowerCase() === dbName.toLowerCase()
+  );

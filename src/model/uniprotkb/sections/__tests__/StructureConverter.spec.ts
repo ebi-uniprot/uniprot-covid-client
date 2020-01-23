@@ -9,6 +9,7 @@ describe('Structure data converter', () => {
       xrefData: [],
       featuresData: [],
       keywordData: [],
+      structures: new Map(),
     });
   });
 });

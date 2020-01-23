@@ -3,7 +3,7 @@ import { Header } from 'franklin-sites';
 
 import SearchContainer from '../search/SearchContainer';
 
-import Logo from '../svg/uniprot-rgb.svg';
+import Logo from '../svg/uniprot-logo.svg';
 
 const tools = [
   {
@@ -27,7 +27,7 @@ const tools = [
 const links = [
   {
     label: 'Query Builder',
-    path: '/advancedSearch',
+    path: '/advancedSearch/reset',
   },
   {
     label: 'API',

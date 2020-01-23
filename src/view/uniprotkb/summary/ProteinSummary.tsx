@@ -10,10 +10,14 @@ import uniProtKbConverter, {
 import ProteinOverview from '../components/ProteinOverviewView';
 import FreeTextView from '../components/FreeTextView';
 import EntrySection from '../../../model/types/EntrySection';
-import { CommentType, FreeText } from '../../../model/types/CommentTypes';
+import {
+  CommentType,
+  FreeTextComment,
+} from '../../../model/types/CommentTypes';
 
 const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
   const url = apiUrls.entry(accession);
+  console.log('here here');
   const entryData = useDataApi(url);
   if (Object.keys(entryData).length === 0) {
     return <Loader />;
@@ -34,9 +38,9 @@ const ProteinSummary: FC<{ accession: string }> = ({ accession }) => {
           comments={
             transformedData[EntrySection.FamilyAndDomains].commentsData.get(
               CommentType.SIMILARITY
-            ) as FreeText[]
+            ) as FreeTextComment[]
           }
-          includeTitle
+          title={CommentType.SIMILARITY.toLowerCase()}
         />
         <ProteinHighlights data={entryData} />
       </Card>

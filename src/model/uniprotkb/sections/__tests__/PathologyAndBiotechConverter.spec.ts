@@ -42,6 +42,30 @@ describe('Pathology/Biotech data converter', () => {
             },
           ],
         ],
+        ['ALLERGEN', []],
+        ['BIOTECHNOLOGY', []],
+        ['TOXIC DOSE', []],
+        ['PHARMACEUTICAL', []],
+        [
+          'DISRUPTION PHENOTYPE',
+          [
+            {
+              commentType: 'DISRUPTION PHENOTYPE',
+              texts: [
+                {
+                  evidences: [
+                    {
+                      evidenceCode: 'ECO:0000256',
+                      id: 'PIRNR001360',
+                      source: 'PIRNR',
+                    },
+                  ],
+                  value: 'value',
+                },
+              ],
+            },
+          ],
+        ],
       ]),
       featuresData: [],
       keywordData: [],

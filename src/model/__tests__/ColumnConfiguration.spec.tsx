@@ -10,6 +10,10 @@ describe('ColumnConfiguration component', () => {
 
   beforeAll(() => {
     transformedData = uniProtKbConverter(data);
+    window.SVGElement.prototype.getBBox = () => ({
+      width: 10,
+      height: 10,
+    });
   });
 
   test('should render all columns', () => {

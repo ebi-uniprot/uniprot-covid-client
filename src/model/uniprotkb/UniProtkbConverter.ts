@@ -12,19 +12,43 @@ import {
 import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
 import convertSubcellularLocation from './sections/SubcellularLocationConverter';
-import { convertSequence, SequenceUIModel } from './sections/SequenceConverter';
+import {
+  convertSequence,
+  SequenceUIModel,
+  EntryAudit,
+} from './sections/SequenceConverter';
 import { SequenceData } from '../../view/uniprotkb/components/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import convertInteraction from './sections/InteractionConverter';
 import convertFamilyAndDomains from './sections/FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
 import convertStructure from './sections/StructureConverter';
+import convertExternalLinks from './sections/ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
 
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
   TREMBL = 'TrEMBL',
 }
+
+export type Citation = {
+  citation: {
+    citationType?: string;
+    authors?: string[];
+    citationXrefs?: Xref[];
+    title?: string;
+    publicationDate?: number;
+    journal?: string;
+    firstPage?: number;
+    lastPage?: number;
+    volume?: number;
+  };
+  referencePositions?: string[];
+  referenceComments?: {
+    value: string;
+    type: string;
+  };
+};
 
 export type UniProtkbAPIModel = {
   proteinDescription?: ProteinNamesData;
@@ -41,28 +65,8 @@ export type UniProtkbAPIModel = {
   databaseCrossReferences?: Xref[];
   sequence: SequenceData;
   annotationScore: number;
-  entryAudit?: {
-    lastSequenceUpdateDate: string;
-    sequenceVersion: string;
-  };
-  references?: {
-    citation: {
-      citationType?: string;
-      authors?: string[];
-      citationXrefs?: Xref[];
-      title?: string;
-      publicationDate?: number;
-      journal?: string;
-      firstPage?: number;
-      lastPage?: number;
-      volume?: number;
-    };
-    referencePositions?: string[];
-    referenceComments?: {
-      value: string;
-      type: string;
-    };
-  }[];
+  entryAudit?: EntryAudit;
+  references?: Citation[];
 };
 
 export type UniProtkbUIModel = {
@@ -81,27 +85,29 @@ export type UniProtkbUIModel = {
   [EntrySection.Interaction]: UIModel;
   [EntrySection.Structure]: UIModel;
   [EntrySection.FamilyAndDomains]: UIModel;
+  [EntrySection.ExternalLinks]: UIModel;
+  references?: Citation[];
 };
 
-const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
-  return {
-    primaryAccession: data.primaryAccession,
-    uniProtId: data.uniProtId,
-    proteinExistence: data.proteinExistence,
-    entryType: data.entryType,
-    annotationScore: data.annotationScore,
-    [EntrySection.Function]: convertFunction(data),
-    [EntrySection.NamesAndTaxonomy]: convertNamesAndTaxonomy(data),
-    [EntrySection.SubCellularLocation]: convertSubcellularLocation(data),
-    [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(data),
-    [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
-    [EntrySection.Expression]: convertExpression(data),
-    [EntrySection.Interaction]: convertInteraction(data),
-    [EntrySection.Structure]: convertStructure(data),
-    [EntrySection.Sequence]: convertSequence(data),
-    [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
-  };
-};
+const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => ({
+  primaryAccession: data.primaryAccession,
+  uniProtId: data.uniProtId,
+  proteinExistence: data.proteinExistence,
+  entryType: data.entryType,
+  annotationScore: data.annotationScore,
+  [EntrySection.Function]: convertFunction(data),
+  [EntrySection.NamesAndTaxonomy]: convertNamesAndTaxonomy(data),
+  [EntrySection.SubCellularLocation]: convertSubcellularLocation(data),
+  [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(data),
+  [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
+  [EntrySection.Expression]: convertExpression(data),
+  [EntrySection.Interaction]: convertInteraction(data),
+  [EntrySection.Structure]: convertStructure(data),
+  [EntrySection.Sequence]: convertSequence(data),
+  [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
+  [EntrySection.ExternalLinks]: convertExternalLinks(data),
+  references: data.references || [],
+});
 
 export default uniProtKbConverter;
 

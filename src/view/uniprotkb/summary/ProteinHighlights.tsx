@@ -7,7 +7,7 @@ import {
   CommentType,
   InteractionComment,
   DiseaseComment,
-  AlternativeProducts,
+  AlternativeProductsComment,
 } from '../../../model/types/CommentTypes';
 import { FeatureData } from '../components/FeaturesView';
 import './ProteinHighlights.scss';
@@ -84,7 +84,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
     // isoforms
     const isoformsComments = data.comments.find(
       comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
-    ) as AlternativeProducts;
+    ) as AlternativeProductsComment;
     highlightsMap.set(
       highlightSection.isoforms,
       isoformsComments ? isoformsComments.isoforms.length : 0
@@ -132,7 +132,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
 
   return (
     <div className="protein-highlights">
-      <h4>Protein Highlights</h4>
+      <h3>Protein Highlights</h3>
       {Array.from(highlightsMap.keys()).map(name => {
         const count = highlightsMap.get(name);
         if (count === 0) {
@@ -145,7 +145,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
             >
               <Bubble
                 value={highlightsMap.get(name)}
-                colourClass="colour-uniprot-blue"
+                colourClass="colour-sea-blue"
               />
               {name}
             </Link>

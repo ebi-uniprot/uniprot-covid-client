@@ -5,14 +5,14 @@ import './styles/SideBarLayout.scss';
 type SideBarLayoutProps = {
   title?: JSX.Element;
   sidebar: JSX.Element;
-  content: JSX.Element;
+  children: JSX.Element;
   invert?: boolean;
 };
 
 const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   title,
   sidebar,
-  content,
+  children,
   invert = false,
 }) => (
   <section
@@ -21,7 +21,7 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   >
     {title && <section className="sidebar-layout__title">{title}</section>}
     <section className="sidebar-layout__sidebar">{sidebar}</section>
-    <section className="sidebar-layout__content">{content}</section>
+    <section className="sidebar-layout__content">{children}</section>
   </section>
 );
 

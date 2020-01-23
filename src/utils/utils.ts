@@ -92,3 +92,9 @@ export const groupBy = (list: any[], keyGetter: Function) => {
   });
   return map;
 };
+
+export const uniq = (items: any[]) => {
+  return [
+    ...new Set(items.map(item => JSON.stringify(item))),
+  ].map(referenceString => JSON.parse(referenceString));
+};

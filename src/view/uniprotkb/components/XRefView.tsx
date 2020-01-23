@@ -106,6 +106,20 @@ const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
   );
 };
 
+export const XrefCategoryContent: React.FC<{
+  database: XrefsGoupedByDatabase;
+  primaryAccession: string;
+}> = ({ database, primaryAccession }) => (
+  <ExpandableList descriptionString={`${database.database} links`}>
+    {database.xrefs.map((xref): { id: string; content: JSX.Element } => ({
+      id: v1(),
+      content: (
+        <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
+      ),
+    }))}
+  </ExpandableList>
+);
+
 const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
@@ -116,14 +130,10 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   } => ({
     title: database.database,
     content: (
-      <ExpandableList descriptionString={`${database.database} links`}>
-        {database.xrefs.map((xref): { id: string; content: JSX.Element } => ({
-          id: v1(),
-          content: (
-            <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
-          ),
-        }))}
-      </ExpandableList>
+      <XrefCategoryContent
+        database={database}
+        primaryAccession={primaryAccession}
+      />
     ),
   }));
   return <InfoList infoData={infoData} columns />;
@@ -151,7 +161,7 @@ const XRefView: React.FC<XRefProps> = ({
       }
       return (
         <Fragment key={v1()}>
-          <h4>{title}</h4>
+          <h3>{title}</h3>
           {infoListNode}
         </Fragment>
       );

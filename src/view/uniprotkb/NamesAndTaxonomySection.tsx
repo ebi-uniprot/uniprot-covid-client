@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
 import ProteinNamesView from './components/ProteinNamesView';
-import hasContent from '../../model/utils/utils';
+import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import GeneNamesView from './components/GeneNamesView';
@@ -19,17 +19,17 @@ const NamesAndTaxonomySection: FC<{
   return (
     <div id={EntrySection.NamesAndTaxonomy}>
       <Card title={EntrySection.NamesAndTaxonomy}>
-        <h4>Protein names</h4>
+        <h3>Protein names</h3>
         <ProteinNamesView proteinNames={data.proteinNamesData} />
         {data.geneNamesData && (
           <Fragment>
-            <h4>Gene names</h4>
+            <h3>Gene names</h3>
             <GeneNamesView geneNamesData={data.geneNamesData} />
           </Fragment>
         )}
-        <h4>Organism names</h4>
+        <h3>Organism names</h3>
         <OrganismListView data={data.organismData} hosts={data.organismHosts} />
-        <h4>Proteome</h4>
+        <h3>Proteome</h3>
         <ProteomesListView data={data.proteomesData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>

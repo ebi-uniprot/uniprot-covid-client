@@ -14,11 +14,13 @@ type DiseaseInvolvementEntryProps = {
 type DiseaseInvolvementProps = {
   comments?: DiseaseComment[];
   primaryAccession: string;
+  includeTitle?: boolean;
 };
 
-export const DiseaseInvolvementEntry: React.FC<
-  DiseaseInvolvementEntryProps
-> = ({ comment, accession }) => {
+export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = ({
+  comment,
+  accession,
+}) => {
   const { disease, note } = comment;
   if (!disease) {
     return null;
@@ -80,7 +82,7 @@ export const DiseaseInvolvementEntry: React.FC<
   }
   return (
     <Fragment>
-      <h4>{`${diseaseId} ${acronym && `(${acronym})`}`}</h4>
+      <h3>{`${diseaseId} ${acronym && `(${acronym})`}`}</h3>
       <span className="text-block">{evidenceNodes}</span>
       <InfoList infoData={infoData} />
     </Fragment>
@@ -90,6 +92,7 @@ export const DiseaseInvolvementEntry: React.FC<
 export const DiseaseInvolvementView: React.FC<DiseaseInvolvementProps> = ({
   comments,
   primaryAccession: accession,
+  includeTitle = false,
 }) => {
   if (!comments || comments.length <= 0) {
     return null;
@@ -103,7 +106,7 @@ export const DiseaseInvolvementView: React.FC<DiseaseInvolvementProps> = ({
   ));
   return (
     <Fragment>
-      <h3>Involvment in disease</h3>
+      {includeTitle && <h3>Involvement in disease</h3>}
       {nodes}
     </Fragment>
   );

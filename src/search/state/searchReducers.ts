@@ -13,7 +13,7 @@ export const clause = (state: Clause, action: SearchAction) => {
       return {
         ...state,
         searchTerm: action.payload.searchTerm,
-        queryInput: {},
+        queryInput: action.payload.queryInput,
       };
     case searchActions.UPDATE_INPUT_VALUE:
       return {
@@ -161,12 +161,16 @@ const searchReducers = (
         ...state,
         evidences: evidences(state.evidences, action),
       };
-    case searchActions.UPDATE_QUERY_STRING: {
+    case searchActions.UPDATE_QUERY_STRING:
       return {
         ...state,
         queryString: action.payload.queryString,
       };
-    }
+    case searchActions.RESET_SEARCH_INPUT:
+      return {
+        ...state,
+        queryString: '',
+      };
     default:
       return state;
   }

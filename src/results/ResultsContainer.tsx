@@ -20,6 +20,7 @@ import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
 import { getQueryUrl } from '../utils/apiUrls';
+import { uniq } from '../utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
@@ -41,10 +42,11 @@ export type Facet = {
 type ResultsProps = {
   namespace: Namespace;
   dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) => void;
-  dispatchReset: () => void;
+  dispatchResetSearchInput: () => void;
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
   dispatchUpdateSummaryAccession: (accession: string) => void;
+  dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
   cardColumns: string[];
@@ -81,8 +83,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   }
 
   componentWillUnmount() {
-    const { dispatchReset } = this.props;
-    dispatchReset();
+    const { dispatchResetSearchInput } = this.props;
+    dispatchResetSearchInput();
   }
 
   getURLParams = (
@@ -231,7 +233,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
-      viewMode,
+      dispatchUpdateQueryString,
     } = this.props;
     const {
       query,
@@ -239,11 +241,15 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
-    const columns = viewMode === ViewMode.CARD ? cardColumns : tableColumns;
+    // Always fetch at least the card columns so these can be rendered
+    // Eg if no columns are selected for the table view ensure sufficient
+    // columns will be fetched to render each card.
+    const columns = uniq([...cardColumns, ...tableColumns]);
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
+    dispatchUpdateQueryString(query);
   }
 
   render() {
@@ -274,116 +280,109 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     }
     const { name, links, info } = infoMappings[namespace];
     return (
-      <Fragment>
-        <SideBarLayout
-          title={
-            <PageIntro
-              title={name}
-              links={links}
-              resultsCount={totalNumberResults}
-            >
-              {info}
-            </PageIntro>
-          }
-          sidebar={
-            <Facets
-              data={facets}
-              selectedFacets={selectedFacets}
-              addFacet={this.addFacet}
-              removeFacet={this.removeFacet}
-            />
-          }
-          content={
-            <Fragment>
-              {results.length > 0 && (
-                <div className="button-group">
-                  <button type="button" className="button link-button disabled">
-                    Blast
+      <SideBarLayout
+        title={
+          <PageIntro
+            title={name}
+            links={links}
+            resultsCount={totalNumberResults}
+          >
+            {info}
+          </PageIntro>
+        }
+        sidebar={
+          <Facets
+            data={facets}
+            selectedFacets={selectedFacets}
+            addFacet={this.addFacet}
+            removeFacet={this.removeFacet}
+          />
+        }
+      >
+        <Fragment>
+          {results.length > 0 && (
+            <div className="button-group">
+              <button type="button" className="button tertiary disabled">
+                Blast
+              </button>
+              <button type="button" className="button tertiary disabled">
+                Align
+              </button>
+              <button type="button" className="button tertiary">
+                <Link
+                  to={{
+                    pathname: '/download',
+                    state: {
+                      query,
+                      selectedFacets,
+                      sortColumn,
+                      sortDirection,
+                      selectedEntries: Object.keys(selectedEntries),
+                      nResults: results.length,
+                    },
+                  }}
+                >
+                  <DownloadIcon />
+                  Download
+                </Link>
+              </button>
+              <button type="button" className="button tertiary disabled">
+                <BasketIcon />
+                Add
+              </button>
+              <button type="button" className="button tertiary">
+                <StatisticsIcon />
+                Statistics
+              </button>
+              <button
+                type="button"
+                className="button tertiary large-icon"
+                onClick={() => dispatchSwitchViewMode()}
+                data-testid="table-card-toggle"
+              >
+                <span
+                  className={
+                    viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
+                  }
+                >
+                  <TableIcon />
+                </span>
+                <span
+                  className={
+                    viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
+                  }
+                >
+                  <ListIcon />
+                </span>
+              </button>
+              {viewMode === ViewMode.TABLE && (
+                <Link to="/customise-table">
+                  <button type="button" className="button tertiary">
+                    <EditIcon />
+                    Customise data
                   </button>
-                  <button type="button" className="button link-button disabled">
-                    Align
-                  </button>
-                  <Link
-                    to={{
-                      pathname: '/download',
-                      state: {
-                        query,
-                        selectedFacets,
-                        sortColumn,
-                        sortDirection,
-                        selectedEntries: Object.keys(selectedEntries),
-                        nResults: results.length,
-                      },
-                    }}
-                  >
-                    <button type="button" className="button link-button">
-                      <DownloadIcon />
-                      Download
-                    </button>
-                  </Link>
-                  <button type="button" className="button link-button disabled">
-                    <BasketIcon />
-                    Add
-                  </button>
-                  <button type="button" className="button link-button">
-                    <StatisticsIcon />
-                    Statistics
-                  </button>
-                  <button
-                    type="button"
-                    className="button link-button large-icon"
-                    onClick={() => dispatchSwitchViewMode()}
-                    data-testid="table-card-toggle"
-                  >
-                    <span
-                      className={
-                        viewMode === ViewMode.CARD
-                          ? 'link-button-icon__active'
-                          : ''
-                      }
-                    >
-                      <TableIcon />
-                    </span>
-                    <span
-                      className={
-                        viewMode === ViewMode.TABLE
-                          ? 'link-button-icon__active'
-                          : ''
-                      }
-                    >
-                      <ListIcon />
-                    </span>
-                  </button>
-                  {viewMode === ViewMode.TABLE && (
-                    <Link to="/customise-table">
-                      <button type="button" className="button link-button">
-                        <EditIcon />
-                        Customise data
-                      </button>
-                    </Link>
-                  )}
-                </div>
+                </Link>
               )}
-              <ResultsView
-                results={results}
-                handleEntrySelection={this.handleEntrySelection}
-                selectedEntries={selectedEntries}
-                handleHeaderClick={this.updateColumnSort}
-                handleCardClick={dispatchUpdateSummaryAccession}
-                summaryAccession={summaryAccession}
-                sortColumn={sortColumn}
-                sortDirection={sortDirection}
-                handleLoadMoreRows={() =>
-                  dispatchFetchBatchOfResultsIfNeeded(nextUrl)
-                }
-                totalNumberResults={totalNumberResults}
-                tableColumns={tableColumns}
-                viewMode={viewMode}
-              />
-            </Fragment>
-          }
-        />
-      </Fragment>
+            </div>
+          )}
+          <ResultsView
+            results={results}
+            handleEntrySelection={this.handleEntrySelection}
+            selectedEntries={selectedEntries}
+            handleHeaderClick={this.updateColumnSort}
+            handleCardClick={dispatchUpdateSummaryAccession}
+            summaryAccession={summaryAccession}
+            sortColumn={sortColumn}
+            sortDirection={sortDirection}
+            handleLoadMoreRows={() =>
+              dispatchFetchBatchOfResultsIfNeeded(nextUrl)
+            }
+            totalNumberResults={totalNumberResults}
+            tableColumns={tableColumns}
+            viewMode={viewMode}
+          />
+        </Fragment>
+      </SideBarLayout>
     );
   }
 }
@@ -408,11 +407,13 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchBatchOfResultsIfNeeded: (url: string | undefined) =>
         resultsActions.fetchBatchOfResultsIfNeeded(url),
-      dispatchReset: () => searchActions.reset(),
+      dispatchResetSearchInput: () => searchActions.resetSearchInput(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
       dispatchUpdateSummaryAccession: (accession: string) =>
         resultsActions.updateSummaryAccession(accession),
+      dispatchUpdateQueryString: queryString =>
+        searchActions.updateQueryString(queryString),
     },
     dispatch
   );
