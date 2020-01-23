@@ -8,7 +8,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
     <div
       class="card__header"
     >
-      <h3
+      <h2
         class="card__title"
       >
         <div
@@ -21,11 +21,9 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
               height="512"
               viewBox="0 0 426 512"
               width="426"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                id="Shape"
               />
             </svg>
           </span>
@@ -36,7 +34,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           </a>
            · uniprot id
         </div>
-      </h3>
+      </h2>
     </div>
     <div
       class="card__content"
@@ -50,7 +48,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            Name
+            <h5
+              class="bold"
+            >
+              Name
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -64,7 +66,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            EC number
+            <h5
+              class="bold"
+            >
+              EC number
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -80,7 +86,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            Organism
+            <h5
+              class="bold"
+            >
+              Organism
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -98,7 +108,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            Gene
+            <h5
+              class="bold"
+            >
+              Gene
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -273,7 +287,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            Evidence
+            <h5
+              class="bold"
+            >
+              Evidence
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -287,7 +305,11 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
           <div
             class="info-list__item__title"
           >
-            Annotation score
+            <h5
+              class="bold"
+            >
+              Annotation score
+            </h5>
           </div>
           <div
             class="info-list__item__content"
@@ -296,13 +318,13 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
               title="Annotation Score"
             >
               <span
-                class="doughnut-chart--medium colour-light-grey"
+                class="doughnut-chart--medium colour-azureish-white"
               >
                 <span
                   class="doughnut-chart--medium__left-wrap"
                 >
                   <span
-                    class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+                    class="doughnut-chart--medium__left-wrap__loader colour-sea-blue"
                     style="transform: rotate(0deg);"
                   />
                 </span>
@@ -310,7 +332,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   class="doughnut-chart--medium__right-wrap"
                 >
                   <span
-                    class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+                    class="doughnut-chart--medium__right-wrap__loader colour-sea-blue"
                     style="transform: rotate(72deg);"
                   />
                 </span>
@@ -327,9 +349,9 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
       <div
         class="protein-highlights"
       >
-        <h4>
+        <h3>
           Protein Highlights
-        </h4>
+        </h3>
         <div
           class="protein-highlights__item"
         >
@@ -337,7 +359,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             href="/uniprotkb/P21802#Sequence"
           >
             <span
-              class="bubble--medium colour-uniprot-blue"
+              class="bubble--medium colour-sea-blue"
             >
               1
             </span>
@@ -351,7 +373,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             href="/uniprotkb/P21802#Interaction"
           >
             <span
-              class="bubble--medium colour-uniprot-blue"
+              class="bubble--medium colour-sea-blue"
             >
               1
             </span>
@@ -365,7 +387,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             href="/uniprotkb/P21802#Pathology & BioTech"
           >
             <span
-              class="bubble--medium colour-uniprot-blue"
+              class="bubble--medium colour-sea-blue"
             >
               1
             </span>
@@ -379,7 +401,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             href="/uniprotkb/P21802#Subcellular Location"
           >
             <span
-              class="bubble--medium colour-uniprot-blue"
+              class="bubble--medium colour-sea-blue"
             >
               1
             </span>
@@ -393,7 +415,7 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
             href="/uniprotkb/P21802#null"
           >
             <span
-              class="bubble--medium colour-uniprot-blue"
+              class="bubble--medium colour-sea-blue"
             >
               7
             </span>

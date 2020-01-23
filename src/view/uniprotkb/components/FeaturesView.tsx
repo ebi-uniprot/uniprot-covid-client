@@ -127,7 +127,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
 
   return (
     <Fragment>
-      <h4>Features</h4>
+      <h3>Features</h3>
       <protvista-manager attributes="highlight displaystart displayend">
         {sequence && (
           <Fragment>

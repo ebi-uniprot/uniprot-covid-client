@@ -32,7 +32,7 @@ const GOView: React.FC<{ data: Map<GoAspect, GoTerm[]> }> = ({ data }) => (
   <Fragment>
     {Array.from(data.keys()).map(aspect => (
       <section className="text-block" key={aspect}>
-        <h5>{aspect}</h5>
+        <h4>{aspect}</h4>
         {data.get(aspect) && (
           <GOTermsView data={data.get(aspect) as GoTerm[]} />
         )}

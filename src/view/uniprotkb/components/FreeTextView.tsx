@@ -36,7 +36,7 @@ const FreeTextView: React.FC<FreeTextProps> = ({ comments, title }) => {
 
   return (
     <Fragment>
-      {title && <h4 style={{ textTransform: 'capitalize' }}>{title}</h4>}
+      {title && <h3 style={{ textTransform: 'capitalize' }}>{title}</h3>}
       {freeTextData}
     </Fragment>
   );

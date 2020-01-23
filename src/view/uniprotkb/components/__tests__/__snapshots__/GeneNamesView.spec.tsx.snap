@@ -11,7 +11,11 @@ exports[`GeneNames should render gene_names 1`] = `
       <div
         class="info-list__item__title"
       >
-        Name
+        <h5
+          class="bold"
+        >
+          Name
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -62,7 +66,11 @@ exports[`GeneNames should render gene_names 1`] = `
       <div
         class="info-list__item__title"
       >
-        Synonyms
+        <h5
+          class="bold"
+        >
+          Synonyms
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -113,7 +121,11 @@ exports[`GeneNames should render gene_names 1`] = `
       <div
         class="info-list__item__title"
       >
-        ORF names
+        <h5
+          class="bold"
+        >
+          ORF names
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -164,7 +176,11 @@ exports[`GeneNames should render gene_names 1`] = `
       <div
         class="info-list__item__title"
       >
-        Ordered locus names
+        <h5
+          class="bold"
+        >
+          Ordered locus names
+        </h5>
       </div>
       <div
         class="info-list__item__content"

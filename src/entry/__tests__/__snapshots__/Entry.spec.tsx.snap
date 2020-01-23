@@ -115,26 +115,25 @@ exports[`Entry should render 1`] = `
         class="button-group"
       >
         <button
-          class="button link-button"
+          class="button tertiary"
           type="button"
         >
           Blast
         </button>
         <button
-          class="button link-button"
+          class="button tertiary"
           type="button"
         >
           Align
         </button>
         <button
-          class="button link-button"
+          class="button tertiary"
           type="button"
         >
           <svg
             height="32"
             viewBox="0 0 32 32"
             width="32"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
@@ -143,7 +142,7 @@ exports[`Entry should render 1`] = `
           Download
         </button>
         <button
-          class="button link-button"
+          class="button tertiary"
           type="button"
         >
           Add
@@ -155,7 +154,7 @@ exports[`Entry should render 1`] = `
         <div
           class="card__header"
         >
-          <h3
+          <h2
             class="card__title"
           >
             <div
@@ -168,11 +167,9 @@ exports[`Entry should render 1`] = `
                   height="512"
                   viewBox="0 0 426 512"
                   width="426"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                    id="Shape"
                   />
                 </svg>
               </span>
@@ -183,7 +180,7 @@ exports[`Entry should render 1`] = `
               </a>
                · uniprot id
             </div>
-          </h3>
+          </h2>
         </div>
         <div
           class="card__content"
@@ -197,7 +194,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                Name
+                <h5
+                  class="bold"
+                >
+                  Name
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -211,7 +212,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                EC number
+                <h5
+                  class="bold"
+                >
+                  EC number
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -227,7 +232,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                Organism
+                <h5
+                  class="bold"
+                >
+                  Organism
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -245,7 +254,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                Gene
+                <h5
+                  class="bold"
+                >
+                  Gene
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -420,7 +433,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                Evidence
+                <h5
+                  class="bold"
+                >
+                  Evidence
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -434,7 +451,11 @@ exports[`Entry should render 1`] = `
               <div
                 class="info-list__item__title"
               >
-                Annotation score
+                <h5
+                  class="bold"
+                >
+                  Annotation score
+                </h5>
               </div>
               <div
                 class="info-list__item__content"
@@ -443,13 +464,13 @@ exports[`Entry should render 1`] = `
                   title="Annotation Score"
                 >
                   <span
-                    class="doughnut-chart--medium colour-light-grey"
+                    class="doughnut-chart--medium colour-azureish-white"
                   >
                     <span
                       class="doughnut-chart--medium__left-wrap"
                     >
                       <span
-                        class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+                        class="doughnut-chart--medium__left-wrap__loader colour-sea-blue"
                         style="transform: rotate(0deg);"
                       />
                     </span>
@@ -457,7 +478,7 @@ exports[`Entry should render 1`] = `
                       class="doughnut-chart--medium__right-wrap"
                     >
                       <span
-                        class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+                        class="doughnut-chart--medium__right-wrap__loader colour-sea-blue"
                         style="transform: rotate(72deg);"
                       />
                     </span>
@@ -482,18 +503,18 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Function
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
           >
-            <h4>
+            <h3>
               catalytic activity
-            </h4>
+            </h3>
             <span
               class="text-block"
             >
@@ -511,11 +532,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -555,11 +574,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -601,11 +618,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 400 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -643,11 +658,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 400 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -672,9 +685,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </section>
             </section>
-            <h4>
+            <h3>
               Absorption
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -697,11 +710,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 426 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -735,11 +746,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 426 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -763,9 +772,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </section>
-            <h4>
+            <h3>
               Kinetics
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -788,11 +797,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 426 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -835,11 +842,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 426 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -864,9 +869,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </section>
             </section>
-            <h4>
+            <h3>
               pH Dependence
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -881,11 +886,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 426 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -909,9 +912,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </section>
-            <h4>
+            <h3>
               Redox Potential
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -926,11 +929,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 426 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -954,9 +955,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </section>
-            <h4>
+            <h3>
               Temperature Dependence
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -971,11 +972,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 426 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -1002,9 +1001,9 @@ exports[`Entry should render 1`] = `
             <div
               class="GoRibbon"
             >
-              <h4>
+              <h3>
                 GO Annotations
-              </h4>
+              </h3>
               <div
                 class="GoRibbon__container"
               >
@@ -1027,18 +1026,18 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Names & Taxonomy
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
           >
-            <h4>
+            <h3>
               Protein names
-            </h4>
+            </h3>
             <div
               class="info-list"
             >
@@ -1048,7 +1047,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Recommended name
+                  <h5
+                    class="bold"
+                  >
+                    Recommended name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1064,11 +1067,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 426 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -1099,7 +1100,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  EC number
+                  <h5
+                    class="bold"
+                  >
+                    EC number
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1115,11 +1120,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 426 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -1150,7 +1153,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Short names
+                  <h5
+                    class="bold"
+                  >
+                    Short names
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1166,11 +1173,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 426 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -1201,13 +1206,17 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Alternative names
+                  <h5
+                    class="bold"
+                  >
+                    Alternative names
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 >
                   <ul
-                    class="no-bullet"
+                    class="expandable-list no-bullet"
                   >
                     <li>
                       a full alt Name 
@@ -1221,11 +1230,9 @@ exports[`Entry should render 1`] = `
                           height="12"
                           viewBox="0 0 426 512"
                           width="12"
-                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                            id="Shape"
                           />
                         </svg>
                         <span
@@ -1259,11 +1266,9 @@ exports[`Entry should render 1`] = `
                           height="12"
                           viewBox="0 0 426 512"
                           width="12"
-                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                            id="Shape"
                           />
                         </svg>
                         <span
@@ -1297,13 +1302,17 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Cleaved into 1 chains
+                  <h5
+                    class="bold"
+                  >
+                    Cleaved into 1 chains
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 >
                   <ul
-                    class="no-bullet"
+                    class="expandable-list no-bullet"
                   >
                     <li>
                       containsrec full Name (containsrecommended short name)  
@@ -1321,13 +1330,17 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Submission names
+                  <h5
+                    class="bold"
+                  >
+                    Submission names
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 >
                   <ul
-                    class="no-bullet"
+                    class="expandable-list no-bullet"
                   >
                     <li>
                       sub full Name 
@@ -1341,11 +1354,9 @@ exports[`Entry should render 1`] = `
                           height="12"
                           viewBox="0 0 426 512"
                           width="12"
-                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                            id="Shape"
                           />
                         </svg>
                         <span
@@ -1378,7 +1389,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Biotech name
+                  <h5
+                    class="bold"
+                  >
+                    Biotech name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1394,11 +1409,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 426 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -1429,7 +1442,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  CD Antigen Name
+                  <h5
+                    class="bold"
+                  >
+                    CD Antigen Name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1441,16 +1458,20 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  INN Name
+                  <h5
+                    class="bold"
+                  >
+                    INN Name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 />
               </div>
             </div>
-            <h4>
+            <h3>
               Gene names
-            </h4>
+            </h3>
             <div
               class="info-list"
             >
@@ -1460,7 +1481,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Name
+                  <h5
+                    class="bold"
+                  >
+                    Name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1511,7 +1536,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Synonyms
+                  <h5
+                    class="bold"
+                  >
+                    Synonyms
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1562,7 +1591,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  ORF names
+                  <h5
+                    class="bold"
+                  >
+                    ORF names
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1613,7 +1646,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Ordered locus names
+                  <h5
+                    class="bold"
+                  >
+                    Ordered locus names
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1659,9 +1696,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </div>
-            <h4>
+            <h3>
               Organism names
-            </h4>
+            </h3>
             <div
               class="info-list"
             >
@@ -1671,7 +1708,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Organism
+                  <h5
+                    class="bold"
+                  >
+                    Organism
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1726,7 +1767,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Taxonomic identifier
+                  <h5
+                    class="bold"
+                  >
+                    Taxonomic identifier
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1745,10 +1790,9 @@ exports[`Entry should render 1`] = `
                     <svg
                       viewBox="0 0 576 512"
                       width="12.5"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
                       />
                     </svg>
                   </a>
@@ -1760,7 +1804,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Taxonomic lineage
+                  <h5
+                    class="bold"
+                  >
+                    Taxonomic lineage
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1774,7 +1822,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Virus hosts
+                  <h5
+                    class="bold"
+                  >
+                    Virus hosts
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -1789,9 +1841,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </div>
-            <h4>
+            <h3>
               Proteome
-            </h4>
+            </h3>
           </div>
         </div>
       </div>
@@ -1804,11 +1856,11 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Subcellular Location
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
@@ -1816,9 +1868,9 @@ exports[`Entry should render 1`] = `
             <section
               class="text-block"
             >
-              <h4>
+              <h3>
                 molecule value
-              </h4>
+              </h3>
               <div>
                 <strong>
                   location value
@@ -1834,11 +1886,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 400 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -1872,11 +1922,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 400 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -1914,11 +1962,9 @@ exports[`Entry should render 1`] = `
                     height="12"
                     viewBox="0 0 400 512"
                     width="12"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                      id="Shape"
                     />
                   </svg>
                   <span
@@ -1955,11 +2001,11 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Pathology & BioTech
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
@@ -1967,9 +2013,9 @@ exports[`Entry should render 1`] = `
             <h3>
               Involvement in disease
             </h3>
-            <h4>
+            <h3>
               Disease Id (someAcron)
-            </h4>
+            </h3>
             <span
               class="text-block"
             >
@@ -1983,11 +2029,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -2020,13 +2064,17 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Note
+                  <h5
+                    class="bold"
+                  >
+                    Note
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 >
                   <ul
-                    class="no-bullet"
+                    class="expandable-list no-bullet"
                   >
                     <li>
                       value2
@@ -2040,7 +2088,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Description
+                  <h5
+                    class="bold"
+                  >
+                    Description
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2054,7 +2106,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  See also
+                  <h5
+                    class="bold"
+                  >
+                    See also
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2068,21 +2124,20 @@ exports[`Entry should render 1`] = `
                     <svg
                       viewBox="0 0 576 512"
                       width="12.5"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
                       />
                     </svg>
                   </a>
                 </div>
               </div>
             </div>
-            <h4
+            <h3
               style="text-transform: capitalize;"
             >
               disruption phenotype
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -2097,11 +2152,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -2126,9 +2179,9 @@ exports[`Entry should render 1`] = `
               </div>
             </section>
             <div>
-              <h4>
+              <h3>
                 Variants
-              </h4>
+              </h3>
               <protvista-manager
                 attributes="highlight displaystart displayend activefilters filters"
               >
@@ -2168,18 +2221,18 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Protein Processing
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
           >
-            <h4>
+            <h3>
               Features
-            </h4>
+            </h3>
             <protvista-manager
               attributes="highlight displaystart displayend"
             >
@@ -2212,11 +2265,11 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Interaction
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
@@ -2237,18 +2290,18 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Family & Domains
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
           >
-            <h4>
+            <h3>
               Keywords
-            </h4>
+            </h3>
             <div
               class="info-list"
             >
@@ -2258,7 +2311,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Domain
+                  <h5
+                    class="bold"
+                  >
+                    Domain
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2283,11 +2340,11 @@ exports[`Entry should render 1`] = `
           <div
             class="card__header"
           >
-            <h3
+            <h2
               class="card__title"
             >
               Sequence
-            </h3>
+            </h2>
           </div>
           <div
             class="card__content"
@@ -2301,7 +2358,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Sequence status
+                  <h5
+                    class="bold"
+                  >
+                    Sequence status
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2325,11 +2386,11 @@ exports[`Entry should render 1`] = `
               value1
             </p>
             <hr />
-            <h4
+            <h3
               id="isoID1"
             >
               isoID1
-            </h4>
+            </h3>
             <div
               class="info-list"
             >
@@ -2339,7 +2400,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Name
+                  <h5
+                    class="bold"
+                  >
+                    Name
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2353,7 +2418,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Synonyms
+                  <h5
+                    class="bold"
+                  >
+                    Synonyms
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2367,7 +2436,11 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Note
+                  <h5
+                    class="bold"
+                  >
+                    Note
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
@@ -2382,9 +2455,9 @@ exports[`Entry should render 1`] = `
             >
               Load sequence
             </button>
-            <h4>
+            <h3>
               Sequence caution
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -2398,10 +2471,9 @@ exports[`Entry should render 1`] = `
                 <svg
                   viewBox="0 0 576 512"
                   width="12.5"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                    d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
                   />
                 </svg>
               </a>
@@ -2416,11 +2488,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -2444,9 +2514,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </section>
-            <h4>
+            <h3>
               Mass Spectrometry
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -2465,11 +2535,9 @@ exports[`Entry should render 1`] = `
                   height="12"
                   viewBox="0 0 400 512"
                   width="12"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                    id="Shape"
                   />
                 </svg>
                 <span
@@ -2493,9 +2561,9 @@ exports[`Entry should render 1`] = `
                 </div>
               </div>
             </section>
-            <h4>
+            <h3>
               RNA Editing
-            </h4>
+            </h3>
             <section
               class="text-block"
             >
@@ -2513,11 +2581,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 400 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -2555,11 +2621,9 @@ exports[`Entry should render 1`] = `
                       height="12"
                       viewBox="0 0 400 512"
                       width="12"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-                        id="Shape"
                       />
                     </svg>
                     <span
@@ -2585,9 +2649,9 @@ exports[`Entry should render 1`] = `
                 </span>
               </div>
             </section>
-            <h4>
+            <h3>
               Genome annotation databases
-            </h4>
+            </h3>
             <div
               class="info-list info-list--columns"
             >
@@ -2597,13 +2661,17 @@ exports[`Entry should render 1`] = `
                 <div
                   class="info-list__item__title"
                 >
-                  Ensembl
+                  <h5
+                    class="bold"
+                  >
+                    Ensembl
+                  </h5>
                 </div>
                 <div
                   class="info-list__item__content"
                 >
                   <ul
-                    class="no-bullet"
+                    class="expandable-list no-bullet"
                   >
                     <li>
                       <a
@@ -2615,10 +2683,9 @@ exports[`Entry should render 1`] = `
                         <svg
                           viewBox="0 0 576 512"
                           width="12.5"
-                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
                           />
                         </svg>
                       </a>
