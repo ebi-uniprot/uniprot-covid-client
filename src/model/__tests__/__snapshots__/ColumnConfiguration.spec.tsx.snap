@@ -1394,9 +1394,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
       : topology value 
@@ -1432,9 +1429,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </div>
@@ -1474,9 +1468,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </section>
