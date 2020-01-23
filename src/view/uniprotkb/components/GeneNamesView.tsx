@@ -2,13 +2,23 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { GeneNamesData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
+import { NameWithEvidence } from './ProteinNamesView';
+import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
 export const geneAlternativeNamesView = (
-  alternativeNames: { value: string }[],
+  alternativeNames: ValueWithEvidence[],
   firstComma: boolean = true
 ) => {
-  const altNames = alternativeNames.map(altName => altName.value).join(', ');
-  return `${firstComma ? ', ' : ''}${altNames}`;
+  return (
+    <Fragment>
+      {firstComma && ', '}
+      {alternativeNames
+        .map<React.ReactNode>(altName => (
+          <NameWithEvidence data={altName} key={altName.value} />
+        ))
+        .reduce((prev, curr) => [prev, ', ', curr])}
+    </Fragment>
+  );
 };
 
 const GeneNamesView: React.FC<{
@@ -21,7 +31,9 @@ const GeneNamesView: React.FC<{
         {
           title: 'Name',
           content: geneNames.geneName && (
-            <Fragment>{geneNames.geneName.value}</Fragment>
+            <Fragment>
+              <NameWithEvidence data={geneNames.geneName} />
+            </Fragment>
           ),
         },
       ];
