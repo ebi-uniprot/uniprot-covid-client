@@ -9,10 +9,13 @@ import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
 import { getDownloadUrl } from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 
-const replaceExcelWithTsv = (fileFormat: FileFormat) =>
+export const replaceExcelWithTsv = (fileFormat: FileFormat) =>
   fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;
 
-const compareDownloadsUrlsDisregardSize = (url1: string, url2: string) => {
+export const compareDownloadUrlsDisregardSize = (
+  url1: string,
+  url2: string
+) => {
   const reSize = /&size=\d+/;
   return url1.replace(reSize, '') === url2.replace(reSize, '');
 };
@@ -143,7 +146,7 @@ const Download: React.FC<DownloadTableProps> = ({
         setCompressed(e.target.value === 'true')
       }
       preview={
-        compareDownloadsUrlsDisregardSize(preview.url, downloadUrl) &&
+        compareDownloadUrlsDisregardSize(preview.url, downloadUrl) &&
         preview.data &&
         preview.contentType ===
           fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
