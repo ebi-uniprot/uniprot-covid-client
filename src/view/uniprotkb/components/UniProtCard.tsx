@@ -96,13 +96,13 @@ const UniProtCard: FC<{
 
   return (
     <div>
-      <h4>
+      <h3>
         <UniProtTitle
           primaryAccession={data.primaryAccession}
           entryType={data.entryType}
           uniProtId={data.uniProtId}
         />
-      </h4>
+      </h3>
       <p>
         {recommendedNameNode}
         {organismNameNode}

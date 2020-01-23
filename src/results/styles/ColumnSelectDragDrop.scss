@@ -2,7 +2,7 @@
 
 .column-select-drag-drop {
   &__list {
-    background: $colour-seashell-grey;
+    background: $colour-azureish-white;
     display: flex;
     padding: 0.5rem;
     overflow: auto;
@@ -13,18 +13,18 @@
       user-select: none;
       padding: 0.5rem;
       margin: 0 0.25rem 0 0;
-      color: black;
-      background: $colour-light-blue;
+      color: $colour-sky-white;
+      background: $colour-sea-blue;
       &:focus {
         outline: none;
       }
       &:hover {
-        color: black;
-        background: $colour-medium-blue;
+        color: $colour-sky-white;
+        background: $colour-vivid-cerulean;
       }
       &--dragging {
-        color: black;
-        background: $colour-medium-blue;
+        color: $colour-sky-white;
+        background: $colour-vivid-cerulean;
       }
 
       &__button {
@@ -36,7 +36,7 @@
         }
 
         &__icon {
-          fill: black !important;
+          color: $colour-sky-white;
           width: 0.9rem;
           height: 0.9rem;
           position: relative;

@@ -30,25 +30,25 @@ const SequenceSection: FC<{
         />
         {data.sequenceCaution && data.sequenceCaution.length > 0 && (
           <Fragment>
-            <h4>Sequence caution</h4>
+            <h3>Sequence caution</h3>
             <SequenceCautionView data={data.sequenceCaution} />
           </Fragment>
         )}
         {data.massSpectrometry && data.massSpectrometry.length > 0 && (
           <Fragment>
-            <h4>Mass Spectrometry</h4>
+            <h3>Mass Spectrometry</h3>
             <MassSpectrometryView data={data.massSpectrometry} />
           </Fragment>
         )}
         {data.polymorphysm && data.polymorphysm.length > 0 && (
           <Fragment>
-            <h4>Polymorphysm</h4>
+            <h3>Polymorphysm</h3>
             <FreeTextView comments={data.polymorphysm} />
           </Fragment>
         )}
         {data.rnaEditing && data.rnaEditing.length > 0 && (
           <Fragment>
-            <h4>RNA Editing</h4>
+            <h3>RNA Editing</h3>
             <RNAEditingView data={data.rnaEditing} />
           </Fragment>
         )}

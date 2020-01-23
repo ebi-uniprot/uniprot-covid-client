@@ -59,7 +59,7 @@ const KeywordView: React.FC<{ keywords: KeywordUIModel[] }> = ({
   }
   return (
     <Fragment>
-      <h4>Keywords</h4>
+      <h3>Keywords</h3>
       <InfoList infoData={infoData} />
     </Fragment>
   );
