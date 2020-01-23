@@ -331,7 +331,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
                 <div>
                   some orf 
@@ -372,7 +371,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
                 <div>
                   some locus 
@@ -413,7 +411,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
               </div>
             </div>
@@ -1561,7 +1558,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
               </div>
               <div
@@ -1613,7 +1609,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
               </div>
               <div
@@ -1665,7 +1660,6 @@ exports[`Entry should render 1`] = `
                       </div>
                     </div>
                   </div>
-                  , 
                 </div>
               </div>
             </div>

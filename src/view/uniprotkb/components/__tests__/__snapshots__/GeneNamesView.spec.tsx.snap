@@ -105,7 +105,6 @@ exports[`GeneNames should render gene_names 1`] = `
             </div>
           </div>
         </div>
-        , 
       </div>
     </div>
     <div
@@ -157,7 +156,6 @@ exports[`GeneNames should render gene_names 1`] = `
             </div>
           </div>
         </div>
-        , 
       </div>
     </div>
     <div
@@ -209,7 +207,6 @@ exports[`GeneNames should render gene_names 1`] = `
             </div>
           </div>
         </div>
-        , 
       </div>
     </div>
   </div>

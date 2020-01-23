@@ -222,7 +222,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
             <div>
               some orf 
@@ -263,7 +262,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
             <div>
               some locus 
@@ -304,7 +302,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
           </div>
         </div>
@@ -1452,7 +1449,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
           </div>
           <div
@@ -1504,7 +1500,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
           </div>
           <div
@@ -1556,7 +1551,6 @@ exports[`Entry view should render 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
           </div>
         </div>

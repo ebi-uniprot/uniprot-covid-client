@@ -184,7 +184,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
             <div>
               some orf 
@@ -225,7 +224,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
             <div>
               some locus 
@@ -266,7 +264,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   </div>
                 </div>
               </div>
-              , 
             </div>
           </div>
         </div>

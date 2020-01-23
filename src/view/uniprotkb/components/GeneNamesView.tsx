@@ -12,12 +12,11 @@ export const geneAlternativeNamesView = (
   return (
     <Fragment>
       {firstComma && ', '}
-      {alternativeNames.map(altName => (
-        <Fragment key={altName.value}>
-          <NameWithEvidence data={altName} />
-          {', '}
-        </Fragment>
-      ))}
+      {alternativeNames
+        .map<React.ReactNode>(altName => (
+          <NameWithEvidence data={altName} key={altName.value} />
+        ))
+        .reduce((prev, curr) => [prev, ', ', curr])}
     </Fragment>
   );
 };
