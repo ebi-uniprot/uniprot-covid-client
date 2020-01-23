@@ -161,7 +161,7 @@ const XRefView: React.FC<XRefProps> = ({
       }
       return (
         <Fragment key={v1()}>
-          <h4>{title}</h4>
+          <h3>{title}</h3>
           {infoListNode}
         </Fragment>
       );

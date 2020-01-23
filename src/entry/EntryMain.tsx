@@ -20,17 +20,17 @@ function arePropsEqual(prevProps: EntryMainProps, nextProps: EntryMainProps) {
 const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
     <div className="button-group">
-      <button type="button" className="button link-button">
+      <button type="button" className="button tertiary">
         Blast
       </button>
-      <button type="button" className="button link-button">
+      <button type="button" className="button tertiary">
         Align
       </button>
-      <button type="button" className="button link-button">
+      <button type="button" className="button tertiary">
         <DownloadIcon />
         Download
       </button>
-      <button type="button" className="button link-button">
+      <button type="button" className="button tertiary">
         Add
       </button>
     </div>

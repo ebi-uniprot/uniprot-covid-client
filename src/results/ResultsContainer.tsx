@@ -299,33 +299,33 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
         <Fragment>
           {results.length > 0 && (
             <div className="button-group">
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 Blast
               </button>
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 Align
               </button>
-              <button type="button" className="button link-button">
+              <button type="button" className="button tertiary">
                 <DownloadIcon />
                 Download
               </button>
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 <BasketIcon />
                 Add
               </button>
-              <button type="button" className="button link-button">
+              <button type="button" className="button tertiary">
                 <StatisticsIcon />
                 Statistics
               </button>
               <button
                 type="button"
-                className="button link-button large-icon"
+                className="button tertiary large-icon"
                 onClick={() => dispatchSwitchViewMode()}
                 data-testid="table-card-toggle"
               >
                 <span
                   className={
-                    viewMode === ViewMode.CARD ? 'link-button-icon__active' : ''
+                    viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
                   }
                 >
                   <TableIcon />
@@ -333,7 +333,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 <span
                   className={
                     viewMode === ViewMode.TABLE
-                      ? 'link-button-icon__active'
+                      ? 'tertiary-icon__active'
                       : ''
                   }
                 >
@@ -342,7 +342,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               </button>
               {viewMode === ViewMode.TABLE && (
                 <Link to="/customise-table">
-                  <button type="button" className="button link-button">
+                  <button type="button" className="button tertiary">
                     <EditIcon />
                     Customise data
                   </button>

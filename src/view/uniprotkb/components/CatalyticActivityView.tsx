@@ -48,7 +48,7 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
     <Fragment>
       <button
         type="button"
-        className="button link-button rhea-reaction-visualizer__button"
+        className="button tertiary rhea-reaction-visualizer__button"
         onClick={() => setShow(!show)}
       >
         {`${show ? 'Hide' : 'View'} Rhea reaction`}
@@ -132,7 +132,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   let firstRheaId: number | null = null;
   return (
     <Fragment>
-      {title && <h4>{title}</h4>}
+      {title && <h3>{title}</h3>}
       {comments.map(({ reaction, physiologicalReactions }) => {
         if (!reaction) {
           return null;

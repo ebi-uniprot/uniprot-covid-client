@@ -11,7 +11,11 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       <div
         class="info-list__item__title"
       >
-        Length
+        <h5
+          class="bold"
+        >
+          Length
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -25,7 +29,11 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       <div
         class="info-list__item__title"
       >
-        Mass (Da)
+        <h5
+          class="bold"
+        >
+          Mass (Da)
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -39,7 +47,11 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       <div
         class="info-list__item__title"
       >
-        Last updated
+        <h5
+          class="bold"
+        >
+          Last updated
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -53,7 +65,11 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       <div
         class="info-list__item__title"
       >
-        Checksum
+        <h5
+          class="bold"
+        >
+          Checksum
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -153,7 +169,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Sequence status
+        <h5
+          class="bold"
+        >
+          Sequence status
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -167,7 +187,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Sequence processing
+        <h5
+          class="bold"
+        >
+          Sequence processing
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -191,11 +215,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
     some text
   </p>
   <hr />
-  <h4
+  <h3
     id="P05067-1"
   >
     P05067-1
-  </h4>
+  </h3>
   <p>
     This isoform has been chosen as the 
     <strong>
@@ -212,7 +236,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Name
+        <h5
+          class="bold"
+        >
+          Name
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -226,7 +254,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Synonyms
+        <h5
+          class="bold"
+        >
+          Synonyms
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -240,7 +272,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Note
+        <h5
+          class="bold"
+        >
+          Note
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -258,7 +294,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Length
+        <h5
+          class="bold"
+        >
+          Length
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -272,7 +312,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Mass (Da)
+        <h5
+          class="bold"
+        >
+          Mass (Da)
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -286,7 +330,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Last updated
+        <h5
+          class="bold"
+        >
+          Last updated
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -300,7 +348,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       <div
         class="info-list__item__title"
       >
-        Checksum
+        <h5
+          class="bold"
+        >
+          Checksum
+        </h5>
       </div>
       <div
         class="info-list__item__content"

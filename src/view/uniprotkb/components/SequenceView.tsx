@@ -114,7 +114,7 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   return (
     <Fragment key={isoformData.isoformIds.join('')}>
       <hr />
-      <h4 id={name}>{name}</h4>
+      <h3 id={name}>{name}</h3>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
           {'This isoform has been chosen as the '}
