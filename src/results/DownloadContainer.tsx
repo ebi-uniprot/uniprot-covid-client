@@ -60,7 +60,7 @@ const Download: React.FC<DownloadTableProps> = ({
     });
     const link = document.createElement('a');
     link.href = url;
-    // link.target = '_blank';
+    link.target = '_blank';
     link.setAttribute('download', '');
     document.body.appendChild(link);
     link.click();
