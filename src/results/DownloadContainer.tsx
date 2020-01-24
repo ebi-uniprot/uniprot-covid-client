@@ -49,7 +49,6 @@ const Download: React.FC<DownloadTableProps> = ({
     contentType: '',
     data: '',
   });
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const url = getDownloadUrl({
@@ -94,10 +93,12 @@ const Download: React.FC<DownloadTableProps> = ({
       Accept: fileFormatToContentType.get(fileFormatExcelReplaced),
     })
       .then(response => {
+        console.log('response', response);
         const contentType = idx(
           response,
           o => o.headers['content-type']
         ) as FileFormat;
+        console.log('abn', response.data);
         setPreview({
           data:
             contentType === fileFormatToContentType.get(FileFormat.json)
@@ -125,6 +126,12 @@ const Download: React.FC<DownloadTableProps> = ({
     compressed,
     selectedAccessions: downloadAll ? [] : selectedEntries,
   });
+  console.log(
+    'conditions',
+    preview.contentType,
+    fileFormat,
+    fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
+  );
   return (
     <DownloadView
       onSubmit={handleSubmit}

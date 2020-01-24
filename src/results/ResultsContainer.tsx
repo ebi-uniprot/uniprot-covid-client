@@ -318,7 +318,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                       sortColumn,
                       sortDirection,
                       selectedEntries: Object.keys(selectedEntries),
-                      nResults: results.length,
                     },
                   }}
                 >

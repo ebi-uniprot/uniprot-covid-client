@@ -40,6 +40,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   nSelectedEntries,
   totalNumberResults,
 }) => {
+  console.log('zebra', preview);
   let previewNode;
   if (loadingPreview) {
     previewNode = <Loader />;
@@ -48,7 +49,9 @@ const DownloadView: React.FC<DownloadViewProps> = ({
       <div className="preview">
         <h4>Preview</h4>
         <div className="preview__container">
-          <pre className="preview__inner">{preview}</pre>
+          <pre className="preview__inner" data-testid="download-preview">
+            {preview}
+          </pre>
         </div>
       </div>
     );
