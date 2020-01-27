@@ -11,12 +11,19 @@ import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 import mockDownloadApi from '../../__mockData__/DownloadData';
+import mockResultFieldsApi from '../../__mockData__/ResultFieldsData';
 import * as resultsActions from '../state/resultsActions';
+import '@testing-library/jest-dom/extend-expect';
 import { FileFormat } from '../types/resultsTypes';
 import apiUrls from '../../utils/apiUrls';
 
 const mock = new MockAdapter(axios);
-mock.onGet(mockDownloadApi.request).reply(200, mockDownloadApi.response);
+mock
+  .onGet(mockDownloadApi.request)
+  .reply(200, mockDownloadApi.response, mockDownloadApi.headers);
+mock
+  .onGet(mockResultFieldsApi.request)
+  .reply(200, mockResultFieldsApi.response);
 
 describe('replaceExcelWithTsv', () => {
   test('should replace excel file format with tsv', () => {
@@ -48,19 +55,16 @@ describe('DownloadContainer component', () => {
   beforeEach(() => {
     history = createMemoryHistory();
     history.replace(location);
-    renderedWithRedux = renderWithRedux(
-      <DownloadContainer totalNumberResults={1000} />,
-      {
-        initialState: {
-          ...initialState,
-          results: {
-            ...initialState.results,
-            totalNumberResults: 1000,
-          },
+    renderedWithRedux = renderWithRedux(<DownloadContainer />, {
+      initialState: {
+        ...initialState,
+        results: {
+          ...initialState.results,
+          totalNumberResults: 1000,
         },
-        history,
-      }
-    );
+      },
+      history,
+    });
     goBack = jest.spyOn(history, 'goBack');
     windowSpy = jest.spyOn(global, 'window', 'get');
   });
@@ -72,36 +76,38 @@ describe('DownloadContainer component', () => {
     expect(goBack).toHaveBeenCalled();
   });
 
-  test('should handle download button by calling download endpoint and then going back', () => {
+  test('should handle download button by opening new tab and then going back', () => {
     const { getAllByText } = renderedWithRedux;
     const downloadButton = getAllByText('Download')[1];
     fireEvent.click(downloadButton);
-    // A new tab should have been opened to start the download
     expect(windowSpy).toHaveBeenCalled();
     expect(goBack).toHaveBeenCalled();
   });
 
-  // test('should handle preview button click by calling endpoint with a limit of 10', async () => {
-  //   console.log(initialState);
-  //   const { getByTestId, getByText } = renderedWithRedux;
-  //   const previewButton = getByText('Preview 10');
-  //   fireEvent.click(previewButton);
-  //   const preview = await waitForElement(() => getByTestId('download-preview'));
-  //   expect(preview.textContent).toEqual(mockDownloadApi.response);
-  // });
+  test('should handle preview button click', async () => {
+    const { getByTestId, getByText } = renderedWithRedux;
+    const previewButton = getByText('Preview 10');
+    fireEvent.click(previewButton);
+    const preview = await waitForElement(() => getByTestId('download-preview'));
+    expect(preview.textContent).toEqual(mockDownloadApi.response);
+  });
 
-  // test('should handle preview button click by calling endpoint with a limit pf', () => {
-  //   const { getByText } = renderedWithRedux;
-  //   const cancelButton = getByText('Cancel');
-  //   fireEvent.click(cancelButton);
-  //   expect(goBack).toHaveBeenCalled();
-  // });
-
-  // test('should go back and call updateTableColumns action when customise table form is submitted', () => {
-  //   const { getByTestId, history } = renderedWithRedux;
-  //   const form = getByTestId('customise-table-form');
-  //   fireEvent.submit(form);
-  //   expect(goBack).toHaveBeenCalled();
-  //   expect(updateTableColumns).toHaveBeenCalled();
-  // });
+  test('should  show column selection component when excel or tsv file type is selected and otherwise hide it', async () => {
+    const { getByTestId, queryByText } = renderedWithRedux;
+    const formatSelect = getByTestId('file-format-select');
+    [
+      [FileFormat.excel, true],
+      [FileFormat.xml, false],
+      [FileFormat.tsv, true],
+    ].forEach(async (value, columnSelect) => {
+      fireEvent.change(formatSelect, { target: { value } });
+      const customise = await waitForElement(() =>
+        queryByText('Customise data')
+      );
+      const expectCustomise = expect(customise);
+      columnSelect
+        ? expectCustomise.toBeInTheDocument()
+        : expectCustomise.not.toBeInTheDocument();
+    });
+  });
 });

@@ -40,7 +40,6 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   nSelectedEntries,
   totalNumberResults,
 }) => {
-  console.log('zebra', preview);
   let previewNode;
   if (loadingPreview) {
     previewNode = <Loader />;
@@ -62,7 +61,11 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   );
   return (
     <Fragment>
-      <form onSubmit={onSubmit} className="download">
+      <form
+        onSubmit={onSubmit}
+        className="download"
+        data-testid="download-form"
+      >
         <h3>Download</h3>
         <label htmlFor="data-selection-false">
           <input
@@ -91,6 +94,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           <legend>Format</legend>
           <select
             id="file-format-select"
+            data-testid="file-format-select"
             value={fileFormat}
             onChange={onFileFormatChange}
           >
