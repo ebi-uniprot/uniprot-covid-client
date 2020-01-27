@@ -1,27 +1,8 @@
 import React, { FC, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  UniProtkbAPIModel,
-  Citation,
-} from '../../model/uniprotkb/UniProtkbConverter';
+import { Publication } from 'franklin-sites';
+import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import { RootState } from '../../state/state-types';
-
-const Publication: FC<{ publication: Citation }> = ({ publication }) => (
-  <div>
-    <h4>{publication.citation.title}</h4>
-    <p>
-      {publication.citation.authors &&
-        publication.citation.authors
-          .map<React.ReactNode>(author => (
-            <Link to="/" key={author}>
-              {author}
-            </Link>
-          ))
-          .reduce((prev, curr) => [prev, ', ', curr])}
-    </p>
-  </div>
-);
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];
@@ -44,7 +25,18 @@ const UniProtKBEntryPublications: FC<{
     <Fragment>
       {references &&
         references.map(reference => (
-          <Publication publication={reference} key={reference.citation.title} />
+          <Publication
+            title={reference.citation.title}
+            authors={reference.citation.authors}
+            key={reference.citation.title}
+            journalInfo={{
+              firstPage: reference.citation.firstPage,
+              journal: reference.citation.journal,
+              lastPage: reference.citation.lastPage,
+              publicationDate: reference.citation.publicationDate,
+              volume: reference.citation.volume,
+            }}
+          />
         ))}
     </Fragment>
   );
