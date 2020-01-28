@@ -186,7 +186,8 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
     {data.map(item => (
       <section
         className="text-block"
-        key={`${item.positions.map(pos => pos.position).join('')}`}
+        key={`${item.positions &&
+          item.positions.map(pos => pos.position).join('')}`}
       >
         {item.positions && (
           <div>
