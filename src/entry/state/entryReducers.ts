@@ -24,6 +24,34 @@ const entryReducers = (
         ...state,
         data: null,
         accession: null,
+        publicationsData: {
+          data: [],
+          nextUrl: '',
+          total: 0,
+        },
+      };
+    case entryActions.REQUEST_ENTRY_PUBLICATIONS:
+      return {
+        ...state,
+        publicationsData: {
+          ...state.publicationsData,
+          isFetching: true,
+        },
+      };
+    case entryActions.RECEIVE_ENTRY_PUBLICATIONS:
+      return {
+        ...state,
+        publicationsData: {
+          data: [...state.publicationsData.data, ...action.payload.data],
+          isFetching: false,
+          isFetched: {
+            ...state.publicationsData.isFetched,
+            [action.payload.url]: true,
+          },
+          nextUrl: action.payload.nextUrl,
+          total: action.payload.total,
+          facets: [],
+        },
       };
     default:
       return state;

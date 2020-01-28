@@ -21,6 +21,7 @@ import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
 import { RootState, RootAction } from '../state/state-types';
 import * as entryActions from './state/entryActions';
+import EntryPublicationsContainer from './publications/EntryPublicationsContainer';
 
 type MatchParams = {
   accession: string;
@@ -39,12 +40,14 @@ const Entry: React.FC<EntryProps> = ({
   dispatchFetchEntry,
   dispatchResetEntry,
 }) => {
+  const { accession } = match.params;
+
   useEffect(() => {
-    dispatchFetchEntry(match.params.accession);
+    dispatchFetchEntry(accession);
     return function cleanup() {
       dispatchResetEntry();
     };
-  }, [match, dispatchFetchEntry, dispatchResetEntry]);
+  }, [accession, dispatchFetchEntry, dispatchResetEntry]);
 
   if (!entryData || Object.keys(entryData).length === 0) {
     return <Loader />;
@@ -72,6 +75,10 @@ const Entry: React.FC<EntryProps> = ({
             exact
           />
           <Route
+            path={`${match.url}/publications`}
+            render={() => <EntryPublicationsContainer accession={accession} />}
+          />
+          <Route
             path={`${match.url}/external-links`}
             render={() => (
               <EntryExternalLinks transformedData={transformedData} />
@@ -95,6 +102,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchFetchEntry: (accession: string) =>
         entryActions.fetchEntry(accession),
       dispatchResetEntry: () => entryActions.resetEntry(),
+      dispatchFetchEntryPublications: (accession: string) =>
+        entryActions.fetchEntryPublications(accession),
     },
     dispatch
   );
