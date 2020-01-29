@@ -119,6 +119,11 @@ const Download: React.FC<DownloadTableProps> = ({
     compressed,
     selectedAccessions: downloadAll ? [] : selectedEntries,
   });
+  const showPreview =
+    urlsAreEqual(preview.url, previewUrl, ['compressed']) &&
+    preview.data &&
+    preview.contentType ===
+      fileFormatToContentType.get(replaceExcelWithTsv(fileFormat));
   return (
     <DownloadView
       onSubmit={handleSubmit}
@@ -139,14 +144,7 @@ const Download: React.FC<DownloadTableProps> = ({
       onCompressedChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setCompressed(e.target.value === 'true')
       }
-      preview={
-        urlsAreEqual(preview.url, previewUrl, ['compressed']) &&
-        preview.data &&
-        preview.contentType ===
-          fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
-          ? preview.data
-          : ''
-      }
+      preview={showPreview ? preview.data : ''}
       loadingPreview={loadingPreview}
       nPreview={nPreview}
       totalNumberResults={totalNumberResults}
