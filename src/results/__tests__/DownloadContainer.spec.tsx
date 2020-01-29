@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import DownloadContainer, {
-  replaceExcelWithTsv,
-  compareDownloadUrlsDisregardSize,
-} from '../DownloadContainer';
+import DownloadContainer, { replaceExcelWithTsv } from '../DownloadContainer';
 import { createMemoryHistory } from 'history';
 import { waitForElement } from '@testing-library/react';
 import initialState from '../../state/initialState';
@@ -32,13 +29,6 @@ describe('replaceExcelWithTsv', () => {
 
   test('should not replace text file format with tsv', () => {
     expect(replaceExcelWithTsv(FileFormat.text)).toEqual(FileFormat.text);
-  });
-});
-
-describe('compareDownloadUrlsDisregardSize', () => {
-  test('should return true for urls which are equal with the exception of the size parameter', () => {
-    const url = size => `https://some/resource?parameter=value&size=${size}`;
-    expect(compareDownloadUrlsDisregardSize(url(1), url(1000))).toEqual(true);
   });
 });
 

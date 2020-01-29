@@ -109,16 +109,6 @@ const Download: React.FC<DownloadTableProps> = ({
         setLoadingPreview(false);
       });
   };
-  const downloadUrl = getDownloadUrl({
-    query,
-    columns: selectedColumns,
-    selectedFacets,
-    sortColumn,
-    sortDirection,
-    fileFormat,
-    compressed,
-    selectedAccessions: downloadAll ? [] : selectedEntries,
-  });
   const showPreview =
     urlsAreEqual(preview.url, previewUrl, ['compressed']) &&
     preview.data &&

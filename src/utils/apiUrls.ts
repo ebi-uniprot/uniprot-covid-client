@@ -8,7 +8,6 @@ import {
   fileFormatsWithColumns,
   fileFormatToUrlParameter,
 } from '../results/types/resultsTypes';
-import queryStringModule from 'query-string';
 import { SortableColumn } from '../model/types/ColumnTypes';
 import { uniq } from './utils';
 
@@ -165,8 +164,8 @@ export const urlsAreEqual = (
   url2: string,
   ignoreParams: string[] = []
 ) => {
-  const urlObject1 = queryStringModule.parseUrl(url1);
-  const urlObject2 = queryStringModule.parseUrl(url2);
+  const urlObject1 = queryString.parseUrl(url1);
+  const urlObject2 = queryString.parseUrl(url2);
   if (urlObject1.url !== urlObject2.url) {
     return false;
   }

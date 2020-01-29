@@ -18,7 +18,7 @@ exports[`DownloadView component should render 1`] = `
         type="radio"
         value="false"
       />
-      Download selected (10)
+      Download selected (5)
     </label>
     <label
       for="data-selection-true"

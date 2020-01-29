@@ -23,8 +23,9 @@ describe('DownloadView component', () => {
       onDownloadAllChange: jest.fn(),
       onFileFormatChange: jest.fn(),
       onCompressedChange: jest.fn(),
-      nSelectedEntries: 10,
+      nSelectedEntries: 5,
       totalNumberResults: 100,
+      nPreview: 10,
     };
     renderedWithRedux = renderWithRedux(<DownloadView {...props} />, {
       initialState,

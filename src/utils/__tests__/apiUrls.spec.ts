@@ -1,7 +1,7 @@
-import { getQueryUrl, createFacetsQueryString } from '../apiUrls';
+import { getQueryUrl, createFacetsQueryString, urlsAreEqual } from '../apiUrls';
 
-describe('utils', () => {
-  test('should generate facet query', () => {
+describe('getQueryUrl', () => {
+  test('should generate facet url', () => {
     const facets = [
       { name: 'facet1', value: 'value 1' },
       { name: 'facet2', value: 'value 3' },
@@ -11,7 +11,9 @@ describe('utils', () => {
       'https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/search?facets=reviewed%2Cpopular_organism%2Cproteins_with%2Cexistence%2Cannotation_score%2Clength&fields=&query=cdc7%20AND%20%28facet1%3A%22value%201%22%29%20AND%20%28facet2%3A%22value%203%22%29'
     );
   });
+});
 
+describe('createFacetsQueryString', () => {
   test('should generate facet query', () => {
     const facets = [
       { name: 'facet1', value: 'value 1' },
@@ -23,5 +25,35 @@ describe('utils', () => {
     expect(queryString).toBe(
       ' AND (facet1:"value 1") AND (facet2:"value 3") AND (facet3:value3) AND (facet4:[1 TO *])'
     );
+  });
+});
+
+describe('urlsAreEqual', () => {
+  test('should return true when urls are equal except for mismatch between the parameter compress', () => {
+    expect(
+      urlsAreEqual(
+        'https://foo.bar?param=3&compress=true',
+        'https://foo.bar?compress=true&param=3',
+        ['compress']
+      )
+    ).toBe(true);
+  });
+  test('should return false when url hostnames are unequal', () => {
+    expect(
+      urlsAreEqual(
+        'https://foo.bar?param=3&compress=true',
+        'https://goo.bar?compress=true&param=3',
+        ['compress']
+      )
+    ).toBe(false);
+  });
+  test('should return false when url non-ignored parameter is unequal', () => {
+    expect(
+      urlsAreEqual(
+        'https://foo.bar?param=3&compress=true',
+        'https://goo.bar?compress=true&param=4',
+        ['compress']
+      )
+    ).toBe(false);
   });
 });
