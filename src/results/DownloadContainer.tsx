@@ -9,7 +9,7 @@ import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
 import { getDownloadUrl, urlsAreEqual } from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 
-export const replaceExcelWithTsv = (fileFormat: FileFormat) =>
+export const getPreviewFileFormat = (fileFormat: FileFormat) =>
   fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;
 
 type DownloadTableProps = {
@@ -70,14 +70,14 @@ const Download: React.FC<DownloadTableProps> = ({
     10,
     downloadAll ? totalNumberResults : nSelectedEntries
   );
-  const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
+  const previewFileFormat = getPreviewFileFormat(fileFormat);
   const previewUrl = getDownloadUrl({
     query,
     columns: selectedColumns,
     selectedFacets,
     sortColumn,
     sortDirection,
-    fileFormat: fileFormatExcelReplaced,
+    fileFormat: previewFileFormat,
     compressed,
     size: nPreview,
     selectedAccessions: downloadAll ? [] : selectedEntries,
@@ -85,7 +85,7 @@ const Download: React.FC<DownloadTableProps> = ({
   const handlePreview = () => {
     setLoadingPreview(true);
     fetchData(previewUrl, {
-      Accept: fileFormatToContentType.get(fileFormatExcelReplaced),
+      Accept: fileFormatToContentType.get(previewFileFormat),
     })
       .then(response => {
         const contentType = idx(
@@ -112,8 +112,7 @@ const Download: React.FC<DownloadTableProps> = ({
   const showPreview =
     urlsAreEqual(preview.url, previewUrl, ['compressed']) &&
     preview.data &&
-    preview.contentType ===
-      fileFormatToContentType.get(replaceExcelWithTsv(fileFormat));
+    preview.contentType === fileFormatToContentType.get(previewFileFormat);
   return (
     <DownloadView
       onSubmit={handleSubmit}

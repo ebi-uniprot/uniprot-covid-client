@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import DownloadContainer, { replaceExcelWithTsv } from '../DownloadContainer';
+import DownloadContainer, { getPreviewFileFormat } from '../DownloadContainer';
 import { createMemoryHistory } from 'history';
 import { waitForElement } from '@testing-library/react';
 import initialState from '../../state/initialState';
@@ -22,13 +22,13 @@ mock
   .onGet(mockResultFieldsApi.request)
   .reply(200, mockResultFieldsApi.response);
 
-describe('replaceExcelWithTsv', () => {
+describe('getPreviewFileFormat', () => {
   test('should replace excel file format with tsv', () => {
-    expect(replaceExcelWithTsv(FileFormat.excel)).toEqual(FileFormat.tsv);
+    expect(getPreviewFileFormat(FileFormat.excel)).toEqual(FileFormat.tsv);
   });
 
   test('should not replace text file format with tsv', () => {
-    expect(replaceExcelWithTsv(FileFormat.text)).toEqual(FileFormat.text);
+    expect(getPreviewFileFormat(FileFormat.text)).toEqual(FileFormat.text);
   });
 });
 
