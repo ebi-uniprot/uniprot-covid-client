@@ -21,6 +21,7 @@ type DownloadViewProps = {
   onCompressedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   nSelectedEntries: number;
   totalNumberResults: number;
+  nPreview: number;
 };
 
 const DownloadView: React.FC<DownloadViewProps> = ({
@@ -38,6 +39,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   onFileFormatChange,
   onCompressedChange,
   nSelectedEntries,
+  nPreview,
   totalNumberResults,
 }) => {
   let previewNode;
@@ -55,10 +57,6 @@ const DownloadView: React.FC<DownloadViewProps> = ({
       </div>
     );
   }
-  const nPreview = Math.min(
-    10,
-    downloadAll ? totalNumberResults : nSelectedEntries
-  );
   return (
     <Fragment>
       <form

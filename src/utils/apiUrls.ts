@@ -8,7 +8,9 @@ import {
   fileFormatsWithColumns,
   fileFormatToUrlParameter,
 } from '../results/types/resultsTypes';
+import queryStringModule from 'query-string';
 import { SortableColumn } from '../model/types/ColumnTypes';
+import { uniq } from './utils';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
@@ -156,4 +158,25 @@ export const getDownloadUrl = ({
     parameters.compressed = true;
   }
   return `${apiUrls.download}?${queryString.stringify(parameters)}`;
+};
+
+export const urlsAreEqual = (
+  url1: string,
+  url2: string,
+  ignoreParams: string[] = []
+) => {
+  const urlObject1 = queryStringModule.parseUrl(url1);
+  const urlObject2 = queryStringModule.parseUrl(url2);
+  if (urlObject1.url !== urlObject2.url) {
+    return false;
+  }
+  const paramsIntersection = uniq([
+    ...Object.keys(urlObject1.query),
+    ...Object.keys(urlObject1.query),
+  ]);
+  return paramsIntersection.every(
+    param =>
+      ignoreParams.includes(param) ||
+      urlObject1.query[param] === urlObject2.query[param]
+  );
 };

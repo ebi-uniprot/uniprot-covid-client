@@ -6,19 +6,11 @@ import { RootState } from '../state/state-types';
 import DownloadView from './DownloadView';
 import { Column } from '../model/types/ColumnTypes';
 import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
-import { getDownloadUrl } from '../utils/apiUrls';
+import { getDownloadUrl, urlsAreEqual } from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 
 export const replaceExcelWithTsv = (fileFormat: FileFormat) =>
   fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;
-
-export const compareDownloadUrlsDisregardSize = (
-  url1: string,
-  url2: string
-) => {
-  const reSize = /&size=\d+/;
-  return url1.replace(reSize, '') === url2.replace(reSize, '');
-};
 
 type DownloadTableProps = {
   tableColumns: Column[];
@@ -70,26 +62,29 @@ const Download: React.FC<DownloadTableProps> = ({
     document.body.removeChild(link);
     history.goBack();
   };
-
+  const nSelectedEntries = selectedEntries.length;
   const handleCancel = () => {
     history.goBack();
   };
-
-  const handlePreview = (nPreview: number) => {
-    const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
-    const url = getDownloadUrl({
-      query,
-      columns: selectedColumns,
-      selectedFacets,
-      sortColumn,
-      sortDirection,
-      fileFormat: fileFormatExcelReplaced,
-      compressed,
-      size: nPreview,
-      selectedAccessions: downloadAll ? [] : selectedEntries,
-    });
+  const nPreview = Math.min(
+    10,
+    downloadAll ? totalNumberResults : nSelectedEntries
+  );
+  const fileFormatExcelReplaced = replaceExcelWithTsv(fileFormat);
+  const previewUrl = getDownloadUrl({
+    query,
+    columns: selectedColumns,
+    selectedFacets,
+    sortColumn,
+    sortDirection,
+    fileFormat: fileFormatExcelReplaced,
+    compressed,
+    size: nPreview,
+    selectedAccessions: downloadAll ? [] : selectedEntries,
+  });
+  const handlePreview = () => {
     setLoadingPreview(true);
-    fetchData(url, {
+    fetchData(previewUrl, {
       Accept: fileFormatToContentType.get(fileFormatExcelReplaced),
     })
       .then(response => {
@@ -134,7 +129,7 @@ const Download: React.FC<DownloadTableProps> = ({
       fileFormat={fileFormat}
       compressed={compressed}
       onSelectedColumnsChange={setSelectedColumns}
-      nSelectedEntries={selectedEntries.length}
+      nSelectedEntries={nSelectedEntries}
       onDownloadAllChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setDownloadAll(e.target.value === 'true')
       }
@@ -145,7 +140,7 @@ const Download: React.FC<DownloadTableProps> = ({
         setCompressed(e.target.value === 'true')
       }
       preview={
-        compareDownloadUrlsDisregardSize(preview.url, downloadUrl) &&
+        urlsAreEqual(preview.url, previewUrl, ['compressed']) &&
         preview.data &&
         preview.contentType ===
           fileFormatToContentType.get(replaceExcelWithTsv(fileFormat))
@@ -153,6 +148,7 @@ const Download: React.FC<DownloadTableProps> = ({
           : ''
       }
       loadingPreview={loadingPreview}
+      nPreview={nPreview}
       totalNumberResults={totalNumberResults}
     />
   );
