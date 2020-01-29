@@ -14,7 +14,7 @@ import {
   ReceivedFieldData,
   ReceivedField,
 } from '../types/resultsTypes';
-import { getNextUrlFromResponse } from '../../utils/queryUtils';
+import getNextUrlFromResponse from '../../utils/queryUtils';
 import Response from '../../types/queryTypes';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';

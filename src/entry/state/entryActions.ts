@@ -6,7 +6,7 @@ import fetchData from '../../utils/fetchData';
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import apiUrls from '../../utils/apiUrls';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import { getNextUrlFromResponse } from '../../utils/queryUtils';
+import getNextUrlFromResponse from '../../utils/queryUtils';
 import Response from '../../types/queryTypes';
 import { RootState } from '../../state/state-types';
 

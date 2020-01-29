@@ -28,6 +28,8 @@ const entryReducers = (
           data: [],
           nextUrl: '',
           total: 0,
+          isFetching: false,
+          isFetched: {},
         },
       };
     case entryActions.REQUEST_ENTRY_PUBLICATIONS:
@@ -48,7 +50,7 @@ const entryReducers = (
             ...state.publicationsData.isFetched,
             [action.payload.url]: true,
           },
-          nextUrl: action.payload.nextUrl,
+          nextUrl: action.payload.nextUrl ? action.payload.nextUrl : '',
           total: action.payload.total,
           facets: [],
         },

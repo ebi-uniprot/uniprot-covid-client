@@ -1,4 +1,4 @@
-export const getNextUrlFromResponse = (
+const getNextUrlFromResponse = (
   link: string | null | undefined
 ): string | undefined => {
   if (!link) {
@@ -11,3 +11,5 @@ export const getNextUrlFromResponse = (
     return match[1];
   }
 };
+
+export default getNextUrlFromResponse;
