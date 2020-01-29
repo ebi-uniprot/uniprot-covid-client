@@ -1,6 +1,6 @@
 import urlJoin from 'url-join';
 import queryString from 'query-string';
-import { SortDirectionApi } from '../results/types/resultsTypes';
+import { SortDirectionApi, SelectedFacet } from '../results/types/resultsTypes';
 import { SortableColumn } from '../model/types/ColumnTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
@@ -76,3 +76,15 @@ export const getQueryUrl = (
       'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
     sort: sortBy && `${sortBy} ${sortDirection}`,
   })}`;
+
+export const getUniProtPublicationsQueryUrl = (
+  accession: string,
+  selectedFacets: SelectedFacet[]
+) => {
+  return `${apiUrls.entryPublications(accession)}?${queryString.stringify({
+    facets: 'source,category,scale',
+    query: selectedFacets
+      .map(facet => `${facet.name}:"${facet.value}"`)
+      .join(','),
+  })}`;
+};

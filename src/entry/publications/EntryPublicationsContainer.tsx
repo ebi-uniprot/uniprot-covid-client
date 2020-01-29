@@ -1,30 +1,54 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import EntryPublications from './EntryPublications';
 import * as entryActions from '../state/entryActions';
 import { RootAction, RootState } from '../../state/state-types';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import apiUrls from '../../utils/apiUrls';
+import { getUniProtPublicationsQueryUrl } from '../../utils/apiUrls';
+import { Facet } from '../../results/ResultsContainer';
+
+type SelectedFacet = {
+  name: string;
+  value: string;
+};
 
 const EntryPublicationsContainer: FC<{
   accession: string;
   dispatchFetchEntryPublications: (url: string) => void;
+  dispatchResetEntryPublications: () => void;
   publicationsData: {
     data: LiteratureForProteinAPI[] | null;
+    facets: Facet[];
     nextUrl: string;
     total: number;
   };
-}> = ({ accession, dispatchFetchEntryPublications, publicationsData }) => {
+}> = ({
+  accession,
+  dispatchFetchEntryPublications,
+  dispatchResetEntryPublications,
+  publicationsData,
+}) => {
+  const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
+
   useEffect(() => {
-    const url = apiUrls.entryPublications(accession);
+    const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
     dispatchFetchEntryPublications(url);
-  }, [accession, dispatchFetchEntryPublications]);
+    return () => dispatchResetEntryPublications();
+  }, [
+    accession,
+    selectedFacets,
+    dispatchFetchEntryPublications,
+    dispatchResetEntryPublications,
+  ]);
 
   return (
     <EntryPublications
       accession={accession}
       data={publicationsData.data}
+      facets={publicationsData.facets}
+      selectedFacets={selectedFacets}
+      setSelectedFacets={setSelectedFacets}
       total={publicationsData.total}
       handleLoadMoreItems={() => {
         dispatchFetchEntryPublications(publicationsData.nextUrl);
@@ -42,6 +66,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchFetchEntryPublications: (accession: string) =>
         entryActions.fetchEntryPublicationsIfNeeded(accession),
+      dispatchResetEntryPublications: () =>
+        entryActions.resetEntryPublications(),
     },
     dispatch
   );

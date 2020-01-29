@@ -1,19 +1,53 @@
 import React, { FC } from 'react';
-import { Loader, Publication, DataList } from 'franklin-sites';
+import { Loader, Publication, DataList, Facets } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
+import { Facet } from '../../results/ResultsContainer';
+import { SelectedFacet } from '../../results/types/resultsTypes';
 
 const EntryPublications: FC<{
   accession: string;
   data: LiteratureForProteinAPI[] | null;
+  facets: Facet[];
+  selectedFacets: SelectedFacet[];
+  setSelectedFacets: (facets: SelectedFacet[]) => void;
   total: number;
   handleLoadMoreItems: () => void;
-}> = ({ accession, data, total, handleLoadMoreItems }) => {
-  if (!data) {
+}> = ({
+  accession,
+  data,
+  facets,
+  selectedFacets,
+  setSelectedFacets,
+  total,
+  handleLoadMoreItems,
+}) => {
+  if (!data || data.length <= 0) {
     return <Loader />;
   }
+
+  const addFacet = (name: string, value: string) => {
+    selectedFacets.find(facet => facet.name === name);
+    setSelectedFacets([...selectedFacets, { name, value }]);
+  };
+
+  const removeFacet = (name: string, value: string) => {
+    setSelectedFacets(
+      selectedFacets.filter(
+        selectedFacet =>
+          !(selectedFacet.name === name && selectedFacet.value === value)
+      )
+    );
+  };
+
   return (
     <section>
       <h2>Publications for {accession}</h2>
+      <Facets
+        data={facets}
+        addFacet={addFacet}
+        removeFacet={removeFacet}
+        selectedFacets={selectedFacets}
+      />
       <div style={{ height: '70vh', overflow: 'auto' }}>
         <DataList
           idKey="primaryAccession"

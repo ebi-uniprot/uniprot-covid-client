@@ -24,13 +24,6 @@ const entryReducers = (
         ...state,
         data: null,
         accession: null,
-        publicationsData: {
-          data: [],
-          nextUrl: '',
-          total: 0,
-          isFetching: false,
-          isFetched: {},
-        },
       };
     case entryActions.REQUEST_ENTRY_PUBLICATIONS:
       return {
@@ -44,7 +37,11 @@ const entryReducers = (
       return {
         ...state,
         publicationsData: {
-          data: [...state.publicationsData.data, ...action.payload.data],
+          data: [
+            ...state.publicationsData.data,
+            ...action.payload.data.results,
+          ],
+          facets: action.payload.data.facets,
           isFetching: false,
           isFetched: {
             ...state.publicationsData.isFetched,
@@ -52,7 +49,18 @@ const entryReducers = (
           },
           nextUrl: action.payload.nextUrl ? action.payload.nextUrl : '',
           total: action.payload.total,
+        },
+      };
+    case entryActions.RESET_ENTRY_PUBLICATIONS:
+      return {
+        ...state,
+        publicationsData: {
+          data: [],
           facets: [],
+          nextUrl: '',
+          total: 0,
+          isFetching: false,
+          isFetched: {},
         },
       };
     default:
