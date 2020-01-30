@@ -1,6 +1,7 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import idx from 'idx';
+import { v1 } from 'uuid';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
@@ -73,10 +74,17 @@ export const fetchEntryPublications = (url: string) => async (
         idx(response, o => o.headers.link)
       );
       const publicationData = response.data as EntryPublicationsData;
+      const publicationDataWithIds = {
+        ...publicationData,
+        results: publicationData.results.map(publication => ({
+          ...publication,
+          id: v1(),
+        })),
+      };
       dispatch(
         receiveEntryPublications(
           url,
-          publicationData,
+          publicationDataWithIds,
           nextUrl,
           response.headers['x-totalrecords']
         )

@@ -23,6 +23,7 @@ export type LiteratureEntry = {
 };
 
 export type LiteratureForProteinAPI = {
+  id?: string;
   literatureEntry: LiteratureEntry;
   uniProtReference?: Citation;
   literatureMappedReference?: {

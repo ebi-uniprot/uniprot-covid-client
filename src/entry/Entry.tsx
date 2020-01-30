@@ -66,27 +66,29 @@ const Entry: React.FC<EntryProps> = ({
   }));
 
   return (
-    <SideBarLayout sidebar={<InPageNav sections={sections} />}>
-      <Router history={history}>
-        <Switch>
-          <Route
-            path={`${match.url}/`}
-            render={() => <EntryMain transformedData={transformedData} />}
-            exact
-          />
-          <Route
-            path={`${match.url}/publications`}
-            render={() => <EntryPublicationsContainer accession={accession} />}
-          />
-          <Route
-            path={`${match.url}/external-links`}
-            render={() => (
-              <EntryExternalLinks transformedData={transformedData} />
-            )}
-          />
-        </Switch>
-      </Router>
-    </SideBarLayout>
+    <Router history={history}>
+      <Switch>
+        <Route
+          path={`${match.url}/`}
+          render={() => (
+            <SideBarLayout sidebar={<InPageNav sections={sections} />}>
+              <EntryMain transformedData={transformedData} />
+            </SideBarLayout>
+          )}
+          exact
+        />
+        <Route
+          path={`${match.url}/publications`}
+          render={() => <EntryPublicationsContainer accession={accession} />}
+        />
+        <Route
+          path={`${match.url}/external-links`}
+          render={() => (
+            <EntryExternalLinks transformedData={transformedData} />
+          )}
+        />
+      </Switch>
+    </Router>
   );
 };
 
