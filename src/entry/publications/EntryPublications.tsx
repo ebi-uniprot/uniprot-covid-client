@@ -54,7 +54,8 @@ const EntryPublications: FC<{
           />
         }
       >
-        <div style={{ height: '80vh', overflow: 'auto' }}>
+        <div style={{ height: '80vh' }}>
+          {/* The height css will be removed after Franklin DataList is updated */}
           <DataList
             idKey="id"
             data={data}

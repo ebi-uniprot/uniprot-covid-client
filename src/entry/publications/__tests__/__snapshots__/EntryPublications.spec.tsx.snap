@@ -1,0 +1,596 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntryPublications tests should render 1`] = `
+<DocumentFragment>
+  <section>
+    <h2>
+      Publications for P05067
+    </h2>
+    <section
+      class="sidebar-layout false"
+      data-layout="left-sidebar-layout"
+    >
+      <section
+        class="sidebar-layout__sidebar"
+      >
+        <div
+          class="facets"
+        >
+          <ul
+            class="no-bullet"
+          >
+            <li>
+              <div
+                class="facet-name"
+              >
+                Scale
+              </div>
+              <ul
+                class="expandable-list no-bullet"
+              >
+                <li>
+                  <button
+                    class=""
+                    type="button"
+                  >
+                    Small (2,272)
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class=""
+                    type="button"
+                  >
+                    Large (116)
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="sidebar-layout__content"
+      >
+        <div
+          style="height: 80vh;"
+        >
+          <div
+            class="data-loader__wrapper"
+          >
+            <div
+              class="data-loader__scroll-container"
+            >
+              <div
+                class="card "
+              >
+                <div
+                  class="card__content"
+                >
+                  <section
+                    class="publication"
+                  >
+                    <h4>
+                      The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.
+                    </h4>
+                    <section
+                      class="publication__authors"
+                    >
+                      <a
+                        href="/"
+                      >
+                        Kang J.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Lemaire H.-G.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Unterbeck A.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Salbaum J.M.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Masters C.L.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Grzeschik K.-H.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Multhaup G.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Beyreuther K.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Mueller-Hill B.
+                      </a>
+                    </section>
+                    <section
+                      class="publication__columns"
+                    >
+                      <section
+                        class="publication__columns__main"
+                      >
+                        <section>
+                          <button
+                            class="button tertiary"
+                            type="button"
+                          >
+                            Show abstract
+                          </button>
+                        </section>
+                        <div
+                          class="info-list"
+                        >
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Cited for
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP695)
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Tissue
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              <ul
+                                class="no-bullet"
+                              >
+                                <li>
+                                  Brain
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Categories
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              <ul
+                                class="no-bullet"
+                              >
+                                <li>
+                                  Sequence
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Source
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              Swiss-Prot
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <section
+                        class="publication__columns__side"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            <a
+                              href="//www.ncbi.nlm.nih.gov/pubmed/2881207"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              PubMed
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="//europepmc.org/article/MED/2881207"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Europe PMC
+                            </a>
+                          </li>
+                          <li>
+                            <section
+                              class="publication__statistics"
+                            >
+                              <div>
+                                Cited in other entries:
+                              </div>
+                              <span
+                                class="bubble--medium colour-sea-blue"
+                              >
+                                1
+                              </span>
+                            </section>
+                          </li>
+                        </ul>
+                      </section>
+                    </section>
+                  </section>
+                </div>
+              </div>
+              <div
+                class="card "
+              >
+                <div
+                  class="card__content"
+                >
+                  <section
+                    class="publication"
+                  >
+                    <h4>
+                      Constitutive and regulated alpha-secretase cleavage of Alzheimer's amyloid precursor protein by a disintegrin metalloprotease.
+                    </h4>
+                    <section
+                      class="publication__authors"
+                    >
+                      <a
+                        href="/"
+                      >
+                        Lammich S.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Kojro E.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Postina R.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Gilbert S.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Pfeiffer R.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Jasionowski M.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Haass C.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Fahrenholz F.
+                      </a>
+                    </section>
+                    <section
+                      class="publication__columns"
+                    >
+                      <section
+                        class="publication__columns__main"
+                      >
+                        <section>
+                          <button
+                            class="button tertiary"
+                            type="button"
+                          >
+                            Show abstract
+                          </button>
+                        </section>
+                        <div
+                          class="info-list"
+                        >
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Annotation
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              Pathway
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Mapping Source
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              Reactome:R-HSA-9010028
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Source
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              Computationally mapped
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <section
+                        class="publication__columns__side"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            <a
+                              href="//www.ncbi.nlm.nih.gov/pubmed/10097139"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              PubMed
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="//europepmc.org/article/MED/10097139"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Europe PMC
+                            </a>
+                          </li>
+                          <li>
+                            <section
+                              class="publication__statistics"
+                            >
+                              <div>
+                                Cited in other entries:
+                              </div>
+                              <span
+                                class="bubble--medium colour-sea-blue"
+                              >
+                                1
+                              </span>
+                            </section>
+                          </li>
+                        </ul>
+                      </section>
+                    </section>
+                  </section>
+                </div>
+              </div>
+              <div
+                class="card "
+              >
+                <div
+                  class="card__content"
+                >
+                  <section
+                    class="publication"
+                  >
+                    <h4>
+                      The phosphotyrosine interaction domains of X11 and FE65 bind to distinct sites on the YENPTY motif of amyloid precursor protein.
+                    </h4>
+                    <section
+                      class="publication__authors"
+                    >
+                      <a
+                        href="/"
+                      >
+                        Borg J.-P.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Ooi J.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Levy E.
+                      </a>
+                      , 
+                      <a
+                        href="/"
+                      >
+                        Margolis B.
+                      </a>
+                    </section>
+                    <section
+                      class="publication__columns"
+                    >
+                      <section
+                        class="publication__columns__main"
+                      >
+                        <div
+                          class="info-list"
+                        >
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Cited for
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              INTERACTION WITH APBA1 AND APBB1MUTAGENESIS OF TYR-728; TYR-757; ASN-759 AND TYR-762
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Categories
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              <ul
+                                class="no-bullet"
+                              >
+                                <li>
+                                  Interaction
+                                </li>
+                                <li>
+                                  Pathol
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div
+                            class="info-list__item"
+                          >
+                            <div
+                              class="info-list__item__title"
+                            >
+                              <h5
+                                class="bold"
+                              >
+                                Source
+                              </h5>
+                            </div>
+                            <div
+                              class="info-list__item__content"
+                            >
+                              Swiss-Prot
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <section
+                        class="publication__columns__side"
+                      >
+                        <ul
+                          class="no-bullet"
+                        />
+                      </section>
+                    </section>
+                  </section>
+                </div>
+              </div>
+              <div
+                class="data-loader__loading"
+              >
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </section>
+</DocumentFragment>
+`;
