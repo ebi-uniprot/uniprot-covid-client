@@ -50,7 +50,7 @@ const entryReducers = (
             [action.payload.url]: true,
           },
           nextUrl: action.payload.nextUrl ? action.payload.nextUrl : '',
-          total: action.payload.total,
+          total: parseInt(action.payload.total, 10),
         },
       };
     case entryActions.RESET_ENTRY_PUBLICATIONS:

@@ -6,7 +6,7 @@ type Response = {
     facets: Facet[];
   };
   headers: {
-    ['x-totalrecords']: number;
+    ['x-totalrecords']: string;
     link: string;
   };
 };
