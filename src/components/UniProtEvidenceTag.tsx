@@ -51,11 +51,14 @@ export const UniProtEvidenceTagContent: FC<{
           <Fragment>
             {groupedReferences
               .get(evidenceTagSourceTypes.UNIPROT)
-              .map((reference: Evidence) => (
-                <Link to={`/uniprotkb/${reference.id}`} key={reference.id}>
-                  {reference.id}
-                </Link>
-              ))}
+              .map((reference: Evidence) => {
+                const { id } = reference;
+                return (
+                  <Link to={`/uniprotkb/${id}`} key={id}>
+                    {id}
+                  </Link>
+                );
+              })}
           </Fragment>
         )}
       {groupedReferences &&
@@ -63,14 +66,14 @@ export const UniProtEvidenceTagContent: FC<{
           <Fragment>
             {groupedReferences
               .get(evidenceTagSourceTypes.PROSITE_PRORULE)
-              .map((reference: Evidence) => (
-                <a
-                  href={`//prosite.expasy.org/unirule/${reference.id}`}
-                  key={reference.id}
-                >
-                  {reference.id}
-                </a>
-              ))}
+              .map((reference: Evidence) => {
+                const { id } = reference;
+                return (
+                  <a href={`//prosite.expasy.org/unirule/${id}`} key={id}>
+                    {id}
+                  </a>
+                );
+              })}
           </Fragment>
         )}
     </div>
