@@ -22,8 +22,8 @@ export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
   dispatch(requestEntry());
   const url = apiUrls.entry(accession);
   fetchData(url)
-    .then((response: { data: UniProtkbAPIModel }) => {
-      dispatch(receiveEntry(accession, response.data));
+    .then(({ data }: { data: UniProtkbAPIModel }) => {
+      dispatch(receiveEntry(accession, data));
     }) /* eslint-disable no-console */
     .catch(error => console.error(error));
 };
