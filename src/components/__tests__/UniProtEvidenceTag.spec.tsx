@@ -2,7 +2,7 @@ import React from 'react';
 import UniProtEvidenceTag, {
   UniProtProtvistaEvidenceTag,
 } from '../UniProtEvidenceTag';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 describe('UniProtEvidenceTag components', () => {
