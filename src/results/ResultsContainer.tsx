@@ -19,7 +19,7 @@ import * as searchActions from '../search/state/searchActions';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
-import { getAPIQueryUrl } from './utils/utils';
+import { getQueryUrl } from '../utils/apiUrls';
 import { uniq } from '../utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
@@ -247,7 +247,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const columns = uniq([...cardColumns, ...tableColumns]);
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+      getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
     dispatchUpdateQueryString(query);
   }
@@ -269,9 +269,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
-    const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
-      queryParamFromUrl
-    );
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
     if (isFetching && !results.length) {
       return <Loader />;
     }
@@ -306,8 +309,21 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 Align
               </button>
               <button type="button" className="button tertiary">
-                <DownloadIcon />
-                Download
+                <Link
+                  to={{
+                    pathname: '/download',
+                    state: {
+                      query,
+                      selectedFacets,
+                      sortColumn,
+                      sortDirection,
+                      selectedEntries: Object.keys(selectedEntries),
+                    },
+                  }}
+                >
+                  <DownloadIcon />
+                  Download
+                </Link>
               </button>
               <button type="button" className="button tertiary disabled">
                 <BasketIcon />
@@ -332,9 +348,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 </span>
                 <span
                   className={
-                    viewMode === ViewMode.TABLE
-                      ? 'tertiary-icon__active'
-                      : ''
+                    viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
                   }
                 >
                   <ListIcon />
