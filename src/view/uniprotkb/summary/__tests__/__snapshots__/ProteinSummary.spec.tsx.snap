@@ -150,9 +150,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                     <h5>
                       Automatic assertion according to rules
                     </h5>
-                    <div>
-                      PIRNR:PIRNR001360
-                    </div>
                   </div>
                 </div>
               </strong>
@@ -189,9 +186,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PIRNR:PIRNR001361
-                  </div>
                 </div>
               </div>
             </div>
@@ -227,9 +221,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   <h5>
                     Manual assertion based on experiment
                   </h5>
-                  <div>
-                    PubMed:11389730
-                  </div>
                 </div>
               </div>
             </div>
@@ -265,9 +256,6 @@ exports[`ProteinSummary component it renders without crashing 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PIRNR:PIRNR001362
-                  </div>
                 </div>
               </div>
             </div>
