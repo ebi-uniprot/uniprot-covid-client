@@ -3,12 +3,20 @@ import ReactDOMServer from 'react-dom/server';
 import { EvidenceTag, SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { Link } from 'react-router-dom';
 import {
   getEvidenceCodeData,
   EvidenceData,
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
 import { groupBy, uniq } from '../utils/utils';
+import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
+
+enum evidenceTagSourceTypes {
+  PUBMED = 'PubMed',
+  UNIPROT = 'UniProtKB',
+  PROSITE_PRORULE = 'PROSITE-ProRule',
+}
 
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
@@ -20,17 +28,48 @@ export const UniProtEvidenceTagContent: FC<{
   // For GO terms the backend currently returns duplicates, so we need
   // to only use unique values
   const uniqueReferences = uniq(references);
+  const groupedReferences =
+    uniqueReferences &&
+    groupBy(uniqueReferences, (reference: Evidence) => reference.source);
+  // TODO it looks like there's more source types than defined here
   return (
     <div>
       <h5>{evidenceData.label}</h5>
-      {uniqueReferences &&
-        uniqueReferences
-          .filter((reference: Evidence) => reference.id && reference.source)
-          .map((reference: Evidence) => (
-            <div
-              key={`${reference.id}_${reference.source}`}
-            >{`${reference.source}:${reference.id}`}</div>
-          ))}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.PUBMED) && (
+          <UniProtKBEntryPublications
+            pubmedIds={
+              groupedReferences
+                .get(evidenceTagSourceTypes.PUBMED)
+                .map((reference: Evidence) => reference.id)
+                .filter((id: string) => id) as string[]
+            }
+          />
+        )}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.UNIPROT) && (
+          <Fragment>
+            {groupedReferences
+              .get(evidenceTagSourceTypes.UNIPROT)
+              .map(({ id }: Evidence) => (
+                <Link to={`/uniprotkb/${id}`} key={id}>
+                  {id}
+                </Link>
+              ))}
+          </Fragment>
+        )}
+      {groupedReferences &&
+        groupedReferences.get(evidenceTagSourceTypes.PROSITE_PRORULE) && (
+          <Fragment>
+            {groupedReferences
+              .get(evidenceTagSourceTypes.PROSITE_PRORULE)
+              .map(({ id }: Evidence) => (
+                <a href={`//prosite.expasy.org/unirule/${id}`} key={id}>
+                  {id}
+                </a>
+              ))}
+          </Fragment>
+        )}
     </div>
   );
 };

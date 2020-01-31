@@ -2,7 +2,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
-import { createWhitelistFilter, createBlacklistFilter } from 'redux-persist-transform-filter';
+import {
+  createWhitelistFilter,
+  createBlacklistFilter,
+} from 'redux-persist-transform-filter';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import rootReducer from './rootReducer';
@@ -14,12 +17,12 @@ const persistConfig = {
   transforms: [
     createWhitelistFilter(
       'results',
-      ['tableColumns', 'viewMode'],  // save
-      ['tableColumns', 'viewMode'],  // load
+      ['tableColumns', 'viewMode'], // save
+      ['tableColumns', 'viewMode'] // load
     ),
     createBlacklistFilter(
       'query',
-      ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'], // ignore
+      ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'] // ignore
     ),
   ],
 };

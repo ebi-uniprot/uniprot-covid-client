@@ -42,6 +42,8 @@ export type Citation = {
     firstPage?: number;
     lastPage?: number;
     volume?: number;
+    authoringGroup?: string[];
+    submissionDatabase?: string;
   };
   referencePositions?: string[];
   referenceComments?: {

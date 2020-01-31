@@ -47,9 +47,6 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
         <h5>
           Manual assertion based on experiment
         </h5>
-        <div>
-          PubMed:30193097
-        </div>
       </div>
     </div>
      and the 
@@ -88,9 +85,6 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
         <h5>
           Manual assertion based on experiment
         </h5>
-        <div>
-          PubMed:30193097
-        </div>
       </div>
     </div>
      directions 
@@ -142,9 +136,6 @@ exports[`CatalyticActivityView component should render catalytic activity when c
         <h5>
           Manual assertion based on experiment
         </h5>
-        <div>
-          PubMed:30193097
-        </div>
       </div>
     </div>
      and the 
@@ -183,9 +174,6 @@ exports[`CatalyticActivityView component should render catalytic activity when c
         <h5>
           Manual assertion based on experiment
         </h5>
-        <div>
-          PubMed:30193097
-        </div>
       </div>
     </div>
      directions 
@@ -232,9 +220,6 @@ exports[`ReactionDirection component should render ReactionDirection when one ph
       <h5>
         Manual assertion based on experiment
       </h5>
-      <div>
-        PubMed:30193097
-      </div>
     </div>
   </div>
 </DocumentFragment>
@@ -278,9 +263,6 @@ exports[`ReactionDirection component should render ReactionDirection when two ph
       <h5>
         Manual assertion based on experiment
       </h5>
-      <div>
-        PubMed:30193097
-      </div>
     </div>
   </div>
    and the 
@@ -319,9 +301,6 @@ exports[`ReactionDirection component should render ReactionDirection when two ph
       <h5>
         Manual assertion based on experiment
       </h5>
-      <div>
-        PubMed:30193097
-      </div>
     </div>
   </div>
    directions 

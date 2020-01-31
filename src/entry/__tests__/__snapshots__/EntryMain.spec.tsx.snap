@@ -435,9 +435,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PIRNR:PIRNR001361
-              </div>
             </div>
           </div>
           This reaction proceeds in the 
@@ -477,9 +474,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion inferred from database entries
               </h5>
-              <div>
-                Ensembl:ENSP0001324
-              </div>
             </div>
           </div>
         </span>
@@ -521,9 +515,6 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PIRNR:PIRNR001361
-                </div>
               </div>
             </div>
           </span>
@@ -561,9 +552,6 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PIRNR:PIRNR001361
-                </div>
               </div>
             </div>
           </section>
@@ -613,9 +601,11 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PROSITE-ProRule:PRU10028
-                </div>
+                <a
+                  href="//prosite.expasy.org/unirule/PRU10028"
+                >
+                  PRU10028
+                </a>
               </div>
             </div>
           </section>
@@ -649,9 +639,11 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PROSITE-ProRule:PRU10028
-              </div>
+              <a
+                href="//prosite.expasy.org/unirule/PRU10028"
+              >
+                PRU10028
+              </a>
             </div>
           </div>
         </section>
@@ -700,9 +692,11 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PROSITE-ProRule:PRU10028
-                  </div>
+                  <a
+                    href="//prosite.expasy.org/unirule/PRU10028"
+                  >
+                    PRU10028
+                  </a>
                 </div>
               </div>
             </li>
@@ -745,9 +739,11 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PROSITE-ProRule:PRU10028
-                </div>
+                <a
+                  href="//prosite.expasy.org/unirule/PRU10028"
+                >
+                  PRU10028
+                </a>
               </div>
             </div>
           </section>
@@ -789,9 +785,11 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PROSITE-ProRule:PRU10028
-              </div>
+              <a
+                href="//prosite.expasy.org/unirule/PRU10028"
+              >
+                PRU10028
+              </a>
             </div>
           </div>
         </section>
@@ -832,9 +830,11 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PROSITE-ProRule:PRU10028
-              </div>
+              <a
+                href="//prosite.expasy.org/unirule/PRU10028"
+              >
+                PRU10028
+              </a>
             </div>
           </div>
         </section>
@@ -875,9 +875,11 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PROSITE-ProRule:PRU10028
-              </div>
+              <a
+                href="//prosite.expasy.org/unirule/PRU10028"
+              >
+                PRU10028
+              </a>
             </div>
           </div>
         </section>
@@ -970,9 +972,11 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PROSITE-ProRule:PRU10026
-                  </div>
+                  <a
+                    href="//prosite.expasy.org/unirule/PRU10026"
+                  >
+                    PRU10026
+                  </a>
                 </div>
               </div>
             </div>
@@ -1023,9 +1027,11 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PROSITE-ProRule:PRU100210
-                  </div>
+                  <a
+                    href="//prosite.expasy.org/unirule/PRU100210"
+                  >
+                    PRU100210
+                  </a>
                 </div>
               </div>
             </div>
@@ -1076,9 +1082,11 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PROSITE-ProRule:PRU10020
-                  </div>
+                  <a
+                    href="//prosite.expasy.org/unirule/PRU10020"
+                  >
+                    PRU10020
+                  </a>
                 </div>
               </div>
             </div>
@@ -1133,9 +1141,11 @@ exports[`Entry view should render 1`] = `
                       <h5>
                         Automatic assertion according to rules
                       </h5>
-                      <div>
-                        PROSITE-ProRule:PRU10022
-                      </div>
+                      <a
+                        href="//prosite.expasy.org/unirule/PRU10022"
+                      >
+                        PRU10022
+                      </a>
                     </div>
                   </div>
                    (short alt name1 
@@ -1169,9 +1179,11 @@ exports[`Entry view should render 1`] = `
                       <h5>
                         Automatic assertion according to rules
                       </h5>
-                      <div>
-                        PROSITE-ProRule:PRU10028
-                      </div>
+                      <a
+                        href="//prosite.expasy.org/unirule/PRU10028"
+                      >
+                        PRU10028
+                      </a>
                     </div>
                   </div>
                   ) 
@@ -1257,9 +1269,11 @@ exports[`Entry view should render 1`] = `
                       <h5>
                         Automatic assertion according to rules
                       </h5>
-                      <div>
-                        PROSITE-ProRule:PRU10027
-                      </div>
+                      <a
+                        href="//prosite.expasy.org/unirule/PRU10027"
+                      >
+                        PRU10027
+                      </a>
                     </div>
                   </div>
                 </li>
@@ -1312,9 +1326,11 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PROSITE-ProRule:PRU10024
-                  </div>
+                  <a
+                    href="//prosite.expasy.org/unirule/PRU10024"
+                  >
+                    PRU10024
+                  </a>
                 </div>
               </div>
             </div>
@@ -1779,9 +1795,6 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PIRNR:PIRNR001361
-                </div>
               </div>
             </div>
             : topology value 
@@ -1815,9 +1828,6 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PIRNR:PIRNR001361
-                </div>
               </div>
             </div>
           </div>
@@ -1855,9 +1865,6 @@ exports[`Entry view should render 1`] = `
                 <h5>
                   Automatic assertion according to rules
                 </h5>
-                <div>
-                  PIRNR:PIRNR001361
-                </div>
               </div>
             </div>
           </section>
@@ -1922,9 +1929,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PIRNR:PIRNR001362
-              </div>
             </div>
           </div>
         </span>
@@ -2045,9 +2049,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PIRNR:PIRNR001360
-              </div>
             </div>
           </div>
         </section>
@@ -2350,9 +2351,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PIRNR:PIRNR001361
-              </div>
             </div>
           </div>
         </section>
@@ -2397,9 +2395,6 @@ exports[`Entry view should render 1`] = `
               <h5>
                 Automatic assertion according to rules
               </h5>
-              <div>
-                PIRNR:PIRNR001361
-              </div>
             </div>
           </div>
         </section>
@@ -2443,9 +2438,6 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PIRNR:PIRNR001361
-                  </div>
                 </div>
               </div>
             </span>
@@ -2483,9 +2475,6 @@ exports[`Entry view should render 1`] = `
                   <h5>
                     Automatic assertion according to rules
                   </h5>
-                  <div>
-                    PIRNR:PIRNR001361
-                  </div>
                 </div>
               </div>
             </span>

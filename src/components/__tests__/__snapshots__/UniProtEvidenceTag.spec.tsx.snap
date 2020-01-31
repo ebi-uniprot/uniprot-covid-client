@@ -99,9 +99,11 @@ exports[`UniProtEvidenceTag components should render automatic annotation 1`] = 
       <h5>
         Automatic assertion according to rules
       </h5>
-      <div>
-        PROSITE-ProRule:PRU10023
-      </div>
+      <a
+        href="//prosite.expasy.org/unirule/PRU10023"
+      >
+        PRU10023
+      </a>
     </div>
   </div>
 </DocumentFragment>
@@ -139,12 +141,6 @@ exports[`UniProtEvidenceTag components should render publications count 1`] = `
       <h5>
         Manual assertion based on experiment
       </h5>
-      <div>
-        PubMed:12345
-      </div>
-      <div>
-        PubMed:12346
-      </div>
     </div>
   </div>
 </DocumentFragment>

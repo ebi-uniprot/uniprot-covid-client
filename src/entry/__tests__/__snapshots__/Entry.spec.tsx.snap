@@ -2,12 +2,14 @@
 
 exports[`Entry should render 1`] = `
 <DocumentFragment>
-  <section
-    class="sidebar-layout false"
-    data-layout="left-sidebar-layout"
+  <div
+    class="loader-container"
   >
-    <section
-      class="sidebar-layout__sidebar"
+    <svg
+      class="loader"
+      height="100"
+      viewBox="0 0 100 100"
+      width="100"
     >
       <div
         class="in-page-nav in-page-nav--sticky"
