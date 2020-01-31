@@ -4,13 +4,6 @@ import ColumnSelectView from '../ColumnSelectView';
 import { Column } from '../../model/types/ColumnTypes';
 import structuredResultFieldsData from '../../__mockData__/StructuredResultFieldsData.json';
 
-/*
-  selectedColumns: Column[];
-  fieldData: FieldData;
-  onSelect: (columnId: Column) => void;
-  onDragDrop: (srcIndex: number, destIndex: number) => void;
-  onReset: () => void;
-*/
 describe('ColumnSelectView component', () => {
   let props;
   let rendered;

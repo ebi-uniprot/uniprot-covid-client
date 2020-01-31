@@ -15,26 +15,24 @@ const UniProtKBEntryPublications: FC<{
   const references =
     entryData.references &&
     entryData.references.filter(
-      reference =>
-        reference.citation.citationXrefs &&
-        reference.citation.citationXrefs.some(
-          citation => citation.id && pubmedIds.includes(citation.id)
-        )
+      ({ citation }) =>
+        citation.citationXrefs &&
+        citation.citationXrefs.some(({ id }) => id && pubmedIds.includes(id))
     );
   return (
     <Fragment>
       {references &&
-        references.map(reference => (
+        references.map(({ citation }) => (
           <Publication
-            title={reference.citation.title}
-            authors={reference.citation.authors}
-            key={reference.citation.title}
+            title={citation.title}
+            authors={citation.authors}
+            key={citation.title}
             journalInfo={{
-              firstPage: reference.citation.firstPage,
-              journal: reference.citation.journal,
-              lastPage: reference.citation.lastPage,
-              publicationDate: reference.citation.publicationDate,
-              volume: reference.citation.volume,
+              firstPage: citation.firstPage,
+              journal: citation.journal,
+              lastPage: citation.lastPage,
+              publicationDate: citation.publicationDate,
+              volume: citation.volume,
             }}
           />
         ))}

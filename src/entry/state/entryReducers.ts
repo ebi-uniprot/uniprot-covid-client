@@ -12,12 +12,14 @@ const entryReducers = (
     case entryActions.REQUEST_ENTRY:
       return {
         ...state,
+        isFetching: true,
       };
     case entryActions.RECEIVE_ENTRY:
       return {
         ...state,
         data: action.payload.data,
         accession: action.payload.accession,
+        isFetching: false,
       };
     case entryActions.RESET_ENTRY:
       return {

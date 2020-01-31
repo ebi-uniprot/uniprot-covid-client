@@ -4,7 +4,7 @@ import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaVariation from 'protvista-variation';
 import ProtvistaVariationAdapter from 'protvista-variation-adapter';
-import ProtvistaFilter, { ProtvistaCheckbox } from 'protvista-filter';
+import ProtvistaFilter from 'protvista-filter';
 import { html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
 import useDataApi from '../../../utils/useDataApi';
@@ -54,7 +54,6 @@ loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-sequence', ProtvistaSequence);
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-filter', ProtvistaFilter);
-loadWebComponent('protvista-checkbox', ProtvistaCheckbox);
 loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
 
 const formatVariantDescription = (description: string) => {

@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { cleanup, waitForElement } from '@testing-library/react';
 import axios from 'axios';
 import { MemoryRouter as Router } from 'react-router-dom';
+import renderWithRedux from '../../../../__testHelpers__/renderWithRedux';
 import ProteinSummary from '../ProteinSummary';
 import modelData from '../../../../model/__mocks__/modelData.json';
 
@@ -15,7 +16,7 @@ axios.get.mockResolvedValue({
 
 describe('ProteinSummary component', () => {
   test('it renders without crashing', async () => {
-    const { asFragment, getByText } = render(
+    const { asFragment, getByText } = renderWithRedux(
       <Router>
         <ProteinSummary accession="P05067" />
       </Router>

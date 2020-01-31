@@ -1,4 +1,4 @@
-import { ValueWithEvidence } from '../../types/modelTypes';
+import { ValueWithEvidence, Evidence } from '../../types/modelTypes';
 import { Flag } from './SequenceConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Xref } from '../../types/CommentTypes';
@@ -28,12 +28,10 @@ export type ProteinNamesData = ProteinDescription & {
 };
 
 export type GeneNamesData = {
-  geneName?: {
-    value: string;
-  };
-  synonyms?: [{ value: string }];
-  orfNames?: [{ value: string }];
-  orderedLocusNames?: [{ value: string }];
+  geneName?: ValueWithEvidence;
+  synonyms?: ValueWithEvidence[];
+  orfNames?: ValueWithEvidence[];
+  orderedLocusNames?: ValueWithEvidence[];
 }[];
 
 export type OrganismData = {
@@ -41,6 +39,7 @@ export type OrganismData = {
   commonName?: string;
   synonyms?: string[];
   taxonId?: number;
+  evidences?: Evidence[];
   lineage?: string[];
 };
 

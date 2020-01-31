@@ -102,7 +102,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(
     {
       dispatchFetchEntry: (accession: string) =>
-        entryActions.fetchEntry(accession),
+        entryActions.fetchEntryIfNeeded(accession),
       dispatchResetEntry: () => entryActions.resetEntry(),
       dispatchFetchEntryPublications: (accession: string) =>
         entryActions.fetchEntryPublications(accession),

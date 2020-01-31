@@ -51,9 +51,9 @@ export const UniProtEvidenceTagContent: FC<{
           <Fragment>
             {groupedReferences
               .get(evidenceTagSourceTypes.UNIPROT)
-              .map((reference: Evidence) => (
-                <Link to={`/uniprotkb/${reference.id}`} key={reference.id}>
-                  {reference.id}
+              .map(({ id }: Evidence) => (
+                <Link to={`/uniprotkb/${id}`} key={id}>
+                  {id}
                 </Link>
               ))}
           </Fragment>
@@ -63,12 +63,9 @@ export const UniProtEvidenceTagContent: FC<{
           <Fragment>
             {groupedReferences
               .get(evidenceTagSourceTypes.PROSITE_PRORULE)
-              .map((reference: Evidence) => (
-                <a
-                  href={`//prosite.expasy.org/unirule/${reference.id}`}
-                  key={reference.id}
-                >
-                  {reference.id}
+              .map(({ id }: Evidence) => (
+                <a href={`//prosite.expasy.org/unirule/${id}`} key={id}>
+                  {id}
                 </a>
               ))}
           </Fragment>

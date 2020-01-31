@@ -4,6 +4,7 @@ import { Facet } from '../../results/ResultsContainer';
 
 export type EntryState = {
   accession: string | null;
+  isFetching: boolean;
   data: UniProtkbAPIModel | null;
   publicationsData: {
     isFetching: boolean;
@@ -17,6 +18,7 @@ export type EntryState = {
 
 const entryInitialState = {
   accession: null,
+  isFetching: false,
   data: null,
   publicationsData: {
     isFetching: false,

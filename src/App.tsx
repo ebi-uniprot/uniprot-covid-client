@@ -19,6 +19,7 @@ const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
+const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 
 export const queryBuilderPath = '/advancedSearch';
 
@@ -57,6 +58,14 @@ const App = () => (
             render={() => (
               <BaseLayout>
                 <CustomiseTablePage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/download"
+            render={() => (
+              <BaseLayout>
+                <DownloadPage />
               </BaseLayout>
             )}
           />

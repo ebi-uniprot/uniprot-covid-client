@@ -34,14 +34,28 @@ export const receiveEntry = (accession: string, data: UniProtkbAPIModel) => {
 
 export const requestEntry = () => action(REQUEST_ENTRY);
 
+const shouldFetchEntry = (accessionToFetch: string, state: RootState) => {
+  const { accession, isFetching } = state.entry;
+  return !isFetching || accession === accessionToFetch;
+};
+
 export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
   dispatch(requestEntry());
   const url = apiUrls.entry(accession);
   fetchData(url)
-    .then((response: { data: UniProtkbAPIModel }) => {
-      dispatch(receiveEntry(accession, response.data));
+    .then(({ data }: { data: UniProtkbAPIModel }) => {
+      dispatch(receiveEntry(accession, data));
     }) /* eslint-disable no-console */
     .catch(error => console.error(error));
+};
+
+export const fetchEntryIfNeeded = (accession: string) => (
+  dispatch: ThunkDispatch<RootState, void, Action>,
+  getState: () => RootState
+) => {
+  if (shouldFetchEntry(accession, getState())) {
+    dispatch(fetchEntry(accession));
+  }
 };
 
 export const resetEntry = () => action(RESET_ENTRY);
@@ -50,7 +64,7 @@ export const receiveEntryPublications = (
   url: string,
   data: EntryPublicationsData,
   nextUrl: string | undefined,
-  total: number
+  total: string
 ) => {
   return action(RECEIVE_ENTRY_PUBLICATIONS, {
     url,
