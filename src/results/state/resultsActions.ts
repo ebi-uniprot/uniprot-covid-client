@@ -30,7 +30,7 @@ export const receiveBatchOfResults = (
   url: string,
   data: Response['data'],
   nextUrl: string | undefined,
-  totalNumberResults: number
+  totalNumberResults: string
 ) =>
   action(RECEIVE_BATCH_OF_RESULTS, {
     url,
@@ -61,7 +61,7 @@ export const clearResults = () => action(CLEAR_RESULTS);
 type Response = {
   data: { results: UniProtkbAPIModel[]; facets: Facet[] };
   headers: {
-    ['x-totalrecords']: number;
+    ['x-totalrecords']: string;
     link: string;
   };
 };
