@@ -199,3 +199,5 @@ export const implicitDatabaseGenePatternOrganism = {
 export const implicitDatabaseSimilarityComment = {
   GPCRDB: 'Belongs to the G-protein coupled receptor',
 };
+
+export const implicitDatabasesEC = ['ENZYME'];

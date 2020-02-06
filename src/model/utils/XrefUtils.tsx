@@ -8,13 +8,14 @@ import {
   implicitDatabaseAlwaysInclude,
   implicitDatabaseGenePatternOrganism,
   implicitDatabaseSimilarityComment,
+  implicitDatabasesEC,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
 import { DatabaseCategory } from '../types/DatabaseTypes';
 import Comment, { Xref, FreeTextComment } from '../types/CommentTypes';
 import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
-import { Property } from '../types/modelTypes';
+import { Property, ValueWithEvidence } from '../types/modelTypes';
 
 export type XrefsGoupedByDatabase = {
   database: string;
@@ -32,7 +33,8 @@ export const getXrefsForSection = (
   geneNamesData?: GeneNamesData,
   commonName?: string,
   similarityComments?: FreeTextComment[],
-  uniProtId?: string
+  uniProtId?: string,
+  ecNumbers: ValueWithEvidence[]
 ): XrefUIModel[] => {
   const databasesForSection = entrySectionToDatabaseNames.get(section);
   if (!databasesForSection) {
@@ -128,6 +130,8 @@ export const getXrefsForSection = (
     }
   });
 
+  // Implicit databases which require depend on the a gene name pattern
+  // and orgnasim pattern
   const { pattern, organism } = implicitDatabaseGenePatternOrganism;
   if (
     geneNamesData &&
@@ -149,6 +153,20 @@ export const getXrefsForSection = (
           }
         }
       });
+  }
+  // EC dependent implicit databases
+  if (ecNumbers) {
+    implicitDatabasesEC.forEach(name => {
+      const xref = implicitDatabaseXRefs.get(name);
+      if (xref) {
+        ecNumbers.forEach(({ value }) => {
+          addXrefIfInSection({
+            ...xref,
+            properties: [{ key: 'ec' as PropertyKey, value }],
+          });
+        });
+      }
+    });
   }
   const databaseCategoryOrder = entrySectionToDatabaseCategoryOrder.get(
     section
