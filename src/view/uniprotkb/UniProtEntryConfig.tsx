@@ -12,6 +12,8 @@ import InteractionSection from './InteractionSection';
 import FamilyAndDomainsSection from './FamilyAndDomainsSection';
 import StructureSection from './StructureSection';
 import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
+import Entry from '../../entry/Entry';
+import idx from 'idx';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;
@@ -98,6 +100,9 @@ const UniProtKBEntryConfig: {
         primaryAccession={data.primaryAccession}
         sequence={data[EntrySection.Sequence].sequence.value}
         key={EntrySection.Structure}
+        crc64={
+          idx(data, o => o[EntrySection.Sequence].sequence.crc64) || undefined
+        }
       />
     ),
   },

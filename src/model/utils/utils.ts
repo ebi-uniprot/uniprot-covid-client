@@ -1,5 +1,7 @@
 import UniProtKBEntryConfig from '../../view/uniprotkb/UniProtEntryConfig';
 import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
+import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
+import { uniq } from '../../utils/utils';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const hasContent = (obj: any) => {
@@ -25,3 +27,20 @@ export const hasExternalLinks = (transformedData: UniProtkbUIModel) =>
     const data = transformedData[name];
     return typeof data.xrefData && data.xrefData.length > 0;
   });
+
+export const flattenGeneNameData = (geneNamesData: GeneNamesData) => {
+  const geneNames: string[] = [];
+  geneNamesData.forEach(
+    ({ geneName, synonyms = [], orfNames = [], orderedLocusNames = [] }) => {
+      if (geneName) {
+        geneNames.push(geneName.value);
+      }
+      [synonyms, orfNames, orderedLocusNames].forEach(names => {
+        names.forEach(({ value }) => {
+          geneNames.push(value);
+        });
+      });
+    }
+  );
+  return uniq(geneNames);
+};

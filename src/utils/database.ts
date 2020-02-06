@@ -3,6 +3,7 @@ import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
+  ImplicitXref,
 } from '../model/types/DatabaseTypes';
 import { flattenArrays } from './utils';
 
@@ -12,11 +13,16 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseToDatabaseInfo: {
     [database: string]: DatabaseInfoPoint;
   } = {};
+  const implicitDatabaseXRefs = new Map<string, ImplicitXref>();
   databaseInfo.forEach(info => {
-    const { name, category } = info as {
+    const { name, category, implicit } = info as {
       name: string;
       category: DatabaseCategory;
+      implicit?: boolean;
     };
+    if (implicit) {
+      implicitDatabaseXRefs.set(name, { databaseType: name, implicit: true });
+    }
     const databaseNames = databaseCategoryToNames.get(category);
     databaseCategoryToNames.set(
       category,
@@ -29,6 +35,7 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
     databaseCategoryToNames,
     databaseNameToCategory,
     databaseToDatabaseInfo,
+    implicitDatabaseXRefs,
   };
 };
 

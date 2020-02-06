@@ -30,6 +30,12 @@ export type DatabaseInfoPoint = {
   category: string;
   uriLink: string;
   attributes?: AttributesItem[];
+  implicit?: boolean;
 };
 
 export type DatabaseInfo = DatabaseInfoPoint[];
+
+export type ImplicitXref = {
+  databaseType: string;
+  implicit: true;
+};

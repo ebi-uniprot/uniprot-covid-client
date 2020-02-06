@@ -163,12 +163,12 @@ export const MassSpectrometryView: React.FC<{
           value: item.molWeight,
           unit: Unit.DA,
         })} from positions `}
-        {item.ranges.map(range => (
+        {/* {item.ranges.map(range => (
           // TODO this links to be a link to BLAST later on
           <span key={range.range.start.value + range.range.end.value}>
             {range.range.start.value}-{range.range.end.value}
           </span>
-        ))}
+        ))} */}
         . Determined by {item.method}. {item.note}{' '}
         <UniProtEvidenceTag evidences={item.evidences} />
       </section>

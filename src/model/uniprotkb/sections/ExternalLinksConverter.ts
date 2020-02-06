@@ -1,6 +1,9 @@
 import { UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { CommentType } from '../../types/CommentTypes';
+import { getXrefsForSection } from '../../utils/XrefUtils';
+import EntrySection from '../../types/EntrySection';
+import idx from 'idx';
 
 const convertExternalLinks = (data: UniProtkbAPIModel) => {
   const convertedData: UIModel = {
@@ -9,7 +12,7 @@ const convertExternalLinks = (data: UniProtkbAPIModel) => {
     featuresData: [],
     xrefData: [],
   };
-  const { comments } = data;
+  const { comments, databaseCrossReferences, genes, organism } = data;
 
   if (comments) {
     convertedData.commentsData.set(
@@ -17,6 +20,15 @@ const convertExternalLinks = (data: UniProtkbAPIModel) => {
       comments.filter(
         comment => comment.commentType === CommentType.WEB_RESOURCE
       )
+    );
+  }
+  if (databaseCrossReferences) {
+    const commonName = idx(organism, o => o.commonName);
+    convertedData.xrefData = getXrefsForSection(
+      databaseCrossReferences,
+      EntrySection.ExternalLinks,
+      genes,
+      commonName
     );
   }
 

@@ -38,6 +38,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
   const {
     [EntrySection.ExternalLinks]: data,
     primaryAccession,
+    uniProtId,
   } = transformedData;
   const webResourceComments = data.commentsData.get(CommentType.WEB_RESOURCE);
 
@@ -89,7 +90,11 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
             </ExpandableList>
           </Fragment>
         )}
-        <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
+        <XRefView
+          xrefs={xrefData}
+          primaryAccession={primaryAccession}
+          uniProtId={uniProtId}
+        />
       </Card>
     </div>
   );

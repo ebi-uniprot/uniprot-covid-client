@@ -9,6 +9,7 @@ import EntrySection from '../types/EntrySection';
 import KeywordCategory from '../types/KeywordCategory';
 import FeatureType from '../types/FeatureType';
 import { UniProtkbAPIModel } from './UniProtkbConverter';
+import idx from 'idx';
 
 export type UIModel = {
   commentsData: Map<CommentType, Comment[]>;
@@ -31,7 +32,15 @@ export const convertSection = (
     xrefData: [],
   };
 
-  const { comments, keywords, features, databaseCrossReferences } = data;
+  const {
+    comments,
+    keywords,
+    features,
+    databaseCrossReferences,
+    genes,
+    organism,
+    uniProtId,
+  } = data;
   if (sectionComments && comments) {
     sectionComments.forEach(commentType => {
       convertedData.commentsData.set(
@@ -52,9 +61,19 @@ export const convertSection = (
     });
   }
   if (section && databaseCrossReferences) {
+    const commonName = idx(organism, o => o.commonName);
+    // These are needed because the implicit database GPCRDB depends on the existence of a similarity
+    // comment with the text "Belongs to the G-protein coupled receptor"'],
+    const similarityComments = convertedData.commentsData.get(
+      CommentType.SIMILARITY
+    );
     convertedData.xrefData = getXrefsForSection(
       databaseCrossReferences,
-      section
+      section,
+      genes,
+      commonName,
+      similarityComments,
+      uniProtId
     );
   }
   return convertedData;
