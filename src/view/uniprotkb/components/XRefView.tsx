@@ -14,6 +14,7 @@ import { Property, PropertyKey } from '../../../model/types/modelTypes';
 import {
   DatabaseInfo,
   DatabaseInfoPoint,
+  AttributesItem,
 } from '../../../model/types/DatabaseTypes';
 import idx from 'idx';
 import { link } from 'fs';
@@ -30,27 +31,37 @@ https://www.brenda-enzymes.org/enzyme.php?ecno=%s&UniProtAcc=%value&OrganismID=%
 
 */
 
-const fillUrl = (urlTemplate, params) => {
-  let url = urlTemplate.slice();
-  Object.keys(params).forEach(param => {
-    const value = params[param];
+const fillUrl = (urlTemplate: string, params: { [key: string]: string }) => {
+  let url = urlTemplate;
+  Object.entries(params).forEach(([param, value]) => {
     url = url.replace(new RegExp(`%${param}`, 'g'), value);
   });
   return url;
 };
 
-const transfromProperties = properties => {
-  const o = {};
-  properties.forEach(({ key, value }) => (o[key] = value));
+const transfromProperties = (properties: Property[]) => {
+  const o: { [key: string]: string } = {};
+  properties.forEach(({ key, value }) => {
+    if (key && value) {
+      o[key] = value;
+    }
+  });
   return o;
 };
 
-const getDatabaseInfoAttribute = (databaseInfoPoint, name) => {
-  return databaseInfoPoint.attributes.find(({ name: n }) => n === name);
+export const getDatabaseInfoAttribute = (
+  attributes: AttributesItem[],
+  name: string
+) => {
+  return attributes.find(({ name: n }) => n === name);
 };
 
-const getXrefProperty = (xref, name) => {
-  const found = xref.properties.find(({ key }) => key === name);
+// This step is required because our API returns arrays of objects of shape: { key: x, value: y}
+export const getPropertyValue = (
+  properties: Property[],
+  propertyKey: PropertyKey
+) => {
+  const found = properties.find(({ key }) => key === propertyKey);
   if (found) {
     return found.value;
   }
@@ -75,10 +86,21 @@ export const getPropertyLink = (
   property: PropertyKey,
   xref: Xref
 ) => {
-  const attributes = getDatabaseInfoAttribute(databaseInfo, property);
-  const id = getXrefProperty(xref, property);
+  const { attributes } = databaseInfo;
+  if (!attributes) {
+    return;
+  }
+  const attribute = getDatabaseInfoAttribute(attributes, property);
+  const { properties } = xref;
+  if (!properties) {
+    return;
+  }
+  const id = getPropertyValue(properties, property);
+  if (!id || !attribute || !attribute.uriLink) {
+    return;
+  }
   return (
-    <ExternalLink url={fillUrl(attributes.uriLink, { [property]: id })}>
+    <ExternalLink url={fillUrl(attribute.uriLink, { [property]: id })}>
       {id}
     </ExternalLink>
   );
@@ -96,8 +118,7 @@ export const XRef: React.FC<XRefProps> = ({
   xref,
   primaryAccession,
   crc64,
-  uniProtId,
-}): JSX.Element => {
+}): JSX.Element | null => {
   const databaseInfo = databaseToDatabaseInfo[database];
   const { properties = [], isoformId, id, databaseType } = xref;
   const { uriLink, implicit } = databaseInfo;
@@ -121,12 +142,17 @@ export const XRef: React.FC<XRefProps> = ({
       </Fragment>
     );
   }
-  const url = fillUrl(uriLink, {
+  const params: { [key: string]: string } = {
     primaryAccession,
-    id,
-    crc64,
     ...transfromProperties(properties),
-  });
+  };
+  if (id) {
+    params['id'] = id;
+  }
+  if (crc64) {
+    params['crc64'] = crc64;
+  }
+  const url = fillUrl(uriLink, params);
   const linkNode = (
     <ExternalLink url={url}>
       {implicit
@@ -158,7 +184,6 @@ export const DatabaseList: React.FC<{
   xrefsGoupedByDatabase: { database, xrefs },
   primaryAccession,
   crc64,
-  uniProtId,
 }) => (
   <ExpandableList descriptionString={`${database} links`}>
     {xrefs.map((xref): { id: string; content: JSX.Element } => ({
@@ -169,7 +194,6 @@ export const DatabaseList: React.FC<{
           xref={xref}
           primaryAccession={primaryAccession}
           crc64={crc64}
-          uniProtId={uniProtId}
         />
       ),
     }))}
@@ -186,7 +210,6 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
   crc64,
-  uniProtId,
 }): JSX.Element => {
   const infoData = sortBy(databases, 'database').map((database): {
     title: string;
@@ -200,7 +223,6 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
           xrefsGoupedByDatabase={database}
           primaryAccession={primaryAccession}
           crc64={crc64}
-          uniProtId={uniProtId}
         />
       ),
     };
@@ -218,7 +240,6 @@ const XRefView: React.FC<XRefViewProps> = ({
   xrefs,
   primaryAccession,
   crc64,
-  uniProtId,
 }): JSX.Element | null => {
   if (!xrefs) {
     return null;
@@ -230,7 +251,6 @@ const XRefView: React.FC<XRefViewProps> = ({
           databases={databases}
           primaryAccession={primaryAccession}
           crc64={crc64}
-          uniProtId={uniProtId}
         />
       );
       let title;

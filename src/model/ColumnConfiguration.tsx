@@ -60,7 +60,7 @@ import { ValueWithEvidence } from './types/modelTypes';
 import { getAllKeywords } from './utils/KeywordsUtil';
 import { KeywordList } from '../view/uniprotkb/components/KeywordView';
 import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtTitle';
-import { XrefCategoryContent } from '../view/uniprotkb/components/XRefView';
+import { DatabaseList } from '../view/uniprotkb/components/XRefView';
 import {
   databaseNameToCategory,
   getDatabaseNameToEntrySection,
@@ -1013,13 +1013,13 @@ const getXrefColumn = (databaseName: string) => ({
       return undefined;
     }
     // Get the database based on the name
-    const database = category.databases.find(
+    const xrefsGoupedByDatabase = category.databases.find(
       databaseGroup => databaseGroup.database === databaseName
     );
     return (
-      database && (
-        <XrefCategoryContent
-          database={database}
+      xrefsGoupedByDatabase && (
+        <DatabaseList
+          xrefsGoupedByDatabase={xrefsGoupedByDatabase}
           primaryAccession={data.primaryAccession}
         />
       )

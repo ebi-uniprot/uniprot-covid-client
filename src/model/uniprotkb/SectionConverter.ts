@@ -1,5 +1,5 @@
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
-import Comment, { CommentType } from '../types/CommentTypes';
+import Comment, { CommentType, FreeTextComment } from '../types/CommentTypes';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
@@ -70,7 +70,7 @@ export const convertSection = (
     // comment with the text "Belongs to the G-protein coupled receptor"'],
     const similarityComments = convertedData.commentsData.get(
       CommentType.SIMILARITY
-    );
+    ) as FreeTextComment[];
     convertedData.xrefData = getXrefsForSection(
       databaseCrossReferences,
       section,

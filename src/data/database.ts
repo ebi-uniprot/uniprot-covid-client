@@ -176,7 +176,7 @@ export const getDatabaseInfoByName = (dbName: string) =>
   );
 
 // If each of the keys are present then show the values
-export const implicitDatabaseDRPresence = {
+export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
   EMBL: ['GenBank', 'DDBJ'],
   PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'],
   MIM: ['SOURCE_MIM'],
@@ -185,7 +185,7 @@ export const implicitDatabaseDRPresence = {
 };
 
 // If each of the keys are not present then show the value
-export const implicitDatabaseDRAbsence = {
+export const implicitDatabaseDRAbsence: { [key: string]: string[] } = {
   SMR: ['SWISS-MODEL-Workspace'],
 };
 

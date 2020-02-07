@@ -1,3 +1,5 @@
+import { Property } from './modelTypes';
+
 export enum DatabaseCategory {
   CHEMISTRY = 'CHEMISTRY',
   DOMAIN = 'FMD',
@@ -18,7 +20,7 @@ export enum DatabaseCategory {
   STRUCTURE = '3DS',
 }
 
-type AttributesItem = {
+export type AttributesItem = {
   name: string;
   xmlTag: string;
   uriLink?: string;
@@ -34,8 +36,3 @@ export type DatabaseInfoPoint = {
 };
 
 export type DatabaseInfo = DatabaseInfoPoint[];
-
-export type ImplicitXref = {
-  databaseType: string;
-  implicit: true;
-};

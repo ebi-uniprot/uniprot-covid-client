@@ -3,9 +3,9 @@ import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
-  ImplicitXref,
 } from '../model/types/DatabaseTypes';
 import { flattenArrays } from './utils';
+import { Xref } from '../model/types/CommentTypes';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseCategoryToNames = new Map<DatabaseCategory, string[]>();
@@ -13,7 +13,7 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseToDatabaseInfo: {
     [database: string]: DatabaseInfoPoint;
   } = {};
-  const implicitDatabaseXRefs = new Map<string, ImplicitXref>();
+  const implicitDatabaseXRefs = new Map<string, Xref>();
   databaseInfo.forEach(info => {
     const { name, category, implicit } = info as {
       name: string;

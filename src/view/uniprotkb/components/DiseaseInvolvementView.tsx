@@ -4,7 +4,7 @@ import { InfoList, ExpandableList } from 'franklin-sites';
 import { DiseaseComment } from '../../../model/types/CommentTypes';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { databaseToDatabaseInfo } from '../../../data/database';
-import { XRefExternalLink } from './XRefView';
+import { XRef } from './XRefView';
 
 type DiseaseInvolvementEntryProps = {
   comment: DiseaseComment[][0];
@@ -68,15 +68,14 @@ export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = (
   if (reference) {
     const { databaseType: database, id } = reference;
     if (database && id && databaseToDatabaseInfo[database]) {
-      const info = databaseToDatabaseInfo[database];
       infoData.push({
         title: 'See also',
         content: (
-          <h2>hiya!</h2>
-          // <XRefExternalLink url={info.uriLink} id={id} accession={accession}>
-          //   {info.displayName}
-          //   {id && `:${id}`}
-          // </XRefExternalLink>
+          <XRef
+            database={database}
+            xref={reference}
+            primaryAccession={accession}
+          />
         ),
       });
     }

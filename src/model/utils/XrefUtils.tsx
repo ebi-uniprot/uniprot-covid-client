@@ -31,10 +31,10 @@ export const getXrefsForSection = (
   xrefs: Xref[],
   section: EntrySection,
   geneNamesData?: GeneNamesData,
-  commonName?: string,
+  commonName?: string | null,
   similarityComments?: FreeTextComment[],
   uniProtId?: string,
-  ecNumbers: ValueWithEvidence[]
+  ecNumbers?: ValueWithEvidence[] | null
 ): XrefUIModel[] => {
   const databasesForSection = entrySectionToDatabaseNames.get(section);
   if (!databasesForSection) {
@@ -44,24 +44,24 @@ export const getXrefsForSection = (
     DatabaseCategory,
     { [name: string]: Xref[] }
   >();
-  const implicitDatabasePresenceCheck: { [key: string]: boolean } = {};
+  const implicitDatabaseDRPresenceCheck: { [key: string]: boolean } = {};
   Object.keys(implicitDatabaseDRPresence).forEach(
-    xref => (implicitDatabasePresenceCheck[xref] = false)
+    xref => (implicitDatabaseDRPresenceCheck[xref] = false)
   );
-  const implicitDatabaseAbsenceCheck: { [key: string]: boolean } = {};
+  const implicitDatabaseDRAbsenceCheck: { [key: string]: boolean } = {};
   Object.keys(implicitDatabaseDRAbsence).forEach(
-    xref => (implicitDatabaseAbsenceCheck[xref] = true)
+    xref => (implicitDatabaseDRAbsenceCheck[xref] = true)
   );
   const addXrefIfInSection = (xref: Xref) => {
     const { databaseType: name } = xref;
     if (!name) {
       return;
     }
-    if (name in implicitDatabasePresenceCheck) {
-      implicitDatabasePresenceCheck[name] = true;
+    if (name in implicitDatabaseDRPresenceCheck) {
+      implicitDatabaseDRPresenceCheck[name] = true;
     }
-    if (name in implicitDatabaseAbsenceCheck) {
-      implicitDatabaseAbsenceCheck[name] = false;
+    if (name in implicitDatabaseDRAbsenceCheck) {
+      implicitDatabaseDRAbsenceCheck[name] = false;
     }
     if (!databasesForSection.includes(name)) {
       return;
@@ -81,14 +81,14 @@ export const getXrefsForSection = (
   // After passing through all of the xrefs we can now establish
   // which DR line contingent-implicit databases can be included
   [
-    [implicitDatabasePresenceCheck, implicitDatabaseDRPresence],
-    [implicitDatabaseAbsenceCheck, implicitDatabaseDRAbsence],
+    [implicitDatabaseDRPresenceCheck, implicitDatabaseDRPresence],
+    [implicitDatabaseDRAbsenceCheck, implicitDatabaseDRAbsence],
   ].forEach(([check, ruleMap]) => {
     Object.entries(check).forEach(([name, include]) => {
-      if (!include) {
+      if (!include || !(name in ruleMap)) {
         return;
       }
-      const implicitNames = ruleMap[name];
+      const implicitNames = ruleMap[name] as string[];
       if (implicitNames) {
         implicitNames.forEach(implicitName => {
           const xref = implicitDatabaseXRefs.get(implicitName);
@@ -114,7 +114,10 @@ export const getXrefsForSection = (
             addXrefIfInSection({
               ...xref,
               properties: [
-                { key: 'uniProtId' as PropertyKey, value: uniProtId },
+                {
+                  key: 'uniProtId' as PropertyKey,
+                  value: uniProtId,
+                } as Property,
               ],
             });
           }
@@ -148,7 +151,9 @@ export const getXrefsForSection = (
           if (xref) {
             addXrefIfInSection({
               ...xref,
-              properties: [{ key: 'gene' as PropertyKey, value: gene }],
+              properties: [
+                { key: 'gene' as PropertyKey, value: gene } as Property,
+              ],
             });
           }
         }
@@ -162,7 +167,7 @@ export const getXrefsForSection = (
         ecNumbers.forEach(({ value }) => {
           addXrefIfInSection({
             ...xref,
-            properties: [{ key: 'ec' as PropertyKey, value }],
+            properties: [{ key: 'ec' as PropertyKey, value } as Property],
           });
         });
       }

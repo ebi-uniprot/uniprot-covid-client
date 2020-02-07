@@ -90,11 +90,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
             </ExpandableList>
           </Fragment>
         )}
-        <XRefView
-          xrefs={xrefData}
-          primaryAccession={primaryAccession}
-          uniProtId={uniProtId}
-        />
+        <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
       </Card>
     </div>
   );
