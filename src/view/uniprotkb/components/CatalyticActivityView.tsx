@@ -152,7 +152,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
           <span className="text-block" key={reaction.name}>
             <strong>{reaction.ecNumber}</strong>
             {/* Need a link to search for EC in UniProtKB:
-             https://www.ebi.ac.uk/panda/jira/browse/TRM-23597*/}
+             https://www.ebi.ac.uk/panda/jira/browse/TRM-23597 */}
             {` ${reaction.name}`}
             {reaction.evidences && (
               <UniProtEvidenceTag evidences={reaction.evidences} />

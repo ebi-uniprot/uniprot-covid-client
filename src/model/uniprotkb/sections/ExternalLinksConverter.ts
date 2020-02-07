@@ -1,9 +1,9 @@
+import idx from 'idx';
 import { UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { CommentType } from '../../types/CommentTypes';
 import { getXrefsForSection } from '../../utils/XrefUtils';
 import EntrySection from '../../types/EntrySection';
-import idx from 'idx';
 
 const convertExternalLinks = (data: UniProtkbAPIModel) => {
   const convertedData: UIModel = {

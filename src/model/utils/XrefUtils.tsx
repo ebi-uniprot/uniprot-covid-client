@@ -12,10 +12,10 @@ import {
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
 import { DatabaseCategory } from '../types/DatabaseTypes';
-import Comment, { Xref, FreeTextComment } from '../types/CommentTypes';
+import { Xref, FreeTextComment } from '../types/CommentTypes';
 import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
-import { Property, ValueWithEvidence } from '../types/modelTypes';
+import { Property, PropertyKey, ValueWithEvidence } from '../types/modelTypes';
 
 export type XrefsGoupedByDatabase = {
   database: string;
@@ -45,13 +45,13 @@ export const getXrefsForSection = (
     { [name: string]: Xref[] }
   >();
   const implicitDatabaseDRPresenceCheck: { [key: string]: boolean } = {};
-  Object.keys(implicitDatabaseDRPresence).forEach(
-    xref => (implicitDatabaseDRPresenceCheck[xref] = false)
-  );
+  Object.keys(implicitDatabaseDRPresence).forEach(xref => {
+    implicitDatabaseDRPresenceCheck[xref] = false;
+  });
   const implicitDatabaseDRAbsenceCheck: { [key: string]: boolean } = {};
-  Object.keys(implicitDatabaseDRAbsence).forEach(
-    xref => (implicitDatabaseDRAbsenceCheck[xref] = true)
-  );
+  Object.keys(implicitDatabaseDRAbsence).forEach(xref => {
+    implicitDatabaseDRAbsenceCheck[xref] = true;
+  });
   const addXrefIfInSection = (xref: Xref) => {
     const { databaseType: name } = xref;
     if (!name) {
@@ -111,14 +111,13 @@ export const getXrefsForSection = (
         if (foundCommentSubstring) {
           const xref = implicitDatabaseXRefs.get(implicitName);
           if (xref) {
+            const property: Property = {
+              key: 'uniProtId' as PropertyKey,
+              value: uniProtId,
+            };
             addXrefIfInSection({
               ...xref,
-              properties: [
-                {
-                  key: 'uniProtId' as PropertyKey,
-                  value: uniProtId,
-                } as Property,
-              ],
+              properties: [property],
             });
           }
         }
@@ -144,16 +143,18 @@ export const getXrefsForSection = (
     const geneNames = flattenGeneNameData(geneNamesData);
     geneNames
       .filter(geneName => geneName.match(pattern))
-      .forEach(gene => {
+      .forEach((gene: string) => {
         if (commonName in organism) {
           const name = organism[commonName as keyof typeof organism];
           const xref = implicitDatabaseXRefs.get(name);
           if (xref) {
+            const property: Property = {
+              key: 'gene' as PropertyKey,
+              value: gene,
+            };
             addXrefIfInSection({
               ...xref,
-              properties: [
-                { key: 'gene' as PropertyKey, value: gene } as Property,
-              ],
+              properties: [property],
             });
           }
         }
@@ -165,9 +166,13 @@ export const getXrefsForSection = (
       const xref = implicitDatabaseXRefs.get(name);
       if (xref) {
         ecNumbers.forEach(({ value }) => {
+          const property: Property = {
+            key: 'ec' as PropertyKey,
+            value,
+          };
           addXrefIfInSection({
             ...xref,
-            properties: [{ key: 'ec' as PropertyKey, value } as Property],
+            properties: [property],
           });
         });
       }
@@ -187,9 +192,9 @@ export const getXrefsForSection = (
     }
     xrefCategories.push({
       category,
-      databases: Object.entries(nameToXrefs).map(([database, xrefs]) => ({
+      databases: Object.entries(nameToXrefs).map(([database, refs]) => ({
         database,
-        xrefs,
+        xrefs: refs,
       })),
     });
   });

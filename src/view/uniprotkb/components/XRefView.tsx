@@ -12,13 +12,9 @@ import {
 import { Xref } from '../../../model/types/CommentTypes';
 import { Property, PropertyKey } from '../../../model/types/modelTypes';
 import {
-  DatabaseInfo,
   DatabaseInfoPoint,
   AttributesItem,
 } from '../../../model/types/DatabaseTypes';
-import idx from 'idx';
-import { link } from 'fs';
-import { url } from 'inspector';
 import { sortBy } from '../../../utils/utils';
 
 type XrefItem = {
@@ -62,9 +58,7 @@ export const getPropertyValue = (
   propertyKey: PropertyKey
 ) => {
   const found = properties.find(({ key }) => key === propertyKey);
-  if (found) {
-    return found.value;
-  }
+  return found ? found.value : null;
 };
 
 export const getPropertyString = (key?: string, value?: string) => {
@@ -88,16 +82,16 @@ export const getPropertyLink = (
 ) => {
   const { attributes } = databaseInfo;
   if (!attributes) {
-    return;
+    return null;
   }
   const attribute = getDatabaseInfoAttribute(attributes, property);
   const { properties } = xref;
   if (!properties) {
-    return;
+    return null;
   }
   const id = getPropertyValue(properties, property);
   if (!id || !attribute || !attribute.uriLink) {
-    return;
+    return null;
   }
   return (
     <ExternalLink url={fillUrl(attribute.uriLink, { [property]: id })}>
@@ -147,20 +141,22 @@ export const XRef: React.FC<XRefProps> = ({
     ...transfromProperties(properties),
   };
   if (id) {
-    params['id'] = id;
+    params.id = id;
   }
   if (crc64) {
-    params['crc64'] = crc64;
+    params.crc64 = crc64;
   }
-  const url = fillUrl(uriLink, params);
+  let text;
+  if (implicit) {
+    text =
+      databaseType === 'SWISS-MODEL-Workspace'
+        ? 'Submit a new modelling project...'
+        : 'Search...';
+  } else {
+    text = id;
+  }
   const linkNode = (
-    <ExternalLink url={url}>
-      {implicit
-        ? databaseType === 'SWISS-MODEL-Workspace'
-          ? 'Submit a new modelling project...'
-          : 'Search...'
-        : id}
-    </ExternalLink>
+    <ExternalLink url={fillUrl(uriLink, params)}>{text}</ExternalLink>
   );
 
   return (

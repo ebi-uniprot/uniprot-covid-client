@@ -95,7 +95,8 @@ export const groupBy = (list: any[], keyGetter: Function) => {
 
 export const sortBy = (items: any[], key: string) => {
   const compare = (a: any, b: any) => {
-    let valA, valB;
+    let valA;
+    let valB;
     if (key in a) {
       valA = a[key];
     }

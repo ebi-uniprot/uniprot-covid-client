@@ -1,4 +1,5 @@
 import React from 'react';
+import idx from 'idx';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
@@ -12,8 +13,6 @@ import InteractionSection from './InteractionSection';
 import FamilyAndDomainsSection from './FamilyAndDomainsSection';
 import StructureSection from './StructureSection';
 import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
-import Entry from '../../entry/Entry';
-import idx from 'idx';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;

@@ -38,7 +38,6 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
   const {
     [EntrySection.ExternalLinks]: data,
     primaryAccession,
-    uniProtId,
   } = transformedData;
   const webResourceComments = data.commentsData.get(CommentType.WEB_RESOURCE);
 

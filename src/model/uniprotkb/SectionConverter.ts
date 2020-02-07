@@ -1,3 +1,4 @@
+import idx from 'idx';
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
 import Comment, { CommentType, FreeTextComment } from '../types/CommentTypes';
 import {
@@ -9,7 +10,6 @@ import EntrySection from '../types/EntrySection';
 import KeywordCategory from '../types/KeywordCategory';
 import FeatureType from '../types/FeatureType';
 import { UniProtkbAPIModel } from './UniProtkbConverter';
-import idx from 'idx';
 
 export type UIModel = {
   commentsData: Map<CommentType, Comment[]>;

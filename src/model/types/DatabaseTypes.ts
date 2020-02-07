@@ -1,5 +1,3 @@
-import { Property } from './modelTypes';
-
 export enum DatabaseCategory {
   CHEMISTRY = 'CHEMISTRY',
   DOMAIN = 'FMD',
