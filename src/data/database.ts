@@ -177,7 +177,8 @@ export const getDatabaseInfoByName = (dbName: string) =>
 
 // If each of the keys are present then show the values
 export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
-  EMBL: ['GenBank', 'DDBJ'],
+  // these EMBL mirrors are taken care of in xrefview as they are displayed differently
+  // EMBL: ['GenBank', 'DDBJ'],
   PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'],
   MIM: ['SOURCE_MIM'],
   MGI: ['SOURCE_MGI'],

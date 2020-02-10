@@ -136,6 +136,7 @@ export const XRef: React.FC<XRefProps> = ({
       </Fragment>
     );
   }
+
   const params: { [key: string]: string } = {
     primaryAccession,
     ...transfromProperties(properties),
@@ -146,19 +147,48 @@ export const XRef: React.FC<XRefProps> = ({
   if (crc64) {
     params.crc64 = crc64;
   }
-  let text;
-  if (implicit) {
-    text =
-      databaseType === 'SWISS-MODEL-Workspace'
-        ? 'Submit a new modelling project...'
-        : 'Search...';
-  } else {
-    text = id;
-  }
-  const linkNode = (
-    <ExternalLink url={fillUrl(uriLink, params)}>{text}</ExternalLink>
-  );
 
+  let linkNode;
+  if (database === 'EMBL') {
+    // M28638 (EMBL|GenBank|DDBJ)
+    const genBankInfo = databaseToDatabaseInfo['GenBank'];
+    const ddbjInfo = databaseToDatabaseInfo['DDBJ'];
+    if (!genBankInfo || !ddbjInfo) {
+      console.warn(
+        'GenBank or DDBJ database information not found in drlineconiguration'
+      );
+    }
+    linkNode = (
+      <Fragment>
+        (
+        <ExternalLink url={fillUrl(databaseInfo.uriLink, params)}>
+          EMBL
+        </ExternalLink>
+        {' | '}
+        <ExternalLink url={fillUrl(genBankInfo.uriLink, params)}>
+          GenBank
+        </ExternalLink>
+        {' | '}
+        <ExternalLink url={fillUrl(ddbjInfo.uriLink, params)}>
+          DDBJ
+        </ExternalLink>
+        ) {id}
+      </Fragment>
+    );
+  } else {
+    let text;
+    if (implicit) {
+      text =
+        databaseType === 'SWISS-MODEL-Workspace'
+          ? 'Submit a new modelling project...'
+          : 'Search...';
+    } else {
+      text = id;
+    }
+    linkNode = (
+      <ExternalLink url={fillUrl(uriLink, params)}>{text}</ExternalLink>
+    );
+  }
   return (
     <Fragment key={v1()}>
       {linkNode} {propertiesNode} {isoformNode}
