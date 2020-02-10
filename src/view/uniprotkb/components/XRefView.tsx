@@ -22,12 +22,10 @@ type XrefItem = {
   xref: Xref;
 };
 
-/*
-https://www.brenda-enzymes.org/enzyme.php?ecno=%s&UniProtAcc=%value&OrganismID=%d",
-
-*/
-
-const fillUrl = (urlTemplate: string, params: { [key: string]: string }) => {
+export const fillUrl = (
+  urlTemplate: string,
+  params: { [key: string]: string }
+) => {
   let url = urlTemplate;
   Object.entries(params).forEach(([param, value]) => {
     url = url.replace(new RegExp(`%${param}`, 'g'), value);
@@ -35,7 +33,7 @@ const fillUrl = (urlTemplate: string, params: { [key: string]: string }) => {
   return url;
 };
 
-const transfromProperties = (properties: Property[]) => {
+export const transfromProperties = (properties: Property[]) => {
   const o: { [key: string]: string } = {};
   properties.forEach(({ key, value }) => {
     if (key && value) {
@@ -48,9 +46,7 @@ const transfromProperties = (properties: Property[]) => {
 export const getDatabaseInfoAttribute = (
   attributes: AttributesItem[],
   name: string
-) => {
-  return attributes.find(({ name: n }) => n === name);
-};
+) => attributes.find(({ name: n }) => n === name);
 
 // This step is required because our API returns arrays of objects of shape: { key: x, value: y}
 export const getPropertyValue = (

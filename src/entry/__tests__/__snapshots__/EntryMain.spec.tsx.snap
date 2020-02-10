@@ -758,6 +758,49 @@ exports[`Entry view should render 1`] = `
             </div>
           </div>
         </div>
+        <h4>
+          Enzyme and pathway databases
+        </h4>
+        <div
+          class="info-list info-list--columns"
+        >
+          <div
+            class="info-list__item"
+          >
+            <div
+              class="info-list__item__title"
+            >
+              ENZYME
+            </div>
+            <div
+              class="info-list__item__content"
+            >
+              <ul
+                class="no-bullet"
+              >
+                <li>
+                  <a
+                    class="external-link"
+                    href="https://enzyme.expasy.org/EC/1.2.3.4"
+                    target="_blank"
+                  >
+                    Search...
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                   1.2.3.4 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1623,10 +1666,10 @@ exports[`Entry view should render 1`] = `
             >
               <a
                 class="external-link"
-                href="http://www.omim.org/entry/3124"
+                href="https://www.omim.org/entry/3124"
                 target="_blank"
               >
-                MIM:3124
+                3124
                 <svg
                   viewBox="0 0 576 512"
                   width="12.5"
@@ -1637,6 +1680,7 @@ exports[`Entry view should render 1`] = `
                   />
                 </svg>
               </a>
+                
             </div>
           </div>
         </div>
@@ -1760,6 +1804,109 @@ exports[`Entry view should render 1`] = `
     </div>
   </div>
   <div
+    id="Structure"
+  >
+    <div
+      class="card "
+    >
+      <div
+        class="card__header"
+      >
+        <h3
+          class="card__title"
+        >
+          Structure
+        </h3>
+      </div>
+      <div
+        class="card__content"
+      >
+        <protvista-structure
+          accession="P21802"
+        />
+        <h4>
+          3D structure databases
+        </h4>
+        <div
+          class="info-list info-list--columns"
+        >
+          <div
+            class="info-list__item"
+          >
+            <div
+              class="info-list__item__title"
+            >
+              ModBase
+            </div>
+            <div
+              class="info-list__item__content"
+            >
+              <ul
+                class="no-bullet"
+              >
+                <li>
+                  <a
+                    class="external-link"
+                    href="http://salilab.org/modbase-cgi/model_search.cgi?searchkw=name&kword=P21802"
+                    target="_blank"
+                  >
+                    Search...
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                    
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="info-list__item"
+          >
+            <div
+              class="info-list__item__title"
+            >
+              SWISS-MODEL-Workspace
+            </div>
+            <div
+              class="info-list__item__content"
+            >
+              <ul
+                class="no-bullet"
+              >
+                <li>
+                  <a
+                    class="external-link"
+                    href="http://salilab.org/modbase-cgi/model_search.cgi?searchkw=name&kword=P21802"
+                    target="_blank"
+                  >
+                    Submit a new modelling project...
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                   some Gene 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
     id="Family & Domains"
   >
     <div
@@ -1799,6 +1946,85 @@ exports[`Entry view should render 1`] = `
               >
                  #keyword value
               </a>
+            </div>
+          </div>
+        </div>
+        <h4>
+          Family and domain databases
+        </h4>
+        <div
+          class="info-list info-list--columns"
+        >
+          <div
+            class="info-list__item"
+          >
+            <div
+              class="info-list__item__title"
+            >
+              MobiDB
+            </div>
+            <div
+              class="info-list__item__content"
+            >
+              <ul
+                class="no-bullet"
+              >
+                <li>
+                  <a
+                    class="external-link"
+                    href="http://mobidb.bio.unipd.it/entries/P21802"
+                    target="_blank"
+                  >
+                    Search...
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                    
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="info-list__item"
+          >
+            <div
+              class="info-list__item__title"
+            >
+              ProtoNet
+            </div>
+            <div
+              class="info-list__item__content"
+            >
+              <ul
+                class="no-bullet"
+              >
+                <li>
+                  <a
+                    class="external-link"
+                    href="http://www.protonet.cs.huji.ac.il/sp.php?prot=P21802"
+                    target="_blank"
+                  >
+                    Search...
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                    
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -1981,11 +2207,7 @@ exports[`Entry view should render 1`] = `
         <section
           class="text-block"
         >
-          Molecular mass is 2.1 Da from positions 
-          <span>
-            1-7
-          </span>
-          . Determined by LSI. note value 
+          Molecular mass is 2.1 Da from positions . Determined by LSI. note value 
           <span
             class="evidence-tag svg-colour-unreviewed"
             data-testid="evidence-tag-trigger"
@@ -2153,12 +2375,30 @@ exports[`Entry view should render 1`] = `
                       />
                     </svg>
                   </a>
-                   description value 
+                   
+                  <a
+                    class="external-link"
+                    href="https://www.ensembl.org/id/description value"
+                    target="_blank"
+                  >
+                    description value
+                    <svg
+                      viewBox="0 0 576 512"
+                      width="12.5"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                      />
+                    </svg>
+                  </a>
+                   [
                   <a
                     href="#Q9NXB0-1"
                   >
-                    [Q9NXB0-1]
+                    Q9NXB0-1
                   </a>
+                  ]
                 </li>
               </ul>
             </div>

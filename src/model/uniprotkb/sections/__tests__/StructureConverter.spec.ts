@@ -6,7 +6,27 @@ describe('Structure data converter', () => {
     const convertedData = convertStructure(modelData);
     expect(convertedData).toEqual({
       commentsData: new Map(),
-      xrefData: [],
+      xrefData: [
+        {
+          category: '3DS',
+          databases: [
+            {
+              database: 'SWISS-MODEL-Workspace',
+              xrefs: [
+                {
+                  databaseType: 'SWISS-MODEL-Workspace',
+                  implicit: true,
+                  properties: [{ key: 'GeneName', value: 'some Gene' }],
+                },
+              ],
+            },
+            {
+              database: 'ModBase',
+              xrefs: [{ databaseType: 'ModBase', implicit: true }],
+            },
+          ],
+        },
+      ],
       featuresData: [],
       keywordData: [],
       structures: new Map(),

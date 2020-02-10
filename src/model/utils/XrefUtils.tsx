@@ -80,7 +80,6 @@ export const getXrefsForSection = (
   xrefs.forEach(addXrefIfInSection);
   // After passing through all of the xrefs we can now establish
   // which DR line contingent-implicit databases can be included
-
   const geneNames = geneNamesData ? flattenGeneNameData(geneNamesData) : [];
   [
     [implicitDatabaseDRPresenceCheck, implicitDatabaseDRPresence],
