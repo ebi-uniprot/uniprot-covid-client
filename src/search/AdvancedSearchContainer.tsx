@@ -14,6 +14,7 @@ import {
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import createQueryString from './utils/QueryStringGenerator';
+import { queryBuilderPath } from '../App';
 
 import './styles/SearchContainer.scss';
 
@@ -52,6 +53,18 @@ export class Search extends Component<Props, State> {
     this.state = { queryString };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
+  }
+
+  componentDidMount() {
+    const {
+      dispatchSetPreSelectedClauses,
+      location: { pathname },
+      history,
+    } = this.props;
+    if (pathname === `${queryBuilderPath}/reset`) {
+      dispatchSetPreSelectedClauses();
+      history.replace(queryBuilderPath);
+    }
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -128,10 +141,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const AdvancedSearchContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Search)
+  connect(mapStateToProps, mapDispatchToProps)(Search)
 );
 
 export default AdvancedSearchContainer;

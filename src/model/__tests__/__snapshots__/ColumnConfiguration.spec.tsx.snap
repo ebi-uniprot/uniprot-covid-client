@@ -33,7 +33,7 @@ exports[`ColumnConfiguration component should render all columns 3`] = `
   </div>
   <div>
     <ul
-      class="no-bullet"
+      class="expandable-list no-bullet"
     >
       <li>
         a full alt Name (short alt name1) 
@@ -42,7 +42,7 @@ exports[`ColumnConfiguration component should render all columns 3`] = `
   </div>
   <div>
     <ul
-      class="no-bullet"
+      class="expandable-list no-bullet"
     >
       <li>
         containsrec full Name (containsrecommended short name)  
@@ -55,7 +55,7 @@ exports[`ColumnConfiguration component should render all columns 3`] = `
   </div>
   <div>
     <ul
-      class="no-bullet"
+      class="expandable-list no-bullet"
     >
       <li>
         sub full Name
@@ -74,17 +74,145 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
 <DocumentFragment>
   <div>
     <strong>
-      some Gene
+      some Gene 
+      <span
+        class="evidence-tag svg-colour-unreviewed"
+        data-testid="evidence-tag-trigger"
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          height="12"
+          viewBox="0 0 400 512"
+          width="12"
+        >
+          <path
+            d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+          />
+        </svg>
+        <span
+          class="evidence-tag__label"
+          title=""
+        >
+          1 automatic annotation
+        </span>
+      </span>
+      <div
+        class="evidence-tag-content "
+        data-testid="evidence-tag-content"
+      >
+        <div>
+          <h5>
+            Automatic assertion according to rules
+          </h5>
+        </div>
+      </div>
     </strong>
   </div>
   <div>
-    some Syn
+    some Syn 
+    <span
+      class="evidence-tag svg-colour-unreviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 400 512"
+        width="12"
+      >
+        <path
+          d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 automatic annotation
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Automatic assertion according to rules
+        </h5>
+      </div>
+    </div>
   </div>
   <div>
-    some orf
+    some orf 
+    <span
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 426 512"
+        width="12"
+      >
+        <path
+          d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 publication
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Manual assertion based on experiment
+        </h5>
+      </div>
+    </div>
   </div>
   <div>
-    some locus
+    some locus 
+    <span
+      class="evidence-tag svg-colour-unreviewed"
+      data-testid="evidence-tag-trigger"
+      role="button"
+      tabindex="0"
+    >
+      <svg
+        height="12"
+        viewBox="0 0 400 512"
+        width="12"
+      >
+        <path
+          d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 automatic annotation
+      </span>
+    </span>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+    >
+      <div>
+        <h5>
+          Automatic assertion according to rules
+        </h5>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -115,19 +243,115 @@ exports[`ColumnConfiguration component should render all columns 7`] = `
 
 exports[`ColumnConfiguration component should render all columns 8`] = `
 <DocumentFragment>
-  some locus
+  some locus 
+  <span
+    class="evidence-tag svg-colour-unreviewed"
+    data-testid="evidence-tag-trigger"
+    role="button"
+    tabindex="0"
+  >
+    <svg
+      height="12"
+      viewBox="0 0 400 512"
+      width="12"
+    >
+      <path
+        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 automatic annotation
+    </span>
+  </span>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+  >
+    <div>
+      <h5>
+        Automatic assertion according to rules
+      </h5>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
 exports[`ColumnConfiguration component should render all columns 9`] = `
 <DocumentFragment>
-  some orf
+  some orf 
+  <span
+    class="evidence-tag svg-colour-reviewed"
+    data-testid="evidence-tag-trigger"
+    role="button"
+    tabindex="0"
+  >
+    <svg
+      height="12"
+      viewBox="0 0 426 512"
+      width="12"
+    >
+      <path
+        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 publication
+    </span>
+  </span>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+  >
+    <div>
+      <h5>
+        Manual assertion based on experiment
+      </h5>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
 exports[`ColumnConfiguration component should render all columns 10`] = `
 <DocumentFragment>
-  some Syn
+  some Syn 
+  <span
+    class="evidence-tag svg-colour-unreviewed"
+    data-testid="evidence-tag-trigger"
+    role="button"
+    tabindex="0"
+  >
+    <svg
+      height="12"
+      viewBox="0 0 400 512"
+      width="12"
+    >
+      <path
+        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 automatic annotation
+    </span>
+  </span>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+  >
+    <div>
+      <h5>
+        Automatic assertion according to rules
+      </h5>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
@@ -147,10 +371,9 @@ exports[`ColumnConfiguration component should render all columns 11`] = `
     <svg
       viewBox="0 0 576 512"
       width="12.5"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
       />
     </svg>
   </a>
@@ -194,11 +417,11 @@ exports[`ColumnConfiguration component should render all columns 15`] = `
     value1
   </p>
   <hr />
-  <h4
+  <h3
     id="isoID1"
   >
     isoID1
-  </h4>
+  </h3>
   <div
     class="info-list"
   >
@@ -208,7 +431,11 @@ exports[`ColumnConfiguration component should render all columns 15`] = `
       <div
         class="info-list__item__title"
       >
-        Name
+        <h5
+          class="bold"
+        >
+          Name
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -222,7 +449,11 @@ exports[`ColumnConfiguration component should render all columns 15`] = `
       <div
         class="info-list__item__title"
       >
-        Synonyms
+        <h5
+          class="bold"
+        >
+          Synonyms
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -236,7 +467,11 @@ exports[`ColumnConfiguration component should render all columns 15`] = `
       <div
         class="info-list__item__title"
       >
-        Note
+        <h5
+          class="bold"
+        >
+          Note
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -351,7 +586,11 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
   <section
     class="text-block"
   >
-    Molecular mass is 2.1 Da from positions . Determined by LSI. note value 
+    Molecular mass is 2.1 Da from positions 
+    <span>
+      1-7
+    </span>
+    . Determined by LSI. note value 
     <span
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
@@ -362,11 +601,9 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -384,9 +621,6 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -422,11 +656,9 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             height="12"
             viewBox="0 0 400 512"
             width="12"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-              id="Shape"
             />
           </svg>
           <span
@@ -444,9 +676,6 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PIRNR:PIRNR001361
-            </div>
           </div>
         </div>
       </span>
@@ -464,11 +693,9 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             height="12"
             viewBox="0 0 400 512"
             width="12"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-              id="Shape"
             />
           </svg>
           <span
@@ -486,9 +713,6 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PIRNR:PIRNR001361
-            </div>
           </div>
         </div>
       </span>
@@ -512,10 +736,9 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
       <svg
         viewBox="0 0 576 512"
         width="12.5"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
         />
       </svg>
     </a>
@@ -530,11 +753,9 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -552,9 +773,6 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -597,11 +815,9 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
           height="12"
           viewBox="0 0 426 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-            id="Shape"
           />
         </svg>
         <span
@@ -619,9 +835,11 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PROSITE-ProRule:PRU10028
-          </div>
+          <a
+            href="//prosite.expasy.org/unirule/PRU10028"
+          >
+            PRU10028
+          </a>
         </div>
       </div>
     </section>
@@ -635,11 +853,9 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         height="12"
         viewBox="0 0 426 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-          id="Shape"
         />
       </svg>
       <span
@@ -657,9 +873,11 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -691,11 +909,9 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -713,9 +929,6 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
     This reaction proceeds in the 
@@ -735,11 +948,9 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -757,9 +968,6 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
         <h5>
           Automatic assertion inferred from database entries
         </h5>
-        <div>
-          Ensembl:ENSP0001324
-        </div>
       </div>
     </div>
   </span>
@@ -783,11 +991,9 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           height="12"
           viewBox="0 0 400 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-            id="Shape"
           />
         </svg>
         <span
@@ -805,9 +1011,6 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </span>
@@ -825,11 +1028,9 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           height="12"
           viewBox="0 0 400 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-            id="Shape"
           />
         </svg>
         <span
@@ -847,9 +1048,6 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </section>
@@ -872,11 +1070,9 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
       height="12"
       viewBox="0 0 426 512"
       width="12"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-        id="Shape"
       />
     </svg>
     <span
@@ -894,9 +1090,11 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
       <h5>
         Automatic assertion according to rules
       </h5>
-      <div>
-        PROSITE-ProRule:PRU100210
-      </div>
+      <a
+        href="//prosite.expasy.org/unirule/PRU100210"
+      >
+        PRU100210
+      </a>
     </div>
   </div>
 </DocumentFragment>
@@ -930,11 +1128,9 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
             height="12"
             viewBox="0 0 426 512"
             width="12"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-              id="Shape"
             />
           </svg>
           <span
@@ -952,9 +1148,11 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
             <h5>
               Automatic assertion according to rules
             </h5>
-            <div>
-              PROSITE-ProRule:PRU10028
-            </div>
+            <a
+              href="//prosite.expasy.org/unirule/PRU10028"
+            >
+              PRU10028
+            </a>
           </div>
         </div>
       </li>
@@ -977,11 +1175,9 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           height="12"
           viewBox="0 0 426 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-            id="Shape"
           />
         </svg>
         <span
@@ -999,9 +1195,11 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PROSITE-ProRule:PRU10028
-          </div>
+          <a
+            href="//prosite.expasy.org/unirule/PRU10028"
+          >
+            PRU10028
+          </a>
         </div>
       </div>
     </section>
@@ -1031,11 +1229,9 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
         height="12"
         viewBox="0 0 426 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1053,9 +1249,11 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -1078,11 +1276,9 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
         height="12"
         viewBox="0 0 426 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1100,9 +1296,11 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -1127,11 +1325,9 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
         height="12"
         viewBox="0 0 426 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1149,9 +1345,11 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PROSITE-ProRule:PRU10028
-        </div>
+        <a
+          href="//prosite.expasy.org/unirule/PRU10028"
+        >
+          PRU10028
+        </a>
       </div>
     </div>
   </section>
@@ -1164,13 +1362,13 @@ exports[`ColumnConfiguration component should render all columns 49`] = `
     title="Annotation Score"
   >
     <span
-      class="doughnut-chart--medium colour-light-grey"
+      class="doughnut-chart--medium colour-azureish-white"
     >
       <span
         class="doughnut-chart--medium__left-wrap"
       >
         <span
-          class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+          class="doughnut-chart--medium__left-wrap__loader colour-sea-blue"
           style="transform: rotate(0deg);"
         />
       </span>
@@ -1178,7 +1376,7 @@ exports[`ColumnConfiguration component should render all columns 49`] = `
         class="doughnut-chart--medium__right-wrap"
       >
         <span
-          class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+          class="doughnut-chart--medium__right-wrap__loader colour-sea-blue"
           style="transform: rotate(72deg);"
         />
       </span>
@@ -1207,10 +1405,9 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
       <svg
         viewBox="0 0 576 512"
         width="12.5"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
         />
       </svg>
     </a>
@@ -1225,11 +1422,9 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1247,9 +1442,6 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001361
-        </div>
       </div>
     </div>
   </section>
@@ -1293,11 +1485,9 @@ exports[`ColumnConfiguration component should render all columns 55`] = `
       height="512"
       viewBox="0 0 426 512"
       width="426"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-        id="Shape"
       />
     </svg>
   </span>
@@ -1336,7 +1526,7 @@ exports[`ColumnConfiguration component should render all columns 64`] = `
     class="text-block"
   >
     <ul
-      class="no-bullet"
+      class="expandable-list no-bullet"
     />
   </section>
 </DocumentFragment>
@@ -1348,7 +1538,7 @@ exports[`ColumnConfiguration component should render all columns 65`] = `
     class="text-block"
   >
     <ul
-      class="no-bullet"
+      class="expandable-list no-bullet"
     />
   </section>
 </DocumentFragment>
@@ -1361,9 +1551,9 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
   <section
     class="text-block"
   >
-    <h4>
+    <h3>
       molecule value
-    </h4>
+    </h3>
     <div>
       <strong>
         location value
@@ -1379,11 +1569,9 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           height="12"
           viewBox="0 0 400 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-            id="Shape"
           />
         </svg>
         <span
@@ -1401,9 +1589,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
       : topology value 
@@ -1417,11 +1602,9 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           height="12"
           viewBox="0 0 400 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-            id="Shape"
           />
         </svg>
         <span
@@ -1439,9 +1622,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </div>
@@ -1459,11 +1639,9 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           height="12"
           viewBox="0 0 400 512"
           width="12"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-            id="Shape"
           />
         </svg>
         <span
@@ -1481,9 +1659,6 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
           <h5>
             Automatic assertion according to rules
           </h5>
-          <div>
-            PIRNR:PIRNR001361
-          </div>
         </div>
       </div>
     </section>
@@ -1515,11 +1690,9 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1537,9 +1710,6 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001360
-        </div>
       </div>
     </div>
   </section>
@@ -1548,9 +1718,9 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
 
 exports[`ColumnConfiguration component should render all columns 73`] = `
 <DocumentFragment>
-  <h4>
+  <h3>
     Disease Id (someAcron)
-  </h4>
+  </h3>
   <span
     class="text-block"
   >
@@ -1564,11 +1734,9 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
         height="12"
         viewBox="0 0 400 512"
         width="12"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
-          id="Shape"
         />
       </svg>
       <span
@@ -1586,9 +1754,6 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
         <h5>
           Automatic assertion according to rules
         </h5>
-        <div>
-          PIRNR:PIRNR001362
-        </div>
       </div>
     </div>
   </span>
@@ -1601,13 +1766,17 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
       <div
         class="info-list__item__title"
       >
-        Note
+        <h5
+          class="bold"
+        >
+          Note
+        </h5>
       </div>
       <div
         class="info-list__item__content"
       >
         <ul
-          class="no-bullet"
+          class="expandable-list no-bullet"
         >
           <li>
             value2
@@ -1621,7 +1790,11 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
       <div
         class="info-list__item__title"
       >
-        Description
+        <h5
+          class="bold"
+        >
+          Description
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -1635,7 +1808,11 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
       <div
         class="info-list__item__title"
       >
-        See also
+        <h5
+          class="bold"
+        >
+          See also
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -1649,10 +1826,9 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
           <svg
             viewBox="0 0 576 512"
             width="12.5"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
             />
           </svg>
         </a>
@@ -1706,7 +1882,7 @@ exports[`ColumnConfiguration component should render all columns 93`] = `<Docume
 exports[`ColumnConfiguration component should render all columns 94`] = `
 <DocumentFragment>
   <ul
-    class="no-bullet"
+    class="expandable-list no-bullet"
   >
     <li>
       <a
@@ -1743,13 +1919,15 @@ exports[`ColumnConfiguration component should render all columns 94`] = `
         somepID5
       </a>
     </li>
-    <button
-      class="button link-button"
-      data-testid="expandable-message"
-      type="button"
-    >
-      More items
-    </button>
+    <li>
+      <button
+        class="button tertiary"
+        data-testid="expandable-message"
+        type="button"
+      >
+        More items
+      </button>
+    </li>
   </ul>
 </DocumentFragment>
 `;
@@ -1889,7 +2067,7 @@ exports[`ColumnConfiguration component should render all columns 148`] = `<Docum
 exports[`ColumnConfiguration component should render all columns 149`] = `
 <DocumentFragment>
   <ul
-    class="no-bullet"
+    class="expandable-list no-bullet"
   >
     <li>
       <a
@@ -1901,10 +2079,9 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
         <svg
           viewBox="0 0 576 512"
           width="12.5"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
           />
         </svg>
       </a>
@@ -1918,10 +2095,9 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
         <svg
           viewBox="0 0 576 512"
           width="12.5"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
           />
         </svg>
       </a>

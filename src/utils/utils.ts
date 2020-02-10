@@ -119,7 +119,7 @@ export const sortBy = (items: any[], key: string) => {
 };
 
 export const uniq = (items: any[]) => {
-  return [
-    ...new Set(items.map(item => JSON.stringify(item))),
-  ].map(referenceString => JSON.parse(referenceString));
+  return [...new Set(items.map(item => JSON.stringify(item)))].map(jsonString =>
+    JSON.parse(jsonString)
+  );
 };

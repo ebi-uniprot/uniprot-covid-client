@@ -114,7 +114,7 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
   return (
     <Fragment key={isoformData.isoformIds.join('')}>
       <hr />
-      <h4 id={name}>{name}</h4>
+      <h3 id={name}>{name}</h3>
       {isoformData.isoformSequenceStatus === 'Displayed' && (
         <p>
           {'This isoform has been chosen as the '}
@@ -155,26 +155,29 @@ export const SequenceCautionView: React.FC<{
 
 export const MassSpectrometryView: React.FC<{
   data: MassSpectrometryComment[];
-}> = ({ data }) => (
-  <Fragment>
-    {data.map(item => (
-      <section className="text-block" key={`${item.molWeight}${item.method}`}>
-        {`Molecular mass is ${numberView({
-          value: item.molWeight,
-          unit: Unit.DA,
-        })} from positions `}
-        {/* {item.ranges.map(range => (
-          // TODO this links to be a link to BLAST later on
-          <span key={range.range.start.value + range.range.end.value}>
-            {range.range.start.value}-{range.range.end.value}
-          </span>
-        ))} */}
-        . Determined by {item.method}. {item.note}{' '}
-        <UniProtEvidenceTag evidences={item.evidences} />
-      </section>
-    ))}
-  </Fragment>
-);
+}> = ({ data }) => {
+  return (
+    <Fragment>
+      {data.map(item => (
+        <section className="text-block" key={`${item.molWeight}${item.method}`}>
+          {`Molecular mass is ${numberView({
+            value: item.molWeight,
+            unit: Unit.DA,
+          })} from positions `}
+          {item.ranges &&
+            item.ranges.map(range => (
+              // TODO this links to be a link to BLAST later on
+              <span key={range.range.start.value + range.range.end.value}>
+                {range.range.start.value}-{range.range.end.value}
+              </span>
+            ))}
+          . Determined by {item.method}. {item.note}{' '}
+          <UniProtEvidenceTag evidences={item.evidences} />
+        </section>
+      ))}
+    </Fragment>
+  );
+};
 
 export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
   data,
@@ -183,7 +186,8 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
     {data.map(item => (
       <section
         className="text-block"
-        key={`${item.positions.map(pos => pos.position).join('')}`}
+        key={`${item.positions &&
+          item.positions.map(pos => pos.position).join('')}`}
       >
         {item.positions && (
           <div>

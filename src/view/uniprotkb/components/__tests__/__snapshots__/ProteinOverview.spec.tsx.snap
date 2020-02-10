@@ -11,7 +11,11 @@ exports[`ProteinOverview component should render 1`] = `
       <div
         class="info-list__item__title"
       >
-        Evidence
+        <h5
+          class="bold"
+        >
+          Evidence
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -25,7 +29,11 @@ exports[`ProteinOverview component should render 1`] = `
       <div
         class="info-list__item__title"
       >
-        Annotation score
+        <h5
+          class="bold"
+        >
+          Annotation score
+        </h5>
       </div>
       <div
         class="info-list__item__content"
@@ -34,13 +42,13 @@ exports[`ProteinOverview component should render 1`] = `
           title="Annotation Score"
         >
           <span
-            class="doughnut-chart--medium colour-light-grey"
+            class="doughnut-chart--medium colour-azureish-white"
           >
             <span
               class="doughnut-chart--medium__left-wrap"
             >
               <span
-                class="doughnut-chart--medium__left-wrap__loader colour-uniprot-blue"
+                class="doughnut-chart--medium__left-wrap__loader colour-sea-blue"
                 style="transform: rotate(0deg);"
               />
             </span>
@@ -48,7 +56,7 @@ exports[`ProteinOverview component should render 1`] = `
               class="doughnut-chart--medium__right-wrap"
             >
               <span
-                class="doughnut-chart--medium__right-wrap__loader colour-uniprot-blue"
+                class="doughnut-chart--medium__right-wrap__loader colour-sea-blue"
                 style="transform: rotate(72deg);"
               />
             </span>

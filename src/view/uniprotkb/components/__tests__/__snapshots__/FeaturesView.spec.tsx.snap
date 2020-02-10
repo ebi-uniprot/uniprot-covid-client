@@ -2,9 +2,9 @@
 
 exports[`FeaturesView component it renders without crashing 1`] = `
 <DocumentFragment>
-  <h4>
+  <h3>
     Features
-  </h4>
+  </h3>
   <protvista-manager
     attributes="highlight displaystart displayend"
   >

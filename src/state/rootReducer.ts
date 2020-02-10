@@ -6,15 +6,19 @@ import resultsReducers, {
 import { SearchState } from '../search/state/searchInitialState';
 import { ResultsState } from '../results/state/resultsInitialState';
 import initialState from './initialState';
+import { EntryState } from '../entry/state/entryInitialState';
+import entryReducers from '../entry/state/entryReducers';
 
 type RootState = {
   query: SearchState;
   results: ResultsState;
+  entry: EntryState;
 };
 
 const appReducer = combineReducers({
   query: searchReducers,
   results: resultsReducers,
+  entry: entryReducers,
 });
 
 const rootReducer = (

@@ -1,7 +1,15 @@
 import urlJoin from 'url-join';
 import queryString from 'query-string';
-import { SortDirectionApi } from '../results/types/resultsTypes';
+import {
+  getApiSortDirection,
+  SortDirection,
+  SelectedFacet,
+  FileFormat,
+  fileFormatsWithColumns,
+  fileFormatToUrlParameter,
+} from '../results/types/resultsTypes';
 import { SortableColumn } from '../model/types/ColumnTypes';
+import { uniq } from './utils';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
@@ -42,7 +50,8 @@ const apiUrls = {
     '/uniprot/api/configure/uniprotkb/resultfields'
   ),
   // Retrieve results
-  advancedSearch: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
+  search: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
+  download: joinUrl(devPrefix, '/uniprot/api/uniprotkb/download'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
 
   entry: (accession: string) =>
@@ -55,15 +64,118 @@ const RE_QUERY = /\?$/;
 export const getSuggesterUrl = (url: string, value: string) =>
   joinUrl(devPrefix, url.replace(RE_QUERY, value));
 
+export const createFacetsQueryString = (facets: SelectedFacet[]) =>
+  /**
+   * Add double quotes to facet values which contain
+   * spaces as otherwise the backend doesn't escape special characters
+   * such as '.' or '-'.
+   * Single word values shouldn't have double quotes as they can be boolean.
+   * Range queries (/^\[.*]$/) should not have double quotes either.
+   * */
+  facets.reduce(
+    (queryAccumulator, facet) =>
+      `${queryAccumulator} AND (${facet.name}:${
+        facet.value.indexOf(' ') >= 0 && !facet.value.match(/^\[.*\]$/)
+          ? `"${facet.value}"`
+          : facet.value
+      })`,
+    ''
+  );
+
+export const createAccessionsQueryString = (accessions: string[]) =>
+  accessions.map(accession => `accession:${accession}`).join(' OR ');
+
 export const getQueryUrl = (
-  encodedQueryString: string,
+  query: string,
   columns: string[],
-  sortBy?: SortableColumn | undefined,
-  sortDirection?: SortDirectionApi | undefined
+  selectedFacets: SelectedFacet[],
+  sortColumn: SortableColumn | undefined = undefined,
+  sortDirection: SortDirection | undefined = SortDirection.ascend
 ) =>
-  `${apiUrls.advancedSearch}?${queryString.stringify({
-    query: encodedQueryString,
+  `${apiUrls.search}?${queryString.stringify({
+    query: `${query}${createFacetsQueryString(selectedFacets)}`,
     fields: columns.join(','),
-    facets: 'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
-    sort: sortBy && `${sortBy} ${sortDirection}`,
+    facets:
+      'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
+    sort:
+      sortColumn &&
+      `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
   })}`;
+
+export const getDownloadUrl = ({
+  query,
+  columns,
+  selectedFacets,
+  sortColumn,
+  sortDirection = SortDirection.ascend,
+  fileFormat,
+  compressed = false,
+  size,
+  selectedAccessions = [],
+}: {
+  query: string;
+  columns: string[];
+  selectedFacets: SelectedFacet[];
+  sortColumn: SortableColumn;
+  sortDirection: SortDirection;
+  fileFormat: FileFormat;
+  compressed: boolean;
+  size?: number;
+  selectedAccessions: string[];
+}) => {
+  const parameters: {
+    query: string;
+    format: string;
+    fields?: string;
+    sort?: string;
+    includeIsoform?: boolean;
+    size?: number;
+    compressed?: boolean;
+  } = {
+    query: selectedAccessions.length
+      ? createAccessionsQueryString(selectedAccessions)
+      : `${query}${createFacetsQueryString(selectedFacets)}`,
+    // fallback to json if something goes wrong
+    format: fileFormatToUrlParameter.get(fileFormat) || 'json',
+  };
+  const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
+  if (isColumnFileFormat && sortColumn) {
+    parameters.sort = `${sortColumn} ${getApiSortDirection(
+      SortDirection[sortDirection]
+    )}`;
+  }
+  if (fileFormat === FileFormat.fastaCanonicalIsoform) {
+    parameters.includeIsoform = true;
+  }
+  if (isColumnFileFormat && columns) {
+    parameters.fields = columns.join(',');
+  }
+  if (size && !selectedAccessions.length) {
+    parameters.size = size;
+  }
+  if (compressed) {
+    parameters.compressed = true;
+  }
+  return `${apiUrls.download}?${queryString.stringify(parameters)}`;
+};
+
+export const urlsAreEqual = (
+  url1: string,
+  url2: string,
+  ignoreParams: string[] = []
+) => {
+  const urlObject1 = queryString.parseUrl(url1);
+  const urlObject2 = queryString.parseUrl(url2);
+  if (urlObject1.url !== urlObject2.url) {
+    return false;
+  }
+  const paramsIntersection = uniq([
+    ...Object.keys(urlObject1.query),
+    ...Object.keys(urlObject1.query),
+  ]);
+  return paramsIntersection.every(
+    param =>
+      ignoreParams.includes(param) ||
+      urlObject1.query[param] === urlObject2.query[param]
+  );
+};

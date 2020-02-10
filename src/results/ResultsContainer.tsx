@@ -19,7 +19,7 @@ import * as searchActions from '../search/state/searchActions';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
-import { getAPIQueryUrl } from './utils/utils';
+import { getQueryUrl } from '../utils/apiUrls';
 import { uniq } from '../utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
@@ -46,6 +46,7 @@ type ResultsProps = {
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
   dispatchUpdateSummaryAccession: (accession: string) => void;
+  dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
   cardColumns: string[];
@@ -232,6 +233,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
+      dispatchUpdateQueryString,
     } = this.props;
     const {
       query,
@@ -245,8 +247,9 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const columns = uniq([...cardColumns, ...tableColumns]);
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
-      getAPIQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
+      getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
     );
+    dispatchUpdateQueryString(query);
   }
 
   render() {
@@ -266,9 +269,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
-    const { selectedFacets, sortColumn, sortDirection } = this.getURLParams(
-      queryParamFromUrl
-    );
+    const {
+      query,
+      selectedFacets,
+      sortColumn,
+      sortDirection,
+    } = this.getURLParams(queryParamFromUrl);
     if (isFetching && !results.length) {
       return <Loader />;
     }
@@ -296,42 +302,53 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
         <Fragment>
           {results.length > 0 && (
             <div className="button-group">
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 Blast
               </button>
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 Align
               </button>
-              <button type="button" className="button link-button">
-                <DownloadIcon />
-                Download
+              <button type="button" className="button tertiary">
+                <Link
+                  to={{
+                    pathname: '/download',
+                    state: {
+                      query,
+                      selectedFacets,
+                      sortColumn,
+                      sortDirection,
+                      selectedEntries: Object.keys(selectedEntries),
+                    },
+                  }}
+                >
+                  <DownloadIcon />
+                  Download
+                </Link>
               </button>
-              <button type="button" className="button link-button disabled">
+              <button type="button" className="button tertiary disabled">
                 <BasketIcon />
                 Add
               </button>
-              <button type="button" className="button link-button">
+              <button type="button" className="button tertiary">
                 <StatisticsIcon />
                 Statistics
               </button>
               <button
                 type="button"
-                className="button link-button large-icon"
+                className="button tertiary large-icon"
                 onClick={() => dispatchSwitchViewMode()}
                 data-testid="table-card-toggle"
               >
                 <span
                   className={
-                    viewMode === ViewMode.CARD ? 'link-button-icon__active' : ''
+                    viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
                   }
                 >
                   <TableIcon />
                 </span>
                 <span
                   className={
-                    viewMode === ViewMode.TABLE
-                      ? 'link-button-icon__active'
-                      : ''
+                    viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
                   }
                 >
                   <ListIcon />
@@ -339,7 +356,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               </button>
               {viewMode === ViewMode.TABLE && (
                 <Link to="/customise-table">
-                  <button type="button" className="button link-button">
+                  <button type="button" className="button tertiary">
                     <EditIcon />
                     Customise data
                   </button>
@@ -394,6 +411,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
       dispatchUpdateSummaryAccession: (accession: string) =>
         resultsActions.updateSummaryAccession(accession),
+      dispatchUpdateQueryString: queryString =>
+        searchActions.updateQueryString(queryString),
     },
     dispatch
   );

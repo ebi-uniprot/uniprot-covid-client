@@ -13,8 +13,13 @@ export const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
   data,
 }): JSX.Element => (
   <Fragment>
-    {`${data.value} `}
-    {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
+    {data.value}
+    {data.evidences && (
+      <Fragment>
+        {' '}
+        <UniProtEvidenceTag evidences={data.evidences} />
+      </Fragment>
+    )}
   </Fragment>
 );
 

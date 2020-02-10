@@ -225,7 +225,11 @@ export const getEvidenceCodeData = (eco: string): EvidenceData | null => {
         manual: true,
         label: 'Manual assertion inferred from experiment',
         description: 'Inferred by curator',
-        labelRender: publicationCountRenderer,
+        labelRender: (evidences: Evidence[]) => {
+          return evidences.some(evidence => evidence.source)
+            ? publicationCountRenderer(evidences)
+            : 'Curated';
+        },
       };
     case ECO.ND:
       return {

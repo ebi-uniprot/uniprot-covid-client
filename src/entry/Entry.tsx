@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   withRouter,
   RouteComponentProps,
@@ -7,31 +7,48 @@ import {
   Route,
 } from 'react-router-dom';
 import { InPageNav, Loader } from 'franklin-sites';
-import useDataApi from '../utils/useDataApi';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
-import apiUrls from '../utils/apiUrls';
 import uniProtKbConverter, {
   UniProtkbUIModel,
+  UniProtkbAPIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import SideBarLayout from '../layout/SideBarLayout';
 import EntrySection from '../model/types/EntrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
+import { RootState, RootAction } from '../state/state-types';
+import * as entryActions from './state/entryActions';
 
 type MatchParams = {
   accession: string;
 };
 
-type EntryProps = RouteComponentProps<MatchParams>;
+type EntryProps = RouteComponentProps<MatchParams> & {
+  entryData: UniProtkbAPIModel | null;
+  dispatchFetchEntry: (accesion: string) => void;
+  dispatchResetEntry: () => void;
+};
 
-const Entry: React.FC<EntryProps> = ({ match, history }) => {
-  const url = apiUrls.entry(match.params.accession);
-  const entryData = useDataApi(url);
-  if (Object.keys(entryData).length === 0) {
+const Entry: React.FC<EntryProps> = ({
+  match,
+  history,
+  entryData,
+  dispatchFetchEntry,
+  dispatchResetEntry,
+}) => {
+  useEffect(() => {
+    dispatchFetchEntry(match.params.accession);
+    return function cleanup() {
+      dispatchResetEntry();
+    };
+  }, [match, dispatchFetchEntry, dispatchResetEntry]);
+
+  if (!entryData || Object.keys(entryData).length === 0) {
     return <Loader />;
   }
-
   const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
 
   const sections = UniProtKBEntryConfig.map(section => ({
@@ -66,4 +83,20 @@ const Entry: React.FC<EntryProps> = ({ match, history }) => {
   );
 };
 
-export default withRouter(Entry);
+const mapStateToProps = (state: RootState) => {
+  return {
+    entryData: state.entry.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      dispatchFetchEntry: (accession: string) =>
+        entryActions.fetchEntryIfNeeded(accession),
+      dispatchResetEntry: () => entryActions.resetEntry(),
+    },
+    dispatch
+  );
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entry));

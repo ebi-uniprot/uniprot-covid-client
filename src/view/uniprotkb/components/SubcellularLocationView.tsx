@@ -5,8 +5,11 @@ import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import { TextView } from './FreeTextView';
 
 const SubcellularLocationView: FC<{
-  comments: SubcellularLocationComment[];
+  comments?: SubcellularLocationComment[];
 }> = ({ comments }) => {
+  if (!comments || !comments.length) {
+    return null;
+  }
   return (
     <Fragment>
       {comments.map(
@@ -16,7 +19,7 @@ const SubcellularLocationView: FC<{
               className="text-block"
               key={subcellData.molecule ? subcellData.molecule : v1()}
             >
-              <h4>{subcellData.molecule}</h4>
+              <h3>{subcellData.molecule}</h3>
               {subcellData.subcellularLocations.map(subcellularLocation => (
                 <div
                   key={`${

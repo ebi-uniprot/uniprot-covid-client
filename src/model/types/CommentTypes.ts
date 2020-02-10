@@ -185,7 +185,7 @@ export type MassSpectrometryComment = {
   note?: string;
   molWeight: number;
   molWeightError: number;
-  ranges: Range[];
+  ranges?: Range[];
   evidences: Evidence[];
 };
 

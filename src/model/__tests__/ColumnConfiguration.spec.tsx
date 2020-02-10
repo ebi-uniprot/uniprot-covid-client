@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import ColumnConfiguration from '../ColumnConfiguration';
 import data from '../__mocks__/modelData.json';
 import uniProtKbConverter from '../uniprotkb/UniProtkbConverter';
+import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 describe('ColumnConfiguration component', () => {
   let transformedData;
@@ -18,7 +19,7 @@ describe('ColumnConfiguration component', () => {
 
   test('should render all columns', () => {
     ColumnConfiguration.forEach(column => {
-      const { asFragment } = render(
+      const { asFragment } = renderWithRedux(
         <MemoryRouter>{column.render(transformedData)}</MemoryRouter>
       );
       expect(asFragment()).toMatchSnapshot();

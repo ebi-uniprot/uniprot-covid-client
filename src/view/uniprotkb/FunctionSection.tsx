@@ -71,31 +71,31 @@ const BioPhysicoChemicalPropertiesView: FC<{
     <Fragment>
       {data.absorption && (
         <Fragment>
-          <h4>Absorption</h4>
+          <h3>Absorption</h3>
           <AbsorptionView data={data.absorption} />
         </Fragment>
       )}
       {data.kinetics && (
         <Fragment>
-          <h4>Kinetics</h4>
+          <h3>Kinetics</h3>
           <KineticsView data={data.kinetics} />
         </Fragment>
       )}
       {data.pHDependence && (
         <Fragment>
-          <h4>pH Dependence</h4>
+          <h3>pH Dependence</h3>
           <TextView comments={data.pHDependence} />
         </Fragment>
       )}
       {data.redoxPotential && (
         <Fragment>
-          <h4>Redox Potential</h4>
+          <h3>Redox Potential</h3>
           <TextView comments={data.redoxPotential} />
         </Fragment>
       )}
       {data.temperatureDependence && (
         <Fragment>
-          <h4>Temperature Dependence</h4>
+          <h3>Temperature Dependence</h3>
           <TextView comments={data.temperatureDependence} />
         </Fragment>
       )}
@@ -104,29 +104,34 @@ const BioPhysicoChemicalPropertiesView: FC<{
 };
 
 export const CofactorView: FC<{
-  cofactors: CofactorComment[];
+  cofactors?: CofactorComment[];
   title?: string;
-}> = ({ cofactors, title }) => (
-  <Fragment>
-    {title && <h3>{title}</h3>}
-    {cofactors.map(cofactorComment => (
-      <section className="text-block" key={v1()}>
-        {cofactorComment.cofactors &&
-          cofactorComment.cofactors.map(cofactor => (
-            <span key={cofactor.name}>
-              {cofactor.name}{' '}
-              {cofactor.evidences && (
-                <UniProtEvidenceTag evidences={cofactor.evidences} />
-              )}
-            </span>
-          ))}
-        {cofactorComment.note && (
-          <TextView comments={cofactorComment.note.texts} />
-        )}
-      </section>
-    ))}
-  </Fragment>
-);
+}> = ({ cofactors, title }) => {
+  if (!cofactors || !cofactors.length) {
+    return null;
+  }
+  return (
+    <Fragment>
+      {title && <h3>{title}</h3>}
+      {cofactors.map(cofactorComment => (
+        <section className="text-block" key={v1()}>
+          {cofactorComment.cofactors &&
+            cofactorComment.cofactors.map(cofactor => (
+              <span key={cofactor.name}>
+                {cofactor.name}{' '}
+                {cofactor.evidences && (
+                  <UniProtEvidenceTag evidences={cofactor.evidences} />
+                )}
+              </span>
+            ))}
+          {cofactorComment.note && (
+            <TextView comments={cofactorComment.note.texts} />
+          )}
+        </section>
+      ))}
+    </Fragment>
+  );
+};
 
 const FunctionSection: FC<{
   data: FunctionUIModel;

@@ -20,7 +20,7 @@ enum COLOR_BY {
 
 const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   <div className="GoRibbon">
-    <h4>GO Annotations</h4>
+    <h3>GO Annotations</h3>
     <RibbonDataProvider subject={`UniProtKB:${primaryAccession}`}>
       {({
         entities,
