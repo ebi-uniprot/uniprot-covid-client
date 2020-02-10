@@ -93,8 +93,9 @@ export const getPropertyLink = (
   if (!id || !attribute || !attribute.uriLink) {
     return null;
   }
+  const url = fillUrl(attribute.uriLink, { [property]: id });
   return (
-    <ExternalLink url={fillUrl(attribute.uriLink, { [property]: id })}>
+    <ExternalLink key={url} url={url}>
       {id}
     </ExternalLink>
   );
@@ -151,9 +152,10 @@ export const XRef: React.FC<XRefProps> = ({
   let linkNode;
   if (database === 'EMBL') {
     // M28638 (EMBL|GenBank|DDBJ)
-    const genBankInfo = databaseToDatabaseInfo['GenBank'];
-    const ddbjInfo = databaseToDatabaseInfo['DDBJ'];
+    const genBankInfo = databaseToDatabaseInfo.GenBank;
+    const ddbjInfo = databaseToDatabaseInfo.DDBJ;
     if (!genBankInfo || !ddbjInfo) {
+      // eslint-disable-next-line no-console
       console.warn(
         'GenBank or DDBJ database information not found in drlineconiguration'
       );
@@ -190,7 +192,7 @@ export const XRef: React.FC<XRefProps> = ({
     );
   }
   return (
-    <Fragment key={v1()}>
+    <Fragment>
       {linkNode} {propertiesNode} {isoformNode}
     </Fragment>
   );
