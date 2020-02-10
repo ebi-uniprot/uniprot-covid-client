@@ -80,6 +80,8 @@ export const getXrefsForSection = (
   xrefs.forEach(addXrefIfInSection);
   // After passing through all of the xrefs we can now establish
   // which DR line contingent-implicit databases can be included
+
+  const geneNames = geneNamesData ? flattenGeneNameData(geneNamesData) : [];
   [
     [implicitDatabaseDRPresenceCheck, implicitDatabaseDRPresence],
     [implicitDatabaseDRAbsenceCheck, implicitDatabaseDRAbsence],
@@ -93,7 +95,17 @@ export const getXrefsForSection = (
         implicitNames.forEach(implicitName => {
           const xref = implicitDatabaseXRefs.get(implicitName);
           if (xref) {
-            addXrefIfInSection(xref);
+            let property: Property = {};
+            if (geneNames.length) {
+              property = {
+                key: 'GeneName' as PropertyKey,
+                value: geneNames[0],
+              };
+            }
+            addXrefIfInSection({
+              ...xref,
+              properties: [property],
+            });
           }
         });
       }
@@ -135,12 +147,7 @@ export const getXrefsForSection = (
   // Implicit databases which require depend on the a gene name pattern
   // and orgnasim pattern
   const { pattern, organism } = implicitDatabaseGenePatternOrganism;
-  if (
-    geneNamesData &&
-    commonName &&
-    Object.keys(organism).includes(commonName)
-  ) {
-    const geneNames = flattenGeneNameData(geneNamesData);
+  if (commonName && Object.keys(organism).includes(commonName)) {
     geneNames
       .filter(geneName => geneName.match(pattern))
       .forEach((gene: string) => {

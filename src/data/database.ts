@@ -149,7 +149,7 @@ entrySectionToDatabaseNames.set(
 entrySectionToDatabaseNames.set(
   EntrySection.ExternalLinks,
   databaseSelector({
-    categories: [DatabaseCategory.OTHER],
+    categories: [DatabaseCategory.OTHER, DatabaseCategory.PROTOCOL],
   })
 );
 
