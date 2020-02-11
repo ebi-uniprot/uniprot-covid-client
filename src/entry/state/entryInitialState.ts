@@ -8,7 +8,6 @@ export type EntryState = {
   data: UniProtkbAPIModel | null;
   publicationsData: {
     isFetching: boolean;
-    isFetched: { [url: string]: boolean };
     data: LiteratureForProteinAPI[];
     facets: Facet[];
     nextUrl: string;
@@ -22,7 +21,6 @@ const entryInitialState = {
   data: null,
   publicationsData: {
     isFetching: false,
-    isFetched: {},
     data: [],
     facets: [],
     nextUrl: '',

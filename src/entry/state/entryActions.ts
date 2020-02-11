@@ -18,6 +18,7 @@ export const RESET_ENTRY = 'RESET_ENTRY';
 export const REQUEST_ENTRY_PUBLICATIONS = 'REQUEST_ENTRY_PUBLICATIONS';
 export const RECEIVE_ENTRY_PUBLICATIONS = 'RECEIVE_ENTRY_PUBLICATIONS';
 export const RESET_ENTRY_PUBLICATIONS = 'RESET_ENTRY_PUBLICATIONS';
+export const SET_SELECTED_FACETS = 'SET_SELECTED_FACETS';
 
 type EntryPublicationsData = {
   facets: Facet[];
@@ -64,13 +65,15 @@ export const receiveEntryPublications = (
   url: string,
   data: EntryPublicationsData,
   nextUrl: string | undefined,
-  total: string
+  total: string,
+  reset: boolean = true
 ) => {
   return action(RECEIVE_ENTRY_PUBLICATIONS, {
     url,
     data,
     nextUrl,
     total,
+    reset,
     receivedAt: Date.now(),
   });
 };
@@ -78,9 +81,10 @@ export const receiveEntryPublications = (
 export const requestEntryPublications = () =>
   action(REQUEST_ENTRY_PUBLICATIONS);
 
-export const fetchEntryPublications = (url: string) => async (
-  dispatch: Dispatch
-) => {
+export const fetchEntryPublications = (
+  url: string,
+  reset: boolean = false
+) => async (dispatch: Dispatch) => {
   dispatch(requestEntryPublications());
   fetchData(url)
     .then((response: Response) => {
@@ -100,7 +104,8 @@ export const fetchEntryPublications = (url: string) => async (
           url,
           publicationDataWithIds,
           nextUrl,
-          response.headers['x-totalrecords']
+          response.headers['x-totalrecords'],
+          reset
         )
       );
     }) /* eslint-disable no-console */
@@ -108,16 +113,19 @@ export const fetchEntryPublications = (url: string) => async (
 };
 
 export const shouldFetchEntryPublications = (url: string, state: RootState) => {
-  const { isFetching, isFetched } = state.entry.publicationsData;
-  return !isFetching && !isFetched[url];
+  const { isFetching } = state.entry.publicationsData;
+  return !isFetching;
 };
 
-export const fetchEntryPublicationsIfNeeded = (url: string | undefined) => (
+export const fetchEntryPublicationsIfNeeded = (
+  url: string | undefined,
+  reset: boolean = true
+) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState
 ) => {
   if (url && shouldFetchEntryPublications(url, getState())) {
-    dispatch(fetchEntryPublications(url));
+    dispatch(fetchEntryPublications(url, reset));
   }
 };
 

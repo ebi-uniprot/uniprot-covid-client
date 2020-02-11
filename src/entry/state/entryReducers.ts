@@ -39,16 +39,11 @@ const entryReducers = (
       return {
         ...state,
         publicationsData: {
-          data: [
-            ...state.publicationsData.data,
-            ...action.payload.data.results,
-          ],
+          data: action.payload.reset
+            ? action.payload.data.results
+            : [...state.publicationsData.data, ...action.payload.data.results],
           facets: action.payload.data.facets,
           isFetching: false,
-          isFetched: {
-            ...state.publicationsData.isFetched,
-            [action.payload.url]: true,
-          },
           nextUrl: action.payload.nextUrl ? action.payload.nextUrl : '',
           total: parseInt(action.payload.total, 10),
         },
@@ -62,7 +57,6 @@ const entryReducers = (
           nextUrl: '',
           total: 0,
           isFetching: false,
-          isFetched: {},
         },
       };
     default:

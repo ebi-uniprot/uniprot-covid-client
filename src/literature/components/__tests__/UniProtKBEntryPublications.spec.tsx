@@ -1,7 +1,7 @@
 import React from 'react';
 import renderWithRedux from '../../../__testHelpers__/renderWithRedux';
 import UniProtKBEntryPublications from '../UniProtKBEntryPublications';
-import entryData from '../../../model/__mocks__/modelData.json';
+import entryData from '../../../model/__mocks__/entryModelData.json';
 import entryInitialState from '../../../entry/state/entryInitialState';
 
 describe('UniProtKBEntryPublications', () => {

@@ -117,8 +117,8 @@ export const getUniProtPublicationsQueryUrl = (
   return `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,scale',
     query: selectedFacets
-      .map(facet => `${facet.name}:"${facet.value}"`)
-      .join(','),
+      .map(facet => `(${facet.name}:"${facet.value}")`)
+      .join(' AND '),
   })}`;
 };
 
