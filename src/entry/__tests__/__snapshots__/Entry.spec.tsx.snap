@@ -16,10 +16,12 @@ exports[`Entry should render main 1`] = `
           class="no-bullet"
         >
           <li>
-            <h5>
+            <h5
+              class="display-menu__item_title"
+            >
               <a
                 aria-current="page"
-                class="display-menu__item_title display-menu__item_title--active"
+                class="display-menu__item_title--active"
                 href="/uniprotkb/P21802/main"
               >
                 <span
@@ -132,9 +134,10 @@ exports[`Entry should render main 1`] = `
             </div>
           </li>
           <li>
-            <h5>
+            <h5
+              class="display-menu__item_title"
+            >
               <a
-                class="display-menu__item_title"
                 href="/uniprotkb/P21802/publications"
               >
                 <span
@@ -145,9 +148,10 @@ exports[`Entry should render main 1`] = `
             </h5>
           </li>
           <li>
-            <h5>
+            <h5
+              class="display-menu__item_title"
+            >
               <a
-                class="display-menu__item_title"
                 href="/uniprotkb/P21802/external-links"
               >
                 <span

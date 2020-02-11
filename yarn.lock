@@ -5923,10 +5923,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.27.tgz#801e9a563b043a574bf7e496de7e9d3acd3a8277"
-  integrity sha512-VlaaDmRBQ7MOv2eiPofcyT1G0zavEjT1CNAq9OJD2KegUvKb7qX8lU7tt8XVzVTU6MiD9IG4PGgdqoVe2Cexow==
+franklin-sites@0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.28.tgz#3cc8ee8d6fba18d9281239877703920677d48125"
+  integrity sha512-bDjmeJY5eZUsKkxUe5FKbUJ+syQRqEB0DaDvybSb/eCMWo9nrsj13jN+kokPxnMqH9cmRVnKpzzm/MlD8+2YHg==
   dependencies:
     "@storybook/addon-actions" "^5.3.6"
     "@storybook/addons" "^5.3.6"
@@ -5934,6 +5934,7 @@ franklin-sites@0.0.27:
     "@storybook/components" "^5.3.6"
     file-loader "^2.0.0"
     foundation-sites "^6.5.0-rc.3"
+    history "^4.10.1"
     lorem-ipsum "^2.0.2"
     path "^0.12.7"
     prop-types "^15.6.2"
@@ -5943,6 +5944,7 @@ franklin-sites@0.0.27:
     react-markdown "^4.2.2"
     react-router-dom "^5.0.1"
     react-scrollspy "^3.4.0"
+    storybook-react-router "^1.0.8"
     uuid "^3.3.2"
 
 fresh@0.5.2:
@@ -6357,7 +6359,7 @@ highlight.js@~9.13.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
   integrity sha512-Sc28JNQNDzaH6PORtRLMvif9RSn1mYuOoX3omVjnb0+HbpPygU2ALBI0R/wsiqCb4/fcp07Gdo8g+fhtFrQl6A==
 
-history@^4.9.0:
+history@^4.10.1, history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/history/-/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
   integrity sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==
@@ -11260,6 +11262,13 @@ storybook-chromatic@^2.2.2:
     tmp "^0.1.0"
     tree-kill "^1.1.0"
     uuid "^3.3.2"
+
+storybook-react-router@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/storybook-react-router/-/storybook-react-router-1.0.8.tgz#8d174eba1c38fff2c7e459c3d0c2463bc0cd9c6a"
+  integrity sha512-3PvuTu6cJHtF72WC3aKdIrUY1eUYsdVYEmW74nZiJoLCn0C/6iDx73w94jgI6lXq75aEJsri+lEDyhcokfP6YA==
+  dependencies:
+    prop-types "^15.7.2"
 
 stream-browserify@^2.0.1:
   version "2.0.2"
