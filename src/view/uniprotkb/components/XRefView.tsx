@@ -17,11 +17,6 @@ import {
 } from '../../../model/types/DatabaseTypes';
 import { sortBy } from '../../../utils/utils';
 
-type XrefItem = {
-  databaseCategory: string;
-  xref: Xref;
-};
-
 export const fillUrl = (
   urlTemplate: string,
   params: { [key: string]: string }
@@ -192,12 +187,6 @@ export const XRef: React.FC<XRefProps> = ({
       {linkNode} {propertiesNode} {isoformNode}
     </Fragment>
   );
-};
-type XRefExternalLinkProps = {
-  url: string;
-  primaryAccession?: string | null | undefined;
-  id?: string | null | undefined;
-  children: string | string[];
 };
 
 export const DatabaseList: React.FC<{
