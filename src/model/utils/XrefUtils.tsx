@@ -27,6 +27,220 @@ export type XrefUIModel = {
   databases: XrefsGoupedByDatabase[];
 };
 
+const addXrefIfInSection = (
+  xref: Xref,
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>
+) => {
+  const { databaseType: name } = xref;
+  if (!name) {
+    return;
+  }
+  if (name in implicitDatabaseDRPresenceCheck) {
+    implicitDatabaseDRPresenceCheck[name] = true; // eslint-disable-line no-param-reassign
+  }
+  if (name in implicitDatabaseDRAbsenceCheck) {
+    implicitDatabaseDRAbsenceCheck[name] = false; // eslint-disable-line no-param-reassign
+  }
+  if (!databasesForSection.includes(name)) {
+    return;
+  }
+  const category = databaseNameToCategory.get(name);
+  if (!category) {
+    return;
+  }
+  const nameToXrefs = categoryToNameToXrefs.get(category) || {};
+  if (!nameToXrefs[name]) {
+    nameToXrefs[name] = [];
+  }
+  nameToXrefs[name].push(xref);
+  categoryToNameToXrefs.set(category, nameToXrefs);
+};
+
+const addDRImplicitXrefs = (
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>,
+  geneNames: string[]
+) => {
+  // After passing through all of the xrefs we can now establish
+  // which DR line contingent-implicit databases can be included
+  [
+    [implicitDatabaseDRPresenceCheck, implicitDatabaseDRPresence],
+    [implicitDatabaseDRAbsenceCheck, implicitDatabaseDRAbsence],
+  ].forEach(([check, ruleMap]) => {
+    Object.entries(check).forEach(([name, include]) => {
+      if (!include || !(name in ruleMap)) {
+        return;
+      }
+      const implicitNames = ruleMap[name] as string[];
+      if (implicitNames) {
+        implicitNames.forEach(implicitName => {
+          const xref = implicitDatabaseXRefs.get(implicitName);
+          if (xref) {
+            let property: Property = {};
+            if (geneNames.length) {
+              property = {
+                key: 'GeneName' as PropertyKey,
+                value: geneNames[0],
+              };
+            }
+            addXrefIfInSection(
+              {
+                ...xref,
+                properties: [property],
+              },
+              implicitDatabaseDRPresenceCheck,
+              implicitDatabaseDRAbsenceCheck,
+              databasesForSection,
+              categoryToNameToXrefs
+            );
+          }
+        });
+      }
+    });
+  });
+};
+
+const addDatabaseSimilarityCommentImplicitXrefs = (
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>,
+  uniProtId: string | undefined,
+  similarityComments?: FreeTextComment[]
+) => {
+  // The implicit database GPCRDB should only be inluded if there exists a
+  // similarity comment with "Belongs to the G-protein coupled receptor"
+  if (similarityComments && uniProtId) {
+    Object.entries(implicitDatabaseSimilarityComment).forEach(
+      ([implicitName, commentSubstring]) => {
+        const foundCommentSubstring = similarityComments.some(
+          ({ texts }) =>
+            texts && texts.some(({ value }) => value.includes(commentSubstring))
+        );
+        if (foundCommentSubstring) {
+          const xref = implicitDatabaseXRefs.get(implicitName);
+          if (xref) {
+            const property: Property = {
+              key: 'uniProtId' as PropertyKey,
+              value: uniProtId,
+            };
+            addXrefIfInSection(
+              {
+                ...xref,
+                properties: [property],
+              },
+              implicitDatabaseDRPresenceCheck,
+              implicitDatabaseDRAbsenceCheck,
+              databasesForSection,
+              categoryToNameToXrefs
+            );
+          }
+        }
+      }
+    );
+  }
+};
+
+const addUnconditionalImplicitXrefs = (
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>
+) => {
+  // Always include these implicit databases (ie they are unconditional)
+  implicitDatabaseAlwaysInclude.forEach(name => {
+    const xref = implicitDatabaseXRefs.get(name);
+    if (xref) {
+      addXrefIfInSection(
+        xref,
+        implicitDatabaseDRPresenceCheck,
+        implicitDatabaseDRAbsenceCheck,
+        databasesForSection,
+        categoryToNameToXrefs
+      );
+    }
+  });
+};
+
+export const addGenePatternOrganismImplicitXrefs = (
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>,
+  geneNames: string[],
+  commonName?: string | null
+) => {
+  // Implicit databases which require depend on the a gene name pattern
+  // and orgnasim pattern
+  const { pattern, organism } = implicitDatabaseGenePatternOrganism;
+  if (commonName && Object.keys(organism).includes(commonName)) {
+    geneNames
+      .filter((geneName: { match: (arg0: RegExp) => void }) =>
+        geneName.match(pattern)
+      )
+      .forEach((gene: string) => {
+        if (commonName in organism) {
+          const name = organism[commonName as keyof typeof organism];
+          const xref = implicitDatabaseXRefs.get(name);
+          if (xref) {
+            const property: Property = {
+              key: 'gene' as PropertyKey,
+              value: gene,
+            };
+            addXrefIfInSection(
+              {
+                ...xref,
+                properties: [property],
+              },
+              implicitDatabaseDRPresenceCheck,
+              implicitDatabaseDRAbsenceCheck,
+              databasesForSection,
+              categoryToNameToXrefs
+            );
+          }
+        }
+      });
+  }
+};
+
+export const addECImplicitXrefs = (
+  implicitDatabaseDRPresenceCheck: { [key: string]: boolean },
+  implicitDatabaseDRAbsenceCheck: { [key: string]: boolean },
+  databasesForSection: string[],
+  categoryToNameToXrefs: Map<DatabaseCategory, { [name: string]: Xref[] }>,
+  ecNumbers?: ValueWithEvidence[] | null
+) => {
+  // EC dependent implicit databases
+  if (ecNumbers) {
+    implicitDatabasesEC.forEach(name => {
+      const xref = implicitDatabaseXRefs.get(name);
+      if (xref) {
+        ecNumbers.forEach(({ value }) => {
+          const property: Property = {
+            key: 'ec' as PropertyKey,
+            value,
+          };
+          addXrefIfInSection(
+            {
+              ...xref,
+              properties: [property],
+            },
+            implicitDatabaseDRPresenceCheck,
+            implicitDatabaseDRAbsenceCheck,
+            databasesForSection,
+            categoryToNameToXrefs
+          );
+        });
+      }
+    });
+  }
+};
+
 export const getXrefsForSection = (
   xrefs: Xref[],
   section: EntrySection,
@@ -52,138 +266,60 @@ export const getXrefsForSection = (
   Object.keys(implicitDatabaseDRAbsence).forEach(xref => {
     implicitDatabaseDRAbsenceCheck[xref] = true;
   });
-  const addXrefIfInSection = (xref: Xref) => {
-    const { databaseType: name } = xref;
-    if (!name) {
-      return;
-    }
-    if (name in implicitDatabaseDRPresenceCheck) {
-      implicitDatabaseDRPresenceCheck[name] = true;
-    }
-    if (name in implicitDatabaseDRAbsenceCheck) {
-      implicitDatabaseDRAbsenceCheck[name] = false;
-    }
-    if (!databasesForSection.includes(name)) {
-      return;
-    }
-    const category = databaseNameToCategory.get(name);
-    if (!category) {
-      return;
-    }
-    const nameToXrefs = categoryToNameToXrefs.get(category) || {};
-    if (!nameToXrefs[name]) {
-      nameToXrefs[name] = [];
-    }
-    nameToXrefs[name].push(xref);
-    categoryToNameToXrefs.set(category, nameToXrefs);
-  };
-  xrefs.forEach(addXrefIfInSection);
-  // After passing through all of the xrefs we can now establish
-  // which DR line contingent-implicit databases can be included
-  const geneNames = geneNamesData ? flattenGeneNameData(geneNamesData) : [];
-  [
-    [implicitDatabaseDRPresenceCheck, implicitDatabaseDRPresence],
-    [implicitDatabaseDRAbsenceCheck, implicitDatabaseDRAbsence],
-  ].forEach(([check, ruleMap]) => {
-    Object.entries(check).forEach(([name, include]) => {
-      if (!include || !(name in ruleMap)) {
-        return;
-      }
-      const implicitNames = ruleMap[name] as string[];
-      if (implicitNames) {
-        implicitNames.forEach(implicitName => {
-          const xref = implicitDatabaseXRefs.get(implicitName);
-          if (xref) {
-            let property: Property = {};
-            if (geneNames.length) {
-              property = {
-                key: 'GeneName' as PropertyKey,
-                value: geneNames[0],
-              };
-            }
-            addXrefIfInSection({
-              ...xref,
-              properties: [property],
-            });
-          }
-        });
-      }
-    });
-  });
-  // The implicit database GPCRDB should only be inluded if there exists a
-  // similarity comment with "Belongs to the G-protein coupled receptor"
-  if (similarityComments) {
-    Object.entries(implicitDatabaseSimilarityComment).forEach(
-      ([implicitName, commentSubstring]) => {
-        const foundCommentSubstring = similarityComments.some(
-          ({ texts }) =>
-            texts && texts.some(({ value }) => value.includes(commentSubstring))
-        );
-        if (foundCommentSubstring) {
-          const xref = implicitDatabaseXRefs.get(implicitName);
-          if (xref) {
-            const property: Property = {
-              key: 'uniProtId' as PropertyKey,
-              value: uniProtId,
-            };
-            addXrefIfInSection({
-              ...xref,
-              properties: [property],
-            });
-          }
-        }
-      }
+
+  xrefs.forEach(xref => {
+    addXrefIfInSection(
+      xref,
+      implicitDatabaseDRPresenceCheck,
+      implicitDatabaseDRAbsenceCheck,
+      databasesForSection,
+      categoryToNameToXrefs
     );
-  }
-  // Always include these implicit databases (ie they are unconditional)
-  implicitDatabaseAlwaysInclude.forEach(name => {
-    const xref = implicitDatabaseXRefs.get(name);
-    if (xref) {
-      addXrefIfInSection(xref);
-    }
   });
 
-  // Implicit databases which require depend on the a gene name pattern
-  // and orgnasim pattern
-  const { pattern, organism } = implicitDatabaseGenePatternOrganism;
-  if (commonName && Object.keys(organism).includes(commonName)) {
+  const geneNames = geneNamesData ? flattenGeneNameData(geneNamesData) : [];
+
+  addDRImplicitXrefs(
+    implicitDatabaseDRPresenceCheck,
+    implicitDatabaseDRAbsenceCheck,
+    databasesForSection,
+    categoryToNameToXrefs,
     geneNames
-      .filter(geneName => geneName.match(pattern))
-      .forEach((gene: string) => {
-        if (commonName in organism) {
-          const name = organism[commonName as keyof typeof organism];
-          const xref = implicitDatabaseXRefs.get(name);
-          if (xref) {
-            const property: Property = {
-              key: 'gene' as PropertyKey,
-              value: gene,
-            };
-            addXrefIfInSection({
-              ...xref,
-              properties: [property],
-            });
-          }
-        }
-      });
-  }
-  // EC dependent implicit databases
-  if (ecNumbers) {
-    implicitDatabasesEC.forEach(name => {
-      const xref = implicitDatabaseXRefs.get(name);
-      if (xref) {
-        ecNumbers.forEach(({ value }) => {
-          const property: Property = {
-            key: 'ec' as PropertyKey,
-            value,
-          };
-          addXrefIfInSection({
-            ...xref,
-            properties: [property],
-          });
-        });
-      }
-    });
-  }
+  );
+
+  addDatabaseSimilarityCommentImplicitXrefs(
+    implicitDatabaseDRPresenceCheck,
+    implicitDatabaseDRAbsenceCheck,
+    databasesForSection,
+    categoryToNameToXrefs,
+    uniProtId,
+    similarityComments
+  );
+
+  addUnconditionalImplicitXrefs(
+    implicitDatabaseDRPresenceCheck,
+    implicitDatabaseDRAbsenceCheck,
+    databasesForSection,
+    categoryToNameToXrefs
+  );
+
+  addGenePatternOrganismImplicitXrefs(
+    implicitDatabaseDRPresenceCheck,
+    implicitDatabaseDRAbsenceCheck,
+    databasesForSection,
+    categoryToNameToXrefs,
+    geneNames,
+    commonName
+  );
+
+  addECImplicitXrefs(
+    implicitDatabaseDRPresenceCheck,
+    implicitDatabaseDRAbsenceCheck,
+    databasesForSection,
+    categoryToNameToXrefs,
+    ecNumbers
+  );
+
   const databaseCategoryOrder = entrySectionToDatabaseCategoryOrder.get(
     section
   ) as DatabaseCategory[];
