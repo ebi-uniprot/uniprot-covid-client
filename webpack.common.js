@@ -13,9 +13,6 @@ module.exports = {
       'react-router-dom': path.resolve('./node_modules/react-router-dom'),
     },
   },
-  node: {
-    fs: 'empty'
-  },
   module: {
     rules: [{
         test: /\.(js|jsx|tsx|ts)$/,
@@ -58,11 +55,9 @@ module.exports = {
       {
         test: /\.svg$/i,
         issuer: /\.(t|j)sx?$/,
-        use: [
-          {
-            loader: '@svgr/webpack',
-          },
-        ],
+        use: [{
+          loader: '@svgr/webpack',
+        }, ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
