@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import XRefView, {
   getPropertyString,
-  fillUrl,
+  processUrlTemplate,
   transfromProperties,
   getPropertyLink,
   getPropertyValue,
@@ -51,10 +51,13 @@ const xRefUrlTestData = [
       'https://www.brenda-enzymes.org/enzyme.php?ecno=2.3.1.88&UniProtAcc=Q80UM3&OrganismID=3474',
   },
 ];
-describe('fillUrl', () => {
+describe('processUrlTemplate', () => {
   test('should fill url', () => {
     expect(
-      fillUrl('https://endpoint/%id/param=%Param', { id: '12', Param: 'foo' })
+      processUrlTemplate('https://endpoint/%id/param=%Param', {
+        id: '12',
+        Param: 'foo',
+      })
     ).toEqual('https://endpoint/12/param=foo');
   });
 });

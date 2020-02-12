@@ -21,7 +21,7 @@ import {
   getPropertyValue,
 } from '../../../model/utils/utils';
 
-export const fillUrl = (
+export const processUrlTemplate = (
   urlTemplate: string,
   params: { [key: string]: string }
 ) => {
@@ -69,7 +69,7 @@ export const getPropertyLink = (
   if (!id || !attribute || !attribute.uriLink) {
     return null;
   }
-  const url = fillUrl(attribute.uriLink, { [property]: id });
+  const url = processUrlTemplate(attribute.uriLink, { [property]: id });
   return (
     <ExternalLink key={url} url={url}>
       {id}
@@ -139,15 +139,15 @@ export const XRef: React.FC<XRefProps> = ({
     linkNode = (
       <Fragment>
         (
-        <ExternalLink url={fillUrl(databaseInfo.uriLink, params)}>
+        <ExternalLink url={processUrlTemplate(databaseInfo.uriLink, params)}>
           EMBL
         </ExternalLink>
         {' | '}
-        <ExternalLink url={fillUrl(genBankInfo.uriLink, params)}>
+        <ExternalLink url={processUrlTemplate(genBankInfo.uriLink, params)}>
           GenBank
         </ExternalLink>
         {' | '}
-        <ExternalLink url={fillUrl(ddbjInfo.uriLink, params)}>
+        <ExternalLink url={processUrlTemplate(ddbjInfo.uriLink, params)}>
           DDBJ
         </ExternalLink>
         ) {id}
@@ -164,7 +164,9 @@ export const XRef: React.FC<XRefProps> = ({
       text = id;
     }
     linkNode = (
-      <ExternalLink url={fillUrl(uriLink, params)}>{text}</ExternalLink>
+      <ExternalLink url={processUrlTemplate(uriLink, params)}>
+        {text}
+      </ExternalLink>
     );
   }
   return (
