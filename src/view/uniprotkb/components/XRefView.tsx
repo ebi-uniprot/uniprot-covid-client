@@ -16,6 +16,10 @@ import {
   AttributesItem,
 } from '../../../model/types/DatabaseTypes';
 import { sortBy } from '../../../utils/utils';
+import {
+  transfromProperties,
+  getPropertyValue,
+} from '../../../model/utils/utils';
 
 export const fillUrl = (
   urlTemplate: string,
@@ -28,29 +32,10 @@ export const fillUrl = (
   return url;
 };
 
-export const transfromProperties = (properties: Property[]) => {
-  const o: { [key: string]: string } = {};
-  properties.forEach(({ key, value }) => {
-    if (key && value) {
-      o[key] = value;
-    }
-  });
-  return o;
-};
-
 export const getDatabaseInfoAttribute = (
   attributes: AttributesItem[],
   name: string
 ) => attributes.find(({ name: n }) => n === name);
-
-// This step is required because our API returns arrays of objects of shape: { key: x, value: y}
-export const getPropertyValue = (
-  properties: Property[],
-  propertyKey: PropertyKey
-) => {
-  const found = properties.find(({ key }) => key === propertyKey);
-  return found ? found.value : null;
-};
 
 export const getPropertyString = (key?: string, value?: string) => {
   if (!value || value === '-') {

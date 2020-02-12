@@ -58,23 +58,10 @@ describe('fillUrl', () => {
     ).toEqual('https://endpoint/12/param=foo');
   });
 });
-const testingProperties = [
-  { key: PropertyKey.Project, value: 'foo' },
-  { key: PropertyKey.GeneName, value: 'A1' },
-];
-describe('transformProperties', () => {
-  test('should transform array of properties to object', () => {
-    expect(transfromProperties(testingProperties)).toEqual({
-      [PropertyKey.Project]: 'foo',
-      [PropertyKey.GeneName]: 'A1',
-    });
-  });
-});
 
 describe('getPropertyLink', () => {
   test('should create snapshot', () => {
     const databaseInfoPoint = {
-      name: 'Ensembl',
       displayName: 'Ensembl',
       category: 'GMA',
       uriLink: 'https://www.ensembl.org/id/%id',
@@ -105,14 +92,6 @@ describe('getPropertyLink', () => {
       getPropertyLink(databaseInfoPoint, property, xref)
     );
     expect(asFragment()).toMatchSnapshot();
-  });
-});
-
-describe('getPropertyValue', () => {
-  test('should find and return property value', () => {
-    expect(getPropertyValue(testingProperties, PropertyKey.GeneName)).toEqual(
-      'A1'
-    );
   });
 });
 
