@@ -8,7 +8,7 @@ import Logo from '../svg/uniprot-logo.svg';
 const tools = [
   {
     label: 'BLAST',
-    path: '/',
+    path: '/blast',
   },
   {
     label: 'Align',

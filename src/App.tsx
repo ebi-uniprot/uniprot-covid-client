@@ -4,6 +4,7 @@ import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from './layout/BaseLayout';
 import './styles/App.scss';
+import BlastPage from './blast/BlastPage';
 
 declare const BASE_URL: string;
 
@@ -74,6 +75,14 @@ const App = () => (
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/blast"
+            render={() => (
+              <BaseLayout>
+                <BlastPage />
               </BaseLayout>
             )}
           />
