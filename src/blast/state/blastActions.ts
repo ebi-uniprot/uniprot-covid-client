@@ -5,6 +5,7 @@ import fetchData from '../../utils/fetchData';
 import { BlastFormValues } from '../data/BlastFormData';
 import blastUrls from '../utils/blastUrls';
 import { RootState } from '../../state/state-types';
+import { BlastResults } from '../types/blastResults';
 
 export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';
@@ -18,7 +19,7 @@ export const RECEIVE_BLAST_RESULTS = 'FETCH_BLAST_RESULTS';
 export const receiveBlastJobID = (jobId: string) =>
   action(RECEIVE_BLAST_JOB_ID, { jobId });
 
-export const receiveBlastResults = (jobId: string, data) => {
+export const receiveBlastResults = (jobId: string, data: BlastResults) => {
   return action(RECEIVE_BLAST_RESULTS, {
     jobId,
     data,
