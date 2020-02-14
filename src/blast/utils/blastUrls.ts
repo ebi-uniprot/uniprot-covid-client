@@ -1,4 +1,4 @@
-const baseUrl = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast';
+const baseUrl = 'https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast';
 
 export default {
   runUrl: `${baseUrl}/run`,

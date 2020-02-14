@@ -2,7 +2,7 @@ export type BlastFormValue = {
   fieldName: string;
   selected?: string | undefined;
   selectedLabel?: string | undefined;
-  type: BlastFieldTypes;
+  type?: BlastFieldTypes;
   values?: { label?: string; value?: string | number }[];
 };
 
@@ -78,7 +78,6 @@ export default {
   [BlastFields.matrix]: {
     fieldName: 'matrix',
     type: BlastFieldTypes.select,
-    selected: null,
     values: [
       {
         value: '',

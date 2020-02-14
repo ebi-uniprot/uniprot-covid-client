@@ -1,6 +1,6 @@
 export type BlastJob = {
   jobId: string;
-  status: string;
+  status?: string;
   results?: any[];
 };
 
