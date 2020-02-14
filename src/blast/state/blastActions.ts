@@ -61,7 +61,7 @@ const runPolling = (
   const p = generator.next();
   p.value.then((d: string) => {
     if (d === 'RUNNING') {
-      dispatch(runPolling(jobId, generator));
+      setTimeout(() => dispatch(runPolling(jobId, generator)), 3000);
     } else {
       dispatch(fetchBlastResults(jobId));
       // return action(POLL_BLAST_STATUS, {});
