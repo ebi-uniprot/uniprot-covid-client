@@ -21,7 +21,7 @@ const BlastPage: FC<{
 
 const mapStateToProps = (state: RootState) => {
   return {
-    // jobs: state.blast.jobs,
+    jobs: state.blast.jobs,
   };
 };
 

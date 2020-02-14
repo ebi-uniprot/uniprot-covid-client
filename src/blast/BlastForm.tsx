@@ -119,7 +119,7 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
             </section>
           )}
           <section>
-            <button className="button secondary" type="reset">
+            <button className="button secondary" type="button">
               Clear
             </button>
             <button

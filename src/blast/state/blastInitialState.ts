@@ -1,7 +1,8 @@
+import { BlastResults } from '../types/blastResults';
+
 export type BlastJob = {
   jobId: string;
-  status?: string;
-  results?: any[];
+  results?: BlastResults[];
 };
 
 export type BlastState = {

@@ -15,9 +15,9 @@ const blastReducers = (
         jobs: [...state.jobs, { jobId: action.payload.jobId }],
       };
     case blastActions.RECEIVE_BLAST_RESULTS:
-      // TODO handle results
       return {
         ...state,
+        jobs: [...state.jobs, { ...action.payload }],
       };
     default:
       return state;
