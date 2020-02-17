@@ -8,9 +8,8 @@ import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import apiUrls from '../../utils/apiUrls';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
 import getNextUrlFromResponse from '../../utils/queryUtils';
-import Response from '../../types/queryTypes';
+import Response, { Facet } from '../../types/responseTypes';
 import { RootState } from '../../state/state-types';
-import { Facet } from '../../results/ResultsContainer';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
@@ -67,8 +66,8 @@ export const receiveEntryPublications = (
   nextUrl: string | undefined,
   total: string,
   reset: boolean = true
-) => {
-  return action(RECEIVE_ENTRY_PUBLICATIONS, {
+) =>
+  action(RECEIVE_ENTRY_PUBLICATIONS, {
     url,
     data,
     nextUrl,
@@ -76,7 +75,6 @@ export const receiveEntryPublications = (
     reset,
     receivedAt: Date.now(),
   });
-};
 
 export const requestEntryPublications = () =>
   action(REQUEST_ENTRY_PUBLICATIONS);

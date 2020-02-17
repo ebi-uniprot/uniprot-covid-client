@@ -44,7 +44,7 @@ const entryReducers = (
             : [...state.publicationsData.data, ...action.payload.data.results],
           facets: action.payload.data.facets,
           isFetching: false,
-          nextUrl: action.payload.nextUrl ? action.payload.nextUrl : '',
+          nextUrl: action.payload.nextUrl || '',
           total: parseInt(action.payload.total, 10),
         },
       };

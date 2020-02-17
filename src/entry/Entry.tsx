@@ -24,8 +24,8 @@ import { SelectedFacet } from '../results/types/resultsTypes';
 import EntryPublicationsFacets from './publications/EntryPublicationsFacets';
 import EntryPublications from './publications/EntryPublications';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
-import { Facet } from '../results/ResultsContainer';
 import SideBarLayout from '../layout/SideBarLayout';
+import { Facet } from '../types/responseTypes';
 
 type MatchParams = {
   accession: string;

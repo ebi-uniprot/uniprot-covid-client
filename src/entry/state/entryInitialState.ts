@@ -1,6 +1,6 @@
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import { Facet } from '../../results/ResultsContainer';
+import { Facet } from '../../types/responseTypes';
 
 export type EntryState = {
   accession: string | null;

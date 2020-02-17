@@ -113,14 +113,13 @@ export const getQueryUrl = (
 export const getUniProtPublicationsQueryUrl = (
   accession: string,
   selectedFacets: SelectedFacet[]
-) => {
-  return `${apiUrls.entryPublications(accession)}?${queryString.stringify({
+) =>
+  `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,scale',
     query: selectedFacets
       .map(facet => `(${facet.name}:"${facet.value}")`)
       .join(' AND '),
   })}`;
-};
 
 export const getDownloadUrl = ({
   query,

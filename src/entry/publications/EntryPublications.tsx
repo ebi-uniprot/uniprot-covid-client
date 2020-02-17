@@ -9,7 +9,7 @@ const EntryPublications: FC<{
   total: number;
   handleLoadMoreItems: () => void;
 }> = ({ accession, data, total, handleLoadMoreItems }) => {
-  if (!data || data.length <= 0) {
+  if (!data || data.length === 0) {
     return <Loader />;
   }
 
@@ -21,47 +21,59 @@ const EntryPublications: FC<{
         <DataList
           idKey="id"
           data={data}
-          dataRenderer={(publicationData: LiteratureForProteinAPI) => {
+          dataRenderer={({
+            literatureMappedReference,
+            publicationSource,
+            uniProtReference,
+            categories,
+            literatureEntry,
+          }: LiteratureForProteinAPI) => {
             let infoListData;
-            if (publicationData.literatureMappedReference) {
+            if (literatureMappedReference) {
+              const {
+                annotation,
+                source,
+                sourceId,
+              } = literatureMappedReference;
               infoListData = [
                 {
                   title: 'Annotation',
-                  content: publicationData.literatureMappedReference.annotation,
+                  content: annotation,
                 },
                 {
                   title: 'Mapping Source',
-                  content: `${publicationData.literatureMappedReference.source}:${publicationData.literatureMappedReference.sourceId}`,
+                  content: `${source}:${sourceId}`,
                 },
                 {
                   title: 'Source',
-                  content: publicationData.publicationSource,
+                  content: publicationSource,
                 },
               ];
-            } else if (publicationData.uniProtReference) {
+            } else if (uniProtReference) {
+              const {
+                referencePositions,
+                referenceComments,
+              } = uniProtReference;
               infoListData = [
                 {
                   title: 'Cited for',
-                  content: publicationData.uniProtReference.referencePositions,
+                  content: referencePositions,
                 },
                 {
                   title: 'Tissue',
-                  content: publicationData.uniProtReference
-                    .referenceComments && (
+                  content: referenceComments && (
                     <ul className="no-bullet">
-                      {publicationData.uniProtReference.referenceComments.map(
-                        comment => (
-                          <li key={comment.value}>{comment.value}</li>
-                        )
-                      )}
+                      {referenceComments.map(comment => (
+                        <li key={comment.value}>{comment.value}</li>
+                      ))}
                     </ul>
                   ),
                 },
                 {
                   title: 'Categories',
-                  content: publicationData.categories && (
+                  content: categories && (
                     <ul className="no-bullet">
-                      {uniq(publicationData.categories).map(category => (
+                      {uniq(categories).map(category => (
                         <li key={category}>{category}</li>
                       ))}
                     </ul>
@@ -69,28 +81,25 @@ const EntryPublications: FC<{
                 },
                 {
                   title: 'Source',
-                  content: publicationData.publicationSource,
+                  content: publicationSource,
                 },
               ];
             }
-            if (publicationData.literatureEntry) {
+            if (literatureEntry) {
+              const { literatureAbstract, statistics } = literatureEntry;
               return (
                 <Publication
-                  {...publicationData.literatureEntry}
-                  abstract={publicationData.literatureEntry.literatureAbstract}
+                  {...literatureEntry}
+                  abstract={literatureAbstract}
                   infoData={infoListData}
-                  statistics={
-                    publicationData.literatureEntry.statistics &&
-                    publicationData.literatureEntry.statistics
-                      .reviewedProteinCount
-                  }
+                  statistics={statistics && statistics.reviewedProteinCount}
                 />
               );
             }
             return (
-              publicationData.uniProtReference && (
+              uniProtReference && (
                 <Publication
-                  {...publicationData.uniProtReference.citation}
+                  {...uniProtReference.citation}
                   infoData={infoListData}
                 />
               )

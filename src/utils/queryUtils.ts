@@ -6,7 +6,7 @@ const getNextUrlFromResponse = (
   }
   const re = /<([0-9a-zA-Z$\-_.+!*'(),?/:=&%]+)>; rel="next"/;
   const match = re.exec(link);
-  if (match) {
+  if (match && match[1]) {
     // eslint-disable-next-line consistent-return
     return match[1];
   }

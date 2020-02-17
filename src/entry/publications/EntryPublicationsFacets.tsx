@@ -1,7 +1,7 @@
 import React from 'react';
 import { Facets } from 'franklin-sites';
-import { Facet } from '../../results/ResultsContainer';
 import { SelectedFacet } from '../../results/types/resultsTypes';
+import { Facet } from '../../types/responseTypes';
 
 const EntryPublicationsFacets: React.FC<{
   facets: Facet[];
@@ -9,7 +9,6 @@ const EntryPublicationsFacets: React.FC<{
   setSelectedFacets: (facets: SelectedFacet[]) => void;
 }> = ({ facets, selectedFacets, setSelectedFacets }) => {
   const addFacet = (name: string, value: string) => {
-    selectedFacets.find(facet => facet.name === name);
     setSelectedFacets([...selectedFacets, { name, value }]);
   };
 

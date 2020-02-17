@@ -1,4 +1,9 @@
-import { Facet } from '../results/ResultsContainer';
+export type Facet = {
+  label: string;
+  name: string;
+  allowMultipleSelection: boolean;
+  values: { label: string; value: string; count: number }[];
+};
 
 type Response = {
   data: {
