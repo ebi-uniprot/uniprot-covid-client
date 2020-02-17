@@ -6,6 +6,7 @@ import { BlastFormValues } from '../data/BlastFormData';
 import blastUrls from '../utils/blastUrls';
 import { RootState } from '../../state/state-types';
 import { BlastResults } from '../types/blastResults';
+import postData from '../../utils/postData';
 
 export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';
@@ -43,7 +44,6 @@ function* pollForBlastStatus(jobId: string) {
       headers: {
         Accept: 'text/plain',
       },
-      method: 'get',
     }).then(response => {
       return response.data;
     });
@@ -83,8 +83,7 @@ export const runBlastJob = (blastFormValues: BlastFormValues) => (
     }
   });
 
-  fetchData(url, {
-    method: 'post',
+  postData(url, {
     data: formData,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

@@ -3,15 +3,15 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import 'core-js/stable';
 import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
-import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
+import ResultsContainer from '../ResultsContainer';
 import results from '../../__mockData__/results.json';
 import entry from '../../__mockData__/swissprot_entry.json';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
-var mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 
 mock
   .onGet(/\/uniprotkb\/search/)
@@ -53,7 +53,9 @@ describe('Results component', () => {
     await act(async () => {
       const { container, getByTestId, getByText } = renderWithRedux(
         <ResultsContainer />,
-        { route: '/uniprotkb?query=blah' }
+        {
+          route: '/uniprotkb?query=blah',
+        }
       );
       const toggle = await waitForElement(() =>
         getByTestId('table-card-toggle')
@@ -72,7 +74,10 @@ describe('Results component', () => {
     };
     const { container, debug, getByText } = renderWithRedux(
       <ResultsContainer />,
-      { initialState: state, route: '/uniprotkb?query=blah' }
+      {
+        initialState: state,
+        route: '/uniprotkb?query=blah',
+      }
     );
     const checkbox = await waitForElement(() =>
       container.querySelector('input[type=checkbox]')
