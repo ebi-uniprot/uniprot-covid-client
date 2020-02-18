@@ -1,10 +1,10 @@
+import { flatten } from 'lodash';
 import EntrySection from '../model/types/EntrySection';
 import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
 } from '../model/types/DatabaseTypes';
-import { flattenArrays } from './utils';
 import { Xref } from '../model/types/CommentTypes';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
@@ -51,7 +51,7 @@ export const selectDatabases = (
   blacklist?: string[];
 }) =>
   [
-    ...flattenArrays(
+    ...flatten(
       categories.map(
         category =>
           databaseCategoryToNames.get(category as DatabaseCategory) || []

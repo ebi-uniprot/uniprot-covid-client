@@ -3,7 +3,6 @@ import {
   serializableDeepAreEqual,
   removeProperty,
   formatLargeNumber,
-  flattenArrays,
   truncateStringWithEllipsis,
   getBEMClassName,
   uniq,
@@ -38,11 +37,6 @@ test('removeProperty removes only specified property and returns a deep copy of 
 test('formatLargeNumber', () => {
   const number = 999999;
   expect(formatLargeNumber(number)).toEqual('999,999');
-});
-
-test('flattenArrays', () => {
-  const arrays = [[1, 2, 3], ['ab'], [4, '5']];
-  expect(flattenArrays(arrays)).toEqual([1, 2, 3, 'ab', 4, '5']);
 });
 
 test('truncateStringWithEllipsis to return truncated string with ellipsis appended', () => {

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
+import { sortBy } from 'lodash';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
@@ -15,7 +16,6 @@ import {
   DatabaseInfoPoint,
   AttributesItem,
 } from '../../../model/types/DatabaseTypes';
-import { sortBy } from '../../../utils/utils';
 import {
   transfromProperties,
   getPropertyValue,

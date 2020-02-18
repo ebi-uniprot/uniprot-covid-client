@@ -23,9 +23,6 @@ export const loadWebComponent = (name: string, className: Function) => {
   }
 };
 
-export const flattenArrays = (arrays: any[][]) =>
-  [].concat(...(arrays as any[]));
-
 export const moveItemInList = (
   list: any[],
   srcIndex: number,

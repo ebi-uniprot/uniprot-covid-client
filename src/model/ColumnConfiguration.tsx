@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
+import { flatten } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import SimpleView from '../view/uniprotkb/components/SimpleView';
@@ -72,7 +73,6 @@ import VariationView from '../view/uniprotkb/components/VariationView';
 import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
 import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
 import { GOTermsView } from '../view/uniprotkb/components/GOView';
-import { flattenArrays } from '../utils/utils';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -709,7 +709,7 @@ ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Array.from(goTerms.values()));
     return allGOTerms && <GOTermsView data={allGOTerms} />;
   },
 });
@@ -717,7 +717,7 @@ ColumnConfiguration.set(Column.goId, {
   label: 'Gene Ontology IDs',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Array.from(goTerms.values()));
     return (
       allGOTerms && (
         <section className="text-block">
