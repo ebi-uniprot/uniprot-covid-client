@@ -79,7 +79,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/blast"
+            path="/blast/:jobId?"
             render={() => (
               <BaseLayout>
                 <BlastPage />

@@ -2,7 +2,7 @@ import { BlastResults } from '../types/blastResults';
 
 export type BlastJob = {
   jobId: string;
-  results?: BlastResults[];
+  data?: BlastResults;
 };
 
 export type BlastState = {

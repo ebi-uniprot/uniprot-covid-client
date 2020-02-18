@@ -1,3 +1,21 @@
+export type BlastHsp = {
+  hsp_num: number;
+  hsp_score: number;
+  hsp_bit_score: number;
+  hsp_expect: number;
+  hsp_identity: number;
+  hsp_positive: number;
+  hsp_gaps: number;
+  hsp_strand: string;
+  hsp_query_from: number;
+  hsp_query_to: number;
+  hsp_hit_from: number;
+  hsp_hit_to: number;
+  hsp_qseq: string;
+  hsp_mseq: string;
+  hsp_hseq: string;
+};
+
 export type BlastHit = {
   hit_num: number;
   hit_def: string;
@@ -7,23 +25,7 @@ export type BlastHit = {
   hit_desc: string;
   hit_url: string;
   hit_len: number;
-  hit_hsps: {
-    hsp_num: number;
-    hsp_score: number;
-    hsp_bit_score: number;
-    hsp_expect: number;
-    hsp_identity: number;
-    hsp_positive: number;
-    hsp_gaps: number;
-    hsp_strand: string;
-    hsp_query_from: number;
-    hsp_query_to: number;
-    hsp_hit_from: number;
-    hsp_hit_to: number;
-    hsp_qseq: string;
-    hsp_mseq: string;
-    hsp_hseq: string;
-  }[];
+  hit_hsps: BlastHsp[];
 };
 
 export type BlastResults = {

@@ -17,7 +17,14 @@ const blastReducers = (
     case blastActions.RECEIVE_BLAST_RESULTS:
       return {
         ...state,
-        jobs: [...state.jobs, { ...action.payload }],
+        jobs: [
+          ...state.jobs.map(job => {
+            if (job.jobId === action.payload.jobId) {
+              return { ...job, data: action.payload.data };
+            }
+            return job;
+          }),
+        ],
       };
     default:
       return state;
