@@ -1,3 +1,4 @@
+import { groupBy } from 'lodash';
 import {
   CommentType,
   AbsorptionComment,
@@ -14,7 +15,6 @@ import EntrySection from '../../types/EntrySection';
 import { convertSection, UIModel } from '../SectionConverter';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
 import { Evidence } from '../../types/modelTypes';
-import { groupBy } from '../../../utils/utils';
 
 export type Absorption = {
   max: number;
@@ -56,10 +56,6 @@ export type BioPhysicoChemicalProperties = {
   redoxPotential?: TextWithEvidence[];
   temperatureDependence?: TextWithEvidence[];
 };
-export type FunctionUIModel = {
-  bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
-  goTerms?: Map<GoAspect, GoTerm[]>;
-} & UIModel;
 
 export enum GoAspect {
   P = 'Biological Process',
@@ -72,6 +68,13 @@ export type GoTerm = {
   termDescription?: string;
   evidences?: Evidence[];
 } & Xref;
+
+export type GroupedGoTerms = { [key in keyof typeof GoAspect]: GoTerm[] };
+
+export type FunctionUIModel = {
+  bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
+  goTerms?: GroupedGoTerms;
+} & UIModel;
 
 const keywordsCategories = [
   KeywordCategory.MOLECULAR_FUNCTION,
@@ -161,7 +164,10 @@ const convertFunction = (data: UniProtkbAPIModel) => {
         termDescription,
       };
     });
-    convertedSection.goTerms = groupBy(goTerms, (term: GoTerm) => term.aspect);
+    convertedSection.goTerms = groupBy(
+      goTerms,
+      (term: GoTerm) => term.aspect
+    ) as GroupedGoTerms;
   }
   return convertedSection;
 };

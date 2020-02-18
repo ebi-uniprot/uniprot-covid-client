@@ -16,7 +16,6 @@ import { Xref, FreeTextComment } from '../types/CommentTypes';
 import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
 import { Property, PropertyKey, ValueWithEvidence } from '../types/modelTypes';
-import { uniq } from '../../utils/utils';
 
 export type XrefsGoupedByDatabase = {
   database: string;
@@ -204,14 +203,14 @@ export const getXrefsForSection = (
   const geneNames = geneNamesData ? flattenGeneNameData(geneNamesData) : [];
   // Combine all of the 'explicit' xrefs with all of the implicit xrefs
   // which pass the conditions and add if they are part of the section
-  uniq([
+  [
     ...xrefs,
     ...getUnconditionalImplicitXrefs(),
     ...getDRImplicitXrefs(xrefs, geneNames),
     ...getDatabaseSimilarityCommentImplicitXrefs(uniProtId, similarityComments),
     ...getGenePatternOrganismImplicitXrefs(geneNames, commonName),
     ...getECImplicitXrefs(ecNumbers),
-  ]).forEach(xref => {
+  ].forEach(xref => {
     const { databaseType: name } = xref;
     if (!name) {
       return;

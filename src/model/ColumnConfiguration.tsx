@@ -42,6 +42,7 @@ import {
   CofactorComment,
   GoAspect,
   GoTerm,
+  GroupedGoTerms,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -95,7 +96,8 @@ const getGOColumnForAspect = (aspect: GoAspect) => {
     label: `Gene Ontology - ${aspect}`,
     render: (data: UniProtkbUIModel) => {
       const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-      const goProcessTerms = goTerms && goTerms.get(aspect);
+      const goProcessTerms =
+        goTerms && goTerms[(aspect as unknown) as keyof GroupedGoTerms];
       return goProcessTerms && <GOTermsView data={goProcessTerms} />;
     },
   };
@@ -709,7 +711,7 @@ ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flatten(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return allGOTerms && <GOTermsView data={allGOTerms} />;
   },
 });
@@ -717,7 +719,7 @@ ColumnConfiguration.set(Column.goId, {
   label: 'Gene Ontology IDs',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flatten(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return (
       allGOTerms && (
         <section className="text-block">
@@ -744,11 +746,11 @@ ColumnConfiguration.set(Column.threeD, {
     return (
       structureData && (
         <Fragment>
-          {Array.from(structureData.keys()).map(method => (
+          {Object.entries(structureData).map(([method, xrefs]) => (
             <div key={method}>
-              {structureData.get(method) && (
+              {xrefs && (
                 <Fragment>
-                  {method}: {(structureData.get(method) as Xref[]).length}
+                  {method}: {(xrefs as Xref[]).length}
                 </Fragment>
               )}
             </div>

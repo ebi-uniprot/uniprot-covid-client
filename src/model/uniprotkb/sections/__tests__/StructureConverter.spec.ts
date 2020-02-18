@@ -8,7 +8,7 @@ describe('Structure data converter', () => {
       commentsData: new Map(),
       featuresData: [],
       keywordData: [],
-      structures: new Map(),
+      structures: {},
       xrefData: [
         {
           category: '3DS',

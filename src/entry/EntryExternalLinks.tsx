@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
 import { v1 } from 'uuid';
+import { groupBy } from 'lodash';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import XRefView from '../view/uniprotkb/components/XRefView';
 import EntrySection from '../model/types/EntrySection';
 import { XrefUIModel, XrefsGoupedByDatabase } from '../model/utils/XrefUtils';
 import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
-import { groupBy } from '../utils/utils';
 import { DatabaseCategory } from '../model/types/DatabaseTypes';
 
 type EntryExternalLinksProps = {
@@ -59,15 +59,16 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
       }
     );
   });
+
   const xrefData = Array.from(
     databaseCategoryToXrefsGoupedByDatabase.entries()
   ).map(([category, xrefsGoupedByDatabase]) => ({
     category,
-    databases: Array.from(
+    databases: Object.values(
       groupBy(
         xrefsGoupedByDatabase,
         (xrefs: XrefsGoupedByDatabase) => xrefs.database
-      ).values()
+      )
       // Only need the first entry as it assumed that each database
       // list is the same across all of the sections
     ).map(v => v[0]),

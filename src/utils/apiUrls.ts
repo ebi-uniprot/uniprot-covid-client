@@ -1,5 +1,6 @@
 import urlJoin from 'url-join';
 import queryString from 'query-string';
+import { uniq } from 'lodash';
 import {
   getApiSortDirection,
   SortDirection,
@@ -9,7 +10,6 @@ import {
   fileFormatToUrlParameter,
 } from '../results/types/resultsTypes';
 import { SortableColumn } from '../model/types/ColumnTypes';
-import { uniq } from './utils';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 

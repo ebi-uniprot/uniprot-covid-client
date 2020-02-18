@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { uniq } from 'lodash';
 import {
   Facets,
   PageIntro,
@@ -20,7 +21,6 @@ import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
 import { getQueryUrl } from '../utils/apiUrls';
-import { uniq } from '../utils/utils';
 import infoMappings from '../info/InfoMappings';
 import { RootState, RootAction } from '../state/state-types';
 import {
