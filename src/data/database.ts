@@ -113,7 +113,6 @@ entrySectionToDatabaseNames.set(EntrySection.PathologyAndBioTech, [
   'BioMuta',
   'DMDM',
   'Allergome',
-  'ChiTaRS', // temp
 ]);
 entrySectionToDatabaseNames.set(
   EntrySection.ProteinProcessing,
