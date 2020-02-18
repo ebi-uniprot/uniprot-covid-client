@@ -1,5 +1,5 @@
 import { convertNamesAndTaxonomy } from '../NamesAndTaxonomyConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Names and taxonomy data converter', () => {
   test('should convert the data', () => {

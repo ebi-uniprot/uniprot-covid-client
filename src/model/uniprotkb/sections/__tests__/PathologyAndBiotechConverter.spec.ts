@@ -1,5 +1,5 @@
 import convertPathologyAndBiotech from '../PathologyAndBiotechConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Pathology/Biotech data converter', () => {
   test('should convert the data', () => {

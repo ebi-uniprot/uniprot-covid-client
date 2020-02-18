@@ -1,5 +1,5 @@
 import convertInteraction from '../InteractionConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Interaction data converter', () => {
   test('should convert the data', () => {

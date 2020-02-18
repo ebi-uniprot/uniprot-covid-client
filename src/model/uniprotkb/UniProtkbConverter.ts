@@ -49,7 +49,7 @@ export type Citation = {
   referenceComments?: {
     value: string;
     type: string;
-  };
+  }[];
 };
 
 export type UniProtkbAPIModel = {

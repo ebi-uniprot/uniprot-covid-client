@@ -31,13 +31,7 @@ import {
 import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
-
-export type Facet = {
-  label: string;
-  name: string;
-  allowMultipleSelection: boolean;
-  values: { label: string; value: string; count: number }[];
-};
+import { Facet } from '../types/responseTypes';
 
 type ResultsProps = {
   namespace: Namespace;

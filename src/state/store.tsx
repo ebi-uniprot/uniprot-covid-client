@@ -22,8 +22,9 @@ const persistConfig = {
     ),
     createBlacklistFilter(
       'query',
-      ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'] // ignore
+      ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'] // ignore,
     ),
+    createBlacklistFilter('entry', ['accession', 'data', 'publicationsData']),
   ],
 };
 
