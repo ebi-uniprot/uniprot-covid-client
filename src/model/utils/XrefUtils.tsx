@@ -83,7 +83,7 @@ export const getDRImplicitXrefs = (xrefs: Xref[], geneNames: string[]) => {
   return foundXrefs;
 };
 
-const getDatabaseSimilarityCommentImplicitXrefs = (
+export const getDatabaseSimilarityCommentImplicitXrefs = (
   uniProtId: string | undefined,
   similarityComments?: FreeTextComment[]
 ) => {
