@@ -1,5 +1,5 @@
 import convertExpression from '../ExpressionConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Expression data converter', () => {
   test('should convert the data', () => {

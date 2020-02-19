@@ -1,5 +1,5 @@
 import convertStructure from '../StructureConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Structure data converter', () => {
   test('should convert the data', () => {

@@ -11,7 +11,7 @@ import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
-var mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 
 mock
   .onGet(/\/uniprotkb\/search/)
@@ -51,10 +51,13 @@ describe('Results component', () => {
 
   test('should toggle card view to table', async () => {
     await act(async () => {
-      const { container, getByTestId, getByText } = renderWithRedux(
-        <ResultsContainer />,
-        { route: '/uniprotkb?query=blah' }
-      );
+      const {
+        container,
+        getByTestId,
+        getByText,
+      } = renderWithRedux(<ResultsContainer />, {
+        route: '/uniprotkb?query=blah',
+      });
       const toggle = await waitForElement(() =>
         getByTestId('table-card-toggle')
       );
@@ -70,10 +73,14 @@ describe('Results component', () => {
       query: searchInitialState,
       results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
     };
-    const { container, debug, getByText } = renderWithRedux(
-      <ResultsContainer />,
-      { initialState: state, route: '/uniprotkb?query=blah' }
-    );
+    const {
+      container,
+      debug,
+      getByText,
+    } = renderWithRedux(<ResultsContainer />, {
+      initialState: state,
+      route: '/uniprotkb?query=blah',
+    });
     const checkbox = await waitForElement(() =>
       container.querySelector('input[type=checkbox]')
     );

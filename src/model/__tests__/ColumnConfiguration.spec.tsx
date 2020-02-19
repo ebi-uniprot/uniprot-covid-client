@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ColumnConfiguration from '../ColumnConfiguration';
-import data from '../__mocks__/modelData.json';
+import data from '../__mocks__/entryModelData.json';
 import uniProtKbConverter from '../uniprotkb/UniProtkbConverter';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 

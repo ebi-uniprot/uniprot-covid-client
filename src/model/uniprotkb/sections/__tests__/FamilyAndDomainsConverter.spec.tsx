@@ -1,5 +1,5 @@
 import convertFamilyAndDomains from '../FamilyAndDomainsConverter';
-import modelDataJson from '../../../__mocks__/modelData.json';
+import modelDataJson from '../../../__mocks__/entryModelData.json';
 
 describe('Family and Domains data converter', () => {
   test('should convert the data', () => {

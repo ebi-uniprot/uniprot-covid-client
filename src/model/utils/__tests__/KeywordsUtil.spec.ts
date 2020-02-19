@@ -1,6 +1,6 @@
 import { getAllKeywords } from '../KeywordsUtil';
 import EntrySection from '../../types/EntrySection';
-import modelData from '../../__mocks__/modelData.json';
+import modelData from '../../__mocks__/entryModelData.json';
 import uniProtKbConverter from '../../uniprotkb/UniProtkbConverter';
 
 describe('KeywordsUtil', () => {

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { MemoryRouter as Router } from 'react-router-dom';
 import renderWithRedux from '../../../../__testHelpers__/renderWithRedux';
 import ProteinSummary from '../ProteinSummary';
-import modelData from '../../../../model/__mocks__/modelData.json';
+import modelData from '../../../../model/__mocks__/entryModelData.json';
 
 afterEach(cleanup);
 

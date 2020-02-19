@@ -3,7 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import EntryExternalLinks from '../EntryExternalLinks';
 import uniProtKbConverter from '../../model/uniprotkb/UniProtkbConverter';
-import mock_data from '../../model/__mocks__/modelData.json';
+import mock_data from '../../model/__mocks__/entryModelData.json';
 
 describe('Entry - External Links view', () => {
   test('should render', () => {

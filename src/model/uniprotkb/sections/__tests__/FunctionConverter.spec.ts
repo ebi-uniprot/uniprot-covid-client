@@ -1,5 +1,5 @@
 import convertFunction from '../FunctionConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 import { CommentType } from '../../../types/CommentTypes';
 
 let data;

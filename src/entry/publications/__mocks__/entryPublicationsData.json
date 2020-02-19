@@ -1,0 +1,162 @@
+{
+  "facets": [
+    {
+      "label": "Scale",
+      "name": "scale",
+      "allowMultipleSelection": false,
+      "values": [
+        {
+          "value": "Small",
+          "count": 2272
+        },
+        {
+          "value": "Large",
+          "count": 116
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "1",
+      "literatureEntry": {
+        "pubmedId": 2881207,
+        "doiId": "10.1038/325733a0",
+        "title": "The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.",
+        "authors": [
+          "Kang J.",
+          "Lemaire H.-G.",
+          "Unterbeck A.",
+          "Salbaum J.M.",
+          "Masters C.L.",
+          "Grzeschik K.-H.",
+          "Multhaup G.",
+          "Beyreuther K.",
+          "Mueller-Hill B."
+        ],
+        "completeAuthorList": true,
+        "publicationDate": "1987",
+        "journal": "Nature",
+        "firstPage": "733",
+        "lastPage": "736",
+        "volume": "325",
+        "literatureAbstract": "Alzheimer's disease is characterized by a widespread functional disturbance of the human brain. Fibrillar amyloid proteins are deposited inside neurons as neurofibrillary tangles and extracellularly as amyloid plaque cores and in blood vessels. The major protein subunit (A4) of the amyloid fibril of tangles, plaques and blood vessel deposits is an insoluble, highly aggregating small polypeptide of relative molecular mass 4,500. The same polypeptide is also deposited in the brains of aged individuals with trisomy 21 (Down's syndrome). We have argued previously that the A4 protein is of neuronal origin and is the cleavage product of a larger precursor protein. To identify this precursor, we have now isolated and sequenced an apparently full-length complementary DNA clone coding for the A4 polypeptide. The predicted precursor consists of 695 residues and contains features characteristic of glycosylated cell-surface receptors. This sequence, together with the localization of its gene on chromosome 21, suggests that the cerebral amyloid deposited in Alzheimer's disease and aged Down's syndrome is caused by aberrant catabolism of a cell- surface receptor.",
+        "statistics": {
+          "reviewedProteinCount": 1,
+          "unreviewedProteinCount": 0,
+          "mappedProteinCount": 0
+        }
+      },
+      "uniProtReference": {
+        "citation": {
+          "citationType": "journal article",
+          "authors": [
+            "Kang J.",
+            "Lemaire H.-G.",
+            "Unterbeck A.",
+            "Salbaum J.M.",
+            "Masters C.L.",
+            "Grzeschik K.-H.",
+            "Multhaup G.",
+            "Beyreuther K.",
+            "Mueller-Hill B."
+          ],
+          "citationXrefs": [
+            {
+              "databaseType": "PubMed",
+              "id": "2881207"
+            },
+            {
+              "databaseType": "DOI",
+              "id": "10.1038/325733a0"
+            }
+          ],
+          "title": "The precursor of Alzheimer's disease amyloid A4 protein resembles a cell-surface receptor.",
+          "publicationDate": "1987",
+          "journal": "Nature",
+          "firstPage": "733",
+          "lastPage": "736",
+          "volume": "325"
+        },
+        "referencePositions": ["NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP695)"],
+        "referenceComments": [
+          {
+            "value": "Brain",
+            "type": "TISSUE"
+          }
+        ]
+      },
+      "categories": ["Sequence", "Sequence"],
+      "publicationSource": "Swiss-Prot"
+    },
+    {
+      "id": "2",
+      "literatureEntry": {
+        "pubmedId": 10097139,
+        "doiId": "10.1073/pnas.96.7.3922",
+        "title": "Constitutive and regulated alpha-secretase cleavage of Alzheimer's amyloid precursor protein by a disintegrin metalloprotease.",
+        "authors": [
+          "Lammich S.",
+          "Kojro E.",
+          "Postina R.",
+          "Gilbert S.",
+          "Pfeiffer R.",
+          "Jasionowski M.",
+          "Haass C.",
+          "Fahrenholz F."
+        ],
+        "completeAuthorList": true,
+        "publicationDate": "1999",
+        "journal": "Proc. Natl. Acad. Sci. U.S.A.",
+        "firstPage": "3922",
+        "lastPage": "3927",
+        "volume": "96",
+        "literatureAbstract": "Amyloid beta peptide (Abeta), the principal proteinaceous component of amyloid plaques in brains of Alzheimer's disease patients, is derived by proteolytic cleavage of the amyloid precursor protein (APP). Proteolytic cleavage of APP by a putative alpha-secretase within the Abeta sequence precludes the formation of the amyloidogenic peptides and leads to the release of soluble APPsalpha into the medium. By overexpression of a disintegrin and metalloprotease (ADAM), classified as ADAM 10, in HEK 293 cells, basal and protein kinase C-stimulated alpha-secretase activity was increased severalfold. The proteolytically activated form of ADAM 10 was localized by cell surface biotinylation in the plasma membrane, but the majority of the proenzyme was found in the Golgi. These results support the view that APP is cleaved both at the cell surface and along the secretory pathway. Endogenous alpha-secretase activity was inhibited by a dominant negative form of ADAM 10 with a point mutation in the zinc binding site. Studies with purified ADAM 10 and Abeta fragments confirm the correct alpha-secretase cleavage site and demonstrate a dependence on the substrate's conformation. Our results provide evidence that ADAM 10 has alpha-secretase activity and many properties expected for the proteolytic processing of APP. Increases of its expression and activity might be beneficial for the treatment of Alzheimer's disease.",
+        "statistics": {
+          "reviewedProteinCount": 1,
+          "unreviewedProteinCount": 0,
+          "mappedProteinCount": 8
+        }
+      },
+      "literatureMappedReference": {
+        "uniprotAccession": "P05067",
+        "source": "Reactome",
+        "sourceId": "R-HSA-9010028",
+        "annotation": "Pathway"
+      },
+      "categories": ["Function"],
+      "publicationSource": "Computationally mapped"
+    },
+    {
+      "id": "3",
+      "uniProtReference": {
+        "citation": {
+          "citationType": "journal article",
+          "authors": ["Borg J.-P.", "Ooi J.", "Levy E.", "Margolis B."],
+          "citationXrefs": [
+            {
+              "databaseType": "PubMed",
+              "id": "8887653"
+            },
+            {
+              "databaseType": "DOI",
+              "id": "10.1128/mcb.16.11.6229"
+            }
+          ],
+          "title": "The phosphotyrosine interaction domains of X11 and FE65 bind to distinct sites on the YENPTY motif of amyloid precursor protein.",
+          "publicationDate": "1996",
+          "journal": "Mol. Cell. Biol.",
+          "firstPage": "6229",
+          "lastPage": "6241",
+          "volume": "16"
+        },
+        "referencePositions": [
+          "INTERACTION WITH APBA1 AND APBB1",
+          "MUTAGENESIS OF TYR-728; TYR-757; ASN-759 AND TYR-762"
+        ]
+      },
+      "categories": ["Interaction", "Pathol"],
+      "publicationSource": "Swiss-Prot"
+    }
+  ]
+}

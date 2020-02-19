@@ -6,7 +6,6 @@ import fetchData from '../../utils/fetchData';
 import { RootState } from '../../state/state-types';
 import 'regenerator-runtime/runtime';
 import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
-import { Facet } from '../ResultsContainer';
 import apiUrls from '../../utils/apiUrls';
 import { Column } from '../../model/types/ColumnTypes';
 import {
@@ -15,6 +14,8 @@ import {
   ReceivedFieldData,
   ReceivedField,
 } from '../types/resultsTypes';
+import getNextUrlFromResponse from '../../utils/queryUtils';
+import Response from '../../types/responseTypes';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';
@@ -42,29 +43,7 @@ export const receiveBatchOfResults = (
 export const requestBatchOfResults = (url: string) =>
   action(REQUEST_BATCH_OF_RESULTS, { url });
 
-const getNextUrlFromResponse = (
-  link: string | null | undefined
-): string | undefined => {
-  if (!link) {
-    return;
-  }
-  const re = /<([0-9a-zA-Z$\-_.+!*'(),?/:=&%]+)>; rel="next"/;
-  const match = re.exec(link);
-  if (match) {
-    // eslint-disable-next-line consistent-return
-    return match[1];
-  }
-};
-
 export const clearResults = () => action(CLEAR_RESULTS);
-
-type Response = {
-  data: { results: UniProtkbAPIModel[]; facets: Facet[] };
-  headers: {
-    ['x-totalrecords']: string;
-    link: string;
-  };
-};
 
 export const fetchBatchOfResults = (url: string, state: RootState) => async (
   dispatch: Dispatch
@@ -81,7 +60,8 @@ export const fetchBatchOfResults = (url: string, state: RootState) => async (
       )
     );
     if (response.data.results.length > 0 && !state.results.summaryAccession) {
-      const firstAccession = response.data.results[0].primaryAccession;
+      const firstAccession = (response.data.results as UniProtkbAPIModel[])[0]
+        .primaryAccession;
       if (firstAccession) {
         dispatch(
           action(UPDATE_SUMMARY_ACCESSION, { accession: firstAccession })

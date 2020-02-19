@@ -1,5 +1,5 @@
 import { convertSequence } from '../SequenceConverter';
-import modelData from '../../../__mocks__/modelData.json';
+import modelData from '../../../__mocks__/entryModelData.json';
 
 describe('Sequence data converter', () => {
   test('should convert the data', () => {
