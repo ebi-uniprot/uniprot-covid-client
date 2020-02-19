@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, Fragment } from 'react';
 import idx from 'idx';
+import { truncate } from 'lodash';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
-import { truncateStringWithEllipsis } from '../../../utils/utils';
 import KeywordCategory from '../../../model/types/KeywordCategory';
 import { KeywordList } from './KeywordView';
 import UniProtTitle from './UniProtTitle';
@@ -87,10 +87,9 @@ const UniProtCard: FC<{
       (_): string => _.texts[0].value
     );
     if (firstCommentValue) {
-      functionNode = truncateStringWithEllipsis(
-        firstCommentValue,
-        CHAR_LENGTH_FUNCTION_SUMMARY
-      );
+      functionNode = truncate(firstCommentValue, {
+        length: CHAR_LENGTH_FUNCTION_SUMMARY,
+      });
     }
   }
 

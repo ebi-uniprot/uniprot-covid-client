@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const serializableDeepCopy = (x: object) =>
-  JSON.parse(JSON.stringify(x));
 
-export const serializableDeepAreEqual = (obj1: object, obj2: object) =>
-  JSON.stringify(obj1) === JSON.stringify(obj2);
-
+// Keeping this util because _.omit is marked to be deprecated:
+// https://github.com/lodash/lodash/wiki/Roadmap
 export const removeProperty = (
   obj: { [key: string]: any },
   property: string | number
@@ -65,14 +62,4 @@ export const getBEMClassName = ({
     }
   }
   return className;
-};
-
-export const truncateStringWithEllipsis = (
-  string: string,
-  maxLength: number
-) => {
-  if (string.length <= maxLength) {
-    return string;
-  }
-  return `${string.slice(0, maxLength - 3)}...`;
 };
