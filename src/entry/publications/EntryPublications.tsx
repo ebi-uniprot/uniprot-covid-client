@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import { uniq } from '../../utils/utils';
 
 const EntryPublications: FC<{
   accession: string;
