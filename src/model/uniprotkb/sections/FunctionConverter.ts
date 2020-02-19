@@ -69,7 +69,7 @@ export type GoTerm = {
   evidences?: Evidence[];
 } & Xref;
 
-export type GroupedGoTerms = { [key in keyof typeof GoAspect]: GoTerm[] };
+export type GroupedGoTerms = Map<GoAspect, GoTerm[]>;
 
 export type FunctionUIModel = {
   bioPhysicoChemicalProperties: BioPhysicoChemicalProperties;
@@ -164,9 +164,8 @@ const convertFunction = (data: UniProtkbAPIModel) => {
         termDescription,
       };
     });
-    convertedSection.goTerms = groupBy(
-      goTerms,
-      (term: GoTerm) => term.aspect
+    convertedSection.goTerms = new Map(
+      Object.entries(groupBy(goTerms, (term: GoTerm) => term.aspect))
     ) as GroupedGoTerms;
   }
   return convertedSection;

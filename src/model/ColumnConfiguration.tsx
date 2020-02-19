@@ -42,7 +42,6 @@ import {
   CofactorComment,
   GoAspect,
   GoTerm,
-  GroupedGoTerms,
 } from './uniprotkb/sections/FunctionConverter';
 import { Column } from './types/ColumnTypes';
 import {
@@ -96,8 +95,7 @@ const getGOColumnForAspect = (aspect: GoAspect) => {
     label: `Gene Ontology - ${aspect}`,
     render: (data: UniProtkbUIModel) => {
       const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-      const goProcessTerms =
-        goTerms && goTerms[(aspect as unknown) as keyof GroupedGoTerms];
+      const goProcessTerms = goTerms && goTerms.get(aspect);
       return goProcessTerms && <GOTermsView data={goProcessTerms} />;
     },
   };

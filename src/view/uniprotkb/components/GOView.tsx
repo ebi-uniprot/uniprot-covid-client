@@ -30,7 +30,7 @@ export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
 
 const GOView: React.FC<{ data: GroupedGoTerms }> = ({ data }) => (
   <Fragment>
-    {Object.entries(data).map(([aspect, terms]) => (
+    {Array.from(data.entries()).map(([aspect, terms]) => (
       <section className="text-block" key={aspect}>
         <h4>{aspect}</h4>
         {terms && <GOTermsView data={terms} />}
