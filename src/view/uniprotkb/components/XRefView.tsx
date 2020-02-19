@@ -20,6 +20,7 @@ import {
   transfromProperties,
   getPropertyValue,
 } from '../../../model/utils/utils';
+import idx from 'idx';
 
 export const processUrlTemplate = (
   urlTemplate: string,
@@ -211,7 +212,11 @@ const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   primaryAccession,
   crc64,
 }): JSX.Element => {
-  const infoData = sortBy(databases, 'database').map((database): {
+  console.log(databases);
+  const infoData = sortBy(databases, ({ database }) => [
+    idx(databaseToDatabaseInfo, o => o[database].implicit),
+    database,
+  ]).map((database): {
     title: string;
     content: JSX.Element;
   } => {
