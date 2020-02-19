@@ -38,7 +38,10 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
   const {
     [EntrySection.ExternalLinks]: data,
     primaryAccession,
+    [EntrySection.Sequence]: { sequence },
   } = transformedData;
+  // Needed for SMR implicit xref
+  const crc64 = sequence && sequence.crc64;
   const webResourceComments = data.commentsData.get(CommentType.WEB_RESOURCE);
 
   // Merge all of the external links from the entry page sections
@@ -90,7 +93,11 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
             </ExpandableList>
           </Fragment>
         )}
-        <XRefView xrefs={xrefData} primaryAccession={primaryAccession} />
+        <XRefView
+          xrefs={xrefData}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
       </Card>
     </div>
   );

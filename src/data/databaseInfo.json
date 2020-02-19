@@ -148,7 +148,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://pdbe-kb.org/proteins/%id"
+		"uriLink": "https://pdbe-kb.org/proteins/%primaryAccession"
 	},
 	{
 		"name": "PDBj",
@@ -156,7 +156,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://pdbj.org/mine/summary/%id"
+		"uriLink": "https://pdbj.org/mine/summary/%primaryAccession"
 	},
 
 	{
@@ -165,7 +165,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://www.rcsb.org/structure/%id"
+		"uriLink": "https://www.rcsb.org/structure/%primaryAccession"
 	},
 
 
