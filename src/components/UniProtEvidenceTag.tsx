@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { EvidenceTag, SwissProtIcon, TremblIcon } from 'franklin-sites';
+import { EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { Link } from 'react-router-dom';
@@ -92,7 +92,6 @@ const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
             ? evidenceData.labelRender(references)
             : evidenceData.label
         }
-        iconComponent={evidenceData.manual ? <SwissProtIcon /> : <TremblIcon />}
         className={
           evidenceData.manual ? 'svg-colour-reviewed' : 'svg-colour-unreviewed'
         }
@@ -136,11 +135,7 @@ export const UniProtProtvistaEvidenceTag = (
       >
         ${unsafeHTML(
           ReactDOMServer.renderToStaticMarkup(
-            evidenceData.manual ? (
-              <SwissProtIcon width={size} height={size} />
-            ) : (
-              <TremblIcon width={size} height={size} />
-            )
+            <EvidenceTagIcon width={size} height={size} />
           )
         )}
         ${evidenceData.labelRender

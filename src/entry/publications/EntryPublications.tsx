@@ -92,7 +92,7 @@ const EntryPublications: FC<{
                   {...literatureEntry}
                   abstract={literatureAbstract}
                   infoData={infoListData}
-                  statistics={statistics && statistics.reviewedProteinCount}
+                  statistics={statistics && statistics}
                 />
               );
             }

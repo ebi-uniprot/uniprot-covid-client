@@ -329,12 +329,16 @@ exports[`Entry should render main 1`] = `
                       tabindex="0"
                     >
                       <svg
+                        fill="none"
                         height="12"
-                        viewBox="0 0 400 512"
+                        viewBox="0 0 10 15"
                         width="12"
                       >
                         <path
-                          d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                          clip-rule="evenodd"
+                          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                          fill="#4E5A71"
+                          fill-rule="evenodd"
                         />
                       </svg>
                       <span
@@ -365,12 +369,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -400,12 +408,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -435,12 +447,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -565,12 +581,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -604,12 +624,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -645,12 +669,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 400 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -682,12 +710,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 400 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -731,12 +763,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 426 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -769,12 +805,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 426 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -822,12 +862,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -869,12 +913,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 426 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -915,12 +963,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 426 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -960,12 +1012,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 426 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -1005,12 +1061,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 426 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -1102,12 +1162,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1157,12 +1221,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1212,12 +1280,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1271,12 +1343,16 @@ exports[`Entry should render main 1`] = `
                         tabindex="0"
                       >
                         <svg
+                          fill="none"
                           height="12"
-                          viewBox="0 0 426 512"
+                          viewBox="0 0 10 15"
                           width="12"
                         >
                           <path
-                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                            clip-rule="evenodd"
+                            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                            fill="#4E5A71"
+                            fill-rule="evenodd"
                           />
                         </svg>
                         <span
@@ -1309,12 +1385,16 @@ exports[`Entry should render main 1`] = `
                         tabindex="0"
                       >
                         <svg
+                          fill="none"
                           height="12"
-                          viewBox="0 0 426 512"
+                          viewBox="0 0 10 15"
                           width="12"
                         >
                           <path
-                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                            clip-rule="evenodd"
+                            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                            fill="#4E5A71"
+                            fill-rule="evenodd"
                           />
                         </svg>
                         <span
@@ -1399,12 +1479,16 @@ exports[`Entry should render main 1`] = `
                         tabindex="0"
                       >
                         <svg
+                          fill="none"
                           height="12"
-                          viewBox="0 0 426 512"
+                          viewBox="0 0 10 15"
                           width="12"
                         >
                           <path
-                            d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                            clip-rule="evenodd"
+                            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                            fill="#4E5A71"
+                            fill-rule="evenodd"
                           />
                         </svg>
                         <span
@@ -1456,12 +1540,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1550,12 +1638,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1600,12 +1692,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1650,12 +1746,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 426 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1700,12 +1800,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1761,12 +1865,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -1910,12 +2018,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 400 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -1943,12 +2055,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 400 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -1980,12 +2096,16 @@ exports[`Entry should render main 1`] = `
                   tabindex="0"
                 >
                   <svg
+                    fill="none"
                     height="12"
-                    viewBox="0 0 400 512"
+                    viewBox="0 0 10 15"
                     width="12"
                   >
                     <path
-                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                      clip-rule="evenodd"
+                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                      fill="#4E5A71"
+                      fill-rule="evenodd"
                     />
                   </svg>
                   <span
@@ -2044,12 +2164,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -2164,12 +2288,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -2466,12 +2594,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -2510,12 +2642,16 @@ exports[`Entry should render main 1`] = `
                 tabindex="0"
               >
                 <svg
+                  fill="none"
                   height="12"
-                  viewBox="0 0 400 512"
+                  viewBox="0 0 10 15"
                   width="12"
                 >
                   <path
-                    d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    clip-rule="evenodd"
+                    d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                    fill="#4E5A71"
+                    fill-rule="evenodd"
                   />
                 </svg>
                 <span
@@ -2553,12 +2689,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
@@ -2590,12 +2730,16 @@ exports[`Entry should render main 1`] = `
                     tabindex="0"
                   >
                     <svg
+                      fill="none"
                       height="12"
-                      viewBox="0 0 400 512"
+                      viewBox="0 0 10 15"
                       width="12"
                     >
                       <path
-                        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                        clip-rule="evenodd"
+                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                        fill="#4E5A71"
+                        fill-rule="evenodd"
                       />
                     </svg>
                     <span
