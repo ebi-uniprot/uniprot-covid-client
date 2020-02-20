@@ -1063,8 +1063,8 @@
 		"uriLink": "http://www.kazusa.or.jp/huge/gfpage/%gene"
 	},
 	{
-		"name": "Rouge",
-		"displayName": "Rouge",
+		"name": "ROUGE",
+		"displayName": "ROUGE",
 		"category": "ORG",
 		"implicit": true,
 		"linkedReason": "GN:KIAAnnnn, Mouse Entries, can be multiple",

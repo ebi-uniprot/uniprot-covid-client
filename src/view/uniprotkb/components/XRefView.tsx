@@ -98,7 +98,7 @@ export const XRef: React.FC<XRefProps> = ({
     return null;
   }
   let propertiesNode;
-  if (properties) {
+  if (properties && !implicit) {
     propertiesNode = properties.map(({ key, value }: Property) =>
       key && value && [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key)
         ? getPropertyLink(databaseInfo, key, xref)

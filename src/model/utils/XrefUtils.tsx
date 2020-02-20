@@ -125,7 +125,7 @@ export const getGenePatternOrganismImplicitXrefs = (
   const { pattern, organism } = implicitDatabaseGenePatternOrganism;
   if (commonName && Object.keys(organism).includes(commonName)) {
     geneNames
-      .filter((geneName: { match: (arg0: RegExp) => void }) =>
+      .filter((geneName: { match: (arg: RegExp) => void }) =>
         geneName.match(pattern)
       )
       .forEach((gene: string) => {
