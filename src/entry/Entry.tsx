@@ -5,7 +5,14 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { InPageNav, Loader, DisplayMenu } from 'franklin-sites';
+import {
+  InPageNav,
+  Loader,
+  DisplayMenu,
+  PublicationIcon,
+  ExternalLinkIcon,
+  TremblIcon,
+} from 'franklin-sites';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
@@ -88,6 +95,7 @@ const Entry: React.FC<EntryProps> = ({
   const displayMenuData = [
     {
       name: 'Entry',
+      icon: <TremblIcon />,
       itemContent: <InPageNav sections={sections} />,
       path: 'main',
       mainContent: <EntryMain transformedData={transformedData} />,
@@ -95,6 +103,7 @@ const Entry: React.FC<EntryProps> = ({
     {
       name: 'Publications',
       path: 'publications',
+      icon: <PublicationIcon />,
       itemContent: (
         <EntryPublicationsFacets
           facets={publicationsData.facets}
@@ -116,6 +125,7 @@ const Entry: React.FC<EntryProps> = ({
     {
       name: 'External links',
       path: 'external-links',
+      icon: <ExternalLinkIcon />,
       mainContent: <EntryExternalLinks transformedData={transformedData} />,
     },
   ];
