@@ -5,25 +5,27 @@ import {
   GroupedGoTerms,
 } from '../../../model/uniprotkb/sections/FunctionConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import externalUrls from '../../../utils/externalUrls';
 
 export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
   <section className="text-block">
     <ExpandableList descriptionString="terms">
-      {data.map(term => ({
-        id: term.id,
-        content: (
-          <Fragment>
-            <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>
-              {term.termDescription}
-            </a>
-            {/* TODO: currently not displaying the GoEvidenceType property
+      {data
+        .filter(({ id }) => id)
+        .map(
+          ({ id, evidences, termDescription }) =>
+            id && {
+              id,
+              content: (
+                <Fragment>
+                  <a href={externalUrls.QuickGO(id)}>{termDescription}</a>
+                  {/* TODO: currently not displaying the GoEvidenceType property
         which will have to be displayed like an evidence tag */}
-            {term.evidences && (
-              <UniProtEvidenceTag evidences={term.evidences} />
-            )}
-          </Fragment>
-        ),
-      }))}
+                  {evidences && <UniProtEvidenceTag evidences={evidences} />}
+                </Fragment>
+              ),
+            }
+        )}
     </ExpandableList>
   </section>
 );

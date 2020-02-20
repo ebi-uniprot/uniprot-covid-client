@@ -22,11 +22,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
   return (
     <Fragment>
       <Link to={`taxonomy/${taxonId}`}>{`${taxonId} `}</Link>
-      <ExternalLink
-        url={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${taxonId}`}
-      >
-        NCBI
-      </ExternalLink>
+      <ExternalLink url={ExternalLink.NCBI(taxonId)}>NCBI</ExternalLink>
     </Fragment>
   );
 };

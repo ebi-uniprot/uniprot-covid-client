@@ -15,6 +15,7 @@ import { formatLargeNumber } from '../../../utils/utils';
 import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import numberView, { Unit } from './NumberView';
+import externalUrls from '../../../utils/externalUrls';
 
 export type SequenceData = {
   value: string;
@@ -137,9 +138,7 @@ export const SequenceCautionView: React.FC<{
       {data.map(cautionData => (
         <section className="text-block" key={cautionData.sequence}>
           {`The sequence `}
-          <ExternalLink
-            url={`//www.ebi.ac.uk/ena/data/view/${cautionData.sequence}`}
-          >
+          <ExternalLink url={externalUrls.ENA(cautionData.sequence)}>
             {cautionData.sequence}
           </ExternalLink>
           {` differs from that shown. Reason: ${cautionData.sequenceCautionType} `}
