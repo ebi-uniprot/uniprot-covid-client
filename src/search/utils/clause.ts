@@ -1,11 +1,7 @@
 import { v1 } from 'uuid';
-import { serializableDeepAreEqual, removeProperty } from '../../utils/utils';
-import {
-  Operator,
-  Clause,
-  itemType,
-  dataType,
-} from '../types/searchTypes';
+import { isEqual } from 'lodash';
+import { removeProperty } from '../../utils/utils';
+import { Operator, Clause, itemType, dataType } from '../types/searchTypes';
 
 export const createEmptyClause = (): Clause => ({
   id: v1(),
@@ -21,7 +17,7 @@ export const createEmptyClause = (): Clause => ({
   queryInput: {},
 });
 
-export const createPreSelectedClauses = () : Clause[] => [
+export const createPreSelectedClauses = (): Clause[] => [
   {
     id: v1(),
     logicOperator: Operator.AND,
@@ -39,14 +35,14 @@ export const createPreSelectedClauses = () : Clause[] => [
     id: v1(),
     logicOperator: Operator.AND,
     searchTerm: {
-      id: "id_taxonomy",
-      label: "Taxonomy [OC]",
-      term: "taxonomy",
+      id: 'id_taxonomy',
+      label: 'Taxonomy [OC]',
+      term: 'taxonomy',
       itemType: itemType.single,
       dataType: dataType.string,
-      autoComplete: "/uniprot/api/suggester?dict=taxonomy&query=?",
-      description: "Search by NCBI taxonomy",
-      example: "human",
+      autoComplete: '/uniprot/api/suggester?dict=taxonomy&query=?',
+      description: 'Search by NCBI taxonomy',
+      example: 'human',
       termSuffix: true,
     },
     queryInput: {},
@@ -87,7 +83,4 @@ export const createPreSelectedClauses = () : Clause[] => [
 ];
 
 export const clausesAreEqual = (clause1: Clause, clause2: Clause) =>
-  serializableDeepAreEqual(
-    removeProperty(clause1, 'id'),
-    removeProperty(clause2, 'id')
-  );
+  isEqual(removeProperty(clause1, 'id'), removeProperty(clause2, 'id'));

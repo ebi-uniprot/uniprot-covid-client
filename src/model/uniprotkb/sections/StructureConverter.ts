@@ -1,12 +1,14 @@
+import { groupBy } from 'lodash';
 import FeatureType from '../../types/FeatureType';
 import { convertSection, UIModel } from '../SectionConverter';
 import EntrySection from '../../types/EntrySection';
 import { UniProtkbAPIModel } from '../UniProtkbConverter';
-import { groupBy } from '../../../utils/utils';
 import { Xref } from '../../types/CommentTypes';
 
+type GroupedStructureInfo = { [key: string]: Xref[] };
+
 export type StructureUIModel = {
-  structures?: Map<string, Xref[]>;
+  structures?: GroupedStructureInfo;
 } & UIModel;
 
 const featuresCategories = [FeatureType.HELIX, FeatureType.STRAND];
@@ -33,7 +35,7 @@ const convertStructure = (data: UniProtkbAPIModel) => {
       structureInfo,
       (item: { method: string }) => item.method
     );
-    structureData.structures = groupedStructureInfo;
+    structureData.structures = groupedStructureInfo as GroupedStructureInfo;
   }
   return structureData;
 };

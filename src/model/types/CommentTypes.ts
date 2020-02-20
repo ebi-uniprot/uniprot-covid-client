@@ -114,8 +114,9 @@ export type PhysiologicalReaction = {
 export type Xref = {
   databaseType?: string;
   id?: string;
-  properties?: [Property];
+  properties?: Property[];
   isoformId?: string;
+  implicit?: true;
 };
 
 export type DiseaseType = {

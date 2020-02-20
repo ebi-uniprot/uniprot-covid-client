@@ -1,6 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import XRefView, { getPropertyString } from '../XRefView';
+import XRefView, {
+  getPropertyString,
+  processUrlTemplate,
+  transfromProperties,
+  getPropertyLink,
+  getPropertyValue,
+  getDatabaseInfoAttribute,
+} from '../XRefView';
 import xrefUIData from '../__mocks__/XrefUIData.json';
 import EntrySectionType from '../../../../model/types/EntrySection';
 import { XrefUIModel } from '../../../../model/utils/XrefUtils';
@@ -18,40 +25,127 @@ describe('XRefView', () => {
   }
 });
 
+const xRefUrlTestData = [
+  {
+    input: {
+      config: {
+        name: 'BRENDA',
+        displayName: 'BRENDA',
+        category: 'EAP',
+        uriLink:
+          'https://www.brenda-enzymes.org/enzyme.php?ecno=%id&UniProtAcc=%accession&OrganismID=%organismId',
+        attributes: [
+          {
+            name: 'OrganismId',
+            xmlTag: 'organism ID',
+          },
+        ],
+      },
+      dbReference: {
+        type: 'BRENDA',
+        id: '2.3.1.88',
+        properties: { 'organism ID': '3474' },
+      },
+    },
+    expected:
+      'https://www.brenda-enzymes.org/enzyme.php?ecno=2.3.1.88&UniProtAcc=Q80UM3&OrganismID=3474',
+  },
+];
+describe('processUrlTemplate', () => {
+  test('should fill url', () => {
+    expect(
+      processUrlTemplate('https://endpoint/%id/param=%Param', {
+        id: '12',
+        Param: 'foo',
+      })
+    ).toEqual('https://endpoint/12/param=foo');
+  });
+});
+
+describe('getPropertyLink', () => {
+  test('should create snapshot', () => {
+    const databaseInfoPoint = {
+      displayName: 'Ensembl',
+      category: 'GMA',
+      uriLink: 'https://www.ensembl.org/id/%id',
+      attributes: [
+        {
+          name: 'ProteinId',
+          xmlTag: 'protein sequence ID',
+          uriLink: 'https://www.ensembl.org/id/%ProteinId',
+        },
+        {
+          name: 'GeneId',
+          xmlTag: 'gene ID',
+          uriLink: 'https://www.ensembl.org/id/%GeneId',
+        },
+      ],
+    };
+    const property = PropertyKey.GeneId;
+    const xref = {
+      databaseType: 'Ensembl',
+      id: 'ENST00000440126',
+      properties: [
+        { key: 'ProteinId', value: 'ENSP00000387483' },
+        { key: 'GeneId', value: 'ENSG00000142192' },
+      ],
+      isoformId: 'P05067-11',
+    };
+    const { asFragment } = render(
+      getPropertyLink(databaseInfoPoint, property, xref)
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('getDatabaseInfoAttribute', () => {
+  test('should find return database info attribute', () => {
+    expect(
+      getDatabaseInfoAttribute(
+        [
+          {
+            name: 'ProteinId',
+            xmlTag: 'protein sequence ID',
+            uriLink: 'https://www.ensembl.org/id/%ProteinId',
+          },
+          {
+            name: 'GeneId',
+            xmlTag: 'gene ID',
+            uriLink: 'https://www.ensembl.org/id/%GeneId',
+          },
+        ],
+        'GeneId'
+      )
+    ).toEqual({
+      name: 'GeneId',
+      uriLink: 'https://www.ensembl.org/id/%GeneId',
+      xmlTag: 'gene ID',
+    });
+  });
+});
+
 describe('getPropertyString', () => {
   test('should return empty string', () => {
-    const propertyString = getPropertyString({
-      key: PropertyKey.Status,
-      value: '-',
-    });
+    const propertyString = getPropertyString(PropertyKey.Status, '-');
     expect(propertyString).toEqual('');
   });
   test('should append value', () => {
-    const propertyString = getPropertyString({
-      key: PropertyKey.PathwayName,
-      value: 'Amyloid fiber formation',
-    });
+    const propertyString = getPropertyString(
+      PropertyKey.PathwayName,
+      'Amyloid fiber formation'
+    );
     expect(propertyString).toEqual('Amyloid fiber formation');
   });
   test('should append value and "hit"', () => {
-    const propertyString = getPropertyString({
-      key: PropertyKey.MatchStatus,
-      value: '1',
-    });
-    expect(propertyString).toEqual('- 1 hit');
+    const propertyString = getPropertyString(PropertyKey.MatchStatus, '1');
+    expect(propertyString).toEqual(' - 1 hit');
   });
   test('should append value and "hits"', () => {
-    const propertyString = getPropertyString({
-      key: PropertyKey.MatchStatus,
-      value: '2',
-    });
-    expect(propertyString).toEqual('- 2 hits');
+    const propertyString = getPropertyString(PropertyKey.MatchStatus, '2');
+    expect(propertyString).toEqual(' - 2 hits');
   });
   test('should if empty string if key is MatchStatus but value <= 0', () => {
-    const propertyString = getPropertyString({
-      key: PropertyKey.MatchStatus,
-      value: '0',
-    });
+    const propertyString = getPropertyString(PropertyKey.MatchStatus, '0');
     expect(propertyString).toEqual('');
   });
 });

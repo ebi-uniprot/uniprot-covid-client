@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
+import { flatten } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import SimpleView from '../view/uniprotkb/components/SimpleView';
@@ -60,7 +61,7 @@ import { ValueWithEvidence } from './types/modelTypes';
 import { getAllKeywords } from './utils/KeywordsUtil';
 import { KeywordList } from '../view/uniprotkb/components/KeywordView';
 import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtTitle';
-import { XrefCategoryContent } from '../view/uniprotkb/components/XRefView';
+import { DatabaseList } from '../view/uniprotkb/components/XRefView';
 import {
   databaseNameToCategory,
   getDatabaseNameToEntrySection,
@@ -72,7 +73,6 @@ import VariationView from '../view/uniprotkb/components/VariationView';
 import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
 import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
 import { GOTermsView } from '../view/uniprotkb/components/GOView';
-import { flattenArrays } from '../utils/utils';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -709,7 +709,7 @@ ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return allGOTerms && <GOTermsView data={allGOTerms} />;
   },
 });
@@ -717,7 +717,7 @@ ColumnConfiguration.set(Column.goId, {
   label: 'Gene Ontology IDs',
   render: data => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
-    const allGOTerms = goTerms && flattenArrays(Array.from(goTerms.values()));
+    const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return (
       allGOTerms && (
         <section className="text-block">
@@ -744,11 +744,11 @@ ColumnConfiguration.set(Column.threeD, {
     return (
       structureData && (
         <Fragment>
-          {Array.from(structureData.keys()).map(method => (
+          {Object.entries(structureData).map(([method, xrefs]) => (
             <div key={method}>
-              {structureData.get(method) && (
+              {xrefs && (
                 <Fragment>
-                  {method}: {(structureData.get(method) as Xref[]).length}
+                  {method}: {(xrefs as Xref[]).length}
                 </Fragment>
               )}
             </div>
@@ -1013,13 +1013,13 @@ const getXrefColumn = (databaseName: string) => ({
       return undefined;
     }
     // Get the database based on the name
-    const database = category.databases.find(
+    const xrefsGoupedByDatabase = category.databases.find(
       databaseGroup => databaseGroup.database === databaseName
     );
     return (
-      database && (
-        <XrefCategoryContent
-          database={database}
+      xrefsGoupedByDatabase && (
+        <DatabaseList
+          xrefsGoupedByDatabase={xrefsGoupedByDatabase}
           primaryAccession={data.primaryAccession}
         />
       )

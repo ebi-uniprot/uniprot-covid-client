@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
+import idx from 'idx';
+import { sortBy } from 'lodash';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
@@ -11,52 +13,32 @@ import {
 } from '../../../model/utils/XrefUtils';
 import { Xref } from '../../../model/types/CommentTypes';
 import { Property, PropertyKey } from '../../../model/types/modelTypes';
+import {
+  DatabaseInfoPoint,
+  AttributesItem,
+} from '../../../model/types/DatabaseTypes';
+import {
+  transfromProperties,
+  getPropertyValue,
+} from '../../../model/utils/utils';
 
-type XRefProps = {
-  xrefs: XrefUIModel[];
-  primaryAccession: string;
+export const processUrlTemplate = (
+  urlTemplate: string,
+  params: { [key: string]: string }
+) => {
+  let url = urlTemplate;
+  Object.entries(params).forEach(([param, value]) => {
+    url = url.replace(new RegExp(`%${param}`, 'g'), value);
+  });
+  return url;
 };
 
-type XRefItemProps = {
-  xRefEntry: Xref;
-  primaryAccession: string;
-};
+export const getDatabaseInfoAttribute = (
+  attributes: AttributesItem[],
+  name: string
+) => attributes.find(({ name: n }) => n === name);
 
-type XRefCategoryInfoListProps = {
-  databases: XrefsGoupedByDatabase[];
-  primaryAccession: string;
-};
-
-type XrefItem = {
-  databaseCategory: string;
-  xref: Xref;
-};
-
-type XRefExternalLinkProps = {
-  url: string;
-  accession?: string | null | undefined;
-  id?: string | null | undefined;
-  children: string | string[];
-};
-
-export const XRefExternalLink: React.FC<XRefExternalLinkProps> = ({
-  url,
-  accession,
-  id,
-  children,
-}): JSX.Element => {
-  let link = url;
-  if (accession) {
-    link = link.replace(/%acc/g, accession);
-  }
-  if (id) {
-    link = link.replace(/%value/g, id);
-  }
-  return <ExternalLink url={link}>{children}</ExternalLink>;
-};
-
-export const getPropertyString = (property: Property) => {
-  const { key, value } = property;
+export const getPropertyString = (key?: string, value?: string) => {
   if (!value || value === '-') {
     return '';
   }
@@ -65,97 +47,217 @@ export const getPropertyString = (property: Property) => {
     if (hits <= 0) {
       return '';
     }
-    return `- ${value} hit${hits > 1 ? 's' : ''}`;
+    return ` - ${value} hit${hits > 1 ? 's' : ''}`;
   }
-  return `${value}`;
+  return value;
 };
 
-const XRefItem: React.FC<XRefItemProps> = ({ xRefEntry, primaryAccession }) => {
-  const {
-    databaseType: database,
-    properties: entryProperties,
-    isoformId,
-    id,
-  } = xRefEntry;
-  if (
-    !id ||
-    !database ||
-    !primaryAccession ||
-    !(database in databaseToDatabaseInfo)
-  ) {
+export const getPropertyLink = (
+  databaseInfo: DatabaseInfoPoint,
+  property: PropertyKey,
+  xref: Xref
+) => {
+  const { attributes } = databaseInfo;
+  if (!attributes) {
     return null;
   }
-  const info = databaseToDatabaseInfo[database];
-  let properties = '';
-  if (entryProperties) {
-    properties = entryProperties
-      .map((property: Property) => getPropertyString(property))
-      .join(' ');
+  const attribute = getDatabaseInfoAttribute(attributes, property);
+  const { properties } = xref;
+  if (!properties) {
+    return null;
   }
-  let isoformLink;
+  const id = getPropertyValue(properties, property);
+  if (!id || !attribute || !attribute.uriLink) {
+    return null;
+  }
+  const url = processUrlTemplate(attribute.uriLink, { [property]: id });
+  return (
+    <ExternalLink key={url} url={url}>
+      {id}
+    </ExternalLink>
+  );
+};
+
+type XRefProps = {
+  database: string;
+  xref: Xref;
+  primaryAccession?: string;
+  crc64?: string;
+};
+
+export const XRef: React.FC<XRefProps> = ({
+  database,
+  xref,
+  primaryAccession,
+  crc64,
+}): JSX.Element | null => {
+  const databaseInfo = databaseToDatabaseInfo[database];
+  const { properties = [], isoformId, id, databaseType } = xref;
+  const { uriLink, implicit } = databaseInfo;
+  if (!database || !primaryAccession) {
+    return null;
+  }
+  let propertiesNode;
+  if (properties) {
+    propertiesNode = properties.map(({ key, value }: Property) =>
+      key && value && [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key)
+        ? getPropertyLink(databaseInfo, key, xref)
+        : getPropertyString(key, value)
+    );
+  }
+
+  let isoformNode;
   if (isoformId) {
-    isoformLink = <a href={`#${isoformId}`}>[{isoformId}]</a>;
+    isoformNode = (
+      <Fragment>
+        [<a href={`#${isoformId}`}>{isoformId}</a>]
+      </Fragment>
+    );
+  }
+
+  const params: { [key: string]: string } = {
+    primaryAccession,
+    ...transfromProperties(properties),
+  };
+  if (id) {
+    params.id = id;
+  }
+  if (crc64) {
+    params.crc64 = crc64;
+  }
+
+  let linkNode;
+  if (database === 'EMBL') {
+    // M28638 (EMBL|GenBank|DDBJ)
+    const genBankInfo = databaseToDatabaseInfo.GenBank;
+    const ddbjInfo = databaseToDatabaseInfo.DDBJ;
+    if (!genBankInfo || !ddbjInfo) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'GenBank or DDBJ database information not found in drlineconiguration'
+      );
+    }
+    linkNode = (
+      <Fragment>
+        (
+        <ExternalLink url={processUrlTemplate(databaseInfo.uriLink, params)}>
+          EMBL
+        </ExternalLink>
+        {' | '}
+        <ExternalLink url={processUrlTemplate(genBankInfo.uriLink, params)}>
+          GenBank
+        </ExternalLink>
+        {' | '}
+        <ExternalLink url={processUrlTemplate(ddbjInfo.uriLink, params)}>
+          DDBJ
+        </ExternalLink>
+        ) {id}
+      </Fragment>
+    );
+  } else {
+    let text;
+    if (implicit) {
+      text =
+        databaseType === 'SWISS-MODEL-Workspace'
+          ? 'Submit a new modelling project...'
+          : 'Search...';
+    } else {
+      text = id;
+    }
+    linkNode = (
+      <ExternalLink url={processUrlTemplate(uriLink, params)}>
+        {text}
+      </ExternalLink>
+    );
   }
   return (
     <Fragment>
-      <XRefExternalLink url={info.uriLink} accession={primaryAccession} id={id}>
-        {id}
-      </XRefExternalLink>{' '}
-      {properties} {isoformLink}
+      {linkNode} {propertiesNode} {isoformNode}
     </Fragment>
   );
 };
 
-export const XrefCategoryContent: React.FC<{
-  database: XrefsGoupedByDatabase;
+export const DatabaseList: React.FC<{
+  xrefsGoupedByDatabase: XrefsGoupedByDatabase;
   primaryAccession: string;
-}> = ({ database, primaryAccession }) => (
-  <ExpandableList descriptionString={`${database.database} links`}>
-    {database.xrefs.map((xref): { id: string; content: JSX.Element } => ({
+  crc64?: string;
+}> = ({
+  xrefsGoupedByDatabase: { database, xrefs },
+  primaryAccession,
+  crc64,
+}) => (
+  <ExpandableList descriptionString={`${database} links`}>
+    {xrefs.map((xref): { id: string; content: JSX.Element } => ({
       id: v1(),
       content: (
-        <XRefItem xRefEntry={xref} primaryAccession={primaryAccession} />
+        <XRef
+          database={database}
+          xref={xref}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
       ),
     }))}
   </ExpandableList>
 );
 
+type XRefCategoryInfoListProps = {
+  databases: XrefsGoupedByDatabase[];
+  primaryAccession: string;
+  crc64?: string;
+};
+
 const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
   databases,
   primaryAccession,
+  crc64,
 }): JSX.Element => {
-  const infoData = databases.sort().map((database): {
+  const infoData = sortBy(databases, ({ database }) => [
+    idx(databaseToDatabaseInfo, o => o[database].implicit),
+    database,
+  ]).map((database): {
     title: string;
     content: JSX.Element;
-  } => ({
-    title: database.database,
-    content: (
-      <XrefCategoryContent
-        database={database}
-        primaryAccession={primaryAccession}
-      />
-    ),
-  }));
+  } => {
+    const databaseInfo = databaseToDatabaseInfo[database.database];
+    return {
+      title: databaseInfo.displayName,
+      content: (
+        <DatabaseList
+          xrefsGoupedByDatabase={database}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
+      ),
+    };
+  });
   return <InfoList infoData={infoData} columns />;
 };
 
-const XRefView: React.FC<XRefProps> = ({
+type XRefViewProps = {
+  xrefs: XrefUIModel[];
+  primaryAccession: string;
+  crc64?: string;
+};
+
+const XRefView: React.FC<XRefViewProps> = ({
   xrefs,
   primaryAccession,
+  crc64,
 }): JSX.Element | null => {
   if (!xrefs) {
     return null;
   }
   const nodes = xrefs.map(
-    (xrefCategory): JSX.Element => {
+    ({ databases, category }): JSX.Element => {
       const infoListNode = (
         <XRefCategoryInfoList
-          databases={xrefCategory.databases}
+          databases={databases}
           primaryAccession={primaryAccession}
+          crc64={crc64}
         />
       );
       let title;
-      const { category } = xrefCategory;
       if (category && databaseCategoryToString[category]) {
         title = databaseCategoryToString[category];
       }

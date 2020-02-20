@@ -18,7 +18,7 @@ export enum DatabaseCategory {
   STRUCTURE = '3DS',
 }
 
-type AttributesItem = {
+export type AttributesItem = {
   name: string;
   xmlTag: string;
   uriLink?: string;
@@ -30,6 +30,7 @@ export type DatabaseInfoPoint = {
   category: string;
   uriLink: string;
   attributes?: AttributesItem[];
+  implicit?: boolean;
 };
 
 export type DatabaseInfo = DatabaseInfoPoint[];

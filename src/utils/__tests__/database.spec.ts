@@ -54,9 +54,12 @@ test('selectDatabases', () => {
     blacklist: ['PDB', 'PDBsum'],
   });
   expect(selected).toEqual([
-    'DisProt',
-    'ProteinModelPortal',
+    'ModBase',
     'SMR',
+    'SWISS-MODEL-Workspace',
+    'PDBe-KB',
+    'PDBj',
+    'RCSB-PDB',
     'EvolutionaryTrace',
   ]);
 });

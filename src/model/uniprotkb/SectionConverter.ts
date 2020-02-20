@@ -1,5 +1,6 @@
+import idx from 'idx';
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
-import Comment, { CommentType } from '../types/CommentTypes';
+import Comment, { CommentType, FreeTextComment } from '../types/CommentTypes';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
@@ -31,7 +32,15 @@ export const convertSection = (
     xrefData: [],
   };
 
-  const { comments, keywords, features, databaseCrossReferences } = data;
+  const {
+    comments,
+    keywords,
+    features,
+    databaseCrossReferences,
+    genes,
+    organism,
+    uniProtId,
+  } = data;
   if (sectionComments && comments) {
     sectionComments.forEach(commentType => {
       convertedData.commentsData.set(
@@ -52,9 +61,24 @@ export const convertSection = (
     });
   }
   if (section && databaseCrossReferences) {
+    const commonName = idx(organism, o => o.commonName);
+    const ecNumbers = idx(
+      data,
+      o => o.proteinDescription.recommendedName.ecNumbers
+    );
+    // These are needed because the implicit database GPCRDB depends on the existence of a similarity
+    // comment with the text "Belongs to the G-protein coupled receptor"'],
+    const similarityComments = convertedData.commentsData.get(
+      CommentType.SIMILARITY
+    ) as FreeTextComment[];
     convertedData.xrefData = getXrefsForSection(
       databaseCrossReferences,
-      section
+      section,
+      genes,
+      commonName,
+      similarityComments,
+      uniProtId,
+      ecNumbers
     );
   }
   return convertedData;
