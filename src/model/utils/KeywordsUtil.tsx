@@ -1,6 +1,6 @@
+import { flatten } from 'lodash';
 import KeywordCategory from '../types/KeywordCategory';
 import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
-import { flattenArrays } from '../../utils/utils';
 import { UIModel } from '../uniprotkb/SectionConverter';
 
 export type Keyword = {
@@ -19,7 +19,7 @@ export const getAllKeywords = (data: UniProtkbUIModel) => {
   Object.values(data).forEach(attributes => {
     const UIModelAttribute = attributes as UIModel;
     if (UIModelAttribute && UIModelAttribute.keywordData) {
-      const keywordData = flattenArrays(
+      const keywordData = flatten(
         UIModelAttribute.keywordData.map(categ => categ.keywords)
       );
       allKeywords.push(...keywordData);

@@ -1,4 +1,5 @@
-import { hasContent } from '../utils';
+import { hasContent, transfromProperties, getPropertyValue } from '../utils';
+import { PropertyKey } from '../../types/modelTypes';
 
 describe('Model Utils', () => {
   it('should check whether an object is empty', () => {
@@ -27,5 +28,27 @@ describe('Model Utils', () => {
 
   it('should check whether a nested Map has no content', () => {
     expect(hasContent({ key: new Map() })).toBeFalsy();
+  });
+});
+
+const testingProperties = [
+  { key: PropertyKey.Project, value: 'foo' },
+  { key: PropertyKey.GeneName, value: 'A1' },
+];
+
+describe('transformProperties', () => {
+  test('should transform array of properties to object', () => {
+    expect(transfromProperties(testingProperties)).toEqual({
+      [PropertyKey.Project]: 'foo',
+      [PropertyKey.GeneName]: 'A1',
+    });
+  });
+});
+
+describe('getPropertyValue', () => {
+  test('should find and return property value', () => {
+    expect(getPropertyValue(testingProperties, PropertyKey.GeneName)).toEqual(
+      'A1'
+    );
   });
 });

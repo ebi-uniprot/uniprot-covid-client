@@ -5,7 +5,10 @@ describe('Family and Domains data converter', () => {
   test('should convert the data', () => {
     const convertedData = convertFamilyAndDomains(modelDataJson);
     expect(convertedData).toEqual({
-      commentsData: new Map([['DOMAIN', []], ['SIMILARITY', []]]),
+      commentsData: new Map([
+        ['DOMAIN', []],
+        ['SIMILARITY', []],
+      ]),
       featuresData: [],
       keywordData: [
         {
@@ -26,7 +29,21 @@ describe('Family and Domains data converter', () => {
           ],
         },
       ],
-      xrefData: [],
+      xrefData: [
+        {
+          category: 'FMD',
+          databases: [
+            {
+              database: 'MobiDB',
+              xrefs: [{ databaseType: 'MobiDB', implicit: true }],
+            },
+            {
+              database: 'ProtoNet',
+              xrefs: [{ databaseType: 'ProtoNet', implicit: true }],
+            },
+          ],
+        },
+      ],
     });
   });
 });

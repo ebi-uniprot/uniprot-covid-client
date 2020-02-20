@@ -6,18 +6,18 @@ Array [
     "processor": DefaultTemplateProcessor {},
     "strings": Array [
       "
-      <span
-        class=",
+        <span
+          class=",
       "
-        @click=",
+          @click=",
       "
-      >
-        ",
+        >
+          ",
       "
-        ",
+          ",
       "</span
-      >
-    ",
+        >
+      ",
     ],
     "type": "html",
     "values": Array [

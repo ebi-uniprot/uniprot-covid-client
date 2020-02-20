@@ -33,6 +33,7 @@ export const {
   databaseCategoryToNames,
   databaseNameToCategory,
   databaseToDatabaseInfo,
+  implicitDatabaseXRefs,
 } = getDatabaseInfoMaps(databaseInfo);
 
 const databaseSelector = selectDatabases(databaseCategoryToNames);
@@ -49,6 +50,11 @@ entrySectionToDatabaseNames.set(
   EntrySection.FamilyAndDomains,
   databaseSelector({
     categories: [DatabaseCategory.PHYLOGENOMIC, DatabaseCategory.DOMAIN],
+    whitelist: [
+      'MobiDB', // Implicit
+      'ProtoNet', // Implicit
+      'GPCRDB', // Implicit
+    ],
   })
 );
 entrySectionToDatabaseNames.set(
@@ -129,8 +135,20 @@ entrySectionToDatabaseNames.set(
   EntrySection.Structure,
   databaseSelector({
     categories: [DatabaseCategory.STRUCTURE],
-    whitelist: ['EvolutionaryTrace'],
+    whitelist: [
+      'EvolutionaryTrace',
+      'ModBase', // Implicit
+      'PDBe-KB', // Implicit
+    ],
     blacklist: ['PDB', 'PDBsum'],
+  })
+);
+
+// This is used to catch those that aren't listed in the page sections
+entrySectionToDatabaseNames.set(
+  EntrySection.ExternalLinks,
+  databaseSelector({
+    categories: [DatabaseCategory.OTHER, DatabaseCategory.PROTOCOL],
   })
 );
 
@@ -155,3 +173,31 @@ export const getDatabaseInfoByName = (dbName: string) =>
   databaseInfo.find(
     dbInfo => dbInfo.name.toLowerCase() === dbName.toLowerCase()
   );
+
+// If each of the keys are present then show the values
+export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
+  // these EMBL mirrors are taken care of in xrefview as they are displayed differently
+  // EMBL: ['GenBank', 'DDBJ'],
+  PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'],
+  MIM: ['SOURCE_MIM'],
+  MGI: ['SOURCE_MGI'],
+  HGNC: ['GenAtlas'],
+};
+
+// If each of the keys are not present then show the value
+export const implicitDatabaseDRAbsence: { [key: string]: string[] } = {
+  SMR: ['SWISS-MODEL-Workspace'],
+};
+
+export const implicitDatabaseAlwaysInclude = ['ModBase', 'MobiDB', 'ProtoNet'];
+
+export const implicitDatabaseGenePatternOrganism = {
+  pattern: /KIAA\d{4}/,
+  organism: { Human: 'HUGE', Mouse: 'ROUGE' },
+};
+
+export const implicitDatabaseSimilarityComment = {
+  GPCRDB: 'Belongs to the G-protein coupled receptor',
+};
+
+export const implicitDatabasesEC = ['ENZYME'];

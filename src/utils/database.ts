@@ -1,10 +1,11 @@
+import { flatten } from 'lodash';
 import EntrySection from '../model/types/EntrySection';
 import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
 } from '../model/types/DatabaseTypes';
-import { flattenArrays } from './utils';
+import { Xref } from '../model/types/CommentTypes';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseCategoryToNames = new Map<DatabaseCategory, string[]>();
@@ -12,9 +13,16 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseToDatabaseInfo: {
     [database: string]: DatabaseInfoPoint;
   } = {};
+  const implicitDatabaseXRefs = new Map<string, Xref>();
   databaseInfo.forEach(info => {
-    const { name } = info;
-    const category = info.category as DatabaseCategory;
+    const { name, category, implicit } = info as {
+      name: string;
+      category: DatabaseCategory;
+      implicit?: boolean;
+    };
+    if (implicit) {
+      implicitDatabaseXRefs.set(name, { databaseType: name, implicit: true });
+    }
     const databaseNames = databaseCategoryToNames.get(category);
     databaseCategoryToNames.set(
       category,
@@ -27,6 +35,7 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
     databaseCategoryToNames,
     databaseNameToCategory,
     databaseToDatabaseInfo,
+    implicitDatabaseXRefs,
   };
 };
 
@@ -42,7 +51,7 @@ export const selectDatabases = (
   blacklist?: string[];
 }) =>
   [
-    ...flattenArrays(
+    ...flatten(
       categories.map(
         category =>
           databaseCategoryToNames.get(category as DatabaseCategory) || []
@@ -55,10 +64,7 @@ export const getEntrySectionToDatabaseCategoryOrder = (
   entrySectionToDatabaseNames: Map<EntrySection, string[]>,
   databaseNameToCategory: Map<string, DatabaseCategory>
 ) => {
-  const entrySectionToDatabaseCategoryOrder = new Map<
-    EntrySection,
-    (string)[]
-  >();
+  const entrySectionToDatabaseCategoryOrder = new Map<EntrySection, string[]>();
   // eslint-disable-next-line no-restricted-syntax
   for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
     const uniqueCategories: DatabaseCategory[] = [];

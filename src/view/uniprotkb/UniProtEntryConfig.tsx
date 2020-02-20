@@ -1,4 +1,5 @@
 import React from 'react';
+import idx from 'idx';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
@@ -98,6 +99,9 @@ const UniProtKBEntryConfig: {
         primaryAccession={data.primaryAccession}
         sequence={data[EntrySection.Sequence].sequence.value}
         key={EntrySection.Structure}
+        crc64={
+          idx(data, o => o[EntrySection.Sequence].sequence.crc64) || undefined
+        }
       />
     ),
   },

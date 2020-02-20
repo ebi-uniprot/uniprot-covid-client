@@ -146,7 +146,8 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
   if (data.databaseCrossReferences) {
     const xrefs = getXrefsForSection(
       data.databaseCrossReferences,
-      EntrySection.Sequence
+      EntrySection.Sequence,
+      data.genes
     );
     if (xrefs && typeof xrefs !== 'undefined') {
       sequenceData.xrefData = xrefs;

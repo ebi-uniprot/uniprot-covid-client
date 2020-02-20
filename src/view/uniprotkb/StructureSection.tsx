@@ -13,7 +13,8 @@ const StructureSection: FC<{
   data: UIModel;
   primaryAccession: string;
   sequence: string;
-}> = ({ data, primaryAccession, sequence }): JSX.Element | null => {
+  crc64?: string;
+}> = ({ data, primaryAccession, sequence, crc64 }): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
@@ -24,7 +25,11 @@ const StructureSection: FC<{
         <protvista-structure accession={primaryAccession} />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         {/* TODO: filter out PDB */}
-        <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
+        <XRefView
+          xrefs={data.xrefData}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
       </Card>
     </div>
   );
