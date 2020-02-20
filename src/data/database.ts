@@ -149,7 +149,11 @@ entrySectionToDatabaseNames.set(
   EntrySection.ExternalLinks,
   databaseSelector({
     categories: [DatabaseCategory.OTHER, DatabaseCategory.PROTOCOL],
-    whitelist: ['HUGE', 'ROUGE'],
+    whitelist: [
+      'HUGE', // Implicit
+      'ROUGE', // Implicit
+      'GenAtlas', // Implicit
+    ],
   })
 );
 
