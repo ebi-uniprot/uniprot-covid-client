@@ -157,7 +157,7 @@ export const expectedDatabaseCategoryToNames = [
       'Xenbase',
       'ZFIN',
       'HUGE',
-      'Rouge',
+      'ROUGE',
     ],
   ],
   [
@@ -352,7 +352,7 @@ export const expectedDatabaseNameToCategory = [
   ['Xenbase', 'ORG'],
   ['ZFIN', 'ORG'],
   ['HUGE', 'ORG'],
-  ['Rouge', 'ORG'],
+  ['ROUGE', 'ORG'],
   ['eggNOG', 'PLG'],
   ['GeneTree', 'PLG'],
   ['HOGENOM', 'PLG'],
@@ -419,5 +419,5 @@ export const expectedEntrySectionToDatabaseCategoryOrder = [
   ['Protein Processing', ['PROTEOMIC', '2DG', 'PTM']],
   ['Sequence', ['SEQ', 'GMA']],
   ['Structure', ['3DS', 'OTHER']],
-  ['External Links', ['OTHER', 'PAM']],
+  ['External Links', ['OTHER', 'PAM', 'ORG']],
 ];
