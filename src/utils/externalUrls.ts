@@ -3,7 +3,7 @@ import { joinUrl } from './apiUrls';
 const externalUrls = {
   IntAct: '//www.ebi.ac.uk/intact/',
   QuickGO: (id: string) => `//www.ebi.ac.uk/QuickGO/term/${id}`,
-  NCBI: (id: string) =>
+  NCBI: (id: number | string) =>
     `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${id}`,
   ENA: (id: string) => `//www.ebi.ac.uk/ena/data/view/${id}`,
 };

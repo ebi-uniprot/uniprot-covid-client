@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SimpleView from './SimpleView';
 import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import externalUrls from '../../../utils/externalUrls';
 
 type OrganismDataProps = {
   data: OrganismData;
@@ -22,7 +23,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
   return (
     <Fragment>
       <Link to={`taxonomy/${taxonId}`}>{`${taxonId} `}</Link>
-      <ExternalLink url={ExternalLink.NCBI(taxonId)}>NCBI</ExternalLink>
+      <ExternalLink url={externalUrls.NCBI(taxonId)}>NCBI</ExternalLink>
     </Fragment>
   );
 };
