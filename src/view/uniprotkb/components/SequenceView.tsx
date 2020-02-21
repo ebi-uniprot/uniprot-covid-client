@@ -135,17 +135,18 @@ export const SequenceCautionView: React.FC<{
 }> = ({ data }) => {
   return (
     <Fragment>
-      {data.map(cautionData => (
-        <section className="text-block" key={cautionData.sequence}>
+      {data.map(({ sequence, sequenceCautionType, note, evidences }) => (
+        <section
+          className="text-block"
+          key={`${sequenceCautionType}-${sequence}`}
+        >
           {`The sequence `}
-          <ExternalLink url={externalUrls.ENA(cautionData.sequence)}>
-            {cautionData.sequence}
+          <ExternalLink url={externalUrls.ENA(sequence)}>
+            {sequence}
           </ExternalLink>
-          {` differs from that shown. Reason: ${cautionData.sequenceCautionType} `}
-          {cautionData.note}
-          {cautionData.evidences && (
-            <UniProtEvidenceTag evidences={cautionData.evidences} />
-          )}
+          {` differs from that shown. Reason: ${sequenceCautionType} `}
+          {note}
+          {evidences && <UniProtEvidenceTag evidences={evidences} />}
         </section>
       ))}
     </Fragment>
