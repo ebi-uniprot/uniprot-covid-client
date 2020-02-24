@@ -140,7 +140,6 @@ entrySectionToDatabaseNames.set(
       'ModBase', // Implicit
       'PDBe-KB', // Implicit
     ],
-    blacklist: ['PDB', 'PDBsum'],
   })
 );
 
