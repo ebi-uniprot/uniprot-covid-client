@@ -84,7 +84,7 @@ exports[`Entry - External Links view should render 1`] = `
                       />
                     </svg>
                   </a>
-                   1.2.3.4 
+                    
                 </li>
               </ul>
             </div>
@@ -322,7 +322,7 @@ exports[`Entry - External Links view should render 1`] = `
                       />
                     </svg>
                   </a>
-                   some Gene 
+                    
                 </li>
               </ul>
             </div>

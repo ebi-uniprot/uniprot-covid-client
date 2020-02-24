@@ -149,6 +149,11 @@ entrySectionToDatabaseNames.set(
   EntrySection.ExternalLinks,
   databaseSelector({
     categories: [DatabaseCategory.OTHER, DatabaseCategory.PROTOCOL],
+    whitelist: [
+      'HUGE', // Implicit
+      'ROUGE', // Implicit
+      'GenAtlas', // Implicit
+    ],
   })
 );
 
@@ -178,26 +183,33 @@ export const getDatabaseInfoByName = (dbName: string) =>
 export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
   // these EMBL mirrors are taken care of in xrefview as they are displayed differently
   // EMBL: ['GenBank', 'DDBJ'],
-  PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'],
-  MIM: ['SOURCE_MIM'],
-  MGI: ['SOURCE_MGI'],
-  HGNC: ['GenAtlas'],
+  PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'], // eg P05067
+  MIM: ['SOURCE_MIM'], // eg P05067
+  MGI: ['SOURCE_MGI'], // eg E9PXF8
+  HGNC: ['GenAtlas'], // eg Q9Y263
 };
 
 // If each of the keys are not present then show the value
 export const implicitDatabaseDRAbsence: { [key: string]: string[] } = {
-  SMR: ['SWISS-MODEL-Workspace'],
+  SMR: ['SWISS-MODEL-Workspace'], // eg P16646
 };
 
-export const implicitDatabaseAlwaysInclude = ['ModBase', 'MobiDB', 'ProtoNet'];
+export const implicitDatabaseAlwaysInclude = [
+  'ModBase', // eg P05067
+  'MobiDB', // eg P05067
+  'ProtoNet', // eg P05067
+];
 
 export const implicitDatabaseGenePatternOrganism = {
-  pattern: /KIAA\d{4}/,
-  organism: { Human: 'HUGE', Mouse: 'ROUGE' },
+  pattern: /KIAA\d{4}/i,
+  organism: {
+    Human: 'HUGE', // eg Q96PV4
+    Mouse: 'ROUGE', // eg Q8CJ19
+  },
 };
 
 export const implicitDatabaseSimilarityComment = {
-  GPCRDB: 'Belongs to the G-protein coupled receptor',
+  GPCRDB: 'Belongs to the G-protein coupled receptor', // eg Q7RTX1
 };
 
-export const implicitDatabasesEC = ['ENZYME'];
+export const implicitDatabasesEC = ['ENZYME']; // eg Q54WR4
