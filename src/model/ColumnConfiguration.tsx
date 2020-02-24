@@ -73,6 +73,7 @@ import VariationView from '../view/uniprotkb/components/VariationView';
 import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
 import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
 import { GOTermsView } from '../view/uniprotkb/components/GOView';
+import externalUrls from '../utils/externalUrls';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {
@@ -722,14 +723,12 @@ ColumnConfiguration.set(Column.goId, {
       allGOTerms && (
         <section className="text-block">
           <ExpandableList descriptionString="terms">
-            {allGOTerms.map((term: GoTerm) => ({
-              id: term.id,
-              content: (
-                <a href={`//www.ebi.ac.uk/QuickGO/term/${term.id}`}>
-                  {term.id}
-                </a>
-              ),
-            }))}
+            {allGOTerms
+              .filter(({ id }: GoTerm) => id)
+              .map(({ id }: GoTerm) => ({
+                id,
+                content: id && <a href={externalUrls.QuickGO(id)}>{id}</a>,
+              }))}
           </ExpandableList>
         </section>
       )
