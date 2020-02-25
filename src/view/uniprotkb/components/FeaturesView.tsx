@@ -61,18 +61,16 @@ export type ProcessedFeature = {
 
 const processData = (data: FeatureData): ProcessedFeature[] =>
   data.map(
-    (feature): ProcessedFeature => {
-      return {
-        accession: feature.featureId,
-        start: feature.location.start.value,
-        end: feature.location.end.value,
-        startModifier: feature.location.start.modifier,
-        endModifier: feature.location.end.modifier,
-        type: feature.type,
-        description: feature.description,
-        evidences: feature.evidences,
-      };
-    }
+    (feature): ProcessedFeature => ({
+      accession: feature.featureId,
+      start: feature.location.start.value,
+      end: feature.location.end.value,
+      startModifier: feature.location.start.modifier,
+      endModifier: feature.location.end.modifier,
+      type: feature.type,
+      description: feature.description,
+      evidences: feature.evidences,
+    })
   );
 
 const FeaturesView: React.FC<FeatureProps> = ({
@@ -86,30 +84,28 @@ const FeaturesView: React.FC<FeatureProps> = ({
 
   const processedData = processData(features);
 
-  const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
-    return {
-      type: {
-        label: 'Type',
-        resolver: (d: ProtvistaFeature): string => d.type,
-      },
-      positions: {
-        label: 'Positions',
-        resolver: (d: ProtvistaFeature): string =>
-          `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
-            d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
-          }`,
-      },
-      description: {
-        label: 'Description',
-        resolver: (d: ProtvistaFeature): TemplateResult =>
-          html`
-            ${d.description}
-            ${d.evidences &&
-              UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)}
-          `,
-      },
-    };
-  };
+  const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => ({
+    type: {
+      label: 'Type',
+      resolver: (d: ProtvistaFeature): string => d.type,
+    },
+    positions: {
+      label: 'Positions',
+      resolver: (d: ProtvistaFeature): string =>
+        `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
+          d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
+        }`,
+    },
+    description: {
+      label: 'Description',
+      resolver: (d: ProtvistaFeature): TemplateResult =>
+        html`
+          ${d.description}
+          ${d.evidences &&
+            UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)}
+        `,
+    },
+  });
 
   const setTrackData = useCallback(
     (node): void => {
@@ -121,7 +117,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
     [processedData]
   );
 
-  if (processedData.length <= 0) {
+  if (processedData.length === 0) {
     return null;
   }
 

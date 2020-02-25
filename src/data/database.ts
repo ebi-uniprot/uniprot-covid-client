@@ -138,7 +138,6 @@ entrySectionToDatabaseNames.set(
     whitelist: [
       'EvolutionaryTrace',
       'ModBase', // Implicit
-      'PDBe-KB', // Implicit
     ],
   })
 );
@@ -182,7 +181,7 @@ export const getDatabaseInfoByName = (dbName: string) =>
 export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
   // these EMBL mirrors are taken care of in xrefview as they are displayed differently
   // EMBL: ['GenBank', 'DDBJ'],
-  PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'], // eg P05067
+  PDB: ['PDBe-KB'], // eg P05067
   MIM: ['SOURCE_MIM'], // eg P05067
   MGI: ['SOURCE_MGI'], // eg E9PXF8
   HGNC: ['GenAtlas'], // eg Q9Y263
@@ -212,3 +211,5 @@ export const implicitDatabaseSimilarityComment = {
 };
 
 export const implicitDatabasesEC = ['ENZYME']; // eg Q54WR4
+
+export const PDBDataTableDatabases = ['PDB', 'PDBsum'];

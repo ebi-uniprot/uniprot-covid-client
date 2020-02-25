@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import idx from 'idx';
-import { sortBy } from 'lodash';
+import { sortBy, groupBy } from 'lodash';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
+  PDBDataTableDatabases,
 } from '../../../data/database';
 import {
   XrefUIModel,
@@ -16,11 +17,13 @@ import { Property, PropertyKey } from '../../../model/types/modelTypes';
 import {
   DatabaseInfoPoint,
   AttributesItem,
+  DatabaseCategory,
 } from '../../../model/types/DatabaseTypes';
 import {
   transfromProperties,
   getPropertyValue,
 } from '../../../model/utils/utils';
+import PDBXRefView from './PDBXRefView';
 
 export const processUrlTemplate = (
   urlTemplate: string,
@@ -201,13 +204,62 @@ export const DatabaseList: React.FC<{
   </ExpandableList>
 );
 
-type XRefCategoryInfoListProps = {
+type StructureXRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
   primaryAccession: string;
   crc64?: string;
 };
 
-const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
+const StructureXRefsGroupedByCategory: React.FC<StructureXRefsGroupedByCategoryProps> = ({
+  databases,
+  primaryAccession,
+  crc64,
+}): JSX.Element => {
+  /*
+    Need to extract the following as they are used to populate a protvista-datatable
+      PDBe
+      RCSB PDB
+      PDBj
+      PDBsum
+  */
+
+  //const dataTableDatabases = [];
+  //const nonDataTableDatabases = [];
+  //databases.forEach(database => {
+  // (structureDataTableDatabases.includes(database.database) ? dataTableDatabases : nonDataTableDatabases).push(database)
+  //})
+  console.log(PDBDataTableDatabases);
+  const databasesGroupedByView = groupBy(databases, ({ database }) =>
+    PDBDataTableDatabases.includes(database)
+      ? 'dataTableDatabases'
+      : 'defaultDatabases'
+  );
+  console.log(databasesGroupedByView);
+  const { dataTableDatabases, defaultDatabases } = databasesGroupedByView;
+
+  return (
+    <Fragment>
+      {dataTableDatabases && dataTableDatabases.length && (
+        <PDBXRefView databases={dataTableDatabases} />
+      )}
+      {defaultDatabases && defaultDatabases.length && (
+        <XRefsGroupedByCategory
+          databases={defaultDatabases}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
+      )}
+    </Fragment>
+  );
+};
+
+type XRefsGroupedByCategoryProps = {
+  databases: XrefsGoupedByDatabase[];
+  primaryAccession: string;
+  crc64?: string;
+};
+
+const XRefsGroupedByCategory: React.FC<XRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
@@ -250,13 +302,20 @@ const XRefView: React.FC<XRefViewProps> = ({
   }
   const nodes = xrefs.map(
     ({ databases, category }): JSX.Element => {
-      const infoListNode = (
-        <XRefCategoryInfoList
-          databases={databases}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-        />
-      );
+      const xrefsNode =
+        category === DatabaseCategory.STRUCTURE ? (
+          <StructureXRefsGroupedByCategory
+            databases={databases}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+          />
+        ) : (
+          <XRefsGroupedByCategory
+            databases={databases}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+          />
+        );
       let title;
       if (category && databaseCategoryToString[category]) {
         title = databaseCategoryToString[category];
@@ -264,7 +323,7 @@ const XRefView: React.FC<XRefViewProps> = ({
       return (
         <Fragment key={v1()}>
           <h3>{title}</h3>
-          {infoListNode}
+          {xrefsNode}
         </Fragment>
       );
     }
