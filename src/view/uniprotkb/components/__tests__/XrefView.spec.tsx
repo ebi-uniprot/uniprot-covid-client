@@ -136,14 +136,18 @@ describe('getPropertyString', () => {
   });
   test('should append value and "hit"', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '1');
-    expect(propertyString).toEqual(' - 1 hit');
+    expect(propertyString).toEqual(' 1 hit');
   });
   test('should append value and "hits"', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '2');
-    expect(propertyString).toEqual(' - 2 hits');
+    expect(propertyString).toEqual(' 2 hits');
   });
   test('should if empty string if key is MatchStatus but value <= 0', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '0');
     expect(propertyString).toEqual('');
+  });
+  test('should append value and "interactors"', () => {
+    const propertyString = getPropertyString(PropertyKey.Interactions, '2');
+    expect(propertyString).toEqual(' 2 interactors');
   });
 });

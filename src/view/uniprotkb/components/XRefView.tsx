@@ -36,16 +36,23 @@ export const getDatabaseInfoAttribute = (
   name: string
 ) => attributes.find(({ name: n }) => n === name);
 
+const formatSuffixWithCount = (prefix: string, number: string) => {
+  const count = parseInt(number, 10);
+  if (count <= 0) {
+    return '';
+  }
+  return ` ${count} ${prefix}${count > 1 ? 's' : ''}`;
+};
+
 export const getPropertyString = (key?: string, value?: string) => {
   if (!value || value === '-') {
     return '';
   }
   if (key === PropertyKey.MatchStatus) {
-    const hits = parseInt(value, 10);
-    if (hits <= 0) {
-      return '';
-    }
-    return ` - ${value} hit${hits > 1 ? 's' : ''}`;
+    return formatSuffixWithCount('hit', value);
+  }
+  if (key === PropertyKey.Interactions) {
+    return formatSuffixWithCount('interactor', value);
   }
   return value;
 };
