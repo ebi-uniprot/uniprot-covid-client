@@ -36,6 +36,12 @@ export const {
   implicitDatabaseXRefs,
 } = getDatabaseInfoMaps(databaseInfo);
 
+export const PDBMirrors = ['PDB', 'RCSB-PDB', 'PDBj', 'PDBsum'];
+
+export const PDBMirrorsInfo = PDBMirrors.map(
+  PDBMirror => databaseToDatabaseInfo[PDBMirror]
+);
+
 const databaseSelector = selectDatabases(databaseCategoryToNames);
 
 export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
@@ -139,6 +145,7 @@ entrySectionToDatabaseNames.set(
       'EvolutionaryTrace',
       'ModBase', // Implicit
     ],
+    blacklist: PDBMirrors,
   })
 );
 
@@ -151,6 +158,7 @@ entrySectionToDatabaseNames.set(
       'HUGE', // Implicit
       'ROUGE', // Implicit
       'GenAtlas', // Implicit
+      ...PDBMirrors,
     ],
   })
 );
@@ -211,9 +219,3 @@ export const implicitDatabaseSimilarityComment = {
 };
 
 export const implicitDatabasesEC = ['ENZYME']; // eg Q54WR4
-
-export const PDBMirrors = ['PDB', 'RCSB-PDB', 'PDBj', 'PDBsum'];
-
-export const PDBMirrorsInfo = PDBMirrors.map(
-  PDBMirror => databaseToDatabaseInfo[PDBMirror]
-);
