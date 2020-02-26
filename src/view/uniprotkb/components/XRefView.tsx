@@ -17,7 +17,7 @@ import {
   DatabaseInfoPoint,
   AttributesItem,
 } from '../../../model/types/DatabaseTypes';
-import xrefProperties from '../../../data/xrefProperties.json';
+import EMBLXrefProperties from '../../../data/EMBLXrefProperties.json';
 import externalUrls from '../../../utils/externalUrls';
 
 export const processUrlTemplate = (
@@ -132,7 +132,7 @@ const EMBLXref: React.FC<{
       {properties &&
         properties.MoleculeType &&
         `${
-          ((xrefProperties as unknown) as { [key: string]: string })[
+          ((EMBLXrefProperties as unknown) as { [key: string]: string })[
             properties.MoleculeType
           ]
         }: `}
@@ -142,7 +142,7 @@ const EMBLXref: React.FC<{
         getPropertyLink(databaseInfo, PropertyKey.ProteinId, xref)}
       {properties &&
         properties.Status &&
-        ((xrefProperties as unknown) as { [key: string]: string })[
+        ((EMBLXrefProperties as unknown) as { [key: string]: string })[
           properties.Status
         ]}
       {isoformNode}
