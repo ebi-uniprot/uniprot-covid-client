@@ -6,7 +6,7 @@ import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
-  PDBDataTableDatabases,
+  PDBMirrors,
 } from '../../../data/database';
 import {
   XrefUIModel,
@@ -215,26 +215,9 @@ const StructureXRefsGroupedByCategory: React.FC<StructureXRefsGroupedByCategoryP
   primaryAccession,
   crc64,
 }): JSX.Element => {
-  /*
-    Need to extract the following as they are used to populate a protvista-datatable
-      PDBe
-      RCSB PDB
-      PDBj
-      PDBsum
-  */
-
-  //const dataTableDatabases = [];
-  //const nonDataTableDatabases = [];
-  //databases.forEach(database => {
-  // (structureDataTableDatabases.includes(database.database) ? dataTableDatabases : nonDataTableDatabases).push(database)
-  //})
-  console.log(PDBDataTableDatabases);
   const databasesGroupedByView = groupBy(databases, ({ database }) =>
-    PDBDataTableDatabases.includes(database)
-      ? 'dataTableDatabases'
-      : 'defaultDatabases'
+    PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
   );
-  console.log(databasesGroupedByView);
   const { dataTableDatabases, defaultDatabases } = databasesGroupedByView;
 
   return (

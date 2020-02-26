@@ -212,4 +212,8 @@ export const implicitDatabaseSimilarityComment = {
 
 export const implicitDatabasesEC = ['ENZYME']; // eg Q54WR4
 
-export const PDBDataTableDatabases = ['PDB', 'PDBsum'];
+export const PDBMirrors = ['PDB', 'RCSB-PDB', 'PDBj', 'PDBsum'];
+
+export const PDBMirrorsInfo = PDBMirrors.map(
+  PDBMirror => databaseToDatabaseInfo[PDBMirror]
+);

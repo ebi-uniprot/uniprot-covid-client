@@ -93,7 +93,7 @@
 	},
 	{
 		"name": "PDB",
-		"displayName": "PDB",
+		"displayName": "PDBe",
 		"category": "3DS",
 		"uriLink": "https://www.ebi.ac.uk/pdbe-srv/view/entry/%id",
 		"attributes": [{
@@ -148,7 +148,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://pdbe-kb.org/proteins/%id"
+		"uriLink": "https://pdbe-kb.org/proteins/%primaryAccession"
 	},
 	{
 		"name": "PDBj",

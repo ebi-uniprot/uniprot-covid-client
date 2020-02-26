@@ -1,20 +1,15 @@
 import React, { Fragment, useCallback, useState, FC } from 'react';
 import ProtvistaDatatable from 'protvista-datatable';
 import { loadWebComponent } from '../../../utils/utils';
-import { AttributesItem } from '../../../model/types/DatabaseTypes';
 import { getPropertyValue } from '../../../model/utils/utils';
 import { TemplateResult, html } from 'lit-html';
-import { databaseToDatabaseInfo } from '../../../data/database';
+import { PDBMirrorsInfo, databaseToDatabaseInfo } from '../../../data/database';
+import { processUrlTemplate } from './XRefView';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
-const PDBMirrorInfo = [
-  databaseToDatabaseInfo['PDBe-KB'],
-  databaseToDatabaseInfo['RCSB-PDB'],
-  databaseToDatabaseInfo['PDBj'],
-  databaseToDatabaseInfo['PDBsum'],
-];
-console.log(PDBMirrorInfo);
+
 const processData = databases => {
+  // We only need the information from the PDB xref entries
   const PDBDatabase = databases.filter(({ database }) => database === 'PDB');
   if (!PDBDatabase || PDBDatabase.length !== 1) {
     return;
@@ -45,32 +40,34 @@ const processData = databases => {
 const getColumnConfig = () => ({
   type: {
     label: 'PDB Entry',
-    resolver: (d): string => d.id,
+    resolver: ({ id }): string => id,
   },
   method: {
     label: 'Method',
-    resolver: (d): string => d.method,
+    resolver: ({ method }): string => method,
   },
   resolution: {
     label: 'Resolution',
-    resolver: (d): string => d.resolution,
+    resolver: ({ resolution }): string => resolution,
   },
   chain: {
     label: 'Chain',
-    resolver: (d): string => d.chain,
+    resolver: ({ chain }): string => chain,
   },
   positions: {
     label: 'Positions',
-    resolver: (d): string => d.positions,
+    resolver: ({ positions }): string => positions,
   },
   links: {
     label: 'Links',
-    resolver: (d): TemplateResult =>
+    resolver: ({ id }): TemplateResult =>
       html`
-        ${PDBMirrorInfo.map(
+        ${PDBMirrorsInfo.map(
           ({ displayName, uriLink }) =>
             html`
-              <a href="#">${displayName}</a>
+              <a href="${processUrlTemplate(uriLink, { id })}"
+                >${displayName}</a
+              >
             `
         ).reduce(
           (prev, curr) =>
@@ -83,9 +80,7 @@ const getColumnConfig = () => ({
 });
 
 const PDBXRefView = ({ databases }) => {
-  console.log(databases);
   const data = processData(databases);
-  console.log(data);
   const setTableData = useCallback(
     (node): void => {
       if (node) {
