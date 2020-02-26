@@ -4,7 +4,9 @@ import idx from 'idx';
 import { v1 } from 'uuid';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
-import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import uniProtKbConverter, {
+  UniProtkbAPIModel,
+} from '../../model/uniprotkb/UniProtkbConverter';
 import apiUrls from '../../utils/apiUrls';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
 import getNextUrlFromResponse from '../../utils/queryUtils';
@@ -24,7 +26,11 @@ type EntryPublicationsData = {
   results: LiteratureForProteinAPI[];
 };
 
-export const receiveEntry = (accession: string, data: UniProtkbAPIModel) => {
+export const receiveEntry = (
+  accession: string,
+  dataAPIModel: UniProtkbAPIModel
+) => {
+  const data = uniProtKbConverter(dataAPIModel);
   return action(RECEIVE_ENTRY, {
     accession,
     data,

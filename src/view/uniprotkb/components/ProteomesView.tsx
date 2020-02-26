@@ -2,22 +2,15 @@ import React, { Fragment } from 'react';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import { Xref } from '../../../model/types/CommentTypes';
-import { Property } from '../../../model/types/modelTypes';
 
 const ProteomesId: React.FC<{ id?: string }> = ({ id }) => (
   <Link to={`/proteomes/${id}`}>{id}</Link>
 );
 
-const ProteomesComponents: React.FC<{ components?: Property[] }> = ({
-  components,
-}) => (
-  <Fragment>
-    {components &&
-      components
-        .filter(component => component.value)
-        .map(component => component.value)
-        .join(', ')}
-  </Fragment>
+const ProteomesComponents: React.FC<{
+  components?: { [key: string]: string };
+}> = ({ components }) => (
+  <Fragment>{components && Object.values(components).join(', ')}</Fragment>
 );
 
 const ProteomesView: React.FC<{ data?: Xref[]; isCompact?: boolean }> = ({

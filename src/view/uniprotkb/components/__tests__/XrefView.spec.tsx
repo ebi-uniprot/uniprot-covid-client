@@ -3,9 +3,7 @@ import { render } from '@testing-library/react';
 import XRefView, {
   getPropertyString,
   processUrlTemplate,
-  transfromProperties,
   getPropertyLink,
-  getPropertyValue,
   getDatabaseInfoAttribute,
 } from '../XRefView';
 import xrefUIData from '../__mocks__/XrefUIData.json';
@@ -85,10 +83,10 @@ describe('getPropertyLink', () => {
     const xref = {
       databaseType: 'Ensembl',
       id: 'ENST00000440126',
-      properties: [
-        { key: 'ProteinId', value: 'ENSP00000387483' },
-        { key: 'GeneId', value: 'ENSG00000142192' },
-      ],
+      properties: {
+        ProteinId: 'ENSP00000387483',
+        GeneId: 'ENSG00000142192',
+      },
       isoformId: 'P05067-11',
     };
     const { asFragment } = render(

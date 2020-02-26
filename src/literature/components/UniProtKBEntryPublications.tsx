@@ -1,12 +1,12 @@
 import React, { FC, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Publication } from 'franklin-sites';
-import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
 import { RootState } from '../../state/state-types';
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];
-  entryData: UniProtkbAPIModel | null;
+  entryData: UniProtkbUIModel | null;
 }> = ({ pubmedIds, entryData }) => {
   if (!entryData) {
     return null;

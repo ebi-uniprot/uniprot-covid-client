@@ -4,32 +4,29 @@ import {
   getGenePatternOrganismImplicitXrefs,
   getECImplicitXrefs,
   getUnconditionalImplicitXrefs,
+  getJoinedXrefs,
 } from '../XrefUtils';
 import { CommentType } from '../../types/CommentTypes';
 
-describe('getDRImplicitXrefs', () => {
-  test('should ', () => {
+describe('XrefUtils tests', () => {
+  test('should getDRImplicitXrefs', () => {
     expect(
       getDRImplicitXrefs(
         [
           {
             databaseType: 'PDB',
             id: '1AMB',
-            properties: [
-              { key: 'Method', value: 'NMR' },
-              { key: 'Resolution', value: '-' },
-              { key: 'Chains', value: 'A=672-699' },
-            ],
+            properties: { Method: 'NMR', Resolution: '-', Chains: 'A=672-699' },
           },
           {
             databaseType: 'MIM',
             id: '104300',
-            properties: [{ key: 'Type', value: 'phenotype' }],
+            properties: { Type: 'phenotype' },
           },
           {
             databaseType: 'HGNC',
             id: 'HGNC:620',
-            properties: [{ key: 'GeneName', value: 'APP' }],
+            properties: { GeneName: 'APP' },
           },
         ],
         ['APP', 'A4', 'AD1']
@@ -38,39 +35,37 @@ describe('getDRImplicitXrefs', () => {
       {
         databaseType: 'PDBe-KB',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
       {
         databaseType: 'PDBj',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
       {
         databaseType: 'RCSB-PDB',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
       {
         databaseType: 'SOURCE_MIM',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
       {
         databaseType: 'GenAtlas',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
       {
         databaseType: 'SWISS-MODEL-Workspace',
         implicit: true,
-        properties: [{ key: 'GeneName', value: 'APP' }],
+        properties: { GeneName: 'APP' },
       },
     ]);
   });
-});
 
-describe('getDatabaseSimilarityCommentImplicitXrefs', () => {
-  test('should ', () => {
+  test('should getDatabaseSimilarityCommentImplicitXrefs', () => {
     expect(
       getDatabaseSimilarityCommentImplicitXrefs('TS1R1_HUMAN', [
         {
@@ -88,44 +83,88 @@ describe('getDatabaseSimilarityCommentImplicitXrefs', () => {
       {
         databaseType: 'GPCRDB',
         implicit: true,
-        properties: [{ key: 'uniProtId', value: 'TS1R1_HUMAN' }],
+        properties: { uniProtId: 'TS1R1_HUMAN' },
       },
     ]);
   });
-});
 
-describe('getGenePatternOrganismImplicitXrefs', () => {
-  test('should ', () => {
+  test('should getGenePatternOrganismImplicitXrefs', () => {
     expect(
       getGenePatternOrganismImplicitXrefs(['PNMA5', 'KIAA1934'], 'Human')
     ).toEqual([
       {
         databaseType: 'HUGE',
         implicit: true,
-        properties: [{ key: 'gene', value: 'KIAA1934' }],
+        properties: { gene: 'KIAA1934' },
       },
     ]);
   });
-});
 
-describe('getECImplicitXrefs', () => {
-  test('should ', () => {
+  test('should getECImplicitXrefs', () => {
     expect(getECImplicitXrefs([{ value: '3.1.4.4' }])).toEqual([
       {
         databaseType: 'ENZYME',
         implicit: true,
-        properties: [{ key: 'ec', value: '3.1.4.4' }],
+        properties: { ec: '3.1.4.4' },
       },
     ]);
   });
-});
-
-describe('getUnconditionalImplicitXrefs', () => {
-  test('should ', () => {
+  test('should getUnconditionalImplicitXrefs', () => {
     expect(getUnconditionalImplicitXrefs()).toEqual([
       { databaseType: 'ModBase', implicit: true },
       { databaseType: 'MobiDB', implicit: true },
       { databaseType: 'ProtoNet', implicit: true },
+    ]);
+  });
+
+  test('should getJoinedXrefs', () => {
+    const xrefs = [
+      {
+        id: 'A',
+        properties: {
+          Status: 'SOMETHING',
+          ProteinId: 'PROTEINA',
+        },
+      },
+      {
+        id: 'B',
+        properties: {
+          Status: 'JOINED',
+          ProteinId: 'PROTEINA',
+        },
+      },
+      {
+        id: 'C',
+        properties: {
+          Status: 'JOINED',
+          ProteinId: 'PROTEINA',
+        },
+      },
+      {
+        id: 'D',
+        properties: {
+          Status: 'SOMETHING ELSE',
+          ProteinId: 'PROTEIND',
+        },
+      },
+    ];
+    const joined = getJoinedXrefs(xrefs);
+    expect(joined).toEqual([
+      {
+        id: 'A',
+        properties: {
+          Status: 'SOMETHING',
+          ProteinId: 'PROTEINA',
+        },
+        additionalIds: ['B', 'C'],
+      },
+      {
+        id: 'D',
+        properties: {
+          Status: 'SOMETHING ELSE',
+          ProteinId: 'PROTEIND',
+        },
+      },
     ]);
   });
 });

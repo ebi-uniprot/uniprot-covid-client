@@ -23,7 +23,7 @@ describe('Structure data converter', () => {
                 {
                   databaseType: 'SWISS-MODEL-Workspace',
                   implicit: true,
-                  properties: [{ key: 'GeneName', value: 'some Gene' }],
+                  properties: { GeneName: 'some Gene' },
                 },
               ],
             },

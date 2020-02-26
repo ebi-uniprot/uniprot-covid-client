@@ -15,7 +15,7 @@ import { DatabaseCategory } from '../types/DatabaseTypes';
 import { Xref, FreeTextComment } from '../types/CommentTypes';
 import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
-import { Property, PropertyKey, ValueWithEvidence } from '../types/modelTypes';
+import { ValueWithEvidence } from '../types/modelTypes';
 
 export type XrefsGoupedByDatabase = {
   database: string;
@@ -63,16 +63,15 @@ export const getDRImplicitXrefs = (xrefs: Xref[], geneNames: string[]) => {
         implicitNames.forEach(implicitName => {
           const xref = implicitDatabaseXRefs.get(implicitName);
           if (xref) {
-            let property: Property = {};
+            let property = {};
             if (geneNames.length) {
               property = {
-                key: 'GeneName' as PropertyKey,
-                value: geneNames[0],
+                GeneName: geneNames[0],
               };
             }
             foundXrefs.push({
               ...xref,
-              properties: [property],
+              properties: property,
             });
           }
         });
@@ -99,13 +98,12 @@ export const getDatabaseSimilarityCommentImplicitXrefs = (
         if (foundCommentSubstring) {
           const xref = implicitDatabaseXRefs.get(implicitName);
           if (xref) {
-            const property: Property = {
-              key: 'uniProtId' as PropertyKey,
-              value: uniProtId,
+            const property = {
+              uniProtId,
             };
             foundXrefs.push({
               ...xref,
-              properties: [property],
+              properties: property,
             });
           }
         }
@@ -133,13 +131,12 @@ export const getGenePatternOrganismImplicitXrefs = (
           const name = organism[commonName as keyof typeof organism];
           const xref = implicitDatabaseXRefs.get(name);
           if (xref) {
-            const property: Property = {
-              key: 'gene' as PropertyKey,
-              value: gene,
+            const property = {
+              gene,
             };
             foundXrefs.push({
               ...xref,
-              properties: [property],
+              properties: property,
             });
           }
         }
@@ -156,13 +153,12 @@ export const getECImplicitXrefs = (ecNumbers?: ValueWithEvidence[] | null) => {
       const xref = implicitDatabaseXRefs.get(name);
       if (xref) {
         ecNumbers.forEach(({ value }) => {
-          const property: Property = {
-            key: 'ec' as PropertyKey,
-            value,
+          const property = {
+            ec: value,
           };
           foundXrefs.push({
             ...xref,
-            properties: [property],
+            properties: property,
           });
         });
       }
@@ -183,6 +179,32 @@ export const getUnconditionalImplicitXrefs = () => {
   return foundXrefs;
 };
 
+export const getJoinedXrefs = (xrefs: Xref[]) => {
+  const joinedXrefs = [...xrefs];
+  const scheduledForRemoval: string[] = [];
+  joinedXrefs
+    .filter(xref => xref.properties && xref.properties.Status === 'JOINED')
+    .forEach(xref => {
+      const masterXref = joinedXrefs.find(
+        potentialMasterXref =>
+          potentialMasterXref.properties &&
+          xref.properties &&
+          potentialMasterXref.properties.ProteinId ===
+            xref.properties.ProteinId &&
+          potentialMasterXref.properties.Status !== 'JOINED'
+      );
+      if (masterXref && xref.id) {
+        masterXref.additionalIds = masterXref.additionalIds
+          ? [...masterXref.additionalIds, xref.id]
+          : [xref.id];
+        scheduledForRemoval.push(xref.id);
+      }
+    });
+  return joinedXrefs.filter(
+    xref => xref.id && !scheduledForRemoval.includes(xref.id)
+  );
+};
+
 export const getXrefsForSection = (
   xrefs: Xref[],
   section: EntrySection,
@@ -196,6 +218,7 @@ export const getXrefsForSection = (
   if (!databasesForSection) {
     return [];
   }
+
   const categoryToNameToXrefs = new Map<
     DatabaseCategory,
     { [name: string]: Xref[] }
@@ -215,6 +238,7 @@ export const getXrefsForSection = (
     if (!name) {
       return;
     }
+    // eslint-disable-next-line no-param-reassign
     if (!databasesForSection.includes(name)) {
       return;
     }
