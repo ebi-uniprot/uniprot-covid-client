@@ -48,7 +48,8 @@ const getColumnConfig = () => ({
   },
   resolution: {
     label: 'Resolution',
-    resolver: ({ resolution }): string => resolution,
+    resolver: ({ resolution }): string =>
+      resolution && resolution.replace('A', 'Å'),
   },
   chain: {
     label: 'Chain',
