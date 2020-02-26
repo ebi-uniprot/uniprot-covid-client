@@ -215,11 +215,11 @@ const StructureXRefsGroupedByCategory: React.FC<StructureXRefsGroupedByCategoryP
   primaryAccession,
   crc64,
 }): JSX.Element => {
-  const databasesGroupedByView = groupBy(databases, ({ database }) =>
-    PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
+  const { dataTableDatabases, defaultDatabases } = groupBy(
+    databases,
+    ({ database }) =>
+      PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
   );
-  const { dataTableDatabases, defaultDatabases } = databasesGroupedByView;
-
   return (
     <Fragment>
       {dataTableDatabases && dataTableDatabases.length && (
