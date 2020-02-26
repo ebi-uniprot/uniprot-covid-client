@@ -18,38 +18,9 @@
   ],
   "results": [
     {
-      "id": "1",
-      "literatureEntry": {
-        "pubmedId": 2881207,
-        "doiId": "10.1038/325733a0",
-        "title": "The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.",
-        "authors": [
-          "Kang J.",
-          "Lemaire H.-G.",
-          "Unterbeck A.",
-          "Salbaum J.M.",
-          "Masters C.L.",
-          "Grzeschik K.-H.",
-          "Multhaup G.",
-          "Beyreuther K.",
-          "Mueller-Hill B."
-        ],
-        "completeAuthorList": true,
-        "publicationDate": "1987",
-        "journal": "Nature",
-        "firstPage": "733",
-        "lastPage": "736",
-        "volume": "325",
-        "literatureAbstract": "Alzheimer's disease is characterized by a widespread functional disturbance of the human brain. Fibrillar amyloid proteins are deposited inside neurons as neurofibrillary tangles and extracellularly as amyloid plaque cores and in blood vessels. The major protein subunit (A4) of the amyloid fibril of tangles, plaques and blood vessel deposits is an insoluble, highly aggregating small polypeptide of relative molecular mass 4,500. The same polypeptide is also deposited in the brains of aged individuals with trisomy 21 (Down's syndrome). We have argued previously that the A4 protein is of neuronal origin and is the cleavage product of a larger precursor protein. To identify this precursor, we have now isolated and sequenced an apparently full-length complementary DNA clone coding for the A4 polypeptide. The predicted precursor consists of 695 residues and contains features characteristic of glycosylated cell-surface receptors. This sequence, together with the localization of its gene on chromosome 21, suggests that the cerebral amyloid deposited in Alzheimer's disease and aged Down's syndrome is caused by aberrant catabolism of a cell- surface receptor.",
-        "statistics": {
-          "reviewedProteinCount": 1,
-          "unreviewedProteinCount": 0,
-          "mappedProteinCount": 0
-        }
-      },
-      "uniProtReference": {
+      "reference": {
         "citation": {
-          "citationType": "journal article",
+          "citationType": "UniProt indexed literatures",
           "authors": [
             "Kang J.",
             "Lemaire H.-G.",
@@ -71,12 +42,14 @@
               "id": "10.1038/325733a0"
             }
           ],
-          "title": "The precursor of Alzheimer's disease amyloid A4 protein resembles a cell-surface receptor.",
+          "title": "The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.",
           "publicationDate": "1987",
           "journal": "Nature",
           "firstPage": "733",
           "lastPage": "736",
-          "volume": "325"
+          "volume": "325",
+          "completeAuthorList": true,
+          "literatureAbstract": "Alzheimer's disease is characterized by a widespread functional disturbance of the human brain. Fibrillar amyloid proteins are deposited inside neurons as neurofibrillary tangles and extracellularly as amyloid plaque cores and in blood vessels. The major protein subunit (A4) of the amyloid fibril of tangles, plaques and blood vessel deposits is an insoluble, highly aggregating small polypeptide of relative molecular mass 4,500. The same polypeptide is also deposited in the brains of aged individuals with trisomy 21 (Down's syndrome). We have argued previously that the A4 protein is of neuronal origin and is the cleavage product of a larger precursor protein. To identify this precursor, we have now isolated and sequenced an apparently full-length complementary DNA clone coding for the A4 polypeptide. The predicted precursor consists of 695 residues and contains features characteristic of glycosylated cell-surface receptors. This sequence, together with the localization of its gene on chromosome 21, suggests that the cerebral amyloid deposited in Alzheimer's disease and aged Down's syndrome is caused by aberrant catabolism of a cell- surface receptor."
         },
         "referencePositions": ["NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP695)"],
         "referenceComments": [
@@ -86,76 +59,109 @@
           }
         ]
       },
-      "categories": ["Sequence", "Sequence"],
+      "statistics": {
+        "reviewedProteinCount": 1,
+        "unreviewedProteinCount": 0,
+        "mappedProteinCount": 0
+      },
+      "categories": ["Sequence"],
       "publicationSource": "Swiss-Prot"
     },
     {
-      "id": "2",
-      "literatureEntry": {
-        "pubmedId": 10097139,
-        "doiId": "10.1073/pnas.96.7.3922",
-        "title": "Constitutive and regulated alpha-secretase cleavage of Alzheimer's amyloid precursor protein by a disintegrin metalloprotease.",
-        "authors": [
-          "Lammich S.",
-          "Kojro E.",
-          "Postina R.",
-          "Gilbert S.",
-          "Pfeiffer R.",
-          "Jasionowski M.",
-          "Haass C.",
-          "Fahrenholz F."
-        ],
-        "completeAuthorList": true,
-        "publicationDate": "1999",
-        "journal": "Proc. Natl. Acad. Sci. U.S.A.",
-        "firstPage": "3922",
-        "lastPage": "3927",
-        "volume": "96",
-        "literatureAbstract": "Amyloid beta peptide (Abeta), the principal proteinaceous component of amyloid plaques in brains of Alzheimer's disease patients, is derived by proteolytic cleavage of the amyloid precursor protein (APP). Proteolytic cleavage of APP by a putative alpha-secretase within the Abeta sequence precludes the formation of the amyloidogenic peptides and leads to the release of soluble APPsalpha into the medium. By overexpression of a disintegrin and metalloprotease (ADAM), classified as ADAM 10, in HEK 293 cells, basal and protein kinase C-stimulated alpha-secretase activity was increased severalfold. The proteolytically activated form of ADAM 10 was localized by cell surface biotinylation in the plasma membrane, but the majority of the proenzyme was found in the Golgi. These results support the view that APP is cleaved both at the cell surface and along the secretory pathway. Endogenous alpha-secretase activity was inhibited by a dominant negative form of ADAM 10 with a point mutation in the zinc binding site. Studies with purified ADAM 10 and Abeta fragments confirm the correct alpha-secretase cleavage site and demonstrate a dependence on the substrate's conformation. Our results provide evidence that ADAM 10 has alpha-secretase activity and many properties expected for the proteolytic processing of APP. Increases of its expression and activity might be beneficial for the treatment of Alzheimer's disease.",
-        "statistics": {
-          "reviewedProteinCount": 1,
-          "unreviewedProteinCount": 0,
-          "mappedProteinCount": 8
-        }
-      },
-      "literatureMappedReference": {
-        "uniprotAccession": "P05067",
-        "source": "Reactome",
-        "sourceId": "R-HSA-9010028",
-        "annotation": "Pathway"
-      },
-      "categories": ["Function"],
-      "publicationSource": "Computationally mapped"
-    },
-    {
-      "id": "3",
-      "uniProtReference": {
+      "reference": {
         "citation": {
-          "citationType": "journal article",
-          "authors": ["Borg J.-P.", "Ooi J.", "Levy E.", "Margolis B."],
+          "citationType": "UniProt indexed literatures",
+          "authors": [
+            "Ponte P.",
+            "Gonzalez-Dewhitt P.",
+            "Schilling J.",
+            "Miller J.",
+            "Hsu D.",
+            "Greenberg B.",
+            "Davis K.",
+            "Wallace W.",
+            "Lieberburg I.",
+            "Fuller F.",
+            "Cordell B."
+          ],
           "citationXrefs": [
             {
               "databaseType": "PubMed",
-              "id": "8887653"
+              "id": "2893289"
             },
             {
               "databaseType": "DOI",
-              "id": "10.1128/mcb.16.11.6229"
+              "id": "10.1038/331525a0"
             }
           ],
-          "title": "The phosphotyrosine interaction domains of X11 and FE65 bind to distinct sites on the YENPTY motif of amyloid precursor protein.",
-          "publicationDate": "1996",
-          "journal": "Mol. Cell. Biol.",
-          "firstPage": "6229",
-          "lastPage": "6241",
-          "volume": "16"
+          "title": "A new A4 amyloid mRNA contains a domain homologous to serine proteinase inhibitors.",
+          "publicationDate": "1988",
+          "journal": "Nature",
+          "firstPage": "525",
+          "lastPage": "527",
+          "volume": "331",
+          "completeAuthorList": true,
+          "literatureAbstract": "The amyloid proteins isolated from neuritic plaques and the cerebrovasculature of Alzheimer's disease are self-aggregating moieties termed A4 protein and beta- protein, respectively. A putative A4 amyloid precursor (herein termed A4(695] has been characterized by analysis of a human brain complementary DNA. We report here the sequence of a closely related amyloid cDNA, A4(751), distinguished from A4(695) by the presence of a 168 base-pair (bp) sequence which adds 57 amino acids to, and removes one residue from, the predicted A4(695) protein. The peptide predicted from this insert is very similar to the Kunitz family of serine proteinase inhibitors. The two A4-specific messenger RNAs are differentially expressed: in a limited survey, A4(751) mRNA appears to be ubiquitous, whereas A4(695) mRNA has a restricted pattern of expression which includes cells from neuronal tissue. These data may have significant implications for understanding amyloid deposition in Alzheimer's disease."
         },
-        "referencePositions": [
-          "INTERACTION WITH APBA1 AND APBB1",
-          "MUTAGENESIS OF TYR-728; TYR-757; ASN-759 AND TYR-762"
+        "referencePositions": ["NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP751)"],
+        "referenceComments": [
+          {
+            "value": "Brain",
+            "type": "TISSUE"
+          }
         ]
       },
-      "categories": ["Interaction", "Pathol"],
+      "statistics": {
+        "reviewedProteinCount": 1,
+        "unreviewedProteinCount": 0,
+        "mappedProteinCount": 0
+      },
+      "categories": ["Sequence"],
+      "publicationSource": "Swiss-Prot"
+    },
+    {
+      "reference": {
+        "citation": {
+          "citationType": "UniProt indexed literatures",
+          "authors": [
+            "Lemaire H.-G.",
+            "Salbaum J.M.",
+            "Multhaup G.",
+            "Kang J.",
+            "Bayney R.M.",
+            "Unterbeck A.",
+            "Beyreuther K.",
+            "Mueller-Hill B."
+          ],
+          "citationXrefs": [
+            {
+              "databaseType": "PubMed",
+              "id": "2783775"
+            },
+            {
+              "databaseType": "DOI",
+              "id": "10.1093/nar/17.2.517"
+            }
+          ],
+          "title": "The PreA4(695) precursor protein of Alzheimer's disease A4 amyloid is encoded by 16 exons.",
+          "publicationDate": "1989",
+          "journal": "Nucleic Acids Res.",
+          "firstPage": "517",
+          "lastPage": "522",
+          "volume": "17",
+          "completeAuthorList": true,
+          "literatureAbstract": "Alzheimer's disease (AD) is characterized by the cerebral deposition of fibrillar aggregates of the amyloid A4 protein. Complementary DNA's coding for the precursor of the amyloid A4 protein have been described. In order to identify the structure of the precursor gene relevant clones from several human genomic libraries were isolated. Sequence analysis of the various clones revealed 16 exons to encode the 695 residue precursor protein (PreA4(695] of Alzheimer's disease amyloid A4 protein. The DNA sequence coding for the amyloid A4 protein is interrupted by an intron. This finding supports the idea that amyloid A4 protein arises by incomplete proteolysis of a larger precursor, and not by aberrant splicing."
+        },
+        "referencePositions": [
+          "NUCLEOTIDE SEQUENCE [GENOMIC DNA] (ISOFORM APP695)"
+        ]
+      },
+      "statistics": {
+        "reviewedProteinCount": 1,
+        "unreviewedProteinCount": 0,
+        "mappedProteinCount": 0
+      },
+      "categories": ["Sequence"],
       "publicationSource": "Swiss-Prot"
     }
   ]
