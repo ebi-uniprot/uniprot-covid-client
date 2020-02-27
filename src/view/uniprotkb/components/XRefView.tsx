@@ -132,8 +132,8 @@ const EMBLXref: React.FC<{
       {properties &&
         properties.MoleculeType &&
         `${
-          ((EMBLXrefProperties as unknown) as { [key: string]: string })[
-            properties.MoleculeType
+          EMBLXrefProperties[
+            properties.MoleculeType as keyof typeof EMBLXrefProperties
           ]
         }: `}
       {properties &&
@@ -142,8 +142,8 @@ const EMBLXref: React.FC<{
         getPropertyLink(databaseInfo, PropertyKey.ProteinId, xref)}
       {properties &&
         properties.Status &&
-        ((EMBLXrefProperties as unknown) as { [key: string]: string })[
-          properties.Status
+        EMBLXrefProperties[
+          properties.Status as keyof typeof EMBLXrefProperties
         ]}
       {isoformNode}
     </Fragment>

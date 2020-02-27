@@ -1,7 +1,14 @@
 import convertPathologyAndBiotech from '../PathologyAndBiotechConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Pathology/Biotech data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertPathologyAndBiotech(modelData);
     expect(convertedData).toEqual({

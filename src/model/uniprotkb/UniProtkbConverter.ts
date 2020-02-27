@@ -93,17 +93,20 @@ export type UniProtkbUIModel = {
   references?: Citation[];
 };
 
+export const convertXrefProperties = (xrefs: Xref[]) =>
+  xrefs.map(xref => ({
+    ...xref,
+    properties: xref.properties
+      ? transfromProperties((xref.properties as unknown) as Property[])
+      : {},
+  }));
+
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
   const dataCopy = { ...data };
 
   if (dataCopy.databaseCrossReferences) {
-    dataCopy.databaseCrossReferences = dataCopy.databaseCrossReferences.map(
-      xref => ({
-        ...xref,
-        properties: xref.properties
-          ? transfromProperties((xref.properties as unknown) as Property[])
-          : {},
-      })
+    dataCopy.databaseCrossReferences = convertXrefProperties(
+      dataCopy.databaseCrossReferences
     );
   }
 

@@ -1,7 +1,14 @@
 import convertStructure from '../StructureConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Structure data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertStructure(modelData);
     expect(convertedData).toEqual({

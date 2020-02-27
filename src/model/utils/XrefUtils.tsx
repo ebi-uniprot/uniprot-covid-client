@@ -1,3 +1,4 @@
+import { groupBy } from 'lodash';
 import {
   databaseNameToCategory,
   entrySectionToDatabaseNames,
@@ -180,29 +181,35 @@ export const getUnconditionalImplicitXrefs = () => {
 };
 
 export const getJoinedXrefs = (xrefs: Xref[]) => {
-  const joinedXrefs = [...xrefs];
-  const scheduledForRemoval: string[] = [];
-  joinedXrefs
-    .filter(xref => xref.properties && xref.properties.Status === 'JOINED')
-    .forEach(xref => {
-      const masterXref = joinedXrefs.find(
-        potentialMasterXref =>
-          potentialMasterXref.properties &&
+  /**
+   * Add the "JOINED" xrefs to the "master" xref which it
+   * shares its ProteinId with
+   */
+  if (!xrefs || xrefs.length === 0) {
+    return xrefs;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { JOINED, NOT_JOINED } = groupBy(xrefs, xref =>
+    xref.properties && xref.properties.Status === 'JOINED'
+      ? 'JOINED'
+      : 'NOT_JOINED'
+  );
+  if (JOINED) {
+    JOINED.forEach(xref => {
+      const masterXref = NOT_JOINED.find(
+        notJoinedXref =>
+          notJoinedXref.properties &&
           xref.properties &&
-          potentialMasterXref.properties.ProteinId ===
-            xref.properties.ProteinId &&
-          potentialMasterXref.properties.Status !== 'JOINED'
+          notJoinedXref.properties.ProteinId === xref.properties.ProteinId
       );
       if (masterXref && xref.id) {
         masterXref.additionalIds = masterXref.additionalIds
           ? [...masterXref.additionalIds, xref.id]
           : [xref.id];
-        scheduledForRemoval.push(xref.id);
       }
     });
-  return joinedXrefs.filter(
-    xref => xref.id && !scheduledForRemoval.includes(xref.id)
-  );
+  }
+  return NOT_JOINED;
 };
 
 export const getXrefsForSection = (

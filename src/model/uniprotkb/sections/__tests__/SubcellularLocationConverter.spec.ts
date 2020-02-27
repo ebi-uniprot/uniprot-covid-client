@@ -1,7 +1,14 @@
 import convertSubcellularLocation from '../SubcellularLocationConverter';
 import modelDataJson from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Subcellular data converter', () => {
+  beforeAll(() => {
+    modelDataJson.databaseCrossReferences = convertXrefProperties(
+      modelDataJson.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertSubcellularLocation(modelDataJson);
     expect(convertedData).toEqual({
