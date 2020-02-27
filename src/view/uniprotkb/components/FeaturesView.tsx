@@ -30,6 +30,10 @@ export type FeatureData = {
     start: FeatureLocation;
     end: FeatureLocation;
   };
+  alternativeSequence?: {
+    originalSequence?: string;
+    alternativeSequences: string[];
+  };
   evidences?: Evidence[];
 }[];
 

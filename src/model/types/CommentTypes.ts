@@ -4,6 +4,7 @@ import {
   KineticParameters,
   CofactorComment,
 } from '../uniprotkb/sections/FunctionConverter';
+import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',
@@ -162,6 +163,7 @@ export type Isoform = {
   synonyms: { value: string }[];
   note?: { texts: TextWithEvidence[] };
   sequenceIds: string[];
+  varSeqs: FeatureData;
 };
 
 export type AlternativeProductsComment = {

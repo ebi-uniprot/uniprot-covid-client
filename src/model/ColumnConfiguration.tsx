@@ -317,6 +317,7 @@ ColumnConfiguration.set(Column.ccAlternativeProducts, {
         <IsoformView
           alternativeProducts={sequenceData.alternativeProducts}
           includeSequences={false}
+          canonicalAccession={data.primaryAccession}
         />
       )
     );
