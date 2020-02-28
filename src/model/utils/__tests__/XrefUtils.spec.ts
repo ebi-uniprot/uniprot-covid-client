@@ -164,6 +164,7 @@ describe('XrefUtils tests', () => {
           Status: 'SOMETHING ELSE',
           ProteinId: 'PROTEIND',
         },
+        additionalIds: [],
       },
     ]);
   });

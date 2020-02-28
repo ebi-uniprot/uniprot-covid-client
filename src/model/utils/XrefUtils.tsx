@@ -188,25 +188,23 @@ export const getJoinedXrefs = (xrefs: Xref[]) => {
   if (!xrefs || xrefs.length === 0) {
     return xrefs;
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { JOINED, NOT_JOINED } = groupBy(xrefs, xref =>
     xref.properties && xref.properties.Status === 'JOINED'
       ? 'JOINED'
       : 'NOT_JOINED'
   );
   if (JOINED) {
-    JOINED.forEach(xref => {
-      const masterXref = NOT_JOINED.find(
-        notJoinedXref =>
-          notJoinedXref.properties &&
+    return NOT_JOINED.map(xref => {
+      const joinedXrefIds = JOINED.filter(
+        joinedXref =>
+          joinedXref.properties &&
           xref.properties &&
-          notJoinedXref.properties.ProteinId === xref.properties.ProteinId
-      );
-      if (masterXref && xref.id) {
-        masterXref.additionalIds = masterXref.additionalIds
-          ? [...masterXref.additionalIds, xref.id]
-          : [xref.id];
-      }
+          joinedXref.properties.ProteinId === xref.properties.ProteinId
+      ).map(joinedXref => joinedXref.id);
+      return {
+        ...xref,
+        additionalIds: joinedXrefIds,
+      };
     });
   }
   return NOT_JOINED;
