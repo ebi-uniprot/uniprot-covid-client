@@ -3,9 +3,7 @@ import { render } from '@testing-library/react';
 import XRefView, {
   getPropertyString,
   processUrlTemplate,
-  transfromProperties,
   getPropertyLink,
-  getPropertyValue,
   getDatabaseInfoAttribute,
 } from '../XRefView';
 import xrefUIData from '../__mocks__/XrefUIData.json';
@@ -85,10 +83,10 @@ describe('getPropertyLink', () => {
     const xref = {
       databaseType: 'Ensembl',
       id: 'ENST00000440126',
-      properties: [
-        { key: 'ProteinId', value: 'ENSP00000387483' },
-        { key: 'GeneId', value: 'ENSG00000142192' },
-      ],
+      properties: {
+        ProteinId: 'ENSP00000387483',
+        GeneId: 'ENSG00000142192',
+      },
       isoformId: 'P05067-11',
     };
     const { asFragment } = render(
@@ -138,14 +136,18 @@ describe('getPropertyString', () => {
   });
   test('should append value and "hit"', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '1');
-    expect(propertyString).toEqual(' - 1 hit');
+    expect(propertyString).toEqual(' 1 hit');
   });
   test('should append value and "hits"', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '2');
-    expect(propertyString).toEqual(' - 2 hits');
+    expect(propertyString).toEqual(' 2 hits');
   });
   test('should if empty string if key is MatchStatus but value <= 0', () => {
     const propertyString = getPropertyString(PropertyKey.MatchStatus, '0');
     expect(propertyString).toEqual('');
+  });
+  test('should append value and "interactors"', () => {
+    const propertyString = getPropertyString(PropertyKey.Interactions, '2');
+    expect(propertyString).toEqual(' 2 interactors');
   });
 });

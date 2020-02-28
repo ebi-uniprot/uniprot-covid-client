@@ -9,7 +9,7 @@
       "reference": {
         "databaseType": "EMBL",
         "id": "some ref id",
-        "properties": [{ "key": "prop1", "value": "value1" }],
+        "properties": { "prop1": "value1" },
         "isoformId": "some isoform"
       },
       "evidences": []

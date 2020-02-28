@@ -1,7 +1,14 @@
 import convertInteraction from '../InteractionConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Interaction data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertInteraction(modelData);
     expect(convertedData).toEqual({

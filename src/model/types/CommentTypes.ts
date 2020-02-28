@@ -1,4 +1,4 @@
-import { Evidence, Property } from './modelTypes';
+import { Evidence } from './modelTypes';
 import {
   Absorption,
   KineticParameters,
@@ -115,7 +115,8 @@ export type PhysiologicalReaction = {
 export type Xref = {
   databaseType?: string;
   id?: string;
-  properties?: Property[];
+  properties?: { [key: string]: string };
+  additionalIds?: string[];
   isoformId?: string;
   implicit?: true;
 };

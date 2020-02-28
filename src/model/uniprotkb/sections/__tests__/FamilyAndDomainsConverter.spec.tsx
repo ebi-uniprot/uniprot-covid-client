@@ -1,7 +1,14 @@
 import convertFamilyAndDomains from '../FamilyAndDomainsConverter';
 import modelDataJson from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Family and Domains data converter', () => {
+  beforeAll(() => {
+    modelDataJson.databaseCrossReferences = convertXrefProperties(
+      modelDataJson.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertFamilyAndDomains(modelDataJson);
     expect(convertedData).toEqual({
