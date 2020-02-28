@@ -31,7 +31,13 @@ const FreeTextView: React.FC<FreeTextProps> = ({ comments, title }) => {
     return null;
   }
   const freeTextData = comments.map(
-    item => item.texts && <TextView comments={item.texts} key={v1()} />
+    item =>
+      item.texts && (
+        <Fragment key={v1()}>
+          {item.molecule && <h5>{item.molecule}</h5>}
+          <TextView comments={item.texts} />
+        </Fragment>
+      )
   );
 
   return (

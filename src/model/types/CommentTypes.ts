@@ -56,6 +56,7 @@ export type TextWithEvidence = { value: string; evidences?: Evidence[] };
 export type FreeTextComment = {
   commentType: FreeTextType;
   texts?: TextWithEvidence[];
+  molecule?: string;
 };
 
 export type AbsorptionComment = {
