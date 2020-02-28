@@ -199,8 +199,9 @@ export const getJoinedXrefs = (xrefs: Xref[]) => {
         joinedXref =>
           joinedXref.properties &&
           xref.properties &&
-          joinedXref.properties.ProteinId === xref.properties.ProteinId
-      ).map(joinedXref => joinedXref.id);
+          joinedXref.properties.ProteinId === xref.properties.ProteinId &&
+          joinedXref.id
+      ).map(joinedXref => joinedXref.id) as string[];
       return {
         ...xref,
         additionalIds: joinedXrefIds,
