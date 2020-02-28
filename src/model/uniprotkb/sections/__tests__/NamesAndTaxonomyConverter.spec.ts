@@ -1,7 +1,14 @@
 import { convertNamesAndTaxonomy } from '../NamesAndTaxonomyConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Names and taxonomy data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertNamesAndTaxonomy(modelData);
     expect(convertedData).toEqual({

@@ -16,10 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
-import uniProtKbConverter, {
-  UniProtkbUIModel,
-  UniProtkbAPIModel,
-} from '../model/uniprotkb/UniProtkbConverter';
+import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import EntrySection from '../model/types/EntrySection';
 import EntryMain from './EntryMain';
@@ -40,7 +37,7 @@ type MatchParams = {
 };
 
 type EntryProps = RouteComponentProps<MatchParams> & {
-  entryData: UniProtkbAPIModel | null;
+  entryData: UniProtkbUIModel | null;
   publicationsData: {
     data: LiteratureForProteinAPI[] | null;
     facets: Facet[];
@@ -79,7 +76,6 @@ const Entry: React.FC<EntryProps> = ({
   if (!entryData || Object.keys(entryData).length === 0) {
     return <Loader />;
   }
-  const transformedData: UniProtkbUIModel = uniProtKbConverter(entryData);
 
   const sections = UniProtKBEntryConfig.map(section => ({
     label: section.name,
@@ -87,9 +83,9 @@ const Entry: React.FC<EntryProps> = ({
 
     disabled:
       section.name === EntrySection.ExternalLinks
-        ? !hasExternalLinks(transformedData)
+        ? !hasExternalLinks(entryData)
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          !hasContent((transformedData as any)[section.name]),
+          !hasContent((entryData as any)[section.name]),
   }));
 
   const displayMenuData = [
@@ -98,7 +94,7 @@ const Entry: React.FC<EntryProps> = ({
       icon: <TremblIcon />,
       itemContent: <InPageNav sections={sections} />,
       path: 'main',
-      mainContent: <EntryMain transformedData={transformedData} />,
+      mainContent: <EntryMain transformedData={entryData} />,
     },
     {
       name: 'Publications',
@@ -126,7 +122,7 @@ const Entry: React.FC<EntryProps> = ({
       name: 'External links',
       path: 'external-links',
       icon: <ExternalLinkIcon />,
-      mainContent: <EntryExternalLinks transformedData={transformedData} />,
+      mainContent: <EntryExternalLinks transformedData={entryData} />,
     },
   ];
 

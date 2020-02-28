@@ -1,7 +1,14 @@
 import convertProteinProcessing from '../ProteinProcessingConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Protein processing data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertProteinProcessing(modelData);
     expect(convertedData).toEqual({

@@ -1,11 +1,15 @@
 import convertFunction from '../FunctionConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
 import { CommentType } from '../../../types/CommentTypes';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 let data;
 
 describe('Function data converter', () => {
   beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
     data = convertFunction(modelData);
   });
 
