@@ -108,24 +108,22 @@ export const IsoformInfo: React.FC<{
       title: 'Differences from canonical',
       content: isoformData.varSeqs && !!isoformData.varSeqs.length && (
         <ul className="no-bullet">
-          {isoformData.varSeqs.map(varSeq => (
-            <li
-              key={`${varSeq.location.start.value}-${varSeq.location.end.value}`}
-            >
-              <Link
-                to={`/blast/accession/${canonicalAccession}/positions/${varSeq.location.start.value}-${varSeq.location.end.value}`}
-              >{`${varSeq.location.start.value}-${varSeq.location.end.value}: `}</Link>
-              {varSeq.alternativeSequence &&
-              varSeq.alternativeSequence.originalSequence
-                ? `${varSeq.alternativeSequence.originalSequence}  → ${varSeq
-                    .alternativeSequence.alternativeSequences &&
-                    varSeq.alternativeSequence.alternativeSequences.join(', ')}`
-                : 'Missing'}
-              {varSeq.evidences && (
-                <UniProtEvidenceTag evidences={varSeq.evidences} />
-              )}
-            </li>
-          ))}
+          {isoformData.varSeqs.map(
+            ({ location, alternativeSequence, evidences }) => (
+              <li key={`${location.start.value}-${location.end.value}`}>
+                <Link
+                  to={`/blast/accession/${canonicalAccession}/positions/${location.start.value}-${location.end.value}`}
+                >{`${location.start.value}-${location.end.value}: `}</Link>
+                {alternativeSequence && alternativeSequence.originalSequence
+                  ? `${
+                      alternativeSequence.originalSequence
+                    }  → ${alternativeSequence.alternativeSequences &&
+                      alternativeSequence.alternativeSequences.join(', ')}`
+                  : 'Missing'}
+                {evidences && <UniProtEvidenceTag evidences={evidences} />}
+              </li>
+            )
+          )}
         </ul>
       ),
     },
