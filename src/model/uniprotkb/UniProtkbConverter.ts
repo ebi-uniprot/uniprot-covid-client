@@ -25,6 +25,8 @@ import { UIModel } from './SectionConverter';
 import convertStructure from './sections/StructureConverter';
 import convertExternalLinks from './sections/ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
+import { transfromProperties } from '../utils/utils';
+import { Property } from '../types/modelTypes';
 
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
@@ -95,25 +97,43 @@ export type UniProtkbUIModel = {
   references?: Reference[];
 };
 
-const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => ({
-  primaryAccession: data.primaryAccession,
-  uniProtId: data.uniProtId,
-  proteinExistence: data.proteinExistence,
-  entryType: data.entryType,
-  annotationScore: data.annotationScore,
-  [EntrySection.Function]: convertFunction(data),
-  [EntrySection.NamesAndTaxonomy]: convertNamesAndTaxonomy(data),
-  [EntrySection.SubCellularLocation]: convertSubcellularLocation(data),
-  [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(data),
-  [EntrySection.ProteinProcessing]: convertProteinProcessing(data),
-  [EntrySection.Expression]: convertExpression(data),
-  [EntrySection.Interaction]: convertInteraction(data),
-  [EntrySection.Structure]: convertStructure(data),
-  [EntrySection.Sequence]: convertSequence(data),
-  [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(data),
-  [EntrySection.ExternalLinks]: convertExternalLinks(data),
-  references: data.references || [],
-});
+export const convertXrefProperties = (xrefs: Xref[]) =>
+  xrefs.map(xref => ({
+    ...xref,
+    properties: xref.properties
+      ? transfromProperties((xref.properties as unknown) as Property[])
+      : {},
+  }));
+
+const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
+  const dataCopy = { ...data };
+
+  if (dataCopy.databaseCrossReferences) {
+    dataCopy.databaseCrossReferences = convertXrefProperties(
+      dataCopy.databaseCrossReferences
+    );
+  }
+
+  return {
+    primaryAccession: dataCopy.primaryAccession,
+    uniProtId: dataCopy.uniProtId,
+    proteinExistence: dataCopy.proteinExistence,
+    entryType: dataCopy.entryType,
+    annotationScore: dataCopy.annotationScore,
+    [EntrySection.Function]: convertFunction(dataCopy),
+    [EntrySection.NamesAndTaxonomy]: convertNamesAndTaxonomy(dataCopy),
+    [EntrySection.SubCellularLocation]: convertSubcellularLocation(dataCopy),
+    [EntrySection.PathologyAndBioTech]: convertPathologyAndBiotech(dataCopy),
+    [EntrySection.ProteinProcessing]: convertProteinProcessing(dataCopy),
+    [EntrySection.Expression]: convertExpression(dataCopy),
+    [EntrySection.Interaction]: convertInteraction(dataCopy),
+    [EntrySection.Structure]: convertStructure(dataCopy),
+    [EntrySection.Sequence]: convertSequence(dataCopy),
+    [EntrySection.FamilyAndDomains]: convertFamilyAndDomains(dataCopy),
+    [EntrySection.ExternalLinks]: convertExternalLinks(dataCopy),
+    references: dataCopy.references || [],
+  };
+};
 
 export default uniProtKbConverter;
 

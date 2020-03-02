@@ -13,17 +13,15 @@ import {
   XrefsGoupedByDatabase,
 } from '../../../model/utils/XrefUtils';
 import { Xref } from '../../../model/types/CommentTypes';
-import { Property, PropertyKey } from '../../../model/types/modelTypes';
+import { PropertyKey } from '../../../model/types/modelTypes';
 import {
   DatabaseInfoPoint,
   AttributesItem,
   DatabaseCategory,
 } from '../../../model/types/DatabaseTypes';
-import {
-  transfromProperties,
-  getPropertyValue,
-} from '../../../model/utils/utils';
 import PDBXRefView from './PDBXRefView';
+import EMBLXrefProperties from '../../../data/EMBLXrefProperties.json';
+import externalUrls from '../../../utils/externalUrls';
 
 export const processUrlTemplate = (
   urlTemplate: string,
@@ -41,16 +39,23 @@ export const getDatabaseInfoAttribute = (
   name: string
 ) => attributes.find(({ name: n }) => n === name);
 
+const formatSuffixWithCount = (prefix: string, number: string) => {
+  const count = parseInt(number, 10);
+  if (count <= 0) {
+    return '';
+  }
+  return ` ${count} ${prefix}${count > 1 ? 's' : ''}`;
+};
+
 export const getPropertyString = (key?: string, value?: string) => {
   if (!value || value === '-') {
     return '';
   }
   if (key === PropertyKey.MatchStatus) {
-    const hits = parseInt(value, 10);
-    if (hits <= 0) {
-      return '';
-    }
-    return ` - ${value} hit${hits > 1 ? 's' : ''}`;
+    return formatSuffixWithCount('hit', value);
+  }
+  if (key === PropertyKey.Interactions) {
+    return formatSuffixWithCount('interactor', value);
   }
   return value;
 };
@@ -69,7 +74,7 @@ export const getPropertyLink = (
   if (!properties) {
     return null;
   }
-  const id = getPropertyValue(properties, property);
+  const id = properties[property];
   if (!id || !attribute || !attribute.uriLink) {
     return null;
   }
@@ -88,6 +93,66 @@ type XRefProps = {
   crc64?: string;
 };
 
+const EMBLXref: React.FC<{
+  databaseInfo: DatabaseInfoPoint;
+  params: { [key: string]: string };
+  id: string | undefined;
+  xref: Xref;
+  isoformNode?: JSX.Element;
+}> = ({ databaseInfo, params, id, xref, isoformNode }) => {
+  // M28638 (EMBL|GenBank|DDBJ)
+  const genBankInfo = databaseToDatabaseInfo.GenBank;
+  const ddbjInfo = databaseToDatabaseInfo.DDBJ;
+  const { properties, additionalIds } = xref;
+  if (!genBankInfo || !ddbjInfo) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'GenBank or DDBJ database information not found in drlineconiguration'
+    );
+  }
+  return (
+    <Fragment>
+      (
+      <ExternalLink url={processUrlTemplate(databaseInfo.uriLink, params)}>
+        EMBL
+      </ExternalLink>
+      {' | '}
+      <ExternalLink url={processUrlTemplate(genBankInfo.uriLink, params)}>
+        GenBank
+      </ExternalLink>
+      {' | '}
+      <ExternalLink url={processUrlTemplate(ddbjInfo.uriLink, params)}>
+        DDBJ
+      </ExternalLink>
+      {') '}
+      {id && <ExternalLink url={externalUrls.ENA(id)}>{id}</ExternalLink>}
+      {additionalIds &&
+        additionalIds.map(additionalId => (
+          <ExternalLink url={externalUrls.ENA(additionalId)} key={additionalId}>
+            {additionalId}
+          </ExternalLink>
+        ))}
+      {properties &&
+        properties.MoleculeType &&
+        `${
+          EMBLXrefProperties[
+            properties.MoleculeType as keyof typeof EMBLXrefProperties
+          ]
+        }: `}
+      {properties &&
+        properties.ProteinId &&
+        properties.ProteinId !== '-' &&
+        getPropertyLink(databaseInfo, PropertyKey.ProteinId, xref)}
+      {properties &&
+        properties.Status &&
+        EMBLXrefProperties[
+          properties.Status as keyof typeof EMBLXrefProperties
+        ]}
+      {isoformNode}
+    </Fragment>
+  );
+};
+
 export const XRef: React.FC<XRefProps> = ({
   database,
   xref,
@@ -95,17 +160,17 @@ export const XRef: React.FC<XRefProps> = ({
   crc64,
 }): JSX.Element | null => {
   const databaseInfo = databaseToDatabaseInfo[database];
-  const { properties = [], isoformId, id, databaseType } = xref;
+  const { properties, isoformId, id, databaseType } = xref;
   const { uriLink, implicit } = databaseInfo;
   if (!database || !primaryAccession) {
     return null;
   }
   let propertiesNode;
   if (properties && !implicit) {
-    propertiesNode = properties.map(({ key, value }: Property) =>
-      key && value && [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key)
-        ? getPropertyLink(databaseInfo, key, xref)
-        : getPropertyString(key, value)
+    propertiesNode = Object.keys(properties).map(key =>
+      [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key as PropertyKey)
+        ? getPropertyLink(databaseInfo, key as PropertyKey, xref)
+        : getPropertyString(key, properties[key])
     );
   }
 
@@ -120,8 +185,9 @@ export const XRef: React.FC<XRefProps> = ({
 
   const params: { [key: string]: string } = {
     primaryAccession,
-    ...transfromProperties(properties),
+    ...properties,
   };
+
   if (id) {
     params.id = id;
   }
@@ -129,53 +195,33 @@ export const XRef: React.FC<XRefProps> = ({
     params.crc64 = crc64;
   }
 
-  let linkNode;
   if (database === 'EMBL') {
-    // M28638 (EMBL|GenBank|DDBJ)
-    const genBankInfo = databaseToDatabaseInfo.GenBank;
-    const ddbjInfo = databaseToDatabaseInfo.DDBJ;
-    if (!genBankInfo || !ddbjInfo) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        'GenBank or DDBJ database information not found in drlineconiguration'
-      );
-    }
-    linkNode = (
-      <Fragment>
-        (
-        <ExternalLink url={processUrlTemplate(databaseInfo.uriLink, params)}>
-          EMBL
-        </ExternalLink>
-        {' | '}
-        <ExternalLink url={processUrlTemplate(genBankInfo.uriLink, params)}>
-          GenBank
-        </ExternalLink>
-        {' | '}
-        <ExternalLink url={processUrlTemplate(ddbjInfo.uriLink, params)}>
-          DDBJ
-        </ExternalLink>
-        ) {id}
-      </Fragment>
-    );
-  } else {
-    let text;
-    if (implicit) {
-      text =
-        databaseType === 'SWISS-MODEL-Workspace'
-          ? 'Submit a new modelling project...'
-          : 'Search...';
-    } else {
-      text = id;
-    }
-    linkNode = (
-      <ExternalLink url={processUrlTemplate(uriLink, params)}>
-        {text}
-      </ExternalLink>
+    return (
+      <EMBLXref
+        databaseInfo={databaseInfo}
+        params={params}
+        id={id}
+        xref={xref}
+        isoformNode={isoformNode}
+      />
     );
   }
+  let text;
+  if (implicit) {
+    text =
+      databaseType === 'SWISS-MODEL-Workspace'
+        ? 'Submit a new modelling project...'
+        : 'Search...';
+  } else {
+    text = id;
+  }
+
   return (
     <Fragment>
-      {linkNode} {propertiesNode} {isoformNode}
+      <ExternalLink url={processUrlTemplate(uriLink, params)}>
+        {text}
+      </ExternalLink>{' '}
+      {propertiesNode} {isoformNode}
     </Fragment>
   );
 };

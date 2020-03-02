@@ -5,7 +5,11 @@ import {
 } from '../../utils/KeywordsUtil';
 import KeywordCategory from '../../types/KeywordCategory';
 import FeatureType from '../../types/FeatureType';
-import { getXrefsForSection, XrefUIModel } from '../../utils/XrefUtils';
+import {
+  getXrefsForSection,
+  XrefUIModel,
+  getJoinedXrefs,
+} from '../../utils/XrefUtils';
 import EntrySection from '../../types/EntrySection';
 import { SequenceData } from '../../../view/uniprotkb/components/SequenceView';
 import {
@@ -144,8 +148,18 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
     sequenceData.featuresData = features;
   }
   if (data.databaseCrossReferences) {
+    // Some EMBL xrefs need to be merged
+    const joined = getJoinedXrefs(
+      data.databaseCrossReferences.filter(xref => xref.databaseType === 'EMBL')
+    );
+    const newXrefs = [
+      ...data.databaseCrossReferences.filter(
+        xref => xref.databaseType !== 'EMBL'
+      ),
+      ...joined,
+    ];
     const xrefs = getXrefsForSection(
-      data.databaseCrossReferences,
+      newXrefs,
       EntrySection.Sequence,
       data.genes
     );

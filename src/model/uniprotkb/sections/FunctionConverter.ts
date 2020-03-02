@@ -147,17 +147,9 @@ const convertFunction = (data: UniProtkbAPIModel) => {
     const goTerms = (data.databaseCrossReferences.filter(
       xref => xref.databaseType === 'GO' && xref.properties
     ) as GoTerm[]).map(term => {
-      const goTermProperty =
-        term.properties &&
-        term.properties.find(property => property.key === 'GoTerm');
-      const aspect =
-        goTermProperty &&
-        goTermProperty.value &&
-        goTermProperty.value.substring(0, 1);
-      const termDescription =
-        goTermProperty &&
-        goTermProperty.value &&
-        goTermProperty.value.substring(2);
+      const goTermProperty = term.properties && term.properties.GoTerm;
+      const aspect = goTermProperty && goTermProperty.substring(0, 1);
+      const termDescription = goTermProperty && goTermProperty.substring(2);
       return {
         ...term,
         aspect: GoAspect[aspect as keyof typeof GoAspect],

@@ -8,7 +8,7 @@
           {
             "databaseType": "EMBL",
             "id": "1234",
-            "properties": [{ "key": "propKey", "value": "propValue" }],
+            "properties": { "propKey": "propValue" },
             "isoformId": "ABCD"
           }
         ]

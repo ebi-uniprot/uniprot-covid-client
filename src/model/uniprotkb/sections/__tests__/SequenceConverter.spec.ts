@@ -1,7 +1,14 @@
 import { convertSequence } from '../SequenceConverter';
 import modelData from '../../../__mocks__/entryModelData.json';
+import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Sequence data converter', () => {
+  beforeAll(() => {
+    modelData.databaseCrossReferences = convertXrefProperties(
+      modelData.databaseCrossReferences
+    );
+  });
+
   test('should convert the data', () => {
     const convertedData = convertSequence(modelData);
     expect(convertedData).toEqual({
@@ -171,9 +178,7 @@ describe('Sequence data converter', () => {
                   ],
                   id: 'id value',
                   isoformId: 'Q9NXB0-1',
-                  properties: [
-                    { key: 'ProteinId', value: 'description value' },
-                  ],
+                  properties: { ProteinId: 'description value' },
                 },
               ],
             },

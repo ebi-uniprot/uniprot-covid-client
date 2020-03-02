@@ -26,10 +26,8 @@ const convertStructure = (data: UniProtkbAPIModel) => {
     const structureInfo = data.databaseCrossReferences
       .filter(ref => ref.databaseType === 'PDB')
       .map(item => {
-        const method =
-          item.properties &&
-          item.properties.find(property => property.key === 'Method');
-        return { ...item, method: method ? method.value : '' };
+        const method = item.properties && item.properties.Method;
+        return { ...item, method };
       });
     const groupedStructureInfo = groupBy(
       structureInfo,
