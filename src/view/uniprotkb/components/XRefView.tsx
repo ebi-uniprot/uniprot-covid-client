@@ -266,11 +266,23 @@ const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> 
     ({ database }) =>
       PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
   );
+  // Though we have partitioned the xrefs into PDB* and non-PDB* we only need the
+  // information from the PDB xref entries (ie not PDBsum)
+  let PDBXRefViewNode;
+  if (dataTableDatabases) {
+    const PDBDatabaseSingleton = dataTableDatabases.filter(
+      ({ database }) => database === 'PDB'
+    );
+    if (PDBDatabaseSingleton && PDBDatabaseSingleton.length === 1) {
+      const { xrefs } = PDBDatabaseSingleton[0];
+      if (xrefs.length) {
+        PDBXRefViewNode = <PDBXRefView xrefs={xrefs} />;
+      }
+    }
+  }
   return (
     <Fragment>
-      {dataTableDatabases && dataTableDatabases.length && (
-        <PDBXRefView databases={dataTableDatabases} />
-      )}
+      {PDBXRefViewNode}
       {defaultDatabases && defaultDatabases.length && (
         <XRefsGroupedByCategory
           databases={defaultDatabases}

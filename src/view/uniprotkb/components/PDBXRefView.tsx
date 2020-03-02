@@ -4,18 +4,12 @@ import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
 import { PDBMirrorsInfo } from '../../../data/database';
 import { processUrlTemplate } from './XRefView';
-import { XrefsGoupedByDatabase } from '../../../model/utils/XrefUtils';
+import { Xref } from '../../../model/types/CommentTypes';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
 
-const processData = (databases: XrefsGoupedByDatabase[]) => {
-  // We only need the information from the PDB xref entries
-  const PDBDatabase = databases.filter(({ database }) => database === 'PDB');
-  if (!PDBDatabase || PDBDatabase.length !== 1) {
-    return null;
-  }
-  const { xrefs } = PDBDatabase[0];
-  return xrefs.map(({ id, properties }) => {
+const processData = (xrefs: Xref[]) =>
+  xrefs.map(({ id, properties }) => {
     if (!properties) {
       return null;
     }
@@ -36,7 +30,6 @@ const processData = (databases: XrefsGoupedByDatabase[]) => {
       positions,
     };
   });
-};
 
 export type ProtvistaPDB = {
   id: string;
@@ -90,9 +83,9 @@ const getColumnConfig = () => ({
 });
 
 const PDBXRefView: FC<{
-  databases: XrefsGoupedByDatabase[];
-}> = ({ databases }) => {
-  const data = processData(databases);
+  xrefs: Xref[];
+}> = ({ xrefs }) => {
+  const data = processData(xrefs);
   const setTableData = useCallback(
     (node): void => {
       if (node) {
