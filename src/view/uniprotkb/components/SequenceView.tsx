@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
+import { Link } from 'react-router-dom';
 import {
   Isoform,
   SequenceCautionComment,
@@ -88,9 +89,10 @@ export const SequenceInfo: React.FC<{
   );
 };
 
-export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
-  isoformData,
-}) => {
+export const IsoformInfo: React.FC<{
+  isoformData: Isoform;
+  canonicalAccession: string;
+}> = ({ isoformData, canonicalAccession }) => {
   const infoListData = [
     {
       title: 'Name',
@@ -101,6 +103,29 @@ export const IsoformInfo: React.FC<{ isoformData: Isoform }> = ({
       content: (idx(isoformData, o => o.synonyms) || [])
         .map(syn => syn.value)
         .join(', '),
+    },
+    {
+      title: 'Differences from canonical',
+      content: isoformData.varSeqs && !!isoformData.varSeqs.length && (
+        <ul className="no-bullet">
+          {isoformData.varSeqs.map(
+            ({ location, alternativeSequence, evidences }) => (
+              <li key={`${location.start.value}-${location.end.value}`}>
+                <Link
+                  to={`/blast/accession/${canonicalAccession}/positions/${location.start.value}-${location.end.value}`}
+                >{`${location.start.value}-${location.end.value}: `}</Link>
+                {alternativeSequence && alternativeSequence.originalSequence
+                  ? `${
+                      alternativeSequence.originalSequence
+                    }  → ${alternativeSequence.alternativeSequences &&
+                      alternativeSequence.alternativeSequences.join(', ')}`
+                  : 'Missing'}
+                {evidences && <UniProtEvidenceTag evidences={evidences} />}
+              </li>
+            )
+          )}
+        </ul>
+      ),
     },
     {
       title: 'Note',
@@ -221,15 +246,22 @@ export const IsoformView: React.FC<{
   alternativeProducts: AlternativeProductsComment;
   canonicalComponent?: JSX.Element;
   includeSequences?: boolean;
-}> = ({ alternativeProducts, canonicalComponent, includeSequences = true }) => {
+  canonicalAccession: string;
+}> = ({
+  alternativeProducts,
+  canonicalComponent,
+  includeSequences = true,
+  canonicalAccession,
+}) => {
   let isoformCountNode;
-  if (alternativeProducts.isoforms && alternativeProducts.events) {
+  const { isoforms, events } = alternativeProducts;
+  if (isoforms && events) {
     isoformCountNode = (
       <p>
         {`This entry describes `}
-        <strong>{alternativeProducts.isoforms.length}</strong>
+        <strong>{isoforms.length}</strong>
         {` isoforms produced by `}
-        <strong>{alternativeProducts.events.join(' & ')}</strong>.
+        <strong>{events.join(' & ')}</strong>.
       </p>
     );
   }
@@ -241,14 +273,17 @@ export const IsoformView: React.FC<{
   }
 
   let isoformsNode;
-  if (alternativeProducts.isoforms) {
-    isoformsNode = alternativeProducts.isoforms.map(isoform => {
+  if (isoforms) {
+    isoformsNode = isoforms.map(isoform => {
       const isoformComponent = (
         <SequenceInfo isoformId={isoform.isoformIds[0]} />
       );
       return (
         <Fragment key={isoform.isoformIds.join('')}>
-          <IsoformInfo isoformData={isoform} />
+          <IsoformInfo
+            isoformData={isoform}
+            canonicalAccession={canonicalAccession}
+          />
           {includeSequences && (
             <Fragment>
               {canonicalComponent &&
@@ -309,6 +344,7 @@ const SequenceView: React.FC<SequenceViewProps> = ({ accession, data }) => {
       <IsoformView
         alternativeProducts={data.alternativeProducts}
         canonicalComponent={canonicalComponent}
+        canonicalAccession={accession}
       />
     </Fragment>
   );

@@ -146,6 +146,28 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
       return sequenceFeatures.includes(feature.type);
     });
     sequenceData.featuresData = features;
+    // Add VAR_SEQ to corresponding isoforms
+    if (features && sequenceData.alternativeProducts) {
+      const varSeqs = features.filter(
+        feature => feature.type === FeatureType.VAR_SEQ
+      );
+      sequenceData.alternativeProducts.isoforms = sequenceData.alternativeProducts.isoforms.map(
+        isoform => {
+          const varSeqsToAdd: FeatureData = [];
+          if (isoform.sequenceIds && varSeqs.length !== 0) {
+            isoform.sequenceIds.forEach(sequenceId => {
+              const varSeqToAdd = varSeqs.find(
+                varSeq => varSeq.featureId === sequenceId
+              );
+              if (varSeqToAdd) {
+                varSeqsToAdd.push(varSeqToAdd);
+              }
+            });
+          }
+          return { ...isoform, varSeqs: varSeqsToAdd };
+        }
+      );
+    }
   }
   if (data.databaseCrossReferences) {
     // Some EMBL xrefs need to be merged

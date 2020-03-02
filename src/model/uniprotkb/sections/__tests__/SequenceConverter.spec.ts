@@ -56,6 +56,7 @@ describe('Sequence data converter', () => {
                 value: 'syn value',
               },
             ],
+            varSeqs: [],
           },
         ],
         note: {
