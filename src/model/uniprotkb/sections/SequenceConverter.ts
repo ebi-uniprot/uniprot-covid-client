@@ -150,7 +150,7 @@ export const convertSequence = (data: UniProtkbAPIModel) => {
       sequenceData.alternativeProducts.isoforms = sequenceData.alternativeProducts.isoforms.map(
         isoform => {
           const varSeqsToAdd: FeatureData = [];
-          if (isoform.sequenceIds) {
+          if (isoform.sequenceIds && varSeqs.length !== 0) {
             isoform.sequenceIds.forEach(sequenceId => {
               const varSeqToAdd = varSeqs.find(
                 varSeq => varSeq.featureId === sequenceId
