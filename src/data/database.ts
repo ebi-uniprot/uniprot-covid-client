@@ -36,6 +36,12 @@ export const {
   implicitDatabaseXRefs,
 } = getDatabaseInfoMaps(databaseInfo);
 
+export const PDBMirrors = ['PDB', 'RCSB-PDB', 'PDBj', 'PDBsum'];
+
+export const PDBMirrorsInfo = PDBMirrors.map(
+  PDBMirror => databaseToDatabaseInfo[PDBMirror]
+);
+
 const databaseSelector = selectDatabases(databaseCategoryToNames);
 
 export const entrySectionToDatabaseNames = new Map<EntrySection, string[]>();
@@ -138,9 +144,8 @@ entrySectionToDatabaseNames.set(
     whitelist: [
       'EvolutionaryTrace',
       'ModBase', // Implicit
-      'PDBe-KB', // Implicit
     ],
-    blacklist: ['PDB', 'PDBsum'],
+    blacklist: PDBMirrors,
   })
 );
 
@@ -153,6 +158,7 @@ entrySectionToDatabaseNames.set(
       'HUGE', // Implicit
       'ROUGE', // Implicit
       'GenAtlas', // Implicit
+      ...PDBMirrors,
     ],
   })
 );
@@ -183,7 +189,7 @@ export const getDatabaseInfoByName = (dbName: string) =>
 export const implicitDatabaseDRPresence: { [key: string]: string[] } = {
   // these EMBL mirrors are taken care of in xrefview as they are displayed differently
   // EMBL: ['GenBank', 'DDBJ'],
-  PDB: ['PDBe-KB', 'PDBj', 'RCSB-PDB'], // eg P05067
+  PDB: ['PDBe-KB'], // eg P05067
   MIM: ['SOURCE_MIM'], // eg P05067
   MGI: ['SOURCE_MGI'], // eg E9PXF8
   HGNC: ['GenAtlas'], // eg Q9Y263

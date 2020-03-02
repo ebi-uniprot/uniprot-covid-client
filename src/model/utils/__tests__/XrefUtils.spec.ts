@@ -38,16 +38,6 @@ describe('XrefUtils tests', () => {
         properties: { GeneName: 'APP' },
       },
       {
-        databaseType: 'PDBj',
-        implicit: true,
-        properties: { GeneName: 'APP' },
-      },
-      {
-        databaseType: 'RCSB-PDB',
-        implicit: true,
-        properties: { GeneName: 'APP' },
-      },
-      {
         databaseType: 'SOURCE_MIM',
         implicit: true,
         properties: { GeneName: 'APP' },

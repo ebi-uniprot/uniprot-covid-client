@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { v1 } from 'uuid';
 import idx from 'idx';
-import { sortBy } from 'lodash';
+import { sortBy, groupBy } from 'lodash';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
+  PDBMirrors,
 } from '../../../data/database';
 import {
   XrefUIModel,
@@ -16,7 +17,9 @@ import { PropertyKey } from '../../../model/types/modelTypes';
 import {
   DatabaseInfoPoint,
   AttributesItem,
+  DatabaseCategory,
 } from '../../../model/types/DatabaseTypes';
+import PDBXRefView from './PDBXRefView';
 import EMBLXrefProperties from '../../../data/EMBLXrefProperties.json';
 import externalUrls from '../../../utils/externalUrls';
 
@@ -90,7 +93,7 @@ type XRefProps = {
   crc64?: string;
 };
 
-const EMBLXref: React.FC<{
+const EMBLXref: FC<{
   databaseInfo: DatabaseInfoPoint;
   params: { [key: string]: string };
   id: string | undefined;
@@ -150,7 +153,7 @@ const EMBLXref: React.FC<{
   );
 };
 
-export const XRef: React.FC<XRefProps> = ({
+export const XRef: FC<XRefProps> = ({
   database,
   xref,
   primaryAccession,
@@ -223,7 +226,7 @@ export const XRef: React.FC<XRefProps> = ({
   );
 };
 
-export const DatabaseList: React.FC<{
+export const DatabaseList: FC<{
   xrefsGoupedByDatabase: XrefsGoupedByDatabase;
   primaryAccession: string;
   crc64?: string;
@@ -247,13 +250,54 @@ export const DatabaseList: React.FC<{
   </ExpandableList>
 );
 
-type XRefCategoryInfoListProps = {
+type StructureXRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
   primaryAccession: string;
   crc64?: string;
 };
 
-const XRefCategoryInfoList: React.FC<XRefCategoryInfoListProps> = ({
+const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> = ({
+  databases,
+  primaryAccession,
+  crc64,
+}): JSX.Element => {
+  const { dataTableDatabases, defaultDatabases } = groupBy(
+    databases,
+    ({ database }) =>
+      PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
+  );
+  // Though we have partitioned the xrefs into PDB* and non-PDB* we only need the
+  // information from the PDB xref entries (ie not PDBsum)
+  let PDBXRefViewNode;
+  if (dataTableDatabases) {
+    const PDBDatabase = dataTableDatabases.find(
+      ({ database }) => database === 'PDB'
+    );
+    if (PDBDatabase && PDBDatabase.xrefs.length) {
+      PDBXRefViewNode = <PDBXRefView xrefs={PDBDatabase.xrefs} />;
+    }
+  }
+  return (
+    <Fragment>
+      {PDBXRefViewNode}
+      {defaultDatabases && defaultDatabases.length && (
+        <XRefsGroupedByCategory
+          databases={defaultDatabases}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
+      )}
+    </Fragment>
+  );
+};
+
+type XRefsGroupedByCategoryProps = {
+  databases: XrefsGoupedByDatabase[];
+  primaryAccession: string;
+  crc64?: string;
+};
+
+const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
@@ -286,7 +330,7 @@ type XRefViewProps = {
   crc64?: string;
 };
 
-const XRefView: React.FC<XRefViewProps> = ({
+const XRefView: FC<XRefViewProps> = ({
   xrefs,
   primaryAccession,
   crc64,
@@ -296,13 +340,20 @@ const XRefView: React.FC<XRefViewProps> = ({
   }
   const nodes = xrefs.map(
     ({ databases, category }): JSX.Element => {
-      const infoListNode = (
-        <XRefCategoryInfoList
-          databases={databases}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-        />
-      );
+      const xrefsNode =
+        category === DatabaseCategory.STRUCTURE ? (
+          <StructureXRefsGroupedByCategory
+            databases={databases}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+          />
+        ) : (
+          <XRefsGroupedByCategory
+            databases={databases}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+          />
+        );
       let title;
       if (category && databaseCategoryToString[category]) {
         title = databaseCategoryToString[category];
@@ -310,7 +361,7 @@ const XRefView: React.FC<XRefViewProps> = ({
       return (
         <Fragment key={v1()}>
           <h3>{title}</h3>
-          {infoListNode}
+          {xrefsNode}
         </Fragment>
       );
     }

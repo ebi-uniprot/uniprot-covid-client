@@ -93,7 +93,7 @@
 	},
 	{
 		"name": "PDB",
-		"displayName": "PDB",
+		"displayName": "PDBe",
 		"category": "3DS",
 		"uriLink": "https://www.ebi.ac.uk/pdbe-srv/view/entry/%id",
 		"attributes": [{
@@ -156,7 +156,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://pdbj.org/mine/summary/%primaryAccession"
+		"uriLink": "https://pdbj.org/mine/summary/%id"
 	},
 
 	{
@@ -165,7 +165,7 @@
 		"category": "3DS",
 		"implicit": true,
 		"linkedReason": "DR:PDB",
-		"uriLink": "https://www.rcsb.org/structure/%primaryAccession"
+		"uriLink": "https://www.rcsb.org/structure/%id"
 	},
 
 

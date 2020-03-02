@@ -42,7 +42,7 @@ export const requestEntry = () => action(REQUEST_ENTRY);
 
 const shouldFetchEntry = (accessionToFetch: string, state: RootState) => {
   const { accession, isFetching } = state.entry;
-  return !isFetching || accession === accessionToFetch;
+  return !isFetching || accession !== accessionToFetch;
 };
 
 export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
