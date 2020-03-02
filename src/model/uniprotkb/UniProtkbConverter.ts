@@ -32,19 +32,23 @@ export enum EntryType {
 }
 
 export type Citation = {
-  citation: {
-    citationType?: string;
-    authors?: string[];
-    citationXrefs?: Xref[];
-    title?: string;
-    publicationDate?: number;
-    journal?: string;
-    firstPage?: number;
-    lastPage?: number;
-    volume?: number;
-    authoringGroup?: string[];
-    submissionDatabase?: string;
-  };
+  citationType?: string;
+  authors?: string[];
+  citationXrefs?: Xref[];
+  title?: string;
+  publicationDate?: number;
+  journal?: string;
+  firstPage?: number;
+  lastPage?: number;
+  volume?: number;
+  completeAuthorList?: boolean;
+  literatureAbstract?: string;
+  authoringGroup?: string[];
+  submissionDatabase?: string;
+};
+
+export type Reference = {
+  citation: Citation;
   referencePositions?: string[];
   referenceComments?: {
     value: string;
@@ -68,7 +72,7 @@ export type UniProtkbAPIModel = {
   sequence: SequenceData;
   annotationScore: number;
   entryAudit?: EntryAudit;
-  references?: Citation[];
+  references?: Reference[];
 };
 
 export type UniProtkbUIModel = {
@@ -88,7 +92,7 @@ export type UniProtkbUIModel = {
   [EntrySection.Structure]: UIModel;
   [EntrySection.FamilyAndDomains]: UIModel;
   [EntrySection.ExternalLinks]: UIModel;
-  references?: Citation[];
+  references?: Reference[];
 };
 
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => ({

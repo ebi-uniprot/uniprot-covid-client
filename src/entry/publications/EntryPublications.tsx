@@ -22,85 +22,77 @@ const EntryPublications: FC<{
           idKey="id"
           data={data}
           dataRenderer={({
-            literatureMappedReference,
+            reference,
             publicationSource,
-            uniProtReference,
+            statistics,
             categories,
-            literatureEntry,
           }: LiteratureForProteinAPI) => {
-            let infoListData;
-            if (literatureMappedReference) {
-              const {
-                annotation,
-                source,
-                sourceId,
-              } = literatureMappedReference;
-              infoListData = [
-                {
-                  title: 'Annotation',
-                  content: annotation,
-                },
-                {
-                  title: 'Mapping Source',
-                  content: `${source}:${sourceId}`,
-                },
-                {
-                  title: 'Source',
-                  content: publicationSource,
-                },
-              ];
-            } else if (uniProtReference) {
-              const {
-                referencePositions,
-                referenceComments,
-              } = uniProtReference;
-              infoListData = [
-                {
-                  title: 'Cited for',
-                  content: referencePositions,
-                },
-                {
-                  title: 'Tissue',
-                  content: referenceComments && (
-                    <ul className="no-bullet">
-                      {referenceComments.map(comment => (
-                        <li key={comment.value}>{comment.value}</li>
-                      ))}
-                    </ul>
-                  ),
-                },
-                {
-                  title: 'Categories',
-                  content: categories && (
-                    <ul className="no-bullet">
-                      {uniq(categories).map(category => (
-                        <li key={category}>{category}</li>
-                      ))}
-                    </ul>
-                  ),
-                },
-                {
-                  title: 'Source',
-                  content: publicationSource,
-                },
-              ];
-            }
-            if (literatureEntry) {
-              const { literatureAbstract, statistics } = literatureEntry;
-              return (
+            const {
+              citation,
+              referencePositions,
+              referenceComments,
+            } = reference;
+
+            const pubMedXref =
+              citation.citationXrefs &&
+              citation.citationXrefs.find(
+                xref => xref.databaseType === 'PubMed'
+              );
+
+            const doiXref =
+              citation.citationXrefs &&
+              citation.citationXrefs.find(xref => xref.databaseType === 'DOI');
+
+            const pubmedId = pubMedXref && pubMedXref.id;
+
+            const journalInfo = {
+              journal: citation.journal,
+              volume: citation.volume,
+              firstPage: citation.firstPage,
+              lastPage: citation.lastPage,
+              publicationDate: citation.publicationDate,
+              doiId: doiXref && doiXref.id,
+            };
+
+            const infoListData = [
+              {
+                title: 'Cited for',
+                content: referencePositions,
+              },
+              {
+                title: 'Tissue',
+                content: referenceComments && (
+                  <ul className="no-bullet">
+                    {referenceComments.map(comment => (
+                      <li key={comment.value}>{comment.value}</li>
+                    ))}
+                  </ul>
+                ),
+              },
+              {
+                title: 'Categories',
+                content: categories && (
+                  <ul className="no-bullet">
+                    {uniq(categories).map(category => (
+                      <li key={category}>{category}</li>
+                    ))}
+                  </ul>
+                ),
+              },
+              {
+                title: 'Source',
+                content: publicationSource,
+              },
+            ];
+            return (
+              reference && (
                 <Publication
-                  {...literatureEntry}
-                  abstract={literatureAbstract}
+                  {...citation}
+                  abstract={citation.literatureAbstract}
                   infoData={infoListData}
                   statistics={statistics}
-                />
-              );
-            }
-            return (
-              uniProtReference && (
-                <Publication
-                  {...uniProtReference.citation}
-                  infoData={infoListData}
+                  pubmedId={pubmedId}
+                  journalInfo={journalInfo}
                 />
               )
             );
