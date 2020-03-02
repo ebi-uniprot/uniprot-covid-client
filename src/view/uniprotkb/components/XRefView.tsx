@@ -270,14 +270,11 @@ const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> 
   // information from the PDB xref entries (ie not PDBsum)
   let PDBXRefViewNode;
   if (dataTableDatabases) {
-    const PDBDatabaseSingleton = dataTableDatabases.filter(
+    const PDBDatabase = dataTableDatabases.find(
       ({ database }) => database === 'PDB'
     );
-    if (PDBDatabaseSingleton && PDBDatabaseSingleton.length === 1) {
-      const { xrefs } = PDBDatabaseSingleton[0];
-      if (xrefs.length) {
-        PDBXRefViewNode = <PDBXRefView xrefs={xrefs} />;
-      }
+    if (PDBDatabase && PDBDatabase.xrefs.length) {
+      PDBXRefViewNode = <PDBXRefView xrefs={PDBDatabase.xrefs} />;
     }
   }
   return (
