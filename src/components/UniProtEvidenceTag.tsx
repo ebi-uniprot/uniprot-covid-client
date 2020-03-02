@@ -1,16 +1,17 @@
 import React, { FC, Fragment } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { groupBy } from 'lodash';
-import { EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
+import { ExternalLink, EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { Link } from 'react-router-dom';
 import {
   getEvidenceCodeData,
   EvidenceData,
 } from '../model/types/EvidenceCodes';
 import { Evidence } from '../model/types/modelTypes';
 import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
+import { processUrlTemplate } from '../view/uniprotkb/components/XRefView';
+import evidenceUrls from '../utils/evidenceUrls';
 
 enum evidenceTagSourceTypes {
   PUBMED = 'PubMed',
@@ -20,51 +21,50 @@ enum evidenceTagSourceTypes {
 
 export const UniProtEvidenceTagContent: FC<{
   evidenceData: EvidenceData;
-  references: Evidence[] | undefined;
-}> = ({ evidenceData, references }) => {
-  if (!references || references.length <= 0) {
+  evidences: Evidence[] | undefined;
+}> = ({ evidenceData, evidences }) => {
+  if (!evidences || evidences.length <= 0) {
     return null;
   }
-  const groupedReferences =
-    references &&
-    groupBy(references, (reference: Evidence) => reference.source);
-  // TODO it looks like there's more source types than defined here
+  const groupedEvidences =
+    evidences && groupBy(evidences, (evidence: Evidence) => evidence.source);
+
+  const publicationReferences = groupedEvidences[evidenceTagSourceTypes.PUBMED];
+
+  delete groupedEvidences[evidenceTagSourceTypes.PUBMED];
+
   return (
     <div>
       <h5>{evidenceData.label}</h5>
-      {groupedReferences &&
-        groupedReferences[evidenceTagSourceTypes.PUBMED] && (
-          <UniProtKBEntryPublications
-            pubmedIds={
-              groupedReferences[evidenceTagSourceTypes.PUBMED]
-                .map((reference: Evidence) => reference.id)
-                .filter((id?: string) => id) as string[]
-            }
-          />
-        )}
-      {groupedReferences && groupedReferences[evidenceTagSourceTypes.UNIPROT] && (
-        <Fragment>
-          {groupedReferences[evidenceTagSourceTypes.UNIPROT].map(
-            ({ id }: Evidence) => (
-              <Link to={`/uniprotkb/${id}`} key={id}>
-                {id}
-              </Link>
-            )
-          )}
-        </Fragment>
+      {publicationReferences && (
+        <UniProtKBEntryPublications
+          pubmedIds={
+            publicationReferences
+              .map((reference: Evidence) => reference.id)
+              .filter((id?: string) => id) as string[]
+          }
+        />
       )}
-      {groupedReferences &&
-        groupedReferences[evidenceTagSourceTypes.PROSITE_PRORULE] && (
-          <Fragment>
-            {groupedReferences[evidenceTagSourceTypes.PROSITE_PRORULE].map(
-              ({ id }: Evidence) => (
-                <a href={`//prosite.expasy.org/unirule/${id}`} key={id}>
-                  {id}
-                </a>
-              )
-            )}
-          </Fragment>
-        )}
+      {Object.keys(groupedEvidences).map(key => (
+        <Fragment key={key}>
+          {groupedEvidences[key].map(({ id }: Evidence) => {
+            if (!id) {
+              return null;
+            }
+            const urlPattern = evidenceUrls[key];
+            return urlPattern ? (
+              <ExternalLink
+                url={processUrlTemplate(urlPattern, { value: id })}
+                key={id}
+              >
+                {id}
+              </ExternalLink>
+            ) : (
+              <Fragment key={id}>{id}</Fragment>
+            );
+          })}
+        </Fragment>
+      ))}
     </div>
   );
 };
@@ -96,7 +96,7 @@ const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
         >
           <UniProtEvidenceTagContent
             evidenceData={evidenceData}
-            references={references}
+            evidences={references}
           />
         </EvidenceTag>
       );
