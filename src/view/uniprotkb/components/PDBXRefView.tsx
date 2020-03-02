@@ -1,67 +1,76 @@
-import React, { Fragment, useCallback, useState, FC } from 'react';
+import React, { useCallback, FC } from 'react';
 import ProtvistaDatatable from 'protvista-datatable';
-import { loadWebComponent } from '../../../utils/utils';
-import { getPropertyValue } from '../../../model/utils/utils';
 import { TemplateResult, html } from 'lit-html';
-import { PDBMirrorsInfo, databaseToDatabaseInfo } from '../../../data/database';
+import { loadWebComponent } from '../../../utils/utils';
+import { PDBMirrorsInfo } from '../../../data/database';
 import { processUrlTemplate } from './XRefView';
+import { XrefsGoupedByDatabase } from '../../../model/utils/XrefUtils';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
 
-const processData = databases => {
+const processData = (databases: XrefsGoupedByDatabase[]) => {
   // We only need the information from the PDB xref entries
   const PDBDatabase = databases.filter(({ database }) => database === 'PDB');
   if (!PDBDatabase || PDBDatabase.length !== 1) {
-    return;
+    return null;
   }
   const { xrefs } = PDBDatabase[0];
   return xrefs.map(({ id, properties }) => {
-    const chains = getPropertyValue(properties, 'Chains');
+    if (!properties) {
+      return null;
+    }
+    const { Chains, Resolution, Method } = properties;
     let chain;
     let positions;
-    if (chains) {
-      const tokens = chains.split('=');
+    if (Chains) {
+      const tokens = Chains.split('=');
       if (tokens.length === 2) {
-        chain = tokens[0];
-        positions = tokens[1];
+        [chain, positions] = tokens;
       }
     }
-    const resolution = getPropertyValue(properties, 'Resolution');
     return {
       id,
-      method: getPropertyValue(properties, 'Method'),
-      resolution: !resolution || resolution === '-' ? null : resolution,
+      method: Method,
+      resolution: !Resolution || Resolution === '-' ? null : Resolution,
       chain,
       positions,
     };
   });
 };
 
+export type ProtvistaPDB = {
+  id: string;
+  method: string;
+  resolution: string;
+  positions: string;
+  chain: string;
+};
+
 const getColumnConfig = () => ({
   type: {
     label: 'PDB Entry',
-    resolver: ({ id }): string => id,
+    resolver: ({ id }: ProtvistaPDB): string => id,
   },
   method: {
     label: 'Method',
-    resolver: ({ method }): string => method,
+    resolver: ({ method }: ProtvistaPDB): string => method,
   },
   resolution: {
     label: 'Resolution',
-    resolver: ({ resolution }): string =>
+    resolver: ({ resolution }: ProtvistaPDB): string =>
       resolution && resolution.replace('A', 'Å'),
   },
   chain: {
     label: 'Chain',
-    resolver: ({ chain }): string => chain,
+    resolver: ({ chain }: ProtvistaPDB): string => chain,
   },
   positions: {
     label: 'Positions',
-    resolver: ({ positions }): string => positions,
+    resolver: ({ positions }: ProtvistaPDB): string => positions,
   },
   links: {
     label: 'Links',
-    resolver: ({ id }): TemplateResult =>
+    resolver: ({ id }: ProtvistaPDB): TemplateResult =>
       html`
         ${PDBMirrorsInfo.map(
           ({ displayName, uriLink }) =>
@@ -80,7 +89,9 @@ const getColumnConfig = () => ({
   },
 });
 
-const PDBXRefView = ({ databases }) => {
+const PDBXRefView: FC<{
+  databases: XrefsGoupedByDatabase[];
+}> = ({ databases }) => {
   const data = processData(databases);
   const setTableData = useCallback(
     (node): void => {
@@ -91,7 +102,7 @@ const PDBXRefView = ({ databases }) => {
         node.columns = getColumnConfig();
       }
     },
-    [databases]
+    [data]
   );
   return <protvista-datatable ref={setTableData} />;
 };

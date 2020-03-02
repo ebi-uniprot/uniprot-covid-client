@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { v1 } from 'uuid';
 import idx from 'idx';
 import { sortBy, groupBy } from 'lodash';
@@ -93,7 +93,7 @@ type XRefProps = {
   crc64?: string;
 };
 
-const EMBLXref: React.FC<{
+const EMBLXref: FC<{
   databaseInfo: DatabaseInfoPoint;
   params: { [key: string]: string };
   id: string | undefined;
@@ -153,7 +153,7 @@ const EMBLXref: React.FC<{
   );
 };
 
-export const XRef: React.FC<XRefProps> = ({
+export const XRef: FC<XRefProps> = ({
   database,
   xref,
   primaryAccession,
@@ -226,7 +226,7 @@ export const XRef: React.FC<XRefProps> = ({
   );
 };
 
-export const DatabaseList: React.FC<{
+export const DatabaseList: FC<{
   xrefsGoupedByDatabase: XrefsGoupedByDatabase;
   primaryAccession: string;
   crc64?: string;
@@ -256,7 +256,7 @@ type StructureXRefsGroupedByCategoryProps = {
   crc64?: string;
 };
 
-const StructureXRefsGroupedByCategory: React.FC<StructureXRefsGroupedByCategoryProps> = ({
+const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
@@ -288,7 +288,7 @@ type XRefsGroupedByCategoryProps = {
   crc64?: string;
 };
 
-const XRefsGroupedByCategory: React.FC<XRefsGroupedByCategoryProps> = ({
+const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
@@ -321,7 +321,7 @@ type XRefViewProps = {
   crc64?: string;
 };
 
-const XRefView: React.FC<XRefViewProps> = ({
+const XRefView: FC<XRefViewProps> = ({
   xrefs,
   primaryAccession,
   crc64,

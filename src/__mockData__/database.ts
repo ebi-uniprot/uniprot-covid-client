@@ -419,5 +419,5 @@ export const expectedEntrySectionToDatabaseCategoryOrder = [
   ['Protein Processing', ['PROTEOMIC', '2DG', 'PTM']],
   ['Sequence', ['SEQ', 'GMA']],
   ['Structure', ['3DS', 'OTHER']],
-  ['External Links', ['OTHER', 'PAM', 'ORG']],
+  ['External Links', ['OTHER', 'PAM', 'ORG', '3DS']],
 ];
