@@ -24,7 +24,6 @@ export type ResultsState = {
     data: FieldData;
     isFetching: boolean;
   };
-  summaryAccession: string | null;
 };
 
 export const defaultTableColumns = [
@@ -63,7 +62,6 @@ const resultsInitialState = {
     },
     isFetching: false,
   },
-  summaryAccession: null,
 };
 
 export default resultsInitialState;

@@ -39,7 +39,6 @@ type ResultsProps = {
   dispatchResetSearchInput: () => void;
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
-  dispatchUpdateSummaryAccession: (accession: string) => void;
   dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
@@ -50,7 +49,6 @@ type ResultsProps = {
   nextUrl: string;
   totalNumberResults: number;
   viewMode: ViewMode;
-  summaryAccession: string | null;
 } & RouteComponentProps;
 
 type ResultsContainerState = {
@@ -253,14 +251,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       facets,
       isFetching,
       dispatchFetchBatchOfResultsIfNeeded,
-      dispatchUpdateSummaryAccession,
       namespace,
       nextUrl,
       totalNumberResults,
       viewMode,
       tableColumns,
       dispatchSwitchViewMode,
-      summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
     const {
@@ -363,8 +359,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             handleEntrySelection={this.handleEntrySelection}
             selectedEntries={selectedEntries}
             handleHeaderClick={this.updateColumnSort}
-            handleCardClick={dispatchUpdateSummaryAccession}
-            summaryAccession={summaryAccession}
             sortColumn={sortColumn}
             sortDirection={sortDirection}
             handleLoadMoreRows={() =>
@@ -391,7 +385,6 @@ const mapStateToProps = (state: RootState) => {
     nextUrl: state.results.nextUrl,
     totalNumberResults: state.results.totalNumberResults,
     viewMode: state.results.viewMode,
-    summaryAccession: state.results.summaryAccession,
   };
 };
 
@@ -403,8 +396,6 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchResetSearchInput: () => searchActions.resetSearchInput(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
-      dispatchUpdateSummaryAccession: (accession: string) =>
-        resultsActions.updateSummaryAccession(accession),
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
     },
