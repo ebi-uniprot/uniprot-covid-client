@@ -1,17 +1,13 @@
-import React, { FC } from 'react';
-import { Bubble } from 'franklin-sites';
-import { HashLink as Link } from 'react-router-hash-link';
-import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
-import FeatureType from '../../../model/types/FeatureType';
+import { UniProtkbAPIModel } from '../UniProtkbConverter';
+import FeatureType from '../../types/FeatureType';
 import {
   CommentType,
   InteractionComment,
   DiseaseComment,
   AlternativeProductsComment,
-} from '../../../model/types/CommentTypes';
-import { FeatureData } from '../components/FeaturesView';
-import './ProteinHighlights.scss';
-import EntrySection from '../../../model/types/EntrySection';
+} from '../../types/CommentTypes';
+import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
+import EntrySection from '../../types/EntrySection';
 
 enum highlightSection {
   domains = 'domains',
@@ -44,45 +40,52 @@ const highlightToEntrySection = {
 const getFeatureCount = (features: FeatureData, type: FeatureType) =>
   features.filter(feature => feature.type === type).length;
 
-const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
+const getProteinHighlights = (data: UniProtkbAPIModel) => {
   const highlightsMap = new Map<highlightSection, number>();
+  const {
+    primaryAccession,
+    features,
+    comments,
+    databaseCrossReferences,
+    references,
+  } = data;
 
   // FEATURES
-  if (data.features) {
+  if (features) {
     // domains
     highlightsMap.set(
       highlightSection.domains,
-      getFeatureCount(data.features, FeatureType.DOMAIN)
+      getFeatureCount(features, FeatureType.DOMAIN)
     );
 
     // PTMs
     highlightsMap.set(
       highlightSection.PTM,
-      getFeatureCount(data.features, FeatureType.MOD_RES)
+      getFeatureCount(features, FeatureType.MOD_RES)
     );
 
     // variants
     highlightsMap.set(
       highlightSection.variants,
-      getFeatureCount(data.features, FeatureType.VARIANT)
+      getFeatureCount(features, FeatureType.VARIANT)
     );
 
     // mutagenesis
     highlightsMap.set(
       highlightSection.mutagenesis,
-      getFeatureCount(data.features, FeatureType.MUTAGEN)
+      getFeatureCount(features, FeatureType.MUTAGEN)
     );
 
     // active sites
     highlightsMap.set(
       highlightSection.activeSites,
-      getFeatureCount(data.features, FeatureType.ACT_SITE)
+      getFeatureCount(features, FeatureType.ACT_SITE)
     );
   }
 
-  if (data.comments) {
+  if (comments) {
     // isoforms
-    const isoformsComments = data.comments.find(
+    const isoformsComments = comments.find(
       comment => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
     ) as AlternativeProductsComment;
     highlightsMap.set(
@@ -91,7 +94,7 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
     );
 
     // interactions
-    const interactionComments = data.comments.find(
+    const interactionComments = comments.find(
       comment => comment.commentType === CommentType.INTERACTION
     ) as InteractionComment;
     highlightsMap.set(
@@ -100,13 +103,13 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
     );
 
     // diseases
-    const diseaseComments = data.comments.filter(
+    const diseaseComments = comments.filter(
       comment => comment.commentType === CommentType.DISEASE
     ) as DiseaseComment[];
     highlightsMap.set(highlightSection.disease, diseaseComments.length);
 
     // subcellular location
-    const subcellComments = data.comments.filter(
+    const subcellComments = comments.filter(
       comment => comment.commentType === CommentType.SUBCELLULAR_LOCATION
     );
     highlightsMap.set(highlightSection.subcell, subcellComments.length);
@@ -114,46 +117,26 @@ const ProteinHighlights: FC<{ data: UniProtkbAPIModel }> = ({ data }) => {
 
   // XREFS
   // 3D structures
-  if (data.databaseCrossReferences) {
-    const structures = data.databaseCrossReferences.filter(
+  if (databaseCrossReferences) {
+    const structures = databaseCrossReferences.filter(
       databaseCrossReference => databaseCrossReference.databaseType === 'PDB'
     );
     highlightsMap.set(highlightSection.structures, structures.length);
   }
 
   // publications
-  if (data.references) {
-    highlightsMap.set(highlightSection.publications, data.references.length);
+  if (references) {
+    highlightsMap.set(highlightSection.publications, references.length);
   }
-
   // TODO later
   // expression
   // biotech / distruption phenotype
 
-  return (
-    <div className="protein-highlights">
-      <h3>Protein Highlights</h3>
-      {Array.from(highlightsMap.keys()).map(name => {
-        const count = highlightsMap.get(name);
-        if (count === 0) {
-          return null;
-        }
-        return (
-          <div key={name} className="protein-highlights__item">
-            <Link
-              to={`/uniprotkb/${data.primaryAccession}#${highlightToEntrySection[name]}`}
-            >
-              <Bubble
-                value={highlightsMap.get(name)}
-                colourClass="colour-sea-blue"
-              />
-              {name}
-            </Link>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return Array.from(highlightsMap.keys()).map(highlightKey => ({
+    color: 'red',
+    link: `/uniprotkb/${primaryAccession}#${highlightToEntrySection[highlightKey]}`,
+    name: `${highlightsMap.get(highlightKey)} ${highlightKey}`,
+  }));
 };
 
-export default ProteinHighlights;
+export default getProteinHighlights;

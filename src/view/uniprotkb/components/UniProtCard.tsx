@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, Fragment } from 'react';
 import idx from 'idx';
+import { Card } from 'franklin-sites';
 import { truncate } from 'lodash';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
@@ -14,6 +15,7 @@ import {
   CommentType,
   FreeTextComment,
 } from '../../../model/types/CommentTypes';
+import getProteinHighlights from '../../../model/uniprotkb/summary/ProteinHighlights';
 
 const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
 
@@ -28,6 +30,8 @@ const UniProtCard: FC<{
   if (recommendedName) {
     recommendedNameNode = `${recommendedName} · `;
   }
+
+  const highlights = getProteinHighlights(data);
 
   const organismNameNode = (
     <Fragment>
@@ -94,7 +98,7 @@ const UniProtCard: FC<{
   }
 
   return (
-    <div>
+    <Card links={highlights}>
       <h3>
         <UniProtTitle
           primaryAccession={data.primaryAccession}
@@ -111,7 +115,7 @@ const UniProtCard: FC<{
       </p>
       <p>{functionNode}</p>
       <p>{keywordsNode}</p>
-    </div>
+    </Card>
   );
 };
 

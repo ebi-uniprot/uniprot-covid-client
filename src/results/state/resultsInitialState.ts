@@ -10,7 +10,6 @@ export enum ViewMode {
 
 export type ResultsState = {
   tableColumns: Column[];
-  cardColumns: Column[];
   facets: Facet[];
   nextUrl: string;
   results: {
@@ -37,15 +36,6 @@ export const defaultTableColumns = [
 
 const resultsInitialState = {
   tableColumns: defaultTableColumns,
-  cardColumns: [
-    Column.accession,
-    Column.id,
-    Column.proteinName,
-    Column.geneNames,
-    Column.organism,
-    Column.keyword,
-    Column.sequence,
-  ],
   results: {
     data: [],
     isFetching: false,

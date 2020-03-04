@@ -42,7 +42,6 @@ type ResultsProps = {
   dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
-  cardColumns: string[];
   results: UniProtkbAPIModel[];
   facets: Facet[];
   isFetching: boolean;
@@ -222,10 +221,10 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const {
       location: { search: queryParamFromUrl },
       tableColumns,
-      cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
       dispatchUpdateQueryString,
+      viewMode,
     } = this.props;
     const {
       query,
@@ -236,7 +235,10 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     // Always fetch at least the card columns so these can be rendered
     // Eg if no columns are selected for the table view ensure sufficient
     // columns will be fetched to render each card.
-    const columns = uniq([...cardColumns, ...tableColumns]);
+    let columns = null;
+    if (viewMode === ViewMode.TABLE) {
+      columns = uniq([...tableColumns]);
+    }
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
@@ -378,7 +380,6 @@ const mapStateToProps = (state: RootState) => {
   return {
     namespace: state.query.namespace,
     tableColumns: state.results.tableColumns,
-    cardColumns: state.results.cardColumns,
     results: state.results.results.data,
     facets: state.results.facets,
     isFetching: state.results.results.isFetching,
