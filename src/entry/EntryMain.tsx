@@ -4,6 +4,11 @@ import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
+import {
+  FileFormat,
+  fileFormatEntryDownload,
+} from '../results/types/resultsTypes';
+import apiUrls from '../utils/apiUrls';
 
 type EntryMainProps = {
   transformedData: UniProtkbUIModel;
@@ -38,24 +43,18 @@ const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
       >
         <div className="dropdown-menu__content">
           <ul>
-            <li>
-              <a href="//www.ensembl.org">Text</a>
-            </li>
-            <li>
-              <a href="//www.ensembl.org">FASTA(canonical)</a>
-            </li>
-            <li>
-              <a href="//www.ensembl.org">FASTA(canonical & isoform)</a>
-            </li>
-            <li>
-              <a href="//www.ensembl.org">XML</a>
-            </li>
-            <li>
-              <a href="//www.ensembl.org">RDF / XML</a>
-            </li>
-            <li>
-              <a href="//www.ensembl.org">GFF</a>
-            </li>
+            {fileFormatEntryDownload.map(fileFormat => (
+              <li key={fileFormat}>
+                <a
+                  href={apiUrls.entryDownload(
+                    transformedData.primaryAccession,
+                    fileFormat
+                  )}
+                >
+                  {fileFormat}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </DropdownButton>

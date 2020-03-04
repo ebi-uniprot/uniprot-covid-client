@@ -57,6 +57,9 @@ const apiUrls = {
   entry: (accession: string) =>
     joinUrl(devPrefix, '/uniprot/api/uniprotkb/accession', accession),
 
+  entryDownload: (accession: string, format: FileFormat) =>
+    `${apiUrls.entry(accession)}.${fileFormatToUrlParameter.get(format)}`,
+
   entryPublications: (accession: string) =>
     joinUrl(
       devPrefix,

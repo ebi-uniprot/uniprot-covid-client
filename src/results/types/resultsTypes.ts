@@ -100,3 +100,12 @@ export const fileFormatToUrlParameter = new Map<FileFormat, string>([
 ]);
 
 export const fileFormatsWithColumns = [FileFormat.tsv, FileFormat.excel];
+
+export const fileFormatEntryDownload = [
+  FileFormat.text,
+  FileFormat.fastaCanonical,
+  FileFormat.fastaCanonicalIsoform,
+  FileFormat.xml,
+  FileFormat.rdfXml,
+  FileFormat.gff,
+];
