@@ -1,5 +1,5 @@
 import React, { Fragment, memo } from 'react';
-import { Card, DownloadIcon } from 'franklin-sites';
+import { Card, DownloadIcon, DropdownButton } from 'franklin-sites';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
@@ -26,10 +26,39 @@ const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
       <button type="button" className="button tertiary">
         Align
       </button>
-      <button type="button" className="button tertiary">
-        <DownloadIcon />
-        Download
-      </button>
+      <DropdownButton
+        label={
+          <Fragment>
+            <DownloadIcon />
+            Download
+          </Fragment>
+        }
+        className="tertiary"
+        // onSelect={action('onSelect')}
+      >
+        <div className="dropdown-menu__content">
+          <ul>
+            <li>
+              <a href="//www.ensembl.org">Text</a>
+            </li>
+            <li>
+              <a href="//www.ensembl.org">FASTA(canonical)</a>
+            </li>
+            <li>
+              <a href="//www.ensembl.org">FASTA(canonical & isoform)</a>
+            </li>
+            <li>
+              <a href="//www.ensembl.org">XML</a>
+            </li>
+            <li>
+              <a href="//www.ensembl.org">RDF / XML</a>
+            </li>
+            <li>
+              <a href="//www.ensembl.org">GFF</a>
+            </li>
+          </ul>
+        </div>
+      </DropdownButton>
       <button type="button" className="button tertiary">
         Add
       </button>
