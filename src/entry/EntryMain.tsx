@@ -4,10 +4,7 @@ import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
-import {
-  FileFormat,
-  fileFormatEntryDownload,
-} from '../results/types/resultsTypes';
+import { fileFormatEntryDownload } from '../results/types/resultsTypes';
 import apiUrls from '../utils/apiUrls';
 
 type EntryMainProps = {
