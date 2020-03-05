@@ -2,7 +2,7 @@
 import React, { FC, Fragment } from 'react';
 import idx from 'idx';
 import { Card } from 'franklin-sites';
-import { truncate } from 'lodash';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
 import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
 import KeywordCategory from '../../../model/types/KeywordCategory';
@@ -11,17 +11,20 @@ import UniProtTitle from './UniProtTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
-import {
-  CommentType,
-  FreeTextComment,
-} from '../../../model/types/CommentTypes';
 import getProteinHighlights from '../../../model/uniprotkb/summary/ProteinHighlights';
-
-const CHAR_LENGTH_FUNCTION_SUMMARY = 150;
+import { SelectedEntries } from '../../../results/types/resultsTypes';
+import './styles/UniProtCard.scss';
 
 const UniProtCard: FC<{
   data: UniProtkbAPIModel;
-}> = ({ data }): JSX.Element => {
+  selectedEntries: SelectedEntries;
+  handleEntrySelection: (rowId: string) => void;
+} & RouteComponentProps> = ({
+  data,
+  selectedEntries,
+  handleEntrySelection,
+  history,
+}): JSX.Element => {
   let recommendedNameNode;
   const recommendedName = idx(
     data,
@@ -82,41 +85,43 @@ const UniProtCard: FC<{
     }
   }
 
-  let functionNode;
-  const firstCommentType = idx(data, (_): string => _.comments[0].commentType);
-  if (data.comments && firstCommentType === CommentType.FUNCTION) {
-    const firstComment = data.comments[0] as FreeTextComment;
-    const firstCommentValue = idx(
-      firstComment,
-      (_): string => _.texts[0].value
-    );
-    if (firstCommentValue) {
-      functionNode = truncate(firstCommentValue, {
-        length: CHAR_LENGTH_FUNCTION_SUMMARY,
-      });
-    }
-  }
-
   return (
-    <Card links={highlights}>
-      <h3>
-        <UniProtTitle
-          primaryAccession={data.primaryAccession}
-          entryType={data.entryType}
-          uniProtId={data.uniProtId}
-        />
-      </h3>
-      <p>
-        {recommendedNameNode}
-        {organismNameNode}
-        {geneNameListNode}
-        {sequenceLengthNode}
-        {annotationScoreNode}
-      </p>
-      <p>{functionNode}</p>
-      <p>{keywordsNode}</p>
+    <Card
+      links={highlights}
+      onClick={() => history.push(`/uniprotkb/${data.primaryAccession}`)}
+    >
+      <section className="uniprot-card">
+        <section className="uniprot-card__left">
+          <input
+            type="checkbox"
+            checked={selectedEntries[data.primaryAccession]}
+            onClick={e => e.stopPropagation()}
+            onChange={() => handleEntrySelection(data.primaryAccession)}
+            data-testid="up-card-checkbox"
+          />
+        </section>
+        <section className="uniprot-card__right">
+          <h5>
+            <UniProtTitle
+              primaryAccession={data.primaryAccession}
+              entryType={data.entryType}
+              uniProtId={data.uniProtId}
+            />
+          </h5>
+          <section>
+            {recommendedNameNode}
+            {organismNameNode}
+            {geneNameListNode}
+            {sequenceLengthNode}
+            {annotationScoreNode}
+          </section>
+          <section>
+            <small>{keywordsNode}</small>
+          </section>
+        </section>
+      </section>
     </Card>
   );
 };
 
-export default UniProtCard;
+export default withRouter(UniProtCard);

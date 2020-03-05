@@ -133,7 +133,6 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
   // biotech / distruption phenotype
 
   return Array.from(highlightsMap.keys()).map(highlightKey => ({
-    color: 'red',
     link: `/uniprotkb/${primaryAccession}#${highlightToEntrySection[highlightKey]}`,
     name: `${highlightsMap.get(highlightKey)} ${highlightKey}`,
   }));

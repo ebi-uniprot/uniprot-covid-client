@@ -3,191 +3,209 @@
 exports[`UniProtCard component should render 1`] = `
 <DocumentFragment>
   <div
-    class="card "
+    class="card"
   >
-    <div
-      class="card__actions"
+    <section
+      class=" card--has-hover"
+      role="button"
+      tabindex="0"
     >
       <div
-        class="card__link"
-        style="border-color: red;"
+        class="card__content"
       >
+        <section
+          class="uniprot-card"
+        >
+          <section
+            class="uniprot-card__left"
+          >
+            <input
+              data-testid="up-card-checkbox"
+              type="checkbox"
+            />
+          </section>
+          <section
+            class="uniprot-card__right"
+          >
+            <h5>
+              <span
+                class="uniprot-title"
+              >
+                <span
+                  class="uniprot-title__status icon--reviewed"
+                >
+                  <svg
+                    height="512"
+                    viewBox="0 0 426 512"
+                    width="426"
+                  >
+                    <path
+                      d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+                    />
+                  </svg>
+                </span>
+                P21802 · uniprot id
+              </span>
+            </h5>
+            <section>
+              rec full Name · 
+              <a
+                href="#"
+              >
+                scientific name
+              </a>
+               · Gene: some Gene · 10 amino-acids · 
+              <span
+                title="Annotation Score"
+              >
+                <span
+                  class="doughnut-chart--small colour-azureish-white"
+                >
+                  <span
+                    class="doughnut-chart--small__left-wrap"
+                  >
+                    <span
+                      class="doughnut-chart--small__left-wrap__loader colour-sea-blue"
+                      style="transform: rotate(0deg);"
+                    />
+                  </span>
+                  <span
+                    class="doughnut-chart--small__right-wrap"
+                  >
+                    <span
+                      class="doughnut-chart--small__right-wrap__loader colour-sea-blue"
+                      style="transform: rotate(72deg);"
+                    />
+                  </span>
+                  <span
+                    class="doughnut-chart--small__inner-circle"
+                  >
+                    1/5
+                  </span>
+                </span>
+              </span>
+            </section>
+            <section>
+              <small />
+            </section>
+          </section>
+        </section>
+      </div>
+    </section>
+    <section
+      class="card__actions"
+    >
+      <span
+        class="card__link"
+      >
+        · 
         <a
           href="/uniprotkb/P21802#Function"
         >
           0 domains
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Protein Processing"
         >
           0 PTM
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Pathology & BioTech"
         >
           0 variants
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Pathology & BioTech"
         >
           0 mutagenesis
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Function"
         >
           0 active sites
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Sequence"
         >
           1 isoforms
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Interaction"
         >
           1 interactions
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Pathology & BioTech"
         >
           1 disease
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Subcellular Location"
         >
           1 subcellular location
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#Structure"
         >
           0 3D structures
         </a>
-      </div>
-      <div
+      </span>
+      <span
         class="card__link"
-        style="border-color: red;"
       >
+        · 
         <a
           href="/uniprotkb/P21802#null"
         >
           7 reviewed publications
         </a>
-      </div>
-    </div>
-    <div
-      class="card__content"
-    >
-      <h3>
-        <div
-          class="uniprot-title"
-        >
-          <span
-            class="uniprot-title__status icon--reviewed"
-          >
-            <svg
-              height="512"
-              viewBox="0 0 426 512"
-              width="426"
-            >
-              <path
-                d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
-              />
-            </svg>
-          </span>
-          <a
-            href="/uniprotkb/P21802"
-          >
-            P21802
-          </a>
-           · uniprot id
-        </div>
-      </h3>
-      <p>
-        rec full Name · 
-        <a
-          href="#"
-        >
-          scientific name
-        </a>
-         · Gene: some Gene · 10 amino-acids · 
-        <span
-          title="Annotation Score"
-        >
-          <span
-            class="doughnut-chart--small colour-azureish-white"
-          >
-            <span
-              class="doughnut-chart--small__left-wrap"
-            >
-              <span
-                class="doughnut-chart--small__left-wrap__loader colour-sea-blue"
-                style="transform: rotate(0deg);"
-              />
-            </span>
-            <span
-              class="doughnut-chart--small__right-wrap"
-            >
-              <span
-                class="doughnut-chart--small__right-wrap__loader colour-sea-blue"
-                style="transform: rotate(72deg);"
-              />
-            </span>
-            <span
-              class="doughnut-chart--small__inner-circle"
-            >
-              1/5
-            </span>
-          </span>
-        </span>
-      </p>
-      <p />
-      <p />
-    </div>
+      </span>
+    </section>
   </div>
 </DocumentFragment>
 `;

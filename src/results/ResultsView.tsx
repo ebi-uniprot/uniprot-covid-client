@@ -43,11 +43,12 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         <DataList
           idKey="primaryAccession"
           data={results}
-          selectable
-          selected={selectedEntries}
-          onSelect={handleEntrySelection}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
-            <UniProtCard data={dataItem} />
+            <UniProtCard
+              data={dataItem}
+              selectedEntries={selectedEntries}
+              handleEntrySelection={handleEntrySelection}
+            />
           )}
           onLoadMoreItems={handleLoadMoreRows}
           hasMoreData={hasMoreData}

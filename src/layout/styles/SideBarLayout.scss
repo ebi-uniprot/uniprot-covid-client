@@ -3,8 +3,8 @@
 .sidebar-layout {
   padding-left: 0.5rem;
   display: grid;
-  grid-gap: $gutter-size;
-  grid-template-columns: 16.6vw 83.4vw;
+  column-gap: $gutter-size;
+  grid-template-columns: 16.6vw auto;
   grid-template-rows: auto 100vh;
   grid-template-areas: 'title title' 'sidebar content';
   &--inverted {

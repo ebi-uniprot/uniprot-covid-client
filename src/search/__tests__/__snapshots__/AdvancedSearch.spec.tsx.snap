@@ -46,7 +46,7 @@ exports[`AdvancedSearch shallow components should render 1`] = `
         class="dropdown-container"
       >
         <button
-          class="button dropdown"
+          class="button dropdown "
           type="button"
         >
           All
@@ -157,7 +157,7 @@ exports[`AdvancedSearch shallow components should render 1`] = `
         class="dropdown-container"
       >
         <button
-          class="button dropdown"
+          class="button dropdown "
           type="button"
         >
           All
@@ -268,7 +268,7 @@ exports[`AdvancedSearch shallow components should render 1`] = `
         class="dropdown-container"
       >
         <button
-          class="button dropdown"
+          class="button dropdown "
           type="button"
         >
           All
@@ -379,7 +379,7 @@ exports[`AdvancedSearch shallow components should render 1`] = `
         class="dropdown-container"
       >
         <button
-          class="button dropdown"
+          class="button dropdown "
           type="button"
         >
           All
