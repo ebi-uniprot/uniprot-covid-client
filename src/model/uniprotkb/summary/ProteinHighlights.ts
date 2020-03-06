@@ -23,15 +23,15 @@ enum highlightSection {
 }
 
 const highlightToEntrySection = {
-  [highlightSection.domains]: EntrySection.Function,
-  [highlightSection.PTM]: EntrySection.ProteinProcessing,
-  [highlightSection.variants]: EntrySection.PathologyAndBioTech,
-  [highlightSection.activeSites]: EntrySection.Function,
-  [highlightSection.isoforms]: EntrySection.Sequence,
-  [highlightSection.structures]: EntrySection.Structure,
-  [highlightSection.disease]: EntrySection.PathologyAndBioTech,
-  [highlightSection.interactions]: EntrySection.Interaction,
-  [highlightSection.subcell]: EntrySection.SubCellularLocation,
+  [highlightSection.domains]: `#${EntrySection.Function}`,
+  [highlightSection.PTM]: `#${EntrySection.ProteinProcessing}`,
+  [highlightSection.variants]: `#${EntrySection.PathologyAndBioTech}`,
+  [highlightSection.activeSites]: `#${EntrySection.Function}`,
+  [highlightSection.isoforms]: `#${EntrySection.Sequence}`,
+  [highlightSection.structures]: `#${EntrySection.Structure}`,
+  [highlightSection.disease]: `#${EntrySection.PathologyAndBioTech}`,
+  [highlightSection.interactions]: `#${EntrySection.Interaction}`,
+  [highlightSection.subcell]: `#${EntrySection.SubCellularLocation}`,
   [highlightSection.publications]: '/publications',
 };
 
@@ -120,7 +120,7 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
     .map(highlightKey => {
       const count = highlightsMap.get(highlightKey);
       return {
-        link: `/uniprotkb/${primaryAccession}#${highlightToEntrySection[highlightKey]}`,
+        link: `/uniprotkb/${primaryAccession}${highlightToEntrySection[highlightKey]}`,
         name: `${count} ${highlightKey}${count && count > 1 ? 's' : ''}`,
       };
     });

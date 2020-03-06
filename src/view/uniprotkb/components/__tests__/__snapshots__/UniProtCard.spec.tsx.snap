@@ -130,7 +130,7 @@ exports[`UniProtCard component should render 1`] = `
       >
         · 
         <a
-          href="/uniprotkb/P21802#/publications"
+          href="/uniprotkb/P21802/publications"
         >
           7 reviewed publications
         </a>
