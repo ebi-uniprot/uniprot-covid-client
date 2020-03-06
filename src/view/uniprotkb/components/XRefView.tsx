@@ -7,6 +7,7 @@ import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
   PDBMirrors,
+  viewProteinLinkDatabases,
 } from '../../../data/database';
 import {
   XrefUIModel,
@@ -234,21 +235,39 @@ export const DatabaseList: FC<{
   xrefsGoupedByDatabase: { database, xrefs },
   primaryAccession,
   crc64,
-}) => (
-  <ExpandableList descriptionString={`${database} links`}>
-    {xrefs.map((xref): { id: string; content: JSX.Element } => ({
-      id: v1(),
-      content: (
-        <XRef
-          database={database}
-          xref={xref}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-        />
-      ),
-    }))}
-  </ExpandableList>
-);
+}) => {
+  let viewItem;
+  const viewLink = viewProteinLinkDatabases.get(database);
+  if (viewLink) {
+    viewItem = [
+      {
+        id: v1(),
+        content: (
+          <ExternalLink
+            key={v1()}
+            url={viewLink(primaryAccession)}
+          >{`View protein in ${database}`}</ExternalLink>
+        ),
+      },
+    ];
+  }
+  const xrefItems = xrefs.map((xref): { id: string; content: JSX.Element } => ({
+    id: v1(),
+    content: (
+      <XRef
+        database={database}
+        xref={xref}
+        primaryAccession={primaryAccession}
+        crc64={crc64}
+      />
+    ),
+  }));
+  return (
+    <ExpandableList descriptionString={`${database} links`}>
+      {viewItem ? viewItem.concat(xrefItems) : xrefItems}
+    </ExpandableList>
+  );
+};
 
 type StructureXRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
