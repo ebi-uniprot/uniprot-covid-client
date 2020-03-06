@@ -222,8 +222,8 @@ export const implicitDatabaseSimilarityComment = {
 export const implicitDatabasesEC = ['ENZYME']; // eg Q54WR4
 
 export const viewProteinLinkDatabases = new Map([
-  ['InterPro', externalUrls['InterPro']],
-  ['Pfam', externalUrls['Pfam']],
-  ['SMART', externalUrls['SMART']],
-  ['PROSITE', externalUrls['PROSITE']],
+  ['InterPro', externalUrls.InterPro],
+  ['Pfam', externalUrls.Pfam],
+  ['SMART', externalUrls.SMART],
+  ['PROSITE', externalUrls.PROSITE],
 ]);
