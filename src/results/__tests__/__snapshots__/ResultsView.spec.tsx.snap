@@ -132,50 +132,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O00311#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O00311#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O00311#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O00311#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -298,50 +254,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9Z0H0#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9Z0H0#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9Z0H0#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9Z0H0#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -478,50 +390,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P06243#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P06243#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P06243#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P06243#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -644,50 +512,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P41892#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P41892#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P41892#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P41892#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -923,50 +747,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P50582#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P50582#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P50582#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P50582#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -1083,50 +863,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NEY8#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NEY8#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NEY8#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NEY8#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -1435,50 +1171,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NFT6#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NFT6#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NFT6#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8NFT6#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -1614,50 +1306,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P32325#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P32325#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P32325#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P32325#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -1762,50 +1410,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UBU7#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UBU7#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UBU7#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UBU7#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -1948,50 +1552,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P49736#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P49736#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P49736#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P49736#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -2115,50 +1675,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9BW66#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9BW66#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9BW66#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9BW66#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -2263,50 +1779,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9QZ41#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9QZ41#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9QZ41#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9QZ41#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -2443,50 +1915,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR83#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR83#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR83#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR83#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -2609,50 +2037,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P97310#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P97310#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P97310#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P97310#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -2789,50 +2173,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR85#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR85#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR85#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q8SR85#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -2956,50 +2296,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P55861#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P55861#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P55861#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P55861#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -3110,50 +2406,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P87027#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P87027#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P87027#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P87027#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -3277,50 +2529,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q5XK83#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q5XK83#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q5XK83#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q5XK83#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -3457,50 +2665,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UQY9#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UQY9#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UQY9#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/Q9UQY9#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -3593,50 +2757,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O74473#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O74473#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O74473#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/O74473#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>
@@ -3761,50 +2881,6 @@ exports[`ResultsView component should render cards 1`] = `
                 </section>
               </div>
             </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P30664#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P30664#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P30664#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P30664#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
-            </section>
           </div>
         </section>
         <section>
@@ -3927,50 +3003,6 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </section>
-            <section
-              class="card__actions"
-            >
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P33991#Sequence"
-                >
-                  0 isoforms
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P33991#Interaction"
-                >
-                  0 interactions
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P33991#Pathology & BioTech"
-                >
-                  0 disease
-                </a>
-              </span>
-              <span
-                class="card__link"
-              >
-                · 
-                <a
-                  href="/uniprotkb/P33991#Subcellular Location"
-                >
-                  0 subcellular location
-                </a>
-              </span>
             </section>
           </div>
         </section>

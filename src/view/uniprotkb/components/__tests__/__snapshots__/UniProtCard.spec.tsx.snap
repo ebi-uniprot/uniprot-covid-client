@@ -100,59 +100,9 @@ exports[`UniProtCard component should render 1`] = `
       >
         · 
         <a
-          href="/uniprotkb/P21802#Function"
-        >
-          0 domains
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#Protein Processing"
-        >
-          0 PTM
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#Pathology & BioTech"
-        >
-          0 variants
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#Pathology & BioTech"
-        >
-          0 mutagenesis
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#Function"
-        >
-          0 active sites
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
           href="/uniprotkb/P21802#Sequence"
         >
-          1 isoforms
+          1 isoform
         </a>
       </span>
       <span
@@ -162,7 +112,7 @@ exports[`UniProtCard component should render 1`] = `
         <a
           href="/uniprotkb/P21802#Interaction"
         >
-          1 interactions
+          1 interaction
         </a>
       </span>
       <span
@@ -180,27 +130,7 @@ exports[`UniProtCard component should render 1`] = `
       >
         · 
         <a
-          href="/uniprotkb/P21802#Subcellular Location"
-        >
-          1 subcellular location
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#Structure"
-        >
-          0 3D structures
-        </a>
-      </span>
-      <span
-        class="card__link"
-      >
-        · 
-        <a
-          href="/uniprotkb/P21802#null"
+          href="/uniprotkb/P21802#/publications"
         >
           7 reviewed publications
         </a>

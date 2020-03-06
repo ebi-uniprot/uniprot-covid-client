@@ -10,31 +10,29 @@ import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
 import EntrySection from '../../types/EntrySection';
 
 enum highlightSection {
-  domains = 'domains',
+  domains = 'domain',
   PTM = 'PTM',
-  variants = 'variants',
-  mutagenesis = 'mutagenesis',
-  activeSites = 'active sites',
-  isoforms = 'isoforms',
-  structures = '3D structures',
+  variants = 'reviewed variant',
+  activeSites = 'active site',
+  isoforms = 'isoform',
+  structures = '3D structure',
   disease = 'disease',
-  interactions = 'interactions',
+  interactions = 'interaction',
   subcell = 'subcellular location',
-  publications = 'reviewed publications',
+  publications = 'reviewed publication',
 }
 
 const highlightToEntrySection = {
   [highlightSection.domains]: EntrySection.Function,
   [highlightSection.PTM]: EntrySection.ProteinProcessing,
   [highlightSection.variants]: EntrySection.PathologyAndBioTech,
-  [highlightSection.mutagenesis]: EntrySection.PathologyAndBioTech,
   [highlightSection.activeSites]: EntrySection.Function,
   [highlightSection.isoforms]: EntrySection.Sequence,
   [highlightSection.structures]: EntrySection.Structure,
   [highlightSection.disease]: EntrySection.PathologyAndBioTech,
   [highlightSection.interactions]: EntrySection.Interaction,
   [highlightSection.subcell]: EntrySection.SubCellularLocation,
-  [highlightSection.publications]: null,
+  [highlightSection.publications]: '/publications',
 };
 
 const getFeatureCount = (features: FeatureData, type: FeatureType) =>
@@ -70,12 +68,6 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
       getFeatureCount(features, FeatureType.VARIANT)
     );
 
-    // mutagenesis
-    highlightsMap.set(
-      highlightSection.mutagenesis,
-      getFeatureCount(features, FeatureType.MUTAGEN)
-    );
-
     // active sites
     highlightsMap.set(
       highlightSection.activeSites,
@@ -107,12 +99,6 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
       comment => comment.commentType === CommentType.DISEASE
     ) as DiseaseComment[];
     highlightsMap.set(highlightSection.disease, diseaseComments.length);
-
-    // subcellular location
-    const subcellComments = comments.filter(
-      comment => comment.commentType === CommentType.SUBCELLULAR_LOCATION
-    );
-    highlightsMap.set(highlightSection.subcell, subcellComments.length);
   }
 
   // XREFS
@@ -128,14 +114,16 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
   if (references) {
     highlightsMap.set(highlightSection.publications, references.length);
   }
-  // TODO later
-  // expression
-  // biotech / distruption phenotype
 
-  return Array.from(highlightsMap.keys()).map(highlightKey => ({
-    link: `/uniprotkb/${primaryAccession}#${highlightToEntrySection[highlightKey]}`,
-    name: `${highlightsMap.get(highlightKey)} ${highlightKey}`,
-  }));
+  return Array.from(highlightsMap.keys())
+    .filter(highlightKey => highlightsMap.get(highlightKey))
+    .map(highlightKey => {
+      const count = highlightsMap.get(highlightKey);
+      return {
+        link: `/uniprotkb/${primaryAccession}#${highlightToEntrySection[highlightKey]}`,
+        name: `${count} ${highlightKey}${count && count > 1 ? 's' : ''}`,
+      };
+    });
 };
 
 export default getProteinHighlights;
