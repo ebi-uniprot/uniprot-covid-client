@@ -8,9 +8,7 @@ exports[`Entry - External Links view should render 1`] = `
     <div
       class="card"
     >
-      <section
-        class=""
-      >
+      <section>
         <div
           class="card__header"
         >

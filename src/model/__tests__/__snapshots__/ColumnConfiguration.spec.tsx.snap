@@ -527,6 +527,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <ul
           class="no-bullet"
@@ -586,9 +587,10 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
         </ul>
       </div>
     </div>
-    <button
+    <a
       class="button"
-      type="button"
+      download=""
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
     >
       <svg
         height="32"
@@ -600,7 +602,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
         />
       </svg>
       Download
-    </button>
+    </a>
     <button
       class="button"
       type="button"
@@ -625,6 +627,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <div
           class="dropdown-menu__content"

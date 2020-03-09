@@ -92,6 +92,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <ul
           class="no-bullet"
@@ -151,9 +152,10 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
         </ul>
       </div>
     </div>
-    <button
+    <a
       class="button"
-      type="button"
+      download=""
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
     >
       <svg
         height="32"
@@ -165,7 +167,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
         />
       </svg>
       Download
-    </button>
+    </a>
     <button
       class="button"
       type="button"
@@ -190,6 +192,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <div
           class="dropdown-menu__content"
@@ -473,6 +476,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <ul
           class="no-bullet"
@@ -532,9 +536,10 @@ exports[`SequenceView component should render SequenceView 1`] = `
         </ul>
       </div>
     </div>
-    <button
+    <a
       class="button"
-      type="button"
+      download=""
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
     >
       <svg
         height="32"
@@ -546,7 +551,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
         />
       </svg>
       Download
-    </button>
+    </a>
     <button
       class="button"
       type="button"
@@ -571,6 +576,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
       </button>
       <div
         class="dropdown-menu"
+        style="top: 0px;"
       >
         <div
           class="dropdown-menu__content"
