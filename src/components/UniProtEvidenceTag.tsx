@@ -29,9 +29,10 @@ export const UniProtEvidenceTagContent: FC<{
   const groupedEvidences =
     evidences && groupBy(evidences, (evidence: Evidence) => evidence.source);
 
-  const publicationReferences = groupedEvidences[evidenceTagSourceTypes.PUBMED];
-
-  delete groupedEvidences[evidenceTagSourceTypes.PUBMED];
+  const {
+    [evidenceTagSourceTypes.PUBMED]: publicationReferences,
+    ...groupedEvidencesWithoutPubs
+  } = groupedEvidences;
 
   return (
     <div>
@@ -45,26 +46,28 @@ export const UniProtEvidenceTagContent: FC<{
           }
         />
       )}
-      {Object.keys(groupedEvidences).map(key => (
-        <Fragment key={key}>
-          {groupedEvidences[key].map(({ id }: Evidence) => {
-            if (!id) {
-              return null;
-            }
-            const urlPattern = evidenceUrls[key];
-            return urlPattern ? (
-              <ExternalLink
-                url={processUrlTemplate(urlPattern, { value: id })}
-                key={id}
-              >
-                {id}
-              </ExternalLink>
-            ) : (
-              <Fragment key={id}>{id}</Fragment>
-            );
-          })}
-        </Fragment>
-      ))}
+      {Object.entries(groupedEvidencesWithoutPubs).map(
+        ([key, mappedEvidences]) => (
+          <Fragment key={key}>
+            {mappedEvidences.map(({ id }: Evidence) => {
+              if (!id) {
+                return null;
+              }
+              const urlPattern = evidenceUrls[key];
+              return urlPattern ? (
+                <ExternalLink
+                  url={processUrlTemplate(urlPattern, { value: id })}
+                  key={id}
+                >
+                  {id}
+                </ExternalLink>
+              ) : (
+                <Fragment key={id}>{id}</Fragment>
+              );
+            })}
+          </Fragment>
+        )
+      )}
     </div>
   );
 };
