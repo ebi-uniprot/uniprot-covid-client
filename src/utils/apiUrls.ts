@@ -57,6 +57,16 @@ const apiUrls = {
   entry: (accession: string) =>
     joinUrl(devPrefix, '/uniprot/api/uniprotkb/accession', accession),
 
+  entryDownload: (accession: string, format: FileFormat) =>
+    format === FileFormat.fastaCanonicalIsoform
+      ? `${apiUrls.search}?${queryString.stringify({
+          query: `accession:${accession}`,
+          includeIsoform: true,
+          format: fileFormatToUrlParameter.get(
+            FileFormat.fastaCanonicalIsoform
+          ),
+        })}`
+      : `${apiUrls.entry(accession)}.${fileFormatToUrlParameter.get(format)}`,
   entryPublications: (accession: string) =>
     joinUrl(
       devPrefix,

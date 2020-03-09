@@ -1,9 +1,11 @@
 import React, { Fragment, memo } from 'react';
-import { Card, DownloadIcon } from 'franklin-sites';
+import { Card, DownloadIcon, DropdownButton } from 'franklin-sites';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
 import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
+import { fileFormatEntryDownload } from '../results/types/resultsTypes';
+import apiUrls from '../utils/apiUrls';
 
 type EntryMainProps = {
   transformedData: UniProtkbUIModel;
@@ -26,10 +28,33 @@ const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
       <button type="button" className="button tertiary">
         Align
       </button>
-      <button type="button" className="button tertiary">
-        <DownloadIcon />
-        Download
-      </button>
+      <DropdownButton
+        label={
+          <Fragment>
+            <DownloadIcon />
+            Download
+          </Fragment>
+        }
+        className="tertiary"
+        // onSelect={action('onSelect')}
+      >
+        <div className="dropdown-menu__content">
+          <ul>
+            {fileFormatEntryDownload.map(fileFormat => (
+              <li key={fileFormat}>
+                <a
+                  href={apiUrls.entryDownload(
+                    transformedData.primaryAccession,
+                    fileFormat
+                  )}
+                >
+                  {fileFormat}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </DropdownButton>
       <button type="button" className="button tertiary">
         Add
       </button>
