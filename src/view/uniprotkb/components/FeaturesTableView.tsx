@@ -68,7 +68,7 @@ const FeaturesTableView: FC<{
         {selectedEvidenceData && selectedReferences && (
           <UniProtEvidenceTagContent
             evidenceData={selectedEvidenceData}
-            references={selectedReferences}
+            evidences={selectedReferences}
           />
         )}
       </div>
