@@ -4,8 +4,14 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import idx from 'idx';
 import { RootState } from '../state/state-types';
 import DownloadView from './DownloadView';
-import { Column } from '../model/types/ColumnTypes';
-import { FileFormat, fileFormatToContentType } from './types/resultsTypes';
+import { Column, SortableColumn } from '../model/types/ColumnTypes';
+import {
+  FileFormat,
+  fileFormatToContentType,
+  SelectedFacet,
+  SortDirection,
+  SelectedEntries,
+} from './types/resultsTypes';
 import { getDownloadUrl, urlsAreEqual } from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
 
@@ -15,6 +21,15 @@ export const getPreviewFileFormat = (fileFormat: FileFormat) =>
 type DownloadTableProps = {
   tableColumns: Column[];
   totalNumberResults: number;
+  location: {
+    state: {
+      query: string;
+      selectedFacets: SelectedFacet[];
+      sortColumn: SortableColumn;
+      sortDirection: SortDirection;
+      selectedEntries: string[];
+    };
+  };
 } & RouteComponentProps;
 
 const Download: React.FC<DownloadTableProps> = ({
