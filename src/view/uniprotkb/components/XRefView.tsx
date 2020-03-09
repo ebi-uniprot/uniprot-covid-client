@@ -236,6 +236,8 @@ export const DatabaseList: FC<{
   primaryAccession,
   crc64,
 }) => {
+  // This step is needed as some databases (eg InterPro) have an additional link:
+  // "View protein in InterPro" at the top of the xref links.
   let viewItem;
   const viewLink = viewProteinLinkDatabases.get(database);
   if (viewLink) {
