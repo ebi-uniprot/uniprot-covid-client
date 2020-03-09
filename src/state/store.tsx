@@ -30,14 +30,14 @@ const persistConfig = {
 
 const persistorReducer = persistReducer(persistConfig, rootReducer);
 
-function configureStore(initialState?: object) {
+function configureStore() {
   let store;
 
   if (process.env.NODE_ENV === 'development') {
     const debug = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     store = createStore(
       persistorReducer,
-      initialState,
+      undefined,
       debug
         ? debug(applyMiddleware(thunkMiddleware))
         : applyMiddleware(thunkMiddleware)
@@ -45,7 +45,7 @@ function configureStore(initialState?: object) {
   } else {
     store = createStore(
       persistorReducer,
-      initialState,
+      undefined,
       applyMiddleware(thunkMiddleware)
     );
   }

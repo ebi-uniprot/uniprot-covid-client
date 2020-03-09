@@ -109,8 +109,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   setURLParams = (
     query: string,
     selectedFacets: SelectedFacet[],
-    sortColumn: SortableColumn,
-    sortDirection: SortDirection
+    sortColumn?: string,
+    sortDirection?: SortDirection
   ): void => {
     const { history } = this.props;
     history.push({
@@ -208,16 +208,32 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
 
+    /**
+     * NOTE: temporary fix until backend provide
+     * the correct name for sort fields
+     * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
+     */
+    const fieldNameMap = new Map([
+      [Column.accession, 'accession'],
+      [Column.id, 'mnemonic'],
+      [Column.proteinName, 'name'],
+      [Column.geneNames, 'gene'],
+      [Column.organism, 'organism_name'],
+      [Column.mass, 'mass'],
+      [Column.length, 'length'],
+    ]);
+    const apiColumn = fieldNameMap.get(column);
+
     // Change sort direction
     let updatedDirection = sortDirection;
-    if (column === sortColumn) {
+    if (apiColumn === sortColumn) {
       updatedDirection =
         sortDirection === SortDirection.ascend
           ? SortDirection.descend
           : SortDirection.ascend;
     }
 
-    this.setURLParams(query, selectedFacets, column, updatedDirection);
+    this.setURLParams(query, selectedFacets, apiColumn, updatedDirection);
   };
 
   updateData() {
