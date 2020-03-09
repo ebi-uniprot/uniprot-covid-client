@@ -15,840 +15,822 @@ exports[`EntryPublications tests should render 1`] = `
         <div
           class="data-loader__scroll-container"
         >
-          <div
-            class="card "
-          >
-            <div
-              class="card__content"
+          <section>
+            <section
+              class="publication"
             >
+              <h4>
+                The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.
+              </h4>
               <section
-                class="publication"
+                class="publication__authors"
               >
-                <h4>
-                  The precursor of Alzheimer's disease amyloid A4 protein resembles a cell- surface receptor.
-                </h4>
-                <section
-                  class="publication__authors"
+                <a
+                  href="/"
                 >
-                  <a
-                    href="/"
-                  >
-                    Kang J.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Lemaire H.-G.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Unterbeck A.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Salbaum J.M.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Masters C.L.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Grzeschik K.-H.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Multhaup G.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Beyreuther K.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Mueller-Hill B.
-                  </a>
-                </section>
-                <section>
-                  <button
-                    class="button tertiary"
-                    type="button"
-                  >
-                    View abstract [...]
-                  </button>
-                </section>
-                <section
-                  class="publication__columns"
+                  Kang J.
+                </a>
+                , 
+                <a
+                  href="/"
                 >
-                  <section
-                    class="publication__columns__main"
+                  Lemaire H.-G.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Unterbeck A.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Salbaum J.M.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Masters C.L.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Grzeschik K.-H.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Multhaup G.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Beyreuther K.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Mueller-Hill B.
+                </a>
+              </section>
+              <section>
+                <button
+                  class="button tertiary"
+                  type="button"
+                >
+                  View abstract [...]
+                </button>
+              </section>
+              <section
+                class="publication__columns"
+              >
+                <section
+                  class="publication__columns__main"
+                >
+                  <div
+                    class="info-list"
                   >
                     <div
-                      class="info-list"
+                      class="info-list__item"
                     >
                       <div
-                        class="info-list__item"
+                        class="info-list__item__title"
                       >
-                        <div
-                          class="info-list__item__title"
+                        <h5
+                          class="bold"
                         >
-                          <h5
-                            class="bold"
-                          >
-                            Cited for
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP695)
-                        </div>
+                          Cited for
+                        </h5>
                       </div>
                       <div
-                        class="info-list__item"
+                        class="info-list__item__content"
                       >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Tissue
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          <ul
-                            class="no-bullet"
-                          >
-                            <li>
-                              Brain
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div
-                        class="info-list__item"
-                      >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Categories
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          <ul
-                            class="no-bullet"
-                          >
-                            <li>
-                              Sequence
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div
-                        class="info-list__item"
-                      >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Source
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          Swiss-Prot
-                        </div>
+                        NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP695)
                       </div>
                     </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Tissue
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            Brain
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Categories
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            Sequence
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Source
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        Swiss-Prot
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section
+                  class="publication__columns__side"
+                >
+                  <section
+                    class="publication__columns__side__item"
+                  >
+                    <svg
+                      fill="none"
+                      height="2rem"
+                      viewBox="0 0 30 32"
+                      width="1.875rem"
+                    >
+                      <path
+                        d="M26.5 13.5h-8v8h8v-8z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
+                        stroke="#000"
+                        stroke-miterlimit="10"
+                      />
+                    </svg>
+                    <ul
+                      class="no-bullet"
+                    >
+                      <li>
+                        <a
+                          href="//www.ncbi.nlm.nih.gov/pubmed/2881207"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          PubMed
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="//europepmc.org/article/MED/2881207"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Europe PMC
+                        </a>
+                      </li>
+                      <li>
+                        <small>
+                          <a
+                            href="//dx.doi.org/10.1038/325733a0"
+                          >
+                            Nature 325:733-736(1987)
+                          </a>
+                        </small>
+                      </li>
+                    </ul>
                   </section>
                   <section
-                    class="publication__columns__side"
+                    class="publication__columns__side__item"
                   >
                     <section
-                      class="publication__columns__side__item"
-                    >
-                      <svg
-                        fill="none"
-                        height="2rem"
-                        viewBox="0 0 30 32"
-                        width="1.875rem"
-                      >
-                        <path
-                          d="M26.5 13.5h-8v8h8v-8z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-                          stroke="#000"
-                          stroke-miterlimit="10"
-                        />
-                      </svg>
-                      <ul
-                        class="no-bullet"
-                      >
-                        <li>
-                          <a
-                            href="//www.ncbi.nlm.nih.gov/pubmed/2881207"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            PubMed
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="//europepmc.org/article/MED/2881207"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Europe PMC
-                          </a>
-                        </li>
-                        <li>
-                          <small>
-                            <a
-                              href="//dx.doi.org/10.1038/325733a0"
-                            >
-                              Nature 325:733-736(1987)
-                            </a>
-                          </small>
-                        </li>
-                      </ul>
-                    </section>
-                    <section
-                      class="publication__columns__side__item"
+                      class="publication__statistics"
                     >
                       <section
-                        class="publication__statistics"
+                        class="publication__statistics__item"
                       >
-                        <section
-                          class="publication__statistics__item"
+                        <a
+                          href="/"
                         >
-                          <a
-                            href="/"
+                          <section>
+                            <small>
+                              Cited in
+                            </small>
+                          </section>
+                          <section
+                            class="publication__statistics__bubble"
                           >
-                            <section>
-                              <small>
-                                Cited in
-                              </small>
-                            </section>
-                            <section
-                              class="publication__statistics__bubble"
+                            <span
+                              class="bubble--small colour-pastel-blue"
                             >
-                              <span
-                                class="bubble--small colour-pastel-blue"
-                              >
-                                1
-                              </span>
-                              <svg
-                                fill="none"
-                                height="15"
-                                viewBox="0 0 30 22"
-                                width="15"
-                              >
-                                <path
-                                  d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
-                                  fill="#161D39"
-                                />
-                              </svg>
-                            </section>
-                          </a>
-                        </section>
+                              1
+                            </span>
+                            <svg
+                              fill="none"
+                              height="15"
+                              viewBox="0 0 30 22"
+                              width="15"
+                            >
+                              <path
+                                d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
+                                fill="#161D39"
+                              />
+                            </svg>
+                          </section>
+                        </a>
                       </section>
                     </section>
                   </section>
                 </section>
               </section>
-            </div>
-          </div>
-          <div
-            class="card "
-          >
-            <div
-              class="card__content"
+            </section>
+          </section>
+          <section>
+            <section
+              class="publication"
             >
+              <h4>
+                A new A4 amyloid mRNA contains a domain homologous to serine proteinase inhibitors.
+              </h4>
               <section
-                class="publication"
+                class="publication__authors"
               >
-                <h4>
-                  A new A4 amyloid mRNA contains a domain homologous to serine proteinase inhibitors.
-                </h4>
-                <section
-                  class="publication__authors"
+                <a
+                  href="/"
                 >
-                  <a
-                    href="/"
-                  >
-                    Ponte P.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Gonzalez-Dewhitt P.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Schilling J.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Miller J.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Hsu D.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Greenberg B.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Davis K.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Wallace W.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Lieberburg I.
-                  </a>
-                  <button
-                    class="button tertiary"
-                    type="button"
-                  >
-                    [...]
-                  </button>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Cordell B.
-                  </a>
-                </section>
-                <section>
-                  <button
-                    class="button tertiary"
-                    type="button"
-                  >
-                    View abstract [...]
-                  </button>
-                </section>
-                <section
-                  class="publication__columns"
+                  Ponte P.
+                </a>
+                , 
+                <a
+                  href="/"
                 >
-                  <section
-                    class="publication__columns__main"
+                  Gonzalez-Dewhitt P.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Schilling J.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Miller J.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Hsu D.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Greenberg B.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Davis K.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Wallace W.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Lieberburg I.
+                </a>
+                <button
+                  class="button tertiary"
+                  type="button"
+                >
+                  [...]
+                </button>
+                , 
+                <a
+                  href="/"
+                >
+                  Cordell B.
+                </a>
+              </section>
+              <section>
+                <button
+                  class="button tertiary"
+                  type="button"
+                >
+                  View abstract [...]
+                </button>
+              </section>
+              <section
+                class="publication__columns"
+              >
+                <section
+                  class="publication__columns__main"
+                >
+                  <div
+                    class="info-list"
                   >
                     <div
-                      class="info-list"
+                      class="info-list__item"
                     >
                       <div
-                        class="info-list__item"
+                        class="info-list__item__title"
                       >
-                        <div
-                          class="info-list__item__title"
+                        <h5
+                          class="bold"
                         >
-                          <h5
-                            class="bold"
-                          >
-                            Cited for
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP751)
-                        </div>
+                          Cited for
+                        </h5>
                       </div>
                       <div
-                        class="info-list__item"
+                        class="info-list__item__content"
                       >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Tissue
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          <ul
-                            class="no-bullet"
-                          >
-                            <li>
-                              Brain
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div
-                        class="info-list__item"
-                      >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Categories
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          <ul
-                            class="no-bullet"
-                          >
-                            <li>
-                              Sequence
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div
-                        class="info-list__item"
-                      >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Source
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          Swiss-Prot
-                        </div>
+                        NUCLEOTIDE SEQUENCE [MRNA] (ISOFORM APP751)
                       </div>
                     </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Tissue
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            Brain
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Categories
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            Sequence
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Source
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        Swiss-Prot
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section
+                  class="publication__columns__side"
+                >
+                  <section
+                    class="publication__columns__side__item"
+                  >
+                    <svg
+                      fill="none"
+                      height="2rem"
+                      viewBox="0 0 30 32"
+                      width="1.875rem"
+                    >
+                      <path
+                        d="M26.5 13.5h-8v8h8v-8z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
+                        stroke="#000"
+                        stroke-miterlimit="10"
+                      />
+                    </svg>
+                    <ul
+                      class="no-bullet"
+                    >
+                      <li>
+                        <a
+                          href="//www.ncbi.nlm.nih.gov/pubmed/2893289"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          PubMed
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="//europepmc.org/article/MED/2893289"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Europe PMC
+                        </a>
+                      </li>
+                      <li>
+                        <small>
+                          <a
+                            href="//dx.doi.org/10.1038/331525a0"
+                          >
+                            Nature 331:525-527(1988)
+                          </a>
+                        </small>
+                      </li>
+                    </ul>
                   </section>
                   <section
-                    class="publication__columns__side"
+                    class="publication__columns__side__item"
                   >
                     <section
-                      class="publication__columns__side__item"
-                    >
-                      <svg
-                        fill="none"
-                        height="2rem"
-                        viewBox="0 0 30 32"
-                        width="1.875rem"
-                      >
-                        <path
-                          d="M26.5 13.5h-8v8h8v-8z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-                          stroke="#000"
-                          stroke-miterlimit="10"
-                        />
-                      </svg>
-                      <ul
-                        class="no-bullet"
-                      >
-                        <li>
-                          <a
-                            href="//www.ncbi.nlm.nih.gov/pubmed/2893289"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            PubMed
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="//europepmc.org/article/MED/2893289"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Europe PMC
-                          </a>
-                        </li>
-                        <li>
-                          <small>
-                            <a
-                              href="//dx.doi.org/10.1038/331525a0"
-                            >
-                              Nature 331:525-527(1988)
-                            </a>
-                          </small>
-                        </li>
-                      </ul>
-                    </section>
-                    <section
-                      class="publication__columns__side__item"
+                      class="publication__statistics"
                     >
                       <section
-                        class="publication__statistics"
+                        class="publication__statistics__item"
                       >
-                        <section
-                          class="publication__statistics__item"
+                        <a
+                          href="/"
                         >
-                          <a
-                            href="/"
+                          <section>
+                            <small>
+                              Cited in
+                            </small>
+                          </section>
+                          <section
+                            class="publication__statistics__bubble"
                           >
-                            <section>
-                              <small>
-                                Cited in
-                              </small>
-                            </section>
-                            <section
-                              class="publication__statistics__bubble"
+                            <span
+                              class="bubble--small colour-pastel-blue"
                             >
-                              <span
-                                class="bubble--small colour-pastel-blue"
-                              >
-                                1
-                              </span>
-                              <svg
-                                fill="none"
-                                height="15"
-                                viewBox="0 0 30 22"
-                                width="15"
-                              >
-                                <path
-                                  d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
-                                  fill="#161D39"
-                                />
-                              </svg>
-                            </section>
-                          </a>
-                        </section>
+                              1
+                            </span>
+                            <svg
+                              fill="none"
+                              height="15"
+                              viewBox="0 0 30 22"
+                              width="15"
+                            >
+                              <path
+                                d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
+                                fill="#161D39"
+                              />
+                            </svg>
+                          </section>
+                        </a>
                       </section>
                     </section>
                   </section>
                 </section>
               </section>
-            </div>
-          </div>
-          <div
-            class="card "
-          >
-            <div
-              class="card__content"
+            </section>
+          </section>
+          <section>
+            <section
+              class="publication"
             >
+              <h4>
+                The PreA4(695) precursor protein of Alzheimer's disease A4 amyloid is encoded by 16 exons.
+              </h4>
               <section
-                class="publication"
+                class="publication__authors"
               >
-                <h4>
-                  The PreA4(695) precursor protein of Alzheimer's disease A4 amyloid is encoded by 16 exons.
-                </h4>
-                <section
-                  class="publication__authors"
+                <a
+                  href="/"
                 >
-                  <a
-                    href="/"
-                  >
-                    Lemaire H.-G.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Salbaum J.M.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Multhaup G.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Kang J.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Bayney R.M.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Unterbeck A.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Beyreuther K.
-                  </a>
-                  , 
-                  <a
-                    href="/"
-                  >
-                    Mueller-Hill B.
-                  </a>
-                </section>
-                <section>
-                  <button
-                    class="button tertiary"
-                    type="button"
-                  >
-                    View abstract [...]
-                  </button>
-                </section>
-                <section
-                  class="publication__columns"
+                  Lemaire H.-G.
+                </a>
+                , 
+                <a
+                  href="/"
                 >
-                  <section
-                    class="publication__columns__main"
+                  Salbaum J.M.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Multhaup G.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Kang J.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Bayney R.M.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Unterbeck A.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Beyreuther K.
+                </a>
+                , 
+                <a
+                  href="/"
+                >
+                  Mueller-Hill B.
+                </a>
+              </section>
+              <section>
+                <button
+                  class="button tertiary"
+                  type="button"
+                >
+                  View abstract [...]
+                </button>
+              </section>
+              <section
+                class="publication__columns"
+              >
+                <section
+                  class="publication__columns__main"
+                >
+                  <div
+                    class="info-list"
                   >
                     <div
-                      class="info-list"
+                      class="info-list__item"
                     >
                       <div
-                        class="info-list__item"
+                        class="info-list__item__title"
                       >
-                        <div
-                          class="info-list__item__title"
+                        <h5
+                          class="bold"
                         >
-                          <h5
-                            class="bold"
-                          >
-                            Cited for
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          NUCLEOTIDE SEQUENCE [GENOMIC DNA] (ISOFORM APP695)
-                        </div>
+                          Cited for
+                        </h5>
                       </div>
                       <div
-                        class="info-list__item"
+                        class="info-list__item__content"
                       >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Categories
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          <ul
-                            class="no-bullet"
-                          >
-                            <li>
-                              Sequence
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div
-                        class="info-list__item"
-                      >
-                        <div
-                          class="info-list__item__title"
-                        >
-                          <h5
-                            class="bold"
-                          >
-                            Source
-                          </h5>
-                        </div>
-                        <div
-                          class="info-list__item__content"
-                        >
-                          Swiss-Prot
-                        </div>
+                        NUCLEOTIDE SEQUENCE [GENOMIC DNA] (ISOFORM APP695)
                       </div>
                     </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Categories
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        <ul
+                          class="no-bullet"
+                        >
+                          <li>
+                            Sequence
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="info-list__item"
+                    >
+                      <div
+                        class="info-list__item__title"
+                      >
+                        <h5
+                          class="bold"
+                        >
+                          Source
+                        </h5>
+                      </div>
+                      <div
+                        class="info-list__item__content"
+                      >
+                        Swiss-Prot
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section
+                  class="publication__columns__side"
+                >
+                  <section
+                    class="publication__columns__side__item"
+                  >
+                    <svg
+                      fill="none"
+                      height="2rem"
+                      viewBox="0 0 30 32"
+                      width="1.875rem"
+                    >
+                      <path
+                        d="M26.5 13.5h-8v8h8v-8z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+                        fill="#000"
+                      />
+                      <path
+                        d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
+                        stroke="#000"
+                        stroke-miterlimit="10"
+                      />
+                    </svg>
+                    <ul
+                      class="no-bullet"
+                    >
+                      <li>
+                        <a
+                          href="//www.ncbi.nlm.nih.gov/pubmed/2783775"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          PubMed
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="//europepmc.org/article/MED/2783775"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Europe PMC
+                        </a>
+                      </li>
+                      <li>
+                        <small>
+                          <a
+                            href="//dx.doi.org/10.1093/nar/17.2.517"
+                          >
+                            Nucleic Acids Res. 17:517-522(1989)
+                          </a>
+                        </small>
+                      </li>
+                    </ul>
                   </section>
                   <section
-                    class="publication__columns__side"
+                    class="publication__columns__side__item"
                   >
                     <section
-                      class="publication__columns__side__item"
-                    >
-                      <svg
-                        fill="none"
-                        height="2rem"
-                        viewBox="0 0 30 32"
-                        width="1.875rem"
-                      >
-                        <path
-                          d="M26.5 13.5h-8v8h8v-8z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-                          fill="#000"
-                        />
-                        <path
-                          d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-                          stroke="#000"
-                          stroke-miterlimit="10"
-                        />
-                      </svg>
-                      <ul
-                        class="no-bullet"
-                      >
-                        <li>
-                          <a
-                            href="//www.ncbi.nlm.nih.gov/pubmed/2783775"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            PubMed
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="//europepmc.org/article/MED/2783775"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Europe PMC
-                          </a>
-                        </li>
-                        <li>
-                          <small>
-                            <a
-                              href="//dx.doi.org/10.1093/nar/17.2.517"
-                            >
-                              Nucleic Acids Res. 17:517-522(1989)
-                            </a>
-                          </small>
-                        </li>
-                      </ul>
-                    </section>
-                    <section
-                      class="publication__columns__side__item"
+                      class="publication__statistics"
                     >
                       <section
-                        class="publication__statistics"
+                        class="publication__statistics__item"
                       >
-                        <section
-                          class="publication__statistics__item"
+                        <a
+                          href="/"
                         >
-                          <a
-                            href="/"
+                          <section>
+                            <small>
+                              Cited in
+                            </small>
+                          </section>
+                          <section
+                            class="publication__statistics__bubble"
                           >
-                            <section>
-                              <small>
-                                Cited in
-                              </small>
-                            </section>
-                            <section
-                              class="publication__statistics__bubble"
+                            <span
+                              class="bubble--small colour-pastel-blue"
                             >
-                              <span
-                                class="bubble--small colour-pastel-blue"
-                              >
-                                1
-                              </span>
-                              <svg
-                                fill="none"
-                                height="15"
-                                viewBox="0 0 30 22"
-                                width="15"
-                              >
-                                <path
-                                  d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
-                                  fill="#161D39"
-                                />
-                              </svg>
-                            </section>
-                          </a>
-                        </section>
+                              1
+                            </span>
+                            <svg
+                              fill="none"
+                              height="15"
+                              viewBox="0 0 30 22"
+                              width="15"
+                            >
+                              <path
+                                d="M13.651 6.684v1.011a.14.14 0 010 .119 14.123 14.123 0 01-1.011 4.125 15.727 15.727 0 01-2.698 4.542 15.866 15.866 0 01-3.966 3.391 18.283 18.283 0 01-4.621 1.984s2.836-4.145 5.79-8.191h-.297a6.822 6.822 0 116.744-7.676c.038.23.058.462.059.695zM29.993 6.684v1.011c.01.04.01.08 0 .12a14.123 14.123 0 01-1.011 4.124 15.728 15.728 0 01-2.678 4.562 15.863 15.863 0 01-3.966 3.332 18.285 18.285 0 01-4.681 1.983s2.836-4.125 5.791-8.171h-.297a6.822 6.822 0 116.783-7.655c.038.229.058.461.06.694z"
+                                fill="#161D39"
+                              />
+                            </svg>
+                          </section>
+                        </a>
                       </section>
                     </section>
                   </section>
                 </section>
               </section>
-            </div>
-          </div>
+            </section>
+          </section>
           <div
             class="data-loader__loading"
           >
