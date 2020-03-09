@@ -10,7 +10,6 @@ import {
   fileFormatToContentType,
   SelectedFacet,
   SortDirection,
-  SelectedEntries,
 } from './types/resultsTypes';
 import { getDownloadUrl, urlsAreEqual } from '../utils/apiUrls';
 import fetchData from '../utils/fetchData';
