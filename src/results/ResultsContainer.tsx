@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { uniq } from 'lodash';
 import {
   Facets,
   PageIntro,
@@ -220,11 +219,9 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   updateData() {
     const {
       location: { search: queryParamFromUrl },
-      tableColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
       dispatchUpdateQueryString,
-      viewMode,
     } = this.props;
     const {
       query,
@@ -232,13 +229,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
-    // Always fetch at least the card columns so these can be rendered
-    // Eg if no columns are selected for the table view ensure sufficient
-    // columns will be fetched to render each card.
-    let columns = null;
-    if (viewMode === ViewMode.TABLE) {
-      columns = uniq([...tableColumns]);
-    }
+    /**
+     * WARNING: horrible hack to get the switch between
+     * table and cards to work while we wait for the backend
+     * to generate a column for card counts and we refactor
+     * this class as a functional component and put all url
+     * parameters in the store.
+     */
+    const columns: Column[] = [];
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
