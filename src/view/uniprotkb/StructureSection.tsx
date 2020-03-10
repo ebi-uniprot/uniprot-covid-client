@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { flatten } from 'lodash';
 import { Card } from 'franklin-sites';
 import ProtvistaStructure from 'protvista-structure';
 import { loadWebComponent } from '../../utils/utils';
@@ -19,10 +20,17 @@ const StructureSection: FC<{
     return null;
   }
   loadWebComponent('protvista-structure', ProtvistaStructure);
+  const sortedIds = flatten(
+    data.featuresData.map(
+      ({ evidences }) => evidences && evidences.map(({ id }) => id)
+    )
+  ).sort();
+  const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
+
   return (
     <div id={EntrySection.Structure}>
       <Card title={EntrySection.Structure}>
-        <protvista-structure accession={primaryAccession} />
+        <protvista-structure accession={primaryAccession} pdb-id={firstId} />
         <FeaturesView features={data.featuresData} sequence={sequence} />
         {/* TODO: filter out PDB */}
         <XRefView
