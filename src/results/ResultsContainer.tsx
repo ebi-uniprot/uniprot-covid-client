@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { uniq } from 'lodash';
 import {
   Facets,
   PageIntro,
@@ -39,18 +38,15 @@ type ResultsProps = {
   dispatchResetSearchInput: () => void;
   dispatchClearResults: () => void;
   dispatchSwitchViewMode: () => void;
-  dispatchUpdateSummaryAccession: (accession: string) => void;
   dispatchUpdateQueryString: (type: string) => void;
   clauses?: Clause[];
   tableColumns: Column[];
-  cardColumns: string[];
   results: UniProtkbAPIModel[];
   facets: Facet[];
   isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;
   viewMode: ViewMode;
-  summaryAccession: string | null;
 } & RouteComponentProps;
 
 type ResultsContainerState = {
@@ -239,8 +235,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   updateData() {
     const {
       location: { search: queryParamFromUrl },
-      tableColumns,
-      cardColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
       dispatchUpdateQueryString,
@@ -251,10 +245,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
-    // Always fetch at least the card columns so these can be rendered
-    // Eg if no columns are selected for the table view ensure sufficient
-    // columns will be fetched to render each card.
-    const columns = uniq([...cardColumns, ...tableColumns]);
+    /**
+     * WARNING: horrible hack to get the switch between
+     * table and cards to work while we wait for the backend
+     * to generate a column for card counts and we refactor
+     * this class as a functional component and put all url
+     * parameters in the store.
+     */
+    const columns: Column[] = [];
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
@@ -269,14 +267,12 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       facets,
       isFetching,
       dispatchFetchBatchOfResultsIfNeeded,
-      dispatchUpdateSummaryAccession,
       namespace,
       nextUrl,
       totalNumberResults,
       viewMode,
       tableColumns,
       dispatchSwitchViewMode,
-      summaryAccession,
     } = this.props;
     const { selectedEntries } = this.state;
     const {
@@ -379,8 +375,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             handleEntrySelection={this.handleEntrySelection}
             selectedEntries={selectedEntries}
             handleHeaderClick={this.updateColumnSort}
-            handleCardClick={dispatchUpdateSummaryAccession}
-            summaryAccession={summaryAccession}
             sortColumn={sortColumn}
             sortDirection={sortDirection}
             handleLoadMoreRows={() =>
@@ -400,14 +394,12 @@ const mapStateToProps = (state: RootState) => {
   return {
     namespace: state.query.namespace,
     tableColumns: state.results.tableColumns,
-    cardColumns: state.results.cardColumns,
     results: state.results.results.data,
     facets: state.results.facets,
     isFetching: state.results.results.isFetching,
     nextUrl: state.results.nextUrl,
     totalNumberResults: state.results.totalNumberResults,
     viewMode: state.results.viewMode,
-    summaryAccession: state.results.summaryAccession,
   };
 };
 
@@ -419,8 +411,6 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchResetSearchInput: () => searchActions.resetSearchInput(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
-      dispatchUpdateSummaryAccession: (accession: string) =>
-        resultsActions.updateSummaryAccession(accession),
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
     },

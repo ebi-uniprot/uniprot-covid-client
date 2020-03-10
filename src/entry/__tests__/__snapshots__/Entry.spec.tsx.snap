@@ -318,7 +318,7 @@ exports[`Entry should render main 1`] = `
             <h2
               class="card__title"
             >
-              <div
+              <span
                 class="uniprot-title"
               >
                 <span
@@ -334,13 +334,8 @@ exports[`Entry should render main 1`] = `
                     />
                   </svg>
                 </span>
-                <a
-                  href="/uniprotkb/P21802"
-                >
-                  P21802
-                </a>
-                 · uniprot id
-              </div>
+                P21802 · uniprot id
+              </span>
             </h2>
           </div>
           <div

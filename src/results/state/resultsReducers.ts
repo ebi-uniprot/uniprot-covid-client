@@ -40,7 +40,6 @@ const resultsReducers = (
           isFetching: false,
           isFetched: {},
         },
-        summaryAccession: null,
         isFetching: false,
         isFetched: {},
       };
@@ -62,12 +61,6 @@ const resultsReducers = (
         ...state,
         fields: { data: action.payload.data, isFetching: false },
       };
-    case resultsActions.UPDATE_SUMMARY_ACCESSION: {
-      return {
-        ...state,
-        summaryAccession: action.payload.accession,
-      };
-    }
     case resultsActions.UPDATE_TABLE_COLUMNS: {
       return {
         ...state,

@@ -10,7 +10,6 @@ export enum ViewMode {
 
 export type ResultsState = {
   tableColumns: Column[];
-  cardColumns: Column[];
   facets: Facet[];
   nextUrl: string;
   results: {
@@ -24,7 +23,6 @@ export type ResultsState = {
     data: FieldData;
     isFetching: boolean;
   };
-  summaryAccession: string | null;
 };
 
 export const defaultTableColumns = [
@@ -38,15 +36,6 @@ export const defaultTableColumns = [
 
 const resultsInitialState = {
   tableColumns: defaultTableColumns,
-  cardColumns: [
-    Column.accession,
-    Column.id,
-    Column.proteinName,
-    Column.geneNames,
-    Column.organism,
-    Column.keyword,
-    Column.sequence,
-  ],
   results: {
     data: [],
     isFetching: false,
@@ -63,7 +52,6 @@ const resultsInitialState = {
     },
     isFetching: false,
   },
-  summaryAccession: null,
 };
 
 export default resultsInitialState;
