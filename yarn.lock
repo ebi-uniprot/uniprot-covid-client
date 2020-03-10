@@ -8813,10 +8813,10 @@ prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-protvista-datatable@^2.2.15:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/protvista-datatable/-/protvista-datatable-2.3.3.tgz#1f85087381218e540c8e20757f1e2f62cef5ae41"
-  integrity sha512-GE3Z+5P22+DcgUo+wH2ul7b4Z1vvah9ISAN7mPn/0Zl+HaXS+FPfC63UDL/ek/s1inf/iHGK/HLLK0JmIKVl/A==
+protvista-datatable@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/protvista-datatable/-/protvista-datatable-2.4.0.tgz#a51275e0e2d84be519d655cc61d58709f333b8f3"
+  integrity sha512-8G4jTUcMeMTz4cjORw38/5TK22W5GPBhLaglaNz36sfmtFoH/GVAvZbjLXD227b5VWJuebLScgCV55G5R1LxJg==
   dependencies:
     lit-element "^2.1.0"
     uuid "^3.3.3"
@@ -8859,10 +8859,10 @@ protvista-sequence@^2.1.17:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.3.3"
 
-protvista-structure@^2.1.18:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.3.0.tgz#0f672f8ff4d965be72242134334a88804c5c1381"
-  integrity sha512-cSDLkanxwi2pHPlfcwW+cAOoy+AK+pSxzZeu4TBpmWNDHnia/0l4l5l+78PL85ZSYgwsqyJtUBH+8D/0pRF2ww==
+protvista-structure@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.4.0.tgz#5fbbdfc51d4349cf43a3617aab3afdd6abaae4de"
+  integrity sha512-FjeIsgYfWbniq0d7imh4IY+B+cpjvYVYZW4M+OEfJupkxNLj5iQ6JoN+ZVUURkleq+3mWX5HVwZPUbx7qu8P9A==
   dependencies:
     lodash-es "^4.17.11"
     whatwg-fetch "^3.0.0"
