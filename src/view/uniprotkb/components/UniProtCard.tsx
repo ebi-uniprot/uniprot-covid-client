@@ -94,7 +94,11 @@ const UniProtCard: FC<{
         <section className="uniprot-card__left">
           <input
             type="checkbox"
-            checked={selectedEntries[data.primaryAccession]}
+            checked={
+              selectedEntries[data.primaryAccession]
+                ? selectedEntries[data.primaryAccession]
+                : false
+            }
             onClick={e => e.stopPropagation()}
             onChange={() => handleEntrySelection(data.primaryAccession)}
             data-testid="up-card-checkbox"
