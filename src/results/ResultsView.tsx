@@ -2,6 +2,7 @@ import React from 'react';
 import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
 import '../styles/alert.scss';
+import '../styles/ResultsView.scss';
 import { SelectedEntries, SortDirection } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
@@ -38,19 +39,21 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const hasMoreData = totalNumberResults > results.length;
   if (viewMode === ViewMode.CARD) {
     return (
-      <DataList
-        idKey="primaryAccession"
-        data={results}
-        dataRenderer={(dataItem: UniProtkbAPIModel) => (
-          <UniProtCard
-            data={dataItem}
-            selectedEntries={selectedEntries}
-            handleEntrySelection={handleEntrySelection}
-          />
-        )}
-        onLoadMoreItems={handleLoadMoreRows}
-        hasMoreData={hasMoreData}
-      />
+      <div className="datalist">
+        <DataList
+          idKey="primaryAccession"
+          data={results}
+          dataRenderer={(dataItem: UniProtkbAPIModel) => (
+            <UniProtCard
+              data={dataItem}
+              selectedEntries={selectedEntries}
+              handleEntrySelection={handleEntrySelection}
+            />
+          )}
+          onLoadMoreItems={handleLoadMoreRows}
+          hasMoreData={hasMoreData}
+        />
+      </div>
     );
   } // viewMode === ViewMode.TABLE
   const columns = tableColumns.map(columnName => {

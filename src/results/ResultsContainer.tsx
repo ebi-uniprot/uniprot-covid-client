@@ -272,108 +272,106 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     }
     const { name, links, info } = infoMappings[namespace];
     return (
-      <Fragment>
-        {results.length > 0 && (
-          <div className="button-group">
-            <button type="button" className="button tertiary disabled">
-              Blast
-            </button>
-            <button type="button" className="button tertiary disabled">
-              Align
-            </button>
-            <button type="button" className="button tertiary">
-              <Link
-                to={{
-                  pathname: '/download',
-                  state: {
-                    query,
-                    selectedFacets,
-                    sortColumn,
-                    sortDirection,
-                    selectedEntries: Object.keys(selectedEntries),
-                  },
-                }}
+      <SideBarLayout
+        title={
+          <PageIntro
+            title={name}
+            links={links}
+            resultsCount={totalNumberResults}
+          >
+            {info}
+          </PageIntro>
+        }
+        sidebar={
+          <Facets
+            data={facets}
+            selectedFacets={selectedFacets}
+            addFacet={this.addFacet}
+            removeFacet={this.removeFacet}
+          />
+        }
+      >
+        <Fragment>
+          {results.length > 0 && (
+            <div className="button-group">
+              <button type="button" className="button tertiary disabled">
+                Blast
+              </button>
+              <button type="button" className="button tertiary disabled">
+                Align
+              </button>
+              <button type="button" className="button tertiary">
+                <Link
+                  to={{
+                    pathname: '/download',
+                    state: {
+                      query,
+                      selectedFacets,
+                      sortColumn,
+                      sortDirection,
+                      selectedEntries: Object.keys(selectedEntries),
+                    },
+                  }}
+                >
+                  <DownloadIcon />
+                  Download
+                </Link>
+              </button>
+              <button type="button" className="button tertiary disabled">
+                <BasketIcon />
+                Add
+              </button>
+              <button type="button" className="button tertiary">
+                <StatisticsIcon />
+                Statistics
+              </button>
+              <button
+                type="button"
+                className="button tertiary large-icon"
+                onClick={() => dispatchSwitchViewMode()}
+                data-testid="table-card-toggle"
               >
-                <DownloadIcon />
-                Download
-              </Link>
-            </button>
-            <button type="button" className="button tertiary disabled">
-              <BasketIcon />
-              Add
-            </button>
-            <button type="button" className="button tertiary">
-              <StatisticsIcon />
-              Statistics
-            </button>
-            <button
-              type="button"
-              className="button tertiary large-icon"
-              onClick={() => dispatchSwitchViewMode()}
-              data-testid="table-card-toggle"
-            >
-              <span
-                className={
-                  viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
-                }
-              >
-                <TableIcon />
-              </span>
-              <span
-                className={
-                  viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
-                }
-              >
-                <ListIcon />
-              </span>
-            </button>
-            {viewMode === ViewMode.TABLE && (
-              <Link to="/customise-table">
-                <button type="button" className="button tertiary">
-                  <EditIcon />
-                  Customise data
-                </button>
-              </Link>
-            )}
-          </div>
-        )}{' '}
-        <SideBarLayout
-          title={
-            <PageIntro
-              title={name}
-              links={links}
-              resultsCount={totalNumberResults}
-            >
-              {info}
-            </PageIntro>
-          }
-          sidebar={
-            <Facets
-              data={facets}
-              selectedFacets={selectedFacets}
-              addFacet={this.addFacet}
-              removeFacet={this.removeFacet}
-            />
-          }
-        >
-          <Fragment>
-            <ResultsView
-              results={results}
-              handleEntrySelection={this.handleEntrySelection}
-              selectedEntries={selectedEntries}
-              handleHeaderClick={this.updateColumnSort}
-              sortColumn={sortColumn}
-              sortDirection={sortDirection}
-              handleLoadMoreRows={() =>
-                dispatchFetchBatchOfResultsIfNeeded(nextUrl)
-              }
-              totalNumberResults={totalNumberResults}
-              tableColumns={tableColumns}
-              viewMode={viewMode}
-            />
-          </Fragment>
-        </SideBarLayout>
-      </Fragment>
+                <span
+                  className={
+                    viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
+                  }
+                >
+                  <TableIcon />
+                </span>
+                <span
+                  className={
+                    viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
+                  }
+                >
+                  <ListIcon />
+                </span>
+              </button>
+              {viewMode === ViewMode.TABLE && (
+                <Link to="/customise-table">
+                  <button type="button" className="button tertiary">
+                    <EditIcon />
+                    Customise data
+                  </button>
+                </Link>
+              )}
+            </div>
+          )}
+          <ResultsView
+            results={results}
+            handleEntrySelection={this.handleEntrySelection}
+            selectedEntries={selectedEntries}
+            handleHeaderClick={this.updateColumnSort}
+            sortColumn={sortColumn}
+            sortDirection={sortDirection}
+            handleLoadMoreRows={() =>
+              dispatchFetchBatchOfResultsIfNeeded(nextUrl)
+            }
+            totalNumberResults={totalNumberResults}
+            tableColumns={tableColumns}
+            viewMode={viewMode}
+          />
+        </Fragment>
+      </SideBarLayout>
     );
   }
 }
