@@ -28,31 +28,9 @@ const App = () => (
     <Router basename={BASE_URL}>
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <BaseLayout isHomePage>
-                <HomePage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path="/uniprotkb/:accession"
-            render={() => (
-              <BaseLayout>
-                <EntryPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path="/uniprotkb"
-            render={() => (
-              <BaseLayout>
-                <ResultsPage />
-              </BaseLayout>
-            )}
-          />
+          <Route path="/" exact render={() => <HomePage />} />
+          <Route path="/uniprotkb/:accession" render={() => <EntryPage />} />
+          <Route path="/uniprotkb" render={() => <ResultsPage />} />
           <Route
             path="/customise-table"
             render={() => (

@@ -12,6 +12,7 @@ import {
   PublicationIcon,
   ExternalLinkIcon,
   TremblIcon,
+  DownloadIcon,
 } from 'franklin-sites';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
@@ -94,6 +95,23 @@ const Entry: React.FC<EntryProps> = ({
       icon: <TremblIcon />,
       itemContent: <InPageNav sections={sections} />,
       path: 'main',
+      actionButtons: (
+        <div className="button-group">
+          <button type="button" className="button tertiary">
+            Blast
+          </button>
+          <button type="button" className="button tertiary">
+            Align
+          </button>
+          <button type="button" className="button tertiary">
+            <DownloadIcon />
+            Download
+          </button>
+          <button type="button" className="button tertiary">
+            Add
+          </button>
+        </div>
+      ),
       mainContent: <EntryMain transformedData={entryData} />,
     },
     {
@@ -134,6 +152,17 @@ const Entry: React.FC<EntryProps> = ({
             data={displayMenuData}
             title={`Publications for ${accession}`}
           />
+        }
+        actionButtons={
+          <Switch>
+            {displayMenuData.map(displayItem => (
+              <Route
+                path={`${path}/${displayItem.path}`}
+                render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
+                key={displayItem.name}
+              />
+            ))}
+          </Switch>
         }
       >
         <Switch>

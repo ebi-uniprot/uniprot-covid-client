@@ -1,5 +1,5 @@
 import React, { Fragment, memo } from 'react';
-import { Card, DownloadIcon } from 'franklin-sites';
+import { Card } from 'franklin-sites';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
 import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
@@ -19,21 +19,6 @@ function arePropsEqual(prevProps: EntryMainProps, nextProps: EntryMainProps) {
 
 const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
-    <div className="button-group">
-      <button type="button" className="button tertiary">
-        Blast
-      </button>
-      <button type="button" className="button tertiary">
-        Align
-      </button>
-      <button type="button" className="button tertiary">
-        <DownloadIcon />
-        Download
-      </button>
-      <button type="button" className="button tertiary">
-        Add
-      </button>
-    </div>
     <Card
       title={
         <UniProtTitle

@@ -271,7 +271,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       return <Loader />;
     }
     const { name, links, info } = infoMappings[namespace];
-    return (
+
+    const actionButtons = (
       <Fragment>
         {results.length > 0 && (
           <div className="button-group">
@@ -336,17 +337,25 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
               </Link>
             )}
           </div>
-        )}{' '}
+        )}
+      </Fragment>
+    );
+
+    return (
+      <Fragment>
         <SideBarLayout
           title={
-            <PageIntro
-              title={name}
-              links={links}
-              resultsCount={totalNumberResults}
-            >
-              {info}
-            </PageIntro>
+            <Fragment>
+              <PageIntro
+                title={name}
+                links={links}
+                resultsCount={totalNumberResults}
+              >
+                {info}
+              </PageIntro>
+            </Fragment>
           }
+          actionButtons={actionButtons}
           sidebar={
             <Facets
               data={facets}
