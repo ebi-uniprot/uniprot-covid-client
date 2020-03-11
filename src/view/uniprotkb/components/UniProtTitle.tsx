@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
-import { Link } from 'react-router-dom';
 import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
 import './styles/UniProtTitle.scss';
 
@@ -22,11 +21,11 @@ const UniProtTitle: FC<{
   entryType: EntryType;
   uniProtId: string;
 }> = ({ primaryAccession, entryType, uniProtId }) => (
-  <div className="uniprot-title">
+  <span className="uniprot-title">
     <ReviewedUnreviewed entryType={entryType} />
-    <Link to={`/uniprotkb/${primaryAccession}`}>{primaryAccession}</Link>
+    {primaryAccession}
     {` · ${uniProtId}`}
-  </div>
+  </span>
 );
 
 export default UniProtTitle;

@@ -1,0 +1,11 @@
+.uniprot-card {
+  display: flex;
+  &__left {
+    padding: 0.2rem;
+  }
+  &__right {
+    h5 {
+      margin: 0;
+    }
+  }
+}

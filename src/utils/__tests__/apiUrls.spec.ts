@@ -1,4 +1,9 @@
-import { getQueryUrl, createFacetsQueryString, urlsAreEqual } from '../apiUrls';
+import apiUrls, {
+  getQueryUrl,
+  createFacetsQueryString,
+  urlsAreEqual,
+} from '../apiUrls';
+import { FileFormat } from '../../results/types/resultsTypes';
 
 describe('getQueryUrl', () => {
   test('should generate facet url', () => {
@@ -55,5 +60,43 @@ describe('urlsAreEqual', () => {
         ['compress']
       )
     ).toBe(false);
+  });
+});
+
+describe('apiUrls', () => {
+  const getLastPath = url => url.substr(url.lastIndexOf('/') + 1);
+  const accession = 'P123456';
+  const testCases = [
+    {
+      fileFormat: FileFormat.text,
+      lastPath: 'P123456.txt',
+    },
+    {
+      fileFormat: FileFormat.fastaCanonical,
+      lastPath: 'P123456.fasta',
+    },
+    {
+      fileFormat: FileFormat.fastaCanonicalIsoform,
+      lastPath:
+        'search?format=fasta&includeIsoform=true&query=accession%3AP123456',
+    },
+    {
+      fileFormat: FileFormat.xml,
+      lastPath: 'P123456.xml',
+    },
+    {
+      fileFormat: FileFormat.rdfXml,
+      lastPath: 'P123456.rdf',
+    },
+    {
+      fileFormat: FileFormat.gff,
+      lastPath: 'P123456.gff',
+    },
+  ];
+  testCases.forEach(({ fileFormat, lastPath }) => {
+    test(`should return correct download URL for file format ${fileFormat}`, () => {
+      const url = apiUrls.entryDownload(accession, fileFormat);
+      expect(getLastPath(url)).toBe(lastPath);
+    });
   });
 });

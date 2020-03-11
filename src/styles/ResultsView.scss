@@ -1,8 +1,5 @@
 .datalist {
   display: flex;
   height: 100%; //needed for the data list to function
-  &__column {
-    width: 50%;
-    overflow-y: auto;
-  }
+  overflow-y: auto;
 }

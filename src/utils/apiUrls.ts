@@ -57,6 +57,16 @@ const apiUrls = {
   entry: (accession: string) =>
     joinUrl(devPrefix, '/uniprot/api/uniprotkb/accession', accession),
 
+  entryDownload: (accession: string, format: FileFormat) =>
+    format === FileFormat.fastaCanonicalIsoform
+      ? `${apiUrls.search}?${queryString.stringify({
+          query: `accession:${accession}`,
+          includeIsoform: true,
+          format: fileFormatToUrlParameter.get(
+            FileFormat.fastaCanonicalIsoform
+          ),
+        })}`
+      : `${apiUrls.entry(accession)}.${fileFormatToUrlParameter.get(format)}`,
   entryPublications: (accession: string) =>
     joinUrl(
       devPrefix,
@@ -95,14 +105,14 @@ export const createAccessionsQueryString = (accessions: string[]) =>
 
 export const getQueryUrl = (
   query: string,
-  columns: string[],
+  columns: string[] | null,
   selectedFacets: SelectedFacet[],
   sortColumn: SortableColumn | undefined = undefined,
   sortDirection: SortDirection | undefined = SortDirection.ascend
 ) =>
   `${apiUrls.search}?${queryString.stringify({
     query: `${query}${createFacetsQueryString(selectedFacets)}`,
-    fields: columns.join(','),
+    fields: columns && columns.join(','),
     facets:
       'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
     sort:
