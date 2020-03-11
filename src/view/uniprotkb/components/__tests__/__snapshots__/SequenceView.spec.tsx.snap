@@ -99,14 +99,14 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
         >
           <li>
             <a
-              href="/blast/accession/undefined"
+              href="/blast/accession/Isoform"
             >
               BLAST
             </a>
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protparam/protparam?undefined"
+              href="//web.expasy.org/cgi-bin//protparam/protparam?Isoform"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -115,7 +115,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?undefined"
+              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?Isoform"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -124,7 +124,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?undefined"
+              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?Isoform"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -133,7 +133,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?Isoform"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -142,7 +142,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?Isoform"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -155,7 +155,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
     <a
       class="button"
       download=""
-      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/Isoform.fasta"
     >
       <svg
         height="32"
@@ -483,14 +483,14 @@ exports[`SequenceView component should render SequenceView 1`] = `
         >
           <li>
             <a
-              href="/blast/accession/undefined"
+              href="/blast/accession/P05067"
             >
               BLAST
             </a>
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protparam/protparam?undefined"
+              href="//web.expasy.org/cgi-bin//protparam/protparam?P05067"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -499,7 +499,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?undefined"
+              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?P05067"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -508,7 +508,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?undefined"
+              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?P05067"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -517,7 +517,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?P05067"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -526,7 +526,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?P05067"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -539,7 +539,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
     <a
       class="button"
       download=""
-      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P05067.fasta"
     >
       <svg
         height="32"

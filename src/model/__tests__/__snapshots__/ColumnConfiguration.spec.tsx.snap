@@ -609,14 +609,14 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
         >
           <li>
             <a
-              href="/blast/accession/undefined"
+              href="/blast/accession/P21802"
             >
               BLAST
             </a>
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protparam/protparam?undefined"
+              href="//web.expasy.org/cgi-bin//protparam/protparam?P21802"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -625,7 +625,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?undefined"
+              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?P21802"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -634,7 +634,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?undefined"
+              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?P21802"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -643,7 +643,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?P21802"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -652,7 +652,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
           </li>
           <li>
             <a
-              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?undefined"
+              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?P21802"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -665,7 +665,7 @@ exports[`ColumnConfiguration component should render all columns 16`] = `
     <a
       class="button"
       download=""
-      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/undefined.fasta"
+      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.fasta"
     >
       <svg
         height="32"

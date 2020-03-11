@@ -330,7 +330,7 @@ ColumnConfiguration.set(Column.sequence, {
     return (
       <Sequence
         sequence={sequenceData.sequence.value}
-        id={data.primaryAccession}
+        accession={data.primaryAccession}
       />
     );
   },
