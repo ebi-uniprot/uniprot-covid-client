@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import BaseLayout from './BaseLayout';
+import './styles/SideBarLayout.scss';
 
 type SideBarLayoutProps = {
   title?: JSX.Element;
@@ -15,18 +16,20 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   actionButtons,
   children,
 }) => (
-  <BaseLayout>
-    <Fragment>
-      {title && <section className="base-layout__title">{title}</section>}
-      {actionButtons && (
-        <section className="base-layout__action-buttons">
-          {actionButtons}
-        </section>
-      )}
-      <section className="base-layout__sidebar">{sidebar}</section>
-      <section className="base-layout__content">{children}</section>
-    </Fragment>
-  </BaseLayout>
+  <section className="sidebar-layout">
+    <BaseLayout>
+      <Fragment>
+        {title && <section className="base-layout__title">{title}</section>}
+        {actionButtons && (
+          <section className="base-layout__action-buttons">
+            {actionButtons}
+          </section>
+        )}
+        <section className="base-layout__sidebar">{sidebar}</section>
+        <section className="base-layout__content">{children}</section>
+      </Fragment>
+    </BaseLayout>
+  </section>
 );
 
 export default SideBarLayout;
