@@ -10,6 +10,7 @@ import {
   implicitDatabaseGenePatternOrganism,
   implicitDatabaseSimilarityComment,
   implicitDatabasesEC,
+  PDBMirrors,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
 import { DatabaseCategory } from '../types/DatabaseTypes';
@@ -282,4 +283,20 @@ export const getXrefsForSection = (
   });
 
   return xrefCategories;
+};
+
+export const partitionStructureDatabases = (
+  databases: XrefsGoupedByDatabase[]
+) => {
+  // This function returns the PDB databases and an array of non-PDB databases.
+  const { PDBDatabases, otherStructureDatabases } = groupBy(
+    databases,
+    ({ database }) =>
+      PDBMirrors.includes(database) ? 'PDBDatabases' : 'otherStructureDatabases'
+  );
+  // Though we have partitioned the xrefs into PDB* and non-PDB* we only need the
+  // information from the PDB xref entries (ie not PDBsum)
+  const PDBDatabase =
+    PDBDatabases && PDBDatabases.find(({ database }) => database === 'PDB');
+  return { PDBDatabase, otherStructureDatabases };
 };

@@ -146,7 +146,6 @@ entrySectionToDatabaseNames.set(
       'EvolutionaryTrace',
       'ModBase', // Implicit
     ],
-    blacklist: PDBMirrors,
   })
 );
 
