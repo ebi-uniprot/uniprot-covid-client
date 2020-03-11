@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
+import { groupBy } from 'lodash';
 import { Card } from 'franklin-sites';
-import ProtvistaManager from 'protvista-manager';
-import ProtvistaStructure from 'protvista-structure';
-import { loadWebComponent } from '../../utils/utils';
 import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
@@ -14,7 +12,6 @@ import {
   XrefUIModel,
 } from '../../model/utils/XrefUtils';
 import { DatabaseCategory } from '../../model/types/DatabaseTypes';
-import { groupBy } from 'lodash';
 import { entrySectionToDatabaseCategoryOrder } from '../../data/database';
 
 const StructureSection: FC<{
@@ -26,8 +23,6 @@ const StructureSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
-  loadWebComponent('protvista-manager', ProtvistaManager);
-  loadWebComponent('protvista-structure', ProtvistaStructure);
   const { arrayStructureDatabases, otherDatabases } = groupBy(
     data.xrefData,
     ({ category }) =>
@@ -35,6 +30,9 @@ const StructureSection: FC<{
         ? 'arrayStructureDatabases'
         : 'otherDatabases'
   );
+
+  // Need to save these as we want to display them in the xrefs section
+  const nonPDBDatabases = otherDatabases || [];
 
   let PDBViewNode;
   const structureDatabases =
@@ -49,14 +47,15 @@ const StructureSection: FC<{
     if (PDBDatabase && PDBDatabase.xrefs.length) {
       PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} />;
     }
-    otherDatabases.push({
+    const nonPDBStructureDatabases: XrefUIModel = {
       category: DatabaseCategory.STRUCTURE,
       databases: otherStructureDatabases,
-    } as XrefUIModel);
+    };
+    nonPDBDatabases.push(nonPDBStructureDatabases);
   }
 
   let XrefViewNode;
-  if (otherDatabases && otherDatabases.length) {
+  if (nonPDBDatabases && nonPDBDatabases.length) {
     // The non-PDB databases need to be re-ordered accordingly
     const categoryOrder = entrySectionToDatabaseCategoryOrder.get(
       EntrySection.Structure
@@ -64,7 +63,7 @@ const StructureSection: FC<{
     if (categoryOrder) {
       XrefViewNode = (
         <XRefView
-          xrefs={otherDatabases.sort(
+          xrefs={nonPDBDatabases.sort(
             (a, b) =>
               categoryOrder.indexOf(a.category) -
               categoryOrder.indexOf(b.category)

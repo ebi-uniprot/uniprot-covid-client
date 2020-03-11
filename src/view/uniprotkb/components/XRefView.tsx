@@ -1,7 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import { v1 } from 'uuid';
 import idx from 'idx';
-import { sortBy, groupBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
@@ -266,7 +266,7 @@ const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> 
   );
   let PDBViewNode;
   if (PDBDatabase && PDBDatabase.xrefs.length) {
-    PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} noStructure={true} />;
+    PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} noStructure />;
   }
   return (
     <Fragment>
