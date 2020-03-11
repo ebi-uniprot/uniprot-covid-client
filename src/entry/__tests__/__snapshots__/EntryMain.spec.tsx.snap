@@ -2643,9 +2643,6 @@ exports[`Entry view should render 1`] = `
         <div
           class="card__content"
         >
-          <protvista-structure
-            accession="P21802"
-          />
           <h3>
             3D structure databases
           </h3>

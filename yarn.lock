@@ -8078,7 +8078,7 @@ prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-protvista-datatable@^2.2.15:
+protvista-datatable@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/protvista-datatable/-/protvista-datatable-2.4.0.tgz#a51275e0e2d84be519d655cc61d58709f333b8f3"
   integrity sha512-8G4jTUcMeMTz4cjORw38/5TK22W5GPBhLaglaNz36sfmtFoH/GVAvZbjLXD227b5VWJuebLScgCV55G5R1LxJg==
@@ -8124,7 +8124,7 @@ protvista-sequence@^2.1.17:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.3.5"
 
-protvista-structure@^2.1.18:
+protvista-structure@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/protvista-structure/-/protvista-structure-2.4.0.tgz#5fbbdfc51d4349cf43a3617aab3afdd6abaae4de"
   integrity sha512-FjeIsgYfWbniq0d7imh4IY+B+cpjvYVYZW4M+OEfJupkxNLj5iQ6JoN+ZVUURkleq+3mWX5HVwZPUbx7qu8P9A==

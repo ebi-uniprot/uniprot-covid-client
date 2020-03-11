@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
+import { groupBy } from 'lodash';
 import { Card } from 'franklin-sites';
-import ProtvistaStructure from 'protvista-structure';
-import { loadWebComponent } from '../../utils/utils';
 import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import FeaturesView from './components/FeaturesView';
-import 'litemol/dist/css/LiteMol-plugin.css';
 import XRefView from './components/XRefView';
+import PDBView from './components/PDBView';
+import {
+  partitionStructureDatabases,
+  XrefUIModel,
+} from '../../model/utils/XrefUtils';
+import { DatabaseCategory } from '../../model/types/DatabaseTypes';
+import { entrySectionToDatabaseCategoryOrder } from '../../data/database';
 
 const StructureSection: FC<{
   data: UIModel;
@@ -18,18 +23,69 @@ const StructureSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
-  loadWebComponent('protvista-structure', ProtvistaStructure);
-  return (
-    <div id={EntrySection.Structure}>
-      <Card title={EntrySection.Structure}>
-        <protvista-structure accession={primaryAccession} />
-        <FeaturesView features={data.featuresData} sequence={sequence} />
-        {/* TODO: filter out PDB */}
+  const { arrayStructureDatabases, otherDatabases } = groupBy(
+    data.xrefData,
+    ({ category }) =>
+      category === DatabaseCategory.STRUCTURE
+        ? 'arrayStructureDatabases'
+        : 'otherDatabases'
+  );
+
+  // Need to save these as we want to display them in the xrefs section
+  const nonPDBDatabases = otherDatabases || [];
+
+  let PDBViewNode;
+  const structureDatabases =
+    arrayStructureDatabases &&
+    arrayStructureDatabases.length === 1 &&
+    arrayStructureDatabases[0];
+  if (structureDatabases) {
+    const {
+      PDBDatabase,
+      otherStructureDatabases,
+    } = partitionStructureDatabases(structureDatabases.databases);
+    if (PDBDatabase && PDBDatabase.xrefs.length) {
+      PDBViewNode = (
+        <PDBView
+          xrefs={PDBDatabase.xrefs}
+          primaryAccession={primaryAccession}
+        />
+      );
+    }
+    const nonPDBStructureDatabases: XrefUIModel = {
+      category: DatabaseCategory.STRUCTURE,
+      databases: otherStructureDatabases,
+    };
+    nonPDBDatabases.push(nonPDBStructureDatabases);
+  }
+
+  let XrefViewNode;
+  if (nonPDBDatabases && nonPDBDatabases.length) {
+    // The non-PDB databases need to be re-ordered accordingly
+    const categoryOrder = entrySectionToDatabaseCategoryOrder.get(
+      EntrySection.Structure
+    );
+    if (categoryOrder) {
+      XrefViewNode = (
         <XRefView
-          xrefs={data.xrefData}
+          xrefs={nonPDBDatabases.sort(
+            (a, b) =>
+              categoryOrder.indexOf(a.category) -
+              categoryOrder.indexOf(b.category)
+          )}
           primaryAccession={primaryAccession}
           crc64={crc64}
         />
+      );
+    }
+  }
+
+  return (
+    <div id={EntrySection.Structure}>
+      <Card title={EntrySection.Structure}>
+        {PDBViewNode}
+        <FeaturesView features={data.featuresData} sequence={sequence} />
+        {XrefViewNode}
       </Card>
     </div>
   );
