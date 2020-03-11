@@ -3,43 +3,6 @@
 exports[`Entry view should render 1`] = `
 <DocumentFragment>
   <div
-    class="button-group"
-  >
-    <button
-      class="button tertiary"
-      type="button"
-    >
-      Blast
-    </button>
-    <button
-      class="button tertiary"
-      type="button"
-    >
-      Align
-    </button>
-    <button
-      class="button tertiary"
-      type="button"
-    >
-      <svg
-        height="32"
-        viewBox="0 0 32 32"
-        width="32"
-      >
-        <path
-          d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
-        />
-      </svg>
-      Download
-    </button>
-    <button
-      class="button tertiary"
-      type="button"
-    >
-      Add
-    </button>
-  </div>
-  <div
     class="card"
   >
     <section>
