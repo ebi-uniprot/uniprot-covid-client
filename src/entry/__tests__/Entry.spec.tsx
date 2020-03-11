@@ -79,7 +79,8 @@ describe('Entry', () => {
   it('should switch to publications and apply a filter', async () => {
     await act(async () => {
       const { getByText } = component;
-      fireEvent.click(getByText('Publications'));
+      const button = getByText('Publications', { selector: 'a' });
+      fireEvent.click(button);
       const smallFacetButton = await waitForElement(() => getByText(/Small/));
       fireEvent.click(smallFacetButton);
       const smallFacetButton2 = await waitForElement(() =>

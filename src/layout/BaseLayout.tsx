@@ -2,6 +2,7 @@ import React from 'react';
 
 import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
+import './styles/BaseLayout.scss';
 
 type BaseLayoutProps = {
   children: JSX.Element;
@@ -27,8 +28,10 @@ const style: React.CSSProperties = {
 const BaseLayout: React.FC<BaseLayoutProps> = props => {
   const { children, isHomePage, isSearchPage } = props;
   return (
-    <section id="outer-layout">
-      <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
+    <section className="base-layout">
+      <section className="main-header">
+        <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
+      </section>
       <a
         style={style}
         target="_blank"
@@ -38,7 +41,9 @@ const BaseLayout: React.FC<BaseLayoutProps> = props => {
         Report bug
       </a>
       {children}
-      <UniProtFooter />
+      <section className="footer">
+        <UniProtFooter />
+      </section>
     </section>
   );
 };

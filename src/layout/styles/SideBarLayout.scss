@@ -1,28 +1,38 @@
 @import '../../styles/settings';
 
 .sidebar-layout {
-  padding-left: 0.5rem;
-  display: grid;
-  column-gap: $gutter-size;
-  grid-template-columns: 16.6vw auto;
-  grid-template-rows: auto 100vh;
-  grid-template-areas: 'title title' 'sidebar content';
-  &--inverted {
-    grid-template-areas: 'title title' 'content sidebar';
-    grid-template-columns: 6fr 1fr;
-  }
+  .base-layout {
+    min-height: 100vh;
+    max-height: 100vh;
+    grid-template-areas:
+      'main-header main-header'
+      'title title'
+      '. action-buttons'
+      'sidebar content'
+      'footer footer';
 
-  &__title {
-    grid-column: title;
-  }
+    grid-template-columns: 20vw auto;
+    grid-template-rows: 5rem auto auto 1fr auto;
+    &__title {
+      grid-column: title;
+      padding: 0 $gutter-size;
+    }
 
-  &__sidebar {
-    grid-area: sidebar;
-    overflow-y: auto;
-  }
+    &__action-buttons {
+      grid-column: action-buttons;
+      padding: 0 $gutter-size;
+    }
 
-  &__content {
-    grid-area: content;
-    overflow-y: auto;
+    &__sidebar {
+      padding: 0 $gutter-size;
+      grid-area: sidebar;
+      overflow-y: auto;
+    }
+
+    &__content {
+      padding: 0 $gutter-size;
+      grid-area: content;
+      overflow-y: auto;
+    }
   }
 }

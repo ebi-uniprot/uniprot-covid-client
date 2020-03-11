@@ -12,6 +12,8 @@ import {
   PublicationIcon,
   ExternalLinkIcon,
   TremblIcon,
+  DownloadIcon,
+  DropdownButton,
 } from 'franklin-sites';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
@@ -23,8 +25,11 @@ import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
 import { RootState, RootAction } from '../state/state-types';
 import * as entryActions from './state/entryActions';
-import { getUniProtPublicationsQueryUrl } from '../utils/apiUrls';
-import { SelectedFacet } from '../results/types/resultsTypes';
+import apiUrls, { getUniProtPublicationsQueryUrl } from '../utils/apiUrls';
+import {
+  SelectedFacet,
+  fileFormatEntryDownload,
+} from '../results/types/resultsTypes';
 import EntryPublicationsFacets from './publications/EntryPublicationsFacets';
 import EntryPublications from './publications/EntryPublications';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
@@ -94,6 +99,46 @@ const Entry: React.FC<EntryProps> = ({
       icon: <TremblIcon />,
       itemContent: <InPageNav sections={sections} />,
       path: 'main',
+      actionButtons: (
+        <div className="button-group">
+          <button type="button" className="button tertiary">
+            Blast
+          </button>
+          <button type="button" className="button tertiary">
+            Align
+          </button>
+          <DropdownButton
+            label={
+              <Fragment>
+                <DownloadIcon />
+                Download
+              </Fragment>
+            }
+            className="tertiary"
+            // onSelect={action('onSelect')}
+          >
+            <div className="dropdown-menu__content">
+              <ul>
+                {fileFormatEntryDownload.map(fileFormat => (
+                  <li key={fileFormat}>
+                    <a
+                      href={apiUrls.entryDownload(
+                        entryData.primaryAccession,
+                        fileFormat
+                      )}
+                    >
+                      {fileFormat}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </DropdownButton>
+          <button type="button" className="button tertiary">
+            Add
+          </button>
+        </div>
+      ),
       mainContent: <EntryMain transformedData={entryData} />,
     },
     {
@@ -134,6 +179,17 @@ const Entry: React.FC<EntryProps> = ({
             data={displayMenuData}
             title={`Publications for ${accession}`}
           />
+        }
+        actionButtons={
+          <Switch>
+            {displayMenuData.map(displayItem => (
+              <Route
+                path={`${path}/${displayItem.path}`}
+                render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
+                key={displayItem.name}
+              />
+            ))}
+          </Switch>
         }
       >
         <Switch>
