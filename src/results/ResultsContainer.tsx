@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
-import { uniq } from 'lodash';
 import {
   Facets,
   PageIntro,
@@ -106,8 +105,8 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   setURLParams = (
     query: string,
     selectedFacets: SelectedFacet[],
-    sortColumn: SortableColumn,
-    sortDirection: SortDirection
+    sortColumn?: string,
+    sortDirection?: SortDirection
   ): void => {
     const { history } = this.props;
     history.push({
@@ -205,26 +204,40 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
 
+    /**
+     * NOTE: temporary fix until backend provide
+     * the correct name for sort fields
+     * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
+     */
+    const fieldNameMap = new Map([
+      [Column.accession, 'accession'],
+      [Column.id, 'mnemonic'],
+      [Column.proteinName, 'name'],
+      [Column.geneNames, 'gene'],
+      [Column.organism, 'organism_name'],
+      [Column.mass, 'mass'],
+      [Column.length, 'length'],
+    ]);
+    const apiColumn = fieldNameMap.get(column);
+
     // Change sort direction
     let updatedDirection = sortDirection;
-    if (column === sortColumn) {
+    if (apiColumn === sortColumn) {
       updatedDirection =
         sortDirection === SortDirection.ascend
           ? SortDirection.descend
           : SortDirection.ascend;
     }
 
-    this.setURLParams(query, selectedFacets, column, updatedDirection);
+    this.setURLParams(query, selectedFacets, apiColumn, updatedDirection);
   };
 
   updateData() {
     const {
       location: { search: queryParamFromUrl },
-      tableColumns,
       dispatchFetchBatchOfResultsIfNeeded,
       dispatchClearResults,
       dispatchUpdateQueryString,
-      viewMode,
     } = this.props;
     const {
       query,
@@ -232,13 +245,14 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       sortColumn,
       sortDirection,
     } = this.getURLParams(queryParamFromUrl);
-    // Always fetch at least the card columns so these can be rendered
-    // Eg if no columns are selected for the table view ensure sufficient
-    // columns will be fetched to render each card.
-    let columns = null;
-    if (viewMode === ViewMode.TABLE) {
-      columns = uniq([...tableColumns]);
-    }
+    /**
+     * WARNING: horrible hack to get the switch between
+     * table and cards to work while we wait for the backend
+     * to generate a column for card counts and we refactor
+     * this class as a functional component and put all url
+     * parameters in the store.
+     */
+    const columns: Column[] = [];
     dispatchClearResults();
     dispatchFetchBatchOfResultsIfNeeded(
       getQueryUrl(query, columns, selectedFacets, sortColumn, sortDirection)
@@ -273,72 +287,68 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     const { name, links, info } = infoMappings[namespace];
 
     const actionButtons = (
-      <Fragment>
-        {results.length > 0 && (
-          <div className="button-group">
-            <button type="button" className="button tertiary disabled">
-              Blast
-            </button>
-            <button type="button" className="button tertiary disabled">
-              Align
-            </button>
+      <div className="button-group">
+        <button type="button" className="button tertiary disabled">
+          Blast
+        </button>
+        <button type="button" className="button tertiary disabled">
+          Align
+        </button>
+        <button type="button" className="button tertiary">
+          <Link
+            to={{
+              pathname: '/download',
+              state: {
+                query,
+                selectedFacets,
+                sortColumn,
+                sortDirection,
+                selectedEntries: Object.keys(selectedEntries),
+              },
+            }}
+          >
+            <DownloadIcon />
+            Download
+          </Link>
+        </button>
+        <button type="button" className="button tertiary disabled">
+          <BasketIcon />
+          Add
+        </button>
+        <button type="button" className="button tertiary">
+          <StatisticsIcon />
+          Statistics
+        </button>
+        <button
+          type="button"
+          className="button tertiary large-icon"
+          onClick={() => dispatchSwitchViewMode()}
+          data-testid="table-card-toggle"
+        >
+          <span
+            className={
+              viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
+            }
+          >
+            <TableIcon />
+          </span>
+          <span
+            className={
+              viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
+            }
+          >
+            <ListIcon />
+          </span>
+        </button>
+        {viewMode === ViewMode.TABLE && (
+          <Link to="/customise-table">
             <button type="button" className="button tertiary">
-              <Link
-                to={{
-                  pathname: '/download',
-                  state: {
-                    query,
-                    selectedFacets,
-                    sortColumn,
-                    sortDirection,
-                    selectedEntries: Object.keys(selectedEntries),
-                  },
-                }}
-              >
-                <DownloadIcon />
-                Download
-              </Link>
+              <EditIcon />
+              Customise data
             </button>
-            <button type="button" className="button tertiary disabled">
-              <BasketIcon />
-              Add
-            </button>
-            <button type="button" className="button tertiary">
-              <StatisticsIcon />
-              Statistics
-            </button>
-            <button
-              type="button"
-              className="button tertiary large-icon"
-              onClick={() => dispatchSwitchViewMode()}
-              data-testid="table-card-toggle"
-            >
-              <span
-                className={
-                  viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''
-                }
-              >
-                <TableIcon />
-              </span>
-              <span
-                className={
-                  viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''
-                }
-              >
-                <ListIcon />
-              </span>
-            </button>
-            {viewMode === ViewMode.TABLE && (
-              <Link to="/customise-table">
-                <button type="button" className="button tertiary">
-                  <EditIcon />
-                  Customise data
-                </button>
-              </Link>
-            )}
-          </div>
+          </Link>
         )}
-      </Fragment>
+      </div>
     );
 
     return (

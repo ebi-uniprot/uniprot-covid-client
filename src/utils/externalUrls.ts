@@ -6,6 +6,11 @@ const externalUrls = {
   NCBI: (id: number | string) =>
     `https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=${id}`,
   ENA: (id: string) => `//www.ebi.ac.uk/ena/data/view/${id}`,
+  InterPro: (id: string) => `https://www.ebi.ac.uk/interpro/protein/${id}`,
+  Pfam: (id: string) => `http://pfam.xfam.org/protein/${id}`,
+  SMART: (id: string) => `https://smart.embl.de/smart/show_motifs.pl?ID=${id}`,
+  PROSITE: (id: string) =>
+    `https://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi?seq=${id}&output=nice`,
 };
 
 export const getIntActQueryForAccessionUrl = (accession: string) =>

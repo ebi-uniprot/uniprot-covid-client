@@ -115,15 +115,12 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
     highlightsMap.set(highlightSection.publications, references.length);
   }
 
-  return Array.from(highlightsMap.keys())
-    .filter(highlightKey => highlightsMap.get(highlightKey))
-    .map(highlightKey => {
-      const count = highlightsMap.get(highlightKey);
-      return {
-        link: `/uniprotkb/${primaryAccession}${highlightToEntrySection[highlightKey]}`,
-        name: `${count} ${highlightKey}${count && count > 1 ? 's' : ''}`,
-      };
-    });
+  return Array.from(highlightsMap.entries())
+    .filter(([, count]) => count)
+    .map(([entryHighlightSection, count]) => ({
+      link: `/uniprotkb/${primaryAccession}${highlightToEntrySection[entryHighlightSection]}`,
+      name: `${count} ${entryHighlightSection}${count && count > 1 ? 's' : ''}`,
+    }));
 };
 
 export default getProteinHighlights;
