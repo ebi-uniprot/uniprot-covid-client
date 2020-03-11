@@ -45,7 +45,12 @@ const StructureSection: FC<{
       otherStructureDatabases,
     } = partitionStructureDatabases(structureDatabases.databases);
     if (PDBDatabase && PDBDatabase.xrefs.length) {
-      PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} />;
+      PDBViewNode = (
+        <PDBView
+          xrefs={PDBDatabase.xrefs}
+          primaryAccession={primaryAccession}
+        />
+      );
     }
     const nonPDBStructureDatabases: XrefUIModel = {
       category: DatabaseCategory.STRUCTURE,

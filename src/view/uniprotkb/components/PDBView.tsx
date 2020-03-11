@@ -1,5 +1,7 @@
 import React, { useCallback, FC } from 'react';
+import ProtvistaManager from 'protvista-manager';
 import ProtvistaDatatable from 'protvista-datatable';
+import ProtvistaStructure from 'protvista-structure';
 import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
 import { PDBMirrorsInfo } from '../../../data/database';
@@ -7,7 +9,9 @@ import { processUrlTemplate } from './XRefView';
 import { Xref } from '../../../model/types/CommentTypes';
 import 'litemol/dist/css/LiteMol-plugin.css';
 
+loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
+loadWebComponent('protvista-structure', ProtvistaStructure);
 
 const processData = (xrefs: Xref[]) =>
   xrefs.map(({ id, properties }) => {
@@ -88,7 +92,7 @@ const PDBView: FC<{
   xrefs: Xref[];
   noStructure?: boolean;
   primaryAccession?: string;
-}> = ({ xrefs, noStructure = false }) => {
+}> = ({ xrefs, noStructure = false, primaryAccession }) => {
   const data = processData(xrefs);
   const setTableData = useCallback(
     (node): void => {
@@ -110,10 +114,9 @@ const PDBView: FC<{
 
   const sortedIds = xrefs.map(({ id }) => id).sort();
   const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
-
   return (
     <protvista-manager attributes="pdb-id">
-      <protvista-structure pdb-id={firstId} accession="P05067" />
+      <protvista-structure pdb-id={firstId} accession={primaryAccession} />
       <protvista-datatable
         ref={setTableData}
         selectedId={firstId}

@@ -11,14 +11,12 @@ exports[`ResultsView component should render cards 1`] = `
       <div
         class="data-loader__scroll-container"
       >
-        <div
-          class="card "
-        >
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -133,17 +131,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -258,17 +254,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -395,17 +389,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -520,17 +512,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -633,17 +623,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -758,17 +746,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -877,17 +863,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -983,17 +967,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1089,17 +1071,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1190,17 +1170,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1327,17 +1305,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1434,17 +1410,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1577,17 +1551,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1702,17 +1674,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1809,17 +1779,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -1946,17 +1914,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2071,17 +2037,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2208,17 +2172,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2333,17 +2295,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2446,17 +2406,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2571,17 +2529,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2708,17 +2664,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2803,17 +2757,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -2928,17 +2880,15 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-        <div
-          class="card "
-        >
+        </section>
+        <section>
           <div
-            class="card__content"
+            class="card"
           >
-            <div
-              class="card  card--has-hover"
+            <section
+              class=" card--has-hover"
               role="button"
               tabindex="0"
             >
@@ -3053,9 +3003,9 @@ exports[`ResultsView component should render cards 1`] = `
                   </section>
                 </section>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
