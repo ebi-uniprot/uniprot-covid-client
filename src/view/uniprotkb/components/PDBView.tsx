@@ -5,6 +5,7 @@ import { loadWebComponent } from '../../../utils/utils';
 import { PDBMirrorsInfo } from '../../../data/database';
 import { processUrlTemplate } from './XRefView';
 import { Xref } from '../../../model/types/CommentTypes';
+import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
 
@@ -28,6 +29,7 @@ const processData = (xrefs: Xref[]) =>
       resolution: !Resolution || Resolution === '-' ? null : Resolution,
       chain,
       positions,
+      protvistaFeatureId: id,
     };
   });
 
@@ -82,9 +84,11 @@ const getColumnConfig = () => ({
   },
 });
 
-const PDBXRefView: FC<{
+const PDBView: FC<{
   xrefs: Xref[];
-}> = ({ xrefs }) => {
+  noStructure?: boolean;
+  primaryAccession?: string;
+}> = ({ xrefs, noStructure = false }) => {
   const data = processData(xrefs);
   const setTableData = useCallback(
     (node): void => {
@@ -93,11 +97,31 @@ const PDBXRefView: FC<{
         node.data = data;
         // eslint-disable-next-line no-param-reassign
         node.columns = getColumnConfig();
+        // eslint-disable-next-line no-param-reassign
+        node.rowClickEvent = ({ id }: { id: string }) => ({ 'pdb-id': id });
       }
     },
     [data]
   );
-  return <protvista-datatable ref={setTableData} />;
+
+  if (noStructure) {
+    return <protvista-datatable ref={setTableData} />;
+  }
+
+  const sortedIds = xrefs.map(({ id }) => id).sort();
+  const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
+
+  return (
+    <protvista-manager attributes="pdb-id">
+      <protvista-structure pdb-id={firstId} accession="P05067" />
+      <protvista-datatable
+        ref={setTableData}
+        selectedId={firstId}
+        noScrollToRow
+        noDeselect
+      />
+    </protvista-manager>
+  );
 };
 
-export default PDBXRefView;
+export default PDBView;

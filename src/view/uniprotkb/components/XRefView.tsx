@@ -6,11 +6,11 @@ import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
-  PDBMirrors,
 } from '../../../data/database';
 import {
   XrefUIModel,
   XrefsGoupedByDatabase,
+  partitionStructureDatabases,
 } from '../../../model/utils/XrefUtils';
 import { Xref } from '../../../model/types/CommentTypes';
 import { PropertyKey } from '../../../model/types/modelTypes';
@@ -19,7 +19,7 @@ import {
   AttributesItem,
   DatabaseCategory,
 } from '../../../model/types/DatabaseTypes';
-import PDBXRefView from './PDBXRefView';
+import PDBView from './PDBView';
 import EMBLXrefProperties from '../../../data/EMBLXrefProperties.json';
 import externalUrls from '../../../utils/externalUrls';
 
@@ -261,28 +261,19 @@ const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> 
   primaryAccession,
   crc64,
 }): JSX.Element => {
-  const { dataTableDatabases, defaultDatabases } = groupBy(
-    databases,
-    ({ database }) =>
-      PDBMirrors.includes(database) ? 'dataTableDatabases' : 'defaultDatabases'
+  const { PDBDatabase, otherStructureDatabases } = partitionStructureDatabases(
+    databases
   );
-  // Though we have partitioned the xrefs into PDB* and non-PDB* we only need the
-  // information from the PDB xref entries (ie not PDBsum)
-  let PDBXRefViewNode;
-  if (dataTableDatabases) {
-    const PDBDatabase = dataTableDatabases.find(
-      ({ database }) => database === 'PDB'
-    );
-    if (PDBDatabase && PDBDatabase.xrefs.length) {
-      PDBXRefViewNode = <PDBXRefView xrefs={PDBDatabase.xrefs} />;
-    }
+  let PDBViewNode;
+  if (PDBDatabase && PDBDatabase.xrefs.length) {
+    PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} noStructure={true} />;
   }
   return (
     <Fragment>
-      {PDBXRefViewNode}
-      {defaultDatabases && defaultDatabases.length && (
+      {PDBViewNode}
+      {otherStructureDatabases && otherStructureDatabases.length && (
         <XRefsGroupedByCategory
-          databases={defaultDatabases}
+          databases={otherStructureDatabases}
           primaryAccession={primaryAccession}
           crc64={crc64}
         />

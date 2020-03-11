@@ -1,14 +1,21 @@
 import React, { FC } from 'react';
-import { flatten } from 'lodash';
 import { Card } from 'franklin-sites';
+import ProtvistaManager from 'protvista-manager';
 import ProtvistaStructure from 'protvista-structure';
 import { loadWebComponent } from '../../utils/utils';
 import { hasContent } from '../../model/utils/utils';
 import EntrySection from '../../model/types/EntrySection';
 import { UIModel } from '../../model/uniprotkb/SectionConverter';
 import FeaturesView from './components/FeaturesView';
-import 'litemol/dist/css/LiteMol-plugin.css';
 import XRefView from './components/XRefView';
+import PDBView from './components/PDBView';
+import {
+  partitionStructureDatabases,
+  XrefUIModel,
+} from '../../model/utils/XrefUtils';
+import { DatabaseCategory } from '../../model/types/DatabaseTypes';
+import { groupBy } from 'lodash';
+import { entrySectionToDatabaseCategoryOrder } from '../../data/database';
 
 const StructureSection: FC<{
   data: UIModel;
@@ -19,25 +26,62 @@ const StructureSection: FC<{
   if (!hasContent(data)) {
     return null;
   }
+  loadWebComponent('protvista-manager', ProtvistaManager);
   loadWebComponent('protvista-structure', ProtvistaStructure);
-  const sortedIds = flatten(
-    data.featuresData.map(
-      ({ evidences }) => evidences && evidences.map(({ id }) => id)
-    )
-  ).sort();
-  const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
+  const { arrayStructureDatabases, otherDatabases } = groupBy(
+    data.xrefData,
+    ({ category }) =>
+      category === DatabaseCategory.STRUCTURE
+        ? 'arrayStructureDatabases'
+        : 'otherDatabases'
+  );
+
+  let PDBViewNode;
+  const structureDatabases =
+    arrayStructureDatabases &&
+    arrayStructureDatabases.length === 1 &&
+    arrayStructureDatabases[0];
+  if (structureDatabases) {
+    const {
+      PDBDatabase,
+      otherStructureDatabases,
+    } = partitionStructureDatabases(structureDatabases.databases);
+    if (PDBDatabase && PDBDatabase.xrefs.length) {
+      PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} />;
+    }
+    otherDatabases.push({
+      category: DatabaseCategory.STRUCTURE,
+      databases: otherStructureDatabases,
+    } as XrefUIModel);
+  }
+
+  let XrefViewNode;
+  if (otherDatabases && otherDatabases.length) {
+    // The non-PDB databases need to be re-ordered accordingly
+    const categoryOrder = entrySectionToDatabaseCategoryOrder.get(
+      EntrySection.Structure
+    );
+    if (categoryOrder) {
+      XrefViewNode = (
+        <XRefView
+          xrefs={otherDatabases.sort(
+            (a, b) =>
+              categoryOrder.indexOf(a.category) -
+              categoryOrder.indexOf(b.category)
+          )}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+        />
+      );
+    }
+  }
 
   return (
     <div id={EntrySection.Structure}>
       <Card title={EntrySection.Structure}>
-        <protvista-structure accession={primaryAccession} pdb-id={firstId} />
+        {PDBViewNode}
         <FeaturesView features={data.featuresData} sequence={sequence} />
-        {/* TODO: filter out PDB */}
-        <XRefView
-          xrefs={data.xrefData}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-        />
+        {XrefViewNode}
       </Card>
     </div>
   );
