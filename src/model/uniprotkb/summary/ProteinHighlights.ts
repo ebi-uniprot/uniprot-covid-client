@@ -1,4 +1,4 @@
-import { UniProtkbAPIModel } from '../UniProtkbConverter';
+import { UniProtkbAPIModel, EntryType } from '../UniProtkbConverter';
 import FeatureType from '../../types/FeatureType';
 import {
   CommentType,
@@ -19,20 +19,29 @@ enum highlightSection {
   disease = 'disease',
   interactions = 'interaction',
   subcell = 'subcellular location',
-  publications = 'reviewed publication',
+  publications = 'publication',
 }
 
-const highlightToEntrySection = {
-  [highlightSection.domains]: `#${EntrySection.Function}`,
-  [highlightSection.PTM]: `#${EntrySection.ProteinProcessing}`,
-  [highlightSection.variants]: `#${EntrySection.PathologyAndBioTech}`,
-  [highlightSection.activeSites]: `#${EntrySection.Function}`,
-  [highlightSection.isoforms]: `#${EntrySection.Sequence}`,
-  [highlightSection.structures]: `#${EntrySection.Structure}`,
-  [highlightSection.disease]: `#${EntrySection.PathologyAndBioTech}`,
-  [highlightSection.interactions]: `#${EntrySection.Interaction}`,
-  [highlightSection.subcell]: `#${EntrySection.SubCellularLocation}`,
-  [highlightSection.publications]: '/publications',
+const highlightToEntrySection: {
+  [key in highlightSection]: {
+    link: string;
+    prefixResolver?: (data: UniProtkbAPIModel) => string;
+  };
+} = {
+  [highlightSection.domains]: { link: `#${EntrySection.Function}` },
+  [highlightSection.PTM]: { link: `#${EntrySection.ProteinProcessing}` },
+  [highlightSection.variants]: { link: `#${EntrySection.PathologyAndBioTech}` },
+  [highlightSection.activeSites]: { link: `#${EntrySection.Function}` },
+  [highlightSection.isoforms]: { link: `#${EntrySection.Sequence}` },
+  [highlightSection.structures]: { link: `#${EntrySection.Structure}` },
+  [highlightSection.disease]: { link: `#${EntrySection.PathologyAndBioTech}` },
+  [highlightSection.interactions]: { link: `#${EntrySection.Interaction}` },
+  [highlightSection.subcell]: { link: `#${EntrySection.SubCellularLocation}` },
+  [highlightSection.publications]: {
+    link: '/publications',
+    prefixResolver: data =>
+      data.entryType === EntryType.SWISSPROT ? 'reviewed ' : '',
+  },
 };
 
 const getFeatureCount = (features: FeatureData, type: FeatureType) =>
@@ -110,6 +119,10 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
     highlightsMap.set(highlightSection.structures, structures.length);
   }
 
+  /**
+   * Must include "reviewed" for
+   * Swissprot and not for Trembl.
+   */
   // publications
   if (references) {
     highlightsMap.set(highlightSection.publications, references.length);
@@ -117,10 +130,18 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
 
   return Array.from(highlightsMap.entries())
     .filter(([, count]) => count)
-    .map(([entryHighlightSection, count]) => ({
-      link: `/uniprotkb/${primaryAccession}${highlightToEntrySection[entryHighlightSection]}`,
-      name: `${count} ${entryHighlightSection}${count && count > 1 ? 's' : ''}`,
-    }));
+    .map(([entryHighlightSection, count]) => {
+      const { link, prefixResolver } = highlightToEntrySection[
+        entryHighlightSection
+      ];
+      const prefix = prefixResolver ? prefixResolver(data) : '';
+      return {
+        link: `/uniprotkb/${primaryAccession}${link}`,
+        name: `${count} ${prefix}${entryHighlightSection}${
+          count && count > 1 ? 's' : ''
+        }`,
+      };
+    });
 };
 
 export default getProteinHighlights;
