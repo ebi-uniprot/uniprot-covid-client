@@ -98,7 +98,8 @@ const Entry: React.FC<EntryProps> = ({
       name: 'Entry',
       icon: <TremblIcon />,
       itemContent: <InPageNav sections={sections} />,
-      path: 'main',
+      path: '',
+      exact: true,
       actionButtons: (
         <div className="button-group">
           <button type="button" className="button tertiary">
@@ -198,6 +199,7 @@ const Entry: React.FC<EntryProps> = ({
               path={`${path}/${displayItem.path}`}
               render={() => <Fragment>{displayItem.mainContent}</Fragment>}
               key={displayItem.name}
+              exact={displayItem.exact}
             />
           ))}
         </Switch>
