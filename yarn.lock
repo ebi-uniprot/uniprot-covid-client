@@ -4760,10 +4760,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.34:
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.34.tgz#c98ffac847e4ba2774c8d63d93e20da48023c4bc"
-  integrity sha512-UbF+S53bpbxpdi3n5dUw0Vg9+skY0gJknoQK/OcagRhdBMQzFLVOH+gq227nZKIwtMsvxnW3d7MEiPQnVWPLYg==
+franklin-sites@0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.35.tgz#9b67c565b6cdceb74bc86b62526988b2886b94bc"
+  integrity sha512-S82KFbGx1vS6ISFQ3Y2UTPmR+xo0YTb4uvRxmvJZUARNa3X8KtDyrNs4MNQj/DhOjXrDK2ez75LfzIqMzirgow==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"
@@ -4776,7 +4776,8 @@ franklin-sites@0.0.34:
     react-dom "^16.9.0"
     react-markdown "^4.2.2"
     react-router-dom "^5.0.1"
-    react-scrollspy "^3.4.0"
+    react-router-hash-link "^1.2.2"
+    react-scrollspy "^3.4.2"
     uuid "^3.3.2"
 
 fresh@0.5.2:
@@ -8468,7 +8469,7 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scrollspy@^3.4.0:
+react-scrollspy@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/react-scrollspy/-/react-scrollspy-3.4.2.tgz#0303e9a5d2fc4ee833b6729962bbb3b32375454c"
   integrity sha512-mFev6IBPPGdn0WsAiS0eCoHGUUet0ZRZUHHUw3qLcsvsQZPlubik0N9cf8CcgIbdVzNd04K9L9A0inHhPt7drw==
