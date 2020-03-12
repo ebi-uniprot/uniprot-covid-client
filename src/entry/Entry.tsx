@@ -97,7 +97,9 @@ const Entry: React.FC<EntryProps> = ({
     {
       name: 'Entry',
       icon: <TremblIcon />,
-      itemContent: <InPageNav sections={sections} />,
+      itemContent: (
+        <InPageNav sections={sections} rootElement=".base-layout__content" />
+      ),
       path: '',
       exact: true,
       actionButtons: (
@@ -173,7 +175,7 @@ const Entry: React.FC<EntryProps> = ({
   ];
 
   return (
-    <Fragment>
+    <section id="entry-container">
       <SideBarLayout
         sidebar={
           <DisplayMenu
@@ -204,7 +206,7 @@ const Entry: React.FC<EntryProps> = ({
           ))}
         </Switch>
       </SideBarLayout>
-    </Fragment>
+    </section>
   );
 };
 
