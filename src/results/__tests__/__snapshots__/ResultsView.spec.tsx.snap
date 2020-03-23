@@ -69,7 +69,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -192,7 +192,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -315,7 +315,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -450,7 +450,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -573,7 +573,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -684,7 +684,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -807,7 +807,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -923,7 +923,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1027,7 +1027,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1132,7 +1132,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1231,7 +1231,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1366,7 +1366,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1471,7 +1471,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1612,7 +1612,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1735,7 +1735,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1840,7 +1840,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -1975,7 +1975,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2098,7 +2098,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2233,7 +2233,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2356,7 +2356,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2467,7 +2467,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2590,7 +2590,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2725,7 +2725,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2818,7 +2818,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
@@ -2941,7 +2941,7 @@ exports[`ResultsView component should render cards 1`] = `
                         title="Annotation Score"
                       >
                         <span
-                          class="doughnut-chart--small colour-azureish-white"
+                          class="doughnut-chart--small colour-platinum"
                         >
                           <span
                             class="doughnut-chart--small__left-wrap"
