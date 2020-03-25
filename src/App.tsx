@@ -1,5 +1,10 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from './layout/BaseLayout';
@@ -14,7 +19,6 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Async loading of page components
-const HomePage = lazy(() => import('./pages/HomePage'));
 const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
@@ -28,7 +32,9 @@ const App = () => (
     <Router basename={BASE_URL}>
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact render={() => <HomePage />} />
+          <Route path="/" exact>
+            <Redirect to="/uniprotkb?query=*" />
+          </Route>
           <Route path="/uniprotkb/:accession" render={() => <EntryPage />} />
           <Route path="/uniprotkb" render={() => <ResultsPage />} />
           <Route

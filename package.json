@@ -1,8 +1,8 @@
 {
-  "name": "uniprot-website",
+  "name": "uniprot-covid-client",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://ebi-uniprot.github.io/uniprot-website/",
+  "homepage": "https://ebi-uniprot.github.io/uniprot-covid-client/",
   "main": "./src/ui/index.tsx",
   "license": "MIT",
   "scripts": {

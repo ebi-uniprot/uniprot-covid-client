@@ -13,7 +13,7 @@ import { SortableColumn } from '../model/types/ColumnTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
-const devPrefix = 'https://wwwdev.ebi.ac.uk';
+const devPrefix = 'http://wp-np2-be.ebi.ac.uk:8090/';
 const prodPrefix = 'https://www.ebi.ac.uk';
 
 const apiUrls = {
