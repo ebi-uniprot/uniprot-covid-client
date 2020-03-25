@@ -73,7 +73,7 @@ describe('XrefUtils tests', () => {
       {
         databaseType: 'GPCRDB',
         implicit: true,
-        properties: { uniProtId: 'TS1R1_HUMAN' },
+        properties: { uniProtkbId: 'TS1R1_HUMAN' },
       },
     ]);
   });

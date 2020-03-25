@@ -125,8 +125,8 @@ ColumnConfiguration.set(Column.accession, {
 ColumnConfiguration.set(Column.id, {
   label: 'Entry Name',
   sortable: true,
-  render: (data: { uniProtId: string }) => (
-    <SimpleView termValue={data.uniProtId} />
+  render: (data: { uniProtkbId: string }) => (
+    <SimpleView termValue={data.uniProtkbId} />
   ),
 });
 

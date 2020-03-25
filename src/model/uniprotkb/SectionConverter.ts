@@ -39,7 +39,7 @@ export const convertSection = (
     databaseCrossReferences,
     genes,
     organism,
-    uniProtId,
+    uniProtkbId,
   } = data;
   if (sectionComments && comments) {
     sectionComments.forEach(commentType => {
@@ -77,7 +77,7 @@ export const convertSection = (
       genes,
       commonName,
       similarityComments,
-      uniProtId,
+      uniProtkbId,
       ecNumbers
     );
   }

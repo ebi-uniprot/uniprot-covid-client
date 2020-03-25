@@ -64,7 +64,7 @@ export type UniProtkbAPIModel = {
   organism?: OrganismData;
   organismHosts?: OrganismData[];
   primaryAccession: string;
-  uniProtId: string;
+  uniProtkbId: string;
   proteinExistence: string;
   entryType: EntryType;
   comments?: Comment[];
@@ -79,7 +79,7 @@ export type UniProtkbAPIModel = {
 
 export type UniProtkbUIModel = {
   primaryAccession: string;
-  uniProtId: string;
+  uniProtkbId: string;
   proteinExistence: string;
   entryType: EntryType;
   annotationScore: number;
@@ -116,7 +116,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
 
   return {
     primaryAccession: dataCopy.primaryAccession,
-    uniProtId: dataCopy.uniProtId,
+    uniProtkbId: dataCopy.uniProtkbId,
     proteinExistence: dataCopy.proteinExistence,
     entryType: dataCopy.entryType,
     annotationScore: dataCopy.annotationScore,
