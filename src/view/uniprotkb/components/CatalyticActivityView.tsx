@@ -149,7 +149,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
           firstRheaId = rheaId;
         }
         return (
-          <span className="text-block" key={reaction.name}>
+          <span className="text-block" key={reaction.ecNumber}>
             <strong>{reaction.ecNumber}</strong>
             {/* Need a link to search for EC in UniProtKB:
              https://www.ebi.ac.uk/panda/jira/browse/TRM-23597 */}
