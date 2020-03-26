@@ -1483,18 +1483,6 @@
       "method": "MALDI",
       "molWeight": 6461.6,
       "molWeightError": 0.0,
-      "ranges": [{
-        "range": {
-          "start": {
-            "value": 712,
-            "modifier": "EXACT"
-          },
-          "end": {
-            "value": 767,
-            "modifier": "EXACT"
-          }
-        }
-      }],
       "evidences": [{
         "evidenceCode": "ECO:0000269",
         "source": "PubMed",
@@ -1506,18 +1494,6 @@
       "method": "MALDI",
       "molWeight": 6451.6,
       "molWeightError": 0.0,
-      "ranges": [{
-        "range": {
-          "start": {
-            "value": 714,
-            "modifier": "EXACT"
-          },
-          "end": {
-            "value": 770,
-            "modifier": "EXACT"
-          }
-        }
-      }],
       "evidences": [{
         "evidenceCode": "ECO:0000269",
         "source": "PubMed",
@@ -1529,18 +1505,6 @@
       "method": "MALDI",
       "molWeight": 6436.8,
       "molWeightError": 0.0,
-      "ranges": [{
-        "range": {
-          "start": {
-            "value": 715,
-            "modifier": "EXACT"
-          },
-          "end": {
-            "value": 769,
-            "modifier": "EXACT"
-          }
-        }
-      }],
       "evidences": [{
         "evidenceCode": "ECO:0000269",
         "source": "PubMed",
@@ -1552,18 +1516,6 @@
       "method": "MALDI",
       "molWeight": 5752.5,
       "molWeightError": 0.0,
-      "ranges": [{
-        "range": {
-          "start": {
-            "value": 719,
-            "modifier": "EXACT"
-          },
-          "end": {
-            "value": 767,
-            "modifier": "EXACT"
-          }
-        }
-      }],
       "evidences": [{
         "evidenceCode": "ECO:0000269",
         "source": "PubMed",

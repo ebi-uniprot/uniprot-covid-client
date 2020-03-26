@@ -580,19 +580,6 @@
       "molWeight": 2.1,
       "molWeightError": 1.2,
       "note": "note value",
-      "ranges": [{
-        "range": {
-          "start": {
-            "value": 1,
-            "modifier": "EXACT"
-          },
-          "end": {
-            "value": 7,
-            "modifier": "EXACT"
-          }
-        },
-        "isoformId": "isoformId value"
-      }],
       "evidences": [{
         "evidenceCode": "ECO:0000256",
         "source": "PIRNR",
