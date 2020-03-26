@@ -1,5 +1,6 @@
 stages:
   - test
+  - build_static_assets
 
 .js:
   image: node
@@ -14,3 +15,12 @@ test:
   stage: test
   script:
     - yarn test
+
+build_static_assets:
+  extends: .js
+  stage: build_static_assets
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - build/
