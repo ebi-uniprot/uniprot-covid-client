@@ -813,21 +813,6 @@
       "molWeight": 2.1,
       "molWeightError": 1.2,
       "note": "note value",
-      "ranges": [
-        {
-          "range": {
-            "start": {
-              "value": 1,
-              "modifier": "EXACT"
-            },
-            "end": {
-              "value": 7,
-              "modifier": "EXACT"
-            }
-          },
-          "isoformId": "isoformId value"
-        }
-      ],
       "evidences": [
         {
           "evidenceCode": "ECO:0000256",
@@ -962,7 +947,7 @@
         "originalSequence": "original value",
         "alternativeSequences": ["alternative value"]
       },
-      "dbXref": {
+      "featureCrossReference": {
         "databaseType": "dbSNP",
         "id": "db id"
       },
@@ -1319,5 +1304,15 @@
         "value": "source line value"
       }
     ]
-  }
+  },
+  "lineages": [
+    {
+      "scientificName": "Scientific Name",
+      "commonName": "Common Name",
+      "synonyms": ["synonym"],
+      "taxonId": 9606,
+      "rank": "family",
+      "hidden": true
+    }
+  ]
 }

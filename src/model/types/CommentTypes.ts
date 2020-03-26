@@ -216,19 +216,6 @@ export type WebResourceComment = {
   resourceUrl: string;
 };
 
-export type Range = {
-  range: {
-    start: {
-      value: number;
-      modifier?: string;
-    };
-    end: {
-      value: number;
-      modifier?: string;
-    };
-  };
-};
-
 type Comment =
   | FreeTextComment
   | CatalyticActivityComment

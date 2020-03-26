@@ -43,6 +43,15 @@ export type OrganismData = {
   lineage?: string[];
 };
 
+export type LineageData = {
+  scientificName?: string;
+  commonName?: string;
+  synonyms?: string[];
+  taxonId?: number;
+  rank?: string;
+  hidden?: boolean;
+};
+
 export type NamesAndTaxonomyUIModel = {
   proteinNamesData?: ProteinNamesData;
   geneNamesData?: GeneNamesData;
