@@ -13,7 +13,7 @@ import {
   PDBMirrors,
 } from '../../data/database';
 import EntrySection from '../types/EntrySection';
-import { DatabaseCategory } from '../types/DatabaseTypes';
+import { DatabaseCategory } from '../types/DatabaseRefs';
 import { Xref, FreeTextComment } from '../types/CommentTypes';
 import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
@@ -40,7 +40,7 @@ export const getDRImplicitXrefs = (xrefs: Xref[], geneNames: string[]) => {
     implicitDatabaseDRAbsenceCheck[xref] = true;
   });
   xrefs.forEach(xref => {
-    const { databaseType: name } = xref;
+    const { database: name } = xref;
     if (!name) {
       return;
     }
@@ -244,7 +244,7 @@ export const getXrefsForSection = (
     ...getGenePatternOrganismImplicitXrefs(geneNames, commonName),
     ...getECImplicitXrefs(ecNumbers),
   ].forEach(xref => {
-    const { databaseType: name } = xref;
+    const { database: name } = xref;
     if (!name) {
       return;
     }

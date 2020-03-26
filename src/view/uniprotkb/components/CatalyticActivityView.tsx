@@ -15,12 +15,12 @@ export const getRheaId = (referenceId: string) => {
 };
 
 export const isRheaReactionReference = ({
-  databaseType,
+  database,
   id,
 }: {
-  databaseType: string;
+  database: string;
   id: string;
-}) => databaseType === 'Rhea' && !!getRheaId(id);
+}) => database === 'Rhea' && !!getRheaId(id);
 
 type RheaReactionVisualizerProps = {
   rheaId: number;
@@ -99,8 +99,8 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
       {physiologicalReactions
         // Ensure that left-to-right/forward comes before right-to-left/backward
         .sort((a, b) => a.directionType.localeCompare(b.directionType))
-        .map(({ reactionReference, directionType, evidences }, index) => (
-          <Fragment key={reactionReference.id}>
+        .map(({ reactionCrossReference, directionType, evidences }, index) => (
+          <Fragment key={reactionCrossReference.id}>
             {index > 0 && ' and '}
             {`the `}
             <span data-testid="direction-text">
@@ -149,7 +149,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
           firstRheaId = rheaId;
         }
         return (
-          <span className="text-block" key={reaction.name}>
+          <span className="text-block" key={reaction.ecNumber}>
             <strong>{reaction.ecNumber}</strong>
             {/* Need a link to search for EC in UniProtKB:
              https://www.ebi.ac.uk/panda/jira/browse/TRM-23597 */}

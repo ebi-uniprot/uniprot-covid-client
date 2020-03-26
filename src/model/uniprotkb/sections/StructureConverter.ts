@@ -24,7 +24,7 @@ const convertStructure = (data: UniProtkbAPIModel) => {
   // Extract xrefs to PDB
   if (data.uniProtKBCrossReferences) {
     const structureInfo = data.uniProtKBCrossReferences
-      .filter(ref => ref.databaseType === 'PDB')
+      .filter(ref => ref.database === 'PDB')
       .map(item => {
         const method = item.properties && item.properties.Method;
         return { ...item, method };

@@ -145,7 +145,7 @@ const convertFunction = (data: UniProtkbAPIModel) => {
 
   if (data.uniProtKBCrossReferences) {
     const goTerms = (data.uniProtKBCrossReferences.filter(
-      xref => xref.databaseType === 'GO' && xref.properties
+      xref => xref.database === 'GO' && xref.properties
     ) as GoTerm[]).map(term => {
       const goTermProperty = term.properties && term.properties.GoTerm;
       const aspect = goTermProperty && goTermProperty.substring(0, 1);

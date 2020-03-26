@@ -19,7 +19,7 @@ describe('Function data converter', () => {
       {
         cofactors: [
           {
-            cofactorCrossReference: { databaseType: 'ChEBI', id: 'CHEBI:314' },
+            cofactorCrossReference: { database: 'ChEBI', id: 'CHEBI:314' },
             evidences: [
               {
                 evidenceCode: 'ECO:0000256',
@@ -65,7 +65,7 @@ describe('Function data converter', () => {
                 source: 'Ensembl',
               },
             ],
-            reactionReference: { databaseType: 'Rhea', id: 'RHEA:313' },
+            reactionCrossReference: { database: 'Rhea', id: 'RHEA:313' },
           },
         ],
         reaction: {
@@ -78,9 +78,7 @@ describe('Function data converter', () => {
             },
           ],
           name: 'some reaction',
-          reactionCrossReferences: [
-            { databaseType: 'ChEBI', id: 'ChEBI:3243' },
-          ],
+          reactionCrossReferences: [{ database: 'ChEBI', id: 'ChEBI:3243' }],
         },
       },
     ]);

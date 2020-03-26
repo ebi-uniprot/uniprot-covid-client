@@ -114,7 +114,7 @@ const getProteinHighlights = (data: UniProtkbAPIModel) => {
   // 3D structures
   if (uniProtKBCrossReferences) {
     const structures = uniProtKBCrossReferences.filter(
-      uniProtKBCrossReference => uniProtKBCrossReference.databaseType === 'PDB'
+      uniProtKBCrossReference => uniProtKBCrossReference.database === 'PDB'
     );
     highlightsMap.set(highlightSection.structures, structures.length);
   }
