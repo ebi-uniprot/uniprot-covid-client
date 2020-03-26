@@ -95,7 +95,7 @@ export type CatalyticActivityComment = {
   commentType: CommentType.CATALYTIC_ACTIVITY;
   reaction?: {
     name: string;
-    reactionReferences?: { databaseType: string; id: string }[];
+    reactionCrossReferences?: { databaseType: string; id: string }[];
     ecNumber: string;
     evidences?: Evidence[];
   };

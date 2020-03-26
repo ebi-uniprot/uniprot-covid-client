@@ -20,11 +20,11 @@ describe('CatalyticActivityView component', () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
-  test('should render catalytic activity when comment does not have reactionReferences', () => {
+  test('should render catalytic activity when comment does not have reactionCrossReferences', () => {
     const comment = catalyticActivityUIDataJson[0];
     const commentWithoutReactionReferences = {
       ...comment,
-      reaction: removeProperty(comment.reaction, 'reactionReferences'),
+      reaction: removeProperty(comment.reaction, 'reactionCrossReferences'),
     };
     const { asFragment } = renderWithRedux(
       <CatalyticActivityView comments={[commentWithoutReactionReferences]} />

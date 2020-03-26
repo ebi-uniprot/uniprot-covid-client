@@ -141,8 +141,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         // there will be either 0 or 1 types of this reference (ie never > 1)
 
         const rheaReactionReference =
-          reaction.reactionReferences &&
-          reaction.reactionReferences.find(isRheaReactionReference);
+          reaction.reactionCrossReferences &&
+          reaction.reactionCrossReferences.find(isRheaReactionReference);
         const rheaId =
           rheaReactionReference && getRheaId(rheaReactionReference.id);
         if (rheaId && !firstRheaId) {

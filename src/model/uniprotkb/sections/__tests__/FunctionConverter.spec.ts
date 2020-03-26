@@ -78,7 +78,9 @@ describe('Function data converter', () => {
             },
           ],
           name: 'some reaction',
-          reactionReferences: [{ databaseType: 'ChEBI', id: 'ChEBI:3243' }],
+          reactionCrossReferences: [
+            { databaseType: 'ChEBI', id: 'ChEBI:3243' },
+          ],
         },
       },
     ]);
