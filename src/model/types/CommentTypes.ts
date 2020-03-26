@@ -5,6 +5,7 @@ import {
   CofactorComment,
 } from '../uniprotkb/sections/FunctionConverter';
 import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
+import { Interactant } from '../uniprotkb/sections/InteractionConverter';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',
@@ -145,12 +146,10 @@ export enum InteractionType {
 }
 
 export type Interaction = {
-  firstInteractor: string;
   numberOfExperiments: number;
-  secondInteractor: string;
   type: InteractionType;
-  geneName?: string;
-  uniProtAccession?: string;
+  interactantOne: Interactant;
+  interactantTwo: Interactant;
 };
 
 export type InteractionComment = {

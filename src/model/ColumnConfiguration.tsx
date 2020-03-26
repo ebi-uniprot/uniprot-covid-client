@@ -648,14 +648,16 @@ ColumnConfiguration.set(Column.ccInteraction, {
                 key={
                   interaction.type === InteractionType.SELF
                     ? 'self'
-                    : interaction.uniProtAccession
+                    : interaction.interactantOne.uniProtkbAccession
                 }
               >
                 {interaction.type === InteractionType.SELF ? (
                   'Itself'
                 ) : (
-                  <Link to={`/uniprotkb/${interaction.uniProtAccession}`}>
-                    {interaction.uniProtAccession}
+                  <Link
+                    to={`/uniprotkb/${interaction.interactantOne.uniProtkbAccession}`}
+                  >
+                    {interaction.interactantOne.uniProtkbAccession}
                   </Link>
                 )}
               </div>

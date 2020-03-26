@@ -1986,6 +1986,13 @@ exports[`ColumnConfiguration component should render all columns 56`] = `
       P12345
     </a>
   </div>
+  <div>
+    <a
+      href="/uniprotkb/P12345"
+    >
+      P12345
+    </a>
+  </div>
 </DocumentFragment>
 `;
 
