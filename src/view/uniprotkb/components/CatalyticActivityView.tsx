@@ -15,12 +15,12 @@ export const getRheaId = (referenceId: string) => {
 };
 
 export const isRheaReactionReference = ({
-  databaseType,
+  database,
   id,
 }: {
-  databaseType: string;
+  database: string;
   id: string;
-}) => databaseType === 'Rhea' && !!getRheaId(id);
+}) => database === 'Rhea' && !!getRheaId(id);
 
 type RheaReactionVisualizerProps = {
   rheaId: number;
@@ -141,8 +141,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         // there will be either 0 or 1 types of this reference (ie never > 1)
 
         const rheaReactionReference =
-          reaction.reactionCrossReference &&
-          reaction.reactionCrossReference.find(isRheaReactionReference);
+          reaction.reactionCrossReferences &&
+          reaction.reactionCrossReferences.find(isRheaReactionReference);
         const rheaId =
           rheaReactionReference && getRheaId(rheaReactionReference.id);
         if (rheaId && !firstRheaId) {

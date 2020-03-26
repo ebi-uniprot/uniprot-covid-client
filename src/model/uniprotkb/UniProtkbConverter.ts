@@ -8,6 +8,7 @@ import {
   ProteinNamesData,
   GeneNamesData,
   OrganismData,
+  LineageData,
 } from './sections/NamesAndTaxonomyConverter';
 import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
@@ -36,7 +37,7 @@ export enum EntryType {
 export type Citation = {
   citationType?: string;
   authors?: string[];
-  citationXrefs?: Xref[];
+  citationCrossReferences?: Xref[];
   title?: string;
   publicationDate?: number;
   journal?: string;
@@ -70,11 +71,12 @@ export type UniProtkbAPIModel = {
   comments?: Comment[];
   keywords?: Keyword[];
   features?: FeatureData;
-  databaseCrossReferences?: Xref[];
+  uniProtKBCrossReferences?: Xref[];
   sequence: SequenceData;
   annotationScore: number;
   entryAudit?: EntryAudit;
   references?: Reference[];
+  lineages?: LineageData[];
 };
 
 export type UniProtkbUIModel = {
@@ -108,9 +110,9 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
   const dataCopy = { ...data };
 
-  if (dataCopy.databaseCrossReferences) {
-    dataCopy.databaseCrossReferences = convertXrefProperties(
-      dataCopy.databaseCrossReferences
+  if (dataCopy.uniProtKBCrossReferences) {
+    dataCopy.uniProtKBCrossReferences = convertXrefProperties(
+      dataCopy.uniProtKBCrossReferences
     );
   }
 

@@ -648,14 +648,16 @@ ColumnConfiguration.set(Column.ccInteraction, {
                 key={
                   interaction.type === InteractionType.SELF
                     ? 'self'
-                    : interaction.uniProtAccession
+                    : interaction.interactantOne.uniProtkbAccession
                 }
               >
                 {interaction.type === InteractionType.SELF ? (
                   'Itself'
                 ) : (
-                  <Link to={`/uniprotkb/${interaction.uniProtAccession}`}>
-                    {interaction.uniProtAccession}
+                  <Link
+                    to={`/uniprotkb/${interaction.interactantOne.uniProtkbAccession}`}
+                  >
+                    {interaction.interactantOne.uniProtkbAccession}
                   </Link>
                 )}
               </div>
@@ -900,7 +902,7 @@ ColumnConfiguration.set(Column.pmId, {
     let ids: Xref[] = [];
     if (data.references) {
       ids = data.references.reduce<Xref[]>((acc, citation) => {
-        const xrefs = citation.citation.citationXrefs;
+        const xrefs = citation.citation.citationCrossReferences;
         return xrefs
           ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
           : acc;

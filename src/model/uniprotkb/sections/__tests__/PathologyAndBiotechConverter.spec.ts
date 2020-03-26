@@ -4,8 +4,8 @@ import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Pathology/Biotech data converter', () => {
   beforeAll(() => {
-    modelData.databaseCrossReferences = convertXrefProperties(
-      modelData.databaseCrossReferences
+    modelData.uniProtKBCrossReferences = convertXrefProperties(
+      modelData.uniProtKBCrossReferences
     );
   });
 
@@ -30,7 +30,7 @@ describe('Pathology/Biotech data converter', () => {
                     source: 'PIRNR',
                   },
                 ],
-                reference: { databaseType: 'MIM', id: '3124' },
+                diseaseCrossReference: { databaseType: 'MIM', id: '3124' },
               },
               note: {
                 texts: [

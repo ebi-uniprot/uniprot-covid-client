@@ -7,8 +7,8 @@ let data;
 
 describe('Function data converter', () => {
   beforeAll(() => {
-    modelData.databaseCrossReferences = convertXrefProperties(
-      modelData.databaseCrossReferences
+    modelData.uniProtKBCrossReferences = convertXrefProperties(
+      modelData.uniProtKBCrossReferences
     );
     data = convertFunction(modelData);
   });
@@ -19,7 +19,7 @@ describe('Function data converter', () => {
       {
         cofactors: [
           {
-            cofactorReference: { databaseType: 'ChEBI', id: 'CHEBI:314' },
+            cofactorCrossReference: { database: 'ChEBI', id: 'CHEBI:314' },
             evidences: [
               {
                 evidenceCode: 'ECO:0000256',

@@ -4,8 +4,8 @@ import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Protein processing data converter', () => {
   beforeAll(() => {
-    modelData.databaseCrossReferences = convertXrefProperties(
-      modelData.databaseCrossReferences
+    modelData.uniProtKBCrossReferences = convertXrefProperties(
+      modelData.uniProtKBCrossReferences
     );
   });
 
@@ -18,7 +18,7 @@ describe('Protein processing data converter', () => {
             alternativeSequences: ['alternative value'],
             originalSequence: 'original value',
           },
-          dbXref: { databaseType: 'dbSNP', id: 'db id' },
+          featureCrossReference: { databaseType: 'dbSNP', id: 'db id' },
           description: 'description value',
           evidences: [
             { evidenceCode: 'ECO:0000269', id: '11389730', source: 'PubMed' },

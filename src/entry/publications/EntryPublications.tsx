@@ -34,14 +34,16 @@ const EntryPublications: FC<{
             } = reference;
 
             const pubMedXref =
-              citation.citationXrefs &&
-              citation.citationXrefs.find(
+              citation.citationCrossReferences &&
+              citation.citationCrossReferences.find(
                 xref => xref.databaseType === 'PubMed'
               );
 
             const doiXref =
-              citation.citationXrefs &&
-              citation.citationXrefs.find(xref => xref.databaseType === 'DOI');
+              citation.citationCrossReferences &&
+              citation.citationCrossReferences.find(
+                xref => xref.databaseType === 'DOI'
+              );
 
             const pubmedId = pubMedXref && pubMedXref.id;
 

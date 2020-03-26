@@ -16,8 +16,10 @@ const UniProtKBEntryPublications: FC<{
     entryData.references &&
     entryData.references.filter(
       ({ citation }) =>
-        citation.citationXrefs &&
-        citation.citationXrefs.some(({ id }) => id && pubmedIds.includes(id))
+        citation.citationCrossReferences &&
+        citation.citationCrossReferences.some(
+          ({ id }) => id && pubmedIds.includes(id)
+        )
     );
   return (
     <Fragment>

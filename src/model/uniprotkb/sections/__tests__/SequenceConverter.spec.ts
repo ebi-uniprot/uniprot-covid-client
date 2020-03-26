@@ -4,8 +4,8 @@ import { convertXrefProperties } from '../../UniProtkbConverter';
 
 describe('Sequence data converter', () => {
   beforeAll(() => {
-    modelData.databaseCrossReferences = convertXrefProperties(
-      modelData.databaseCrossReferences
+    modelData.uniProtKBCrossReferences = convertXrefProperties(
+      modelData.uniProtKBCrossReferences
     );
   });
 
@@ -95,15 +95,6 @@ describe('Sequence data converter', () => {
           molWeight: 2.1,
           molWeightError: 1.2,
           note: 'note value',
-          ranges: [
-            {
-              isoformId: 'isoformId value',
-              range: {
-                end: { modifier: 'EXACT', value: 7 },
-                start: { modifier: 'EXACT', value: 1 },
-              },
-            },
-          ],
         },
       ],
       molWeight: 1185,

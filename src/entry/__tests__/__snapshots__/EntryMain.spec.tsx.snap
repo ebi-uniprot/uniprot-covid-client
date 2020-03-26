@@ -3075,11 +3075,7 @@ exports[`Entry view should render 1`] = `
           <section
             class="text-block"
           >
-            Molecular mass is 2.1 Da from positions 
-            <span>
-              1-7
-            </span>
-            . Determined by LSI. note value 
+            Molecular mass is 2.1 Da. Determined by LSI. note value 
             <span
               class="evidence-tag svg-colour-unreviewed"
               data-testid="evidence-tag-trigger"
