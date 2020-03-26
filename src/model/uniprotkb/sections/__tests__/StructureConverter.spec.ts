@@ -22,13 +22,13 @@ describe('Structure data converter', () => {
           databases: [
             {
               database: 'ModBase',
-              xrefs: [{ databaseType: 'ModBase', implicit: true }],
+              xrefs: [{ database: 'ModBase', implicit: true }],
             },
             {
               database: 'SWISS-MODEL-Workspace',
               xrefs: [
                 {
-                  databaseType: 'SWISS-MODEL-Workspace',
+                  database: 'SWISS-MODEL-Workspace',
                   implicit: true,
                   properties: { GeneName: 'some Gene' },
                 },

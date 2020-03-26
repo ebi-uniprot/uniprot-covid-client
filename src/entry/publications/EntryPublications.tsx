@@ -36,13 +36,13 @@ const EntryPublications: FC<{
             const pubMedXref =
               citation.citationCrossReferences &&
               citation.citationCrossReferences.find(
-                xref => xref.databaseType === 'PubMed'
+                xref => xref.database === 'PubMed'
               );
 
             const doiXref =
               citation.citationCrossReferences &&
               citation.citationCrossReferences.find(
-                xref => xref.databaseType === 'DOI'
+                xref => xref.database === 'DOI'
               );
 
             const pubmedId = pubMedXref && pubMedXref.id;

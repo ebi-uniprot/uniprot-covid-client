@@ -160,7 +160,7 @@ describe('Sequence data converter', () => {
               database: 'Ensembl',
               xrefs: [
                 {
-                  databaseType: 'Ensembl',
+                  database: 'Ensembl',
                   evidences: [
                     {
                       evidenceCode: 'ECO:0000269',

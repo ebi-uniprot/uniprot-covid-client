@@ -115,7 +115,7 @@ export type PhysiologicalReaction = {
 };
 
 export type Xref = {
-  databaseType?: string;
+  database?: string;
   id?: string;
   properties?: { [key: string]: string };
   additionalIds?: string[];

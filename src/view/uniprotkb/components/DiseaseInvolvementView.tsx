@@ -66,7 +66,7 @@ export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = (
   }
 
   if (diseaseCrossReference) {
-    const { databaseType: database, id } = diseaseCrossReference;
+    const { database, id } = diseaseCrossReference;
     if (database && id && databaseToDatabaseInfo[database]) {
       infoData.push({
         title: 'See also',
