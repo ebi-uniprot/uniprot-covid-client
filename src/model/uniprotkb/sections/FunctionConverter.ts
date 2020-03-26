@@ -42,7 +42,7 @@ export type CofactorComment = {
   cofactors?: {
     name: string;
     evidences?: Evidence[];
-    cofactorReference?: Xref;
+    cofactorCrossReference?: Xref;
   }[];
   note: {
     texts: TextWithEvidence[];

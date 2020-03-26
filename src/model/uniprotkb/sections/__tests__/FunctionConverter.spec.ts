@@ -19,7 +19,7 @@ describe('Function data converter', () => {
       {
         cofactors: [
           {
-            cofactorReference: { databaseType: 'ChEBI', id: 'CHEBI:314' },
+            cofactorCrossReference: { databaseType: 'ChEBI', id: 'CHEBI:314' },
             evidences: [
               {
                 evidenceCode: 'ECO:0000256',
