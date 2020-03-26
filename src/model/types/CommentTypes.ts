@@ -185,11 +185,11 @@ export type SequenceCautionComment = {
 
 export type MassSpectrometryComment = {
   commentType: CommentType.MASS_SPECTROMETRY;
+  molecule?: string;
   method?: string;
   note?: string;
   molWeight: number;
   molWeightError: number;
-  ranges?: Range[];
   evidences: Evidence[];
 };
 
