@@ -674,7 +674,7 @@
         {
           "directionType": "right-to-left",
           "reactionCrossReference": {
-            "databaseType": "Rhea",
+            "database": "Rhea",
             "id": "RHEA:313"
           },
           "evidences": [
@@ -701,7 +701,7 @@
             }
           ],
           "cofactorCrossReference": {
-            "databaseType": "ChEBI",
+            "database": "ChEBI",
             "id": "CHEBI:314"
           }
         }
@@ -729,7 +729,7 @@
         "acronym": "someAcron",
         "description": "some description",
         "diseaseCrossReference": {
-          "databaseType": "MIM",
+          "database": "MIM",
           "id": "3124"
         },
         "evidences": [
@@ -948,7 +948,7 @@
         "alternativeSequences": ["alternative value"]
       },
       "featureCrossReference": {
-        "databaseType": "dbSNP",
+        "database": "dbSNP",
         "id": "db id"
       },
       "evidences": [
@@ -995,7 +995,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID1"
           }
         ],
@@ -1038,7 +1038,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID2"
           }
         ],
@@ -1076,7 +1076,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID3"
           }
         ],
@@ -1116,7 +1116,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID4"
           }
         ],
@@ -1153,7 +1153,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID5"
           }
         ],
@@ -1190,7 +1190,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID6"
           }
         ],
@@ -1228,7 +1228,7 @@
         "authors": ["author Leo"],
         "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID7"
           }
         ],
@@ -1260,7 +1260,7 @@
   ],
   "uniProtKBCrossReferences": [
     {
-      "databaseType": "Ensembl",
+      "database": "Ensembl",
       "id": "id value",
       "properties": [
         {
