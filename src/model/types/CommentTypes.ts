@@ -53,7 +53,11 @@ export type FreeTextType =
   | CommentType.TISSUE_SPECIFICITY
   | CommentType.POLYMORPHISM;
 
-export type TextWithEvidence = { value: string; evidences?: Evidence[] };
+export type TextWithEvidence = {
+  value: string;
+  evidences?: Evidence[];
+  id: string;
+};
 
 export type FreeTextComment = {
   commentType: FreeTextType;
@@ -206,6 +210,7 @@ export type SubcellularLocationComment = {
   subcellularLocations?: {
     location: TextWithEvidence;
     topology?: TextWithEvidence;
+    orientation?: TextWithEvidence;
   }[];
 };
 
