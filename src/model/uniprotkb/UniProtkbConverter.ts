@@ -70,7 +70,7 @@ export type UniProtkbAPIModel = {
   comments?: Comment[];
   keywords?: Keyword[];
   features?: FeatureData;
-  databaseCrossReferences?: Xref[];
+  uniProtKBCrossReferences?: Xref[];
   sequence: SequenceData;
   annotationScore: number;
   entryAudit?: EntryAudit;
@@ -108,9 +108,9 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
 const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
   const dataCopy = { ...data };
 
-  if (dataCopy.databaseCrossReferences) {
-    dataCopy.databaseCrossReferences = convertXrefProperties(
-      dataCopy.databaseCrossReferences
+  if (dataCopy.uniProtKBCrossReferences) {
+    dataCopy.uniProtKBCrossReferences = convertXrefProperties(
+      dataCopy.uniProtKBCrossReferences
     );
   }
 

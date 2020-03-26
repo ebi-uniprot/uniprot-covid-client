@@ -72,8 +72,8 @@ export const convertNamesAndTaxonomy = (data: UniProtkbAPIModel) => {
   if (data.organismHosts) {
     namesAndTaxonomyData.organismHosts = data.organismHosts;
   }
-  if (data.databaseCrossReferences) {
-    namesAndTaxonomyData.proteomesData = data.databaseCrossReferences.filter(
+  if (data.uniProtKBCrossReferences) {
+    namesAndTaxonomyData.proteomesData = data.uniProtKBCrossReferences.filter(
       db => db.databaseType === 'Proteomes'
     );
   }

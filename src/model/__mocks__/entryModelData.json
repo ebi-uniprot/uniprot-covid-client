@@ -1249,7 +1249,7 @@
       ]
     }
   ],
-  "databaseCrossReferences": [
+  "uniProtKBCrossReferences": [
     {
       "databaseType": "Ensembl",
       "id": "id value",

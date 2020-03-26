@@ -143,8 +143,8 @@ const convertFunction = (data: UniProtkbAPIModel) => {
     CommentType.BIOPHYSICOCHEMICAL_PROPERTIES
   );
 
-  if (data.databaseCrossReferences) {
-    const goTerms = (data.databaseCrossReferences.filter(
+  if (data.uniProtKBCrossReferences) {
+    const goTerms = (data.uniProtKBCrossReferences.filter(
       xref => xref.databaseType === 'GO' && xref.properties
     ) as GoTerm[]).map(term => {
       const goTermProperty = term.properties && term.properties.GoTerm;

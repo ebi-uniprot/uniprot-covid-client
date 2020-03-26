@@ -7,8 +7,8 @@ let data;
 
 describe('Function data converter', () => {
   beforeAll(() => {
-    modelData.databaseCrossReferences = convertXrefProperties(
-      modelData.databaseCrossReferences
+    modelData.uniProtKBCrossReferences = convertXrefProperties(
+      modelData.uniProtKBCrossReferences
     );
     data = convertFunction(modelData);
   });
