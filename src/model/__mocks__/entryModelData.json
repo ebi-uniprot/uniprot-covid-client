@@ -728,7 +728,7 @@
         "diseaseAccession": "Disease AC",
         "acronym": "someAcron",
         "description": "some description",
-        "reference": {
+        "diseaseCrossReference": {
           "databaseType": "MIM",
           "id": "3124"
         },

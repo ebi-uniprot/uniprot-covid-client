@@ -30,7 +30,7 @@ describe('Pathology/Biotech data converter', () => {
                     source: 'PIRNR',
                   },
                 ],
-                reference: { databaseType: 'MIM', id: '3124' },
+                diseaseCrossReference: { databaseType: 'MIM', id: '3124' },
               },
               note: {
                 texts: [

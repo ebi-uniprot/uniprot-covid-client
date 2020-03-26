@@ -127,7 +127,7 @@ export type DiseaseType = {
   diseaseAccession?: string;
   acronym?: string;
   description?: string;
-  reference?: Xref;
+  diseaseCrossReference?: Xref;
   evidences?: Evidence[];
 };
 
