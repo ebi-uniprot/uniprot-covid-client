@@ -700,7 +700,7 @@
               "id": "PIRNR001361"
             }
           ],
-          "cofactorReference": {
+          "cofactorCrossReference": {
             "databaseType": "ChEBI",
             "id": "CHEBI:314"
           }
@@ -984,7 +984,7 @@
         "citationType": "book",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID1"
@@ -1027,7 +1027,7 @@
         "citationType": "online journal article",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID2"
@@ -1065,7 +1065,7 @@
         "citationType": "journal article",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID3"
@@ -1105,7 +1105,7 @@
         "citationType": "patent",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID4"
@@ -1142,7 +1142,7 @@
         "citationType": "submission",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID5"
@@ -1179,7 +1179,7 @@
         "citationType": "thesis",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID6"
@@ -1217,7 +1217,7 @@
         "citationType": "unpublished observations",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "somepID7"
