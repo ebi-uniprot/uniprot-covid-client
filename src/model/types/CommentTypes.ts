@@ -95,7 +95,7 @@ export type CatalyticActivityComment = {
   commentType: CommentType.CATALYTIC_ACTIVITY;
   reaction?: {
     name: string;
-    reactionReferences?: { databaseType: string; id: string }[];
+    reactionCrossReference?: { database: string; id: string }[];
     ecNumber: string;
     evidences?: Evidence[];
   };
@@ -109,7 +109,7 @@ export enum PhysiologicalReactionDirection {
 
 export type PhysiologicalReaction = {
   directionType: PhysiologicalReactionDirection;
-  reactionReference: { databaseType: string; id: string };
+  reactionCrossReference: { database: string; id: string };
   evidences: Evidence[];
 };
 

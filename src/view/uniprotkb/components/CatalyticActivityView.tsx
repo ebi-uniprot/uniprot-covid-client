@@ -99,8 +99,8 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
       {physiologicalReactions
         // Ensure that left-to-right/forward comes before right-to-left/backward
         .sort((a, b) => a.directionType.localeCompare(b.directionType))
-        .map(({ reactionReference, directionType, evidences }, index) => (
-          <Fragment key={reactionReference.id}>
+        .map(({ reactionCrossReference, directionType, evidences }, index) => (
+          <Fragment key={reactionCrossReference.id}>
             {index > 0 && ' and '}
             {`the `}
             <span data-testid="direction-text">
@@ -141,8 +141,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
         // there will be either 0 or 1 types of this reference (ie never > 1)
 
         const rheaReactionReference =
-          reaction.reactionReferences &&
-          reaction.reactionReferences.find(isRheaReactionReference);
+          reaction.reactionCrossReference &&
+          reaction.reactionCrossReference.find(isRheaReactionReference);
         const rheaId =
           rheaReactionReference && getRheaId(rheaReactionReference.id);
         if (rheaId && !firstRheaId) {
