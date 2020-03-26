@@ -31,123 +31,7 @@ exports[`Entry should render main 1`] = `
             </div>
             <ul
               class="header__navigation"
-            >
-              <li
-                class="dropdown-container dropdown-container--hover"
-              >
-                <span
-                  class="dropdown-container__trigger"
-                >
-                  Tools
-                </span>
-                <div
-                  class="dropdown-menu"
-                >
-                  <ul>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        BLAST
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Align
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Peptide Search
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Retrieve/ID Mapping
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a
-                  href="/advancedSearch/reset"
-                >
-                  Query Builder
-                </a>
-              </li>
-              <li
-                class="dropdown-container dropdown-container--hover"
-              >
-                <span
-                  class="dropdown-container__trigger"
-                >
-                  API
-                </span>
-                <div
-                  class="dropdown-menu"
-                >
-                  <ul>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Programmatic access
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                class="dropdown-container dropdown-container--hover"
-              >
-                <span
-                  class="dropdown-container__trigger"
-                >
-                  Help
-                </span>
-                <div
-                  class="dropdown-menu"
-                >
-                  <ul>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Help
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Contact
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        About UniProt
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                      >
-                        Cite us
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
+            />
             <div
               class="header__search"
             >
@@ -284,42 +168,42 @@ exports[`Entry should render main 1`] = `
                   <ul>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.txt"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.txt"
                       >
                         Text
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.fasta"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.fasta"
                       >
                         FASTA (canonical)
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/search?format=fasta&includeIsoform=true&query=accession%3AP21802"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/search?format=fasta&includeIsoform=true&query=accession%3AP21802"
                       >
                         FASTA (canonical & isoform)
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.xml"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.xml"
                       >
                         XML
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.rdf"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.rdf"
                       >
                         RDF/XML
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P21802.gff"
+                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.gff"
                       >
                         GFF
                       </a>

@@ -12,7 +12,6 @@ import mockResultFieldsApi from '../../__mockData__/ResultFieldsData';
 import * as resultsActions from '../state/resultsActions';
 import '@testing-library/jest-dom/extend-expect';
 import { FileFormat } from '../types/resultsTypes';
-import apiUrls from '../../utils/apiUrls';
 
 const mock = new MockAdapter(axios);
 mock
