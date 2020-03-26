@@ -18,7 +18,7 @@ describe('Protein processing data converter', () => {
             alternativeSequences: ['alternative value'],
             originalSequence: 'original value',
           },
-          dbXref: { databaseType: 'dbSNP', id: 'db id' },
+          featureCrossReference: { databaseType: 'dbSNP', id: 'db id' },
           description: 'description value',
           evidences: [
             { evidenceCode: 'ECO:0000269', id: '11389730', source: 'PubMed' },

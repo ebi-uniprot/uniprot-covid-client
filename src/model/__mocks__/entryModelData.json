@@ -938,7 +938,7 @@
         "originalSequence": "original value",
         "alternativeSequences": ["alternative value"]
       },
-      "dbXref": {
+      "featureCrossReference": {
         "databaseType": "dbSNP",
         "id": "db id"
       },
