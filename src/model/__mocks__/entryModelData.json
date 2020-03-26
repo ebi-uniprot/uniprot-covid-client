@@ -2,7 +2,7 @@
   "entryType": "Swiss-Prot",
   "primaryAccession": "P21802",
   "secondaryAccessions": ["P21802"],
-  "uniProtId": "uniprot id",
+  "uniProtkbId": "uniprot id",
   "entryAudit": {
     "firstPublicDate": "2015-08-02",
     "lastAnnotationUpdateDate": "2016-04-24",
@@ -655,9 +655,9 @@
       "commentType": "CATALYTIC ACTIVITY",
       "reaction": {
         "name": "some reaction",
-        "reactionReferences": [
+        "reactionCrossReferences": [
           {
-            "databaseType": "ChEBI",
+            "database": "ChEBI",
             "id": "ChEBI:3243"
           }
         ],
@@ -673,8 +673,8 @@
       "physiologicalReactions": [
         {
           "directionType": "right-to-left",
-          "reactionReference": {
-            "databaseType": "Rhea",
+          "reactionCrossReference": {
+            "database": "Rhea",
             "id": "RHEA:313"
           },
           "evidences": [
@@ -700,8 +700,8 @@
               "id": "PIRNR001361"
             }
           ],
-          "cofactorReference": {
-            "databaseType": "ChEBI",
+          "cofactorCrossReference": {
+            "database": "ChEBI",
             "id": "CHEBI:314"
           }
         }
@@ -728,8 +728,8 @@
         "diseaseAccession": "Disease AC",
         "acronym": "someAcron",
         "description": "some description",
-        "reference": {
-          "databaseType": "MIM",
+        "diseaseCrossReference": {
+          "database": "MIM",
           "id": "3124"
         },
         "evidences": [
@@ -774,12 +774,36 @@
       "commentType": "INTERACTION",
       "interactions": [
         {
-          "type": "BINARY",
-          "uniProtAccession": "P12345",
-          "geneName": "gene name",
-          "numberOfExperiments": 10,
-          "firstInteractor": "first",
-          "secondInteractor": "second"
+          "interactantOne": {
+            "uniProtkbAccession": "P12345",
+            "geneName": "gen",
+            "chainId": "PROC_12344",
+            "intActId": "EBI-0001"
+          },
+          "interactantTwo": {
+            "uniProtkbAccession": "P12345-1",
+            "geneName": "gene1",
+            "chainId": "PROC_12347",
+            "intActId": "EBI-0002"
+          },
+          "numberOfExperiments": 3,
+          "organismDiffer": true
+        },
+        {
+          "interactantOne": {
+            "uniProtkbAccession": "P12345",
+            "geneName": "gen",
+            "chainId": "PROC_12345",
+            "intActId": "EBI-00011"
+          },
+          "interactantTwo": {
+            "uniProtkbAccession": "P12346",
+            "geneName": "gene1",
+            "chainId": "PROC_123454",
+            "intActId": "EBI-00012"
+          },
+          "numberOfExperiments": 6,
+          "organismDiffer": true
         }
       ]
     },
@@ -789,21 +813,6 @@
       "molWeight": 2.1,
       "molWeightError": 1.2,
       "note": "note value",
-      "ranges": [
-        {
-          "range": {
-            "start": {
-              "value": 1,
-              "modifier": "EXACT"
-            },
-            "end": {
-              "value": 7,
-              "modifier": "EXACT"
-            }
-          },
-          "isoformId": "isoformId value"
-        }
-      ],
       "evidences": [
         {
           "evidenceCode": "ECO:0000256",
@@ -938,8 +947,8 @@
         "originalSequence": "original value",
         "alternativeSequences": ["alternative value"]
       },
-      "dbXref": {
-        "databaseType": "dbSNP",
+      "featureCrossReference": {
+        "database": "dbSNP",
         "id": "db id"
       },
       "evidences": [
@@ -984,9 +993,9 @@
         "citationType": "book",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID1"
           }
         ],
@@ -1027,9 +1036,9 @@
         "citationType": "online journal article",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID2"
           }
         ],
@@ -1065,9 +1074,9 @@
         "citationType": "journal article",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID3"
           }
         ],
@@ -1105,9 +1114,9 @@
         "citationType": "patent",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID4"
           }
         ],
@@ -1142,9 +1151,9 @@
         "citationType": "submission",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID5"
           }
         ],
@@ -1179,9 +1188,9 @@
         "citationType": "thesis",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID6"
           }
         ],
@@ -1217,9 +1226,9 @@
         "citationType": "unpublished observations",
         "authoringGroup": ["auth group"],
         "authors": ["author Leo"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
-            "databaseType": "PubMed",
+            "database": "PubMed",
             "id": "somepID7"
           }
         ],
@@ -1249,9 +1258,9 @@
       ]
     }
   ],
-  "databaseCrossReferences": [
+  "uniProtKBCrossReferences": [
     {
-      "databaseType": "Ensembl",
+      "database": "Ensembl",
       "id": "id value",
       "properties": [
         {
@@ -1295,5 +1304,15 @@
         "value": "source line value"
       }
     ]
-  }
+  },
+  "lineages": [
+    {
+      "scientificName": "Scientific Name",
+      "commonName": "Common Name",
+      "synonyms": ["synonym"],
+      "taxonId": 9606,
+      "rank": "family",
+      "hidden": true
+    }
+  ]
 }

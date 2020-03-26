@@ -226,7 +226,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC7_HUMAN",
+      "uniProtkbId": "CDC7_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -397,7 +397,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC7_MOUSE",
+      "uniProtkbId": "CDC7_MOUSE",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -564,7 +564,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC7_YEAST",
+      "uniProtkbId": "CDC7_YEAST",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -698,7 +698,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC7_SCHPO",
+      "uniProtkbId": "CDC7_SCHPO",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -808,7 +808,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC7_DICDI",
+      "uniProtkbId": "CDC7_DICDI",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -959,7 +959,7 @@
           ]
         }
       ],
-      "uniProtId": "HSK1_SCHPO",
+      "uniProtkbId": "HSK1_SCHPO",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -1160,7 +1160,7 @@
           ]
         }
       ],
-      "uniProtId": "PPHLN_HUMAN",
+      "uniProtkbId": "PPHLN_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -1475,7 +1475,7 @@
           ]
         }
       ],
-      "uniProtId": "X2JCT3_DROME",
+      "uniProtkbId": "X2JCT3_DROME",
       "proteinDescription": {
         "submissionNames": [
           {
@@ -1766,7 +1766,7 @@
           ]
         }
       ],
-      "uniProtId": "Q9W3Y1_DROME",
+      "uniProtkbId": "Q9W3Y1_DROME",
       "proteinDescription": {
         "submissionNames": [
           {
@@ -1924,7 +1924,7 @@
           ]
         }
       ],
-      "uniProtId": "DBF4B_HUMAN",
+      "uniProtkbId": "DBF4B_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2158,7 +2158,7 @@
           ]
         }
       ],
-      "uniProtId": "DBF4_YEAST",
+      "uniProtkbId": "DBF4_YEAST",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2325,7 +2325,7 @@
           ]
         }
       ],
-      "uniProtId": "DBF4A_HUMAN",
+      "uniProtkbId": "DBF4A_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2545,7 +2545,7 @@
           ]
         }
       ],
-      "uniProtId": "MCM2_HUMAN",
+      "uniProtkbId": "MCM2_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2706,7 +2706,7 @@
           }
         }
       ],
-      "uniProtId": "CINP_HUMAN",
+      "uniProtkbId": "CINP_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2848,7 +2848,7 @@
           ]
         }
       ],
-      "uniProtId": "DBF4A_MOUSE",
+      "uniProtkbId": "DBF4A_MOUSE",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -2989,7 +2989,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC72_ENCCU",
+      "uniProtkbId": "CDC72_ENCCU",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3175,7 +3175,7 @@
           ]
         }
       ],
-      "uniProtId": "MCM2_MOUSE",
+      "uniProtkbId": "MCM2_MOUSE",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3326,7 +3326,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC71_ENCCU",
+      "uniProtkbId": "CDC71_ENCCU",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3470,7 +3470,7 @@
           }
         }
       ],
-      "uniProtId": "MCM2_XENLA",
+      "uniProtkbId": "MCM2_XENLA",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3611,7 +3611,7 @@
           ]
         }
       ],
-      "uniProtId": "SPG1_SCHPO",
+      "uniProtkbId": "SPG1_SCHPO",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3757,7 +3757,7 @@
           }
         }
       ],
-      "uniProtId": "MCM4A_XENLA",
+      "uniProtkbId": "MCM4A_XENLA",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -3928,7 +3928,7 @@
           ]
         }
       ],
-      "uniProtId": "SPO4_SCHPO",
+      "uniProtkbId": "SPO4_SCHPO",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -4054,7 +4054,7 @@
           ]
         }
       ],
-      "uniProtId": "CDC11_SCHPO",
+      "uniProtkbId": "CDC11_SCHPO",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -4195,7 +4195,7 @@
           }
         }
       ],
-      "uniProtId": "MCM4B_XENLA",
+      "uniProtkbId": "MCM4B_XENLA",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {
@@ -4381,7 +4381,7 @@
           ]
         }
       ],
-      "uniProtId": "MCM4_HUMAN",
+      "uniProtkbId": "MCM4_HUMAN",
       "proteinDescription": {
         "recommendedName": {
           "fullName": {

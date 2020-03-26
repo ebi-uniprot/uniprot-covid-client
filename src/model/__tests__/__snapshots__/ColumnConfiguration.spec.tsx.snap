@@ -790,11 +790,7 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
   <section
     class="text-block"
   >
-    Molecular mass is 2.1 Da from positions 
-    <span>
-      1-7
-    </span>
-    . Determined by LSI. note value 
+    Molecular mass is 2.1 Da. Determined by LSI. note value 
     <span
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
@@ -1983,6 +1979,13 @@ exports[`ColumnConfiguration component should render all columns 55`] = `
 
 exports[`ColumnConfiguration component should render all columns 56`] = `
 <DocumentFragment>
+  <div>
+    <a
+      href="/uniprotkb/P12345"
+    >
+      P12345
+    </a>
+  </div>
   <div>
     <a
       href="/uniprotkb/P12345"
