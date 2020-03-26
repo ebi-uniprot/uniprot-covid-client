@@ -673,7 +673,7 @@
       "physiologicalReactions": [
         {
           "directionType": "right-to-left",
-          "reactionReference": {
+          "reactionCrossReference": {
             "databaseType": "Rhea",
             "id": "RHEA:313"
           },

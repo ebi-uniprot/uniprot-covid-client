@@ -15,7 +15,7 @@
   },
   "physiologicalReactions": [{
       "directionType": "right-to-left",
-      "reactionReference": {
+      "reactionCrossReference": {
         "databaseType": "Rhea",
         "id": "RHEA:10390"
       },
@@ -27,7 +27,7 @@
     },
     {
       "directionType": "left-to-right",
-      "reactionReference": {
+      "reactionCrossReference": {
         "databaseType": "Rhea",
         "id": "RHEA:10389"
       },
