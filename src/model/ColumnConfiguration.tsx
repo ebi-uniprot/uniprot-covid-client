@@ -900,7 +900,7 @@ ColumnConfiguration.set(Column.pmId, {
     let ids: Xref[] = [];
     if (data.references) {
       ids = data.references.reduce<Xref[]>((acc, citation) => {
-        const xrefs = citation.citation.citationXrefs;
+        const xrefs = citation.citation.citationCrossReferences;
         return xrefs
           ? acc.concat(xrefs.filter(xref => xref.databaseType === 'PubMed'))
           : acc;

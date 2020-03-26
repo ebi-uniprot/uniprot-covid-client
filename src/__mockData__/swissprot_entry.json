@@ -2012,7 +2012,7 @@
           "Beyreuther K.",
           "Mueller-Hill B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2881207"
@@ -2053,7 +2053,7 @@
           "Fuller F.",
           "Cordell B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2893289"
@@ -2091,7 +2091,7 @@
           "Beyreuther K.",
           "Mueller-Hill B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2783775"
@@ -2122,7 +2122,7 @@
           "Furuya H.",
           "Sakaki Y."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2110105"
@@ -2153,7 +2153,7 @@
           "Furuya H.",
           "Sakaki Y."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1908403"
@@ -2185,7 +2185,7 @@
           "Masters C.L.",
           "Beyreuther K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1587857"
@@ -2219,7 +2219,7 @@
           "Tsukuni S.",
           "Sakaki Y."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9108164"
@@ -2251,7 +2251,7 @@
           "Ravid R.",
           "Jing N."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12859342"
@@ -2441,7 +2441,7 @@
           "Isogai T.",
           "Sugano S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "14702039"
@@ -2552,7 +2552,7 @@
           "Reinhardt R.",
           "Yaspo M.-L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10830953"
@@ -2622,7 +2622,7 @@
       "citation": {
         "citationType": "journal article",
         "authoringGroup": ["The MGC Project Team"],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15489334"
@@ -2657,7 +2657,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Schon E.A.", "Mita S.", "Sadlock J.", "Herbert J."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "3140222"
@@ -2703,7 +2703,7 @@
           "Salton S.R.",
           "Robakis N.K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2538123"
@@ -2726,7 +2726,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["van Nostrand W.E.", "Cunningham D.D."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "3597385"
@@ -2759,7 +2759,7 @@
           "Thomas G.R.",
           "Vandekerckhove J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12665801"
@@ -2795,7 +2795,7 @@
           "Gusella J.F.",
           "Neve R.L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2893290"
@@ -2824,7 +2824,7 @@
           "Shiojiri S.",
           "Ito H."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2893291"
@@ -2854,7 +2854,7 @@
           "Majocha R.E.",
           "Marotta C.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2893379"
@@ -2883,7 +2883,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Beher D.", "Hesse L.", "Masters C.L.", "Multhaup G."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8576160"
@@ -2909,7 +2909,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Denman R.B.", "Rosenzcwaig R.", "Miller D.L."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8476439"
@@ -2942,7 +2942,7 @@
           "Norris F.H.",
           "Little S.P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2675837"
@@ -2976,7 +2976,7 @@
           "Iwatsubo T.",
           "Nakashima K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15201367"
@@ -3011,7 +3011,7 @@
           "Huebner V.",
           "Shively J.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "3312495"
@@ -3051,7 +3051,7 @@
           "Whaley J.",
           "Swindlehurst C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1406936"
@@ -3083,7 +3083,7 @@
           "Lieberburg I.",
           "Schenk D.B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8229004"
@@ -3120,7 +3120,7 @@
           "Gowing E.",
           "Ball M.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8248178"
@@ -3155,7 +3155,7 @@
           "Marques M.R.F.",
           "Frangione B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8109908"
@@ -3184,7 +3184,7 @@
           "Saffiotti U.",
           "Gajdusek D.C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "3810169"
@@ -3224,7 +3224,7 @@
           "Kurnit D.M.",
           "Neve R.L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2949367"
@@ -3270,7 +3270,7 @@
           "Blennow K.",
           "Brinkmalm A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "22576872"
@@ -3302,7 +3302,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Sun X.", "He G.", "Song W."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "16816112"
@@ -3328,7 +3328,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["de Sauvage F.", "Octave J.-N."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2569763"
@@ -3364,7 +3364,7 @@
           "Wolfe G.",
           "Wisniewski H.M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "3035574"
@@ -3405,7 +3405,7 @@
           "Masters C.L.",
           "Beyreuther K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2900137"
@@ -3443,7 +3443,7 @@
           "Dovey H.F.",
           "Sinha S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2506449"
@@ -3473,7 +3473,7 @@
           "Cordell B.",
           "Katunuma N."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1969731"
@@ -3506,7 +3506,7 @@
           "Beyreuther K.",
           "Masters C.L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8344894"
@@ -3533,7 +3533,7 @@
           "Murayama Y.",
           "Ogata E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8446172"
@@ -3563,7 +3563,7 @@
           "Nairn A.C.",
           "Greengard P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8131745"
@@ -3586,7 +3586,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Hesse L.", "Beher D.", "Masters C.L.", "Multhaup G."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "7913895"
@@ -3620,7 +3620,7 @@
           "Beyreuther K.",
           "Masters C.L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8158260"
@@ -3651,7 +3651,7 @@
           "Shioi J.",
           "Robakis N.K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "7737970"
@@ -3677,7 +3677,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Chow N.", "Korenberg J.R.", "Chen X.-N.", "Neve R.L."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8626687"
@@ -3700,7 +3700,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Borg J.-P.", "Ooi J.", "Levy E.", "Margolis B."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8887653"
@@ -3726,7 +3726,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Guenette S.Y.", "Chen J.", "Jondro P.D.", "Tanzi R.E."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8855266"
@@ -3749,7 +3749,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Walter M.F.", "Mason P.E.", "Mason R.P."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9168929"
@@ -3786,7 +3786,7 @@
           "Masters C.L.",
           "Small D.H."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9357988"
@@ -3824,7 +3824,7 @@
           "Roher A.",
           "Stern D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9338779"
@@ -3862,7 +3862,7 @@
           "Masters C.L.",
           "Beyreuther K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9585534"
@@ -3885,7 +3885,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Zheng P.", "Eastman J.", "Vande Pol S.", "Pimplikar S.W."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9843960"
@@ -3912,7 +3912,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Liu S.T.", "Howlett G.", "Barrow C.J."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10413512"
@@ -3958,7 +3958,7 @@
           "Roy S.",
           "Nicholson D.W."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10319819"
@@ -3990,7 +3990,7 @@
           "Jahanshahi F.",
           "Butterfield D.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10535332"
@@ -4026,7 +4026,7 @@
           "Greengard P.",
           "Suzuki T."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10341243"
@@ -4063,7 +4063,7 @@
           "Kirino Y.",
           "Suzuki T."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9890987"
@@ -4096,7 +4096,7 @@
           "Stokin G.B.",
           "Koo E.H."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10383380"
@@ -4129,7 +4129,7 @@
           "Opazo C.",
           "Inestrosa N.C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10461923"
@@ -4171,7 +4171,7 @@
           "Dingwall C.",
           "Christie G."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10656250"
@@ -4211,7 +4211,7 @@
           "Frangione B.",
           "Ghiso J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10816430"
@@ -4241,7 +4241,7 @@
           "Shank R.P.",
           "Reitz A.B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10681545"
@@ -4274,7 +4274,7 @@
           "Tabaton M.",
           "D'Adamio L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12214090"
@@ -4297,7 +4297,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Kontush A."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11775062"
@@ -4332,7 +4332,7 @@
           "Li C.C.H.",
           "Wang J.M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11689470"
@@ -4378,7 +4378,7 @@
           "Jacobsen J.S.",
           "Ozenberger B.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11278849"
@@ -4412,7 +4412,7 @@
           "Bush A.I.",
           "Barnham K.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11274207"
@@ -4445,7 +4445,7 @@
           "Beyreuther K.",
           "Multhaup G."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11438549"
@@ -4473,7 +4473,7 @@
           "Guenette S.Y.",
           "Selkoe D.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11544248"
@@ -4500,7 +4500,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Ohsawa I.", "Takamura C.", "Kohsaka S."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11238726"
@@ -4532,7 +4532,7 @@
           "Johnston J.A.",
           "Sharma S.K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11943163"
@@ -4562,7 +4562,7 @@
           "Abdallah M.",
           "D'Adamio L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11724784"
@@ -4598,7 +4598,7 @@
           "Masters C.L.",
           "Cappai R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11784781"
@@ -4624,7 +4624,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Bush A.I.", "Tanzi R.E."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12032279"
@@ -4657,7 +4657,7 @@
           "Selkoe D.J.",
           "Haass C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8999878"
@@ -4683,7 +4683,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Walter J.", "Schindzielorz A.", "Hartung B.", "Haass C."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10806211"
@@ -4719,7 +4719,7 @@
           "Koo E.H.",
           "Bredesen D.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10742146"
@@ -4751,7 +4751,7 @@
           "Kirino Y.",
           "Suzuki T."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11517218"
@@ -4786,7 +4786,7 @@
           "McLoughlin D.M.",
           "Miller C.C.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11146006"
@@ -4822,7 +4822,7 @@
           "Beyreuther K.",
           "Evin G."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11851430"
@@ -4853,7 +4853,7 @@
           "Pelicci P.G.",
           "D'Adamio L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11877420"
@@ -4880,7 +4880,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Annaert W.", "De Strooper B."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12142279"
@@ -4910,7 +4910,7 @@
           "Ihara Y.",
           "Tabira T."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15084524"
@@ -4936,7 +4936,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Ghersi E.", "Noviello C.", "D'Adamio L."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15347684"
@@ -4967,7 +4967,7 @@
           "Moore R.J.",
           "Smith R.D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "16335952"
@@ -5016,7 +5016,7 @@
           "Nykjaer A.",
           "Willnow T.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "16174740"
@@ -5050,7 +5050,7 @@
           "Willnow T.E.",
           "Hyman B.T."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "16407538"
@@ -5084,7 +5084,7 @@
           "Andersen O.M.",
           "Willnow T.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "17855360"
@@ -5107,7 +5107,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Nakaya T.", "Kawai T.", "Suzuki T."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "18468999"
@@ -5130,7 +5130,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Matsuda S.", "Matsuda Y.", "D'Adamio L."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "19366692"
@@ -5158,7 +5158,7 @@
           "O'Leary D.D.M.",
           "Tessier-Lavigne M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "19225519"
@@ -5204,7 +5204,7 @@
           "Yamada K.",
           "Yan S.S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "19901339"
@@ -5237,7 +5237,7 @@
           "Lenkei Z.",
           "Potier M.C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "20580937"
@@ -5272,7 +5272,7 @@
           "Wennogle L.P.",
           "Greengard P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "20811458"
@@ -5304,7 +5304,7 @@
           "Superti-Furga G.",
           "Colinge J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "21269460"
@@ -5339,7 +5339,7 @@
           "Larson G.",
           "Nilsson J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "21712440"
@@ -5371,7 +5371,7 @@
           "Gilthorpe J.",
           "van der Maarel J.R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "22457725"
@@ -5405,7 +5405,7 @@
           "Ye M.",
           "Zou H."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "24275569"
@@ -5523,7 +5523,7 @@
           "Kauwe J.S.",
           "Goate A.M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "24336208"
@@ -5552,7 +5552,7 @@
           "Canerina-Amaro A.",
           "Marin R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "25168729"
@@ -5588,7 +5588,7 @@
           "Takagi J.",
           "Willnow T.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "24523320"
@@ -5627,7 +5627,7 @@
           "Pagliarini D.J.",
           "Dixon J.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "26091039"
@@ -5665,7 +5665,7 @@
           "Zeng L.",
           "Tan E.K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "28720718"
@@ -5698,7 +5698,7 @@
           "Eigenbrot C.",
           "Kossiakof A.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2125487"
@@ -5733,7 +5733,7 @@
           "Unterbeck A.",
           "Tamburini P.P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1718421"
@@ -5761,7 +5761,7 @@
           "Klopman G.",
           "Zagorski M.G."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "7516706"
@@ -5793,7 +5793,7 @@
           "Frank R.W.",
           "Rosch P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "7588758"
@@ -5822,7 +5822,7 @@
           "Sato K.",
           "Takashima A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8973180"
@@ -5851,7 +5851,7 @@
           "Wells J.A.",
           "Kossiakoff A.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9300481"
@@ -5882,7 +5882,7 @@
           "Fairlie D.P.",
           "Craik D.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9693002"
@@ -5917,7 +5917,7 @@
           "Masters C.L.",
           "Parker M.W."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10201399"
@@ -5949,7 +5949,7 @@
           "Frangione B.",
           "Ghiso J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10821838"
@@ -5983,7 +5983,7 @@
           "Maggio J.E.",
           "Lee J.P."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10940221"
@@ -6006,7 +6006,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Poulsen S.-A.", "Watson A.A.", "Craik D.J."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10940222"
@@ -6044,7 +6044,7 @@
           "Parker M.W.",
           "Cappai R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12611883"
@@ -6078,7 +6078,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Wang Y.", "Ha Y."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15304215"
@@ -6106,7 +6106,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Shen Y.", "Joachimiak A.", "Rosner M.R.", "Tang W.-J."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "17051221"
@@ -6131,7 +6131,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Kong G.K.", "Adams J.J.", "Cappai R.", "Parker M.W."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "17909280"
@@ -6169,7 +6169,7 @@
           "Cappai R.",
           "Parker M.W."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "17239395"
@@ -6233,7 +6233,7 @@
           "Patterson P.H.",
           "Dealwis C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "17895381"
@@ -6283,7 +6283,7 @@
           "Schenk D.",
           "Weis W.I."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "19923222"
@@ -6315,7 +6315,7 @@
           "Guhrs K.H.",
           "Than M.E."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "20212142"
@@ -6349,7 +6349,7 @@
           "Bocharov E.V.",
           "Arseniev A.S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "22584060"
@@ -6391,7 +6391,7 @@
           "Beel A.J.",
           "Sanders C.R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "22654059"
@@ -6439,7 +6439,7 @@
           "Wild K.",
           "Kins S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "25122912"
@@ -6486,7 +6486,7 @@
           "Makarov A.A.",
           "Polshakov V.I."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "26898943"
@@ -6531,7 +6531,7 @@
           "Mitkevich V.A.",
           "Makarov A.A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "28570778"
@@ -6574,7 +6574,7 @@
           "Willbold D.",
           "Schroder G.F."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "28882996"
@@ -6622,7 +6622,7 @@
           "Gonen T.",
           "Eisenberg D.S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "29282295"
@@ -6661,7 +6661,7 @@
           "Lei J.",
           "Shi Y."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "30630874"
@@ -6691,7 +6691,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Hardy J."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1363811"
@@ -6724,7 +6724,7 @@
           "Luyendijk W.",
           "Frangione B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "2111584"
@@ -6769,7 +6769,7 @@
           "Owen M.",
           "Hardy J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1671712"
@@ -6798,7 +6798,7 @@
           "Ogihara T.",
           "Sakaki Y."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1908231"
@@ -6833,7 +6833,7 @@
           "Miyatake T.",
           "Tsuji S."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1678058"
@@ -6868,7 +6868,7 @@
           "Hardy J.",
           "Mullan M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1944558"
@@ -6891,7 +6891,7 @@
       "citation": {
         "citationType": "journal article",
         "authors": ["Murrell J.R.", "Farlow M.", "Ghetti B.", "Benson M.D."],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1925564"
@@ -6939,7 +6939,7 @@
           "Bird T.D.",
           "Schellenberg G.D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1415269"
@@ -6971,7 +6971,7 @@
           "Hofman A.",
           "Van Broeckhoven C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1303239"
@@ -7002,7 +7002,7 @@
           "Winblad B.",
           "Lannfelt L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1302033"
@@ -7035,7 +7035,7 @@
           "Lieberburg I.",
           "Selkoe D.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1465129"
@@ -7066,7 +7066,7 @@
           "Brock D.J.H.",
           "St Clair D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1307241"
@@ -7099,7 +7099,7 @@
           "Jaillard-Serradt A.",
           "Mallet J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "1303275"
@@ -7128,7 +7128,7 @@
           "Roses A.D.",
           "Benson M.D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8267572"
@@ -7158,7 +7158,7 @@
           "Roses A.D.",
           "Fink J.K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8154870"
@@ -7188,7 +7188,7 @@
           "Zeldenrust S.",
           "Benson M.D."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8290042"
@@ -7221,7 +7221,7 @@
           "Yeung L.U.",
           "Van Broeckhoven C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8577393"
@@ -7254,7 +7254,7 @@
           "Iwatsubo T.",
           "Obata K."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "8886002"
@@ -7295,7 +7295,7 @@
           "Hutton M.",
           "Hardy J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9328472"
@@ -7329,7 +7329,7 @@
           "Van Broeckhoven C.",
           "Martin J.J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "9754958"
@@ -7364,7 +7364,7 @@
           "Frebourg T.",
           "Checler F."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10097173"
@@ -7402,7 +7402,7 @@
           "Nitsch R.M.",
           "Gal A."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10631141"
@@ -7434,7 +7434,7 @@
           "Masters C.L.",
           "Schofield P.R."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10665499"
@@ -7463,7 +7463,7 @@
           "Farlow M.R.",
           "Ghetti B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10867787"
@@ -7501,7 +7501,7 @@
           "Kroisel P.M.",
           "Van Broeckhoven C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11063718"
@@ -7534,7 +7534,7 @@
           "Dashti A.",
           "Tang J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "10677483"
@@ -7563,7 +7563,7 @@
           "Rebeck G.W.",
           "Greenberg S.M."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11409420"
@@ -7592,7 +7592,7 @@
           "Selkoe D.J.",
           "Teplow D.B."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11311152"
@@ -7628,7 +7628,7 @@
           "Naeslund J.",
           "Lannfelt L."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "11528419"
@@ -7661,7 +7661,7 @@
           "Crook R.",
           "Hardy J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12034808"
@@ -7694,7 +7694,7 @@
           "Tournier-Lasserve E.",
           "Baron J.-C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "12654973"
@@ -7732,7 +7732,7 @@
           "Bugiani O.",
           "Bruni A.C."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15365148"
@@ -7769,7 +7769,7 @@
           "Coverlizza S.",
           "Merlini G."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "16178030"
@@ -7804,7 +7804,7 @@
           "Rogaeva E.",
           "Hardy J."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "15668448"
@@ -7848,7 +7848,7 @@
           "Padovani A.",
           "Tagliavini F."
         ],
-        "citationXrefs": [
+        "citationCrossReferences": [
           {
             "databaseType": "PubMed",
             "id": "20697050"

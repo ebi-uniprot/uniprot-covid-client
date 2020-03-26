@@ -32,7 +32,7 @@
             "Beyreuther K.",
             "Mueller-Hill B."
           ],
-          "citationXrefs": [
+          "citationCrossReferences": [
             {
               "databaseType": "PubMed",
               "id": "2881207"
@@ -84,7 +84,7 @@
             "Fuller F.",
             "Cordell B."
           ],
-          "citationXrefs": [
+          "citationCrossReferences": [
             {
               "databaseType": "PubMed",
               "id": "2893289"
@@ -133,7 +133,7 @@
             "Beyreuther K.",
             "Mueller-Hill B."
           ],
-          "citationXrefs": [
+          "citationCrossReferences": [
             {
               "databaseType": "PubMed",
               "id": "2783775"

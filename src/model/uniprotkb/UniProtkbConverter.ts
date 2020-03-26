@@ -36,7 +36,7 @@ export enum EntryType {
 export type Citation = {
   citationType?: string;
   authors?: string[];
-  citationXrefs?: Xref[];
+  citationCrossReferences?: Xref[];
   title?: string;
   publicationDate?: number;
   journal?: string;
