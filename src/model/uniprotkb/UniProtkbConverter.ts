@@ -8,6 +8,7 @@ import {
   ProteinNamesData,
   GeneNamesData,
   OrganismData,
+  LineageData,
 } from './sections/NamesAndTaxonomyConverter';
 import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
@@ -75,6 +76,7 @@ export type UniProtkbAPIModel = {
   annotationScore: number;
   entryAudit?: EntryAudit;
   references?: Reference[];
+  lineages?: LineageData[];
 };
 
 export type UniProtkbUIModel = {
