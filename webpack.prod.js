@@ -1,16 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const common = require('./webpack.common.js');
+
+const publicPath = '/';
 
 module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/uniprot-website/',
+    publicPath,
     filename: 'app.[hash].bundle.js',
   },
   plugins: [
@@ -22,7 +24,7 @@ module.exports = merge(common, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-    new webpack.DefinePlugin({ BASE_URL: JSON.stringify('/uniprot-website') }),
+    new webpack.DefinePlugin({ BASE_URL: JSON.stringify(publicPath) }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
