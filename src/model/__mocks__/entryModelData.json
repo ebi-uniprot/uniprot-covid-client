@@ -655,7 +655,7 @@
       "commentType": "CATALYTIC ACTIVITY",
       "reaction": {
         "name": "some reaction",
-        "reactionReferences": [
+        "reactionCrossReferences": [
           {
             "databaseType": "ChEBI",
             "id": "ChEBI:3243"
