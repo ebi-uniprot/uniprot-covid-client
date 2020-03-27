@@ -6,8 +6,6 @@ import {
   Facets,
   PageIntro,
   DownloadIcon,
-  BasketIcon,
-  StatisticsIcon,
   TableIcon,
   ListIcon,
   EditIcon,

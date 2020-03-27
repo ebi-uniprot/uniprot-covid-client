@@ -55,17 +55,17 @@ export class Search extends Component<Props, State> {
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
 
-  componentDidMount() {
-    const {
-      dispatchSetPreSelectedClauses,
-      location: { pathname },
-      history,
-    } = this.props;
-    // if (pathname === `${queryBuilderPath}/reset`) {
-    //   dispatchSetPreSelectedClauses();
-    //   history.replace(queryBuilderPath);
-    // }
-  }
+  // componentDidMount() {
+  //   const {
+  //     dispatchSetPreSelectedClauses,
+  //     location: { pathname },
+  //     history,
+  //   } = this.props;
+  //   if (pathname === `${queryBuilderPath}/reset`) {
+  //     dispatchSetPreSelectedClauses();
+  //     history.replace(queryBuilderPath);
+  //   }
+  // }
 
   componentDidUpdate(prevProps: Props) {
     const { queryString: prevQueryString } = prevProps;
