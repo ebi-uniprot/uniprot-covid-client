@@ -84,7 +84,11 @@ export const SequenceInfo: React.FC<{
   return (
     <Fragment>
       {dataToDisplay && <InfoList infoData={infoData} />}
-      <Sequence sequence={dataToDisplay.value} accession={isoformId} />
+      <Sequence
+        sequence={dataToDisplay.value}
+        accession={isoformId}
+        downloadUrl={apiUrls.sequenceFasta(isoformId)}
+      />
     </Fragment>
   );
 };
