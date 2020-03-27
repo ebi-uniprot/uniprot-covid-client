@@ -112,7 +112,7 @@ export const getQueryUrl = (
     query: `${query}${createFacetsQueryString(selectedFacets)}`,
     fields: columns && columns.join(','),
     facets:
-      'reviewed,popular_organism,proteins_with,existence,annotation_score,length',
+      'reviewed,popular_organism,other_organism,proteins_with,existence,annotation_score,length',
     sort:
       sortColumn &&
       `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
