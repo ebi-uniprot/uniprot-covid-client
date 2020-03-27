@@ -6,13 +6,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 const common = require('./webpack.common.js');
 
-const publicPath = '/uniprot-covid-client';
-
 module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath,
+    publicPath: '/uniprot-covid-client/',
     filename: 'app.[hash].bundle.js',
   },
   plugins: [
@@ -24,7 +22,9 @@ module.exports = merge(common, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-    new webpack.DefinePlugin({ BASE_URL: JSON.stringify(publicPath) }),
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify('/uniprot-covid-client'),
+    }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'disabled',
       generateStatsFile: true,
