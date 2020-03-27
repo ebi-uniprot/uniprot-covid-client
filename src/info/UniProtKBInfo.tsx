@@ -3,21 +3,7 @@ import React, { Fragment } from 'react';
 const UniProtKBInfo = () => (
   <Fragment>
     <p>
-      The UniProt Knowledgebase (UniProtKB) is the central hub for the
-      collection of functional information on proteins, with accurate,
-      consistent and rich annotation. In addition to capturing the core data
-      mandatory for each UniProtKB entry (mainly, the amino acid sequence,
-      protein name or description, taxonomic data and citation information), as
-      much annotation information as possible is added.
-    </p>
-    <p>UniProtKB consists of two sections:</p>
-    <p>
-      Reviewed (Swiss-Prot) - Manually annotated Records with information
-      extracted from literature and curator-evaluated computational analysis.
-    </p>
-    <p>
-      Unreviewed (TrEMBL) - Computationally analyzed Records that await full
-      manual annotation.
+      This page lists the latest available UniProtKB data relating to the COVID-19 outbreak, including protein entries for the Sars-Cov-2 coronavirus. It will be updated as new information becomes available, independent of the general UniProt release schedule. Ths data can also be via our FTP on <a href="ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/" target="_blank">ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/</a>.
     </p>
   </Fragment>
 );
