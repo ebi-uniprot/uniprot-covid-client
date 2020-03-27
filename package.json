@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
     "build": "webpack --mode production --config webpack.prod.js",
+    "build-staging": "webpack --mode production --config webpack.staging.js",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
