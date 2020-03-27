@@ -288,12 +288,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
 
     const actionButtons = (
       <div className="button-group">
-        <button type="button" className="button tertiary disabled">
-          Blast
-        </button>
-        <button type="button" className="button tertiary disabled">
-          Align
-        </button>
         <button type="button" className="button tertiary">
           <Link
             to={{
@@ -310,14 +304,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
             <DownloadIcon />
             Download
           </Link>
-        </button>
-        <button type="button" className="button tertiary disabled">
-          <BasketIcon />
-          Add
-        </button>
-        <button type="button" className="button tertiary">
-          <StatisticsIcon />
-          Statistics
         </button>
         <button
           type="button"

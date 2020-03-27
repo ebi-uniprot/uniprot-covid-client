@@ -21,11 +21,11 @@ if (process.env.NODE_ENV !== 'development') {
 // Async loading of page components
 const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const EntryPage = lazy(() => import('./pages/EntryPage'));
-const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
+// const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 
-export const queryBuilderPath = '/advancedSearch';
+// export const queryBuilderPath = '/advancedSearch';
 
 const App = () => (
   <FranklinSite>
@@ -53,14 +53,14 @@ const App = () => (
               </BaseLayout>
             )}
           />
-          <Route
+          {/* <Route
             path={`${queryBuilderPath}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />
               </BaseLayout>
             )}
-          />
+          /> */}
         </Switch>
       </Suspense>
     </Router>
