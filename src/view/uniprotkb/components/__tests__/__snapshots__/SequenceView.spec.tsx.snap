@@ -152,6 +152,22 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
         </ul>
       </div>
     </div>
+    <a
+      class="button"
+      download=""
+      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/Isoform.fasta"
+    >
+      <svg
+        height="32"
+        viewBox="0 0 32 32"
+        width="32"
+      >
+        <path
+          d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
+        />
+      </svg>
+      Download
+    </a>
     <button
       class="button"
       type="button"
@@ -520,6 +536,22 @@ exports[`SequenceView component should render SequenceView 1`] = `
         </ul>
       </div>
     </div>
+    <a
+      class="button"
+      download=""
+      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P05067.fasta"
+    >
+      <svg
+        height="32"
+        viewBox="0 0 32 32"
+        width="32"
+      >
+        <path
+          d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
+        />
+      </svg>
+      Download
+    </a>
     <button
       class="button"
       type="button"
