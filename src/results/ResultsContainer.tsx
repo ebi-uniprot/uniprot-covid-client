@@ -341,9 +341,10 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
           title={
             <Fragment>
               <PageIntro
-                title={name}
+                title={`COVID-19 ${name}`}
                 links={links}
                 resultsCount={totalNumberResults}
+                showContent
               >
                 {info}
               </PageIntro>

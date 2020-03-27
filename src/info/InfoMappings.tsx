@@ -12,10 +12,7 @@ const infoMappings: {
   uniprotkb: {
     name: 'UniProtKB',
     info: <UniProtKBInfo />,
-    links: [
-      { title: 'Help', destination: '' },
-      { title: 'Video', destination: '' },
-    ],
+    links: [],
   },
 };
 
