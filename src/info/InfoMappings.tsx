@@ -10,7 +10,7 @@ const infoMappings: {
   }
 } = {
   uniprotkb: {
-    name: 'Covid-19 UniProtKB',
+    name: 'UniProtKB',
     info: <UniProtKBInfo />,
     links: [],
   },
