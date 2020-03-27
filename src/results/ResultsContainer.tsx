@@ -360,6 +360,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 title={name}
                 links={links}
                 resultsCount={totalNumberResults}
+                showContent
               >
                 {info}
               </PageIntro>
