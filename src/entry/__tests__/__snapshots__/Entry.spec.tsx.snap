@@ -25,6 +25,7 @@ exports[`Entry should render main 1`] = `
               >
                 <test-file-stub
                   height="50"
+                  style="margin-right: 5rem;"
                   width="120"
                 />
               </a>
@@ -128,18 +129,6 @@ exports[`Entry should render main 1`] = `
           <div
             class="button-group"
           >
-            <button
-              class="button tertiary"
-              type="button"
-            >
-              Blast
-            </button>
-            <button
-              class="button tertiary"
-              type="button"
-            >
-              Align
-            </button>
             <div
               class="dropdown-container"
             >
@@ -212,12 +201,6 @@ exports[`Entry should render main 1`] = `
                 </div>
               </div>
             </div>
-            <button
-              class="button tertiary"
-              type="button"
-            >
-              Add
-            </button>
           </div>
         </section>
         <section

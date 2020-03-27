@@ -19,6 +19,7 @@ exports[`HomePage component should render 1`] = `
           >
             <test-file-stub
               height="50"
+              style="margin-right: 5rem;"
               width="120"
             />
           </a>

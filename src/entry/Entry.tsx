@@ -104,12 +104,6 @@ const Entry: React.FC<EntryProps> = ({
       exact: true,
       actionButtons: (
         <div className="button-group">
-          <button type="button" className="button tertiary">
-            Blast
-          </button>
-          <button type="button" className="button tertiary">
-            Align
-          </button>
           <DropdownButton
             label={
               <Fragment>
@@ -137,9 +131,6 @@ const Entry: React.FC<EntryProps> = ({
               </ul>
             </div>
           </DropdownButton>
-          <button type="button" className="button tertiary">
-            Add
-          </button>
         </div>
       ),
       mainContent: <EntryMain transformedData={entryData} />,
