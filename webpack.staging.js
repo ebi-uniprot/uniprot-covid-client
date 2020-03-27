@@ -12,7 +12,7 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath,
+    publicPath: '/uniprot-covid-client',
     filename: 'app.[hash].bundle.js',
   },
   plugins: [
