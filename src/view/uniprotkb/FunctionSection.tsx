@@ -13,7 +13,6 @@ import {
   CatalyticActivityComment,
   FreeTextComment,
 } from '../../model/types/CommentTypes';
-import GoRibbon from './components/GoRibbon';
 import UniProtEvidenceTag from '../../components/UniProtEvidenceTag';
 import {
   FunctionUIModel,
@@ -22,6 +21,7 @@ import {
   KineticParameters,
   CofactorComment,
 } from '../../model/uniprotkb/sections/FunctionConverter';
+import GOView from './components/GOView';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
@@ -194,8 +194,8 @@ const FunctionSection: FC<{
           title={CommentType.ACTIVITY_REGULATION.toLowerCase()}
         />
         <FeaturesView features={data.featuresData} sequence={sequence} />
-        <GoRibbon primaryAccession={primaryAccession} />
-        {/* {data.goTerms && <GOView data={data.goTerms} />} removed for now */}
+        {/* <GoRibbon primaryAccession={primaryAccession} /> */}
+        {data.goTerms && <GOView data={data.goTerms} />}
         <KeywordView keywords={data.keywordData} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
