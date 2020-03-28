@@ -131,6 +131,12 @@ const Entry: React.FC<EntryProps> = ({
               </ul>
             </div>
           </DropdownButton>
+          <a
+            className="button tertiary"
+            href={`//community.uniprot.org/bbsub/bbsub.html?accession=${accession}`}
+          >
+            Add a Publication
+          </a>
         </div>
       ),
       mainContent: <EntryMain transformedData={entryData} />,
