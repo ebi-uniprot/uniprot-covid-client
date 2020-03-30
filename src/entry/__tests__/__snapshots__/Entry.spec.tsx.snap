@@ -126,13 +126,6 @@ exports[`Entry should render main 1`] = `
                     </li>
                     <li>
                       <a
-                        href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.rdf"
-                      >
-                        RDF/XML
-                      </a>
-                    </li>
-                    <li>
-                      <a
                         href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P21802.gff"
                       >
                         GFF
