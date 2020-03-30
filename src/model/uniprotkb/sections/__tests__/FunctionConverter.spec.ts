@@ -55,6 +55,7 @@ describe('Function data converter', () => {
     expect(commentsData.get(CommentType.CATALYTIC_ACTIVITY)).toEqual([
       {
         commentType: 'CATALYTIC ACTIVITY',
+        molecule: 'Isoform 3',
         physiologicalReactions: [
           {
             directionType: 'right-to-left',

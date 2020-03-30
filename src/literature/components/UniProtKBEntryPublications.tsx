@@ -11,7 +11,6 @@ const UniProtKBEntryPublications: FC<{
   if (!entryData) {
     return null;
   }
-
   const references =
     entryData.references &&
     entryData.references.filter(
@@ -28,7 +27,7 @@ const UniProtKBEntryPublications: FC<{
           <Publication
             title={citation.title}
             authors={citation.authors}
-            key={citation.title}
+            key={`${citation.title}-${citation.citationType}-${citation.journal}`}
             journalInfo={{
               firstPage: citation.firstPage,
               journal: citation.journal,

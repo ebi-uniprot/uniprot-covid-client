@@ -21,8 +21,8 @@ describe('Pathology/Biotech data converter', () => {
               disease: {
                 acronym: 'someAcron',
                 description: 'some description',
-                diseaseAccession: 'Disease AC',
-                diseaseId: 'Disease Id',
+                diseaseAccession: 'DiseaseEntry AC',
+                diseaseId: 'DiseaseEntry Id',
                 evidences: [
                   {
                     evidenceCode: 'ECO:0000256',
@@ -32,6 +32,7 @@ describe('Pathology/Biotech data converter', () => {
                 ],
                 diseaseCrossReference: { database: 'MIM', id: '3124' },
               },
+              molecule: 'Isoform 3',
               note: {
                 texts: [
                   {
@@ -51,13 +52,12 @@ describe('Pathology/Biotech data converter', () => {
         ],
         ['ALLERGEN', []],
         ['BIOTECHNOLOGY', []],
-        ['TOXIC DOSE', []],
-        ['PHARMACEUTICAL', []],
         [
           'DISRUPTION PHENOTYPE',
           [
             {
               commentType: 'DISRUPTION PHENOTYPE',
+              molecule: 'Isoform 4',
               texts: [
                 {
                   evidences: [
@@ -73,6 +73,8 @@ describe('Pathology/Biotech data converter', () => {
             },
           ],
         ],
+        ['TOXIC DOSE', []],
+        ['PHARMACEUTICAL', []],
       ]),
       featuresData: [],
       keywordData: [],
