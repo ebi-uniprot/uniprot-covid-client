@@ -996,7 +996,11 @@ ColumnConfiguration.set(Column.taxId, {
           {organismData.taxonId}
         {</a> */}
           {organismData.taxonId
-            && <ExternalLink url={externalUrls.NCBI(organismData.taxonId)}>NCBI</ExternalLink>
+            && (
+              <ExternalLink url={externalUrls.NCBI(organismData.taxonId)}>
+                {organismData.taxonId}
+              </ExternalLink>
+            )
           }
         </Fragment>
       )

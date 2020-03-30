@@ -280,13 +280,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
 
 exports[`ColumnConfiguration component should render all columns 5`] = `
 <DocumentFragment>
-  scientific name (common name)  (synonyms 1)
   <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
     target="_blank"
   >
-    NCBI
+    scientific name (common name)  (synonyms 1)
     <svg
       viewBox="0 0 576 512"
       width="12.5"
@@ -471,13 +470,12 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
 
 exports[`ColumnConfiguration component should render all columns 11`] = `
 <DocumentFragment>
-  9606
   <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
     target="_blank"
   >
-    NCBI
+    9606
     <svg
       viewBox="0 0 576 512"
       width="12.5"
@@ -501,13 +499,12 @@ exports[`ColumnConfiguration component should render all columns 13`] = `
 exports[`ColumnConfiguration component should render all columns 14`] = `
 <DocumentFragment>
   <p>
-    scientific name (common name)  (synonyms 1)
     <a
       class="external-link"
       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
       target="_blank"
     >
-      NCBI
+      scientific name (common name)  (synonyms 1)
       <svg
         viewBox="0 0 576 512"
         width="12.5"
@@ -2571,7 +2568,7 @@ exports[`ColumnConfiguration component should render all columns 109`] = `
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
     target="_blank"
   >
-    NCBI
+    9606
     <svg
       viewBox="0 0 576 512"
       width="12.5"

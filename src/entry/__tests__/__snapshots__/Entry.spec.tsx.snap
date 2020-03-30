@@ -447,13 +447,12 @@ exports[`Entry should render main 1`] = `
                     <div
                       class="info-list__item__content"
                     >
-                      scientific name (common name)  (synonyms 1)
                       <a
                         class="external-link"
                         href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
                         target="_blank"
                       >
-                        NCBI
+                        scientific name (common name)  (synonyms 1)
                         <svg
                           viewBox="0 0 576 512"
                           width="12.5"
@@ -2338,13 +2337,12 @@ exports[`Entry should render main 1`] = `
                       <div
                         class="info-list__item__content"
                       >
-                        scientific name (common name) 
                         <a
                           class="external-link"
                           href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
                           target="_blank"
                         >
-                          NCBI
+                          scientific name (common name)
                           <svg
                             viewBox="0 0 576 512"
                             width="12.5"
@@ -2422,13 +2420,12 @@ exports[`Entry should render main 1`] = `
                       <div
                         class="info-list__item__content"
                       >
-                        9606
                         <a
                           class="external-link"
                           href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
                           target="_blank"
                         >
-                          NCBI
+                          9606
                           <svg
                             viewBox="0 0 576 512"
                             width="12.5"
@@ -2474,13 +2471,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         <p>
-                          scientific name (common name)  (synonyms 1)
                           <a
                             class="external-link"
                             href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
                             target="_blank"
                           >
-                            NCBI
+                            scientific name (common name)  (synonyms 1)
                             <svg
                               viewBox="0 0 576 512"
                               width="12.5"

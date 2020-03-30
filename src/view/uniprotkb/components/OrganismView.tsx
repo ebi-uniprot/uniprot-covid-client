@@ -20,9 +20,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
   }
   return (
     <Fragment>
-      {/* <a href={`//www.uniprot.org/taxonomy/${taxonId}`}>{`${taxonId} `}</a> */}
-      {taxonId}
-      <ExternalLink url={externalUrls.NCBI(taxonId)}>NCBI</ExternalLink>
+      <ExternalLink url={externalUrls.NCBI(taxonId)}>{taxonId}</ExternalLink>
     </Fragment>
   );
 };
@@ -40,11 +38,7 @@ const OrganismView: React.FC<OrganismDataProps> = ({
 
   return (
     <Fragment>
-      {termValue}
-      {/* <a href={`https://www.uniprot.org/taxonomy/${data.taxonId}`}>
-        {termValue}
-      </a> */}
-      <ExternalLink url={externalUrls.NCBI(termValue)}>NCBI</ExternalLink>
+      <ExternalLink url={externalUrls.NCBI(termValue)}>{termValue}</ExternalLink>
     </Fragment>
   );
 };
@@ -62,12 +56,13 @@ export const OrganismListView: React.FC<{
       title: 'Organism',
       content: (
         <Fragment>
-          {/* <a href={`//www.uniprot.org/taxonomy/${data.taxonId}`}> */}
-          {`${data.scientificName} (${data.commonName})`}
-          {/* </a> */}
-          {' '}
           {data.taxonId
-            && <ExternalLink url={externalUrls.NCBI(data.taxonId)}>NCBI</ExternalLink>}
+            && (
+              <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
+                {`${data.scientificName} (${data.commonName})`}
+              </ExternalLink>
+            )
+          }
           {data.evidences && data.evidences.length && (
             <UniProtEvidenceTag evidences={data.evidences} />
           )}

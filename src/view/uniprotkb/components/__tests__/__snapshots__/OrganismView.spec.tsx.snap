@@ -2,13 +2,12 @@
 
 exports[`Organism should render organism 1`] = `
 <DocumentFragment>
-  Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)
   <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)"
     target="_blank"
   >
-    NCBI
+    Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)
     <svg
       viewBox="0 0 576 512"
       width="12.5"
