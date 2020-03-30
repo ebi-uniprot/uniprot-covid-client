@@ -3,10 +3,10 @@ import React, { Fragment } from 'react';
 const UniProtKBInfo = () => (
   <Fragment>
     <section className="text-block">
-      This page lists the latest available UniProtKB data relating to the
-      COVID-19 outbreak, including protein entries for the SARS-CoV-2
-      coronavirus. It will be updated as new information becomes available,
-      independent of the general UniProt release schedule.
+      This site provides the latest available pre-release UniProtKB data for the SARS-CoV-2 coronavirus 
+      and other entries relating to the COVID-19 outbreak. Therefore, data and functionality provided 
+      here may differ from the main Uniprot.org website which is updated every eight weeks. This site will be 
+      updated as new relevant information becomes available, independent of the general UniProt release schedule.
     </section>
     <section className="text-block">
       This data can also be accessed via our FTP on{' '}
