@@ -1,0 +1,17 @@
+$black: #000000;
+
+.gdpr-section {
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 1rem 2rem;
+  position: fixed;
+  bottom: 0;
+  background-color: lighten($black, 0.2);
+  color: #fff;
+  a {
+    color: #fff;
+  }
+  button {
+    margin-left: 2rem;
+  }
+}
