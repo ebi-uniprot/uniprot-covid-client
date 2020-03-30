@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
-import { ExpandableList, Sequence } from 'franklin-sites';
+import { ExpandableList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import { flatten } from 'lodash';
 import { Link } from 'react-router-dom';
@@ -995,6 +995,13 @@ ColumnConfiguration.set(Column.taxId, {
           {/* <a href={`//www.uniprot.org/taxonomy/${organismData.taxonId}`}>}
           {organismData.taxonId}
         {</a> */}
+          {organismData.taxonId
+            && (
+              <ExternalLink url={externalUrls.NCBI(organismData.taxonId)}>
+                {organismData.taxonId}
+              </ExternalLink>
+            )
+          }
         </Fragment>
       )
     );
