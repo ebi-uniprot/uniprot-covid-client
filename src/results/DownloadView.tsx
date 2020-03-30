@@ -130,7 +130,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
         </fieldset>
         {fileFormatsWithColumns.includes(fileFormat) && (
           <fieldset>
-            <legend>Customise data</legend>
+            <legend>Customize data</legend>
             <ColumnSelectContainer
               onChange={onSelectedColumnsChange}
               selectedColumns={selectedColumns}

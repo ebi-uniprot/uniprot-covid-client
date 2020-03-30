@@ -344,7 +344,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
           <Link to="/customise-table">
             <button type="button" className="button tertiary">
               <EditIcon />
-              Customise data
+              Customize data
             </button>
           </Link>
         )}
