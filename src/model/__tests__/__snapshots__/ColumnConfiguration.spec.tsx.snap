@@ -461,7 +461,7 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
 exports[`ColumnConfiguration component should render all columns 11`] = `
 <DocumentFragment>
   <a
-    href="/taxonomy/9606"
+    href="//www.uniprot.org/taxonomy/9606"
   >
     9606 
   </a>
