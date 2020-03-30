@@ -281,7 +281,7 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
 exports[`ColumnConfiguration component should render all columns 5`] = `
 <DocumentFragment>
   <a
-    href="/taxonomy/9606"
+    href="https://www.uniprot.org/taxonomy/9606"
   >
     scientific name (common name)  (synonyms 1)
   </a>
@@ -495,7 +495,7 @@ exports[`ColumnConfiguration component should render all columns 14`] = `
 <DocumentFragment>
   <p>
     <a
-      href="/taxonomy/9606"
+      href="https://www.uniprot.org/taxonomy/9606"
     >
       scientific name (common name)  (synonyms 1)
     </a>
@@ -2548,7 +2548,7 @@ exports[`ColumnConfiguration component should render all columns 108`] = `<Docum
 exports[`ColumnConfiguration component should render all columns 109`] = `
 <DocumentFragment>
   <a
-    href="/taxonomy/9606"
+    href="//www.uniprot.org/taxonomy/9606"
   >
     9606
   </a>
