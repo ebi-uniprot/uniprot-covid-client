@@ -106,6 +106,6 @@ export const fileFormatEntryDownload = [
   FileFormat.fastaCanonical,
   FileFormat.fastaCanonicalIsoform,
   FileFormat.xml,
-  FileFormat.rdfXml,
+  // FileFormat.rdfXml, // this currently doesn't work so remove for now
   FileFormat.gff,
 ];
