@@ -774,6 +774,9 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
   <section
     class="text-block"
   >
+    <h3>
+      isoform 1
+    </h3>
     Molecular mass is 2.1 Da. Determined by LSI. note value 
     <span
       class="evidence-tag svg-colour-unreviewed"
@@ -2207,6 +2210,9 @@ exports[`ColumnConfiguration component should render all columns 71`] = `<Docume
 
 exports[`ColumnConfiguration component should render all columns 72`] = `
 <DocumentFragment>
+  <h5>
+    Isoform 4
+  </h5>
   <section
     class="text-block"
   >
@@ -2269,7 +2275,7 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
 exports[`ColumnConfiguration component should render all columns 73`] = `
 <DocumentFragment>
   <h3>
-    Disease Id (someAcron)
+    DiseaseEntry Id (someAcron)
   </h3>
   <span
     class="text-block"
@@ -2455,37 +2461,37 @@ exports[`ColumnConfiguration component should render all columns 94`] = `
   >
     <li>
       <a
-        href="/citations/somepID1"
+        href="/citations/12345"
       >
-        somepID1
+        12345
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID2"
+        href="/citations/12345"
       >
-        somepID2
+        12345
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID3"
+        href="/citations/12345"
       >
-        somepID3
+        12345
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID4"
+        href="/citations/12345"
       >
-        somepID4
+        12345
       </a>
     </li>
     <li>
       <a
-        href="/citations/somepID5"
+        href="/citations/12345"
       >
-        somepID5
+        12345
       </a>
     </li>
     <li>
