@@ -648,7 +648,7 @@ ColumnConfiguration.set(Column.ccInteraction, {
                 key={
                   interaction.type === InteractionType.SELF
                     ? 'self'
-                    : interaction.interactantOne.uniProtkbAccession
+                    : `${interaction.interactantOne.uniProtkbAccession}-${interaction.interactantTwo.uniProtkbAccession}`
                 }
               >
                 {interaction.type === InteractionType.SELF ? (

@@ -211,7 +211,7 @@ export const MassSpectrometryView: React.FC<{
     <Fragment>
       {data.map(item => (
         <section className="text-block" key={`${item.molWeight}${item.method}`}>
-          {item.molecule && <h3>${item.molecule}</h3>}
+          {item.molecule && <h3>{item.molecule}</h3>}
           {`Molecular mass is ${numberView({
             value: item.molWeight,
             unit: Unit.DA,

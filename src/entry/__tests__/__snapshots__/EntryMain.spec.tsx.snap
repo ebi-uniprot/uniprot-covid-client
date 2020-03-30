@@ -2318,7 +2318,7 @@ exports[`Entry view should render 1`] = `
             Involvement in disease
           </h3>
           <h3>
-            Disease Id (someAcron)
+            DiseaseEntry Id (someAcron)
           </h3>
           <span
             class="text-block"
@@ -2459,6 +2459,9 @@ exports[`Entry view should render 1`] = `
           >
             disruption phenotype
           </h3>
+          <h5>
+            Isoform 4
+          </h5>
           <section
             class="text-block"
           >
@@ -3040,6 +3043,9 @@ exports[`Entry view should render 1`] = `
           <section
             class="text-block"
           >
+            <h3>
+              isoform 1
+            </h3>
             Molecular mass is 2.1 Da. Determined by LSI. note value 
             <span
               class="evidence-tag svg-colour-unreviewed"
