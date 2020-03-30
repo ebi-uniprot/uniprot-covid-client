@@ -31,7 +31,7 @@ describe('Family and Domains data converter', () => {
                 },
               ],
               id: 'KW-11111',
-              value: 'keyword value',
+              name: 'keyword value',
             },
           ],
         },
