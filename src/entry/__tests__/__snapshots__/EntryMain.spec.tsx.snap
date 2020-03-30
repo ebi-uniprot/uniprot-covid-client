@@ -92,7 +92,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item__content"
             >
               <a
-                href="/taxonomy/9606"
+                href="https://www.uniprot.org/taxonomy/9606"
               >
                 scientific name (common name)  (synonyms 1)
               </a>
@@ -1972,7 +1972,7 @@ exports[`Entry view should render 1`] = `
                 class="info-list__item__content"
               >
                 <a
-                  href="/taxonomy/9606"
+                  href="//www.uniprot.org/taxonomy/9606"
                 >
                   scientific name (common name)
                 </a>
@@ -2101,7 +2101,7 @@ exports[`Entry view should render 1`] = `
               >
                 <p>
                   <a
-                    href="/taxonomy/9606"
+                    href="https://www.uniprot.org/taxonomy/9606"
                   >
                     scientific name (common name)  (synonyms 1)
                   </a>

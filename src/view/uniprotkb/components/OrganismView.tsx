@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import SimpleView from './SimpleView';
 import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import externalUrls from '../../../utils/externalUrls';
@@ -40,7 +39,7 @@ const OrganismView: React.FC<OrganismDataProps> = ({
   } ${data.synonyms && data.synonyms.length > 0 ? ` (${data.synonyms})` : ''}`;
 
   return (
-    <SimpleView termValue={termValue} linkTo={`/taxonomy/${data.taxonId}`} />
+    <a href={`https://www.uniprot.org/taxonomy/${data.taxonId}`}>{termValue}</a>
   );
 };
 
@@ -57,9 +56,9 @@ export const OrganismListView: React.FC<{
       title: 'Organism',
       content: (
         <Fragment>
-          <Link to={`/taxonomy/${data.taxonId}`}>
+          <a href={`//www.uniprot.org/taxonomy/${data.taxonId}`}>
             {`${data.scientificName} (${data.commonName})`}
-          </Link>
+          </a>
           {data.evidences && data.evidences.length && (
             <UniProtEvidenceTag evidences={data.evidences} />
           )}
