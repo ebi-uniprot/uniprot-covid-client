@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
@@ -17,6 +17,7 @@ import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConve
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import numberView, { Unit } from './NumberView';
 import externalUrls from '../../../utils/externalUrls';
+import submitBlast from '../../../blast_website/BlastUtils';
 
 export type SequenceData = {
   value: string;
@@ -49,6 +50,13 @@ export const SequenceInfo: React.FC<{
 
     fetchIsoformData();
   }, [isoformToFetch]);
+
+  const onBlastClick = useCallback(() => {
+    const dataToDisplay = data || isoformSequence;
+    if (dataToDisplay && dataToDisplay.value) {
+      submitBlast(dataToDisplay.value);
+    }
+  }, [isoformSequence, data]);
 
   const dataToDisplay = data || isoformSequence;
 
@@ -94,6 +102,7 @@ export const SequenceInfo: React.FC<{
         sequence={dataToDisplay.value}
         accession={isoformId}
         downloadUrl={apiUrls.sequenceFasta(isoformId)}
+        onBlastClick={onBlastClick}
       />
     </Fragment>
   );
