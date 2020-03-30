@@ -3,7 +3,12 @@ import { InfoList } from 'franklin-sites';
 import { Xref } from '../../../model/types/CommentTypes';
 
 const ProteomesId: React.FC<{ id?: string }> = ({ id }) => (
-  <a href={`//www.uniprot.org/proteomes/${id}`}>{id}</a>
+  <Fragment>
+    {id}
+    {/* <a href={`//www.uniprot.org/proteomes/${id}`}>
+    {id}
+  </a> */}
+  </Fragment>
 );
 
 const ProteomesComponents: React.FC<{

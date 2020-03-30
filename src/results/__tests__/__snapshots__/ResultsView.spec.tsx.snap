@@ -58,13 +58,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell division cycle 7-related protein kinase · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: CDC7 · 574 amino-acids · 
+                      Cell division cycle 7-related protein kinase · Homo sapiens · Gene: CDC7 · 574 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -98,31 +92,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
@@ -181,13 +175,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell division cycle 7-related protein kinase · 
-                      <a
-                        href="#"
-                      >
-                        Mus musculus
-                      </a>
-                       · Gene: Cdc7 · 564 amino-acids · 
+                      Cell division cycle 7-related protein kinase · Mus musculus · Gene: Cdc7 · 564 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -221,31 +209,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
@@ -304,13 +292,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell division control protein 7 · 
-                      <a
-                        href="#"
-                      >
-                        Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
-                      </a>
-                       · Gene: CDC7 · 507 amino-acids · 
+                      Cell division control protein 7 · Saccharomyces cerevisiae (strain ATCC 204508 / S288c) · Gene: CDC7 · 507 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -344,43 +326,43 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0469"
+                          href="//www.uniprot.org/keywords/KW-0469"
                         >
                            #Meiosis
                         </a>
                          
                         <a
-                          href="/keywords/KW-0498"
+                          href="//www.uniprot.org/keywords/KW-0498"
                         >
                            #Mitosis
                         </a>
@@ -439,13 +421,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell division control protein 7 · 
-                      <a
-                        href="#"
-                      >
-                        Schizosaccharomyces pombe (strain 972 / ATCC 24843)
-                      </a>
-                       · Gene: cdc7 · 1062 amino-acids · 
+                      Cell division control protein 7 · Schizosaccharomyces pombe (strain 972 / ATCC 24843) · Gene: cdc7 · 1062 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -479,31 +455,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
@@ -562,13 +538,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Probable serine/threonine-protein kinase cdc7 · 
-                      <a
-                        href="#"
-                      >
-                        Dictyostelium discoideum
-                      </a>
-                       · Gene: cdc7 · 1061 amino-acids · 
+                      Probable serine/threonine-protein kinase cdc7 · Dictyostelium discoideum · Gene: cdc7 · 1061 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -602,19 +572,19 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
@@ -673,13 +643,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell cycle serine/threonine-protein kinase hsk1 · 
-                      <a
-                        href="#"
-                      >
-                        Schizosaccharomyces pombe (strain 972 / ATCC 24843)
-                      </a>
-                       · Gene: hsk1 · 507 amino-acids · 
+                      Cell cycle serine/threonine-protein kinase hsk1 · Schizosaccharomyces pombe (strain 972 / ATCC 24843) · Gene: hsk1 · 507 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -713,31 +677,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
@@ -796,13 +760,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Periphilin-1 · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: PPHLN1 · 458 amino-acids · 
+                      Periphilin-1 · Homo sapiens · Gene: PPHLN1 · 458 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -836,25 +794,25 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0678"
+                          href="//www.uniprot.org/keywords/KW-0678"
                         >
                            #Repressor
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0417"
+                          href="//www.uniprot.org/keywords/KW-0417"
                         >
                            #Keratinization
                         </a>
                          
                         <a
-                          href="/keywords/KW-0804"
+                          href="//www.uniprot.org/keywords/KW-0804"
                         >
                            #Transcription
                         </a>
                          
                         <a
-                          href="/keywords/KW-0805"
+                          href="//www.uniprot.org/keywords/KW-0805"
                         >
                            #Transcription regulation
                         </a>
@@ -913,12 +871,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      <a
-                        href="#"
-                      >
-                        Drosophila melanogaster
-                      </a>
-                       · Gene: Cdc7 · 699 amino-acids · 
+                      Drosophila melanogaster · Gene: Cdc7 · 699 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -952,13 +905,13 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
@@ -1017,12 +970,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      <a
-                        href="#"
-                      >
-                        Drosophila melanogaster
-                      </a>
-                       · Gene: Cdc7 · 700 amino-acids · 
+                      Drosophila melanogaster · Gene: Cdc7 · 700 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1056,13 +1004,13 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
@@ -1121,13 +1069,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Protein DBF4 homolog B · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: DBF4B · 615 amino-acids · 
+                      Protein DBF4 homolog B · Homo sapiens · Gene: DBF4B · 615 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1161,7 +1103,7 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
@@ -1220,13 +1162,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DDK kinase regulatory subunit DBF4 · 
-                      <a
-                        href="#"
-                      >
-                        Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
-                      </a>
-                       · Gene: DBF4 · 704 amino-acids · 
+                      DDK kinase regulatory subunit DBF4 · Saccharomyces cerevisiae (strain ATCC 204508 / S288c) · Gene: DBF4 · 704 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1260,43 +1196,43 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0159"
+                          href="//www.uniprot.org/keywords/KW-0159"
                         >
                            #Chromosome partition
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
                          
                         <a
-                          href="/keywords/KW-0469"
+                          href="//www.uniprot.org/keywords/KW-0469"
                         >
                            #Meiosis
                         </a>
                          
                         <a
-                          href="/keywords/KW-0498"
+                          href="//www.uniprot.org/keywords/KW-0498"
                         >
                            #Mitosis
                         </a>
@@ -1355,13 +1291,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Protein DBF4 homolog A · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: DBF4 · 674 amino-acids · 
+                      Protein DBF4 homolog A · Homo sapiens · Gene: DBF4 · 674 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1395,13 +1325,13 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -1460,13 +1390,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor MCM2 · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: MCM2 · 904 amino-acids · 
+                      DNA replication licensing factor MCM2 · Homo sapiens · Gene: MCM2 · 904 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1500,49 +1424,49 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0209"
+                          href="//www.uniprot.org/keywords/KW-0209"
                         >
                            #Deafness
                         </a>
                          
                         <a
-                          href="/keywords/KW-0225"
+                          href="//www.uniprot.org/keywords/KW-0225"
                         >
                            #Disease mutation
                         </a>
                          
                         <a
-                          href="/keywords/KW-1010"
+                          href="//www.uniprot.org/keywords/KW-1010"
                         >
                            #Non-syndromic deafness
                         </a>
@@ -1601,13 +1525,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cyclin-dependent kinase 2-interacting protein · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: CINP · 212 amino-acids · 
+                      Cyclin-dependent kinase 2-interacting protein · Homo sapiens · Gene: CINP · 212 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1641,31 +1559,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0227"
+                          href="//www.uniprot.org/keywords/KW-0227"
                         >
                            #DNA damage
                         </a>
                          
                         <a
-                          href="/keywords/KW-0234"
+                          href="//www.uniprot.org/keywords/KW-0234"
                         >
                            #DNA repair
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -1724,13 +1642,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Protein DBF4 homolog A · 
-                      <a
-                        href="#"
-                      >
-                        Mus musculus
-                      </a>
-                       · Gene: Dbf4 · 663 amino-acids · 
+                      Protein DBF4 homolog A · Mus musculus · Gene: Dbf4 · 663 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1764,13 +1676,13 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -1829,13 +1741,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Probable cell division control protein 7 homolog 2 · 
-                      <a
-                        href="#"
-                      >
-                        Encephalitozoon cuniculi (strain GB-M1)
-                      </a>
-                       · Gene: CDC7-2 · 351 amino-acids · 
+                      Probable cell division control protein 7 homolog 2 · Encephalitozoon cuniculi (strain GB-M1) · Gene: CDC7-2 · 351 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -1869,43 +1775,43 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0469"
+                          href="//www.uniprot.org/keywords/KW-0469"
                         >
                            #Meiosis
                         </a>
                          
                         <a
-                          href="/keywords/KW-0498"
+                          href="//www.uniprot.org/keywords/KW-0498"
                         >
                            #Mitosis
                         </a>
@@ -1964,13 +1870,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor MCM2 · 
-                      <a
-                        href="#"
-                      >
-                        Mus musculus
-                      </a>
-                       · Gene: Mcm2 · 904 amino-acids · 
+                      DNA replication licensing factor MCM2 · Mus musculus · Gene: Mcm2 · 904 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2004,31 +1904,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -2087,13 +1987,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Probable cell division control protein 7 homolog 1 · 
-                      <a
-                        href="#"
-                      >
-                        Encephalitozoon cuniculi (strain GB-M1)
-                      </a>
-                       · Gene: CDC7-1 · 351 amino-acids · 
+                      Probable cell division control protein 7 homolog 1 · Encephalitozoon cuniculi (strain GB-M1) · Gene: CDC7-1 · 351 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2127,43 +2021,43 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0469"
+                          href="//www.uniprot.org/keywords/KW-0469"
                         >
                            #Meiosis
                         </a>
                          
                         <a
-                          href="/keywords/KW-0498"
+                          href="//www.uniprot.org/keywords/KW-0498"
                         >
                            #Mitosis
                         </a>
@@ -2222,13 +2116,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor mcm2 · 
-                      <a
-                        href="#"
-                      >
-                        Xenopus laevis
-                      </a>
-                       · Gene: mcm2 · 886 amino-acids · 
+                      DNA replication licensing factor mcm2 · Xenopus laevis · Gene: mcm2 · 886 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2262,31 +2150,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -2345,13 +2233,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Septum-promoting GTP-binding protein 1 · 
-                      <a
-                        href="#"
-                      >
-                        Schizosaccharomyces pombe (strain 972 / ATCC 24843)
-                      </a>
-                       · Gene: spg1 · 198 amino-acids · 
+                      Septum-promoting GTP-binding protein 1 · Schizosaccharomyces pombe (strain 972 / ATCC 24843) · Gene: spg1 · 198 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2385,19 +2267,19 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0498"
+                          href="//www.uniprot.org/keywords/KW-0498"
                         >
                            #Mitosis
                         </a>
@@ -2456,13 +2338,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor mcm4-A · 
-                      <a
-                        href="#"
-                      >
-                        Xenopus laevis
-                      </a>
-                       · Gene: mcm4-a · 858 amino-acids · 
+                      DNA replication licensing factor mcm4-A · Xenopus laevis · Gene: mcm4-a · 858 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2496,31 +2372,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -2579,13 +2455,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Cell cycle protein kinase spo4 · 
-                      <a
-                        href="#"
-                      >
-                        Schizosaccharomyces pombe (strain 972 / ATCC 24843)
-                      </a>
-                       · Gene: spo4 · 429 amino-acids · 
+                      Cell cycle protein kinase spo4 · Schizosaccharomyces pombe (strain 972 / ATCC 24843) · Gene: spo4 · 429 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2619,43 +2489,43 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0418"
+                          href="//www.uniprot.org/keywords/KW-0418"
                         >
                            #Kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0723"
+                          href="//www.uniprot.org/keywords/KW-0723"
                         >
                            #Serine/threonine-protein kinase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0808"
+                          href="//www.uniprot.org/keywords/KW-0808"
                         >
                            #Transferase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0132"
+                          href="//www.uniprot.org/keywords/KW-0132"
                         >
                            #Cell division
                         </a>
                          
                         <a
-                          href="/keywords/KW-0469"
+                          href="//www.uniprot.org/keywords/KW-0469"
                         >
                            #Meiosis
                         </a>
                          
                         <a
-                          href="/keywords/KW-0749"
+                          href="//www.uniprot.org/keywords/KW-0749"
                         >
                            #Sporulation
                         </a>
@@ -2714,13 +2584,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      Septation initiation network scaffold protein cdc11 · 
-                      <a
-                        href="#"
-                      >
-                        Schizosaccharomyces pombe (strain 972 / ATCC 24843)
-                      </a>
-                       · Gene: cdc11 · 1045 amino-acids · 
+                      Septation initiation network scaffold protein cdc11 · Schizosaccharomyces pombe (strain 972 / ATCC 24843) · Gene: cdc11 · 1045 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2807,13 +2671,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor mcm4-B · 
-                      <a
-                        href="#"
-                      >
-                        Xenopus laevis
-                      </a>
-                       · Gene: mcm4-b · 863 amino-acids · 
+                      DNA replication licensing factor mcm4-B · Xenopus laevis · Gene: mcm4-b · 863 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2847,31 +2705,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>
@@ -2930,13 +2788,7 @@ exports[`ResultsView component should render cards 1`] = `
                       </span>
                     </h5>
                     <section>
-                      DNA replication licensing factor MCM4 · 
-                      <a
-                        href="#"
-                      >
-                        Homo sapiens
-                      </a>
-                       · Gene: MCM4 · 863 amino-acids · 
+                      DNA replication licensing factor MCM4 · Homo sapiens · Gene: MCM4 · 863 amino-acids · 
                       <span
                         title="Annotation Score"
                       >
@@ -2970,31 +2822,31 @@ exports[`ResultsView component should render cards 1`] = `
                     <section>
                       <small>
                         <a
-                          href="/keywords/KW-0238"
+                          href="//www.uniprot.org/keywords/KW-0238"
                         >
                            #DNA-binding
                         </a>
                          
                         <a
-                          href="/keywords/KW-0347"
+                          href="//www.uniprot.org/keywords/KW-0347"
                         >
                            #Helicase
                         </a>
                          
                         <a
-                          href="/keywords/KW-0378"
+                          href="//www.uniprot.org/keywords/KW-0378"
                         >
                            #Hydrolase
                         </a>
                          · 
                         <a
-                          href="/keywords/KW-0131"
+                          href="//www.uniprot.org/keywords/KW-0131"
                         >
                            #Cell cycle
                         </a>
                          
                         <a
-                          href="/keywords/KW-0235"
+                          href="//www.uniprot.org/keywords/KW-0235"
                         >
                            #DNA replication
                         </a>

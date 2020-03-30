@@ -280,11 +280,7 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
 
 exports[`ColumnConfiguration component should render all columns 5`] = `
 <DocumentFragment>
-  <a
-    href="https://www.uniprot.org/taxonomy/9606"
-  >
-    scientific name (common name)  (synonyms 1)
-  </a>
+  scientific name (common name)  (synonyms 1)
 </DocumentFragment>
 `;
 
@@ -460,11 +456,7 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
 
 exports[`ColumnConfiguration component should render all columns 11`] = `
 <DocumentFragment>
-  <a
-    href="//www.uniprot.org/taxonomy/9606"
-  >
-    9606 
-  </a>
+  9606
   <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
@@ -494,11 +486,7 @@ exports[`ColumnConfiguration component should render all columns 13`] = `
 exports[`ColumnConfiguration component should render all columns 14`] = `
 <DocumentFragment>
   <p>
-    <a
-      href="https://www.uniprot.org/taxonomy/9606"
-    >
-      scientific name (common name)  (synonyms 1)
-    </a>
+    scientific name (common name)  (synonyms 1)
   </p>
 </DocumentFragment>
 `;
@@ -1918,7 +1906,7 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
 exports[`ColumnConfiguration component should render all columns 51`] = `
 <DocumentFragment>
   <a
-    href="/keywords/KW-11111"
+    href="//www.uniprot.org/keywords/KW-11111"
   >
      #keyword value
   </a>
@@ -1928,7 +1916,7 @@ exports[`ColumnConfiguration component should render all columns 51`] = `
 exports[`ColumnConfiguration component should render all columns 52`] = `
 <DocumentFragment>
   <a
-    href="/keywords/KW-11111"
+    href="//www.uniprot.org/keywords/KW-11111"
   >
      #KW-11111
   </a>
@@ -2547,11 +2535,7 @@ exports[`ColumnConfiguration component should render all columns 108`] = `<Docum
 
 exports[`ColumnConfiguration component should render all columns 109`] = `
 <DocumentFragment>
-  <a
-    href="//www.uniprot.org/taxonomy/9606"
-  >
-    9606
-  </a>
+  9606
 </DocumentFragment>
 `;
 

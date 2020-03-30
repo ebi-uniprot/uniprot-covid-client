@@ -38,7 +38,7 @@ const UniProtCard: FC<{
 
   const organismNameNode = (
     <Fragment>
-      <a href="#">{idx(data, (_): string => _.organism.scientificName)}</a>
+      {idx(data, (_): string => _.organism.scientificName)}
       {' · '}
     </Fragment>
   );

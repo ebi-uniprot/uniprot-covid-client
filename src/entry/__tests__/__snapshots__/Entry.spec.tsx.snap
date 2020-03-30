@@ -447,11 +447,7 @@ exports[`Entry should render main 1`] = `
                     <div
                       class="info-list__item__content"
                     >
-                      <a
-                        href="https://www.uniprot.org/taxonomy/9606"
-                      >
-                        scientific name (common name)  (synonyms 1)
-                      </a>
+                      scientific name (common name)  (synonyms 1)
                     </div>
                   </div>
                   <div
@@ -2327,11 +2323,7 @@ exports[`Entry should render main 1`] = `
                       <div
                         class="info-list__item__content"
                       >
-                        <a
-                          href="//www.uniprot.org/taxonomy/9606"
-                        >
-                          scientific name (common name)
-                        </a>
+                        scientific name (common name)
                         <span
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
@@ -2400,11 +2392,7 @@ exports[`Entry should render main 1`] = `
                       <div
                         class="info-list__item__content"
                       >
-                        <a
-                          href="//www.uniprot.org/taxonomy/9606"
-                        >
-                          9606 
-                        </a>
+                        9606
                         <a
                           class="external-link"
                           href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
@@ -2456,11 +2444,7 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         <p>
-                          <a
-                            href="https://www.uniprot.org/taxonomy/9606"
-                          >
-                            scientific name (common name)  (synonyms 1)
-                          </a>
+                          scientific name (common name)  (synonyms 1)
                         </p>
                       </div>
                     </div>
@@ -3110,7 +3094,7 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         <a
-                          href="/keywords/KW-11111"
+                          href="//www.uniprot.org/keywords/KW-11111"
                         >
                            #keyword value
                         </a>

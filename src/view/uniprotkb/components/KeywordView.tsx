@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
-import { Link } from 'react-router-dom';
 import { Keyword, KeywordUIModel } from '../../../model/utils/KeywordsUtil';
 
 type KeywordListProps = {
@@ -18,7 +17,7 @@ export const KeywordItem: React.FC<KeywordItempProps> = ({ id, value }) => {
   if (!id || !value) {
     return null;
   }
-  return <Link to={`/keywords/${id}`}>{` #${value}`}</Link>;
+  return <a href={`//www.uniprot.org/keywords/${id}`}>{` #${value}`}</a>;
 };
 
 export const KeywordList: React.FC<KeywordListProps> = ({

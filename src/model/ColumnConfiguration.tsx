@@ -990,9 +990,12 @@ ColumnConfiguration.set(Column.taxId, {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return (
       organismData && (
-        <a href={`//www.uniprot.org/taxonomy/${organismData.taxonId}`}>
+        <Fragment>
           {organismData.taxonId}
-        </a>
+          {/* <a href={`//www.uniprot.org/taxonomy/${organismData.taxonId}`}>}
+          {organismData.taxonId}
+        {</a> */}
+        </Fragment>
       )
     );
   },
