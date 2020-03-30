@@ -3872,6 +3872,25 @@ exports[`Entry should render main 1`] = `
         >
           <footer />
         </section>
+        <div
+          class="gdpr-section"
+        >
+          We'd like to inform you that we have updated our 
+          <a
+            href="https://www.uniprot.org/help/privacy"
+          >
+            Privacy Notice
+          </a>
+           to
+      comply with Europe’s new General Data Protection Regulation (GDPR) that
+      applies since 25 May 2018.
+          <button
+            class="button secondary"
+            type="button"
+          >
+            Accept
+          </button>
+        </div>
       </section>
     </section>
   </section>
