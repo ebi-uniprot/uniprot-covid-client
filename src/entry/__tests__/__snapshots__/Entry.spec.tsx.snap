@@ -2401,7 +2401,7 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         <a
-                          href="/uniprotkb/taxonomy/9606"
+                          href="//www.uniprot.org/taxonomy/9606"
                         >
                           9606 
                         </a>

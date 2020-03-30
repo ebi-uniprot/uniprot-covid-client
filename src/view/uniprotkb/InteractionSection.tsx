@@ -42,7 +42,9 @@ const getInteractionColumns = (primaryAccession: string) => ({
     label: 'Entry 2',
     resolver: (d: Interaction) =>
       html`
-        <a href="/uniprotkb/${d.interactantTwo.uniProtkbAccession}"
+        <a
+          href="//www.uniprot.org/uniprot/${d.interactantTwo
+            .uniProtkbAccession}"
           >${d.interactantTwo.uniProtkbAccession}</a
         >
         ${d.interactantTwo.geneName} ${d.interactantTwo.chainId}

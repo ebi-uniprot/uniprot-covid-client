@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import { Link } from 'react-router-dom';
 import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
 import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
 import externalUrls from '../../../utils/externalUrls';
@@ -21,7 +20,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
   }
   return (
     <Fragment>
-      <Link to={`taxonomy/${taxonId}`}>{`${taxonId} `}</Link>
+      <a href={`//www.uniprot.org/taxonomy/${taxonId}`}>{`${taxonId} `}</a>
       <ExternalLink url={externalUrls.NCBI(taxonId)}>NCBI</ExternalLink>
     </Fragment>
   );
