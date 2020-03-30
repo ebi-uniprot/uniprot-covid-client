@@ -35,6 +35,7 @@ import EntryPublications from './publications/EntryPublications';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import { Facet } from '../types/responseTypes';
+import submitBlast from '../blast_website/BlastUtils';
 
 type MatchParams = {
   accession: string;
@@ -104,6 +105,15 @@ const Entry: React.FC<EntryProps> = ({
       exact: true,
       actionButtons: (
         <div className="button-group">
+          <button
+            type="button"
+            className="button tertiary"
+            onClick={() =>
+              submitBlast(entryData[EntrySection.Sequence].sequence.value)
+            }
+          >
+            BLAST
+          </button>
           <DropdownButton
             label={
               <Fragment>

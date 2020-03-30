@@ -70,6 +70,12 @@ exports[`Entry should render main 1`] = `
           <div
             class="button-group"
           >
+            <button
+              class="button tertiary"
+              type="button"
+            >
+              BLAST
+            </button>
             <div
               class="dropdown-container"
             >
