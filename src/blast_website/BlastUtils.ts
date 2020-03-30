@@ -10,7 +10,7 @@ const params: { [key: string]: string } = {
   url2: '',
 };
 
-const getHiddenField = (key: string, value: string) => {
+const createHiddenField = (key: string, value: string) => {
   const hiddenField = document.createElement('input');
   hiddenField.type = 'hidden';
   hiddenField.name = key;
@@ -23,11 +23,11 @@ const submitBlast = (sequence: string) => {
   form.method = 'post';
   form.action = '//www.uniprot.org/blast/';
 
-  const sequenceField = getHiddenField('blastQuery', sequence);
+  const sequenceField = createHiddenField('blastQuery', sequence);
   form.appendChild(sequenceField);
 
   Object.keys(params).forEach(key => {
-    const hiddenField = getHiddenField(key, params[key]);
+    const hiddenField = createHiddenField(key, params[key]);
     form.appendChild(hiddenField);
   });
 
