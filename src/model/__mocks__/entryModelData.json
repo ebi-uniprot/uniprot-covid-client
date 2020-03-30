@@ -975,7 +975,7 @@
   ],
   "keywords": [
     {
-      "value": "keyword value",
+      "name": "keyword value",
       "evidences": [
         {
           "evidenceCode": "ECO:0000255",
