@@ -21,7 +21,7 @@ exports[`ProteomesEntryView component should render 1`] = `
         class="info-list__item__content"
       >
         <a
-          href="/proteomes/UP000005640"
+          href="//www.uniprot.org/proteomes/UP000005640"
         >
           UP000005640
         </a>
