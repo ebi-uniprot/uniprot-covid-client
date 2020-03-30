@@ -91,7 +91,7 @@ describe('DownloadContainer component', () => {
     ].forEach(async (value, columnSelect) => {
       fireEvent.change(formatSelect, { target: { value } });
       const customise = await waitForElement(() =>
-        queryByText('Customise data')
+        queryByText('Customize data')
       );
       const expectCustomise = expect(customise);
       columnSelect

@@ -34,13 +34,7 @@ export const SequenceInfo: React.FC<{
   isoformId: string;
   isoformSequence?: SequenceData;
   lastUpdateDate?: string | null;
-  displayLoadSequenceButton?: boolean;
-}> = ({
-  isoformId,
-  isoformSequence,
-  lastUpdateDate,
-  displayLoadSequenceButton = true,
-}) => {
+}> = ({ isoformId, isoformSequence, lastUpdateDate }) => {
   const [data, setData] = useState(null);
   const [isoformToFetch, setIsoformToFetch] = useState('');
 
@@ -58,7 +52,7 @@ export const SequenceInfo: React.FC<{
 
   const dataToDisplay = data || isoformSequence;
 
-  if (!dataToDisplay && displayLoadSequenceButton) {
+  if (!dataToDisplay) {
     return (
       <button
         type="button"
@@ -92,6 +86,7 @@ export const SequenceInfo: React.FC<{
       content: dataToDisplay.crc64,
     },
   ];
+
   return (
     <Fragment>
       {dataToDisplay && <InfoList infoData={infoData} />}
@@ -163,6 +158,22 @@ export const IsoformInfo: React.FC<{
           {' sequence. All positional information in '}
           {'this entry refers to it. This is also the sequence '}
           {'that appears in the downloadable versions of the entry.'}
+        </p>
+      )}
+      {isoformData.isoformSequenceStatus === 'External' && (
+        <p>
+          This is a computationally mapped potential isoform.{' '}
+          {/* TODO: this is hacky and temporary until we sort out
+          external isoforms */}
+          <Link
+            className="button secondary"
+            to={`/uniprotkb/${isoformData.isoformIds[0].substring(
+              0,
+              isoformData.isoformIds[0].length - 2
+            )}`}
+          >
+            View isoform
+          </Link>
         </p>
       )}
       <InfoList infoData={infoListData} />
@@ -285,12 +296,7 @@ export const IsoformView: React.FC<{
   if (isoforms) {
     isoformsNode = isoforms.map(isoform => {
       const isoformComponent = (
-        <SequenceInfo
-          isoformId={isoform.isoformIds[0]}
-          displayLoadSequenceButton={
-            isoform.isoformSequenceStatus !== 'External'
-          }
-        />
+        <SequenceInfo isoformId={isoform.isoformIds[0]} />
       );
       return (
         <Fragment key={isoform.isoformIds.join('')}>
@@ -298,7 +304,7 @@ export const IsoformView: React.FC<{
             isoformData={isoform}
             canonicalAccession={canonicalAccession}
           />
-          {includeSequences && (
+          {includeSequences && isoform.isoformSequenceStatus !== 'External' && (
             <Fragment>
               {canonicalComponent &&
               isoform.isoformSequenceStatus === 'Displayed'
