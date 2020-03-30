@@ -152,8 +152,12 @@ export const IsoformInfo: React.FC<{
         </p>
       )}
       {isoformData.isoformSequenceStatus === 'External' && (
-        <p>
-          This is a computationally mapped potential isoform.{' '}
+        <section>
+          <p>
+            The sequence of this isoform can be found in the external entry
+            linked below. Isoforms of the same protein are often annotated in
+            two different entries if their sequences differ significantly.{' '}
+          </p>
           {/* TODO: this is hacky and temporary until we sort out
           external isoforms */}
           <Link
@@ -165,7 +169,7 @@ export const IsoformInfo: React.FC<{
           >
             View isoform
           </Link>
-        </p>
+        </section>
       )}
       <InfoList infoData={infoListData} />
     </Fragment>
