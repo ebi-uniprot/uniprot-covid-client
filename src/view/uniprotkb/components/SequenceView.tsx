@@ -34,7 +34,13 @@ export const SequenceInfo: React.FC<{
   isoformId: string;
   isoformSequence?: SequenceData;
   lastUpdateDate?: string | null;
-}> = ({ isoformId, isoformSequence, lastUpdateDate }): JSX.Element => {
+  displayLoadSequenceButton?: boolean;
+}> = ({
+  isoformId,
+  isoformSequence,
+  lastUpdateDate,
+  displayLoadSequenceButton = true,
+}) => {
   const [data, setData] = useState(null);
   const [isoformToFetch, setIsoformToFetch] = useState('');
 
@@ -52,7 +58,7 @@ export const SequenceInfo: React.FC<{
 
   const dataToDisplay = data || isoformSequence;
 
-  if (!dataToDisplay) {
+  if (!dataToDisplay && displayLoadSequenceButton) {
     return (
       <button
         type="button"
@@ -63,6 +69,11 @@ export const SequenceInfo: React.FC<{
       </button>
     );
   }
+
+  if (!dataToDisplay) {
+    return null;
+  }
+
   const infoData = [
     {
       title: 'Length',
@@ -274,7 +285,12 @@ export const IsoformView: React.FC<{
   if (isoforms) {
     isoformsNode = isoforms.map(isoform => {
       const isoformComponent = (
-        <SequenceInfo isoformId={isoform.isoformIds[0]} />
+        <SequenceInfo
+          isoformId={isoform.isoformIds[0]}
+          displayLoadSequenceButton={
+            isoform.isoformSequenceStatus !== 'External'
+          }
+        />
       );
       return (
         <Fragment key={isoform.isoformIds.join('')}>
