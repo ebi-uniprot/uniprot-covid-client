@@ -27,6 +27,7 @@ describe('Protein processing data converter', () => {
           location: {
             end: { modifier: 'EXACT', value: 8 },
             start: { modifier: 'EXACT', value: 2 },
+            sequence: 'sequence 1',
           },
           type: 'chain',
         },
