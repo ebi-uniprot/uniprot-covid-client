@@ -92,6 +92,7 @@ export const SequenceInfo: React.FC<{
           console.log('BLAST clicked');
         }}
         onAddToBasketClick={() => {
+          // eslint-disable-next-line no-console
           console.log('Add to basket clicked');
         }}
       />
