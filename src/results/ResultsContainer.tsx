@@ -29,6 +29,7 @@ import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 import { Facet } from '../types/responseTypes';
+import Message, { MessageLevel } from '../Message';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -340,6 +341,19 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
         <SideBarLayout
           title={
             <Fragment>
+              <Message
+                body={
+                  <Fragment>
+                    On 2nd April we will be giving a free online webinar about
+                    this platform and its data.{' '}
+                    <a href="//attendee.gototraining.com/r/1748036977112903681">
+                      Register for the webinar
+                    </a>
+                  </Fragment>
+                }
+                level={MessageLevel.warning}
+              />
+
               <PageIntro
                 title={`COVID-19 ${name}`}
                 links={links}

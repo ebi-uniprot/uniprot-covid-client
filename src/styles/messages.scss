@@ -1,0 +1,40 @@
+$warning: #f0c135;
+$failure: #d94d3d;
+$success: #bdd071;
+$info: #9ecfeb;
+
+@function getMessageBorder($level) {
+  @return 0.25rem solid $level;
+}
+
+.alert {
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+
+  &__content {
+    padding-left: 0.5rem;
+  }
+
+  &--warning {
+    .alert__content {
+      border-left: getMessageBorder($warning);
+    }
+  }
+  &--failure {
+    .alert__content {
+      border-left: getMessageBorder($failure);
+    }
+  }
+  &--success {
+    .alert__content {
+      border-left: getMessageBorder($success);
+    }
+  }
+  &--info {
+    .alert__content {
+      border-left: getMessageBorder($info);
+    }
+  }
+}
