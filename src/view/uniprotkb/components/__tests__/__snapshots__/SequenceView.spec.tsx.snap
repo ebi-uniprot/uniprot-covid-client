@@ -98,11 +98,12 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           class="no-bullet"
         >
           <li>
-            <a
-              href="/blast/accession/Isoform"
+            <button
+              class="button tertiary"
+              type="button"
             >
               BLAST
-            </a>
+            </button>
           </li>
           <li>
             <a
@@ -482,11 +483,12 @@ exports[`SequenceView component should render SequenceView 1`] = `
           class="no-bullet"
         >
           <li>
-            <a
-              href="/blast/accession/P05067"
+            <button
+              class="button tertiary"
+              type="button"
             >
               BLAST
-            </a>
+            </button>
           </li>
           <li>
             <a
