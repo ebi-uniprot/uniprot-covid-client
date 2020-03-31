@@ -22,6 +22,7 @@ const submitBlast = (sequence: string) => {
   const form = document.createElement('form');
   form.method = 'post';
   form.action = '//www.uniprot.org/blast/';
+  form.setAttribute('target', '_blank');
 
   const sequenceField = createHiddenField('blastQuery', sequence);
   form.appendChild(sequenceField);
