@@ -7,32 +7,47 @@ $info: #9ecfeb;
   @return 0.25rem solid $level;
 }
 
+@mixin SVGDefinition($level) {
+  svg {
+    path {
+      fill: $level;
+    }
+  }
+}
+
 .alert {
   -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
-
   &__content {
     padding-left: 0.5rem;
+    display: flex;
+    svg {
+      margin-right: 0.5rem;
+    }
   }
 
   &--warning {
+    @include SVGDefinition(($warning));
     .alert__content {
       border-left: getMessageBorder($warning);
     }
   }
   &--failure {
+    @include SVGDefinition(($failure));
     .alert__content {
       border-left: getMessageBorder($failure);
     }
   }
   &--success {
+    @include SVGDefinition(($success));
     .alert__content {
       border-left: getMessageBorder($success);
     }
   }
   &--info {
+    @include SVGDefinition(($info));
     .alert__content {
       border-left: getMessageBorder($info);
     }
