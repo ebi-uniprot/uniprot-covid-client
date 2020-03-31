@@ -56,7 +56,7 @@ const apiUrls = {
 
   entry: (accession: string) =>
     joinUrl(devPrefix, '/uniprot/api/uniprotkb/accession', accession),
-
+  sequenceFasta: (accession: string) => `${apiUrls.entry(accession)}.fasta`,
   entryDownload: (accession: string, format: FileFormat) =>
     format === FileFormat.fastaCanonicalIsoform
       ? `${apiUrls.search}?${queryString.stringify({
