@@ -15,6 +15,13 @@ $info: #9ecfeb;
   }
 }
 
+@mixin getWarningCSS($level) {
+  @include SVGDefinition(($warning));
+  .alert__content {
+    border-left: getMessageBorder($warning);
+  }
+}
+
 .alert {
   -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
@@ -29,27 +36,15 @@ $info: #9ecfeb;
   }
 
   &--warning {
-    @include SVGDefinition(($warning));
-    .alert__content {
-      border-left: getMessageBorder($warning);
-    }
+    @include getWarningCSS($warning);
   }
   &--failure {
-    @include SVGDefinition(($failure));
-    .alert__content {
-      border-left: getMessageBorder($failure);
-    }
+    @include getWarningCSS($failure);
   }
   &--success {
-    @include SVGDefinition(($success));
-    .alert__content {
-      border-left: getMessageBorder($success);
-    }
+    @include getWarningCSS($success);
   }
   &--info {
-    @include SVGDefinition(($info));
-    .alert__content {
-      border-left: getMessageBorder($info);
-    }
+    @include getWarningCSS($info);
   }
 }
