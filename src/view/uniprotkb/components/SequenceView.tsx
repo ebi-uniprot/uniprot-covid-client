@@ -88,6 +88,12 @@ export const SequenceInfo: React.FC<{
         sequence={dataToDisplay.value}
         accession={isoformId}
         downloadUrl={apiUrls.sequenceFasta(isoformId)}
+        onBlastClick={() => {
+          console.log('BLAST clicked');
+        }}
+        onAddToBasketClick={() => {
+          console.log('Add to basket clicked');
+        }}
       />
     </Fragment>
   );
