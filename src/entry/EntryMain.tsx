@@ -1,4 +1,5 @@
 import React, { Fragment, memo } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from 'franklin-sites';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
@@ -19,6 +20,18 @@ function arePropsEqual(prevProps: EntryMainProps, nextProps: EntryMainProps) {
 
 const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
+    <div className="feedback-link-wrapper">
+      <Link
+        to={{
+          pathname: '/contact',
+          state: {
+            accession: transformedData.primaryAccession,
+          },
+        }}
+      >
+        Feedback
+      </Link>
+    </div>
     <Card
       title={
         <UniProtTitle

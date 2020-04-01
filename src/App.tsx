@@ -24,6 +24,7 @@ const EntryPage = lazy(() => import('./pages/EntryPage'));
 // const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // export const queryBuilderPath = '/advancedSearch';
 
@@ -37,6 +38,7 @@ const App = () => (
           </Route>
           <Route path="/uniprotkb/:accession" render={() => <EntryPage />} />
           <Route path="/uniprotkb" render={() => <ResultsPage />} />
+          <Route path="/contact" render={() => <ContactPage />} />
           <Route
             path="/customise-table"
             render={() => (
