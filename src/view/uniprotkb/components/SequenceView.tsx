@@ -172,9 +172,9 @@ export const IsoformInfo: React.FC<{
       {isoformData.isoformSequenceStatus === 'External' && (
         <section>
           <p>
-            The sequence of this isoform can be found in the external entry
-            linked below. Isoforms of the same protein are often annotated in
-            two different entries if their sequences differ significantly.{' '}
+            The sequence of this isoform can be found in the external UniProtKB
+            entry linked below. Isoforms of the same protein are often annotated
+            in two different entries if their sequences differ significantly.{' '}
           </p>
           {/* TODO: this is hacky and temporary until we sort out
           external isoforms */}
