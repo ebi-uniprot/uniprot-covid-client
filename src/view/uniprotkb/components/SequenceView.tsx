@@ -88,13 +88,10 @@ export const SequenceInfo: React.FC<{
         sequence={dataToDisplay.value}
         accession={isoformId}
         downloadUrl={apiUrls.sequenceFasta(isoformId)}
-        onBlastClick={() => {
-          console.log('BLAST clicked');
-        }}
-        onAddToBasketClick={() => {
-          // eslint-disable-next-line no-console
-          console.log('Add to basket clicked');
-        }}
+        // These callbacks have been commented out as neither BLAST
+        // nor the basket have been implemented
+        // onBlastClick={() => {}}
+        // onAddToBasketClick={() => {}}
       />
     </Fragment>
   );
