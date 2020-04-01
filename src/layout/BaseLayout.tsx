@@ -3,7 +3,7 @@ import React from 'react';
 import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
 import './styles/BaseLayout.scss';
-import GDPR from '../GDPR';
+import GDPR from '../components/GDPR';
 
 type BaseLayoutProps = {
   children: JSX.Element;
