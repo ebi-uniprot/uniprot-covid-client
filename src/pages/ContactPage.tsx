@@ -31,48 +31,47 @@ const ContactPage: React.FC<Props> = ({
         <div className="contact-page-form">
           <h3>Contact</h3>
           <div className="contact-page-form__row">
-            <span>
+            <label htmlFor="name">
               Name
-            </span>
-            <input
-              id="name"
-              type="text"
-              name="name"
-            />
+              <input
+                id="name"
+                type="text"
+                name="name"
+              />
+            </label>
           </div>
           <div className="contact-page-form__row">
-            <span>
+            <label htmlFor="email">
               Email
-            </span>
-            <input
-              id="email"
-              type="text"
-              name="email"
-            />
+              <input
+                id="email"
+                type="text"
+                name="email"
+              />
+            </label>
           </div>
           <div className="contact-page-form__row">
-            <span>
+            <label htmlFor="subject">
               Subject
-            </span>
-            <input
-              id="subject"
-              type="text"
-              name="subject"
-              value={subject}
-              onChange={e => setSubject(e.target.value)}
-            />
+              <input
+                id="subject"
+                type="text"
+                name="subject"
+                value={subject}
+                onChange={e => setSubject(e.target.value)}
+              />
+            </label>
           </div>
           <div className="contact-page-form__row">
-            <span>
+            <label htmlFor="message">
               Message
-            </span>
-            <textarea
-              id="message"
-              name="message"
-            />
+              <textarea
+                id="message"
+                name="message"
+              />
+            </label>
           </div>
           <div className="contact-page-form__row">
-            <span />
             <input
               name="privacy_ok"
               type="checkbox"
@@ -85,11 +84,13 @@ const ContactPage: React.FC<Props> = ({
             <a href="https://www.uniprot.org/help/privacy">privacy notice</a>.
           </div>
           <div className="contact-page-form__row">
-            <span />
-            {agree
-              ? <button type="submit" className="button">Submit</button>
-              : <button type="submit" className="button disabled" disabled>Submit</button>
-            }
+            <button
+              type="submit"
+              className={`button ${!agree && 'disabled'}`}
+              disabled={!agree}
+            >
+              Submit
+            </button>
           </div>
         </div>
       </form>
