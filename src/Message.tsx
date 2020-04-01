@@ -9,7 +9,7 @@ export enum MessageLevel {
   info = 'info',
 }
 
-const iconSize = '1.125rem';
+const iconSize = '1.125em';
 
 const Message: FC<{ body: JSX.Element; level?: MessageLevel }> = ({
   body,
