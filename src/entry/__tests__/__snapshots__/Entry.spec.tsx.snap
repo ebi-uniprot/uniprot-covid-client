@@ -147,6 +147,11 @@ exports[`Entry should render main 1`] = `
             >
               Add a Publication
             </a>
+            <a
+              href="/contact"
+            >
+              Feedback
+            </a>
           </div>
         </section>
         <section
@@ -357,15 +362,6 @@ exports[`Entry should render main 1`] = `
         <section
           class="base-layout__content"
         >
-          <div
-            class="feedback-link-wrapper"
-          >
-            <a
-              href="/contact"
-            >
-              Feedback
-            </a>
-          </div>
           <div
             class="card"
           >
