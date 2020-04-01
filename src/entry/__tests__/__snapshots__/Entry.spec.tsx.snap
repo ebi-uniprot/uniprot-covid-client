@@ -358,6 +358,15 @@ exports[`Entry should render main 1`] = `
           class="base-layout__content"
         >
           <div
+            class="feedback-link-wrapper"
+          >
+            <a
+              href="/contact"
+            >
+              Feedback
+            </a>
+          </div>
+          <div
             class="card"
           >
             <section>
