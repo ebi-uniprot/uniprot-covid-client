@@ -8,19 +8,23 @@ type Props = {
   location: {
     state: {
       accession?: string;
-    }
-  }
+    };
+  };
 } & RouteComponentProps;
 
 const ContactPage: React.FC<Props> = ({
-  location: { state: { accession = '' } },
+  location: {
+    state: { accession = '' },
+  },
 }) => {
   const [subject, setSubject] = useState('');
   const [agree, setAgree] = useState(false);
 
   useEffect(() => {
     if (accession.length > 0) {
-      setSubject(`Covid-19 UniProtKB/Swiss-Prot ${accession} entry update request`);
+      setSubject(
+        `Covid-19 UniProtKB/Swiss-Prot ${accession} entry update request`
+      );
     }
   }, [accession]);
 
@@ -28,26 +32,19 @@ const ContactPage: React.FC<Props> = ({
     <BaseLayout>
       <form action="https://www.uniprot.org/feedback" method="POST">
         <input type="hidden" name="entry" value={accession} />
+        <input type="hidden" name="spam" value="COVID-19" />
         <div className="contact-page-form">
           <h3>Contact</h3>
           <div className="contact-page-form__row">
             <label htmlFor="name">
               Name
-              <input
-                id="name"
-                type="text"
-                name="name"
-              />
+              <input id="name" type="text" name="name" />
             </label>
           </div>
           <div className="contact-page-form__row">
             <label htmlFor="email">
               Email
-              <input
-                id="email"
-                type="text"
-                name="email"
-              />
+              <input id="email" type="text" name="email" />
             </label>
           </div>
           <div className="contact-page-form__row">
@@ -65,10 +62,7 @@ const ContactPage: React.FC<Props> = ({
           <div className="contact-page-form__row">
             <label htmlFor="message">
               Message
-              <textarea
-                id="message"
-                name="message"
-              />
+              <textarea id="message" name="message" />
             </label>
           </div>
           <div className="contact-page-form__row">
@@ -78,9 +72,8 @@ const ContactPage: React.FC<Props> = ({
               checked={agree}
               onChange={e => setAgree(e.target.checked)}
             />
-            &nbsp;
-            I agree to the processing of my data for the purposes described in this
-            &nbsp;
+            &nbsp; I agree to the processing of my data for the purposes
+            described in this &nbsp;
             <a href="https://www.uniprot.org/help/privacy">privacy notice</a>.
           </div>
           <div className="contact-page-form__row">
@@ -96,6 +89,6 @@ const ContactPage: React.FC<Props> = ({
       </form>
     </BaseLayout>
   );
-}
+};
 
 export default withRouter(ContactPage);
