@@ -33,6 +33,7 @@ const ContactPage: React.FC<Props> = ({
       <form action="https://www.uniprot.org/feedback" method="POST">
         <input type="hidden" name="entry" value={accession} />
         <input type="hidden" name="spam" value="COVID-19" />
+        <input type="hidden" name="referrer" value="COVID-19" />
         <div className="contact-page-form">
           <h3>Contact</h3>
           <div className="contact-page-form__row">
