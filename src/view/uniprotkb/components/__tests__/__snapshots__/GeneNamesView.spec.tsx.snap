@@ -3,7 +3,7 @@
 exports[`GeneNames should render gene_names 1`] = `
 <DocumentFragment>
   <div
-    class="info-list"
+    class="info-list "
   >
     <div
       class="info-list__item"

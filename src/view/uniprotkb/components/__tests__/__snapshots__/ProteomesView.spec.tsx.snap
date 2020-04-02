@@ -3,7 +3,7 @@
 exports[`ProteomesEntryView component should render 1`] = `
 <DocumentFragment>
   <div
-    class="info-list"
+    class="info-list "
   >
     <div
       class="info-list__item"

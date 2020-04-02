@@ -5,69 +5,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  undefined book volume:first page-last page(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -76,9 +43,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -86,69 +51,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  journal name undefined:undefined-undefined(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -157,9 +89,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -167,69 +97,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  journal name volume value:first page-last page(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -238,9 +135,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -248,69 +143,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  undefined undefined:undefined-undefined(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -319,9 +181,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -329,69 +189,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  undefined undefined:undefined-undefined(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -400,9 +227,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -410,69 +235,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  undefined undefined:undefined-undefined(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -481,9 +273,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
@@ -491,69 +281,36 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
   <section
     class="publication"
   >
-    <h4>
-      Leo book tittle
-    </h4>
-    <section
-      class="publication__authors"
-    >
-      <a
-        href="/"
-      >
-        author Leo
-      </a>
-    </section>
     <section
       class="publication__columns"
     >
       <section
         class="publication__columns__main"
-      />
+      >
+        <h5>
+          Leo book tittle
+        </h5>
+        <section
+          class="publication__authors"
+        >
+          <a
+            href="/"
+          >
+            author Leo
+          </a>
+        </section>
+      </section>
       <section
         class="publication__columns__side"
       >
         <section
           class="publication__columns__side__item"
         >
-          <svg
-            fill="none"
-            height="2rem"
-            viewBox="0 0 30 32"
-            width="1.875rem"
-          >
-            <path
-              d="M26.5 13.5h-8v8h8v-8z"
-              fill="#000"
-            />
-            <path
-              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
-              fill="#000"
-            />
-            <path
-              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.892 1.892 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
-              fill="#000"
-            />
-            <path
-              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.839 1.839 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
-              fill="#000"
-            />
-            <path
-              d="M22 5.5h5M3 13.5h9M3 9.5h7M3 5.5h5M18 9.5h9M3 17.5h9M3 21.5h9M3 25.5h9M18 25.5h9"
-              stroke="#000"
-              stroke-miterlimit="10"
-            />
-          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small>
-                <a
-                  href="//dx.doi.org/undefined"
-                >
-                  undefined undefined:undefined-undefined(date value)
-                </a>
-              </small>
+              <small />
             </li>
           </ul>
         </section>
@@ -562,9 +319,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          >
-            NaN
-          </section>
+          />
         </section>
       </section>
     </section>
