@@ -147,6 +147,11 @@ exports[`Entry should render main 1`] = `
             >
               Add a Publication
             </a>
+            <a
+              href="/contact"
+            >
+              Feedback
+            </a>
           </div>
         </section>
         <section
