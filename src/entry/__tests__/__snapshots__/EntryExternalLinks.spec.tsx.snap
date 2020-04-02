@@ -49,7 +49,7 @@ exports[`Entry - External Links view should render 1`] = `
             Enzyme and pathway databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -95,7 +95,7 @@ exports[`Entry - External Links view should render 1`] = `
             Family and domain databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -180,7 +180,7 @@ exports[`Entry - External Links view should render 1`] = `
             Genome annotation databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -248,7 +248,7 @@ exports[`Entry - External Links view should render 1`] = `
             3D structure databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"

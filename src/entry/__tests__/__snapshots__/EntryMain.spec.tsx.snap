@@ -36,7 +36,7 @@ exports[`Entry view should render 1`] = `
         class="card__content"
       >
         <div
-          class="info-list"
+          class="info-list "
         >
           <div
             class="info-list__item"
@@ -113,206 +113,270 @@ exports[`Entry view should render 1`] = `
             <div
               class="info-list__item__content"
             >
-              <div>
-                <strong>
-                  some Gene 
-                  <span
-                    class="evidence-tag svg-colour-unreviewed"
-                    data-testid="evidence-tag-trigger"
-                    role="button"
-                    tabindex="0"
-                  >
-                    <svg
-                      fill="none"
-                      height="12"
-                      viewBox="0 0 10 15"
-                      width="12"
-                    >
-                      <path
-                        clip-rule="evenodd"
-                        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-                        fill="#4E5A71"
-                        fill-rule="evenodd"
-                      />
-                    </svg>
-                    <span
-                      class="evidence-tag__label"
-                      title=""
-                    >
-                      1 automatic annotation
-                    </span>
-                  </span>
+              <div
+                class="info-list info-list--compact"
+              >
+                <div
+                  class="info-list__item"
+                >
                   <div
-                    class="evidence-tag-content "
-                    data-testid="evidence-tag-content"
+                    class="info-list__item__title"
                   >
-                    <div>
-                      <h5>
-                        Automatic assertion according to rules
-                      </h5>
-                      <a
-                        class="external-link"
-                        href="https://www.uniprot.org/unirule/PIRNR001360"
-                        target="_blank"
+                    <h5
+                      class="bold"
+                    >
+                      Name
+                    </h5>
+                  </div>
+                  <div
+                    class="info-list__item__content"
+                  >
+                    <strong>
+                      some Gene 
+                      <span
+                        class="evidence-tag svg-colour-unreviewed"
+                        data-testid="evidence-tag-trigger"
+                        role="button"
+                        tabindex="0"
                       >
-                        PIRNR001360
                         <svg
-                          viewBox="0 0 576 512"
-                          width="12.5"
+                          fill="none"
+                          height="12"
+                          viewBox="0 0 10 15"
+                          width="12"
                         >
                           <path
-                            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                            clip-rule="evenodd"
+                            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                            fill="#4E5A71"
+                            fill-rule="evenodd"
                           />
                         </svg>
-                      </a>
+                        <span
+                          class="evidence-tag__label"
+                          title=""
+                        >
+                          1 automatic annotation
+                        </span>
+                      </span>
+                      <div
+                        class="evidence-tag-content "
+                        data-testid="evidence-tag-content"
+                      >
+                        <div>
+                          <h5>
+                            Automatic assertion according to rules
+                          </h5>
+                          <a
+                            class="external-link"
+                            href="https://www.uniprot.org/unirule/PIRNR001360"
+                            target="_blank"
+                          >
+                            PIRNR001360
+                            <svg
+                              viewBox="0 0 576 512"
+                              width="12.5"
+                            >
+                              <path
+                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                              />
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                    </strong>
+                  </div>
+                </div>
+                <div
+                  class="info-list__item"
+                >
+                  <div
+                    class="info-list__item__title"
+                  >
+                    <h5
+                      class="bold"
+                    >
+                      Synonyms
+                    </h5>
+                  </div>
+                  <div
+                    class="info-list__item__content"
+                  >
+                    some Syn 
+                    <span
+                      class="evidence-tag svg-colour-unreviewed"
+                      data-testid="evidence-tag-trigger"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <svg
+                        fill="none"
+                        height="12"
+                        viewBox="0 0 10 15"
+                        width="12"
+                      >
+                        <path
+                          clip-rule="evenodd"
+                          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                          fill="#4E5A71"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        1 automatic annotation
+                      </span>
+                    </span>
+                    <div
+                      class="evidence-tag-content "
+                      data-testid="evidence-tag-content"
+                    >
+                      <div>
+                        <h5>
+                          Automatic assertion according to rules
+                        </h5>
+                        <a
+                          class="external-link"
+                          href="https://www.uniprot.org/unirule/PIRNR001361"
+                          target="_blank"
+                        >
+                          PIRNR001361
+                          <svg
+                            viewBox="0 0 576 512"
+                            width="12.5"
+                          >
+                            <path
+                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                            />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </strong>
-              </div>
-              <div>
-                some Syn 
-                <span
-                  class="evidence-tag svg-colour-unreviewed"
-                  data-testid="evidence-tag-trigger"
-                  role="button"
-                  tabindex="0"
-                >
-                  <svg
-                    fill="none"
-                    height="12"
-                    viewBox="0 0 10 15"
-                    width="12"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-                      fill="#4E5A71"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    class="evidence-tag__label"
-                    title=""
-                  >
-                    1 automatic annotation
-                  </span>
-                </span>
-                <div
-                  class="evidence-tag-content "
-                  data-testid="evidence-tag-content"
-                >
-                  <div>
-                    <h5>
-                      Automatic assertion according to rules
-                    </h5>
-                    <a
-                      class="external-link"
-                      href="https://www.uniprot.org/unirule/PIRNR001361"
-                      target="_blank"
-                    >
-                      PIRNR001361
-                      <svg
-                        viewBox="0 0 576 512"
-                        width="12.5"
-                      >
-                        <path
-                          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                        />
-                      </svg>
-                    </a>
-                  </div>
                 </div>
-              </div>
-              <div>
-                some orf 
-                <span
-                  class="evidence-tag svg-colour-reviewed"
-                  data-testid="evidence-tag-trigger"
-                  role="button"
-                  tabindex="0"
-                >
-                  <svg
-                    fill="none"
-                    height="12"
-                    viewBox="0 0 10 15"
-                    width="12"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-                      fill="#4E5A71"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    class="evidence-tag__label"
-                    title=""
-                  >
-                    1 publication
-                  </span>
-                </span>
                 <div
-                  class="evidence-tag-content "
-                  data-testid="evidence-tag-content"
+                  class="info-list__item"
                 >
-                  <div>
-                    <h5>
-                      Manual assertion based on experiment
+                  <div
+                    class="info-list__item__title"
+                  >
+                    <h5
+                      class="bold"
+                    >
+                      ORF names
                     </h5>
                   </div>
-                </div>
-              </div>
-              <div>
-                some locus 
-                <span
-                  class="evidence-tag svg-colour-unreviewed"
-                  data-testid="evidence-tag-trigger"
-                  role="button"
-                  tabindex="0"
-                >
-                  <svg
-                    fill="none"
-                    height="12"
-                    viewBox="0 0 10 15"
-                    width="12"
+                  <div
+                    class="info-list__item__content"
                   >
-                    <path
-                      clip-rule="evenodd"
-                      d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-                      fill="#4E5A71"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                  <span
-                    class="evidence-tag__label"
-                    title=""
-                  >
-                    1 automatic annotation
-                  </span>
-                </span>
-                <div
-                  class="evidence-tag-content "
-                  data-testid="evidence-tag-content"
-                >
-                  <div>
-                    <h5>
-                      Automatic assertion according to rules
-                    </h5>
-                    <a
-                      class="external-link"
-                      href="https://www.uniprot.org/unirule/PIRNR001362"
-                      target="_blank"
+                    some orf 
+                    <span
+                      class="evidence-tag svg-colour-reviewed"
+                      data-testid="evidence-tag-trigger"
+                      role="button"
+                      tabindex="0"
                     >
-                      PIRNR001362
                       <svg
-                        viewBox="0 0 576 512"
-                        width="12.5"
+                        fill="none"
+                        height="12"
+                        viewBox="0 0 10 15"
+                        width="12"
                       >
                         <path
-                          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                          clip-rule="evenodd"
+                          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                          fill="#4E5A71"
+                          fill-rule="evenodd"
                         />
                       </svg>
-                    </a>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        1 publication
+                      </span>
+                    </span>
+                    <div
+                      class="evidence-tag-content "
+                      data-testid="evidence-tag-content"
+                    >
+                      <div>
+                        <h5>
+                          Manual assertion based on experiment
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="info-list__item"
+                >
+                  <div
+                    class="info-list__item__title"
+                  >
+                    <h5
+                      class="bold"
+                    >
+                      Ordered locus names
+                    </h5>
+                  </div>
+                  <div
+                    class="info-list__item__content"
+                  >
+                    some locus 
+                    <span
+                      class="evidence-tag svg-colour-unreviewed"
+                      data-testid="evidence-tag-trigger"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <svg
+                        fill="none"
+                        height="12"
+                        viewBox="0 0 10 15"
+                        width="12"
+                      >
+                        <path
+                          clip-rule="evenodd"
+                          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
+                          fill="#4E5A71"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                      <span
+                        class="evidence-tag__label"
+                        title=""
+                      >
+                        1 automatic annotation
+                      </span>
+                    </span>
+                    <div
+                      class="evidence-tag-content "
+                      data-testid="evidence-tag-content"
+                    >
+                      <div>
+                        <h5>
+                          Automatic assertion according to rules
+                        </h5>
+                        <a
+                          class="external-link"
+                          href="https://www.uniprot.org/unirule/PIRNR001362"
+                          target="_blank"
+                        >
+                          PIRNR001362
+                          <svg
+                            viewBox="0 0 576 512"
+                            width="12.5"
+                          >
+                            <path
+                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1087,7 +1151,7 @@ exports[`Entry view should render 1`] = `
             Enzyme and pathway databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -1156,7 +1220,7 @@ exports[`Entry view should render 1`] = `
             Protein names
           </h3>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -1702,7 +1766,7 @@ exports[`Entry view should render 1`] = `
             Gene names
           </h3>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -1970,7 +2034,7 @@ exports[`Entry view should render 1`] = `
             Organism names
           </h3>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -2408,7 +2472,7 @@ exports[`Entry view should render 1`] = `
             </div>
           </span>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -2647,7 +2711,7 @@ exports[`Entry view should render 1`] = `
             3D structure databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -2755,7 +2819,7 @@ exports[`Entry view should render 1`] = `
             Keywords
           </h3>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -2784,7 +2848,7 @@ exports[`Entry view should render 1`] = `
             Family and domain databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
@@ -2889,7 +2953,7 @@ exports[`Entry view should render 1`] = `
           class="card__content"
         >
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -2931,7 +2995,7 @@ exports[`Entry view should render 1`] = `
             isoID1
           </h3>
           <div
-            class="info-list"
+            class="info-list "
           >
             <div
               class="info-list__item"
@@ -3256,7 +3320,7 @@ exports[`Entry view should render 1`] = `
             Genome annotation databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"

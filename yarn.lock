@@ -4760,10 +4760,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.40:
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.40.tgz#97f464e4d6816ed88dea5282ef195184dbedf427"
-  integrity sha512-zUHunn2hAedLlI9URMEDdwdvz7ufn3/EbjXXnf18LR+GC5faReJqYe5GFaLMb+W7HeeerSchDPta3kAP0R2dgQ==
+franklin-sites@0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.41.tgz#67b4397d63ce8a17473e730bd02b5eb87b236ed4"
+  integrity sha512-ZmVHAPyHsvOP6sR9ual46Ysxr5dm8GcDjZeM/och00vFhbbSiJILuxzTlDg5po+BCC+pLQyMg5uQbxn4PZ8cHA==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"

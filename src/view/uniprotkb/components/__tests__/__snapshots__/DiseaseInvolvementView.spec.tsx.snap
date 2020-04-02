@@ -12,7 +12,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
     class="text-block"
   />
   <div
-    class="info-list"
+    class="info-list "
   >
     <div
       class="info-list__item"
