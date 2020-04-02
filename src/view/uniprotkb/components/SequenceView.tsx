@@ -85,7 +85,15 @@ export const SequenceInfo: React.FC<{
   return (
     <Fragment>
       {dataToDisplay && <InfoList infoData={infoData} />}
-      <Sequence sequence={dataToDisplay.value} accession={isoformId} />
+      <Sequence
+        sequence={dataToDisplay.value}
+        accession={isoformId}
+        downloadUrl={apiUrls.sequenceFasta(isoformId)}
+        // These callbacks have been commented out as neither BLAST
+        // nor the basket have been implemented
+        // onBlastClick={() => {}}
+        // onAddToBasketClick={() => {}}
+      />
     </Fragment>
   );
 };

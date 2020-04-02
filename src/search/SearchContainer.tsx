@@ -53,6 +53,14 @@ export class Search extends Component<SearchProps, SearchContainerState> {
         onSubmit={this.handleSubmitClick}
         onChange={this.handleQueryStringChange}
         searchTerm={queryString}
+        namespaces={[
+          'UniProtKB - the UniProt knowledgebase',
+          'UniRef',
+          'UniParc',
+          'Proteomes',
+          'Publications',
+          'Keywords',
+        ]}
       />
     );
     return <Fragment>{search}</Fragment>;
