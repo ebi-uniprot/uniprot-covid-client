@@ -19,7 +19,14 @@ const StructureSection: FC<{
   primaryAccession: string;
   sequence: string;
   crc64?: string;
-}> = ({ data, primaryAccession, sequence, crc64 }): JSX.Element | null => {
+  taxonId?: number;
+}> = ({
+  data,
+  primaryAccession,
+  sequence,
+  crc64,
+  taxonId,
+}): JSX.Element | null => {
   if (!hasContent(data)) {
     return null;
   }
@@ -75,6 +82,7 @@ const StructureSection: FC<{
           )}
           primaryAccession={primaryAccession}
           crc64={crc64}
+          taxonId={taxonId}
         />
       );
     }

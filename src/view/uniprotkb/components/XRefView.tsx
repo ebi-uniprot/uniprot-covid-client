@@ -92,6 +92,7 @@ type XRefProps = {
   xref: Xref;
   primaryAccession?: string;
   crc64?: string;
+  taxonId?: number;
 };
 
 const EMBLXref: FC<{
@@ -154,11 +155,25 @@ const EMBLXref: FC<{
   );
 };
 
+// This exists purely for the Covid-19 portal so that the implicit
+// PDBe-KB link points at the their specific covid-19 data
+const PDBeKBCovid19XRef: FC<{
+  primaryAccession: string;
+}> = ({ primaryAccession }) => (
+  <ExternalLink
+    url={`https://www.ebi.ac.uk/pdbe/pdbe-kb/covid19/${primaryAccession}`}
+  >
+    View all available PDBe data, including observed ligand binding sites and
+    protein-protein interaction residues
+  </ExternalLink>
+);
+
 export const XRef: FC<XRefProps> = ({
   database,
   xref,
   primaryAccession,
   crc64,
+  taxonId,
 }): JSX.Element | null => {
   const databaseInfo = databaseToDatabaseInfo[database];
   const { properties, isoformId, id, database: databaseType } = xref;
@@ -207,6 +222,13 @@ export const XRef: FC<XRefProps> = ({
       />
     );
   }
+
+  // This is hard-coded to show within the Covid-19 portal as
+  // PDBe have a special location if the entry is sars-cov-2
+  if (database === 'PDBe-KB' && taxonId === 2697049) {
+    return <PDBeKBCovid19XRef primaryAccession={primaryAccession} />;
+  }
+
   let text;
   if (implicit) {
     text =
@@ -231,10 +253,12 @@ export const DatabaseList: FC<{
   xrefsGoupedByDatabase: XrefsGoupedByDatabase;
   primaryAccession: string;
   crc64?: string;
+  taxonId?: number;
 }> = ({
   xrefsGoupedByDatabase: { database, xrefs },
   primaryAccession,
   crc64,
+  taxonId,
 }) => {
   // This step is needed as some databases (eg InterPro) have an additional link:
   // "View protein in InterPro" at the top of the xref links.
@@ -261,6 +285,7 @@ export const DatabaseList: FC<{
         xref={xref}
         primaryAccession={primaryAccession}
         crc64={crc64}
+        taxonId={taxonId}
       />
     ),
   }));
@@ -275,12 +300,14 @@ type StructureXRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
   primaryAccession: string;
   crc64?: string;
+  taxonId?: number;
 };
 
 const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
+  taxonId,
 }): JSX.Element => {
   const { PDBDatabase, otherStructureDatabases } = partitionStructureDatabases(
     databases
@@ -297,6 +324,7 @@ const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> 
           databases={otherStructureDatabases}
           primaryAccession={primaryAccession}
           crc64={crc64}
+          taxonId={taxonId}
         />
       )}
     </Fragment>
@@ -307,12 +335,14 @@ type XRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
   primaryAccession: string;
   crc64?: string;
+  taxonId?: number;
 };
 
 const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
   databases,
   primaryAccession,
   crc64,
+  taxonId,
 }): JSX.Element => {
   const infoData = sortBy(databases, ({ database }) => [
     idx(databaseToDatabaseInfo, o => o[database].implicit),
@@ -329,6 +359,7 @@ const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
           xrefsGoupedByDatabase={database}
           primaryAccession={primaryAccession}
           crc64={crc64}
+          taxonId={taxonId}
         />
       ),
     };
@@ -340,12 +371,14 @@ type XRefViewProps = {
   xrefs: XrefUIModel[];
   primaryAccession: string;
   crc64?: string;
+  taxonId?: number;
 };
 
 const XRefView: FC<XRefViewProps> = ({
   xrefs,
   primaryAccession,
   crc64,
+  taxonId,
 }): JSX.Element | null => {
   if (!xrefs) {
     return null;
@@ -358,12 +391,14 @@ const XRefView: FC<XRefViewProps> = ({
             databases={databases}
             primaryAccession={primaryAccession}
             crc64={crc64}
+            taxonId={taxonId}
           />
         ) : (
           <XRefsGroupedByCategory
             databases={databases}
             primaryAccession={primaryAccession}
             crc64={crc64}
+            taxonId={taxonId}
           />
         );
       let title;

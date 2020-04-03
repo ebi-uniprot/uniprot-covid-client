@@ -102,6 +102,12 @@ const UniProtKBEntryConfig: {
         crc64={
           idx(data, o => o[EntrySection.Sequence].sequence.crc64) || undefined
         }
+        taxonId={
+          idx(
+            data,
+            o => o[EntrySection.NamesAndTaxonomy].organismData.taxonId
+          ) || undefined
+        }
       />
     ),
   },
