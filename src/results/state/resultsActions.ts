@@ -29,13 +29,15 @@ export const receiveBatchOfResults = (
   url: string,
   data: Response['data'],
   nextUrl: string | undefined,
-  totalNumberResults: string
+  totalNumberResults: string,
+  releaseDate: string
 ) =>
   action(RECEIVE_BATCH_OF_RESULTS, {
     url,
     data,
     nextUrl,
     totalNumberResults,
+    releaseDate,
     receivedAt: Date.now(),
   });
 export const requestBatchOfResults = (url: string) =>
@@ -48,13 +50,16 @@ export const fetchBatchOfResults = (url: string) => async (
 ) => {
   dispatch(requestBatchOfResults(url));
   fetchData(url).then((response: Response) => {
-    const nextUrl = getNextUrlFromResponse(idx(response, o => o.headers.link));
+    const nextUrl = getNextUrlFromResponse(
+      idx(response, (o) => o.headers.link)
+    );
     dispatch(
       receiveBatchOfResults(
         url,
         response.data,
         nextUrl,
-        response.headers['x-totalrecords']
+        response.headers['x-totalrecords'],
+        response.headers['x-release']
       )
     );
   });
@@ -117,7 +122,7 @@ export const receiveFields = (data: ReceivedFieldData) =>
 
 export const fetchFields = () => async (dispatch: Dispatch) => {
   dispatch(requestFields());
-  return fetchData(apiUrls.resultsFields).then(response =>
+  return fetchData(apiUrls.resultsFields).then((response) =>
     dispatch(receiveFields(response.data))
   );
 };

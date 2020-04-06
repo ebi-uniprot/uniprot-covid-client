@@ -29,7 +29,6 @@ import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 import { Facet } from '../types/responseTypes';
-import Message, { MessageLevel } from '../Message';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -45,6 +44,7 @@ type ResultsProps = {
   isFetching: boolean;
   nextUrl: string;
   totalNumberResults: number;
+  releaseDate: string;
   viewMode: ViewMode;
 } & RouteComponentProps;
 
@@ -141,7 +141,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
   };
 
   facetsAsArray = (facetString: string): SelectedFacet[] => {
-    return facetString.split(',').map(stringItem => {
+    return facetString.split(',').map((stringItem) => {
       const [name, value] = stringItem.split(':');
       return {
         name,
@@ -183,7 +183,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     } = this.getURLParams(queryParamFromUrl);
 
     const index = selectedFacets.findIndex(
-      selectedFacet =>
+      (selectedFacet) =>
         selectedFacet.name === facetName && selectedFacet.value === facetValue
     );
 
@@ -269,6 +269,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
       namespace,
       nextUrl,
       totalNumberResults,
+      releaseDate,
       viewMode,
       tableColumns,
       dispatchSwitchViewMode,
@@ -283,6 +284,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     if (isFetching && !results.length) {
       return <Loader />;
     }
+
     const { name, links, info } = infoMappings[namespace];
 
     const actionButtons = (
@@ -341,19 +343,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
         <SideBarLayout
           title={
             <Fragment>
-              <Message
-                body={
-                  <Fragment>
-                    On 2nd April we will be giving a free online webinar about
-                    this platform and its data.{' '}
-                    <a href="//attendee.gototraining.com/r/1748036977112903681">
-                      Register for the webinar
-                    </a>
-                  </Fragment>
-                }
-                level={MessageLevel.warning}
-              />
-
               <PageIntro
                 title={`COVID-19 ${name}`}
                 links={links}
@@ -361,6 +350,7 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
                 showContent
               >
                 {info}
+                <strong>Latest update</strong>: {releaseDate}
               </PageIntro>
             </Fragment>
           }
@@ -405,6 +395,7 @@ const mapStateToProps = (state: RootState) => {
     isFetching: state.results.results.isFetching,
     nextUrl: state.results.nextUrl,
     totalNumberResults: state.results.totalNumberResults,
+    releaseDate: state.results.releaseDate,
     viewMode: state.results.viewMode,
   };
 };
@@ -417,7 +408,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       dispatchResetSearchInput: () => searchActions.resetSearchInput(),
       dispatchClearResults: () => resultsActions.clearResults(),
       dispatchSwitchViewMode: () => resultsActions.switchViewMode(),
-      dispatchUpdateQueryString: queryString =>
+      dispatchUpdateQueryString: (queryString) =>
         searchActions.updateQueryString(queryString),
     },
     dispatch
