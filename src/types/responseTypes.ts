@@ -12,6 +12,7 @@ type Response = {
   };
   headers: {
     ['x-totalrecords']: string;
+    ['x-release']: string;
     link: string;
   };
 };

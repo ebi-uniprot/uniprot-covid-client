@@ -18,6 +18,7 @@ export type ResultsState = {
     isFetched: { [url: string]: boolean };
   };
   totalNumberResults: number;
+  releaseDate: string;
   viewMode: ViewMode;
   fields: {
     data: FieldData;
@@ -44,6 +45,7 @@ const resultsInitialState = {
   facets: [],
   nextUrl: '',
   totalNumberResults: 0,
+  releaseDate: '',
   viewMode: ViewMode.CARD,
   fields: {
     data: {

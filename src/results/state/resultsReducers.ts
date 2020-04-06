@@ -22,6 +22,7 @@ const resultsReducers = (
         facets: action.payload.data.facets,
         lastUpdated: action.payload.receivedAt,
         totalNumberResults: parseInt(action.payload.totalNumberResults, 10),
+        releaseDate: action.payload.releaseDate,
         results: {
           data: [...state.results.data, ...action.payload.data.results],
           isFetching: false,
