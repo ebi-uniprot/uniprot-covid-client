@@ -11,7 +11,7 @@ const useDataApi = (url: string) => {
         const result = await fetchData(url);
         setData(result.data);
       } catch (error) {
-        if (error.response.status === '404') console.error(error);
+        if (error.response.status !== '404') console.error(error);
         setData(null);
       }
     };
