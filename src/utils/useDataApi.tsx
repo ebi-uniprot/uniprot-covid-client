@@ -7,8 +7,13 @@ const useDataApi = (url: string) => {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await fetchData(url);
-      setData(result.data);
+      try {
+        const result = await fetchData(url);
+        setData(result.data);
+      } catch (error) {
+        if (error.response.status !== '404') console.error(error);
+        setData(null);
+      }
     };
     getData();
   }, [url]);
