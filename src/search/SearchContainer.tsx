@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
+import * as messageActions from '../messages/state/messagesActions';
 
 import './styles/SearchContainer.scss';
 
@@ -47,7 +48,7 @@ export class Search extends Component<SearchProps, SearchContainerState> {
   }
 
   render() {
-    const { queryString } = this.state;
+    const { queryString, addMessage } = this.state;
     const search = (
       <MainSearch
         onSubmit={this.handleSubmitClick}
@@ -63,7 +64,24 @@ export class Search extends Component<SearchProps, SearchContainerState> {
         ]}
       />
     );
-    return <Fragment>{search}</Fragment>;
+
+    return (
+      <Fragment>
+        <section>
+          <button
+            onClick={() =>
+              addMessage({
+                content: 'hi',
+                level: 'level',
+              })
+            }
+          >
+            Create message
+          </button>
+        </section>
+        {search}
+      </Fragment>
+    );
   }
 }
 
@@ -76,6 +94,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
+      addMessage: message => messageActions.addMessage(message),
     },
     dispatch
   );
