@@ -1,12 +1,10 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
-import * as messageActions from '../messages/state/messagesActions';
-
 import './styles/SearchContainer.scss';
 
 type SearchProps = {
@@ -48,8 +46,8 @@ export class Search extends Component<SearchProps, SearchContainerState> {
   }
 
   render() {
-    const { queryString, addMessage } = this.state;
-    const search = (
+    const { queryString } = this.state;
+    return (
       <MainSearch
         onSubmit={this.handleSubmitClick}
         onChange={this.handleQueryStringChange}
@@ -64,24 +62,6 @@ export class Search extends Component<SearchProps, SearchContainerState> {
         ]}
       />
     );
-
-    return (
-      <Fragment>
-        <section>
-          <button
-            onClick={() =>
-              addMessage({
-                content: 'hi',
-                level: 'level',
-              })
-            }
-          >
-            Create message
-          </button>
-        </section>
-        {search}
-      </Fragment>
-    );
   }
 }
 
@@ -94,7 +74,6 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     {
       dispatchUpdateQueryString: queryString =>
         searchActions.updateQueryString(queryString),
-      addMessage: message => messageActions.addMessage(message),
     },
     dispatch
   );

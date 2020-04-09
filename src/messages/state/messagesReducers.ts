@@ -10,7 +10,11 @@ const messagesReducers = (
 ) => {
   switch (action.type) {
     case messagesActions.ADD_MESSAGE:
-      if (state.deleted[action.payload.id]) {
+      if (
+        state.deleted[action.payload.id] ||
+        (action.payload.dateActive && action.payload.dateActive > Date.now()) ||
+        (action.payload.dateExpired && action.payload.dateExpired < Date.now())
+      ) {
         return state;
       }
       return {
