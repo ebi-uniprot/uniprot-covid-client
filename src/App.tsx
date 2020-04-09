@@ -20,6 +20,9 @@ const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
+const NoResultsPage = lazy(() => import('./pages/errors/NoResultsPage'));
+const NotFoundPage = lazy(() => import('./pages/errors/NotFoundPage'));
+const ObsoleteEntryPage = lazy(() => import('./pages/errors/ObsoleteEntryPage'));
 
 export const queryBuilderPath = '/advancedSearch';
 
@@ -44,6 +47,30 @@ const App = () => (
             render={() => (
               <BaseLayout>
                 <DownloadPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/no-results"
+            render={() => (
+              <BaseLayout>
+                <NoResultsPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/page-not-found"
+            render={() => (
+              <BaseLayout>
+                <NotFoundPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/obsolete-entry"
+            render={() => (
+              <BaseLayout>
+                <ObsoleteEntryPage />
               </BaseLayout>
             )}
           />
