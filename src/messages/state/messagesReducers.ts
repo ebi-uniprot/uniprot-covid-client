@@ -10,19 +10,25 @@ const messagesReducers = (
 ) => {
   switch (action.type) {
     case messagesActions.ADD_MESSAGE:
+      if (state.deleted[action.payload.id]) {
+        return state;
+      }
       return {
         ...state,
-        messages: [...state.messages, action.payload],
+        active: [...state.active, action.payload],
       };
     case messagesActions.DELETE_MESSAGE:
       return {
         ...state,
-        messages: state.messages.filter(({ id }) => id !== action.payload.id),
-        dismissed: { ...state.dismissed, [action.payload.id]: true },
+        active: state.active.filter(({ id }) => id !== action.payload.id),
+        deleted: {
+          ...state.deleted,
+          [action.payload.id]: true,
+        },
       };
     default:
       return state;
   }
 };
 
-export default entryReducers;
+export default messagesReducers;
