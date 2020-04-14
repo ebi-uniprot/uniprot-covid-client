@@ -42,7 +42,6 @@ const reducer = (state: State, action: Action): State => {
     case ActionType.ERROR:
       return {
         loading: false,
-        data: null,
         status: action.error.response && action.error.response.status,
         statusText: action.error.response && action.error.response.statusText,
         headers: action.error.response && action.error.response.headers,
@@ -51,7 +50,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-const useDataApi = (url: string): State => {
+const useDataApi = (url?: string): State => {
   const [state, dispatch] = useReducer(reducer, { loading: !!url });
 
   useEffect(() => {
