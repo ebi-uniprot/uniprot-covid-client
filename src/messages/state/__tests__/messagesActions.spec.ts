@@ -3,6 +3,7 @@ import {
   MessageLevel,
   MessageFormat,
   MessageType,
+  MessageTag,
 } from '../../types/messagesTypes';
 
 describe('messages actions', () => {
@@ -14,7 +15,7 @@ describe('messages actions', () => {
       level: MessageLevel.SUCCESS,
       dateActive: Date.now(),
       dateExpired: Date.now(),
-      tag: 'blast-job',
+      tag: MessageTag.BLAST_JOB,
     };
     const expectedAction = {
       type: actions.ADD_MESSAGE,

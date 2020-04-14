@@ -10,6 +10,11 @@ export enum MessageFormat {
   IN_PAGE = 'IN_PAGE', // eg full width banner at the top of the page
 }
 
+export enum MessageTag {
+  BLAST_JOB = 'BLAST_JOB',
+  DOWNTIME = 'DOWNTIME',
+}
+
 export type MessageType = {
   id: string;
   content: string | JSX.Element;
@@ -17,5 +22,5 @@ export type MessageType = {
   level: MessageLevel;
   dateActive?: number;
   dateExpired?: number;
-  tag?: string;
+  tag?: MessageTag;
 };
