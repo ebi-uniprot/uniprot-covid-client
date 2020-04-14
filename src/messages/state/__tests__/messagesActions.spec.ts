@@ -14,6 +14,7 @@ describe('messages actions', () => {
       level: MessageLevel.SUCCESS,
       dateActive: Date.now(),
       dateExpired: Date.now(),
+      tag: 'blast-job',
     };
     const expectedAction = {
       type: actions.ADD_MESSAGE,

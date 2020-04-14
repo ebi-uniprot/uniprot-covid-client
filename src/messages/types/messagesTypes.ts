@@ -17,4 +17,5 @@ export type MessageType = {
   level: MessageLevel;
   dateActive?: number;
   dateExpired?: number;
+  tag?: string;
 };
