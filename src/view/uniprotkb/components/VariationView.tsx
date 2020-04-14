@@ -5,9 +5,10 @@ import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaVariation from 'protvista-variation';
 import ProtvistaVariationAdapter from 'protvista-variation-adapter';
 import ProtvistaFilter from 'protvista-filter';
+import { Loader } from 'franklin-sites';
 import { html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
-import useDataApi from '../../../utils/useDataApi';
+import useDataApi from '../../../hooks/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
@@ -103,10 +104,7 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         const formatedDescription = formatVariantDescription(d.description);
         return formatedDescription
           ? formatedDescription.map(
-              descriptionLine =>
-                html`
-                  <p>${descriptionLine}</p>
-                `
+              (descriptionLine) => html` <p>${descriptionLine}</p> `
             )
           : '';
       },
@@ -128,21 +126,21 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         if (!d.association) {
           return '';
         }
-        return d.association.map(association => {
+        return d.association.map((association) => {
           return html`
             <p>
               ${association.name}
               ${association.evidences &&
-                UniProtProtvistaEvidenceTag(
-                  association.evidences.map(evidence => {
-                    return ({
-                      evidenceCode: evidence.code,
-                      source: evidence.source.name,
-                      id: evidence.source.id,
-                    } as unknown) as Evidence;
-                  }),
-                  evidenceTagCallback
-                )}
+              UniProtProtvistaEvidenceTag(
+                association.evidences.map((evidence) => {
+                  return ({
+                    evidenceCode: evidence.code,
+                    source: evidence.source.name,
+                    id: evidence.source.id,
+                  } as unknown) as Evidence;
+                }),
+                evidenceTagCallback
+              )}
             </p>
           `;
         });
@@ -156,10 +154,12 @@ const VariationView: FC<{
   title?: string;
   hasTable?: boolean;
 }> = ({ primaryAccession, title, hasTable = true }) => {
-  const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
+  const { loading, data, error, status } = useDataApi(
+    joinUrl(apiUrls.variation, primaryAccession)
+  );
 
   const setTrackData = useCallback(
-    node => {
+    (node) => {
       if (node !== null && data.features) {
         // eslint-disable-next-line no-param-reassign
         node.data = data;
@@ -170,7 +170,14 @@ const VariationView: FC<{
     [data]
   );
 
-  if (!data.sequence || data.features.length <= 0) {
+  if (loading) return <Loader />;
+
+  if (error && status !== 404) {
+    // TODO: use in-page error message
+    return <div>An error happened</div>;
+  }
+
+  if (status === 404 || !data.sequence || data.features.length <= 0) {
     return null;
   }
 

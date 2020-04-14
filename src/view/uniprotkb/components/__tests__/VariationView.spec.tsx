@@ -11,6 +11,7 @@ afterEach(cleanup);
 describe('VariationView component', () => {
   test('it renders without crashing', async () => {
     axios.get.mockResolvedValue(resp);
+    axios.CancelToken.source.mockImplementation(() => ({ cancel: () => {} }));
     await act(async () => {
       const { asFragment } = render(
         <VariationView primaryAccession="P05067" />
