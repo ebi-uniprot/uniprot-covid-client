@@ -1,6 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VariationView component it renders without crashing 1`] = `
+exports[`VariationView component renders on data 1`] = `
+<DocumentFragment>
+  <div>
+    <h3>
+      some title
+    </h3>
+    <protvista-manager
+      attributes="highlight displaystart displayend activefilters filters"
+    >
+      <div
+        class="variation-view"
+      >
+        <protvista-navigation
+          length="7"
+        />
+        <protvista-sequence
+          height="20"
+          length="7"
+          sequence="ABCDEFG"
+        />
+        <protvista-filter />
+        <protvista-variation
+          length="7"
+        >
+          <protvista-variation-adapter />
+        </protvista-variation>
+      </div>
+      <protvista-datatable />
+      <div
+        class="evidence-tag-content false"
+      />
+    </protvista-manager>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`VariationView component renders on error 1`] = `
+<DocumentFragment>
+  <div>
+    An error happened
+  </div>
+</DocumentFragment>
+`;
+
+exports[`VariationView component renders on loading 1`] = `
 <DocumentFragment>
   <div
     class="loader-container"
@@ -56,3 +100,5 @@ exports[`VariationView component it renders without crashing 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`VariationView component renders on no data 1`] = `<DocumentFragment />`;
