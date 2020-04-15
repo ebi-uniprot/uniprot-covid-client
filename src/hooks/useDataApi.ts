@@ -65,28 +65,22 @@ const useDataApi = (url?: string): State => {
 
     // variables to handle cancellation
     const source = axios.CancelToken.source();
-    let didCancel = false;
 
     // actual request
     fetchData(url, undefined, source.token).then(
       // handle ok
-      (response: AxiosResponse) => {
-        if (didCancel) return;
-        dispatch({ type: ActionType.SUCCESS, response });
-      },
+      (response: AxiosResponse) =>
+        dispatch({ type: ActionType.SUCCESS, response }),
       // catch error
       (error: AxiosError) => {
-        if (didCancel) return;
+        if (axios.isCancel(error)) return;
         dispatch({ type: ActionType.ERROR, error });
       }
     );
 
     // handle unmounting of the hook
     // eslint-disable-next-line consistent-return
-    return () => {
-      source.cancel();
-      didCancel = true;
-    };
+    return () => source.cancel();
   }, [url]);
 
   return state;
