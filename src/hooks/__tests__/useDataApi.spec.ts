@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import useDataApi from '../useDataApi';
 
 const url = '/some/path';
-const url2 = '/some/other/path';
+// const url2 = '/some/other/path';
 let mock;
 
 beforeAll(() => {
@@ -83,57 +83,57 @@ describe('useDataApi hook', () => {
     // error when we cancel before getting data
   });
 
-  test('change of URL', async () => {
-    mock.onGet(url).reply(200, 'some data');
-    mock.onGet(url2).reply(200, 'some other data');
-    const { result, waitForNextUpdate, rerender } = renderHook(
-      (props) => useDataApi(props.url),
-      { initialProps: { url } }
-    );
+  // test('change of URL', async () => {
+  //   mock.onGet(url).reply(200, 'some data');
+  //   mock.onGet(url2).reply(200, 'some other data');
+  //   const { result, waitForNextUpdate, rerender } = renderHook(
+  //     (props) => useDataApi(props.url),
+  //     { initialProps: { url } }
+  //   );
 
-    expect(result.current).toEqual({ loading: true });
+  //   expect(result.current).toEqual({ loading: true });
 
-    await waitForNextUpdate();
+  //   await waitForNextUpdate();
 
-    expect(result.current).toEqual({
-      loading: false,
-      data: 'some data',
-      status: 200,
-    });
+  //   expect(result.current).toEqual({
+  //     loading: false,
+  //     data: 'some data',
+  //     status: 200,
+  //   });
 
-    rerender({ url: url2 });
+  //   rerender({ url: url2 });
 
-    expect(result.current).toEqual({ loading: true });
+  //   expect(result.current).toEqual({ loading: true });
 
-    await waitForNextUpdate();
+  //   await waitForNextUpdate();
 
-    expect(result.current).toEqual({
-      loading: false,
-      data: 'some other data',
-      status: 200,
-    });
-  });
+  //   expect(result.current).toEqual({
+  //     loading: false,
+  //     data: 'some other data',
+  //     status: 200,
+  //   });
+  // });
 
-  test('change of URL without waiting', async () => {
-    mock.onGet(url).reply(200, 'some data');
-    mock.onGet(url2).reply(200, 'some other data');
-    const { result, waitForNextUpdate, rerender } = renderHook(
-      (props) => useDataApi(props.url),
-      { initialProps: { url } }
-    );
+  // test('change of URL without waiting', async () => {
+  //   mock.onGet(url).reply(200, 'some data');
+  //   mock.onGet(url2).reply(200, 'some other data');
+  //   const { result, waitForNextUpdate, rerender } = renderHook(
+  //     (props) => useDataApi(props.url),
+  //     { initialProps: { url } }
+  //   );
 
-    expect(result.current).toEqual({ loading: true });
+  //   expect(result.current).toEqual({ loading: true });
 
-    rerender({ url: url2 });
+  //   rerender({ url: url2 });
 
-    expect(result.current).toEqual({ loading: true });
+  //   expect(result.current).toEqual({ loading: true });
 
-    await waitForNextUpdate();
+  //   await waitForNextUpdate();
 
-    expect(result.current).toEqual({
-      loading: false,
-      data: 'some other data',
-      status: 200,
-    });
-  });
+  //   expect(result.current).toEqual({
+  //     loading: false,
+  //     data: 'some other data',
+  //     status: 200,
+  //   });
+  // });
 });
