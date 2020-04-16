@@ -1,4 +1,8 @@
-import { MessageType } from '../types/messagesTypes';
+import {
+  MessageType,
+  MessageFormat,
+  MessageLevel,
+} from '../types/messagesTypes';
 
 export type MessagesState = {
   active: MessageType[];
@@ -6,7 +10,20 @@ export type MessagesState = {
 };
 
 const messagesInitialState = {
-  active: [],
+  active: [
+    {
+      id: 'msg1',
+      content: 'lorem',
+      format: MessageFormat.POP_UP,
+      level: MessageLevel.INFO,
+    },
+    {
+      id: 'msg2',
+      content: 'ipsum',
+      format: MessageFormat.POP_UP,
+      level: MessageLevel.SUCCESS,
+    },
+  ],
   deleted: {},
 };
 
