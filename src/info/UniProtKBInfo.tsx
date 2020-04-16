@@ -17,6 +17,11 @@ const UniProtKBInfo = () => (
       </a>
     </section>
     <section className="text-block">
+      You can view our latest webinar about Sars-CoV-2 and this portal from{' '}
+      <a href="https://www.youtube.com/watch?v=EY69TjnVhRs">here</a>, presented
+      on the 2nd April 2020.
+    </section>
+    <section className="text-block">
       Please go to the <a href="//www.uniprot.org">UniProt.org</a> website for
       all other entries and functionalities.
     </section>
