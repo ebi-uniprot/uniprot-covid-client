@@ -4,6 +4,7 @@ import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
 import './styles/BaseLayout.scss';
 import GDPR from '../components/GDPR';
+import PopupMessageHub from '../messages/components/PopupMessageHub';
 
 type BaseLayoutProps = {
   children: JSX.Element;
@@ -26,13 +27,14 @@ const style: React.CSSProperties = {
   zIndex: 99,
 };
 
-const BaseLayout: React.FC<BaseLayoutProps> = props => {
+const BaseLayout: React.FC<BaseLayoutProps> = (props) => {
   const { children, isHomePage, isSearchPage } = props;
   return (
     <section className="base-layout">
       <section className="main-header">
         <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
       </section>
+      <PopupMessageHub />
       <a
         style={style}
         target="_blank"
