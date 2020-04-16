@@ -6,6 +6,7 @@
     max-height: 100vh;
     grid-template-areas:
       'main-header main-header'
+      'in-page-messages in-page-messages'
       'title title'
       '. action-buttons'
       'sidebar content'
@@ -13,6 +14,7 @@
 
     grid-template-columns: 20vw auto;
     grid-template-rows: 5rem auto auto 1fr auto;
+
     &__title {
       grid-column: title;
       padding: 0 $gutter-size;

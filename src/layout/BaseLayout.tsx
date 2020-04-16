@@ -33,7 +33,9 @@ const BaseLayout: React.FC<BaseLayoutProps> = props => {
       <section className="main-header">
         <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
       </section>
-      <MessageManagerContainer />
+      <section className="in-page-messages">
+        <MessageManagerContainer />
+      </section>
       <a
         style={style}
         target="_blank"
