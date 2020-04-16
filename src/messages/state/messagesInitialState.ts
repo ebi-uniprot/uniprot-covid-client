@@ -23,6 +23,18 @@ const messagesInitialState = {
       format: MessageFormat.POP_UP,
       level: MessageLevel.SUCCESS,
     },
+    {
+      id: 'msg3',
+      content: 'inpage message lorem',
+      format: MessageFormat.IN_PAGE,
+      level: MessageLevel.FAILURE,
+    },
+    {
+      id: 'msg4',
+      content: 'inpage message ipsum',
+      format: MessageFormat.IN_PAGE,
+      level: MessageLevel.SUCCESS,
+    },
   ],
   deleted: {},
 };

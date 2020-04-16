@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
-import * as actions from './state/messagesActions';
-import { MessageType } from './types/messagesTypes';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { groupBy } from 'lodash';
+import * as actions from './state/messagesActions';
+import { MessageType, MessageFormat } from './types/messagesTypes';
 import { RootAction, RootState } from '../state/state-types';
+import InPageMessageHub from './components/InPageMessageHub';
 
 type MessageManagerContainerProps = {
   activeMessages: MessageType[];
@@ -18,7 +20,12 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
   deleteMessage,
   addMessage,
 }) => {
-  return <div>{JSON.stringify(activeMessages)}</div>;
+  const { IN_PAGE: inPageMessages, POP_UP: popUpMessages } = groupBy(
+    activeMessages,
+    ({ format }) => format
+  );
+  console.log(activeMessages, inPageMessages, popUpMessages);
+  return <InPageMessageHub messages={inPageMessages} />;
 };
 
 const mapStateToProps = (state: RootState) => {
