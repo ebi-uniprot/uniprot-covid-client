@@ -13,7 +13,7 @@ type InPageMessageHubProps = {
 };
 
 const InPageMessageHub: FC<InPageMessageHubProps> = ({
-  messages,
+  messages = [],
   handleDismiss,
 }) => (
   <div>
