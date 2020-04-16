@@ -8,12 +8,12 @@ import {
 } from '../types/messagesTypes';
 
 type InPageMessageHubProps = {
-  children: MessageType[];
+  messages: MessageType[];
   handleDismiss: (id: string) => void;
 };
 
 const InPageMessageHub: FC<InPageMessageHubProps> = ({
-  children: messages,
+  messages,
   handleDismiss,
 }) => (
   <div>

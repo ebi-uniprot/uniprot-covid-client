@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { groupBy } from 'lodash';
@@ -6,6 +6,7 @@ import * as actions from './state/messagesActions';
 import { MessageType, MessageFormat } from './types/messagesTypes';
 import { RootAction, RootState } from '../state/state-types';
 import InPageMessageHub from './components/InPageMessageHub';
+import PopUpMessageHub from './components/PopupMessageHub';
 
 type MessageManagerContainerProps = {
   activeMessages: MessageType[];
@@ -26,9 +27,13 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
   );
   console.log(activeMessages, inPageMessages, popUpMessages);
   return (
-    <InPageMessageHub handleDismiss={deleteMessage}>
-      {inPageMessages}
-    </InPageMessageHub>
+    <Fragment>
+      <InPageMessageHub
+        messages={inPageMessages}
+        handleDismiss={deleteMessage}
+      />
+      <PopUpMessageHub messages={popUpMessages} />
+    </Fragment>
   );
 };
 
