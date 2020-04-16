@@ -25,7 +25,11 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
     ({ format }) => format
   );
   console.log(activeMessages, inPageMessages, popUpMessages);
-  return <InPageMessageHub messages={inPageMessages} />;
+  return (
+    <InPageMessageHub handleDismiss={deleteMessage}>
+      {inPageMessages}
+    </InPageMessageHub>
+  );
 };
 
 const mapStateToProps = (state: RootState) => {
