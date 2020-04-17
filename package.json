@@ -51,7 +51,7 @@
     "core-js": "^3.1.4",
     "d3": "^5.9.2",
     "d3-scale": "^3.2.1",
-    "franklin-sites": "0.0.42",
+    "franklin-sites": "0.0.43",
     "idx": "^2.5.2",
     "interaction-viewer": "2.4.3",
     "lit-html": "^1.1.2",

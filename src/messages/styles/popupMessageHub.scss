@@ -1,4 +1,7 @@
+@import '../../styles/settings';
+
 .popup-message-container {
+  z-index: $z-index-high;
   position: fixed;
   display: flex;
   width: 25vw;
