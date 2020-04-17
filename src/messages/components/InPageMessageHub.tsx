@@ -4,16 +4,16 @@ import { MessageType } from '../types/messagesTypes';
 
 type InPageMessageHubProps = {
   messages: MessageType[];
-  handleDismiss: (id: string) => void;
+  onDismiss: (id: string) => void;
 };
 
 const InPageMessageHub: FC<InPageMessageHubProps> = ({
   messages = [],
-  handleDismiss,
+  onDismiss,
 }) => (
   <div>
     {messages.map(({ level, content, id }) => (
-      <Message key={id} level={level} onDismiss={() => handleDismiss(id)}>
+      <Message key={id} level={level} onDismiss={() => onDismiss(id)}>
         {content}
       </Message>
     ))}

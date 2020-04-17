@@ -132,6 +132,14 @@ exports[`HomePage component should render 1`] = `
         />
       </div>
     </section>
+    <section
+      class="in-page-messages"
+    >
+      <div />
+      <div
+        class="popup-message-container"
+      />
+    </section>
     <a
       href="https://goo.gl/forms/VrAGbqg2XFg6Mpbh1"
       rel="noopener noreferrer"

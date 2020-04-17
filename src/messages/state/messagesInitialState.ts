@@ -1,9 +1,4 @@
-import {
-  MessageType,
-  MessageFormat,
-  MessageLevel,
-} from '../types/messagesTypes';
-import { Location } from '../../urls';
+import { MessageType } from '../types/messagesTypes';
 
 export type MessagesState = {
   active: MessageType[];
