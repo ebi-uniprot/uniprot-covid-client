@@ -8,9 +8,11 @@ const PopUpMessageHub: React.FC<{ messages: MessageType[] }> = ({
   messages,
 }) => {
   const transitions = useTransition(messages, (item) => item.id, {
-    from: { opacity: 0 },
+    from: { opacity: 0, marginRight: -100, marginLeft: 100 },
     enter: {
       opacity: 1,
+      marginRight: 0,
+      marginLeft: 0,
     },
     exit: {
       opacity: 0,
