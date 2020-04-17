@@ -11,33 +11,7 @@ export type MessagesState = {
 };
 
 const messagesInitialState = {
-  active: [
-    {
-      id: 'msg1',
-      content: 'lorem',
-      format: MessageFormat.POP_UP,
-      level: MessageLevel.INFO,
-    },
-    {
-      id: 'msg2',
-      content: 'ipsum',
-      format: MessageFormat.POP_UP,
-      level: MessageLevel.SUCCESS,
-    },
-    {
-      id: 'msg3',
-      content: 'inpage message lorem',
-      format: MessageFormat.IN_PAGE,
-      level: MessageLevel.FAILURE,
-    },
-    {
-      id: 'msg4',
-      content: 'inpage results message',
-      format: MessageFormat.IN_PAGE,
-      level: MessageLevel.SUCCESS,
-      locations: [Location.UniProtKB_Results],
-    },
-  ],
+  active: [],
   deleted: {},
 };
 
