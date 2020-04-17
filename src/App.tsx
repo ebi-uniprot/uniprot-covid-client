@@ -33,15 +33,15 @@ const App = () => (
             render={() => <HomePage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKB_Entry)}
+            path={LocationToPath.get(Location.UniProtKBEntry)}
             render={() => <EntryPage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKB_Results)}
+            path={LocationToPath.get(Location.UniProtKBResults)}
             render={() => <ResultsPage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKB_CustomiseTable)}
+            path={LocationToPath.get(Location.UniProtKBCustomiseTable)}
             render={() => (
               <BaseLayout>
                 <CustomiseTablePage />
@@ -49,7 +49,7 @@ const App = () => (
             )}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKB_Download)}
+            path={LocationToPath.get(Location.UniProtKBDownload)}
             render={() => (
               <BaseLayout>
                 <DownloadPage />
@@ -58,7 +58,7 @@ const App = () => (
           />
           <Route
             path={`${LocationToPath.get(
-              Location.UniProtKB_QueryBuilder
+              Location.UniProtKBQueryBuilder
             )}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
