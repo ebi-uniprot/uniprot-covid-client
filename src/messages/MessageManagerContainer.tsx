@@ -1,5 +1,6 @@
 import React, { FC, Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { v1 } from 'uuid';
 import { bindActionCreators, Dispatch } from 'redux';
 import { groupBy } from 'lodash';
@@ -12,24 +13,28 @@ import {
 import { RootAction, RootState } from '../state/state-types';
 import InPageMessageHub from './components/InPageMessageHub';
 import PopUpMessageHub from './components/PopupMessageHub';
+import { Location, PathToLocation } from '../urls';
 
 type MessageManagerContainerProps = {
   activeMessages: MessageType[];
   deletedMessages: { [id: string]: boolean };
   deleteMessage: (id: string) => void;
   addMessage: (message: MessageType) => void;
-};
+} & RouteComponentProps;
 
 const MessageManager: FC<MessageManagerContainerProps> = ({
   activeMessages,
   deleteMessage,
   addMessage,
+  match: { path },
 }) => {
-  const { IN_PAGE: inPageMessages, POP_UP: popUpMessages } = groupBy(
-    activeMessages,
-    ({ format }) => format
-  );
+  let {
+    [MessageFormat.IN_PAGE]: inPageMessages,
+    [MessageFormat.POP_UP]: popUpMessages,
+  } = groupBy(activeMessages, ({ format }) => format);
+
   console.log(activeMessages, inPageMessages, popUpMessages);
+
   // Temporary add messages to test pop ups are working
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,6 +47,13 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
     }, 10000);
     return () => clearInterval(interval);
   }, [addMessage]);
+
+  const currentLocation = PathToLocation.get(path as Location);
+  inPageMessages = inPageMessages.filter(
+    ({ locations }) =>
+      !locations || // if not locations in the message then show it everywhere
+      (locations && currentLocation && locations.includes(currentLocation))
+  );
 
   return (
     <Fragment>
@@ -70,9 +82,8 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     dispatch
   );
 
-const MessageManagerContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MessageManager);
+const MessageManagerContainer = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MessageManager)
+);
 
 export default MessageManagerContainer;

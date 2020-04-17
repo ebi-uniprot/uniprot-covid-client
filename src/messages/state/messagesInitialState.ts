@@ -3,6 +3,7 @@ import {
   MessageFormat,
   MessageLevel,
 } from '../types/messagesTypes';
+import { Location } from '../../urls';
 
 export type MessagesState = {
   active: MessageType[];
@@ -31,9 +32,10 @@ const messagesInitialState = {
     },
     {
       id: 'msg4',
-      content: 'inpage message ipsum',
+      content: 'inpage results message',
       format: MessageFormat.IN_PAGE,
       level: MessageLevel.SUCCESS,
+      locations: [Location.UniProtKB_Results],
     },
   ],
   deleted: {},
