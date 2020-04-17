@@ -4,9 +4,10 @@ import { useTransition, animated } from 'react-spring';
 import { MessageType } from '../types/messagesTypes';
 import '../styles/popupMessageHub.scss';
 
-const PopUpMessageHub: React.FC<{ messages: MessageType[] }> = ({
-  messages,
-}) => {
+const PopUpMessageHub: React.FC<{
+  messages: MessageType[];
+  onDismiss: (id: string) => void;
+}> = ({ messages, onDismiss }) => {
   const transitions = useTransition(messages, (item) => item.id, {
     from: { opacity: 0, marginRight: -100, marginLeft: 100 },
     enter: {
@@ -14,7 +15,7 @@ const PopUpMessageHub: React.FC<{ messages: MessageType[] }> = ({
       marginRight: 0,
       marginLeft: 0,
     },
-    exit: {
+    leave: {
       opacity: 0,
     },
   });
@@ -24,7 +25,9 @@ const PopUpMessageHub: React.FC<{ messages: MessageType[] }> = ({
       {transitions.map(({ key, item, props }) => {
         return (
           <animated.div key={key} style={props}>
-            <Message level={item.level}>{item.content}</Message>
+            <Message level={item.level} onDismiss={() => onDismiss(item.id)}>
+              {item.content}
+            </Message>
           </animated.div>
         );
       })}

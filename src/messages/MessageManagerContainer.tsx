@@ -22,7 +22,6 @@ type MessageManagerContainerProps = {
 
 const MessageManager: FC<MessageManagerContainerProps> = ({
   activeMessages,
-  deletedMessages,
   deleteMessage,
   addMessage,
 }) => {
@@ -40,7 +39,7 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
         format: MessageFormat.POP_UP,
         level: MessageLevel.INFO,
       });
-    }, 3000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [addMessage]);
 
@@ -50,7 +49,7 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
         messages={inPageMessages}
         handleDismiss={deleteMessage}
       />
-      <PopUpMessageHub messages={popUpMessages} />
+      <PopUpMessageHub messages={popUpMessages} onDismiss={deleteMessage} />
     </Fragment>
   );
 };
