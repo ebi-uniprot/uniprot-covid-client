@@ -13,7 +13,7 @@
       'footer footer';
 
     grid-template-columns: 20vw auto;
-    grid-template-rows: 5rem auto auto 1fr auto;
+    grid-template-rows: 5rem auto auto auto 1fr auto;
 
     &__title {
       grid-column: title;

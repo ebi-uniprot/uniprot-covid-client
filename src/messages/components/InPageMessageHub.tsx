@@ -1,11 +1,6 @@
 import React, { FC } from 'react';
 import { Message } from 'franklin-sites';
-import { useTransition } from 'react-spring';
-import {
-  MessageType,
-  MessageLevel,
-  MessageFormat,
-} from '../types/messagesTypes';
+import { MessageType } from '../types/messagesTypes';
 
 type InPageMessageHubProps = {
   messages: MessageType[];
