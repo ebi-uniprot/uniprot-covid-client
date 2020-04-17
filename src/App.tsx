@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from './layout/BaseLayout';
+import { Location, LocationToPath } from './urls';
 import './styles/App.scss';
 
 declare const BASE_URL: string;
@@ -21,18 +22,26 @@ const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 
-export const queryBuilderPath = '/advancedSearch';
-
 const App = () => (
   <FranklinSite>
     <Router basename={BASE_URL}>
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact render={() => <HomePage />} />
-          <Route path="/uniprotkb/:accession" render={() => <EntryPage />} />
-          <Route path="/uniprotkb" render={() => <ResultsPage />} />
           <Route
-            path="/customise-table"
+            path={LocationToPath.get(Location.Home)}
+            exact
+            render={() => <HomePage />}
+          />
+          <Route
+            path={LocationToPath.get(Location.UniProtKB_Entry)}
+            render={() => <EntryPage />}
+          />
+          <Route
+            path={LocationToPath.get(Location.UniProtKB_Results)}
+            render={() => <ResultsPage />}
+          />
+          <Route
+            path={LocationToPath.get(Location.UniProtKB_CustomiseTable)}
             render={() => (
               <BaseLayout>
                 <CustomiseTablePage />
@@ -40,7 +49,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/download"
+            path={LocationToPath.get(Location.UniProtKB_Download)}
             render={() => (
               <BaseLayout>
                 <DownloadPage />
@@ -48,7 +57,9 @@ const App = () => (
             )}
           />
           <Route
-            path={`${queryBuilderPath}(/reset)?`}
+            path={`${LocationToPath.get(
+              Location.UniProtKB_QueryBuilder
+            )}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />
