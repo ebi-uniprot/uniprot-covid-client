@@ -31,6 +31,7 @@ import { Property } from '../types/modelTypes';
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
   TREMBL = 'TrEMBL',
+  INACTIVE='Inactive',
 }
 
 export type Citation = {
