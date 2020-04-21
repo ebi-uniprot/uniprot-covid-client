@@ -1,17 +1,8 @@
 import React from 'react';
-import axios from 'axios';
-import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
 import { v1 } from 'uuid';
 import MessageManagerContainer from '../MessageManagerContainer';
-import { act } from 'react-dom/test-utils';
-import messagesInitialState from '../state/messagesInitialState';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 import { MessageFormat, MessageLevel } from '../types/messagesTypes';
-import ResultsContainer from '../../results/ResultsContainer';
-import searchInitialState from '../../search/state/searchInitialState';
-import resultsInitialState, {
-  ViewMode,
-} from '../../results/state/resultsInitialState';
 
 const getState = (content, format, locations = null) => ({
   messages: {

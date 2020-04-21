@@ -12,7 +12,6 @@ import { Location, PathToLocation } from '../urls';
 
 type MessageManagerContainerProps = {
   activeMessages: MessageType[];
-  deletedMessages: { [id: string]: boolean };
   deleteMessage: (id: string) => void;
 } & RouteComponentProps;
 
@@ -30,7 +29,7 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
   const filteredInPageMessages = inPageMessages.filter(
     ({ locations }) =>
       !locations || // if no locations in the message object then show it everywhere
-      (locations && currentLocation && locations.includes(currentLocation))
+      (currentLocation && locations.includes(currentLocation))
   );
 
   return (
@@ -47,7 +46,6 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
 const mapStateToProps = (state: RootState) => {
   return {
     activeMessages: state.messages.active,
-    deletedMessages: state.messages.deleted,
   };
 };
 
