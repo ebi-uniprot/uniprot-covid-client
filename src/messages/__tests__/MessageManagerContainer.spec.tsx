@@ -34,7 +34,7 @@ describe('Message Manager component', () => {
       initialState: getState(content, MessageFormat.POP_UP),
     });
     const messageContent = getByText(content);
-    expect(messageContent).toBeTruthy;
+    expect(messageContent).toBeTruthy();
   });
 
   test('should show in-page message when location is not specified', () => {
@@ -43,7 +43,7 @@ describe('Message Manager component', () => {
       initialState: getState(content, MessageFormat.IN_PAGE),
     });
     const messageContent = getByText(content);
-    expect(messageContent).toBeTruthy;
+    expect(messageContent).toBeTruthy();
   });
 
   test('should show in-page message when location is specified and the router is at that location', () => {
@@ -56,7 +56,7 @@ describe('Message Manager component', () => {
       path: '/uniprotkb',
     });
     const messageContent = getByText(content);
-    expect(messageContent).toBeTruthy;
+    expect(messageContent).toBeTruthy();
   });
 
   test('should not show in-page message when location is specified but the router is not at that location', () => {
