@@ -64,6 +64,7 @@
     "protvista-sequence": "^2.1.17",
     "protvista-structure": "^2.4.0",
     "protvista-track": "^2.1.17",
+    "protvista-uniprot": "^2.1.0",
     "protvista-variation": "^2.1.17",
     "protvista-variation-adapter": "^2.3.0",
     "query-string": "^6.2.0",
