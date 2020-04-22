@@ -51,11 +51,11 @@ mock.onGet(joinUrl(apiUrls.variation, primaryAccession)).reply(200, {});
 
 let component;
 
-describe('Entry', () => {
+describe.skip('Entry', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
