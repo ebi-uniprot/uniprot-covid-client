@@ -1,19 +1,18 @@
 import React, { FC, useRef, useEffect, useState } from 'react';
-import ProtvistaUniprot, {
-  transformDataFeatureAdapter,
-  transformDataProteomicsAdapter,
-  transformDataStructureAdapter,
-  transformDataVariationAdapter,
-  transformDataInterproAdapter,
-} from 'protvista-uniprot';
+import ProtvistaUniprot from // transformDataFeatureAdapter,
+// transformDataProteomicsAdapter,
+// transformDataStructureAdapter,
+// transformDataVariationAdapter,
+// transformDataInterproAdapter,
+'protvista-uniprot';
 
 import useDataApi from '../utils/useDataApi';
 import { loadWebComponent } from '../utils/utils';
 
 const transformData = (data: any) => {
-  const output = {};
+  const output: any = {};
 
-  output.STRUCTURE = transformDataStructureAdapter(data);
+  // output.STRUCTURE = transformDataStructureAdapter(data);
 
   return output;
 };
