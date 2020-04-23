@@ -31,6 +31,8 @@ import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
 import { Facet } from '../types/responseTypes';
+import BaseLayout from '../layout/BaseLayout';
+import NoResultsPage from '../pages/errors/NoResultsPage';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -284,6 +286,15 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     if (isFetching && !results.length) {
       return <Loader />;
     }
+
+    if (results.length === 0) {
+      return (
+        <BaseLayout>
+          <NoResultsPage />
+        </BaseLayout>
+      );
+    }
+
     const { name, links, info } = infoMappings[namespace];
 
     const actionButtons = (

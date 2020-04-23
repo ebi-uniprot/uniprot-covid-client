@@ -19,7 +19,6 @@ const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
-const NoResultsPage = lazy(() => import('./pages/errors/NoResultsPage'));
 const ResourceNotFoundPage = lazy(() => import('./pages/errors/ResourceNotFoundPage'));
 const ServiceUnavailablePage = lazy(() => import('./pages/errors/ServiceUnavailablePage'));
 const JobErrorPage = lazy(() => import('./pages/errors/JobErrorPage'));
@@ -47,14 +46,6 @@ const App = () => (
             render={() => (
               <BaseLayout>
                 <DownloadPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path="/no-results"
-            render={() => (
-              <BaseLayout>
-                <NoResultsPage />
               </BaseLayout>
             )}
           />

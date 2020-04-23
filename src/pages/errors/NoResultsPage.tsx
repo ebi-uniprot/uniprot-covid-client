@@ -1,6 +1,6 @@
 import React from 'react';
 import { Message } from 'franklin-sites';
-import ArtWork from '../../svg/undraw_no_results.svg';
+import ArtWork from '../../svg/no-results-found.svg';
 
 import '../../styles/ErrorPages.scss';
 
