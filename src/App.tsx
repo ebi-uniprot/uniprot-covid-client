@@ -1,11 +1,10 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from './layout/BaseLayout';
 import './styles/App.scss';
-
-declare const BASE_URL: string;
+import history from './utils/browserHistory';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -21,14 +20,15 @@ const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 const NoResultsPage = lazy(() => import('./pages/errors/NoResultsPage'));
-const NotFoundPage = lazy(() => import('./pages/errors/NotFoundPage'));
-const ObsoleteEntryPage = lazy(() => import('./pages/errors/ObsoleteEntryPage'));
+const ResourceNotFoundPage = lazy(() => import('./pages/errors/ResourceNotFoundPage'));
+const ServiceUnavailablePage = lazy(() => import('./pages/errors/ServiceUnavailablePage'));
+const JobErrorPage = lazy(() => import('./pages/errors/JobErrorPage'));
 
 export const queryBuilderPath = '/advancedSearch';
 
 const App = () => (
   <FranklinSite>
-    <Router basename={BASE_URL}>
+    <Router history={history}>
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route path="/" exact render={() => <HomePage />} />
@@ -62,15 +62,23 @@ const App = () => (
             path="/page-not-found"
             render={() => (
               <BaseLayout>
-                <NotFoundPage />
+                <ResourceNotFoundPage />
               </BaseLayout>
             )}
           />
           <Route
-            path="/obsolete-entry"
+            path="/service-unavailable"
             render={() => (
               <BaseLayout>
-                <ObsoleteEntryPage />
+                <ServiceUnavailablePage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path="/job-error"
+            render={() => (
+              <BaseLayout>
+                <JobErrorPage />
               </BaseLayout>
             )}
           />
