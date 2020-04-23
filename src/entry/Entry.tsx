@@ -4,7 +4,6 @@ import {
   RouteComponentProps,
   Switch,
   Route,
-  useHistory,
 } from 'react-router-dom';
 import {
   InPageNav,
@@ -19,7 +18,11 @@ import {
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
-import { UniProtkbUIModel, EntryType } from '../model/uniprotkb/UniProtkbConverter';
+import {
+  UniProtkbUIModel,
+  EntryType,
+  UniProtKBUIInactiveEntryModel,
+} from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import EntrySection from '../model/types/EntrySection';
 import EntryMain from './EntryMain';
@@ -36,6 +39,8 @@ import EntryPublications from './publications/EntryPublications';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import { Facet } from '../types/responseTypes';
+import BaseLayout from '../layout/BaseLayout';
+import ObsoleteEntryPage from '../pages/errors/ObsoleteEntryPage';
 
 type MatchParams = {
   accession: string;
@@ -43,7 +48,7 @@ type MatchParams = {
 };
 
 type EntryProps = RouteComponentProps<MatchParams> & {
-  entryData: UniProtkbUIModel | null;
+  entryData: UniProtkbUIModel | UniProtKBUIInactiveEntryModel | null;
   publicationsData: {
     data: LiteratureForProteinAPI[] | null;
     facets: Facet[];
@@ -66,7 +71,6 @@ const Entry: React.FC<EntryProps> = ({
   const { path, params } = match;
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
-  const history = useHistory();
 
   useEffect(() => {
     dispatchFetchEntry(accession);
@@ -85,8 +89,17 @@ const Entry: React.FC<EntryProps> = ({
   }
 
   if (entryData && entryData.entryType === EntryType.INACTIVE) {
-    // history.push("/obsolete-entry");
-    // return null;
+    const inactiveEntryData : UniProtKBUIInactiveEntryModel =
+      entryData as UniProtKBUIInactiveEntryModel;
+
+    return (
+      <BaseLayout>
+        <ObsoleteEntryPage
+          accession={accession}
+          details={inactiveEntryData.inactiveReason}
+        />
+      </BaseLayout>
+    );
   }
 
   const sections = UniProtKBEntryConfig.map(section => ({

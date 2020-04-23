@@ -1,17 +1,74 @@
 import React from 'react';
 import { Message } from 'franklin-sites';
-import ArtWork from '../../svg/undraw_obsolete.svg';
+import { Link } from 'react-router-dom';
+import { v1 } from 'uuid';
+import { InactiveEntryReason, InactiveReasonType } from '../../model/uniprotkb/UniProtkbConverter';
+import ArtWork from '../../svg/obsolete-entry.svg';
 
 import '../../styles/ErrorPages.scss';
 
-const ObsoleteEntryPage = () => (
+type ObsoleteEntryPageProps = {
+  accession: string;
+  details: InactiveEntryReason;
+}
+
+const DeletedEntryMessage: React.FC<{accession: string}> = ({
+  accession,
+}) => (
+  <Message level="info">
+    <h4>This entry is obsolete</h4>
+    <p>
+      The protein sequence for this entry is available in {' '}
+      <Link to={`/uniparc/?query=${accession}`}>UniParc</Link>.
+      For previous versions of this entry, please look at its {' '}
+      <Link to={`/uniprot/${accession}?version=*`}>history</Link>.
+    </p>
+  </Message>
+);
+
+const DemergedEntryMessage: React.FC<{accession: string, demergedTo: string[]}> = ({
+  accession,
+  demergedTo,
+}) => (
+  <Message level="info">
+    <h4>This entry is obsolete</h4>
+    <p>
+      It can now be found as secondary accession in {' '}
+      {demergedTo
+        .reduce((a: (string | JSX.Element)[], c, i) => {
+          if (i > 0) {
+            if (i === demergedTo.length - 1) {
+              a.push(<span key={v1()}> and </span>);
+            } else {
+              a.push(', ');
+            }
+          }
+
+          a.push(<Link to={`/uniprotkb/${c}`} key={c}>{c}</Link>);
+
+          return a;
+        }, [])
+      }. [ <Link to={`/uniprot/?query=replaces:${accession}`}>List</Link> ]
+    </p>
+    <p>
+      The protein sequence for this entry is available in {' '}
+      <Link to={`/uniparc/?query=${accession}`}>UniParc</Link>.
+      For previous versions of this entry, please look at its {' '}
+      <Link to={`/uniprot/${accession}?version=*`}>history</Link>.
+    </p>
+  </Message>
+);
+
+const ObsoleteEntryPage: React.FC<ObsoleteEntryPageProps> = ({
+  accession,
+  details,
+}) => (
   <div className="error-page-container">
     <ArtWork className="error-page-container__art-work" />
-
-    <Message level="info">
-      <h4>This entry is now obsolete!</h4>
-      <span>Please try a different entry</span>
-    </Message>
+    {details.inactiveReasonType === InactiveReasonType.DELETED
+     ? <DeletedEntryMessage accession={accession} />
+     : <DemergedEntryMessage accession={accession} demergedTo={details.mergeDemergeTo} />
+   }
   </div>
 );
 

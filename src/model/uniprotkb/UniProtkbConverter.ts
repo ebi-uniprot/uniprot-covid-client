@@ -98,6 +98,33 @@ export type UniProtkbUIModel = {
   references?: Reference[];
 };
 
+export enum InactiveReasonType {
+  MERGED = 'MERGED', // We will never see this as this is followed by a 303 redirect
+  DEMERGED = 'DEMERGED',
+  DELETED = 'DELETED',
+};
+
+export type InactiveEntryReason = {
+  inactiveReasonType: InactiveReasonType;
+  mergeDemergeTo: string[] | [];
+}
+
+export type UniProtkbAPIInactiveEntryModel = {
+  annotationScore: number;
+  entryType: EntryType.INACTIVE;
+  inactiveReason: InactiveEntryReason;
+  primaryAccession: string;
+  uniProtId: string;
+}
+
+export type UniProtKBUIInactiveEntryModel = {
+  annotationScore: number;
+  entryType: EntryType.INACTIVE;
+  inactiveReason: InactiveEntryReason;
+  primaryAccession: string;
+  uniProtId: string;
+}
+
 export const convertXrefProperties = (xrefs: Xref[]) =>
   xrefs.map(xref => ({
     ...xref,
@@ -106,8 +133,20 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
       : {},
   }));
 
-const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
-  const dataCopy = { ...data };
+const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbAPIInactiveEntryModel):
+  UniProtkbUIModel | UniProtKBUIInactiveEntryModel => 
+{
+  const dataCopy = { ...data};
+
+  if (dataCopy.entryType === EntryType.INACTIVE) {
+    return {
+      annotationScore: dataCopy.annotationScore,
+      entryType: dataCopy.entryType,
+      inactiveReason: (dataCopy as UniProtkbAPIInactiveEntryModel).inactiveReason,
+      primaryAccession: dataCopy.primaryAccession,
+      uniProtId: dataCopy.uniProtId,
+    }
+  }
 
   if (dataCopy.databaseCrossReferences) {
     dataCopy.databaseCrossReferences = convertXrefProperties(
