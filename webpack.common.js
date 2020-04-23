@@ -17,10 +17,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|tsx|ts)$/,
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'node_modules/protvista-uniprot'),
-        ],
+        include: [path.resolve(__dirname, 'src')],
         use: {
           loader: 'babel-loader',
         },
