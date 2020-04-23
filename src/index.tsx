@@ -10,9 +10,13 @@ const LoadingView = () => <span>Loading ...</span>;
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<LoadingView />} persistor={persistor}>
+    {process.env.NODE_ENV === 'development' ? (
       <App />
-    </PersistGate>
+    ) : (
+      <PersistGate loading={<LoadingView />} persistor={persistor}>
+        <App />
+      </PersistGate>
+    )}
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

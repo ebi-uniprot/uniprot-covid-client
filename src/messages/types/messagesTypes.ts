@@ -1,8 +1,10 @@
+import { Location } from '../../urls';
+
 export enum MessageLevel {
-  SUCCESS = 'SUCCESS',
-  INFO = 'INFO',
-  WARNING = 'WARNING',
-  FAILURE = 'FAILURE',
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  FAILURE = 'failure',
 }
 
 export enum MessageFormat {
@@ -23,4 +25,5 @@ export type MessageType = {
   dateActive?: number;
   dateExpired?: number;
   tag?: MessageTag;
+  locations?: Location[];
 };

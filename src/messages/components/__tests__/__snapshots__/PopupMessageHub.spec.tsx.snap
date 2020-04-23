@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
+<DocumentFragment>
+  <div
+    class="popup-message-container"
+  >
+    <div
+      style="opacity: 0; margin-right: -100px; margin-left: 100px;"
+    >
+      <div
+        class="message message--info"
+        role="status"
+      >
+        <section
+          class="message__content"
+        >
+          <svg
+            fill="none"
+            height="1.125em"
+            viewBox="0 0 18 18"
+            width="1.125em"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+              fill="#000"
+              fill-rule="evenodd"
+            />
+          </svg>
+          <small>
+            lorem
+          </small>
+        </section>
+        <button
+          class="message__dismiss"
+          type="button"
+        >
+          <svg
+            height="10"
+            viewBox="0 0 352 512"
+            width="10"
+          >
+            <path
+              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
