@@ -3,17 +3,19 @@ import ProtvistaManager from 'protvista-manager';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaVariation from 'protvista-variation';
-import ProtvistaVariationAdapter from 'protvista-variation-adapter';
+import { transformData } from 'protvista-variation-adapter';
 import ProtvistaFilter from 'protvista-filter';
+import { Loader } from 'franklin-sites';
 import { html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
-import useDataApi from '../../../utils/useDataApi';
+import useDataApi from '../../../hooks/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
 import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
 import { Evidence } from '../../../model/types/modelTypes';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
+import filterConfig, { colorConfig } from './protvista-config/variationFilters';
 
 export type ProtvistaVariant = {
   begin: number;
@@ -31,6 +33,7 @@ export type ProtvistaVariant = {
   genomicLocation?: string;
   somaticStatus?: number;
   sourceType: string;
+  clinicalSignificances?: string;
   association?: {
     description: string;
     disease: boolean;
@@ -45,6 +48,21 @@ export type ProtvistaVariant = {
   }[];
 };
 
+export type TransformedProtvistaVariant = ProtvistaVariant & {
+  accession: string;
+  start: string;
+  tooltipContent: string;
+  sourceType: string;
+  variant: string;
+  protvistaFeatureId: string;
+  xrefNames: string[];
+};
+
+export type TransformedVariantsResponse = {
+  sequence: string;
+  variants: TransformedProtvistaVariant[];
+};
+
 interface ChangeEvent extends Event {
   detail?: { type: string; value: string[] };
 }
@@ -54,7 +72,6 @@ loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-sequence', ProtvistaSequence);
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-filter', ProtvistaFilter);
-loadWebComponent('protvista-variation-adapter', ProtvistaVariationAdapter);
 
 const formatVariantDescription = (description: string) => {
   /* eslint-disable no-useless-escape */
@@ -103,10 +120,7 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         const formatedDescription = formatVariantDescription(d.description);
         return formatedDescription
           ? formatedDescription.map(
-              descriptionLine =>
-                html`
-                  <p>${descriptionLine}</p>
-                `
+              (descriptionLine) => html` <p>${descriptionLine}</p> `
             )
           : '';
       },
@@ -128,21 +142,21 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         if (!d.association) {
           return '';
         }
-        return d.association.map(association => {
+        return d.association.map((association) => {
           return html`
             <p>
               ${association.name}
               ${association.evidences &&
-                UniProtProtvistaEvidenceTag(
-                  association.evidences.map(evidence => {
-                    return ({
-                      evidenceCode: evidence.code,
-                      source: evidence.source.name,
-                      id: evidence.source.id,
-                    } as unknown) as Evidence;
-                  }),
-                  evidenceTagCallback
-                )}
+              UniProtProtvistaEvidenceTag(
+                association.evidences.map((evidence) => {
+                  return ({
+                    evidenceCode: evidence.code,
+                    source: evidence.source.name,
+                    id: evidence.source.id,
+                  } as unknown) as Evidence;
+                }),
+                evidenceTagCallback
+              )}
             </p>
           `;
         });
@@ -156,21 +170,42 @@ const VariationView: FC<{
   title?: string;
   hasTable?: boolean;
 }> = ({ primaryAccession, title, hasTable = true }) => {
-  const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
+  const { loading, data, error, status } = useDataApi(
+    joinUrl(apiUrls.variation, primaryAccession)
+  );
 
-  const setTrackData = useCallback(
-    node => {
+  const protvistaFilterRef = useCallback((node) => {
+    if (node !== null) {
+      // eslint-disable-next-line no-param-reassign
+      node.filters = filterConfig;
+    }
+  }, []);
+
+  const protvistaVariationRef = useCallback(
+    (node) => {
       if (node !== null && data.features) {
+        const transformedData: TransformedVariantsResponse = transformData(
+          data
+        );
         // eslint-disable-next-line no-param-reassign
-        node.data = data;
+        node.colorConfig = colorConfig;
         // eslint-disable-next-line no-param-reassign
-        node.length = data.sequence.length;
+        node.data = transformedData;
+        // eslint-disable-next-line no-param-reassign
+        node.length = transformedData.sequence.length;
       }
     },
     [data]
   );
 
-  if (!data.sequence || data.features.length <= 0) {
+  if (loading) return <Loader />;
+
+  if (error && status !== 404) {
+    // TODO: use in-page error message
+    return <div>An error happened</div>;
+  }
+
+  if (status === 404 || !data.sequence || data.features.length <= 0) {
     return null;
   }
 
@@ -186,10 +221,15 @@ const VariationView: FC<{
               sequence={data.sequence}
               height="20"
             />
-            <protvista-filter />
-            <protvista-variation length={data.sequence.length}>
-              <protvista-variation-adapter ref={setTrackData} />
-            </protvista-variation>
+            <protvista-filter
+              for="variation-component"
+              ref={protvistaFilterRef}
+            />
+            <protvista-variation
+              id="variation-component"
+              length={data.sequence.length}
+              ref={protvistaVariationRef}
+            />
           </div>
         )}
         <FeaturesTableView

@@ -101,7 +101,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   );
 
 export const createAccessionsQueryString = (accessions: string[]) =>
-  accessions.map(accession => `accession:${accession}`).join(' OR ');
+  accessions.map((accession) => `accession:${accession}`).join(' OR ');
 
 export const getQueryUrl = (
   query: string,
@@ -127,7 +127,7 @@ export const getUniProtPublicationsQueryUrl = (
   `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,scale',
     query: selectedFacets
-      .map(facet => `(${facet.name}:"${facet.value}")`)
+      .map((facet) => `(${facet.name}:"${facet.value}")`)
       .join(' AND '),
   })}`;
 
@@ -203,7 +203,7 @@ export const urlsAreEqual = (
     ...Object.keys(urlObject1.query),
   ]);
   return paramsIntersection.every(
-    param =>
+    (param) =>
       ignoreParams.includes(param) ||
       urlObject1.query[param] === urlObject2.query[param]
   );
