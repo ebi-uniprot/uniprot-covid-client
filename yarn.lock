@@ -864,7 +864,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.4", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.4", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -4860,10 +4860,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.41:
-  version "0.0.41"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.41.tgz#67b4397d63ce8a17473e730bd02b5eb87b236ed4"
-  integrity sha512-ZmVHAPyHsvOP6sR9ual46Ysxr5dm8GcDjZeM/och00vFhbbSiJILuxzTlDg5po+BCC+pLQyMg5uQbxn4PZ8cHA==
+franklin-sites@0.0.43:
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.43.tgz#c5773f74ed92109e6b7e3e49b6e1806307cc056b"
+  integrity sha512-vzrEhGWStoXVyPu2aUYLZysm//Kssvz41z5ufWVC8/+bOIMKDnN/HLf2cpGhO36oGVBuhiUKf4MT8yXC5/yUuw==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"
@@ -6698,7 +6698,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lit-element@^2.2.0:
+lit-element@^2.1.0, lit-element@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-2.3.1.tgz#73343b978fa1e73d60526c6bb6ad60f53a16c343"
   integrity sha512-tOcUAmeO3BzwiQ7FGWdsshNvC0HVHcTFYw/TLIImmKwXYoV0E7zCBASa8IJ7DiP4cen/Yoj454gS0qqTnIGsFA==
@@ -8238,7 +8238,7 @@ protvista-structure@^2.4.0:
     lodash-es "^4.17.11"
     whatwg-fetch "^3.0.0"
 
-protvista-track@^2.1.17, protvista-track@^2.6.1:
+protvista-track@^2.1.17, protvista-track@^2.3.5:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/protvista-track/-/protvista-track-2.6.1.tgz#ef5ce3ddde3e4b3fd11defcbcbb90b94db31d26d"
   integrity sha512-VozfGgofxhDXXQRxl2Apw6USux7ySITfcEJws/PpfHW5M59lgAUk/MgJgOBAGE4ebKCUv+FZwEtmbbAMlrJCVA==
@@ -10559,7 +10559,7 @@ watch@~0.18.0:
     exec-sh "^0.2.0"
     minimist "^1.2.0"
 
-watchpack@^1.6.1:
+watchpack@^1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.6.1.tgz#280da0a8718592174010c078c7585a74cd8cd0e2"
   integrity sha512-+IF9hfUFOrYOOaKyfaI7h7dquUIOgyEMoQMLA7OP5FxegKA2+XdXThAZ9TU2kucfhDH7rfMHs1oPYziVGWRnZA==
