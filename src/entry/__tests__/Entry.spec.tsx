@@ -51,7 +51,7 @@ mock.onGet(joinUrl(apiUrls.variation, primaryAccession)).reply(200, {});
 
 let component;
 
-describe.skip('Entry', () => {
+describe('Entry', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <Route

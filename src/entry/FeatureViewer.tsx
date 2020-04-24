@@ -1,6 +1,5 @@
 import React, { FC /* useRef, useEffect, useState */ } from 'react';
-import ProtvistaUniprot from // transformDataInterproAdapter, // transformDataVariationAdapter, // transformDataStructureAdapter, // transformDataProteomicsAdapter, // transformDataFeatureAdapter,
-'protvista-uniprot';
+import ProtvistaUniprot from 'protvista-uniprot'; // transformDataInterproAdapter, // transformDataVariationAdapter, // transformDataStructureAdapter, // transformDataProteomicsAdapter, // transformDataFeatureAdapter,
 
 import useDataApi from '../utils/useDataApi';
 import { loadWebComponent } from '../utils/utils';
@@ -54,6 +53,11 @@ const FeatureViewer: FC<{ accession: string }> = ({ accession }) => {
     <section>
       <div style={{ height: '80vh' }}>
         <h2>ProtVista visualisation for {accession}</h2>
+        <p>
+          Note that data might be slightly out of sync since this visualisation
+          is using the main UniProt data API and not the COVID-19 specific one,
+          updated more regularly
+        </p>
         <protvista-uniprot accession={accession} />
       </div>
     </section>
