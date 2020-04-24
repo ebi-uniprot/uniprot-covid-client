@@ -11,6 +11,7 @@ import {
   Loader,
   DisplayMenu,
   PublicationIcon,
+  ProtVistaIcon,
   ExternalLinkIcon,
   TremblIcon,
   DownloadIcon,
@@ -33,6 +34,7 @@ import {
 } from '../results/types/resultsTypes';
 import EntryPublicationsFacets from './publications/EntryPublicationsFacets';
 import EntryPublications from './publications/EntryPublications';
+import FeatureViewer from './FeatureViewer';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import { Facet } from '../types/responseTypes';
@@ -84,7 +86,7 @@ const Entry: React.FC<EntryProps> = ({
     return <Loader />;
   }
 
-  const sections = UniProtKBEntryConfig.map(section => ({
+  const sections = UniProtKBEntryConfig.map((section) => ({
     label: section.name,
     id: section.name,
 
@@ -127,7 +129,7 @@ const Entry: React.FC<EntryProps> = ({
           >
             <div className="dropdown-menu__content">
               <ul>
-                {fileFormatEntryDownload.map(fileFormat => (
+                {fileFormatEntryDownload.map((fileFormat) => (
                   <li key={fileFormat}>
                     <a
                       href={apiUrls.entryDownload(
@@ -161,6 +163,12 @@ const Entry: React.FC<EntryProps> = ({
         </div>
       ),
       mainContent: <EntryMain transformedData={entryData} />,
+    },
+    {
+      name: 'Feature viewer',
+      path: 'feature-viewer',
+      icon: <ProtVistaIcon />,
+      mainContent: <FeatureViewer accession={accession} />,
     },
     {
       name: 'Publications',
@@ -203,7 +211,7 @@ const Entry: React.FC<EntryProps> = ({
         }
         actionButtons={
           <Switch>
-            {displayMenuData.map(displayItem => (
+            {displayMenuData.map((displayItem) => (
               <Route
                 path={`${path}/${displayItem.path}`}
                 render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
@@ -214,7 +222,7 @@ const Entry: React.FC<EntryProps> = ({
         }
       >
         <Switch>
-          {displayMenuData.map(displayItem => (
+          {displayMenuData.map((displayItem) => (
             <Route
               path={`${path}/${displayItem.path}`}
               render={() => <Fragment>{displayItem.mainContent}</Fragment>}

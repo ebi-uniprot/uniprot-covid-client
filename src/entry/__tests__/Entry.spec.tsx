@@ -55,7 +55,7 @@ describe('Entry', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {

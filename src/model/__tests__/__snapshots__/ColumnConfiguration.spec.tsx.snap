@@ -231,11 +231,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
       >
         <strong>
           some Gene 
-          <span
+          <button
+            aria-controls="<UUID>"
+            aria-expanded="false"
             class="evidence-tag svg-colour-unreviewed"
             data-testid="evidence-tag-trigger"
-            role="button"
-            tabindex="0"
+            type="button"
           >
             <svg
               fill="none"
@@ -256,32 +257,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
             >
               1 automatic annotation
             </span>
-          </span>
+          </button>
           <div
             class="evidence-tag-content "
             data-testid="evidence-tag-content"
-          >
-            <div>
-              <h5>
-                Automatic assertion according to rules
-              </h5>
-              <a
-                class="external-link"
-                href="https://www.uniprot.org/unirule/PIRNR001360"
-                target="_blank"
-              >
-                PIRNR001360
-                <svg
-                  viewBox="0 0 576 512"
-                  width="12.5"
-                >
-                  <path
-                    d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
+            id="<UUID>"
+          />
         </strong>
       </div>
     </div>
@@ -301,11 +282,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
         class="info-list__item__content"
       >
         some Syn 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-unreviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -326,32 +308,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           >
             1 automatic annotation
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Automatic assertion according to rules
-            </h5>
-            <a
-              class="external-link"
-              href="https://www.uniprot.org/unirule/PIRNR001361"
-              target="_blank"
-            >
-              PIRNR001361
-              <svg
-                viewBox="0 0 576 512"
-                width="12.5"
-              >
-                <path
-                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </div>
     </div>
     <div
@@ -370,11 +332,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
         class="info-list__item__content"
       >
         some orf 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-reviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -395,17 +358,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           >
             1 publication
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Manual assertion based on experiment
-            </h5>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </div>
     </div>
     <div
@@ -424,11 +382,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
         class="info-list__item__content"
       >
         some locus 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-unreviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -449,32 +408,12 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           >
             1 automatic annotation
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Automatic assertion according to rules
-            </h5>
-            <a
-              class="external-link"
-              href="https://www.uniprot.org/unirule/PIRNR001362"
-              target="_blank"
-            >
-              PIRNR001362
-              <svg
-                viewBox="0 0 576 512"
-                width="12.5"
-              >
-                <path
-                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </div>
     </div>
   </div>
@@ -518,11 +457,12 @@ exports[`ColumnConfiguration component should render all columns 7`] = `
 exports[`ColumnConfiguration component should render all columns 8`] = `
 <DocumentFragment>
   some locus 
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-unreviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -543,43 +483,24 @@ exports[`ColumnConfiguration component should render all columns 8`] = `
     >
       1 automatic annotation
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Automatic assertion according to rules
-      </h5>
-      <a
-        class="external-link"
-        href="https://www.uniprot.org/unirule/PIRNR001362"
-        target="_blank"
-      >
-        PIRNR001362
-        <svg
-          viewBox="0 0 576 512"
-          width="12.5"
-        >
-          <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-          />
-        </svg>
-      </a>
-    </div>
-  </div>
+    id="<UUID>"
+  />
 </DocumentFragment>
 `;
 
 exports[`ColumnConfiguration component should render all columns 9`] = `
 <DocumentFragment>
   some orf 
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-reviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -600,28 +521,24 @@ exports[`ColumnConfiguration component should render all columns 9`] = `
     >
       1 publication
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Manual assertion based on experiment
-      </h5>
-    </div>
-  </div>
+    id="<UUID>"
+  />
 </DocumentFragment>
 `;
 
 exports[`ColumnConfiguration component should render all columns 10`] = `
 <DocumentFragment>
   some Syn 
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-unreviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -642,32 +559,12 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
     >
       1 automatic annotation
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Automatic assertion according to rules
-      </h5>
-      <a
-        class="external-link"
-        href="https://www.uniprot.org/unirule/PIRNR001361"
-        target="_blank"
-      >
-        PIRNR001361
-        <svg
-          viewBox="0 0 576 512"
-          width="12.5"
-        >
-          <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-          />
-        </svg>
-      </a>
-    </div>
-  </div>
+    id="<UUID>"
+  />
 </DocumentFragment>
 `;
 
@@ -976,11 +873,12 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
       isoform 1
     </h3>
     Molecular mass is 2.1 Da. Determined by LSI. note value 
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1001,32 +899,12 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001361"
-          target="_blank"
-        >
-          PIRNR001361
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -1050,11 +928,12 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
       Edited at positions 
       <span>
         rna position 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-unreviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -1075,42 +954,23 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
           >
             1 automatic annotation
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Automatic assertion according to rules
-            </h5>
-            <a
-              class="external-link"
-              href="https://www.uniprot.org/unirule/PIRNR001361"
-              target="_blank"
-            >
-              PIRNR001361
-              <svg
-                viewBox="0 0 576 512"
-                width="12.5"
-              >
-                <path
-                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </span>
     </div>
     <div>
       <span>
         value 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-unreviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -1131,32 +991,12 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
           >
             1 automatic annotation
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Automatic assertion according to rules
-            </h5>
-            <a
-              class="external-link"
-              href="https://www.uniprot.org/unirule/PIRNR001361"
-              target="_blank"
-            >
-              PIRNR001361
-              <svg
-                viewBox="0 0 576 512"
-                width="12.5"
-              >
-                <path
-                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </span>
     </div>
   </section>
@@ -1185,11 +1025,12 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
       </svg>
     </a>
      differs from that shown. Reason: Erroneous initiation Text note
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1210,32 +1051,12 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001361"
-          target="_blank"
-        >
-          PIRNR001361
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -1266,11 +1087,12 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
       class="text-block"
     >
       value1
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-reviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -1291,38 +1113,19 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://prosite.expasy.org/unirule/PRU10028"
-            target="_blank"
-          >
-            PRU10028
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </section>
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1343,32 +1146,12 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://prosite.expasy.org/unirule/PRU10028"
-          target="_blank"
-        >
-          PRU10028
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -1388,11 +1171,12 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       1.2.4.5
     </strong>
      some reaction
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1413,32 +1197,12 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001361"
-          target="_blank"
-        >
-          PIRNR001361
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
     This reaction proceeds in the 
     <span
       data-testid="direction-text"
@@ -1446,11 +1210,12 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       backward
     </span>
      direction 
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1471,32 +1236,12 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       >
         Imported
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion inferred from database entries
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.ensembl.org/id/ENSP0001324"
-          target="_blank"
-        >
-          ENSP0001324
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </span>
 </DocumentFragment>
 `;
@@ -1508,11 +1253,12 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
   >
     <span>
       Cofactor Name 
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-unreviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -1533,42 +1279,23 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://www.uniprot.org/unirule/PIRNR001361"
-            target="_blank"
-          >
-            PIRNR001361
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </span>
     <section
       class="text-block"
     >
       value2
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-unreviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -1589,32 +1316,12 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://www.uniprot.org/unirule/PIRNR001361"
-            target="_blank"
-          >
-            PIRNR001361
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </section>
   </section>
 </DocumentFragment>
@@ -1625,11 +1332,12 @@ exports[`ColumnConfiguration component should render all columns 37`] = `<Docume
 exports[`ColumnConfiguration component should render all columns 38`] = `
 <DocumentFragment>
   1.2.3.4 
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-reviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -1650,32 +1358,12 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
     >
       1 automatic annotation
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Automatic assertion according to rules
-      </h5>
-      <a
-        class="external-link"
-        href="https://prosite.expasy.org/unirule/PRU100210"
-        target="_blank"
-      >
-        PRU100210
-        <svg
-          viewBox="0 0 576 512"
-          width="12.5"
-        >
-          <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-          />
-        </svg>
-      </a>
-    </div>
-  </div>
+    id="<UUID>"
+  />
 </DocumentFragment>
 `;
 
@@ -1697,11 +1385,12 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           M
         </sub>
         =2.0999999046325684uM for sub1 
-        <span
+        <button
+          aria-controls="<UUID>"
+          aria-expanded="false"
           class="evidence-tag svg-colour-reviewed"
           data-testid="evidence-tag-trigger"
-          role="button"
-          tabindex="0"
+          type="button"
         >
           <svg
             fill="none"
@@ -1722,32 +1411,12 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           >
             1 automatic annotation
           </span>
-        </span>
+        </button>
         <div
           class="evidence-tag-content "
           data-testid="evidence-tag-content"
-        >
-          <div>
-            <h5>
-              Automatic assertion according to rules
-            </h5>
-            <a
-              class="external-link"
-              href="https://prosite.expasy.org/unirule/PRU10028"
-              target="_blank"
-            >
-              PRU10028
-              <svg
-                viewBox="0 0 576 512"
-                width="12.5"
-              >
-                <path
-                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+          id="<UUID>"
+        />
       </li>
     </ul>
   </section>
@@ -1758,11 +1427,12 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
       class="text-block"
     >
       value1
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-reviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -1783,32 +1453,12 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://prosite.expasy.org/unirule/PRU10028"
-            target="_blank"
-          >
-            PRU10028
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </section>
   </section>
 </DocumentFragment>
@@ -1826,11 +1476,12 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
     class="text-block"
   >
     value1
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1851,32 +1502,12 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://prosite.expasy.org/unirule/PRU10028"
-          target="_blank"
-        >
-          PRU10028
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -1887,11 +1518,12 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
     class="text-block"
   >
     value1
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1912,32 +1544,12 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://prosite.expasy.org/unirule/PRU10028"
-          target="_blank"
-        >
-          PRU10028
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -1950,11 +1562,12 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
     class="text-block"
   >
     value1
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -1975,32 +1588,12 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://prosite.expasy.org/unirule/PRU10028"
-          target="_blank"
-        >
-          PRU10028
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -2061,11 +1654,12 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
       </svg>
     </a>
      differs from that shown. Reason: Erroneous initiation Text note
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -2086,32 +1680,12 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001361"
-          target="_blank"
-        >
-          PIRNR001361
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -2234,11 +1808,12 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         location value
       </strong>
        
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-unreviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -2259,38 +1834,19 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://www.uniprot.org/unirule/PIRNR001361"
-            target="_blank"
-          >
-            PIRNR001361
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
       : topology value 
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-unreviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -2311,42 +1867,23 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://www.uniprot.org/unirule/PIRNR001361"
-            target="_blank"
-          >
-            PIRNR001361
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </div>
     <section
       class="text-block"
     >
       value
-      <span
+      <button
+        aria-controls="<UUID>"
+        aria-expanded="false"
         class="evidence-tag svg-colour-unreviewed"
         data-testid="evidence-tag-trigger"
-        role="button"
-        tabindex="0"
+        type="button"
       >
         <svg
           fill="none"
@@ -2367,32 +1904,12 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         >
           1 automatic annotation
         </span>
-      </span>
+      </button>
       <div
         class="evidence-tag-content "
         data-testid="evidence-tag-content"
-      >
-        <div>
-          <h5>
-            Automatic assertion according to rules
-          </h5>
-          <a
-            class="external-link"
-            href="https://www.uniprot.org/unirule/PIRNR001361"
-            target="_blank"
-          >
-            PIRNR001361
-            <svg
-              viewBox="0 0 576 512"
-              width="12.5"
-            >
-              <path
-                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+        id="<UUID>"
+      />
     </section>
   </section>
 </DocumentFragment>
@@ -2415,11 +1932,12 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
     class="text-block"
   >
     value
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -2440,32 +1958,12 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001360"
-          target="_blank"
-        >
-          PIRNR001360
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </section>
 </DocumentFragment>
 `;
@@ -2478,11 +1976,12 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
   <span
     class="text-block"
   >
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-unreviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -2503,32 +2002,12 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
       >
         1 automatic annotation
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Automatic assertion according to rules
-        </h5>
-        <a
-          class="external-link"
-          href="https://www.uniprot.org/unirule/PIRNR001362"
-          target="_blank"
-        >
-          PIRNR001362
-          <svg
-            viewBox="0 0 576 512"
-            width="12.5"
-          >
-            <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
+      id="<UUID>"
+    />
   </span>
   <div
     class="info-list "

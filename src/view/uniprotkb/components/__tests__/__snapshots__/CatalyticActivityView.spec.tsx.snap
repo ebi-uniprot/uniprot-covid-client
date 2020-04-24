@@ -17,11 +17,12 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
     >
       forward
     </span>
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -42,28 +43,24 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
       >
         1 publication
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Manual assertion based on experiment
-        </h5>
-      </div>
-    </div>
+      id="<UUID>"
+    />
      and the 
     <span
       data-testid="direction-text"
     >
       backward
     </span>
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -84,17 +81,12 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
       >
         1 publication
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Manual assertion based on experiment
-        </h5>
-      </div>
-    </div>
+      id="<UUID>"
+    />
      directions 
   </span>
 </DocumentFragment>
@@ -114,11 +106,12 @@ exports[`CatalyticActivityView component should render catalytic activity when c
     >
       forward
     </span>
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -139,28 +132,24 @@ exports[`CatalyticActivityView component should render catalytic activity when c
       >
         1 publication
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Manual assertion based on experiment
-        </h5>
-      </div>
-    </div>
+      id="<UUID>"
+    />
      and the 
     <span
       data-testid="direction-text"
     >
       backward
     </span>
-    <span
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
       class="evidence-tag svg-colour-reviewed"
       data-testid="evidence-tag-trigger"
-      role="button"
-      tabindex="0"
+      type="button"
     >
       <svg
         fill="none"
@@ -181,17 +170,12 @@ exports[`CatalyticActivityView component should render catalytic activity when c
       >
         1 publication
       </span>
-    </span>
+    </button>
     <div
       class="evidence-tag-content "
       data-testid="evidence-tag-content"
-    >
-      <div>
-        <h5>
-          Manual assertion based on experiment
-        </h5>
-      </div>
-    </div>
+      id="<UUID>"
+    />
      directions 
   </span>
 </DocumentFragment>
@@ -206,11 +190,12 @@ exports[`ReactionDirection component should render ReactionDirection when one ph
     forward
   </span>
    direction 
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-reviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -231,17 +216,12 @@ exports[`ReactionDirection component should render ReactionDirection when one ph
     >
       1 publication
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Manual assertion based on experiment
-      </h5>
-    </div>
-  </div>
+    id="<UUID>"
+  />
 </DocumentFragment>
 `;
 
@@ -253,11 +233,12 @@ exports[`ReactionDirection component should render ReactionDirection when two ph
   >
     forward
   </span>
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-reviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -278,28 +259,24 @@ exports[`ReactionDirection component should render ReactionDirection when two ph
     >
       1 publication
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Manual assertion based on experiment
-      </h5>
-    </div>
-  </div>
+    id="<UUID>"
+  />
    and the 
   <span
     data-testid="direction-text"
   >
     backward
   </span>
-  <span
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
     class="evidence-tag svg-colour-reviewed"
     data-testid="evidence-tag-trigger"
-    role="button"
-    tabindex="0"
+    type="button"
   >
     <svg
       fill="none"
@@ -320,17 +297,12 @@ exports[`ReactionDirection component should render ReactionDirection when two ph
     >
       1 publication
     </span>
-  </span>
+  </button>
   <div
     class="evidence-tag-content "
     data-testid="evidence-tag-content"
-  >
-    <div>
-      <h5>
-        Manual assertion based on experiment
-      </h5>
-    </div>
-  </div>
+    id="<UUID>"
+  />
    directions 
 </DocumentFragment>
 `;
