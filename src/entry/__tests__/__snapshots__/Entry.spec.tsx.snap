@@ -302,51 +302,17 @@ exports[`Entry should render main 1`] = `
                       class="display-menu__item_icon"
                     >
                       <svg
-                        height="100"
-                        viewBox="0 0 100 100"
-                        width="100"
+                        fill="currentColor"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        width="16"
                       >
-                        <g
-                          fill="none"
-                          fill-rule="evenodd"
-                        >
-                          <path
-                            d="M9 50c6.833-10.667 13.667-16 20.5-16S43.167 39.333 50 50s13.667 16 20.5 16S84.167 60.667 91 50"
-                            stroke="#3ca3ca"
-                            stroke-linecap="square"
-                            stroke-width="2"
-                          />
-                          <circle
-                            cx="9"
-                            cy="50"
-                            fill="#3ca3ca"
-                            r="6"
-                          />
-                          <circle
-                            cx="30"
-                            cy="34"
-                            fill="#3ca3ca"
-                            r="6"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            fill="#3ca3ca"
-                            r="6"
-                          />
-                          <circle
-                            cx="70"
-                            cy="66"
-                            fill="#3ca3ca"
-                            r="6"
-                          />
-                          <circle
-                            cx="91"
-                            cy="50"
-                            fill="#3ca3ca"
-                            r="6"
-                          />
-                        </g>
+                        <path
+                          d="M0 0h2v14h14v2H0V0z"
+                        />
+                        <path
+                          d="M6.92 2l-2.9 9.86.96.28L7.08 5l2.28 5.47 2.07-2.58 1.64 2.86.86-.5-2.36-4.14-1.93 2.42L6.92 2z"
+                        />
                       </svg>
                     </span>
                     Feature viewer
@@ -565,11 +531,12 @@ exports[`Entry should render main 1`] = `
                           >
                             <strong>
                               some Gene 
-                              <span
+                              <button
+                                aria-controls="<UUID>"
+                                aria-expanded="false"
                                 class="evidence-tag svg-colour-unreviewed"
                                 data-testid="evidence-tag-trigger"
-                                role="button"
-                                tabindex="0"
+                                type="button"
                               >
                                 <svg
                                   fill="none"
@@ -590,32 +557,12 @@ exports[`Entry should render main 1`] = `
                                 >
                                   1 automatic annotation
                                 </span>
-                              </span>
+                              </button>
                               <div
                                 class="evidence-tag-content "
                                 data-testid="evidence-tag-content"
-                              >
-                                <div>
-                                  <h5>
-                                    Automatic assertion according to rules
-                                  </h5>
-                                  <a
-                                    class="external-link"
-                                    href="https://www.uniprot.org/unirule/PIRNR001360"
-                                    target="_blank"
-                                  >
-                                    PIRNR001360
-                                    <svg
-                                      viewBox="0 0 576 512"
-                                      width="12.5"
-                                    >
-                                      <path
-                                        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                      />
-                                    </svg>
-                                  </a>
-                                </div>
-                              </div>
+                                id="<UUID>"
+                              />
                             </strong>
                           </div>
                         </div>
@@ -635,11 +582,12 @@ exports[`Entry should render main 1`] = `
                             class="info-list__item__content"
                           >
                             some Syn 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-unreviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -660,32 +608,12 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 automatic annotation
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Automatic assertion according to rules
-                                </h5>
-                                <a
-                                  class="external-link"
-                                  href="https://www.uniprot.org/unirule/PIRNR001361"
-                                  target="_blank"
-                                >
-                                  PIRNR001361
-                                  <svg
-                                    viewBox="0 0 576 512"
-                                    width="12.5"
-                                  >
-                                    <path
-                                      d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                    />
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                           </div>
                         </div>
                         <div
@@ -704,11 +632,12 @@ exports[`Entry should render main 1`] = `
                             class="info-list__item__content"
                           >
                             some orf 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-reviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -729,17 +658,12 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 publication
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Manual assertion based on experiment
-                                </h5>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                           </div>
                         </div>
                         <div
@@ -758,11 +682,12 @@ exports[`Entry should render main 1`] = `
                             class="info-list__item__content"
                           >
                             some locus 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-unreviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -783,32 +708,12 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 automatic annotation
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Automatic assertion according to rules
-                                </h5>
-                                <a
-                                  class="external-link"
-                                  href="https://www.uniprot.org/unirule/PIRNR001362"
-                                  target="_blank"
-                                >
-                                  PIRNR001362
-                                  <svg
-                                    viewBox="0 0 576 512"
-                                    width="12.5"
-                                  >
-                                    <path
-                                      d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                    />
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                           </div>
                         </div>
                       </div>
@@ -911,11 +816,12 @@ exports[`Entry should render main 1`] = `
                       1.2.4.5
                     </strong>
                      some reaction
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -936,32 +842,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.uniprot.org/unirule/PIRNR001361"
-                          target="_blank"
-                        >
-                          PIRNR001361
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                     This reaction proceeds in the 
                     <span
                       data-testid="direction-text"
@@ -969,11 +855,12 @@ exports[`Entry should render main 1`] = `
                       backward
                     </span>
                      direction 
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -994,32 +881,12 @@ exports[`Entry should render main 1`] = `
                       >
                         Imported
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion inferred from database entries
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.ensembl.org/id/ENSP0001324"
-                          target="_blank"
-                        >
-                          ENSP0001324
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </span>
                   <h3>
                     cofactor
@@ -1029,11 +896,12 @@ exports[`Entry should render main 1`] = `
                   >
                     <span>
                       Cofactor Name 
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-unreviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -1054,42 +922,23 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://www.uniprot.org/unirule/PIRNR001361"
-                            target="_blank"
-                          >
-                            PIRNR001361
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </span>
                     <section
                       class="text-block"
                     >
                       value2
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-unreviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -1110,32 +959,12 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://www.uniprot.org/unirule/PIRNR001361"
-                            target="_blank"
-                          >
-                            PIRNR001361
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </section>
                   </section>
                   <h3>
@@ -1153,11 +982,12 @@ exports[`Entry should render main 1`] = `
                       class="text-block"
                     >
                       value1
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-reviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -1178,38 +1008,19 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://prosite.expasy.org/unirule/PRU10028"
-                            target="_blank"
-                          >
-                            PRU10028
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </section>
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-reviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -1230,32 +1041,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://prosite.expasy.org/unirule/PRU10028"
-                          target="_blank"
-                        >
-                          PRU10028
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     Kinetics
@@ -1272,11 +1063,12 @@ exports[`Entry should render main 1`] = `
                           M
                         </sub>
                         =2.0999999046325684uM for sub1 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -1297,32 +1089,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://prosite.expasy.org/unirule/PRU10028"
-                              target="_blank"
-                            >
-                              PRU10028
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </li>
                     </ul>
                   </section>
@@ -1333,11 +1105,12 @@ exports[`Entry should render main 1`] = `
                       class="text-block"
                     >
                       value1
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-reviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -1358,32 +1131,12 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://prosite.expasy.org/unirule/PRU10028"
-                            target="_blank"
-                          >
-                            PRU10028
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </section>
                   </section>
                   <h3>
@@ -1393,11 +1146,12 @@ exports[`Entry should render main 1`] = `
                     class="text-block"
                   >
                     value1
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-reviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -1418,32 +1172,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://prosite.expasy.org/unirule/PRU10028"
-                          target="_blank"
-                        >
-                          PRU10028
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     Redox Potential
@@ -1452,11 +1186,12 @@ exports[`Entry should render main 1`] = `
                     class="text-block"
                   >
                     value1
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-reviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -1477,32 +1212,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://prosite.expasy.org/unirule/PRU10028"
-                          target="_blank"
-                        >
-                          PRU10028
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     Temperature Dependence
@@ -1511,11 +1226,12 @@ exports[`Entry should render main 1`] = `
                     class="text-block"
                   >
                     value1
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-reviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -1536,32 +1252,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://prosite.expasy.org/unirule/PRU10028"
-                          target="_blank"
-                        >
-                          PRU10028
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     Enzyme and pathway databases
@@ -1654,11 +1350,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         rec full Name 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -1679,32 +1376,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://prosite.expasy.org/unirule/PRU10026"
-                              target="_blank"
-                            >
-                              PRU10026
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -1723,11 +1400,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         1.2.3.4 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -1748,32 +1426,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://prosite.expasy.org/unirule/PRU100210"
-                              target="_blank"
-                            >
-                              PRU100210
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -1792,11 +1450,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         recommended short name 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -1817,32 +1476,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://prosite.expasy.org/unirule/PRU10020"
-                              target="_blank"
-                            >
-                              PRU10020
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -1865,11 +1504,12 @@ exports[`Entry should render main 1`] = `
                         >
                           <li>
                             a full alt Name 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-reviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -1890,38 +1530,19 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 automatic annotation
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Automatic assertion according to rules
-                                </h5>
-                                <a
-                                  class="external-link"
-                                  href="https://prosite.expasy.org/unirule/PRU10022"
-                                  target="_blank"
-                                >
-                                  PRU10022
-                                  <svg
-                                    viewBox="0 0 576 512"
-                                    width="12.5"
-                                  >
-                                    <path
-                                      d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                    />
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                              (short alt name1 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-reviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -1942,32 +1563,12 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 automatic annotation
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Automatic assertion according to rules
-                                </h5>
-                                <a
-                                  class="external-link"
-                                  href="https://prosite.expasy.org/unirule/PRU10028"
-                                  target="_blank"
-                                >
-                                  PRU10028
-                                  <svg
-                                    viewBox="0 0 576 512"
-                                    width="12.5"
-                                  >
-                                    <path
-                                      d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                    />
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                             ) 
                           </li>
                         </ul>
@@ -2021,11 +1622,12 @@ exports[`Entry should render main 1`] = `
                         >
                           <li>
                             sub full Name 
-                            <span
+                            <button
+                              aria-controls="<UUID>"
+                              aria-expanded="false"
                               class="evidence-tag svg-colour-reviewed"
                               data-testid="evidence-tag-trigger"
-                              role="button"
-                              tabindex="0"
+                              type="button"
                             >
                               <svg
                                 fill="none"
@@ -2046,32 +1648,12 @@ exports[`Entry should render main 1`] = `
                               >
                                 1 automatic annotation
                               </span>
-                            </span>
+                            </button>
                             <div
                               class="evidence-tag-content "
                               data-testid="evidence-tag-content"
-                            >
-                              <div>
-                                <h5>
-                                  Automatic assertion according to rules
-                                </h5>
-                                <a
-                                  class="external-link"
-                                  href="https://prosite.expasy.org/unirule/PRU10027"
-                                  target="_blank"
-                                >
-                                  PRU10027
-                                  <svg
-                                    viewBox="0 0 576 512"
-                                    width="12.5"
-                                  >
-                                    <path
-                                      d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                    />
-                                  </svg>
-                                </a>
-                              </div>
-                            </div>
+                              id="<UUID>"
+                            />
                           </li>
                         </ul>
                       </div>
@@ -2092,11 +1674,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         biotech 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2117,32 +1700,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://prosite.expasy.org/unirule/PRU10024"
-                              target="_blank"
-                            >
-                              PRU10024
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -2200,11 +1763,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         some Gene 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2225,32 +1789,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001360"
-                              target="_blank"
-                            >
-                              PIRNR001360
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -2269,11 +1813,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         some Syn 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2294,32 +1839,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001361"
-                              target="_blank"
-                            >
-                              PIRNR001361
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -2338,11 +1863,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         some orf 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-reviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2363,17 +1889,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 publication
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Manual assertion based on experiment
-                            </h5>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -2392,11 +1913,12 @@ exports[`Entry should render main 1`] = `
                         class="info-list__item__content"
                       >
                         some locus 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2417,32 +1939,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001362"
-                              target="_blank"
-                            >
-                              PIRNR001362
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                   </div>
@@ -2482,11 +1984,12 @@ exports[`Entry should render main 1`] = `
                             />
                           </svg>
                         </a>
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -2507,32 +2010,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001363"
-                              target="_blank"
-                            >
-                              PIRNR001363
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </div>
                     </div>
                     <div
@@ -2657,11 +2140,12 @@ exports[`Entry should render main 1`] = `
                         location value
                       </strong>
                        
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-unreviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -2682,38 +2166,19 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://www.uniprot.org/unirule/PIRNR001361"
-                            target="_blank"
-                          >
-                            PIRNR001361
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                       : topology value 
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-unreviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -2734,42 +2199,23 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://www.uniprot.org/unirule/PIRNR001361"
-                            target="_blank"
-                          >
-                            PIRNR001361
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </div>
                     <section
                       class="text-block"
                     >
                       value
-                      <span
+                      <button
+                        aria-controls="<UUID>"
+                        aria-expanded="false"
                         class="evidence-tag svg-colour-unreviewed"
                         data-testid="evidence-tag-trigger"
-                        role="button"
-                        tabindex="0"
+                        type="button"
                       >
                         <svg
                           fill="none"
@@ -2790,32 +2236,12 @@ exports[`Entry should render main 1`] = `
                         >
                           1 automatic annotation
                         </span>
-                      </span>
+                      </button>
                       <div
                         class="evidence-tag-content "
                         data-testid="evidence-tag-content"
-                      >
-                        <div>
-                          <h5>
-                            Automatic assertion according to rules
-                          </h5>
-                          <a
-                            class="external-link"
-                            href="https://www.uniprot.org/unirule/PIRNR001361"
-                            target="_blank"
-                          >
-                            PIRNR001361
-                            <svg
-                              viewBox="0 0 576 512"
-                              width="12.5"
-                            >
-                              <path
-                                d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                        id="<UUID>"
+                      />
                     </section>
                   </section>
                 </div>
@@ -2850,11 +2276,12 @@ exports[`Entry should render main 1`] = `
                   <span
                     class="text-block"
                   >
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -2875,32 +2302,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.uniprot.org/unirule/PIRNR001362"
-                          target="_blank"
-                        >
-                          PIRNR001362
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </span>
                   <div
                     class="info-list "
@@ -2993,11 +2400,12 @@ exports[`Entry should render main 1`] = `
                     class="text-block"
                   >
                     value
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -3018,32 +2426,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.uniprot.org/unirule/PIRNR001360"
-                          target="_blank"
-                        >
-                          PIRNR001360
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                 </div>
               </section>
@@ -3512,11 +2900,12 @@ exports[`Entry should render main 1`] = `
                       </svg>
                     </a>
                      differs from that shown. Reason: Erroneous initiation Text note
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -3537,32 +2926,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.uniprot.org/unirule/PIRNR001361"
-                          target="_blank"
-                        >
-                          PIRNR001361
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     Mass Spectrometry
@@ -3574,11 +2943,12 @@ exports[`Entry should render main 1`] = `
                       isoform 1
                     </h3>
                     Molecular mass is 2.1 Da. Determined by LSI. note value 
-                    <span
+                    <button
+                      aria-controls="<UUID>"
+                      aria-expanded="false"
                       class="evidence-tag svg-colour-unreviewed"
                       data-testid="evidence-tag-trigger"
-                      role="button"
-                      tabindex="0"
+                      type="button"
                     >
                       <svg
                         fill="none"
@@ -3599,32 +2969,12 @@ exports[`Entry should render main 1`] = `
                       >
                         1 automatic annotation
                       </span>
-                    </span>
+                    </button>
                     <div
                       class="evidence-tag-content "
                       data-testid="evidence-tag-content"
-                    >
-                      <div>
-                        <h5>
-                          Automatic assertion according to rules
-                        </h5>
-                        <a
-                          class="external-link"
-                          href="https://www.uniprot.org/unirule/PIRNR001361"
-                          target="_blank"
-                        >
-                          PIRNR001361
-                          <svg
-                            viewBox="0 0 576 512"
-                            width="12.5"
-                          >
-                            <path
-                              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
+                      id="<UUID>"
+                    />
                   </section>
                   <h3>
                     RNA Editing
@@ -3636,11 +2986,12 @@ exports[`Entry should render main 1`] = `
                       Edited at positions 
                       <span>
                         rna position 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -3661,42 +3012,23 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001361"
-                              target="_blank"
-                            >
-                              PIRNR001361
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </span>
                     </div>
                     <div>
                       <span>
                         value 
-                        <span
+                        <button
+                          aria-controls="<UUID>"
+                          aria-expanded="false"
                           class="evidence-tag svg-colour-unreviewed"
                           data-testid="evidence-tag-trigger"
-                          role="button"
-                          tabindex="0"
+                          type="button"
                         >
                           <svg
                             fill="none"
@@ -3717,32 +3049,12 @@ exports[`Entry should render main 1`] = `
                           >
                             1 automatic annotation
                           </span>
-                        </span>
+                        </button>
                         <div
                           class="evidence-tag-content "
                           data-testid="evidence-tag-content"
-                        >
-                          <div>
-                            <h5>
-                              Automatic assertion according to rules
-                            </h5>
-                            <a
-                              class="external-link"
-                              href="https://www.uniprot.org/unirule/PIRNR001361"
-                              target="_blank"
-                            >
-                              PIRNR001361
-                              <svg
-                                viewBox="0 0 576 512"
-                                width="12.5"
-                              >
-                                <path
-                                  d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
-                                />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
+                          id="<UUID>"
+                        />
                       </span>
                     </div>
                   </section>

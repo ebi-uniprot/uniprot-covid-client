@@ -41,7 +41,10 @@
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
       "^react$": "<rootDir>/node_modules/react/",
       "^react-router-dom$": "<rootDir>/node_modules/react-router-dom/"
-    }
+    },
+    "snapshotSerializers": [
+      "<rootDir>/jest.serializer.js"
+    ]
   },
   "dependencies": {
     "@geneontology/ribbon": "^1.9.32",

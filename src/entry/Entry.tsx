@@ -11,7 +11,7 @@ import {
   Loader,
   DisplayMenu,
   PublicationIcon,
-  ProteinIcon,
+  ProtVistaIcon,
   ExternalLinkIcon,
   TremblIcon,
   DownloadIcon,
@@ -167,7 +167,7 @@ const Entry: React.FC<EntryProps> = ({
     {
       name: 'Feature viewer',
       path: 'feature-viewer',
-      icon: <ProteinIcon />,
+      icon: <ProtVistaIcon />,
       mainContent: <FeatureViewer accession={accession} />,
     },
     {
