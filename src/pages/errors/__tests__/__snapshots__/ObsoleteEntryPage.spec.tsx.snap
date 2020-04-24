@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ObsoleteEntryPage component should render deleted page 1`] = `
+<DocumentFragment>
+  <div
+    class="error-page-container"
+  >
+    <test-file-stub
+      classname="error-page-container__art-work"
+    />
+    <div
+      class="message message--info"
+      role="status"
+    >
+      <section
+        class="message__content"
+      >
+        <svg
+          fill="none"
+          height="1.125em"
+          viewBox="0 0 18 18"
+          width="1.125em"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+            fill="#000"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <small>
+          <h4>
+            This entry is obsolete
+          </h4>
+          <p
+            data-testid="deleted-entry-message"
+          >
+            The protein sequence for this entry is available in  
+            <a
+              href="/uniparc/?query=I8FBX0"
+            >
+              UniParc
+            </a>
+            . For previous versions of this entry, please look at its  
+            <a
+              href="/uniprot/I8FBX0?version=*"
+            >
+              history
+            </a>
+            .
+          </p>
+        </small>
+      </section>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ObsoleteEntryPage component should render demereged page 1`] = `
+<DocumentFragment>
+  <div
+    class="error-page-container"
+  >
+    <test-file-stub
+      classname="error-page-container__art-work"
+    />
+    <div
+      class="message message--info"
+      role="status"
+    >
+      <section
+        class="message__content"
+      >
+        <svg
+          fill="none"
+          height="1.125em"
+          viewBox="0 0 18 18"
+          width="1.125em"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+            fill="#000"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <small>
+          <h4>
+            This entry is obsolete
+          </h4>
+          <p
+            data-testid="demerged-entry-message"
+          >
+            It can now be found as secondary accession in  
+            <a
+              href="/uniprotkb/P63151"
+            >
+              P63151
+            </a>
+            <span>
+               and 
+            </span>
+            <a
+              href="/uniprotkb/P63150"
+            >
+              P63150
+            </a>
+            . [ 
+            <a
+              href="/uniprot/?query=replaces:Q00007"
+            >
+              List
+            </a>
+             ]
+          </p>
+          <p>
+            The protein sequence for this entry is available in  
+            <a
+              href="/uniparc/?query=Q00007"
+            >
+              UniParc
+            </a>
+            . For previous versions of this entry, please look at its  
+            <a
+              href="/uniprot/Q00007?version=*"
+            >
+              history
+            </a>
+            .
+          </p>
+        </small>
+      </section>
+    </div>
+  </div>
+</DocumentFragment>
+`;

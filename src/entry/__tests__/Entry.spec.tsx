@@ -7,6 +7,8 @@ import { fireEvent, waitForElement } from '@testing-library/dom';
 import Entry from '../Entry';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 import entryData from '../../model/__mocks__/entryModelData.json';
+import deletedEntryData from '../../model/__mocks__/deletedEntryModelData.json';
+import demeregedEntryData from '../../model/__mocks__/demergedEntryModelData.json';
 import entryPublicationsData from '../publications/__mocks__/entryPublicationsData.json';
 import entryInitialState from '../state/entryInitialState';
 
@@ -16,12 +18,16 @@ import apiUrls, {
 } from '../../utils/apiUrls';
 
 const { primaryAccession } = entryData;
+const { primaryAccession: deleteEntryAccession } = deletedEntryData;
+const { primaryAccession: demeregedEntryAccession } = demeregedEntryData;
 const mock = new MockAdapter(axios);
 
 const filteredUrl = getUniProtPublicationsQueryUrl(primaryAccession, [
   { name: 'scale', value: 'Small' },
 ]);
 
+mock.onGet(apiUrls.entry(deleteEntryAccession)).reply(200, deletedEntryData);
+mock.onGet(apiUrls.entry(demeregedEntryAccession)).reply(200, demeregedEntryData);
 mock.onGet(apiUrls.entry(primaryAccession)).reply(200, entryData);
 mock
   .onGet(getUniProtPublicationsQueryUrl(primaryAccession, []))
@@ -87,6 +93,50 @@ describe('Entry', () => {
         getByText(/Another facet/)
       );
       expect(smallFacetButton2).toBeTruthy();
+    });
+  });
+
+  it('should render obsolete page for deleted entries', async () => {
+    component = renderWithRedux(
+      <Route
+        component={props => <Entry {...props} />}
+        path="/uniprotkb/:accession"
+      />,
+      {
+        route: `/uniprotkb/${deleteEntryAccession}`,
+        initialState: {
+          entry: {
+            ...entryInitialState,
+          },
+        },
+      }
+    );
+
+    await act(async () => {
+      const { getByTestId } = component;
+      await waitForElement(() => getByTestId('deleted-entry-message'));
+    });
+  });
+
+  it('should render obsolete page for demereged entries', async () => {
+    component = renderWithRedux(
+      <Route
+        component={props => <Entry {...props} />}
+        path="/uniprotkb/:accession"
+      />,
+      {
+        route: `/uniprotkb/${demeregedEntryAccession}`,
+        initialState: {
+          entry: {
+            ...entryInitialState,
+          },
+        },
+      }
+    );
+
+    await act(async () => {
+      const { getByTestId } = component;
+      await waitForElement(() => getByTestId('demerged-entry-message'));
     });
   });
 });

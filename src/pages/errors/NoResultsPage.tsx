@@ -5,7 +5,7 @@ import ArtWork from '../../svg/no-results-found.svg';
 import '../../styles/ErrorPages.scss';
 
 const NoResultsPage = () => (
-  <div className="error-page-container">
+  <div className="error-page-container" data-testid="no-results-page">
     <ArtWork className="error-page-container__art-work" />
 
     <Message level="info">

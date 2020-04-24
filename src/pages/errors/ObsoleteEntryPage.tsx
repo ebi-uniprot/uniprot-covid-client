@@ -17,7 +17,7 @@ const DeletedEntryMessage: React.FC<{accession: string}> = ({
 }) => (
   <Message level="info">
     <h4>This entry is obsolete</h4>
-    <p>
+    <p data-testid="deleted-entry-message">
       The protein sequence for this entry is available in {' '}
       <Link to={`/uniparc/?query=${accession}`}>UniParc</Link>.
       For previous versions of this entry, please look at its {' '}
@@ -32,7 +32,7 @@ const DemergedEntryMessage: React.FC<{accession: string, demergedTo: string[]}> 
 }) => (
   <Message level="info">
     <h4>This entry is obsolete</h4>
-    <p>
+    <p data-testid="demerged-entry-message">
       It can now be found as secondary accession in {' '}
       {demergedTo
         .reduce((a: (string | JSX.Element)[], c, i) => {
