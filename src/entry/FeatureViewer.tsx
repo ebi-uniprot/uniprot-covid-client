@@ -1,9 +1,8 @@
 import React, { FC /* useRef, useEffect, useState */ } from 'react';
-import ProtvistaUniprot from // transformDataVariationAdapter, // transformDataStructureAdapter, // transformDataProteomicsAdapter, // transformDataFeatureAdapter,
-// transformDataInterproAdapter,
+import ProtvistaUniprot from // transformDataInterproAdapter, // transformDataVariationAdapter, // transformDataStructureAdapter, // transformDataProteomicsAdapter, // transformDataFeatureAdapter,
 'protvista-uniprot';
 
-// import useDataApi from '../utils/useDataApi';
+import useDataApi from '../utils/useDataApi';
 import { loadWebComponent } from '../utils/utils';
 
 // const transformData = (data: any) => {
@@ -23,6 +22,9 @@ const FeatureViewer: FC<{ accession: string }> = ({ accession }) => {
   // const data = useDataApi(
   //   `https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/${accession}`
   // );
+  const data = useDataApi(
+    `https://www.ebi.ac.uk/proteins/api/proteins/${accession}`
+  );
 
   // useEffect(() => {
   //   if (!data.sequence || !viewerRef.current) return;
@@ -46,7 +48,7 @@ const FeatureViewer: FC<{ accession: string }> = ({ accession }) => {
   //   };
   // }, [data]);
 
-  // if (!data.sequence) return null;
+  if (!data) return null;
 
   return (
     <section>
