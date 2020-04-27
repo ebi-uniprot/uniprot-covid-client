@@ -8,7 +8,7 @@ import Entry from '../Entry';
 import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 import entryData from '../../model/__mocks__/entryModelData.json';
 import deletedEntryData from '../../model/__mocks__/deletedEntryModelData.json';
-import demeregedEntryData from '../../model/__mocks__/demergedEntryModelData.json';
+import demergedEntryData from '../../model/__mocks__/demergedEntryModelData.json';
 import entryPublicationsData from '../publications/__mocks__/entryPublicationsData.json';
 import entryInitialState from '../state/entryInitialState';
 
@@ -19,7 +19,7 @@ import apiUrls, {
 
 const { primaryAccession } = entryData;
 const { primaryAccession: deleteEntryAccession } = deletedEntryData;
-const { primaryAccession: demeregedEntryAccession } = demeregedEntryData;
+const { primaryAccession: demergedEntryAccession } = demergedEntryData;
 const mock = new MockAdapter(axios);
 
 const filteredUrl = getUniProtPublicationsQueryUrl(primaryAccession, [
@@ -27,7 +27,7 @@ const filteredUrl = getUniProtPublicationsQueryUrl(primaryAccession, [
 ]);
 
 mock.onGet(apiUrls.entry(deleteEntryAccession)).reply(200, deletedEntryData);
-mock.onGet(apiUrls.entry(demeregedEntryAccession)).reply(200, demeregedEntryData);
+mock.onGet(apiUrls.entry(demergedEntryAccession)).reply(200, demergedEntryData);
 mock.onGet(apiUrls.entry(primaryAccession)).reply(200, entryData);
 mock
   .onGet(getUniProtPublicationsQueryUrl(primaryAccession, []))
@@ -118,14 +118,14 @@ describe('Entry', () => {
     });
   });
 
-  it('should render obsolete page for demereged entries', async () => {
+  it('should render obsolete page for demerged entries', async () => {
     component = renderWithRedux(
       <Route
         component={props => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
-        route: `/uniprotkb/${demeregedEntryAccession}`,
+        route: `/uniprotkb/${demergedEntryAccession}`,
         initialState: {
           entry: {
             ...entryInitialState,

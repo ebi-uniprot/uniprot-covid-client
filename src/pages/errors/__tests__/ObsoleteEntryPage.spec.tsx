@@ -2,7 +2,7 @@ import React from 'react';
 import ObsoleteEntryPage from '../ObsoleteEntryPage';
 import renderWithRedux from '../../../__testHelpers__/renderWithRedux';
 import deletedEntryData from '../../../model/__mocks__/deletedEntryModelData.json';
-import demeregedEntryData from '../../../model/__mocks__/demergedEntryModelData.json';
+import demergedEntryData from '../../../model/__mocks__/demergedEntryModelData.json';
 
 describe('ObsoleteEntryPage component', () => {
   test('should render deleted page', () => {
@@ -17,12 +17,12 @@ describe('ObsoleteEntryPage component', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test('should render demereged page', () => {
-    const { primaryAccession } = demeregedEntryData;
+  test('should render demerged page', () => {
+    const { primaryAccession } = demergedEntryData;
     const { asFragment } = renderWithRedux(
       <ObsoleteEntryPage
         accession={primaryAccession}
-        details={demeregedEntryData.inactiveReason}
+        details={demergedEntryData.inactiveReason}
       />
     );
 

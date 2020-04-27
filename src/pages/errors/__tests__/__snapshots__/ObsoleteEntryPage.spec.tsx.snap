@@ -56,7 +56,7 @@ exports[`ObsoleteEntryPage component should render deleted page 1`] = `
 </DocumentFragment>
 `;
 
-exports[`ObsoleteEntryPage component should render demereged page 1`] = `
+exports[`ObsoleteEntryPage component should render demerged page 1`] = `
 <DocumentFragment>
   <div
     class="error-page-container"
