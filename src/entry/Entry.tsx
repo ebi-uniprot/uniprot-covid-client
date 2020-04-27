@@ -21,7 +21,7 @@ import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import {
   UniProtkbUIModel,
   EntryType,
-  UniProtKBUIInactiveEntryModel,
+  UniProtkbInactiveEntryModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import EntrySection from '../model/types/EntrySection';
@@ -48,7 +48,7 @@ type MatchParams = {
 };
 
 type EntryProps = RouteComponentProps<MatchParams> & {
-  entryData: UniProtkbUIModel | UniProtKBUIInactiveEntryModel | null;
+  entryData: UniProtkbUIModel | UniProtkbInactiveEntryModel | null;
   publicationsData: {
     data: LiteratureForProteinAPI[] | null;
     facets: Facet[];
@@ -89,8 +89,8 @@ const Entry: React.FC<EntryProps> = ({
   }
 
   if (entryData && entryData.entryType === EntryType.INACTIVE) {
-    const inactiveEntryData : UniProtKBUIInactiveEntryModel =
-      entryData as UniProtKBUIInactiveEntryModel;
+    const inactiveEntryData : UniProtkbInactiveEntryModel =
+      entryData as UniProtkbInactiveEntryModel;
 
     return (
       <BaseLayout>

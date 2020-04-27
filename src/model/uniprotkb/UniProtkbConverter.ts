@@ -109,15 +109,7 @@ export type InactiveEntryReason = {
   mergeDemergeTo: string[] | [];
 }
 
-export type UniProtkbAPIInactiveEntryModel = {
-  annotationScore: number;
-  entryType: EntryType.INACTIVE;
-  inactiveReason: InactiveEntryReason;
-  primaryAccession: string;
-  uniProtId: string;
-}
-
-export type UniProtKBUIInactiveEntryModel = {
+export type UniProtkbInactiveEntryModel = {
   annotationScore: number;
   entryType: EntryType.INACTIVE;
   inactiveReason: InactiveEntryReason;
@@ -133,8 +125,8 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
       : {},
   }));
 
-const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbAPIInactiveEntryModel):
-  UniProtkbUIModel | UniProtKBUIInactiveEntryModel => 
+const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbInactiveEntryModel):
+  UniProtkbUIModel | UniProtkbInactiveEntryModel => 
 {
   const dataCopy = { ...data};
 
@@ -142,7 +134,7 @@ const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbAPIInactiveEntryM
     return {
       annotationScore: dataCopy.annotationScore,
       entryType: dataCopy.entryType,
-      inactiveReason: (dataCopy as UniProtkbAPIInactiveEntryModel).inactiveReason,
+      inactiveReason: (dataCopy as UniProtkbInactiveEntryModel).inactiveReason,
       primaryAccession: dataCopy.primaryAccession,
       uniProtId: dataCopy.uniProtId,
     }
