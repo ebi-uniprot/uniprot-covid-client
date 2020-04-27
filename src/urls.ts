@@ -5,6 +5,9 @@ export enum Location {
   UniProtKBDownload = 'UniProtKBDownload',
   UniProtKBCustomiseTable = 'UniProtKBCustomiseTable',
   UniProtKBQueryBuilder = 'UniProtKBQueryBuilder',
+  PageNotFound = 'PageNotFound',
+  ServiceUnavailable = 'ServiceUnavailable',
+  JobError = 'JobError',
 }
 
 export const LocationToPath = new Map([
@@ -14,6 +17,9 @@ export const LocationToPath = new Map([
   [Location.UniProtKBDownload, '/download'],
   [Location.UniProtKBCustomiseTable, '/customise-table'],
   [Location.UniProtKBQueryBuilder, '/advancedSearch'],
+  [Location.PageNotFound, '/page-not-found'],
+  [Location.ServiceUnavailable, '/service-unavailable'],
+  [Location.JobError, '/job-error'],
 ]);
 
 export const PathToLocation = new Map(

@@ -59,7 +59,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/page-not-found"
+            path={LocationToPath.get(Location.PageNotFound)}
             render={() => (
               <BaseLayout>
                 <ResourceNotFoundPage />
@@ -67,7 +67,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/service-unavailable"
+            path={LocationToPath.get(Location.ServiceUnavailable)}
             render={() => (
               <BaseLayout>
                 <ServiceUnavailablePage />
@@ -75,7 +75,7 @@ const App = () => (
             )}
           />
           <Route
-            path="/job-error"
+            path={LocationToPath.get(Location.JobError)}
             render={() => (
               <BaseLayout>
                 <JobErrorPage />
