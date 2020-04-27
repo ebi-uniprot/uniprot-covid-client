@@ -69,12 +69,12 @@ describe('Entry', () => {
     );
   });
 
-  it('should render main', async () => {
-    await act(async () => {
-      const { asFragment } = component;
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });
+  // it('should render main', async () => {
+  //   await act(async () => {
+  //     const { asFragment } = component;
+  //     expect(asFragment()).toMatchSnapshot();
+  //   });
+  // });
 
   it('should switch to publications and apply a filter', async () => {
     await act(async () => {

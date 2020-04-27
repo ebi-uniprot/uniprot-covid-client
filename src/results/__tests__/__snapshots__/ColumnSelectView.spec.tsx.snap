@@ -7,14 +7,18 @@ exports[`ColumnSelectView component should render 1`] = `
   >
     <div
       class="column-select-drag-drop__list"
-      data-react-beautiful-dnd-droppable="0"
+      data-rbd-droppable-context-id="0"
+      data-rbd-droppable-id="droppable"
     >
       <div
-        aria-roledescription="Draggable item. Press space bar to lift"
+        aria-describedby="rbd-hidden-text-0-hidden-text-0"
         class="button column-select-drag-drop__list__item"
-        data-react-beautiful-dnd-drag-handle="0"
-        data-react-beautiful-dnd-draggable="0"
+        data-rbd-drag-handle-context-id="0"
+        data-rbd-drag-handle-draggable-id="cc_allergen"
+        data-rbd-draggable-context-id="0"
+        data-rbd-draggable-id="cc_allergen"
         draggable="false"
+        role="button"
         tabindex="0"
       >
         ccAllergen-label

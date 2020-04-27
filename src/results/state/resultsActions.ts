@@ -4,7 +4,6 @@ import { ThunkDispatch } from 'redux-thunk';
 import idx from 'idx';
 import fetchData from '../../utils/fetchData';
 import { RootState } from '../../state/state-types';
-import 'regenerator-runtime/runtime';
 import apiUrls from '../../utils/apiUrls';
 import { Column } from '../../model/types/ColumnTypes';
 import {
