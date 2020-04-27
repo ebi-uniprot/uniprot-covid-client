@@ -8259,10 +8259,10 @@ protvista-structure@^2.9.1:
     lodash-es "^4.17.11"
     whatwg-fetch "^3.0.0"
 
-protvista-tooltip@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/protvista-tooltip/-/protvista-tooltip-2.8.1.tgz#6b11b8a382ca7848d64398c8072fab5aaebff60e"
-  integrity sha512-t6wsxgrwt96vTNsbOrsMvrHAlQBTN1djt8vQPkwTfjoqhMKhEx/p8KqoFWcjioICg4mqCPjCD2LNKk7eaofQsw==
+protvista-tooltip@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/protvista-tooltip/-/protvista-tooltip-2.9.2.tgz#15cc20ef1182b3489d7af619c109bbf2946a7a8c"
+  integrity sha512-66bOwB4S3lp5V2NGnX12IMkNnzfokFNV3qFdIGgWvOa0xQwOKEAYfr54M5jor+anawnzs5/v64CgmHPTfxnQBg==
   dependencies:
     lit-element "^2.2.0"
     lodash-es "^4.17.11"
@@ -8275,10 +8275,10 @@ protvista-track@^2.6.1:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.6.1"
 
-protvista-uniprot@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.2.tgz#8abb02efb569c652930b33667b2c2bb7475d8092"
-  integrity sha512-rI30sYzgixfpxCVwAzVHsTBV5zSrXbYk0hI2z2osiwHAJjikpBRe5aGhMo6aDy7FYCYT19h8ZyAo/RT96BUqyg==
+protvista-uniprot@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.3.tgz#db556395bd5651b629eca80968c9673d7e4177ad"
+  integrity sha512-ewy5IKAjbphyJ2/cpgjTv+qp3CLKAK8tweDkDezqi7BHLbe79UaMx5bQvvkj4Bx3vpzNzxSECZbunYif8E7bTA==
   dependencies:
     data-loader "^2.9.1"
     file-saver "^2.0.2"
@@ -8295,7 +8295,7 @@ protvista-uniprot@^2.5.2:
     protvista-sequence "^2.7.0"
     protvista-structure "^2.9.1"
     protvista-structure-adapter "^2.3.3"
-    protvista-tooltip "^2.8.1"
+    protvista-tooltip "^2.9.2"
     protvista-track "^2.6.1"
     protvista-variation "^2.6.1"
     protvista-variation-adapter "^2.3.3"
