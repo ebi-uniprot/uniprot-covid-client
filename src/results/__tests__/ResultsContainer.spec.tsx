@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import 'core-js/stable';
 import { cleanup, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import 'core-js/stable';
 import { waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import ColumnSelectContainer, {
