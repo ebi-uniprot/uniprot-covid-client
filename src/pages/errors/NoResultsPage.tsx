@@ -1,18 +1,21 @@
 import React from 'react';
 import { Message } from 'franklin-sites';
+import ErrorPage from './ErrorPage';
 import ArtWork from '../../svg/no-results-found.svg';
 
-import '../../styles/ErrorPages.scss';
+const ErrorMessage = () => (
+  <Message level="info">
+    <h4>Sorry, no results were found!</h4>
+    <span>Please try a different criteria</span>
+  </Message>
+);
 
 const NoResultsPage = () => (
-  <div className="error-page-container" data-testid="no-results-page">
-    <ArtWork className="error-page-container__art-work" />
-
-    <Message level="info">
-      <h4>Sorry, no results were found!</h4>
-      <span>Please try a different criteria</span>
-    </Message>
-  </div>
+  <ErrorPage
+    artwork={<ArtWork />}
+    message={<ErrorMessage />}
+    testid="no-results-page"
+  />
 );
 
 export default NoResultsPage;
