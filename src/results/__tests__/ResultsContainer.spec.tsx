@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import 'core-js/stable';
-import { cleanup, waitForElement, fireEvent } from '@testing-library/react';
+import { cleanup, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
 import results from '../../__mockData__/results.json';
@@ -31,19 +31,15 @@ describe('Results component', () => {
 
   test('should select/deselect a facet', async () => {
     await act(async () => {
-      const { getByText, history } = renderWithRedux(<ResultsContainer />, {
+      const { findByText, history } = renderWithRedux(<ResultsContainer />, {
         route: '/uniprotkb?query=blah',
       });
-      let unreviewedButton = await waitForElement(() =>
-        getByText('Unreviewed (TrEMBL) (455)')
-      );
+      let unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual(
         '?query=blah&facets=reviewed:false'
       );
-      unreviewedButton = await waitForElement(() =>
-        getByText('Unreviewed (TrEMBL) (455)')
-      );
+      unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual('?query=blah');
     });
@@ -55,43 +51,19 @@ describe('Results component', () => {
         query: searchInitialState,
         results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
       };
-      const { container, getByTestId, getByText, asFragment } = renderWithRedux(
+      const { container, findByTestId, findByText } = renderWithRedux(
         <ResultsContainer />,
         {
           initialState: state,
           route: '/uniprotkb?query=blah',
         }
       );
-      const toggle = await waitForElement(() =>
-        getByTestId('table-card-toggle')
-      );
+      const toggle = await findByTestId('table-card-toggle');
       expect(container.querySelector('div')).toBeNull;
       fireEvent.click(toggle);
-      const table = await waitForElement(() => getByText('Entry'));
+      const table = await findByText('Entry');
       expect(table).toBeTruthy;
     });
-  });
-
-  test('should handle selection', async () => {
-    const state = {
-      query: searchInitialState,
-      results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
-    };
-    const { container, debug, getByText } = renderWithRedux(
-      <ResultsContainer />,
-      {
-        initialState: state,
-        route: '/uniprotkb?query=blah',
-      }
-    );
-    const checkbox = await waitForElement(() =>
-      container.querySelector('input[type=checkbox]')
-    );
-    // As the checkbox selection currently has no effect on the
-    // UI we can't test much at the moment
-    expect(checkbox.checked).toBeFalsy;
-    fireEvent.click(checkbox); // de-select
-    expect(checkbox.checked).toBeTruthy;
   });
 
   test('should set sorting', async () => {
@@ -99,19 +71,22 @@ describe('Results component', () => {
       query: searchInitialState,
       results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
     };
-    const { getByText, history } = renderWithRedux(<ResultsContainer />, {
-      initialState: state,
-      route: '/uniprotkb?query=blah',
-    });
-    let columnHeader = await waitForElement(() => getByText('Entry'));
+    const { getByText, history, findByText } = renderWithRedux(
+      <ResultsContainer />,
+      {
+        initialState: state,
+        route: '/uniprotkb?query=blah',
+      }
+    );
+    let columnHeader = await findByText('Entry');
     fireEvent.click(columnHeader);
     expect(history.location.search).toBe('?query=blah&sort=accession');
-    columnHeader = await waitForElement(() => getByText('Entry'));
+    columnHeader = await findByText('Entry');
     fireEvent.click(columnHeader);
     expect(history.location.search).toBe(
       '?query=blah&sort=accession&dir=ascend'
     );
-    columnHeader = await waitForElement(() => getByText('Entry'));
+    columnHeader = await findByText('Entry');
     fireEvent.click(columnHeader);
     expect(history.location.search).toBe(
       '?query=blah&sort=accession&dir=descend'

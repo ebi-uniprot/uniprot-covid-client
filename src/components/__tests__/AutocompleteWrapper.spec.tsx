@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import AutocompleteWrapper from '../AutocompleteWrapper';
@@ -46,7 +46,7 @@ describe('Autocomplete Wrapper', () => {
     fireEvent.change(searchInput, {
       target: { value: mockSuggesterApi.query },
     });
-    const autocompleteItems = await waitForElement(() =>
+    const autocompleteItems = await waitFor(() =>
       getAllByTestId('autocomplete-item')
     );
     expect(autocompleteItems.length).toEqual(
@@ -59,7 +59,7 @@ describe('Autocomplete Wrapper', () => {
     const searchInput = queryByTestId('search-input');
     const value = 'hu';
     fireEvent.change(searchInput, { target: { value } });
-    const autocompleteItems = await waitForElement(() =>
+    const autocompleteItems = await waitFor(() =>
       queryAllByTestId('autocomplete-item')
     );
     expect(autocompleteItems.length).toEqual(0);
