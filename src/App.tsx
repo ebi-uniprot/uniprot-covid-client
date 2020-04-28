@@ -20,8 +20,12 @@ const EntryPage = lazy(() => import('./pages/EntryPage'));
 const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
 const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
-const ResourceNotFoundPage = lazy(() => import('./pages/errors/ResourceNotFoundPage'));
-const ServiceUnavailablePage = lazy(() => import('./pages/errors/ServiceUnavailablePage'));
+const ResourceNotFoundPage = lazy(() =>
+  import('./pages/errors/ResourceNotFoundPage')
+);
+const ServiceUnavailablePage = lazy(() =>
+  import('./pages/errors/ServiceUnavailablePage')
+);
 const JobErrorPage = lazy(() => import('./pages/errors/JobErrorPage'));
 
 const App = () => (
@@ -30,20 +34,20 @@ const App = () => (
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route
-            path={LocationToPath.get(Location.Home)}
+            path={LocationToPath[Location.Home]}
             exact
             render={() => <HomePage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKBEntry)}
+            path={LocationToPath[Location.UniProtKBEntry]}
             render={() => <EntryPage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKBResults)}
+            path={LocationToPath[Location.UniProtKBResults]}
             render={() => <ResultsPage />}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKBCustomiseTable)}
+            path={LocationToPath[Location.UniProtKBCustomiseTable]}
             render={() => (
               <BaseLayout>
                 <CustomiseTablePage />
@@ -51,7 +55,7 @@ const App = () => (
             )}
           />
           <Route
-            path={LocationToPath.get(Location.UniProtKBDownload)}
+            path={LocationToPath[Location.UniProtKBDownload]}
             render={() => (
               <BaseLayout>
                 <DownloadPage />
@@ -59,7 +63,7 @@ const App = () => (
             )}
           />
           <Route
-            path={LocationToPath.get(Location.PageNotFound)}
+            path={LocationToPath[Location.PageNotFound]}
             render={() => (
               <BaseLayout>
                 <ResourceNotFoundPage />
@@ -67,7 +71,7 @@ const App = () => (
             )}
           />
           <Route
-            path={LocationToPath.get(Location.ServiceUnavailable)}
+            path={LocationToPath[Location.ServiceUnavailable]}
             render={() => (
               <BaseLayout>
                 <ServiceUnavailablePage />
@@ -75,7 +79,7 @@ const App = () => (
             )}
           />
           <Route
-            path={LocationToPath.get(Location.JobError)}
+            path={LocationToPath[Location.JobError]}
             render={() => (
               <BaseLayout>
                 <JobErrorPage />
@@ -83,9 +87,7 @@ const App = () => (
             )}
           />
           <Route
-            path={`${LocationToPath.get(
-              Location.UniProtKBQueryBuilder
-            )}(/reset)?`}
+            path={`${LocationToPath[Location.UniProtKBQueryBuilder]}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
                 <AdvancedSearchPage />

@@ -25,11 +25,10 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
     [MessageFormat.POP_UP]: popUpMessages = [],
   } = groupBy(activeMessages, ({ format }) => format);
 
-  const currentLocation = PathToLocation.get(path as Location);
+  const currentLocation = PathToLocation[path] as Location;
   const filteredInPageMessages = inPageMessages.filter(
     ({ locations }) =>
-      !locations || // if no locations in the message object then show it everywhere
-      (currentLocation && locations.includes(currentLocation))
+      !locations || locations.includes(currentLocation) // if no locations in the message object then show it everywhere
   );
 
   return (
