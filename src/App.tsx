@@ -92,6 +92,13 @@ const App = () => (
               </BaseLayout>
             )}
           />
+          <Route
+            render={() => (
+              <BaseLayout>
+                <ResourceNotFoundPage />
+              </BaseLayout>
+            )}
+          />
         </Switch>
       </Suspense>
     </Router>
