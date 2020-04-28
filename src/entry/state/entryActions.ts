@@ -13,6 +13,7 @@ import getNextUrlFromResponse from '../../utils/queryUtils';
 import Response, { Facet } from '../../types/responseTypes';
 import { RootState } from '../../state/state-types';
 import history from '../../utils/browserHistory';
+import { Location, LocationToPath } from '../../urls';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
@@ -53,21 +54,22 @@ export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
     .then(({ data }: { data: UniProtkbAPIModel }) => {
       dispatch(receiveEntry(accession, data));
     })
-    .catch((error) => {
+    .catch(error => {
       const { status } = error.response;
 
       switch (status) {
         case 400:
         case 404:
-          history.push('/page-not-found');
+          history.push(LocationToPath[Location.PageNotFound]);
           break;
 
         case 500:
         case 503:
-          history.push('/service-unavailable');
+          history.push(LocationToPath[Location.ServiceUnavailable]);
           break;
 
-        default: break;
+        default:
+          break;
       }
 
       /* eslint-disable no-console */

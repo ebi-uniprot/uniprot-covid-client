@@ -18,7 +18,7 @@ import { Location, LocationToPath } from '../urls';
 
 import './styles/SearchContainer.scss';
 
-const queryBuilderPath = LocationToPath.get(Location.UniProtKBQueryBuilder);
+const queryBuilderPath = LocationToPath[Location.UniProtKBQueryBuilder];
 
 type Props = {
   queryString: string;
