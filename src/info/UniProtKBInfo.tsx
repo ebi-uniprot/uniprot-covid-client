@@ -25,6 +25,10 @@ const UniProtKBInfo = () => (
       Please go to the <a href="//www.uniprot.org">UniProt.org</a> website for
       all other entries and functionalities.
     </section>
+    <section className="text-block">
+      You can view all COVID-19 related publications contributed by the
+      community <a href="//community.uniprot.org/bbsub/covid.html">here</a>.
+    </section>
   </Fragment>
 );
 
