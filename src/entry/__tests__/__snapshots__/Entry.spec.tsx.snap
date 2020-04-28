@@ -2502,6 +2502,9 @@ exports[`Entry should render main 1`] = `
                 <div
                   class="card__content"
                 >
+                  <interaction-viewer
+                    accession="P21802"
+                  />
                   <protvista-datatable />
                 </div>
               </section>

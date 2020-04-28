@@ -2114,6 +2114,9 @@ exports[`Entry view should render 1`] = `
         <div
           class="card__content"
         >
+          <interaction-viewer
+            accession="P21802"
+          />
           <protvista-datatable />
         </div>
       </section>

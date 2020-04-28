@@ -57,7 +57,7 @@
     "d3-scale": "^3.2.1",
     "franklin-sites": "0.0.44",
     "idx": "^2.5.2",
-    "interaction-viewer": "2.4.3",
+    "interaction-viewer": "2.7.0",
     "lit-html": "^1.2.1",
     "litemol": "^2.4.2",
     "lodash": "^4.17.15",

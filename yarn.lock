@@ -5616,10 +5616,10 @@ inquirer@^5.2.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-interaction-viewer@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/interaction-viewer/-/interaction-viewer-2.4.3.tgz#16c28f0b3e4122691962707f6fe016f85b46f042"
-  integrity sha512-ka72jOp7nnyiLKKGEk6aDNNuGu+NsUtwBNoDul+v+4qXbbukNOt8unsaSKg7RYvXa//O2ChExUJzootUQ619HQ==
+interaction-viewer@2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/interaction-viewer/-/interaction-viewer-2.7.0.tgz#95d2cba0762d55e1717c7baec58fc7dd5f369ff8"
+  integrity sha512-gUkM4YAsgDYP0nXwnLmLwqtvoLnZvaPpgL1TUHEVyD5Bx9vxHzg5hZcg9x1BtgvgWDIMDY0LLhoUkH/t/evE8Q==
   dependencies:
     d3-scale "^3.2.0"
     d3-selection "^1.4.0"
