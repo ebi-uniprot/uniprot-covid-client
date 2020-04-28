@@ -134,7 +134,7 @@ describe('Results component', () => {
       results: { ...resultsInitialState},
     };
 
-    const { getByTestId, getByText } = renderWithRedux(<ResultsContainer />, {
+    const { getByTestId } = renderWithRedux(<ResultsContainer />, {
       initialState: state,
       route: '/uniprotkb?query=noresult',
     });
