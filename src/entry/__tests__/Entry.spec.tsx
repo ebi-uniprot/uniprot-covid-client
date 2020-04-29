@@ -61,7 +61,7 @@ describe('Entry', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -97,7 +97,7 @@ describe('Entry', () => {
   it('should render obsolete page for deleted entries', async () => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -111,15 +111,16 @@ describe('Entry', () => {
     );
 
     await act(async () => {
-      const { getByTestId } = component;
-      await waitForElement(() => getByTestId('deleted-entry-message'));
+      const { findByTestId } = component;
+      const message = await findByTestId('deleted-entry-message');
+      expect(message).toBeTruthy();
     });
   });
 
   it('should render obsolete page for demerged entries', async () => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -133,8 +134,9 @@ describe('Entry', () => {
     );
 
     await act(async () => {
-      const { getByTestId } = component;
-      await waitForElement(() => getByTestId('demerged-entry-message'));
+      const { findByTestId } = component;
+      const message = await findByTestId('demerged-entry-message');
+      expect(message).toBeTruthy();
     });
   });
 });

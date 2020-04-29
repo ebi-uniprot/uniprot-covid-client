@@ -43,7 +43,10 @@
     },
     "globals": {
       "BASE_URL": "/"
-    }
+    },
+    "snapshotSerializers": [
+      "<rootDir>/jest.serializer.js"
+    ]
   },
   "dependencies": {
     "@geneontology/ribbon": "1.11.2",
