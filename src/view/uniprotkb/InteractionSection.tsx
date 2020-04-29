@@ -128,7 +128,7 @@ const InteractionSection: FC<{
             title={CommentType.SUBUNIT.toLowerCase()}
           />
         )}
-        {/* <interaction-viewer accession={primaryAccession} /> */}
+        <interaction-viewer accession={primaryAccession} />
         <protvista-datatable ref={datatableContainer} />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
