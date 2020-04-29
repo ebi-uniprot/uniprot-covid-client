@@ -14,6 +14,7 @@ import {
   TremblIcon,
   DownloadIcon,
   DropdownButton,
+  ProtVistaIcon,
 } from 'franklin-sites';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
@@ -41,6 +42,7 @@ import SideBarLayout from '../layout/SideBarLayout';
 import { Facet } from '../types/responseTypes';
 import BaseLayout from '../layout/BaseLayout';
 import ObsoleteEntryPage from '../pages/errors/ObsoleteEntryPage';
+import FeatureViewer from './FeatureViewer';
 
 type MatchParams = {
   accession: string;
@@ -89,8 +91,7 @@ const Entry: React.FC<EntryProps> = ({
   }
 
   if (entryData && entryData.entryType === EntryType.INACTIVE) {
-    const inactiveEntryData : UniProtkbInactiveEntryModel =
-      entryData as UniProtkbInactiveEntryModel;
+    const inactiveEntryData: UniProtkbInactiveEntryModel = entryData as UniProtkbInactiveEntryModel;
 
     return (
       <BaseLayout>
@@ -102,7 +103,7 @@ const Entry: React.FC<EntryProps> = ({
     );
   }
 
-  const sections = UniProtKBEntryConfig.map(section => ({
+  const sections = UniProtKBEntryConfig.map((section) => ({
     label: section.name,
     id: section.name,
 
@@ -142,7 +143,7 @@ const Entry: React.FC<EntryProps> = ({
           >
             <div className="dropdown-menu__content">
               <ul>
-                {fileFormatEntryDownload.map(fileFormat => (
+                {fileFormatEntryDownload.map((fileFormat) => (
                   <li key={fileFormat}>
                     <a
                       href={apiUrls.entryDownload(
@@ -163,6 +164,12 @@ const Entry: React.FC<EntryProps> = ({
         </div>
       ),
       mainContent: <EntryMain transformedData={entryData} />,
+    },
+    {
+      name: 'Feature viewer',
+      path: 'feature-viewer',
+      icon: <ProtVistaIcon />,
+      mainContent: <FeatureViewer accession={accession} />,
     },
     {
       name: 'Publications',
@@ -205,7 +212,7 @@ const Entry: React.FC<EntryProps> = ({
         }
         actionButtons={
           <Switch>
-            {displayMenuData.map(displayItem => (
+            {displayMenuData.map((displayItem) => (
               <Route
                 path={`${path}/${displayItem.path}`}
                 render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
@@ -216,7 +223,7 @@ const Entry: React.FC<EntryProps> = ({
         }
       >
         <Switch>
-          {displayMenuData.map(displayItem => (
+          {displayMenuData.map((displayItem) => (
             <Route
               path={`${path}/${displayItem.path}`}
               render={() => <Fragment>{displayItem.mainContent}</Fragment>}
