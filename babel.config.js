@@ -1,5 +1,5 @@
 // eslint-disable-next-line func-names
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
 
   const presets = [
@@ -8,6 +8,7 @@ module.exports = function(api) {
     '@babel/preset-typescript',
   ];
   const plugins = [
+    '@babel/plugin-transform-runtime',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-object-rest-spread',
   ];

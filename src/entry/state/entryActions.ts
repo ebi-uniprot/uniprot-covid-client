@@ -71,7 +71,7 @@ export const receiveEntryPublications = (
   data: EntryPublicationsData,
   nextUrl: string | undefined,
   total: string,
-  reset: boolean = true
+  reset = true
 ) =>
   action(RECEIVE_ENTRY_PUBLICATIONS, {
     url,
@@ -87,7 +87,7 @@ export const requestEntryPublications = () =>
 
 export const fetchEntryPublications = (
   url: string,
-  reset: boolean = false
+  reset = false
 ) => async (dispatch: Dispatch) => {
   dispatch(requestEntryPublications());
   fetchData(url)
@@ -123,7 +123,7 @@ export const shouldFetchEntryPublications = (url: string, state: RootState) => {
 
 export const fetchEntryPublicationsIfNeeded = (
   url: string | undefined,
-  reset: boolean = true
+  reset = true
 ) => (
   dispatch: ThunkDispatch<RootState, void, Action>,
   getState: () => RootState

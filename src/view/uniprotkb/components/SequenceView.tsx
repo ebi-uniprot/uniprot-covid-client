@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import 'regenerator-runtime/runtime';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import { Link } from 'react-router-dom';
@@ -119,8 +118,8 @@ export const IsoformInfo: React.FC<{
     },
     {
       title: 'Synonyms',
-      content: (idx(isoformData, o => o.synonyms) || [])
-        .map(syn => syn.value)
+      content: (idx(isoformData, (o) => o.synonyms) || [])
+        .map((syn) => syn.value)
         .join(', '),
     },
     {
@@ -134,10 +133,10 @@ export const IsoformInfo: React.FC<{
                   to={`/blast/accession/${canonicalAccession}/positions/${location.start.value}-${location.end.value}`}
                 >{`${location.start.value}-${location.end.value}: `}</Link>
                 {alternativeSequence && alternativeSequence.originalSequence
-                  ? `${
-                      alternativeSequence.originalSequence
-                    }  → ${alternativeSequence.alternativeSequences &&
-                      alternativeSequence.alternativeSequences.join(', ')}`
+                  ? `${alternativeSequence.originalSequence}  → ${
+                      alternativeSequence.alternativeSequences &&
+                      alternativeSequence.alternativeSequences.join(', ')
+                    }`
                   : 'Missing'}
                 {evidences && <UniProtEvidenceTag evidences={evidences} />}
               </li>
@@ -150,7 +149,7 @@ export const IsoformInfo: React.FC<{
       title: 'Note',
       content:
         isoformData.note &&
-        isoformData.note.texts.map(note => note.value).join(', '),
+        isoformData.note.texts.map((note) => note.value).join(', '),
     },
   ];
   // TODO isoformData.sequenceIds is used to get the features for
@@ -166,7 +165,7 @@ export const IsoformInfo: React.FC<{
           <strong>canonical</strong>
           {' sequence. All positional information in '}
           {'this entry refers to it. This is also the sequence '}
-          {'that appears in the downloadable versions of the entry.'}
+          that appears in the downloadable versions of the entry.
         </p>
       )}
       {isoformData.isoformSequenceStatus === 'External' && (
@@ -222,7 +221,7 @@ export const MassSpectrometryView: React.FC<{
 }> = ({ data }) => {
   return (
     <Fragment>
-      {data.map(item => (
+      {data.map((item) => (
         <section className="text-block" key={`${item.molWeight}${item.method}`}>
           {item.molecule && <h3>{item.molecule}</h3>}
           {`Molecular mass is ${numberView({
@@ -241,16 +240,17 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
   data,
 }) => (
   <Fragment>
-    {data.map(item => (
+    {data.map((item) => (
       <section
         className="text-block"
-        key={`${item.positions &&
-          item.positions.map(pos => pos.position).join('')}`}
+        key={`${
+          item.positions && item.positions.map((pos) => pos.position).join('')
+        }`}
       >
         {item.positions && (
           <div>
             {'Edited at positions '}
-            {item.positions.map(position => (
+            {item.positions.map((position) => (
               <span key={position.position}>
                 {position.position}{' '}
                 <UniProtEvidenceTag evidences={position.evidences} />
@@ -260,7 +260,7 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
         )}
         {item.note && (
           <div>
-            {item.note.texts.map(text => (
+            {item.note.texts.map((text) => (
               <span key={text.value}>
                 {text.value}{' '}
                 {text.evidences && (
@@ -300,14 +300,14 @@ export const IsoformView: React.FC<{
   }
 
   let notesNode;
-  const texts = idx(alternativeProducts, o => o.note.texts);
+  const texts = idx(alternativeProducts, (o) => o.note.texts);
   if (texts) {
-    notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
+    notesNode = <p>{texts.map((text) => text.value).join(' ')}</p>;
   }
 
   let isoformsNode;
   if (isoforms) {
-    isoformsNode = isoforms.map(isoform => {
+    isoformsNode = isoforms.map((isoform) => {
       const isoformComponent = (
         <SequenceInfo isoformId={isoform.isoformIds[0]} />
       );

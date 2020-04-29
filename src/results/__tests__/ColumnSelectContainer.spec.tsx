@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import 'core-js/stable';
-import { waitForElement } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import ColumnSelectContainer, {
   removeFieldFromFieldsData,
@@ -26,12 +25,12 @@ describe('ColumnSelectContainer component', () => {
         selectedColumns={initialState.results.tableColumns}
       />
     );
-    const items = await waitForElement(() =>
+    const items = await waitFor(() =>
       getAllByTestId('accordion-search-list-item')
     );
     const expectedNumberListItems = mockResultFieldsApi.response.reduce(
       (accum, { fields }) =>
-        accum + fields.filter(field => field.name !== 'accession').length,
+        accum + fields.filter((field) => field.name !== 'accession').length,
       0
     );
     expect(items.length).toEqual(expectedNumberListItems);

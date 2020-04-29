@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import DownloadContainer, { getPreviewFileFormat } from '../DownloadContainer';
 import { createMemoryHistory } from 'history';
-import { waitForElement } from '@testing-library/react';
 import initialState from '../../state/initialState';
 import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
@@ -74,15 +73,15 @@ describe('DownloadContainer component', () => {
   });
 
   test('should handle preview button click', async () => {
-    const { getByTestId, getByText } = renderedWithRedux;
+    const { getByTestId, getByText, findByTestId } = renderedWithRedux;
     const previewButton = getByText('Preview 10');
     fireEvent.click(previewButton);
-    const preview = await waitForElement(() => getByTestId('download-preview'));
+    const preview = await findByTestId('download-preview');
     expect(preview.textContent).toEqual(mockDownloadApi.response);
   });
 
   test('should  show column selection component when excel or tsv file type is selected and otherwise hide it', async () => {
-    const { getByTestId, queryByText } = renderedWithRedux;
+    const { getByTestId, findByText } = renderedWithRedux;
     const formatSelect = getByTestId('file-format-select');
     [
       [FileFormat.excel, true],
@@ -90,9 +89,7 @@ describe('DownloadContainer component', () => {
       [FileFormat.tsv, true],
     ].forEach(async (value, columnSelect) => {
       fireEvent.change(formatSelect, { target: { value } });
-      const customise = await waitForElement(() =>
-        queryByText('Customize data')
-      );
+      const customise = await findByText('Customize data');
       const expectCustomise = expect(customise);
       columnSelect
         ? expectCustomise.toBeInTheDocument()
