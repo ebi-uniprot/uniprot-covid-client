@@ -1,6 +1,5 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import 'core-js/stable';
 import apiUrls from '../../../utils/apiUrls';
 import { clause, searchTerms, evidences } from '../searchReducers';
 import {
@@ -108,7 +107,10 @@ describe('searchTerms reducer', () => {
   });
 
   test('should receive search terms', () => {
-    const data = [{ id: '1', label: 'foo' }, { id: '2', label: 'bar' }];
+    const data = [
+      { id: '1', label: 'foo' },
+      { id: '2', label: 'bar' },
+    ];
     mock.onGet(apiUrls.advancedSearchTerms).reply(200, data);
 
     const state = {

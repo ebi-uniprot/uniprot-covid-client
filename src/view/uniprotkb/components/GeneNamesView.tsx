@@ -7,7 +7,7 @@ import { ValueWithEvidence } from '../../../model/types/modelTypes';
 
 export const geneAlternativeNamesView = (
   alternativeNames: ValueWithEvidence[],
-  firstComma: boolean = true
+  firstComma = true
 ) => {
   return (
     <Fragment>

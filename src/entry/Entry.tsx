@@ -18,7 +18,11 @@ import {
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
-import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
+import {
+  UniProtkbUIModel,
+  EntryType,
+  UniProtkbInactiveEntryModel,
+} from '../model/uniprotkb/UniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import EntrySection from '../model/types/EntrySection';
 import EntryMain from './EntryMain';
@@ -35,6 +39,8 @@ import EntryPublications from './publications/EntryPublications';
 import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import { Facet } from '../types/responseTypes';
+import BaseLayout from '../layout/BaseLayout';
+import ObsoleteEntryPage from '../pages/errors/ObsoleteEntryPage';
 
 type MatchParams = {
   accession: string;
@@ -42,7 +48,7 @@ type MatchParams = {
 };
 
 type EntryProps = RouteComponentProps<MatchParams> & {
-  entryData: UniProtkbUIModel | null;
+  entryData: UniProtkbUIModel | UniProtkbInactiveEntryModel | null;
   publicationsData: {
     data: LiteratureForProteinAPI[] | null;
     facets: Facet[];
@@ -80,6 +86,20 @@ const Entry: React.FC<EntryProps> = ({
 
   if (!entryData || Object.keys(entryData).length === 0) {
     return <Loader />;
+  }
+
+  if (entryData && entryData.entryType === EntryType.INACTIVE) {
+    const inactiveEntryData : UniProtkbInactiveEntryModel =
+      entryData as UniProtkbInactiveEntryModel;
+
+    return (
+      <BaseLayout>
+        <ObsoleteEntryPage
+          accession={accession}
+          details={inactiveEntryData.inactiveReason}
+        />
+      </BaseLayout>
+    );
   }
 
   const sections = UniProtKBEntryConfig.map(section => ({

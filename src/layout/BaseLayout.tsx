@@ -1,9 +1,9 @@
 import React from 'react';
-
 import UniProtHeader from '../header/UniProtHeader';
 import UniProtFooter from '../footer/UniProtFooter';
-import './styles/BaseLayout.scss';
 import GDPR from '../components/GDPR';
+import MessageManagerContainer from '../messages/MessageManagerContainer';
+import './styles/BaseLayout.scss';
 
 type BaseLayoutProps = {
   children: JSX.Element;
@@ -32,6 +32,9 @@ const BaseLayout: React.FC<BaseLayoutProps> = props => {
     <section className="base-layout">
       <section className="main-header">
         <UniProtHeader isHomePage={isHomePage} isSearchPage={isSearchPage} />
+      </section>
+      <section className="in-page-messages">
+        <MessageManagerContainer />
       </section>
       <a
         style={style}

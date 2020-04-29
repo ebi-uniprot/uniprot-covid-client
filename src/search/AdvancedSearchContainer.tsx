@@ -14,9 +14,11 @@ import {
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import createQueryString from './utils/QueryStringGenerator';
-import { queryBuilderPath } from '../App';
+import { Location, LocationToPath } from '../urls';
 
 import './styles/SearchContainer.scss';
+
+const queryBuilderPath = LocationToPath[Location.UniProtKBQueryBuilder];
 
 type Props = {
   queryString: string;
@@ -61,7 +63,7 @@ export class Search extends Component<Props, State> {
       location: { pathname },
       history,
     } = this.props;
-    if (pathname === `${queryBuilderPath}/reset`) {
+    if (queryBuilderPath && pathname === `${queryBuilderPath}/reset`) {
       dispatchSetPreSelectedClauses();
       history.replace(queryBuilderPath);
     }
