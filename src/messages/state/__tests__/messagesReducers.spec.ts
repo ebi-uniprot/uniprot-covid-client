@@ -1,6 +1,5 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import 'core-js/stable';
 import { addMessage, deleteMessage } from '../messagesActions';
 import messagesReducers from '../messagesReducers';
 import {

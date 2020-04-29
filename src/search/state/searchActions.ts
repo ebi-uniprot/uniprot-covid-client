@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { action } from 'typesafe-actions';
@@ -107,7 +106,7 @@ export const receiveSearchTerms = (data: SearchTermType[]) =>
 
 export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
   dispatch(requestSearchTerms());
-  return fetchData(apiUrls.advancedSearchTerms).then(response =>
+  return fetchData(apiUrls.advancedSearchTerms).then((response) =>
     dispatch(receiveSearchTerms(response.data))
   );
 };
@@ -144,7 +143,7 @@ export const fetchEvidences = (evidencesType: Evidence) => async (
 ) => {
   const url = apiUrls.evidences[evidencesType];
   dispatch(requestEvidences(evidencesType));
-  return fetchData(url).then(response =>
+  return fetchData(url).then((response) =>
     dispatch(receiveEvidences(response.data, evidencesType))
   );
 };

@@ -34,8 +34,10 @@ const FeaturesTableView: FC<{
   ) => FeatureColumns;
 }> = ({ data, getColumnConfig }) => {
   const [showEvidenceTagData, setShowEvidenceTagData] = useState(false);
-  const [selectedEvidenceData, setSelectedEvidenceData] = useState();
-  const [selectedReferences, setSelectedReferences] = useState();
+  const [selectedEvidenceData, setSelectedEvidenceData] = useState<
+    EvidenceData
+  >();
+  const [selectedReferences, setSelectedReferences] = useState<Evidence[]>();
 
   const evidenceTagCallback: FeaturesTableCallback = (
     evidenceData,
@@ -62,8 +64,9 @@ const FeaturesTableView: FC<{
     <Fragment>
       <protvista-datatable ref={setTableData} />
       <div
-        className={`evidence-tag-content ${showEvidenceTagData &&
-          'evidence-tag-content--visible'}`}
+        className={`evidence-tag-content ${
+          showEvidenceTagData && 'evidence-tag-content--visible'
+        }`}
       >
         {selectedEvidenceData && selectedReferences && (
           <UniProtEvidenceTagContent

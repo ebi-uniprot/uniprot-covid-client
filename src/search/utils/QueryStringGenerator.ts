@@ -32,7 +32,7 @@ const createTermString = (
   itemType: string,
   id: string | undefined,
   termSuffix: boolean | undefined,
-  stringValue: string = ''
+  stringValue = ''
 ) => {
   if (term === undefined) {
     throw new Error('term is undefined');

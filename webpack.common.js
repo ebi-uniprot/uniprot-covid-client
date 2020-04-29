@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: ['core-js/stable', path.resolve(__dirname, 'src/index.tsx')],
+  entry: [path.resolve(__dirname, 'src/index.tsx')],
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
     alias: {
@@ -14,7 +14,8 @@ module.exports = {
     },
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
@@ -23,25 +24,28 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: {
-            minimize: true,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+            },
           },
-        }, ],
+        ],
       },
       {
         test: /\.(css|sass|scss)$/,
         include: [
           // We use realpathSync otherwise doesn't work with symlinks
-          fs.realpathSync(`${__dirname  }/node_modules/litemol/dist/css`),
-          fs.realpathSync(`${__dirname  }/node_modules/@geneontology/ribbon/es`),
+          fs.realpathSync(`${__dirname}/node_modules/litemol/dist/css`),
+          fs.realpathSync(`${__dirname}/node_modules/@geneontology/ribbon/es`),
           fs.realpathSync(
-            `${__dirname  }/node_modules/interaction-viewer/styles`
+            `${__dirname}/node_modules/interaction-viewer/styles`
           ),
           path.resolve(__dirname, 'src'),
         ],
-        use: [{
+        use: [
+          {
             loader: 'style-loader', // creates style nodes from JS strings
           },
           {
@@ -55,20 +59,24 @@ module.exports = {
       {
         test: /\.svg$/i,
         issuer: /\.(t|j)sx?$/,
-        use: [{
-          loader: '@svgr/webpack',
-        }, ],
+        use: [
+          {
+            loader: '@svgr/webpack',
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         include: [path.resolve(__dirname, 'node_modules/litemol/dist/fonts')],
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
           },
-        }, ],
+        ],
       },
       {
         test: /\.svg$/,
