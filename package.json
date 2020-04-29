@@ -57,7 +57,7 @@
     "franklin-sites": "0.0.43",
     "history": "^4.10.1",
     "idx": "^2.5.2",
-    "interaction-viewer": "2.4.3",
+    "interaction-viewer": "2.7.0",
     "lit-html": "^1.1.2",
     "litemol": "^2.4.2",
     "lodash": "^4.17.15",
