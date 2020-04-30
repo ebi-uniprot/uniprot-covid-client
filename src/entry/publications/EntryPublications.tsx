@@ -31,6 +31,7 @@ const EntryPublications: FC<{
       <div style={{ height: '80vh' }}>
         <h2>Publications for {accession}</h2>
         {/* The height css will be removed after Franklin DataList is updated */}
+        {/* TODO could idKey be a callback on the item? */}
         <DataList
           idKey="id"
           data={results}

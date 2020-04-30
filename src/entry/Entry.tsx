@@ -46,17 +46,7 @@ type MatchParams = {
   path: string;
 };
 
-type EntryProps = RouteComponentProps<MatchParams> & {
-  publicationsData: {
-    data: LiteratureForProteinAPI[] | null;
-    facets: Facet[];
-    nextUrl: string;
-    total: number;
-  };
-  dispatchFetchEntryPublications: (url: string, reset?: boolean) => void;
-};
-
-const Entry: React.FC<EntryProps> = ({ match }) => {
+const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const { path, params } = match;
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
