@@ -12,7 +12,7 @@ const EntryPublications: FC<{
   selectedFacets: SelectedFacet[];
 }> = ({ accession, selectedFacets }) => {
   const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
-  const { loading, data, status, statusText, headers, error } = useDataApi(url);
+  const { loading, data, status, error } = useDataApi(url);
   //   data: LiteratureForProteinAPI[] | null;
 
   // publicationsData.nextUrl
@@ -25,7 +25,7 @@ const EntryPublications: FC<{
     return <Loader />;
   }
 
-  const { results, facets } = data;
+  const { results } = data;
   return (
     <section>
       <div style={{ height: '80vh' }}>

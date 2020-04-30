@@ -1,19 +1,20 @@
 import React from 'react';
-import renderWithRedux from '../../../__testHelpers__/renderWithRedux';
 import UniProtKBEntryPublications from '../UniProtKBEntryPublications';
-import entryData from '../../../model/__mocks__/entryModelData.json';
-import entryInitialState from '../../../entry/state/entryInitialState';
+import { render } from '@testing-library/react';
+import useDataApi from '../../../hooks/useDataApi';
+import { getPublicationsURL } from '../../apiUrls';
+
+jest.mock('../../../hooks/useDataApi', () => ({
+  __esModule: true, // this makes it work
+  default: jest.fn(() => ({
+    loading: false,
+  })),
+}));
 
 describe('UniProtKBEntryPublications', () => {
-  it('Should render', () => {
-    const { asFragment } = renderWithRedux(
-      <UniProtKBEntryPublications pubmedIds={['somepID2']} />,
-      {
-        initialState: {
-          entry: { ...entryInitialState, accession: 'P05067', data: entryData },
-        },
-      }
-    );
-    expect(asFragment()).toMatchSnapshot();
+  it('Should make a call with pubmed ids', () => {
+    const pubMedIds = ['123', '456'];
+    render(<UniProtKBEntryPublications pubmedIds={pubMedIds} />);
+    expect(useDataApi).toHaveBeenCalledWith(getPublicationsURL(pubMedIds));
   });
 });

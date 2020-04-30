@@ -13,8 +13,8 @@ import { SortableColumn } from '../model/types/ColumnTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
-const devPrefix = 'https://wwwdev.ebi.ac.uk';
-const prodPrefix = 'https://www.ebi.ac.uk';
+export const devPrefix = 'https://wwwdev.ebi.ac.uk';
+export const prodPrefix = 'https://www.ebi.ac.uk';
 
 const apiUrls = {
   // uniprotkb advanced search terms

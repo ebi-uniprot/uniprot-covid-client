@@ -10,7 +10,6 @@ import entryData from '../../model/__mocks__/entryModelData.json';
 import deletedEntryData from '../../model/__mocks__/deletedEntryModelData.json';
 import demergedEntryData from '../../model/__mocks__/demergedEntryModelData.json';
 import entryPublicationsData from '../publications/__mocks__/entryPublicationsData.json';
-import entryInitialState from '../state/entryInitialState';
 
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
@@ -66,11 +65,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${primaryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
   });
@@ -102,11 +96,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${deleteEntryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
 
@@ -125,11 +114,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${demergedEntryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
 

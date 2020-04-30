@@ -27,37 +27,13 @@ import convertExternalLinks from './sections/ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
 import { transfromProperties } from '../utils/utils';
 import { Property } from '../types/modelTypes';
+import { Reference } from '../../literature/types/LiteratureTypes';
 
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
   TREMBL = 'TrEMBL',
   INACTIVE = 'Inactive',
 }
-
-export type Citation = {
-  citationType?: string;
-  authors?: string[];
-  citationXrefs?: Xref[];
-  title?: string;
-  publicationDate?: number;
-  journal?: string;
-  firstPage?: number;
-  lastPage?: number;
-  volume?: number;
-  completeAuthorList?: boolean;
-  literatureAbstract?: string;
-  authoringGroup?: string[];
-  submissionDatabase?: string;
-};
-
-export type Reference = {
-  citation: Citation;
-  referencePositions?: string[];
-  referenceComments?: {
-    value: string;
-    type: string;
-  }[];
-};
 
 export type UniProtkbAPIModel = {
   proteinDescription?: ProteinNamesData;

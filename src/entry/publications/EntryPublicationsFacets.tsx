@@ -11,7 +11,7 @@ const EntryPublicationsFacets: React.FC<{
   setSelectedFacets: (facets: SelectedFacet[]) => void;
 }> = ({ accession, selectedFacets, setSelectedFacets }) => {
   const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
-  const { loading, data, status, statusText, headers, error } = useDataApi(url);
+  const { loading, data, status, error } = useDataApi(url);
 
   const addFacet = (name: string, value: string) => {
     setSelectedFacets([...selectedFacets, { name, value }]);
