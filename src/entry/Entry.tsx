@@ -43,6 +43,7 @@ import BaseLayout from '../layout/BaseLayout';
 import ObsoleteEntryPage from '../pages/errors/ObsoleteEntryPage';
 import FeatureViewer from './FeatureViewer';
 import useDataApi from '../hooks/useDataApi';
+import ErrorHandler from '../pages/errors/ErrorHandler';
 
 type MatchParams = {
   accession: string;
@@ -68,14 +69,19 @@ const Entry: React.FC<EntryProps> = ({
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
 
-  const { loading, data, status, statusText, headers } = useDataApi(
+  const { loading, data, status, statusText, headers, error } = useDataApi(
     apiUrls.entry(accession)
   );
 
   useEffect(() => {
     const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
+    // const publicationsData = useDataApi(url);
     dispatchFetchEntryPublications(url);
   }, [accession, dispatchFetchEntryPublications, selectedFacets]);
+
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
 
   if (loading || !data) {
     return <Loader />;

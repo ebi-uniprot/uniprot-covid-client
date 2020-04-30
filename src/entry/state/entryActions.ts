@@ -22,36 +22,6 @@ type EntryPublicationsData = {
   results: LiteratureForProteinAPI[];
 };
 
-// export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
-//   dispatch(requestEntry());
-//   const url = apiUrls.entry(accession);
-//   fetchData(url)
-//     .then(({ data }: { data: UniProtkbAPIModel }) => {
-//       dispatch(receiveEntry(accession, data));
-//     })
-//     .catch(error => {
-//       const { status } = error.response;
-
-//       switch (status) {
-//         case 400:
-//         case 404:
-//           history.push(LocationToPath[Location.PageNotFound]);
-//           break;
-
-//         case 500:
-//         case 503:
-//           history.push(LocationToPath[Location.ServiceUnavailable]);
-//           break;
-
-//         default:
-//           break;
-//       }
-
-//       /* eslint-disable no-console */
-//       console.error(error);
-//     });
-// };
-
 export const receiveEntryPublications = (
   url: string,
   data: EntryPublicationsData,
