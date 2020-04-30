@@ -8,6 +8,7 @@ import {
   ProteinNamesData,
   GeneNamesData,
   OrganismData,
+  LineageData,
 } from './sections/NamesAndTaxonomyConverter';
 import convertProteinProcessing from './sections/ProteinProcessingConverter';
 import convertExpression from './sections/ExpressionConverter';
@@ -31,13 +32,13 @@ import { Property } from '../types/modelTypes';
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
   TREMBL = 'TrEMBL',
-  INACTIVE='Inactive',
+  INACTIVE = 'Inactive',
 }
 
 export type Citation = {
   citationType?: string;
   authors?: string[];
-  citationXrefs?: Xref[];
+  citationCrossReferences?: Xref[];
   title?: string;
   publicationDate?: number;
   journal?: string;
@@ -65,22 +66,23 @@ export type UniProtkbAPIModel = {
   organism?: OrganismData;
   organismHosts?: OrganismData[];
   primaryAccession: string;
-  uniProtId: string;
+  uniProtkbId: string;
   proteinExistence: string;
   entryType: EntryType;
   comments?: Comment[];
   keywords?: Keyword[];
   features?: FeatureData;
-  databaseCrossReferences?: Xref[];
+  uniProtKBCrossReferences?: Xref[];
   sequence: SequenceData;
   annotationScore: number;
   entryAudit?: EntryAudit;
   references?: Reference[];
+  lineages?: LineageData[];
 };
 
 export type UniProtkbUIModel = {
   primaryAccession: string;
-  uniProtId: string;
+  uniProtkbId: string;
   proteinExistence: string;
   entryType: EntryType;
   annotationScore: number;
@@ -102,20 +104,20 @@ export enum InactiveReasonType {
   MERGED = 'MERGED', // We will never see this as this is followed by a 303 redirect
   DEMERGED = 'DEMERGED',
   DELETED = 'DELETED',
-};
+}
 
 export type InactiveEntryReason = {
   inactiveReasonType: InactiveReasonType;
   mergeDemergeTo: string[] | [];
-}
+};
 
 export type UniProtkbInactiveEntryModel = {
   annotationScore: number;
   entryType: EntryType.INACTIVE;
   inactiveReason: InactiveEntryReason;
   primaryAccession: string;
-  uniProtId: string;
-}
+  uniProtkbId: string;
+};
 
 export const convertXrefProperties = (xrefs: Xref[]) =>
   xrefs.map(xref => ({
@@ -125,10 +127,10 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
       : {},
   }));
 
-const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbInactiveEntryModel):
-  UniProtkbUIModel | UniProtkbInactiveEntryModel => 
-{
-  const dataCopy = { ...data};
+const uniProtKbConverter = (
+  data: UniProtkbAPIModel | UniProtkbInactiveEntryModel
+): UniProtkbUIModel | UniProtkbInactiveEntryModel => {
+  const dataCopy = { ...data };
 
   if (dataCopy.entryType === EntryType.INACTIVE) {
     return {
@@ -136,19 +138,19 @@ const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbInactiveEntryMode
       entryType: dataCopy.entryType,
       inactiveReason: (dataCopy as UniProtkbInactiveEntryModel).inactiveReason,
       primaryAccession: dataCopy.primaryAccession,
-      uniProtId: dataCopy.uniProtId,
-    }
+      uniProtkbId: dataCopy.uniProtkbId,
+    };
   }
 
-  if (dataCopy.databaseCrossReferences) {
-    dataCopy.databaseCrossReferences = convertXrefProperties(
-      dataCopy.databaseCrossReferences
+  if (dataCopy.uniProtKBCrossReferences) {
+    dataCopy.uniProtKBCrossReferences = convertXrefProperties(
+      dataCopy.uniProtKBCrossReferences
     );
   }
 
   return {
     primaryAccession: dataCopy.primaryAccession,
-    uniProtId: dataCopy.uniProtId,
+    uniProtkbId: dataCopy.uniProtkbId,
     proteinExistence: dataCopy.proteinExistence,
     entryType: dataCopy.entryType,
     annotationScore: dataCopy.annotationScore,
