@@ -4,16 +4,10 @@ import idx from 'idx';
 import { v1 } from 'uuid';
 import { ThunkDispatch } from 'redux-thunk';
 import fetchData from '../../utils/fetchData';
-import uniProtKbConverter, {
-  UniProtkbAPIModel,
-} from '../../model/uniprotkb/UniProtkbConverter';
-import apiUrls from '../../utils/apiUrls';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
 import getNextUrlFromResponse from '../../utils/queryUtils';
 import Response, { Facet } from '../../types/responseTypes';
 import { RootState } from '../../state/state-types';
-import history from '../../utils/browserHistory';
-import { Location, LocationToPath } from '../../urls';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
@@ -28,65 +22,35 @@ type EntryPublicationsData = {
   results: LiteratureForProteinAPI[];
 };
 
-export const receiveEntry = (
-  accession: string,
-  dataAPIModel: UniProtkbAPIModel
-) => {
-  const data = uniProtKbConverter(dataAPIModel);
-  return action(RECEIVE_ENTRY, {
-    accession,
-    data,
-    receivedAt: Date.now(),
-  });
-};
+// export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
+//   dispatch(requestEntry());
+//   const url = apiUrls.entry(accession);
+//   fetchData(url)
+//     .then(({ data }: { data: UniProtkbAPIModel }) => {
+//       dispatch(receiveEntry(accession, data));
+//     })
+//     .catch(error => {
+//       const { status } = error.response;
 
-export const requestEntry = () => action(REQUEST_ENTRY);
+//       switch (status) {
+//         case 400:
+//         case 404:
+//           history.push(LocationToPath[Location.PageNotFound]);
+//           break;
 
-const shouldFetchEntry = (accessionToFetch: string, state: RootState) => {
-  const { accession, isFetching } = state.entry;
-  return !isFetching || accession !== accessionToFetch;
-};
+//         case 500:
+//         case 503:
+//           history.push(LocationToPath[Location.ServiceUnavailable]);
+//           break;
 
-export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
-  dispatch(requestEntry());
-  const url = apiUrls.entry(accession);
-  fetchData(url)
-    .then(({ data }: { data: UniProtkbAPIModel }) => {
-      dispatch(receiveEntry(accession, data));
-    })
-    .catch(error => {
-      const { status } = error.response;
+//         default:
+//           break;
+//       }
 
-      switch (status) {
-        case 400:
-        case 404:
-          history.push(LocationToPath[Location.PageNotFound]);
-          break;
-
-        case 500:
-        case 503:
-          history.push(LocationToPath[Location.ServiceUnavailable]);
-          break;
-
-        default:
-          break;
-      }
-
-      /* eslint-disable no-console */
-      console.error(error);
-    });
-};
-
-export const fetchEntryIfNeeded = (accession: string) => (
-  dispatch: ThunkDispatch<RootState, void, Action>,
-  getState: () => RootState
-) => {
-  if (shouldFetchEntry(accession, getState())) {
-    dispatch(fetchEntry(accession));
-  }
-};
-
-export const resetEntry = () => action(RESET_ENTRY);
+//       /* eslint-disable no-console */
+//       console.error(error);
+//     });
+// };
 
 export const receiveEntryPublications = (
   url: string,
@@ -107,20 +71,19 @@ export const receiveEntryPublications = (
 export const requestEntryPublications = () =>
   action(REQUEST_ENTRY_PUBLICATIONS);
 
-export const fetchEntryPublications = (
-  url: string,
-  reset = false
-) => async (dispatch: Dispatch) => {
+export const fetchEntryPublications = (url: string, reset = false) => async (
+  dispatch: Dispatch
+) => {
   dispatch(requestEntryPublications());
   fetchData(url)
     .then((response: Response) => {
       const nextUrl = getNextUrlFromResponse(
-        idx(response, o => o.headers.link)
+        idx(response, (o) => o.headers.link)
       );
       const publicationData = response.data as EntryPublicationsData;
       const publicationDataWithIds = {
         ...publicationData,
-        results: publicationData.results.map(publication => ({
+        results: publicationData.results.map((publication) => ({
           ...publication,
           id: v1(),
         })),
@@ -135,7 +98,7 @@ export const fetchEntryPublications = (
         )
       );
     }) /* eslint-disable no-console */
-    .catch(error => console.error(error));
+    .catch((error) => console.error(error));
 };
 
 export const shouldFetchEntryPublications = (url: string, state: RootState) => {

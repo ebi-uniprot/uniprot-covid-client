@@ -9,24 +9,6 @@ const entryReducers = (
   action: EntryAction
 ) => {
   switch (action.type) {
-    case entryActions.REQUEST_ENTRY:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case entryActions.RECEIVE_ENTRY:
-      return {
-        ...state,
-        data: action.payload.data,
-        accession: action.payload.accession,
-        isFetching: false,
-      };
-    case entryActions.RESET_ENTRY:
-      return {
-        ...state,
-        data: null,
-        accession: null,
-      };
     case entryActions.REQUEST_ENTRY_PUBLICATIONS:
       return {
         ...state,

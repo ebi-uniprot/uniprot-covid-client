@@ -31,7 +31,7 @@ import { Property } from '../types/modelTypes';
 export enum EntryType {
   SWISSPROT = 'Swiss-Prot',
   TREMBL = 'TrEMBL',
-  INACTIVE='Inactive',
+  INACTIVE = 'Inactive',
 }
 
 export type Citation = {
@@ -102,12 +102,12 @@ export enum InactiveReasonType {
   MERGED = 'MERGED', // We will never see this as this is followed by a 303 redirect
   DEMERGED = 'DEMERGED',
   DELETED = 'DELETED',
-};
+}
 
 export type InactiveEntryReason = {
   inactiveReasonType: InactiveReasonType;
   mergeDemergeTo: string[] | [];
-}
+};
 
 export type UniProtkbInactiveEntryModel = {
   annotationScore: number;
@@ -115,30 +115,18 @@ export type UniProtkbInactiveEntryModel = {
   inactiveReason: InactiveEntryReason;
   primaryAccession: string;
   uniProtId: string;
-}
+};
 
 export const convertXrefProperties = (xrefs: Xref[]) =>
-  xrefs.map(xref => ({
+  xrefs.map((xref) => ({
     ...xref,
     properties: xref.properties
       ? transfromProperties((xref.properties as unknown) as Property[])
       : {},
   }));
 
-const uniProtKbConverter = (data: UniProtkbAPIModel | UniProtkbInactiveEntryModel):
-  UniProtkbUIModel | UniProtkbInactiveEntryModel => 
-{
-  const dataCopy = { ...data};
-
-  if (dataCopy.entryType === EntryType.INACTIVE) {
-    return {
-      annotationScore: dataCopy.annotationScore,
-      entryType: dataCopy.entryType,
-      inactiveReason: (dataCopy as UniProtkbInactiveEntryModel).inactiveReason,
-      primaryAccession: dataCopy.primaryAccession,
-      uniProtId: dataCopy.uniProtId,
-    }
-  }
+const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
+  const dataCopy = { ...data };
 
   if (dataCopy.databaseCrossReferences) {
     dataCopy.databaseCrossReferences = convertXrefProperties(
