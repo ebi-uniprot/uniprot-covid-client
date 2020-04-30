@@ -4,6 +4,7 @@
   display: grid;
   grid-template-areas:
     'main-header'
+    'in-page-messages'
     'content'
     'footer';
 
@@ -11,6 +12,10 @@
 
   .main-header {
     grid-area: main-header;
+  }
+
+  .in-page-messages {
+    grid-area: in-page-messages;
   }
 
   .footer {

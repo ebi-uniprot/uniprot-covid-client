@@ -5,9 +5,10 @@ import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaVariation from 'protvista-variation';
 import { transformData } from 'protvista-variation-adapter';
 import ProtvistaFilter from 'protvista-filter';
+import { Loader } from 'franklin-sites';
 import { html } from 'lit-html';
 import { loadWebComponent } from '../../../utils/utils';
-import useDataApi from '../../../utils/useDataApi';
+import useDataApi from '../../../hooks/useDataApi';
 import apiUrls, { joinUrl } from '../../../utils/apiUrls';
 import FeatureType from '../../../model/types/FeatureType';
 import './styles/VariationView.scss';
@@ -169,7 +170,9 @@ const VariationView: FC<{
   title?: string;
   hasTable?: boolean;
 }> = ({ primaryAccession, title, hasTable = true }) => {
-  const data = useDataApi(joinUrl(apiUrls.variation, primaryAccession));
+  const { loading, data, error, status } = useDataApi(
+    joinUrl(apiUrls.variation, primaryAccession)
+  );
 
   const protvistaFilterRef = useCallback((node) => {
     if (node !== null) {
@@ -195,7 +198,14 @@ const VariationView: FC<{
     [data]
   );
 
-  if (!data || !data.sequence || data.features.length <= 0) {
+  if (loading) return <Loader />;
+
+  if (error && status !== 404) {
+    // TODO: use in-page error message
+    return <div>An error happened</div>;
+  }
+
+  if (status === 404 || !data || !data.sequence || data.features.length <= 0) {
     return null;
   }
 

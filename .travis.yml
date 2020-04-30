@@ -11,10 +11,6 @@ before_script:
 before_deploy:
   - yarn build-staging
 notifications:
-  email:
-    - xwatkins@ebi.ac.uk
-    - mmahmoudy@ebi.ac.uk
-    - dlrice@ebi.ac.uk
   slack: ebi-uniprot:7OMFmmkUp9uxH3SXgyq7OVb3
 deploy:
   provider: pages

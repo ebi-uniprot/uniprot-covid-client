@@ -42,7 +42,7 @@ const UniProtKBEntryPublications: FC<{
 };
 
 const mapStateToProps = (state: RootState) => ({
-  entryData: state.entry.data,
+  entryData: state.entry.data as UniProtkbUIModel | null,
 });
 
 export default connect(mapStateToProps)(UniProtKBEntryPublications);

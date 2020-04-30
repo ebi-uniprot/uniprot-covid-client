@@ -331,6 +331,7 @@ ColumnConfiguration.set(Column.sequence, {
       <Sequence
         sequence={sequenceData.sequence.value}
         accession={data.primaryAccession}
+        showActionBar={false}
       />
     );
   },

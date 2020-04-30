@@ -14,9 +14,10 @@ import {
 } from './types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
 import createQueryString from './utils/QueryStringGenerator';
-// import { queryBuilderPath } from '../App';
 
 import './styles/SearchContainer.scss';
+
+// const queryBuilderPath = LocationToPath[Location.UniProtKBQueryBuilder];
 
 type Props = {
   queryString: string;
