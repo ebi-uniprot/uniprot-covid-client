@@ -1,13 +1,18 @@
 import React from 'react';
-import { Facets } from 'franklin-sites';
+import { Facets, Loader } from 'franklin-sites';
 import { SelectedFacet } from '../../results/types/resultsTypes';
-import { Facet } from '../../types/responseTypes';
+import { getUniProtPublicationsQueryUrl } from '../../utils/apiUrls';
+import useDataApi from '../../hooks/useDataApi';
+import ErrorHandler from '../../pages/errors/ErrorHandler';
 
 const EntryPublicationsFacets: React.FC<{
-  facets: Facet[];
+  accession: string;
   selectedFacets: SelectedFacet[];
   setSelectedFacets: (facets: SelectedFacet[]) => void;
-}> = ({ facets, selectedFacets, setSelectedFacets }) => {
+}> = ({ accession, selectedFacets, setSelectedFacets }) => {
+  const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
+  const { loading, data, status, statusText, headers, error } = useDataApi(url);
+
   const addFacet = (name: string, value: string) => {
     setSelectedFacets([...selectedFacets, { name, value }]);
   };
@@ -15,11 +20,22 @@ const EntryPublicationsFacets: React.FC<{
   const removeFacet = (name: string, value: string) => {
     setSelectedFacets(
       selectedFacets.filter(
-        selectedFacet =>
+        (selectedFacet) =>
           !(selectedFacet.name === name && selectedFacet.value === value)
       )
     );
   };
+
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
+
+  if (loading || !data) {
+    return <Loader />;
+  }
+
+  const { facets } = data;
+
   return (
     <Facets
       data={facets}

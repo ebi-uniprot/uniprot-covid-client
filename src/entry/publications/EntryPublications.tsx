@@ -2,17 +2,30 @@ import React, { FC } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
+import { getUniProtPublicationsQueryUrl } from '../../utils/apiUrls';
+import useDataApi from '../../hooks/useDataApi';
+import ErrorHandler from '../../pages/errors/ErrorHandler';
+import { SelectedFacet } from '../../results/types/resultsTypes';
 
 const EntryPublications: FC<{
   accession: string;
-  data: LiteratureForProteinAPI[] | null;
-  total: number;
-  handleLoadMoreItems: () => void;
-}> = ({ accession, data, total, handleLoadMoreItems }) => {
-  if (!data || data.length === 0) {
+  selectedFacets: SelectedFacet[];
+}> = ({ accession, selectedFacets }) => {
+  const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
+  const { loading, data, status, statusText, headers, error } = useDataApi(url);
+  //   data: LiteratureForProteinAPI[] | null;
+
+  // publicationsData.nextUrl
+
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
+
+  if (loading || !data) {
     return <Loader />;
   }
 
+  const { results, facets } = data;
   return (
     <section>
       <div style={{ height: '80vh' }}>
@@ -20,7 +33,7 @@ const EntryPublications: FC<{
         {/* The height css will be removed after Franklin DataList is updated */}
         <DataList
           idKey="id"
-          data={data}
+          data={results}
           dataRenderer={({
             reference,
             publicationSource,
@@ -36,12 +49,14 @@ const EntryPublications: FC<{
             const pubMedXref =
               citation.citationXrefs &&
               citation.citationXrefs.find(
-                xref => xref.databaseType === 'PubMed'
+                (xref) => xref.databaseType === 'PubMed'
               );
 
             const doiXref =
               citation.citationXrefs &&
-              citation.citationXrefs.find(xref => xref.databaseType === 'DOI');
+              citation.citationXrefs.find(
+                (xref) => xref.databaseType === 'DOI'
+              );
 
             const pubmedId = pubMedXref && pubMedXref.id;
 
@@ -63,7 +78,7 @@ const EntryPublications: FC<{
                 title: 'Tissue',
                 content: referenceComments && (
                   <ul className="no-bullet">
-                    {referenceComments.map(comment => (
+                    {referenceComments.map((comment) => (
                       <li key={comment.value}>{comment.value}</li>
                     ))}
                   </ul>
@@ -73,7 +88,7 @@ const EntryPublications: FC<{
                 title: 'Categories',
                 content: categories && (
                   <ul className="no-bullet">
-                    {uniq(categories).map(category => (
+                    {uniq(categories).map((category) => (
                       <li key={category}>{category}</li>
                     ))}
                   </ul>
@@ -97,8 +112,8 @@ const EntryPublications: FC<{
               )
             );
           }}
-          onLoadMoreItems={handleLoadMoreItems}
-          hasMoreData={total > data.length}
+          onLoadMoreItems={() => console.log('loading more')}
+          hasMoreData={data.total > data.length}
         />
       </div>
     </section>

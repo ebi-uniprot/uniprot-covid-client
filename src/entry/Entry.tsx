@@ -16,8 +16,6 @@ import {
   DropdownButton,
   ProtVistaIcon,
 } from 'franklin-sites';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
 import uniProtKbConverter, {
   EntryType,
@@ -27,8 +25,6 @@ import { hasContent, hasExternalLinks } from '../model/utils/utils';
 import EntrySection from '../model/types/EntrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
-import { RootState, RootAction } from '../state/state-types';
-import * as entryActions from './state/entryActions';
 import apiUrls, { getUniProtPublicationsQueryUrl } from '../utils/apiUrls';
 import {
   SelectedFacet,
@@ -60,11 +56,7 @@ type EntryProps = RouteComponentProps<MatchParams> & {
   dispatchFetchEntryPublications: (url: string, reset?: boolean) => void;
 };
 
-const Entry: React.FC<EntryProps> = ({
-  match,
-  publicationsData,
-  dispatchFetchEntryPublications,
-}) => {
+const Entry: React.FC<EntryProps> = ({ match }) => {
   const { path, params } = match;
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
@@ -72,12 +64,6 @@ const Entry: React.FC<EntryProps> = ({
   const { loading, data, status, statusText, headers, error } = useDataApi(
     apiUrls.entry(accession)
   );
-
-  useEffect(() => {
-    const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
-    // const publicationsData = useDataApi(url);
-    dispatchFetchEntryPublications(url);
-  }, [accession, dispatchFetchEntryPublications, selectedFacets]);
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -175,7 +161,7 @@ const Entry: React.FC<EntryProps> = ({
       icon: <PublicationIcon />,
       itemContent: (
         <EntryPublicationsFacets
-          facets={publicationsData.facets}
+          accession={accession}
           selectedFacets={selectedFacets}
           setSelectedFacets={setSelectedFacets}
         />
@@ -183,11 +169,7 @@ const Entry: React.FC<EntryProps> = ({
       mainContent: (
         <EntryPublications
           accession={accession}
-          data={publicationsData.data}
-          total={publicationsData.total}
-          handleLoadMoreItems={() => {
-            dispatchFetchEntryPublications(publicationsData.nextUrl, false);
-          }}
+          selectedFacets={selectedFacets}
         />
       ),
     },
@@ -235,19 +217,4 @@ const Entry: React.FC<EntryProps> = ({
   );
 };
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    publicationsData: state.entry.publicationsData,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
-  bindActionCreators(
-    {
-      dispatchFetchEntryPublications: (accession: string, reset?: boolean) =>
-        entryActions.fetchEntryPublicationsIfNeeded(accession, reset),
-    },
-    dispatch
-  );
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entry));
+export default withRouter(Entry);
