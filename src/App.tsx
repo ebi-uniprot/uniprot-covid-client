@@ -38,10 +38,14 @@ const App = () => (
     <Router history={history}>
       <Suspense fallback={<Loader />}>
         <Switch>
-          <Route path="/" exact>
-            <Redirect to="/uniprotkb?query=*" />
+          <Route
+            path="/" exact>
+            <Redirect to={LocationToPath[Location.ShowAllResults]} />
           </Route>
-          <Route path="/contact" render={() => <ContactPage />} />
+          <Route 
+            path={LocationToPath[Location.Contact]}
+            render={() => <ContactPage />}
+          />
           <Route
             path={LocationToPath[Location.UniProtKBEntry]}
             render={() => <EntryPage />}
