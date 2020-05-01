@@ -191,7 +191,6 @@ export class Results extends Component<ResultsProps, ResultsContainerState> {
     );
 
     selectedFacets.splice(index, 1);
-
     this.setURLParams(query, selectedFacets, sortColumn, sortDirection);
   };
 

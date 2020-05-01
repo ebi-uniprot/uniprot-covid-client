@@ -373,7 +373,7 @@
 		"category": "PFAM",
 		"implicit": true,
 		"linkedReason": "CC:SIMILARITY: Belongs to the G-protein coupled receptor",
-		"uriLink": "https://gpcrdb.org/protein/%uniProtId/"
+		"uriLink": "https://gpcrdb.org/protein/%uniProtkbId/"
 	},
 
 

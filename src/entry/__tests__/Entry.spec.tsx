@@ -22,7 +22,7 @@ const { primaryAccession: demergedEntryAccession } = demergedEntryData;
 const mock = new MockAdapter(axios);
 
 const filteredUrl = getUniProtPublicationsQueryUrl(primaryAccession, [
-  { name: 'scale', value: 'Small' },
+  { name: 'study_type', value: 'small_scale' },
 ]);
 
 mock.onGet(apiUrls.entry(deleteEntryAccession)).reply(200, deletedEntryData);
@@ -36,8 +36,8 @@ mock.onGet(filteredUrl).reply(
   {
     facets: [
       {
-        label: 'Scale',
-        name: 'scale',
+        label: 'Study type',
+        name: 'study_type',
         values: [
           {
             value: 'Another facet',
