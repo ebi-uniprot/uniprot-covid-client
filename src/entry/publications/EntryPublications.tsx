@@ -6,6 +6,7 @@ import { getUniProtPublicationsQueryUrl } from '../../utils/apiUrls';
 import useDataApi from '../../hooks/useDataApi';
 import ErrorHandler from '../../pages/errors/ErrorHandler';
 import { SelectedFacet } from '../../results/types/resultsTypes';
+import formatCitationData from '../../literature/adapters/LiteratureConverter';
 
 const EntryPublications: FC<{
   accession: string;
@@ -47,28 +48,7 @@ const EntryPublications: FC<{
               referenceComments,
             } = reference;
 
-            const pubMedXref =
-              citation.citationCrossReferences &&
-              citation.citationCrossReferences.find(
-                (xref) => xref.database === 'PubMed'
-              );
-
-            const doiXref =
-              citation.citationCrossReferences &&
-              citation.citationCrossReferences.find(
-                (xref) => xref.database === 'DOI'
-              );
-
-            const pubmedId = pubMedXref && pubMedXref.id;
-
-            const journalInfo = {
-              journal: citation.journal,
-              volume: citation.volume,
-              firstPage: citation.firstPage,
-              lastPage: citation.lastPage,
-              publicationDate: citation.publicationDate,
-              doiId: doiXref && doiXref.id,
-            };
+            const { pubmedId, journalInfo } = formatCitationData(citation);
 
             const infoListData = [
               {

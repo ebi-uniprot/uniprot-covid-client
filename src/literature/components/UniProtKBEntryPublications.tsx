@@ -4,6 +4,7 @@ import { getPublicationsURL } from '../apiUrls';
 import useDataApi from '../../hooks/useDataApi';
 import { MessageLevel } from '../../messages/types/messagesTypes';
 import { LiteratureAPI } from '../types/LiteratureTypes';
+import formatCitationData from '../adapters/LiteratureConverter';
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];
@@ -24,25 +25,24 @@ const UniProtKBEntryPublications: FC<{
   }
 
   const { results }: { results: LiteratureAPI[] } = data;
-
   return (
     <Fragment>
       {results &&
-        results.map(({ citation, statistics }) => (
-          <Publication
-            title={citation.title}
-            authors={citation.authors}
-            key={`${citation.title}-${citation.citationType}-${citation.journal}`}
-            statistics={statistics}
-            journalInfo={{
-              firstPage: citation.firstPage,
-              journal: citation.journal,
-              lastPage: citation.lastPage,
-              publicationDate: citation.publicationDate,
-              volume: citation.volume,
-            }}
-          />
-        ))}
+        results
+          .map((literatureItem) => ({
+            ...literatureItem,
+            ...formatCitationData(literatureItem.citation),
+          }))
+          .map(({ citation, statistics, pubmedId, journalInfo }) => (
+            <Publication
+              title={citation.title}
+              authors={citation.authors}
+              key={`${citation.title}-${citation.citationType}-${citation.journal}`}
+              pubmedId={pubmedId}
+              statistics={statistics}
+              journalInfo={journalInfo}
+            />
+          ))}
     </Fragment>
   );
 };
