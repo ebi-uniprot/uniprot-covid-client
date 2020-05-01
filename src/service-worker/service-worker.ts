@@ -61,7 +61,7 @@ registerRoute(
 registerRoute(
   /^https?:\/\/.*?\.(?:woff2?|ttf|eot)$/,
   new CacheFirst({
-    cacheName: 'external-images',
+    cacheName: 'fonts',
     plugins: [
       new CacheableResponsePlugin({ statuses: [0, 200] }),
       new ExpirationPlugin({

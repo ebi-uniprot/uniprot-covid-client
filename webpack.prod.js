@@ -10,7 +10,7 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: '/uniprot-website/',
   },
   plugins: [
     new CleanWebpackPlugin(),

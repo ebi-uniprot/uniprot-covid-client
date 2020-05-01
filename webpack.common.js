@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
-        loader: 'file-loader?name=[name].[ext]',
+        loader: 'file-loader?name=[name].[contenthash:6].[ext]',
       },
     ],
   },
@@ -106,6 +106,9 @@ module.exports = {
       // comment/uncomment following line to toggle log messages
       mode: 'development',
       dontCacheBustURLsMatching: /\.[\da-f]{6}\.[\w]{2,5}$/i,
+      // exclude from precaching because one browser will never need all fonts
+      // formats at the same time, will cache later whichever is actually used
+      exclude: [/fontello/],
     }),
   ],
 };
