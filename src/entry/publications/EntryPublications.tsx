@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
@@ -16,19 +16,35 @@ const EntryPublications: FC<{
   const [url, setUrl] = useState(
     getUniProtPublicationsQueryUrl(accession, selectedFacets)
   );
-  const { loading, data, status, error, headers } = useDataApi(url);
+  const [allResults, setAllResults] = useState<LiteratureForProteinAPI[]>([]);
+  const [metaData, setMetaData] = useState<{
+    total: number;
+    nextUrl: string | undefined;
+  }>({ total: 0, nextUrl: undefined });
+
+  const { data, status, error, headers } = useDataApi(url);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const { results } = data;
+    setAllResults((allRes) => [...allRes, ...results]);
+    setMetaData({
+      total: headers['x-totalrecords'],
+      nextUrl: getNextUrlFromResponse(headers.link),
+    });
+  }, [data, headers]);
 
   if (error) {
     return <ErrorHandler status={status} />;
   }
 
-  if (loading || !data) {
+  if (allResults.length === 0) {
     return <Loader />;
   }
 
-  const { results } = data;
-  const total = headers['x-totalrecords'];
-  const nextUrl = getNextUrlFromResponse(headers.link);
+  const { total, nextUrl } = metaData;
 
   return (
     <section>
@@ -38,7 +54,7 @@ const EntryPublications: FC<{
         {/* TODO could idKey be a callback on the item? */}
         <DataList
           idKey="id"
-          data={results}
+          data={allResults}
           dataRenderer={({
             reference,
             publicationSource,
@@ -97,7 +113,8 @@ const EntryPublications: FC<{
             );
           }}
           onLoadMoreItems={() => nextUrl && setUrl(nextUrl)}
-          hasMoreData={total > results.length}
+          loaderComponent={<Loader />}
+          hasMoreData={total > allResults.length}
         />
       </div>
     </section>
