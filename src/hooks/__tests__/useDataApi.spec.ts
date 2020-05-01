@@ -57,6 +57,20 @@ describe('useDataApi hook', () => {
     });
   });
 
+  test('timeout', async () => {
+    mock.onGet(url).timeout();
+    const { result, waitForNextUpdate } = renderHook(() => useDataApi(url));
+
+    expect(result.current).toEqual({ loading: true });
+
+    await waitForNextUpdate();
+
+    expect(result.current).toEqual({
+      loading: false,
+      error: new Error('timeout of 0ms exceeded'),
+    });
+  });
+
   test('404', async () => {
     mock.onGet(url).reply(404);
     const { result, waitForNextUpdate } = renderHook(() => useDataApi(url));
