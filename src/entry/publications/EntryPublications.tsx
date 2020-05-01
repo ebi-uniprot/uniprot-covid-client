@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
@@ -7,16 +7,16 @@ import useDataApi from '../../hooks/useDataApi';
 import ErrorHandler from '../../pages/errors/ErrorHandler';
 import { SelectedFacet } from '../../results/types/resultsTypes';
 import formatCitationData from '../../literature/adapters/LiteratureConverter';
+import getNextUrlFromResponse from '../../utils/queryUtils';
 
 const EntryPublications: FC<{
   accession: string;
   selectedFacets: SelectedFacet[];
 }> = ({ accession, selectedFacets }) => {
-  const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
-  const { loading, data, status, error } = useDataApi(url);
-  //   data: LiteratureForProteinAPI[] | null;
-
-  // publicationsData.nextUrl
+  const [url, setUrl] = useState(
+    getUniProtPublicationsQueryUrl(accession, selectedFacets)
+  );
+  const { loading, data, status, error, headers } = useDataApi(url);
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -27,6 +27,9 @@ const EntryPublications: FC<{
   }
 
   const { results } = data;
+  const total = headers['x-totalrecords'];
+  const nextUrl = getNextUrlFromResponse(headers.link);
+
   return (
     <section>
       <div style={{ height: '80vh' }}>
@@ -93,8 +96,8 @@ const EntryPublications: FC<{
               )
             );
           }}
-          onLoadMoreItems={() => console.log('loading more')}
-          hasMoreData={data.total > data.length}
+          onLoadMoreItems={() => nextUrl && setUrl(nextUrl)}
+          hasMoreData={total > results.length}
         />
       </div>
     </section>
