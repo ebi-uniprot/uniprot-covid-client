@@ -4,7 +4,6 @@ const path = require('path');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  mode: 'development',
   devtool: 'inline-sourcemap',
   output: {
     publicPath: '/',
@@ -16,5 +15,10 @@ module.exports = merge(common, {
     port: 0,
     historyApiFallback: true,
   },
-  plugins: [new webpack.DefinePlugin({ BASE_URL: JSON.stringify('/') })],
+  plugins: [
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify('/'),
+      LIVE_RELOAD: JSON.stringify(true),
+    }),
+  ],
 });

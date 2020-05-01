@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
-    "build": "webpack --mode production --config webpack.prod.js",
+    "build": "webpack --mode production --config webpack.build.js",
+    "build:dev": "webpack --mode development --config webpack.build.js",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
@@ -138,6 +139,7 @@
     "html-webpack-plugin": "4.2.1",
     "jest": "25.5.1",
     "jest-css-modules-transform": "4.0.0",
+    "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.14.0",
     "path": "0.12.7",
     "react-beautiful-dnd-test-utils": "3.1.0",

@@ -13,6 +13,9 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
+declare const BASE_URL: string;
+declare const LIVE_RELOAD: boolean;
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -52,7 +55,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
+              console.log('Content is cached for offline use...');
 
               // Execute callback
               if (config && config.onSuccess) {
@@ -106,20 +109,18 @@ interface Config {
 /* == Main exports below == */
 
 export function register(config?: Config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if (!LIVE_RELOAD && 'serviceWorker' in navigator) {
     // create-react-app specific code, keep it here for now
-    // // The URL constructor is available in all browsers that support SW.
-    // const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    // if (publicUrl.origin !== window.location.origin) {
-    //   // Our service worker won't work if PUBLIC_URL is on a different origin
-    //   // from what our page is served on. This might happen if a CDN is used to
-    //   // serve assets; see https://github.com/facebook/create-react-app/issues/2374
-    //   return;
-    // }
+    // The URL constructor is available in all browsers that support SW.
+    const publicUrl = new URL(BASE_URL || '', window.location.href);
+
+    // Our service worker won't work if PUBLIC_URL is on a different origin
+    // from what our page is served on. This might happen if a CDN is used to
+    // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+    if (publicUrl.origin !== window.location.origin) return;
 
     window.addEventListener('load', () => {
-      // const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-      const swUrl = '/service-worker.js';
+      const swUrl = `${publicUrl}service-worker.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still

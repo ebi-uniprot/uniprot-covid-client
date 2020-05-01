@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const { InjectManifest } = require('workbox-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   context: __dirname,
@@ -12,13 +12,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-      'react-dom': path.resolve('./node_modules/react-dom'),
-      'react-router-dom': path.resolve('./node_modules/react-router-dom'),
-    },
   },
   module: {
+    // JavaScript and Typescript files
     rules: [
       {
         test: /\.(js|jsx|tsx|ts)$/,
@@ -27,17 +23,7 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-            },
-          },
-        ],
-      },
+      // Stylesheets
       {
         test: /\.(css|sass|scss)$/,
         include: [
@@ -51,7 +37,7 @@ module.exports = {
         ],
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader', // translates CSS into CommonJS
@@ -61,6 +47,7 @@ module.exports = {
           },
         ],
       },
+      // SVGs
       {
         test: /\.svg$/i,
         issuer: /\.(t|j)sx?$/,
@@ -70,6 +57,7 @@ module.exports = {
           },
         ],
       },
+      // Fonts
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         include: [path.resolve(__dirname, 'node_modules/litemol/dist/fonts')],
@@ -83,6 +71,7 @@ module.exports = {
           },
         ],
       },
+      // SVGs from protvista-datatable
       {
         test: /\.svg$/,
         include: [path.resolve(__dirname, 'node_modules/protvista-datatable')],
@@ -90,25 +79,28 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
-        loader: 'file-loader?name=[name].[contenthash:6].[ext]',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[contenthash:6].[ext]',
+            },
+          },
+        ],
       },
     ],
+  },
+  stats: {
+    children: false,
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: `${__dirname}/index.html`,
       filename: 'index.html',
     }),
-    new InjectManifest({
-      swSrc: `${__dirname}/src/service-worker/service-worker.ts`,
-      // TODO: remove following line whenever we manage to reduce size of entrypoint
-      maximumFileSizeToCacheInBytes: 1024 * 1024 * 10,
-      // comment/uncomment following line to toggle log messages
-      mode: 'development',
-      dontCacheBustURLsMatching: /\.[\da-f]{6}\.[\w]{2,5}$/i,
-      // exclude from precaching because one browser will never need all fonts
-      // formats at the same time, will cache later whichever is actually used
-      exclude: [/fontello/],
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:6].css',
+      chunkFilename: '[id].[contenthash:6].css',
     }),
   ],
 };

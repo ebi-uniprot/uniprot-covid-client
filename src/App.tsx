@@ -14,19 +14,39 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Async loading of page components
-const HomePage = lazy(() => import('./pages/HomePage'));
-const ResultsPage = lazy(() => import('./pages/ResultsPage'));
-const EntryPage = lazy(() => import('./pages/EntryPage'));
-const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
-const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
-const DownloadPage = lazy(() => import('./pages/DownloadPage'));
+const HomePage = lazy(() =>
+  import(/* webpackChunkName: "home-page" */ './pages/HomePage')
+);
+const ResultsPage = lazy(() =>
+  import(/* webpackChunkName: "result-page" */ './pages/ResultsPage')
+);
+const EntryPage = lazy(() =>
+  import(/* webpackChunkName: "entry-page" */ './pages/EntryPage')
+);
+const AdvancedSearchPage = lazy(() =>
+  import(/* webpackChunkName: "advanced-search" */ './pages/AdvancedSearchPage')
+);
+const CustomiseTablePage = lazy(() =>
+  import(
+    /* webpackChunkName: "customise-table-page" */ './pages/CustomiseTablePage'
+  )
+);
+const DownloadPage = lazy(() =>
+  import(/* webpackChunkName: "download-page" */ './pages/DownloadPage')
+);
 const ResourceNotFoundPage = lazy(() =>
-  import('./pages/errors/ResourceNotFoundPage')
+  import(
+    /* webpackChunkName: "resource-not-found-page" */ './pages/errors/ResourceNotFoundPage'
+  )
 );
 const ServiceUnavailablePage = lazy(() =>
-  import('./pages/errors/ServiceUnavailablePage')
+  import(
+    /* webpackChunkName: "service-unavailable-page" */ './pages/errors/ServiceUnavailablePage'
+  )
 );
-const JobErrorPage = lazy(() => import('./pages/errors/JobErrorPage'));
+const JobErrorPage = lazy(() =>
+  import(/* webpackChunkName: "job-error-page" */ './pages/errors/JobErrorPage')
+);
 
 const App = () => (
   <FranklinSite>
