@@ -1,10 +1,15 @@
 const path = require('path');
 const fs = require('fs');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = {
   context: __dirname,
   entry: [path.resolve(__dirname, 'src/index.tsx')],
+  output: {
+    filename: 'app.[hash:6].js',
+    chunkFilename: '[name].[chunkhash:6].js',
+  },
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
     alias: {
@@ -72,7 +77,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
+              name: '[name].[contenthash:6].[ext]',
               outputPath: 'fonts/',
             },
           },
@@ -93,6 +98,14 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: `${__dirname}/index.html`,
       filename: 'index.html',
+    }),
+    new InjectManifest({
+      swSrc: `${__dirname}/src/service-worker/service-worker.ts`,
+      // TODO: remove following line whenever we manage to reduce size of entrypoint
+      maximumFileSizeToCacheInBytes: 1024 * 1024 * 10,
+      // comment/uncomment following line to toggle log messages
+      mode: 'development',
+      dontCacheBustURLsMatching: /\.[\da-f]{6}\.[\w]{2,5}$/i,
     }),
   ],
 };

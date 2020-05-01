@@ -3,17 +3,17 @@ const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/uniprot-website/',
-    filename: 'app.[hash].bundle.js',
+    publicPath: '/',
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: `${__dirname}/404.html`,
       filename: '404.html',
