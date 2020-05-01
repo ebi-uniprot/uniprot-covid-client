@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // This file is a modified template from what is generated in the
 // create-react-app project. Used here as a reference of good practice.
 
