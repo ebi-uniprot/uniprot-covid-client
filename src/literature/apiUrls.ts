@@ -8,7 +8,7 @@ export const getPublicationURL = (id: string) =>
   joinUrl(literatureApiUrls.literature, id);
 
 export const getPublicationsURL = (ids: string[]) =>
-  `${literatureApiUrls.literature}/searchs?query=(${ids
+  `${literatureApiUrls.literature}/search?query=(${ids
     .map((id) => `id:${id}`)
     .join(' OR ')})`;
 

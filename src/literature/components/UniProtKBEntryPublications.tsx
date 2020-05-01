@@ -23,16 +23,17 @@ const UniProtKBEntryPublications: FC<{
     return <Loader />;
   }
 
-  const { results }: { results: LiteratureAPI[] } = data.results;
+  const { results }: { results: LiteratureAPI[] } = data;
 
   return (
     <Fragment>
       {results &&
-        results.map(({ citation }) => (
+        results.map(({ citation, statistics }) => (
           <Publication
             title={citation.title}
             authors={citation.authors}
             key={`${citation.title}-${citation.citationType}-${citation.journal}`}
+            statistics={statistics}
             journalInfo={{
               firstPage: citation.firstPage,
               journal: citation.journal,
