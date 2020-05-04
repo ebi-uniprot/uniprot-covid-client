@@ -4,27 +4,42 @@ import { render } from '@testing-library/react';
 import EntryPublications from '../EntryPublications';
 import mockPublicationsData from '../__mocks__/entryPublicationsData.json';
 
+jest.mock('../../../hooks/useDataApi', () => jest.fn());
 import useDataApi from '../../../hooks/useDataApi';
 
-jest.mock('../../../hooks/useDataApi', () => ({
-  __esModule: true, // this makes it work
-  default: jest.fn(() => ({
-    loading: false,
-    data: mockPublicationsData,
-    headers: {
-      'x-totalrecords': mockPublicationsData.results.length,
-    },
-  })),
-}));
-
 describe('EntryPublications tests', () => {
-  it('should render', () => {
-    // It seems the setState in useEffect causes this to hang
-    // render(
-    //   <Router>
-    //     <EntryPublications accession="P05067" selectedFacets={[]} />
-    //   </Router>
-    // );
-    // expect(useDataApi).toHaveBeenCalled();
+  it('should call useDataApi and render', async () => {
+    const headers = { 'x-totalrecords': mockPublicationsData.results.length };
+    useDataApi.mockImplementation(() => {
+      return {
+        loading: false,
+        data: mockPublicationsData,
+        headers,
+      };
+    });
+    const { findByText } = render(
+      <Router>
+        <EntryPublications accession="P05067" selectedFacets={[]} />
+      </Router>
+    );
+    expect(useDataApi).toHaveBeenCalled();
+    const item = await findByText(/ISOFORM APP751/);
+    expect(item).toBeTruthy();
+  });
+
+  it('should render the error', async () => {
+    useDataApi.mockImplementation(() => {
+      return {
+        loading: false,
+        error: new Error('my error'),
+        status: 400,
+      };
+    });
+    const { asFragment } = render(
+      <Router>
+        <EntryPublications accession="P05067" selectedFacets={[]} />
+      </Router>
+    );
+    expect(asFragment()).toMatchSnapshot();
   });
 });
