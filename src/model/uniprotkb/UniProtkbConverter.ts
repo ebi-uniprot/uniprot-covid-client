@@ -31,8 +31,8 @@ import { Property } from '../types/modelTypes';
 import { Reference } from '../../literature/types/LiteratureTypes';
 
 export enum EntryType {
-  SWISSPROT = 'Swiss-Prot',
-  TREMBL = 'TrEMBL',
+  SWISSPROT = 'UniProtKB reviewed (Swiss-Prot)',
+  TREMBL = 'UniProtKB unreviewed (TrEMBL)',
   INACTIVE = 'Inactive',
 }
 
