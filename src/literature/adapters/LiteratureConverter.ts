@@ -1,13 +1,17 @@
 import { Citation } from '../types/LiteratureTypes';
 
-const formatCitationData = (citation: Citation) => {
-  const pubMedXref =
-    citation.citationCrossReferences &&
-    citation.citationCrossReferences.find((xref) => xref.database === 'PubMed');
+export const getCitationPubMedId = (citation: Citation) =>
+  citation.citationCrossReferences &&
+  citation.citationCrossReferences.find((xref) => xref.database === 'PubMed');
 
-  const doiXref =
-    citation.citationCrossReferences &&
-    citation.citationCrossReferences.find((xref) => xref.database === 'DOI');
+export const getDoiXref = (citation: Citation) =>
+  citation.citationCrossReferences &&
+  citation.citationCrossReferences.find((xref) => xref.database === 'DOI');
+
+const formatCitationData = (citation: Citation) => {
+  const pubMedXref = getCitationPubMedId(citation);
+
+  const doiXref = getDoiXref(citation);
 
   const pubmedId = pubMedXref && pubMedXref.id;
 

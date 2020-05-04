@@ -6,7 +6,9 @@ import { getUniProtPublicationsQueryUrl } from '../../utils/apiUrls';
 import useDataApi from '../../hooks/useDataApi';
 import ErrorHandler from '../../pages/errors/ErrorHandler';
 import { SelectedFacet } from '../../results/types/resultsTypes';
-import formatCitationData from '../../literature/adapters/LiteratureConverter';
+import formatCitationData, {
+  getCitationPubMedId,
+} from '../../literature/adapters/LiteratureConverter';
 import getNextUrlFromResponse from '../../utils/queryUtils';
 
 const EntryPublications: FC<{
@@ -30,10 +32,10 @@ const EntryPublications: FC<{
     }
     const { results } = data;
     setAllResults((allRes) => [...allRes, ...results]);
-    setMetaData({
+    setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
-    });
+    }));
   }, [data, headers]);
 
   if (error) {
@@ -51,9 +53,19 @@ const EntryPublications: FC<{
       <div style={{ height: '80vh' }}>
         <h2>Publications for {accession}</h2>
         {/* The height css will be removed after Franklin DataList is updated */}
-        {/* TODO could idKey be a callback on the item? */}
         <DataList
-          idKey="id"
+          getIdKey={(item: LiteratureForProteinAPI) => {
+            const { reference } = item;
+            const { citation } = reference;
+            const pubMedXref = getCitationPubMedId(citation);
+            let id = pubMedXref?.id;
+            if (!id) {
+              id = citation.authors
+                ? citation.authors?.join('')
+                : citation.authoringGroup?.join('');
+            }
+            return id;
+          }}
           data={allResults}
           dataRenderer={({
             reference,
