@@ -1,7 +1,7 @@
-import searchInitialState from '../search/state/searchInitialState';
-import resultsInitialState from '../results/state/resultsInitialState';
-import entryInitialState from '../entry/state/entryInitialState';
-import messagesInitialState from '../messages/state/messagesInitialState';
+import searchInitialState from '../../uniprotkb/state/searchInitialState';
+import resultsInitialState from '../../uniprotkb/state/resultsInitialState';
+import entryInitialState from '../../uniprotkb/state/entryInitialState';
+import messagesInitialState from '../../messages/state/messagesInitialState';
 
 const initialState = {
   query: searchInitialState,

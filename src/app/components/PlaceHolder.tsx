@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import PlaceHolderSVG from './placeholder.svg';
+import PlaceHolderSVG from './PlaceHolder';
 import './PlaceHolder.scss';
 
 const PlaceHolder: FC<{}> = () => (

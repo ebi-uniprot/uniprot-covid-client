@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tile, HeroHeader, HeroContainer } from 'franklin-sites';
-import Block from '../layout/Block';
-import SearchContainer from '../search/SearchContainer';
+import Block from './Block';
+import SearchContainer from '../../uniprotkb/components/search/SearchContainer';
 import PlaceHolder from '../components/PlaceHolder';
-import BaseLayout from '../layout/BaseLayout';
+import BaseLayout from '../../shared/components/layouts/BaseLayout';
 
 const mission =
   'The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information.';

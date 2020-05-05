@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux';
-import searchReducers, { SearchAction } from '../search/state/searchReducers';
+import searchReducers, {
+  SearchAction,
+} from '../../uniprotkb/state/searchReducers';
 import resultsReducers, {
   ResultAction,
-} from '../results/state/resultsReducers';
-import { SearchState } from '../search/state/searchInitialState';
-import { ResultsState } from '../results/state/resultsInitialState';
+} from '../../uniprotkb/state/resultsReducers';
+import { SearchState } from '../../uniprotkb/state/searchInitialState';
+import { ResultsState } from '../../uniprotkb/state/resultsInitialState';
 import initialState from './initialState';
-import { EntryState } from '../entry/state/entryInitialState';
-import entryReducers from '../entry/state/entryReducers';
-import { MessagesState } from '../messages/state/messagesInitialState';
+import { EntryState } from '../../uniprotkb/state/entryInitialState';
+import entryReducers from '../../uniprotkb/state/entryReducers';
+import { MessagesState } from '../../messages/state/messagesInitialState';
 import messagesReducers, {
   MessagesAction,
-} from '../messages/state/messagesReducers';
+} from '../../messages/state/messagesReducers';
 
 type RootState = {
   query: SearchState;

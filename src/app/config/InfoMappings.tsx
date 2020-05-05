@@ -1,13 +1,13 @@
 import React from 'react';
-import { Namespace } from '../search/types/searchTypes';
-import UniProtKBInfo from './UniProtKBInfo';
+import { Namespace } from '../../uniprotkb/types/searchTypes';
+import UniProtKBInfo from '../../uniprotkb/components/results/UniProtKBInfo';
 
 const infoMappings: {
   [index in Namespace]: {
     name: string;
     info: JSX.Element;
     links: { title: string; destination: string }[];
-  }
+  };
 } = {
   uniprotkb: {
     name: 'UniProtKB',

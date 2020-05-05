@@ -7,7 +7,7 @@ type BlockProps = {
   children: JSX.Element[];
 };
 
-const Block: React.FC<BlockProps> = (props) => {
+const Block: React.FC<BlockProps> = props => {
   const { columns, children } = props;
   return <div className={`block block--${columns}-col`}>{children}</div>;
 };
