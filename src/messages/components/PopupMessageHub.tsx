@@ -2,13 +2,13 @@ import React from 'react';
 import { Message } from 'franklin-sites';
 import { useTransition, animated } from 'react-spring';
 import { MessageType } from '../types/messagesTypes';
-import '../styles/popupMessageHub.scss';
+import './styles/popupMessageHub.scss';
 
 const PopUpMessageHub: React.FC<{
   messages: MessageType[];
   onDismiss: (id: string) => void;
 }> = ({ messages, onDismiss }) => {
-  const transitions = useTransition(messages, (item) => item.id, {
+  const transitions = useTransition(messages, item => item.id, {
     from: { opacity: 0, marginRight: -100, marginLeft: 100 },
     enter: {
       opacity: 1,

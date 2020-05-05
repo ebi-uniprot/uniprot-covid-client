@@ -1,4 +1,4 @@
-import { Location } from '../../urls';
+import { Location } from '../../app/config/urls';
 
 export enum MessageLevel {
   SUCCESS = 'success',

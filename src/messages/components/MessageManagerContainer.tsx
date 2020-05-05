@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
 import { groupBy } from 'lodash';
-import * as actions from './state/messagesActions';
-import { MessageType, MessageFormat } from './types/messagesTypes';
-import { RootAction, RootState } from '../state/state-types';
-import InPageMessageHub from './components/InPageMessageHub';
-import PopUpMessageHub from './components/PopupMessageHub';
-import { Location, PathToLocation } from '../urls';
+import * as actions from '../state/messagesActions';
+import { MessageType, MessageFormat } from '../types/messagesTypes';
+import { RootAction, RootState } from '../../app/types/state-types';
+import InPageMessageHub from './InPageMessageHub';
+import PopUpMessageHub from './PopupMessageHub';
+import { Location, PathToLocation } from '../../app/config/urls';
 
 type MessageManagerContainerProps = {
   activeMessages: MessageType[];
@@ -27,8 +27,7 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
 
   const currentLocation = PathToLocation[path] as Location;
   const filteredInPageMessages = inPageMessages.filter(
-    ({ locations }) =>
-      !locations || locations.includes(currentLocation) // if no locations in the message object then show it everywhere
+    ({ locations }) => !locations || locations.includes(currentLocation) // if no locations in the message object then show it everywhere
   );
 
   return (
