@@ -55,8 +55,9 @@ const EntryPublications: FC<{
         {/* The height css will be removed after Franklin DataList is updated */}
         <DataList
           getIdKey={(item: LiteratureForProteinAPI) => {
-            const { reference } = item;
-            const { citation } = reference;
+            const {
+              reference: { citation },
+            } = item;
             const pubMedXref = getCitationPubMedId(citation);
             let id = pubMedXref?.id;
             if (!id) {

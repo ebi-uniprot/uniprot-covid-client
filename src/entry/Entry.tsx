@@ -81,7 +81,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       section.name === EntrySection.ExternalLinks
         ? !hasExternalLinks(transformedData)
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          !hasContent((transformedData as any)[section.name]),
+          !hasContent(transformedData[section.name]),
   }));
 
   const displayMenuData = [
