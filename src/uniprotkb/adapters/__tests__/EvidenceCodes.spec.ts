@@ -1,4 +1,4 @@
-import { getEvidenceCodeData } from '../types/EvidenceCodes';
+import { getEvidenceCodeData } from '../../config/EvidenceCodes';
 
 describe('Evidence codes', () => {
   test('should get correct data', () => {

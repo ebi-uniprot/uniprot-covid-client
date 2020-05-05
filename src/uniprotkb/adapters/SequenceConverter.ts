@@ -1,17 +1,17 @@
-import { FeatureData } from '../../../view/uniprotkb/components/FeaturesView';
+import { FeatureData } from '../components/entry/FeaturesView';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
-} from '../../utils/KeywordsUtil';
-import KeywordCategory from '../../types/KeywordCategory';
-import FeatureType from '../../types/FeatureType';
+} from '../utils/KeywordsUtil';
+import KeywordCategory from '../types/KeywordCategory';
+import FeatureType from '../types/FeatureType';
 import {
   getXrefsForSection,
   XrefUIModel,
   getJoinedXrefs,
-} from '../../utils/XrefUtils';
-import EntrySection from '../../types/EntrySection';
-import { SequenceData } from '../../../view/uniprotkb/components/SequenceView';
+} from '../utils/XrefUtils';
+import EntrySection from '../types/EntrySection';
+import { SequenceData } from '../components/entry/SequenceView';
 import {
   CommentType,
   AlternativeProductsComment,
@@ -19,8 +19,8 @@ import {
   MassSpectrometryComment,
   FreeTextComment,
   RNAEditingComment,
-} from '../../types/CommentTypes';
-import { UniProtkbAPIModel } from '../UniProtkbConverter';
+} from '../types/CommentTypes';
+import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
 
 export enum Flag {
   PRECURSOR = 'Precursor',

@@ -1,7 +1,7 @@
-import { CommentType } from '../../types/CommentTypes';
-import EntrySection from '../../types/EntrySection';
-import { convertSection } from '../SectionConverter';
-import { UniProtkbAPIModel } from '../UniProtkbConverter';
+import { CommentType } from '../types/CommentTypes';
+import EntrySection from '../types/EntrySection';
+import { convertSection } from './SectionConverter';
+import { UniProtkbAPIModel } from './UniProtkbConverter';
 
 const commentsCategories = [CommentType.INTERACTION, CommentType.SUBUNIT];
 

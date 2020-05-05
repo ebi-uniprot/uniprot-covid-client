@@ -1,6 +1,6 @@
 import convertExternalLinks from '../ExternalLinksConverter';
-import modelData from '../../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../UniProtkbConverter';
+import modelData from '../../__mockData__/entryModelData.json';
+import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
 
 describe('External links data converter', () => {
   beforeAll(() => {

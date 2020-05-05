@@ -1,7 +1,7 @@
 import EntrySection from '../types/EntrySection';
-import convertFunction from './sections/FunctionConverter';
-import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
-import convertPathologyAndBiotech from './sections/PathologyAndBiotechConverter';
+import convertFunction from '../adapters/FunctionConverter';
+import { FeatureData } from '../components/entry/FeaturesView';
+import convertPathologyAndBiotech from '../adapters/PathologyAndBiotechConverter';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
@@ -9,22 +9,22 @@ import {
   GeneNamesData,
   OrganismData,
   LineageData,
-} from './sections/NamesAndTaxonomyConverter';
-import convertProteinProcessing from './sections/ProteinProcessingConverter';
-import convertExpression from './sections/ExpressionConverter';
-import convertSubcellularLocation from './sections/SubcellularLocationConverter';
+} from '../adapters/NamesAndTaxonomyConverter';
+import convertProteinProcessing from '../adapters/ProteinProcessingConverter';
+import convertExpression from '../adapters/ExpressionConverter';
+import convertSubcellularLocation from '../adapters/SubcellularLocationConverter';
 import {
   convertSequence,
   SequenceUIModel,
   EntryAudit,
-} from './sections/SequenceConverter';
-import { SequenceData } from '../../view/uniprotkb/components/SequenceView';
+} from '../adapters/SequenceConverter';
+import { SequenceData } from '../components/entry/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
-import convertInteraction from './sections/InteractionConverter';
-import convertFamilyAndDomains from './sections/FamilyAndDomainsConverter';
+import convertInteraction from '../adapters/InteractionConverter';
+import convertFamilyAndDomains from '../adapters/FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
-import convertStructure from './sections/StructureConverter';
-import convertExternalLinks from './sections/ExternalLinksConverter';
+import convertStructure from '../adapters/StructureConverter';
+import convertExternalLinks from '../adapters/ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
 import { transfromProperties } from '../utils/utils';
 import { Property } from '../types/modelTypes';

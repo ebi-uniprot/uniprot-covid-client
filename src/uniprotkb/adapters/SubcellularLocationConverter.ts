@@ -1,8 +1,8 @@
-import KeywordCategory from '../../types/KeywordCategory';
-import FeatureType from '../../types/FeatureType';
-import { convertSection } from '../SectionConverter';
-import { UniProtkbAPIModel } from '../UniProtkbConverter';
-import { CommentType } from '../../types/CommentTypes';
+import KeywordCategory from '../types/KeywordCategory';
+import FeatureType from '../types/FeatureType';
+import { convertSection } from '../adapters/SectionConverter';
+import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
+import { CommentType } from '../types/CommentTypes';
 
 const commentCategories = [CommentType.SUBCELLULAR_LOCATION];
 

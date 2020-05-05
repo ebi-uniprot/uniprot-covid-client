@@ -1,6 +1,6 @@
 import convertPathologyAndBiotech from '../PathologyAndBiotechConverter';
-import modelData from '../../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../UniProtkbConverter';
+import modelData from '../../__mockData__/entryModelData.json';
+import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
 
 describe('Pathology/Biotech data converter', () => {
   beforeAll(() => {

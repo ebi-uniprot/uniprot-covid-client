@@ -5,7 +5,7 @@ import {
   getKeywordsForCategories,
   KeywordUIModel,
 } from '../utils/KeywordsUtil';
-import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
+import { FeatureData } from '../components/entry/FeaturesView';
 import EntrySection from '../types/EntrySection';
 import KeywordCategory from '../types/KeywordCategory';
 import FeatureType from '../types/FeatureType';

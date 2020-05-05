@@ -1,6 +1,6 @@
 import convertExpression from '../ExpressionConverter';
-import modelData from '../../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../UniProtkbConverter';
+import modelData from '../../__mockData__/entryModelData.json';
+import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
 
 describe('Expression data converter', () => {
   beforeAll(() => {
