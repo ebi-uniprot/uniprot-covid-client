@@ -101,6 +101,7 @@ const InteractionSection: FC<{
     if (
       datatableContainer &&
       datatableContainer.current &&
+      interactionComment &&
       interactionComment[0]
     ) {
       // eslint-disable-next-line no-param-reassign
