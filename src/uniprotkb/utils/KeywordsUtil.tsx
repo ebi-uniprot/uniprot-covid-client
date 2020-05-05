@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import KeywordCategory from '../types/KeywordCategory';
-import { UniProtkbUIModel } from '../uniprotkb/UniProtkbConverter';
-import { UIModel } from '../uniprotkb/SectionConverter';
+import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
+import { UIModel } from '../adapters/SectionConverter';
 
 export type Keyword = {
   id?: string;

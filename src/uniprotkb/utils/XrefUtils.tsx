@@ -11,11 +11,11 @@ import {
   implicitDatabaseSimilarityComment,
   implicitDatabasesEC,
   PDBMirrors,
-} from '../../data/database';
+} from '../config/database';
 import EntrySection from '../types/EntrySection';
 import { DatabaseCategory } from '../types/DatabaseRefs';
 import { Xref, FreeTextComment } from '../types/CommentTypes';
-import { GeneNamesData } from '../uniprotkb/sections/NamesAndTaxonomyConverter';
+import { GeneNamesData } from '../adapters/NamesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
 import { ValueWithEvidence } from '../types/modelTypes';
 

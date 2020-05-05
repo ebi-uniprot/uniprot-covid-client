@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 import { isEqual } from 'lodash';
-import { removeProperty } from '../../utils/utils';
+import { removeProperty } from '../../shared/utils/utils';
 import { Operator, Clause, itemType, dataType } from '../types/searchTypes';
 
 export const createEmptyClause = (): Clause => ({

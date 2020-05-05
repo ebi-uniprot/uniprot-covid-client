@@ -1,4 +1,4 @@
-import databaseInfoJson from '../../data/databaseInfo.json';
+import databaseInfoJson from '../../config/databaseInfo.json';
 import {
   getDatabaseInfoMaps,
   selectDatabases,
@@ -8,16 +8,13 @@ import {
   databaseCategoryToNames,
   entrySectionToDatabaseNames,
   databaseNameToCategory,
-} from '../../data/database';
-import {
-  DatabaseCategory,
-  DatabaseInfo,
-} from '../../model/types/DatabaseRefs';
+} from '../../config/database';
+import { DatabaseCategory, DatabaseInfo } from '../../types/DatabaseRefs';
 import {
   expectedDatabaseCategoryToNames,
   expectedDatabaseNameToCategory,
   expectedEntrySectionToDatabaseCategoryOrder,
-} from '../../__mockData__/database';
+} from './__mockData__/database';
 
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 

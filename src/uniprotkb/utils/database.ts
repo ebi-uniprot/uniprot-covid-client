@@ -1,11 +1,11 @@
 import { flatten } from 'lodash';
-import EntrySection from '../model/types/EntrySection';
+import EntrySection from '../types/EntrySection';
 import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
-} from '../model/types/DatabaseRefs';
-import { Xref } from '../model/types/CommentTypes';
+} from '..//types/DatabaseRefs';
+import { Xref } from '../types/CommentTypes';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
   const databaseCategoryToNames = new Map<DatabaseCategory, string[]>();
