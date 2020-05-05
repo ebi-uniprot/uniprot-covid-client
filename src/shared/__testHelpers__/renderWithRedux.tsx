@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import rootReducer from '../state/rootReducer';
+import rootReducer from '../../app/state/rootReducer';
 import { Router, Route } from 'react-router-dom';
 
 type RenderOptions = {

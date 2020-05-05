@@ -1,9 +1,7 @@
 import React from 'react';
 import { Header } from 'franklin-sites';
-
-import SearchContainer from '../search/SearchContainer';
-
-import Logo from '../svg/uniprot-logo.svg';
+import SearchContainer from '../../../uniprotkb/components/search/SearchContainer';
+import Logo from './svgs/uniprot-logo.svg';
 
 const tools = [
   {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { v1 } from 'uuid';
 import MessageManagerContainer from '../MessageManagerContainer';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import { MessageFormat, MessageLevel } from '../types/messagesTypes';
+import renderWithRedux from '../../../shared/__testHelpers__/renderWithRedux';
+import { MessageFormat, MessageLevel } from '../../types/messagesTypes';
 
 const getState = (content, format, locations = null) => ({
   messages: {

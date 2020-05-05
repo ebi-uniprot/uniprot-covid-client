@@ -1,8 +1,8 @@
 import React from 'react';
-import UniProtHeader from '../header/UniProtHeader';
-import UniProtFooter from '../footer/UniProtFooter';
-import GDPR from '../components/GDPR';
-import MessageManagerContainer from '../messages/MessageManagerContainer';
+import UniProtHeader from './UniProtHeader';
+import UniProtFooter from './UniProtFooter';
+import GDPR from '../gdpr/GDPR';
+import MessageManagerContainer from '../../../messages/components/MessageManagerContainer';
 import './styles/BaseLayout.scss';
 
 type BaseLayoutProps = {

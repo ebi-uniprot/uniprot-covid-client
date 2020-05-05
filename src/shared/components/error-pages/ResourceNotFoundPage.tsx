@@ -1,7 +1,7 @@
 import React from 'react';
 import { Message } from 'franklin-sites';
 import ErrorPage from './ErrorPage';
-import ArtWork from '../../svg/404.svg';
+import ArtWork from './svgs/404.svg';
 
 const ErrorMessage = () => (
   <Message level="failure">
@@ -11,10 +11,7 @@ const ErrorMessage = () => (
 );
 
 const ResourceNotFoundPage = () => (
-  <ErrorPage
-    artwork={<ArtWork />}
-    message={<ErrorMessage />}
-  />
+  <ErrorPage artwork={<ArtWork />} message={<ErrorMessage />} />
 );
 
 export default ResourceNotFoundPage;

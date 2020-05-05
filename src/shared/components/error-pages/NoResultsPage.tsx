@@ -1,7 +1,7 @@
 import React from 'react';
 import { Message } from 'franklin-sites';
 import ErrorPage from './ErrorPage';
-import ArtWork from '../../svg/no-results-found.svg';
+import ArtWork from './svgs/no-results-found.svg';
 
 const ErrorMessage = () => (
   <Message level="info">
