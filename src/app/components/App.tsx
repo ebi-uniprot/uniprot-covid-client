@@ -2,10 +2,10 @@ import React, { lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
-import BaseLayout from './layout/BaseLayout';
-import { Location, LocationToPath } from './urls';
+import BaseLayout from '../../shared/components/layouts/BaseLayout';
+import { Location, LocationToPath } from '../config/urls';
 import './styles/App.scss';
-import history from './utils/browserHistory';
+import history from '../../shared/utils/browserHistory';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -14,19 +14,29 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Async loading of page components
-const HomePage = lazy(() => import('./pages/HomePage'));
-const ResultsPage = lazy(() => import('./pages/ResultsPage'));
-const EntryPage = lazy(() => import('./pages/EntryPage'));
-const AdvancedSearchPage = lazy(() => import('./pages/AdvancedSearchPage'));
-const CustomiseTablePage = lazy(() => import('./pages/CustomiseTablePage'));
-const DownloadPage = lazy(() => import('./pages/DownloadPage'));
+const HomePage = lazy(() => import('./HomePage'));
+const ResultsPage = lazy(() =>
+  import('../../uniprotkb/components/results/ResultsContainer')
+);
+const EntryPage = lazy(() => import('../../uniprotkb/components/entry/Entry'));
+const AdvancedSearchPage = lazy(() =>
+  import('../../uniprotkb/components/query-builder/AdvancedSearchContainer')
+);
+const CustomiseTablePage = lazy(() =>
+  import('../../uniprotkb/components/customise-table/CustomiseTableContainer')
+);
+const DownloadPage = lazy(() =>
+  import('../../uniprotkb/components/download/DownloadContainer')
+);
 const ResourceNotFoundPage = lazy(() =>
-  import('./pages/errors/ResourceNotFoundPage')
+  import('../../shared/components/error-pages/ResourceNotFoundPage')
 );
 const ServiceUnavailablePage = lazy(() =>
-  import('./pages/errors/ServiceUnavailablePage')
+  import('../../shared/components/error-pages/ServiceUnavailablePage')
 );
-const JobErrorPage = lazy(() => import('./pages/errors/JobErrorPage'));
+const JobErrorPage = lazy(() =>
+  import('../../shared/components/error-pages/JobErrorPage')
+);
 
 const App = () => (
   <FranklinSite>
