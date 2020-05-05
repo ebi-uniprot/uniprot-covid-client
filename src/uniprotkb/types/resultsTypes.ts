@@ -1,4 +1,4 @@
-import { Column } from '../../model/types/ColumnTypes';
+import { Column } from './ColumnTypes';
 
 export enum SortDirection {
   ascend = 'ascend',

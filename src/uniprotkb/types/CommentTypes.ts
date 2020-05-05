@@ -3,9 +3,9 @@ import {
   Absorption,
   KineticParameters,
   CofactorComment,
-} from '../uniprotkb/sections/FunctionConverter';
-import { FeatureData } from '../../view/uniprotkb/components/FeaturesView';
-import { Interactant } from '../uniprotkb/sections/InteractionConverter';
+} from '../adapters/FunctionConverter';
+import { FeatureData } from '../components/entry/FeaturesView';
+import { Interactant } from '../adapters/InteractionConverter';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',

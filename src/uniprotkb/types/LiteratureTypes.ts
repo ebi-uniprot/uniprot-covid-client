@@ -1,4 +1,4 @@
-import { Reference } from '../../model/uniprotkb/UniProtkbConverter';
+import { Reference } from '../adapters/UniProtkbConverter';
 
 export type LiteratureStatistics = {
   reviewedProteinCount?: number;
