@@ -5165,10 +5165,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.44:
-  version "0.0.44"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.44.tgz#f7bc0e56f10fd53a167848855527b869c5180787"
-  integrity sha512-/kPrQMn15sLWe4hUk4K50vWmi2g09xb5gqj0REdUprES6NdMOJY2Ie5BWQq6Gw5YU6R5ZWydWajxYG9Egjk7fg==
+franklin-sites@0.0.45:
+  version "0.0.45"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.45.tgz#089d2b8252ca0deb51f39b4810defeab19719325"
+  integrity sha512-kyRg5Wo/GKeZj0a4jfuA4DSfjO6ztAqUlpiHOuvBKZmRMW+RhOF75QqAURs6CPs8ygrOZSPMI9IfPMiirYWojg==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"
@@ -11018,10 +11018,10 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
-  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
+uuid@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
+  integrity sha512-jOXGuXZAWdsTH7eZLtyXMqUb9EcWMGZNbL9YcGBJl4MH4nrxHmZJhEHvyLFrkxo+28uLb/NYRcStH48fnD0Vzw==
 
 uuid@^3.0.1, uuid@^3.3.2, uuid@^3.3.3:
   version "3.4.0"

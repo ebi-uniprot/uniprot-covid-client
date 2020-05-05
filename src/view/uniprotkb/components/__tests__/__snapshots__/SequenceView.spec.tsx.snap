@@ -151,12 +151,11 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
       href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/Isoform.fasta"
     >
       <svg
-        height="32"
+        fill="currentColor"
         viewBox="0 0 32 32"
-        width="32"
       >
         <path
-          d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
+          d="M27.6 21h3.9v7.7H.5v-7.8h3.9v4h23.2v-4zm-3.9-9.7L16 22.9 8.2 11.3h5.9V1.6h3.8v9.7h5.9z"
         />
       </svg>
       Download
@@ -515,12 +514,11 @@ exports[`SequenceView component should render SequenceView 1`] = `
       href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P05067.fasta"
     >
       <svg
-        height="32"
+        fill="currentColor"
         viewBox="0 0 32 32"
-        width="32"
       >
         <path
-          d="M27.625 20.944H31.5v7.75H.5v-7.75h3.875v3.875h23.25v-3.875zm-3.875-9.687L16 22.882 8.25 11.258h5.813V1.57h3.875v9.687h5.812z"
+          d="M27.6 21h3.9v7.7H.5v-7.8h3.9v4h23.2v-4zm-3.9-9.7L16 22.9 8.2 11.3h5.9V1.6h3.8v9.7h5.9z"
         />
       </svg>
       Download

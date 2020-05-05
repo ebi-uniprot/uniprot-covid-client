@@ -6,8 +6,6 @@ import resultsReducers, {
 import { SearchState } from '../search/state/searchInitialState';
 import { ResultsState } from '../results/state/resultsInitialState';
 import initialState from './initialState';
-import { EntryState } from '../entry/state/entryInitialState';
-import entryReducers from '../entry/state/entryReducers';
 import { MessagesState } from '../messages/state/messagesInitialState';
 import messagesReducers, {
   MessagesAction,
@@ -16,14 +14,12 @@ import messagesReducers, {
 type RootState = {
   query: SearchState;
   results: ResultsState;
-  entry: EntryState;
   messages: MessagesState;
 };
 
 const appReducer = combineReducers({
   query: searchReducers,
   results: resultsReducers,
-  entry: entryReducers,
   messages: messagesReducers,
 });
 
