@@ -239,16 +239,13 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
             type="button"
           >
             <svg
-              fill="none"
+              fill="currentColor"
               height="12"
               viewBox="0 0 10 15"
               width="12"
             >
               <path
-                clip-rule="evenodd"
-                d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-                fill="#4E5A71"
-                fill-rule="evenodd"
+                d="M10 0H0v15l5-5 5 5V0z"
               />
             </svg>
             <span
@@ -290,16 +287,13 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -340,16 +334,13 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -390,16 +381,13 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -455,16 +443,13 @@ exports[`ColumnConfiguration component should render all columns 8`] = `
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -493,16 +478,13 @@ exports[`ColumnConfiguration component should render all columns 9`] = `
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -531,16 +513,13 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -572,11 +551,12 @@ exports[`ColumnConfiguration component should render all columns 11`] = `
   >
     NCBI
     <svg
+      fill="currentColor"
       viewBox="0 0 576 512"
       width="12.5"
     >
       <path
-        d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
       />
     </svg>
   </a>
@@ -753,16 +733,13 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -863,16 +840,13 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -900,16 +874,13 @@ exports[`ColumnConfiguration component should render all columns 26`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -943,11 +914,12 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
     >
       sequence
       <svg
+        fill="currentColor"
         viewBox="0 0 576 512"
         width="12.5"
       >
         <path
-          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
         />
       </svg>
     </a>
@@ -960,16 +932,13 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1022,16 +991,13 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1055,16 +1021,13 @@ exports[`ColumnConfiguration component should render all columns 31`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1106,16 +1069,13 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1145,16 +1105,13 @@ exports[`ColumnConfiguration component should render all columns 35`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1188,16 +1145,13 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1225,16 +1179,13 @@ exports[`ColumnConfiguration component should render all columns 36`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1267,16 +1218,13 @@ exports[`ColumnConfiguration component should render all columns 38`] = `
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -1320,16 +1268,13 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
           type="button"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="12"
             viewBox="0 0 10 15"
             width="12"
           >
             <path
-              clip-rule="evenodd"
-              d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-              fill="#4E5A71"
-              fill-rule="evenodd"
+              d="M10 0H0v15l5-5 5 5V0z"
             />
           </svg>
           <span
@@ -1362,16 +1307,13 @@ exports[`ColumnConfiguration component should render all columns 41`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1411,16 +1353,13 @@ exports[`ColumnConfiguration component should render all columns 45`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1453,16 +1392,13 @@ exports[`ColumnConfiguration component should render all columns 46`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1497,16 +1433,13 @@ exports[`ColumnConfiguration component should render all columns 48`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1572,11 +1505,12 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
     >
       sequence
       <svg
+        fill="currentColor"
         viewBox="0 0 576 512"
         width="12.5"
       >
         <path
-          d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
         />
       </svg>
     </a>
@@ -1589,16 +1523,13 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1648,15 +1579,14 @@ exports[`ColumnConfiguration component should render all columns 54`] = `
 exports[`ColumnConfiguration component should render all columns 55`] = `
 <DocumentFragment>
   <span
-    class="uniprot-title__status icon--reviewed"
+    class="uniprot-title__status icon--unreviewed"
   >
     <svg
-      height="512"
-      viewBox="0 0 426 512"
-      width="426"
+      fill="currentColor"
+      viewBox="0 0 400 512"
     >
       <path
-        d="M432 144H288V0l144 144zM112.96 404.128l66.112 34.752-12.624-73.632 53.488-52.16L146 302.336l-33.056-66.976-33.072 66.976-73.92 10.752 53.504 52.16-12.64 73.632 66.144-34.752zM32 491.856V512h200.192L112.96 449.312 32 491.856zm114-189.52l-33.056-66.976-33.072 66.976L32 309.312v29.152l27.456 26.784-12.64 73.632 66.144-34.752 66.112 34.752-12.624-73.632 53.488-52.16L146 302.336zM256 176V0H32v268.88l21.312-3.104 59.648-120.784 59.6 120.784 133.312 19.408-96.448 94.032L232.192 512H432V176H256z"
+        d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
       />
     </svg>
   </span>
@@ -1743,16 +1673,13 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1776,16 +1703,13 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1813,16 +1737,13 @@ exports[`ColumnConfiguration component should render all columns 67`] = `
         type="button"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="12"
           viewBox="0 0 10 15"
           width="12"
         >
           <path
-            clip-rule="evenodd"
-            d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-            fill="#4E5A71"
-            fill-rule="evenodd"
+            d="M10 0H0v15l5-5 5 5V0z"
           />
         </svg>
         <span
@@ -1867,16 +1788,13 @@ exports[`ColumnConfiguration component should render all columns 72`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -1911,16 +1829,13 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
       type="button"
     >
       <svg
-        fill="none"
+        fill="currentColor"
         height="12"
         viewBox="0 0 10 15"
         width="12"
       >
         <path
-          clip-rule="evenodd"
-          d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-          fill="#4E5A71"
-          fill-rule="evenodd"
+          d="M10 0H0v15l5-5 5 5V0z"
         />
       </svg>
       <span
@@ -2003,11 +1918,12 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
         >
           3124
           <svg
+            fill="currentColor"
             viewBox="0 0 576 512"
             width="12.5"
           >
             <path
-              d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+              d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
             />
           </svg>
         </a>
@@ -2256,11 +2172,12 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
       >
         id value
         <svg
+          fill="currentColor"
           viewBox="0 0 576 512"
           width="12.5"
         >
           <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+            d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
           />
         </svg>
       </a>
@@ -2272,11 +2189,12 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
       >
         description value
         <svg
+          fill="currentColor"
           viewBox="0 0 576 512"
           width="12.5"
         >
           <path
-            d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 00384 303.765V448H64V128h264a24.003 24.003 0 0016.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"
+            d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
           />
         </svg>
       </a>
