@@ -18,19 +18,24 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 const WEEK = 7 * DAY;
 
+// cleans caches that are not needed anymore
+// see: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-precaching#.cleanupOutdatedCaches
 cleanupOutdatedCaches();
+
 // eslint-disable-next-line
 // @ts-ignore
 precacheAndRoute(self.__WB_MANIFEST); // eslint-disable-line
-
-/* routes: */
-
-// respond to all navigation requests with this document
-registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
+// 'self.__WB_MANIFEST' is the injection point for the webpack InjectManifest
+// plugin, injecting a list of all necessary assets to precache.
 
 // routing recipes
 // ORDER MATTERS!
 // see: https://developers.google.com/web/tools/workbox/guides/common-recipes
+
+/* routes: */
+
+// respond to all 'navigation' requests with this document (browsing)
+registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
 
 // https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/A1L3X0?page_size=100&type=family
 // external APIs - Stale While Revalidate

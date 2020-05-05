@@ -144,6 +144,9 @@ export function register(config?: Config) {
   }
 }
 
+// NOTE: Something went horribly wrong with caching? use the following function
+// and re-release asap! You can then spend time fixing whatever issue there was.
+
 // will remove any existing service worker.
 // Might be needed if an issue is detected after deployement.
 export function unregister() {

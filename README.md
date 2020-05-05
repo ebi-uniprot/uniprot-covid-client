@@ -48,3 +48,6 @@ preferably a dev build through `yarn run build:dev` to have an easier time
 debugging. Serve the compiled website through any static asset server (e.g.
 running `npx serve build`) and you can have a look at the website where the
 service worker should be registered and functioning.
+
+Something's gone wrong with caching on a deployed build? In the entry point use
+the `unregister` function instead of the `register` function.
