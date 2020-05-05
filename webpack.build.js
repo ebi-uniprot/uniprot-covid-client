@@ -73,7 +73,7 @@ module.exports = (_env, argv) => {
         dontCacheBustURLsMatching: /\.[\da-f]{6}\.[\w]{2,5}$/i,
         // exclude from precaching because one browser will never need all fonts
         // formats at the same time, will cache later whichever is actually used
-        exclude: [/fontello/],
+        exclude: [/fonts/],
       }),
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',

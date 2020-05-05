@@ -7,6 +7,9 @@ import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
+
+import * as patterns from './url-patterns';
+
 // Refer to https://developers.google.com/web/tools/workbox/reference-docs/latest/
 // for documentation about this whole file's use of workbox
 
@@ -32,13 +35,13 @@ registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
 // https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/A1L3X0?page_size=100&type=family
 // external APIs - Stale While Revalidate
 registerRoute(
-  /^https?:\/\/((www|api)\.rhea-db\.org|api\.geneontology\.org|www\.ebi\.ac\.uk\/interpro\/api)\//,
+  patterns.externalAPIs,
   new StaleWhileRevalidate({
     cacheName: 'external-APIs',
     plugins: [
-      new CacheableResponsePlugin({ statuses: [0, 200] }),
+      new CacheableResponsePlugin({ statuses: [0, 200, 204] }),
       new ExpirationPlugin({
-        maxEntries: 300,
+        maxEntries: 500,
         maxAgeSeconds: 4 * WEEK,
         purgeOnQuotaError: true,
       }),
@@ -48,9 +51,9 @@ registerRoute(
 
 // images - Cache First
 registerRoute(
-  /\.(?:png|gif|jpe?g|webp|svg|ico)$/,
+  patterns.sameOriginImagesAndFonts,
   new CacheFirst({
-    cacheName: 'images',
+    cacheName: 'images-and-fonts',
     plugins: [
       new ExpirationPlugin({
         maxEntries: 100,
@@ -63,7 +66,7 @@ registerRoute(
 
 // external images - Cache First
 registerRoute(
-  /^https?:\/\/.*?\.(?:png|gif|jpe?g|webp|svg)$/,
+  patterns.externalImages,
   new CacheFirst({
     cacheName: 'external-images',
     plugins: [
@@ -79,13 +82,13 @@ registerRoute(
 
 // Google fonts stylesheets - Stale While Revalidate
 registerRoute(
-  /^https:\/\/fonts\.googleapis\.com/,
+  patterns.googleFontsStylesheets,
   new StaleWhileRevalidate({ cacheName: 'google-fonts-stylesheets' })
 );
 
 // fonts - Cache First
 registerRoute(
-  /^https?:\/\/.*?\.(?:woff2?|ttf|eot)$/,
+  patterns.googleFontsStylesheets,
   new CacheFirst({
     cacheName: 'fonts',
     plugins: [
@@ -99,32 +102,16 @@ registerRoute(
   })
 );
 
-// 'X-UniProt-Release' header not available here, right? 🤔
-// UniProt API - Stale While Revalidate
-registerRoute(
-  /^https?:\/\/www(dev)?.ebi\.ac\.uk\/uniprot\/api\//,
-  new StaleWhileRevalidate({
-    cacheName: 'API',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 500,
-        maxAgeSeconds: 8 * WEEK,
-        purgeOnQuotaError: true,
-      }),
-    ],
-  })
-);
-
 // stale while revalidate until we find a way to read and process the
 // 'X-UniProt-Release' header and dump the cache when that changes
-// Proteins API - Stale While Revalidate
+// UniProt API - Stale While Revalidate
 registerRoute(
-  /^https?:\/\/www(dev)?.ebi\.ac\.uk\/proteins\/api\//,
+  patterns.uniprotAPIs,
   new StaleWhileRevalidate({
-    cacheName: 'API',
+    cacheName: 'APIs',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 500,
+        maxEntries: 750,
         maxAgeSeconds: 8 * WEEK,
         purgeOnQuotaError: true,
       }),
