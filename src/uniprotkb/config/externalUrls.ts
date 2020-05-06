@@ -1,4 +1,4 @@
-import { joinUrl } from './apiUrls';
+import { joinUrl } from '../../shared/utils/url';
 
 const externalUrls = {
   IntAct: '//www.ebi.ac.uk/intact/',

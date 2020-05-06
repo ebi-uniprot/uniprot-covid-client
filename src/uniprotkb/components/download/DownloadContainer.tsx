@@ -11,7 +11,8 @@ import {
   SelectedFacet,
   SortDirection,
 } from '../../types/resultsTypes';
-import { getDownloadUrl, urlsAreEqual } from '../../config/apiUrls';
+import { getDownloadUrl } from '../../config/apiUrls';
+import { urlsAreEqual } from '../../../shared/utils/url';
 import fetchData from '../../../shared/utils/fetchData';
 
 export const getPreviewFileFormat = (fileFormat: FileFormat) =>

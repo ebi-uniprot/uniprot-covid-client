@@ -1,6 +1,5 @@
-import urlJoin from 'url-join';
 import queryString from 'query-string';
-import { uniq } from 'lodash';
+import { joinUrl } from '../../shared/utils/url';
 import {
   getApiSortDirection,
   SortDirection,
@@ -10,8 +9,6 @@ import {
   fileFormatToUrlParameter,
 } from '../types/resultsTypes';
 import { SortableColumn } from '../types/ColumnTypes';
-
-export const joinUrl = (...args: string[]) => urlJoin(args);
 
 export const devPrefix = 'https://wwwdev.ebi.ac.uk';
 export const prodPrefix = 'https://www.ebi.ac.uk';
@@ -186,27 +183,6 @@ export const getDownloadUrl = ({
     parameters.compressed = true;
   }
   return `${apiUrls.download}?${queryString.stringify(parameters)}`;
-};
-
-export const urlsAreEqual = (
-  url1: string,
-  url2: string,
-  ignoreParams: string[] = []
-) => {
-  const urlObject1 = queryString.parseUrl(url1);
-  const urlObject2 = queryString.parseUrl(url2);
-  if (urlObject1.url !== urlObject2.url) {
-    return false;
-  }
-  const paramsIntersection = uniq([
-    ...Object.keys(urlObject1.query),
-    ...Object.keys(urlObject1.query),
-  ]);
-  return paramsIntersection.every(
-    param =>
-      ignoreParams.includes(param) ||
-      urlObject1.query[param] === urlObject2.query[param]
-  );
 };
 
 export const literatureApiUrls = {
