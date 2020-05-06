@@ -149,7 +149,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         render: (row: UniProtkbAPIModel) =>
           columnConfig.render(uniProtKbConverter(row) as UniProtkbUIModel),
         sortable: columnConfig.sortable,
-        sorted: columnName === sortColumn && sortDirection,
+        sorted: columnName === sortColumn && sortDirection, // TODO this doesn't seem to update the view
       };
     }
     return {

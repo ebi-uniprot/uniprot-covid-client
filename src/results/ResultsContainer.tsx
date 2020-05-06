@@ -135,6 +135,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
         </span>
       </button>
       {viewMode === ViewMode.TABLE && (
+        // TODO this needs to be persisted in LocalStorage
         <Link to="/customise-table">
           <button type="button" className="button tertiary">
             <EditIcon />
