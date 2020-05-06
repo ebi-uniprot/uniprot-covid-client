@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
-import EntrySection from '../../model/types/EntrySection';
-import FeaturesView from './components/FeaturesView';
-import KeywordView from './components/KeywordView';
-import XRefView from './components/XRefView';
-import FreeTextView from './components/FreeTextView';
-import { CommentType, FreeTextComment } from '../../model/types/CommentTypes';
-import { UIModel } from '../../model/uniprotkb/SectionConverter';
+import { hasContent } from '../../utils/utils';
+import EntrySection from '../../types/EntrySection';
+import FeaturesView from './FeaturesView';
+import KeywordView from './KeywordView';
+import XRefView from './XRefView';
+import FreeTextView from './FreeTextView';
+import { CommentType, FreeTextComment } from '../../types/CommentTypes';
+import { UIModel } from '../../adapters/SectionConverter';
 
 const ProteinProcessingSection: FC<{
   data: UIModel;

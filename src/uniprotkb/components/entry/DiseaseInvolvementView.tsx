@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExpandableList } from 'franklin-sites';
-import { DiseaseComment } from '../../../model/types/CommentTypes';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { databaseToDatabaseInfo } from '../../../data/database';
+import { DiseaseComment } from '../../types/CommentTypes';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import { databaseToDatabaseInfo } from '../../config/database';
 import { XRef } from './XRefView';
 
 type DiseaseInvolvementEntryProps = {
@@ -38,7 +38,7 @@ export const DiseaseInvolvementEntry: React.FC<DiseaseInvolvementEntryProps> = (
   const infoData = [];
 
   const evidenceNodes = evidences && (
-    <UniProtEvidenceTag evidences={evidences} />
+    <UniProtKBEvidenceTag evidences={evidences} />
   );
 
   if (note) {

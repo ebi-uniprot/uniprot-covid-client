@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
 import '@geneontology/ribbon/es/main.scss';
-import '../../../styles/go-ribbon.scss';
+import './styles/go-ribbon.scss';
 
 // The label position of each entity
 enum POSITION {

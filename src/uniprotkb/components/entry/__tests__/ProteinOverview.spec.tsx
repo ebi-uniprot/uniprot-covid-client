@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ProteinOverview from '../ProteinOverviewView';
-import ProteinNamesUIDataJson from '../__mocks__/ProteinNamesUIData.json';
-import EntrySection from '../../../../model/types/EntrySection';
+import ProteinNamesUIDataJson from './__mockData__/ProteinNamesUIData.json';
+import EntrySection from '../../../types/EntrySection';
 
 describe('ProteinOverview component', () => {
   test('should render', () => {

@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { groupBy } from 'lodash';
 import * as actions from '../state/messagesActions';
 import { MessageType, MessageFormat } from '../types/messagesTypes';
-import { RootAction, RootState } from '../../app/types/state-types';
+import { RootAction, RootState } from '../../app/state/rootInitialState';
 import InPageMessageHub from './InPageMessageHub';
 import PopUpMessageHub from './PopupMessageHub';
 import { Location, PathToLocation } from '../../app/config/urls';

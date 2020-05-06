@@ -21,7 +21,7 @@ import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
 import { getQueryUrl } from '../utils/apiUrls';
 import infoMappings from '../info/InfoMappings';
-import { RootState, RootAction } from '../state/state-types';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
 import {
   SortDirection,
   SelectedEntries,

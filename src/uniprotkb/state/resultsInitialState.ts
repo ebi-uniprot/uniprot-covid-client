@@ -1,7 +1,7 @@
-import { UniProtkbAPIModel } from '../../model/uniprotkb/UniProtkbConverter';
-import { Column } from '../../model/types/ColumnTypes';
+import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
+import { Column } from '../types/ColumnTypes';
 import { FieldData, ColumnSelectTab } from '../types/resultsTypes';
-import { Facet } from '../../types/responseTypes';
+import { Facet } from '../types/responseTypes';
 
 export enum ViewMode {
   TABLE,

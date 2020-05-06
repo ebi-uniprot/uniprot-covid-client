@@ -4,12 +4,12 @@ import ProtvistaTrack from 'protvista-track';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
-import { loadWebComponent } from '../../../utils/utils';
-import { Evidence } from '../../../model/types/modelTypes';
-import FeatureType from '../../../model/types/FeatureType';
-import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
+import { loadWebComponent } from '../../../shared/utils/utils';
+import { Evidence } from '../../types/modelTypes';
+import FeatureType from '../../types/FeatureType';
+import { UniProtProtvistaEvidenceTag } from './UniProtKBEvidenceTag';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
-import { Xref } from '../../../model/types/CommentTypes';
+import { Xref } from '../../types/CommentTypes';
 
 enum LocationModifier {
   EXACT = 'EXACT',

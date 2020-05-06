@@ -1,8 +1,8 @@
 import React from 'react';
-import renderWithRedux from '../../../__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 import UniProtKBEntryPublications from '../UniProtKBEntryPublications';
-import entryData from '../../../model/__mocks__/entryModelData.json';
-import entryInitialState from '../../../entry/state/entryInitialState';
+import entryData from '../../../__mockData__/entryModelData.json';
+import entryInitialState from '../../../state/entryInitialState';
 
 describe('UniProtKBEntryPublications', () => {
   it('Should render', () => {

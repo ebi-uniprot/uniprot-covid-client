@@ -9,7 +9,7 @@ import noResults from '../../__mockData__/noResults.json';
 import entry from '../../__mockData__/swissprot_entry.json';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 
 const mock = new MockAdapter(axios);
 

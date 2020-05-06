@@ -18,30 +18,30 @@ import {
 } from 'franklin-sites';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
+import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
 import {
   UniProtkbUIModel,
   EntryType,
   UniProtkbInactiveEntryModel,
-} from '../model/uniprotkb/UniProtkbConverter';
-import { hasContent, hasExternalLinks } from '../model/utils/utils';
-import EntrySection from '../model/types/EntrySection';
+} from '../../adapters/UniProtkbConverter';
+import { hasContent, hasExternalLinks } from '../../utils/utils';
+import EntrySection from '../../types/EntrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
-import { RootState, RootAction } from '../state/state-types';
-import * as entryActions from './state/entryActions';
-import apiUrls, { getUniProtPublicationsQueryUrl } from '../utils/apiUrls';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import * as entryActions from '../../state/entryActions';
+import apiUrls, { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
 import {
   SelectedFacet,
   fileFormatEntryDownload,
-} from '../results/types/resultsTypes';
-import EntryPublicationsFacets from './publications/EntryPublicationsFacets';
-import EntryPublications from './publications/EntryPublications';
-import { LiteratureForProteinAPI } from '../literature/types/LiteratureTypes';
-import SideBarLayout from '../layout/SideBarLayout';
-import { Facet } from '../types/responseTypes';
-import BaseLayout from '../layout/BaseLayout';
-import ObsoleteEntryPage from '../pages/errors/ObsoleteEntryPage';
+} from '../../types/resultsTypes';
+import EntryPublicationsFacets from './EntryPublicationsFacets';
+import EntryPublications from './EntryPublications';
+import { LiteratureForProteinAPI } from '../../types/LiteratureTypes';
+import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
+import { Facet } from '../../types/responseTypes';
+import BaseLayout from '../../../shared/components/layouts/BaseLayout';
+import ObsoleteEntryPage from '../../../shared/components/error-pages/ObsoleteEntryPage';
 import FeatureViewer from './FeatureViewer';
 
 type MatchParams = {
@@ -103,7 +103,7 @@ const Entry: React.FC<EntryProps> = ({
     );
   }
 
-  const sections = UniProtKBEntryConfig.map((section) => ({
+  const sections = UniProtKBEntryConfig.map(section => ({
     label: section.name,
     id: section.name,
 
@@ -143,7 +143,7 @@ const Entry: React.FC<EntryProps> = ({
           >
             <div className="dropdown-menu__content">
               <ul>
-                {fileFormatEntryDownload.map((fileFormat) => (
+                {fileFormatEntryDownload.map(fileFormat => (
                   <li key={fileFormat}>
                     <a
                       href={apiUrls.entryDownload(
@@ -212,7 +212,7 @@ const Entry: React.FC<EntryProps> = ({
         }
         actionButtons={
           <Switch>
-            {displayMenuData.map((displayItem) => (
+            {displayMenuData.map(displayItem => (
               <Route
                 path={`${path}/${displayItem.path}`}
                 render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
@@ -223,7 +223,7 @@ const Entry: React.FC<EntryProps> = ({
         }
       >
         <Switch>
-          {displayMenuData.map((displayItem) => (
+          {displayMenuData.map(displayItem => (
             <Route
               path={`${path}/${displayItem.path}`}
               render={() => <Fragment>{displayItem.mainContent}</Fragment>}

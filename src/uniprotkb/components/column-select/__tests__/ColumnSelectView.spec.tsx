@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ColumnSelectView from '../ColumnSelectView';
-import { Column } from '../../model/types/ColumnTypes';
-import structuredResultFieldsData from '../../__mockData__/StructuredResultFieldsData.json';
+import { Column } from '../../../types/ColumnTypes';
+import structuredResultFieldsData from './__mockData__/StructuredResultFieldsData.json';
 
 describe('ColumnSelectView component', () => {
   let props;

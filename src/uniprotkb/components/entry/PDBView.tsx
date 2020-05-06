@@ -3,10 +3,10 @@ import ProtvistaManager from 'protvista-manager';
 import ProtvistaDatatable from 'protvista-datatable';
 import ProtvistaStructure from 'protvista-structure';
 import { TemplateResult, html } from 'lit-html';
-import { loadWebComponent } from '../../../utils/utils';
-import { PDBMirrorsInfo } from '../../../data/database';
+import { loadWebComponent } from '../../../shared/utils/utils';
+import { PDBMirrorsInfo } from '../../config/database';
 import { processUrlTemplate } from './XRefView';
-import { Xref } from '../../../model/types/CommentTypes';
+import { Xref } from '../../types/CommentTypes';
 import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-manager', ProtvistaManager);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import SequenceView, { SequenceInfo } from '../SequenceView';
-import SequenceUIDataJson from '../__mocks__/SequenceUIData.json';
+import SequenceUIDataJson from './__mockData__/SequenceUIData.json';
 
 describe('SequenceView component', () => {
   beforeEach(() => {

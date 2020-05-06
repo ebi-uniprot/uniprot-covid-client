@@ -5,12 +5,12 @@ import MockAdapter from 'axios-mock-adapter';
 import ColumnSelectContainer, {
   removeFieldFromFieldsData,
 } from '../ColumnSelectContainer';
-import initialState from '../../state/initialState';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import mockResultFieldsApi from '../../__mockData__/ResultFieldsData';
-import structuredResultFieldsData from '../../__mockData__/StructuredResultFieldsData.json';
-import { ColumnSelectTab } from '../types/resultsTypes';
-import { Column } from '../../model/types/ColumnTypes';
+import initialState from '../../../../app/state/initialState';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
+import structuredResultFieldsData from '../../../__mockData__/StructuredResultFieldsData.json';
+import { ColumnSelectTab } from '../../../types/resultsTypes';
+import { Column } from '../../../types/ColumnTypes';
 
 const mock = new MockAdapter(axios);
 mock
@@ -30,7 +30,7 @@ describe('ColumnSelectContainer component', () => {
     );
     const expectedNumberListItems = mockResultFieldsApi.response.reduce(
       (accum, { fields }) =>
-        accum + fields.filter((field) => field.name !== 'accession').length,
+        accum + fields.filter(field => field.name !== 'accession').length,
       0
     );
     expect(items.length).toEqual(expectedNumberListItems);

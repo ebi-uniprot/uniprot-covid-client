@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
-import EntrySection from '../../model/types/EntrySection';
-import KeywordView from './components/KeywordView';
-import FeaturesView from './components/FeaturesView';
-import { UIModel } from '../../model/uniprotkb/SectionConverter';
-import SubcellularLocationView from './components/SubcellularLocationView';
+import { hasContent } from '../../utils/utils';
+import EntrySection from '../../types/EntrySection';
+import KeywordView from './KeywordView';
+import FeaturesView from './FeaturesView';
+import { UIModel } from '../../adapters/SectionConverter';
+import SubcellularLocationView from './SubcellularLocationView';
 import {
   SubcellularLocationComment,
   CommentType,
-} from '../../model/types/CommentTypes';
+} from '../../types/CommentTypes';
 
 const SubcellularLocationSection: FC<{
   data: UIModel;

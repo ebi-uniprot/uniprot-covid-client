@@ -1,13 +1,13 @@
 import React from 'react';
 import { AccordionSearch, Tabs, Bubble } from 'franklin-sites';
-import { getBEMClassName as bem } from '../utils/utils';
+import { getBEMClassName as bem } from '../../../shared/utils/utils';
 import ColumnSelectDragDrop from './ColumnSelectDragDrop';
-import { Column } from '../model/types/ColumnTypes';
+import { Column } from '../../types/ColumnTypes';
 import {
   ColumnSelectTab,
   FieldData,
   SelectedColumn,
-} from './types/resultsTypes';
+} from '../../types/resultsTypes';
 import './styles/ColumnSelect.scss';
 
 const getTabTitle = (tabId: ColumnSelectTab, columns: SelectedColumn[]) => (

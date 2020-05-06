@@ -60,7 +60,7 @@ import AnnotationScoreDoughnutChart, {
 import { ValueWithEvidence } from './types/modelTypes';
 import { getAllKeywords } from './utils/KeywordsUtil';
 import { KeywordList } from '../view/uniprotkb/components/KeywordView';
-import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtTitle';
+import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtKBTitle';
 import { DatabaseList } from '../view/uniprotkb/components/XRefView';
 import {
   databaseNameToCategory,

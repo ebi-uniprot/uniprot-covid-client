@@ -3,7 +3,7 @@ import idx from 'idx';
 import FunctionSection from './FunctionSection';
 import NamesAndTaxonomySection from './NamesAndTaxonomySection';
 import PathologyAndBiotechSection from './PathologyAndBiotechSection';
-import EntrySection from '../../model/types/EntrySection';
+import EntrySection from '../../types/EntrySection';
 import ProteinProcessingSection from './ProteinProcessingSection';
 import ExpressionSection from './ExpressionSection';
 import SubcellularLocationSection from './SubcellularLocationSection';

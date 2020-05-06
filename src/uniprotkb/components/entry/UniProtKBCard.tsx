@@ -3,16 +3,16 @@ import React, { FC, Fragment } from 'react';
 import idx from 'idx';
 import { Card } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { UniProtkbAPIModel } from '../../../model/uniprotkb/UniProtkbConverter';
-import { getKeywordsForCategories } from '../../../model/utils/KeywordsUtil';
-import KeywordCategory from '../../../model/types/KeywordCategory';
+import { UniProtkbAPIModel } from '../../adapters/UniProtkbConverter';
+import { getKeywordsForCategories } from '../../utils/KeywordsUtil';
+import KeywordCategory from '../../types/KeywordCategory';
 import { KeywordList } from './KeywordView';
-import UniProtTitle from './UniProtTitle';
+import UniProtKBTitle from './UniProtKBTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
-import getProteinHighlights from '../../../model/uniprotkb/summary/ProteinHighlights';
-import { SelectedEntries } from '../../../results/types/resultsTypes';
+import getProteinHighlights from '../../adapters/ProteinHighlights';
+import { SelectedEntries } from '../../types/resultsTypes';
 import './styles/UniProtCard.scss';
 
 const UniProtCard: FC<{
@@ -106,7 +106,7 @@ const UniProtCard: FC<{
         </section>
         <section className="uniprot-card__right">
           <h5>
-            <UniProtTitle
+            <UniProtKBTitle
               primaryAccession={data.primaryAccession}
               entryType={data.entryType}
               uniProtkbId={data.uniProtkbId}

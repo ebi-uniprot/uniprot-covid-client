@@ -1,6 +1,6 @@
 import React from 'react';
 import { Facets } from 'franklin-sites';
-import { SelectedFacet } from '../../results/types/resultsTypes';
+import { SelectedFacet } from '../../types/resultsTypes';
 import { Facet } from '../../types/responseTypes';
 
 const EntryPublicationsFacets: React.FC<{

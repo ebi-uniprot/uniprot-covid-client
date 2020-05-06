@@ -6,10 +6,10 @@ import XRefView, {
   getPropertyLink,
   getDatabaseInfoAttribute,
 } from '../XRefView';
-import xrefUIData from '../__mocks__/XrefUIData.json';
-import EntrySectionType from '../../../../model/types/EntrySection';
-import { XrefUIModel } from '../../../../model/utils/XrefUtils';
-import { PropertyKey } from '../../../../model/types/modelTypes';
+import xrefUIData from './__mockData__/XrefUIData.json';
+import EntrySectionType from '../../../types/EntrySection';
+import { XrefUIModel } from '../../../utils/XrefUtils';
+import { PropertyKey } from '../../../types/modelTypes';
 
 describe('XRefView', () => {
   for (const section in EntrySectionType) {

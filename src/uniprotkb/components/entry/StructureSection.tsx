@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import { groupBy } from 'lodash';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
-import EntrySection from '../../model/types/EntrySection';
-import { UIModel } from '../../model/uniprotkb/SectionConverter';
-import FeaturesView from './components/FeaturesView';
-import XRefView from './components/XRefView';
-import PDBView from './components/PDBView';
+import { hasContent } from '../../utils/utils';
+import EntrySection from '../../types/EntrySection';
+import { UIModel } from '../../adapters/SectionConverter';
+import FeaturesView from './FeaturesView';
+import XRefView from './XRefView';
+import PDBView from './PDBView';
 import {
   partitionStructureDatabases,
   XrefUIModel,
-} from '../../model/utils/XrefUtils';
-import { DatabaseCategory } from '../../model/types/DatabaseRefs';
-import { entrySectionToDatabaseCategoryOrder } from '../../data/database';
+} from '../../utils/XrefUtils';
+import { DatabaseCategory } from '../../types/DatabaseRefs';
+import { entrySectionToDatabaseCategoryOrder } from '../../config/database';
 
 const StructureSection: FC<{
   data: UIModel;

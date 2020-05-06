@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Loader } from 'franklin-sites';
-import { moveItemInList, removeItemFromList } from '../utils/utils';
-import { RootState, RootAction } from '../state/state-types';
-import * as resultsActions from './state/resultsActions';
+import {
+  moveItemInList,
+  removeItemFromList,
+} from '../../../shared/utils/utils';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import * as resultsActions from '../../state/resultsActions';
 import ColumnSelectView from './ColumnSelectView';
-import { defaultTableColumns } from './state/resultsInitialState';
-import { Column } from '../model/types/ColumnTypes';
-import { ColumnSelectTab, FieldData } from './types/resultsTypes';
+import { defaultTableColumns } from '../../state/resultsInitialState';
+import { Column } from '../../types/ColumnTypes';
+import { ColumnSelectTab, FieldData } from '../../types/resultsTypes';
 
 type ColumnSelectProps = {
   selectedColumns: Column[];

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import { Keyword, KeywordUIModel } from '../../../model/utils/KeywordsUtil';
+import { Keyword, KeywordUIModel } from '../../utils/KeywordsUtil';
 
 type KeywordListProps = {
   keywords: Keyword[];

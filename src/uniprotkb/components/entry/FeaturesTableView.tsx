@@ -1,12 +1,12 @@
 import React, { Fragment, useCallback, useState, FC } from 'react';
 import { TemplateResult } from 'lit-html';
 import ProtvistaDatatable from 'protvista-datatable';
-import { UniProtEvidenceTagContent } from '../../../components/UniProtEvidenceTag';
-import { loadWebComponent } from '../../../utils/utils';
+import { UniProtEvidenceTagContent } from './UniProtKBEvidenceTag';
+import { loadWebComponent } from '../../../shared/utils/utils';
 import { ProtvistaFeature, ProcessedFeature } from './FeaturesView';
 import { ProtvistaVariant } from './VariationView';
 import { EvidenceData } from '../../../model/types/EvidenceCodes';
-import { Evidence } from '../../../model/types/modelTypes';
+import { Evidence } from '../../types/modelTypes';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
 
@@ -64,9 +64,8 @@ const FeaturesTableView: FC<{
     <Fragment>
       <protvista-datatable ref={setTableData} />
       <div
-        className={`evidence-tag-content ${
-          showEvidenceTagData && 'evidence-tag-content--visible'
-        }`}
+        className={`evidence-tag-content ${showEvidenceTagData &&
+          'evidence-tag-content--visible'}`}
       >
         {selectedEvidenceData && selectedReferences && (
           <UniProtEvidenceTagContent

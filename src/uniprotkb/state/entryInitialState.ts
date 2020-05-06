@@ -1,9 +1,9 @@
 import {
   UniProtkbUIModel,
   UniProtkbInactiveEntryModel,
-} from '../../model/uniprotkb/UniProtkbConverter';
-import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import { Facet } from '../../types/responseTypes';
+} from '../adapters/UniProtkbConverter';
+import { LiteratureForProteinAPI } from '../types/LiteratureTypes';
+import { Facet } from '../types/responseTypes';
 
 export type EntryState = {
   accession: string | null;

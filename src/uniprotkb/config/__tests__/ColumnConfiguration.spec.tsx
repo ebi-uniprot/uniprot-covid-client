@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import ColumnConfiguration from '../ColumnConfiguration';
 import data from '../__mocks__/entryModelData.json';
 import uniProtKbConverter from '../uniprotkb/UniProtkbConverter';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 
 describe('ColumnConfiguration component', () => {
   let transformedData;

@@ -1,18 +1,17 @@
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { render } from '@testing-library/react';
-import EntryMain from '../EntryMain';
-import uniProtKbConverter from '../../model/uniprotkb/UniProtkbConverter';
-import mock_data from '../../model/__mocks__/entryModelData.json';
 import { act } from 'react-dom/test-utils';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
+import EntryMain from '../EntryMain';
+import uniProtKbConverter from '../../../adapters/UniProtkbConverter';
+import mockData from '../../../__mockData__/entryModelData.json';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 
 describe('Entry view', () => {
   test('should render', async () => {
     await act(async () => {
       const { asFragment } = renderWithRedux(
         <Router>
-          <EntryMain transformedData={uniProtKbConverter(mock_data)} />
+          <EntryMain transformedData={uniProtKbConverter(mockData)} />
         </Router>
       );
       expect(asFragment()).toMatchSnapshot();

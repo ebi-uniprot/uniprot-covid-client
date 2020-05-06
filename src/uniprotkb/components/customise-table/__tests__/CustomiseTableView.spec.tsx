@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import initialState from '../../state/initialState';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import initialState from '../../../../app/state/initialState';
 import CustomiseTableView from '../CustomiseTableView';
-import { Column } from '../../model/types/ColumnTypes';
+import { Column } from '../../../types/ColumnTypes';
 
 describe('CustomiseTableView component', () => {
   let props, renderedWithRedux;

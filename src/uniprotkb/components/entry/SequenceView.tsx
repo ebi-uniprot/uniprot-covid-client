@@ -8,14 +8,14 @@ import {
   MassSpectrometryComment,
   RNAEditingComment,
   AlternativeProductsComment,
-} from '../../../model/types/CommentTypes';
-import apiUrls from '../../../utils/apiUrls';
-import fetchData from '../../../utils/fetchData';
-import { formatLargeNumber } from '../../../utils/utils';
-import { SequenceUIModel } from '../../../model/uniprotkb/sections/SequenceConverter';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+} from '../../types/CommentTypes';
+import apiUrls from '../../config/apiUrls';
+import fetchData from '../../../shared/utils/fetchData';
+import { formatLargeNumber } from '../../../shared/utils/utils';
+import { SequenceUIModel } from '../../adapters/SequenceConverter';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import numberView, { Unit } from './NumberView';
-import externalUrls from '../../../utils/externalUrls';
+import externalUrls from '../../config/externalUrls';
 
 export type SequenceData = {
   value: string;
@@ -128,7 +128,7 @@ export const IsoformInfo: React.FC<{
                     }  → ${alternativeSequence.alternativeSequences &&
                       alternativeSequence.alternativeSequences.join(', ')}`
                   : 'Missing'}
-                {evidences && <UniProtEvidenceTag evidences={evidences} />}
+                {evidences && <UniProtKBEvidenceTag evidences={evidences} />}
               </li>
             )
           )}
@@ -199,7 +199,7 @@ export const SequenceCautionView: React.FC<{
           </ExternalLink>
           {` differs from that shown. Reason: ${sequenceCautionType} `}
           {note}
-          {evidences && <UniProtEvidenceTag evidences={evidences} />}
+          {evidences && <UniProtKBEvidenceTag evidences={evidences} />}
         </section>
       ))}
     </Fragment>
@@ -219,7 +219,7 @@ export const MassSpectrometryView: React.FC<{
         })}. `}
         {item.method && `Determined by ${item.method}. `}
         {item.note}
-        <UniProtEvidenceTag evidences={item.evidences} />
+        <UniProtKBEvidenceTag evidences={item.evidences} />
       </section>
     ))}
   </Fragment>
@@ -241,7 +241,7 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
             {item.positions.map(position => (
               <span key={position.position}>
                 {position.position}{' '}
-                <UniProtEvidenceTag evidences={position.evidences} />
+                <UniProtKBEvidenceTag evidences={position.evidences} />
               </span>
             ))}
           </div>
@@ -252,7 +252,7 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
               <span key={text.value}>
                 {text.value}{' '}
                 {text.evidences && (
-                  <UniProtEvidenceTag evidences={text.evidences} />
+                  <UniProtKBEvidenceTag evidences={text.evidences} />
                 )}
               </span>
             ))}

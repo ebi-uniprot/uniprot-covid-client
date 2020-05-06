@@ -1,7 +1,7 @@
 import React from 'react';
 import GeneNamesView from '../GeneNamesView';
-import renderWithRedux from '../../../../__testHelpers__/renderWithRedux';
-import GeneNamesUIDataJson from '../__mocks__/GeneNamesUIData.json';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import GeneNamesUIDataJson from './__mockData__/GeneNamesUIData.json';
 
 describe('GeneNames', () => {
   test('should render gene_names', () => {

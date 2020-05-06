@@ -1,11 +1,11 @@
 import React from 'react';
-import UniProtEvidenceTag, {
+import UniProtKBEvidenceTag, {
   UniProtProtvistaEvidenceTag,
-} from '../UniProtEvidenceTag';
+} from '../UniProtKBEvidenceTag';
 import { cleanup } from '@testing-library/react';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 
-describe('UniProtEvidenceTag components', () => {
+describe('UniProtKBEvidenceTag components', () => {
   test('should render automatic annotation', () => {
     const evidences = [
       {
@@ -15,7 +15,7 @@ describe('UniProtEvidenceTag components', () => {
       },
     ];
     const { asFragment } = renderWithRedux(
-      <UniProtEvidenceTag evidences={evidences} />
+      <UniProtKBEvidenceTag evidences={evidences} />
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -34,7 +34,7 @@ describe('UniProtEvidenceTag components', () => {
       },
     ];
     const { asFragment } = renderWithRedux(
-      <UniProtEvidenceTag evidences={evidences} />
+      <UniProtKBEvidenceTag evidences={evidences} />
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -46,7 +46,7 @@ describe('UniProtEvidenceTag components', () => {
       },
     ];
     const { asFragment } = renderWithRedux(
-      <UniProtEvidenceTag evidences={evidences} />
+      <UniProtKBEvidenceTag evidences={evidences} />
     );
     expect(asFragment()).toMatchSnapshot();
   });

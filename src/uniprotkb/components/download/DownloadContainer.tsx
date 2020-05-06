@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import idx from 'idx';
-import { RootState } from '../state/state-types';
+import { RootState } from '../../../app/state/rootInitialState';
 import DownloadView from './DownloadView';
-import { Column, SortableColumn } from '../model/types/ColumnTypes';
+import { Column, SortableColumn } from '../../types/ColumnTypes';
 import {
   FileFormat,
   fileFormatToContentType,
   SelectedFacet,
   SortDirection,
-} from './types/resultsTypes';
-import { getDownloadUrl, urlsAreEqual } from '../utils/apiUrls';
-import fetchData from '../utils/fetchData';
+} from '../../types/resultsTypes';
+import { getDownloadUrl, urlsAreEqual } from '../../config/apiUrls';
+import fetchData from '../../../shared/utils/fetchData';
 
 export const getPreviewFileFormat = (fileFormat: FileFormat) =>
   fileFormat === FileFormat.excel ? FileFormat.tsv : fileFormat;

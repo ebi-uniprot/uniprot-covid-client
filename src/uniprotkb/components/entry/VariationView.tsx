@@ -7,15 +7,15 @@ import { transformData } from 'protvista-variation-adapter';
 import ProtvistaFilter from 'protvista-filter';
 import { Loader } from 'franklin-sites';
 import { html } from 'lit-html';
-import { loadWebComponent } from '../../../utils/utils';
-import useDataApi from '../../../hooks/useDataApi';
-import apiUrls, { joinUrl } from '../../../utils/apiUrls';
-import FeatureType from '../../../model/types/FeatureType';
-import './styles/VariationView.scss';
-import { UniProtProtvistaEvidenceTag } from '../../../components/UniProtEvidenceTag';
-import { Evidence } from '../../../model/types/modelTypes';
+import { loadWebComponent } from '../../../shared/utils/utils';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import apiUrls, { joinUrl } from '../../config/apiUrls';
+import FeatureType from '../../types/FeatureType';
+import { UniProtProtvistaEvidenceTag } from './UniProtKBEvidenceTag';
+import { Evidence } from '../../types/modelTypes';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
-import filterConfig, { colorConfig } from './protvista-config/variationFilters';
+import filterConfig, { colorConfig } from '../../config/variationFiltersConfig';
+import './styles/VariationView.scss';
 
 export type ProtvistaVariant = {
   begin: number;
@@ -120,7 +120,10 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         const formatedDescription = formatVariantDescription(d.description);
         return formatedDescription
           ? formatedDescription.map(
-              (descriptionLine) => html` <p>${descriptionLine}</p> `
+              descriptionLine =>
+                html`
+                  <p>${descriptionLine}</p>
+                `
             )
           : '';
       },
@@ -142,21 +145,21 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
         if (!d.association) {
           return '';
         }
-        return d.association.map((association) => {
+        return d.association.map(association => {
           return html`
             <p>
               ${association.name}
               ${association.evidences &&
-              UniProtProtvistaEvidenceTag(
-                association.evidences.map((evidence) => {
-                  return ({
-                    evidenceCode: evidence.code,
-                    source: evidence.source.name,
-                    id: evidence.source.id,
-                  } as unknown) as Evidence;
-                }),
-                evidenceTagCallback
-              )}
+                UniProtProtvistaEvidenceTag(
+                  association.evidences.map(evidence => {
+                    return ({
+                      evidenceCode: evidence.code,
+                      source: evidence.source.name,
+                      id: evidence.source.id,
+                    } as unknown) as Evidence;
+                  }),
+                  evidenceTagCallback
+                )}
             </p>
           `;
         });
@@ -174,7 +177,7 @@ const VariationView: FC<{
     joinUrl(apiUrls.variation, primaryAccession)
   );
 
-  const protvistaFilterRef = useCallback((node) => {
+  const protvistaFilterRef = useCallback(node => {
     if (node !== null) {
       // eslint-disable-next-line no-param-reassign
       node.filters = filterConfig;
@@ -182,7 +185,7 @@ const VariationView: FC<{
   }, []);
 
   const protvistaVariationRef = useCallback(
-    (node) => {
+    node => {
       if (node !== null && data.features) {
         const transformedData: TransformedVariantsResponse = transformData(
           data

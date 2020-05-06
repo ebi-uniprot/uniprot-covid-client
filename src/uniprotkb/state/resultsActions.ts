@@ -2,18 +2,18 @@ import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import idx from 'idx';
-import fetchData from '../../utils/fetchData';
-import { RootState } from '../../state/state-types';
-import apiUrls from '../../utils/apiUrls';
-import { Column } from '../../model/types/ColumnTypes';
+import fetchData from '../../shared/utils/fetchData';
+import { RootState } from '../../app/state/rootInitialState';
+import apiUrls from '../config/apiUrls';
+import { Column } from '../types/ColumnTypes';
 import {
   ColumnSelectTab,
   FieldDatum,
   ReceivedFieldData,
   ReceivedField,
 } from '../types/resultsTypes';
-import getNextUrlFromResponse from '../../utils/queryUtils';
-import Response from '../../types/responseTypes';
+import getNextUrlFromResponse from '../utils/queryUtils';
+import Response from '../types/responseTypes';
 
 export const REQUEST_BATCH_OF_RESULTS = 'REQUEST_BATCH_OF_RESULTS';
 export const RECEIVE_BATCH_OF_RESULTS = 'RECEIVE_BATCH_OF_RESULTS';

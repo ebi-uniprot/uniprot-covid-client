@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { InfoList } from 'franklin-sites';
 import { Link } from 'react-router-dom';
-import { Xref } from '../../../model/types/CommentTypes';
+import { Xref } from '../../types/CommentTypes';
 
 const ProteomesId: React.FC<{ id?: string }> = ({ id }) => (
   <Link to={`/proteomes/${id}`}>{id}</Link>

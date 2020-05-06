@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import {
-  FreeTextComment,
-  TextWithEvidence,
-} from '../../../model/types/CommentTypes';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import { FreeTextComment, TextWithEvidence } from '../../types/CommentTypes';
 
 type FreeTextProps = {
   comments?: FreeTextComment[];
@@ -19,7 +16,7 @@ export const TextView: React.FC<{ comments: TextWithEvidence[] }> = ({
       <Fragment key={v1()}>
         {comment.value}
         {comment.evidences && (
-          <UniProtEvidenceTag evidences={comment.evidences} />
+          <UniProtKBEvidenceTag evidences={comment.evidences} />
         )}
       </Fragment>
     ))}

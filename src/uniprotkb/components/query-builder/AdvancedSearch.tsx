@@ -7,7 +7,7 @@ import {
   SearchTermType,
   Operator,
   Evidences,
-} from './types/searchTypes';
+} from '../../types/searchTypes';
 import './styles/AdvancedSearch.scss';
 
 type AdvancedSearchProps = {

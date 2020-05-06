@@ -1,9 +1,9 @@
 import React, { Fragment, memo } from 'react';
 import { Card } from 'franklin-sites';
-import UniProtKBEntryConfig from '../view/uniprotkb/UniProtEntryConfig';
-import { ProteinOverview } from '../view/uniprotkb/components/ProteinOverviewView';
-import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
-import UniProtTitle from '../view/uniprotkb/components/UniProtTitle';
+import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+import { ProteinOverview } from './ProteinOverviewView';
+import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
+import UniProtKBTitle from './UniProtKBTitle';
 
 type EntryMainProps = {
   transformedData: UniProtkbUIModel;
@@ -21,7 +21,7 @@ const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
     <Card
       title={
-        <UniProtTitle
+        <UniProtKBTitle
           primaryAccession={transformedData.primaryAccession}
           entryType={transformedData.entryType}
           uniProtkbId={transformedData.uniProtkbId}

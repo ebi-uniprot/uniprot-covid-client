@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RootState, RootAction } from '../state/state-types';
-import * as searchActions from './state/searchActions';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import * as searchActions from '../../state/searchActions';
 import {
   Clause,
   SearchTermType,
@@ -11,10 +11,10 @@ import {
   Evidence,
   Evidences,
   Namespace,
-} from './types/searchTypes';
+} from '../../types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
-import createQueryString from './utils/QueryStringGenerator';
-import { Location, LocationToPath } from '../urls';
+import createQueryString from '../../utils/QueryStringGenerator';
+import { Location, LocationToPath } from '../../../app/config/urls';
 
 import './styles/SearchContainer.scss';
 

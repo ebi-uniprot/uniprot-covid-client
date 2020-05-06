@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import apiUrls from '../../../utils/apiUrls';
+import apiUrls from '../../config/apiUrls';
 import { clause, searchTerms, evidences } from '../searchReducers';
 import {
   updateInputValue,

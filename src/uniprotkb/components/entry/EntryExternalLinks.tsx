@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
 import { v1 } from 'uuid';
 import { groupBy } from 'lodash';
-import { UniProtkbUIModel } from '../model/uniprotkb/UniProtkbConverter';
-import XRefView from '../view/uniprotkb/components/XRefView';
-import EntrySection from '../model/types/EntrySection';
-import { XrefUIModel, XrefsGoupedByDatabase } from '../model/utils/XrefUtils';
-import { CommentType, WebResourceComment } from '../model/types/CommentTypes';
-import { DatabaseCategory } from '../model/types/DatabaseRefs';
+import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
+import XRefView from './XRefView';
+import EntrySection from '../../types/EntrySection';
+import { XrefUIModel, XrefsGoupedByDatabase } from '../../utils/XrefUtils';
+import { CommentType, WebResourceComment } from '../../types/CommentTypes';
+import { DatabaseCategory } from '../../types/DatabaseRefs';
 
 type EntryExternalLinksProps = {
   transformedData: UniProtkbUIModel;

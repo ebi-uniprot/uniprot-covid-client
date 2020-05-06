@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import {
   CatalyticActivityComment,
   PhysiologicalReactionDirection,
   PhysiologicalReaction,
-} from '../../../model/types/CommentTypes';
+} from '../../types/CommentTypes';
 import './styles/CatalyticActivityView.scss';
 
 export const getRheaId = (referenceId: string) => {
@@ -107,7 +107,7 @@ export const ReactionDirection: React.FC<ReactionDirectionProps> = ({
               {physiologicalReactionDirectionToString.get(directionType)}
             </span>
             {physiologicalReactions.length === 1 && ' direction '}
-            <UniProtEvidenceTag evidences={evidences} />
+            <UniProtKBEvidenceTag evidences={evidences} />
             {physiologicalReactions.length === 2 &&
               index === 1 &&
               ' directions '}
@@ -155,7 +155,7 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
              https://www.ebi.ac.uk/panda/jira/browse/TRM-23597 */}
             {` ${reaction.name}`}
             {reaction.evidences && (
-              <UniProtEvidenceTag evidences={reaction.evidences} />
+              <UniProtKBEvidenceTag evidences={reaction.evidences} />
             )}
             {physiologicalReactions && physiologicalReactions.length && (
               <ReactionDirection

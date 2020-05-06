@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Loader } from 'franklin-sites';
-import ColumnSelectContainer from './ColumnSelectContainer';
-import { FileFormat, fileFormatsWithColumns } from './types/resultsTypes';
-import { Column } from '../model/types/ColumnTypes';
+import ColumnSelectContainer from '../column-select/ColumnSelectContainer';
+import { FileFormat, fileFormatsWithColumns } from '../../types/resultsTypes';
+import { Column } from '../../types/ColumnTypes';
 import './styles/Download.scss';
 
 type DownloadViewProps = {

@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import SimpleView from './SimpleView';
-import { OrganismData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import externalUrls from '../../../utils/externalUrls';
+import { OrganismData } from '../../adapters/NamesAndTaxonomyConverter';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import externalUrls from '../../config/externalUrls';
 
 type OrganismDataProps = {
   data: OrganismData;
@@ -61,7 +61,7 @@ export const OrganismListView: React.FC<{
             {`${data.scientificName} (${data.commonName})`}
           </Link>
           {data.evidences && data.evidences.length && (
-            <UniProtEvidenceTag evidences={data.evidences} />
+            <UniProtKBEvidenceTag evidences={data.evidences} />
           )}
         </Fragment>
       ),

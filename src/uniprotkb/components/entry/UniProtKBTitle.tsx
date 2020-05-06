@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
-import { EntryType } from '../../../model/uniprotkb/UniProtkbConverter';
-import './styles/UniProtTitle.scss';
+import { EntryType } from '../../adapters/UniProtkbConverter';
+import './styles/UniProtKBTitle.scss';
 
 export const ReviewedUnreviewed: FC<{ entryType: EntryType }> = ({
   entryType,
@@ -16,7 +16,7 @@ export const ReviewedUnreviewed: FC<{ entryType: EntryType }> = ({
     </span>
   );
 
-const UniProtTitle: FC<{
+const UniProtKBTitle: FC<{
   primaryAccession: string;
   entryType: EntryType;
   uniProtkbId: string;
@@ -28,4 +28,4 @@ const UniProtTitle: FC<{
   </span>
 );
 
-export default UniProtTitle;
+export default UniProtKBTitle;

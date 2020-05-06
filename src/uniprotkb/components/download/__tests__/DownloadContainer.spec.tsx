@@ -2,16 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import DownloadContainer, { getPreviewFileFormat } from '../DownloadContainer';
 import { createMemoryHistory } from 'history';
-import initialState from '../../state/initialState';
 import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import mockDownloadApi from '../../__mockData__/DownloadData';
-import mockResultFieldsApi from '../../__mockData__/ResultFieldsData';
-import * as resultsActions from '../state/resultsActions';
+import initialState from '../../../../app/state/initialState';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import mockDownloadApi from './__mockData__/DownloadData';
+import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
+import { FileFormat } from '../../../types/resultsTypes';
 import '@testing-library/jest-dom/extend-expect';
-import { FileFormat } from '../types/resultsTypes';
-import apiUrls from '../../utils/apiUrls';
 
 const mock = new MockAdapter(axios);
 mock

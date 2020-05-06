@@ -5,9 +5,9 @@ import {
   ProteinNames,
   ProteinNamesData,
   ProteinDescription,
-} from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import { ValueWithEvidence } from '../../../model/types/modelTypes';
+} from '../../adapters/NamesAndTaxonomyConverter';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import { ValueWithEvidence } from '../../types/modelTypes';
 
 export const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
   data,
@@ -17,7 +17,7 @@ export const NameWithEvidence: React.FC<{ data: ValueWithEvidence }> = ({
     {data.evidences && (
       <Fragment>
         {' '}
-        <UniProtEvidenceTag evidences={data.evidences} />
+        <UniProtKBEvidenceTag evidences={data.evidences} />
       </Fragment>
     )}
   </Fragment>

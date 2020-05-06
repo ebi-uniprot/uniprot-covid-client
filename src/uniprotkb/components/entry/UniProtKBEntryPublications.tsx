@@ -1,8 +1,8 @@
 import React, { FC, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Publication } from 'franklin-sites';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
-import { RootState } from '../../state/state-types';
+import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
+import { RootState } from '../../../app/state/rootInitialState';
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];

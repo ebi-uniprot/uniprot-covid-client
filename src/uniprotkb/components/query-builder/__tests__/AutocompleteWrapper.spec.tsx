@@ -3,11 +3,11 @@ import { render, fireEvent, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import AutocompleteWrapper from '../AutocompleteWrapper';
-import { resetUuidV1 } from '../../../__mocks__/uuid';
+import { resetUuidV1 } from '../../../../../__mocks__/uuid';
 import {
   mockSuggesterApi,
   preparedSuggestions,
-} from '../../__mockData__/AutocompleteWrapperData';
+} from './__mockData__/AutocompleteWrapperData';
 
 describe('Autocomplete Wrapper static methods', () => {
   test('should prepare API data for Autocomplete', () => {

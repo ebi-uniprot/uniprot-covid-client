@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchTermType } from './types/searchTypes';
+import { SearchTermType } from '../../types/searchTypes';
 
 type TextFieldProps = {
   field: SearchTermType;

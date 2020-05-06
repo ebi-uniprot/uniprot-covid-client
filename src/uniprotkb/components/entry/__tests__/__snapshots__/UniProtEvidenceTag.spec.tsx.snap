@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UniProtEvidenceTag components should render ProtVista evidence tag 1`] = `
+exports[`UniProtKBEvidenceTag components should render ProtVista evidence tag 1`] = `
 Array [
   TemplateResult {
     "processor": DefaultTemplateProcessor {},
@@ -30,7 +30,7 @@ Array [
 ]
 `;
 
-exports[`UniProtEvidenceTag components should render automatic  1`] = `
+exports[`UniProtKBEvidenceTag components should render automatic  1`] = `
 <DocumentFragment>
   <button
     aria-controls="<UUID>"
@@ -67,7 +67,7 @@ exports[`UniProtEvidenceTag components should render automatic  1`] = `
 </DocumentFragment>
 `;
 
-exports[`UniProtEvidenceTag components should render automatic annotation 1`] = `
+exports[`UniProtKBEvidenceTag components should render automatic annotation 1`] = `
 <DocumentFragment>
   <button
     aria-controls="<UUID>"
@@ -104,7 +104,7 @@ exports[`UniProtEvidenceTag components should render automatic annotation 1`] = 
 </DocumentFragment>
 `;
 
-exports[`UniProtEvidenceTag components should render publications count 1`] = `
+exports[`UniProtKBEvidenceTag components should render publications count 1`] = `
 <DocumentFragment>
   <button
     aria-controls="<UUID>"

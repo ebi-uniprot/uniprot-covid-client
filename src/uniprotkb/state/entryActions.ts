@@ -3,17 +3,17 @@ import { Dispatch, Action } from 'redux';
 import idx from 'idx';
 import { v1 } from 'uuid';
 import { ThunkDispatch } from 'redux-thunk';
-import fetchData from '../../utils/fetchData';
+import fetchData from '../../shared/utils/fetchData';
 import uniProtKbConverter, {
   UniProtkbAPIModel,
-} from '../../model/uniprotkb/UniProtkbConverter';
-import apiUrls from '../../utils/apiUrls';
-import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
-import getNextUrlFromResponse from '../../utils/queryUtils';
-import Response, { Facet } from '../../types/responseTypes';
-import { RootState } from '../../state/state-types';
-import history from '../../utils/browserHistory';
-import { Location, LocationToPath } from '../../urls';
+} from '../adapters/UniProtkbConverter';
+import apiUrls from '../config/apiUrls';
+import { LiteratureForProteinAPI } from '../types/LiteratureTypes';
+import getNextUrlFromResponse from '../utils/queryUtils';
+import Response, { Facet } from '../types/responseTypes';
+import { RootState } from '../../app/state/rootInitialState';
+import history from '../../shared/utils/browserHistory';
+import { Location, LocationToPath } from '../../app/config/urls';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
@@ -107,10 +107,9 @@ export const receiveEntryPublications = (
 export const requestEntryPublications = () =>
   action(REQUEST_ENTRY_PUBLICATIONS);
 
-export const fetchEntryPublications = (
-  url: string,
-  reset = false
-) => async (dispatch: Dispatch) => {
+export const fetchEntryPublications = (url: string, reset = false) => async (
+  dispatch: Dispatch
+) => {
   dispatch(requestEntryPublications());
   fetchData(url)
     .then((response: Response) => {

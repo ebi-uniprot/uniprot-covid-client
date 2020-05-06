@@ -1,26 +1,9 @@
 import { combineReducers } from 'redux';
-import searchReducers, {
-  SearchAction,
-} from '../../uniprotkb/state/searchReducers';
-import resultsReducers, {
-  ResultAction,
-} from '../../uniprotkb/state/resultsReducers';
-import { SearchState } from '../../uniprotkb/state/searchInitialState';
-import { ResultsState } from '../../uniprotkb/state/resultsInitialState';
-import initialState from './initialState';
-import { EntryState } from '../../uniprotkb/state/entryInitialState';
+import initialState, { RootState, RootAction } from './rootInitialState';
+import searchReducers from '../../uniprotkb/state/searchReducers';
+import resultsReducers from '../../uniprotkb/state/resultsReducers';
 import entryReducers from '../../uniprotkb/state/entryReducers';
-import { MessagesState } from '../../messages/state/messagesInitialState';
-import messagesReducers, {
-  MessagesAction,
-} from '../../messages/state/messagesReducers';
-
-type RootState = {
-  query: SearchState;
-  results: ResultsState;
-  entry: EntryState;
-  messages: MessagesState;
-};
+import messagesReducers from '../../messages/state/messagesReducers';
 
 const appReducer = combineReducers({
   query: searchReducers,
@@ -29,10 +12,7 @@ const appReducer = combineReducers({
   messages: messagesReducers,
 });
 
-const rootReducer = (
-  state: RootState | undefined,
-  action: SearchAction | ResultAction | MessagesAction
-) => {
+const rootReducer = (state: RootState | undefined, action: RootAction) => {
   if (action.type === 'RESET') {
     return initialState;
   }

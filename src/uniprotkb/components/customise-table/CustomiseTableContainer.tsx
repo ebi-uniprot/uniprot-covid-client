@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RootState, RootAction } from '../state/state-types';
-import * as resultsActions from './state/resultsActions';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import * as resultsActions from '../../state/resultsActions';
 import CustomiseTableView from './CustomiseTableView';
-import { Column } from '../model/types/ColumnTypes';
+import { Column } from '../../types/ColumnTypes';
 
 type CustomiseTableProps = {
   tableColumns: Column[];
@@ -57,10 +57,7 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   );
 
 const CustomiseTableContainer = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CustomiseTable)
+  connect(mapStateToProps, mapDispatchToProps)(CustomiseTable)
 );
 
 export default CustomiseTableContainer;

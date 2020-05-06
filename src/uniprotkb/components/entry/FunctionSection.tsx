@@ -1,27 +1,27 @@
 import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../model/utils/utils';
-import FreeTextView, { TextView } from './components/FreeTextView';
-import CatalyticActivityView from './components/CatalyticActivityView';
-import KeywordView from './components/KeywordView';
-import XRefView from './components/XRefView';
-import FeaturesView from './components/FeaturesView';
-import EntrySection from '../../model/types/EntrySection';
+import { hasContent } from '../../utils/utils';
+import FreeTextView, { TextView } from './FreeTextView';
+import CatalyticActivityView from './CatalyticActivityView';
+import KeywordView from './KeywordView';
+import XRefView from './XRefView';
+import FeaturesView from './FeaturesView';
+import EntrySection from '../../types/EntrySection';
 import {
   CommentType,
   CatalyticActivityComment,
   FreeTextComment,
-} from '../../model/types/CommentTypes';
-import GoRibbon from './components/GoRibbon';
-import UniProtEvidenceTag from '../../components/UniProtEvidenceTag';
+} from '../../types/CommentTypes';
+import GoRibbon from './GoRibbon';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import {
   FunctionUIModel,
   BioPhysicoChemicalProperties,
   Absorption,
   KineticParameters,
   CofactorComment,
-} from '../../model/uniprotkb/sections/FunctionConverter';
+} from '../../adapters/FunctionConverter';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (
@@ -31,7 +31,7 @@ export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
       </section>
       <section className="text-block">
         {data.note && <TextView comments={data.note.texts} />}
-        {data.evidences && <UniProtEvidenceTag evidences={data.evidences} />}
+        {data.evidences && <UniProtKBEvidenceTag evidences={data.evidences} />}
       </section>
     </Fragment>
   );
@@ -47,7 +47,7 @@ export const KineticsView: FC<{ data: KineticParameters }> = ({ data }) => {
               <li key={km.constant}>
                 K<sub>M</sub>
                 {`=${km.constant}${km.unit} for ${km.substrate} `}
-                <UniProtEvidenceTag evidences={km.evidences} />
+                <UniProtKBEvidenceTag evidences={km.evidences} />
               </li>
             ))}
           </ul>
@@ -119,7 +119,7 @@ export const CofactorView: FC<{
               <span key={cofactor.name}>
                 {cofactor.name}{' '}
                 {cofactor.evidences && (
-                  <UniProtEvidenceTag evidences={cofactor.evidences} />
+                  <UniProtKBEvidenceTag evidences={cofactor.evidences} />
                 )}
               </span>
             ))}

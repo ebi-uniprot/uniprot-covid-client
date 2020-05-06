@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import ProtvistaUniprot from 'protvista-uniprot';
 import { Loader } from 'franklin-sites';
-
-import useDataApi from '../hooks/useDataApi';
-import { loadWebComponent } from '../utils/utils';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import { loadWebComponent } from '../../../shared/utils/utils';
 
 loadWebComponent('protvista-uniprot', ProtvistaUniprot);
 

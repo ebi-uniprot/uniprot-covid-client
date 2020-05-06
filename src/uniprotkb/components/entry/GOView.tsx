@@ -1,11 +1,8 @@
 import React, { Fragment } from 'react';
 import { ExpandableList } from 'franklin-sites';
-import {
-  GoTerm,
-  GroupedGoTerms,
-} from '../../../model/uniprotkb/sections/FunctionConverter';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
-import externalUrls from '../../../utils/externalUrls';
+import { GoTerm, GroupedGoTerms } from '../../adapters/FunctionConverter';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import externalUrls from '../../config/externalUrls';
 
 export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
   <section className="text-block">
@@ -21,7 +18,7 @@ export const GOTermsView: React.FC<{ data: GoTerm[] }> = ({ data }) => (
                   <a href={externalUrls.QuickGO(id)}>{termDescription}</a>
                   {/* TODO: currently not displaying the GoEvidenceType property
         which will have to be displayed like an evidence tag */}
-                  {evidences && <UniProtEvidenceTag evidences={evidences} />}
+                  {evidences && <UniProtKBEvidenceTag evidences={evidences} />}
                 </Fragment>
               ),
             }

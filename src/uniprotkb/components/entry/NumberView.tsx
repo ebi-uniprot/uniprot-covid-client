@@ -1,4 +1,4 @@
-import { formatLargeNumber } from '../../../utils/utils';
+import { formatLargeNumber } from '../../../shared/utils/utils';
 
 export enum Unit {
   DA = 'Da',

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import FreeTextView from './components/FreeTextView';
-import KeywordView from './components/KeywordView';
-import XRefView from './components/XRefView';
-import FeaturesView from './components/FeaturesView';
-import EntrySection from '../../model/types/EntrySection';
-import { hasContent } from '../../model/utils/utils';
-import { CommentType, FreeTextComment } from '../../model/types/CommentTypes';
-import { UIModel } from '../../model/uniprotkb/SectionConverter';
+import FreeTextView from './FreeTextView';
+import KeywordView from './KeywordView';
+import XRefView from './XRefView';
+import FeaturesView from './FeaturesView';
+import EntrySection from '../../types/EntrySection';
+import { hasContent } from '../../utils/utils';
+import { CommentType, FreeTextComment } from '../../types/CommentTypes';
+import { UIModel } from '../../adapters/SectionConverter';
 
 const FamilyAndDomainsSection: FC<{
   data: UIModel;

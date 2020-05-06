@@ -1,11 +1,10 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import useDataApi from '../../../../hooks/useDataApi';
-
+import useDataApi from '../../../../shared/hooks/useDataApi';
 import VariationView from '../VariationView';
 
-jest.mock('../../../../hooks/useDataApi');
+jest.mock('../../../../shared/hooks/useDataApi');
 
 afterEach(cleanup);
 

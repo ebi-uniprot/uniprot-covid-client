@@ -3,10 +3,10 @@ import axios from 'axios';
 import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import CustomiseTableContainer from '../CustomiseTableContainer';
-import initialState from '../../state/initialState';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import mockResultFieldsApi from '../../__mockData__/ResultFieldsData';
-import * as resultsActions from '../state/resultsActions';
+import initialState from '../../../../app/state/initialState';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
+import * as resultsActions from '../../../state/resultsActions';
 
 const mock = new MockAdapter(axios);
 mock
@@ -17,15 +17,12 @@ const updateTableColumns = jest.spyOn(resultsActions, 'updateTableColumns');
 describe('CustomiseTableContainer component', () => {
   let renderedWithRedux, goBack;
   beforeEach(() => {
-    renderedWithRedux = renderWithRedux(
-      <CustomiseTableContainer />,
-      {
-        initialState,
-        location: '/customise-table',
-      }
-    );
+    renderedWithRedux = renderWithRedux(<CustomiseTableContainer />, {
+      initialState,
+      location: '/customise-table',
+    });
     goBack = jest.spyOn(renderedWithRedux.history, 'goBack');
-  })
+  });
 
   test('should go back and not call updateTableColumns action when cancel button is pressed', () => {
     const { getByTestId } = renderedWithRedux;
@@ -42,5 +39,4 @@ describe('CustomiseTableContainer component', () => {
     expect(goBack).toHaveBeenCalled();
     expect(updateTableColumns).toHaveBeenCalled();
   });
-
 });

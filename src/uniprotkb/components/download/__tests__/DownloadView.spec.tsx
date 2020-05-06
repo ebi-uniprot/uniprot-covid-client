@@ -1,10 +1,10 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import DownloadView from '../DownloadView';
-import { defaultTableColumns } from '../../results/state/resultsInitialState';
-import { FileFormat } from '../types/resultsTypes';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import initialState from '../../state/initialState';
+import { defaultTableColumns } from '../../../state/resultsInitialState';
+import { FileFormat } from '../../../types/resultsTypes';
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import initialState from '../../../../app/state/initialState';
 
 describe('DownloadView component', () => {
   let props, renderedWithRedux;

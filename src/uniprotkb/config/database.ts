@@ -1,4 +1,4 @@
-import EntrySection from '../model/types/EntrySection';
+import EntrySection from '../../types/EntrySection';
 import { DatabaseCategory, DatabaseInfo } from '../model/types/DatabaseRefs';
 import {
   getDatabaseInfoMaps,

@@ -7,22 +7,22 @@ import {
   databaseCategoryToString,
   databaseToDatabaseInfo,
   viewProteinLinkDatabases,
-} from '../../../data/database';
+} from '../../config/database';
 import {
   XrefUIModel,
   XrefsGoupedByDatabase,
   partitionStructureDatabases,
-} from '../../../model/utils/XrefUtils';
-import { Xref } from '../../../model/types/CommentTypes';
-import { PropertyKey } from '../../../model/types/modelTypes';
+} from '../../utils/XrefUtils';
+import { Xref } from '../../types/CommentTypes';
+import { PropertyKey } from '../../types/modelTypes';
 import {
   DatabaseInfoPoint,
   AttributesItem,
   DatabaseCategory,
-} from '../../../model/types/DatabaseRefs';
+} from '../../types/DatabaseRefs';
 import PDBView from './PDBView';
-import EMBLXrefProperties from '../../../data/EMBLXrefProperties.json';
-import externalUrls from '../../../utils/externalUrls';
+import EMBLXrefProperties from '../../config/EMBLXrefProperties.json';
+import externalUrls from '../../config/externalUrls';
 
 export const processUrlTemplate = (
   urlTemplate: string,

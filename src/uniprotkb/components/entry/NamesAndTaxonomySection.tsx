@@ -1,13 +1,13 @@
 import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
-import ProteinNamesView from './components/ProteinNamesView';
-import { hasContent } from '../../model/utils/utils';
-import EntrySection from '../../model/types/EntrySection';
-import { NamesAndTaxonomyUIModel } from '../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
-import GeneNamesView from './components/GeneNamesView';
-import { OrganismListView } from './components/OrganismView';
-import ProteomesListView from './components/ProteomesView';
-import XRefView from './components/XRefView';
+import ProteinNamesView from './ProteinNamesView';
+import { hasContent } from '../../utils/utils';
+import EntrySection from '../../types/EntrySection';
+import { NamesAndTaxonomyUIModel } from '../../adapters/NamesAndTaxonomyConverter';
+import GeneNamesView from './GeneNamesView';
+import { OrganismListView } from './OrganismView';
+import ProteomesListView from './ProteomesView';
+import XRefView from './XRefView';
 
 const NamesAndTaxonomySection: FC<{
   data: NamesAndTaxonomyUIModel;

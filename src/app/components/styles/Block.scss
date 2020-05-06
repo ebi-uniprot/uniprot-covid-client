@@ -1,4 +1,4 @@
-@import '../../styles/settings';
+@import '../../../shared/styles/settings'
 
 // Layout Blocks
 // -------------
@@ -7,9 +7,9 @@
   display: grid;
   grid-area: block;
 
-  & > *:first-child {
+  &>*:first-child {
     grid-column-start: 2;
-  } 
+  }
 
   &--1-col {
     grid-template-columns: auto 64rem auto;

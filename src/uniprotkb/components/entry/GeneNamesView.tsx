@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
-import { GeneNamesData } from '../../../model/uniprotkb/sections/NamesAndTaxonomyConverter';
+import { GeneNamesData } from '../../adapters/NamesAndTaxonomyConverter';
 import { NameWithEvidence } from './ProteinNamesView';
-import { ValueWithEvidence } from '../../../model/types/modelTypes';
+import { ValueWithEvidence } from '../../types/modelTypes';
 
 export const geneAlternativeNamesView = (
   alternativeNames: ValueWithEvidence[],

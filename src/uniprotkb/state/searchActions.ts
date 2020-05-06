@@ -1,8 +1,8 @@
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { action } from 'typesafe-actions';
-import fetchData from '../../utils/fetchData';
-import apiUrls from '../../utils/apiUrls';
+import fetchData from '../../shared/utils/fetchData';
+import apiUrls from '../config/apiUrls';
 import {
   SearchTermType,
   Operator,
@@ -10,7 +10,7 @@ import {
   Clause,
   dataType,
 } from '../types/searchTypes';
-import { RootState } from '../../state/state-types';
+import { RootState } from '../../app/state/rootInitialState';
 
 export const SELECT_SEARCH_TERM = 'SELECT_SEARCH_TERM';
 export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
@@ -106,7 +106,7 @@ export const receiveSearchTerms = (data: SearchTermType[]) =>
 
 export const fetchSearchTerms = () => async (dispatch: Dispatch) => {
   dispatch(requestSearchTerms());
-  return fetchData(apiUrls.advancedSearchTerms).then((response) =>
+  return fetchData(apiUrls.advancedSearchTerms).then(response =>
     dispatch(receiveSearchTerms(response.data))
   );
 };
@@ -143,7 +143,7 @@ export const fetchEvidences = (evidencesType: Evidence) => async (
 ) => {
   const url = apiUrls.evidences[evidencesType];
   dispatch(requestEvidences(evidencesType));
-  return fetchData(url).then((response) =>
+  return fetchData(url).then(response =>
     dispatch(receiveEvidences(response.data, evidencesType))
   );
 };

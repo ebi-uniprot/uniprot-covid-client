@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
-import { SubcellularLocationComment } from '../../../model/types/CommentTypes';
-import UniProtEvidenceTag from '../../../components/UniProtEvidenceTag';
+import { SubcellularLocationComment } from '../../types/CommentTypes';
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import { TextView } from './FreeTextView';
 
 const SubcellularLocationView: FC<{
@@ -29,7 +29,7 @@ const SubcellularLocationView: FC<{
                 >
                   <strong>{subcellularLocation.location.value}</strong>{' '}
                   {subcellularLocation.location.evidences && (
-                    <UniProtEvidenceTag
+                    <UniProtKBEvidenceTag
                       evidences={subcellularLocation.location.evidences}
                     />
                   )}
@@ -37,7 +37,7 @@ const SubcellularLocationView: FC<{
                     <Fragment>
                       {`: ${subcellularLocation.topology.value} `}
                       {subcellularLocation.topology.evidences && (
-                        <UniProtEvidenceTag
+                        <UniProtKBEvidenceTag
                           evidences={subcellularLocation.topology.evidences}
                         />
                       )}

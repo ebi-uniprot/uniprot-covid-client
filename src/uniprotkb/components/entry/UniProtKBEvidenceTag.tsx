@@ -4,14 +4,11 @@ import { groupBy } from 'lodash';
 import { ExternalLink, EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import {
-  getEvidenceCodeData,
-  EvidenceData,
-} from '../model/types/EvidenceCodes';
-import { Evidence } from '../model/types/modelTypes';
-import UniProtKBEntryPublications from '../literature/components/UniProtKBEntryPublications';
-import { processUrlTemplate } from '../view/uniprotkb/components/XRefView';
-import evidenceUrls from '../utils/evidenceUrls';
+import { getEvidenceCodeData, EvidenceData } from '../../config/EvidenceCodes';
+import { Evidence } from '../../types/modelTypes';
+import UniProtKBEntryPublications from './UniProtKBEntryPublications';
+import { processUrlTemplate } from './XRefView';
+import evidenceUrls from '../../config/evidenceUrls';
 
 enum evidenceTagSourceTypes {
   PUBMED = 'PubMed',
@@ -72,7 +69,7 @@ export const UniProtEvidenceTagContent: FC<{
   );
 };
 
-const UniProtEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
+const UniProtKBEvidenceTag: FC<{ evidences: Evidence[] }> = ({ evidences }) => {
   const evidenceObj = groupBy(
     evidences,
     (evidence: Evidence) => evidence.evidenceCode
@@ -151,4 +148,4 @@ export const UniProtProtvistaEvidenceTag = (
   return evidenceTags;
 };
 
-export default UniProtEvidenceTag;
+export default UniProtKBEvidenceTag;

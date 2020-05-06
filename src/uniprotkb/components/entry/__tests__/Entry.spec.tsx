@@ -5,17 +5,16 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import Entry from '../Entry';
-import renderWithRedux from '../../__testHelpers__/renderWithRedux';
-import entryData from '../../model/__mocks__/entryModelData.json';
-import deletedEntryData from '../../model/__mocks__/deletedEntryModelData.json';
-import demergedEntryData from '../../model/__mocks__/demergedEntryModelData.json';
-import entryPublicationsData from '../publications/__mocks__/entryPublicationsData.json';
-import entryInitialState from '../state/entryInitialState';
-
+import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import entryData from '../../../__mockData__/entryModelData.json';
+import deletedEntryData from '../../../../shared/__mockData__/deletedEntryModelData.json';
+import demergedEntryData from '../../../../shared/__mockData__/demergedEntryData.json';
+import entryPublicationsData from './__mockData__/entryPublicationsData.json';
+import entryInitialState from '../../../state/entryInitialState';
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
   joinUrl,
-} from '../../utils/apiUrls';
+} from '../../../config/apiUrls';
 
 const { primaryAccession } = entryData;
 const { primaryAccession: deleteEntryAccession } = deletedEntryData;
@@ -61,7 +60,7 @@ describe('Entry', () => {
   beforeEach(() => {
     component = renderWithRedux(
       <Route
-        component={(props) => <Entry {...props} />}
+        component={props => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -97,7 +96,7 @@ describe('Entry', () => {
   it('should render obsolete page for deleted entries', async () => {
     component = renderWithRedux(
       <Route
-        component={(props) => <Entry {...props} />}
+        component={props => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -120,7 +119,7 @@ describe('Entry', () => {
   it('should render obsolete page for demerged entries', async () => {
     component = renderWithRedux(
       <Route
-        component={(props) => <Entry {...props} />}
+        component={props => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {

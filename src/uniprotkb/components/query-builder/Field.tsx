@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import RangeField from './RangeField';
 import EnumField from './EnumField';
 import TextField from './TextField';
-import AutocompleteWrapper from '../components/AutocompleteWrapper';
-import { SearchTermType, Input } from './types/searchTypes';
+import AutocompleteWrapper from './AutocompleteWrapper';
+import { SearchTermType, Input } from '../../types/searchTypes';
 
 type FieldProps = {
   field: SearchTermType;
