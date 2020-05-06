@@ -46,7 +46,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
    */
   const columns: Column[] = [];
 
-  const initialUrl = getAPIQueryUrl(
+  const initialApiUrl = getAPIQueryUrl(
     query,
     columns,
     selectedFacets,
@@ -54,7 +54,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
     sortDirection
   );
 
-  const { data, error, loading, headers } = useDataApi(initialUrl);
+  const { data, error, loading, headers } = useDataApi(initialApiUrl);
 
   if (error) {
     // TODO handle error with ErrorPage
@@ -160,7 +160,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
       >
         <Fragment>
           <ResultsView
-            initialUrl={initialUrl}
+            columns={columns}
             handleEntrySelection={handleEntrySelection}
             selectedEntries={selectedEntries}
             viewMode={viewMode}

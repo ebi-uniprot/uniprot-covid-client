@@ -17,22 +17,37 @@ import '../styles/alert.scss';
 import '../styles/ResultsView.scss';
 import { getParamsFromURL, getLocationForParams } from './utils';
 import { SortableColumn, Column } from '../model/types/ColumnTypes';
+import { getAPIQueryUrl } from '../utils/apiUrls';
 
 type ResultsTableProps = {
-  initialUrl: string;
   selectedEntries: SelectedEntries;
+  columns: Column[];
   handleEntrySelection: (rowId: string) => void;
   viewMode: ViewMode;
 } & RouteComponentProps;
 
 const ResultsView: React.FC<ResultsTableProps> = ({
-  initialUrl,
   selectedEntries,
+  columns,
   handleEntrySelection,
   viewMode,
   history,
+  location,
 }) => {
-  const [url, setUrl] = useState(initialUrl);
+  const { search: queryParamFromUrl } = location;
+  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
+    queryParamFromUrl
+  );
+
+  const initialApiUrl = getAPIQueryUrl(
+    query,
+    columns,
+    selectedFacets,
+    sortColumn,
+    sortDirection
+  );
+
+  const [url, setUrl] = useState(initialApiUrl);
   const [metaData, setMetaData] = useState<{
     total: number;
     nextUrl: string | undefined;
@@ -40,9 +55,6 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
 
   const { data, error, headers } = useDataApi(url);
-  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
-    initialUrl
-  );
 
   useEffect(() => {
     if (!data) {
@@ -90,16 +102,18 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     const apiColumn = fieldNameMap.get(column);
 
     // Change sort direction
-    let updatedDirection = sortDirection;
-    if (apiColumn === sortColumn) {
-      updatedDirection =
-        sortDirection === SortDirection.ascend
-          ? SortDirection.descend
-          : SortDirection.ascend;
-    }
+    const updatedSortDirection =
+      !sortDirection || sortDirection === SortDirection.descend
+        ? SortDirection.ascend
+        : SortDirection.descend;
 
     history.push(
-      getLocationForParams(query, selectedFacets, apiColumn, updatedDirection)
+      getLocationForParams(
+        query,
+        selectedFacets,
+        apiColumn,
+        updatedSortDirection
+      )
     );
   };
 
