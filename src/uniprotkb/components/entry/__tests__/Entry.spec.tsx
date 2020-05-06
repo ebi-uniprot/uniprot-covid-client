@@ -6,7 +6,6 @@ import axios from 'axios';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import Entry from '../Entry';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
-import entryInitialState from '../../../state/entryInitialState';
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
 } from '../../../config/apiUrls';
