@@ -3,7 +3,7 @@ import axios from 'axios';
 import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import CustomiseTableContainer from '../CustomiseTableContainer';
-import initialState from '../../../../app/state/initialState';
+import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
 import * as resultsActions from '../../../state/resultsActions';

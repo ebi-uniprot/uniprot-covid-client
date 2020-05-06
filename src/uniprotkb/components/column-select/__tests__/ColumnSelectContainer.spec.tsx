@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import ColumnSelectContainer, {
   removeFieldFromFieldsData,
 } from '../ColumnSelectContainer';
-import initialState from '../../../../app/state/initialState';
+import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
 import structuredResultFieldsData from '../../../__mockData__/StructuredResultFieldsData.json';

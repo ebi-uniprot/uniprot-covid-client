@@ -6,15 +6,15 @@ import axios from 'axios';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import Entry from '../Entry';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
-import entryData from '../../../__mockData__/entryModelData.json';
-import deletedEntryData from '../../../../shared/__mockData__/deletedEntryModelData.json';
-import demergedEntryData from '../../../../shared/__mockData__/demergedEntryData.json';
-import entryPublicationsData from './__mockData__/entryPublicationsData.json';
 import entryInitialState from '../../../state/entryInitialState';
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
   joinUrl,
 } from '../../../config/apiUrls';
+import entryData from '../../../__mockData__/entryModelData.json';
+import deletedEntryData from '../../../../shared/__mockData__/deletedEntryModelData.json';
+import demergedEntryData from '../../../../shared/__mockData__/demergedEntryModelData.json';
+import entryPublicationsData from './__mockData__/entryPublicationsData.json';
 
 const { primaryAccession } = entryData;
 const { primaryAccession: deleteEntryAccession } = deletedEntryData;

@@ -5,45 +5,43 @@ import idx from 'idx';
 import { flatten } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import SimpleView from '../view/uniprotkb/components/SimpleView';
+import SimpleView from '../components/entry/SimpleView';
 import ProteinNamesView, {
   ECNumbersView,
-} from '../view/uniprotkb/components/ProteinNamesView';
+} from '../components/entry/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
   OrganismId,
-} from '../view/uniprotkb/components/OrganismView';
+} from '../components/entry/OrganismView';
 import GeneNamesView, {
   geneAlternativeNamesView,
-} from '../view/uniprotkb/components/GeneNamesView';
-import { UniProtkbUIModel } from './uniprotkb/UniProtkbConverter';
-import numberView, { Unit } from '../view/uniprotkb/components/NumberView';
-import ProteomesView from '../view/uniprotkb/components/ProteomesView';
-import FeaturesView from '../view/uniprotkb/components/FeaturesView';
-import EntrySection from './types/EntrySection';
+} from '../components/entry/GeneNamesView';
+import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
+import numberView, { Unit } from '../components/entry/NumberView';
+import ProteomesView from '../components/entry/ProteomesView';
+import FeaturesView from '../components/entry/FeaturesView';
+import EntrySection from '../types/EntrySection';
 import {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
   IsoformView,
-} from '../view/uniprotkb/components/SequenceView';
-import { Flag } from './uniprotkb/sections/SequenceConverter';
-import FeatureType from './types/FeatureType';
-import FreeTextView, {
-  TextView,
-} from '../view/uniprotkb/components/FreeTextView';
+} from '../components/entry/SequenceView';
+import { Flag } from '../adapters/SequenceConverter';
+import FeatureType from '../types/FeatureType';
+import FreeTextView, { TextView } from '../components/entry/FreeTextView';
 import {
   AbsorptionView,
   KineticsView,
   CofactorView,
-} from '../view/uniprotkb/FunctionSection';
+} from '../components/entry/FunctionSection';
 import {
   FunctionUIModel,
   CofactorComment,
   GoAspect,
   GoTerm,
-} from './uniprotkb/sections/FunctionConverter';
-import { Column } from './types/ColumnTypes';
+} from '../adapters/FunctionConverter';
+import { Column } from '../types/ColumnTypes';
 import {
   CommentType,
   FreeTextComment,
@@ -53,27 +51,27 @@ import {
   DiseaseComment,
   CatalyticActivityComment,
   SubcellularLocationComment,
-} from './types/CommentTypes';
+} from '../types/CommentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
-} from '../view/uniprotkb/components/AnnotationScoreDoughnutChart';
-import { ValueWithEvidence } from './types/modelTypes';
-import { getAllKeywords } from './utils/KeywordsUtil';
-import { KeywordList } from '../view/uniprotkb/components/KeywordView';
-import { ReviewedUnreviewed } from '../view/uniprotkb/components/UniProtKBTitle';
-import { DatabaseList } from '../view/uniprotkb/components/XRefView';
+} from '../components/entry/AnnotationScoreDoughnutChart';
+import { ValueWithEvidence } from '../types/modelTypes';
+import { getAllKeywords } from '../utils/KeywordsUtil';
+import { KeywordList } from '../components/entry/KeywordView';
+import { ReviewedUnreviewed } from '../components/entry/UniProtKBTitle';
+import { DatabaseList } from '../components/entry/XRefView';
 import {
   databaseNameToCategory,
   getDatabaseNameToEntrySection,
   getDatabaseInfoByName,
-} from '../data/database';
-import DiseaseInvolvementView from '../view/uniprotkb/components/DiseaseInvolvementView';
-import CatalyticActivityView from '../view/uniprotkb/components/CatalyticActivityView';
-import VariationView from '../view/uniprotkb/components/VariationView';
-import { StructureUIModel } from './uniprotkb/sections/StructureConverter';
-import SubcellularLocationView from '../view/uniprotkb/components/SubcellularLocationView';
-import { GOTermsView } from '../view/uniprotkb/components/GOView';
-import externalUrls from '../utils/externalUrls';
+} from './database';
+import DiseaseInvolvementView from '../components/entry/DiseaseInvolvementView';
+import CatalyticActivityView from '../components/entry/CatalyticActivityView';
+import VariationView from '../components/entry/VariationView';
+import { StructureUIModel } from '../adapters/StructureConverter';
+import SubcellularLocationView from '../components/entry/SubcellularLocationView';
+import { GOTermsView } from '../components/entry/GOView';
+import externalUrls from './externalUrls';
 
 const getFeatureColumn = (type: FeatureType) => {
   return {

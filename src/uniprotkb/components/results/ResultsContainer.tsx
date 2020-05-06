@@ -14,25 +14,25 @@ import {
   Loader,
 } from 'franklin-sites';
 import queryStringModule from 'query-string';
-import * as resultsActions from './state/resultsActions';
-import * as searchActions from '../search/state/searchActions';
-import { Clause, Namespace } from '../search/types/searchTypes';
-import SideBarLayout from '../layout/SideBarLayout';
+import * as resultsActions from '../../state/resultsActions';
+import * as searchActions from '../../state/searchActions';
+import { Clause, Namespace } from '../../types/searchTypes';
+import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
 import ResultsView from './ResultsView';
-import { getQueryUrl } from '../utils/apiUrls';
-import infoMappings from '../info/InfoMappings';
+import { getQueryUrl } from '../../config/apiUrls';
+import infoMappings from '../../../shared/config/InfoMappings';
 import { RootState, RootAction } from '../../../app/state/rootInitialState';
 import {
   SortDirection,
   SelectedEntries,
   SelectedFacet,
-} from './types/resultsTypes';
-import { SortableColumn, Column } from '../model/types/ColumnTypes';
-import { ViewMode } from './state/resultsInitialState';
-import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
-import { Facet } from '../types/responseTypes';
-import BaseLayout from '../layout/BaseLayout';
-import NoResultsPage from '../pages/errors/NoResultsPage';
+} from '../../types/resultsTypes';
+import { SortableColumn, Column } from '../../types/ColumnTypes';
+import { ViewMode } from '../../state/resultsInitialState';
+import { UniProtkbAPIModel } from '../../adapters/UniProtkbConverter';
+import { Facet } from '../../types/responseTypes';
+import BaseLayout from '../../../shared/components/layouts/BaseLayout';
+import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
 
 type ResultsProps = {
   namespace: Namespace;

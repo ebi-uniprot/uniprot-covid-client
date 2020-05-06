@@ -1,5 +1,5 @@
 import idx from 'idx';
-import { ProteinNamesData } from '../adapters/NamesAndTaxonomyConverter';
+import { ProteinNamesData } from './NamesAndTaxonomyConverter';
 
 const convertProteinNames = (data: ProteinNamesData) => {
   let recommendedName;

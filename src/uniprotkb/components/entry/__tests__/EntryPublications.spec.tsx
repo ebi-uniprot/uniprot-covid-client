@@ -3,7 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import { v1 } from 'uuid';
 import { render } from '@testing-library/react';
 import EntryPublications from '../EntryPublications';
-import publicationsData from '../../../__mockData__/entryPublicationsData.json';
+import publicationsData from './__mockData__/entryPublicationsData.json';
 
 let component;
 

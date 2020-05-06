@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import EntryPublicationsFacets from '../EntryPublicationsFacets';
-import publicationsData from '../../../__mockData__/entryPublicationsData.json';
+import publicationsData from './__mockData__/entryPublicationsData.json';
 
 let component;
 const setSelectedFacets = jest.fn();

@@ -1,4 +1,4 @@
-import { Evidence } from './modelTypes';
+import { Evidence } from '../types/modelTypes';
 
 export enum ECO {
   EXP = 269,

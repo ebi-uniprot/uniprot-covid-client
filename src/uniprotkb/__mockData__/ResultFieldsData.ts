@@ -1,4 +1,4 @@
-import apiUrls from '../utils/apiUrls';
+import apiUrls from '../config/apiUrls';
 
 const mockResultFieldsApi = {
   request: apiUrls.resultsFields,

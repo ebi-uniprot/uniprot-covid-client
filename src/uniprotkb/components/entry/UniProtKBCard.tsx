@@ -13,9 +13,9 @@ import AnnotationScoreDoughnutChart, {
 } from './AnnotationScoreDoughnutChart';
 import getProteinHighlights from '../../adapters/ProteinHighlights';
 import { SelectedEntries } from '../../types/resultsTypes';
-import './styles/UniProtCard.scss';
+import './styles/UniProtKBCard.scss';
 
-const UniProtCard: FC<{
+const UniProtKBCard: FC<{
   data: UniProtkbAPIModel;
   selectedEntries: SelectedEntries;
   handleEntrySelection: (rowId: string) => void;
@@ -128,4 +128,4 @@ const UniProtCard: FC<{
   );
 };
 
-export default withRouter(UniProtCard);
+export default withRouter(UniProtKBCard);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
-import initialState from '../../../../app/state/initialState';
+import initialState from '../../../../app/state/rootInitialState';
 import CustomiseTableView from '../CustomiseTableView';
 import { Column } from '../../../types/ColumnTypes';
 

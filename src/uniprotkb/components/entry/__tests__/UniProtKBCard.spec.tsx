@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UniProtCard from '../UniProtCard';
+import UniProtKBCard from '../UniProtKBCard';
 import data from '../../../__mockData__/entryModelData.json';
 
 const handleEntrySelection = jest.fn();
 
 let item;
 
-describe('UniProtCard component', () => {
+describe('UniProtKBCard component', () => {
   beforeEach(() => {
     item = render(
       <Router>
-        <UniProtCard
+        <UniProtKBCard
           data={data}
           selectedEntries={{}}
           handleEntrySelection={handleEntrySelection}

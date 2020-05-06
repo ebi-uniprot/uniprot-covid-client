@@ -1,4 +1,4 @@
-import { UniProtkbAPIModel, EntryType } from '../adapters/UniProtkbConverter';
+import { UniProtkbAPIModel, EntryType } from './UniProtkbConverter';
 import FeatureType from '../types/FeatureType';
 import {
   CommentType,

@@ -3,7 +3,7 @@ import apiUrls, {
   createFacetsQueryString,
   urlsAreEqual,
 } from '../apiUrls';
-import { FileFormat } from '../../results/types/resultsTypes';
+import { FileFormat } from '../../types/resultsTypes';
 
 describe('getQueryUrl', () => {
   test('should generate facet url', () => {

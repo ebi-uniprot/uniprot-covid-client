@@ -2,8 +2,8 @@ import {
   calculatePredictionScoreAvg,
   getFilteredVariants,
   colorConfig,
-} from '../variationFilters';
-import FeatureType from '../../../../../model/types/FeatureType';
+} from '../variationFiltersConfig';
+import FeatureType from '../../types/FeatureType';
 
 const transformedVariantPositions = [
   {
@@ -104,7 +104,7 @@ describe('Variation filter config', () => {
   test('it should filter according to the callback function', () => {
     const filteredVariants = getFilteredVariants(
       transformedVariantPositions,
-      (variant) => variant.accession === 'A'
+      variant => variant.accession === 'A'
     );
     expect(filteredVariants).toEqual([
       {

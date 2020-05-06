@@ -1,18 +1,18 @@
 import React from 'react';
 import idx from 'idx';
-import FunctionSection from './FunctionSection';
-import NamesAndTaxonomySection from './NamesAndTaxonomySection';
-import PathologyAndBiotechSection from './PathologyAndBiotechSection';
-import EntrySection from '../../types/EntrySection';
-import ProteinProcessingSection from './ProteinProcessingSection';
-import ExpressionSection from './ExpressionSection';
-import SubcellularLocationSection from './SubcellularLocationSection';
-import SequenceSection from './SequenceSection';
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
-import InteractionSection from './InteractionSection';
-import FamilyAndDomainsSection from './FamilyAndDomainsSection';
-import StructureSection from './StructureSection';
-import { FunctionUIModel } from '../../model/uniprotkb/sections/FunctionConverter';
+import FunctionSection from '../components/entry/FunctionSection';
+import NamesAndTaxonomySection from '../components/entry/NamesAndTaxonomySection';
+import PathologyAndBiotechSection from '../components/entry/PathologyAndBiotechSection';
+import ProteinProcessingSection from '../components/entry/ProteinProcessingSection';
+import ExpressionSection from '../components/entry/ExpressionSection';
+import SubcellularLocationSection from '../components/entry/SubcellularLocationSection';
+import SequenceSection from '../components/entry/SequenceSection';
+import InteractionSection from '../components/entry/InteractionSection';
+import FamilyAndDomainsSection from '../components/entry/FamilyAndDomainsSection';
+import StructureSection from '../components/entry/StructureSection';
+import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
+import { FunctionUIModel } from '../adapters/FunctionConverter';
+import EntrySection from '../types/EntrySection';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;

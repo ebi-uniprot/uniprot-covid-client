@@ -7,7 +7,7 @@ import {
 } from '../../../uniprotkb/adapters/UniProtkbConverter';
 import ArtWork from './svgs/obsolete-entry.svg';
 
-import '../../styles/ErrorPages.scss';
+import './styles/ErrorPages.scss';
 
 type ObsoleteEntryPageProps = {
   accession: string;

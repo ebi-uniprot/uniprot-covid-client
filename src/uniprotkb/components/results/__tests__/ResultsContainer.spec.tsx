@@ -4,11 +4,13 @@ import MockAdapter from 'axios-mock-adapter';
 import { cleanup, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
-import results from '../../__mockData__/results.json';
-import noResults from '../../__mockData__/noResults.json';
-import entry from '../../__mockData__/swissprot_entry.json';
-import searchInitialState from '../../search/state/searchInitialState';
-import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
+import results from './__mockData__/results.json';
+import noResults from './__mockData__/noResults.json';
+import entry from './__mockData__/swissprot_entry.json';
+import searchInitialState from '../../../state/searchInitialState';
+import resultsInitialState, {
+  ViewMode,
+} from '../../../state/resultsInitialState';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 
 const mock = new MockAdapter(axios);

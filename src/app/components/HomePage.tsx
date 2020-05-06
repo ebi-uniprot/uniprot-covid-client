@@ -2,7 +2,7 @@ import React from 'react';
 import { Tile, HeroHeader, HeroContainer } from 'franklin-sites';
 import Block from './Block';
 import SearchContainer from '../../uniprotkb/components/search/SearchContainer';
-import PlaceHolder from '../components/PlaceHolder';
+import PlaceHolder from './PlaceHolder';
 import BaseLayout from '../../shared/components/layouts/BaseLayout';
 
 const mission =

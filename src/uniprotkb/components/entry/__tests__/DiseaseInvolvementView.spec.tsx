@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import DiseaseInvolvement from '../DiseaseInvolvementView';
-import DiseaseInvolvementUIDataJson from './__mocks__/DiseaseInvolvementUIData.json';
+import DiseaseInvolvementUIDataJson from './__mockData__/DiseaseInvolvementUIData.json';
 
 describe('DiseaseInvolvement', () => {
   test('should render DiseaseInvolvement', () => {

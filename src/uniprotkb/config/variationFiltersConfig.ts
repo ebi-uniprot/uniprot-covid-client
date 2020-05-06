@@ -1,5 +1,5 @@
 import { scaleLinear } from 'd3-scale';
-import { TransformedProtvistaVariant } from '../VariationView';
+import { TransformedProtvistaVariant } from '../components/entry/VariationView';
 
 type VariationVariants = { variants: TransformedProtvistaVariant[] }[];
 
@@ -22,8 +22,8 @@ export const getFilteredVariants = (
   variants: VariationVariants,
   callbackFilter: (variant: TransformedProtvistaVariant) => void
 ) =>
-  variants.map((variant) => {
-    const matchingVariants = variant.variants.filter((variantPos) =>
+  variants.map(variant => {
+    const matchingVariants = variant.variants.filter(variantPos =>
       callbackFilter(variantPos)
     );
     return {

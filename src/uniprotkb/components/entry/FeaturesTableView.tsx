@@ -5,7 +5,7 @@ import { UniProtEvidenceTagContent } from './UniProtKBEvidenceTag';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { ProtvistaFeature, ProcessedFeature } from './FeaturesView';
 import { ProtvistaVariant } from './VariationView';
-import { EvidenceData } from '../../../model/types/EvidenceCodes';
+import { EvidenceData } from '../../config/EvidenceCodes';
 import { Evidence } from '../../types/modelTypes';
 
 loadWebComponent('protvista-datatable', ProtvistaDatatable);

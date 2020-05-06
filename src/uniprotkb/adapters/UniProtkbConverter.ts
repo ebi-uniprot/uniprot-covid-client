@@ -1,7 +1,7 @@
 import EntrySection from '../types/EntrySection';
-import convertFunction from '../adapters/FunctionConverter';
+import convertFunction from './FunctionConverter';
 import { FeatureData } from '../components/entry/FeaturesView';
-import convertPathologyAndBiotech from '../adapters/PathologyAndBiotechConverter';
+import convertPathologyAndBiotech from './PathologyAndBiotechConverter';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
@@ -9,22 +9,22 @@ import {
   GeneNamesData,
   OrganismData,
   LineageData,
-} from '../adapters/NamesAndTaxonomyConverter';
-import convertProteinProcessing from '../adapters/ProteinProcessingConverter';
-import convertExpression from '../adapters/ExpressionConverter';
-import convertSubcellularLocation from '../adapters/SubcellularLocationConverter';
+} from './NamesAndTaxonomyConverter';
+import convertProteinProcessing from './ProteinProcessingConverter';
+import convertExpression from './ExpressionConverter';
+import convertSubcellularLocation from './SubcellularLocationConverter';
 import {
   convertSequence,
   SequenceUIModel,
   EntryAudit,
-} from '../adapters/SequenceConverter';
+} from './SequenceConverter';
 import { SequenceData } from '../components/entry/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
-import convertInteraction from '../adapters/InteractionConverter';
-import convertFamilyAndDomains from '../adapters/FamilyAndDomainsConverter';
+import convertInteraction from './InteractionConverter';
+import convertFamilyAndDomains from './FamilyAndDomainsConverter';
 import { UIModel } from './SectionConverter';
-import convertStructure from '../adapters/StructureConverter';
-import convertExternalLinks from '../adapters/ExternalLinksConverter';
+import convertStructure from './StructureConverter';
+import convertExternalLinks from './ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
 import { transfromProperties } from '../utils/utils';
 import { Property } from '../types/modelTypes';

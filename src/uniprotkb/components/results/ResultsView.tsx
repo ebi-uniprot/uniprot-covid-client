@@ -1,16 +1,16 @@
 import React from 'react';
 import { DataTable, DataList } from 'franklin-sites';
-import ColumnConfiguration from '../model/ColumnConfiguration';
-import '../styles/alert.scss';
-import '../styles/ResultsView.scss';
-import { SelectedEntries, SortDirection } from './types/resultsTypes';
-import UniProtCard from '../view/uniprotkb/components/UniProtCard';
+import ColumnConfiguration from '../../config/ColumnConfiguration';
+import { SelectedEntries, SortDirection } from '../../types/resultsTypes';
+import UniProtKBCard from '../entry/UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
-} from '../model/uniprotkb/UniProtkbConverter';
-import { ViewMode } from './state/resultsInitialState';
-import { SortableColumn, Column } from '../model/types/ColumnTypes';
+} from '../../adapters/UniProtkbConverter';
+import { ViewMode } from '../../state/resultsInitialState';
+import { SortableColumn, Column } from '../../types/ColumnTypes';
+import './styles/warning.scss';
+import './styles/ResultsView.scss';
 
 type ResultsTableProps = {
   results: UniProtkbAPIModel[];
@@ -45,7 +45,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           idKey="primaryAccession"
           data={results}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
-            <UniProtCard
+            <UniProtKBCard
               data={dataItem}
               selectedEntries={selectedEntries}
               handleEntrySelection={handleEntrySelection}

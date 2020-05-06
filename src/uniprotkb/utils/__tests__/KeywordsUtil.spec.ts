@@ -1,6 +1,6 @@
 import { getAllKeywords } from '../KeywordsUtil';
-import modelData from '../../__mocks__/entryModelData.json';
-import uniProtKbConverter from '../../uniprotkb/UniProtkbConverter';
+import modelData from '../../__mockData__/entryModelData.json';
+import uniProtKbConverter from '../../adapters/UniProtkbConverter';
 
 describe('KeywordsUtil', () => {
   it('Should retrieve all keywords from UI Model', () => {

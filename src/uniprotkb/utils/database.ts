@@ -4,7 +4,7 @@ import {
   DatabaseCategory,
   DatabaseInfo,
   DatabaseInfoPoint,
-} from '..//types/DatabaseRefs';
+} from '../types/DatabaseRefs';
 import { Xref } from '../types/CommentTypes';
 
 export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {

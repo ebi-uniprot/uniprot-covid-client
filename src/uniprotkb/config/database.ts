@@ -1,12 +1,12 @@
-import EntrySection from '../../types/EntrySection';
-import { DatabaseCategory, DatabaseInfo } from '../model/types/DatabaseRefs';
+import EntrySection from '../types/EntrySection';
+import { DatabaseCategory, DatabaseInfo } from '../types/DatabaseRefs';
 import {
   getDatabaseInfoMaps,
   selectDatabases,
   getEntrySectionToDatabaseCategoryOrder,
 } from '../utils/database';
 import databaseInfoJson from './databaseInfo.json';
-import externalUrls from '../utils/externalUrls';
+import externalUrls from './externalUrls';
 
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 

@@ -2,7 +2,7 @@ import createQueryString from '../QueryStringGenerator';
 import {
   testData,
   exceptionThrowingTestData,
-} from '../../../__mockData__/clauseQueryTestData';
+} from './__mockData__/clauseQueryTestData';
 
 describe('QueryHelper', () => {
   testData.forEach(({ description, queryString, clauses }) => {

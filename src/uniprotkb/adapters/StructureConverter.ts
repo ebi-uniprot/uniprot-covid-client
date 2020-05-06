@@ -1,8 +1,8 @@
 import { groupBy } from 'lodash';
 import FeatureType from '../types/FeatureType';
-import { convertSection, UIModel } from '../adapters/SectionConverter';
+import { convertSection, UIModel } from './SectionConverter';
 import EntrySection from '../types/EntrySection';
-import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
+import { UniProtkbAPIModel } from './UniProtkbConverter';
 import { Xref } from '../types/CommentTypes';
 
 type GroupedStructureInfo = { [key: string]: Xref[] };

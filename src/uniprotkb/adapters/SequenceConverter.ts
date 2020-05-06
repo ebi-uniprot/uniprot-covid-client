@@ -20,7 +20,7 @@ import {
   FreeTextComment,
   RNAEditingComment,
 } from '../types/CommentTypes';
-import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
+import { UniProtkbAPIModel } from './UniProtkbConverter';
 
 export enum Flag {
   PRECURSOR = 'Precursor',

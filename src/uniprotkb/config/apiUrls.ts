@@ -8,8 +8,8 @@ import {
   FileFormat,
   fileFormatsWithColumns,
   fileFormatToUrlParameter,
-} from '../results/types/resultsTypes';
-import { SortableColumn } from '../model/types/ColumnTypes';
+} from '../types/resultsTypes';
+import { SortableColumn } from '../types/ColumnTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
