@@ -4,7 +4,7 @@ exports[`Organism should render organism 1`] = `
 <DocumentFragment>
   <a
     class="external-link"
-    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)"
+    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=12344"
     target="_blank"
   >
     Cheeky monkey (Really cheeky little monkey)  (Monkey 1,Monkey 2)

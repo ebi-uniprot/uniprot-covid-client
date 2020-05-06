@@ -424,7 +424,7 @@ exports[`ColumnConfiguration component should render all columns 5`] = `
 <DocumentFragment>
   <a
     class="external-link"
-    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
+    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
     target="_blank"
   >
     scientific name (common name)  (synonyms 1)
@@ -601,7 +601,7 @@ exports[`ColumnConfiguration component should render all columns 14`] = `
   <p>
     <a
       class="external-link"
-      href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
+      href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
       target="_blank"
     >
       scientific name (common name)  (synonyms 1)

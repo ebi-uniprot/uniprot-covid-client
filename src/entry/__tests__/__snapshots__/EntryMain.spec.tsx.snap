@@ -93,7 +93,7 @@ exports[`Entry view should render 1`] = `
             >
               <a
                 class="external-link"
-                href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
+                href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
                 target="_blank"
               >
                 scientific name (common name)  (synonyms 1)
@@ -1698,7 +1698,7 @@ exports[`Entry view should render 1`] = `
                 <p>
                   <a
                     class="external-link"
-                    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=scientific name (common name)  (synonyms 1)"
+                    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
                     target="_blank"
                   >
                     scientific name (common name)  (synonyms 1)

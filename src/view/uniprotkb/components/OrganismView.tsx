@@ -19,9 +19,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
     return null;
   }
   return (
-    <Fragment>
-      <ExternalLink url={externalUrls.NCBI(taxonId)}>{taxonId}</ExternalLink>
-    </Fragment>
+    <ExternalLink url={externalUrls.NCBI(taxonId)}>{taxonId}</ExternalLink>
   );
 };
 
@@ -37,9 +35,9 @@ const OrganismView: React.FC<OrganismDataProps> = ({
   } ${data.synonyms && data.synonyms.length > 0 ? ` (${data.synonyms})` : ''}`;
 
   return (
-    <Fragment>
-      <ExternalLink url={externalUrls.NCBI(termValue)}>{termValue}</ExternalLink>
-    </Fragment>
+    <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
+      {termValue}
+    </ExternalLink>
   );
 };
 
@@ -56,13 +54,11 @@ export const OrganismListView: React.FC<{
       title: 'Organism',
       content: (
         <Fragment>
-          {data.taxonId
-            && (
-              <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
-                {`${data.scientificName} (${data.commonName})`}
-              </ExternalLink>
-            )
-          }
+          {data.taxonId && (
+            <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
+              {`${data.scientificName} (${data.commonName})`}
+            </ExternalLink>
+          )}
           {data.evidences && data.evidences.length && (
             <UniProtEvidenceTag evidences={data.evidences} />
           )}
@@ -87,7 +83,7 @@ export const OrganismListView: React.FC<{
       title: 'Virus hosts',
       content: (
         <Fragment>
-          {hosts.map(host => (
+          {hosts.map((host) => (
             <p key={host.taxonId}>
               <OrganismView data={host} />
             </p>
