@@ -37,21 +37,30 @@ export const getURLParams = (
   };
 };
 
-export const setUrlParams = () => null;
+const facetsAsString = (facets: SelectedFacet[]): string => {
+  if (!facets || facets.length <= 0) {
+    return '';
+  }
+  return facets.reduce(
+    (accumulator, facet, i) =>
+      `${accumulator}${i > 0 ? ',' : ''}${facet.name}:${facet.value}`,
+    '&facets='
+  );
+};
 
-// const setURLParams = (
-//   query: string,
-//   selectedFacets: SelectedFacet[],
-//   sortColumn?: string,
-//   sortDirection?: SortDirection
-// ): void => {
-//   const { history } = this.props;
-//   history.push({
-//     pathname: '/uniprotkb',
-//     search: [
-//       `query=${query}${this.facetsAsString(selectedFacets)}`,
-//       `${sortColumn ? `&sort=${sortColumn}` : ''}`,
-//       `${sortDirection ? `&dir=${sortDirection}` : ''}`,
-//     ].join(''),
-//   });
-// };
+export const setURLParams = (
+  history,
+  query: string,
+  selectedFacets: SelectedFacet[],
+  sortColumn?: string,
+  sortDirection?: SortDirection
+): void => {
+  history.push({
+    pathname: '/uniprotkb',
+    search: [
+      `query=${query}${facetsAsString(selectedFacets)}`,
+      `${sortColumn ? `&sort=${sortColumn}` : ''}`,
+      `${sortDirection ? `&dir=${sortDirection}` : ''}`,
+    ].join(''),
+  });
+};
