@@ -1,8 +1,8 @@
-import React, { FC, Fragment, useState, useEffect } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
-  Facets,
+  Loader,
   PageIntro,
   DownloadIcon,
   BasketIcon,
@@ -10,81 +10,33 @@ import {
   TableIcon,
   ListIcon,
   EditIcon,
-  Loader,
 } from 'franklin-sites';
-import queryStringModule from 'query-string';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
-import { getQueryUrl } from '../utils/apiUrls';
 import infoMappings from '../info/InfoMappings';
 import { RootState } from '../state/state-types';
-import {
-  SortDirection,
-  SelectedEntries,
-  SelectedFacet,
-} from './types/resultsTypes';
-import { SortableColumn, Column } from '../model/types/ColumnTypes';
-import { ViewMode, defaultTableColumns } from './state/resultsInitialState';
-import { UniProtkbAPIModel } from '../model/uniprotkb/UniProtkbConverter';
-import { Facet } from '../types/responseTypes';
-import BaseLayout from '../layout/BaseLayout';
-import NoResultsPage from '../pages/errors/NoResultsPage';
+import { SelectedEntries } from './types/resultsTypes';
+import { ViewMode } from './state/resultsInitialState';
+import { Column } from '../model/types/ColumnTypes';
+import { getAPIQueryUrl } from '../utils/apiUrls';
+import { getURLParams } from './utils';
+import ResultsFacets from './ResultsFacets';
 import useDataApi from '../hooks/useDataApi';
-import getNextUrlFromResponse from '../utils/queryUtils';
 
 type ResultsProps = {
   namespace: Namespace;
   clauses?: Clause[];
-  tableColumns: Column[];
-  results: UniProtkbAPIModel[];
-  facets: Facet[];
-  isFetching: boolean;
-  nextUrl: string;
-  totalNumberResults: number;
-  viewMode: ViewMode;
 } & RouteComponentProps;
 
 type ResultsContainerState = {
   selectedEntries: SelectedEntries;
 };
 
-const facetsAsArray = (facetString: string): SelectedFacet[] => {
-  return facetString.split(',').map((stringItem) => {
-    const [name, value] = stringItem.split(':');
-    return {
-      name,
-      value,
-    };
-  });
-};
+const Results: FC<ResultsProps> = ({ namespace, location }) => {
+  const [selectedEntries, setSelectedEntries] = useState({});
+  const [viewMode, setViewMode] = useState(ViewMode.CARD);
 
-const getURLParams = (
-  url: string
-): {
-  query: string;
-  selectedFacets: SelectedFacet[];
-  sortColumn: SortableColumn;
-  sortDirection: SortDirection;
-} => {
-  const urlParams = queryStringModule.parse(url);
-  const { query, facets, sort, dir } = urlParams;
-
-  let selectedFacets: SelectedFacet[] = [];
-  if (facets && typeof facets === 'string') {
-    selectedFacets = facetsAsArray(facets);
-  }
-  const sortDirection = dir as keyof typeof SortDirection;
-
-  return {
-    query: query && typeof query === 'string' ? query : '',
-    selectedFacets,
-    sortColumn: sort as SortableColumn,
-    sortDirection: sortDirection && SortDirection[sortDirection],
-  };
-};
-
-const Results: FC<ResultsProps> = ({ location, namespace }) => {
   const { search: queryParamFromUrl } = location;
   const { query, selectedFacets, sortColumn, sortDirection } = getURLParams(
     queryParamFromUrl
@@ -99,71 +51,26 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
    */
   const columns: Column[] = [];
 
-  const stringUrl = getQueryUrl(
+  const initialUrl = getAPIQueryUrl(
     query,
     columns,
     selectedFacets,
     sortColumn,
     sortDirection
   );
-  const [url, setUrl] = useState(stringUrl);
-  const [total, setTotal] = useState(0);
-  const [selectedEntries, setSelectedEntries] = useState({});
-  const [viewMode, setViewMode] = useState(ViewMode.CARD);
-  const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
 
-  // const {
-  //   location: { search: queryParamFromUrl },
-  //   dispatchUpdateQueryString,
-  // } = this.props;
-  const { data, error, loading, headers } = useDataApi(url);
+  const { data, error, loading, headers } = useDataApi(initialUrl);
 
-  useEffect(() => {
-    if (!data) {
-      return;
-    }
-    const { results } = data;
-    setAllResults((allRes) => [...allRes, ...results]);
-    setTotal(() => headers['x-totalrecords']);
-  }, [data, headers]);
+  if (error) {
+    // TODO handle error with ErrorPage
+  }
 
   if (loading) {
     return <Loader />;
   }
 
-  const { link } = headers;
-  const nextUrl = getNextUrlFromResponse(link);
-
-  // componentDidUpdate(prevProps: ResultsProps) {
-  //   const {
-  //     location: { search: queryParamFromUrl },
-  //   } = this.props;
-  //   if (prevProps.location.search !== queryParamFromUrl) {
-  //     this.updateData();
-  //   }
-  // }
-
-  // componentWillUnmount() {
-  //   const { dispatchResetSearchInput } = this.props;
-  //   dispatchResetSearchInput();
-  // }
-
-  // const setURLParams = (
-  //   query: string,
-  //   selectedFacets: SelectedFacet[],
-  //   sortColumn?: string,
-  //   sortDirection?: SortDirection
-  // ): void => {
-  //   const { history } = this.props;
-  //   history.push({
-  //     pathname: '/uniprotkb',
-  //     search: [
-  //       `query=${query}${this.facetsAsString(selectedFacets)}`,
-  //       `${sortColumn ? `&sort=${sortColumn}` : ''}`,
-  //       `${sortDirection ? `&dir=${sortDirection}` : ''}`,
-  //     ].join(''),
-  //   });
-  // };
+  const { facets } = data;
+  const total = headers['x-totalrecords'];
 
   // const handleEntrySelection = (rowId: string): void => {
   //   const { selectedEntries: prevSelectedEntries } = this.state;
@@ -174,58 +81,6 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
   //     prevSelectedEntries[rowId] = true;
   //     setSelectedEntries(prevSelectedEntries );
   //   }
-  // };
-
-  // const facetsAsString = (facets: SelectedFacet[]): string => {
-  //   if (!facets || facets.length <= 0) {
-  //     return '';
-  //   }
-  //   return facets.reduce(
-  //     (accumulator, facet, i) =>
-  //       `${accumulator}${i > 0 ? ',' : ''}${facet.name}:${facet.value}`,
-  //     '&facets='
-  //   );
-  // };
-
-  // const addFacet = (facetName: string, facetValue: string): void => {
-  //   const {
-  //     location: { search: queryParamFromUrl },
-  //   } = this.props;
-  //   const {
-  //     query,
-  //     selectedFacets,
-  //     sortColumn,
-  //     sortDirection,
-  //   } = getURLParams(queryParamFromUrl);
-
-  //   const facet: SelectedFacet = { name: facetName, value: facetValue };
-
-  //   setURLParams(
-  //     query,
-  //     [...selectedFacets.concat(facet)],
-  //     sortColumn,
-  //     sortDirection
-  //   );
-  // };
-
-  // const removeFacet = (facetName: string, facetValue: string): void => {
-  //   const {
-  //     location: { search: queryParamFromUrl },
-  //   } = this.props;
-  //   const {
-  //     query,
-  //     selectedFacets,
-  //     sortColumn,
-  //     sortDirection,
-  //   } = getURLParams(queryParamFromUrl);
-
-  //   const index = selectedFacets.findIndex(
-  //     selectedFacet =>
-  //       selectedFacet.name === facetName && selectedFacet.value === facetValue
-  //   );
-
-  //   selectedFacets.splice(index, 1);
-  //   setURLParams(query, selectedFacets, sortColumn, sortDirection);
   // };
 
   // const updateColumnSort = (column: SortableColumn): void => {
@@ -267,38 +122,6 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
   //   setURLParams(query, selectedFacets, apiColumn, updatedDirection);
   // };
 
-  // render() {
-  //   const {
-  //     location: { search: queryParamFromUrl },
-  //     results,
-  //     facets,
-  //     isFetching,
-  //     dispatchFetchBatchOfResultsIfNeeded,
-  //     namespace,
-  //     nextUrl,
-  //     totalNumberResults,
-  //     viewMode,
-  //     tableColumns,
-  //     dispatchSwitchViewMode,
-  //   } = this.props;
-  //   const { selectedEntries } = this.state;
-  //   const {
-  //     query,
-  //     selectedFacets,
-  //     sortColumn,
-  //     sortDirection,
-  //   } = this.getURLParams(queryParamFromUrl);
-
-  const { results, facets } = data;
-
-  if (results.length === 0) {
-    return (
-      <BaseLayout>
-        <NoResultsPage />
-      </BaseLayout>
-    );
-  }
-
   const { name, links, info } = infoMappings[namespace];
 
   const actionButtons = (
@@ -310,7 +133,7 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
         Align
       </button>
       <button type="button" className="button tertiary">
-        <Link
+        {/* <Link
           to={{
             pathname: '/download',
             state: {
@@ -324,7 +147,7 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
         >
           <DownloadIcon />
           Download
-        </Link>
+        </Link> */}
       </button>
       <button type="button" className="button tertiary disabled">
         <BasketIcon />
@@ -377,26 +200,13 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
           </Fragment>
         }
         actionButtons={actionButtons}
-        sidebar={
-          <Facets
-            data={facets}
-            selectedFacets={selectedFacets}
-            addFacet={() => null}
-            removeFacet={() => null}
-          />
-        }
+        sidebar={<ResultsFacets facets={facets} />}
       >
         <Fragment>
           <ResultsView
-            results={allResults}
+            initialUrl={initialUrl}
             handleEntrySelection={() => null}
             selectedEntries={selectedEntries}
-            handleHeaderClick={() => null}
-            sortColumn={sortColumn}
-            sortDirection={sortDirection}
-            handleLoadMoreRows={() => nextUrl && setUrl(nextUrl)}
-            totalNumberResults={total}
-            tableColumns={defaultTableColumns}
             viewMode={viewMode}
           />
         </Fragment>
@@ -409,6 +219,7 @@ const Results: FC<ResultsProps> = ({ location, namespace }) => {
 const mapStateToProps = (state: RootState) => {
   return {
     namespace: state.query.namespace,
+    columns: state.results.tableColumns,
   };
 };
 

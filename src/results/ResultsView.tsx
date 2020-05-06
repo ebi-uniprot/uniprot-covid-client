@@ -1,43 +1,73 @@
-import React from 'react';
-import { DataTable, DataList } from 'franklin-sites';
+import React, { useState, useEffect } from 'react';
+import { DataTable, DataList, Loader } from 'franklin-sites';
 import ColumnConfiguration from '../model/ColumnConfiguration';
-import '../styles/alert.scss';
-import '../styles/ResultsView.scss';
-import { SelectedEntries, SortDirection } from './types/resultsTypes';
+import { SelectedEntries } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
-import { ViewMode } from './state/resultsInitialState';
-import { SortableColumn, Column } from '../model/types/ColumnTypes';
+import { ViewMode, defaultTableColumns } from './state/resultsInitialState';
+import getNextUrlFromResponse from '../utils/queryUtils';
+import useDataApi from '../hooks/useDataApi';
+import BaseLayout from '../layout/BaseLayout';
+import NoResultsPage from '../pages/errors/NoResultsPage';
+import '../styles/alert.scss';
+import '../styles/ResultsView.scss';
+import { getURLParams } from './utils';
 
 type ResultsTableProps = {
-  results: UniProtkbAPIModel[];
-  tableColumns: (Column | SortableColumn)[];
+  initialUrl: string;
   selectedEntries: SelectedEntries;
   handleEntrySelection: (rowId: string) => void;
-  handleHeaderClick: (column: SortableColumn) => void;
-  handleLoadMoreRows: () => void;
-  totalNumberResults: number;
-  sortColumn: SortableColumn;
-  sortDirection: SortDirection;
   viewMode: ViewMode;
 };
 
 const ResultsView: React.FC<ResultsTableProps> = ({
-  results = [],
-  totalNumberResults,
-  tableColumns,
+  initialUrl,
   selectedEntries,
   handleEntrySelection,
-  handleLoadMoreRows,
-  handleHeaderClick,
-  sortColumn,
-  sortDirection,
   viewMode,
 }) => {
-  const hasMoreData = totalNumberResults > results.length;
+  const [url, setUrl] = useState(initialUrl);
+  const [metaData, setMetaData] = useState<{
+    total: number;
+    nextUrl: string | undefined;
+  }>({ total: 0, nextUrl: undefined });
+  const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
+
+  const { data, error, headers } = useDataApi(url);
+  const { sortColumn, sortDirection } = getURLParams(initialUrl);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const { results } = data;
+    setAllResults((allRes) => [...allRes, ...results]);
+    setMetaData(() => ({
+      total: headers['x-totalrecords'],
+      nextUrl: getNextUrlFromResponse(headers.link),
+    }));
+  }, [data, headers]);
+
+  if (allResults.length === 0) {
+    return <Loader />;
+  }
+
+  if (allResults.length === 0) {
+    return (
+      <BaseLayout>
+        <NoResultsPage />
+      </BaseLayout>
+    );
+  }
+
+  const { total, nextUrl } = metaData;
+
+  const handleLoadMoreRows = () => nextUrl && setUrl(nextUrl);
+
+  const hasMoreData = total > allResults.length;
   if (viewMode === ViewMode.CARD) {
     return (
       <div className="datalist">
@@ -45,7 +75,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
             primaryAccession
           }
-          data={results}
+          data={allResults}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
             <UniProtCard
               data={dataItem}
@@ -55,11 +85,12 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           )}
           onLoadMoreItems={handleLoadMoreRows}
           hasMoreData={hasMoreData}
+          loaderComponent={<Loader />}
         />
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columns = tableColumns.map((columnName) => {
+  const columnsToDisplay = defaultTableColumns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {
@@ -86,14 +117,15 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
         primaryAccession
       }
-      columns={columns}
-      data={results}
+      columns={columnsToDisplay}
+      data={allResults}
       selectable
       selected={selectedEntries}
       onSelect={handleEntrySelection}
-      onHeaderClick={handleHeaderClick}
+      onHeaderClick={() => null}
       onLoadMoreItems={handleLoadMoreRows}
       hasMoreData={hasMoreData}
+      loaderComponent={<Loader />}
     />
   );
 };
