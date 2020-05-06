@@ -1,6 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UniProtKBEntryPublications Should render 1`] = `
+exports[`UniProtKBEntryPublications Should make a call with pubmed ids 1`] = `
+<DocumentFragment>
+  <div
+    class="message message--failure"
+    role="status"
+  >
+    <section
+      class="message__content"
+    >
+      <svg
+        fill="currentColor"
+        height="1.125em"
+        viewBox="0 0 18 18"
+        width="1.125em"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <small>
+        : There has been an error
+      </small>
+    </section>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`UniProtKBEntryPublications Should make a call with pubmed ids and render properly 1`] = `
 <DocumentFragment>
   <section
     class="publication"
@@ -12,7 +41,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         class="publication__columns__main"
       >
         <h5>
-          Leo book tittle
+          A peptide zipcode sufficient for anterograde transport within amyloid precursor protein.
         </h5>
         <section
           class="publication__authors"
@@ -20,7 +49,31 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
           <a
             href="/"
           >
-            author Leo
+            Satpute-Krishnan P.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            DeGiorgis J.A.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Conley M.P.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Jang M.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Bearer E.L.
           </a>
         </section>
       </section>
@@ -30,11 +83,59 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         <section
           class="publication__columns__side__item"
         >
+          <svg
+            fill="currentColor"
+            height="2em"
+            viewBox="0 0 30 32"
+            width="1.875em"
+          >
+            <path
+              d="M26.5 13.5h-8v8h8v-8z"
+            />
+            <path
+              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+            />
+            <path
+              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.9 1.9 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+            />
+            <path
+              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.84 1.84 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+            />
+            <path
+              d="M22 5.5h5m-24 8h9m-9-4h7m-7-4h5m10 4h9m-24 8h9m-9 4h9m-9 4h9m6 0h9"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+            />
+          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small />
+              <a
+                href="//www.ncbi.nlm.nih.gov/pubmed/17062754"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                PubMed
+              </a>
+            </li>
+            <li>
+              <a
+                href="//europepmc.org/article/MED/17062754"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Europe PMC
+              </a>
+            </li>
+            <li>
+              <small>
+                <a
+                  href="//dx.doi.org/10.1073/pnas.0607527103"
+                >
+                  Proc. Natl. Acad. Sci. U.S.A. 103:16532-16537(2006)
+                </a>
+              </small>
             </li>
           </ul>
         </section>
@@ -43,7 +144,40 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          />
+          >
+            <section
+              class="publication__statistics__item"
+            >
+              <a
+                href="/"
+              >
+                <section>
+                  <small>
+                    Cited in
+                  </small>
+                </section>
+                <section
+                  class="publication__statistics__bubble"
+                >
+                  <span
+                    class="bubble--small colour-pastel-blue"
+                  >
+                    2
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="15"
+                    viewBox="0 0 30 22"
+                    width="15"
+                  >
+                    <path
+                      d="M13.65 6.68V7.7a.14.14 0 010 .11c-.13 1.42-.47 2.81-1.01 4.13a15.73 15.73 0 01-2.7 4.54 15.87 15.87 0 01-3.96 3.4c-1.45.86-3 1.53-4.63 1.98 0 0 2.84-4.15 5.8-8.2h-.3a6.82 6.82 0 116.8-6.98zm16.35 0v1.13c-.13 1.42-.48 2.81-1.02 4.13a15.73 15.73 0 01-2.68 4.56 15.86 15.86 0 01-3.96 3.33 18.29 18.29 0 01-4.68 1.99s2.83-4.13 5.79-8.18h-.3A6.82 6.82 0 1130 6.68z"
+                    />
+                  </svg>
+                </section>
+              </a>
+            </section>
+          </section>
         </section>
       </section>
     </section>
@@ -58,7 +192,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         class="publication__columns__main"
       >
         <h5>
-          Leo book tittle
+          Quantitative measurements and modeling of cargo-motor interactions during fast transport in the living axon.
         </h5>
         <section
           class="publication__authors"
@@ -66,7 +200,43 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
           <a
             href="/"
           >
-            author Leo
+            Seamster P.E.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Loewenberg M.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Pascal J.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Chauviere A.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Gonzales A.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Cristini V.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Bearer E.L.
           </a>
         </section>
       </section>
@@ -76,11 +246,59 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         <section
           class="publication__columns__side__item"
         >
+          <svg
+            fill="currentColor"
+            height="2em"
+            viewBox="0 0 30 32"
+            width="1.875em"
+          >
+            <path
+              d="M26.5 13.5h-8v8h8v-8z"
+            />
+            <path
+              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+            />
+            <path
+              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.9 1.9 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+            />
+            <path
+              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.84 1.84 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+            />
+            <path
+              d="M22 5.5h5m-24 8h9m-9-4h7m-7-4h5m10 4h9m-24 8h9m-9 4h9m-9 4h9m6 0h9"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+            />
+          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small />
+              <a
+                href="//www.ncbi.nlm.nih.gov/pubmed/23011729"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                PubMed
+              </a>
+            </li>
+            <li>
+              <a
+                href="//europepmc.org/article/MED/23011729"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Europe PMC
+              </a>
+            </li>
+            <li>
+              <small>
+                <a
+                  href="//dx.doi.org/10.1088/1478-3975/9/5/055005"
+                >
+                  Phys. Biol. 9:055005-055005(2012)
+                </a>
+              </small>
             </li>
           </ul>
         </section>
@@ -89,7 +307,40 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          />
+          >
+            <section
+              class="publication__statistics__item"
+            >
+              <a
+                href="/"
+              >
+                <section>
+                  <small>
+                    Cited in
+                  </small>
+                </section>
+                <section
+                  class="publication__statistics__bubble"
+                >
+                  <span
+                    class="bubble--small colour-pastel-blue"
+                  >
+                    6
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="15"
+                    viewBox="0 0 30 22"
+                    width="15"
+                  >
+                    <path
+                      d="M13.65 6.68V7.7a.14.14 0 010 .11c-.13 1.42-.47 2.81-1.01 4.13a15.73 15.73 0 01-2.7 4.54 15.87 15.87 0 01-3.96 3.4c-1.45.86-3 1.53-4.63 1.98 0 0 2.84-4.15 5.8-8.2h-.3a6.82 6.82 0 116.8-6.98zm16.35 0v1.13c-.13 1.42-.48 2.81-1.02 4.13a15.73 15.73 0 01-2.68 4.56 15.86 15.86 0 01-3.96 3.33 18.29 18.29 0 01-4.68 1.99s2.83-4.13 5.79-8.18h-.3A6.82 6.82 0 1130 6.68z"
+                    />
+                  </svg>
+                </section>
+              </a>
+            </section>
+          </section>
         </section>
       </section>
     </section>
@@ -104,7 +355,7 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         class="publication__columns__main"
       >
         <h5>
-          Leo book tittle
+          Amyloid precursor protein dimerization and synaptogenic function depend on copper binding to the growth factor-like domain.
         </h5>
         <section
           class="publication__authors"
@@ -112,7 +363,67 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
           <a
             href="/"
           >
-            author Leo
+            Baumkotter F.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Schmidt N.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Vargas C.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Schilling S.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Weber R.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Wagner K.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Fiedler S.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Klug W.
+          </a>
+          , 
+          <a
+            href="/"
+          >
+            Radzimanowski J.
+          </a>
+          <button
+            class="button tertiary"
+            type="button"
+          >
+            [...]
+          </button>
+          , 
+          <a
+            href="/"
+          >
+            Kins S.
           </a>
         </section>
       </section>
@@ -122,11 +433,59 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         <section
           class="publication__columns__side__item"
         >
+          <svg
+            fill="currentColor"
+            height="2em"
+            viewBox="0 0 30 32"
+            width="1.875em"
+          >
+            <path
+              d="M26.5 13.5h-8v8h8v-8z"
+            />
+            <path
+              d="M26 14v7h-7v-7h7zm1-1h-9v9h9v-9z"
+            />
+            <path
+              d="M29 1v28.06H17.05a3 3 0 00-2 .74V1.94a1 1 0 011-.94H29zm1-1H16.05a2 2 0 00-2 1.94V32h1a1.9 1.9 0 01.59-1.38 2 2 0 011.4-.56H30V0z"
+            />
+            <path
+              d="M13.12 1a.91.91 0 01.88.94v27.78a2.78 2.78 0 00-1.81-.66H1V1h12.12zm0-1H0v30.06h12.19a1.84 1.84 0 011.32.56 1.93 1.93 0 01.55 1.38H15V1.94A1.91 1.91 0 0013.12 0z"
+            />
+            <path
+              d="M22 5.5h5m-24 8h9m-9-4h7m-7-4h5m10 4h9m-24 8h9m-9 4h9m-9 4h9m6 0h9"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+            />
+          </svg>
           <ul
             class="no-bullet"
           >
             <li>
-              <small />
+              <a
+                href="//www.ncbi.nlm.nih.gov/pubmed/25122912"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                PubMed
+              </a>
+            </li>
+            <li>
+              <a
+                href="//europepmc.org/article/MED/25122912"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Europe PMC
+              </a>
+            </li>
+            <li>
+              <small>
+                <a
+                  href="//dx.doi.org/10.1523/jneurosci.0180-14.2014"
+                >
+                  J. Neurosci. 34:11159-11172(2014)
+                </a>
+              </small>
             </li>
           </ul>
         </section>
@@ -135,191 +494,40 @@ exports[`UniProtKBEntryPublications Should render 1`] = `
         >
           <section
             class="publication__statistics"
-          />
-        </section>
-      </section>
-    </section>
-  </section>
-  <section
-    class="publication"
-  >
-    <section
-      class="publication__columns"
-    >
-      <section
-        class="publication__columns__main"
-      >
-        <h5>
-          Leo book tittle
-        </h5>
-        <section
-          class="publication__authors"
-        >
-          <a
-            href="/"
           >
-            author Leo
-          </a>
-        </section>
-      </section>
-      <section
-        class="publication__columns__side"
-      >
-        <section
-          class="publication__columns__side__item"
-        >
-          <ul
-            class="no-bullet"
-          >
-            <li>
-              <small />
-            </li>
-          </ul>
-        </section>
-        <section
-          class="publication__columns__side__item"
-        >
-          <section
-            class="publication__statistics"
-          />
-        </section>
-      </section>
-    </section>
-  </section>
-  <section
-    class="publication"
-  >
-    <section
-      class="publication__columns"
-    >
-      <section
-        class="publication__columns__main"
-      >
-        <h5>
-          Leo book tittle
-        </h5>
-        <section
-          class="publication__authors"
-        >
-          <a
-            href="/"
-          >
-            author Leo
-          </a>
-        </section>
-      </section>
-      <section
-        class="publication__columns__side"
-      >
-        <section
-          class="publication__columns__side__item"
-        >
-          <ul
-            class="no-bullet"
-          >
-            <li>
-              <small />
-            </li>
-          </ul>
-        </section>
-        <section
-          class="publication__columns__side__item"
-        >
-          <section
-            class="publication__statistics"
-          />
-        </section>
-      </section>
-    </section>
-  </section>
-  <section
-    class="publication"
-  >
-    <section
-      class="publication__columns"
-    >
-      <section
-        class="publication__columns__main"
-      >
-        <h5>
-          Leo book tittle
-        </h5>
-        <section
-          class="publication__authors"
-        >
-          <a
-            href="/"
-          >
-            author Leo
-          </a>
-        </section>
-      </section>
-      <section
-        class="publication__columns__side"
-      >
-        <section
-          class="publication__columns__side__item"
-        >
-          <ul
-            class="no-bullet"
-          >
-            <li>
-              <small />
-            </li>
-          </ul>
-        </section>
-        <section
-          class="publication__columns__side__item"
-        >
-          <section
-            class="publication__statistics"
-          />
-        </section>
-      </section>
-    </section>
-  </section>
-  <section
-    class="publication"
-  >
-    <section
-      class="publication__columns"
-    >
-      <section
-        class="publication__columns__main"
-      >
-        <h5>
-          Leo book tittle
-        </h5>
-        <section
-          class="publication__authors"
-        >
-          <a
-            href="/"
-          >
-            author Leo
-          </a>
-        </section>
-      </section>
-      <section
-        class="publication__columns__side"
-      >
-        <section
-          class="publication__columns__side__item"
-        >
-          <ul
-            class="no-bullet"
-          >
-            <li>
-              <small />
-            </li>
-          </ul>
-        </section>
-        <section
-          class="publication__columns__side__item"
-        >
-          <section
-            class="publication__statistics"
-          />
+            <section
+              class="publication__statistics__item"
+            >
+              <a
+                href="/"
+              >
+                <section>
+                  <small>
+                    Cited in
+                  </small>
+                </section>
+                <section
+                  class="publication__statistics__bubble"
+                >
+                  <span
+                    class="bubble--small colour-pastel-blue"
+                  >
+                    1
+                  </span>
+                  <svg
+                    fill="currentColor"
+                    height="15"
+                    viewBox="0 0 30 22"
+                    width="15"
+                  >
+                    <path
+                      d="M13.65 6.68V7.7a.14.14 0 010 .11c-.13 1.42-.47 2.81-1.01 4.13a15.73 15.73 0 01-2.7 4.54 15.87 15.87 0 01-3.96 3.4c-1.45.86-3 1.53-4.63 1.98 0 0 2.84-4.15 5.8-8.2h-.3a6.82 6.82 0 116.8-6.98zm16.35 0v1.13c-.13 1.42-.48 2.81-1.02 4.13a15.73 15.73 0 01-2.68 4.56 15.86 15.86 0 01-3.96 3.33 18.29 18.29 0 01-4.68 1.99s2.83-4.13 5.79-8.18h-.3A6.82 6.82 0 1130 6.68z"
+                    />
+                  </svg>
+                </section>
+              </a>
+            </section>
+          </section>
         </section>
       </section>
     </section>

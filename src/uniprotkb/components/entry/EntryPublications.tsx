@@ -1,17 +1,52 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../types/LiteratureTypes';
+import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
+import { SelectedFacet } from '../../types/resultsTypes';
+import formatCitationData, {
+  getCitationPubMedId,
+} from '../../adapters/LiteratureConverter';
+import getNextUrlFromResponse from '../../utils/queryUtils';
 
 const EntryPublications: FC<{
   accession: string;
-  data: LiteratureForProteinAPI[] | null;
-  total: number;
-  handleLoadMoreItems: () => void;
-}> = ({ accession, data, total, handleLoadMoreItems }) => {
-  if (!data || data.length === 0) {
+  selectedFacets: SelectedFacet[];
+}> = ({ accession, selectedFacets }) => {
+  const [url, setUrl] = useState(
+    getUniProtPublicationsQueryUrl(accession, selectedFacets)
+  );
+  const [allResults, setAllResults] = useState<LiteratureForProteinAPI[]>([]);
+  const [metaData, setMetaData] = useState<{
+    total: number;
+    nextUrl: string | undefined;
+  }>({ total: 0, nextUrl: undefined });
+
+  const { data, status, error, headers } = useDataApi(url);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const { results } = data;
+    setAllResults(allRes => [...allRes, ...results]);
+    setMetaData(() => ({
+      total: headers['x-totalrecords'],
+      nextUrl: getNextUrlFromResponse(headers.link),
+    }));
+  }, [data, headers]);
+
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
+
+  if (allResults.length === 0) {
     return <Loader />;
   }
+
+  const { total, nextUrl } = metaData;
 
   return (
     <section>
@@ -19,8 +54,20 @@ const EntryPublications: FC<{
         <h2>Publications for {accession}</h2>
         {/* The height css will be removed after Franklin DataList is updated */}
         <DataList
-          idKey="id"
-          data={data}
+          getIdKey={(item: LiteratureForProteinAPI) => {
+            const {
+              reference: { citation },
+            } = item;
+            const pubMedXref = getCitationPubMedId(citation);
+            let id = pubMedXref?.id;
+            if (!id) {
+              id = citation.authors
+                ? citation.authors?.join('')
+                : citation.authoringGroup?.join('');
+            }
+            return id;
+          }}
+          data={allResults}
           dataRenderer={({
             reference,
             publicationSource,
@@ -33,28 +80,7 @@ const EntryPublications: FC<{
               referenceComments,
             } = reference;
 
-            const pubMedXref =
-              citation.citationCrossReferences &&
-              citation.citationCrossReferences.find(
-                xref => xref.database === 'PubMed'
-              );
-
-            const doiXref =
-              citation.citationCrossReferences &&
-              citation.citationCrossReferences.find(
-                xref => xref.database === 'DOI'
-              );
-
-            const pubmedId = pubMedXref && pubMedXref.id;
-
-            const journalInfo = {
-              journal: citation.journal,
-              volume: citation.volume,
-              firstPage: citation.firstPage,
-              lastPage: citation.lastPage,
-              publicationDate: citation.publicationDate,
-              doiId: doiXref && doiXref.id,
-            };
+            const { pubmedId, journalInfo } = formatCitationData(citation);
 
             const infoListData = [
               {
@@ -99,8 +125,9 @@ const EntryPublications: FC<{
               )
             );
           }}
-          onLoadMoreItems={handleLoadMoreItems}
-          hasMoreData={total > data.length}
+          onLoadMoreItems={() => nextUrl && setUrl(nextUrl)}
+          loaderComponent={<Loader />}
+          hasMoreData={total > allResults.length}
         />
       </div>
     </section>

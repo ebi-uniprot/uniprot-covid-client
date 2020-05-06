@@ -2,18 +2,27 @@ import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import EntryPublicationsFacets from '../EntryPublicationsFacets';
-import publicationsData from './__mockData__/entryPublicationsData.json';
+import mockPublicationsData from './__mockData__/entryPublicationsData.json';
+import useDataApi from '../../../../shared/hooks/useDataApi';
+
+jest.mock('../../../../shared/hooks/useDataApi', () => ({
+  __esModule: true, // this makes it work
+  default: jest.fn(() => ({
+    loading: false,
+    data: mockPublicationsData,
+  })),
+}));
 
 let component;
 const setSelectedFacets = jest.fn();
 const selectedFacets = [{ name: 'study_type', value: 'large_scale' }];
 
-describe('EntryPublications tests', () => {
+describe('EntryPublication facets tests', () => {
   beforeEach(() => {
     component = render(
       <Router>
         <EntryPublicationsFacets
-          facets={publicationsData.facets}
+          accession="P05067"
           selectedFacets={selectedFacets}
           setSelectedFacets={setSelectedFacets}
         />

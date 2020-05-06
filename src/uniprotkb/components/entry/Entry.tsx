@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import {
   withRouter,
   RouteComponentProps,
@@ -16,11 +16,8 @@ import {
   DropdownButton,
   ProtVistaIcon,
 } from 'franklin-sites';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
-import {
-  UniProtkbUIModel,
+import uniProtKbConverter, {
   EntryType,
   UniProtkbInactiveEntryModel,
 } from '../../adapters/UniProtkbConverter';
@@ -28,70 +25,42 @@ import { hasContent, hasExternalLinks } from '../../utils/utils';
 import EntrySection from '../../types/EntrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
-import { RootState, RootAction } from '../../../app/state/rootInitialState';
-import * as entryActions from '../../state/entryActions';
-import apiUrls, { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
+import apiUrls from '../../config/apiUrls';
 import {
   SelectedFacet,
   fileFormatEntryDownload,
 } from '../../types/resultsTypes';
 import EntryPublicationsFacets from './EntryPublicationsFacets';
 import EntryPublications from './EntryPublications';
-import { LiteratureForProteinAPI } from '../../types/LiteratureTypes';
 import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
-import { Facet } from '../../types/responseTypes';
 import BaseLayout from '../../../shared/components/layouts/BaseLayout';
 import ObsoleteEntryPage from '../../../shared/components/error-pages/ObsoleteEntryPage';
+import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 import FeatureViewer from './FeatureViewer';
+import useDataApi from '../../../shared/hooks/useDataApi';
 
 type MatchParams = {
   accession: string;
   path: string;
 };
 
-type EntryProps = RouteComponentProps<MatchParams> & {
-  entryData: UniProtkbUIModel | UniProtkbInactiveEntryModel | null;
-  publicationsData: {
-    data: LiteratureForProteinAPI[] | null;
-    facets: Facet[];
-    nextUrl: string;
-    total: number;
-  };
-  dispatchFetchEntry: (accesion: string) => void;
-  dispatchFetchEntryPublications: (url: string, reset?: boolean) => void;
-  dispatchResetEntry: () => void;
-};
-
-const Entry: React.FC<EntryProps> = ({
-  match,
-  entryData,
-  publicationsData,
-  dispatchFetchEntry,
-  dispatchFetchEntryPublications,
-  dispatchResetEntry,
-}) => {
+const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const { path, params } = match;
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
 
-  useEffect(() => {
-    dispatchFetchEntry(accession);
-    return function cleanup() {
-      dispatchResetEntry();
-    };
-  }, [accession, dispatchFetchEntry, dispatchResetEntry]);
+  const { loading, data, status, error } = useDataApi(apiUrls.entry(accession));
 
-  useEffect(() => {
-    const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
-    dispatchFetchEntryPublications(url);
-  }, [accession, dispatchFetchEntryPublications, selectedFacets]);
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
 
-  if (!entryData || Object.keys(entryData).length === 0) {
+  if (loading || !data) {
     return <Loader />;
   }
 
-  if (entryData && entryData.entryType === EntryType.INACTIVE) {
-    const inactiveEntryData: UniProtkbInactiveEntryModel = entryData as UniProtkbInactiveEntryModel;
+  if (data && data.entryType === EntryType.INACTIVE) {
+    const inactiveEntryData: UniProtkbInactiveEntryModel = data as UniProtkbInactiveEntryModel;
 
     return (
       <BaseLayout>
@@ -102,6 +71,7 @@ const Entry: React.FC<EntryProps> = ({
       </BaseLayout>
     );
   }
+  const transformedData = uniProtKbConverter(data);
 
   const sections = UniProtKBEntryConfig.map(section => ({
     label: section.name,
@@ -109,9 +79,8 @@ const Entry: React.FC<EntryProps> = ({
 
     disabled:
       section.name === EntrySection.ExternalLinks
-        ? !hasExternalLinks(entryData)
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          !hasContent((entryData as any)[section.name]),
+        ? !hasExternalLinks(transformedData)
+        : !hasContent(transformedData[section.name]),
   }));
 
   const displayMenuData = [
@@ -147,7 +116,7 @@ const Entry: React.FC<EntryProps> = ({
                   <li key={fileFormat}>
                     <a
                       href={apiUrls.entryDownload(
-                        entryData.primaryAccession,
+                        transformedData.primaryAccession,
                         fileFormat
                       )}
                     >
@@ -163,7 +132,7 @@ const Entry: React.FC<EntryProps> = ({
           </button>
         </div>
       ),
-      mainContent: <EntryMain transformedData={entryData} />,
+      mainContent: <EntryMain transformedData={transformedData} />,
     },
     {
       name: 'Feature viewer',
@@ -177,7 +146,7 @@ const Entry: React.FC<EntryProps> = ({
       icon: <PublicationIcon />,
       itemContent: (
         <EntryPublicationsFacets
-          facets={publicationsData.facets}
+          accession={accession}
           selectedFacets={selectedFacets}
           setSelectedFacets={setSelectedFacets}
         />
@@ -185,11 +154,7 @@ const Entry: React.FC<EntryProps> = ({
       mainContent: (
         <EntryPublications
           accession={accession}
-          data={publicationsData.data}
-          total={publicationsData.total}
-          handleLoadMoreItems={() => {
-            dispatchFetchEntryPublications(publicationsData.nextUrl, false);
-          }}
+          selectedFacets={selectedFacets}
         />
       ),
     },
@@ -197,7 +162,7 @@ const Entry: React.FC<EntryProps> = ({
       name: 'External links',
       path: 'external-links',
       icon: <ExternalLinkIcon />,
-      mainContent: <EntryExternalLinks transformedData={entryData} />,
+      mainContent: <EntryExternalLinks transformedData={transformedData} />,
     },
   ];
 
@@ -237,23 +202,4 @@ const Entry: React.FC<EntryProps> = ({
   );
 };
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    entryData: state.entry.data,
-    publicationsData: state.entry.publicationsData,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
-  bindActionCreators(
-    {
-      dispatchFetchEntry: (accession: string) =>
-        entryActions.fetchEntryIfNeeded(accession),
-      dispatchResetEntry: () => entryActions.resetEntry(),
-      dispatchFetchEntryPublications: (accession: string, reset?: boolean) =>
-        entryActions.fetchEntryPublicationsIfNeeded(accession, reset),
-    },
-    dispatch
-  );
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entry));
+export default withRouter(Entry);

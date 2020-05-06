@@ -1,48 +1,50 @@
 import React, { FC, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Publication } from 'franklin-sites';
-import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
-import { RootState } from '../../../app/state/rootInitialState';
+import { Publication, Loader, Message } from 'franklin-sites';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import { getPublicationsURL } from '../../config/apiUrls';
+import { MessageLevel } from '../../../messages/types/messagesTypes';
+import { LiteratureAPI } from '../../types/LiteratureTypes';
+import formatCitationData from '../../adapters/LiteratureConverter';
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];
-  entryData: UniProtkbUIModel | null;
-}> = ({ pubmedIds, entryData }) => {
-  if (!entryData) {
-    return null;
-  }
-  const references =
-    entryData.references &&
-    entryData.references.filter(
-      ({ citation }) =>
-        citation.citationCrossReferences &&
-        citation.citationCrossReferences.some(
-          ({ id }) => id && pubmedIds.includes(id)
-        )
+}> = ({ pubmedIds }) => {
+  const url = getPublicationsURL(pubmedIds);
+  const { loading, data, status, error } = useDataApi(url);
+
+  if (error) {
+    return (
+      <Message level={MessageLevel.FAILURE}>
+        {status}: {error.message}
+      </Message>
     );
+  }
+
+  if (loading || !data) {
+    return <Loader />;
+  }
+
+  const { results }: { results: LiteratureAPI[] } = data;
   return (
     <Fragment>
-      {references &&
-        references.map(({ citation }) => (
-          <Publication
-            title={citation.title}
-            authors={citation.authors}
-            key={`${citation.title}-${citation.citationType}-${citation.journal}`}
-            journalInfo={{
-              firstPage: citation.firstPage,
-              journal: citation.journal,
-              lastPage: citation.lastPage,
-              publicationDate: citation.publicationDate,
-              volume: citation.volume,
-            }}
-          />
-        ))}
+      {results &&
+        results
+          .map(literatureItem => ({
+            ...literatureItem,
+            ...formatCitationData(literatureItem.citation),
+          }))
+          .map(({ citation, statistics, pubmedId, journalInfo }) => (
+            <Publication
+              title={citation.title}
+              authors={citation.authors}
+              key={`${citation.title}-${citation.citationType}-${citation.journal}`}
+              pubmedId={pubmedId}
+              statistics={statistics}
+              journalInfo={journalInfo}
+            />
+          ))}
     </Fragment>
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  entryData: state.entry.data as UniProtkbUIModel | null,
-});
-
-export default connect(mapStateToProps)(UniProtKBEntryPublications);
+export default UniProtKBEntryPublications;

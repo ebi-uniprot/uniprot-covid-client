@@ -1,13 +1,18 @@
 import React from 'react';
-import { Facets } from 'franklin-sites';
+import { Facets, Loader } from 'franklin-sites';
 import { SelectedFacet } from '../../types/resultsTypes';
-import { Facet } from '../../types/responseTypes';
+import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 
 const EntryPublicationsFacets: React.FC<{
-  facets: Facet[];
+  accession: string;
   selectedFacets: SelectedFacet[];
   setSelectedFacets: (facets: SelectedFacet[]) => void;
-}> = ({ facets, selectedFacets, setSelectedFacets }) => {
+}> = ({ accession, selectedFacets, setSelectedFacets }) => {
+  const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
+  const { loading, data, status, error } = useDataApi(url);
+
   const addFacet = (name: string, value: string) => {
     setSelectedFacets([...selectedFacets, { name, value }]);
   };
@@ -20,6 +25,17 @@ const EntryPublicationsFacets: React.FC<{
       )
     );
   };
+
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
+
+  if (loading || !data) {
+    return <Loader />;
+  }
+
+  const { facets } = data;
+
   return (
     <Facets
       data={facets}

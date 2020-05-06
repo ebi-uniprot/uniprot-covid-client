@@ -65,11 +65,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${primaryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
   });
@@ -101,11 +96,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${deleteEntryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
 
@@ -124,11 +114,6 @@ describe('Entry', () => {
       />,
       {
         route: `/uniprotkb/${demergedEntryAccession}`,
-        initialState: {
-          entry: {
-            ...entryInitialState,
-          },
-        },
       }
     );
 

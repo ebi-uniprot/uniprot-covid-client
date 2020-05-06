@@ -40,16 +40,13 @@ exports[`UniProtKBEvidenceTag components should render automatic  1`] = `
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -77,16 +74,13 @@ exports[`UniProtKBEvidenceTag components should render automatic annotation 1`] 
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span
@@ -114,16 +108,13 @@ exports[`UniProtKBEvidenceTag components should render publications count 1`] = 
     type="button"
   >
     <svg
-      fill="none"
+      fill="currentColor"
       height="12"
       viewBox="0 0 10 15"
       width="12"
     >
       <path
-        clip-rule="evenodd"
-        d="M10 0H0v15h.051L5 10l4.949 5H10V0z"
-        fill="#4E5A71"
-        fill-rule="evenodd"
+        d="M10 0H0v15l5-5 5 5V0z"
       />
     </svg>
     <span

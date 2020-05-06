@@ -16,7 +16,7 @@ exports[`ObsoleteEntryPage component should render deleted page 1`] = `
         class="message__content"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="1.125em"
           viewBox="0 0 18 18"
           width="1.125em"
@@ -24,7 +24,6 @@ exports[`ObsoleteEntryPage component should render deleted page 1`] = `
           <path
             clip-rule="evenodd"
             d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
-            fill="#000"
             fill-rule="evenodd"
           />
         </svg>
@@ -72,7 +71,7 @@ exports[`ObsoleteEntryPage component should render demerged page 1`] = `
         class="message__content"
       >
         <svg
-          fill="none"
+          fill="currentColor"
           height="1.125em"
           viewBox="0 0 18 18"
           width="1.125em"
@@ -80,7 +79,6 @@ exports[`ObsoleteEntryPage component should render demerged page 1`] = `
           <path
             clip-rule="evenodd"
             d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
-            fill="#000"
             fill-rule="evenodd"
           />
         </svg>

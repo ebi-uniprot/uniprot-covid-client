@@ -13,8 +13,8 @@ import { SortableColumn } from '../types/ColumnTypes';
 
 export const joinUrl = (...args: string[]) => urlJoin(args);
 
-const devPrefix = 'https://wwwdev.ebi.ac.uk';
-const prodPrefix = 'https://www.ebi.ac.uk';
+export const devPrefix = 'https://wwwdev.ebi.ac.uk';
+export const prodPrefix = 'https://www.ebi.ac.uk';
 
 const apiUrls = {
   // uniprotkb advanced search terms
@@ -208,3 +208,15 @@ export const urlsAreEqual = (
       urlObject1.query[param] === urlObject2.query[param]
   );
 };
+
+export const literatureApiUrls = {
+  literature: joinUrl(devPrefix, '/uniprot/api/literature'),
+};
+
+export const getPublicationURL = (id: string) =>
+  joinUrl(literatureApiUrls.literature, id);
+
+export const getPublicationsURL = (ids: string[]) =>
+  `${literatureApiUrls.literature}/search?query=(${ids
+    .map(id => `id:${id}`)
+    .join(' OR ')})`;

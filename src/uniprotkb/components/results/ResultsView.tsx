@@ -42,7 +42,9 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     return (
       <div className="datalist">
         <DataList
-          idKey="primaryAccession"
+          getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
+            primaryAccession
+          }
           data={results}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
             <UniProtKBCard
@@ -57,7 +59,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columns = tableColumns.map(columnName => {
+  const columns = tableColumns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {
@@ -81,7 +83,9 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   });
   return (
     <DataTable
-      idKey="primaryAccession"
+      getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
+        primaryAccession
+      }
       columns={columns}
       data={results}
       selectable

@@ -28,37 +28,13 @@ import convertExternalLinks from './ExternalLinksConverter';
 import Comment, { Xref } from '../types/CommentTypes';
 import { transfromProperties } from '../utils/utils';
 import { Property } from '../types/modelTypes';
+import { Reference } from '../types/LiteratureTypes';
 
 export enum EntryType {
-  SWISSPROT = 'Swiss-Prot',
-  TREMBL = 'TrEMBL',
+  SWISSPROT = 'UniProtKB reviewed (Swiss-Prot)',
+  TREMBL = 'UniProtKB unreviewed (TrEMBL)',
   INACTIVE = 'Inactive',
 }
-
-export type Citation = {
-  citationType?: string;
-  authors?: string[];
-  citationCrossReferences?: Xref[];
-  title?: string;
-  publicationDate?: number;
-  journal?: string;
-  firstPage?: number;
-  lastPage?: number;
-  volume?: number;
-  completeAuthorList?: boolean;
-  literatureAbstract?: string;
-  authoringGroup?: string[];
-  submissionDatabase?: string;
-};
-
-export type Reference = {
-  citation: Citation;
-  referencePositions?: string[];
-  referenceComments?: {
-    value: string;
-    type: string;
-  }[];
-};
 
 export type UniProtkbAPIModel = {
   proteinDescription?: ProteinNamesData;
@@ -127,20 +103,8 @@ export const convertXrefProperties = (xrefs: Xref[]) =>
       : {},
   }));
 
-const uniProtKbConverter = (
-  data: UniProtkbAPIModel | UniProtkbInactiveEntryModel
-): UniProtkbUIModel | UniProtkbInactiveEntryModel => {
+const uniProtKbConverter = (data: UniProtkbAPIModel): UniProtkbUIModel => {
   const dataCopy = { ...data };
-
-  if (dataCopy.entryType === EntryType.INACTIVE) {
-    return {
-      annotationScore: dataCopy.annotationScore,
-      entryType: dataCopy.entryType,
-      inactiveReason: (dataCopy as UniProtkbInactiveEntryModel).inactiveReason,
-      primaryAccession: dataCopy.primaryAccession,
-      uniProtkbId: dataCopy.uniProtkbId,
-    };
-  }
 
   if (dataCopy.uniProtKBCrossReferences) {
     dataCopy.uniProtKBCrossReferences = convertXrefProperties(

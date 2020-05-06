@@ -1,31 +1,45 @@
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { v1 } from 'uuid';
 import { render } from '@testing-library/react';
 import EntryPublications from '../EntryPublications';
-import publicationsData from './__mockData__/entryPublicationsData.json';
+import mockPublicationsData from './__mockData__/entryPublicationsData.json';
 
-let component;
+jest.mock('../../../../shared/hooks/useDataApi', () => jest.fn());
+import useDataApi from '../../../../shared/hooks/useDataApi';
 
 describe('EntryPublications tests', () => {
-  beforeEach(() => {
-    component = render(
+  it('should call useDataApi and render', async () => {
+    const headers = { 'x-totalrecords': mockPublicationsData.results.length };
+    useDataApi.mockImplementation(() => {
+      return {
+        loading: false,
+        data: mockPublicationsData,
+        headers,
+      };
+    });
+    const { findByText } = render(
       <Router>
-        <EntryPublications
-          accession="P05067"
-          data={publicationsData.results.map(publication => ({
-            ...publication,
-            id: v1(),
-          }))}
-          total={2388}
-          handleLoadMoreItems={jest.fn()}
-        />
+        <EntryPublications accession="P05067" selectedFacets={[]} />
       </Router>
     );
+    expect(useDataApi).toHaveBeenCalled();
+    const item = await findByText(/ISOFORM APP751/);
+    expect(item).toBeTruthy();
   });
 
-  it('should render', () => {
-    const { asFragment } = component;
+  it('should render the error', async () => {
+    useDataApi.mockImplementation(() => {
+      return {
+        loading: false,
+        error: new Error('my error'),
+        status: 400,
+      };
+    });
+    const { asFragment } = render(
+      <Router>
+        <EntryPublications accession="P05067" selectedFacets={[]} />
+      </Router>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
