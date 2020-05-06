@@ -16,11 +16,10 @@ import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
 import infoMappings from '../info/InfoMappings';
 import { RootState } from '../state/state-types';
-import { SelectedEntries } from './types/resultsTypes';
 import { ViewMode } from './state/resultsInitialState';
 import { Column } from '../model/types/ColumnTypes';
 import { getAPIQueryUrl } from '../utils/apiUrls';
-import { getURLParams } from './utils';
+import { getParamsFromURL } from './utils';
 import ResultsFacets from './ResultsFacets';
 import useDataApi from '../hooks/useDataApi';
 
@@ -29,18 +28,14 @@ type ResultsProps = {
   clauses?: Clause[];
 } & RouteComponentProps;
 
-type ResultsContainerState = {
-  selectedEntries: SelectedEntries;
-};
-
 const Results: FC<ResultsProps> = ({ namespace, location }) => {
-  const [selectedEntries, setSelectedEntries] = useState({});
-  const [viewMode, setViewMode] = useState(ViewMode.CARD);
-
   const { search: queryParamFromUrl } = location;
-  const { query, selectedFacets, sortColumn, sortDirection } = getURLParams(
+  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
     queryParamFromUrl
   );
+
+  const [selectedEntries, setSelectedEntries] = useState({});
+  const [viewMode, setViewMode] = useState(ViewMode.CARD);
 
   /**
    * WARNING: horrible hack to get the switch between
@@ -72,55 +67,16 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
   const { facets } = data;
   const total = headers['x-totalrecords'];
 
-  // const handleEntrySelection = (rowId: string): void => {
-  //   const { selectedEntries: prevSelectedEntries } = this.state;
-  //   if (rowId in prevSelectedEntries) {
-  //     const { [rowId]: value, ...selectedEntries } = prevSelectedEntries;
-  //     setSelectedEntries(selectedEntries );
-  //   } else {
-  //     prevSelectedEntries[rowId] = true;
-  //     setSelectedEntries(prevSelectedEntries );
-  //   }
-  // };
-
-  // const updateColumnSort = (column: SortableColumn): void => {
-  //   const {
-  //     location: { search: queryParamFromUrl },
-  //   } = this.props;
-  //   const {
-  //     query,
-  //     selectedFacets,
-  //     sortColumn,
-  //     sortDirection,
-  //   } = getURLParams(queryParamFromUrl);
-
-  //   /**
-  //    * NOTE: temporary fix until backend provide
-  //    * the correct name for sort fields
-  //    * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
-  //    */
-  //   const fieldNameMap = new Map([
-  //     [Column.accession, 'accession'],
-  //     [Column.id, 'mnemonic'],
-  //     [Column.proteinName, 'name'],
-  //     [Column.geneNames, 'gene'],
-  //     [Column.organism, 'organism_name'],
-  //     [Column.mass, 'mass'],
-  //     [Column.length, 'length'],
-  //   ]);
-  //   const apiColumn = fieldNameMap.get(column);
-
-  //   // Change sort direction
-  //   let updatedDirection = sortDirection;
-  //   if (apiColumn === sortColumn) {
-  //     updatedDirection =
-  //       sortDirection === SortDirection.ascend
-  //         ? SortDirection.descend
-  //         : SortDirection.ascend;
-  //   }
-
-  //   setURLParams(query, selectedFacets, apiColumn, updatedDirection);
-  // };
+  const handleEntrySelection = (rowId: string): void => {
+    // TODO this is broken
+    if (rowId in selectedEntries) {
+      const { [rowId]: value, ...newSelectedEntries } = selectedEntries;
+      setSelectedEntries(newSelectedEntries);
+    } else {
+      selectedEntries[rowId] = true;
+      setSelectedEntries(selectedEntries);
+    }
+  };
 
   const { name, links, info } = infoMappings[namespace];
 
@@ -205,7 +161,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
         <Fragment>
           <ResultsView
             initialUrl={initialUrl}
-            handleEntrySelection={() => null}
+            handleEntrySelection={handleEntrySelection}
             selectedEntries={selectedEntries}
             viewMode={viewMode}
           />

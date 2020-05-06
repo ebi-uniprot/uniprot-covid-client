@@ -12,7 +12,7 @@ const facetsAsArray = (facetString: string): SelectedFacet[] => {
   });
 };
 
-export const getURLParams = (
+export const getParamsFromURL = (
   url: string
 ): {
   query: string;
@@ -48,19 +48,16 @@ const facetsAsString = (facets: SelectedFacet[]): string => {
   );
 };
 
-export const setURLParams = (
-  history,
+export const getLocationForParams = (
   query: string,
   selectedFacets: SelectedFacet[],
   sortColumn?: string,
   sortDirection?: SortDirection
-): void => {
-  history.push({
-    pathname: '/uniprotkb',
-    search: [
-      `query=${query}${facetsAsString(selectedFacets)}`,
-      `${sortColumn ? `&sort=${sortColumn}` : ''}`,
-      `${sortDirection ? `&dir=${sortDirection}` : ''}`,
-    ].join(''),
-  });
-};
+) => ({
+  pathname: '/uniprotkb',
+  search: [
+    `query=${query}${facetsAsString(selectedFacets)}`,
+    `${sortColumn ? `&sort=${sortColumn}` : ''}`,
+    `${sortDirection ? `&dir=${sortDirection}` : ''}`,
+  ].join(''),
+});

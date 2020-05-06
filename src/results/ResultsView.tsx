@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../model/ColumnConfiguration';
-import { SelectedEntries } from './types/resultsTypes';
+import { SelectedEntries, SortDirection } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
@@ -14,20 +15,22 @@ import BaseLayout from '../layout/BaseLayout';
 import NoResultsPage from '../pages/errors/NoResultsPage';
 import '../styles/alert.scss';
 import '../styles/ResultsView.scss';
-import { getURLParams } from './utils';
+import { getParamsFromURL, getLocationForParams } from './utils';
+import { SortableColumn, Column } from '../model/types/ColumnTypes';
 
 type ResultsTableProps = {
   initialUrl: string;
   selectedEntries: SelectedEntries;
   handleEntrySelection: (rowId: string) => void;
   viewMode: ViewMode;
-};
+} & RouteComponentProps;
 
 const ResultsView: React.FC<ResultsTableProps> = ({
   initialUrl,
   selectedEntries,
   handleEntrySelection,
   viewMode,
+  history,
 }) => {
   const [url, setUrl] = useState(initialUrl);
   const [metaData, setMetaData] = useState<{
@@ -37,7 +40,9 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
 
   const { data, error, headers } = useDataApi(url);
-  const { sortColumn, sortDirection } = getURLParams(initialUrl);
+  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
+    initialUrl
+  );
 
   useEffect(() => {
     if (!data) {
@@ -66,6 +71,37 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const { total, nextUrl } = metaData;
 
   const handleLoadMoreRows = () => nextUrl && setUrl(nextUrl);
+
+  const updateColumnSort = (column: SortableColumn) => {
+    /**
+     * NOTE: temporary fix until backend provide
+     * the correct name for sort fields
+     * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
+     */
+    const fieldNameMap = new Map([
+      [Column.accession, 'accession'],
+      [Column.id, 'mnemonic'],
+      [Column.proteinName, 'name'],
+      [Column.geneNames, 'gene'],
+      [Column.organism, 'organism_name'],
+      [Column.mass, 'mass'],
+      [Column.length, 'length'],
+    ]);
+    const apiColumn = fieldNameMap.get(column);
+
+    // Change sort direction
+    let updatedDirection = sortDirection;
+    if (apiColumn === sortColumn) {
+      updatedDirection =
+        sortDirection === SortDirection.ascend
+          ? SortDirection.descend
+          : SortDirection.ascend;
+    }
+
+    history.push(
+      getLocationForParams(query, selectedFacets, apiColumn, updatedDirection)
+    );
+  };
 
   const hasMoreData = total > allResults.length;
   if (viewMode === ViewMode.CARD) {
@@ -122,7 +158,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       selectable
       selected={selectedEntries}
       onSelect={handleEntrySelection}
-      onHeaderClick={() => null}
+      onHeaderClick={updateColumnSort}
       onLoadMoreItems={handleLoadMoreRows}
       hasMoreData={hasMoreData}
       loaderComponent={<Loader />}
@@ -130,4 +166,4 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   );
 };
 
-export default ResultsView;
+export default withRouter(ResultsView);

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Facets } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Facet } from '../types/responseTypes';
-import { setURLParams, getURLParams } from './utils';
+import { getLocationForParams, getParamsFromURL } from './utils';
 import { SelectedFacet } from './types/resultsTypes';
 
 const ResultsFacets: FC<{ facets: Facet[] } & RouteComponentProps> = ({
@@ -11,19 +11,20 @@ const ResultsFacets: FC<{ facets: Facet[] } & RouteComponentProps> = ({
   history,
 }) => {
   const { search: queryParamFromUrl } = location;
-  const { query, selectedFacets, sortColumn, sortDirection } = getURLParams(
+  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
     queryParamFromUrl
   );
 
   const addFacet = (facetName: string, facetValue: string): void => {
     const facet: SelectedFacet = { name: facetName, value: facetValue };
 
-    setURLParams(
-      history,
-      query,
-      [...selectedFacets.concat(facet)],
-      sortColumn,
-      sortDirection
+    history.push(
+      getLocationForParams(
+        query,
+        [...selectedFacets.concat(facet)],
+        sortColumn,
+        sortDirection
+      )
     );
   };
 
@@ -34,7 +35,9 @@ const ResultsFacets: FC<{ facets: Facet[] } & RouteComponentProps> = ({
     );
 
     selectedFacets.splice(index, 1);
-    setURLParams(history, query, selectedFacets, sortColumn, sortDirection);
+    history.push(
+      getLocationForParams(query, selectedFacets, sortColumn, sortDirection)
+    );
   };
 
   return (
