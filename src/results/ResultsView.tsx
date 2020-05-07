@@ -18,17 +18,18 @@ import '../styles/ResultsView.scss';
 import { getParamsFromURL, getLocationForParams } from './utils';
 import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { getAPIQueryUrl } from '../utils/apiUrls';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 type ResultsTableProps = {
   selectedEntries: string[];
   columns: Column[];
+  viewMode: ViewMode;
   handleEntrySelection: (rowId: string) => void;
 } & RouteComponentProps;
 
 const ResultsView: React.FC<ResultsTableProps> = ({
   selectedEntries,
   columns,
+  viewMode,
   handleEntrySelection,
   history,
   location,
@@ -52,7 +53,6 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     nextUrl: string | undefined;
   }>({ total: 0, nextUrl: undefined });
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
-  const [viewMode] = useLocalStorage('view-mode', ViewMode.CARD);
 
   const { data, error, headers } = useDataApi(url);
 
@@ -61,7 +61,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       return;
     }
     const { results } = data;
-    setAllResults(allRes => [...allRes, ...results]);
+    setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -140,7 +140,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = columns.map(columnName => {
+  const columnsToDisplay = columns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {

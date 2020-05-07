@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Loader, PageIntro } from 'franklin-sites';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
@@ -62,7 +62,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   const total = headers['x-totalrecords'];
 
   const handleEntrySelection = (rowId: string): void => {
-    const filtered = selectedEntries.filter(id => id !== rowId);
+    const filtered = selectedEntries.filter((id) => id !== rowId);
     setSelectedEntries(
       filtered.length === selectedEntries.length
         ? [...selectedEntries, rowId]
