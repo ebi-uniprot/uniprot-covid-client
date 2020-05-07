@@ -18,19 +18,18 @@ import '../styles/ResultsView.scss';
 import { getParamsFromURL, getLocationForParams } from './utils';
 import { SortableColumn, Column } from '../model/types/ColumnTypes';
 import { getAPIQueryUrl } from '../utils/apiUrls';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 type ResultsTableProps = {
   selectedEntries: SelectedEntries;
   columns: Column[];
   handleEntrySelection: (rowId: string) => void;
-  viewMode: ViewMode;
 } & RouteComponentProps;
 
 const ResultsView: React.FC<ResultsTableProps> = ({
   selectedEntries,
   columns,
   handleEntrySelection,
-  viewMode,
   history,
   location,
 }) => {
@@ -53,6 +52,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     nextUrl: string | undefined;
   }>({ total: 0, nextUrl: undefined });
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
+  const [viewMode] = useLocalStorage('view-mode', ViewMode.CARD);
 
   const { data, error, headers } = useDataApi(url);
 

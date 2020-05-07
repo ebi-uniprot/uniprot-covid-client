@@ -22,6 +22,7 @@ import { getAPIQueryUrl } from '../utils/apiUrls';
 import { getParamsFromURL } from './utils';
 import ResultsFacets from './ResultsFacets';
 import useDataApi from '../hooks/useDataApi';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -36,7 +37,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   );
 
   const [selectedEntries, setSelectedEntries] = useState({});
-  const [viewMode, setViewMode] = useState(ViewMode.CARD);
+  const [viewMode, setViewMode] = useLocalStorage('view-mode', ViewMode.CARD);
 
   /**
    * WARNING: horrible hack to get the switch between
@@ -137,7 +138,6 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
         </span>
       </button>
       {viewMode === ViewMode.TABLE && (
-        // TODO this needs to be persisted in LocalStorage
         <Link to="/customise-table">
           <button type="button" className="button tertiary">
             <EditIcon />
