@@ -90,7 +90,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
         Align
       </button>
       <button type="button" className="button tertiary">
-        {/* <Link
+        <Link
           to={{
             pathname: '/download',
             state: {
@@ -99,12 +99,13 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
               sortColumn,
               sortDirection,
               selectedEntries: Object.keys(selectedEntries),
+              totalNumberResults: total,
             },
           }}
         >
           <DownloadIcon />
           Download
-        </Link> */}
+        </Link>
       </button>
       <button type="button" className="button tertiary disabled">
         <BasketIcon />

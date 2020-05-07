@@ -19,7 +19,6 @@ export const getPreviewFileFormat = (fileFormat: FileFormat) =>
 
 type DownloadTableProps = {
   tableColumns: Column[];
-  totalNumberResults: number;
   location: {
     state: {
       query: string;
@@ -27,13 +26,13 @@ type DownloadTableProps = {
       sortColumn: SortableColumn;
       sortDirection: SortDirection;
       selectedEntries: string[];
+      totalNumberResults: number;
     };
   };
 } & RouteComponentProps;
 
 const Download: React.FC<DownloadTableProps> = ({
   tableColumns,
-  totalNumberResults,
   history,
   location: {
     state: {
@@ -42,6 +41,7 @@ const Download: React.FC<DownloadTableProps> = ({
       sortColumn,
       sortDirection,
       selectedEntries,
+      totalNumberResults,
     },
   },
 }) => {
@@ -101,21 +101,21 @@ const Download: React.FC<DownloadTableProps> = ({
     fetchData(previewUrl, {
       Accept: fileFormatToContentType.get(previewFileFormat),
     })
-      .then(response => {
+      .then((response) => {
         const contentType = idx(
           response,
-          o => o.headers['content-type']
+          (o) => o.headers['content-type']
         ) as FileFormat;
         setPreview({
           data:
             contentType === fileFormatToContentType.get(FileFormat.json)
               ? JSON.stringify(response.data, null, 2)
               : response.data,
-          url: idx(response, o => o.config.url) || '',
+          url: idx(response, (o) => o.config.url) || '',
           contentType,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         // eslint-disable-next-line no-console
         console.error(e);
       })
@@ -157,7 +157,6 @@ const Download: React.FC<DownloadTableProps> = ({
 
 const mapStateToProps = (state: RootState) => ({
   tableColumns: state.results.tableColumns,
-  totalNumberResults: state.results.totalNumberResults,
 });
 
 const DownloadContainer = withRouter(connect(mapStateToProps)(Download));
