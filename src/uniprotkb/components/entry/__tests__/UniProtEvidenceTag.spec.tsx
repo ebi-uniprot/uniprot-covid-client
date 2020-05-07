@@ -3,7 +3,7 @@ import UniProtKBEvidenceTag, {
   UniProtProtvistaEvidenceTag,
 } from '../UniProtKBEvidenceTag';
 import { cleanup } from '@testing-library/react';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 
 describe('UniProtKBEvidenceTag components', () => {
   test('should render automatic annotation', () => {

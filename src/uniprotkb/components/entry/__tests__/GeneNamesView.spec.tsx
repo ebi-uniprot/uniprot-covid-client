@@ -1,6 +1,6 @@
 import React from 'react';
 import GeneNamesView from '../GeneNamesView';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 import GeneNamesUIDataJson from './__mocks__/geneNamesUIData.json';
 
 describe('GeneNames', () => {

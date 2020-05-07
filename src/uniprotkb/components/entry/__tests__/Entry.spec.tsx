@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import Entry from '../Entry';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
 } from '../../../config/apiUrls';

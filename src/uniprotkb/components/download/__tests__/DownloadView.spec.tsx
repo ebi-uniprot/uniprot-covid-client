@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import DownloadView from '../DownloadView';
 import { defaultTableColumns } from '../../../state/resultsInitialState';
 import { FileFormat } from '../../../types/resultsTypes';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 import initialState from '../../../../app/state/rootInitialState';
 
 describe('DownloadView component', () => {

@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import initialState from '../../../../app/state/rootInitialState';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 import mockDownloadApi from './__mocks__/downloadData.json';
 import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
 import { FileFormat } from '../../../types/resultsTypes';

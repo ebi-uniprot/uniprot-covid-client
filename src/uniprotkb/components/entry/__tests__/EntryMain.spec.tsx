@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import EntryMain from '../EntryMain';
 import uniProtKbConverter from '../../../adapters/UniProtkbConverter';
 import mockData from '../../../__mocks__/entryModelData.json';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 
 describe('Entry view', () => {
   test('should render', async () => {

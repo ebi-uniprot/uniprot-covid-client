@@ -1,6 +1,6 @@
 import React from 'react';
 import ServiceUnavailablePage from '../ServiceUnavailablePage';
-import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
 
 describe('ServiceUnavailablePage component', () => {
   test('should render', () => {
