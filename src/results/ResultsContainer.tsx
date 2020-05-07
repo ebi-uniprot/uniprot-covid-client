@@ -82,7 +82,16 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
           </Fragment>
         }
         actionButtons={
-          <ResultsButtons viewMode={viewMode} setViewMode={setViewMode} />
+          <ResultsButtons
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            query={query}
+            selectedFacets={selectedFacets}
+            selectedEntries={selectedEntries}
+            sortColumn={sortColumn}
+            sortDirection={sortDirection}
+            total={total}
+          />
         }
         sidebar={<ResultsFacets facets={facets} />}
       >

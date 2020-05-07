@@ -9,11 +9,28 @@ import {
 } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import { ViewMode } from './state/resultsInitialState';
+import { SortDirection, SelectedFacet } from './types/resultsTypes';
+import { SortableColumn } from '../model/types/ColumnTypes';
 
 const ResultsButtons: FC<{
   viewMode: ViewMode;
   setViewMode: (viewMode: ViewMode) => void;
-}> = ({ viewMode, setViewMode }) => {
+  query: string;
+  selectedFacets: SelectedFacet[];
+  sortColumn: SortableColumn;
+  sortDirection: SortDirection;
+  selectedEntries: string[];
+  total: number;
+}> = ({
+  viewMode,
+  setViewMode,
+  query,
+  selectedFacets,
+  sortColumn,
+  sortDirection,
+  selectedEntries,
+  total,
+}) => {
   return (
     <div className="button-group">
       <button type="button" className="button tertiary disabled">
@@ -23,7 +40,7 @@ const ResultsButtons: FC<{
         Align
       </button>
       <button type="button" className="button tertiary">
-        {/* <Link
+        <Link
           to={{
             pathname: '/download',
             state: {
@@ -38,7 +55,7 @@ const ResultsButtons: FC<{
         >
           <DownloadIcon />
           Download
-        </Link> */}
+        </Link>
       </button>
       <button type="button" className="button tertiary disabled">
         <BasketIcon />
