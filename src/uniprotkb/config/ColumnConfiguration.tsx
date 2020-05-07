@@ -5,31 +5,33 @@ import idx from 'idx';
 import { flatten } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import SimpleView from '../components/entry/SimpleView';
+import SimpleView from '../components/protein-data-views/SimpleView';
 import ProteinNamesView, {
   ECNumbersView,
-} from '../components/entry/ProteinNamesView';
+} from '../components/protein-data-views/ProteinNamesView';
 import OrganismView, {
   OrganismLineage,
   OrganismId,
-} from '../components/entry/OrganismView';
+} from '../components/protein-data-views/OrganismView';
 import GeneNamesView, {
   geneAlternativeNamesView,
-} from '../components/entry/GeneNamesView';
+} from '../components/protein-data-views/GeneNamesView';
 import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
-import numberView, { Unit } from '../components/entry/NumberView';
-import ProteomesView from '../components/entry/ProteomesView';
-import FeaturesView from '../components/entry/FeaturesView';
+import numberView, { Unit } from '../components/protein-data-views/NumberView';
+import ProteomesView from '../components/protein-data-views/ProteomesView';
+import FeaturesView from '../components/protein-data-views/FeaturesView';
 import EntrySection from '../types/entrySection';
 import {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
   IsoformView,
-} from '../components/entry/SequenceView';
+} from '../components/protein-data-views/SequenceView';
 import { Flag } from '../adapters/sequenceConverter';
 import FeatureType from '../types/featureType';
-import FreeTextView, { TextView } from '../components/entry/FreeTextView';
+import FreeTextView, {
+  TextView,
+} from '../components/protein-data-views/FreeTextView';
 import {
   AbsorptionView,
   KineticsView,
@@ -54,23 +56,23 @@ import {
 } from '../types/commentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
-} from '../components/entry/AnnotationScoreDoughnutChart';
+} from '../components/protein-data-views/AnnotationScoreDoughnutChart';
 import { ValueWithEvidence } from '../types/modelTypes';
 import { getAllKeywords } from '../utils/KeywordsUtil';
-import { KeywordList } from '../components/entry/KeywordView';
-import { ReviewedUnreviewed } from '../components/entry/UniProtKBTitle';
-import { DatabaseList } from '../components/entry/XRefView';
+import { KeywordList } from '../components/protein-data-views/KeywordView';
+import { ReviewedUnreviewed } from '../components/protein-data-views/UniProtKBTitle';
+import { DatabaseList } from '../components/protein-data-views/XRefView';
 import {
   databaseNameToCategory,
   getDatabaseNameToEntrySection,
   getDatabaseInfoByName,
 } from './database';
-import DiseaseInvolvementView from '../components/entry/DiseaseInvolvementView';
-import CatalyticActivityView from '../components/entry/CatalyticActivityView';
-import VariationView from '../components/entry/VariationView';
+import DiseaseInvolvementView from '../components/protein-data-views/DiseaseInvolvementView';
+import CatalyticActivityView from '../components/protein-data-views/CatalyticActivityView';
+import VariationView from '../components/protein-data-views/VariationView';
 import { StructureUIModel } from '../adapters/structureConverter';
-import SubcellularLocationView from '../components/entry/SubcellularLocationView';
-import { GOTermsView } from '../components/entry/GOView';
+import SubcellularLocationView from '../components/protein-data-views/SubcellularLocationView';
+import { GOTermsView } from '../components/protein-data-views/GOView';
 import externalUrls from './externalUrls';
 
 const getFeatureColumn = (type: FeatureType) => {

@@ -1,9 +1,9 @@
 import React, { Fragment, memo } from 'react';
 import { Card } from 'franklin-sites';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
-import { ProteinOverview } from './ProteinOverviewView';
+import { ProteinOverview } from '../protein-data-views/ProteinOverviewView';
 import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
-import UniProtKBTitle from './UniProtKBTitle';
+import UniProtKBTitle from '../protein-data-views/UniProtKBTitle';
 
 type EntryMainProps = {
   transformedData: UniProtkbUIModel;

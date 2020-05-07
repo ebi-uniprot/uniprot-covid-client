@@ -2,7 +2,7 @@ import React from 'react';
 import { DataTable, DataList } from 'franklin-sites';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
 import { SelectedEntries, SortDirection } from '../../types/resultsTypes';
-import UniProtKBCard from '../entry/UniProtKBCard';
+import UniProtKBCard from './UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
@@ -59,7 +59,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columns = tableColumns.map((columnName) => {
+  const columns = tableColumns.map(columnName => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {

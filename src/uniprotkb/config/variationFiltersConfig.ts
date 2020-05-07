@@ -1,5 +1,5 @@
 import { scaleLinear } from 'd3-scale';
-import { TransformedProtvistaVariant } from '../components/entry/VariationView';
+import { TransformedProtvistaVariant } from '../components/protein-data-views/VariationView';
 
 type VariationVariants = { variants: TransformedProtvistaVariant[] }[];
 

@@ -1,4 +1,4 @@
-import { FeatureData } from '../components/entry/FeaturesView';
+import { FeatureData } from '../components/protein-data-views/FeaturesView';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
@@ -11,7 +11,7 @@ import {
   getJoinedXrefs,
 } from '../utils/XrefUtils';
 import EntrySection from '../types/entrySection';
-import { SequenceData } from '../components/entry/SequenceView';
+import { SequenceData } from '../components/protein-data-views/SequenceView';
 import {
   CommentType,
   AlternativeProductsComment,

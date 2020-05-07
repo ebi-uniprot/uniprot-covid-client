@@ -3,7 +3,7 @@ import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
 import { v1 } from 'uuid';
 import { groupBy } from 'lodash';
 import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
-import XRefView from './XRefView';
+import XRefView from '../protein-data-views/XRefView';
 import EntrySection from '../../types/entrySection';
 import { XrefUIModel, XrefsGoupedByDatabase } from '../../utils/XrefUtils';
 import { CommentType, WebResourceComment } from '../../types/commentTypes';

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import FeaturesView from './FeaturesView';
-import DiseaseInvolvementView from './DiseaseInvolvementView';
-import KeywordView from './KeywordView';
+import FeaturesView from '../protein-data-views/FeaturesView';
+import DiseaseInvolvementView from '../protein-data-views/DiseaseInvolvementView';
+import KeywordView from '../protein-data-views/KeywordView';
 import EntrySection from '../../types/entrySection';
 import { hasContent } from '../../utils/utils';
 import { UIModel } from '../../adapters/sectionConverter';
@@ -11,9 +11,9 @@ import {
   DiseaseComment,
   FreeTextComment,
 } from '../../types/commentTypes';
-import XRefView from './XRefView';
-import VariationView from './VariationView';
-import FreeTextView from './FreeTextView';
+import XRefView from '../protein-data-views/XRefView';
+import VariationView from '../protein-data-views/VariationView';
+import FreeTextView from '../protein-data-views/FreeTextView';
 
 const PathologyAndBiotechSection: FC<{
   data: UIModel;

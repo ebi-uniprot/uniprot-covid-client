@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import FreeTextView from './FreeTextView';
-import KeywordView from './KeywordView';
-import XRefView from './XRefView';
-import FeaturesView from './FeaturesView';
+import FreeTextView from '../protein-data-views/FreeTextView';
+import KeywordView from '../protein-data-views/KeywordView';
+import XRefView from '../protein-data-views/XRefView';
+import FeaturesView from '../protein-data-views/FeaturesView';
 import EntrySection from '../../types/entrySection';
 import { hasContent } from '../../utils/utils';
 import { CommentType, FreeTextComment } from '../../types/commentTypes';

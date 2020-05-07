@@ -6,11 +6,11 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { UniProtkbAPIModel } from '../../adapters/uniProtkbConverter';
 import { getKeywordsForCategories } from '../../utils/KeywordsUtil';
 import KeywordCategory from '../../types/keywordCategory';
-import { KeywordList } from './KeywordView';
-import UniProtKBTitle from './UniProtKBTitle';
+import { KeywordList } from '../protein-data-views/KeywordView';
+import UniProtKBTitle from '../protein-data-views/UniProtKBTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
-} from './AnnotationScoreDoughnutChart';
+} from '../protein-data-views/AnnotationScoreDoughnutChart';
 import getProteinHighlights from '../../adapters/proteinHighlights';
 import { SelectedEntries } from '../../types/resultsTypes';
 import './styles/uniprotkb-card.scss';

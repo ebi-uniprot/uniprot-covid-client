@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';
-import FeaturesView from './FeaturesView';
-import KeywordView from './KeywordView';
-import XRefView from './XRefView';
-import FreeTextView from './FreeTextView';
+import FeaturesView from '../protein-data-views/FeaturesView';
+import KeywordView from '../protein-data-views/KeywordView';
+import XRefView from '../protein-data-views/XRefView';
+import FreeTextView from '../protein-data-views/FreeTextView';
 import { CommentType, FreeTextComment } from '../../types/commentTypes';
 import { UIModel } from '../../adapters/sectionConverter';
 

@@ -2,11 +2,11 @@ import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
-import FreeTextView, { TextView } from './FreeTextView';
-import CatalyticActivityView from './CatalyticActivityView';
-import KeywordView from './KeywordView';
-import XRefView from './XRefView';
-import FeaturesView from './FeaturesView';
+import FreeTextView, { TextView } from '../protein-data-views/FreeTextView';
+import CatalyticActivityView from '../protein-data-views/CatalyticActivityView';
+import KeywordView from '../protein-data-views/KeywordView';
+import XRefView from '../protein-data-views/XRefView';
+import FeaturesView from '../protein-data-views/FeaturesView';
 import EntrySection from '../../types/entrySection';
 import {
   CommentType,
@@ -14,7 +14,7 @@ import {
   FreeTextComment,
 } from '../../types/commentTypes';
 import GoRibbon from './GoRibbon';
-import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import UniProtKBEvidenceTag from '../protein-data-views/UniProtKBEvidenceTag';
 import {
   FunctionUIModel,
   BioPhysicoChemicalProperties,

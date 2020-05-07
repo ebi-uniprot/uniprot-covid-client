@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ProteinOverview from '../ProteinOverviewView';
-import ProteinNamesUIDataJson from './__mocks__/proteinNamesUIData.json';
+import ProteinOverview from '../../protein-data-views/ProteinOverviewView';
+import ProteinNamesUIData from '../../../__mocks__/proteinNamesUIData.json';
 import EntrySection from '../../../types/entrySection';
 
 describe('ProteinOverview component', () => {
@@ -10,7 +10,7 @@ describe('ProteinOverview component', () => {
       proteinExistence: 'IT exists',
       annotationScore: 12.4,
     };
-    transformedData[EntrySection.NamesAndTaxonomy] = ProteinNamesUIDataJson;
+    transformedData[EntrySection.NamesAndTaxonomy] = ProteinNamesUIData;
     const { asFragment } = render(
       <ProteinOverview transformedData={transformedData} />
     );

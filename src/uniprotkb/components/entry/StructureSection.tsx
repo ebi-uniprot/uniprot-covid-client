@@ -4,9 +4,9 @@ import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';
 import { UIModel } from '../../adapters/sectionConverter';
-import FeaturesView from './FeaturesView';
-import XRefView from './XRefView';
-import PDBView from './PDBView';
+import FeaturesView from '../protein-data-views/FeaturesView';
+import XRefView from '../protein-data-views/XRefView';
+import PDBView from '../protein-data-views/PDBView';
 import {
   partitionStructureDatabases,
   XrefUIModel,

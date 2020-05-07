@@ -1,6 +1,6 @@
 import EntrySection from '../types/entrySection';
 import convertFunction from './functionConverter';
-import { FeatureData } from '../components/entry/FeaturesView';
+import { FeatureData } from '../components/protein-data-views/FeaturesView';
 import convertPathologyAndBiotech from './pathologyAndBiotechConverter';
 import {
   convertNamesAndTaxonomy,
@@ -18,7 +18,7 @@ import {
   SequenceUIModel,
   EntryAudit,
 } from './sequenceConverter';
-import { SequenceData } from '../components/entry/SequenceView';
+import { SequenceData } from '../components/protein-data-views/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
 import convertInteraction from './interactionConverter';
 import convertFamilyAndDomains from './familyAndDomainsConverter';

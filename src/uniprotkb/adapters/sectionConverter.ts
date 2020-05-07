@@ -5,7 +5,7 @@ import {
   getKeywordsForCategories,
   KeywordUIModel,
 } from '../utils/KeywordsUtil';
-import { FeatureData } from '../components/entry/FeaturesView';
+import { FeatureData } from '../components/protein-data-views/FeaturesView';
 import EntrySection from '../types/entrySection';
 import KeywordCategory from '../types/keywordCategory';
 import FeatureType from '../types/featureType';

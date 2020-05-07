@@ -6,7 +6,7 @@ import {
   DiseaseComment,
   AlternativeProductsComment,
 } from '../types/commentTypes';
-import { FeatureData } from '../components/entry/FeaturesView';
+import { FeatureData } from '../components/protein-data-views/FeaturesView';
 import EntrySection from '../types/entrySection';
 
 enum highlightSection {

@@ -2,16 +2,16 @@ import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';
-import FeaturesView from './FeaturesView';
-import KeywordView from './KeywordView';
-import XRefView from './XRefView';
+import FeaturesView from '../protein-data-views/FeaturesView';
+import KeywordView from '../protein-data-views/KeywordView';
+import XRefView from '../protein-data-views/XRefView';
 import SequenceView, {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
-} from './SequenceView';
+} from '../protein-data-views/SequenceView';
 import { SequenceUIModel } from '../../adapters/sequenceConverter';
-import FreeTextView from './FreeTextView';
+import FreeTextView from '../protein-data-views/FreeTextView';
 
 const SequenceSection: FC<{
   data: SequenceUIModel;

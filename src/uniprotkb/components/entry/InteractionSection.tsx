@@ -5,8 +5,8 @@ import ProtvistaDatatable from 'protvista-datatable';
 import InteractionViewer from 'interaction-viewer';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';
-import FreeTextView from './FreeTextView';
-import XRefView from './XRefView';
+import FreeTextView from '../protein-data-views/FreeTextView';
+import XRefView from '../protein-data-views/XRefView';
 import {
   CommentType,
   FreeTextComment,

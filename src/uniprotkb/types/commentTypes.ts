@@ -4,7 +4,7 @@ import {
   KineticParameters,
   CofactorComment,
 } from '../adapters/functionConverter';
-import { FeatureData } from '../components/entry/FeaturesView';
+import { FeatureData } from '../components/protein-data-views/FeaturesView';
 import { Interactant } from '../adapters/interactionConverter';
 
 export enum CommentType {

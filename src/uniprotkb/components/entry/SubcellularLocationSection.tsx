@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';
-import KeywordView from './KeywordView';
-import FeaturesView from './FeaturesView';
+import KeywordView from '../protein-data-views/KeywordView';
+import FeaturesView from '../protein-data-views/FeaturesView';
 import { UIModel } from '../../adapters/sectionConverter';
-import SubcellularLocationView from './SubcellularLocationView';
+import SubcellularLocationView from '../protein-data-views/SubcellularLocationView';
 import {
   SubcellularLocationComment,
   CommentType,
