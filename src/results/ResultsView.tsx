@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../model/ColumnConfiguration';
-import { SelectedEntries, SortDirection } from './types/resultsTypes';
+import { SortDirection } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
@@ -21,7 +21,7 @@ import { getAPIQueryUrl } from '../utils/apiUrls';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 type ResultsTableProps = {
-  selectedEntries: SelectedEntries;
+  selectedEntries: string[];
   columns: Column[];
   handleEntrySelection: (rowId: string) => void;
 } & RouteComponentProps;
@@ -61,7 +61,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       return;
     }
     const { results } = data;
-    setAllResults((allRes) => [...allRes, ...results]);
+    setAllResults(allRes => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -129,7 +129,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
             <UniProtCard
               data={dataItem}
-              selectedEntries={selectedEntries}
+              selected={selectedEntries.includes(dataItem.primaryAccession)}
               handleEntrySelection={handleEntrySelection}
             />
           )}
@@ -140,7 +140,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = columns.map((columnName) => {
+  const columnsToDisplay = columns.map(columnName => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {

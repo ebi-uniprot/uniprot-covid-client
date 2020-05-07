@@ -16,7 +16,6 @@ export const getApiSortDirection = (direction: SortDirection) =>
     : SortDirectionApi.descend;
 
 export type SelectedFacet = { name: string; value: string };
-export type SelectedEntries = { [key: string]: boolean };
 
 export enum ColumnSelectTab {
   data = 'data',

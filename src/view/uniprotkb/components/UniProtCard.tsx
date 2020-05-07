@@ -12,16 +12,15 @@ import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
 import getProteinHighlights from '../../../model/uniprotkb/summary/ProteinHighlights';
-import { SelectedEntries } from '../../../results/types/resultsTypes';
 import './styles/UniProtCard.scss';
 
 const UniProtCard: FC<{
   data: UniProtkbAPIModel;
-  selectedEntries: SelectedEntries;
+  selected: boolean;
   handleEntrySelection: (rowId: string) => void;
 } & RouteComponentProps> = ({
   data,
-  selectedEntries,
+  selected,
   handleEntrySelection,
   history,
 }): JSX.Element => {
@@ -94,11 +93,7 @@ const UniProtCard: FC<{
         <section className="uniprot-card__left">
           <input
             type="checkbox"
-            checked={
-              selectedEntries[data.primaryAccession]
-                ? selectedEntries[data.primaryAccession]
-                : false
-            }
+            checked={selected}
             onClick={e => e.stopPropagation()}
             onChange={() => handleEntrySelection(data.primaryAccession)}
             data-testid="up-card-checkbox"
