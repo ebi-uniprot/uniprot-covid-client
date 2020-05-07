@@ -106,7 +106,7 @@ const mapStateToProps = (state: RootState) => ({
   searchTerms: state.query.searchTerms.data,
   namespace: state.query.namespace,
   evidences: state.query.evidences,
-  queryString: state.query.queryString,
+  // queryString: state.query.queryString,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
@@ -128,13 +128,13 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
       handleRemoveClause: (clauseId: string) =>
         searchActions.removeClause(clauseId),
       dispatchAddClause: () => searchActions.addClause(),
-      dispatchfetchEvidencesIfNeeded: evidencesType =>
+      dispatchfetchEvidencesIfNeeded: (evidencesType) =>
         searchActions.fetchEvidencesIfNeeded(evidencesType),
       dispatchFetchSearchTermsIfNeeded: () =>
         searchActions.fetchSearchTermsIfNeeded(),
       dispatchSubmitAdvancedQuery: () => searchActions.submitAdvancedQuery(),
-      dispatchUpdateClauses: clauses => searchActions.updateClauses(clauses),
-      dispatchUpdateQueryString: queryString =>
+      dispatchUpdateClauses: (clauses) => searchActions.updateClauses(clauses),
+      dispatchUpdateQueryString: (queryString) =>
         searchActions.updateQueryString(queryString),
       dispatchSetPreSelectedClauses: () =>
         searchActions.setPreSelectedClauses(),
