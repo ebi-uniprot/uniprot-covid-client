@@ -1,10 +1,7 @@
 import queryString from 'query-string';
 import { uniq } from 'lodash';
-import urlJoin from 'url-join';
 
-export const joinUrl = (...args: string[]) => urlJoin(args);
-
-export const urlsAreEqual = (
+const urlsAreEqual = (
   url1: string,
   url2: string,
   ignoreParams: string[] = []
@@ -24,3 +21,5 @@ export const urlsAreEqual = (
       urlObject1.query[param] === urlObject2.query[param]
   );
 };
+
+export default urlsAreEqual;

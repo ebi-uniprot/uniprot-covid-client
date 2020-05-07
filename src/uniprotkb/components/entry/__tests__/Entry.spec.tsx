@@ -9,7 +9,7 @@ import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux'
 import apiUrls, {
   getUniProtPublicationsQueryUrl,
 } from '../../../config/apiUrls';
-import { joinUrl } from '../../../../shared/utils/url';
+import joinUrl from 'url-join';
 import entryData from '../../../__mockData__/entryModelData.json';
 import deletedEntryData from '../../../../shared/__mockData__/deletedEntryModelData.json';
 import demergedEntryData from '../../../../shared/__mockData__/demergedEntryModelData.json';

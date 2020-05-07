@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { joinUrl } from '../../shared/utils/url';
+import joinUrl from 'url-join';
 import {
   getApiSortDirection,
   SortDirection,
