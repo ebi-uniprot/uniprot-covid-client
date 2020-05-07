@@ -1,16 +1,7 @@
 import React, { FC, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
-import {
-  Loader,
-  PageIntro,
-  DownloadIcon,
-  BasketIcon,
-  StatisticsIcon,
-  TableIcon,
-  ListIcon,
-  EditIcon,
-} from 'franklin-sites';
+import { Loader, PageIntro } from 'franklin-sites';
 import { Clause, Namespace } from '../search/types/searchTypes';
 import SideBarLayout from '../layout/SideBarLayout';
 import ResultsView from './ResultsView';
@@ -23,6 +14,7 @@ import { getParamsFromURL } from './utils';
 import ResultsFacets from './ResultsFacets';
 import useDataApi from '../hooks/useDataApi';
 import useLocalStorage from '../hooks/useLocalStorage';
+import ResultsButtons from './ResultsButtons';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -80,72 +72,6 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
 
   const { name, links, info } = infoMappings[namespace];
 
-  const actionButtons = (
-    <div className="button-group">
-      <button type="button" className="button tertiary disabled">
-        Blast
-      </button>
-      <button type="button" className="button tertiary disabled">
-        Align
-      </button>
-      <button type="button" className="button tertiary">
-        <Link
-          to={{
-            pathname: '/download',
-            state: {
-              query,
-              selectedFacets,
-              sortColumn,
-              sortDirection,
-              selectedEntries,
-              totalNumberResults: total,
-            },
-          }}
-        >
-          <DownloadIcon />
-          Download
-        </Link>
-      </button>
-      <button type="button" className="button tertiary disabled">
-        <BasketIcon />
-        Add
-      </button>
-      <button type="button" className="button tertiary">
-        <StatisticsIcon />
-        Statistics
-      </button>
-      <button
-        type="button"
-        className="button tertiary large-icon"
-        onClick={() =>
-          setViewMode(
-            viewMode === ViewMode.CARD ? ViewMode.TABLE : ViewMode.CARD
-          )
-        }
-        data-testid="table-card-toggle"
-      >
-        <span
-          className={viewMode === ViewMode.CARD ? 'tertiary-icon__active' : ''}
-        >
-          <TableIcon />
-        </span>
-        <span
-          className={viewMode === ViewMode.TABLE ? 'tertiary-icon__active' : ''}
-        >
-          <ListIcon />
-        </span>
-      </button>
-      {viewMode === ViewMode.TABLE && (
-        <Link to="/customise-table">
-          <button type="button" className="button tertiary">
-            <EditIcon />
-            Customize data
-          </button>
-        </Link>
-      )}
-    </div>
-  );
-
   return (
     <Fragment>
       <SideBarLayout
@@ -156,7 +82,9 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
             </PageIntro>
           </Fragment>
         }
-        actionButtons={actionButtons}
+        actionButtons={
+          <ResultsButtons viewMode={viewMode} setViewMode={setViewMode} />
+        }
         sidebar={<ResultsFacets facets={facets} />}
       >
         <Fragment>
