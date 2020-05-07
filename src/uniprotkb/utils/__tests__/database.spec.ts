@@ -14,7 +14,7 @@ import {
   expectedDatabaseCategoryToNames,
   expectedDatabaseNameToCategory,
   expectedEntrySectionToDatabaseCategoryOrder,
-} from './__mockData__/database';
+} from './__mocks__/database';
 
 const databaseInfo: DatabaseInfo = databaseInfoJson;
 

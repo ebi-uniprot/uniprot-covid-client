@@ -6,8 +6,8 @@ import { fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
-import mockDownloadApi from './__mockData__/DownloadData.json';
-import mockResultFieldsApi from '../../../__mockData__/ResultFieldsData';
+import mockDownloadApi from './__mocks__/downloadData.json';
+import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
 import { FileFormat } from '../../../types/resultsTypes';
 import '@testing-library/jest-dom/extend-expect';
 

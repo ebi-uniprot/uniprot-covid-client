@@ -7,7 +7,7 @@ import { resetUuidV1 } from '../../../../../__mocks__/uuid';
 import {
   mockSuggesterApi,
   preparedSuggestions,
-} from './__mockData__/AutocompleteWrapperData';
+} from './__mocks__/AutocompleteWrapperData';
 
 describe('Autocomplete Wrapper static methods', () => {
   test('should prepare API data for Autocomplete', () => {

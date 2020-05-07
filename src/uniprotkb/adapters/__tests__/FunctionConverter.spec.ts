@@ -1,5 +1,5 @@
 import convertFunction from '../FunctionConverter';
-import modelData from '../../__mockData__/entryModelData.json';
+import modelData from '../../__mocks__/entryModelData.json';
 import { CommentType } from '../../types/CommentTypes';
 import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
 

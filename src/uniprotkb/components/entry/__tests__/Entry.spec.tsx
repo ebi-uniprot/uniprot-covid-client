@@ -10,10 +10,10 @@ import apiUrls, {
   getUniProtPublicationsQueryUrl,
 } from '../../../config/apiUrls';
 import joinUrl from 'url-join';
-import entryData from '../../../__mockData__/entryModelData.json';
-import deletedEntryData from '../../../../shared/__mockData__/deletedEntryModelData.json';
-import demergedEntryData from '../../../../shared/__mockData__/demergedEntryModelData.json';
-import entryPublicationsData from './__mockData__/entryPublicationsData.json';
+import entryData from '../../../__mocks__/entryModelData.json';
+import deletedEntryData from '../../../../shared/__mocks__/deletedEntryModelData.json';
+import demergedEntryData from '../../../../shared/__mocks__/demergedEntryModelData.json';
+import entryPublicationsData from './__mocks__/entryPublicationsData.json';
 
 const { primaryAccession } = entryData;
 const { primaryAccession: deleteEntryAccession } = deletedEntryData;

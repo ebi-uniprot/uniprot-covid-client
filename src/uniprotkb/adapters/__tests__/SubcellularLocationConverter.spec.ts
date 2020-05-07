@@ -1,5 +1,5 @@
 import convertSubcellularLocation from '../SubcellularLocationConverter';
-import modelData from '../../__mockData__/entryModelData.json';
+import modelData from '../../__mocks__/entryModelData.json';
 import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
 
 describe('Subcellular data converter', () => {

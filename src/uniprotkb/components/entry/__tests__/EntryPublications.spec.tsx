@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import EntryPublications from '../EntryPublications';
-import mockPublicationsData from './__mockData__/entryPublicationsData.json';
+import mockPublicationsData from './__mocks__/entryPublicationsData.json';
 
 jest.mock('../../../../shared/hooks/useDataApi', () => jest.fn());
 import useDataApi from '../../../../shared/hooks/useDataApi';

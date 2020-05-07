@@ -3,7 +3,7 @@ import UniProtKBEntryPublications from '../UniProtKBEntryPublications';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { getPublicationsURL } from '../../../config/apiUrls';
-import mockUniProtKBEntryPublications from './__mockData__/uniprotKBEntryPublications.json';
+import mockUniProtKBEntryPublications from './__mocks__/uniprotKBEntryPublications.json';
 
 import useDataApi from '../../../../shared/hooks/useDataApi';
 jest.mock('../../../../shared/hooks/useDataApi', () => jest.fn());

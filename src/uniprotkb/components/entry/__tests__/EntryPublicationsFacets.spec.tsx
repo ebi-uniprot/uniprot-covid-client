@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import EntryPublicationsFacets from '../EntryPublicationsFacets';
-import mockPublicationsData from './__mockData__/entryPublicationsData.json';
+import mockPublicationsData from './__mocks__/entryPublicationsData.json';
 
 jest.mock('../../../../shared/hooks/useDataApi', () => ({
   __esModule: true, // this makes it work

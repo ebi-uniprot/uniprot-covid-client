@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UniProtKBCard from '../UniProtKBCard';
-import data from '../../../__mockData__/entryModelData.json';
+import data from '../../../__mocks__/entryModelData.json';
 
 const handleEntrySelection = jest.fn();
 

@@ -4,9 +4,9 @@ import MockAdapter from 'axios-mock-adapter';
 import { cleanup, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
-import results from './__mockData__/results.json';
-import noResults from './__mockData__/noResults.json';
-import entry from './__mockData__/swissprot_entry.json';
+import results from './__mocks__/results.json';
+import noResults from './__mocks__/noResults.json';
+import entry from './__mocks__/swissprot_entry.json';
 import searchInitialState from '../../../state/searchInitialState';
 import resultsInitialState, {
   ViewMode,
