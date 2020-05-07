@@ -1,15 +1,15 @@
 import idx from 'idx';
 import { getXrefsForSection, XrefUIModel } from '../utils/XrefUtils';
-import Comment, { CommentType, FreeTextComment } from '../types/CommentTypes';
+import Comment, { CommentType, FreeTextComment } from '../types/commentTypes';
 import {
   getKeywordsForCategories,
   KeywordUIModel,
 } from '../utils/KeywordsUtil';
 import { FeatureData } from '../components/entry/FeaturesView';
-import EntrySection from '../types/EntrySection';
-import KeywordCategory from '../types/KeywordCategory';
-import FeatureType from '../types/FeatureType';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+import EntrySection from '../types/entrySection';
+import KeywordCategory from '../types/keywordCategory';
+import FeatureType from '../types/featureType';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 
 export type UIModel = {
   commentsData: Map<CommentType, Comment[]>;

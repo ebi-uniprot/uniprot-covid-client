@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import idx from 'idx';
 import { RootState } from '../../../app/state/rootInitialState';
 import DownloadView from './DownloadView';
-import { Column, SortableColumn } from '../../types/ColumnTypes';
+import { Column, SortableColumn } from '../../types/columnTypes';
 import {
   FileFormat,
   fileFormatToContentType,

@@ -5,7 +5,7 @@ import {
   CatalyticActivityComment,
   PhysiologicalReactionDirection,
   PhysiologicalReaction,
-} from '../../types/CommentTypes';
+} from '../../types/commentTypes';
 import './styles/catalytic-activity-view.scss';
 
 export const getRheaId = (referenceId: string) => {

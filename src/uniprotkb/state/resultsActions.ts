@@ -5,7 +5,7 @@ import idx from 'idx';
 import fetchData from '../../shared/utils/fetchData';
 import { RootState } from '../../app/state/rootInitialState';
 import apiUrls from '../config/apiUrls';
-import { Column } from '../types/ColumnTypes';
+import { Column } from '../types/columnTypes';
 import {
   ColumnSelectTab,
   FieldDatum,

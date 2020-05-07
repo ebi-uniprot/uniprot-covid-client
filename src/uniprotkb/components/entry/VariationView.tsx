@@ -11,7 +11,7 @@ import joinUrl from 'url-join';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import apiUrls from '../../config/apiUrls';
-import FeatureType from '../../types/FeatureType';
+import FeatureType from '../../types/featureType';
 import { UniProtProtvistaEvidenceTag } from './UniProtKBEvidenceTag';
 import { Evidence } from '../../types/modelTypes';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';

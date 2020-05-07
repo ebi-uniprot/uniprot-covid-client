@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   InactiveEntryReason,
   InactiveReasonType,
-} from '../../../uniprotkb/adapters/UniProtkbConverter';
+} from '../../../uniprotkb/adapters/uniProtkbConverter';
 import ArtWork from './svgs/obsolete-entry.svg';
 
 import './styles/error-pages.scss';

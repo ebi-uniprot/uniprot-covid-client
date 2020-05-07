@@ -12,10 +12,10 @@ import {
   implicitDatabasesEC,
   PDBMirrors,
 } from '../config/database';
-import EntrySection from '../types/EntrySection';
-import { DatabaseCategory } from '../types/DatabaseRefs';
-import { Xref, FreeTextComment } from '../types/CommentTypes';
-import { GeneNamesData } from '../adapters/NamesAndTaxonomyConverter';
+import EntrySection from '../types/entrySection';
+import { DatabaseCategory } from '../types/databaseRefs';
+import { Xref, FreeTextComment } from '../types/commentTypes';
+import { GeneNamesData } from '../adapters/namesAndTaxonomyConverter';
 import { flattenGeneNameData } from './utils';
 import { ValueWithEvidence } from '../types/modelTypes';
 

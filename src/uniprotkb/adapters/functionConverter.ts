@@ -8,12 +8,12 @@ import {
   TemperatureDependenceComment,
   TextWithEvidence,
   Xref,
-} from '../types/CommentTypes';
-import KeywordCategory from '../types/KeywordCategory';
-import FeatureType from '../types/FeatureType';
-import EntrySection from '../types/EntrySection';
-import { convertSection, UIModel } from './SectionConverter';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+} from '../types/commentTypes';
+import KeywordCategory from '../types/keywordCategory';
+import FeatureType from '../types/featureType';
+import EntrySection from '../types/entrySection';
+import { convertSection, UIModel } from './sectionConverter';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 import { Evidence } from '../types/modelTypes';
 
 export type Absorption = {

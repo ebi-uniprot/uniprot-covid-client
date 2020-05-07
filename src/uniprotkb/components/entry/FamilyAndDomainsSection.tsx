@@ -4,10 +4,10 @@ import FreeTextView from './FreeTextView';
 import KeywordView from './KeywordView';
 import XRefView from './XRefView';
 import FeaturesView from './FeaturesView';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import { hasContent } from '../../utils/utils';
-import { CommentType, FreeTextComment } from '../../types/CommentTypes';
-import { UIModel } from '../../adapters/SectionConverter';
+import { CommentType, FreeTextComment } from '../../types/commentTypes';
+import { UIModel } from '../../adapters/sectionConverter';
 
 const FamilyAndDomainsSection: FC<{
   data: UIModel;

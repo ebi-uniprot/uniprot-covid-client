@@ -1,7 +1,7 @@
-import convertFunction from '../FunctionConverter';
+import convertFunction from '../functionConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { CommentType } from '../../types/CommentTypes';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { CommentType } from '../../types/commentTypes';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 let data;
 

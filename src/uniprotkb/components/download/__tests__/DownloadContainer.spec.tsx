@@ -7,7 +7,7 @@ import MockAdapter from 'axios-mock-adapter';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import mockDownloadApi from './__mocks__/downloadData.json';
-import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
+import mockResultFieldsApi from '../../../__mocks__/resultFieldsData';
 import { FileFormat } from '../../../types/resultsTypes';
 import '@testing-library/jest-dom/extend-expect';
 

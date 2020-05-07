@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList, ExpandableList } from 'franklin-sites';
-import { DiseaseComment } from '../../types/CommentTypes';
+import { DiseaseComment } from '../../types/commentTypes';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import { databaseToDatabaseInfo } from '../../config/database';
 import { XRef } from './XRefView';

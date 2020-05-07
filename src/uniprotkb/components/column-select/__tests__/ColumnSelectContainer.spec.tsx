@@ -7,10 +7,10 @@ import ColumnSelectContainer, {
 } from '../ColumnSelectContainer';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
-import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
+import mockResultFieldsApi from '../../../__mocks__/resultFieldsData';
 import structuredResultFieldsData from '../../../__mocks__/structuredResultFieldsData.json';
 import { ColumnSelectTab } from '../../../types/resultsTypes';
-import { Column } from '../../../types/ColumnTypes';
+import { Column } from '../../../types/columnTypes';
 
 const mock = new MockAdapter(axios);
 mock

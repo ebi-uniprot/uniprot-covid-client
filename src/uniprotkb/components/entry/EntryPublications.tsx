@@ -1,14 +1,14 @@
 import React, { FC, useState, useEffect } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
-import { LiteratureForProteinAPI } from '../../types/LiteratureTypes';
+import { LiteratureForProteinAPI } from '../../types/literatureTypes';
 import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 import { SelectedFacet } from '../../types/resultsTypes';
 import formatCitationData, {
   getCitationPubMedId,
-} from '../../adapters/LiteratureConverter';
+} from '../../adapters/literatureConverter';
 import getNextUrlFromResponse from '../../utils/queryUtils';
 
 const EntryPublications: FC<{

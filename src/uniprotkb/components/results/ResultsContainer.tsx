@@ -27,9 +27,9 @@ import {
   SelectedEntries,
   SelectedFacet,
 } from '../../types/resultsTypes';
-import { SortableColumn, Column } from '../../types/ColumnTypes';
+import { SortableColumn, Column } from '../../types/columnTypes';
 import { ViewMode } from '../../state/resultsInitialState';
-import { UniProtkbAPIModel } from '../../adapters/UniProtkbConverter';
+import { UniProtkbAPIModel } from '../../adapters/uniProtkbConverter';
 import { Facet } from '../../types/responseTypes';
 import BaseLayout from '../../../shared/components/layouts/BaseLayout';
 import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';

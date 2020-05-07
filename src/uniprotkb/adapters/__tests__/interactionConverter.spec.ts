@@ -1,6 +1,6 @@
-import convertInteraction from '../InteractionConverter';
+import convertInteraction from '../interactionConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 describe('Interaction data converter', () => {
   beforeAll(() => {

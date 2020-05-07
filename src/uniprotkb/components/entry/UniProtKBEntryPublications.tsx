@@ -3,8 +3,8 @@ import { Publication, Loader, Message } from 'franklin-sites';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import { getPublicationsURL } from '../../config/apiUrls';
 import { MessageLevel } from '../../../messages/types/messagesTypes';
-import { LiteratureAPI } from '../../types/LiteratureTypes';
-import formatCitationData from '../../adapters/LiteratureConverter';
+import { LiteratureAPI } from '../../types/literatureTypes';
+import formatCitationData from '../../adapters/literatureConverter';
 
 const UniProtKBEntryPublications: FC<{
   pubmedIds: string[];

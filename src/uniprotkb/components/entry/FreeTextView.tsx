@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
-import { FreeTextComment, TextWithEvidence } from '../../types/CommentTypes';
+import { FreeTextComment, TextWithEvidence } from '../../types/commentTypes';
 
 type FreeTextProps = {
   comments?: FreeTextComment[];

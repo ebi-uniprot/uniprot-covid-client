@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import CustomiseTableContainer from '../CustomiseTableContainer';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
-import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
+import mockResultFieldsApi from '../../../__mocks__/resultFieldsData';
 import * as resultsActions from '../../../state/resultsActions';
 
 const mock = new MockAdapter(axios);

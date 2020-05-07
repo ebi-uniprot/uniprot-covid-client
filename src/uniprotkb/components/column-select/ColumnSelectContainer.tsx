@@ -11,7 +11,7 @@ import { RootState, RootAction } from '../../../app/state/rootInitialState';
 import * as resultsActions from '../../state/resultsActions';
 import ColumnSelectView from './ColumnSelectView';
 import { defaultTableColumns } from '../../state/resultsInitialState';
-import { Column } from '../../types/ColumnTypes';
+import { Column } from '../../types/columnTypes';
 import { ColumnSelectTab, FieldData } from '../../types/resultsTypes';
 
 type ColumnSelectProps = {

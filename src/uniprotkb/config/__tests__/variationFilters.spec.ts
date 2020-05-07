@@ -3,7 +3,7 @@ import {
   getFilteredVariants,
   colorConfig,
 } from '../variationFiltersConfig';
-import FeatureType from '../../types/FeatureType';
+import FeatureType from '../../types/featureType';
 
 const transformedVariantPositions = [
   {

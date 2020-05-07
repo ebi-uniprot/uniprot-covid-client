@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import initialState from '../../../../app/state/rootInitialState';
 import CustomiseTableView from '../CustomiseTableView';
-import { Column } from '../../../types/ColumnTypes';
+import { Column } from '../../../types/columnTypes';
 
 describe('CustomiseTableView component', () => {
   let props, renderedWithRedux;

@@ -13,13 +13,13 @@ import {
   XrefsGoupedByDatabase,
   partitionStructureDatabases,
 } from '../../utils/XrefUtils';
-import { Xref } from '../../types/CommentTypes';
+import { Xref } from '../../types/commentTypes';
 import { PropertyKey } from '../../types/modelTypes';
 import {
   DatabaseInfoPoint,
   AttributesItem,
   DatabaseCategory,
-} from '../../types/DatabaseRefs';
+} from '../../types/databaseRefs';
 import PDBView from './PDBView';
 import EMBLXrefProperties from '../../config/emblXrefPropertiesData.json';
 import externalUrls from '../../config/externalUrls';

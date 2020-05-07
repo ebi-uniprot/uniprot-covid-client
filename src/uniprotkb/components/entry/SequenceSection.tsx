@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import FeaturesView from './FeaturesView';
 import KeywordView from './KeywordView';
 import XRefView from './XRefView';
@@ -10,7 +10,7 @@ import SequenceView, {
   MassSpectrometryView,
   RNAEditingView,
 } from './SequenceView';
-import { SequenceUIModel } from '../../adapters/SequenceConverter';
+import { SequenceUIModel } from '../../adapters/sequenceConverter';
 import FreeTextView from './FreeTextView';
 
 const SequenceSection: FC<{

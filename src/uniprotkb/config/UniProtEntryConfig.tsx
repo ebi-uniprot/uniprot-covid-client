@@ -10,9 +10,9 @@ import SequenceSection from '../components/entry/SequenceSection';
 import InteractionSection from '../components/entry/InteractionSection';
 import FamilyAndDomainsSection from '../components/entry/FamilyAndDomainsSection';
 import StructureSection from '../components/entry/StructureSection';
-import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
-import { FunctionUIModel } from '../adapters/FunctionConverter';
-import EntrySection from '../types/EntrySection';
+import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
+import { FunctionUIModel } from '../adapters/functionConverter';
+import EntrySection from '../types/entrySection';
 
 const UniProtKBEntryConfig: {
   name: EntrySection;

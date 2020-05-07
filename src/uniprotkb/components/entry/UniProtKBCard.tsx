@@ -3,15 +3,15 @@ import React, { FC, Fragment } from 'react';
 import idx from 'idx';
 import { Card } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { UniProtkbAPIModel } from '../../adapters/UniProtkbConverter';
+import { UniProtkbAPIModel } from '../../adapters/uniProtkbConverter';
 import { getKeywordsForCategories } from '../../utils/KeywordsUtil';
-import KeywordCategory from '../../types/KeywordCategory';
+import KeywordCategory from '../../types/keywordCategory';
 import { KeywordList } from './KeywordView';
 import UniProtKBTitle from './UniProtKBTitle';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from './AnnotationScoreDoughnutChart';
-import getProteinHighlights from '../../adapters/ProteinHighlights';
+import getProteinHighlights from '../../adapters/proteinHighlights';
 import { SelectedEntries } from '../../types/resultsTypes';
 import './styles/uniprotkb-card.scss';
 

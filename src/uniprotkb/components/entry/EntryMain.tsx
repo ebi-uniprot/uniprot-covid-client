@@ -2,7 +2,7 @@ import React, { Fragment, memo } from 'react';
 import { Card } from 'franklin-sites';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
 import { ProteinOverview } from './ProteinOverviewView';
-import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
+import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
 import UniProtKBTitle from './UniProtKBTitle';
 
 type EntryMainProps = {

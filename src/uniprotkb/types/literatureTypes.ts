@@ -1,4 +1,4 @@
-import { Xref } from './CommentTypes';
+import { Xref } from './commentTypes';
 
 export type Citation = {
   citationType?: string;

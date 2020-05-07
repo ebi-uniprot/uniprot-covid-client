@@ -16,19 +16,19 @@ import OrganismView, {
 import GeneNamesView, {
   geneAlternativeNamesView,
 } from '../components/entry/GeneNamesView';
-import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
+import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
 import numberView, { Unit } from '../components/entry/NumberView';
 import ProteomesView from '../components/entry/ProteomesView';
 import FeaturesView from '../components/entry/FeaturesView';
-import EntrySection from '../types/EntrySection';
+import EntrySection from '../types/entrySection';
 import {
   SequenceCautionView,
   MassSpectrometryView,
   RNAEditingView,
   IsoformView,
 } from '../components/entry/SequenceView';
-import { Flag } from '../adapters/SequenceConverter';
-import FeatureType from '../types/FeatureType';
+import { Flag } from '../adapters/sequenceConverter';
+import FeatureType from '../types/featureType';
 import FreeTextView, { TextView } from '../components/entry/FreeTextView';
 import {
   AbsorptionView,
@@ -40,8 +40,8 @@ import {
   CofactorComment,
   GoAspect,
   GoTerm,
-} from '../adapters/FunctionConverter';
-import { Column } from '../types/ColumnTypes';
+} from '../adapters/functionConverter';
+import { Column } from '../types/columnTypes';
 import {
   CommentType,
   FreeTextComment,
@@ -51,7 +51,7 @@ import {
   DiseaseComment,
   CatalyticActivityComment,
   SubcellularLocationComment,
-} from '../types/CommentTypes';
+} from '../types/commentTypes';
 import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../components/entry/AnnotationScoreDoughnutChart';
@@ -68,7 +68,7 @@ import {
 import DiseaseInvolvementView from '../components/entry/DiseaseInvolvementView';
 import CatalyticActivityView from '../components/entry/CatalyticActivityView';
 import VariationView from '../components/entry/VariationView';
-import { StructureUIModel } from '../adapters/StructureConverter';
+import { StructureUIModel } from '../adapters/structureConverter';
 import SubcellularLocationView from '../components/entry/SubcellularLocationView';
 import { GOTermsView } from '../components/entry/GOView';
 import externalUrls from './externalUrls';

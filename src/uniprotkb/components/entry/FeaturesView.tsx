@@ -6,10 +6,10 @@ import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { Evidence } from '../../types/modelTypes';
-import FeatureType from '../../types/FeatureType';
+import FeatureType from '../../types/featureType';
 import { UniProtProtvistaEvidenceTag } from './UniProtKBEvidenceTag';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
-import { Xref } from '../../types/CommentTypes';
+import { Xref } from '../../types/commentTypes';
 
 enum LocationModifier {
   EXACT = 'EXACT',

@@ -20,9 +20,9 @@ import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
 import uniProtKbConverter, {
   EntryType,
   UniProtkbInactiveEntryModel,
-} from '../../adapters/UniProtkbConverter';
+} from '../../adapters/uniProtkbConverter';
 import { hasContent, hasExternalLinks } from '../../utils/utils';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
 import apiUrls from '../../config/apiUrls';

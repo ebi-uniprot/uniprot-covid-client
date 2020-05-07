@@ -1,6 +1,6 @@
-import convertFamilyAndDomains from '../FamilyAndDomainsConverter';
+import convertFamilyAndDomains from '../familyAndDomainsConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 describe('Family and Domains data converter', () => {
   beforeAll(() => {

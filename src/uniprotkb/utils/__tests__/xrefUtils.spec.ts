@@ -6,7 +6,7 @@ import {
   getUnconditionalImplicitXrefs,
   getJoinedXrefs,
 } from '../XrefUtils';
-import { CommentType } from '../../types/CommentTypes';
+import { CommentType } from '../../types/commentTypes';
 
 describe('XrefUtils tests', () => {
   test('should getDRImplicitXrefs', () => {

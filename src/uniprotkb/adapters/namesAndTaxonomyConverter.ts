@@ -1,9 +1,9 @@
 import { ValueWithEvidence, Evidence } from '../types/modelTypes';
-import { Flag } from './SequenceConverter';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
-import { Xref } from '../types/CommentTypes';
-import { convertSection, UIModel } from './SectionConverter';
-import EntrySection from '../types/EntrySection';
+import { Flag } from './sequenceConverter';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
+import { Xref } from '../types/commentTypes';
+import { convertSection, UIModel } from './sectionConverter';
+import EntrySection from '../types/entrySection';
 
 export type ProteinNames = {
   fullName: ValueWithEvidence;

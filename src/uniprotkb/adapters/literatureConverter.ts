@@ -1,4 +1,4 @@
-import { Citation } from '../types/LiteratureTypes';
+import { Citation } from '../types/literatureTypes';
 
 export const getCitationPubMedId = (citation: Citation) =>
   citation.citationCrossReferences &&

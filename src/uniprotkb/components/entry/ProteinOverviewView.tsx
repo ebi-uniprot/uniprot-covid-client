@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { InfoList } from 'franklin-sites';
 import idx from 'idx';
 import OrganismView from './OrganismView';
-import { UniProtkbUIModel } from '../../adapters/UniProtkbConverter';
-import EntrySection from '../../types/EntrySection';
+import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
+import EntrySection from '../../types/entrySection';
 import AnnotationScoreDoughnutChart from './AnnotationScoreDoughnutChart';
 import GeneNamesView from './GeneNamesView';
 

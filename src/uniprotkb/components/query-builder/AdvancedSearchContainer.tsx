@@ -13,7 +13,7 @@ import {
   Namespace,
 } from '../../types/searchTypes';
 import AdvancedSearch from './AdvancedSearch';
-import createQueryString from '../../utils/QueryStringGenerator';
+import createQueryString from '../../utils/queryStringGenerator';
 import { Location, LocationToPath } from '../../../app/config/urls';
 import '../search/styles/search-container.scss';
 

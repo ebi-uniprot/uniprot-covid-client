@@ -1,4 +1,4 @@
-import createQueryString from '../QueryStringGenerator';
+import createQueryString from '../queryStringGenerator';
 import {
   testData,
   exceptionThrowingTestData,

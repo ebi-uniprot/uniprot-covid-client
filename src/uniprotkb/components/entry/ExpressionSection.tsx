@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import FreeTextView from './FreeTextView';
 import KeywordView from './KeywordView';
 import XRefView from './XRefView';
-import { UIModel } from '../../adapters/SectionConverter';
-import { CommentType, FreeTextComment } from '../../types/CommentTypes';
+import { UIModel } from '../../adapters/sectionConverter';
+import { CommentType, FreeTextComment } from '../../types/commentTypes';
 
 const ExpressionSection: FC<{
   data: UIModel;

@@ -8,7 +8,7 @@ import {
   fileFormatsWithColumns,
   fileFormatToUrlParameter,
 } from '../types/resultsTypes';
-import { SortableColumn } from '../types/ColumnTypes';
+import { SortableColumn } from '../types/columnTypes';
 
 export const devPrefix = 'https://wwwdev.ebi.ac.uk';
 export const prodPrefix = 'https://www.ebi.ac.uk';

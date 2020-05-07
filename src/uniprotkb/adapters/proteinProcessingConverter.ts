@@ -1,9 +1,9 @@
-import FeatureType from '../types/FeatureType';
-import KeywordCategory from '../types/KeywordCategory';
-import EntrySection from '../types/EntrySection';
-import { CommentType } from '../types/CommentTypes';
-import { convertSection } from './SectionConverter';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+import FeatureType from '../types/featureType';
+import KeywordCategory from '../types/keywordCategory';
+import EntrySection from '../types/entrySection';
+import { CommentType } from '../types/commentTypes';
+import { convertSection } from './sectionConverter';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 
 const keywordsCategories = [KeywordCategory.PTM];
 

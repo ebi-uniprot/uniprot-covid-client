@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { InfoList, ExternalLink } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import SimpleView from './SimpleView';
-import { OrganismData } from '../../adapters/NamesAndTaxonomyConverter';
+import { OrganismData } from '../../adapters/namesAndTaxonomyConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import externalUrls from '../../config/externalUrls';
 

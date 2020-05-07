@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { groupBy } from 'lodash';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
-import EntrySection from '../../types/EntrySection';
-import { UIModel } from '../../adapters/SectionConverter';
+import EntrySection from '../../types/entrySection';
+import { UIModel } from '../../adapters/sectionConverter';
 import FeaturesView from './FeaturesView';
 import XRefView from './XRefView';
 import PDBView from './PDBView';
@@ -11,7 +11,7 @@ import {
   partitionStructureDatabases,
   XrefUIModel,
 } from '../../utils/XrefUtils';
-import { DatabaseCategory } from '../../types/DatabaseRefs';
+import { DatabaseCategory } from '../../types/databaseRefs';
 import { entrySectionToDatabaseCategoryOrder } from '../../config/database';
 
 const StructureSection: FC<{

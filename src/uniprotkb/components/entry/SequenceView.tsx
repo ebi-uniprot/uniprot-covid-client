@@ -8,11 +8,11 @@ import {
   MassSpectrometryComment,
   RNAEditingComment,
   AlternativeProductsComment,
-} from '../../types/CommentTypes';
+} from '../../types/commentTypes';
 import apiUrls from '../../config/apiUrls';
 import fetchData from '../../../shared/utils/fetchData';
 import { formatLargeNumber } from '../../../shared/utils/utils';
-import { SequenceUIModel } from '../../adapters/SequenceConverter';
+import { SequenceUIModel } from '../../adapters/sequenceConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import numberView, { Unit } from './NumberView';
 import externalUrls from '../../config/externalUrls';

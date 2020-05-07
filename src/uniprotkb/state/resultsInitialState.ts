@@ -1,5 +1,5 @@
-import { UniProtkbAPIModel } from '../adapters/UniProtkbConverter';
-import { Column } from '../types/ColumnTypes';
+import { UniProtkbAPIModel } from '../adapters/uniProtkbConverter';
+import { Column } from '../types/columnTypes';
 import { FieldData, ColumnSelectTab } from '../types/resultsTypes';
 import { Facet } from '../types/responseTypes';
 

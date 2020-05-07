@@ -7,12 +7,12 @@ import CatalyticActivityView from './CatalyticActivityView';
 import KeywordView from './KeywordView';
 import XRefView from './XRefView';
 import FeaturesView from './FeaturesView';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import {
   CommentType,
   CatalyticActivityComment,
   FreeTextComment,
-} from '../../types/CommentTypes';
+} from '../../types/commentTypes';
 import GoRibbon from './GoRibbon';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import {
@@ -21,7 +21,7 @@ import {
   Absorption,
   KineticParameters,
   CofactorComment,
-} from '../../adapters/FunctionConverter';
+} from '../../adapters/functionConverter';
 
 export const AbsorptionView: FC<{ data: Absorption }> = ({ data }) => {
   return (

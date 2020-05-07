@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { v1 } from 'uuid';
 import { InfoList } from 'franklin-sites';
-import { GeneNamesData } from '../../adapters/NamesAndTaxonomyConverter';
+import { GeneNamesData } from '../../adapters/namesAndTaxonomyConverter';
 import { NameWithEvidence } from './ProteinNamesView';
 import { ValueWithEvidence } from '../../types/modelTypes';
 

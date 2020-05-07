@@ -4,7 +4,7 @@ import { html, TemplateResult } from 'lit-html';
 import ProtvistaDatatable from 'protvista-datatable';
 import InteractionViewer from 'interaction-viewer';
 import { hasContent } from '../../utils/utils';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import FreeTextView from './FreeTextView';
 import XRefView from './XRefView';
 import {
@@ -12,8 +12,8 @@ import {
   FreeTextComment,
   InteractionComment,
   Interaction,
-} from '../../types/CommentTypes';
-import { UIModel } from '../../adapters/SectionConverter';
+} from '../../types/commentTypes';
+import { UIModel } from '../../adapters/sectionConverter';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import {
   getIntActQueryUrl,

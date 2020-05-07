@@ -1,6 +1,6 @@
-import { convertNamesAndTaxonomy } from '../NamesAndTaxonomyConverter';
+import { convertNamesAndTaxonomy } from '../namesAndTaxonomyConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 describe('Names and taxonomy data converter', () => {
   beforeAll(() => {

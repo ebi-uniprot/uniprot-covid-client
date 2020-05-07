@@ -6,7 +6,7 @@ import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { PDBMirrorsInfo } from '../../config/database';
 import { processUrlTemplate } from './XRefView';
-import { Xref } from '../../types/CommentTypes';
+import { Xref } from '../../types/commentTypes';
 import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-manager', ProtvistaManager);

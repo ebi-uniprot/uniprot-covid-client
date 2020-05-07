@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
-import { SubcellularLocationComment } from '../../types/CommentTypes';
+import { SubcellularLocationComment } from '../../types/commentTypes';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import { TextView } from './FreeTextView';
 

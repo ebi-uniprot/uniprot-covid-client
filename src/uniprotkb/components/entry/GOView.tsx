@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ExpandableList } from 'franklin-sites';
-import { GoTerm, GroupedGoTerms } from '../../adapters/FunctionConverter';
+import { GoTerm, GroupedGoTerms } from '../../adapters/functionConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import externalUrls from '../../config/externalUrls';
 

@@ -1,8 +1,8 @@
-import { CommentType } from '../types/CommentTypes';
-import KeywordCategory from '../types/KeywordCategory';
-import EntrySection from '../types/EntrySection';
-import { convertSection } from './SectionConverter';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+import { CommentType } from '../types/commentTypes';
+import KeywordCategory from '../types/keywordCategory';
+import EntrySection from '../types/entrySection';
+import { convertSection } from './sectionConverter';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 
 const keywordsCategories = [KeywordCategory.DEVELOPMENTAL_STAGE];
 

@@ -1,13 +1,13 @@
-import { UniProtkbAPIModel, EntryType } from './UniProtkbConverter';
-import FeatureType from '../types/FeatureType';
+import { UniProtkbAPIModel, EntryType } from './uniProtkbConverter';
+import FeatureType from '../types/featureType';
 import {
   CommentType,
   InteractionComment,
   DiseaseComment,
   AlternativeProductsComment,
-} from '../types/CommentTypes';
+} from '../types/commentTypes';
 import { FeatureData } from '../components/entry/FeaturesView';
-import EntrySection from '../types/EntrySection';
+import EntrySection from '../types/entrySection';
 
 enum highlightSection {
   domains = 'domain',

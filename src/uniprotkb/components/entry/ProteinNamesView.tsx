@@ -5,7 +5,7 @@ import {
   ProteinNames,
   ProteinNamesData,
   ProteinDescription,
-} from '../../adapters/NamesAndTaxonomyConverter';
+} from '../../adapters/namesAndTaxonomyConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import { ValueWithEvidence } from '../../types/modelTypes';
 

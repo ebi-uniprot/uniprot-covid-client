@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { CloseIcon } from 'franklin-sites';
 import { getBEMClassName as bem } from '../../../shared/utils/utils';
 import { SelectedColumn } from '../../types/resultsTypes';
-import { Column } from '../../types/ColumnTypes';
+import { Column } from '../../types/columnTypes';
 import './styles/column-select-drag-drop.scss';
 
 type ColumnSelectDragDropProps = {

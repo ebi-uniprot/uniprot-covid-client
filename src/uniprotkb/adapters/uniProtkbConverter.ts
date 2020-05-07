@@ -1,7 +1,7 @@
-import EntrySection from '../types/EntrySection';
-import convertFunction from './FunctionConverter';
+import EntrySection from '../types/entrySection';
+import convertFunction from './functionConverter';
 import { FeatureData } from '../components/entry/FeaturesView';
-import convertPathologyAndBiotech from './PathologyAndBiotechConverter';
+import convertPathologyAndBiotech from './pathologyAndBiotechConverter';
 import {
   convertNamesAndTaxonomy,
   NamesAndTaxonomyUIModel,
@@ -9,26 +9,26 @@ import {
   GeneNamesData,
   OrganismData,
   LineageData,
-} from './NamesAndTaxonomyConverter';
-import convertProteinProcessing from './ProteinProcessingConverter';
-import convertExpression from './ExpressionConverter';
-import convertSubcellularLocation from './SubcellularLocationConverter';
+} from './namesAndTaxonomyConverter';
+import convertProteinProcessing from './proteinProcessingConverter';
+import convertExpression from './expressionConverter';
+import convertSubcellularLocation from './subcellularLocationConverter';
 import {
   convertSequence,
   SequenceUIModel,
   EntryAudit,
-} from './SequenceConverter';
+} from './sequenceConverter';
 import { SequenceData } from '../components/entry/SequenceView';
 import { Keyword } from '../utils/KeywordsUtil';
-import convertInteraction from './InteractionConverter';
-import convertFamilyAndDomains from './FamilyAndDomainsConverter';
-import { UIModel } from './SectionConverter';
-import convertStructure from './StructureConverter';
-import convertExternalLinks from './ExternalLinksConverter';
-import Comment, { Xref } from '../types/CommentTypes';
+import convertInteraction from './interactionConverter';
+import convertFamilyAndDomains from './familyAndDomainsConverter';
+import { UIModel } from './sectionConverter';
+import convertStructure from './structureConverter';
+import convertExternalLinks from './externalLinksConverter';
+import Comment, { Xref } from '../types/commentTypes';
 import { transfromProperties } from '../utils/utils';
 import { Property } from '../types/modelTypes';
-import { Reference } from '../types/LiteratureTypes';
+import { Reference } from '../types/literatureTypes';
 
 export enum EntryType {
   SWISSPROT = 'UniProtKB reviewed (Swiss-Prot)',

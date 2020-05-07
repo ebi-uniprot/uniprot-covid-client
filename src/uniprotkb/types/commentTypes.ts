@@ -3,9 +3,9 @@ import {
   Absorption,
   KineticParameters,
   CofactorComment,
-} from '../adapters/FunctionConverter';
+} from '../adapters/functionConverter';
 import { FeatureData } from '../components/entry/FeaturesView';
-import { Interactant } from '../adapters/InteractionConverter';
+import { Interactant } from '../adapters/interactionConverter';
 
 export enum CommentType {
   ACTIVITY_REGULATION = 'ACTIVITY REGULATION',

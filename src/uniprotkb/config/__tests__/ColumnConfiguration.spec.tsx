@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import ColumnConfiguration from '../ColumnConfiguration';
 import data from '../../__mocks__/entryModelData.json';
-import uniProtKbConverter from '../../adapters/UniProtkbConverter';
+import uniProtKbConverter from '../../adapters/uniProtkbConverter';
 import renderWithRedux from '../../../shared/__test-helpers__/RenderWithRedux';
 
 describe('ColumnConfiguration component', () => {

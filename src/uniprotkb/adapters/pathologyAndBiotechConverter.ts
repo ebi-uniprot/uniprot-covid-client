@@ -1,9 +1,9 @@
-import { CommentType } from '../types/CommentTypes';
-import KeywordCategory from '../types/KeywordCategory';
-import FeatureType from '../types/FeatureType';
-import { convertSection } from './SectionConverter';
-import EntrySection from '../types/EntrySection';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+import { CommentType } from '../types/commentTypes';
+import KeywordCategory from '../types/keywordCategory';
+import FeatureType from '../types/featureType';
+import { convertSection } from './sectionConverter';
+import EntrySection from '../types/entrySection';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 
 const keywordsCategories = [KeywordCategory.DISEASE];
 

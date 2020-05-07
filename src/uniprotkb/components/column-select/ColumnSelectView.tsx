@@ -2,7 +2,7 @@ import React from 'react';
 import { AccordionSearch, Tabs, Bubble } from 'franklin-sites';
 import { getBEMClassName as bem } from '../../../shared/utils/utils';
 import ColumnSelectDragDrop from './ColumnSelectDragDrop';
-import { Column } from '../../types/ColumnTypes';
+import { Column } from '../../types/columnTypes';
 import {
   ColumnSelectTab,
   FieldData,

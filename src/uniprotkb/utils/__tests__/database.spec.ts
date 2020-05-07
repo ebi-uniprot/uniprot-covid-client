@@ -9,7 +9,7 @@ import {
   entrySectionToDatabaseNames,
   databaseNameToCategory,
 } from '../../config/database';
-import { DatabaseCategory, DatabaseInfo } from '../../types/DatabaseRefs';
+import { DatabaseCategory, DatabaseInfo } from '../../types/databaseRefs';
 import {
   expectedDatabaseCategoryToNames,
   expectedDatabaseNameToCategory,

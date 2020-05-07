@@ -1,7 +1,7 @@
 import { uniq } from 'lodash';
 import UniProtKBEntryConfig from '../config/UniProtEntryConfig';
-import { UniProtkbUIModel } from '../adapters/UniProtkbConverter';
-import { GeneNamesData } from '../adapters/NamesAndTaxonomyConverter';
+import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
+import { GeneNamesData } from '../adapters/namesAndTaxonomyConverter';
 import { Property, PropertyKey } from '../types/modelTypes';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

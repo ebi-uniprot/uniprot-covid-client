@@ -3,14 +3,14 @@ import { Card } from 'franklin-sites';
 import FeaturesView from './FeaturesView';
 import DiseaseInvolvementView from './DiseaseInvolvementView';
 import KeywordView from './KeywordView';
-import EntrySection from '../../types/EntrySection';
+import EntrySection from '../../types/entrySection';
 import { hasContent } from '../../utils/utils';
-import { UIModel } from '../../adapters/SectionConverter';
+import { UIModel } from '../../adapters/sectionConverter';
 import {
   CommentType,
   DiseaseComment,
   FreeTextComment,
-} from '../../types/CommentTypes';
+} from '../../types/commentTypes';
 import XRefView from './XRefView';
 import VariationView from './VariationView';
 import FreeTextView from './FreeTextView';

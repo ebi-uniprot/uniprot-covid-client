@@ -1,6 +1,6 @@
-import { convertSequence } from '../SequenceConverter';
+import { convertSequence } from '../sequenceConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 describe('Sequence data converter', () => {
   beforeAll(() => {

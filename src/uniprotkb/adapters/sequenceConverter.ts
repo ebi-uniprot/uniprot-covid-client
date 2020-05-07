@@ -3,14 +3,14 @@ import {
   getKeywordsForCategories,
   KeywordUIModel,
 } from '../utils/KeywordsUtil';
-import KeywordCategory from '../types/KeywordCategory';
-import FeatureType from '../types/FeatureType';
+import KeywordCategory from '../types/keywordCategory';
+import FeatureType from '../types/featureType';
 import {
   getXrefsForSection,
   XrefUIModel,
   getJoinedXrefs,
 } from '../utils/XrefUtils';
-import EntrySection from '../types/EntrySection';
+import EntrySection from '../types/entrySection';
 import { SequenceData } from '../components/entry/SequenceView';
 import {
   CommentType,
@@ -19,8 +19,8 @@ import {
   MassSpectrometryComment,
   FreeTextComment,
   RNAEditingComment,
-} from '../types/CommentTypes';
-import { UniProtkbAPIModel } from './UniProtkbConverter';
+} from '../types/commentTypes';
+import { UniProtkbAPIModel } from './uniProtkbConverter';
 
 export enum Flag {
   PRECURSOR = 'Precursor',

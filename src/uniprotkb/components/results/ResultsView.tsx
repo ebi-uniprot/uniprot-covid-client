@@ -6,9 +6,9 @@ import UniProtKBCard from '../entry/UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
-} from '../../adapters/UniProtkbConverter';
+} from '../../adapters/uniProtkbConverter';
 import { ViewMode } from '../../state/resultsInitialState';
-import { SortableColumn, Column } from '../../types/ColumnTypes';
+import { SortableColumn, Column } from '../../types/columnTypes';
 import './styles/warning.scss';
 import './styles/results-view.scss';
 

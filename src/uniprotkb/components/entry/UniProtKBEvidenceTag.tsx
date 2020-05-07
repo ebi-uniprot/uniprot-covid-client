@@ -4,7 +4,7 @@ import { groupBy } from 'lodash';
 import { ExternalLink, EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-import { getEvidenceCodeData, EvidenceData } from '../../config/EvidenceCodes';
+import { getEvidenceCodeData, EvidenceData } from '../../config/evidenceCodes';
 import { Evidence } from '../../types/modelTypes';
 import UniProtKBEntryPublications from './UniProtKBEntryPublications';
 import { processUrlTemplate } from './XRefView';

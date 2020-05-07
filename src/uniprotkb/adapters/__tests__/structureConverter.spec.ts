@@ -1,6 +1,6 @@
-import convertStructure from '../StructureConverter';
+import convertStructure from '../structureConverter';
 import modelData from '../../__mocks__/entryModelData.json';
-import { convertXrefProperties } from '../../adapters/UniProtkbConverter';
+import { convertXrefProperties } from '../../adapters/uniProtkbConverter';
 
 describe('Structure data converter', () => {
   beforeAll(() => {

@@ -6,7 +6,7 @@ import {
   DND_DIRECTION_LEFT,
 } from 'react-beautiful-dnd-test-utils';
 import { ColumnSelectTab } from '../../../types/resultsTypes';
-import { Column } from '../../../types/ColumnTypes';
+import { Column } from '../../../types/columnTypes';
 import ColumnSelectDragDrop from '../ColumnSelectDragDrop';
 
 describe('ColumnSelectDragDrop component', () => {
