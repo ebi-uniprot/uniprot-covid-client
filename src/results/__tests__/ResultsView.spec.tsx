@@ -11,7 +11,7 @@ describe('ResultsView component', () => {
     const props = {
       viewMode: ViewMode.TABLE,
       tableColumns: ['accession'],
-      selectedEntries: {},
+      selectedEntries: [],
       results: data.results,
       sort: { column: 'accession', direction: 'descend' },
       handleEntrySelection: jest.fn(),
@@ -33,7 +33,7 @@ describe('ResultsView component', () => {
     const props = {
       viewMode: ViewMode.CARD,
       tableColumns: ['accession'],
-      selectedEntries: {},
+      selectedEntries: [],
       results: data.results,
       sort: { column: 'accession', direction: 'descend' },
       handleEntrySelection: jest.fn(),
