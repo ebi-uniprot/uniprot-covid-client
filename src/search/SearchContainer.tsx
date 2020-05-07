@@ -1,85 +1,54 @@
-import React, { Component, SyntheticEvent } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import queryString from 'query-string';
 import { MainSearch } from 'franklin-sites';
-import { RootState, RootAction } from '../state/state-types';
-import * as searchActions from './state/searchActions';
+
 import './styles/SearchContainer.scss';
 
-type SearchProps = {
-  queryString: string;
-  dispatchUpdateQueryString: (type: string) => void;
-} & RouteComponentProps;
+const namespaces = [
+  'UniProtKB - the UniProt knowledgebase',
+  'UniRef',
+  'UniParc',
+  'Proteomes',
+  'Publications',
+  'Keywords',
+];
 
-type SearchContainerState = {
-  queryString: string;
-};
+const Search = () => {
+  const history = useHistory();
 
-export class Search extends Component<SearchProps, SearchContainerState> {
-  constructor(props: SearchProps) {
-    super(props);
-    const { queryString } = props;
-    this.state = { queryString };
-    this.handleSubmitClick = this.handleSubmitClick.bind(this);
-    this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
-  }
-
-  componentDidUpdate(prevProps: SearchProps) {
-    const { queryString: prevQueryString } = prevProps;
-    const { queryString } = this.props;
-    if (prevQueryString !== queryString) {
-      this.setState({ queryString });
-    }
-  }
-
-  handleSubmitClick(e: SyntheticEvent) {
-    e.preventDefault();
-    const { history, dispatchUpdateQueryString } = this.props;
-    const { queryString } = this.state;
-    dispatchUpdateQueryString(queryString);
-    history.push({ pathname: '/uniprotkb', search: `query=${queryString}` });
-  }
-
-  handleQueryStringChange(queryString: string) {
-    this.setState({ queryString });
-  }
-
-  render() {
-    const { queryString } = this.state;
-    return (
-      <MainSearch
-        onSubmit={this.handleSubmitClick}
-        onChange={this.handleQueryStringChange}
-        searchTerm={queryString}
-        namespaces={[
-          'UniProtKB - the UniProt knowledgebase',
-          'UniRef',
-          'UniParc',
-          'Proteomes',
-          'Publications',
-          'Keywords',
-        ]}
-      />
-    );
-  }
-}
-
-const mapStateToProps = (state: RootState) => ({
-  queryString: state.query.queryString,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
-  bindActionCreators(
-    {
-      dispatchUpdateQueryString: queryString =>
-        searchActions.updateQueryString(queryString),
-    },
-    dispatch
+  // local state to hold the search value without modifying URL
+  const [searchTerm, setSearchTerm] = useState(
+    // initialise with whatever is already in the URL
+    queryString.parse(history.location.search, { decode: true }).query
   );
 
-const SearchContainer = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Search)
-);
+  const handleSubmit = (event: Event) => {
+    // prevent normal browser submission
+    event.preventDefault();
 
-export default SearchContainer;
+    // extract current search (to keep other fields if defined)
+    const search = queryString.parse(history.location.search, { decode: true });
+    // add/overwrite the current queried term
+    search.query = searchTerm || '*';
+    // restringify the resulting search
+    const stringifiedSearch = queryString.stringify(search, { encode: true });
+
+    // push a new location to the history containing the modified search term
+    history.push({
+      pathname: '/uniprotkb', // NOTE: shouldn't that depend on the selected namespace?
+      search: stringifiedSearch,
+    });
+  };
+
+  return (
+    <MainSearch
+      namespaces={namespaces}
+      searchTerm={searchTerm}
+      onChange={setSearchTerm}
+      onSubmit={handleSubmit}
+    />
+  );
+};
+
+export default Search;
