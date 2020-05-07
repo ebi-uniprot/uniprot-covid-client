@@ -15,6 +15,8 @@ import ResultsFacets from './ResultsFacets';
 import useDataApi from '../hooks/useDataApi';
 import useLocalStorage from '../hooks/useLocalStorage';
 import ResultsButtons from './ResultsButtons';
+import NoResultsPage from '../pages/errors/NoResultsPage';
+import BaseLayout from '../layout/BaseLayout';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -58,8 +60,16 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
     return <Loader />;
   }
 
-  const { facets } = data;
+  const { facets, results } = data;
   const total = headers['x-totalrecords'];
+
+  if (results.length === 0) {
+    return (
+      <BaseLayout>
+        <NoResultsPage />
+      </BaseLayout>
+    );
+  }
 
   const handleEntrySelection = (rowId: string): void => {
     const filtered = selectedEntries.filter((id) => id !== rowId);

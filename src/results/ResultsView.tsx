@@ -54,7 +54,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   }>({ total: 0, nextUrl: undefined });
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
 
-  const { data, error, headers } = useDataApi(url);
+  const { data, headers } = useDataApi(url);
+  // TODO handle error
 
   useEffect(() => {
     if (!data) {
