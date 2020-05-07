@@ -8,7 +8,7 @@ import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
-import { ViewMode, defaultTableColumns } from './state/resultsInitialState';
+import { ViewMode } from './state/resultsInitialState';
 import getNextUrlFromResponse from '../utils/queryUtils';
 import useDataApi from '../hooks/useDataApi';
 import BaseLayout from '../layout/BaseLayout';
@@ -140,7 +140,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = defaultTableColumns.map((columnName) => {
+  const columnsToDisplay = columns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {

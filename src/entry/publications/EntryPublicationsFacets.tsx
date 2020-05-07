@@ -10,6 +10,7 @@ const EntryPublicationsFacets: React.FC<{
   selectedFacets: SelectedFacet[];
   setSelectedFacets: (facets: SelectedFacet[]) => void;
 }> = ({ accession, selectedFacets, setSelectedFacets }) => {
+  // TODO are these working? we should use the url anyway.
   const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
   const { loading, data, status, error } = useDataApi(url);
 

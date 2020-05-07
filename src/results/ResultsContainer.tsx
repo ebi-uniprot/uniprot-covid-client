@@ -25,10 +25,11 @@ import useDataApi from '../hooks/useDataApi';
 
 type ResultsProps = {
   namespace: Namespace;
+  tableColumns: Column[];
   clauses?: Clause[];
 } & RouteComponentProps;
 
-const Results: FC<ResultsProps> = ({ namespace, location }) => {
+const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   const { search: queryParamFromUrl } = location;
   const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
     queryParamFromUrl
@@ -44,7 +45,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
    * this class as a functional component and put all url
    * parameters in the store.
    */
-  const columns: Column[] = [];
+  const columns: Column[] = viewMode === ViewMode.TABLE ? tableColumns : [];
 
   const initialApiUrl = getAPIQueryUrl(
     query,
@@ -176,7 +177,7 @@ const Results: FC<ResultsProps> = ({ namespace, location }) => {
 const mapStateToProps = (state: RootState) => {
   return {
     namespace: state.query.namespace,
-    columns: state.results.tableColumns,
+    tableColumns: state.results.tableColumns,
   };
 };
 
