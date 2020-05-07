@@ -11,7 +11,7 @@ import searchInitialState from '../../../state/searchInitialState';
 import resultsInitialState, {
   ViewMode,
 } from '../../../state/resultsInitialState';
-import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 
 const mock = new MockAdapter(axios);
 

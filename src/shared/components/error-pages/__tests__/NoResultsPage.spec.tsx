@@ -1,6 +1,6 @@
 import React from 'react';
 import NoResultsPage from '../NoResultsPage';
-import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 
 describe('NoResultsPage component', () => {
   test('should render', () => {

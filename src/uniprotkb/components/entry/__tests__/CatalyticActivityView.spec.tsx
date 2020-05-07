@@ -8,7 +8,7 @@ import CatalyticActivityView, {
 } from '../CatalyticActivityView';
 import catalyticActivityUIDataJson from './__mocks__/catalyticActivityUIData.json';
 import { removeProperty } from '../../../../shared/utils/utils';
-import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 
 describe('CatalyticActivityView component', () => {
   test('should render catalytic activity', () => {

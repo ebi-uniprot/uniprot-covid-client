@@ -1,6 +1,6 @@
 import React from 'react';
 import ObsoleteEntryPage from '../ObsoleteEntryPage';
-import renderWithRedux from '../../../__test-helpers__/renderWithRedux';
+import renderWithRedux from '../../../__test-helpers__/RenderWithRedux';
 import deletedEntryData from '../../../../shared/__mocks__/deletedEntryModelData.json';
 import demergedEntryData from '../../../../shared/__mocks__/demergedEntryModelData.json';
 

@@ -6,7 +6,7 @@ import ColumnSelectContainer, {
   removeFieldFromFieldsData,
 } from '../ColumnSelectContainer';
 import initialState from '../../../../app/state/rootInitialState';
-import renderWithRedux from '../../../../shared/__test-helpers__/renderWithRedux';
+import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
 import structuredResultFieldsData from '../../../__mocks__/structuredResultFieldsData.json';
 import { ColumnSelectTab } from '../../../types/resultsTypes';
