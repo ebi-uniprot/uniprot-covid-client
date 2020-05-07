@@ -8,7 +8,7 @@ import ColumnSelectContainer, {
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 import mockResultFieldsApi from '../../../__mocks__/ResultFieldsData';
-import structuredResultFieldsData from '../../../__mocks__/StructuredResultFieldsData.json';
+import structuredResultFieldsData from '../../../__mocks__/structuredResultFieldsData.json';
 import { ColumnSelectTab } from '../../../types/resultsTypes';
 import { Column } from '../../../types/ColumnTypes';
 

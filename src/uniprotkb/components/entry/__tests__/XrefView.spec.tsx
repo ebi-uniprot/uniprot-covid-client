@@ -6,7 +6,7 @@ import XRefView, {
   getPropertyLink,
   getDatabaseInfoAttribute,
 } from '../XRefView';
-import xrefUIData from './__mocks__/XrefUIData.json';
+import xrefUIData from './__mocks__/xrefUIData.json';
 import EntrySectionType from '../../../types/EntrySection';
 import { XrefUIModel } from '../../../utils/XrefUtils';
 import { PropertyKey } from '../../../types/modelTypes';

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import KeywordView from '../KeywordView';
-import KeywordUIDataJson from './__mocks__/KeywordUIData.json';
+import KeywordUIDataJson from './__mocks__/keywordUIData.json';
 
 afterAll(() => cleanup());
 

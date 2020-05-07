@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import FeaturesView from '../FeaturesView';
-import FeaturesUIDataJson from './__mocks__/FeaturesUIData.json';
+import FeaturesUIDataJson from './__mocks__/featuresUIData.json';
 
 afterEach(cleanup);
 

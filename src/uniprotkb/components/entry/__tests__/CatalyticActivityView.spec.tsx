@@ -6,7 +6,7 @@ import CatalyticActivityView, {
   RheaReactionVisualizer,
   ReactionDirection,
 } from '../CatalyticActivityView';
-import catalyticActivityUIDataJson from './__mocks__/CatalyticActivityUIData.json';
+import catalyticActivityUIDataJson from './__mocks__/catalyticActivityUIData.json';
 import { removeProperty } from '../../../../shared/utils/utils';
 import renderWithRedux from '../../../../shared/__testHelpers__/renderWithRedux';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import OrganismView from '../OrganismView';
-import OrganismUIDataJson from './__mocks__/OrganismUIData.json';
+import OrganismUIDataJson from './__mocks__/organismUIData.json';
 
 describe('Organism', () => {
   test('should render organism', () => {
