@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/ErrorPages.scss';
+import './styles/error-pages.scss';
 
 const ErrorPage: React.FC<{
   artwork: JSX.Element;

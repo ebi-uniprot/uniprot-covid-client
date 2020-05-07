@@ -10,7 +10,7 @@ import uniProtKbConverter, {
 import { ViewMode } from '../../state/resultsInitialState';
 import { SortableColumn, Column } from '../../types/ColumnTypes';
 import './styles/warning.scss';
-import './styles/ResultsView.scss';
+import './styles/results-view.scss';
 
 type ResultsTableProps = {
   results: UniProtkbAPIModel[];

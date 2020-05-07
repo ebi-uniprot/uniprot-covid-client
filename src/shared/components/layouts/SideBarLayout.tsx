@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import BaseLayout from './BaseLayout';
-import './styles/SideBarLayout.scss';
+import './styles/side-bar-layout.scss';
 
 type SideBarLayoutProps = {
   title?: JSX.Element;

@@ -3,7 +3,7 @@ import UniProtHeader from './UniProtHeader';
 import UniProtFooter from './UniProtFooter';
 import GDPR from '../gdpr/GDPR';
 import MessageManagerContainer from '../../../messages/components/MessageManagerContainer';
-import './styles/BaseLayout.scss';
+import './styles/base-layout.scss';
 
 type BaseLayoutProps = {
   children: JSX.Element;

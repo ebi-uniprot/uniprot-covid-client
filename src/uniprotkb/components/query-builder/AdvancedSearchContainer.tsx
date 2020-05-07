@@ -15,7 +15,7 @@ import {
 import AdvancedSearch from './AdvancedSearch';
 import createQueryString from '../../utils/QueryStringGenerator';
 import { Location, LocationToPath } from '../../../app/config/urls';
-import '../search/styles/SearchContainer.scss';
+import '../search/styles/search-container.scss';
 
 const queryBuilderPath = LocationToPath[Location.UniProtKBQueryBuilder];
 

@@ -16,7 +16,7 @@ import { UniProtProtvistaEvidenceTag } from './UniProtKBEvidenceTag';
 import { Evidence } from '../../types/modelTypes';
 import FeaturesTableView, { FeaturesTableCallback } from './FeaturesTableView';
 import filterConfig, { colorConfig } from '../../config/variationFiltersConfig';
-import './styles/VariationView.scss';
+import './styles/variation-view.scss';
 
 export type ProtvistaVariant = {
   begin: number;

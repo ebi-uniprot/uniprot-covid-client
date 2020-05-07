@@ -8,7 +8,7 @@ import {
   FieldData,
   SelectedColumn,
 } from '../../types/resultsTypes';
-import './styles/ColumnSelect.scss';
+import './styles/column-select.scss';
 
 const getTabTitle = (tabId: ColumnSelectTab, columns: SelectedColumn[]) => (
   <div

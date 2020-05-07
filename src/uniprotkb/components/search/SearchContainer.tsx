@@ -5,7 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../../../app/state/rootInitialState';
 import * as searchActions from '../../state/searchActions';
-import './styles/SearchContainer.scss';
+import './styles/search-container.scss';
 
 type SearchProps = {
   queryString: string;

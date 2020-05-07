@@ -6,7 +6,7 @@ import {
   PhysiologicalReactionDirection,
   PhysiologicalReaction,
 } from '../../types/CommentTypes';
-import './styles/CatalyticActivityView.scss';
+import './styles/catalytic-activity-view.scss';
 
 export const getRheaId = (referenceId: string) => {
   const re = /^RHEA:(\d+)$/i;

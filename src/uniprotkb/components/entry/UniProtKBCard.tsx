@@ -13,7 +13,7 @@ import AnnotationScoreDoughnutChart, {
 } from './AnnotationScoreDoughnutChart';
 import getProteinHighlights from '../../adapters/ProteinHighlights';
 import { SelectedEntries } from '../../types/resultsTypes';
-import './styles/UniProtKBCard.scss';
+import './styles/uniprotkb-card.scss';
 
 const UniProtKBCard: FC<{
   data: UniProtkbAPIModel;

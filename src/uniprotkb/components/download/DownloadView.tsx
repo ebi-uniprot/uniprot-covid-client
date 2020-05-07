@@ -3,7 +3,7 @@ import { Loader } from 'franklin-sites';
 import ColumnSelectContainer from '../column-select/ColumnSelectContainer';
 import { FileFormat, fileFormatsWithColumns } from '../../types/resultsTypes';
 import { Column } from '../../types/ColumnTypes';
-import './styles/Download.scss';
+import './styles/download.scss';
 
 type DownloadViewProps = {
   selectedColumns: Column[];

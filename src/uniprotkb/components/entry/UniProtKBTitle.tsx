@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SwissProtIcon, TremblIcon } from 'franklin-sites';
 import { EntryType } from '../../adapters/UniProtkbConverter';
-import './styles/UniProtKBTitle.scss';
+import './styles/uniprotkb-title.scss';
 
 export const ReviewedUnreviewed: FC<{ entryType: EntryType }> = ({
   entryType,

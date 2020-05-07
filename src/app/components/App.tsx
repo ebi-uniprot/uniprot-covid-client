@@ -4,7 +4,7 @@ import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 import BaseLayout from '../../shared/components/layouts/BaseLayout';
 import { Location, LocationToPath } from '../config/urls';
-import './styles/App.scss';
+import './styles/app.scss';
 import history from '../../shared/utils/browserHistory';
 
 if (process.env.NODE_ENV !== 'development') {

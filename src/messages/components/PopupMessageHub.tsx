@@ -2,7 +2,7 @@ import React from 'react';
 import { Message } from 'franklin-sites';
 import { useTransition, animated } from 'react-spring';
 import { MessageType } from '../types/messagesTypes';
-import './styles/popupMessageHub.scss';
+import './styles/popup-message-hub.scss';
 
 const PopUpMessageHub: React.FC<{
   messages: MessageType[];

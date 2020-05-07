@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/Block.scss';
+import './styles/block.scss';
 
 type BlockProps = {
   columns: string;
