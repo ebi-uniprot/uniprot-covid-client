@@ -35,7 +35,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
     queryParamFromUrl
   );
 
-  const [selectedEntries, setSelectedEntries] = useState({});
+  const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState(ViewMode.CARD);
 
   /**
@@ -69,14 +69,12 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   const total = headers['x-totalrecords'];
 
   const handleEntrySelection = (rowId: string): void => {
-    // TODO this is broken
-    if (rowId in selectedEntries) {
-      const { [rowId]: value, ...newSelectedEntries } = selectedEntries;
-      setSelectedEntries(newSelectedEntries);
-    } else {
-      selectedEntries[rowId] = true;
-      setSelectedEntries(selectedEntries);
-    }
+    const filtered = selectedEntries.filter(id => id !== rowId);
+    setSelectedEntries(
+      filtered.length === selectedEntries.length
+        ? [...selectedEntries, rowId]
+        : filtered
+    );
   };
 
   const { name, links, info } = infoMappings[namespace];
@@ -98,7 +96,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
               selectedFacets,
               sortColumn,
               sortDirection,
-              selectedEntries: Object.keys(selectedEntries),
+              selectedEntries,
               totalNumberResults: total,
             },
           }}
