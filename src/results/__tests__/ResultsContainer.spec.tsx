@@ -87,9 +87,6 @@ describe('Results component', () => {
     );
     let columnHeader = await findByText('Entry');
     fireEvent.click(columnHeader);
-    expect(history.location.search).toBe('?query=blah&sort=accession');
-    columnHeader = await findByText('Entry');
-    fireEvent.click(columnHeader);
     expect(history.location.search).toBe(
       '?query=blah&sort=accession&dir=ascend'
     );
@@ -97,6 +94,11 @@ describe('Results component', () => {
     fireEvent.click(columnHeader);
     expect(history.location.search).toBe(
       '?query=blah&sort=accession&dir=descend'
+    );
+    columnHeader = await findByText('Entry');
+    fireEvent.click(columnHeader);
+    expect(history.location.search).toBe(
+      '?query=blah&sort=accession&dir=ascend'
     );
   });
 
