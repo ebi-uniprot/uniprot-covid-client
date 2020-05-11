@@ -32,17 +32,26 @@ describe('Results component', () => {
     expect(getSpy).toHaveBeenCalled();
   });
 
-  test('should select/deselect a facet', async () => {
+  test('should select a facet', async () => {
     await act(async () => {
       const { findByText, history } = renderWithRedux(<ResultsContainer />, {
         route: '/uniprotkb?query=blah',
       });
-      let unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
+      expect(history.location.search).toEqual('?query=blah');
+      const unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual(
         '?query=blah&facets=reviewed:false'
       );
-      unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
+    });
+  });
+
+  test('should deselect a facet', async () => {
+    await act(async () => {
+      const { findByText, history } = renderWithRedux(<ResultsContainer />, {
+        route: '/uniprotkb?query=blah&facets=reviewed:false',
+      });
+      const unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual('?query=blah');
     });
