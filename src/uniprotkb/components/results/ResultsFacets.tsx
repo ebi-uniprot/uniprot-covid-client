@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Facets } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { getLocationForParams, getParamsFromURL } from './utils';
+import { getLocationForParams, getParamsFromURL } from '../column-select/utils';
 import { SelectedFacet } from '../../types/resultsTypes';
 import { Facet } from '../../types/responseTypes';
 

@@ -15,8 +15,8 @@ import { getParamsFromURL } from '../column-select/utils';
 import useLocalStorage from '../../../shared/hooks/useLocalStorage';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
-import ResultsButtons from '../column-select/ResultsButtons';
-import ResultsFacets from '../column-select/ResultsFacets';
+import ResultsButtons from './ResultsButtons';
+import ResultsFacets from './ResultsFacets';
 
 type ResultsProps = {
   namespace: Namespace;
