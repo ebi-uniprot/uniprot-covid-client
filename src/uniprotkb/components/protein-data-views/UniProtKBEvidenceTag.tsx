@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import { ExternalLink, EvidenceTag, EvidenceTagIcon } from 'franklin-sites';
 import { html } from 'lit-html';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';

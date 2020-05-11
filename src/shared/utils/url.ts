@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { uniq } from 'lodash';
+import { uniq } from 'lodash-es';
 
 const urlsAreEqual = (
   url1: string,
@@ -16,7 +16,7 @@ const urlsAreEqual = (
     ...Object.keys(urlObject1.query),
   ]);
   return paramsIntersection.every(
-    param =>
+    (param) =>
       ignoreParams.includes(param) ||
       urlObject1.query[param] === urlObject2.query[param]
   );

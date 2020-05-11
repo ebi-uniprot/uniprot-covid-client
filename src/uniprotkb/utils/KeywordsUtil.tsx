@@ -1,4 +1,4 @@
-import { flatten } from 'lodash';
+import { flatten } from 'lodash-es';
 import KeywordCategory from '../types/keywordCategory';
 import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
 import { UIModel } from '../adapters/sectionConverter';
@@ -16,11 +16,11 @@ export type KeywordUIModel = {
 
 export const getAllKeywords = (data: UniProtkbUIModel) => {
   const allKeywords: Keyword[] = [];
-  Object.values(data).forEach(attributes => {
+  Object.values(data).forEach((attributes) => {
     const UIModelAttribute = attributes as UIModel;
     if (UIModelAttribute && UIModelAttribute.keywordData) {
       const keywordData = flatten(
-        UIModelAttribute.keywordData.map(categ => categ.keywords)
+        UIModelAttribute.keywordData.map((categ) => categ.keywords)
       );
       allKeywords.push(...keywordData);
     }
@@ -39,7 +39,7 @@ export const getKeywordsForCategories = (
   // eslint-disable-next-line no-restricted-syntax
   for (const category of keywordCategories) {
     const categoryKeywords = keywords.filter(
-      keyword => keyword.category === category
+      (keyword) => keyword.category === category
     );
     if (categoryKeywords && categoryKeywords.length > 0) {
       keywordsByCategories.push({

@@ -1,4 +1,4 @@
-import { invert } from 'lodash';
+import { invert } from 'lodash-es';
 
 export enum Location {
   Home = 'Home',

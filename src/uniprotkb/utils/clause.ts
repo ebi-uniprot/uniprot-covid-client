@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { removeProperty } from '../../shared/utils/utils';
 import { Operator, Clause, itemType, dataType } from '../types/searchTypes';
 

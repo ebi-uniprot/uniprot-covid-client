@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import {
   CommentType,
   AbsorptionComment,
@@ -121,7 +121,7 @@ const convertFunction = (data: UniProtkbAPIModel) => {
   );
   convertedSection.bioPhysicoChemicalProperties = {};
   if (bpcProperties) {
-    bpcProperties.forEach(bpcProperty => {
+    bpcProperties.forEach((bpcProperty) => {
       if ((bpcProperty as AbsorptionComment).absorption) {
         convertedSection.bioPhysicoChemicalProperties.absorption = (bpcProperty as AbsorptionComment).absorption;
       }
@@ -145,8 +145,8 @@ const convertFunction = (data: UniProtkbAPIModel) => {
 
   if (data.uniProtKBCrossReferences) {
     const goTerms = (data.uniProtKBCrossReferences.filter(
-      xref => xref.database === 'GO' && xref.properties
-    ) as GoTerm[]).map(term => {
+      (xref) => xref.database === 'GO' && xref.properties
+    ) as GoTerm[]).map((term) => {
       const goTermProperty = term.properties && term.properties.GoTerm;
       const aspect = goTermProperty && goTermProperty.substring(0, 1);
       const termDescription = goTermProperty && goTermProperty.substring(2);

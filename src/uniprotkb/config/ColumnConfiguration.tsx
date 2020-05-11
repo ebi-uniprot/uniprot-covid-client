@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
-import { flatten } from 'lodash';
+import { flatten } from 'lodash-es';
 import { Link } from 'react-router-dom';
 
 import SimpleView from '../components/protein-data-views/SimpleView';
@@ -83,7 +83,7 @@ const getFeatureColumn = (type: FeatureType) => {
       return (
         featuresData && (
           <FeaturesView
-            features={featuresData.filter(feature => feature.type === type)}
+            features={featuresData.filter((feature) => feature.type === type)}
           />
         )
       );
@@ -133,7 +133,7 @@ ColumnConfiguration.set(Column.id, {
 ColumnConfiguration.set(Column.proteinName, {
   label: 'Protein names',
   sortable: true,
-  render: data => {
+  render: (data) => {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       proteinNamesData && (
@@ -146,7 +146,7 @@ ColumnConfiguration.set(Column.proteinName, {
 ColumnConfiguration.set(Column.geneNames, {
   label: 'Gene Names',
   sortable: true,
-  render: data => {
+  render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       geneNamesData && <GeneNamesView geneNamesData={geneNamesData} isCompact />
@@ -157,7 +157,7 @@ ColumnConfiguration.set(Column.geneNames, {
 ColumnConfiguration.set(Column.organism, {
   label: 'Organism',
   sortable: true,
-  render: data => {
+  render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return organismData && <OrganismView data={organismData} />;
   },
@@ -165,7 +165,7 @@ ColumnConfiguration.set(Column.organism, {
 
 ColumnConfiguration.set(Column.length, {
   label: 'Length',
-  render: data => {
+  render: (data) => {
     const sequenceData = data[EntrySection.Sequence];
     return (
       sequenceData.sequence &&
@@ -176,12 +176,12 @@ ColumnConfiguration.set(Column.length, {
 
 ColumnConfiguration.set(Column.genePrimary, {
   label: 'Gene names (Primary)',
-  render: data => {
+  render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       <Fragment>
         {geneNamesData &&
-          geneNamesData.map(geneData => {
+          geneNamesData.map((geneData) => {
             return (
               geneData.geneName && (
                 <div key={geneData.geneName.value}>
@@ -197,13 +197,13 @@ ColumnConfiguration.set(Column.genePrimary, {
 
 ColumnConfiguration.set(Column.geneOln, {
   label: 'Gene names (Ordered locus)',
-  render: data => {
+  render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       <Fragment>
         {geneNamesData &&
           geneNamesData.map(
-            geneData =>
+            (geneData) =>
               geneData.orderedLocusNames && (
                 <Fragment key={geneData.orderedLocusNames.join('')}>
                   {geneAlternativeNamesView(geneData.orderedLocusNames, false)}
@@ -217,13 +217,13 @@ ColumnConfiguration.set(Column.geneOln, {
 
 ColumnConfiguration.set(Column.geneOrf, {
   label: 'Gene names (ORF)',
-  render: data => {
+  render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       <Fragment>
         {geneNamesData &&
           geneNamesData.map(
-            geneData =>
+            (geneData) =>
               geneData.orfNames && (
                 <Fragment key={geneData.orfNames.join('')}>
                   {geneAlternativeNamesView(geneData.orfNames, false)}
@@ -237,13 +237,13 @@ ColumnConfiguration.set(Column.geneOrf, {
 
 ColumnConfiguration.set(Column.geneSynonym, {
   label: 'Gene names (Synonyms)',
-  render: data => {
+  render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       <Fragment>
         {geneNamesData &&
           geneNamesData.map(
-            geneData =>
+            (geneData) =>
               geneData.synonyms && (
                 <Fragment key={geneData.synonyms.join('')}>
                   {geneAlternativeNamesView(geneData.synonyms, false)}
@@ -256,7 +256,7 @@ ColumnConfiguration.set(Column.geneSynonym, {
 });
 ColumnConfiguration.set(Column.organismId, {
   label: 'Organism',
-  render: data => {
+  render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return organismData && <OrganismId taxonId={organismData.taxonId} />;
   },
@@ -264,7 +264,7 @@ ColumnConfiguration.set(Column.organismId, {
 
 ColumnConfiguration.set(Column.proteinName, {
   label: 'Protein names',
-  render: data => {
+  render: (data) => {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       proteinNamesData && (
@@ -276,14 +276,14 @@ ColumnConfiguration.set(Column.proteinName, {
 
 ColumnConfiguration.set(Column.drProteomes, {
   label: 'Proteomes',
-  render: data => {
+  render: (data) => {
     const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
     return proteomesData && <ProteomesView data={proteomesData} isCompact />;
   },
 });
 ColumnConfiguration.set(Column.lineage, {
   label: 'Lineage',
-  render: data => {
+  render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return (
       organismData &&
@@ -293,12 +293,12 @@ ColumnConfiguration.set(Column.lineage, {
 });
 ColumnConfiguration.set(Column.organismHost, {
   label: 'Virus hosts',
-  render: data => {
+  render: (data) => {
     const { organismHosts } = data[EntrySection.NamesAndTaxonomy];
     return (
       organismHosts && (
         <Fragment>
-          {organismHosts.map(host => (
+          {organismHosts.map((host) => (
             <p key={host.taxonId}>
               <OrganismView data={host} />
             </p>
@@ -310,7 +310,7 @@ ColumnConfiguration.set(Column.organismHost, {
 });
 ColumnConfiguration.set(Column.ccAlternativeProducts, {
   label: 'Alternative Products',
-  render: data => {
+  render: (data) => {
     const sequenceData = data[EntrySection.Sequence];
     return (
       sequenceData.alternativeProducts && (
@@ -325,7 +325,7 @@ ColumnConfiguration.set(Column.ccAlternativeProducts, {
 });
 ColumnConfiguration.set(Column.sequence, {
   label: 'Sequence',
-  render: data => {
+  render: (data) => {
     const sequenceData = data[EntrySection.Sequence];
     return (
       <Sequence
@@ -339,7 +339,7 @@ ColumnConfiguration.set(Column.sequence, {
 
 ColumnConfiguration.set(Column.ftVarSeq, {
   label: 'Alternative sequence',
-  render: data => {
+  render: (data) => {
     const { featuresData } = data[EntrySection.Sequence];
     return (
       <Fragment>
@@ -350,7 +350,7 @@ ColumnConfiguration.set(Column.ftVarSeq, {
 });
 ColumnConfiguration.set(Column.fragment, {
   label: 'Fragment',
-  render: data => {
+  render: (data) => {
     const { flag } = data[EntrySection.Sequence];
     const isFragment =
       flag &&
@@ -366,7 +366,7 @@ ColumnConfiguration.set(Column.fragment, {
 // gene_location ,  "Invalid fields parameter value 'gene_location'"
 ColumnConfiguration.set(Column.mass, {
   label: 'Mass',
-  render: data => {
+  render: (data) => {
     const { molWeight } = data[EntrySection.Sequence];
     return numberView({ value: molWeight, unit: Unit.DA });
   },
@@ -374,7 +374,7 @@ ColumnConfiguration.set(Column.mass, {
 
 ColumnConfiguration.set(Column.ccMassSpectrometry, {
   label: 'Mass Spectrometry',
-  render: data => {
+  render: (data) => {
     const { massSpectrometry } = data[EntrySection.Sequence];
     return massSpectrometry && <MassSpectrometryView data={massSpectrometry} />;
   },
@@ -382,7 +382,7 @@ ColumnConfiguration.set(Column.ccMassSpectrometry, {
 
 ColumnConfiguration.set(Column.ftVariant, {
   label: 'Variants',
-  render: data => (
+  render: (data) => (
     <VariationView primaryAccession={data.primaryAccession} hasTable={false} />
   ),
 });
@@ -396,7 +396,7 @@ ColumnConfiguration.set(Column.ftNonTer, getFeatureColumn(FeatureType.NON_TER));
 
 ColumnConfiguration.set(Column.ccPolymorphism, {
   label: 'Polymorphysm',
-  render: data => {
+  render: (data) => {
     const { polymorphysm } = data[EntrySection.Sequence];
     return polymorphysm && <FreeTextView comments={polymorphysm} />;
   },
@@ -404,14 +404,14 @@ ColumnConfiguration.set(Column.ccPolymorphism, {
 
 ColumnConfiguration.set(Column.ccRnaEditing, {
   label: 'RNA Editing',
-  render: data => {
+  render: (data) => {
     const { rnaEditing } = data[EntrySection.Sequence];
     return rnaEditing && <RNAEditingView data={rnaEditing} />;
   },
 });
 ColumnConfiguration.set(Column.errorGmodelPred, {
   label: 'Sequence Caution',
-  render: data => {
+  render: (data) => {
     const { sequenceCaution } = data[EntrySection.Sequence];
     return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
   },
@@ -424,14 +424,14 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftUnsure, getFeatureColumn(FeatureType.UNSURE));
 ColumnConfiguration.set(Column.sequenceVersion, {
   label: 'Sequence Version',
-  render: data => {
+  render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && <span>{entryAudit.sequenceVersion}</span>;
   },
 });
 ColumnConfiguration.set(Column.absorption, {
   label: 'Absorption',
-  render: data => {
+  render: (data) => {
     const { bioPhysicoChemicalProperties } = data[
       EntrySection.Function
     ] as FunctionUIModel;
@@ -453,7 +453,7 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftCaBind, getFeatureColumn(FeatureType.CA_BIND));
 ColumnConfiguration.set(Column.ccCatalyticActivity, {
   label: 'Catalytic Activity',
-  render: data => {
+  render: (data) => {
     const catalyticActivityComments = data[
       EntrySection.Function
     ].commentsData.get(
@@ -468,7 +468,7 @@ ColumnConfiguration.set(Column.ccCatalyticActivity, {
 });
 ColumnConfiguration.set(Column.ccCofactor, {
   label: 'Cofactor',
-  render: data => {
+  render: (data) => {
     const cofactorComments = data[EntrySection.Function].commentsData.get(
       CommentType.COFACTOR
     ) as CofactorComment[];
@@ -481,18 +481,18 @@ ColumnConfiguration.set(
 );
 ColumnConfiguration.set(Column.ec, {
   label: 'EC Number',
-  render: data => {
+  render: (data) => {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     const ecNumbers = idx(
       proteinNamesData,
-      proteinName => proteinName.recommendedName.ecNumbers
+      (proteinName) => proteinName.recommendedName.ecNumbers
     ) as ValueWithEvidence[];
     return ecNumbers && <ECNumbersView ecNumbers={ecNumbers} />;
   },
 });
 ColumnConfiguration.set(Column.ccActivityRegulation, {
   label: 'Activity Regulation',
-  render: data => {
+  render: (data) => {
     const activityRegulationComments = data[
       EntrySection.Function
     ].commentsData.get(CommentType.ACTIVITY_REGULATION) as FreeTextComment[];
@@ -505,7 +505,7 @@ ColumnConfiguration.set(Column.ccActivityRegulation, {
 });
 ColumnConfiguration.set(Column.ccFunction, {
   label: 'Function',
-  render: data => {
+  render: (data) => {
     const functionComments = data[EntrySection.Function].commentsData.get(
       CommentType.FUNCTION
     ) as FreeTextComment[];
@@ -514,7 +514,7 @@ ColumnConfiguration.set(Column.ccFunction, {
 });
 ColumnConfiguration.set(Column.kinetics, {
   label: 'Kinetics',
-  render: data => {
+  render: (data) => {
     const { bioPhysicoChemicalProperties } = data[
       EntrySection.Function
     ] as FunctionUIModel;
@@ -532,7 +532,7 @@ ColumnConfiguration.set(
 );
 ColumnConfiguration.set(Column.ccPathway, {
   label: 'Pathway',
-  render: data => {
+  render: (data) => {
     const pathwayComments = data[EntrySection.Function].commentsData.get(
       CommentType.PATHWAY
     ) as FreeTextComment[];
@@ -541,7 +541,7 @@ ColumnConfiguration.set(Column.ccPathway, {
 });
 ColumnConfiguration.set(Column.phDependence, {
   label: 'pH Dependence',
-  render: data => {
+  render: (data) => {
     const { bioPhysicoChemicalProperties } = data[
       EntrySection.Function
     ] as FunctionUIModel;
@@ -554,7 +554,7 @@ ColumnConfiguration.set(Column.phDependence, {
 });
 ColumnConfiguration.set(Column.redoxPotential, {
   label: 'Redox Potential',
-  render: data => {
+  render: (data) => {
     const { bioPhysicoChemicalProperties } = data[
       EntrySection.Function
     ] as FunctionUIModel;
@@ -568,7 +568,7 @@ ColumnConfiguration.set(Column.redoxPotential, {
 ColumnConfiguration.set(Column.ftSite, getFeatureColumn(FeatureType.SITE));
 ColumnConfiguration.set(Column.tempDependence, {
   label: 'Temperature Dependence',
-  render: data => {
+  render: (data) => {
     const { bioPhysicoChemicalProperties } = data[
       EntrySection.Function
     ] as FunctionUIModel;
@@ -583,7 +583,7 @@ ColumnConfiguration.set(Column.tempDependence, {
 });
 ColumnConfiguration.set(Column.score, {
   label: 'Score',
-  render: data => (
+  render: (data) => (
     <AnnotationScoreDoughnutChart
       score={data.annotationScore}
       size={DoughnutChartSize.medium}
@@ -592,7 +592,7 @@ ColumnConfiguration.set(Column.score, {
 });
 ColumnConfiguration.set(Column.ccSequenceCaution, {
   label: 'Sequence Caution',
-  render: data => {
+  render: (data) => {
     const { sequenceCaution } = data[EntrySection.Sequence];
     return sequenceCaution && <SequenceCautionView data={sequenceCaution} />;
   },
@@ -600,14 +600,14 @@ ColumnConfiguration.set(Column.ccSequenceCaution, {
 // feature ,
 ColumnConfiguration.set(Column.keyword, {
   label: 'Keywords',
-  render: data => {
+  render: (data) => {
     const keywords = getAllKeywords(data);
     return <KeywordList keywords={keywords} />;
   },
 });
 ColumnConfiguration.set(Column.keywordid, {
   label: 'Keyword IDs',
-  render: data => {
+  render: (data) => {
     const keywords = getAllKeywords(data);
     return <KeywordList keywords={keywords} idOnly />;
   },
@@ -615,7 +615,7 @@ ColumnConfiguration.set(Column.keywordid, {
 // matched_text: this field is not provided anymore ,
 ColumnConfiguration.set(Column.ccMiscellaneous, {
   label: 'Miscellaneous [CC]',
-  render: data => {
+  render: (data) => {
     const miscellaneousComments = data[EntrySection.Function].commentsData.get(
       CommentType.MISCELLANEOUS
     ) as FreeTextComment[];
@@ -626,25 +626,25 @@ ColumnConfiguration.set(Column.ccMiscellaneous, {
 });
 ColumnConfiguration.set(Column.proteinExistence, {
   label: 'Protein existence',
-  render: data => data.proteinExistence,
+  render: (data) => data.proteinExistence,
 });
 ColumnConfiguration.set(Column.reviewed, {
   label: '',
-  render: data => <ReviewedUnreviewed entryType={data.entryType} />,
+  render: (data) => <ReviewedUnreviewed entryType={data.entryType} />,
 });
 // tools: UX review is this needed?? ,
 // uniparc_id: leo re-indexing today 02/12/2019,
 ColumnConfiguration.set(Column.ccInteraction, {
   label: 'Interacts with',
-  render: data => {
+  render: (data) => {
     const interactionComments = data[EntrySection.Interaction].commentsData.get(
       CommentType.INTERACTION
     ) as InteractionComment[];
     return (
       interactionComments && (
         <Fragment>
-          {interactionComments.map(interactionCC =>
-            interactionCC.interactions.map(interaction => (
+          {interactionComments.map((interactionCC) =>
+            interactionCC.interactions.map((interaction) => (
               <div
                 key={
                   interaction.type === InteractionType.SELF
@@ -671,7 +671,7 @@ ColumnConfiguration.set(Column.ccInteraction, {
 });
 ColumnConfiguration.set(Column.ccSubunit, {
   label: 'Subunit structure',
-  render: data => {
+  render: (data) => {
     const subunitComments = data[EntrySection.Interaction].commentsData.get(
       CommentType.SUBUNIT
     ) as FreeTextComment[];
@@ -680,7 +680,7 @@ ColumnConfiguration.set(Column.ccSubunit, {
 });
 ColumnConfiguration.set(Column.ccDevelopmentalStage, {
   label: 'Developmental stage',
-  render: data => {
+  render: (data) => {
     const developmentComments = data[EntrySection.Expression].commentsData.get(
       CommentType.DEVELOPMENTAL_STAGE
     ) as FreeTextComment[];
@@ -691,7 +691,7 @@ ColumnConfiguration.set(Column.ccDevelopmentalStage, {
 });
 ColumnConfiguration.set(Column.ccInduction, {
   label: 'Induction',
-  render: data => {
+  render: (data) => {
     const inductionComments = data[EntrySection.Expression].commentsData.get(
       CommentType.INDUCTION
     ) as FreeTextComment[];
@@ -700,7 +700,7 @@ ColumnConfiguration.set(Column.ccInduction, {
 });
 ColumnConfiguration.set(Column.ccTissueSpecificity, {
   label: 'Tissue Specificity',
-  render: data => {
+  render: (data) => {
     const tissueComment = data[EntrySection.Expression].commentsData.get(
       CommentType.TISSUE_SPECIFICITY
     ) as FreeTextComment[];
@@ -712,7 +712,7 @@ ColumnConfiguration.set(Column.goC, getGOColumnForAspect(GoAspect.C));
 ColumnConfiguration.set(Column.goF, getGOColumnForAspect(GoAspect.F));
 ColumnConfiguration.set(Column.go, {
   label: 'Gene Ontology',
-  render: data => {
+  render: (data) => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
     const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return allGOTerms && <GOTermsView data={allGOTerms} />;
@@ -720,7 +720,7 @@ ColumnConfiguration.set(Column.go, {
 });
 ColumnConfiguration.set(Column.goId, {
   label: 'Gene Ontology IDs',
-  render: data => {
+  render: (data) => {
     const { goTerms } = data[EntrySection.Function] as FunctionUIModel;
     const allGOTerms = goTerms && flatten(Object.values(goTerms));
     return (
@@ -741,7 +741,7 @@ ColumnConfiguration.set(Column.goId, {
 });
 ColumnConfiguration.set(Column.threeD, {
   label: '3D structures',
-  render: data => {
+  render: (data) => {
     const structureData = (data[EntrySection.Structure] as StructureUIModel)
       .structures;
     return (
@@ -763,7 +763,7 @@ ColumnConfiguration.set(Column.threeD, {
 });
 ColumnConfiguration.set(Column.ccSubcellularLocation, {
   label: 'Subcellular Location',
-  render: data => {
+  render: (data) => {
     const subcellData = data[EntrySection.SubCellularLocation].commentsData.get(
       CommentType.SUBCELLULAR_LOCATION
     ) as SubcellularLocationComment[];
@@ -772,7 +772,7 @@ ColumnConfiguration.set(Column.ccSubcellularLocation, {
 });
 ColumnConfiguration.set(Column.ccDomain, {
   label: 'Domain',
-  render: data => {
+  render: (data) => {
     const domainData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.DOMAIN
     ) as FreeTextComment[];
@@ -781,7 +781,7 @@ ColumnConfiguration.set(Column.ccDomain, {
 });
 ColumnConfiguration.set(Column.ccPtm, {
   label: 'Post-Translational Modification',
-  render: data => {
+  render: (data) => {
     const ptmData = data[EntrySection.ProteinProcessing].commentsData.get(
       CommentType.PTM
     ) as FreeTextComment[];
@@ -790,7 +790,7 @@ ColumnConfiguration.set(Column.ccPtm, {
 });
 ColumnConfiguration.set(Column.ccAllergen, {
   label: 'Allergenic Properties',
-  render: data => {
+  render: (data) => {
     const allergenData = data[
       EntrySection.PathologyAndBioTech
     ].commentsData.get(CommentType.ALLERGEN) as FreeTextComment[];
@@ -799,7 +799,7 @@ ColumnConfiguration.set(Column.ccAllergen, {
 });
 ColumnConfiguration.set(Column.ccBiotechnology, {
   label: 'Biotechnological Use',
-  render: data => {
+  render: (data) => {
     const biotechData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.BIOTECHNOLOGY
     ) as FreeTextComment[];
@@ -808,7 +808,7 @@ ColumnConfiguration.set(Column.ccBiotechnology, {
 });
 ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
   label: 'Disruption Phenotype',
-  render: data => {
+  render: (data) => {
     const disruptionData = data[
       EntrySection.PathologyAndBioTech
     ].commentsData.get(CommentType.DISRUPTION_PHENOTYPE) as FreeTextComment[];
@@ -817,7 +817,7 @@ ColumnConfiguration.set(Column.ccDisruptionPhenotype, {
 });
 ColumnConfiguration.set(Column.ccDisease, {
   label: 'Disease Involvement',
-  render: data => {
+  render: (data) => {
     const diseaseComments = data[
       EntrySection.PathologyAndBioTech
     ].commentsData.get(CommentType.DISEASE) as DiseaseComment[];
@@ -837,7 +837,7 @@ ColumnConfiguration.set(
 );
 ColumnConfiguration.set(Column.ccPharmaceutical, {
   label: 'Pharmaceutical Use',
-  render: data => {
+  render: (data) => {
     const pharmaData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.PHARMACEUTICAL
     ) as FreeTextComment[];
@@ -846,7 +846,7 @@ ColumnConfiguration.set(Column.ccPharmaceutical, {
 });
 ColumnConfiguration.set(Column.ccToxicDose, {
   label: 'Toxic Dose',
-  render: data => {
+  render: (data) => {
     const toxicData = data[EntrySection.PathologyAndBioTech].commentsData.get(
       CommentType.TOXIC_DOSE
     ) as FreeTextComment[];
@@ -899,19 +899,19 @@ ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
 ColumnConfiguration.set(Column.pmId, {
   label: 'PubMed ID',
-  render: data => {
+  render: (data) => {
     let ids: Xref[] = [];
     if (data.references) {
       ids = data.references.reduce<Xref[]>((acc, citation) => {
         const xrefs = citation.citation.citationCrossReferences;
         return xrefs
-          ? acc.concat(xrefs.filter(xref => xref.database === 'PubMed'))
+          ? acc.concat(xrefs.filter((xref) => xref.database === 'PubMed'))
           : acc;
       }, []);
     }
     return (
       <ExpandableList>
-        {ids.map(xref => ({
+        {ids.map((xref) => ({
           id: xref.id,
           content: <Link to={`citations/${xref.id}`}>{xref.id}</Link>,
         }))}
@@ -929,28 +929,28 @@ ColumnConfiguration.set(Column.mappedPmId, {
 });
 ColumnConfiguration.set(Column.dateCreate, {
   label: 'Date Created',
-  render: data => {
+  render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && entryAudit.firstPublicDate;
   },
 });
 ColumnConfiguration.set(Column.dateMod, {
   label: 'Date Modified',
-  render: data => {
+  render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && entryAudit.lastAnnotationUpdateDate;
   },
 });
 ColumnConfiguration.set(Column.dateSeqMod, {
   label: 'Date Sequence Modified',
-  render: data => {
+  render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && entryAudit.lastSequenceUpdateDate;
   },
 });
 ColumnConfiguration.set(Column.version, {
   label: 'Version',
-  render: data => {
+  render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && <Fragment>{entryAudit.entryVersion}</Fragment>;
   },
@@ -964,7 +964,7 @@ ColumnConfiguration.set(Column.ftDomain, getFeatureColumn(FeatureType.DOMAIN));
 ColumnConfiguration.set(Column.ftMotif, getFeatureColumn(FeatureType.MOTIF));
 ColumnConfiguration.set(Column.proteinFamilies, {
   label: 'Protein Families',
-  render: data => {
+  render: (data) => {
     // TODO this actually seems to be a subset of this with a query on link?
     // Could maybe be removed
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
@@ -977,7 +977,7 @@ ColumnConfiguration.set(Column.ftRegion, getFeatureColumn(FeatureType.REGION));
 ColumnConfiguration.set(Column.ftRepeat, getFeatureColumn(FeatureType.REPEAT));
 ColumnConfiguration.set(Column.ccSimilarity, {
   label: 'Sequence Similarities',
-  render: data => {
+  render: (data) => {
     const familiesData = data[EntrySection.FamilyAndDomains].commentsData.get(
       CommentType.SIMILARITY
     ) as FreeTextComment[];
@@ -987,7 +987,7 @@ ColumnConfiguration.set(Column.ccSimilarity, {
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
 ColumnConfiguration.set(Column.taxId, {
   label: 'Taxon ID',
-  render: data => {
+  render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return (
       organismData && (
@@ -1009,7 +1009,7 @@ const getXrefColumn = (databaseName: string) => ({
     const { xrefData } = data[entrySection];
     // Get the category for the database name in the section
     const category = xrefData.find(
-      xrefCategory =>
+      (xrefCategory) =>
         xrefCategory.category === databaseNameToCategory.get(databaseName)
     );
     if (!category) {
@@ -1017,7 +1017,7 @@ const getXrefColumn = (databaseName: string) => ({
     }
     // Get the database based on the name
     const xrefsGoupedByDatabase = category.databases.find(
-      databaseGroup => databaseGroup.database === databaseName
+      (databaseGroup) => databaseGroup.database === databaseName
     );
     return (
       xrefsGoupedByDatabase && (
@@ -1038,8 +1038,8 @@ const getXrefColumn = (databaseName: string) => ({
 
 // Add all database cross-reference columns
 Object.values(Column)
-  .filter(col => col.startsWith('dr_'))
-  .forEach(colName => {
+  .filter((col) => col.startsWith('dr_'))
+  .forEach((colName) => {
     const databaseInfo = getDatabaseInfoByName(colName.substring(3));
     if (!databaseInfo || !databaseInfo.name) {
       /* eslint-disable no-console */

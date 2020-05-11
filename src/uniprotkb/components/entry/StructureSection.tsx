@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import { Card } from 'franklin-sites';
 import { hasContent } from '../../utils/utils';
 import EntrySection from '../../types/entrySection';

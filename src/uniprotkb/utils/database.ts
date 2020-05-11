@@ -1,4 +1,4 @@
-import { flatten } from 'lodash';
+import { flatten } from 'lodash-es';
 import EntrySection from '../types/entrySection';
 import {
   DatabaseCategory,
@@ -14,7 +14,7 @@ export const getDatabaseInfoMaps = (databaseInfo: DatabaseInfo) => {
     [database: string]: DatabaseInfoPoint;
   } = {};
   const implicitDatabaseXRefs = new Map<string, Xref>();
-  databaseInfo.forEach(info => {
+  databaseInfo.forEach((info) => {
     const { name, category, implicit } = info as {
       name: string;
       category: DatabaseCategory;
@@ -53,12 +53,12 @@ export const selectDatabases = (
   [
     ...flatten(
       categories.map(
-        category =>
+        (category) =>
           databaseCategoryToNames.get(category as DatabaseCategory) || []
       )
     ),
     ...whitelist,
-  ].filter(db => !blacklist.includes(db));
+  ].filter((db) => !blacklist.includes(db));
 
 export const getEntrySectionToDatabaseCategoryOrder = (
   entrySectionToDatabaseNames: Map<EntrySection, string[]>,

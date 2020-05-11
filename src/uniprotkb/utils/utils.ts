@@ -1,4 +1,4 @@
-import { uniq } from 'lodash';
+import { uniq } from 'lodash-es';
 import UniProtKBEntryConfig from '../config/UniProtEntryConfig';
 import { UniProtkbUIModel } from '../adapters/uniProtkbConverter';
 import { GeneNamesData } from '../adapters/namesAndTaxonomyConverter';
@@ -6,7 +6,7 @@ import { Property, PropertyKey } from '../types/modelTypes';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const hasContent = (obj: any) => {
-  return Object.values(obj).some(val => {
+  return Object.values(obj).some((val) => {
     if (Array.isArray(val)) {
       const valArray = val as any[];
       return valArray.length > 0;
@@ -14,7 +14,7 @@ export const hasContent = (obj: any) => {
     if (typeof val === 'object' && val) {
       if (val instanceof Map) {
         return Array.from(val.values()).some(
-          value => value && value.length > 0
+          (value) => value && value.length > 0
         );
       }
       return Object.values(val).length > 0;
@@ -36,7 +36,7 @@ export const flattenGeneNameData = (geneNamesData: GeneNamesData) => {
       if (geneName) {
         geneNames.push(geneName.value);
       }
-      [synonyms, orfNames, orderedLocusNames].forEach(names => {
+      [synonyms, orfNames, orderedLocusNames].forEach((names) => {
         names.forEach(({ value }) => {
           geneNames.push(value);
         });

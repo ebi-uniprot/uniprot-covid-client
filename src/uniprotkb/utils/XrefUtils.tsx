@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import {
   databaseNameToCategory,
   entrySectionToDatabaseNames,
@@ -32,14 +32,14 @@ export type XrefUIModel = {
 export const getDRImplicitXrefs = (xrefs: Xref[], geneNames: string[]) => {
   // Get DR line contingent-implicit xrefs
   const implicitDatabaseDRPresenceCheck: { [key: string]: boolean } = {};
-  Object.keys(implicitDatabaseDRPresence).forEach(xref => {
+  Object.keys(implicitDatabaseDRPresence).forEach((xref) => {
     implicitDatabaseDRPresenceCheck[xref] = false;
   });
   const implicitDatabaseDRAbsenceCheck: { [key: string]: boolean } = {};
-  Object.keys(implicitDatabaseDRAbsence).forEach(xref => {
+  Object.keys(implicitDatabaseDRAbsence).forEach((xref) => {
     implicitDatabaseDRAbsenceCheck[xref] = true;
   });
-  xrefs.forEach(xref => {
+  xrefs.forEach((xref) => {
     const { database: name } = xref;
     if (!name) {
       return;
@@ -62,7 +62,7 @@ export const getDRImplicitXrefs = (xrefs: Xref[], geneNames: string[]) => {
       }
       const implicitNames = ruleMap[name] as string[];
       if (implicitNames) {
-        implicitNames.forEach(implicitName => {
+        implicitNames.forEach((implicitName) => {
           const xref = implicitDatabaseXRefs.get(implicitName);
           if (xref) {
             let property = {};
@@ -151,7 +151,7 @@ export const getECImplicitXrefs = (ecNumbers?: ValueWithEvidence[] | null) => {
   // EC dependent implicit databases
   const foundXrefs: Xref[] = [];
   if (ecNumbers) {
-    implicitDatabasesEC.forEach(name => {
+    implicitDatabasesEC.forEach((name) => {
       const xref = implicitDatabaseXRefs.get(name);
       if (xref) {
         ecNumbers.forEach(({ value }) => {
@@ -172,7 +172,7 @@ export const getECImplicitXrefs = (ecNumbers?: ValueWithEvidence[] | null) => {
 export const getUnconditionalImplicitXrefs = () => {
   // Always include these implicit databases (ie they are unconditional)
   const foundXrefs: Xref[] = [];
-  implicitDatabaseAlwaysInclude.forEach(name => {
+  implicitDatabaseAlwaysInclude.forEach((name) => {
     const xref = implicitDatabaseXRefs.get(name);
     if (xref) {
       foundXrefs.push(xref);
@@ -189,20 +189,20 @@ export const getJoinedXrefs = (xrefs: Xref[]) => {
   if (!xrefs || xrefs.length === 0) {
     return xrefs;
   }
-  const { JOINED, NOT_JOINED } = groupBy(xrefs, xref =>
+  const { JOINED, NOT_JOINED } = groupBy(xrefs, (xref) =>
     xref.properties && xref.properties.Status === 'JOINED'
       ? 'JOINED'
       : 'NOT_JOINED'
   );
   if (JOINED) {
-    return NOT_JOINED.map(xref => {
+    return NOT_JOINED.map((xref) => {
       const joinedXrefIds = JOINED.filter(
-        joinedXref =>
+        (joinedXref) =>
           joinedXref.properties &&
           xref.properties &&
           joinedXref.properties.ProteinId === xref.properties.ProteinId &&
           joinedXref.id
-      ).map(joinedXref => joinedXref.id) as string[];
+      ).map((joinedXref) => joinedXref.id) as string[];
       return {
         ...xref,
         additionalIds: joinedXrefIds,
@@ -243,7 +243,7 @@ export const getXrefsForSection = (
     ),
     ...getGenePatternOrganismImplicitXrefs(geneNames, commonName),
     ...getECImplicitXrefs(ecNumbers),
-  ].forEach(xref => {
+  ].forEach((xref) => {
     const { database: name } = xref;
     if (!name) {
       return;
@@ -271,7 +271,7 @@ export const getXrefsForSection = (
     return [];
   }
   const xrefCategories: XrefUIModel[] = [];
-  databaseCategoryOrder.forEach(category => {
+  databaseCategoryOrder.forEach((category) => {
     const nameToXrefs = categoryToNameToXrefs.get(category);
     if (!nameToXrefs) {
       return;
