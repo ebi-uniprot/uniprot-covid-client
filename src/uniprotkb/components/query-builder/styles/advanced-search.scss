@@ -1,0 +1,32 @@
+@import "../../../../shared/styles/settings";
+
+.advanced-search {
+  .advanced-search__clause {
+    display: flex;
+    align-items: center;
+
+    &>div,
+    &>select,
+    &>a {
+      margin: 0 $gutter-size;
+    }
+
+    .advanced-search__logic {
+      flex: 0 1 6rem;
+    }
+
+    .advanced-search__inputs {
+      flex-grow: 2;
+      margin-bottom: 0.25rem;
+      display: flex;
+
+      label {
+        width: 100%;
+      }
+    }
+  }
+
+  #submit-query {
+    float: right;
+  }
+}
