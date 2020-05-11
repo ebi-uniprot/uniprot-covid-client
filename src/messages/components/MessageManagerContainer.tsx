@@ -2,7 +2,7 @@ import React, { FC, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators, Dispatch } from 'redux';
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import * as actions from '../state/messagesActions';
 import { MessageType, MessageFormat } from '../types/messagesTypes';
 import { RootAction, RootState } from '../../app/state/rootInitialState';

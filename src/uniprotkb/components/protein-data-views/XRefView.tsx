@@ -1,7 +1,7 @@
 import React, { Fragment, FC } from 'react';
 import { v1 } from 'uuid';
 import idx from 'idx';
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 import { InfoList, ExternalLink, ExpandableList } from 'franklin-sites';
 import {
   databaseCategoryToString,
@@ -128,7 +128,7 @@ const EMBLXref: FC<{
       {') '}
       {id && <ExternalLink url={externalUrls.ENA(id)}>{id}</ExternalLink>}
       {additionalIds &&
-        additionalIds.map(additionalId => (
+        additionalIds.map((additionalId) => (
           <ExternalLink url={externalUrls.ENA(additionalId)} key={additionalId}>
             {additionalId}
           </ExternalLink>
@@ -168,7 +168,7 @@ export const XRef: FC<XRefProps> = ({
   }
   let propertiesNode;
   if (properties && !implicit) {
-    propertiesNode = Object.keys(properties).map(key =>
+    propertiesNode = Object.keys(properties).map((key) =>
       [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key as PropertyKey)
         ? getPropertyLink(databaseInfo, key as PropertyKey, xref)
         : getPropertyString(key, properties[key])
@@ -315,7 +315,7 @@ const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
   crc64,
 }): JSX.Element => {
   const infoData = sortBy(databases, ({ database }) => [
-    idx(databaseToDatabaseInfo, o => o[database].implicit),
+    idx(databaseToDatabaseInfo, (o) => o[database].implicit),
     database,
   ]).map((database): {
     title: string;

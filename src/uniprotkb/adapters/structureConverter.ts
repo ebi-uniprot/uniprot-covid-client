@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import FeatureType from '../types/featureType';
 import { convertSection, UIModel } from './sectionConverter';
 import EntrySection from '../types/entrySection';
@@ -24,8 +24,8 @@ const convertStructure = (data: UniProtkbAPIModel) => {
   // Extract xrefs to PDB
   if (data.uniProtKBCrossReferences) {
     const structureInfo = data.uniProtKBCrossReferences
-      .filter(ref => ref.database === 'PDB')
-      .map(item => {
+      .filter((ref) => ref.database === 'PDB')
+      .map((item) => {
         const method = item.properties && item.properties.Method;
         return { ...item, method };
       });

@@ -14,28 +14,48 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Async loading of page components
-const HomePage = lazy(() => import('./HomePage'));
-const ResultsPage = lazy(() =>
-  import('../../uniprotkb/components/results/ResultsContainer')
+const HomePage = lazy(() =>
+  import(/* webpackChunkName: "home-page" */ './HomePage')
 );
-const EntryPage = lazy(() => import('../../uniprotkb/components/entry/Entry'));
+const ResultsPage = lazy(() =>
+  import(
+    /* webpackChunkName: "results" */ '../../uniprotkb/components/results/ResultsContainer'
+  )
+);
+const EntryPage = lazy(() =>
+  import(
+    /* webpackChunkName: "entry" */ '../../uniprotkb/components/entry/Entry'
+  )
+);
 const AdvancedSearchPage = lazy(() =>
-  import('../../uniprotkb/components/query-builder/AdvancedSearchContainer')
+  import(
+    /* webpackChunkName: "advanced-search" */ '../../uniprotkb/components/query-builder/AdvancedSearchContainer'
+  )
 );
 const CustomiseTablePage = lazy(() =>
-  import('../../uniprotkb/components/customise-table/CustomiseTableContainer')
+  import(
+    /* webpackChunkName: "customise-table" */ '../../uniprotkb/components/customise-table/CustomiseTableContainer'
+  )
 );
 const DownloadPage = lazy(() =>
-  import('../../uniprotkb/components/download/DownloadContainer')
+  import(
+    /* webpackChunkName: "download" */ '../../uniprotkb/components/download/DownloadContainer'
+  )
 );
 const ResourceNotFoundPage = lazy(() =>
-  import('../../shared/components/error-pages/ResourceNotFoundPage')
+  import(
+    /* webpackChunkName: "resource-not-found" */ '../../shared/components/error-pages/ResourceNotFoundPage'
+  )
 );
 const ServiceUnavailablePage = lazy(() =>
-  import('../../shared/components/error-pages/ServiceUnavailablePage')
+  import(
+    /* webpackChunkName: "service-unavailable" */ '../../shared/components/error-pages/ServiceUnavailablePage'
+  )
 );
 const JobErrorPage = lazy(() =>
-  import('../../shared/components/error-pages/JobErrorPage')
+  import(
+    /* webpackChunkName: "job-error" */ '../../shared/components/error-pages/JobErrorPage'
+  )
 );
 
 const App = () => (

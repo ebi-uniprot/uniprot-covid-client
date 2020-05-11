@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { uniq } from 'lodash';
+import { uniq } from 'lodash-es';
 import { Loader, Publication, DataList } from 'franklin-sites';
 import { LiteratureForProteinAPI } from '../../types/literatureTypes';
 import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
@@ -31,7 +31,7 @@ const EntryPublications: FC<{
       return;
     }
     const { results } = data;
-    setAllResults(allRes => [...allRes, ...results]);
+    setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -91,7 +91,7 @@ const EntryPublications: FC<{
                 title: 'Tissue',
                 content: referenceComments && (
                   <ul className="no-bullet">
-                    {referenceComments.map(comment => (
+                    {referenceComments.map((comment) => (
                       <li key={comment.value}>{comment.value}</li>
                     ))}
                   </ul>
@@ -101,7 +101,7 @@ const EntryPublications: FC<{
                 title: 'Categories',
                 content: categories && (
                   <ul className="no-bullet">
-                    {uniq(categories).map(category => (
+                    {uniq(categories).map((category) => (
                       <li key={category}>{category}</li>
                     ))}
                   </ul>

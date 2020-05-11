@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Card, ExpandableList, ExternalLink } from 'franklin-sites';
 import { v1 } from 'uuid';
-import { groupBy } from 'lodash';
+import { groupBy } from 'lodash-es';
 import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
 import XRefView from '../protein-data-views/XRefView';
 import EntrySection from '../../types/entrySection';
@@ -49,7 +49,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
     DatabaseCategory,
     XrefsGoupedByDatabase[]
   >();
-  Object.values(EntrySection).forEach(entrySection => {
+  Object.values(EntrySection).forEach((entrySection) => {
     transformedData[entrySection as EntrySection].xrefData.forEach(
       ({ category, databases }) => {
         const currentDatabases = databaseCategoryToXrefsGoupedByDatabase.get(
@@ -74,7 +74,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
       )
       // Only need the first entry as it assumed that each database
       // list is the same across all of the sections
-    ).map(v => v[0]),
+    ).map((v) => v[0]),
   }));
 
   return (
@@ -84,7 +84,7 @@ const EntryExternalLinks: React.FC<EntryExternalLinksProps> = ({
           <Fragment>
             <h3>Web resources</h3>
             <ExpandableList descriptionString="alternative names">
-              {webResourceComments.map(comment => ({
+              {webResourceComments.map((comment) => ({
                 id: v1(),
                 content: (
                   <WebResourceLink comment={comment as WebResourceComment} />
