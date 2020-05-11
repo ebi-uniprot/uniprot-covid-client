@@ -6,9 +6,9 @@
   "main": "./src/ui/index.tsx",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --config webpack.dev.js",
-    "build": "webpack --mode production --config webpack.build.js",
-    "build:dev": "webpack --mode development --config webpack.build.js",
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
@@ -143,7 +143,6 @@
     "jest-css-modules-transform": "4.0.0",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.14.0",
-    "path": "0.12.7",
     "react-beautiful-dnd-test-utils": "3.1.0",
     "react-test-renderer": "16.13.1",
     "redux-mock-store": "1.5.4",
@@ -156,7 +155,6 @@
     "webpack-bundle-analyzer": "3.7.0",
     "webpack-cli": "3.3.11",
     "webpack-dev-server": "3.10.3",
-    "webpack-merge": "4.2.2",
     "workbox-webpack-plugin": "5.1.3"
   }
 }
