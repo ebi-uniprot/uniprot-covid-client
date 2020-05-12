@@ -19,7 +19,7 @@ import {
   ProtVistaIcon,
 } from 'franklin-sites';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
-import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import { RootAction } from '../../../app/state/rootInitialState';
 import uniProtKbConverter, {
   EntryType,
   UniProtkbInactiveEntryModel,
@@ -55,7 +55,14 @@ type MatchParams = {
   path: string;
 };
 
-const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
+type EntryProps = {
+  addMessage: (message: MessageType) => void;
+} & RouteComponentProps<MatchParams>;
+
+const Entry: React.FC<EntryProps> = ({
+  addMessage,
+  match,
+}) => {
   const { path, params } = match;
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
@@ -84,20 +91,18 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   }
 
   if (redirectedTo) {
-console.log("got a redirect.");
     const message: MessageType = {
       id: 'job-id',
-      content: `You have been redirected to ${redirectedTo}.`,
+      content: `You are seeing the results from: ${redirectedTo}.`,
       format: MessageFormat.IN_PAGE,
       level: MessageLevel.SUCCESS,
       dateActive: Date.now(),
-      dateExpired: Date.now() + (20 * 60 * 1000),
+      dateExpired: Date.now(),
       tag: MessageTag.REDIRECT,
     };
 
-    messagesActions.addMessage(message);
+    addMessage(message);
   }
-
 
   const transformedData = uniProtKbConverter(data);
 
@@ -230,11 +235,7 @@ console.log("got a redirect.");
   );
 };
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    activeMessages: state.messages.active,  // don't really need this here
-  }
-};
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
   bindActionCreators(

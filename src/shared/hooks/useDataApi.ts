@@ -34,9 +34,6 @@ const reducer = (state: State, action: Action): State => {
       };
     case ActionType.SUCCESS:
       // eslint-disable-next-line no-case-declarations
-// console.log("url:", action.response && action.response.request.responseURL);
-// console.log("originalURL:", action.originalURL);
-// console.log("location:", location);
       const newState: State = {
         loading: false,
         data: action.response && action.response.data,
@@ -46,11 +43,16 @@ const reducer = (state: State, action: Action): State => {
       };
       if (
         action.response &&
-        // action.response.config.url !== action.originalURL
         action.response.request.responseURL !== action.originalURL
       ) {
         newState.redirectedTo = action.response.request.responseURL;
-// console.log("got a redirect:", newState.redirectedTo);
+      }
+      // this only needs to be here for axios mock calls
+      if (
+        action.response &&
+        action.response.config.url !== action.originalURL
+      ) {
+        newState.redirectedTo = action.response.config.url;
       }
       return newState;
     case ActionType.ERROR:
