@@ -17,6 +17,7 @@ import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import ResultsButtons from './ResultsButtons';
 import ResultsFacets from './ResultsFacets';
+import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 
 type ResultsProps = {
   namespace: Namespace;
@@ -50,10 +51,10 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
     sortDirection
   );
 
-  const { data, error, loading, headers } = useDataApi(initialApiUrl);
+  const { data, error, loading, headers, status } = useDataApi(initialApiUrl);
 
   if (error) {
-    // TODO handle error with ErrorPage
+    return <ErrorHandler status={status} />;
   }
 
   if (loading) {
