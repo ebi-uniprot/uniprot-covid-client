@@ -39,6 +39,14 @@ import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 import FeatureViewer from './FeatureViewer';
 import useDataApi from '../../../shared/hooks/useDataApi';
 
+import * as messagesActions from '../../../messages/state/messagesActions';
+import {
+  MessageLevel,
+  MessageFormat,
+  MessageType,
+  MessageTag,
+} from '../../../messages/types/messagesTypes';
+
 type MatchParams = {
   accession: string;
   path: string;
@@ -49,7 +57,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const { accession } = params;
   const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
 
-  const { loading, data, status, error } = useDataApi(apiUrls.entry(accession));
+  const { loading, data, status, error, redirectedTo } = useDataApi(apiUrls.entry(accession));
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -71,6 +79,23 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       </BaseLayout>
     );
   }
+
+  if (redirectedTo) {
+console.log("got a redirect.");
+    const message: MessageType = {
+      id: 'job-id',
+      content: `You have been redirected to ${redirectedTo}.`,
+      format: MessageFormat.IN_PAGE,
+      level: MessageLevel.SUCCESS,
+      dateActive: Date.now(),
+      dateExpired: Date.now() + (20 * 60 * 1000),
+      tag: MessageTag.REDIRECT,
+    };
+
+    messagesActions.addMessage(message);
+  }
+
+
   const transformedData = uniProtKbConverter(data);
 
   const sections = UniProtKBEntryConfig.map(section => ({
