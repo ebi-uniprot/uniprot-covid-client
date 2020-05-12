@@ -1366,10 +1366,10 @@
     "@svgr/plugin-svgo" "^5.4.0"
     loader-utils "^2.0.0"
 
-"@swissprot/rhea-reaction-visualizer@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@swissprot/rhea-reaction-visualizer/-/rhea-reaction-visualizer-0.0.15.tgz#3c3b6c65eb33584bd0ad0e3d84fd84b85462da6c"
-  integrity sha512-MJIO1rzFDooXmTGs8imZdtJB/mBJpq+SJU9HtbVvjNfuO+fuoq3POdtKaFssKB6tzJlHCXor5xUb9Ug3AWBiLw==
+"@swissprot/rhea-reaction-visualizer@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@swissprot/rhea-reaction-visualizer/-/rhea-reaction-visualizer-0.0.12.tgz#2f2ab5f79a4da244f0ff064900691121278c4d72"
+  integrity sha512-kFkoSr+cClE1LBU+Lk5PAu/4YWIIpVHi5W9MT9bE+Z5JdvbpjshBbcYkteL3V+xkOr/Oty3cI6R1qSsEPm2sFQ==
 
 "@testing-library/dom@^7.1.0":
   version "7.2.2"
