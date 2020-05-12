@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useCallback } from 'react';
 import '@swissprot/rhea-reaction-visualizer';
+import { useModal, ModalBackdrop, Window } from 'franklin-sites';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import {
   CatalyticActivityComment,
@@ -7,6 +8,8 @@ import {
   PhysiologicalReaction,
 } from '../../types/commentTypes';
 import './styles/catalytic-activity-view.scss';
+
+// example accession to view this component: P31937
 
 export const getRheaId = (referenceId: string) => {
   const re = /^RHEA:(\d+)$/i;
@@ -32,14 +35,21 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   show: initialShow,
 }) => {
   const [show, setShow] = useState(initialShow);
-
+  const [zoomImageUrl, setZoomImageUrl] = useState('');
+  const { displayModal, setDisplayModal, Modal } = useModal(
+    ModalBackdrop,
+    Window
+  );
   const callback = useCallback((node): void => {
     if (node) {
       node.addEventListener(
         'zoomClicked',
-        ({ detail }: { detail: { chebi: string; imgURL: string } }) =>
+        ({ detail }: { detail: { chebi: string; imgURL: string } }) => {
           // eslint-disable-next-line no-console
-          console.log('zoomClicked:', detail)
+          console.log('zoomClicked:', detail);
+          setZoomImageUrl(detail.imgURL);
+          setDisplayModal(true);
+        }
       );
     }
   }, []);
@@ -54,9 +64,21 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
         {`${show ? 'Hide' : 'View'} Rhea reaction`}
       </button>
       {show && (
-        <div className="rhea-reaction-visualizer__component">
-          <rhea-reaction rheaid={rheaId} zoom showids ref={callback} />
-        </div>
+        <Fragment>
+          <div className="rhea-reaction-visualizer__component">
+            <rhea-reaction rheaid={rheaId} zoom showids={true} ref={callback} />
+          </div>
+          {displayModal && zoomImageUrl && (
+            <Modal
+              handleExitModal={() => setDisplayModal(false)}
+              width="50vw"
+              height="50vh"
+              withFooterCloseButton={true}
+            >
+              <img src={zoomImageUrl} />
+            </Modal>
+          )}
+        </Fragment>
       )}
     </Fragment>
   );
