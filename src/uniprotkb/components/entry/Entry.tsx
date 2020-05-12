@@ -1,4 +1,6 @@
 import React, { useState, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import {
   withRouter,
   RouteComponentProps,
@@ -17,6 +19,7 @@ import {
   ProtVistaIcon,
 } from 'franklin-sites';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
 import uniProtKbConverter, {
   EntryType,
   UniProtkbInactiveEntryModel,
@@ -227,4 +230,20 @@ console.log("got a redirect.");
   );
 };
 
-export default withRouter(Entry);
+const mapStateToProps = (state: RootState) => {
+  return {
+    activeMessages: state.messages.active,  // don't really need this here
+  }
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      addMessage: (message: MessageType) => messagesActions.addMessage(message),
+    },
+    dispatch
+  );
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Entry)
+);
