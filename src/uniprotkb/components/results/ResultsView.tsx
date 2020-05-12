@@ -12,7 +12,7 @@ import { ViewMode } from '../../state/resultsInitialState';
 import { SortableColumn, Column } from '../../types/columnTypes';
 import './styles/warning.scss';
 import './styles/results-view.scss';
-import { getParamsFromURL, getLocationForParams } from '../column-select/utils';
+import { getParamsFromURL, getLocationObjForParams } from './utils';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import getNextUrlFromResponse from '../../utils/queryUtils';
@@ -109,7 +109,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         : SortDirection.descend;
 
     history.push(
-      getLocationForParams(
+      getLocationObjForParams(
+        '/uniprotkb',
         query,
         selectedFacets,
         apiColumn,

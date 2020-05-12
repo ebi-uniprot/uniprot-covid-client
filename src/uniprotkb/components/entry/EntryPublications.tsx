@@ -1,23 +1,27 @@
 import React, { FC, useState, useEffect } from 'react';
 import { uniq } from 'lodash';
 import { Loader, Publication, DataList } from 'franklin-sites';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { LiteratureForProteinAPI } from '../../types/literatureTypes';
 import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
-import { SelectedFacet } from '../../types/resultsTypes';
 import formatCitationData, {
   getCitationPubMedId,
 } from '../../adapters/literatureConverter';
 import getNextUrlFromResponse from '../../utils/queryUtils';
+import { getParamsFromURL } from '../results/utils';
 
-const EntryPublications: FC<{
-  accession: string;
-  selectedFacets: SelectedFacet[];
-}> = ({ accession, selectedFacets }) => {
-  const [url, setUrl] = useState(
-    getUniProtPublicationsQueryUrl(accession, selectedFacets)
-  );
+const EntryPublications: FC<
+  {
+    accession: string;
+  } & RouteComponentProps
+> = ({ accession, location }) => {
+  const { search } = location;
+  const { selectedFacets } = getParamsFromURL(search);
+  const initialUrl = getUniProtPublicationsQueryUrl(accession, selectedFacets);
+
+  const [url, setUrl] = useState(initialUrl);
   const [allResults, setAllResults] = useState<LiteratureForProteinAPI[]>([]);
   const [metaData, setMetaData] = useState<{
     total: number;
@@ -31,12 +35,21 @@ const EntryPublications: FC<{
       return;
     }
     const { results } = data;
-    setAllResults(allRes => [...allRes, ...results]);
+    setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
     }));
   }, [data, headers]);
+
+  useEffect(() => {
+    if (url === initialUrl) {
+      return;
+    }
+    setUrl(initialUrl);
+    setAllResults([]);
+    setMetaData({ total: 0, nextUrl: undefined });
+  }, [initialUrl]);
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -91,7 +104,7 @@ const EntryPublications: FC<{
                 title: 'Tissue',
                 content: referenceComments && (
                   <ul className="no-bullet">
-                    {referenceComments.map(comment => (
+                    {referenceComments.map((comment) => (
                       <li key={comment.value}>{comment.value}</li>
                     ))}
                   </ul>
@@ -101,7 +114,7 @@ const EntryPublications: FC<{
                 title: 'Categories',
                 content: categories && (
                   <ul className="no-bullet">
-                    {uniq(categories).map(category => (
+                    {uniq(categories).map((category) => (
                       <li key={category}>{category}</li>
                     ))}
                   </ul>
@@ -134,4 +147,4 @@ const EntryPublications: FC<{
   );
 };
 
-export default EntryPublications;
+export default withRouter(EntryPublications);

@@ -37,7 +37,7 @@ export const getParamsFromURL = (
   };
 };
 
-const facetsAsString = (facets: SelectedFacet[]): string => {
+export const facetsAsString = (facets: SelectedFacet[]): string => {
   if (!facets || facets.length <= 0) {
     return '';
   }
@@ -48,13 +48,14 @@ const facetsAsString = (facets: SelectedFacet[]): string => {
   );
 };
 
-export const getLocationForParams = (
+export const getLocationObjForParams = (
+  pathname: string,
   query: string,
   selectedFacets: SelectedFacet[],
   sortColumn?: string,
   sortDirection?: SortDirection
 ) => ({
-  pathname: '/uniprotkb',
+  pathname,
   search: [
     `query=${query}${facetsAsString(selectedFacets)}`,
     `${sortColumn ? `&sort=${sortColumn}` : ''}`,

@@ -1,48 +1,48 @@
 import React from 'react';
-import { MemoryRouter as Router } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import EntryPublicationsFacets from '../EntryPublicationsFacets';
-import mockPublicationsData from './__mocks__/entryPublicationsData.json';
+import renderWithRouter from '../../../../shared/__test-helpers__/RenderWithRouter';
 
 jest.mock('../../../../shared/hooks/useDataApi', () => ({
   __esModule: true, // this makes it work
   default: jest.fn(() => ({
     loading: false,
-    data: mockPublicationsData,
+    data: require('./__mocks__/entryPublicationsData.json'),
   })),
 }));
-
-let component;
-const setSelectedFacets = jest.fn();
-const selectedFacets = [{ name: 'study_type', value: 'large_scale' }];
+import useDataApi from '../../../../shared/hooks/useDataApi';
 
 describe('EntryPublication facets tests', () => {
-  beforeEach(() => {
-    component = render(
-      <Router>
-        <EntryPublicationsFacets
-          accession="P05067"
-          selectedFacets={selectedFacets}
-          setSelectedFacets={setSelectedFacets}
-        />
-      </Router>
-    );
-  });
-
   it('should render', () => {
-    const { asFragment } = component;
+    const { asFragment } = renderWithRouter(
+      <EntryPublicationsFacets accession="P05067" />
+    );
+    expect(useDataApi).toHaveBeenCalled();
     expect(asFragment()).toMatchSnapshot();
   });
 
   it('should add facet', () => {
-    const { getByText } = component;
+    const { getByText, history } = renderWithRouter(
+      <EntryPublicationsFacets accession="P05067" />
+    );
     fireEvent.click(getByText(/Small/));
-    expect(setSelectedFacets).toHaveBeenCalledTimes(1);
+    const {
+      location: { search },
+    } = history;
+    expect(search).toMatch(/facets=study_type:small_scale/);
   });
 
   it('should remove facet', () => {
-    const { getByText } = component;
-    fireEvent.click(getByText(/Large/));
-    expect(setSelectedFacets).toHaveBeenCalledTimes(2);
+    const { getByText, history } = renderWithRouter(
+      <EntryPublicationsFacets accession="P05067" />,
+      {
+        route: '?facets=study_type:small_scale',
+      }
+    );
+    fireEvent.click(getByText(/Small/));
+    const {
+      location: { search },
+    } = history;
+    expect(search).toMatch('');
   });
 });

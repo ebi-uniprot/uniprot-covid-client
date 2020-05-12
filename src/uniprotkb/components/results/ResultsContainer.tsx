@@ -11,7 +11,7 @@ import { Column } from '../../types/columnTypes';
 import { ViewMode } from '../../state/resultsInitialState';
 import BaseLayout from '../../../shared/components/layouts/BaseLayout';
 import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
-import { getParamsFromURL } from '../column-select/utils';
+import { getParamsFromURL } from './utils';
 import useLocalStorage from '../../../shared/hooks/useLocalStorage';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';

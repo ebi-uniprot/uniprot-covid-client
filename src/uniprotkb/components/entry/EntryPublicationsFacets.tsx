@@ -1,30 +1,40 @@
 import React from 'react';
 import { Facets, Loader } from 'franklin-sites';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { SelectedFacet } from '../../types/resultsTypes';
 import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
+import { facetsAsString, getParamsFromURL } from '../results/utils';
 
-const EntryPublicationsFacets: React.FC<{
-  accession: string;
-  selectedFacets: SelectedFacet[];
-  setSelectedFacets: (facets: SelectedFacet[]) => void;
-}> = ({ accession, selectedFacets, setSelectedFacets }) => {
-  // TODO are these working? we should use the url anyway.
+const EntryPublicationsFacets: React.FC<
+  {
+    accession: string;
+  } & RouteComponentProps
+> = ({ accession, history, location }) => {
+  const { search } = location;
+  const { selectedFacets } = getParamsFromURL(search);
   const url = getUniProtPublicationsQueryUrl(accession, selectedFacets);
   const { loading, data, status, error } = useDataApi(url);
 
   const addFacet = (name: string, value: string) => {
-    setSelectedFacets([...selectedFacets, { name, value }]);
+    const facet: SelectedFacet = { name, value };
+    history.push({
+      pathname: `/uniprotkb/${accession}/publications`,
+      search: `${facetsAsString([...selectedFacets.concat(facet)])}`,
+    });
   };
 
   const removeFacet = (name: string, value: string) => {
-    setSelectedFacets(
-      selectedFacets.filter(
-        selectedFacet =>
-          !(selectedFacet.name === name && selectedFacet.value === value)
-      )
-    );
+    history.push({
+      pathname: `/uniprotkb/${accession}/publications`,
+      search: `${facetsAsString(
+        selectedFacets.filter(
+          (selectedFacet) =>
+            !(selectedFacet.name === name && selectedFacet.value === value)
+        )
+      )}`,
+    });
   };
 
   if (error) {
@@ -47,4 +57,4 @@ const EntryPublicationsFacets: React.FC<{
   );
 };
 
-export default EntryPublicationsFacets;
+export default withRouter(EntryPublicationsFacets);

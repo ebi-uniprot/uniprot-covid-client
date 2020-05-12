@@ -27,7 +27,7 @@ exports[`EntryPublication facets tests should render 1`] = `
           </li>
           <li>
             <button
-              class="facet-active"
+              class=""
               type="button"
             >
               Large scale (8)
