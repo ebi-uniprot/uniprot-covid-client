@@ -12,19 +12,15 @@ import AnnotationScoreDoughnutChart, {
   DoughnutChartSize,
 } from '../protein-data-views/AnnotationScoreDoughnutChart';
 import getProteinHighlights from '../../adapters/proteinHighlights';
-import { SelectedEntries } from '../../types/resultsTypes';
 import './styles/uniprotkb-card.scss';
 
-const UniProtKBCard: FC<{
-  data: UniProtkbAPIModel;
-  selectedEntries: SelectedEntries;
-  handleEntrySelection: (rowId: string) => void;
-} & RouteComponentProps> = ({
-  data,
-  selectedEntries,
-  handleEntrySelection,
-  history,
-}): JSX.Element => {
+const UniProtKBCard: FC<
+  {
+    data: UniProtkbAPIModel;
+    selected: boolean;
+    handleEntrySelection: (rowId: string) => void;
+  } & RouteComponentProps
+> = ({ data, selected, handleEntrySelection, history }): JSX.Element => {
   let recommendedNameNode;
   const recommendedName = idx(
     data,
@@ -49,8 +45,8 @@ const UniProtKBCard: FC<{
       <Fragment>
         {'Gene: '}
         {data.genes
-          .filter(geneName => geneName.geneName)
-          .map(geneName => geneName.geneName && geneName.geneName.value)
+          .filter((geneName) => geneName.geneName)
+          .map((geneName) => geneName.geneName && geneName.geneName.value)
           .join(', ')}
         {' · '}
       </Fragment>
@@ -94,12 +90,8 @@ const UniProtKBCard: FC<{
         <section className="uniprot-card__left">
           <input
             type="checkbox"
-            checked={
-              selectedEntries[data.primaryAccession]
-                ? selectedEntries[data.primaryAccession]
-                : false
-            }
-            onClick={e => e.stopPropagation()}
+            checked={selected}
+            onClick={(e) => e.stopPropagation()}
             onChange={() => handleEntrySelection(data.primaryAccession)}
             data-testid="up-card-checkbox"
           />

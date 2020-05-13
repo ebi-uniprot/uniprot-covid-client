@@ -75,7 +75,7 @@
     "protvista-track": "2.6.1",
     "protvista-uniprot": "2.5.4",
     "protvista-variation": "2.6.1",
-    "protvista-variation-adapter": "2.3.3",
+    "protvista-variation-adapter": "2.9.4",
     "query-string": "6.12.1",
     "react": "16.13.1",
     "react-beautiful-dnd": "13.0.0",

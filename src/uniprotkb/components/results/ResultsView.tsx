@@ -1,7 +1,8 @@
-import React from 'react';
-import { DataTable, DataList } from 'franklin-sites';
+import React, { useState, useEffect } from 'react';
+import { DataTable, DataList, Loader } from 'franklin-sites';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
-import { SelectedEntries, SortDirection } from '../../types/resultsTypes';
+import { SortDirection } from '../../types/resultsTypes';
 import UniProtKBCard from './UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
@@ -11,33 +12,114 @@ import { ViewMode } from '../../state/resultsInitialState';
 import { SortableColumn, Column } from '../../types/columnTypes';
 import './styles/warning.scss';
 import './styles/results-view.scss';
+import { getParamsFromURL, getLocationObjForParams } from '../../utils/results-utils';
+import { getAPIQueryUrl } from '../../config/apiUrls';
+import useDataApi from '../../../shared/hooks/useDataApi';
+import getNextUrlFromResponse from '../../utils/queryUtils';
+import BaseLayout from '../../../shared/components/layouts/BaseLayout';
+import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
 
 type ResultsTableProps = {
-  results: UniProtkbAPIModel[];
-  tableColumns: (Column | SortableColumn)[];
-  selectedEntries: SelectedEntries;
-  handleEntrySelection: (rowId: string) => void;
-  handleHeaderClick: (column: SortableColumn) => void;
-  handleLoadMoreRows: () => void;
-  totalNumberResults: number;
-  sortColumn: SortableColumn;
-  sortDirection: SortDirection;
+  selectedEntries: string[];
+  columns: Column[];
   viewMode: ViewMode;
-};
+  handleEntrySelection: (rowId: string) => void;
+} & RouteComponentProps;
 
 const ResultsView: React.FC<ResultsTableProps> = ({
-  results = [],
-  totalNumberResults,
-  tableColumns,
   selectedEntries,
-  handleEntrySelection,
-  handleLoadMoreRows,
-  handleHeaderClick,
-  sortColumn,
-  sortDirection,
+  columns,
   viewMode,
+  handleEntrySelection,
+  history,
+  location,
 }) => {
-  const hasMoreData = totalNumberResults > results.length;
+  const { search: queryParamFromUrl } = location;
+  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
+    queryParamFromUrl
+  );
+
+  const initialApiUrl = getAPIQueryUrl(
+    query,
+    columns,
+    selectedFacets,
+    sortColumn,
+    sortDirection
+  );
+
+  const [url, setUrl] = useState(initialApiUrl);
+  const [metaData, setMetaData] = useState<{
+    total: number;
+    nextUrl: string | undefined;
+  }>({ total: 0, nextUrl: undefined });
+  const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
+
+  const { data, headers } = useDataApi(url);
+  // TODO handle error
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const { results } = data;
+    setAllResults((allRes) => [...allRes, ...results]);
+    setMetaData(() => ({
+      total: headers['x-totalrecords'],
+      nextUrl: getNextUrlFromResponse(headers.link),
+    }));
+  }, [data, headers]);
+
+  if (allResults.length === 0) {
+    return <Loader />;
+  }
+
+  if (allResults.length === 0) {
+    return (
+      <BaseLayout>
+        <NoResultsPage />
+      </BaseLayout>
+    );
+  }
+
+  const { total, nextUrl } = metaData;
+
+  const handleLoadMoreRows = () => nextUrl && setUrl(nextUrl);
+
+  const updateColumnSort = (column: SortableColumn) => {
+    /**
+     * NOTE: temporary fix until backend provide
+     * the correct name for sort fields
+     * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
+     */
+    const fieldNameMap = new Map([
+      [Column.accession, 'accession'],
+      [Column.id, 'mnemonic'],
+      [Column.proteinName, 'name'],
+      [Column.geneNames, 'gene'],
+      [Column.organism, 'organism_name'],
+      [Column.mass, 'mass'],
+      [Column.length, 'length'],
+    ]);
+    const apiColumn = fieldNameMap.get(column);
+
+    // Change sort direction
+    const updatedSortDirection =
+      !sortDirection || sortDirection === SortDirection.descend
+        ? SortDirection.ascend
+        : SortDirection.descend;
+
+    history.push(
+      getLocationObjForParams(
+        '/uniprotkb',
+        query,
+        selectedFacets,
+        apiColumn,
+        updatedSortDirection
+      )
+    );
+  };
+
+  const hasMoreData = total > allResults.length;
   if (viewMode === ViewMode.CARD) {
     return (
       <div className="datalist">
@@ -45,21 +127,22 @@ const ResultsView: React.FC<ResultsTableProps> = ({
           getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
             primaryAccession
           }
-          data={results}
+          data={allResults}
           dataRenderer={(dataItem: UniProtkbAPIModel) => (
             <UniProtKBCard
               data={dataItem}
-              selectedEntries={selectedEntries}
+              selected={selectedEntries.includes(dataItem.primaryAccession)}
               handleEntrySelection={handleEntrySelection}
             />
           )}
           onLoadMoreItems={handleLoadMoreRows}
           hasMoreData={hasMoreData}
+          loaderComponent={<Loader />}
         />
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columns = tableColumns.map(columnName => {
+  const columnsToDisplay = columns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {
@@ -68,7 +151,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         render: (row: UniProtkbAPIModel) =>
           columnConfig.render(uniProtKbConverter(row) as UniProtkbUIModel),
         sortable: columnConfig.sortable,
-        sorted: columnName === sortColumn && sortDirection,
+        sorted: columnName === sortColumn && sortDirection, // TODO this doesn't seem to update the view
       };
     }
     return {
@@ -86,16 +169,17 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       getIdKey={({ primaryAccession }: { primaryAccession: string }) =>
         primaryAccession
       }
-      columns={columns}
-      data={results}
+      columns={columnsToDisplay}
+      data={allResults}
       selectable
       selected={selectedEntries}
       onSelect={handleEntrySelection}
-      onHeaderClick={handleHeaderClick}
+      onHeaderClick={updateColumnSort}
       onLoadMoreItems={handleLoadMoreRows}
       hasMoreData={hasMoreData}
+      loaderComponent={<Loader />}
     />
   );
 };
 
-export default ResultsView;
+export default withRouter(ResultsView);

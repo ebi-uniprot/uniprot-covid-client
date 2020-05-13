@@ -821,15 +821,6 @@ exports[`Entry view should render 1`] = `
             <h3>
               GO Annotations
             </h3>
-            <div
-              class="GoRibbon__container"
-            >
-              <div
-                class="GoRibbon__container__message"
-              >
-                Loading...
-              </div>
-            </div>
           </div>
           <h3>
             Enzyme and pathway databases

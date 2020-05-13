@@ -32,17 +32,26 @@ describe('Results component', () => {
     expect(getSpy).toHaveBeenCalled();
   });
 
-  test('should select/deselect a facet', async () => {
+  test('should select a facet', async () => {
     await act(async () => {
       const { findByText, history } = renderWithRedux(<ResultsContainer />, {
         route: '/uniprotkb?query=blah',
       });
-      let unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
+      expect(history.location.search).toEqual('?query=blah');
+      const unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual(
         '?query=blah&facets=reviewed:false'
       );
-      unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
+    });
+  });
+
+  test('should deselect a facet', async () => {
+    await act(async () => {
+      const { findByText, history } = renderWithRedux(<ResultsContainer />, {
+        route: '/uniprotkb?query=blah&facets=reviewed:false',
+      });
+      const unreviewedButton = await findByText('Unreviewed (TrEMBL) (455)');
       fireEvent.click(unreviewedButton);
       expect(history.location.search).toEqual('?query=blah');
     });
@@ -80,26 +89,30 @@ describe('Results component', () => {
       query: searchInitialState,
       results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
     };
-    const { getByText, history, findByText } = renderWithRedux(
-      <ResultsContainer />,
-      {
-        initialState: state,
-        route: '/uniprotkb?query=blah',
-      }
-    );
-    let columnHeader = await findByText('Entry');
-    fireEvent.click(columnHeader);
-    expect(history.location.search).toBe('?query=blah&sort=accession');
-    columnHeader = await findByText('Entry');
-    fireEvent.click(columnHeader);
-    expect(history.location.search).toBe(
-      '?query=blah&sort=accession&dir=ascend'
-    );
-    columnHeader = await findByText('Entry');
-    fireEvent.click(columnHeader);
-    expect(history.location.search).toBe(
-      '?query=blah&sort=accession&dir=descend'
-    );
+    await act(async () => {
+      const { getByText, history, findByText } = renderWithRedux(
+        <ResultsContainer />,
+        {
+          initialState: state,
+          route: '/uniprotkb?query=blah',
+        }
+      );
+      let columnHeader = await findByText('Entry');
+      fireEvent.click(columnHeader);
+      expect(history.location.search).toBe(
+        '?query=blah&sort=accession&dir=ascend'
+      );
+      columnHeader = await findByText('Entry');
+      fireEvent.click(columnHeader);
+      expect(history.location.search).toBe(
+        '?query=blah&sort=accession&dir=descend'
+      );
+      columnHeader = await findByText('Entry');
+      fireEvent.click(columnHeader);
+      expect(history.location.search).toBe(
+        '?query=blah&sort=accession&dir=ascend'
+      );
+    });
   });
 
   test('should display no results page', async () => {

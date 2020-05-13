@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Search } from '../SearchContainer';
+import renderWithRouter from '../../../../shared/__test-helpers__/RenderWithRouter';
+import Search from '../SearchContainer';
 
 const props = {
   dispatchCopyQueryClausesToSearch: jest.fn(),
@@ -15,7 +15,7 @@ const props = {
 
 describe('Search shallow components', () => {
   test('should render', () => {
-    const { asFragment } = render(<Search {...props} />);
+    const { asFragment } = renderWithRouter(<Search {...props} />);
     expect(asFragment()).toMatchSnapshot();
   });
 });

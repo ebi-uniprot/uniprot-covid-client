@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import {
   withRouter,
   RouteComponentProps,
@@ -26,10 +26,7 @@ import EntrySection from '../../types/entrySection';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
 import apiUrls from '../../config/apiUrls';
-import {
-  SelectedFacet,
-  fileFormatEntryDownload,
-} from '../../types/resultsTypes';
+import { fileFormatEntryDownload } from '../../types/resultsTypes';
 import EntryPublicationsFacets from './EntryPublicationsFacets';
 import EntryPublications from './EntryPublications';
 import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
@@ -47,7 +44,6 @@ type MatchParams = {
 const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const { path, params } = match;
   const { accession } = params;
-  const [selectedFacets, setSelectedFacets] = useState<SelectedFacet[]>([]);
 
   const { loading, data, status, error } = useDataApi(apiUrls.entry(accession));
 
@@ -73,7 +69,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   }
   const transformedData = uniProtKbConverter(data);
 
-  const sections = UniProtKBEntryConfig.map(section => ({
+  const sections = UniProtKBEntryConfig.map((section) => ({
     label: section.name,
     id: section.name,
 
@@ -112,7 +108,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           >
             <div className="dropdown-menu__content">
               <ul>
-                {fileFormatEntryDownload.map(fileFormat => (
+                {fileFormatEntryDownload.map((fileFormat) => (
                   <li key={fileFormat}>
                     <a
                       href={apiUrls.entryDownload(
@@ -144,19 +140,8 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       name: 'Publications',
       path: 'publications',
       icon: <PublicationIcon />,
-      itemContent: (
-        <EntryPublicationsFacets
-          accession={accession}
-          selectedFacets={selectedFacets}
-          setSelectedFacets={setSelectedFacets}
-        />
-      ),
-      mainContent: (
-        <EntryPublications
-          accession={accession}
-          selectedFacets={selectedFacets}
-        />
-      ),
+      itemContent: <EntryPublicationsFacets accession={accession} />,
+      mainContent: <EntryPublications accession={accession} />,
     },
     {
       name: 'External links',
@@ -177,7 +162,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
         }
         actionButtons={
           <Switch>
-            {displayMenuData.map(displayItem => (
+            {displayMenuData.map((displayItem) => (
               <Route
                 path={`${path}/${displayItem.path}`}
                 render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
@@ -188,7 +173,7 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
         }
       >
         <Switch>
-          {displayMenuData.map(displayItem => (
+          {displayMenuData.map((displayItem) => (
             <Route
               path={`${path}/${displayItem.path}`}
               render={() => <Fragment>{displayItem.mainContent}</Fragment>}

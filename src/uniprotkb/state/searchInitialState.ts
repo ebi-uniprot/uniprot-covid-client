@@ -9,7 +9,6 @@ import {
 
 export type SearchState = {
   readonly clauses: Clause[];
-  readonly queryString: string;
   readonly namespace: Namespace;
   readonly searchTerms: { data: SearchTermType[]; isFetching: boolean };
   readonly evidences: Evidences;
@@ -17,7 +16,6 @@ export type SearchState = {
 
 const searchInitialState: SearchState = {
   clauses: createPreSelectedClauses(),
-  queryString: '',
   namespace: Namespace.uniprotkb,
   searchTerms: {
     data: [],
