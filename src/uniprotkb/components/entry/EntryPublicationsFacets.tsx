@@ -21,19 +21,19 @@ const EntryPublicationsFacets: React.FC<
     const facet: SelectedFacet = { name, value };
     history.push({
       pathname: `/uniprotkb/${accession}/publications`,
-      search: `${facetsAsString([...selectedFacets.concat(facet)])}`,
+      search: facetsAsString([...selectedFacets.concat(facet)]),
     });
   };
 
   const removeFacet = (name: string, value: string) => {
     history.push({
       pathname: `/uniprotkb/${accession}/publications`,
-      search: `${facetsAsString(
+      search: facetsAsString(
         selectedFacets.filter(
           (selectedFacet) =>
             !(selectedFacet.name === name && selectedFacet.value === value)
         )
-      )}`,
+      ),
     });
   };
 
