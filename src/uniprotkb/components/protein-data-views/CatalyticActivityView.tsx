@@ -25,20 +25,20 @@ export const isRheaReactionReference = ({
   id: string;
 }) => database === 'Rhea' && !!getRheaId(id);
 
-const ZoomModalContent = ({ zoomImageUrl }: { zoomImageUrl: string }) => {
+const ZoomModalContent: React.FC<ChebiImageData> = ({ chebi, imgURL }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [loading, setLoading] = useState(true);
   const image = new Image();
+  image.src = imgURL;
   image.onload = () => {
     if (imageRef && imageRef.current) {
       imageRef.current.src = image.src;
       setLoading(false);
     }
   };
-  image.src = zoomImageUrl;
   return (
     <Fragment>
-      <img ref={imageRef} />
+      <img ref={imageRef} alt={chebi} />
       {loading && <Loader />}
     </Fragment>
   );
@@ -49,27 +49,35 @@ type RheaReactionVisualizerProps = {
   show: boolean;
 };
 
+type ChebiImageData = {
+  chebi: string;
+  imgURL: string;
+} | null;
+
 export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
   rheaId,
   show: initialShow,
 }) => {
   const [show, setShow] = useState(initialShow);
-  const [zoomImageUrl, setZoomImageUrl] = useState('');
+  const [zoomImageData, setZoomImageData] = useState<ChebiImageData>();
   const { displayModal, setDisplayModal, Modal } = useModal(
     ModalBackdrop,
     Window
   );
-  const callback = useCallback((node): void => {
-    if (node) {
-      node.addEventListener(
-        'zoomClicked',
-        ({ detail }: { detail: { chebi: string; imgURL: string } }) => {
-          setZoomImageUrl(detail.imgURL);
-          setDisplayModal(true);
-        }
-      );
-    }
-  }, []);
+  const callback = useCallback(
+    (node): void => {
+      if (node) {
+        node.addEventListener(
+          'zoomClicked',
+          ({ detail }: { detail: ChebiImageData }) => {
+            setZoomImageData(detail);
+            setDisplayModal(true);
+          }
+        );
+      }
+    },
+    [setDisplayModal]
+  );
 
   return (
     <Fragment>
@@ -83,11 +91,14 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
       {show && (
         <Fragment>
           <div className="rhea-reaction-visualizer__component">
-            <rhea-reaction rheaid={rheaId} zoom showids={true} ref={callback} />
+            <rhea-reaction rheaid={rheaId} zoom showids ref={callback} />
           </div>
-          {displayModal && zoomImageUrl && (
+          {displayModal && zoomImageData && zoomImageData.imgURL && (
             <Modal handleExitModal={() => setDisplayModal(false)}>
-              <ZoomModalContent zoomImageUrl={zoomImageUrl} />
+              <ZoomModalContent
+                chebi={zoomImageData.chebi}
+                imgURL={zoomImageData.imgURL}
+              />
             </Modal>
           )}
         </Fragment>
