@@ -120,7 +120,7 @@ const App = () => (
             path={`${LocationToPath[Location.UniProtKBQueryBuilder]}(/reset)?`}
             render={() => (
               <BaseLayout isSearchPage>
-                <AdvancedSearchPage />
+                <AdvancedSearchPage queryString="" />
               </BaseLayout>
             )}
           />

@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions';
 import * as searchActions from './searchActions';
 import { createEmptyClause, createPreSelectedClauses } from '../utils/clause';
-import createQueryString from '../utils/queryStringGenerator';
+// import createQueryString from '../utils/QueryStringGenerator';
 import searchInitialState, { SearchState } from './searchInitialState';
 import { Clause } from '../types/searchTypes';
 
@@ -111,7 +111,7 @@ const searchReducers = (
     case searchActions.UPDATE_LOGIC_OPERATOR:
       return {
         ...state,
-        clauses: state.clauses.map(c => {
+        clauses: state.clauses.map((c) => {
           if (c.id !== action.payload.clauseId) {
             return c;
           }
@@ -121,7 +121,7 @@ const searchReducers = (
     case searchActions.SUBMIT_ADVANCED_QUERY:
       return {
         ...state,
-        queryString: createQueryString(state.clauses),
+        // queryString: createQueryString(state.clauses),
       };
     case searchActions.SET_PRE_SELECTED_CLAUSES:
       return {
@@ -142,7 +142,7 @@ const searchReducers = (
       }
       return {
         ...state,
-        clauses: state.clauses.filter(c => c.id !== action.payload.clauseId),
+        clauses: state.clauses.filter((c) => c.id !== action.payload.clauseId),
       };
     case searchActions.UPDATE_CLAUSES:
       return {
@@ -164,12 +164,12 @@ const searchReducers = (
     case searchActions.UPDATE_QUERY_STRING:
       return {
         ...state,
-        queryString: action.payload.queryString,
+        // queryString: action.payload.queryString,
       };
     case searchActions.RESET_SEARCH_INPUT:
       return {
         ...state,
-        queryString: '',
+        // queryString: '',
       };
     default:
       return state;

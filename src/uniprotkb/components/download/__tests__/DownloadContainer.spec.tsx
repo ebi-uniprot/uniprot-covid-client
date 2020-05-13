@@ -37,6 +37,7 @@ describe('DownloadContainer component', () => {
       query: 'nod2',
       selectedFacets: [],
       selectedEntries: ['Q9HC29', 'O43353', 'Q3KP66'],
+      totalNumberResults: 10,
     },
   };
   beforeEach(() => {

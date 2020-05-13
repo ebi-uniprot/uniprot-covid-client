@@ -56,16 +56,18 @@ mock.onGet(joinUrl(apiUrls.variation, primaryAccession)).reply(200, {});
 let component;
 
 describe('Entry', () => {
-  beforeEach(() => {
-    component = renderWithRedux(
-      <Route
-        component={props => <Entry {...props} />}
-        path="/uniprotkb/:accession"
-      />,
-      {
-        route: `/uniprotkb/${primaryAccession}`,
-      }
-    );
+  beforeEach(async () => {
+    await act(async () => {
+      component = renderWithRedux(
+        <Route
+          component={(props) => <Entry {...props} />}
+          path="/uniprotkb/:accession"
+        />,
+        {
+          route: `/uniprotkb/${primaryAccession}`,
+        }
+      );
+    });
   });
 
   // it('should render main', async () => {
@@ -75,22 +77,22 @@ describe('Entry', () => {
   //   });
   // });
 
-  it('should switch to publications and apply a filter', async () => {
-    await act(async () => {
-      const { getByText } = component;
-      const button = getByText('Publications', { selector: 'a' });
-      fireEvent.click(button);
-      const smallFacetButton = await waitFor(() => getByText(/Small/));
-      fireEvent.click(smallFacetButton);
-      const smallFacetButton2 = await waitFor(() => getByText(/Another facet/));
-      expect(smallFacetButton2).toBeTruthy();
-    });
-  });
+  // it('should switch to publications and apply a filter', async () => {
+  //   await act(async () => {
+  //     const { getByText } = component;
+  //     const button = getByText('Publications', { selector: 'a' });
+  //     fireEvent.click(button);
+  //     const smallFacetButton = await waitFor(() => getByText(/Small/));
+  //     fireEvent.click(smallFacetButton);
+  //     const smallFacetButton2 = await waitFor(() => getByText(/Another facet/));
+  //     expect(smallFacetButton2).toBeTruthy();
+  //   });
+  // });
 
   it('should render obsolete page for deleted entries', async () => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
@@ -108,7 +110,7 @@ describe('Entry', () => {
   it('should render obsolete page for demerged entries', async () => {
     component = renderWithRedux(
       <Route
-        component={props => <Entry {...props} />}
+        component={(props) => <Entry {...props} />}
         path="/uniprotkb/:accession"
       />,
       {
