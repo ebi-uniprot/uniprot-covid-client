@@ -27,12 +27,13 @@ const Search = () => {
     // prevent normal browser submission
     event.preventDefault();
 
-    // extract current search (to keep other fields if defined)
-    const search = queryString.parse(history.location.search, { decode: true });
-    // add/overwrite the current queried term
-    search.query = searchTerm || '*';
     // restringify the resulting search
-    const stringifiedSearch = queryString.stringify(search, { encode: true });
+    const stringifiedSearch = queryString.stringify(
+      {
+        query: searchTerm || '*',
+      },
+      { encode: true }
+    );
 
     // push a new location to the history containing the modified search term
     history.push({
