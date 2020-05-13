@@ -8832,10 +8832,10 @@ protvista-track@2.6.1, protvista-track@^2.6.1:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.6.1"
 
-protvista-uniprot@2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.4.tgz#24fc380c63f702245a8dafbf95fac3a0324e6ee2"
-  integrity sha512-GwvPHsXPnw7axc3+OhjYprHSZFjeIEO/KbnY3QcJ+aLiRfVJ87ksRYssccczaRdYP/tSKYekk3dRseTWda+fYg==
+protvista-uniprot@2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.5.tgz#4701f03b7fef56d7472b56edb5335656073e04ba"
+  integrity sha512-Wa3tN0U2trActDKPzeWz3rWdmpzBOcXKhQPLCDU+Z2f3vFyh7jA3mxbzIZRGZ8WsTZlxLi4US45alExTEO1r1Q==
   dependencies:
     data-loader "^2.9.1"
     file-saver "^2.0.2"
