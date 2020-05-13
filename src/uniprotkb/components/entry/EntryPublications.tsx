@@ -10,7 +10,7 @@ import formatCitationData, {
   getCitationPubMedId,
 } from '../../adapters/literatureConverter';
 import getNextUrlFromResponse from '../../utils/queryUtils';
-import { getParamsFromURL } from '../results/utils';
+import { getParamsFromURL } from '../../utils/results-utils';
 
 const EntryPublications: FC<
   {

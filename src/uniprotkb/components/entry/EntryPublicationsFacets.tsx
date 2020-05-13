@@ -5,7 +5,7 @@ import { SelectedFacet } from '../../types/resultsTypes';
 import { getUniProtPublicationsQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
-import { facetsAsString, getParamsFromURL } from '../results/utils';
+import { facetsAsString, getParamsFromURL } from '../../utils/results-utils';
 
 const EntryPublicationsFacets: React.FC<
   {

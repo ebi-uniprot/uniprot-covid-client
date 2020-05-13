@@ -12,7 +12,7 @@ import { ViewMode } from '../../state/resultsInitialState';
 import { SortableColumn, Column } from '../../types/columnTypes';
 import './styles/warning.scss';
 import './styles/results-view.scss';
-import { getParamsFromURL, getLocationObjForParams } from './utils';
+import { getParamsFromURL, getLocationObjForParams } from '../../utils/results-utils';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import getNextUrlFromResponse from '../../utils/queryUtils';

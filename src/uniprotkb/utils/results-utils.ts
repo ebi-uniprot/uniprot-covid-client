@@ -1,6 +1,6 @@
 import queryStringModule from 'query-string';
-import { SortableColumn } from '../../types/columnTypes';
-import { SelectedFacet, SortDirection } from '../../types/resultsTypes';
+import { SortableColumn } from '../types/columnTypes';
+import { SelectedFacet, SortDirection } from '../types/resultsTypes';
 
 const facetsAsArray = (facetString: string): SelectedFacet[] => {
   return facetString.split(',').map((stringItem) => {
