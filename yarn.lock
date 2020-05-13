@@ -8318,10 +8318,10 @@ protvista-track@2.6.1, protvista-track@^2.6.1:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.6.1"
 
-protvista-uniprot@2.5.3:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.3.tgz#db556395bd5651b629eca80968c9673d7e4177ad"
-  integrity sha512-ewy5IKAjbphyJ2/cpgjTv+qp3CLKAK8tweDkDezqi7BHLbe79UaMx5bQvvkj4Bx3vpzNzxSECZbunYif8E7bTA==
+protvista-uniprot@2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/protvista-uniprot/-/protvista-uniprot-2.5.5.tgz#4701f03b7fef56d7472b56edb5335656073e04ba"
+  integrity sha512-Wa3tN0U2trActDKPzeWz3rWdmpzBOcXKhQPLCDU+Z2f3vFyh7jA3mxbzIZRGZ8WsTZlxLi4US45alExTEO1r1Q==
   dependencies:
     data-loader "^2.9.1"
     file-saver "^2.0.2"
@@ -8342,7 +8342,7 @@ protvista-uniprot@2.5.3:
     protvista-track "^2.6.1"
     protvista-variation "^2.6.1"
     protvista-variation-adapter "^2.3.3"
-    protvista-variation-graph "^2.6.1"
+    protvista-variation-graph "^2.9.3"
     protvista-zoomable "^2.6.1"
     timing-functions "^1.0.0"
     url-join "^4.0.1"
@@ -8362,10 +8362,10 @@ protvista-variation-adapter@2.3.3, protvista-variation-adapter@^2.3.3:
     protvista-feature-adapter "^2.3.3"
     uuid "^3.3.3"
 
-protvista-variation-graph@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/protvista-variation-graph/-/protvista-variation-graph-2.6.1.tgz#0c085bddf878d922b15eff7e83572c1db3cccaf5"
-  integrity sha512-8eIvtFa2rvP176mzzLgV/hlxppXZbceb8Eb1XXLiXI48Ql7eUkJjkUcQJGZlqepWVZ+iZFO59bQoCKpdDXn27g==
+protvista-variation-graph@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.yarnpkg.com/protvista-variation-graph/-/protvista-variation-graph-2.9.3.tgz#fd94bd9a5db7115196567ccf92a2ea4b9ef47aca"
+  integrity sha512-Atq+as462xPAFl615JRvdu0LibhxRHeuypyE8GKXbzGslhj6RBjohCZXXNi8L39XrFaZC5v+j3mXcxYWOmAPXw==
   dependencies:
     protvista-track "^2.6.1"
 
