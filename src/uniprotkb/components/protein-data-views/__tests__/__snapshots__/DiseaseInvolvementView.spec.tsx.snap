@@ -75,6 +75,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         <a
           class="external-link"
           href="https://www.ebi.ac.uk/ena/data/view/some ref id"
+          rel="noopener"
           target="_blank"
         >
           EMBL
@@ -92,6 +93,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         <a
           class="external-link"
           href="https://www.ncbi.nlm.nih.gov/protein/some ref id"
+          rel="noopener"
           target="_blank"
         >
           GenBank
@@ -109,6 +111,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         <a
           class="external-link"
           href="http://getentry.ddbj.nig.ac.jp/getentry/dad/some ref id"
+          rel="noopener"
           target="_blank"
         >
           DDBJ
@@ -126,6 +129,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         <a
           class="external-link"
           href="//www.ebi.ac.uk/ena/data/view/some ref id"
+          rel="noopener"
           target="_blank"
         >
           some ref id

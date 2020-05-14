@@ -547,6 +547,7 @@ exports[`ColumnConfiguration component should render all columns 11`] = `
   <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
+    rel="noopener"
     target="_blank"
   >
     NCBI
@@ -910,6 +911,7 @@ exports[`ColumnConfiguration component should render all columns 27`] = `
     <a
       class="external-link"
       href="//www.ebi.ac.uk/ena/data/view/sequence"
+      rel="noopener"
       target="_blank"
     >
       sequence
@@ -1501,6 +1503,7 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
     <a
       class="external-link"
       href="//www.ebi.ac.uk/ena/data/view/sequence"
+      rel="noopener"
       target="_blank"
     >
       sequence
@@ -1914,6 +1917,7 @@ exports[`ColumnConfiguration component should render all columns 73`] = `
         <a
           class="external-link"
           href="https://www.omim.org/entry/3124"
+          rel="noopener"
           target="_blank"
         >
           3124
@@ -2168,6 +2172,7 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
       <a
         class="external-link"
         href="https://www.ensembl.org/id/id value"
+        rel="noopener"
         target="_blank"
       >
         id value
@@ -2185,6 +2190,7 @@ exports[`ColumnConfiguration component should render all columns 149`] = `
       <a
         class="external-link"
         href="https://www.ensembl.org/id/description value"
+        rel="noopener"
         target="_blank"
       >
         description value
