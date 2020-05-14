@@ -40,10 +40,10 @@ export const ZoomModalContent: React.FC<ChebiImageData> = ({
     }
   };
   return (
-    <Fragment>
+    <div className="zoom-image-container">
       <img ref={imageRef} alt={chebi} />
       {loading && <Loader />}
-    </Fragment>
+    </div>
   );
 };
 
@@ -97,7 +97,11 @@ export const RheaReactionVisualizer: React.FC<RheaReactionVisualizerProps> = ({
             <rhea-reaction rheaid={rheaId} zoom showids ref={callback} />
           </div>
           {displayModal && zoomImageData && zoomImageData.imgURL && (
-            <Modal handleExitModal={() => setDisplayModal(false)}>
+            <Modal
+              handleExitModal={() => setDisplayModal(false)}
+              height="30vh"
+              width="30vw"
+            >
               <ZoomModalContent
                 chebi={zoomImageData.chebi}
                 imgURL={zoomImageData.imgURL}
