@@ -20,6 +20,10 @@ const PopUpMessageHub: React.FC<{
     },
   });
 
+  if (messages.length <= 0) {
+    return null;
+  }
+
   return (
     <div className="popup-message-container">
       {transitions.map(({ key, item, props }) => {
