@@ -10,6 +10,10 @@
 
   grid-template-rows: 4rem auto auto;
 
+  .header:not(.header--negative) > .header__logo svg g {
+    fill: white;
+  }
+
   .main-header {
     grid-area: main-header;
   }
