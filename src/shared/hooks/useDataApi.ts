@@ -43,16 +43,17 @@ const reducer = (state: State, action: Action): State => {
       };
       if (
         action.response &&
+        action.response.request.responseURL &&
         action.response.request.responseURL !== action.originalURL
       ) {
         newState.redirectedTo = action.response.request.responseURL;
-      }
-      // this only needs to be here for axios mock calls
-      if (
+      } else if (
+        // Issue with casing in axios-mock-adapter?
         action.response &&
-        action.response.config.url !== action.originalURL
+        action.response.request.responseUrl &&
+        action.response.request.responseUrl !== action.originalURL
       ) {
-        newState.redirectedTo = action.response.config.url;
+        newState.redirectedTo = action.response.request.responseUrl;
       }
       return newState;
     case ActionType.ERROR:
