@@ -1,12 +1,12 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import fetchData from '../../utils/fetchData';
 import { BlastFormValues } from '../data/BlastFormData';
 import blastUrls from '../utils/blastUrls';
-import { RootState } from '../../state/state-types';
 import { BlastResults } from '../types/blastResults';
-import postData from '../../utils/postData';
+import fetchData from '../../shared/utils/fetchData';
+import { RootState } from '../../app/state/rootInitialState';
+import postData from '../../uniprotkb/config/postData';
 
 export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';
@@ -35,7 +35,7 @@ export const fetchBlastResults = (jobId: string) => async (
       dispatch(receiveBlastResults(jobId, data));
       action(FETCH_BLAST_RESULTS);
     }) /* eslint-disable no-console */
-    .catch(error => console.error(error));
+    .catch((error) => console.error(error));
 };
 
 function* pollForBlastStatus(jobId: string) {
@@ -44,7 +44,7 @@ function* pollForBlastStatus(jobId: string) {
       headers: {
         Accept: 'text/plain',
       },
-    }).then(response => {
+    }).then((response) => {
       return response.data;
     });
   }
@@ -77,7 +77,7 @@ export const runBlastJob = (blastFormValues: BlastFormValues) => (
 
   const formData = new FormData();
 
-  Object.values(blastFormValues).forEach(blastFieldValue => {
+  Object.values(blastFormValues).forEach((blastFieldValue) => {
     if (blastFieldValue.selected) {
       formData.append(blastFieldValue.fieldName, blastFieldValue.selected);
     }
@@ -90,9 +90,9 @@ export const runBlastJob = (blastFormValues: BlastFormValues) => (
       Accept: 'text/plain',
     },
   })
-    .then(response => {
+    .then((response) => {
       dispatch(receiveBlastJobID(response.data));
       dispatch(runPolling(response.data));
     }) /* eslint-disable no-console */
-    .catch(error => console.error(error));
+    .catch((error) => console.error(error));
 };

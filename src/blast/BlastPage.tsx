@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { Link, useParams } from 'react-router-dom';
 import BlastForm from './BlastForm';
-import SideBarLayout from '../layout/SideBarLayout';
-import { RootState, RootAction } from '../state/state-types';
 import * as blastActions from './state/blastActions';
 import { BlastFormValues } from './data/BlastFormData';
 import { BlastJob } from './state/blastInitialState';
 import { BlastHsp } from './types/blastResults';
+import SideBarLayout from '../shared/components/layouts/SideBarLayout';
+import { RootState, RootAction } from '../app/state/rootInitialState';
 
 const RecentJobs: FC<{ jobs: BlastJob[] }> = ({ jobs }) => (
   <ul className="no-bullet">
-    {jobs.map(job => (
+    {jobs.map((job) => (
       <li key={job.jobId}>
         <Link to={`/blast/${job.jobId}`}>{job.jobId}</Link>
       </li>
@@ -60,7 +60,7 @@ const BlastResults: FC<{ job: BlastJob | undefined }> = ({ job }) => {
         <tbody className="data-table__table__body">
           {job.data &&
             job.data.hits &&
-            job.data.hits.map(hit => {
+            job.data.hits.map((hit) => {
               const {
                 proteinDescription,
                 organism,
@@ -80,7 +80,7 @@ const BlastResults: FC<{ job: BlastJob | undefined }> = ({ job }) => {
                   </td>
                   <td className="data-table__table__body__cell">{geneName}</td>
                   <td className="data-table__table__body__cell">
-                    {hit.hit_hsps.map(hsp => (
+                    {hit.hit_hsps.map((hsp) => (
                       <BlastResultsHsp
                         hsp={hsp}
                         key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
@@ -105,6 +105,7 @@ const BlastPage: FC<{
     <Fragment>
       <SideBarLayout
         title={<h2>BLAST</h2>}
+        actionButtons={<div>BLAST buttons</div>}
         sidebar={
           <Fragment>
             <h3>Recent jobs</h3>
@@ -115,7 +116,7 @@ const BlastPage: FC<{
         <Fragment>
           {!jobId && <BlastForm runBlastJob={dispatchRunBlastJob} />}
           {jobId && (
-            <BlastResults job={jobs.find(job => job.jobId === jobId)} />
+            <BlastResults job={jobs.find((job) => job.jobId === jobId)} />
           )}
         </Fragment>
       </SideBarLayout>

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
+<DocumentFragment>
+  <div
+    class="popup-message-container"
+  >
+    <div
+      style="opacity: 0; margin-right: -100px; margin-left: 100px;"
+    >
+      <div
+        class="message message--info"
+        role="status"
+      >
+        <section
+          class="message__content"
+        >
+          <svg
+            fill="currentColor"
+            height="1.125em"
+            viewBox="0 0 18 18"
+            width="1.125em"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+              fill-rule="evenodd"
+            />
+          </svg>
+          <small>
+            lorem
+          </small>
+        </section>
+        <button
+          class="message__dismiss"
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="10"
+            viewBox="0 0 352 512"
+            width="10"
+          >
+            <path
+              d="M243 256l100-100c12-12 12-32 0-45l-22-22a31 31 0 00-45 0L176 189 76 89a31 31 0 00-45 0L9 111a31 31 0 000 45l100 100L9 356a31 31 0 000 45l22 22c13 12 33 12 45 0l100-100 100 100c12 12 32 12 45 0l22-22c12-13 12-33 0-45L243 256z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

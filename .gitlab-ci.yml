@@ -1,0 +1,16 @@
+stages:
+  - test
+
+.js:
+  image: node
+  before_script:
+    - node --version
+    - npm --version
+    - yarn --version
+    - yarn
+
+test:
+  extends: .js
+  stage: test
+  script:
+    - yarn test

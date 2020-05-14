@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VariationView component renders on data 1`] = `
+<DocumentFragment>
+  <div>
+    <h3>
+      some title
+    </h3>
+    <protvista-manager
+      attributes="highlight displaystart displayend activefilters filters"
+    >
+      <div
+        class="variation-view"
+      >
+        <protvista-navigation
+          length="7"
+        />
+        <protvista-sequence
+          height="20"
+          length="7"
+          sequence="ABCDEFG"
+        />
+        <protvista-filter
+          for="variation-component"
+        />
+        <protvista-variation
+          id="variation-component"
+          length="7"
+        />
+      </div>
+      <protvista-datatable />
+      <div
+        class="evidence-tag-content false"
+      />
+    </protvista-manager>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`VariationView component renders on error 1`] = `
+<DocumentFragment>
+  <div>
+    An error happened
+  </div>
+</DocumentFragment>
+`;
+
+exports[`VariationView component renders on loading 1`] = `
+<DocumentFragment>
+  <div
+    class="loader-container"
+  >
+    <svg
+      class="loader"
+      height="100"
+      viewBox="0 0 100 100"
+      width="100"
+    >
+      <g
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <path
+          d="M9 50c6.833-10.667 13.667-16 20.5-16S43.167 39.333 50 50s13.667 16 20.5 16S84.167 60.667 91 50"
+          stroke="#3ca3ca"
+          stroke-linecap="square"
+          stroke-width="2"
+        />
+        <circle
+          cx="9"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="30"
+          cy="34"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="70"
+          cy="66"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="91"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+      </g>
+    </svg>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`VariationView component renders on no data 1`] = `<DocumentFragment />`;

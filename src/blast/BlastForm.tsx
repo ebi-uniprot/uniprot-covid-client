@@ -4,7 +4,7 @@ import initialFormValues, {
   BlastFields,
 } from './data/BlastFormData';
 import './styles/BlastForm.scss';
-import AutocompleteWrapper from '../components/AutocompleteWrapper';
+import AutocompleteWrapper from '../uniprotkb/components/query-builder/AutocompleteWrapper';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -22,10 +22,10 @@ const FormSelect: FC<{
         <select
           id={type}
           value={formValues[type].selected}
-          onChange={e => updateFormValues(type, e.target.value)}
+          onChange={(e) => updateFormValues(type, e.target.value)}
         >
           {formObject.values &&
-            formObject.values.map(formValue => (
+            formObject.values.map((formValue) => (
               <option value={formValue.value} key={formValue.value}>
                 {formValue.label ? formValue.label : formValue.value}
               </option>
@@ -70,7 +70,7 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
             <legend>Sequence</legend>
             <textarea
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={e =>
+              onChange={(e) =>
                 updateFormValue(BlastFields.sequence, e.target.value)
               }
               className="blast-form-textarea"
@@ -109,7 +109,7 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
                 BlastFields.filter,
                 BlastFields.gapped,
                 BlastFields.hits,
-              ].map(blastField => (
+              ].map((blastField) => (
                 <FormSelect
                   formValues={formValues}
                   type={blastField}

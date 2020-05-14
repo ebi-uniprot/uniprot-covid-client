@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntryPublication facets tests should render 1`] = `
+<DocumentFragment>
+  <div
+    class="facets"
+  >
+    <ul
+      class="no-bullet"
+    >
+      <li>
+        <div
+          class="facet-name"
+        >
+          Study type
+        </div>
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            <button
+              class=""
+              type="button"
+            >
+              Small scale (239)
+            </button>
+          </li>
+          <li>
+            <button
+              class=""
+              type="button"
+            >
+              Large scale (8)
+            </button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
