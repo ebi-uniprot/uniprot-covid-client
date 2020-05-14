@@ -41,7 +41,11 @@ export const ZoomModalContent: React.FC<ChebiImageData> = ({
   };
   return (
     <div className="zoom-image-container">
-      <img ref={imageRef} alt={chebi} />
+      <img
+        ref={imageRef}
+        alt={chebi}
+        style={{ display: loading ? 'none' : 'block' }}
+      />
       {loading && <Loader />}
     </div>
   );
