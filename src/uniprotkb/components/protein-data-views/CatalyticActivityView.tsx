@@ -25,7 +25,10 @@ export const isRheaReactionReference = ({
   id: string;
 }) => database === 'Rhea' && !!getRheaId(id);
 
-const ZoomModalContent: React.FC<ChebiImageData> = ({ chebi, imgURL }) => {
+export const ZoomModalContent: React.FC<ChebiImageData> = ({
+  chebi,
+  imgURL,
+}) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [loading, setLoading] = useState(true);
   const image = new Image();
