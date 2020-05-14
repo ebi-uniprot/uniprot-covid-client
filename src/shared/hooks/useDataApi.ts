@@ -10,6 +10,7 @@ type State = {
   statusText?: AxiosResponse['statusText'];
   headers?: AxiosResponse['headers'];
   error?: AxiosError;
+  redirectedTo?: string;
 };
 
 enum ActionType {
@@ -20,7 +21,7 @@ enum ActionType {
 
 type Action =
   | { type: ActionType.INIT }
-  | { type: ActionType.SUCCESS; response?: AxiosResponse }
+  | { type: ActionType.SUCCESS; response?: AxiosResponse; originalURL?: string }
   | { type: ActionType.ERROR; error: AxiosError };
 
 // eslint-disable-next-line consistent-return
@@ -32,13 +33,29 @@ const reducer = (state: State, action: Action): State => {
         loading: true,
       };
     case ActionType.SUCCESS:
-      return {
+      // eslint-disable-next-line no-case-declarations
+      const newState: State = {
         loading: false,
         data: action.response && action.response.data,
         status: action.response && action.response.status,
         statusText: action.response && action.response.statusText,
         headers: action.response && action.response.headers,
       };
+      if (
+        action.response &&
+        action.response.request.responseURL &&
+        action.response.request.responseURL !== action.originalURL
+      ) {
+        newState.redirectedTo = action.response.request.responseURL;
+      } else if (
+        // Issue with casing in axios-mock-adapter?
+        action.response &&
+        action.response.request.responseUrl &&
+        action.response.request.responseUrl !== action.originalURL
+      ) {
+        newState.redirectedTo = action.response.request.responseUrl;
+      }
+      return newState;
     case ActionType.ERROR:
       return {
         loading: false,
@@ -70,7 +87,7 @@ const useDataApi = (url?: string): State => {
     fetchData(url, undefined, source.token).then(
       // handle ok
       (response: AxiosResponse) =>
-        dispatch({ type: ActionType.SUCCESS, response }),
+        dispatch({ type: ActionType.SUCCESS, response, originalURL: url }),
       // catch error
       (error: AxiosError) => {
         if (axios.isCancel(error)) return;

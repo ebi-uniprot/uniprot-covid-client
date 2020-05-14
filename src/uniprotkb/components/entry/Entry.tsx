@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import {
   withRouter,
   RouteComponentProps,
@@ -17,6 +19,7 @@ import {
   ProtVistaIcon,
 } from 'franklin-sites';
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+import { RootAction } from '../../../app/state/rootInitialState';
 import uniProtKbConverter, {
   EntryType,
   UniProtkbInactiveEntryModel,
@@ -36,16 +39,31 @@ import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
 import FeatureViewer from './FeatureViewer';
 import useDataApi from '../../../shared/hooks/useDataApi';
 
+import * as messagesActions from '../../../messages/state/messagesActions';
+import {
+  MessageLevel,
+  MessageFormat,
+  MessageType,
+  MessageTag,
+} from '../../../messages/types/messagesTypes';
+
 type MatchParams = {
   accession: string;
   path: string;
 };
 
-const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
+type EntryProps = {
+  addMessage: (message: MessageType) => void;
+} & RouteComponentProps<MatchParams>;
+
+const Entry: React.FC<EntryProps> = ({
+  addMessage,
+  match,
+}) => {
   const { path, params } = match;
   const { accession } = params;
 
-  const { loading, data, status, error } = useDataApi(apiUrls.entry(accession));
+  const { loading, data, status, error, redirectedTo } = useDataApi(apiUrls.entry(accession));
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -67,6 +85,21 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       </BaseLayout>
     );
   }
+
+  if (redirectedTo) {
+    const message: MessageType = {
+      id: 'job-id',
+      content: `You are seeing the results from: ${redirectedTo}.`,
+      format: MessageFormat.IN_PAGE,
+      level: MessageLevel.SUCCESS,
+      dateActive: Date.now(),
+      dateExpired: Date.now(),
+      tag: MessageTag.REDIRECT,
+    };
+
+    addMessage(message);
+  }
+
   const transformedData = uniProtKbConverter(data);
 
   const sections = UniProtKBEntryConfig.map((section) => ({
@@ -187,4 +220,16 @@ const Entry: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   );
 };
 
-export default withRouter(Entry);
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      addMessage: (message: MessageType) => messagesActions.addMessage(message),
+    },
+    dispatch
+  );
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Entry)
+);

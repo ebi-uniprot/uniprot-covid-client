@@ -150,4 +150,21 @@ describe('useDataApi hook', () => {
       status: 200,
     });
   });
+
+ test('detect redirect', async () => {
+   mock.onGet(url).reply(200, 'some data');
+   mock.onGet(url2).reply(() => axios.get(url));
+
+   const { result, waitForNextUpdate } = renderHook(() => useDataApi(url2));
+
+   expect(result.current).toEqual({ loading: true });
+
+   await waitForNextUpdate();
+   expect(result.current).toEqual({
+    loading: false,
+    data: 'some data',
+    status: 200,
+    redirectedTo: url,
+   });
+ });
 });
