@@ -6,6 +6,7 @@ import '../styles/ResultsView.scss';
 import { SelectedEntries, SortDirection } from './types/resultsTypes';
 import UniProtCard from '../view/uniprotkb/components/UniProtCard';
 import uniProtKbConverter, {
+  UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../model/uniprotkb/UniProtkbConverter';
 import { ViewMode } from './state/resultsInitialState';
@@ -63,7 +64,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         label: columnConfig.label,
         name: columnName,
         render: (row: UniProtkbAPIModel) =>
-          columnConfig.render(uniProtKbConverter(row)),
+          columnConfig.render(uniProtKbConverter(row) as UniProtkbUIModel),
         sortable: columnConfig.sortable,
         sorted: columnName === sortColumn && sortDirection,
       };

@@ -704,119 +704,6 @@ exports[`ColumnConfiguration component should render all columns 15`] = `
 exports[`ColumnConfiguration component should render all columns 16`] = `
 <DocumentFragment>
   <div
-    class="action-bar button-group"
-  >
-    <div
-      class="dropdown-container"
-    >
-      <button
-        class="button dropdown "
-        type="button"
-      >
-        Tools
-      </button>
-      <div
-        class="dropdown-menu"
-        style="top: 0px;"
-      >
-        <ul
-          class="no-bullet"
-        >
-          <li>
-            <a
-              href="//web.expasy.org/cgi-bin//protparam/protparam?P21802"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              ProtParam
-            </a>
-          </li>
-          <li>
-            <a
-              href="//web.expasy.org/cgi-bin//protscale/protscale.pl?P21802"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              ProtScale
-            </a>
-          </li>
-          <li>
-            <a
-              href="//web.expasy.org/cgi-bin//compute_pi/pi_tool?P21802"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Compute pI/Mw
-            </a>
-          </li>
-          <li>
-            <a
-              href="//web.expasy.org/cgi-bin//peptide_mass/peptide-mass.pl?P21802"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              PeptideMass
-            </a>
-          </li>
-          <li>
-            <a
-              href="//web.expasy.org/cgi-bin//peptide_cutter/peptidecutter.pl?P21802"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              PeptideCutter
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div
-      class="dropdown-container"
-    >
-      <button
-        class="button dropdown "
-        type="button"
-      >
-        Highlight
-      </button>
-      <div
-        class="dropdown-menu"
-        style="top: 0px;"
-      >
-        <div
-          class="dropdown-menu__content"
-        >
-          <label
-            for="P21802-Polar"
-          >
-            <input
-              data-testid="sequence-highlight-checkbox"
-              id="P21802-Polar"
-              type="checkbox"
-            />
-            Polar
-          </label>
-          <label
-            for="P21802-Hydrophobic"
-          >
-            <input
-              data-testid="sequence-highlight-checkbox"
-              id="P21802-Hydrophobic"
-              type="checkbox"
-            />
-            Hydrophobic
-          </label>
-        </div>
-      </div>
-    </div>
-    <button
-      class="button"
-      type="button"
-    >
-      Copy sequence
-    </button>
-  </div>
-  <div
     class="sequence"
   >
     <div
@@ -909,7 +796,62 @@ exports[`ColumnConfiguration component should render all columns 20`] = `
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 21`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns 21`] = `
+<DocumentFragment>
+  <div
+    class="loader-container"
+  >
+    <svg
+      class="loader"
+      height="100"
+      viewBox="0 0 100 100"
+      width="100"
+    >
+      <g
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <path
+          d="M9 50c6.833-10.667 13.667-16 20.5-16S43.167 39.333 50 50s13.667 16 20.5 16S84.167 60.667 91 50"
+          stroke="#3ca3ca"
+          stroke-linecap="square"
+          stroke-width="2"
+        />
+        <circle
+          cx="9"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="30"
+          cy="34"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="70"
+          cy="66"
+          fill="#3ca3ca"
+          r="6"
+        />
+        <circle
+          cx="91"
+          cy="50"
+          fill="#3ca3ca"
+          r="6"
+        />
+      </g>
+    </svg>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`ColumnConfiguration component should render all columns 22`] = `<DocumentFragment />`;
 

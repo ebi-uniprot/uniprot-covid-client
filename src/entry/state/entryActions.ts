@@ -12,6 +12,8 @@ import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes'
 import getNextUrlFromResponse from '../../utils/queryUtils';
 import Response, { Facet } from '../../types/responseTypes';
 import { RootState } from '../../state/state-types';
+import history from '../../utils/browserHistory';
+import { Location, LocationToPath } from '../../urls';
 
 export const REQUEST_ENTRY = 'REQUEST_ENTRY';
 export const RECEIVE_ENTRY = 'RECEIVE_ENTRY';
@@ -51,8 +53,28 @@ export const fetchEntry = (accession: string) => async (dispatch: Dispatch) => {
   fetchData(url)
     .then(({ data }: { data: UniProtkbAPIModel }) => {
       dispatch(receiveEntry(accession, data));
-    }) /* eslint-disable no-console */
-    .catch(error => console.error(error));
+    })
+    .catch(error => {
+      const { status } = error.response;
+
+      switch (status) {
+        case 400:
+        case 404:
+          history.push(LocationToPath[Location.PageNotFound]);
+          break;
+
+        case 500:
+        case 503:
+          history.push(LocationToPath[Location.ServiceUnavailable]);
+          break;
+
+        default:
+          break;
+      }
+
+      /* eslint-disable no-console */
+      console.error(error);
+    });
 };
 
 export const fetchEntryIfNeeded = (accession: string) => (

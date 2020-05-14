@@ -9,6 +9,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import rootReducer from './rootReducer';
+import initialState from './initialState';
 
 const persistConfig = {
   key: 'root',
@@ -36,8 +37,8 @@ function configureStore() {
   if (process.env.NODE_ENV === 'development') {
     const debug = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     store = createStore(
-      persistorReducer,
-      undefined,
+      rootReducer,
+      initialState,
       debug
         ? debug(applyMiddleware(thunkMiddleware))
         : applyMiddleware(thunkMiddleware)

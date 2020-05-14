@@ -1,11 +1,14 @@
-import { UniProtkbUIModel } from '../../model/uniprotkb/UniProtkbConverter';
+import {
+  UniProtkbUIModel,
+  UniProtkbInactiveEntryModel,
+} from '../../model/uniprotkb/UniProtkbConverter';
 import { LiteratureForProteinAPI } from '../../literature/types/LiteratureTypes';
 import { Facet } from '../../types/responseTypes';
 
 export type EntryState = {
   accession: string | null;
   isFetching: boolean;
-  data: UniProtkbUIModel | null;
+  data: UniProtkbUIModel | UniProtkbInactiveEntryModel | null;
   publicationsData: {
     isFetching: boolean;
     data: LiteratureForProteinAPI[];

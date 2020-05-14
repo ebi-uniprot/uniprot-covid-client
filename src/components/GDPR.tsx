@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import './styles/gdpr.scss';
+import '../styles/gdpr.scss';
 
 const UP_COVID_GDPR = 'UP_COVID_GDPR';
 

@@ -1,11 +1,10 @@
-import React, { Component, Fragment, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { MainSearch } from 'franklin-sites';
 import { RootState, RootAction } from '../state/state-types';
 import * as searchActions from './state/searchActions';
-
 import './styles/SearchContainer.scss';
 
 type SearchProps = {
@@ -48,14 +47,21 @@ export class Search extends Component<SearchProps, SearchContainerState> {
 
   render() {
     const { queryString } = this.state;
-    const search = (
+    return (
       <MainSearch
         onSubmit={this.handleSubmitClick}
         onChange={this.handleQueryStringChange}
         searchTerm={queryString}
+        namespaces={[
+          'UniProtKB - the UniProt knowledgebase',
+          'UniRef',
+          'UniParc',
+          'Proteomes',
+          'Publications',
+          'Keywords',
+        ]}
       />
     );
-    return <Fragment>{search}</Fragment>;
   }
 }
 

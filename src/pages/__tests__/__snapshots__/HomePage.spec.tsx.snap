@@ -32,6 +32,14 @@ exports[`HomePage component should render 1`] = `
         />
       </div>
     </section>
+    <section
+      class="in-page-messages"
+    >
+      <div />
+      <div
+        class="popup-message-container"
+      />
+    </section>
     <a
       href="https://goo.gl/forms/VrAGbqg2XFg6Mpbh1"
       rel="noopener noreferrer"
@@ -58,6 +66,65 @@ exports[`HomePage component should render 1`] = `
             class="main-search"
             data-testid="main-search-form"
           >
+            <div
+              class="dropdown-container"
+            >
+              <button
+                class="button dropdown "
+                type="button"
+              >
+                UniProtKB
+              </button>
+              <div
+                class="dropdown-menu"
+                style="top: 0px;"
+              >
+                <ul>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniProtKB - the UniProt knowledgebase
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniRef
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      UniParc
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Proteomes
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Publications
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                    >
+                      Keywords
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <input
               class="main-search__input"
               data-testid="main-search-input"

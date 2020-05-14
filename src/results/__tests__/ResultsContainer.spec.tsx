@@ -5,6 +5,7 @@ import { cleanup, fireEvent } from '@testing-library/react';
 import ResultsContainer from '../ResultsContainer';
 import { act } from 'react-dom/test-utils';
 import results from '../../__mockData__/results.json';
+import noResults from '../../__mockData__/noResults.json';
 import entry from '../../__mockData__/swissprot_entry.json';
 import searchInitialState from '../../search/state/searchInitialState';
 import resultsInitialState, { ViewMode } from '../state/resultsInitialState';
@@ -12,6 +13,7 @@ import renderWithRedux from '../../__testHelpers__/renderWithRedux';
 
 const mock = new MockAdapter(axios);
 
+mock.onGet(/.+noresult/).reply(200, noResults, { 'x-total-records': 25 });
 mock
   .onGet(/\/uniprotkb\/search/)
   .reply(200, results, { 'x-total-records': 25 });
@@ -48,7 +50,13 @@ describe('Results component', () => {
     await act(async () => {
       const state = {
         query: searchInitialState,
-        results: { ...resultsInitialState, viewMode: ViewMode.TABLE },
+        results: {
+          ...resultsInitialState,
+          viewMode: ViewMode.TABLE,
+          results: {
+            data: [{}],
+          },
+        },
       };
       const { container, findByTestId, findByText } = renderWithRedux(
         <ResultsContainer />,
@@ -90,5 +98,20 @@ describe('Results component', () => {
     expect(history.location.search).toBe(
       '?query=blah&sort=accession&dir=descend'
     );
+  });
+
+  test('should display no results page', async () => {
+    const state = {
+      query: searchInitialState,
+      results: { ...resultsInitialState },
+    };
+
+    const { findByTestId } = renderWithRedux(<ResultsContainer />, {
+      initialState: state,
+      route: '/uniprotkb?query=noresult',
+    });
+
+    const page = await findByTestId('no-results-page');
+    expect(page).toBeTruthy();
   });
 });
