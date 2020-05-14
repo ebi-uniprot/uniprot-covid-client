@@ -29,6 +29,7 @@ exports[`XRefView should render for Expression section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -46,6 +47,7 @@ exports[`XRefView should render for Expression section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -63,6 +65,7 @@ exports[`XRefView should render for Expression section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -80,6 +83,7 @@ exports[`XRefView should render for Expression section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -137,6 +141,7 @@ exports[`XRefView should render for ExternalLinks section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -154,6 +159,7 @@ exports[`XRefView should render for ExternalLinks section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -171,6 +177,7 @@ exports[`XRefView should render for ExternalLinks section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -188,6 +195,7 @@ exports[`XRefView should render for ExternalLinks section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -245,6 +253,7 @@ exports[`XRefView should render for FamilyAndDomains section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -262,6 +271,7 @@ exports[`XRefView should render for FamilyAndDomains section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -279,6 +289,7 @@ exports[`XRefView should render for FamilyAndDomains section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -296,6 +307,7 @@ exports[`XRefView should render for FamilyAndDomains section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -353,6 +365,7 @@ exports[`XRefView should render for Function section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -370,6 +383,7 @@ exports[`XRefView should render for Function section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -387,6 +401,7 @@ exports[`XRefView should render for Function section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -404,6 +419,7 @@ exports[`XRefView should render for Function section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -461,6 +477,7 @@ exports[`XRefView should render for Interaction section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -478,6 +495,7 @@ exports[`XRefView should render for Interaction section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -495,6 +513,7 @@ exports[`XRefView should render for Interaction section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -512,6 +531,7 @@ exports[`XRefView should render for Interaction section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -569,6 +589,7 @@ exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -586,6 +607,7 @@ exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -603,6 +625,7 @@ exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -620,6 +643,7 @@ exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -677,6 +701,7 @@ exports[`XRefView should render for PathologyAndBioTech section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -694,6 +719,7 @@ exports[`XRefView should render for PathologyAndBioTech section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -711,6 +737,7 @@ exports[`XRefView should render for PathologyAndBioTech section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -728,6 +755,7 @@ exports[`XRefView should render for PathologyAndBioTech section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -785,6 +813,7 @@ exports[`XRefView should render for ProteinProcessing section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -802,6 +831,7 @@ exports[`XRefView should render for ProteinProcessing section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -819,6 +849,7 @@ exports[`XRefView should render for ProteinProcessing section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -836,6 +867,7 @@ exports[`XRefView should render for ProteinProcessing section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -893,6 +925,7 @@ exports[`XRefView should render for Sequence section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -910,6 +943,7 @@ exports[`XRefView should render for Sequence section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -927,6 +961,7 @@ exports[`XRefView should render for Sequence section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -944,6 +979,7 @@ exports[`XRefView should render for Sequence section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -1001,6 +1037,7 @@ exports[`XRefView should render for Structure section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -1018,6 +1055,7 @@ exports[`XRefView should render for Structure section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -1035,6 +1073,7 @@ exports[`XRefView should render for Structure section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -1052,6 +1091,7 @@ exports[`XRefView should render for Structure section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -1109,6 +1149,7 @@ exports[`XRefView should render for SubCellularLocation section 1`] = `
             <a
               class="external-link"
               href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               EMBL
@@ -1126,6 +1167,7 @@ exports[`XRefView should render for SubCellularLocation section 1`] = `
             <a
               class="external-link"
               href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
               target="_blank"
             >
               GenBank
@@ -1143,6 +1185,7 @@ exports[`XRefView should render for SubCellularLocation section 1`] = `
             <a
               class="external-link"
               href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
               target="_blank"
             >
               DDBJ
@@ -1160,6 +1203,7 @@ exports[`XRefView should render for SubCellularLocation section 1`] = `
             <a
               class="external-link"
               href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
               target="_blank"
             >
               1234
@@ -1193,6 +1237,7 @@ exports[`getPropertyLink should create snapshot 1`] = `
   <a
     class="external-link"
     href="https://www.ensembl.org/id/ENSG00000142192"
+    rel="noopener"
     target="_blank"
   >
     ENSG00000142192

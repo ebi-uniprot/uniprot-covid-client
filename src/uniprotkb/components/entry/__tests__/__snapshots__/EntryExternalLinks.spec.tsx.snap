@@ -31,6 +31,7 @@ exports[`Entry - External Links view should render 1`] = `
               <a
                 class="external-link"
                 href="resource URL"
+                rel="noopener"
                 target="_blank"
               >
                 resource name (Note text)
@@ -74,6 +75,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="https://enzyme.expasy.org/EC/1.2.3.4"
+                      rel="noopener"
                       target="_blank"
                     >
                       Search...
@@ -121,6 +123,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="http://mobidb.bio.unipd.it/entries/P21802"
+                      rel="noopener"
                       target="_blank"
                     >
                       Search...
@@ -161,6 +164,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="http://www.protonet.cs.huji.ac.il/sp.php?prot=P21802"
+                      rel="noopener"
                       target="_blank"
                     >
                       Search...
@@ -208,6 +212,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="https://www.ensembl.org/id/id value"
+                      rel="noopener"
                       target="_blank"
                     >
                       id value
@@ -225,6 +230,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="https://www.ensembl.org/id/description value"
+                      rel="noopener"
                       target="_blank"
                     >
                       description value
@@ -278,6 +284,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="http://salilab.org/modbase-cgi/model_search.cgi?searchkw=name&kword=P21802"
+                      rel="noopener"
                       target="_blank"
                     >
                       Search...
@@ -318,6 +325,7 @@ exports[`Entry - External Links view should render 1`] = `
                     <a
                       class="external-link"
                       href="https://swissmodel.expasy.org/interactive/?ac=P21802"
+                      rel="noopener"
                       target="_blank"
                     >
                       Submit a new modelling project...
