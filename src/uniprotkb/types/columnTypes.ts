@@ -256,7 +256,7 @@ export enum Column {
   virusHosts = 'virus_hosts',
   organismId = 'organism_id',
   phDependence = 'ph_dependence',
-  pmId = 'pm_id',
+  litPubmedId = 'lit_pubmed_id',
   proteinExistence = 'protein_existence',
   proteinFamilies = 'family',
   proteinName = 'protein_name',

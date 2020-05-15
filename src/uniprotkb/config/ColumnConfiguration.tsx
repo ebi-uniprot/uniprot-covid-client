@@ -897,7 +897,7 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
-ColumnConfiguration.set(Column.pmId, {
+ColumnConfiguration.set(Column.litPubmedId, {
   label: 'PubMed ID',
   render: data => {
     let ids: Xref[] = [];
