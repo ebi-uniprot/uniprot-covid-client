@@ -352,14 +352,14 @@ export const testData = [
   },
   {
     description: 'should handle date range',
-    queryString: '(created:[2018-03-04 TO 2018-03-08])',
+    queryString: '(date_created:[2018-03-04 TO 2018-03-08])',
     clauses: [
       {
         searchTerm: {
           id: 'id_created',
           label: 'Date Of Creation',
           itemType: 'single',
-          term: 'created',
+          term: 'date_created',
           dataType: 'date',
           hasRange: true,
           description: 'Search by Date of creation',
