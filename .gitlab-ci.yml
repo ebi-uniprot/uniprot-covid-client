@@ -3,6 +3,9 @@ stages:
   - build_static_assets
   - build_docker_image
 
+variables:
+  CONTAINER_IMAGE: ${CI_REGISTRY_IMAGE}:latest
+
 .js:
   image: node
   before_script:
