@@ -274,7 +274,7 @@ ColumnConfiguration.set(Column.proteinName, {
   },
 });
 
-ColumnConfiguration.set(Column.drProteomes, {
+ColumnConfiguration.set(Column.xrefProteomes, {
   label: 'Proteomes',
   render: (data) => {
     const { proteomesData } = data[EntrySection.NamesAndTaxonomy];

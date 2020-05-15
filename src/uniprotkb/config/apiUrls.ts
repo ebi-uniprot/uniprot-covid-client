@@ -10,13 +10,16 @@ import {
 } from '../types/resultsTypes';
 import { SortableColumn } from '../types/columnTypes';
 
-export const devPrefix = 'https://wwwdev.ebi.ac.uk';
+// export const devPrefix = 'https://wwwdev.ebi.ac.uk';
+// const dataPrefix = devPrefix;
+export const devPrefix = 'http://wp-np2-be:8090/';
+const dataPrefix = 'http://wp-np2-be:8095/';
 export const prodPrefix = 'https://www.ebi.ac.uk';
 
 const apiUrls = {
   // uniprotkb advanced search terms
   advancedSearchTerms: joinUrl(
-    devPrefix,
+    dataPrefix,
     '/uniprot/api/configure/uniprotkb/search_terms'
   ),
   // Annotation evidence used by advanced search
@@ -38,13 +41,13 @@ const apiUrls = {
   // Database cross reference fields in result column configure
   // "itemType": "database",
   databaseFields: joinUrl(
-    devPrefix,
+    dataPrefix,
     '/uniprot/api/configure/uniprotkb/databasefields'
   ),
   // All result fields except database cross reference fields
   resultsFields: joinUrl(
-    devPrefix,
-    '/uniprot/api/configure/uniprotkb/resultfields'
+    dataPrefix,
+    '/uniprot/api/configure/uniprotkb/result-fields'
   ),
   // Retrieve results
   search: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),

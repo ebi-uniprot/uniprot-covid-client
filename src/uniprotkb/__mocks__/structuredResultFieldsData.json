@@ -16,7 +16,7 @@
         "id": "Sequence",
         "title": "title",
         "items": [{
-            "id": "dr_abcd",
+            "id": "xref_abcd",
             "label": "drAbcd-label"
         }]
     }]

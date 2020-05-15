@@ -30,7 +30,7 @@ describe('ColumnSelectContainer component', () => {
     );
     const expectedNumberListItems = mockResultFieldsApi.response.reduce(
       (accum, { fields }) =>
-        accum + fields.filter(field => field.name !== 'accession').length,
+        accum + fields.filter((field) => field.name !== 'accession').length,
       0
     );
     expect(items.length).toEqual(expectedNumberListItems);
@@ -63,8 +63,8 @@ describe('ColumnSelectContainer component', () => {
           title: 'title',
           items: [
             {
-              id: Column.drAbcd,
-              label: 'drAbcd-label',
+              id: Column.xrefAbcd,
+              label: 'xrefAbcd-label',
             },
           ],
         },
