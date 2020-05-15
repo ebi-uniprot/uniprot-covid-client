@@ -248,7 +248,7 @@ export enum Column {
   kinetics = 'kinetics',
   length = 'length',
   lineage = 'lineage',
-  mappedPmId = 'mapped_pm_id',
+  mappedPubmedId = 'mapped_pubmed_id',
   mass = 'mass',
   matchedText = 'matched_text',
   mnemonic = 'mnemonic',

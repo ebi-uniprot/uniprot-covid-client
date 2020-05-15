@@ -919,7 +919,7 @@ ColumnConfiguration.set(Column.litPubmedId, {
     );
   },
 });
-ColumnConfiguration.set(Column.mappedPmId, {
+ColumnConfiguration.set(Column.mappedPubmedId, {
   label: 'Mapped PubMed ID',
   render: () => {
     // TODO This is currently not implemented in the backend see TRM-23257
