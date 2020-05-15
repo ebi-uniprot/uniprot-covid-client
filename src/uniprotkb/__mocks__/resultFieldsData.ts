@@ -44,7 +44,7 @@ const mockResultFieldsApi = {
           name: 'dr:refseq',
         },
       ],
-      isDatabase: true,
+      isDatabaseGroup: true,
     },
   ],
 };

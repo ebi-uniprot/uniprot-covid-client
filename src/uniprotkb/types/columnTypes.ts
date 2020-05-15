@@ -29,9 +29,9 @@ export enum Column {
   ccSubunit = 'cc_subunit',
   ccTissueSpecificity = 'cc_tissue_specificity',
   ccToxicDose = 'cc_toxic_dose',
-  dateCreate = 'date_create',
-  dateMod = 'date_mod',
-  dateSeqMod = 'date_seq_mod',
+  dateCreated = 'date_created',
+  dateModified = 'date_modified',
+  dateSequenceModified = 'date_sequence_modified',
   xrefAbcd = 'xref_abcd',
   xrefAllergome = 'xref_allergome',
   xrefArachnoserver = 'xref_arachnoserver',
@@ -253,7 +253,7 @@ export enum Column {
   matchedText = 'matched_text',
   mnemonic = 'mnemonic',
   organismName = 'organism_name',
-  organismHost = 'organism_host',
+  virusHosts = 'virus_hosts',
   organismId = 'organism_id',
   phDependence = 'ph_dependence',
   pmId = 'pm_id',
@@ -262,7 +262,7 @@ export enum Column {
   proteinName = 'protein_name',
   redoxPotential = 'redox_potential',
   reviewed = 'reviewed',
-  score = 'score',
+  annotationScore = 'annotation_score',
   sequence = 'sequence',
   sequenceVersion = 'sequence_version',
   tempDependence = 'temp_dependence',
@@ -304,7 +304,7 @@ export enum Column {
 
 export type SortableColumn =
   | Column.accession
-  | Column.score
+  | Column.annotationScore
   | Column.geneNames
   | Column.length
   | Column.mass
