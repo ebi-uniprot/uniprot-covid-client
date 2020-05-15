@@ -154,7 +154,7 @@ ColumnConfiguration.set(Column.geneNames, {
   },
 });
 
-ColumnConfiguration.set(Column.organism, {
+ColumnConfiguration.set(Column.organismName, {
   label: 'Organism',
   sortable: true,
   render: (data) => {
@@ -985,19 +985,6 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   },
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-ColumnConfiguration.set(Column.taxId, {
-  label: 'Taxon ID',
-  render: (data) => {
-    const { organismData } = data[EntrySection.NamesAndTaxonomy];
-    return (
-      organismData && (
-        <Link to={`/taxonomy/${organismData.taxonId}`}>
-          {organismData.taxonId}
-        </Link>
-      )
-    );
-  },
-});
 const getXrefColumn = (databaseName: string) => ({
   label: `${databaseName} cross-reference`,
   render: (data: UniProtkbUIModel) => {

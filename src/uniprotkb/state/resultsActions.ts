@@ -1,6 +1,7 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { groupBy } from 'lodash-es';
 import fetchData from '../../shared/utils/fetchData';
 import { RootState } from '../../app/state/rootInitialState';
 import apiUrls from '../config/apiUrls';
@@ -24,29 +25,9 @@ export const prepareFields = (fields: ReceivedField[]) =>
   fields.map(({ label, name }) => ({ id: name, label }));
 
 export const prepareFieldData = (fieldData: ReceivedFieldData) => {
-  const dataTab: FieldDatum[] = [];
-  const linksTab: FieldDatum[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const linksAdded: any = {};
-  fieldData.forEach(({ groupName, fields, isDatabase }) => {
-    const group = {
-      id: groupName,
-      title: groupName,
-      items: prepareFields(fields),
-    };
-    if (isDatabase) {
-      if (!linksAdded[groupName]) {
-        linksTab.push(group);
-        linksAdded[groupName] = true;
-      }
-    } else {
-      dataTab.push(group);
-    }
-  });
-  return {
-    [ColumnSelectTab.data]: dataTab,
-    [ColumnSelectTab.links]: linksTab,
-  };
+  groupBy(fieldData, ({ isDatabaseGroup }) =>
+    isDatabaseGroup ? ColumnSelectTab.links : ColumnSelectTab.data
+  );
 };
 
 export const receiveFields = (data: ReceivedFieldData) =>
@@ -57,7 +38,7 @@ export const receiveFields = (data: ReceivedFieldData) =>
 
 export const fetchFields = () => async (dispatch: Dispatch) => {
   dispatch(requestFields());
-  return fetchData(apiUrls.resultsFields).then((response) =>
+  return fetchData(apiUrls.resultsFields).then(response =>
     dispatch(receiveFields(response.data))
   );
 };

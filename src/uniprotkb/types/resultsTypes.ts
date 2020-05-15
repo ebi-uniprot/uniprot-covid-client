@@ -49,7 +49,8 @@ export type ReceivedField = {
 
 export type ReceivedFieldData = {
   groupName: string;
-  isDatabase: boolean;
+  isDatabaseGroup: boolean;
+  id: string;
   fields: ReceivedField[];
 }[];
 

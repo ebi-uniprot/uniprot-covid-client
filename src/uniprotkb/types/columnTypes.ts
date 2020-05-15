@@ -252,7 +252,7 @@ export enum Column {
   mass = 'mass',
   matchedText = 'matched_text',
   mnemonic = 'mnemonic',
-  organism = 'organism',
+  organismName = 'organism_name',
   organismHost = 'organism_host',
   organismId = 'organism_id',
   phDependence = 'ph_dependence',
@@ -265,7 +265,6 @@ export enum Column {
   score = 'score',
   sequence = 'sequence',
   sequenceVersion = 'sequence_version',
-  taxId = 'tax_id',
   tempDependence = 'temp_dependence',
   tlAll = 'tl_all',
   tlClass = 'tl_class',
@@ -311,4 +310,4 @@ export type SortableColumn =
   | Column.mass
   | Column.mnemonic
   | Column.proteinName
-  | Column.organism;
+  | Column.organismName;

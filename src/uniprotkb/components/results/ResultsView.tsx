@@ -12,7 +12,10 @@ import { ViewMode } from '../../state/resultsInitialState';
 import { SortableColumn, Column } from '../../types/columnTypes';
 import './styles/warning.scss';
 import './styles/results-view.scss';
-import { getParamsFromURL, getLocationObjForParams } from '../../utils/results-utils';
+import {
+  getParamsFromURL,
+  getLocationObjForParams,
+} from '../../utils/results-utils';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import getNextUrlFromResponse from '../../utils/queryUtils';
@@ -62,7 +65,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       return;
     }
     const { results } = data;
-    setAllResults((allRes) => [...allRes, ...results]);
+    setAllResults(allRes => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -96,7 +99,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       [Column.id, 'mnemonic'],
       [Column.proteinName, 'name'],
       [Column.geneNames, 'gene'],
-      [Column.organism, 'organism_name'],
+      [Column.organismName, 'organism_name'],
       [Column.mass, 'mass'],
       [Column.length, 'length'],
     ]);
@@ -142,7 +145,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = columns.map((columnName) => {
+  const columnsToDisplay = columns.map(columnName => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {
