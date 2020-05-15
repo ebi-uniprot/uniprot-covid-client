@@ -1,5 +1,5 @@
 export enum Column {
-  threeD = '3d',
+  structure3D = 'structure_3d',
   absorption = 'absorption',
   accession = 'accession',
   ccAllergen = 'cc_allergen',

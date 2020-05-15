@@ -739,7 +739,7 @@ ColumnConfiguration.set(Column.goId, {
     );
   },
 });
-ColumnConfiguration.set(Column.threeD, {
+ColumnConfiguration.set(Column.structure3D, {
   label: '3D structures',
   render: data => {
     const structureData = (data[EntrySection.Structure] as StructureUIModel)
