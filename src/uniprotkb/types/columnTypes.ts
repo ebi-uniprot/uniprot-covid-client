@@ -251,7 +251,6 @@ export enum Column {
   mappedPubmedId = 'mapped_pubmed_id',
   mass = 'mass',
   matchedText = 'matched_text',
-  mnemonic = 'mnemonic',
   organismName = 'organism_name',
   virusHosts = 'virus_hosts',
   organismId = 'organism_id',
@@ -308,6 +307,6 @@ export type SortableColumn =
   | Column.geneNames
   | Column.length
   | Column.mass
-  | Column.mnemonic
+  | Column.id
   | Column.proteinName
   | Column.organismName;

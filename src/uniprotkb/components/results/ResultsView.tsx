@@ -96,7 +96,6 @@ const ResultsView: React.FC<ResultsTableProps> = ({
      */
     const fieldNameMap = new Map([
       [Column.accession, 'accession'],
-      [Column.id, 'mnemonic'],
       [Column.proteinName, 'name'],
       [Column.geneNames, 'gene'],
       [Column.organismName, 'organism_name'],
