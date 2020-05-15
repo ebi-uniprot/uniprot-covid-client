@@ -1,7 +1,6 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { groupBy } from 'lodash-es';
 import fetchData from '../../shared/utils/fetchData';
 import { RootState } from '../../app/state/rootInitialState';
 import apiUrls from '../config/apiUrls';
@@ -22,14 +21,33 @@ export const UPDATE_TABLE_COLUMNS = 'UPDATE_TABLE_COLUMNS';
 export const requestFields = () => action(REQUEST_FIELDS);
 
 export const prepareFields = (fields: ReceivedField[]) =>
-  fields.map(({ label, name }) => ({ id: name, label }));
+  fields.map(({ label, name }) => ({ id: name as Column, label }));
 
 export const prepareFieldData = (fieldData: ReceivedFieldData) => {
-  groupBy(fieldData, ({ isDatabaseGroup }) =>
-    isDatabaseGroup ? ColumnSelectTab.links : ColumnSelectTab.data
-  );
+  const dataTab: FieldDatum[] = [];
+  const linksTab: FieldDatum[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const linksAdded: any = {};
+  fieldData.forEach(({ groupName, fields, isDatabaseGroup, id }) => {
+    const group = {
+      id,
+      title: groupName,
+      items: prepareFields(fields),
+    };
+    if (isDatabaseGroup) {
+      if (!linksAdded[groupName]) {
+        linksTab.push(group);
+        linksAdded[groupName] = true;
+      }
+    } else {
+      dataTab.push(group);
+    }
+  });
+  return {
+    [ColumnSelectTab.data]: dataTab,
+    [ColumnSelectTab.links]: linksTab,
+  };
 };
-
 export const receiveFields = (data: ReceivedFieldData) =>
   action(RECEIVE_FIELDS, {
     data: prepareFieldData(data),

@@ -927,7 +927,7 @@ ColumnConfiguration.set(Column.mappedPmId, {
     return '';
   },
 });
-ColumnConfiguration.set(Column.dateCreate, {
+ColumnConfiguration.set(Column.dateCreated, {
   label: 'Date Created',
   render: data => {
     const { entryAudit } = data[EntrySection.Sequence];

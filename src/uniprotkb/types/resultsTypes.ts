@@ -35,6 +35,7 @@ export type FieldDatum = {
   items: {
     id: Column;
     label: string;
+    sortField?: string;
   }[];
 };
 
@@ -45,6 +46,8 @@ export type FieldData = {
 export type ReceivedField = {
   name: Column;
   label: string;
+  id: string;
+  sortField?: string;
 };
 
 export type ReceivedFieldData = {
