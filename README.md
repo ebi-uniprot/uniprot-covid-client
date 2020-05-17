@@ -39,3 +39,15 @@ Here there are two points to keep in mind:
 
 1.  _Jest_ will automatically create a directory called `__snapshots__`, where ever it can find a snapshot test! All of your compiled snapshots will be stored in that directory and they need to be committed to the repository as well, as they are part of your tests.
 2.  After updating a component which has snapshots tests already, you would need to run the following command to update your snapshots with the latest changes from your component: `yarn update-snapshots`. [Jest's documentation](https://facebook.github.io/jest/docs/en/snapshot-testing.html#updating-snapshots) has a section for updating, as well as resolving failing snapshot tests.
+
+### Debugging service workers
+
+Service workers shouldn't be registered on a live-reload development
+environment. To be able to have them running, you need to generate a build,
+preferably a dev build through `yarn run build:dev` to have an easier time
+debugging. Serve the compiled website through any static asset server (e.g.
+running `npx serve build`) and you can have a look at the website where the
+service worker should be registered and functioning.
+
+Something's gone wrong with caching on a deployed build? In the entry point use
+the `unregister` function instead of the `register` function.

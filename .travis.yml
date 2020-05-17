@@ -9,7 +9,7 @@ before_script:
   - 'yarn clear-test-cache'
   - 'yarn cache clean'
 before_deploy:
-  - yarn build-staging
+  - yarn build:staging
 notifications:
   slack: ebi-uniprot:7OMFmmkUp9uxH3SXgyq7OVb3
 deploy:

@@ -1,4 +1,4 @@
-import { Location } from '../../urls';
+import { Location } from '../../app/config/urls';
 
 export enum MessageLevel {
   SUCCESS = 'success',
@@ -15,6 +15,7 @@ export enum MessageFormat {
 export enum MessageTag {
   BLAST_JOB = 'BLAST_JOB',
   DOWNTIME = 'DOWNTIME',
+  REDIRECT = 'REDIRECT',
 }
 
 export type MessageType = {

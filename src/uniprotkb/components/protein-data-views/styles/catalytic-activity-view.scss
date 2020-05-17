@@ -1,0 +1,20 @@
+.rhea-reaction-visualizer {
+  &__button {
+    margin: 0.5rem;
+  }
+
+  &__component {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.zoomLink {
+  cursor: pointer;
+}
+
+.zoom-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -16,7 +16,7 @@ exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
           class="message__content"
         >
           <svg
-            fill="none"
+            fill="currentColor"
             height="1.125em"
             viewBox="0 0 18 18"
             width="1.125em"
@@ -24,7 +24,6 @@ exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
             <path
               clip-rule="evenodd"
               d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
-              fill="#000"
               fill-rule="evenodd"
             />
           </svg>
@@ -37,12 +36,13 @@ exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
           type="button"
         >
           <svg
+            fill="currentColor"
             height="10"
             viewBox="0 0 352 512"
             width="10"
           >
             <path
-              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+              d="M243 256l100-100c12-12 12-32 0-45l-22-22a31 31 0 00-45 0L176 189 76 89a31 31 0 00-45 0L9 111a31 31 0 000 45l100 100L9 356a31 31 0 000 45l22 22c13 12 33 12 45 0l100-100 100 100c12 12 32 12 45 0l22-22c12-13 12-33 0-45L243 256z"
             />
           </svg>
         </button>

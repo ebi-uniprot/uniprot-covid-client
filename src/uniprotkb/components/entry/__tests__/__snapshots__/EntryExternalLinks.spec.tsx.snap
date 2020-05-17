@@ -1,0 +1,353 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Entry - External Links view should render 1`] = `
+<DocumentFragment>
+  <div
+    id="External Links"
+  >
+    <div
+      class="card"
+    >
+      <section>
+        <div
+          class="card__header"
+        >
+          <h2
+            class="card__title"
+          >
+            External Links
+          </h2>
+        </div>
+        <div
+          class="card__content"
+        >
+          <h3>
+            Web resources
+          </h3>
+          <ul
+            class="expandable-list no-bullet"
+          >
+            <li>
+              <a
+                class="external-link"
+                href="resource URL"
+                rel="noopener"
+                target="_blank"
+              >
+                resource name (Note text)
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 576 512"
+                  width="12.5"
+                >
+                  <path
+                    d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+          <h3>
+            Enzyme and pathway databases
+          </h3>
+          <div
+            class="info-list info-list--columns "
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  ENZYME
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="https://enzyme.expasy.org/EC/1.2.3.4"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Search...
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                      
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <h3>
+            Family and domain databases
+          </h3>
+          <div
+            class="info-list info-list--columns "
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  MobiDB
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="http://mobidb.bio.unipd.it/entries/P21802"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Search...
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                      
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  ProtoNet
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="http://www.protonet.cs.huji.ac.il/sp.php?prot=P21802"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Search...
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                      
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <h3>
+            Genome annotation databases
+          </h3>
+          <div
+            class="info-list info-list--columns "
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  Ensembl
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="https://www.ensembl.org/id/id value"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      id value
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                     
+                    <a
+                      class="external-link"
+                      href="https://www.ensembl.org/id/description value"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      description value
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                     [
+                    <a
+                      href="#Q9NXB0-1"
+                    >
+                      Q9NXB0-1
+                    </a>
+                    ]
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <h3>
+            3D structure databases
+          </h3>
+          <div
+            class="info-list info-list--columns "
+          >
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  ModBase
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="http://salilab.org/modbase-cgi/model_search.cgi?searchkw=name&kword=P21802"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Search...
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                      
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="info-list__item"
+            >
+              <div
+                class="info-list__item__title"
+              >
+                <h5
+                  class="bold"
+                >
+                  SWISS-MODEL-Workspace
+                </h5>
+              </div>
+              <div
+                class="info-list__item__content"
+              >
+                <ul
+                  class="expandable-list no-bullet"
+                >
+                  <li>
+                    <a
+                      class="external-link"
+                      href="https://swissmodel.expasy.org/interactive/?ac=P21802"
+                      rel="noopener"
+                      target="_blank"
+                    >
+                      Submit a new modelling project...
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 576 512"
+                        width="12.5"
+                      >
+                        <path
+                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        />
+                      </svg>
+                    </a>
+                      
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</DocumentFragment>
+`;

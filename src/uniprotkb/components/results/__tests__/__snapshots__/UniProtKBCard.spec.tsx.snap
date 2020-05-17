@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UniProtKBCard component should render 1`] = `
+<DocumentFragment>
+  <div
+    class="card"
+  >
+    <section
+      class=" card--has-hover"
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="card__content"
+      >
+        <section
+          class="uniprot-card"
+        >
+          <section
+            class="uniprot-card__left"
+          >
+            <input
+              data-testid="up-card-checkbox"
+              type="checkbox"
+            />
+          </section>
+          <section
+            class="uniprot-card__right"
+          >
+            <h5>
+              <span
+                class="uniprot-title"
+              >
+                <span
+                  class="uniprot-title__status icon--unreviewed"
+                >
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 400 512"
+                  >
+                    <path
+                      d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                    />
+                  </svg>
+                </span>
+                P21802 · uniprot id
+              </span>
+            </h5>
+            <section>
+              rec full Name · scientific name · Gene: some Gene · 10 amino-acids · 
+              <span
+                title="Annotation Score"
+              >
+                <span
+                  class="doughnut-chart--small colour-platinum"
+                >
+                  <span
+                    class="doughnut-chart--small__left-wrap"
+                  >
+                    <span
+                      class="doughnut-chart--small__left-wrap__loader colour-sea-blue"
+                      style="transform: rotate(0deg);"
+                    />
+                  </span>
+                  <span
+                    class="doughnut-chart--small__right-wrap"
+                  >
+                    <span
+                      class="doughnut-chart--small__right-wrap__loader colour-sea-blue"
+                      style="transform: rotate(72deg);"
+                    />
+                  </span>
+                  <span
+                    class="doughnut-chart--small__inner-circle"
+                  >
+                    1/5
+                  </span>
+                </span>
+              </span>
+            </section>
+            <section>
+              <small />
+            </section>
+          </section>
+        </section>
+      </div>
+    </section>
+    <section
+      class="card__actions"
+    >
+      <span
+        class="card__link false"
+      >
+        <a
+          href="/uniprotkb/P21802#Sequence"
+        >
+          1 isoform
+        </a>
+      </span>
+      <span
+        class="card__link card__link--separator"
+      >
+        <a
+          href="/uniprotkb/P21802#Interaction"
+        >
+          2 interactions
+        </a>
+      </span>
+      <span
+        class="card__link card__link--separator"
+      >
+        <a
+          href="/uniprotkb/P21802#Pathology & BioTech"
+        >
+          1 disease
+        </a>
+      </span>
+      <span
+        class="card__link card__link--separator"
+      >
+        <a
+          href="/uniprotkb/P21802/publications"
+        >
+          7 publications
+        </a>
+      </span>
+    </section>
+  </div>
+</DocumentFragment>
+`;

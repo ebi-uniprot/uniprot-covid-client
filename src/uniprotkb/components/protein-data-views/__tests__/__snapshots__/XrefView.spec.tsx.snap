@@ -1,0 +1,1255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`XRefView should render for Expression section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for ExternalLinks section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for FamilyAndDomains section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for Function section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for Interaction section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for NamesAndTaxonomy section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for PathologyAndBioTech section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for ProteinProcessing section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for Sequence section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for Structure section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`XRefView should render for SubCellularLocation section 1`] = `
+<DocumentFragment>
+  <h3 />
+  <div
+    class="info-list info-list--columns "
+  >
+    <div
+      class="info-list__item"
+    >
+      <div
+        class="info-list__item__title"
+      >
+        <h5
+          class="bold"
+        >
+          EMBL
+        </h5>
+      </div>
+      <div
+        class="info-list__item__content"
+      >
+        <ul
+          class="expandable-list no-bullet"
+        >
+          <li>
+            (
+            <a
+              class="external-link"
+              href="https://www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              EMBL
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="https://www.ncbi.nlm.nih.gov/protein/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              GenBank
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+             | 
+            <a
+              class="external-link"
+              href="http://getentry.ddbj.nig.ac.jp/getentry/dad/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              DDBJ
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            ) 
+            <a
+              class="external-link"
+              href="//www.ebi.ac.uk/ena/data/view/1234"
+              rel="noopener"
+              target="_blank"
+            >
+              1234
+              <svg
+                fill="currentColor"
+                viewBox="0 0 576 512"
+                width="12.5"
+              >
+                <path
+                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                />
+              </svg>
+            </a>
+            [
+            <a
+              href="#ABCD"
+            >
+              ABCD
+            </a>
+            ]
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`getPropertyLink should create snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="external-link"
+    href="https://www.ensembl.org/id/ENSG00000142192"
+    rel="noopener"
+    target="_blank"
+  >
+    ENSG00000142192
+    <svg
+      fill="currentColor"
+      viewBox="0 0 576 512"
+      width="12.5"
+    >
+      <path
+        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+      />
+    </svg>
+  </a>
+</DocumentFragment>
+`;

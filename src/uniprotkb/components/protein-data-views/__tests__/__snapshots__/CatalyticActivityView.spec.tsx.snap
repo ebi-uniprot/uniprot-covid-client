@@ -1,0 +1,363 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalyticActivityView component should render catalytic activity 1`] = `
+<DocumentFragment>
+  <h3>
+    Catalytic activity
+  </h3>
+  <span
+    class="text-block"
+  >
+    <strong>
+      EC:12112
+    </strong>
+     Reaction nameThis reaction proceeds in the 
+    <span
+      data-testid="direction-text"
+    >
+      forward
+    </span>
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="12"
+        viewBox="0 0 10 15"
+        width="12"
+      >
+        <path
+          d="M10 0H0v15l5-5 5 5V0z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 publication
+      </span>
+    </button>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+      id="<UUID>"
+    />
+     and the 
+    <span
+      data-testid="direction-text"
+    >
+      backward
+    </span>
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="12"
+        viewBox="0 0 10 15"
+        width="12"
+      >
+        <path
+          d="M10 0H0v15l5-5 5 5V0z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 publication
+      </span>
+    </button>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+      id="<UUID>"
+    />
+     directions 
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CatalyticActivityView component should render catalytic activity when comment does not have reactionCrossReferences 1`] = `
+<DocumentFragment>
+  <span
+    class="text-block"
+  >
+    <strong>
+      EC:12112
+    </strong>
+     Reaction nameThis reaction proceeds in the 
+    <span
+      data-testid="direction-text"
+    >
+      forward
+    </span>
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="12"
+        viewBox="0 0 10 15"
+        width="12"
+      >
+        <path
+          d="M10 0H0v15l5-5 5 5V0z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 publication
+      </span>
+    </button>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+      id="<UUID>"
+    />
+     and the 
+    <span
+      data-testid="direction-text"
+    >
+      backward
+    </span>
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="12"
+        viewBox="0 0 10 15"
+        width="12"
+      >
+        <path
+          d="M10 0H0v15l5-5 5 5V0z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
+      >
+        1 publication
+      </span>
+    </button>
+    <div
+      class="evidence-tag-content "
+      data-testid="evidence-tag-content"
+      id="<UUID>"
+    />
+     directions 
+  </span>
+</DocumentFragment>
+`;
+
+exports[`ReactionDirection component should render ReactionDirection when one physiologicalReactions is present  1`] = `
+<DocumentFragment>
+  This reaction proceeds in the 
+  <span
+    data-testid="direction-text"
+  >
+    forward
+  </span>
+   direction 
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
+    class="evidence-tag svg-colour-reviewed"
+    data-testid="evidence-tag-trigger"
+    type="button"
+  >
+    <svg
+      fill="currentColor"
+      height="12"
+      viewBox="0 0 10 15"
+      width="12"
+    >
+      <path
+        d="M10 0H0v15l5-5 5 5V0z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 publication
+    </span>
+  </button>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+    id="<UUID>"
+  />
+</DocumentFragment>
+`;
+
+exports[`ReactionDirection component should render ReactionDirection when two physiologicalReactions are present and should be in correct order (forwards then backwards)  1`] = `
+<DocumentFragment>
+  This reaction proceeds in the 
+  <span
+    data-testid="direction-text"
+  >
+    forward
+  </span>
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
+    class="evidence-tag svg-colour-reviewed"
+    data-testid="evidence-tag-trigger"
+    type="button"
+  >
+    <svg
+      fill="currentColor"
+      height="12"
+      viewBox="0 0 10 15"
+      width="12"
+    >
+      <path
+        d="M10 0H0v15l5-5 5 5V0z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 publication
+    </span>
+  </button>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+    id="<UUID>"
+  />
+   and the 
+  <span
+    data-testid="direction-text"
+  >
+    backward
+  </span>
+  <button
+    aria-controls="<UUID>"
+    aria-expanded="false"
+    class="evidence-tag svg-colour-reviewed"
+    data-testid="evidence-tag-trigger"
+    type="button"
+  >
+    <svg
+      fill="currentColor"
+      height="12"
+      viewBox="0 0 10 15"
+      width="12"
+    >
+      <path
+        d="M10 0H0v15l5-5 5 5V0z"
+      />
+    </svg>
+    <span
+      class="evidence-tag__label"
+      title=""
+    >
+      1 publication
+    </span>
+  </button>
+  <div
+    class="evidence-tag-content "
+    data-testid="evidence-tag-content"
+    id="<UUID>"
+  />
+   directions 
+</DocumentFragment>
+`;
+
+exports[`RheaReactionVisualizer component should render RheaReactionVisualizer 1`] = `
+<DocumentFragment>
+  <button
+    class="button tertiary rhea-reaction-visualizer__button"
+    type="button"
+  >
+    View Rhea reaction
+  </button>
+</DocumentFragment>
+`;
+
+exports[`ZoomModalContent component should render 1`] = `
+<DocumentFragment>
+  <div
+    class="zoom-image-container"
+  >
+    <img
+      alt="chebi:12345"
+      style="display: none;"
+    />
+    <div
+      class="loader-container"
+    >
+      <svg
+        class="loader"
+        height="100"
+        viewBox="0 0 100 100"
+        width="100"
+      >
+        <g
+          fill="none"
+          fill-rule="evenodd"
+        >
+          <path
+            d="M9 50c6.833-10.667 13.667-16 20.5-16S43.167 39.333 50 50s13.667 16 20.5 16S84.167 60.667 91 50"
+            stroke="#3ca3ca"
+            stroke-linecap="square"
+            stroke-width="2"
+          />
+          <circle
+            cx="9"
+            cy="50"
+            fill="#3ca3ca"
+            r="6"
+          />
+          <circle
+            cx="30"
+            cy="34"
+            fill="#3ca3ca"
+            r="6"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            fill="#3ca3ca"
+            r="6"
+          />
+          <circle
+            cx="70"
+            cy="66"
+            fill="#3ca3ca"
+            r="6"
+          />
+          <circle
+            cx="91"
+            cy="50"
+            fill="#3ca3ca"
+            r="6"
+          />
+        </g>
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;
