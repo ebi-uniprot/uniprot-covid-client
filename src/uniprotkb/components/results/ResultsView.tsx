@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
-import { SortDirection, ReceivedFieldData } from '../../types/resultsTypes';
+import { SortDirection } from '../../types/resultsTypes';
 import UniProtKBCard from './UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
@@ -55,10 +55,9 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     nextUrl: string | undefined;
   }>({ total: 0, nextUrl: undefined });
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
-  const [
-    sortableColumnToSortColumn,
-    setSortableColumnToSortColumn,
-  ] = useState();
+  const [sortableColumnToSortColumn, setSortableColumnToSortColumn] = useState<
+    Map<Column, string>
+  >();
 
   const { data, headers } = useDataApi(url);
   const { data: dataResultFields } = useDataApi(apiUrls.resultsFields);
@@ -83,7 +82,11 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     );
   }, [dataResultFields]);
 
-  if (allResults.length === 0 || sortableColumnToSortColumn.size === 0) {
+  if (
+    allResults.length === 0 ||
+    !sortableColumnToSortColumn ||
+    sortableColumnToSortColumn.size === 0
+  ) {
     return <Loader />;
   }
 
@@ -92,8 +95,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const handleLoadMoreRows = () => nextUrl && setUrl(nextUrl);
 
   const updateColumnSort = (column: SortableColumn) => {
-    const sortColumn = sortableColumnToSortColumn.get(column);
-    if (!sortColumn) return;
+    const sortableColumn = sortableColumnToSortColumn.get(column);
+    if (!sortableColumn) return;
 
     // Change sort direction
     const updatedSortDirection =
@@ -106,7 +109,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         '/uniprotkb',
         query,
         selectedFacets,
-        sortColumn,
+        sortableColumn,
         updatedSortDirection
       )
     );

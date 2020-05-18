@@ -1,5 +1,5 @@
 import queryStringModule from 'query-string';
-import { SortableColumn } from '../types/columnTypes';
+import { SortableColumn, Column } from '../types/columnTypes';
 import {
   SelectedFacet,
   SortDirection,
@@ -70,7 +70,7 @@ export const getLocationObjForParams = (
 export const getSortableColumnToSortColumn = (
   resultFields: ReceivedFieldData
 ) => {
-  const sortableColumnToSortColumn = new Map();
+  const sortableColumnToSortColumn = new Map<Column, string>();
   resultFields.forEach(({ fields }) => {
     fields.forEach(({ name, sortField }) => {
       if (sortField) sortableColumnToSortColumn.set(name, sortField);
