@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: uniprot-website-client
-          image: dockerhub.ebi.ac.uk/uniprot/disease-portal/uniprot-website-client # The image which contains Nginx and the built assets
+          image: dockerhub.ebi.ac.uk/uniprot/uniprot-website/uniprot-website # The image which contains Nginx and the built assets
           ports:
             - containerPort: 80 # We are using Nginx's default config which serves on port 80
           imagePullPolicy: Always # Always force pull the Docker iamge
