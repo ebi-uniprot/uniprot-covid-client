@@ -303,7 +303,7 @@ exports[`ColumnSelectView component should render 1`] = `
                       id="checkbox-xref_abcd"
                       type="checkbox"
                     />
-                    drAbcd-label
+                    xrefAbcd-label
                   </label>
                 </li>
               </ul>
