@@ -10,10 +10,10 @@ import {
 } from '../types/resultsTypes';
 import { SortableColumn } from '../types/columnTypes';
 
-// export const devPrefix = 'https://wwwdev.ebi.ac.uk';
-// const dataPrefix = devPrefix;
-export const devPrefix = 'http://wp-np2-be:8090/';
-const dataPrefix = 'http://wp-np2-be:8095/';
+export const devPrefix = 'https://wwwdev.ebi.ac.uk';
+const dataPrefix = devPrefix;
+// export const devPrefix = 'http://wp-np2-be:8090/';
+// const dataPrefix = 'http://wp-np2-be:8095/';
 export const prodPrefix = 'https://www.ebi.ac.uk';
 
 const apiUrls = {
@@ -101,7 +101,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   );
 
 export const createAccessionsQueryString = (accessions: string[]) =>
-  accessions.map((accession) => `accession:${accession}`).join(' OR ');
+  accessions.map(accession => `accession:${accession}`).join(' OR ');
 
 export const getAPIQueryUrl = (
   query: string,
@@ -127,7 +127,7 @@ export const getUniProtPublicationsQueryUrl = (
   `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,study_type',
     query: selectedFacets
-      .map((facet) => `(${facet.name}:"${facet.value}")`)
+      .map(facet => `(${facet.name}:"${facet.value}")`)
       .join(' AND '),
   })}`;
 
@@ -197,5 +197,5 @@ export const getPublicationURL = (id: string) =>
 
 export const getPublicationsURL = (ids: string[]) =>
   `${literatureApiUrls.literature}/search?query=(${ids
-    .map((id) => `id:${id}`)
+    .map(id => `id:${id}`)
     .join(' OR ')})`;

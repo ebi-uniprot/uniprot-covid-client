@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
 import fetchData from '../utils/fetchData';

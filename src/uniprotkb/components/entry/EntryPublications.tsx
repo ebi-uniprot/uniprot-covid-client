@@ -47,7 +47,7 @@ const EntryPublications: FC<{
     setUrl(initialUrl);
     setAllResults([]);
     setMetaData({ total: 0, nextUrl: undefined });
-  }, [initialUrl]);
+  }, [initialUrl, url]);
 
   if (error) {
     return <ErrorHandler status={status} />;
