@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
-import { SortDirection } from '../../types/resultsTypes';
+import { SortDirection, ReceivedFieldData } from '../../types/resultsTypes';
 import UniProtKBCard from './UniProtKBCard';
 import uniProtKbConverter, {
   UniProtkbUIModel,
@@ -15,12 +15,11 @@ import './styles/results-view.scss';
 import {
   getParamsFromURL,
   getLocationObjForParams,
-} from '../../utils/results-utils';
-import { getAPIQueryUrl } from '../../config/apiUrls';
+  getSortableColumnToSortColumn,
+} from '../../utils/resultsUtils';
+import apiUrls, { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import getNextUrlFromResponse from '../../utils/queryUtils';
-import BaseLayout from '../../../shared/components/layouts/BaseLayout';
-import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
 
 type ResultsTableProps = {
   selectedEntries: string[];
@@ -56,8 +55,13 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     nextUrl: string | undefined;
   }>({ total: 0, nextUrl: undefined });
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
+  const [
+    sortableColumnToSortColumn,
+    setSortableColumnToSortColumn,
+  ] = useState();
 
   const { data, headers } = useDataApi(url);
+  const { data: dataResultFields } = useDataApi(apiUrls.resultsFields);
   // TODO handle error
 
   useEffect(() => {
@@ -72,16 +76,15 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     }));
   }, [data, headers]);
 
-  if (allResults.length === 0) {
-    return <Loader />;
-  }
-
-  if (allResults.length === 0) {
-    return (
-      <BaseLayout>
-        <NoResultsPage />
-      </BaseLayout>
+  useEffect(() => {
+    if (!dataResultFields) return;
+    setSortableColumnToSortColumn(
+      getSortableColumnToSortColumn(dataResultFields)
     );
+  }, [dataResultFields]);
+
+  if (allResults.length === 0 || sortableColumnToSortColumn.size === 0) {
+    return <Loader />;
   }
 
   const { total, nextUrl } = metaData;
@@ -89,20 +92,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const handleLoadMoreRows = () => nextUrl && setUrl(nextUrl);
 
   const updateColumnSort = (column: SortableColumn) => {
-    /**
-     * NOTE: temporary fix until backend provide
-     * the correct name for sort fields
-     * https://www.ebi.ac.uk/panda/jira/browse/TRM-23753
-     */
-    const fieldNameMap = new Map([
-      [Column.accession, 'accession'],
-      [Column.proteinName, 'name'],
-      [Column.geneNames, 'gene'],
-      [Column.organismName, 'organism_name'],
-      [Column.mass, 'mass'],
-      [Column.length, 'length'],
-    ]);
-    const apiColumn = fieldNameMap.get(column);
+    const sortColumn = sortableColumnToSortColumn.get(column);
+    if (!sortColumn) return;
 
     // Change sort direction
     const updatedSortDirection =
@@ -115,7 +106,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         '/uniprotkb',
         query,
         selectedFacets,
-        apiColumn,
+        sortColumn,
         updatedSortDirection
       )
     );
@@ -152,7 +143,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         name: columnName,
         render: (row: UniProtkbAPIModel) =>
           columnConfig.render(uniProtKbConverter(row) as UniProtkbUIModel),
-        sortable: columnConfig.sortable,
+        sortable: sortableColumnToSortColumn.has(columnName),
         sorted: columnName === sortColumn && sortDirection, // TODO this doesn't seem to update the view
       };
     }

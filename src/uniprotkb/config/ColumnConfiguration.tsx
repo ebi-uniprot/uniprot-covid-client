@@ -106,14 +106,12 @@ export const ColumnConfiguration = new Map<
   Column,
   {
     label: string;
-    sortable?: boolean | undefined;
     render: (data: UniProtkbUIModel) => JSX.Element | string | undefined;
   }
 >();
 
 ColumnConfiguration.set(Column.accession, {
   label: 'Entry',
-  sortable: true,
   render: (data: { primaryAccession: string; entryType: string }) => (
     <SimpleView
       termValue={data.primaryAccession}
@@ -124,7 +122,6 @@ ColumnConfiguration.set(Column.accession, {
 
 ColumnConfiguration.set(Column.id, {
   label: 'Entry Name',
-  sortable: true,
   render: (data: { uniProtkbId: string }) => (
     <SimpleView termValue={data.uniProtkbId} />
   ),
@@ -132,7 +129,6 @@ ColumnConfiguration.set(Column.id, {
 
 ColumnConfiguration.set(Column.proteinName, {
   label: 'Protein names',
-  sortable: true,
   render: data => {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
@@ -145,7 +141,6 @@ ColumnConfiguration.set(Column.proteinName, {
 
 ColumnConfiguration.set(Column.geneNames, {
   label: 'Gene Names',
-  sortable: true,
   render: data => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
@@ -156,7 +151,6 @@ ColumnConfiguration.set(Column.geneNames, {
 
 ColumnConfiguration.set(Column.organismName, {
   label: 'Organism',
-  sortable: true,
   render: data => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return organismData && <OrganismView data={organismData} />;
