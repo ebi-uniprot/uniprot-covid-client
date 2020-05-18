@@ -4,9 +4,9 @@ metadata:
   name: uniprot-website-client-http
 spec:
   ports:
-    - port: 31234
+    - port: 31240
       protocol: TCP
-      nodePort: 31234 # The port which will be externally exposed. Must be in the range [30000, 32767].
+      nodePort: 31240 # The port which will be externally exposed. Must be in the range [30000, 32767].
       targetPort: 80 # The port on your Deployment which it will expose
   selector:
     app: uniprot-website-client # Selects the disease-portal-client Deployment to attach the Service to
