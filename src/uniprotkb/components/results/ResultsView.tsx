@@ -64,9 +64,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   // TODO handle error
 
   useEffect(() => {
-    if (!data) {
-      return;
-    }
+    if (!data) return;
     const { results } = data;
     setAllResults(allRes => [...allRes, ...results]);
     setMetaData(() => ({
