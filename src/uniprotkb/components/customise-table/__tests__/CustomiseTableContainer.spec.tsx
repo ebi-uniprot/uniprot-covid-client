@@ -4,7 +4,7 @@ import CustomiseTableContainer from '../CustomiseTableContainer';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import * as resultsActions from '../../../state/resultsActions';
-import '../../../__mocks__/mockApi';
+import '../../__mocks__/mockApi';
 
 const updateTableColumns = jest.spyOn(resultsActions, 'updateTableColumns');
 

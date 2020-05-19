@@ -5,8 +5,8 @@ import { fireEvent } from '@testing-library/react';
 import initialState from '../../../../app/state/rootInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import { FileFormat } from '../../../types/resultsTypes';
-import mockFasta from '../../../__mocks__/fasta.json';
-import '../../../__mocks__/mockApi';
+import mockFasta from '../../__mocks__/fasta.json';
+import '../../__mocks__/mockApi';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('getPreviewFileFormat', () => {

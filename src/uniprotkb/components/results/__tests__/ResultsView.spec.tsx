@@ -5,7 +5,7 @@ import ResultsView from '../ResultsView';
 import { ViewMode } from '../../../state/resultsInitialState';
 import { render } from '@testing-library/react';
 import { Column } from '../../../types/columnTypes';
-import '../../../__mocks__/mockApi';
+import '../../__mocks__/mockApi';
 
 const props = {
   columns: [Column.accession],

@@ -9,7 +9,7 @@ import { ColumnSelectTab } from '../../../types/resultsTypes';
 import { Column } from '../../../types/columnTypes';
 import structuredResultFieldsData from './__mocks__/structuredResultFieldsData.json';
 import resultFields from '../../../__mocks__/resultFields.json';
-import '../../../__mocks__/mockApi';
+import '../../__mocks__/mockApi';
 
 describe('ColumnSelectContainer component', () => {
   test('should call to get field data', async () => {

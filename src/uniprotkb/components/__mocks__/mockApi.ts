@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import results from './results.json';
 import noResults from './noResults.json';
 import entry from './swissprotEntry.json';
-import resultFields from './resultFields.json';
+import resultFields from '../../__mocks__/resultFields.json';
 import mockFasta from './fasta.json';
 
 const mock = new MockAdapter(axios);

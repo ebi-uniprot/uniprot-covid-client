@@ -8,7 +8,7 @@ import resultsInitialState, {
   ViewMode,
 } from '../../../state/resultsInitialState';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
-import '../../../__mocks__/mockApi';
+import '../../__mocks__/mockApi';
 
 describe('Results component', () => {
   afterEach(cleanup);
