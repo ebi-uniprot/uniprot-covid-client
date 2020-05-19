@@ -34,8 +34,11 @@ precacheAndRoute(self.__WB_MANIFEST); // eslint-disable-line
 
 /* routes: */
 
+declare const BASE_URL: string;
 // respond to all 'navigation' requests with this document (browsing)
-registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')));
+registerRoute(
+  new NavigationRoute(createHandlerBoundToURL(`${BASE_URL}index.html`))
+);
 
 // https://www.ebi.ac.uk/interpro/api/entry/interpro/protein/uniprot/A1L3X0?page_size=100&type=family
 // external APIs - Stale While Revalidate
