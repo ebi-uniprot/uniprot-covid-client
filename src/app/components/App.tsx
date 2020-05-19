@@ -57,21 +57,20 @@ const JobErrorPage = lazy(() =>
     /* webpackChunkName: "job-error" */ '../../shared/components/error-pages/JobErrorPage'
   )
 );
+const ContactPage = lazy(() =>
+  import(
+    /* webpackChunkName: "contact" */ '../../shared/components/contact/ContactPage'
+  )
+);
 
 const App = () => (
   <FranklinSite>
     <Router history={history}>
       <Suspense fallback={<Loader />}>
         <Switch>
-          {/* <Route
-            path={LocationToPath[Location.Home]}
-            exact
-            render={() => <HomePage />}
-          /> */}
           <Route path="/" exact>
-            <Redirect to="/uniprotkb?query=*" />
+            <Redirect to={LocationToPath[Location.ShowAllResults]} />
           </Route>
-
           <Route
             path={LocationToPath[Location.UniProtKBEntry]}
             render={() => <EntryPage />}
@@ -119,6 +118,10 @@ const App = () => (
                 <JobErrorPage />
               </BaseLayout>
             )}
+          />
+          <Route
+            path={LocationToPath[Location.Contact]}
+            render={() => <ContactPage />}
           />
           {/* <Route
             path={`${LocationToPath[Location.UniProtKBQueryBuilder]}(/reset)?`}

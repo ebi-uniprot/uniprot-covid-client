@@ -6,6 +6,7 @@ import {
   RouteComponentProps,
   Switch,
   Route,
+  Link,
 } from 'react-router-dom';
 import {
   InPageNav,
@@ -168,9 +169,16 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
           >
             Add a Publication
           </a>
-          {/* <button type="button" className="button tertiary">
-            Add
-          </button> */}
+          <Link
+            to={{
+              pathname: '/contact',
+              state: {
+                accession: transformedData.primaryAccession,
+              },
+            }}
+          >
+            Feedback
+          </Link>
         </div>
       ),
       mainContent: <EntryMain transformedData={transformedData} />,

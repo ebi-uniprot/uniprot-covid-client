@@ -1,0 +1,20 @@
+.contact-page-form {
+  padding: 1rem;
+
+  &__row {
+    display: flex;
+
+    span {
+      width: 20vw;
+    }
+
+    input[type='text'],
+    textarea {
+      width: 40vw;
+    }
+
+    textarea {
+      height: 20vh;
+    }
+  }
+}
