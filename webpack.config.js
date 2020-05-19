@@ -10,7 +10,17 @@ module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
   const isLiveReload = !!argv.liveReload;
 
-  const publicPath = env.PUBLIC_PATH || '/';
+  let publicPath = '/';
+  if (env.PUBLIC_PATH) {
+    // if we have an array, it means we've probably overriden env in the CLI
+    // from a predefined env in a yarn/npm script
+    if (Array.isArray(env.PUBLIC_PATH)) {
+      // so we take the last one
+      publicPath = env.PUBLIC_PATH[env.PUBLIC_PATH.length - 1];
+    } else {
+      publicPath = env.PUBLIC_PATH;
+    }
+  }
 
   const config = {
     context: __dirname,
