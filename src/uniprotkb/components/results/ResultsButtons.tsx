@@ -33,12 +33,12 @@ const ResultsButtons: FC<{
 }) => {
   return (
     <div className="button-group">
-      <button type="button" className="button tertiary disabled">
+      {/* <button type="button" className="button tertiary disabled">
         Blast
       </button>
       <button type="button" className="button tertiary disabled">
         Align
-      </button>
+      </button> */}
       <button type="button" className="button tertiary">
         <Link
           to={{
@@ -57,14 +57,14 @@ const ResultsButtons: FC<{
           Download
         </Link>
       </button>
-      <button type="button" className="button tertiary disabled">
+      {/* <button type="button" className="button tertiary disabled">
         <BasketIcon />
         Add
       </button>
       <button type="button" className="button tertiary">
         <StatisticsIcon />
         Statistics
-      </button>
+      </button> */}
       <button
         type="button"
         className="button tertiary large-icon"

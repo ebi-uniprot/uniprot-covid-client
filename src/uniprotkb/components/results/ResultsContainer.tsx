@@ -87,7 +87,12 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
       <SideBarLayout
         title={
           <Fragment>
-            <PageIntro title={name} links={links} resultsCount={total}>
+            <PageIntro
+              title={name}
+              links={links}
+              resultsCount={total}
+              showContent
+            >
               {info}
             </PageIntro>
           </Fragment>

@@ -41,6 +41,7 @@ export type FeatureData = {
 }[];
 
 export type ProtvistaFeature = {
+  accession?: string;
   type: string;
   description: string;
   evidences: Evidence[];
@@ -55,6 +56,7 @@ type FeatureProps = {
   features: FeatureData;
 };
 
+// TODO: looks like this could be merged with ProtvistaFeature?
 export type ProcessedFeature = {
   accession: string | undefined;
   start: number;
@@ -109,8 +111,12 @@ const FeaturesView: React.FC<FeatureProps> = ({
         html`
           ${d.description}
           ${d.evidences &&
-            UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)}
+          UniProtProtvistaEvidenceTag(d.evidences, evidenceTagCallback)}
         `,
+    },
+    featureId: {
+      label: 'ID',
+      resolver: (d: ProtvistaFeature) => (d.accession ? d.accession : '-'),
     },
   });
 

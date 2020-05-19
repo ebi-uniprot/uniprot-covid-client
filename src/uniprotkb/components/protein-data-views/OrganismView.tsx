@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { InfoList, ExternalLink } from 'franklin-sites';
-import { Link } from 'react-router-dom';
-import SimpleView from './SimpleView';
 import { OrganismData } from '../../adapters/namesAndTaxonomyConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import externalUrls from '../../config/externalUrls';
@@ -21,10 +19,7 @@ export const OrganismId: React.FC<{ taxonId: number | undefined }> = ({
     return null;
   }
   return (
-    <Fragment>
-      <Link to={`taxonomy/${taxonId}`}>{`${taxonId} `}</Link>
-      <ExternalLink url={externalUrls.NCBI(taxonId)}>NCBI</ExternalLink>
-    </Fragment>
+    <ExternalLink url={externalUrls.NCBI(taxonId)}>{taxonId}</ExternalLink>
   );
 };
 
@@ -40,7 +35,9 @@ const OrganismView: React.FC<OrganismDataProps> = ({
   } ${data.synonyms && data.synonyms.length > 0 ? ` (${data.synonyms})` : ''}`;
 
   return (
-    <SimpleView termValue={termValue} linkTo={`/taxonomy/${data.taxonId}`} />
+    <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
+      {termValue}
+    </ExternalLink>
   );
 };
 
@@ -57,9 +54,11 @@ export const OrganismListView: React.FC<{
       title: 'Organism',
       content: (
         <Fragment>
-          <Link to={`/taxonomy/${data.taxonId}`}>
-            {`${data.scientificName} (${data.commonName})`}
-          </Link>
+          {data.taxonId && (
+            <ExternalLink url={externalUrls.NCBI(data.taxonId)}>
+              {`${data.scientificName} (${data.commonName})`}
+            </ExternalLink>
+          )}
           {data.evidences && data.evidences.length && (
             <UniProtKBEvidenceTag evidences={data.evidences} />
           )}
@@ -84,7 +83,7 @@ export const OrganismListView: React.FC<{
       title: 'Virus hosts',
       content: (
         <Fragment>
-          {hosts.map(host => (
+          {hosts.map((host) => (
             <p key={host.taxonId}>
               <OrganismView data={host} />
             </p>

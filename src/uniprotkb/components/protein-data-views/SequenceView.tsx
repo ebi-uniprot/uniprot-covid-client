@@ -33,7 +33,13 @@ export const SequenceInfo: React.FC<{
   isoformId: string;
   isoformSequence?: SequenceData;
   lastUpdateDate?: string | null;
-}> = ({ isoformId, isoformSequence, lastUpdateDate }) => {
+  displayLoadSequenceButton?: boolean;
+}> = ({
+  isoformId,
+  isoformSequence,
+  lastUpdateDate,
+  displayLoadSequenceButton = true,
+}) => {
   const [data, setData] = useState(null);
   const [isoformToFetch, setIsoformToFetch] = useState('');
 
@@ -51,7 +57,7 @@ export const SequenceInfo: React.FC<{
 
   const dataToDisplay = data || isoformSequence;
 
-  if (!dataToDisplay) {
+  if (!dataToDisplay && displayLoadSequenceButton) {
     return (
       <button
         type="button"
@@ -62,6 +68,11 @@ export const SequenceInfo: React.FC<{
       </button>
     );
   }
+
+  if (!dataToDisplay) {
+    return null;
+  }
+
   const infoData = [
     {
       title: 'Length',
@@ -108,8 +119,8 @@ export const IsoformInfo: React.FC<{
     },
     {
       title: 'Synonyms',
-      content: (idx(isoformData, o => o.synonyms) || [])
-        .map(syn => syn.value)
+      content: (idx(isoformData, (o) => o.synonyms) || [])
+        .map((syn) => syn.value)
         .join(', '),
     },
     {
@@ -123,10 +134,10 @@ export const IsoformInfo: React.FC<{
                   to={`/blast/accession/${canonicalAccession}/positions/${location.start.value}-${location.end.value}`}
                 >{`${location.start.value}-${location.end.value}: `}</Link>
                 {alternativeSequence && alternativeSequence.originalSequence
-                  ? `${
-                      alternativeSequence.originalSequence
-                    }  → ${alternativeSequence.alternativeSequences &&
-                      alternativeSequence.alternativeSequences.join(', ')}`
+                  ? `${alternativeSequence.originalSequence}  → ${
+                      alternativeSequence.alternativeSequences &&
+                      alternativeSequence.alternativeSequences.join(', ')
+                    }`
                   : 'Missing'}
                 {evidences && <UniProtKBEvidenceTag evidences={evidences} />}
               </li>
@@ -139,7 +150,7 @@ export const IsoformInfo: React.FC<{
       title: 'Note',
       content:
         isoformData.note &&
-        isoformData.note.texts.map(note => note.value).join(', '),
+        isoformData.note.texts.map((note) => note.value).join(', '),
     },
   ];
   // TODO isoformData.sequenceIds is used to get the features for
@@ -210,7 +221,7 @@ export const MassSpectrometryView: React.FC<{
   data: MassSpectrometryComment[];
 }> = ({ data }) => (
   <Fragment>
-    {data.map(item => (
+    {data.map((item) => (
       <section className="text-block" key={`${item.molWeight}${item.method}`}>
         {item.molecule && <h3>{item.molecule}</h3>}
         {`Molecular mass is ${numberView({
@@ -229,16 +240,17 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
   data,
 }) => (
   <Fragment>
-    {data.map(item => (
+    {data.map((item) => (
       <section
         className="text-block"
-        key={`${item.positions &&
-          item.positions.map(pos => pos.position).join('')}`}
+        key={`${
+          item.positions && item.positions.map((pos) => pos.position).join('')
+        }`}
       >
         {item.positions && (
           <div>
             {'Edited at positions '}
-            {item.positions.map(position => (
+            {item.positions.map((position) => (
               <span key={position.position}>
                 {position.position}{' '}
                 <UniProtKBEvidenceTag evidences={position.evidences} />
@@ -248,7 +260,7 @@ export const RNAEditingView: React.FC<{ data: RNAEditingComment[] }> = ({
         )}
         {item.note && (
           <div>
-            {item.note.texts.map(text => (
+            {item.note.texts.map((text) => (
               <span key={text.value}>
                 {text.value}{' '}
                 {text.evidences && (
@@ -288,16 +300,21 @@ export const IsoformView: React.FC<{
   }
 
   let notesNode;
-  const texts = idx(alternativeProducts, o => o.note.texts);
+  const texts = idx(alternativeProducts, (o) => o.note.texts);
   if (texts) {
-    notesNode = <p>{texts.map(text => text.value).join(' ')}</p>;
+    notesNode = <p>{texts.map((text) => text.value).join(' ')}</p>;
   }
 
   let isoformsNode;
   if (isoforms) {
-    isoformsNode = isoforms.map(isoform => {
+    isoformsNode = isoforms.map((isoform) => {
       const isoformComponent = (
-        <SequenceInfo isoformId={isoform.isoformIds[0]} />
+        <SequenceInfo
+          isoformId={isoform.isoformIds[0]}
+          displayLoadSequenceButton={
+            isoform.isoformSequenceStatus !== 'External'
+          }
+        />
       );
       return (
         <Fragment key={isoform.isoformIds.join('')}>

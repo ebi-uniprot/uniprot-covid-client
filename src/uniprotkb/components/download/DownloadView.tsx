@@ -96,11 +96,13 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             value={fileFormat}
             onChange={onFileFormatChange}
           >
-            {Object.values(FileFormat).map(format => (
-              <option value={format} key={format}>
-                {format}
-              </option>
-            ))}
+            {Object.values(FileFormat)
+              .filter((format) => format !== FileFormat.rdfXml) // this download file type currently doesn't work so remove for now
+              .map((format) => (
+                <option value={format} key={format}>
+                  {format}
+                </option>
+              ))}
           </select>
         </fieldset>
         <fieldset>

@@ -56,14 +56,13 @@ type EntryProps = {
   addMessage: (message: MessageType) => void;
 } & RouteComponentProps<MatchParams>;
 
-const Entry: React.FC<EntryProps> = ({
-  addMessage,
-  match,
-}) => {
+const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   const { path, params } = match;
   const { accession } = params;
 
-  const { loading, data, status, error, redirectedTo } = useDataApi(apiUrls.entry(accession));
+  const { loading, data, status, error, redirectedTo } = useDataApi(
+    apiUrls.entry(accession)
+  );
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -126,9 +125,9 @@ const Entry: React.FC<EntryProps> = ({
           <button type="button" className="button tertiary">
             Blast
           </button>
-          <button type="button" className="button tertiary">
+          {/* <button type="button" className="button tertiary">
             Align
-          </button>
+          </button> */}
           <DropdownButton
             label={
               <Fragment>
@@ -156,9 +155,15 @@ const Entry: React.FC<EntryProps> = ({
               </ul>
             </div>
           </DropdownButton>
-          <button type="button" className="button tertiary">
+          <a
+            className="button tertiary"
+            href={`//community.uniprot.org/bbsub/bbsub.html?accession=${accession}`}
+          >
+            Add a Publication
+          </a>
+          {/* <button type="button" className="button tertiary">
             Add
-          </button>
+          </button> */}
         </div>
       ),
       mainContent: <EntryMain transformedData={transformedData} />,
@@ -230,6 +235,4 @@ const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
     dispatch
   );
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Entry)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Entry));

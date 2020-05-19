@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import { InfoList } from 'franklin-sites';
-import { Link } from 'react-router-dom';
 import { Xref } from '../../types/commentTypes';
 
 const ProteomesId: React.FC<{ id?: string }> = ({ id }) => (
-  <Link to={`/proteomes/${id}`}>{id}</Link>
+  <Fragment>
+    {id}
+    {/* <a href={`//www.uniprot.org/proteomes/${id}`}>
+    {id}
+  </a> */}
+  </Fragment>
 );
 
 const ProteomesComponents: React.FC<{
@@ -22,7 +26,7 @@ const ProteomesView: React.FC<{ data?: Xref[]; isCompact?: boolean }> = ({
   }
   return (
     <Fragment>
-      {data.map(proteome => (
+      {data.map((proteome) => (
         <InfoList
           key={proteome.id}
           isCompact={isCompact}

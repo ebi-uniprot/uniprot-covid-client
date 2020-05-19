@@ -2,23 +2,33 @@ import React, { Fragment } from 'react';
 
 const UniProtKBInfo = () => (
   <Fragment>
-    <p>
-      The UniProt Knowledgebase (UniProtKB) is the central hub for the
-      collection of functional information on proteins, with accurate,
-      consistent and rich annotation. In addition to capturing the core data
-      mandatory for each UniProtKB entry (mainly, the amino acid sequence,
-      protein name or description, taxonomic data and citation information), as
-      much annotation information as possible is added.
-    </p>
-    <p>UniProtKB consists of two sections:</p>
-    <p>
-      Reviewed (Swiss-Prot) - Manually annotated Records with information
-      extracted from literature and curator-evaluated computational analysis.
-    </p>
-    <p>
-      Unreviewed (TrEMBL) - Computationally analyzed Records that await full
-      manual annotation.
-    </p>
+    <section className="text-block">
+      This site provides the latest available pre-release UniProtKB data for the
+      SARS-CoV-2 coronavirus and other entries relating to the COVID-19
+      outbreak. Therefore, data and functionality provided here may differ from
+      the main Uniprot.org website which is updated every eight weeks. This site
+      will be updated as new relevant information becomes available, independent
+      of the general UniProt release schedule.
+    </section>
+    <section className="text-block">
+      This data can also be accessed via our FTP on{' '}
+      <a href="ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/">
+        ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/
+      </a>
+    </section>
+    <section className="text-block">
+      You can view our latest webinar about Sars-CoV-2 and this portal from{' '}
+      <a href="https://www.youtube.com/watch?v=EY69TjnVhRs">here</a>, presented
+      on the 2nd April 2020.
+    </section>
+    <section className="text-block">
+      Please go to the <a href="//www.uniprot.org">UniProt.org</a> website for
+      all other entries and functionalities.
+    </section>
+    <section className="text-block">
+      You can view all COVID-19 related publications contributed by the
+      community <a href="//community.uniprot.org/bbsub/covid.html">here</a>.
+    </section>
   </Fragment>
 );
 

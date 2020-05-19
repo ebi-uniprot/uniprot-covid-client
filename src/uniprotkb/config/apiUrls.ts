@@ -10,8 +10,10 @@ import {
 } from '../types/resultsTypes';
 import { SortableColumn } from '../types/columnTypes';
 
-export const devPrefix = 'https://wwwdev.ebi.ac.uk';
-export const prodPrefix = 'https://www.ebi.ac.uk';
+const devPrefix = 'https://wwwdev.ebi.ac.uk';
+const prodPrefix = 'https://www.ebi.ac.uk';
+// const covidPrefix = 'https://www.ebi.ac.uk/uniprot/api/covid-19';
+const covidPrefix = 'http://wp-np2-be:8090/uniprot/api/';
 
 const apiUrls = {
   // uniprotkb advanced search terms
@@ -47,12 +49,12 @@ const apiUrls = {
     '/uniprot/api/configure/uniprotkb/resultfields'
   ),
   // Retrieve results
-  search: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
-  download: joinUrl(devPrefix, '/uniprot/api/uniprotkb/download'),
+  search: joinUrl(covidPrefix, '/uniprotkb/search'),
+  download: joinUrl(covidPrefix, '/uniprotkb/download'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
 
   entry: (accession: string) =>
-    joinUrl(devPrefix, '/uniprot/api/uniprotkb/accession', accession),
+    joinUrl(covidPrefix, '/uniprotkb/accession', accession),
   sequenceFasta: (accession: string) => `${apiUrls.entry(accession)}.fasta`,
   entryDownload: (accession: string, format: FileFormat) =>
     format === FileFormat.fastaCanonicalIsoform
@@ -65,12 +67,7 @@ const apiUrls = {
         })}`
       : `${apiUrls.entry(accession)}.${fileFormatToUrlParameter.get(format)}`,
   entryPublications: (accession: string) =>
-    joinUrl(
-      devPrefix,
-      '/uniprot/api/uniprotkb/accession',
-      accession,
-      '/publications'
-    ),
+    joinUrl(covidPrefix, '/uniprotkb/accession', accession, '/publications'),
 };
 
 export default apiUrls;
@@ -111,7 +108,7 @@ export const getAPIQueryUrl = (
     query: `${query}${createFacetsQueryString(selectedFacets)}`,
     fields: columns && columns.join(','),
     facets:
-      'reviewed,model_organism,proteins_with,existence,annotation_score,length',
+      'reviewed,model_organism,other_organism,proteins_with,existence,annotation_score',
     sort:
       sortColumn &&
       `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
