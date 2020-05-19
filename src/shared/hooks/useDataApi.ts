@@ -91,13 +91,13 @@ const useDataApi = (url?: string): State => {
     fetchData(url, undefined, source.token).then(
       // handle ok
       (response: AxiosResponse) => {
-        if (!didCancel)
-          dispatch({ type: ActionType.SUCCESS, response, originalURL: url });
+        if (didCancel) return;
+        dispatch({ type: ActionType.SUCCESS, response, originalURL: url });
       },
       // catch error
       (error: AxiosError) => {
-        if (axios.isCancel(error)) return;
-        if (!didCancel) dispatch({ type: ActionType.ERROR, error });
+        if (axios.isCancel(error) || didCancel) return;
+        dispatch({ type: ActionType.ERROR, error });
       }
     );
 
