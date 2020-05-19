@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { SequenceUIModel } from '../../adapters/sequenceConverter';
 import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
 import numberView, { Unit } from './NumberView';
 import externalUrls from '../../config/externalUrls';
+import submitBlast from '../../../blast_website/BlastUtils';
 
 export type SequenceData = {
   value: string;
@@ -54,6 +55,13 @@ export const SequenceInfo: React.FC<{
 
     fetchIsoformData();
   }, [isoformToFetch]);
+
+  const onBlastClick = useCallback(() => {
+    const dataToDisplay = data || isoformSequence;
+    if (dataToDisplay && dataToDisplay.value) {
+      submitBlast(dataToDisplay.value);
+    }
+  }, [isoformSequence, data]);
 
   const dataToDisplay = data || isoformSequence;
 
@@ -101,7 +109,7 @@ export const SequenceInfo: React.FC<{
         downloadUrl={apiUrls.sequenceFasta(isoformId)}
         // These callbacks have been commented out as neither BLAST
         // nor the basket have been implemented
-        // onBlastClick={() => {}}
+        onBlastClick={onBlastClick}
         // onAddToBasketClick={() => {}}
       />
     </Fragment>
