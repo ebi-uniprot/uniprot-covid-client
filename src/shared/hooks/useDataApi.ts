@@ -74,7 +74,6 @@ const useDataApi = (url?: string): State => {
     // need this variabe to ensure state updates don't occur when cancelled/unmounted
     // https://github.com/facebook/react/issues/14369#issuecomment-468267798
     let didCancel = false;
-    if (didCancel) return;
 
     // we don't require a URL, we just don't need data anymore
     // assume succes with no data
