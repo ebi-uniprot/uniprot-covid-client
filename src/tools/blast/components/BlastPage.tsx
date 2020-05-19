@@ -2,13 +2,13 @@ import React, { FC, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { Link, useParams } from 'react-router-dom';
+import * as blastActions from '../../state/blastActions';
+import { BlastFormValues } from '../config/BlastFormData';
+import { BlastJob } from '../../state/blastInitialState';
+import { BlastHsp } from '../types/blastResults';
+import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
 import BlastForm from './BlastForm';
-import * as blastActions from './state/blastActions';
-import { BlastFormValues } from './data/BlastFormData';
-import { BlastJob } from './state/blastInitialState';
-import { BlastHsp } from './types/blastResults';
-import SideBarLayout from '../shared/components/layouts/SideBarLayout';
-import { RootState, RootAction } from '../app/state/rootInitialState';
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
 
 const RecentJobs: FC<{ jobs: BlastJob[] }> = ({ jobs }) => (
   <ul className="no-bullet">

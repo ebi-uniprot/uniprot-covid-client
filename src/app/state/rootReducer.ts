@@ -3,7 +3,7 @@ import initialState, { RootState, RootAction } from './rootInitialState';
 import searchReducers from '../../uniprotkb/state/searchReducers';
 import resultsReducers from '../../uniprotkb/state/resultsReducers';
 import messagesReducers from '../../messages/state/messagesReducers';
-import blastReducers from '../../blast/state/blastReducers';
+import blastReducers from '../../tools/state/blastReducers';
 
 const appReducer = combineReducers({
   query: searchReducers,

@@ -6,7 +6,7 @@ import BaseLayout from '../../shared/components/layouts/BaseLayout';
 import { Location, LocationToPath } from '../config/urls';
 import './styles/app.scss';
 import history from '../../shared/utils/browserHistory';
-import BlastPage from '../../blast/BlastPage';
+import BlastPage from '../../tools/blast/components/BlastPage';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({

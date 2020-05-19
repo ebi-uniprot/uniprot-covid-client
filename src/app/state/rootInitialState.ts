@@ -9,11 +9,11 @@ import messagesInitialState, {
 } from '../../messages/state/messagesInitialState';
 import blastInitialState, {
   BlastState,
-} from '../../blast/state/blastInitialState';
+} from '../../tools/state/blastInitialState';
 import { SearchAction } from '../../uniprotkb/state/searchReducers';
 import { ResultAction } from '../../uniprotkb/state/resultsReducers';
 import { MessagesAction } from '../../messages/state/messagesReducers';
-import { BlastAction } from '../../blast/state/blastReducers';
+import { BlastAction } from '../../tools/state/blastReducers';
 
 export type RootState = {
   query: SearchState;

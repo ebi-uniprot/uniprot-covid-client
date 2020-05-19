@@ -2,9 +2,9 @@ import React, { FC, Fragment, useState } from 'react';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
-} from './data/BlastFormData';
+} from '../config/BlastFormData';
 import './styles/BlastForm.scss';
-import AutocompleteWrapper from '../uniprotkb/components/query-builder/AutocompleteWrapper';
+import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;

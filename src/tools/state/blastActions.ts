@@ -1,12 +1,11 @@
 import { action } from 'typesafe-actions';
 import { Dispatch, Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { BlastFormValues } from '../data/BlastFormData';
-import blastUrls from '../utils/blastUrls';
-import { BlastResults } from '../types/blastResults';
 import fetchData from '../../shared/utils/fetchData';
 import { RootState } from '../../app/state/rootInitialState';
 import postData from '../../uniprotkb/config/postData';
+import blastUrls from '../blast/config/blastUrls';
+import { BlastFormValues } from '../blast/config/BlastFormData';
 
 export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';
