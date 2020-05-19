@@ -16,12 +16,18 @@ variables:
     - yarn
 
 test:
+  only:
+    refs:
+      - master
   extends: .js
   stage: test
   script:
     - yarn test
 
 build_static_assets:
+  only:
+    refs:
+      - master
   extends: .js
   stage: build_static_assets
   script:
@@ -31,6 +37,9 @@ build_static_assets:
       - build/
 
 build_docker_image:
+  only:
+    refs:
+      - master
   stage: build_docker_image
   image: docker:latest
   tags:
@@ -49,6 +58,9 @@ build_docker_image:
     - docker logout "$CI_REGISTRY"
 
 deploy:
+  only:
+    refs:
+      - master
   stage: deploy
   image: alpine
   script:
@@ -61,6 +73,7 @@ deploy:
     - mkdir ~/.kube
     - cp k8s-config/config ~/.kube/
     - kubectl config use-context uniprot-admin-hx-wp-webadmin-02
+    - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | cat'
     - 'printf "$(kubectl create secret docker-registry gitlab-registry --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD --docker-email=$GITLAB_USER_EMAIL -o yaml --dry-run=client)" | kubectl apply -f -'
     - kubectl get secrets gitlab-registry -o yaml
     - kubectl config set-context --current --namespace=uniprot-front-end
