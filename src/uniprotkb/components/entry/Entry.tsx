@@ -46,6 +46,7 @@ import {
   MessageType,
   MessageTag,
 } from '../../../messages/types/messagesTypes';
+import submitBlast from '../../../blast_website/BlastUtils';
 
 type MatchParams = {
   accession: string;
@@ -122,8 +123,14 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
       exact: true,
       actionButtons: (
         <div className="button-group">
-          <button type="button" className="button tertiary">
-            Blast
+          <button
+            type="button"
+            className="button tertiary"
+            onClick={() =>
+              submitBlast(transformedData[EntrySection.Sequence].sequence.value)
+            }
+          >
+            BLAST
           </button>
           {/* <button type="button" className="button tertiary">
             Align
