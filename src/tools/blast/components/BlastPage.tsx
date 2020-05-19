@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import * as blastActions from '../../state/blastActions';
 import { BlastFormValues } from '../config/BlastFormData';
 import { BlastJob } from '../../state/blastInitialState';
-import { BlastHsp } from '../types/blastResults';
+import { BlastHsp, BlastHit } from '../types/blastResults';
 import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
 import BlastForm from './BlastForm';
 import { RootState, RootAction } from '../../../app/state/rootInitialState';
@@ -60,7 +60,7 @@ const BlastResults: FC<{ job: BlastJob | undefined }> = ({ job }) => {
         <tbody className="data-table__table__body">
           {job.data &&
             job.data.hits &&
-            job.data.hits.map((hit) => {
+            job.data.hits.map((hit: BlastHit) => {
               const {
                 proteinDescription,
                 organism,

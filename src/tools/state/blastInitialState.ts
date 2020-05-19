@@ -1,4 +1,4 @@
-import { BlastResults } from '../types/blastResults';
+import { BlastResults } from '../blast/types/blastResults';
 
 export type BlastJob = {
   jobId: string;

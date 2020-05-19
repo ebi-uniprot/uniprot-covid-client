@@ -6,6 +6,7 @@ import { RootState } from '../../app/state/rootInitialState';
 import postData from '../../uniprotkb/config/postData';
 import blastUrls from '../blast/config/blastUrls';
 import { BlastFormValues } from '../blast/config/BlastFormData';
+import { BlastResults } from '../blast/types/blastResults';
 
 export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';

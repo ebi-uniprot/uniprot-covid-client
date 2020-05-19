@@ -28,7 +28,7 @@ exports[`HomePage component should render 1`] = `
         >
           <li>
             <a
-              href="/"
+              href="/blast"
             >
               BLAST
             </a>
