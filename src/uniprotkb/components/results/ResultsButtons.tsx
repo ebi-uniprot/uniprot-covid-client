@@ -1,12 +1,5 @@
 import React, { FC } from 'react';
-import {
-  DownloadIcon,
-  BasketIcon,
-  StatisticsIcon,
-  TableIcon,
-  ListIcon,
-  EditIcon,
-} from 'franklin-sites';
+import { DownloadIcon, TableIcon, ListIcon, EditIcon } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import { ViewMode } from '../../state/resultsInitialState';
 import { SortDirection, SelectedFacet } from '../../types/resultsTypes';

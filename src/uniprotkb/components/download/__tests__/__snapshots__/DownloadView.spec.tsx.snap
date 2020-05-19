@@ -66,11 +66,6 @@ exports[`DownloadView component should render 1`] = `
           XML
         </option>
         <option
-          value="RDF/XML"
-        >
-          RDF/XML
-        </option>
-        <option
           value="Text"
         >
           Text

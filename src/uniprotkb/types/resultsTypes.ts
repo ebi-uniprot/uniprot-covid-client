@@ -59,7 +59,7 @@ export enum FileFormat {
   tsv = 'TSV',
   excel = 'Excel',
   xml = 'XML',
-  // rdfXml = 'RDF/XML',
+  rdfXml = 'RDF/XML',
   text = 'Text',
   gff = 'GFF',
   list = 'List',

@@ -63,6 +63,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
 
   const { facets, results } = data;
   const total = headers['x-totalrecords'];
+  const releaseDate = headers['x-release'];
 
   if (results.length === 0) {
     return (
@@ -94,6 +95,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
               showContent
             >
               {info}
+              <strong>Latest update</strong>: {releaseDate}
             </PageIntro>
           </Fragment>
         }

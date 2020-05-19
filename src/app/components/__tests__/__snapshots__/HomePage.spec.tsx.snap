@@ -9,7 +9,7 @@ exports[`HomePage component should render 1`] = `
       class="main-header"
     >
       <div
-        class="header header--negative"
+        class="header"
       >
         <div
           class="header__logo"
@@ -19,114 +19,14 @@ exports[`HomePage component should render 1`] = `
           >
             <test-file-stub
               height="50"
+              style="margin-right: 5rem;"
               width="120"
             />
           </a>
         </div>
         <ul
           class="header__navigation"
-        >
-          <li>
-            <a
-              href="/"
-            >
-              BLAST
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-            >
-              Align
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-            >
-              Peptide Search
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-            >
-              Retrieve/ID Mapping
-            </a>
-          </li>
-          <li>
-            <a
-              href="/advancedSearch/reset"
-            >
-              Query Builder
-            </a>
-          </li>
-          <li
-            class="dropdown-container dropdown-container--hover"
-          >
-            <span
-              class="dropdown-container__trigger dropdown-container__trigger--negative"
-            >
-              API
-            </span>
-            <div
-              class="dropdown-menu"
-            >
-              <ul>
-                <li>
-                  <a
-                    href="/"
-                  >
-                    Programmatic access
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li
-            class="dropdown-container dropdown-container--hover"
-          >
-            <span
-              class="dropdown-container__trigger dropdown-container__trigger--negative"
-            >
-              Help
-            </span>
-            <div
-              class="dropdown-menu"
-            >
-              <ul>
-                <li>
-                  <a
-                    href="/"
-                  >
-                    Help
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                  >
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                  >
-                    About UniProt
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                  >
-                    Cite us
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        />
         <div
           class="header__search"
         />

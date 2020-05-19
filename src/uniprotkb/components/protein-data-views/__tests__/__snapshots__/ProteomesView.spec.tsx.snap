@@ -20,11 +20,7 @@ exports[`ProteomesEntryView component should render 1`] = `
       <div
         class="info-list__item__content"
       >
-        <a
-          href="/proteomes/UP000005640"
-        >
-          UP000005640
-        </a>
+        UP000005640
       </div>
     </div>
     <div

@@ -47,13 +47,7 @@ exports[`UniProtKBCard component should render 1`] = `
               </span>
             </h5>
             <section>
-              rec full Name · 
-              <a
-                href="#"
-              >
-                scientific name
-              </a>
-               · Gene: some Gene · 10 amino-acids · 
+              rec full Name · scientific name · Gene: some Gene · 10 amino-acids · 
               <span
                 title="Annotation Score"
               >

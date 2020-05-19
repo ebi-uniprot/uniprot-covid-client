@@ -411,9 +411,21 @@ exports[`ColumnConfiguration component should render all columns 4`] = `
 exports[`ColumnConfiguration component should render all columns 5`] = `
 <DocumentFragment>
   <a
-    href="/taxonomy/9606"
+    class="external-link"
+    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
+    rel="noopener"
+    target="_blank"
   >
     scientific name (common name)  (synonyms 1)
+    <svg
+      fill="currentColor"
+      viewBox="0 0 576 512"
+      width="12.5"
+    >
+      <path
+        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+      />
+    </svg>
   </a>
 </DocumentFragment>
 `;
@@ -540,17 +552,12 @@ exports[`ColumnConfiguration component should render all columns 10`] = `
 exports[`ColumnConfiguration component should render all columns 11`] = `
 <DocumentFragment>
   <a
-    href="/taxonomy/9606"
-  >
-    9606 
-  </a>
-  <a
     class="external-link"
     href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
     rel="noopener"
     target="_blank"
   >
-    NCBI
+    9606
     <svg
       fill="currentColor"
       viewBox="0 0 576 512"
@@ -576,9 +583,21 @@ exports[`ColumnConfiguration component should render all columns 14`] = `
 <DocumentFragment>
   <p>
     <a
-      href="/taxonomy/9606"
+      class="external-link"
+      href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
+      rel="noopener"
+      target="_blank"
     >
       scientific name (common name)  (synonyms 1)
+      <svg
+        fill="currentColor"
+        viewBox="0 0 576 512"
+        width="12.5"
+      >
+        <path
+          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+        />
+      </svg>
     </a>
   </p>
 </DocumentFragment>
@@ -1554,7 +1573,7 @@ exports[`ColumnConfiguration component should render all columns 50`] = `
 exports[`ColumnConfiguration component should render all columns 51`] = `
 <DocumentFragment>
   <a
-    href="/keywords/KW-11111"
+    href="//www.uniprot.org/keywords/KW-11111"
   >
      #keyword value
   </a>
@@ -1564,7 +1583,7 @@ exports[`ColumnConfiguration component should render all columns 51`] = `
 exports[`ColumnConfiguration component should render all columns 52`] = `
 <DocumentFragment>
   <a
-    href="/keywords/KW-11111"
+    href="//www.uniprot.org/keywords/KW-11111"
   >
      #KW-11111
   </a>
@@ -2077,10 +2096,23 @@ exports[`ColumnConfiguration component should render all columns 108`] = `<Docum
 
 exports[`ColumnConfiguration component should render all columns 109`] = `
 <DocumentFragment>
+  9606
   <a
-    href="/taxonomy/9606"
+    class="external-link"
+    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
+    rel="noopener"
+    target="_blank"
   >
     9606
+    <svg
+      fill="currentColor"
+      viewBox="0 0 576 512"
+      width="12.5"
+    >
+      <path
+        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+      />
+    </svg>
   </a>
 </DocumentFragment>
 `;

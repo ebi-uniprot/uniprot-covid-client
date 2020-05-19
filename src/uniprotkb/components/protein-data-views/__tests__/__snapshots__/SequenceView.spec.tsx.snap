@@ -98,6 +98,14 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
           class="no-bullet"
         >
           <li>
+            <button
+              class="button tertiary"
+              type="button"
+            >
+              BLAST
+            </button>
+          </li>
+          <li>
             <a
               href="//web.expasy.org/cgi-bin//protparam/protparam?Isoform"
               rel="noopener noreferrer"
@@ -148,7 +156,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
     <a
       class="button"
       download=""
-      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/Isoform.fasta"
+      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/Isoform.fasta"
     >
       <svg
         fill="currentColor"
@@ -461,6 +469,14 @@ exports[`SequenceView component should render SequenceView 1`] = `
           class="no-bullet"
         >
           <li>
+            <button
+              class="button tertiary"
+              type="button"
+            >
+              BLAST
+            </button>
+          </li>
+          <li>
             <a
               href="//web.expasy.org/cgi-bin//protparam/protparam?P05067"
               rel="noopener noreferrer"
@@ -511,7 +527,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
     <a
       class="button"
       download=""
-      href="https://wwwdev.ebi.ac.uk/uniprot/api/uniprotkb/accession/P05067.fasta"
+      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P05067.fasta"
     >
       <svg
         fill="currentColor"
