@@ -59,7 +59,7 @@
     "axios": "0.19.2",
     "d3": "5.16.0",
     "d3-scale": "3.2.1",
-    "franklin-sites": "0.0.46",
+    "franklin-sites": "0.0.47",
     "history": "4.10.1",
     "idx": "2.5.6",
     "interaction-viewer": "2.7.0",
