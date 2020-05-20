@@ -1,13 +1,13 @@
 {
-  "name": "uniprot-website",
+  "name": "uniprot-covid-client",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://ebi-uniprot.github.io/uniprot-website/",
+  "homepage": "https://ebi-uniprot.github.io/uniprot-covid-client/",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production",
-    "build:dev": "webpack --mode development",
+    "start": "webpack-dev-server --env.PUBLIC_PATH=/ --mode development --open",
+    "build": "webpack --env.PUBLIC_PATH=/ --mode production",
+    "build-staging": "webpack --env.PUBLIC_PATH=/uniprot-covid-client/ --mode production",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
