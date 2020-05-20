@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Fragment } from 'react';
-import { ExpandableList, Sequence, ExternalLink } from 'franklin-sites';
+import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
 import { flatten } from 'lodash-es';
 import { Link } from 'react-router-dom';
@@ -106,14 +106,12 @@ export const ColumnConfiguration = new Map<
   Column,
   {
     label: string;
-    sortable?: boolean | undefined;
     render: (data: UniProtkbUIModel) => JSX.Element | string | undefined;
   }
 >();
 
 ColumnConfiguration.set(Column.accession, {
   label: 'Entry',
-  sortable: true,
   render: (data: { primaryAccession: string; entryType: string }) => (
     <SimpleView
       termValue={data.primaryAccession}
@@ -124,7 +122,6 @@ ColumnConfiguration.set(Column.accession, {
 
 ColumnConfiguration.set(Column.id, {
   label: 'Entry Name',
-  sortable: true,
   render: (data: { uniProtkbId: string }) => (
     <SimpleView termValue={data.uniProtkbId} />
   ),
@@ -132,7 +129,6 @@ ColumnConfiguration.set(Column.id, {
 
 ColumnConfiguration.set(Column.proteinName, {
   label: 'Protein names',
-  sortable: true,
   render: (data) => {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
@@ -145,7 +141,6 @@ ColumnConfiguration.set(Column.proteinName, {
 
 ColumnConfiguration.set(Column.geneNames, {
   label: 'Gene Names',
-  sortable: true,
   render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
@@ -154,9 +149,8 @@ ColumnConfiguration.set(Column.geneNames, {
   },
 });
 
-ColumnConfiguration.set(Column.organism, {
+ColumnConfiguration.set(Column.organismName, {
   label: 'Organism',
-  sortable: true,
   render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return organismData && <OrganismView data={organismData} />;
@@ -274,7 +268,7 @@ ColumnConfiguration.set(Column.proteinName, {
   },
 });
 
-ColumnConfiguration.set(Column.drProteomes, {
+ColumnConfiguration.set(Column.xrefProteomes, {
   label: 'Proteomes',
   render: (data) => {
     const { proteomesData } = data[EntrySection.NamesAndTaxonomy];
@@ -291,14 +285,14 @@ ColumnConfiguration.set(Column.lineage, {
     );
   },
 });
-ColumnConfiguration.set(Column.organismHost, {
+ColumnConfiguration.set(Column.virusHosts, {
   label: 'Virus hosts',
   render: (data) => {
-    const { organismHosts } = data[EntrySection.NamesAndTaxonomy];
+    const { virusHosts } = data[EntrySection.NamesAndTaxonomy];
     return (
-      organismHosts && (
+      virusHosts && (
         <Fragment>
-          {organismHosts.map((host) => (
+          {virusHosts.map((host) => (
             <p key={host.taxonId}>
               <OrganismView data={host} />
             </p>
@@ -581,7 +575,7 @@ ColumnConfiguration.set(Column.tempDependence, {
     );
   },
 });
-ColumnConfiguration.set(Column.score, {
+ColumnConfiguration.set(Column.annotationScore, {
   label: 'Score',
   render: (data) => (
     <AnnotationScoreDoughnutChart
@@ -739,7 +733,7 @@ ColumnConfiguration.set(Column.goId, {
     );
   },
 });
-ColumnConfiguration.set(Column.threeD, {
+ColumnConfiguration.set(Column.structure3D, {
   label: '3D structures',
   render: (data) => {
     const structureData = (data[EntrySection.Structure] as StructureUIModel)
@@ -897,7 +891,7 @@ ColumnConfiguration.set(
 ColumnConfiguration.set(Column.ftStrand, getFeatureColumn(FeatureType.STRAND));
 ColumnConfiguration.set(Column.ftHelix, getFeatureColumn(FeatureType.HELIX));
 ColumnConfiguration.set(Column.ftTurn, getFeatureColumn(FeatureType.TURN));
-ColumnConfiguration.set(Column.pmId, {
+ColumnConfiguration.set(Column.litPubmedId, {
   label: 'PubMed ID',
   render: (data) => {
     let ids: Xref[] = [];
@@ -919,7 +913,7 @@ ColumnConfiguration.set(Column.pmId, {
     );
   },
 });
-ColumnConfiguration.set(Column.mappedPmId, {
+ColumnConfiguration.set(Column.mappedPubmedId, {
   label: 'Mapped PubMed ID',
   render: () => {
     // TODO This is currently not implemented in the backend see TRM-23257
@@ -927,21 +921,21 @@ ColumnConfiguration.set(Column.mappedPmId, {
     return '';
   },
 });
-ColumnConfiguration.set(Column.dateCreate, {
+ColumnConfiguration.set(Column.dateCreated, {
   label: 'Date Created',
   render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && entryAudit.firstPublicDate;
   },
 });
-ColumnConfiguration.set(Column.dateMod, {
+ColumnConfiguration.set(Column.dateModified, {
   label: 'Date Modified',
   render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
     return entryAudit && entryAudit.lastAnnotationUpdateDate;
   },
 });
-ColumnConfiguration.set(Column.dateSeqMod, {
+ColumnConfiguration.set(Column.dateSequenceModified, {
   label: 'Date Sequence Modified',
   render: (data) => {
     const { entryAudit } = data[EntrySection.Sequence];
@@ -985,27 +979,7 @@ ColumnConfiguration.set(Column.ccSimilarity, {
   },
 });
 ColumnConfiguration.set(Column.ftZnFing, getFeatureColumn(FeatureType.ZN_FING));
-ColumnConfiguration.set(Column.taxId, {
-  label: 'Taxon ID',
-  render: (data) => {
-    const { organismData } = data[EntrySection.NamesAndTaxonomy];
-    return (
-      organismData && (
-        <Fragment>
-          {organismData.taxonId}
-          {/* <a href={`//www.uniprot.org/taxonomy/${organismData.taxonId}`}>}
-          {organismData.taxonId}
-        {</a> */}
-          {organismData.taxonId && (
-            <ExternalLink url={externalUrls.NCBI(organismData.taxonId)}>
-              {organismData.taxonId}
-            </ExternalLink>
-          )}
-        </Fragment>
-      )
-    );
-  },
-});
+
 const getXrefColumn = (databaseName: string) => ({
   label: `${databaseName} cross-reference`,
   render: (data: UniProtkbUIModel) => {

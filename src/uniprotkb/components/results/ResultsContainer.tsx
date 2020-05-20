@@ -11,7 +11,7 @@ import { Column } from '../../types/columnTypes';
 import { ViewMode } from '../../state/resultsInitialState';
 import BaseLayout from '../../../shared/components/layouts/BaseLayout';
 import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
-import { getParamsFromURL } from '../../utils/results-utils';
+import { getParamsFromURL } from '../../utils/resultsUtils';
 import useLocalStorage from '../../../shared/hooks/useLocalStorage';
 import { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
@@ -65,7 +65,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   const total = headers['x-totalrecords'];
   const releaseDate = headers['x-release'];
 
-  if (results.length === 0) {
+  if (!results || results.length === 0) {
     return (
       <BaseLayout>
         <NoResultsPage />
@@ -74,7 +74,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   }
 
   const handleEntrySelection = (rowId: string): void => {
-    const filtered = selectedEntries.filter((id) => id !== rowId);
+    const filtered = selectedEntries.filter(id => id !== rowId);
     setSelectedEntries(
       filtered.length === selectedEntries.length
         ? [...selectedEntries, rowId]

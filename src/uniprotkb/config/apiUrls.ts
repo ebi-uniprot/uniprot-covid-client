@@ -46,7 +46,7 @@ const apiUrls = {
   // All result fields except database cross reference fields
   resultsFields: joinUrl(
     devPrefix,
-    '/uniprot/api/configure/uniprotkb/resultfields'
+    '/uniprot/api/configure/uniprotkb/result-fields'
   ),
   // Retrieve results
   search: joinUrl(covidPrefix, '/uniprotkb/search'),
@@ -95,7 +95,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   );
 
 export const createAccessionsQueryString = (accessions: string[]) =>
-  accessions.map((accession) => `accession:${accession}`).join(' OR ');
+  accessions.map(accession => `accession:${accession}`).join(' OR ');
 
 export const getAPIQueryUrl = (
   query: string,
@@ -121,7 +121,7 @@ export const getUniProtPublicationsQueryUrl = (
   `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,study_type',
     query: selectedFacets
-      .map((facet) => `(${facet.name}:"${facet.value}")`)
+      .map(facet => `(${facet.name}:"${facet.value}")`)
       .join(' AND '),
   })}`;
 
@@ -191,5 +191,5 @@ export const getPublicationURL = (id: string) =>
 
 export const getPublicationsURL = (ids: string[]) =>
   `${literatureApiUrls.literature}/search?query=(${ids
-    .map((id) => `id:${id}`)
+    .map(id => `id:${id}`)
     .join(' OR ')})`;
