@@ -1,0 +1,10 @@
+.blast-form-textarea {
+  height: 40vh;
+}
+.blast-form-section {
+  display: flex;
+  flex-direction: row;
+  &__item {
+    margin-right: 2rem;
+  }
+}

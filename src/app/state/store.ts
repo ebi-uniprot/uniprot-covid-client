@@ -25,6 +25,11 @@ const persistConfig = {
       'query',
       ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'] // ignore,
     ),
+    createWhitelistFilter(
+      'blast',
+      ['jobs'], // save
+      ['jobs'] // load
+    ),
     createBlacklistFilter('entry', ['accession', 'data', 'publicationsData']),
   ],
 };
