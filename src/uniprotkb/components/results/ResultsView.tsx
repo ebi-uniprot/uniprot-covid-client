@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
@@ -63,6 +63,11 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const { data: dataResultFields } = useDataApi(apiUrls.resultsFields);
   // TODO handle error
 
+  const prevViewMode = useRef<ViewMode>();
+  useEffect(() => {
+    prevViewMode.current = viewMode;
+  });
+
   useEffect(() => {
     if (!data) return;
     const { results } = data;
@@ -83,7 +88,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   if (
     allResults.length === 0 ||
     !sortableColumnToSortColumn ||
-    sortableColumnToSortColumn.size === 0
+    sortableColumnToSortColumn.size === 0 ||
+    prevViewMode.current !== viewMode
   ) {
     return <Loader />;
   }
