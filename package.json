@@ -5,9 +5,9 @@
   "homepage": "https://ebi-uniprot.github.io/uniprot-website/",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production",
-    "build:dev": "webpack --mode development",
+    "start": "webpack-dev-server --env.PUBLIC_PATH=/ --mode development --open",
+    "build": "webpack --env.PUBLIC_PATH=/uniprot-website/ --mode production",
+    "build:dev": "webpack --env.PUBLIC_PATH=/ --mode development",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",

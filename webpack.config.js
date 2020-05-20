@@ -6,16 +6,28 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // some plugins are conditionally-loaded as they are also conditionally used.
 
-module.exports = (_env, argv) => {
+module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
   const isLiveReload = !!argv.liveReload;
+
+  let publicPath = '/';
+  if (env.PUBLIC_PATH) {
+    // if we have an array, it means we've probably overriden env in the CLI
+    // from a predefined env in a yarn/npm script
+    if (Array.isArray(env.PUBLIC_PATH)) {
+      // so we take the last one
+      publicPath = env.PUBLIC_PATH[env.PUBLIC_PATH.length - 1];
+    } else {
+      publicPath = env.PUBLIC_PATH;
+    }
+  }
 
   const config = {
     context: __dirname,
     entry: [path.resolve(__dirname, 'src/index.tsx')],
     output: {
       path: path.resolve(__dirname, 'build'),
-      publicPath: isDev ? '/' : '/uniprot-website/',
+      publicPath,
       filename: 'app.[hash:6].js',
       chunkFilename: '[name].[chunkhash:6].js',
     },
@@ -136,7 +148,7 @@ module.exports = (_env, argv) => {
           filename: '404.html',
         }),
       new DefinePlugin({
-        BASE_URL: JSON.stringify(isDev ? '/' : '/uniprot-website/'),
+        BASE_URL: JSON.stringify(publicPath),
         LIVE_RELOAD: JSON.stringify(isLiveReload),
       }),
       !isLiveReload &&
