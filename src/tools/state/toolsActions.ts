@@ -7,8 +7,24 @@ import postData from '../../uniprotkb/config/postData';
 import blastUrls from '../blast/config/blastUrls';
 import { BlastFormValues } from '../blast/config/BlastFormData';
 import { BlastResults } from '../blast/types/blastResults';
+import { Job } from '../blast/types/blastJob';
 
-export const RUN_BLAST_JOB = 'RUN_BLAST_JOB';
+export const CREATE_JOB = 'CREATE_JOB';
+export const DELETE_JOB = 'DELETE_JOB';
+export const UPDATE_JOB = 'UPDATE_JOB';
+export const UPDATE_JOB_STATUS = 'UPDATE_JOB_STATUS';
+export const UPDATE_JOB_TITLE = 'UPDATE_JOB_TITLE';
+
+export const createJob = (job: Job) => ({
+  type: CREATE_JOB,
+  job,
+});
+
+export const updateJob = (job: Job) => ({
+  type: UPDATE_JOB,
+  job,
+});
+
 export const RECEIVE_BLAST_JOB_ID = 'RECEIVE_BLAST_JOB_ID';
 export const POLL_BLAST_STATUS = 'POLL_BLAST_STATUS';
 export const FETCH_BLAST_RESULTS = 'FETCH_BLAST_RESULTS';
@@ -16,7 +32,6 @@ export const RECEIVE_BLAST_RESULTS = 'FETCH_BLAST_RESULTS';
 
 // RUNNING
 // FINISHED
-
 export const receiveBlastJobID = (jobId: string) =>
   action(RECEIVE_BLAST_JOB_ID, { jobId });
 
@@ -36,38 +51,6 @@ export const fetchBlastResults = (jobId: string) => async (
       action(FETCH_BLAST_RESULTS);
     }) /* eslint-disable no-console */
     .catch((error) => console.error(error));
-};
-
-function* pollForBlastStatus(jobId: string) {
-  while (true) {
-    yield fetchData(blastUrls.statusUrl(jobId), {
-      headers: {
-        Accept: 'text/plain',
-      },
-    }).then((response) => {
-      return response.data;
-    });
-  }
-}
-
-const runPolling = (
-  jobId: string,
-  generator?: IterableIterator<Promise<string>>
-) => (dispatch: ThunkDispatch<RootState, void, Action>) => {
-  if (!generator) {
-    // eslint-disable-next-line no-param-reassign
-    generator = pollForBlastStatus(jobId);
-  }
-
-  const p = generator.next();
-  p.value.then((d: string) => {
-    if (d === 'RUNNING') {
-      setTimeout(() => dispatch(runPolling(jobId, generator)), 3000);
-    } else {
-      dispatch(fetchBlastResults(jobId));
-      // return action(POLL_BLAST_STATUS, {});
-    }
-  });
 };
 
 export const runBlastJob = (blastFormValues: BlastFormValues) => (

@@ -3,13 +3,13 @@ import initialState, { RootState, RootAction } from './rootInitialState';
 import searchReducers from '../../uniprotkb/state/searchReducers';
 import resultsReducers from '../../uniprotkb/state/resultsReducers';
 import messagesReducers from '../../messages/state/messagesReducers';
-import blastReducers from '../../tools/state/blastReducers';
+import toolsReducers from '../../tools/state/toolsReducers';
 
 const appReducer = combineReducers({
   query: searchReducers,
   results: resultsReducers,
   messages: messagesReducers,
-  blast: blastReducers,
+  tools: toolsReducers,
 });
 
 const rootReducer = (state: RootState | undefined, action: RootAction) => {

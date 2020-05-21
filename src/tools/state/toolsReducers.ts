@@ -1,27 +1,27 @@
 import { ActionType } from 'typesafe-actions';
-import * as blastActions from './blastActions';
-import entryInitialState, { BlastState } from './blastInitialState';
+import * as toolsActions from './toolsActions';
+import entryInitialState, { ToolsState } from './toolsInitialState';
 
-export type BlastAction = ActionType<typeof blastActions>;
+export type ToolsAction = ActionType<typeof toolsActions>;
 
-const blastReducers = (
-  state: BlastState = entryInitialState,
-  action: BlastAction
+const toolsReducers = (
+  state: ToolsState = entryInitialState,
+  action: ToolsAction
 ) => {
   switch (action.type) {
     // add job
-    case blastActions.CREATE_JOB:
+    case toolsActions.CREATE_JOB:
       return {
         ...state,
         [action.job.internalID]: action.job,
       };
     // remove job
-    case blastActions.REMOVE_JOB:
+    case toolsActions.DELETE_JOB:
       // eslint-disable-next-line no-case-declarations
       const { [action.id]: _, ...newState } = state;
       return newState;
     // update job
-    case blastActions.UPDATE_JOB:
+    case toolsActions.UPDATE_JOB:
       return { ...state, [action.job.internalID]: action.job };
 
     // case blastActions.RECEIVE_BLAST_JOB_ID:
@@ -46,4 +46,4 @@ const blastReducers = (
   }
 };
 
-export default blastReducers;
+export default toolsReducers;

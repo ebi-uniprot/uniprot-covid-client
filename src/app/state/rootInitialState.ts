@@ -7,31 +7,31 @@ import resultsInitialState, {
 import messagesInitialState, {
   MessagesState,
 } from '../../messages/state/messagesInitialState';
-import blastInitialState, {
-  BlastState,
-} from '../../tools/state/blastInitialState';
+import toolsInitialState, {
+  ToolsState,
+} from '../../tools/state/toolsInitialState';
 import { SearchAction } from '../../uniprotkb/state/searchReducers';
 import { ResultAction } from '../../uniprotkb/state/resultsReducers';
 import { MessagesAction } from '../../messages/state/messagesReducers';
-import { BlastAction } from '../../tools/state/blastReducers';
+import { ToolsAction } from '../../tools/state/toolsReducers';
 
 export type RootState = {
   query: SearchState;
   results: ResultsState;
   messages: MessagesState;
-  blast: BlastState;
+  tools: ToolsState;
 };
 
 export type RootAction =
   | SearchAction
   | ResultAction
   | MessagesAction
-  | BlastAction;
+  | ToolsAction;
 
 const initialState = {
   query: searchInitialState,
   results: resultsInitialState,
   messages: messagesInitialState,
-  blast: blastInitialState,
+  tools: toolsInitialState,
 };
 export default initialState;
