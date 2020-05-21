@@ -9,23 +9,38 @@ const blastReducers = (
   action: BlastAction
 ) => {
   switch (action.type) {
-    case blastActions.RECEIVE_BLAST_JOB_ID:
+    // add job
+    case blastActions.CREATE_JOB:
       return {
         ...state,
-        jobs: [...state.jobs, { jobId: action.payload.jobId }],
+        [action.job.internalID]: action.job,
       };
-    case blastActions.RECEIVE_BLAST_RESULTS:
-      return {
-        ...state,
-        jobs: [
-          ...state.jobs.map(job => {
-            if (job.jobId === action.payload.jobId) {
-              return { ...job, data: action.payload.data };
-            }
-            return job;
-          }),
-        ],
-      };
+    // remove job
+    case blastActions.REMOVE_JOB:
+      // eslint-disable-next-line no-case-declarations
+      const { [action.id]: _, ...newState } = state;
+      return newState;
+    // update job
+    case blastActions.UPDATE_JOB:
+      return { ...state, [action.job.internalID]: action.job };
+
+    // case blastActions.RECEIVE_BLAST_JOB_ID:
+    //   return {
+    //     ...state,
+    //     jobs: [...state.jobs, { jobId: action.payload.jobId }],
+    //   };
+    // case blastActions.RECEIVE_BLAST_RESULTS:
+    //   return {
+    //     ...state,
+    //     jobs: [
+    //       ...state.jobs.map(job => {
+    //         if (job.jobId === action.payload.jobId) {
+    //           return { ...job, data: action.payload.data };
+    //         }
+    //         return job;
+    //       }),
+    //     ],
+    //   };
     default:
       return state;
   }

@@ -1,16 +1,9 @@
-import { BlastResults } from '../blast/types/blastResults';
+import { Job } from '../blast/types/blastJob';
 
-export type BlastJob = {
-  jobId: string;
-  data?: BlastResults;
-};
+export interface BlastState {
+  [key: string]: Job;
+}
 
-export type BlastState = {
-  jobs: BlastJob[];
-};
-
-const blastInitialState: BlastState = {
-  jobs: [],
-};
+const blastInitialState: BlastState = {};
 
 export default blastInitialState;
