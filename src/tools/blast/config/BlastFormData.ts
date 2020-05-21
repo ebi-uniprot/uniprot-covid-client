@@ -62,6 +62,9 @@ export default {
     fieldName: 'taxids',
     type: BlastFieldTypes.autocomplete,
   },
+  // Note: is that the 'exp' parameter?
+  // if so, we'll need to use the actual required string values
+  // (as in: the "1e-1" string instead of 0.1 or 1e-1 numbers)
   [BlastFields.threshold]: {
     fieldName: 'threshold',
     type: BlastFieldTypes.select,
@@ -99,9 +102,11 @@ export default {
     values: [
       { value: 'F', label: 'None' },
       { valueNone: 'T', label: 'Filter low complexity regions' },
+      // TODO: check what this maps to as 'mask' is not an accepted value
       { value: 'mask', label: 'Mask lookup table only' },
     ],
   },
+  // Note: is that the 'gapalign' parameter?
   [BlastFields.gapped]: {
     fieldName: 'gapped',
     type: BlastFieldTypes.select,

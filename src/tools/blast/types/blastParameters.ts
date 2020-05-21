@@ -44,7 +44,6 @@ export type Alignments =
   | 500
   | 750
   | 1000;
-// TODO: check if it actually accepts any integer value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/scores
 // Maximum number of match score summaries reported in the result output.
@@ -61,7 +60,6 @@ export type Scores =
   | 500
   | 750
   | 1000;
-// TODO: check if it actually accepts any integer value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/exp
 // Limits the number of scores and alignments reported based on the expectation value.
@@ -76,11 +74,10 @@ export type Exp =
   | '1e-3'
   | '1e-2'
   | '1e-1'
-  | '1.0'
+  | '1.0' // watch out, need to use the exact string ("1", 1, or 1.0 are invalid)
   | '10' // default
   | '100'
   | '1000';
-// TODO: check if it actually accepts any decimal value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/dropoff
 // The amount a score can drop before gapped extension of word hits is halted
@@ -91,7 +88,6 @@ export type Dropoff =
   | 6
   | 8
   | 10;
-// TODO: check if it actually accepts any integer value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/match_scores
 // (Nucleotide searches) The match score is the bonus to the alignment score when matching the same base.
@@ -106,7 +102,7 @@ export type MatchScores =
   | '1,-1'
   | '5,-4'
   | '4,-5';
-// TODO: check if it actually accepts any tuple of integer values
+// NOTE: it might accept other number tuples (at least it is accepted by server)
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/gapopen
 // Penalty taken away from the score when a gap is created in sequence.
@@ -136,7 +132,6 @@ export type GapOpen =
   | 20
   | 21
   | 25;
-// TODO: check if it actually accepts any integer value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/gapext
 // Penalty taken away from the score for each base or residue in the gap.
@@ -152,7 +147,6 @@ export type GapExt =
   | 6
   | 8
   | 10;
-// TODO: check if it actually accepts any integer value
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/filter
 // Filter regions of low sequence complexity.
@@ -179,7 +173,7 @@ export type WordSize =
   | 6 // default for protein context
   | 11 // default for nucleotide context
   | 28; // default for vector context
-// TODO: check if it actually accepts any integer value
+// NOTE: It actually accepts any integer >= 1
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/taxids
 // Specify one or more TaxIDs so that the BLAST search becomes taxonomically aware.
@@ -195,21 +189,21 @@ export type CompStats =
   | '3';
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/align
-// Maximum number of match alignments reported in the result output.
+// Formating for the alignments.
 export type Align =
-  | 0
+  | 0 // default
+  | 1
+  | 2
+  | 3
+  | 4
   | 5
+  | 6
+  | 7
+  | 8
+  | 9
   | 10
-  | 20
-  | 50 // default
-  | 100
-  | 150
-  | 200
-  | 250
-  | 500
-  | 750
-  | 1000;
-// TODO: check if it actually accepts any integer value
+  | 11
+  | 12;
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/transltable
 // Query Genetic code to use in translation
@@ -236,6 +230,7 @@ export type Database = string;
 export type Parameters = {
   program: Program;
   task?: Task;
+  email: string;
   matrix: Matrix;
   alignments: Alignments;
   scores: Scores;
