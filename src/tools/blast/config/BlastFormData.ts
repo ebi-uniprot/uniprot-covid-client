@@ -1,3 +1,5 @@
+import { Parameters } from '../types/blastParameters';
+
 export type BlastFormValue = {
   fieldName: string;
   selected?: string | undefined;
@@ -31,7 +33,7 @@ export type BlastFormValues = { [x in BlastFields]: BlastFormValue };
 export default {
   [BlastFields.program]: {
     fieldName: 'program',
-    selected: 'blastp',
+    selected: 'blastp' as Parameters['program'],
   },
   [BlastFields.stype]: {
     fieldName: 'stype',
@@ -48,7 +50,7 @@ export default {
   [BlastFields.targetDb]: {
     fieldName: 'database',
     type: BlastFieldTypes.select,
-    selected: 'uniprotkb_refprotswissprot',
+    selected: 'uniprotkb_refprotswissprot' as Parameters['database'],
     values: [
       {
         value: 'uniprotkb_refprotswissprot',
@@ -73,7 +75,7 @@ export default {
       { value: '10' },
       { value: '100' },
       { value: '1000' },
-    ],
+    ] as Array<{ value: string }>,
   },
   [BlastFields.matrix]: {
     fieldName: 'matrix',

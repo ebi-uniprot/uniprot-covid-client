@@ -1,11 +1,18 @@
+/* Results as given by the server */
+
+import { Program, SType, Filter, Matrix } from './blastParameters';
+
 export type BlastHsp = {
   hsp_num: number;
   hsp_score: number;
   hsp_bit_score: number;
   hsp_expect: number;
+  hsp_align_len: number;
   hsp_identity: number;
   hsp_positive: number;
   hsp_gaps: number;
+  hsp_query_frame: string;
+  hsp_hit_frame: string;
   hsp_strand: string;
   hsp_query_from: number;
   hsp_query_to: number;
@@ -24,32 +31,40 @@ export type BlastHit = {
   hit_acc: string;
   hit_desc: string;
   hit_url: string;
+  hit_uni_de: string;
+  hit_uni_os: string;
+  hit_uni_ox: string;
+  hit_uni_gn: string;
+  hit_uni_pe: string;
+  hit_uni_sv: string;
   hit_len: number;
   hit_hsps: BlastHsp[];
 };
 
+export type DB = {
+  name: string;
+  stype: SType;
+  created: string;
+};
+
 export type BlastResults = {
-  program: string;
+  program: Program;
   version: string;
   command: string;
   query_def: string;
-  query_stype: string;
+  query_stype: SType;
   query_len: number;
   db_count: number;
   db_num: number;
   db_len: number;
-  dbs: {
-    name: string;
-    stype: string;
-    created: string;
-  }[];
+  dbs: DB[];
   expect_upper: number;
-  filter: string;
+  filter: Filter;
   gap_extend: number;
   gap_open: number;
-  matrix: string;
-  start: string;
-  end: string;
-  search: string;
+  matrix: Matrix;
+  start: string; // date, job start
+  end: string; // date, job completion
+  search: string; // duration, job duration
   hits: BlastHit[];
 };
