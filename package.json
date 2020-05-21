@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env.PUBLIC_PATH=/ --mode development --open",
-    "build": "webpack --env.PUBLIC_PATH=/uniprot-website/ --mode production",
+    "build:prod": "webpack --env.PUBLIC_PATH=/ --mode production",
+    "build:staging": "webpack --env.PUBLIC_PATH=/uniprot-website/ --mode production",
     "build:dev": "webpack --env.PUBLIC_PATH=/ --mode development",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
