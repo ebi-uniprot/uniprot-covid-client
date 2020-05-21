@@ -6,9 +6,9 @@ import { BlastResults } from './blastResults';
 
 type BaseJob = {
   internalID: string;
+  title: string;
   type: 'blast';
   parameters: Parameters;
-  status: Status.CREATED;
   times: {
     created: number;
     lastUpdate: number;
@@ -26,7 +26,7 @@ export type FailedJob = BaseJob & {
   };
 };
 
-export type RunningJob = CreatedJob & {
+export type RunningJob = BaseJob & {
   remoteID: string;
   status: Status.RUNNING;
   times: BaseJob['times'] & {
@@ -34,17 +34,14 @@ export type RunningJob = CreatedJob & {
   };
 };
 
+// Data as BlastResults from './blastResults are not in here all the time to not
+// fill the store with too much data
 export type FinishedJob = RunningJob & {
   status: Status.FINISHED;
   times: RunningJob['times'] & {
     finished: number;
   };
-  data: BlastResults;
+  data?: BlastResults;
 };
 
-export type Job =
-  | CreatedJob
-  | FailedJob
-  | RunningJob
-  | RunningJob
-  | FinishedJob;
+export type Job = CreatedJob | FailedJob | RunningJob | FinishedJob;
