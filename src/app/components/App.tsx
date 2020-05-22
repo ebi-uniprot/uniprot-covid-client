@@ -6,7 +6,6 @@ import BaseLayout from '../../shared/components/layouts/BaseLayout';
 import { Location, LocationToPath } from '../config/urls';
 import './styles/app.scss';
 import history from '../../shared/utils/browserHistory';
-import BlastPage from '../../tools/blast/components/BlastPage';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -42,6 +41,9 @@ const DownloadPage = lazy(() =>
   import(
     /* webpackChunkName: "download" */ '../../uniprotkb/components/download/DownloadContainer'
   )
+);
+const BlastPage = lazy(() =>
+  import(/* webpackChunkName: "blast" */ '../../tools/blast/components/Blast')
 );
 const ResourceNotFoundPage = lazy(() =>
   import(
@@ -90,6 +92,14 @@ const App = () => (
             render={() => (
               <BaseLayout>
                 <DownloadPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path={LocationToPath[Location.Blast]}
+            render={() => (
+              <BaseLayout>
+                <BlastPage />
               </BaseLayout>
             )}
           />

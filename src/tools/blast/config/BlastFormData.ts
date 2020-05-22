@@ -1,4 +1,15 @@
-import { Parameters } from '../types/blastParameters';
+import {
+  Parameters,
+  Exp,
+  Program,
+  Database,
+  SType,
+  Matrix,
+  Filter,
+  GapAlign,
+  Alignments,
+  Scores,
+} from '../types/blastParameters';
 
 export type BlastFormValue = {
   fieldName: string;
@@ -33,15 +44,15 @@ export type BlastFormValues = { [x in BlastFields]: BlastFormValue };
 export default {
   [BlastFields.program]: {
     fieldName: 'program',
-    selected: 'blastp' as Parameters['program'],
+    selected: 'blastp' as Program,
   },
   [BlastFields.stype]: {
     fieldName: 'stype',
-    selected: 'protein',
+    selected: 'protein' as SType,
   },
   [BlastFields.email]: {
     fieldName: 'email',
-    selected: 'uuw_dev@uniprot.org',
+    selected: 'uuw_dev@uniprot.org' as Parameters['email'],
   },
   [BlastFields.sequence]: {
     fieldName: 'sequence',
@@ -50,10 +61,10 @@ export default {
   [BlastFields.targetDb]: {
     fieldName: 'database',
     type: BlastFieldTypes.select,
-    selected: 'uniprotkb_refprotswissprot' as Parameters['database'],
+    selected: 'uniprotkb_refprotswissprot',
     values: [
       {
-        value: 'uniprotkb_refprotswissprot',
+        value: 'uniprotkb_refprotswissprot' as Database,
         label: 'UniProtKb',
       },
     ],
@@ -70,20 +81,23 @@ export default {
     type: BlastFieldTypes.select,
     selected: '10',
     values: [
-      { value: '0.0001' },
-      { value: '0.001' },
-      { value: '0.01' },
-      { value: '0.1' },
-      { value: '1' },
+      { label: '0.0001', value: '1e-4' },
+      { label: '0.001', value: '1e-3' },
+      { label: '0.01', value: '1e-2' },
+      { label: '0.1', value: '1e-1' },
+      { label: '1', value: '1.0' },
       { value: '10' },
       { value: '100' },
       { value: '1000' },
-    ] as Array<{ value: string }>,
+    ] as Array<{ label?: string; value: Exp }>,
   },
   [BlastFields.matrix]: {
     fieldName: 'matrix',
     type: BlastFieldTypes.select,
     values: [
+      // FIXME: decision needed
+      // default is BLOSUM62, maybe put that as a default explicitely
+      // 'Auto' will leave the user wondering what it actually means
       {
         value: '',
         label: 'Auto',
@@ -93,7 +107,7 @@ export default {
       { value: 'BLOSUM80' },
       { value: 'PAM70' },
       { value: 'PAM30' },
-    ],
+    ] as Array<{ label?: string; value: Matrix }>,
   },
   [BlastFields.filter]: {
     fieldName: 'filter',
@@ -101,32 +115,33 @@ export default {
     selected: 'F',
     values: [
       { value: 'F', label: 'None' },
-      { valueNone: 'T', label: 'Filter low complexity regions' },
+      { value: 'T', label: 'Filter low complexity regions' },
       // TODO: check what this maps to as 'mask' is not an accepted value
       { value: 'mask', label: 'Mask lookup table only' },
-    ],
+    ] as Array<{ label?: string; value: Filter }>,
   },
   // Note: is that the 'gapalign' parameter?
   [BlastFields.gapped]: {
     fieldName: 'gapped',
     type: BlastFieldTypes.select,
-    selected: 'true',
+    selected: true,
     values: [
-      { value: 'true', label: 'yes' },
-      { value: 'false', label: 'no' },
-    ],
+      { value: true, label: 'yes' },
+      { value: false, label: 'no' },
+    ] as Array<{ label?: string; value: GapAlign }>,
   },
+  // Note: this corresponds to BOTH 'alignments' AND 'scores' AT THE SAME TIME!
   [BlastFields.hits]: {
     fieldName: 'hits',
     type: BlastFieldTypes.select,
-    selected: '250',
+    selected: 250,
     values: [
-      { value: '50' },
-      { value: '100' },
-      { value: '250' },
-      { value: '500' },
-      { value: '750' },
-      { value: '1000' },
-    ],
+      { value: 50 },
+      { value: 100 },
+      { value: 250 },
+      { value: 500 },
+      { value: 750 },
+      { value: 1000 },
+    ] as Array<{ value: Alignments | Scores }>,
   },
 };

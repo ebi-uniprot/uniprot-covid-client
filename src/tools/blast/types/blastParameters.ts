@@ -29,6 +29,7 @@ export type Matrix =
   | 'PAM250'
   | 'NONE'; // default for nucleotide and vector contexts
 
+// NOTE: see note below Scores section
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/alignments
 // Maximum number of match alignments reported in the result output.
 export type Alignments =
@@ -60,6 +61,10 @@ export type Scores =
   | 500
   | 750
   | 1000;
+
+// NOTE: to effectively limit the number of results, you need to set BOTH the
+// 'alignments' AND the 'scores' parameters. Otherwise it will return whatever
+// number of result is highest
 
 // https://wwwdev.ebi.ac.uk/Tools/services/rest/ncbiblast/parameterdetails/exp
 // Limits the number of scores and alignments reported based on the expectation value.

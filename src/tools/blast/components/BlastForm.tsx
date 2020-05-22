@@ -111,6 +111,7 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
                 BlastFields.hits,
               ].map((blastField) => (
                 <FormSelect
+                  key={blastField}
                   formValues={formValues}
                   type={blastField}
                   updateFormValues={updateFormValue}
