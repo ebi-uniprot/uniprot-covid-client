@@ -232,27 +232,27 @@ export type Sequence = string;
 // Database
 export type Database = string;
 
-export type Parameters = {
-  program: Program;
+export type ServerParameters = {
+  program?: Program;
   task?: Task;
   email: string;
-  matrix: Matrix;
-  alignments: Alignments;
-  scores: Scores;
-  exp: Exp;
-  dropoff: Dropoff;
+  matrix?: Matrix;
+  alignments?: Alignments;
+  scores?: Scores;
+  exp?: Exp;
+  dropoff?: Dropoff;
   match_scores?: MatchScores;
-  gapopen: GapOpen;
-  gapext: GapExt;
-  filter: Filter;
+  gapopen?: GapOpen;
+  gapext?: GapExt;
+  filter?: Filter;
   seqrange?: SeqRange;
-  gapalign: GapAlign;
-  wordsize: WordSize;
+  gapalign?: GapAlign;
+  wordsize?: WordSize;
   taxids?: TaxIDs;
-  compstats: CompStats;
-  align: Align;
-  transltable: TranslTable;
-  stype: SType;
+  compstats?: CompStats;
+  align?: Align;
+  transltable?: TranslTable;
+  stype?: SType;
   sequence: Sequence;
   database: Database;
 };

@@ -1,14 +1,14 @@
 /* Job as defined inside the web application */
 
 import { Status } from './blastStatuses';
-import { Parameters } from './blastParameters';
 import { BlastResults } from './blastResults';
+import { FormParameters } from './blastFormParameters';
 
 type BaseJob = {
   internalID: string;
   title: string;
   type: 'blast';
-  parameters: Parameters;
+  parameters: FormParameters;
   timeCreated: number;
   timeLastUpdate: number;
 };

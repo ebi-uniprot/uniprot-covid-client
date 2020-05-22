@@ -1,5 +1,5 @@
 import {
-  Parameters,
+  ServerParameters,
   Exp,
   Program,
   Database,
@@ -9,7 +9,8 @@ import {
   GapAlign,
   Alignments,
   Scores,
-} from '../types/blastParameters';
+} from '../types/blastServerParameters';
+import { FormParameters } from '../types/blastFormParameters';
 
 export type BlastFormValue = {
   fieldName: string;
@@ -42,17 +43,19 @@ export enum BlastFieldTypes {
 export type BlastFormValues = { [x in BlastFields]: BlastFormValue };
 
 export default {
+  // we don't need to display this, or even to render it hidden
   [BlastFields.program]: {
     fieldName: 'program',
     selected: 'blastp' as Program,
   },
   [BlastFields.stype]: {
-    fieldName: 'stype',
-    selected: 'protein' as SType,
+    fieldName: 'type',
+    selected: 'protein' as FormParameters['type'],
   },
+  // we don't need to display this, or even to render it hidden
   [BlastFields.email]: {
     fieldName: 'email',
-    selected: 'uuw_dev@uniprot.org' as Parameters['email'],
+    selected: 'uuw_dev@uniprot.org' as ServerParameters['email'],
   },
   [BlastFields.sequence]: {
     fieldName: 'sequence',
@@ -64,10 +67,10 @@ export default {
     selected: 'uniprotkb_refprotswissprot',
     values: [
       {
-        value: 'uniprotkb_refprotswissprot' as Database,
+        value: 'uniprotkb_refprotswissprot',
         label: 'UniProtKb',
       },
-    ],
+    ] as Array<{ label: string; value: FormParameters['database'] }>,
   },
   [BlastFields.taxon]: {
     fieldName: 'taxids',
@@ -89,7 +92,7 @@ export default {
       { value: '10' },
       { value: '100' },
       { value: '1000' },
-    ] as Array<{ label?: string; value: Exp }>,
+    ] as Array<{ label?: string; value: FormParameters['threshold'] }>,
   },
   [BlastFields.matrix]: {
     fieldName: 'matrix',
@@ -107,7 +110,7 @@ export default {
       { value: 'BLOSUM80' },
       { value: 'PAM70' },
       { value: 'PAM30' },
-    ] as Array<{ label?: string; value: Matrix }>,
+    ] as Array<{ label?: string; value: FormParameters['matrix'] }>,
   },
   [BlastFields.filter]: {
     fieldName: 'filter',
@@ -118,7 +121,7 @@ export default {
       { value: 'T', label: 'Filter low complexity regions' },
       // TODO: check what this maps to as 'mask' is not an accepted value
       { value: 'mask', label: 'Mask lookup table only' },
-    ] as Array<{ label?: string; value: Filter }>,
+    ] as Array<{ label?: string; value: FormParameters['filter'] }>,
   },
   // Note: is that the 'gapalign' parameter?
   [BlastFields.gapped]: {
@@ -128,7 +131,7 @@ export default {
     values: [
       { value: true, label: 'yes' },
       { value: false, label: 'no' },
-    ] as Array<{ label?: string; value: GapAlign }>,
+    ] as Array<{ label?: string; value: FormParameters['gapped'] }>,
   },
   // Note: this corresponds to BOTH 'alignments' AND 'scores' AT THE SAME TIME!
   [BlastFields.hits]: {
@@ -142,6 +145,6 @@ export default {
       { value: 500 },
       { value: 750 },
       { value: 1000 },
-    ] as Array<{ value: Alignments | Scores }>,
+    ] as Array<{ value: FormParameters['hits'] }>,
   },
 };
