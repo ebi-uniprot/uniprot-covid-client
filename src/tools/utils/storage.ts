@@ -1,6 +1,6 @@
 import { Store, set, get, del, clear, keys } from 'idb-keyval';
 
-const DB_NAME = 'UniProt-Jobs';
+export const DB_NAME = 'UniProt-Jobs';
 
 export default class JobStore {
   private _store: Store;
