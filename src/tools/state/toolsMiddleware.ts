@@ -1,11 +1,20 @@
 import { Middleware } from 'redux';
-import { RootState } from '../../app/state/rootInitialState';
 
-import { CREATE_JOB, UPDATE_JOB, updateJob } from './toolsActions';
+import { CREATE_JOB, updateJob } from './toolsActions';
 import fetchData from '../../shared/utils/fetchData';
 import blastUrls from '../blast/config/blastUrls';
+import { Job } from '../blast/types/blastJob';
+import postData from '../../uniprotkb/config/postData';
+import { Status } from '../blast/types/blastStatuses';
+import { addMessage } from '../../messages/state/messagesActions';
+import {
+  MessageFormat,
+  MessageLevel,
+  MessageTag,
+} from '../../messages/types/messagesTypes';
 
-const toolsMiddleware: Middleware = (store) => (next) => (action) => {
+const toolsMiddleware: Middleware = (store) => {
+  const { dispatch, getState } = store;
   function* pollForBlastStatus(jobId: string) {
     while (true) {
       yield fetchData(blastUrls.statusUrl(jobId), {
@@ -17,6 +26,11 @@ const toolsMiddleware: Middleware = (store) => (next) => (action) => {
       });
     }
   }
+
+  const fetchBlastResults = (job: Job) => {
+    // TODO make request to fetch results
+    // dispatch(updatedJob);
+  };
 
   const runPolling = (
     jobId: string,
@@ -33,18 +47,61 @@ const toolsMiddleware: Middleware = (store) => (next) => (action) => {
         setTimeout(() => runPolling(jobId, generator), 3000);
       } else {
         // Job has finished running
-        updateJob(job);
+        // dispatch(fetchBlastResults);
       }
     });
   };
 
-  // eslint-disable-next-line default-case
-  switch (action.type) {
-    case CREATE_JOB:
-      const state = store.getState();
-    // TODO add the new job to the state
-  }
-  return next(action);
+  const submitJob = (job: Job) => {
+    const formData = new FormData();
+    Object.keys(job.parameters).forEach((blastField) => {
+      formData.append(blastField, job.parameters[blastField]);
+    });
+    const url = job.type === 'blast' ? blastUrls.runUrl : '';
+    postData(url, {
+      data: formData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'text/plain',
+      },
+    })
+      .then((response) => {
+        const jobId = response.data;
+        // TODO we should probably check that jobId is valid
+        dispatch(
+          updateJob({
+            ...getState(),
+            status: Status.RUNNING,
+            remoteID: jobId,
+            timeSubmitted: new Date(),
+          })
+        );
+      })
+      .catch((error) =>
+        dispatch(
+          addMessage({
+            id: 'job-id',
+            content: `Could not run job: ${error.message}`,
+            format: MessageFormat.POP_UP,
+            level: MessageLevel.FAILURE,
+            tag: MessageTag.JOB,
+          })
+        )
+      );
+  };
+
+  const processJob = (jobId: string) => {
+    // TODO
+  };
+
+  return (next) => (action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case CREATE_JOB:
+      // TODO add the new job to the state
+    }
+    return next(action);
+  };
 };
 
 export default toolsMiddleware;

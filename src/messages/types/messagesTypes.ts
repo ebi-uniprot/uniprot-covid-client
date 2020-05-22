@@ -13,7 +13,7 @@ export enum MessageFormat {
 }
 
 export enum MessageTag {
-  BLAST_JOB = 'BLAST_JOB',
+  JOB = 'JOB',
   DOWNTIME = 'DOWNTIME',
   REDIRECT = 'REDIRECT',
 }
