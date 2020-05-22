@@ -9,15 +9,22 @@ export default class JobStore {
     this._store = new Store(DB_NAME, storeName);
   }
 
-  async get(key: string) {
+  async get(key: IDBValidKey) {
     return get(key, this._store);
   }
 
-  async set(key: string, value: any) {
+  async *getAll() {
+    const keys = await this.keys();
+    for (const key of keys) {
+      yield this.get(key);
+    }
+  }
+
+  async set(key: IDBValidKey, value: any) {
     return set(key, value, this._store);
   }
 
-  async del(key: string) {
+  async del(key: IDBValidKey) {
     return del(key, this._store);
   }
 
