@@ -86,14 +86,9 @@ const toolsMiddleware: Middleware = (store) => {
       );
   };
 
-  const fetchBlastResults = (job: Job) => {
-    // TODO make request to fetch results
-    const url = job.type === 'blast' ? blastUrls.resultUrl : '';
-    // dispatch(updatedJob);
-  };
-
   return (next) => (action) => {
     // eslint-disable-next-line default-case
+    const { job } = action;
     switch (action.type) {
       case CREATE_JOB:
         submitJob(job);
