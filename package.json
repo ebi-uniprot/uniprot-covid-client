@@ -138,6 +138,7 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.20.0",
     "eslint-plugin-react-hooks": "4.0.2",
+    "fake-indexeddb": "^3.0.0",
     "html-loader": "1.1.0",
     "html-webpack-plugin": "4.3.0",
     "jest": "25.5.1",
