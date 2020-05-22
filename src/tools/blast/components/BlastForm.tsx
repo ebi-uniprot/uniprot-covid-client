@@ -1,10 +1,16 @@
 import React, { FC, Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+import { v1 } from 'uuid';
+import * as actions from '../../state/toolsActions';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
 } from '../config/BlastFormData';
 import './styles/BlastForm.scss';
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
+import { RootAction } from '../../../app/state/rootInitialState';
+import { Job } from '../types/blastJob';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -36,8 +42,8 @@ const FormSelect: FC<{
   );
 };
 
-const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
-  runBlastJob,
+const BlastForm: FC<{ createJob: (formValues: BlastFormValues) => void }> = ({
+  createJob,
 }) => {
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [formValues, setFormValues] = useState<BlastFormValues>(
@@ -58,7 +64,13 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
   };
 
   const submitBlastJob = () => {
-    runBlastJob(formValues);
+    const newJob = {
+      internalID: `local-${v1()}`,
+      title: '',
+      type: 'blast',
+      parameters: formValues,
+    };
+    createJob(newJob);
   };
 
   return (
@@ -137,4 +149,12 @@ const BlastForm: FC<{ runBlastJob: (formValues: BlastFormValues) => void }> = ({
   );
 };
 
-export default BlastForm;
+const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
+  bindActionCreators(
+    {
+      createJob: (job: Job) => actions.createJob(job),
+    },
+    dispatch
+  );
+
+export default connect(null, mapDispatchToProps)(BlastForm);
