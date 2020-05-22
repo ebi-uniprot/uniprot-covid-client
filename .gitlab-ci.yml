@@ -77,3 +77,4 @@ deploy:
     - kubectl get secrets gitlab-registry -o yaml
     - kubectl apply -f k8s_deploy.yml
     - kubectl rollout restart deployment/uniprot-website-client
+    - kubectl get nodes
