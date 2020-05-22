@@ -12,45 +12,41 @@ import {
   MessageLevel,
   MessageTag,
 } from '../../messages/types/messagesTypes';
+import { ToolsState } from './toolsInitialState';
+
+const POLLING_INTERVAL = 1000 * 3;
 
 const toolsMiddleware: Middleware = (store) => {
   const { dispatch, getState } = store;
-  function* pollForBlastStatus(jobId: string) {
-    while (true) {
-      yield fetchData(blastUrls.statusUrl(jobId), {
-        headers: {
-          Accept: 'text/plain',
-        },
-      }).then((response) => {
-        return response.data;
-      });
-    }
-  }
 
-  const fetchBlastResults = (job: Job) => {
-    // TODO make request to fetch results
-    // dispatch(updatedJob);
+  const checkJobStatus = (job: Job) => {
+    const url = job.type === 'blast' ? blastUrls.statusUrl(job.remoteId) : '';
+    return fetchData(url, {
+      headers: {
+        Accept: 'text/plain',
+      },
+    }).then((response) => response.data);
   };
 
-  const runPolling = (
-    jobId: string,
-    generator?: IterableIterator<Promise<string>>
-  ) => () => {
-    if (!generator) {
-      // eslint-disable-next-line no-param-reassign
-      generator = pollForBlastStatus(jobId);
+  const processJob = async (job: Job) => {
+    if (job.status === Status.CREATED) {
+      const status = await checkJobStatus(job);
+      // TODO should we check what the status is before dispatching?
+      dispatch(updateJob({ ...getState(), status: status }));
     }
+  };
 
-    const p = generator.next();
-    p.value.then((d: string) => {
-      if (d === 'RUNNING') {
-        setTimeout(() => runPolling(jobId, generator), 3000);
-      } else {
-        // Job has finished running
-        // dispatch(fetchBlastResults);
-      }
+  const pollJobs = async () => {
+    const state: ToolsState = getState();
+    // Wait for browser idleness
+    await new Promise((resolve) => window.requestIdleCallback(resolve));
+    Object.values(state).forEach(async (job) => {
+      await processJob(job);
     });
+    setTimeout(pollJobs, POLLING_INTERVAL);
   };
+
+  pollJobs();
 
   const submitJob = (job: Job) => {
     const formData = new FormData();
@@ -90,15 +86,18 @@ const toolsMiddleware: Middleware = (store) => {
       );
   };
 
-  const processJob = (jobId: string) => {
-    // TODO
+  const fetchBlastResults = (job: Job) => {
+    // TODO make request to fetch results
+    const url = job.type === 'blast' ? blastUrls.resultUrl : '';
+    // dispatch(updatedJob);
   };
 
   return (next) => (action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
       case CREATE_JOB:
-      // TODO add the new job to the state
+        submitJob(job);
+      // TODO add the new job to the store
     }
     return next(action);
   };
