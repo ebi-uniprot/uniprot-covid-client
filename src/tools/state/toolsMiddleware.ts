@@ -9,7 +9,12 @@ import {
 } from '../../messages/types/messagesTypes';
 import { Stores } from '../utils/stores';
 
-import { CREATE_JOB, updateJob, rehydrateJobs } from './toolsActions';
+import {
+  CREATE_JOB,
+  REHYDRATE_JOBS,
+  updateJob,
+  rehydrateJobs,
+} from './toolsActions';
 
 import fetchData from '../../shared/utils/fetchData';
 import postData from '../../uniprotkb/config/postData';
@@ -57,12 +62,12 @@ const toolsMiddleware: Middleware = (store) => {
 
   const checkJobStatus = async (job: RunningJob) => {
     const url = job.type === 'blast' ? blastUrls.statusUrl(job.remoteID) : '';
-    const response = fetchData(url, {
+    const status = await fetchData(url, {
       headers: {
         Accept: 'text/plain',
       },
+      responseType: 'text',
     });
-    const status = await response.text();
     if (!doesJobStillExist(job.internalID)) return;
     dispatch(
       updateJob({
@@ -178,14 +183,10 @@ const toolsMiddleware: Middleware = (store) => {
     scheduledPollJobs = true;
   };
 
-  // initial loop
-  // NOTE: there is no point of calling it here, it would need to be called
-  // rehydrating jobs from IndexedDB
-  schedulePollJobs();
-
   return (next) => (action) => {
     switch (action.type) {
       case CREATE_JOB:
+      case REHYDRATE_JOBS:
         schedulePollJobs();
         break;
       default:
