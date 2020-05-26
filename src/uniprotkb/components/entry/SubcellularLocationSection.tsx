@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../utils/utils';
+import { hasContent } from '../../utils';
 import EntrySection from '../../types/entrySection';
 import KeywordView from '../protein-data-views/KeywordView';
 import FeaturesView from '../protein-data-views/FeaturesView';

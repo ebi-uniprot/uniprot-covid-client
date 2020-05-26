@@ -1,40 +1,37 @@
-@import '../../../../shared/styles/settings';
+@import '../../../styles/settings';
+@import '../../../styles/mixins';
 
 .sidebar-layout {
-  .base-layout {
-    min-height: 100vh;
-    max-height: 100vh;
-    grid-template-areas:
-      'main-header main-header'
-      'in-page-messages in-page-messages'
-      'title title'
-      '. action-buttons'
-      'sidebar content'
-      'footer footer';
+  display: grid;
+  grid-template-areas:
+    'title title'
+    'sidebar action-buttons'
+    'sidebar content';
 
-    grid-template-columns: 20vw auto;
-    grid-template-rows: 5rem auto auto auto 1fr auto;
+  grid-template-columns: 20vw auto;
+  grid-template-rows: auto auto auto;
 
-    &__title {
-      grid-column: title;
-      padding: 0 $gutter-size;
-    }
+  &__title {
+    grid-area: title;
+    padding: 0 $gutter-size;
+  }
 
-    &__action-buttons {
-      grid-column: action-buttons;
-      padding: 0 $gutter-size;
-    }
+  &__action-buttons {
+    grid-area: action-buttons;
+    padding: 0 $gutter-size;
+  }
 
-    &__sidebar {
-      padding: 0 $gutter-size;
-      grid-area: sidebar;
-      overflow-y: auto;
-    }
+  &__sidebar {
+    @include scroll-shadow;
 
-    &__content {
-      padding: 0 $gutter-size;
-      grid-area: content;
-      overflow-y: auto;
-    }
+    padding: 0 $gutter-size;
+    grid-area: sidebar;
+    overflow-y: auto;
+  }
+
+  &__content {
+    padding: 0 $gutter-size;
+    grid-area: content;
+    overflow-y: auto;
   }
 }

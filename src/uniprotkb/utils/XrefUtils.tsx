@@ -16,7 +16,7 @@ import EntrySection from '../types/entrySection';
 import { DatabaseCategory } from '../types/databaseRefs';
 import { Xref, FreeTextComment } from '../types/commentTypes';
 import { GeneNamesData } from '../adapters/namesAndTaxonomyConverter';
-import { flattenGeneNameData } from './utils';
+import { flattenGeneNameData } from '.';
 import { ValueWithEvidence } from '../types/modelTypes';
 
 export type XrefsGoupedByDatabase = {

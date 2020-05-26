@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
-import BaseLayout from './BaseLayout';
+import React from 'react';
+
 import './styles/side-bar-layout.scss';
+import ErrorBoundary from '../error-component/ErrorBoundary';
 
 type SideBarLayoutProps = {
   title?: JSX.Element;
@@ -17,18 +18,18 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   children,
 }) => (
   <section className="sidebar-layout">
-    <BaseLayout>
-      <Fragment>
-        {title && <section className="base-layout__title">{title}</section>}
-        {actionButtons && (
-          <section className="base-layout__action-buttons">
-            {actionButtons}
-          </section>
-        )}
-        <section className="base-layout__sidebar">{sidebar}</section>
-        <section className="base-layout__content">{children}</section>
-      </Fragment>
-    </BaseLayout>
+    {title && <section className="sidebar-layout__title">{title}</section>}
+    {actionButtons && (
+      <section className="sidebar-layout__action-buttons">
+        {actionButtons}
+      </section>
+    )}
+    <section className="sidebar-layout__sidebar">
+      <ErrorBoundary>{sidebar}</ErrorBoundary>
+    </section>
+    <section className="sidebar-layout__content">
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </section>
   </section>
 );
 
