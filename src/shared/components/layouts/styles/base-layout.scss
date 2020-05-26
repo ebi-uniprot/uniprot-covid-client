@@ -6,12 +6,11 @@
     'main-header'
     'in-page-messages'
     'content'
-    'content'
     'footer';
 
   height: 100vh;
 
-  grid-template-rows: 5rem auto auto 1fr auto;
+  grid-template-rows: 5rem auto 1fr auto;
 
   .header:not(.header--negative) > .header__logo svg g {
     fill: white;
