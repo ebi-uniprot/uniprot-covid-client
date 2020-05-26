@@ -1,4 +1,9 @@
 import { ActionType } from 'typesafe-actions';
+import { v1 } from 'uuid';
+
+import { CreatedJob } from '../blast/types/blastJob';
+import { Status } from '../blast/types/blastStatuses';
+
 import * as toolsActions from './toolsActions';
 import entryInitialState, { ToolsState } from './toolsInitialState';
 
@@ -10,37 +15,42 @@ const toolsReducers = (
 ) => {
   switch (action.type) {
     // add job
-    case toolsActions.CREATE_JOB:
-      return {
-        ...state,
-        [action.job.internalID]: action.job,
+    case toolsActions.CREATE_JOB: {
+      const now = Date.now();
+      const newJob: CreatedJob = {
+        status: Status.CREATED,
+        internalID: `local-${v1()}`,
+        title: 'some title',
+        type: action.payload.jobType,
+        parameters: action.payload.parameters,
+        timeCreated: now,
+        timeLastUpdate: now,
       };
+
+      return { ...state, [newJob.internalID]: newJob };
+    }
+
     // remove job
-    case toolsActions.DELETE_JOB:
-      // eslint-disable-next-line no-case-declarations
-      const { [action.id]: _, ...newState } = state;
+    case toolsActions.DELETE_JOB: {
+      const { [action.payload.id]: _jobToRemove, ...newState } = state;
+
       return newState;
+    }
+
     // update job
     case toolsActions.UPDATE_JOB:
-      return { ...state, [action.job.internalID]: action.job };
+      return { ...state, [action.payload.job.internalID]: action.payload.job };
 
-    // case blastActions.RECEIVE_BLAST_JOB_ID:
-    //   return {
-    //     ...state,
-    //     jobs: [...state.jobs, { jobId: action.payload.jobId }],
-    //   };
-    // case blastActions.RECEIVE_BLAST_RESULTS:
-    //   return {
-    //     ...state,
-    //     jobs: [
-    //       ...state.jobs.map(job => {
-    //         if (job.jobId === action.payload.jobId) {
-    //           return { ...job, data: action.payload.data };
-    //         }
-    //         return job;
-    //       }),
-    //     ],
-    //   };
+    // update job title
+    case toolsActions.UPDATE_JOB_TITLE: {
+      const updatedJob = {
+        ...state[action.payload.id],
+        title: action.payload.title,
+      };
+
+      return { ...state, [action.payload.id]: updatedJob };
+    }
+
     default:
       return state;
   }

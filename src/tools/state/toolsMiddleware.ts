@@ -3,7 +3,7 @@ import { Middleware } from 'redux';
 import { CREATE_JOB, updateJob } from './toolsActions';
 import fetchData from '../../shared/utils/fetchData';
 import blastUrls from '../blast/config/blastUrls';
-import { Job } from '../blast/types/blastJob';
+import { Job, CreatedJob } from '../blast/types/blastJob';
 import postData from '../../uniprotkb/config/postData';
 import { Status } from '../blast/types/blastStatuses';
 import { addMessage } from '../../messages/state/messagesActions';
@@ -14,7 +14,7 @@ import {
 } from '../../messages/types/messagesTypes';
 import { ToolsState } from './toolsInitialState';
 
-const POLLING_INTERVAL = 1000 * 3;
+const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
 const toolsMiddleware: Middleware = (store) => {
   const { dispatch, getState } = store;
@@ -48,8 +48,10 @@ const toolsMiddleware: Middleware = (store) => {
 
   pollJobs();
 
-  const submitJob = (job: Job) => {
+  const submitJob = (job: CreatedJob) => {
     const formData = new FormData();
+    // specific logic to transform FormParameters to ServerParameters
+    // (e.g. translating 'gapped' to 'gapaling', adding 'email')
     Object.keys(job.parameters).forEach((blastField) => {
       formData.append(blastField, job.parameters[blastField]);
     });
@@ -87,12 +89,12 @@ const toolsMiddleware: Middleware = (store) => {
   };
 
   return (next) => (action) => {
-    // eslint-disable-next-line default-case
-    const { job } = action;
     switch (action.type) {
       case CREATE_JOB:
-        submitJob(job);
-      // TODO add the new job to the store
+        // schedule loop to submit CREATED jobs
+        break;
+      default:
+      // do nothing
     }
     return next(action);
   };

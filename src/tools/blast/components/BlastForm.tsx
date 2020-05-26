@@ -1,16 +1,21 @@
-import React, { FC, Fragment, useState } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
+import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
+
+import { Job } from '../types/blastJob';
+import { FormParameters } from '../types/blastFormParameters';
+
 import * as actions from '../../state/toolsActions';
+import { RootAction } from '../../../app/state/rootInitialState';
+
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
 } from '../config/BlastFormData';
-import './styles/BlastForm.scss';
+
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
-import { RootAction } from '../../../app/state/rootInitialState';
-import { Job } from '../types/blastJob';
+
+import './styles/BlastForm.scss';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -42,9 +47,9 @@ const FormSelect: FC<{
   );
 };
 
-const BlastForm: FC<{ createJob: (formValues: BlastFormValues) => void }> = ({
-  createJob,
-}) => {
+const BlastForm = () => {
+  const dispatch = useDispatch();
+
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [formValues, setFormValues] = useState<BlastFormValues>(
     initialFormValues
@@ -63,20 +68,27 @@ const BlastForm: FC<{ createJob: (formValues: BlastFormValues) => void }> = ({
     setFormValues(newFormValues);
   };
 
-  const submitBlastJob = () => {
-    const newJob = {
-      internalID: `local-${v1()}`,
-      title: '',
-      type: 'blast',
-      parameters: formValues,
-    };
-    createJob(newJob);
+  // the only thing to do here would be to check the values and prevent
+  // and prevent submission if there is any issue
+  const submitBlastJob = (event: FormEvent | MouseEvent) => {
+    event.preventDefault();
+
+    const parameters = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const { fieldName, selected } of Object.values(formValues)) {
+      if (selected) parameters[fieldName] = selected;
+    }
+
+    // we emit an action containing only the parameters and the type of job
+    // the reducer will be in charge of generating a proper job object for
+    // internal state
+    dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
 
   return (
     <Fragment>
       <h3>Submit new job</h3>
-      <form>
+      <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
             <legend>Sequence</legend>
@@ -135,13 +147,12 @@ const BlastForm: FC<{ createJob: (formValues: BlastFormValues) => void }> = ({
             <button className="button secondary" type="button">
               Clear
             </button>
-            <button
+            <input
               className="button primary"
-              type="button"
-              onClick={() => submitBlastJob()}
-            >
-              Submit
-            </button>
+              type="submit"
+              onClick={submitBlastJob}
+              value="Submit"
+            />
           </section>
         </fieldset>
       </form>
@@ -149,12 +160,4 @@ const BlastForm: FC<{ createJob: (formValues: BlastFormValues) => void }> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootAction>) =>
-  bindActionCreators(
-    {
-      createJob: (job: Job) => actions.createJob(job),
-    },
-    dispatch
-  );
-
-export default connect(null, mapDispatchToProps)(BlastForm);
+export default BlastForm;
