@@ -142,16 +142,12 @@ const toolsMiddleware: Middleware = (store) => {
 
     const toolsState: ToolsState = getState().tools;
 
-    const jobsToSubmit: Array<CreatedJob> = [];
-    const jobsToPoll: Array<RunningJob> = [];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const job of Object.values(toolsState)) {
-      if (job.status === Status.CREATED) {
-        jobsToSubmit.push(job);
-      } else if (job.status === Status.RUNNING) {
-        jobsToPoll.push(job);
-      }
-    }
+    const jobsToSubmit = Object.values(toolsState).filter(
+      (job) => job.status === Status.CREATED
+    ) as Array<CreatedJob>;
+    const jobsToPoll = Object.values(toolsState).filter(
+      (job) => job.status === Status.RUNNING
+    ) as Array<RunningJob>;
 
     // nothing to check, early exit, no recursion
     if (!(jobsToSubmit.length || jobsToPoll.length)) {
