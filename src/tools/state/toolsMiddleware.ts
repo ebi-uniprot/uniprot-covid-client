@@ -7,17 +7,13 @@ import {
   MessageLevel,
   MessageTag,
 } from '../../messages/types/messagesTypes';
+import { Stores } from '../utils/stores';
 
-import {
-  CREATE_JOB,
-  updateJob,
-  UPDATE_JOB,
-  UPDATE_JOB_TITLE,
-  DELETE_JOB,
-} from './toolsActions';
+import { CREATE_JOB, updateJob, rehydrateJobs } from './toolsActions';
 
 import fetchData from '../../shared/utils/fetchData';
 import postData from '../../uniprotkb/config/postData';
+import JobStore from '../utils/storage';
 
 import { addMessage } from '../../messages/state/messagesActions';
 
@@ -29,6 +25,24 @@ const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
 const toolsMiddleware: Middleware = (store) => {
   const { dispatch, getState } = store;
+
+  // rehydrate jobs
+  (async () => {
+    // Wait for browser idleness
+    await new Promise((resolve) => window.requestIdleCallback(resolve));
+
+    const jobStore = new JobStore(Stores.METADATA);
+
+    const persistedJobs = [];
+    for await (const persistedJob of jobStore.getAll()) {
+      persistedJobs.push(persistedJob as Job);
+    }
+
+    // Wait for browser idleness
+    await new Promise((resolve) => window.requestIdleCallback(resolve));
+
+    dispatch(rehydrateJobs(persistedJobs));
+  })();
 
   // flag to avoid multiple pollJobs loop being scheduled
   let scheduledPollJobs = false;
@@ -181,17 +195,6 @@ const toolsMiddleware: Middleware = (store) => {
     // state is not yet updated
     const returnValue = next(action);
     // state is now updated
-
-    switch (action.type) {
-      case CREATE_JOB:
-      case UPDATE_JOB:
-      case UPDATE_JOB_TITLE:
-      case DELETE_JOB:
-        // persist corresponding job from updated state into IndexedDB
-        break;
-      default:
-      // do nothing
-    }
 
     return returnValue;
   };
