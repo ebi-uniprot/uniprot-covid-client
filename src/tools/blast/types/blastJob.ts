@@ -19,6 +19,7 @@ export type CreatedJob = BaseJob & {
 
 export type FailedJob = BaseJob & {
   status: Status.FAILED;
+  remoteID?: string; // depending on if it failed before or after submission
   timeSubmitted?: number; // depending on if it failed before or after submission
 };
 

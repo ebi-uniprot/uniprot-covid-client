@@ -36,7 +36,6 @@ export const getKeywordsForCategories = (
     return [];
   }
   const keywordsByCategories = [];
-  // eslint-disable-next-line no-restricted-syntax
   for (const category of keywordCategories) {
     const categoryKeywords = keywords.filter(
       (keyword) => keyword.category === category

@@ -74,7 +74,6 @@ const BlastForm = () => {
     event.preventDefault();
 
     const parameters = {};
-    // eslint-disable-next-line no-restricted-syntax
     for (const { fieldName, selected } of Object.values(formValues)) {
       if (selected) parameters[fieldName] = selected;
     }
