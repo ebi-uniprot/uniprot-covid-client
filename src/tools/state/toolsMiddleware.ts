@@ -1,6 +1,12 @@
 import { Middleware } from 'redux';
 
-import { CREATE_JOB, updateJob } from './toolsActions';
+import {
+  CREATE_JOB,
+  updateJob,
+  UPDATE_JOB,
+  UPDATE_JOB_TITLE,
+  DELETE_JOB,
+} from './toolsActions';
 import fetchData from '../../shared/utils/fetchData';
 import blastUrls from '../blast/config/blastUrls';
 import { Job, CreatedJob } from '../blast/types/blastJob';
@@ -96,7 +102,23 @@ const toolsMiddleware: Middleware = (store) => {
       default:
       // do nothing
     }
-    return next(action);
+
+    // state is not yet updated
+    const returnValue = next(action);
+    // state is now updated
+
+    switch (action.type) {
+      case CREATE_JOB:
+      case UPDATE_JOB:
+      case UPDATE_JOB_TITLE:
+      case DELETE_JOB:
+        // persist corresponding job from updated state into IndexedDB
+        break;
+      default:
+      // do nothing
+    }
+
+    return returnValue;
   };
 };
 
