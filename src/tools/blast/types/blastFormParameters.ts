@@ -16,7 +16,7 @@ export type FormParameters = {
   taxIDs: string;
   threshold: Exp;
   matrix: Matrix;
-  filter: Filter & 'mask'; // ? need to investigate what this maps to
+  filter: Filter | 'mask'; // ? need to investigate what this maps to
   gapped: GapAlign;
   hits: Scores | Alignments;
 };
