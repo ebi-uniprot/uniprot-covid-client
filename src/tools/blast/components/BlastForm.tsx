@@ -69,7 +69,7 @@ const BlastForm = () => {
     // Only proceed if a node is selected
     if (!id) return;
 
-    const taxonFormValues = formValues[BlastFields.taxon];
+    const taxonFormValues = formValues[BlastFields.taxons];
     const { values } = taxonFormValues;
     // If already there, don't add again
     if (values.some(({ value }: FormValue) => value === id)) {
@@ -114,7 +114,7 @@ const BlastForm = () => {
   };
   console.log(
     'formValues[BlastFields.taxon].selectedLabel',
-    formValues[BlastFields.taxon].selectedLabel
+    formValues[BlastFields.taxons].selectedLabel
   );
   return (
     <Fragment>
