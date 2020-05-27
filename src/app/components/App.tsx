@@ -45,6 +45,11 @@ const DownloadPage = lazy(() =>
 const BlastPage = lazy(() =>
   import(/* webpackChunkName: "blast" */ '../../tools/blast/components/Blast')
 );
+const Dashboard = lazy(() =>
+  import(
+    /* webpackChunkName: "dashboard" */ '../../tools/dashboard/components/Dashboard'
+  )
+);
 const ResourceNotFoundPage = lazy(() =>
   import(
     /* webpackChunkName: "resource-not-found" */ '../../shared/components/error-pages/ResourceNotFoundPage'
@@ -100,6 +105,14 @@ const App = () => (
             render={() => (
               <BaseLayout>
                 <BlastPage />
+              </BaseLayout>
+            )}
+          />
+          <Route
+            path={LocationToPath[Location.Dashboard]}
+            render={() => (
+              <BaseLayout>
+                <Dashboard />
               </BaseLayout>
             )}
           />

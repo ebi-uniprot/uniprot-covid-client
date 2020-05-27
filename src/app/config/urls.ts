@@ -11,6 +11,7 @@ export enum Location {
   PageNotFound = 'PageNotFound',
   ServiceUnavailable = 'ServiceUnavailable',
   JobError = 'JobError',
+  Dashboard = 'Dashboard',
 }
 
 export const LocationToPath = {
@@ -24,6 +25,7 @@ export const LocationToPath = {
   [Location.PageNotFound]: '/page-not-found',
   [Location.ServiceUnavailable]: '/service-unavailable',
   [Location.JobError]: '/job-error',
+  [Location.Dashboard]: '/tool-dashboard',
 };
 
 export const PathToLocation = invert(LocationToPath);

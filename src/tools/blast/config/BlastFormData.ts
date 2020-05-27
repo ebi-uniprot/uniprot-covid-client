@@ -1,12 +1,14 @@
 import { Program } from '../types/blastServerParameters';
 import { FormParameters } from '../types/blastFormParameters';
 
+export type FormValue = { label: string; value: string | number };
+
 export type BlastFormValue = {
   fieldName: string;
   selected?: string | undefined;
   selectedLabel?: string | undefined;
   type?: BlastFieldTypes;
-  values?: { label?: string; value?: string | number }[];
+  values?: FormValue[];
 };
 
 export enum BlastFields {
@@ -69,6 +71,8 @@ export default {
   [BlastFields.taxons]: {
     fieldName: 'taxids',
     type: BlastFieldTypes.autocomplete,
+    values: [],
+    selectedLabel: '',
   },
   // 'exp' parameter
   [BlastFields.threshold]: {

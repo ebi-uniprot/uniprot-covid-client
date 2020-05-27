@@ -8,11 +8,18 @@ import * as actions from '../../state/toolsActions';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
+  SelectedNode,
+  Value,
+  FormValue,
 } from '../config/BlastFormData';
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
 
 import './styles/BlastForm.scss';
+
+const Taxon: FC<{ children: string }> = ({ children }) => (
+  <span className="taxon">{children}</span>
+);
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -59,10 +66,35 @@ const BlastForm = () => {
   };
 
   const updateTaxonFormValue = (path: string, id: string) => {
-    const newFormValues = { ...formValues };
-    newFormValues[BlastFields.taxons].selectedLabel = path;
-    newFormValues[BlastFields.taxons].selected = id;
-    setFormValues(newFormValues);
+    // Only proceed if a node is selected
+    if (!id) return;
+
+    const taxonFormValues = formValues[BlastFields.taxon];
+    const { values } = taxonFormValues;
+    // If already there, don't add again
+    if (values.some(({ value }: FormValue) => value === id)) {
+      setFormValues({
+        ...formValues,
+        [BlastFields.taxons]: {
+          ...taxonFormValues,
+          selectedLabel: '',
+        },
+      });
+      return;
+    }
+
+    // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
+    const label = path.replace(/ *\([^)]*\) */g, ' ');
+    console.log({ id, label });
+
+    setFormValues({
+      ...formValues,
+      [BlastFields.taxons]: {
+        ...taxonFormValues,
+        selectedLabel: '',
+        values: [{ value: id, label }, ...values],
+      },
+    });
   };
 
   // the only thing to do here would be to check the values and prevent
@@ -80,7 +112,10 @@ const BlastForm = () => {
     // internal state
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
-
+  console.log(
+    'formValues[BlastFields.taxon].selectedLabel',
+    formValues[BlastFields.taxon].selectedLabel
+  );
   return (
     <Fragment>
       <h3>Submit new job</h3>
@@ -110,7 +145,13 @@ const BlastForm = () => {
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
                 value={formValues[BlastFields.taxons].selectedLabel}
+                clearOnSelect={true}
               />
+              {(formValues[BlastFields.taxons].values || []).map(
+                ({ label }: FormValue) => (
+                  <Taxon key={label}>{label}</Taxon>
+                )
+              )}
             </section>
           </section>
           {!displayAdvanced ? (
