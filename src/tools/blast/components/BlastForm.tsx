@@ -1,5 +1,7 @@
 import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
+import { v1 } from 'uuid';
+import { CloseIcon } from 'franklin-sites';
 
 import { FormParameters } from '../types/blastFormParameters';
 
@@ -8,8 +10,6 @@ import * as actions from '../../state/toolsActions';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
-  SelectedNode,
-  Value,
   FormValue,
 } from '../config/BlastFormData';
 
@@ -17,8 +17,14 @@ import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/Aut
 
 import './styles/BlastForm.scss';
 
-const Taxon: FC<{ children: string }> = ({ children }) => (
-  <span className="taxon">{children}</span>
+const Taxon: FC<{ children: string | number; onRemove: () => void }> = ({
+  children,
+  onRemove,
+}) => (
+  <span className="taxon">
+    {children}
+    <CloseIcon onClick={onRemove} />
+  </span>
 );
 
 const FormSelect: FC<{
@@ -97,6 +103,19 @@ const BlastForm = () => {
     });
   };
 
+  const removeTaxonFormValue = (id: string | number) => {
+    const taxonFormValues = formValues[BlastFields.taxons];
+    setFormValues({
+      ...formValues,
+      [BlastFields.taxons]: {
+        ...taxonFormValues,
+        values: taxonFormValues.values.filter(
+          (taxon: FormValue) => taxon.value !== id
+        ),
+      },
+    });
+  };
+
   // the only thing to do here would be to check the values and prevent
   // and prevent submission if there is any issue
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
@@ -112,10 +131,7 @@ const BlastForm = () => {
     // internal state
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
-  console.log(
-    'formValues[BlastFields.taxon].selectedLabel',
-    formValues[BlastFields.taxons].selectedLabel
-  );
+
   return (
     <Fragment>
       <h3>Submit new job</h3>
@@ -148,8 +164,13 @@ const BlastForm = () => {
                 clearOnSelect={true}
               />
               {(formValues[BlastFields.taxons].values || []).map(
-                ({ label }: FormValue) => (
-                  <Taxon key={label}>{label}</Taxon>
+                ({ label, value }: FormValue) => (
+                  <Taxon
+                    key={label}
+                    onRemove={() => removeTaxonFormValue(value)}
+                  >
+                    {label}
+                  </Taxon>
                 )
               )}
             </section>
