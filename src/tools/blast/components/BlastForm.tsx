@@ -11,6 +11,7 @@ import { RootAction } from '../../../app/state/rootInitialState';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
+  SelectedNode,
 } from '../config/BlastFormData';
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
@@ -62,10 +63,21 @@ const BlastForm = () => {
   };
 
   const updateTaxonFormValue = (path: string, id: string) => {
-    const newFormValues = { ...formValues };
-    newFormValues[BlastFields.taxon].selectedLabel = path;
-    newFormValues[BlastFields.taxon].selected = id;
-    setFormValues(newFormValues);
+    // Only proceed if a node is selected
+    if (!id) return;
+
+    const { selectedNodes } = formValues[BlastFields.taxon];
+    // If already there, don't add again
+    if (selectedNodes.some((taxon: SelectedNode) => taxon.id === id)) return;
+
+    // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
+    const label = path.replace(/ *\([^)]*\) */g, ' ');
+    console.log({ id, label });
+
+    setFormValues({
+      ...formValues,
+      selectedNodes: [...selectedNodes, { id, label }],
+    });
   };
 
   // the only thing to do here would be to check the values and prevent
