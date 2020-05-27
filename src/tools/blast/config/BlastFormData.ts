@@ -12,18 +12,14 @@ import {
 } from '../types/blastServerParameters';
 import { FormParameters } from '../types/blastFormParameters';
 
-export type SelectedNode = {
-  id: string;
-  label: string;
-};
+export type FormValue = { label: string; value: string | number };
 
 export type BlastFormValue = {
   fieldName: string;
   selected?: string | undefined;
   selectedLabel?: string | undefined;
-  selectedNodes?: SelectedNode[];
   type?: BlastFieldTypes;
-  values?: { label?: string; value?: string | number }[];
+  values?: FormValue[];
 };
 
 export enum BlastFields {
@@ -81,7 +77,8 @@ export default {
   [BlastFields.taxon]: {
     fieldName: 'taxids',
     type: BlastFieldTypes.autocomplete,
-    selectedNodes: [],
+    values: [],
+    selectedLabel: '',
   },
   // Note: is that the 'exp' parameter?
   // if so, we'll need to use the actual required string values

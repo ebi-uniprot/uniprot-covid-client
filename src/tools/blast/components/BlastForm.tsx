@@ -12,11 +12,17 @@ import initialFormValues, {
   BlastFormValues,
   BlastFields,
   SelectedNode,
+  Value,
+  FormValue,
 } from '../config/BlastFormData';
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
 
 import './styles/BlastForm.scss';
+
+const Taxon: FC<{ children: string }> = ({ children }) => (
+  <span className="taxon">{children}</span>
+);
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -66,9 +72,10 @@ const BlastForm = () => {
     // Only proceed if a node is selected
     if (!id) return;
 
-    const { selectedNodes } = formValues[BlastFields.taxon];
+    const taxonFormValues = formValues[BlastFields.taxon];
+    const { values } = taxonFormValues;
     // If already there, don't add again
-    if (selectedNodes.some((taxon: SelectedNode) => taxon.id === id)) return;
+    if (values.some(({ value }: FormValue) => value === id)) return;
 
     // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
     const label = path.replace(/ *\([^)]*\) */g, ' ');
@@ -76,7 +83,11 @@ const BlastForm = () => {
 
     setFormValues({
       ...formValues,
-      selectedNodes: [...selectedNodes, { id, label }],
+      [BlastFields.taxon]: {
+        ...taxonFormValues,
+        selectedLabel: '',
+        values: [{ value: id, label }, ...values],
+      },
     });
   };
 
@@ -95,7 +106,10 @@ const BlastForm = () => {
     // internal state
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
-
+  console.log(
+    'formValues[BlastFields.taxon].selectedLabel',
+    formValues[BlastFields.taxon].selectedLabel
+  );
   return (
     <Fragment>
       <h3>Submit new job</h3>
@@ -126,6 +140,11 @@ const BlastForm = () => {
                 title="Restrict to taxonomy"
                 value={formValues[BlastFields.taxon].selectedLabel}
               />
+              {(formValues[BlastFields.taxon].values || []).map(
+                ({ label }: FormValue) => (
+                  <Taxon key={label}>{label}</Taxon>
+                )
+              )}
             </section>
           </section>
           {!displayAdvanced ? (
