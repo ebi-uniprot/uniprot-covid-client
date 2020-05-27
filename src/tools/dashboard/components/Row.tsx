@@ -1,11 +1,33 @@
-import React, { memo } from 'react';
+import React, { memo, FocusEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Card } from 'franklin-sites';
 
 import { Job } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
 
 import './styles/Dashboard.scss';
+import { updateJobTitle } from '../../state/toolsActions';
+
+interface NameProps {
+  id: string;
+  children: string;
+}
+
+const Name = ({ children, id }: NameProps) => {
+  const dispatch = useDispatch();
+
+  const handleBlur = (event: FocusEvent) => {
+    const text = (event.target as HTMLSpanElement).innerText.trim();
+    if (text !== children) dispatch(updateJobTitle(id, text));
+  };
+
+  return (
+    <span contentEditable onBlur={handleBlur}>
+      {children}
+    </span>
+  );
+};
 
 interface TimeProps {
   children: number;
@@ -61,7 +83,9 @@ interface RowProps {
 
 const Row = memo(({ tool }: RowProps) => (
   <Card>
-    <span className="dashboard__body__name">{tool.title}</span>
+    <span className="dashboard__body__name">
+      <Name id={tool.internalID}>{tool.title}</Name>
+    </span>
     <span className="dashboard__body__type">{tool.type}</span>
     <span className="dashboard__body__time">
       {'timeSubmitted' in tool && tool.timeSubmitted && (

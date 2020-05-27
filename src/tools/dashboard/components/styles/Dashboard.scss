@@ -30,6 +30,7 @@
     &__name {
       grid-area: name;
       font-weight: bold;
+      display: contents;
     }
 
     &__type {
