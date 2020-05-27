@@ -75,7 +75,16 @@ const BlastForm = () => {
     const taxonFormValues = formValues[BlastFields.taxon];
     const { values } = taxonFormValues;
     // If already there, don't add again
-    if (values.some(({ value }: FormValue) => value === id)) return;
+    if (values.some(({ value }: FormValue) => value === id)) {
+      setFormValues({
+        ...formValues,
+        [BlastFields.taxon]: {
+          ...taxonFormValues,
+          selectedLabel: '',
+        },
+      });
+      return;
+    }
 
     // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
     const label = path.replace(/ *\([^)]*\) */g, ' ');
@@ -139,6 +148,7 @@ const BlastForm = () => {
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
                 value={formValues[BlastFields.taxon].selectedLabel}
+                clearOnSelect={true}
               />
               {(formValues[BlastFields.taxon].values || []).map(
                 ({ label }: FormValue) => (

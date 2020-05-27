@@ -9,6 +9,7 @@ type Props = {
   onSelect: Function;
   title: string;
   value?: string;
+  clearOnSelect?: boolean;
 };
 
 type Suggestion = {
@@ -100,10 +101,10 @@ class AutocompleteWrapper extends Component<Props, State> {
     const { url } = this.props;
     const suggesterUrl = getSuggesterUrl(url, textInputValue);
     fetchData(suggesterUrl)
-      .then(data => AutocompleteWrapper.prepareData(data.data.suggestions))
-      .then(data => this.setState({ data }))
+      .then((data) => AutocompleteWrapper.prepareData(data.data.suggestions))
+      .then((data) => this.setState({ data }))
       // eslint-disable-next-line no-console
-      .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   };
 
   handleSelect = (inputValue: SelectValue | string) => {
@@ -117,7 +118,7 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   render() {
     const { data } = this.state;
-    const { title, value } = this.props;
+    const { title, value, clearOnSelect = false } = this.props;
     return (
       <label htmlFor={this.id}>
         {title}
@@ -129,6 +130,7 @@ class AutocompleteWrapper extends Component<Props, State> {
           filter={false}
           value={value}
           minCharsToShowDropdown={minCharsToShowDropdown}
+          clearOnSelect={clearOnSelect}
         />
       </label>
     );
