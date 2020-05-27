@@ -25,6 +25,7 @@ import { addMessage } from '../../messages/state/messagesActions';
 import blastUrls from '../blast/config/blastUrls';
 
 import { ToolsState } from './toolsInitialState';
+import convertFormParametersForServer from '../blast/adapters/BlastParametersAdapter';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
@@ -86,12 +87,11 @@ const toolsMiddleware: Middleware = (store) => {
   };
 
   const submitJob = (job: CreatedJob) => {
-    const formData = new FormData();
     // specific logic to transform FormParameters to ServerParameters
     // (e.g. translating 'gapped' to 'gapaling', adding 'email')
-    Object.keys(job.parameters).forEach((blastField) => {
-      formData.append(blastField, job.parameters[blastField]);
-    });
+    // TODO translation of parameters.
+    const formData = convertFormParametersForServer(job.parameters);
+
     const url = job.type === 'blast' ? blastUrls.runUrl : '';
     postData(url, {
       data: formData,

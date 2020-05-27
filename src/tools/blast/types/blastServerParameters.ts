@@ -233,26 +233,26 @@ export type Sequence = string;
 export type Database = string;
 
 export type ServerParameters = {
-  program?: Program;
+  program?: Program; // program
   task?: Task;
-  email: string;
-  matrix?: Matrix;
-  alignments?: Alignments;
-  scores?: Scores;
-  exp?: Exp;
+  email: string; // email
+  matrix?: Matrix; // matrix
+  alignments?: Alignments; // hits
+  scores?: Scores; // hits
+  exp?: Exp; // threshold
   dropoff?: Dropoff;
   match_scores?: MatchScores;
   gapopen?: GapOpen;
   gapext?: GapExt;
-  filter?: Filter;
+  filter?: Filter; // filter
   seqrange?: SeqRange;
-  gapalign?: GapAlign;
+  gapalign?: GapAlign; // gapped
   wordsize?: WordSize;
-  taxids?: TaxIDs;
+  taxids?: TaxIDs; // taxons
   compstats?: CompStats;
   align?: Align;
   transltable?: TranslTable;
-  stype?: SType;
-  sequence: Sequence;
-  database: Database;
+  stype?: SType; // stype
+  sequence: Sequence; // sequence
+  database: Database; // targetDb
 };

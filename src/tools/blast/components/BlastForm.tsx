@@ -1,12 +1,9 @@
 import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { v1 } from 'uuid';
 
-import { Job } from '../types/blastJob';
 import { FormParameters } from '../types/blastFormParameters';
 
 import * as actions from '../../state/toolsActions';
-import { RootAction } from '../../../app/state/rootInitialState';
 
 import initialFormValues, {
   BlastFormValues,
@@ -63,8 +60,8 @@ const BlastForm = () => {
 
   const updateTaxonFormValue = (path: string, id: string) => {
     const newFormValues = { ...formValues };
-    newFormValues[BlastFields.taxon].selectedLabel = path;
-    newFormValues[BlastFields.taxon].selected = id;
+    newFormValues[BlastFields.taxons].selectedLabel = path;
+    newFormValues[BlastFields.taxons].selected = id;
     setFormValues(newFormValues);
   };
 
@@ -112,7 +109,7 @@ const BlastForm = () => {
                 url="/uniprot/api/suggester?dict=organism&query=?"
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
-                value={formValues[BlastFields.taxon].selectedLabel}
+                value={formValues[BlastFields.taxons].selectedLabel}
               />
             </section>
           </section>
@@ -127,6 +124,8 @@ const BlastForm = () => {
           ) : (
             <section className="blast-form-section">
               {[
+                BlastFields.stype,
+                BlastFields.program,
                 BlastFields.threshold,
                 BlastFields.matrix,
                 BlastFields.filter,

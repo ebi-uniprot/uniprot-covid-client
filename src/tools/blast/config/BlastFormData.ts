@@ -1,15 +1,4 @@
-import {
-  ServerParameters,
-  Exp,
-  Program,
-  Database,
-  SType,
-  Matrix,
-  Filter,
-  GapAlign,
-  Alignments,
-  Scores,
-} from '../types/blastServerParameters';
+import { Program } from '../types/blastServerParameters';
 import { FormParameters } from '../types/blastFormParameters';
 
 export type BlastFormValue = {
@@ -25,7 +14,7 @@ export enum BlastFields {
   stype = 'Sequence type',
   email = 'Email',
   sequence = 'Sequence',
-  taxon = 'Taxon',
+  taxons = 'Taxons',
   targetDb = 'Target database',
   threshold = 'E-Threshold',
   matrix = 'Matrix',
@@ -43,19 +32,24 @@ export enum BlastFieldTypes {
 export type BlastFormValues = { [x in BlastFields]: BlastFormValue };
 
 export default {
-  // we don't need to display this, or even to render it hidden
   [BlastFields.program]: {
     fieldName: 'program',
+    values: [
+      { value: 'blastp' },
+      { value: 'blastx' },
+      { value: 'blastn' },
+      { value: 'tblastx' },
+      { value: 'tblastn' },
+    ],
     selected: 'blastp' as Program,
   },
   [BlastFields.stype]: {
-    fieldName: 'type',
-    selected: 'protein' as FormParameters['type'],
-  },
-  // we don't need to display this, or even to render it hidden
-  [BlastFields.email]: {
-    fieldName: 'email',
-    selected: 'uuw_dev@uniprot.org' as ServerParameters['email'],
+    fieldName: 'stype',
+    values: [
+      { value: 'protein', label: 'Protein' },
+      { value: 'dna', label: 'DNA/RNA' },
+    ],
+    selected: 'protein' as FormParameters['stype'],
   },
   [BlastFields.sequence]: {
     fieldName: 'sequence',
@@ -72,13 +66,11 @@ export default {
       },
     ] as Array<{ label: string; value: FormParameters['database'] }>,
   },
-  [BlastFields.taxon]: {
+  [BlastFields.taxons]: {
     fieldName: 'taxids',
     type: BlastFieldTypes.autocomplete,
   },
-  // Note: is that the 'exp' parameter?
-  // if so, we'll need to use the actual required string values
-  // (as in: the "1e-1" string instead of 0.1 or 1e-1 numbers)
+  // 'exp' parameter
   [BlastFields.threshold]: {
     fieldName: 'threshold',
     type: BlastFieldTypes.select,
@@ -88,7 +80,7 @@ export default {
       { label: '0.001', value: '1e-3' },
       { label: '0.01', value: '1e-2' },
       { label: '0.1', value: '1e-1' },
-      { label: '1', value: '1.0' },
+      { label: '1', value: '1' },
       { value: '10' },
       { value: '100' },
       { value: '1000' },
@@ -97,14 +89,14 @@ export default {
   [BlastFields.matrix]: {
     fieldName: 'matrix',
     type: BlastFieldTypes.select,
+    selected: 'BLOSUM62',
     values: [
-      // FIXME: decision needed
-      // default is BLOSUM62, maybe put that as a default explicitely
-      // 'Auto' will leave the user wondering what it actually means
-      {
-        value: '',
-        label: 'Auto',
-      },
+      // TODO 'Auto' behaves as follows in current website
+      // length > 85: "blosum62"
+      // length > 49: "blosum80"
+      // length > 34: "pam70"
+      // otherwise "pam30"
+      // This should be handled in BlastForm.tsx
       { value: 'BLOSUM45' },
       { value: 'BLOSUM62' },
       { value: 'BLOSUM80' },
@@ -119,11 +111,9 @@ export default {
     values: [
       { value: 'F', label: 'None' },
       { value: 'T', label: 'Filter low complexity regions' },
-      // TODO: check what this maps to as 'mask' is not an accepted value
-      { value: 'mask', label: 'Mask lookup table only' },
     ] as Array<{ label?: string; value: FormParameters['filter'] }>,
   },
-  // Note: is that the 'gapalign' parameter?
+  // 'gapalign'
   [BlastFields.gapped]: {
     fieldName: 'gapped',
     type: BlastFieldTypes.select,

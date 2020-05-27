@@ -7,16 +7,18 @@ import {
   GapAlign,
   Scores,
   Alignments,
+  Program,
 } from './blastServerParameters';
 
 export type FormParameters = {
-  type: SType;
+  stype: SType;
+  program: Program;
   sequence: string;
   database: Database;
   taxIDs: string;
   threshold: Exp;
   matrix: Matrix;
-  filter: Filter | 'mask'; // ? need to investigate what this maps to
+  filter: Filter;
   gapped: GapAlign;
   hits: Scores | Alignments;
 };
