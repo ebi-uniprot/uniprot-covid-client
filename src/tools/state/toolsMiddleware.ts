@@ -161,8 +161,6 @@ const toolsMiddleware: Middleware = (store) => {
 
   // main loop
   const pollJobs = async () => {
-    console.log(Date.now(), 'started a loop');
-    console.time('loop');
     // Wait for browser idleness
     await schedule();
 
@@ -178,7 +176,6 @@ const toolsMiddleware: Middleware = (store) => {
     // nothing to check, early exit, no recursion
     if (!(jobsToSubmit.length || jobsToPoll.length)) {
       scheduledPollJobs = false;
-      console.timeEnd('loop');
       return;
     }
 
@@ -195,15 +192,12 @@ const toolsMiddleware: Middleware = (store) => {
     // reset flag
     scheduledPollJobs = false;
 
-    console.timeEnd('loop');
-
     await sleep(POLLING_INTERVAL);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     schedulePollJobs();
   };
 
   const schedulePollJobs = async () => {
-    console.log(Date.now(), 'scheduled loop');
     if (scheduledPollJobs) return;
     scheduledPollJobs = true;
     await schedule(POLLING_INTERVAL);

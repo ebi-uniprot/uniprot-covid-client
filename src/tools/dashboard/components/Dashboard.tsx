@@ -16,14 +16,14 @@ import finished from '../../blast/__mocks__/internal-jobs/finished';
 import running from '../../blast/__mocks__/internal-jobs/running';
 
 const Dashboard = () => {
-  // const tools: Array<Job> = useSelector((state) => Object.values(state.tools));
-  const tools: Array<Job> = [
-    created,
-    failedBeforeSubmission,
-    failedAfterSubmission,
-    finished,
-    running,
-  ];
+  const tools: Array<Job> = useSelector((state) => Object.values(state.tools));
+  // const tools: Array<Job> = [
+  //   created,
+  //   failedBeforeSubmission,
+  //   failedAfterSubmission,
+  //   finished,
+  //   running,
+  // ];
 
   return (
     <section>

@@ -6,6 +6,7 @@
     display: grid;
     /* this needs to be the same as below to keep visual alignment */
     grid-template-columns: 27ch 10ch 20ch 18ch 1fr;
+    grid-gap: 1ch;
   }
 
   &__body {
@@ -19,6 +20,7 @@
         'name type time status actions'
         'id   id   time status actions';
       grid-template-columns: 27ch 10ch 20ch 18ch 1fr;
+      grid-gap: 1ch;
       grid-template-rows: 1fr 1fr;
 
       &:hover .dashboard__body__notify_message {
@@ -29,8 +31,14 @@
     /* begin grid areas */
     &__name {
       grid-area: name;
-      font-weight: bold;
       display: contents;
+      font-weight: bold;
+
+      & > * {
+        white-space: nowrap;
+        overflow: scroll;
+        max-width: 100%;
+      }
     }
 
     &__type {
