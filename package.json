@@ -89,6 +89,7 @@
     "redux-persist": "6.0.0",
     "redux-persist-transform-filter": "0.0.20",
     "redux-thunk": "2.3.0",
+    "timing-functions": "2.0.0",
     "typesafe-actions": "5.1.0",
     "url-join": "4.0.1",
     "uuid": "8.0.0",

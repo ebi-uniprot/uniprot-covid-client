@@ -1,4 +1,5 @@
 import { Middleware } from 'redux';
+import { schedule, sleep } from 'timing-functions';
 
 import { Job, CreatedJob, RunningJob } from '../blast/types/blastJob';
 import { Status } from '../blast/types/blastStatuses';
@@ -35,7 +36,7 @@ const toolsMiddleware: Middleware = (store) => {
   // rehydrate jobs, run once in the application lifetime
   (async () => {
     // Wait for browser idleness
-    await new Promise((resolve) => window.requestIdleCallback(resolve));
+    await schedule();
 
     const jobStore = new JobStore(Stores.METADATA);
 
@@ -47,7 +48,7 @@ const toolsMiddleware: Middleware = (store) => {
     if (!persistedJobs.length) return;
 
     // Wait for browser idleness
-    await new Promise((resolve) => window.requestIdleCallback(resolve));
+    await schedule();
 
     dispatch(rehydrateJobs(persistedJobs));
   })();
@@ -157,7 +158,7 @@ const toolsMiddleware: Middleware = (store) => {
     console.log(Date.now(), 'started a loop');
     console.time('loop');
     // Wait for browser idleness
-    await new Promise((resolve) => window.requestIdleCallback(resolve));
+    await schedule();
 
     const toolsState: ToolsState = getState().tools;
 
@@ -190,15 +191,17 @@ const toolsMiddleware: Middleware = (store) => {
 
     console.timeEnd('loop');
 
+    await sleep(POLLING_INTERVAL);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    setTimeout(schedulePollJobs, POLLING_INTERVAL);
+    schedulePollJobs();
   };
 
-  const schedulePollJobs = () => {
+  const schedulePollJobs = async () => {
     console.log(Date.now(), 'scheduled loop');
     if (scheduledPollJobs) return;
-    window.requestIdleCallback(pollJobs, { timeout: POLLING_INTERVAL });
     scheduledPollJobs = true;
+    await schedule(POLLING_INTERVAL);
+    pollJobs();
   };
 
   return (next) => (action) => {

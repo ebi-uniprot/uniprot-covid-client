@@ -10816,6 +10816,11 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
+timing-functions@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/timing-functions/-/timing-functions-2.0.0.tgz#ce31caf2c87e6e99e6d7c1cb67226495f9934c50"
+  integrity sha512-UEGnoCxgmlttVetfXJz9gtmp/dDBnZTNcrniTfVDu8RQYMVoBGtY7fzew5kAzrqhi/dOrPRC2mlTC5CI6WIilA==
+
 timing-functions@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/timing-functions/-/timing-functions-1.0.0.tgz#483482e0efb8339e811d0a9f690c47976fd64cd8"
