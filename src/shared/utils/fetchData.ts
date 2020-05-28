@@ -3,7 +3,8 @@ import axios, { CancelToken } from 'axios';
 export default function fetchData(
   url: string,
   headers: object = {},
-  cancelToken?: CancelToken
+  cancelToken?: CancelToken,
+  axiosOptions = {}
 ) {
   return axios.get(url, {
     headers: {
@@ -11,5 +12,6 @@ export default function fetchData(
       ...headers,
     },
     cancelToken,
+    ...axiosOptions,
   });
 }
