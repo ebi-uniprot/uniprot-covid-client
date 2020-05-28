@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { groupBy } from 'lodash-es';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../utils/utils';
+import { hasContent } from '../../utils';
 import EntrySection from '../../types/entrySection';
 import { UIModel } from '../../adapters/sectionConverter';
 import FeaturesView from '../protein-data-views/FeaturesView';

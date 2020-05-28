@@ -2,10 +2,14 @@ import React, { lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
+
 import BaseLayout from '../../shared/components/layouts/BaseLayout';
-import { Location, LocationToPath } from '../config/urls';
-import './styles/app.scss';
+
 import history from '../../shared/utils/browserHistory';
+
+import { Location, LocationToPath } from '../config/urls';
+
+import './styles/app.scss';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -69,102 +73,58 @@ const JobErrorPage = lazy(() =>
 const App = () => (
   <FranklinSite>
     <Router history={history}>
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route
-            path={LocationToPath[Location.Home]}
-            exact
-            render={() => <HomePage />}
-          />
-          <Route
-            path={LocationToPath[Location.UniProtKBEntry]}
-            render={() => <EntryPage />}
-          />
-          <Route
-            path={LocationToPath[Location.UniProtKBResults]}
-            render={() => <ResultsPage />}
-          />
-          <Route
-            path={LocationToPath[Location.UniProtKBCustomiseTable]}
-            render={() => (
-              <BaseLayout>
-                <CustomiseTablePage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.UniProtKBDownload]}
-            render={() => (
-              <BaseLayout>
-                <DownloadPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.Blast]}
-            render={() => (
-              <BaseLayout>
-                <BlastPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.Dashboard]}
-            render={() => (
-              <BaseLayout>
-                <Dashboard />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.PageNotFound]}
-            render={() => (
-              <BaseLayout>
-                <ResourceNotFoundPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.ServiceUnavailable]}
-            render={() => (
-              <BaseLayout>
-                <ServiceUnavailablePage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={LocationToPath[Location.JobError]}
-            render={() => (
-              <BaseLayout>
-                <JobErrorPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path={`${LocationToPath[Location.UniProtKBQueryBuilder]}(/reset)?`}
-            render={() => (
-              <BaseLayout isSearchPage>
-                <AdvancedSearchPage queryString="" />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            path="/blast/:jobId?"
-            render={() => (
-              <BaseLayout>
-                <BlastPage />
-              </BaseLayout>
-            )}
-          />
-          <Route
-            render={() => (
-              <BaseLayout>
-                <ResourceNotFoundPage />
-              </BaseLayout>
-            )}
-          />
-        </Switch>
-      </Suspense>
+      <BaseLayout>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route
+              path={LocationToPath[Location.Home]}
+              exact
+              component={HomePage}
+            />
+            <Route
+              path={LocationToPath[Location.UniProtKBEntry]}
+              component={EntryPage}
+            />
+            <Route
+              path={LocationToPath[Location.UniProtKBResults]}
+              component={ResultsPage}
+            />
+            <Route
+              path={LocationToPath[Location.UniProtKBCustomiseTable]}
+              component={CustomiseTablePage}
+            />
+            <Route
+              path={LocationToPath[Location.UniProtKBDownload]}
+              component={DownloadPage}
+            />
+            <Route
+              path={LocationToPath[Location.Blast]}
+              component={BlastPage}
+            />
+            <Route
+              path={LocationToPath[Location.Dashboard]}
+              component={Dashboard}
+            />
+            <Route
+              path={LocationToPath[Location.PageNotFound]}
+              component={ResourceNotFoundPage}
+            />
+            <Route
+              path={LocationToPath[Location.ServiceUnavailable]}
+              component={ServiceUnavailablePage}
+            />
+            <Route
+              path={LocationToPath[Location.JobError]}
+              component={JobErrorPage}
+            />
+            <Route
+              path={LocationToPath[Location.UniProtKBQueryBuilder]}
+              component={AdvancedSearchPage}
+            />
+            <Route component={ResourceNotFoundPage} />
+          </Switch>
+        </Suspense>
+      </BaseLayout>
     </Router>
   </FranklinSite>
 );

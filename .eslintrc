@@ -50,7 +50,9 @@
     "import/extensions": 0,
     "import/prefer-default-export": 0,
     "react/jsx-fragments": 0,
-    "react/jsx-props-no-spreading": 1
+    "react/jsx-props-no-spreading": 1,
+    "react/static-property-placement": 0,
+    "react/destructuring-assignment": 0
   },
   "settings": {
     "import/resolver": {

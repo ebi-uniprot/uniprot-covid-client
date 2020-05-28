@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 import { MainSearch } from 'franklin-sites';
 
+import { LocationToPath, Location } from '../../../app/config/urls';
+
 import './styles/search-container.scss';
 
 const namespaces = [
@@ -29,15 +31,13 @@ const Search = () => {
 
     // restringify the resulting search
     const stringifiedSearch = queryString.stringify(
-      {
-        query: searchTerm || '*',
-      },
+      { query: searchTerm || '*' },
       { encode: true }
     );
 
     // push a new location to the history containing the modified search term
     history.push({
-      pathname: '/uniprotkb', // NOTE: shouldn't that depend on the selected namespace?
+      pathname: LocationToPath[Location.UniProtKBResults], // NOTE: shouldn't that depend on the selected namespace?
       search: stringifiedSearch,
     });
   };

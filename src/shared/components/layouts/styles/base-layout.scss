@@ -8,7 +8,9 @@
     'content'
     'footer';
 
-  grid-template-rows: 4rem auto auto;
+  height: 100vh;
+
+  grid-template-rows: 5rem auto 1fr auto;
 
   .header:not(.header--negative) > .header__logo svg g {
     fill: white;
@@ -20,6 +22,12 @@
 
   .in-page-messages {
     grid-area: in-page-messages;
+  }
+
+  .content {
+    grid-area: content;
+    overflow: scroll;
+    display: flex;
   }
 
   .footer {
