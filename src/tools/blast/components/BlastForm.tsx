@@ -14,6 +14,7 @@ import initialFormValues, {
 } from '../config/BlastFormData';
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
+import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
 
 import './styles/BlastForm.scss';
 
@@ -147,7 +148,7 @@ const BlastForm = () => {
             />
             <section className="blast-form-section__item blast-form-section__item--taxon-select">
               <AutocompleteWrapper
-                url="/uniprot/api/suggester?dict=organism&query=?"
+                url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
                 clearOnSelect={true}

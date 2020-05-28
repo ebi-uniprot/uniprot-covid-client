@@ -71,6 +71,7 @@ const apiUrls = {
       accession,
       '/publications'
     ),
+  organismSuggester: '/uniprot/api/suggester?dict=organism&query=?',
 };
 
 export default apiUrls;
