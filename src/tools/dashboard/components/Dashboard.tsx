@@ -9,14 +9,18 @@ import Row from './Row';
 import './styles/Dashboard.scss';
 
 // temporary
-import created from '../../blast/__mocks__/internal-jobs/created';
-import failedBeforeSubmission from '../../blast/__mocks__/internal-jobs/failed-after-submission';
-import failedAfterSubmission from '../../blast/__mocks__/internal-jobs/failed-before-submission copy';
-import finished from '../../blast/__mocks__/internal-jobs/finished';
-import running from '../../blast/__mocks__/internal-jobs/running';
+// import created from '../../blast/__mocks__/internal-jobs/created';
+// import failedBeforeSubmission from '../../blast/__mocks__/internal-jobs/failed-after-submission';
+// import failedAfterSubmission from '../../blast/__mocks__/internal-jobs/failed-before-submission copy';
+// import finished from '../../blast/__mocks__/internal-jobs/finished';
+// import running from '../../blast/__mocks__/internal-jobs/running';
+
+const sortNewestFirst = (a: Job, b: Job) => b.timeCreated - a.timeCreated;
 
 const Dashboard = () => {
-  const tools: Array<Job> = useSelector((state) => Object.values(state.tools));
+  const jobs = (useSelector((state) =>
+    Object.values(state.tools)
+  ) as Job[]).sort(sortNewestFirst);
   // const tools: Array<Job> = [
   //   created,
   //   failedBeforeSubmission,
@@ -42,8 +46,8 @@ const Dashboard = () => {
           </Card>
         </div>
         <div className="dashboard__body">
-          {tools.map((tool) => (
-            <Row tool={tool} key={tool.internalID} />
+          {jobs.map((job) => (
+            <Row job={job} key={job.internalID} />
           ))}
         </div>
       </div>

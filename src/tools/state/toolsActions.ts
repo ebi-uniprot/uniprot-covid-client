@@ -27,4 +27,4 @@ export const rehydrateJobs = (jobs: Array<Job>) =>
 export const updateJobTitle = (id: Job['internalID'], title: string) =>
   action(UPDATE_JOB_TITLE, { id, title });
 
-export const deleteJob = (id: Job['internalID']) => action(DELETE_JOB, { id });
+export const deleteJob = (id: Job['internalID']) => action(DELETE_JOB, id);

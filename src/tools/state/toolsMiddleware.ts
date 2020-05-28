@@ -8,6 +8,8 @@ import {
   MessageLevel,
   MessageTag,
 } from '../../messages/types/messagesTypes';
+import { BlastResults } from '../blast/types/blastResults';
+
 import { Stores } from '../utils/stores';
 
 import {
@@ -45,7 +47,10 @@ const toolsMiddleware: Middleware = (store) => {
 
     const persistedJobs = [];
     for await (const persistedJob of jobStore.getAll()) {
-      persistedJobs.push(persistedJob as Job);
+      persistedJobs.push([
+        (persistedJob as Job).internalID,
+        persistedJob as Job,
+      ]);
     }
 
     if (!persistedJobs.length) return;
@@ -53,7 +58,7 @@ const toolsMiddleware: Middleware = (store) => {
     // Wait for browser idleness
     await schedule();
 
-    dispatch(rehydrateJobs(persistedJobs));
+    dispatch(rehydrateJobs(Object.fromEntries(persistedJobs)));
   })();
 
   // flag to avoid multiple pollJobs loop being scheduled
@@ -76,7 +81,7 @@ const toolsMiddleware: Middleware = (store) => {
         { responseType: 'text' }
       );
       // get a new reference to the job
-      const currentStateOfJob = getJobWithID(job.internalID);
+      let currentStateOfJob = getJobWithID(job.internalID);
       // check that the job is still in the state (it might have been removed)
       if (!currentStateOfJob) return;
       // check that the status we got from the server is something expected
@@ -89,11 +94,48 @@ const toolsMiddleware: Middleware = (store) => {
         throw new Error('Job was not found on the server');
       }
 
+      if (status === Status.RUNNING || status === Status.FAILED) {
+        dispatch(
+          updateJob({
+            ...currentStateOfJob,
+            timeLastUpdate: Date.now(),
+            status: status as Status.RUNNING | Status.FAILED,
+          })
+        );
+
+        return;
+      }
+      // job finished
+      const response = await fetchData(
+        job.type === 'blast' ? blastUrls.resultUrl(job.remoteID) : ''
+      );
+
+      const results: BlastResults = response.data;
+
+      // get a new reference to the job
+      currentStateOfJob = getJobWithID(job.internalID);
+      // check that the job is still in the state (it might have been removed)
+      if (!currentStateOfJob) return;
+
+      const now = Date.now();
       dispatch(
         updateJob({
           ...currentStateOfJob,
-          timeFinished: Date.now(),
-          status: status as Exclude<Status, Status.NOT_FOUND>,
+          timeLastUpdate: now,
+          timeFinished: now,
+          status,
+          data: { hits: results.hits.length },
+        })
+      );
+      dispatch(
+        addMessage({
+          id: job.internalID,
+          content: `Job "${job.remoteID}" finished, found ${
+            results.hits.length
+          } hit${results.hits.length === 1 ? '' : 's'}`,
+          format: MessageFormat.POP_UP,
+          level: MessageLevel.SUCCESS,
+          tag: MessageTag.JOB,
         })
       );
     } catch (error) {
@@ -104,6 +146,7 @@ const toolsMiddleware: Middleware = (store) => {
   const submitJob = async (job: CreatedJob) => {
     // specific logic to transform FormParameters to ServerParameters
     const formData = convertFormParametersForServer(job.parameters);
+    formData.delete('scores');
 
     const url = job.type === 'blast' ? blastUrls.runUrl : '';
     try {
@@ -149,7 +192,7 @@ const toolsMiddleware: Middleware = (store) => {
       );
       dispatch(
         addMessage({
-          id: 'job-id',
+          id: job.internalID,
           content: `Could not run job: ${error.message}`,
           format: MessageFormat.POP_UP,
           level: MessageLevel.FAILURE,

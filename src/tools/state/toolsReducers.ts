@@ -44,7 +44,7 @@ const toolsReducers = (
 
     // remove job
     case toolsActions.DELETE_JOB: {
-      const { [action.payload.id]: jobToRemove, ...newState } = state;
+      const { [action.payload]: jobToRemove, ...newState } = state;
 
       store.del(jobToRemove.internalID);
 

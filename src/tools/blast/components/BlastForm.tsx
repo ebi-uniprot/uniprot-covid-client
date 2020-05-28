@@ -113,6 +113,9 @@ const BlastForm = () => {
     event.preventDefault();
 
     const parameters = {};
+
+    // TODO: need to cast the values to the right types
+    // e.g. hits 50 gets stored as a string somehow...
     for (const { fieldName, selected } of Object.values(formValues)) {
       if (selected) parameters[fieldName] = selected;
     }

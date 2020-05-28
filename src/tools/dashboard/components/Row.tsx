@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card } from 'franklin-sites';
 
-import { Job } from '../../blast/types/blastJob';
+import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
 
+import { updateJobTitle, deleteJob } from '../../state/toolsActions';
+
 import './styles/Dashboard.scss';
-import { updateJobTitle } from '../../state/toolsActions';
 
 interface NameProps {
-  id: string;
-  children: string;
+  id: Job['internalID'];
+  children: Job['title'];
 }
 
 const Name = ({ children, id }: NameProps) => {
@@ -45,17 +46,27 @@ const Time = ({ children }: TimeProps) => {
       {YYYY}-{MM}-{DD}
       <br />
       <span className="dashboard__body__hours">
-        {hh}-{mm}
+        {hh}:{mm}
       </span>
     </time>
   );
 };
 
-interface NiceStatusProps {
-  children: Status;
+interface NiceStatusPropsNotFinished {
+  children: Exclude<Status, Status.FINISHED>;
+  queriedHits: Job['parameters']['hits'];
+}
+interface NiceStatusPropsFinished {
+  children: Status.FINISHED;
+  hits: FinishedJob['data']['hits'];
+  queriedHits: FinishedJob['parameters']['hits'];
 }
 
-const NiceStatus = ({ children }: NiceStatusProps) => {
+const NiceStatus = ({
+  children,
+  hits,
+  queriedHits,
+}: NiceStatusPropsNotFinished & NiceStatusPropsFinished) => {
   switch (children) {
     case Status.CREATED:
     case Status.RUNNING:
@@ -70,34 +81,72 @@ const NiceStatus = ({ children }: NiceStatusProps) => {
       );
     case Status.FAILED:
       return <>Failed</>;
-    case Status.FINISHED:
-      return <>Successful</>;
+    case Status.FINISHED: {
+      if (hits === queriedHits) return <>Successful</>;
+      const hitText = `hit${hits === 1 ? '' : 's'}`;
+      return (
+        <>
+          Successful{' '}
+          <span
+            title={`Found ${hits} ${hitText} even though you queried ${queriedHits}`}
+          >
+            ({hits} {hitText})
+          </span>
+        </>
+      );
+    }
     default:
       return null;
   }
 };
 
-interface RowProps {
-  tool: Job;
+interface ActionsProps {
+  id: Job['internalID'];
 }
 
-const Row = memo(({ tool }: RowProps) => (
+const Actions = ({ id }: ActionsProps) => {
+  const dispatch = useDispatch();
+
+  return (
+    <span>
+      <button type="button" disabled>
+        rerun
+      </button>
+      <button type="button" onClick={() => dispatch(deleteJob(id))}>
+        delete
+      </button>
+    </span>
+  );
+};
+
+interface RowProps {
+  job: Job;
+}
+
+const Row = memo(({ job }: RowProps) => (
   <Card>
     <span className="dashboard__body__name">
-      <Name id={tool.internalID}>{tool.title}</Name>
+      <Name id={job.internalID}>{job.title}</Name>
     </span>
-    <span className="dashboard__body__type">{tool.type}</span>
+    <span className="dashboard__body__type">{job.type}</span>
     <span className="dashboard__body__time">
-      {'timeSubmitted' in tool && tool.timeSubmitted && (
-        <Time>{tool.timeSubmitted}</Time>
+      {'timeSubmitted' in job && job.timeSubmitted && (
+        <Time>{job.timeSubmitted}</Time>
       )}
     </span>
     <span className="dashboard__body__status">
-      <NiceStatus>{tool.status}</NiceStatus>
+      <NiceStatus
+        hits={'data' in job ? job.data.hits : undefined}
+        queriedHits={job.parameters.hits}
+      >
+        {job.status}
+      </NiceStatus>
     </span>
-    <span className="dashboard__body__actions">actions</span>
+    <span className="dashboard__body__actions">
+      <Actions id={job.internalID} />
+    </span>
     <span className="dashboard__body__id">
-      {'remoteID' in tool && <Link>{tool.remoteID}</Link>}
+      {'remoteID' in job && <Link>{job.remoteID}</Link>}
     </span>
   </Card>
 ));

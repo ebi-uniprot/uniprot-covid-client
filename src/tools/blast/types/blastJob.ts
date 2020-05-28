@@ -1,9 +1,7 @@
-/* Job as defined inside the web application */
-
 import { Status } from './blastStatuses';
-import { BlastResults } from './blastResults';
 import { FormParameters } from './blastFormParameters';
 
+/* Job as defined inside the web application */
 interface BaseJob {
   status: Status;
   internalID: string;
@@ -37,7 +35,9 @@ export interface FinishedJob extends BaseJob {
   remoteID: string;
   timeSubmitted: number;
   timeFinished: number;
-  data?: BlastResults;
+  data: {
+    hits: number;
+  };
 }
 
 export type Job = CreatedJob | FailedJob | RunningJob | FinishedJob;
