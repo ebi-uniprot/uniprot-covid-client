@@ -10,7 +10,7 @@ import * as actions from '../../state/toolsActions';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
-  FormValue,
+  SelectedTaxon,
 } from '../config/BlastFormData';
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
@@ -42,7 +42,7 @@ const FormSelect: FC<{
         {type}
         <select
           id={type}
-          value={formValues[type].selected}
+          value={formValues[type].selected as string}
           onChange={(e) => updateFormValues(type, e.target.value)}
         >
           {formObject.values &&
@@ -76,19 +76,19 @@ const BlastForm = () => {
     if (!id) return;
 
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { values } = taxonFormValues;
+    const { selected = [] } = taxonFormValues;
+
     // If already there, don't add again
-    if (values.some(({ value }: FormValue) => value === id)) return;
+    if (selected.some((taxon: SelectedTaxon) => taxon.id === id)) return;
 
     // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
     const label = path.replace(/ *\([^)]*\) */g, ' ');
-    console.log({ id, label });
 
     setFormValues({
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        values: [{ value: id, label }, ...values],
+        selected: [{ id, label }, ...selected],
       },
     });
   };
@@ -99,8 +99,8 @@ const BlastForm = () => {
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        values: taxonFormValues.values.filter(
-          (taxon: FormValue) => taxon.value !== id
+        selected: taxonFormValues.selected.filter(
+          (taxon: SelectedTaxon) => taxon.id !== id
         ),
       },
     });
@@ -152,12 +152,9 @@ const BlastForm = () => {
                 title="Restrict to taxonomy"
                 clearOnSelect={true}
               />
-              {(formValues[BlastFields.taxons].values || []).map(
-                ({ label, value }: FormValue) => (
-                  <Taxon
-                    key={label}
-                    onRemove={() => removeTaxonFormValue(value)}
-                  >
+              {(formValues[BlastFields.taxons].selected || []).map(
+                ({ label, id }: SelectedTaxon) => (
+                  <Taxon key={label} onRemove={() => removeTaxonFormValue(id)}>
                     {label}
                   </Taxon>
                 )

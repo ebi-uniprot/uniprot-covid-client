@@ -1,14 +1,13 @@
 import { Program } from '../types/blastServerParameters';
 import { FormParameters } from '../types/blastFormParameters';
 
-export type FormValue = { label: string; value: string | number };
+export type SelectedTaxon = { label: string; id: string };
 
 export type BlastFormValue = {
   fieldName: string;
-  selected?: string | undefined;
-  selectedLabel?: string | undefined;
+  selected?: string | SelectedTaxon[] | undefined;
   type?: BlastFieldTypes;
-  values?: FormValue[];
+  values?: { label?: string; value?: string | number }[];
 };
 
 export enum BlastFields {
