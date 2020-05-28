@@ -17,11 +17,11 @@ import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/Aut
 
 import './styles/BlastForm.scss';
 
-const Taxon: FC<{ children: string | number; onRemove: () => void }> = ({
+const TaxonChip: FC<{ children: string | number; onRemove: () => void }> = ({
   children,
   onRemove,
 }) => (
-  <span className="taxon">
+  <span className="taxon-chip">
     {children}
     <CloseIcon onClick={onRemove} />
   </span>
@@ -152,11 +152,16 @@ const BlastForm = () => {
                 title="Restrict to taxonomy"
                 clearOnSelect={true}
               />
+            </section>
+            <section className="blast-form-section__item blast-form-section__item--selected-taxon">
               {(formValues[BlastFields.taxons].selected || []).map(
                 ({ label, id }: SelectedTaxon) => (
-                  <Taxon key={label} onRemove={() => removeTaxonFormValue(id)}>
+                  <TaxonChip
+                    key={label}
+                    onRemove={() => removeTaxonFormValue(id)}
+                  >
                     {label}
-                  </Taxon>
+                  </TaxonChip>
                 )
               )}
             </section>

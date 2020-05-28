@@ -8,10 +8,13 @@
 
   &__item {
     margin-right: 2rem;
+    &--selected-taxon {
+      margin-top: 1.25rem;
+    }
   }
 }
 
-.taxon {
+.taxon-chip {
   display: inline-block;
   vertical-align: middle;
   margin: 0.25rem;
