@@ -8,6 +8,9 @@
 
   &__item {
     margin-right: 2rem;
+    &--taxon-select {
+      width: 20rem;
+    }
     &--selected-taxon {
       margin-top: 1.25rem;
     }

@@ -145,7 +145,7 @@ const BlastForm = () => {
               type={BlastFields.targetDb}
               updateFormValues={updateFormValue}
             />
-            <section className="blast-form-section__item">
+            <section className="blast-form-section__item blast-form-section__item--taxon-select">
               <AutocompleteWrapper
                 url="/uniprot/api/suggester?dict=organism&query=?"
                 onSelect={updateTaxonFormValue}
