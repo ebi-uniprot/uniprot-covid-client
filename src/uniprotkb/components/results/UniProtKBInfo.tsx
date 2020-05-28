@@ -18,8 +18,14 @@ const UniProtKBInfo = () => (
     </section>
     <section className="text-block">
       You can view our latest webinar about Sars-CoV-2 and this portal from{' '}
-      <a href="https://www.youtube.com/watch?v=EY69TjnVhRs">here</a>, presented
-      on the 2nd April 2020.
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.youtube.com/watch?v=EY69TjnVhRs"
+      >
+        here
+      </a>
+      , presented on the 2nd April 2020.
     </section>
     <section className="text-block">
       Please go to the <a href="//www.uniprot.org">UniProt.org</a> website for
@@ -28,6 +34,17 @@ const UniProtKBInfo = () => (
     <section className="text-block">
       You can view all COVID-19 related publications contributed by the
       community <a href="//community.uniprot.org/bbsub/covid.html">here</a>.
+    </section>
+    <section className="text-block">
+      You can view all curated LitCovid COVID-19 related publications{' '}
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="//www.ncbi.nlm.nih.gov/research/coronavirus/docsum?text=protein%20or%20gene%20or%20structure"
+      >
+        here
+      </a>
+      .
     </section>
   </Fragment>
 );
