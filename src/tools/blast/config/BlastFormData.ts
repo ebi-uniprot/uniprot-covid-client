@@ -71,8 +71,6 @@ export default {
   [BlastFields.taxons]: {
     fieldName: 'taxids',
     type: BlastFieldTypes.autocomplete,
-    values: [],
-    selectedLabel: '',
   },
   // 'exp' parameter
   [BlastFields.threshold]: {

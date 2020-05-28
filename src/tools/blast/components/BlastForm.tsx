@@ -78,16 +78,7 @@ const BlastForm = () => {
     const taxonFormValues = formValues[BlastFields.taxons];
     const { values } = taxonFormValues;
     // If already there, don't add again
-    if (values.some(({ value }: FormValue) => value === id)) {
-      setFormValues({
-        ...formValues,
-        [BlastFields.taxons]: {
-          ...taxonFormValues,
-          selectedLabel: '',
-        },
-      });
-      return;
-    }
+    if (values.some(({ value }: FormValue) => value === id)) return;
 
     // Truncate label: Homo sapiens (Man/Human/HUMAN) [9606] --> Homo sapiens (Man/Human/HUMAN) [9606]
     const label = path.replace(/ *\([^)]*\) */g, ' ');
@@ -97,7 +88,6 @@ const BlastForm = () => {
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        selectedLabel: '',
         values: [{ value: id, label }, ...values],
       },
     });
@@ -160,7 +150,6 @@ const BlastForm = () => {
                 url="/uniprot/api/suggester?dict=organism&query=?"
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
-                value={formValues[BlastFields.taxons].selectedLabel}
                 clearOnSelect={true}
               />
               {(formValues[BlastFields.taxons].values || []).map(
