@@ -1,9 +1,14 @@
 import React, { Fragment, memo } from 'react';
 import { Card } from 'franklin-sites';
-import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+
 import { ProteinOverview } from '../protein-data-views/ProteinOverviewView';
-import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
 import UniProtKBTitle from '../protein-data-views/UniProtKBTitle';
+
+import ErrorBoundary from '../../../shared/components/error-component/ErrorBoundary';
+
+import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+
+import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
 
 type EntryMainProps = {
   transformedData: UniProtkbUIModel;
@@ -19,20 +24,25 @@ function arePropsEqual(prevProps: EntryMainProps, nextProps: EntryMainProps) {
 
 const EntryMain: React.FC<EntryMainProps> = ({ transformedData }) => (
   <Fragment>
-    <Card
-      title={
-        <UniProtKBTitle
-          primaryAccession={transformedData.primaryAccession}
-          entryType={transformedData.entryType}
-          uniProtkbId={transformedData.uniProtkbId}
-        />
-      }
-    >
-      <ProteinOverview transformedData={transformedData} />
-    </Card>
-    {UniProtKBEntryConfig.map(({ sectionContent }) =>
-      sectionContent(transformedData)
-    )}
+    <ErrorBoundary>
+      <Card
+        title={
+          <UniProtKBTitle
+            primaryAccession={transformedData.primaryAccession}
+            entryType={transformedData.entryType}
+            uniProtkbId={transformedData.uniProtkbId}
+          />
+        }
+      >
+        <ProteinOverview transformedData={transformedData} />
+      </Card>
+    </ErrorBoundary>
+
+    {UniProtKBEntryConfig.map(({ name, sectionContent }) => (
+      <ErrorBoundary key={name}>
+        {sectionContent(transformedData)}
+      </ErrorBoundary>
+    ))}
   </Fragment>
 );
 

@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import ColumnConfiguration from '../../config/ColumnConfiguration';
+
 import { SortDirection } from '../../types/resultsTypes';
+import { SortableColumn, Column } from '../../types/columnTypes';
+
 import UniProtKBCard from './UniProtKBCard';
+
+import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
+
+import ColumnConfiguration from '../../config/ColumnConfiguration';
+import { getAPIQueryUrl } from '../../config/apiUrls';
+
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../../adapters/uniProtkbConverter';
+
 import { ViewMode } from '../../state/resultsInitialState';
-import { SortableColumn, Column } from '../../types/columnTypes';
+import {
+  getParamsFromURL,
+  getLocationObjForParams,
+} from '../../utils/results-utils';
+import getNextUrlFromResponse from '../../utils/queryUtils';
+
+import useDataApi from '../../../shared/hooks/useDataApi';
+
 import './styles/warning.scss';
 import './styles/results-view.scss';
-import { getParamsFromURL, getLocationObjForParams } from '../../utils/results-utils';
-import { getAPIQueryUrl } from '../../config/apiUrls';
-import useDataApi from '../../../shared/hooks/useDataApi';
-import getNextUrlFromResponse from '../../utils/queryUtils';
-import BaseLayout from '../../../shared/components/layouts/BaseLayout';
-import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
 
 type ResultsTableProps = {
   selectedEntries: string[];
@@ -74,11 +84,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   }
 
   if (allResults.length === 0) {
-    return (
-      <BaseLayout>
-        <NoResultsPage />
-      </BaseLayout>
-    );
+    return <NoResultsPage />;
   }
 
   const { total, nextUrl } = metaData;
