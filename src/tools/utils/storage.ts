@@ -24,8 +24,7 @@ export default class JobStore {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async set(key: IDBValidKey, value: any) {
-    // TODO: uncomment when we have finished coding
-    // return set(key, value, this.#store);
+    return set(key, value, this.#store);
   }
 
   async del(key: IDBValidKey) {

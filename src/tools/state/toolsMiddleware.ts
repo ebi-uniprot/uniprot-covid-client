@@ -30,6 +30,9 @@ import { ToolsState } from './toolsInitialState';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
+const validServerID = /^ncbiblast-R\d{8}-\d{6}-\d{4}-\d{8}-\w{3}$/;
+const isValidServerID = (id: string) => validServerID.test(id);
+
 const toolsMiddleware: Middleware = (store) => {
   const { dispatch, getState } = store;
 
@@ -111,8 +114,11 @@ const toolsMiddleware: Middleware = (store) => {
           Accept: 'text/plain',
         },
       });
-      const jobId = response.data;
-      // TODO: we should probably check that jobId is valid
+      const remoteID = response.data;
+
+      if (!isValidServerID(remoteID)) {
+        throw new Error(`The server didn't return a valid ID`);
+      }
 
       // get a new reference to the job
       const currentStateOfJob = getJobWithID(job.internalID);
@@ -124,7 +130,7 @@ const toolsMiddleware: Middleware = (store) => {
         updateJob({
           ...currentStateOfJob,
           status: Status.RUNNING,
-          remoteID: jobId,
+          remoteID,
           timeSubmitted: now,
           timeLastUpdate: now,
         })
