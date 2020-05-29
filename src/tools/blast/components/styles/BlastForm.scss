@@ -13,29 +13,11 @@
       width: 20rem;
     }
     &--selected-taxon {
-      margin-top: 1.25rem;
+      margin-top: 1.5rem;
     }
   }
 
   &__submit {
     float: inline-end;
-  }
-}
-
-.taxon-chip {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0.25rem;
-  padding: 0.5em 0.7em;
-  background-color: #00639a;
-  color: white;
-
-  svg {
-    width: 0.9rem;
-    height: 0.9rem;
-    margin-top: -0.2rem;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-    fill: white;
   }
 }

@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
-import { CloseIcon } from 'franklin-sites';
+import { CloseIcon, Chip } from 'franklin-sites';
 
 import { FormParameters } from '../types/blastFormParameters';
 
@@ -17,16 +17,6 @@ import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/Aut
 import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
 
 import './styles/BlastForm.scss';
-
-const TaxonChip: FC<{ children: string | number; onRemove: () => void }> = ({
-  children,
-  onRemove,
-}) => (
-  <span className="taxon-chip">
-    {children}
-    <CloseIcon onClick={onRemove} />
-  </span>
-);
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -160,12 +150,13 @@ const BlastForm = () => {
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">
               {(formValues[BlastFields.taxons].selected || []).map(
                 ({ label, id }: SelectedTaxon) => (
-                  <TaxonChip
+                  <Chip
                     key={label}
                     onRemove={() => removeTaxonFormValue(id)}
+                    className="secondary"
                   >
                     {label}
-                  </TaxonChip>
+                  </Chip>
                 )
               )}
             </section>
