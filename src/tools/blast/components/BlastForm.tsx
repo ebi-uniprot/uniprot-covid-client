@@ -169,12 +169,22 @@ const BlastForm = () => {
                 )
               )}
             </section>
-            <input
-              className="button primary"
-              type="submit"
-              onClick={submitBlastJob}
-              value="Submit"
-            />
+          </section>
+          <section>
+            <section className="blast-form-section__item">
+              <label>
+                Name your BLAST job
+                <input name="title" type="text" placeholder="my job title" />
+              </label>
+            </section>
+            <section className="blast-form-section__item blast-form-section__submit">
+              <input
+                className="button primary"
+                type="submit"
+                onClick={submitBlastJob}
+                value="Submit"
+              />
+            </section>
           </section>
           <button
             type="button"
