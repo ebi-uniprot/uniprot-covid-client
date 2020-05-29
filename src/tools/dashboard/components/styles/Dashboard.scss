@@ -77,5 +77,15 @@
       font-size: 75%;
       transition: opacity ease-in-out 100ms;
     }
+
+    &__actions {
+      display: flex;
+
+      & button {
+        cursor: pointer;
+        margin: 0.5ch;
+        width: 2ch;
+      }
+    }
   }
 }

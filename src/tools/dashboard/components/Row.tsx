@@ -1,7 +1,7 @@
-import React, { memo, FocusEvent, SyntheticEvent } from 'react';
+import React, { memo, FocusEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Card } from 'franklin-sites';
+import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
 
 import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
@@ -111,12 +111,16 @@ const Actions = ({ id }: ActionsProps) => {
   const dispatch = useDispatch();
 
   return (
-    <span>
-      <button type="button" disabled>
-        rerun
+    <span className="dashboard__body__actions">
+      <button type="button" disabled title="resubmit this job">
+        <RefreshIcon />
       </button>
-      <button type="button" onClick={() => dispatch(deleteJob(id))}>
-        delete
+      <button
+        type="button"
+        onClick={() => dispatch(deleteJob(id))}
+        title="delete this job"
+      >
+        <BinIcon />
       </button>
     </span>
   );
