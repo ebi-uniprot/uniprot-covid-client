@@ -32,7 +32,7 @@ import { ToolsState } from './toolsInitialState';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
-const validServerID = /^ncbiblast-R\d{8}-\d{6}-\d{4}-\d{8}-\w{3}$/;
+const validServerID = /^ncbiblast-R\d{8}(-\w+){4}$/;
 const isValidServerID = (id: string) => validServerID.test(id);
 
 const toolsMiddleware: Middleware = (store) => {
