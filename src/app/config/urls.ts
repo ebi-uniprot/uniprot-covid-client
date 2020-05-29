@@ -21,7 +21,7 @@ export const LocationToPath = {
   [Location.UniProtKBDownload]: '/download',
   [Location.Blast]: '/blast',
   [Location.UniProtKBCustomiseTable]: '/customise-table',
-  [Location.UniProtKBQueryBuilder]: '/advancedSearch',
+  [Location.UniProtKBQueryBuilder]: '/advanced-search',
   [Location.PageNotFound]: '/page-not-found',
   [Location.ServiceUnavailable]: '/service-unavailable',
   [Location.JobError]: '/job-error',
