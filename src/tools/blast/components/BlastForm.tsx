@@ -169,39 +169,6 @@ const BlastForm = () => {
                 )
               )}
             </section>
-          </section>
-          {!displayAdvanced ? (
-            <button
-              type="button"
-              className="button tertiary"
-              onClick={() => setDisplayAdvanced(true)}
-            >
-              Advanced
-            </button>
-          ) : (
-            <section className="blast-form-section">
-              {[
-                BlastFields.stype,
-                BlastFields.program,
-                BlastFields.threshold,
-                BlastFields.matrix,
-                BlastFields.filter,
-                BlastFields.gapped,
-                BlastFields.hits,
-              ].map((blastField) => (
-                <FormSelect
-                  key={blastField}
-                  formValues={formValues}
-                  type={blastField}
-                  updateFormValues={updateFormValue}
-                />
-              ))}
-            </section>
-          )}
-          <section>
-            <button className="button secondary" type="button">
-              Clear
-            </button>
             <input
               className="button primary"
               type="submit"
@@ -209,6 +176,40 @@ const BlastForm = () => {
               value="Submit"
             />
           </section>
+          <button
+            type="button"
+            className="button tertiary"
+            onClick={() => setDisplayAdvanced((display) => !display)}
+          >
+            Advanced {displayAdvanced ? '▾' : '▸'}
+          </button>
+          {displayAdvanced && (
+            <>
+              <section className="blast-form-section">
+                {[
+                  BlastFields.stype,
+                  BlastFields.program,
+                  BlastFields.threshold,
+                  BlastFields.matrix,
+                  BlastFields.filter,
+                  BlastFields.gapped,
+                  BlastFields.hits,
+                ].map((blastField) => (
+                  <FormSelect
+                    key={blastField}
+                    formValues={formValues}
+                    type={blastField}
+                    updateFormValues={updateFormValue}
+                  />
+                ))}
+              </section>
+              <section>
+                <button className="button secondary" type="reset">
+                  Reset whole form to default values
+                </button>
+              </section>
+            </>
+          )}
         </fieldset>
       </form>
     </Fragment>
