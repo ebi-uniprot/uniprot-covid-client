@@ -11,7 +11,7 @@ import Logo from './svgs/uniprot-logo.svg';
 const tools = [
   {
     label: 'BLAST',
-    path: '/blast',
+    path: LocationToPath[Location.Blast],
   },
   {
     label: 'Align',
@@ -26,6 +26,11 @@ const tools = [
     path: '/',
   },
 ];
+
+const dashboard = {
+  label: 'Dashboard',
+  path: LocationToPath[Location.Dashboard],
+};
 
 const links = [
   {
@@ -79,7 +84,7 @@ const UniProtHeader = () => {
     () =>
       isHomePage
         ? [...tools, ...links]
-        : [{ label: 'Tools', links: tools }, ...links],
+        : [{ label: 'Tools', links: [...tools, dashboard] }, ...links],
     [isHomePage]
   );
 

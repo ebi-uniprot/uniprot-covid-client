@@ -1,5 +1,5 @@
-import React, { memo, FocusEvent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { memo, FocusEvent, SyntheticEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card } from 'franklin-sites';
 
@@ -7,6 +7,8 @@ import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
 
 import { updateJobTitle, deleteJob } from '../../state/toolsActions';
+
+import { LocationToPath, Location } from '../../../app/config/urls';
 
 import './styles/Dashboard.scss';
 
@@ -18,13 +20,17 @@ interface NameProps {
 const Name = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
 
-  const handleBlur = (event: FocusEvent) => {
-    const text = (event.target as HTMLSpanElement).innerText.trim();
+  const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
+    const text = event.target.innerText.trim();
     if (text !== children) dispatch(updateJobTitle(id, text));
   };
 
   return (
-    <span contentEditable onBlur={handleBlur}>
+    <span
+      contentEditable
+      onBlur={handleBlur}
+      onKeyDown={(event) => event.stopPropagation()}
+    >
       {children}
     </span>
   );
@@ -61,12 +67,9 @@ interface NiceStatusPropsFinished {
   hits: FinishedJob['data']['hits'];
   queriedHits: FinishedJob['parameters']['hits'];
 }
+type NiceStatusProps = NiceStatusPropsFinished & NiceStatusPropsNotFinished;
 
-const NiceStatus = ({
-  children,
-  hits,
-  queriedHits,
-}: NiceStatusPropsNotFinished & NiceStatusPropsFinished) => {
+const NiceStatus = ({ children, hits, queriedHits }: NiceStatusProps) => {
   switch (children) {
     case Status.CREATED:
     case Status.RUNNING:
@@ -123,32 +126,47 @@ interface RowProps {
   job: Job;
 }
 
-const Row = memo(({ job }: RowProps) => (
-  <Card>
-    <span className="dashboard__body__name">
-      <Name id={job.internalID}>{job.title}</Name>
-    </span>
-    <span className="dashboard__body__type">{job.type}</span>
-    <span className="dashboard__body__time">
-      {'timeSubmitted' in job && job.timeSubmitted && (
-        <Time>{job.timeSubmitted}</Time>
-      )}
-    </span>
-    <span className="dashboard__body__status">
-      <NiceStatus
-        hits={'data' in job ? job.data.hits : undefined}
-        queriedHits={job.parameters.hits}
-      >
-        {job.status}
-      </NiceStatus>
-    </span>
-    <span className="dashboard__body__actions">
-      <Actions id={job.internalID} />
-    </span>
-    <span className="dashboard__body__id">
-      {'remoteID' in job && <Link>{job.remoteID}</Link>}
-    </span>
-  </Card>
-));
+const Row = memo(({ job }: RowProps) => {
+  let jobLink: string | undefined;
+  if ('remoteID' in job) {
+    jobLink = `${LocationToPath[Location.Blast]}/${job.remoteID}`;
+  }
+  const history = useHistory();
+
+  const handleClick = () => {
+    if (!jobLink) return;
+    history.push(jobLink);
+  };
+
+  return (
+    <Card onClick={handleClick}>
+      <span className="dashboard__body__name">
+        <Name id={job.internalID}>{job.title}</Name>
+      </span>
+      <span className="dashboard__body__type">{job.type}</span>
+      <span className="dashboard__body__time">
+        {'timeSubmitted' in job && job.timeSubmitted && (
+          <Time>{job.timeSubmitted}</Time>
+        )}
+      </span>
+      <span className="dashboard__body__status">
+        <NiceStatus
+          hits={'data' in job ? job.data.hits : undefined}
+          queriedHits={job.parameters.hits}
+        >
+          {job.status}
+        </NiceStatus>
+      </span>
+      <span className="dashboard__body__actions">
+        <Actions id={job.internalID} />
+      </span>
+      <span className="dashboard__body__id">
+        {'remoteID' in job && jobLink && (
+          <Link to={jobLink}>{job.remoteID}</Link>
+        )}
+      </span>
+    </Card>
+  );
+});
 
 export default Row;

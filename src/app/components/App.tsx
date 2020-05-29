@@ -46,7 +46,12 @@ const DownloadPage = lazy(() =>
     /* webpackChunkName: "download" */ '../../uniprotkb/components/download/DownloadContainer'
   )
 );
-const BlastPage = lazy(() =>
+const BlastResult = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-result" */ '../../tools/blast/components/BlastResult'
+  )
+);
+const BlastForm = lazy(() =>
   import(/* webpackChunkName: "blast" */ '../../tools/blast/components/Blast')
 );
 const Dashboard = lazy(() =>
@@ -98,8 +103,12 @@ const App = () => (
               component={DownloadPage}
             />
             <Route
+              path={LocationToPath[Location.BlastResult]}
+              component={BlastResult}
+            />
+            <Route
               path={LocationToPath[Location.Blast]}
-              component={BlastPage}
+              component={BlastForm}
             />
             <Route
               path={LocationToPath[Location.Dashboard]}
