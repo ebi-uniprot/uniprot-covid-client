@@ -5,15 +5,14 @@ export type SelectedTaxon = { label: string; id: string };
 
 export type BlastFormValue = {
   fieldName: string;
-  selected?: string | SelectedTaxon[] | undefined;
+  selected?: string | SelectedTaxon[] | boolean | number;
   type?: BlastFieldTypes;
-  values?: { label?: string; value?: string | number }[];
+  values?: { label?: string; value?: string | boolean | number }[];
 };
 
 export enum BlastFields {
   program = 'Program',
   stype = 'Sequence type',
-  email = 'Email',
   sequence = 'Sequence',
   taxons = 'Taxons',
   targetDb = 'Target database',

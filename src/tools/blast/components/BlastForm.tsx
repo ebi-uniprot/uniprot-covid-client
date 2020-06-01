@@ -1,7 +1,6 @@
 import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { v1 } from 'uuid';
-import { CloseIcon, Chip } from 'franklin-sites';
+import { Chip } from 'franklin-sites';
 import queryString from 'query-string';
 
 import { FormParameters } from '../types/blastFormParameters';
@@ -72,7 +71,7 @@ const BlastForm = () => {
     if (!id) return;
 
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { selected = [] } = taxonFormValues;
+    const { selected = [] } = taxonFormValues as { selected: SelectedTaxon[] };
 
     // If already there, don't add again
     if (selected.some((taxon: SelectedTaxon) => taxon.id === id)) return;
@@ -91,13 +90,12 @@ const BlastForm = () => {
 
   const removeTaxonFormValue = (id: string | number) => {
     const taxonFormValues = formValues[BlastFields.taxons];
+    const { selected = [] } = taxonFormValues as { selected: SelectedTaxon[] };
     setFormValues({
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        selected: taxonFormValues.selected.filter(
-          (taxon: SelectedTaxon) => taxon.id !== id
-        ),
+        selected: selected.filter((taxon: SelectedTaxon) => taxon.id !== id),
       },
     });
   };
@@ -123,7 +121,7 @@ const BlastForm = () => {
 
   const getSequenceByAccessionOrID = (input: string) => {
     const query = queryString.stringify({
-      query: (uniProtKBAccessionRegEx.test(input.replace(/\s/g, '')))
+      query: uniProtKBAccessionRegEx.test(input.replace(/\s/g, ''))
         ? `accession:${input}`
         : `id:${input}`,
       fields: 'sequence, id',
@@ -140,9 +138,10 @@ const BlastForm = () => {
       .catch((e) => {
         console.error("can't get the sequence:", e);
       });
-  }
-console.log("sequence data:", sequenceData);
-  const sequenceMetaData = sequenceData &&
+  };
+  console.log('sequence data:', sequenceData);
+  const sequenceMetaData =
+    sequenceData &&
     `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
   return (
@@ -151,7 +150,9 @@ console.log("sequence data:", sequenceData);
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
-            <legend>Find a protein to BLAST by UniProtID or keyword (examples).</legend>
+            <legend>
+              Find a protein to BLAST by UniProtID or keyword (examples).
+            </legend>
             <input
               type="text"
               onChange={({ target }) => setSearchByIDValue(target.value)}
@@ -190,7 +191,7 @@ console.log("sequence data:", sequenceData);
                 url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
-                clearOnSelect={true}
+                clearOnSelect
               />
             </section>
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">
