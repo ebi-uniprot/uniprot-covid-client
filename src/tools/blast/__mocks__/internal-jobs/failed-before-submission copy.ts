@@ -13,7 +13,8 @@ const failedAfterSubmission: FailedJob = {
   title: 'my job title',
   type: 'blast',
   parameters: {
-    type: 'protein',
+    stype: 'protein',
+    program: 'blastp',
     sequence: 'MLPGLALLLL',
     database: 'uniprotkb_refprotswissprot',
     taxIDs: '9606',

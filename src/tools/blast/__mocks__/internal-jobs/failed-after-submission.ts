@@ -11,8 +11,9 @@ const failedBeforeSubmission: FailedJob = {
   title: 'my job title',
   type: 'blast',
   parameters: {
-    type: 'protein',
+    stype: 'protein',
     sequence: 'MLPGLALLLL',
+    program: 'blastp',
     database: 'uniprotkb_refprotswissprot',
     taxIDs: '9606',
     threshold: '10',

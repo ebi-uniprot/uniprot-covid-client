@@ -8,14 +8,14 @@ import { Stores } from '../utils/stores';
 import JobStore from '../utils/storage';
 
 import * as toolsActions from './toolsActions';
-import entryInitialState, { ToolsState } from './toolsInitialState';
+import toolsInitialState, { ToolsState } from './toolsInitialState';
 
 export type ToolsAction = ActionType<typeof toolsActions>;
 
 const store = new JobStore(Stores.METADATA);
 
 const toolsReducers = (
-  state: ToolsState = entryInitialState,
+  state: ToolsState = toolsInitialState,
   action: ToolsAction
 ) => {
   switch (action.type) {
