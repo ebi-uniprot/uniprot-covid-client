@@ -21,7 +21,7 @@ describe('ColumnConfiguration component', () => {
       const { asFragment } = renderWithRedux(
         <MemoryRouter>{column.render(transformedData)}</MemoryRouter>
       );
-      expect(asFragment()).toMatchSnapshot();
+      expect(asFragment()).toMatchSnapshot(column.label);
     });
   });
 });
