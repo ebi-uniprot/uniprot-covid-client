@@ -2,6 +2,7 @@ import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
 import { CloseIcon } from 'franklin-sites';
+import queryString from 'query-string';
 
 import { FormParameters } from '../types/blastFormParameters';
 
@@ -15,6 +16,8 @@ import initialFormValues, {
 
 import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
 import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
+import fetchData from '../../../shared/utils/fetchData';
+import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
 
 import './styles/BlastForm.scss';
 
@@ -65,6 +68,8 @@ const BlastForm = () => {
   const [formValues, setFormValues] = useState<BlastFormValues>(
     initialFormValues
   );
+  const [searchByIDValue, setSearchByIDValue] = useState('');
+  const [sequenceData, setSequenceData] = useState(null);
 
   const updateFormValue = (type: BlastFields, value: string) => {
     const newFormValues = { ...formValues };
@@ -126,13 +131,54 @@ const BlastForm = () => {
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
 
+  const getSequenceByAccessionOrID = (input: string) => {
+    const query = queryString.stringify({
+      query: (uniProtKBAccessionRegEx.test(input.replace(/\s/g, '')))
+        ? `accession:${input}`
+        : `id:${input}`,
+      fields: 'sequence, id',
+    });
+
+    const fetchUrl = fetchData(`${uniProtKBApiUrls.search}?${query}`)
+      .then(({ data }) => {
+        const { results } = data;
+        if (results && results.length > 0) {
+          setSequenceData(results[0]);
+          updateFormValue(BlastFields.sequence, results[0].sequence.value);
+        }
+      })
+      .catch((e) => {
+        console.error("can't get the sequence:", e);
+      });
+  }
+console.log("sequence data:", sequenceData);
+  const sequenceMetaData = sequenceData &&
+    `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
+
   return (
     <Fragment>
       <h3>Submit new job</h3>
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
-            <legend>Sequence</legend>
+            <legend>Find a protein to BLAST by UniProtID or keyword (examples).</legend>
+            <input
+              type="text"
+              onChange={({ target }) => setSearchByIDValue(target.value)}
+              value={searchByIDValue}
+            />
+            <button
+              className="button primary"
+              type="button"
+              onClick={() => getSequenceByAccessionOrID(searchByIDValue)}
+            >
+              Get Sequence
+            </button>
+          </section>
+        </fieldset>
+        <fieldset>
+          <section>
+            <legend>Sequence {sequenceData && sequenceMetaData}</legend>
             <textarea
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={(e) =>
