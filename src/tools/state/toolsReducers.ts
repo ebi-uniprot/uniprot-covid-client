@@ -21,7 +21,12 @@ const toolsReducers = (
   switch (action.type) {
     // rehydrate jobs
     case toolsActions.REHYDRATE_JOBS: {
-      return { ...state, ...action.payload.jobs };
+      return {
+        ...state,
+        ...Object.fromEntries(
+          action.payload.jobs.map((job) => [job.internalID, job])
+        ),
+      };
     }
 
     // add job
