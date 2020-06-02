@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, PageIntro } from 'franklin-sites';
 
 import { Job } from '../../blast/types/blastJob';
+import { ToolsState } from '../../state/toolsInitialState';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 import Row from './Row';
@@ -19,7 +20,7 @@ import './styles/Dashboard.scss';
 const sortNewestFirst = (a: Job, b: Job) => b.timeCreated - a.timeCreated;
 
 const Dashboard = () => {
-  const jobs = (useSelector((state) =>
+  const jobs = (useSelector((state: ToolsState) =>
     Object.values(state.tools)
   ) as Job[]).sort(sortNewestFirst);
   // const tools: Array<Job> = [
