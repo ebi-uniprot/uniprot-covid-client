@@ -9,10 +9,3 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-
-// remove the native triangle on select elements, as we are adding our own
-select {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}

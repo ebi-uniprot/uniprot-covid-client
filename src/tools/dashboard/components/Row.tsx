@@ -176,29 +176,30 @@ const Row = memo(({ job }: RowProps) => {
     ) {
       return;
     }
-    const card = ref.current?.parentElement?.parentElement;
-    if (!(card && 'animate' in card)) {
+    if (!(ref.current && 'animate' in ref.current)) {
       return;
     }
-    card.animate(keyframesForNew, animationOptionsForNew);
+    ref.current.animate(keyframesForNew, animationOptionsForNew);
   }, [history, job.parameters]);
 
   // if the status of the current job changes, make it "flash"
   useLayoutEffect(() => {
-    const card = ref.current?.parentElement?.parentElement;
-    if (!(card && 'animate' in card)) {
+    if (!(ref.current && 'animate' in ref.current)) {
       return;
     }
     if (firstTime.current) {
       firstTime.current = false;
       return;
     }
-    card.animate(keyframesForStatusUpdate, animationOptionsForStatusUpdate);
+    ref.current.animate(
+      keyframesForStatusUpdate,
+      animationOptionsForStatusUpdate
+    );
   }, [job.status]);
 
   return (
-    <Card onClick={handleClick}>
-      <span className="dashboard__body__name" ref={ref}>
+    <Card onClick={handleClick} ref={ref}>
+      <span className="dashboard__body__name">
         <Name id={job.internalID}>{job.title}</Name>
       </span>
       <span className="dashboard__body__type">{job.type}</span>
