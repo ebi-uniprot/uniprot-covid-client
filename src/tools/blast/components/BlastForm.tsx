@@ -23,6 +23,18 @@ import fetchData from '../../../shared/utils/fetchData';
 import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
 
 import './styles/BlastForm.scss';
+import {
+  SType,
+  Program,
+  Sequence,
+  Matrix,
+  GapAlign,
+  Database,
+  Exp,
+  Filter,
+  Scores,
+  TaxIDs,
+} from '../types/blastServerParameters';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -108,23 +120,44 @@ const BlastForm = () => {
     });
   };
 
+  const getTaxIDs = (taxons: SelectedTaxon[] = []) =>
+    taxons.map(({ id }) => id).join(',');
+
   // the only thing to do here would be to check the values and prevent
   // and prevent submission if there is any issue
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
     event.preventDefault();
 
-    const parameters = {};
+    const sequence = formValues[BlastFields.sequence].selected as Sequence;
+    // TODO: validate sequence
+
+    const parameters: FormParameters = {
+      stype: formValues[BlastFields.stype].selected as SType,
+      program: formValues[BlastFields.program].selected as Program,
+      sequence,
+      database: formValues[BlastFields.targetDb].selected as Database,
+      taxIDs: getTaxIDs(
+        formValues[BlastFields.taxons].selected as SelectedTaxon[]
+      ) as TaxIDs,
+      threshold: formValues[BlastFields.threshold].selected as Exp,
+      matrix: formValues[BlastFields.matrix].selected as Matrix,
+      filter: formValues[BlastFields.filter].selected as Filter,
+      gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
+      hits: parseInt(
+        formValues[BlastFields.hits].selected as string,
+        10
+      ) as Scores,
+    };
+
+    const jobName = formValues[BlastFields.name].selected as string;
 
     // TODO: need to cast the values to the right types
     // e.g. hits 50 gets stored as a string somehow...
-    for (const { fieldName, selected } of Object.values(formValues)) {
-      if (selected) parameters[fieldName] = selected;
-    }
 
     // we emit an action containing only the parameters and the type of job
     // the reducer will be in charge of generating a proper job object for
     // internal state
-    dispatch(actions.createJob(parameters as FormParameters, 'blast'));
+    dispatch(actions.createJob(parameters, 'blast', jobName));
     // navigate to the dashboard
     history.push(LocationToPath[Location.Dashboard], { parameters });
   };
@@ -205,24 +238,32 @@ const BlastForm = () => {
               />
             </section>
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">
-              {(formValues[BlastFields.taxons].selected || []).map(
-                ({ label, id }: SelectedTaxon) => (
-                  <Chip
-                    key={label}
-                    onRemove={() => removeTaxonFormValue(id)}
-                    className="secondary"
-                  >
-                    {label}
-                  </Chip>
-                )
-              )}
+              {(
+                (formValues[BlastFields.taxons].selected as SelectedTaxon[]) ||
+                []
+              ).map(({ label, id }: SelectedTaxon) => (
+                <Chip
+                  key={label}
+                  onRemove={() => removeTaxonFormValue(id)}
+                  className="secondary"
+                >
+                  {label}
+                </Chip>
+              ))}
             </section>
           </section>
           <section>
             <section className="blast-form-section__item">
               <label>
                 Name your BLAST job
-                <input name="title" type="text" placeholder="my job title" />
+                <input
+                  name="title"
+                  type="text"
+                  placeholder="my job title"
+                  onChange={(e) =>
+                    updateFormValue(BlastFields.name, e.target.value)
+                  }
+                />
               </label>
             </section>
             <section className="blast-form-section__item blast-form-section__submit">

@@ -21,6 +21,7 @@ export enum BlastFields {
   filter = 'Filter',
   gapped = 'Gapped',
   hits = 'Hits',
+  name = 'Name',
 }
 
 export enum BlastFieldTypes {
@@ -136,5 +137,9 @@ export default {
       { value: 750 },
       { value: 1000 },
     ] as Array<{ value: FormParameters['hits'] }>,
+  },
+  [BlastFields.name]: {
+    fieldName: 'name',
+    type: BlastFieldTypes.textarea,
   },
 };

@@ -13,10 +13,15 @@ export const UPDATE_JOB_TITLE = 'UPDATE_JOB_TITLE';
  * @param {FormParameters} parameters - job parameters to be kept in the application logic
  * @param {"blast"} jobType = job type (needs to be defined properly when adding other things than Blast)
  */
-export const createJob = (parameters: FormParameters, jobType: 'blast') =>
+export const createJob = (
+  parameters: FormParameters,
+  jobType: 'blast',
+  jobName: string
+) =>
   action(CREATE_JOB, {
     parameters,
     jobType,
+    jobName,
   });
 
 export const updateJob = (job: Job) => action(UPDATE_JOB, { job });

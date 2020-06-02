@@ -145,7 +145,7 @@ const toolsMiddleware: Middleware = (store) => {
       dispatch(
         addMessage({
           id: job.internalID,
-          content: `Job "${job.remoteID}" finished, found ${
+          content: `Job "${job.title || job.remoteID}" finished, found ${
             results.hits.length
           } hit${results.hits.length === 1 ? '' : 's'}`,
           format: MessageFormat.POP_UP,

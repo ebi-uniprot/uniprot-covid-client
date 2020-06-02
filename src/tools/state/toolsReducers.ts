@@ -30,7 +30,7 @@ const toolsReducers = (
       const newJob: CreatedJob = {
         status: Status.CREATED,
         internalID: `local-${v1()}`,
-        title: 'some title',
+        title: name,
         type: action.payload.jobType,
         parameters: action.payload.parameters,
         timeCreated: now,

@@ -8,14 +8,16 @@ import {
   Scores,
   Alignments,
   Program,
+  Sequence,
+  TaxIDs,
 } from './blastServerParameters';
 
 export type FormParameters = {
   stype: SType;
   program: Program;
-  sequence: string;
+  sequence: Sequence;
   database: Database;
-  taxIDs: string;
+  taxIDs: TaxIDs;
   threshold: Exp;
   matrix: Matrix;
   filter: Filter;
