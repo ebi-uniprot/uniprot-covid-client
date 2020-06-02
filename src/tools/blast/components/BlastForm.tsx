@@ -257,9 +257,7 @@ const BlastForm = () => {
                 ))}
               </section>
               <section>
-                <button className="button secondary" type="reset">
-                  Reset form
-                </button>
+                <input className="button secondary" type="reset" />
               </section>
             </>
           )}
