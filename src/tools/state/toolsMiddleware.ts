@@ -45,20 +45,17 @@ const toolsMiddleware: Middleware = (store) => {
 
     const jobStore = new JobStore(Stores.METADATA);
 
-    const persistedJobs = [];
+    const persistedJobs: { [internalID: string]: Job } = {};
     for await (const persistedJob of jobStore.getAll()) {
-      persistedJobs.push([
-        (persistedJob as Job).internalID,
-        persistedJob as Job,
-      ]);
+      persistedJobs[persistedJob.internalID] = persistedJob;
     }
 
-    if (!persistedJobs.length) return;
+    if (!Object.keys(persistedJobs).length) return;
 
     // Wait for browser idleness
     await schedule();
 
-    dispatch(rehydrateJobs(Object.fromEntries(persistedJobs)));
+    dispatch(rehydrateJobs(persistedJobs));
   })();
 
   // flag to avoid multiple pollJobs loop being scheduled

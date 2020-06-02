@@ -23,9 +23,7 @@ const toolsReducers = (
     case toolsActions.REHYDRATE_JOBS: {
       return {
         ...state,
-        ...Object.fromEntries(
-          action.payload.jobs.map((job) => [job.internalID, job])
-        ),
+        ...action.payload.jobs,
       };
     }
 
