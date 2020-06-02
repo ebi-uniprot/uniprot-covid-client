@@ -12,6 +12,10 @@ import { LocationToPath, Location } from '../../../app/config/urls';
 
 import './styles/Dashboard.scss';
 
+const stopPropagation = (event: MouseEvent | KeyboardEvent) => {
+  event.stopPropagation();
+};
+
 interface NameProps {
   id: Job['internalID'];
   children: Job['title'];
@@ -28,8 +32,9 @@ const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   return (
     <span
       contentEditable
+      onClick={stopPropagation}
       onBlur={handleBlur}
-      onKeyDown={(event) => event.stopPropagation()}
+      onKeyDown={stopPropagation}
     >
       {children}
     </span>
@@ -100,20 +105,32 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
 
 interface ActionsProps {
   id: Job['internalID'];
+  parameters: Job['parameters'];
 }
 
-const Actions: FC<ActionsProps> = ({ id }) => {
+const Actions: FC<ActionsProps> = ({ id, parameters }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <span className="dashboard__body__actions">
-      <button type="button" disabled title="resubmit this job">
+      <button
+        type="button"
+        title="resubmit this job"
+        onClick={(event) => {
+          event.stopPropagation();
+          history.push(LocationToPath[Location.Blast], { parameters });
+        }}
+      >
         <RefreshIcon />
       </button>
       <button
         type="button"
-        onClick={() => dispatch(deleteJob(id))}
         title="delete this job"
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(deleteJob(id));
+        }}
       >
         <BinIcon />
       </button>
@@ -157,7 +174,9 @@ const Row: FC<RowProps> = memo(({ job }) => {
   }
 
   const handleClick = () => {
-    if (!jobLink) return;
+    if (!jobLink) {
+      return;
+    }
     history.push(jobLink);
   };
 
@@ -167,7 +186,7 @@ const Row: FC<RowProps> = memo(({ job }) => {
   useLayoutEffect(() => {
     if (
       job.parameters !==
-      (history.location.state as CustomLocationState)?.parameters
+      (history.location?.state as CustomLocationState)?.parameters
     ) {
       return;
     }
@@ -212,7 +231,7 @@ const Row: FC<RowProps> = memo(({ job }) => {
         </NiceStatus>
       </span>
       <span className="dashboard__body__actions">
-        <Actions id={job.internalID} />
+        <Actions id={job.internalID} parameters={job.parameters} />
       </span>
       <span className="dashboard__body__id">
         {'remoteID' in job && jobLink && (

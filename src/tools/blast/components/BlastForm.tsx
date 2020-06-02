@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 
 import { FormParameters } from '../types/blastFormParameters';
+import { Job } from '../types/blastJob';
 
 import * as actions from '../../state/toolsActions';
 
@@ -69,14 +70,37 @@ const FormSelect: FC<{
   );
 };
 
+interface CustomLocationState {
+  parameters?: Job['parameters'];
+}
+
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
-  const [formValues, setFormValues] = useState<BlastFormValues>(
-    initialFormValues
-  );
+  const [formValues, setFormValues] = useState<BlastFormValues>(() => {
+    // NOTE: we should use a similar logic to pre-fill fields based on querystring
+    const parametersFromHistoryState: FormParameters | undefined = (history
+      .location?.state as CustomLocationState)?.parameters;
+    if (parametersFromHistoryState) {
+      // if we get here, we got parameters passed with the location update to
+      // use as pre-filled fields
+      const output = {};
+      for (const [key, field] of Object.entries(
+        initialFormValues as BlastFormValues
+      )) {
+        output[key] = {
+          ...field,
+          selected: parametersFromHistoryState[field.fieldName],
+        };
+      }
+      return output as BlastFormValues;
+    }
+    // otherwise, pass the default values
+    return initialFormValues;
+  });
+
   const [searchByIDValue, setSearchByIDValue] = useState('');
   const [sequenceData, setSequenceData] = useState(null);
 
