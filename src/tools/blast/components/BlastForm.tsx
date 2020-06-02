@@ -105,9 +105,10 @@ const BlastForm = () => {
   const [sequenceData, setSequenceData] = useState(null);
 
   const updateFormValue = (type: BlastFields, value: string) => {
-    const newFormValues = { ...formValues };
-    newFormValues[type].selected = value;
-    setFormValues(newFormValues);
+    setFormValues({
+      ...formValues,
+      [type]: { ...formValues[type], selected: value },
+    });
   };
 
   const updateTaxonFormValue = (path: string, id: string) => {
