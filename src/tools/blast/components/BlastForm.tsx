@@ -2,6 +2,7 @@ import React, { FC, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Chip, PageIntro } from 'franklin-sites';
 import queryString from 'query-string';
+import { useHistory } from 'react-router-dom';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 
@@ -9,6 +10,7 @@ import { FormParameters } from '../types/blastFormParameters';
 
 import * as actions from '../../state/toolsActions';
 
+import { LocationToPath, Location } from '../../../app/config/urls';
 import initialFormValues, {
   BlastFormValues,
   BlastFields,
@@ -57,6 +59,7 @@ const FormSelect: FC<{
 
 const BlastForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [formValues, setFormValues] = useState<BlastFormValues>(
@@ -122,6 +125,8 @@ const BlastForm = () => {
     // the reducer will be in charge of generating a proper job object for
     // internal state
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
+    // navigate to the dashboard
+    history.push(LocationToPath[Location.Dashboard], { parameters });
   };
 
   const getSequenceByAccessionOrID = (input: string) => {

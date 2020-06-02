@@ -1,4 +1,4 @@
-import React, { memo, FocusEvent } from 'react';
+import React, { memo, useLayoutEffect, useRef, FocusEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
@@ -126,25 +126,79 @@ const Actions = ({ id }: ActionsProps) => {
   );
 };
 
+const keyframesForNew = {
+  opacity: [0, 1],
+  transform: ['scale(0.8)', 'scale(1.05)', 'scale(1)'],
+};
+const animationOptionsForNew: KeyframeAnimationOptions = {
+  duration: 500,
+  easing: 'ease-in-out',
+  fill: 'both',
+};
+const keyframesForStatusUpdate = {
+  opacity: [1, 0.5, 1, 0.5, 1],
+};
+const animationOptionsForStatusUpdate: KeyframeAnimationOptions = {
+  duration: 1000,
+  fill: 'both',
+};
+
 interface RowProps {
   job: Job;
 }
 
+interface CustomLocationState {
+  parameters?: Job['parameters'];
+}
+
 const Row = memo(({ job }: RowProps) => {
+  const history = useHistory();
+  const ref = useRef<HTMLElement>(null);
+  const firstTime = useRef<boolean>(true);
+
   let jobLink: string | undefined;
   if ('remoteID' in job) {
     jobLink = `${LocationToPath[Location.Blast]}/${job.remoteID}`;
   }
-  const history = useHistory();
 
   const handleClick = () => {
     if (!jobLink) return;
     history.push(jobLink);
   };
 
+  // if the state of the current location contains the parameters from this job,
+  // it means we just arrived from a submission form page and this is the job
+  // that was just added, animate it to have it visually represented as "new"
+  useLayoutEffect(() => {
+    if (
+      job.parameters !==
+      (history.location.state as CustomLocationState)?.parameters
+    ) {
+      return;
+    }
+    const card = ref.current?.parentElement?.parentElement;
+    if (!(card && 'animate' in card)) {
+      return;
+    }
+    card.animate(keyframesForNew, animationOptionsForNew);
+  }, [history, job.parameters]);
+
+  // if the status of the current job changes, make it "flash"
+  useLayoutEffect(() => {
+    const card = ref.current?.parentElement?.parentElement;
+    if (!(card && 'animate' in card)) {
+      return;
+    }
+    if (firstTime.current) {
+      firstTime.current = false;
+      return;
+    }
+    card.animate(keyframesForStatusUpdate, animationOptionsForStatusUpdate);
+  }, [job.status]);
+
   return (
     <Card onClick={handleClick}>
-      <span className="dashboard__body__name">
+      <span className="dashboard__body__name" ref={ref}>
         <Name id={job.internalID}>{job.title}</Name>
       </span>
       <span className="dashboard__body__type">{job.type}</span>
