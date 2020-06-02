@@ -42,7 +42,10 @@ const FormSelect: FC<{
         >
           {formObject.values &&
             formObject.values.map((formValue) => (
-              <option value={formValue.value} key={formValue.value}>
+              <option
+                value={String(formValue.value)}
+                key={String(formValue.value)}
+              >
                 {formValue.label ? formValue.label : formValue.value}
               </option>
             ))}
