@@ -12,8 +12,12 @@ const finished: FinishedJob = {
   remoteID: 'ncbiblast-R20200522-953240-6266-96643739-p1m',
   title: 'my job title',
   type: 'blast',
+  data: {
+    hits: 200,
+  },
   parameters: {
-    type: 'protein',
+    stype: 'protein',
+    program: 'blastp',
     sequence: 'MLPGLALLLL',
     database: 'uniprotkb_refprotswissprot',
     taxIDs: '9606',
