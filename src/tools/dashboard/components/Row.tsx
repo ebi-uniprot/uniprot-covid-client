@@ -1,4 +1,4 @@
-import React, { memo, useLayoutEffect, useRef, FocusEvent } from 'react';
+import React, { memo, useLayoutEffect, useRef, FocusEvent, FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
@@ -17,7 +17,7 @@ interface NameProps {
   children: Job['title'];
 }
 
-const Name = ({ children, id }: NameProps) => {
+const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
 
   const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
@@ -40,7 +40,7 @@ interface TimeProps {
   children: number;
 }
 
-const Time = ({ children }: TimeProps) => {
+const Time: FC<TimeProps> = ({ children }) => {
   const date = new Date(children);
   const YYYY = date.getFullYear();
   const MM = `${date.getMonth()}`.padStart(2, '0');
@@ -58,18 +58,13 @@ const Time = ({ children }: TimeProps) => {
   );
 };
 
-interface NiceStatusPropsNotFinished {
-  children: Exclude<Status, Status.FINISHED>;
-  queriedHits: Job['parameters']['hits'];
-}
-interface NiceStatusPropsFinished {
-  children: Status.FINISHED;
-  hits: FinishedJob['data']['hits'];
+interface NiceStatusProps {
+  children: Status;
+  hits?: FinishedJob['data']['hits'];
   queriedHits: FinishedJob['parameters']['hits'];
 }
-type NiceStatusProps = NiceStatusPropsFinished & NiceStatusPropsNotFinished;
 
-const NiceStatus = ({ children, hits, queriedHits }: NiceStatusProps) => {
+const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
   switch (children) {
     case Status.CREATED:
     case Status.RUNNING:
@@ -107,7 +102,7 @@ interface ActionsProps {
   id: Job['internalID'];
 }
 
-const Actions = ({ id }: ActionsProps) => {
+const Actions: FC<ActionsProps> = ({ id }) => {
   const dispatch = useDispatch();
 
   return (
@@ -151,7 +146,7 @@ interface CustomLocationState {
   parameters?: Job['parameters'];
 }
 
-const Row = memo(({ job }: RowProps) => {
+const Row: FC<RowProps> = memo(({ job }) => {
   const history = useHistory();
   const ref = useRef<HTMLElement>(null);
   const firstTime = useRef<boolean>(true);
