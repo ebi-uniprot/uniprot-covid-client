@@ -110,6 +110,14 @@ const toolsMiddleware: Middleware = (store) => {
         job.type === 'blast' ? blastUrls.resultUrl(job.remoteID) : ''
       );
 
+      if (!response.data.hits) {
+        throw new Error(
+          `"${JSON.stringify(
+            response.data
+          )}" in not a valid result for this job`
+        );
+      }
+
       const results: BlastResults = response.data;
 
       // get a new reference to the job
