@@ -52,7 +52,9 @@ const BlastResult = lazy(() =>
   )
 );
 const BlastForm = lazy(() =>
-  import(/* webpackChunkName: "blast" */ '../../tools/blast/components/Blast')
+  import(
+    /* webpackChunkName: "blast-form" */ '../../tools/blast/components/BlastForm'
+  )
 );
 const Dashboard = lazy(() =>
   import(

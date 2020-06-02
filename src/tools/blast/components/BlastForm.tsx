@@ -1,7 +1,9 @@
-import React, { FC, Fragment, useState, FormEvent, MouseEvent } from 'react';
+import React, { FC, useState, FormEvent, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Chip } from 'franklin-sites';
+import { Chip, PageIntro } from 'franklin-sites';
 import queryString from 'query-string';
+
+import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 
 import { FormParameters } from '../types/blastFormParameters';
 
@@ -145,8 +147,8 @@ const BlastForm = () => {
     `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
   return (
-    <Fragment>
-      <h3>Submit new job</h3>
+    <SingleColumnLayout>
+      <PageIntro title="BLAST" />
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
@@ -260,7 +262,7 @@ const BlastForm = () => {
           )}
         </fieldset>
       </form>
-    </Fragment>
+    </SingleColumnLayout>
   );
 };
 

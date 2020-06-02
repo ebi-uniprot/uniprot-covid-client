@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Card } from 'franklin-sites';
+import { Card, PageIntro } from 'franklin-sites';
 
 import { Job } from '../../blast/types/blastJob';
 
+import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 import Row from './Row';
 
 import './styles/Dashboard.scss';
@@ -30,7 +31,8 @@ const Dashboard = () => {
   // ];
 
   return (
-    <section>
+    <SingleColumnLayout>
+      <PageIntro title="Tool results" />
       <p>
         Your tool analysis results from the last 7 days are listed below. For
         any tools still running, you can navigate away to other pages and will
@@ -51,7 +53,7 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-    </section>
+    </SingleColumnLayout>
   );
 };
 
