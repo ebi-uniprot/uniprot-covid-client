@@ -25,15 +25,15 @@ const store = {
   }),
 };
 
-describe('toolsMiddleware', () => {
+describe.skip('toolsMiddleware', () => {
   it('should run with new jobs', () => {
     // TODO this currently runs into infite loops,
     // possibly because the dispatch doesn't interupt the loop
-    //
-    // const action = {
-    //   type: REHYDRATE_JOBS,
-    // };
-    // toolsMiddleware(store)(next)(action);
-    // expect(store.dispatch).toHaveBeenCalled();
+
+    const action = {
+      type: REHYDRATE_JOBS,
+    };
+    toolsMiddleware(store)(next)(action);
+    expect(store.dispatch).toHaveBeenCalled();
   });
 });
