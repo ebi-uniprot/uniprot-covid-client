@@ -275,13 +275,12 @@ const BlastForm = () => {
       </PageIntro>
       <form onSubmit={submitBlastJob}>
         <fieldset>
-          <section>
-            <legend>
-              Find a protein to BLAST by UniProtID or keyword (examples).
-            </legend>
+          <section className="blast-form-section__item">
+            <legend>Find a protein to BLAST by UniProt ID (examples).</legend>
             <div className="import-sequence-section">
               <input
                 type="text"
+                placeholder="P05067"
                 onChange={({ target }) => setSearchByIDValue(target.value)}
                 value={searchByIDValue}
               />
@@ -298,9 +297,15 @@ const BlastForm = () => {
             </div>
           </section>
         </fieldset>
+        <section className="text-block">
+          <strong>OR</strong>
+        </section>
         <fieldset>
-          <section>
-            <legend>Sequence {sequenceData && sequenceMetaData}</legend>
+          <section className="text-block">
+            <legend>
+              Enter either a protein or nucleotide sequence.{' '}
+              {sequenceData && sequenceMetaData}
+            </legend>
             <textarea
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={(e) =>
@@ -355,47 +360,49 @@ const BlastForm = () => {
                 />
               </label>
             </section>
-            <section className="blast-form-section__item blast-form-section__submit">
-              <input
-                className="button primary"
-                type="submit"
-                onClick={submitBlastJob}
-                value="Submit"
-              />
-            </section>
           </section>
-          <button
-            type="button"
-            className="button tertiary"
-            onClick={() => setDisplayAdvanced((display) => !display)}
-          >
-            Advanced {displayAdvanced ? '▾' : '▸'}
-          </button>
-          {displayAdvanced && (
-            <>
-              <section className="blast-form-section">
-                {[
-                  BlastFields.stype,
-                  BlastFields.program,
-                  BlastFields.threshold,
-                  BlastFields.matrix,
-                  BlastFields.filter,
-                  BlastFields.gapped,
-                  BlastFields.hits,
-                ].map((blastField) => (
-                  <FormSelect
-                    key={blastField}
-                    formValues={formValues}
-                    type={blastField}
-                    updateFormValues={updateFormValue}
-                  />
-                ))}
-              </section>
-              <section>
-                <input className="button secondary" type="reset" />
-              </section>
-            </>
-          )}
+          <section className="blast-form-section">
+            <input
+              className="button primary blast-form-section__submit"
+              type="submit"
+              onClick={submitBlastJob}
+              value="Run BLAST"
+            />
+          </section>
+          <section>
+            <button
+              type="button"
+              className="button tertiary"
+              onClick={() => setDisplayAdvanced((display) => !display)}
+            >
+              Advanced parameters {displayAdvanced ? '▾' : '▸'}
+            </button>
+            {displayAdvanced && (
+              <>
+                <section className="blast-form-section">
+                  {[
+                    BlastFields.stype,
+                    BlastFields.program,
+                    BlastFields.threshold,
+                    BlastFields.matrix,
+                    BlastFields.filter,
+                    BlastFields.gapped,
+                    BlastFields.hits,
+                  ].map((blastField) => (
+                    <FormSelect
+                      key={blastField}
+                      formValues={formValues}
+                      type={blastField}
+                      updateFormValues={updateFormValue}
+                    />
+                  ))}
+                </section>
+                <section>
+                  <input className="button secondary" type="reset" />
+                </section>
+              </>
+            )}
+          </section>
         </fieldset>
       </form>
     </SingleColumnLayout>

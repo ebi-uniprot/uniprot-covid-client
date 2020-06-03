@@ -1,5 +1,5 @@
 .blast-form-textarea {
-  height: 40vh;
+  height: 30vh;
 }
 
 .blast-form-section {
@@ -18,7 +18,8 @@
   }
 
   &__submit {
-    float: inline-end;
+    margin-left: auto;
+    order: 2;
   }
 }
 
