@@ -279,11 +279,14 @@ const BlastForm = () => {
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section className="blast-form-section__item">
-            <legend>Find a protein to BLAST by UniProt ID (examples).</legend>
+            <legend>
+              Find a protein to BLAST by UniProt ID{' '}
+              <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
+            </legend>
             <div className="import-sequence-section">
               <input
                 type="text"
-                placeholder="P05067"
+                placeholder="P05067, A4_HUMAN, UPI0000000001"
                 onChange={({ target }) => setSearchByIDValue(target.value)}
                 value={searchByIDValue}
               />
@@ -328,7 +331,7 @@ const BlastForm = () => {
               <AutocompleteWrapper
                 url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
-                title="Restrict to taxonomy"
+                title="Restrict by taxonomy"
                 clearOnSelect={true}
               />
             </section>
