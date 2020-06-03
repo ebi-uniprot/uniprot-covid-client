@@ -21,8 +21,11 @@
       grid-gap: 1ch;
       grid-template-rows: 1fr 1fr;
 
-      &:hover .dashboard__body__notify_message {
-        opacity: 1;
+      &:hover {
+        & .dashboard__body__notify_message,
+        & .dashboard__body__actions {
+          opacity: 1;
+        }
       }
     }
 
@@ -71,9 +74,7 @@
     }
 
     &__notify_message {
-      opacity: 0.5;
       font-size: 75%;
-      transition: opacity ease-in-out 100ms;
     }
 
     &__actions {
@@ -84,6 +85,12 @@
         margin: 0.5ch;
         width: 2ch;
       }
+    }
+
+    &__notify_message,
+    &__actions {
+      opacity: 0.5;
+      transition: opacity ease-in-out 100ms;
     }
   }
 }
