@@ -18,6 +18,7 @@ import {
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
+import { sleep } from 'timing-functions';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 import { FormParameters } from '../types/blastFormParameters';
@@ -107,7 +108,12 @@ const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [submitDisabled, setSubmitDisabled] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
+  const [searchByIDValue, setSearchByIDValue] = useState('');
+  const [sequenceData, setSequenceData] = useState(null);
+  const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
+
   const [formValues, setFormValues] = useState<BlastFormValues>(() => {
     // NOTE: we should use a similar logic to pre-fill fields based on querystring
     const parametersFromHistoryState: FormParameters | undefined = (history
@@ -129,10 +135,6 @@ const BlastForm = () => {
     // otherwise, pass the default values
     return initialFormValues;
   });
-
-  const [searchByIDValue, setSearchByIDValue] = useState('');
-  const [sequenceData, setSequenceData] = useState(null);
-  const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const updateFormValue = (type: BlastFields, value: string) => {
     setFormValues({
@@ -184,6 +186,8 @@ const BlastForm = () => {
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
     event.preventDefault();
 
+    setSubmitDisabled(true);
+
     const sequence = formValues[BlastFields.sequence].selected as Sequence;
     // TODO: validate sequence
 
@@ -217,8 +221,11 @@ const BlastForm = () => {
     // the reducer will be in charge of generating a proper job object for
     // internal state
     dispatch(actions.createJob(parameters, 'blast', jobName));
-    // navigate to the dashboard
-    history.push(LocationToPath[Location.Dashboard], { parameters });
+    // navigate to the dashboard, not immediately, to give the impression that
+    // something is happening
+    sleep(500).then(() => {
+      history.push(LocationToPath[Location.Dashboard], { parameters });
+    });
   };
 
   const resetSequenceData = () => {
@@ -404,6 +411,7 @@ const BlastForm = () => {
             <input
               className="button primary blast-form-section__submit"
               type="submit"
+              disabled={submitDisabled}
               onClick={submitBlastJob}
               value="Run BLAST"
             />
