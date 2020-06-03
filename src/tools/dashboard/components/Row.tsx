@@ -1,7 +1,7 @@
 import React, { memo, useLayoutEffect, useRef, FocusEvent, FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
+import { Card, RefreshIcon, BinIcon, SpinnerIcon } from 'franklin-sites';
 
 import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
@@ -30,6 +30,7 @@ const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <span
       contentEditable
       onClick={stopPropagation}
@@ -75,7 +76,7 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
     case Status.RUNNING:
       return (
         <>
-          Running
+          Running <SpinnerIcon width="12" height="12" />
           <br />
           <span className="dashboard__body__notify_message">
             We&apos;ll notify you when it&apos;s done
