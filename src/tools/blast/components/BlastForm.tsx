@@ -1,7 +1,20 @@
-import React, { FC, Fragment, useState, FormEvent, MouseEvent, useEffect } from 'react';
+import React, {
+  FC,
+  Fragment,
+  useState,
+  FormEvent,
+  MouseEvent,
+  useEffect,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
-import { CloseIcon, Chip, RefreshIcon, WarningIcon} from 'franklin-sites';
+import {
+  CloseIcon,
+  Chip,
+  RefreshIcon,
+  WarningIcon,
+  PageIntro,
+} from 'franklin-sites';
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
@@ -36,6 +49,7 @@ import {
   Scores,
   TaxIDs,
 } from '../types/blastServerParameters';
+import BlastFormInfo from './BlastFormInfo';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -192,7 +206,7 @@ const BlastForm = () => {
   const resetSequenceData = () => {
     setSequenceData(null);
     updateFormValue(BlastFields.sequence, '');
-  }
+  };
 
   const updateImportSequenceFeedback = throttle((feedback: string) => {
     setSequenceImportFeedback(feedback);
@@ -244,22 +258,27 @@ const BlastForm = () => {
       .catch((e) => {
         console.error("can't get the sequence:", e);
       });
-  }
+  };
 
-  const sequenceMetaData = sequenceData &&
+  const sequenceMetaData =
+    sequenceData &&
     `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
-    useEffect(() => {
-      getSequenceByAccessionOrID(searchByIDValue);
-    }, [searchByIDValue]);
+  useEffect(() => {
+    getSequenceByAccessionOrID(searchByIDValue);
+  }, [searchByIDValue]);
 
   return (
-    <Fragment>
-      <h3>Submit new job</h3>
+    <SingleColumnLayout>
+      <PageIntro title="BLAST">
+        <BlastFormInfo />
+      </PageIntro>
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
-            <legend>Find a protein to BLAST by UniProtID or keyword (examples).</legend>
+            <legend>
+              Find a protein to BLAST by UniProtID or keyword (examples).
+            </legend>
             <div className="import-sequence-section">
               <input
                 type="text"
@@ -267,9 +286,13 @@ const BlastForm = () => {
                 value={searchByIDValue}
               />
               <span className="import-sequence-section_feedback">
-                {sequenceImportFeedback === 'loading' && <RefreshIcon width="32" height="32" />}
-                {(sequenceImportFeedback === 'no-results' && searchByIDValue !== '')
-                  && <CloseIcon width="32" height="32" />}
+                {sequenceImportFeedback === 'loading' && (
+                  <RefreshIcon width="32" height="32" />
+                )}
+                {sequenceImportFeedback === 'no-results' &&
+                  searchByIDValue !== '' && (
+                    <CloseIcon width="32" height="32" />
+                  )}
                 {/* sequenceImportFeedback === 'invalid' && <CloseIcon width="32" height="32" /> */}
               </span>
             </div>
@@ -375,7 +398,7 @@ const BlastForm = () => {
           )}
         </fieldset>
       </form>
-    </Fragment>
+    </SingleColumnLayout>
   );
 };
 
