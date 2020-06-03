@@ -117,18 +117,6 @@ const App = () => (
               component={Dashboard}
             />
             <Route
-              path={LocationToPath[Location.PageNotFound]}
-              component={ResourceNotFoundPage}
-            />
-            <Route
-              path={LocationToPath[Location.ServiceUnavailable]}
-              component={ServiceUnavailablePage}
-            />
-            <Route
-              path={LocationToPath[Location.JobError]}
-              component={JobErrorPage}
-            />
-            <Route
               path={LocationToPath[Location.UniProtKBQueryBuilder]}
               component={AdvancedSearchPage}
             />
