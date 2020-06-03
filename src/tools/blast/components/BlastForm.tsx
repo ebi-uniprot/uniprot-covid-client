@@ -267,13 +267,15 @@ const BlastForm = () => {
                 (formValues[BlastFields.taxons].selected as SelectedTaxon[]) ||
                 []
               ).map(({ label, id }: SelectedTaxon) => (
-                <Chip
-                  key={label}
-                  onRemove={() => removeTaxonFormValue(id)}
-                  className="secondary"
-                >
-                  {label}
-                </Chip>
+                <div>
+                  <Chip
+                    key={label}
+                    onRemove={() => removeTaxonFormValue(id)}
+                    className="secondary"
+                  >
+                    {label}
+                  </Chip>
+                </div>
               ))}
             </section>
           </section>
