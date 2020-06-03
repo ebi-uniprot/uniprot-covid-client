@@ -1,4 +1,4 @@
-import React, { memo, FocusEvent } from 'react';
+import React, { memo, useLayoutEffect, useRef, FocusEvent, FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
@@ -12,12 +12,16 @@ import { LocationToPath, Location } from '../../../app/config/urls';
 
 import './styles/Dashboard.scss';
 
+const stopPropagation = (event: MouseEvent | KeyboardEvent) => {
+  event.stopPropagation();
+};
+
 interface NameProps {
   id: Job['internalID'];
   children: Job['title'];
 }
 
-const Name = ({ children, id }: NameProps) => {
+const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
 
   const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
@@ -28,8 +32,9 @@ const Name = ({ children, id }: NameProps) => {
   return (
     <span
       contentEditable
+      onClick={stopPropagation}
       onBlur={handleBlur}
-      onKeyDown={(event) => event.stopPropagation()}
+      onKeyDown={stopPropagation}
     >
       {children}
     </span>
@@ -40,7 +45,7 @@ interface TimeProps {
   children: number;
 }
 
-const Time = ({ children }: TimeProps) => {
+const Time: FC<TimeProps> = ({ children }) => {
   const date = new Date(children);
   const YYYY = date.getFullYear();
   const MM = `${date.getMonth()}`.padStart(2, '0');
@@ -58,18 +63,13 @@ const Time = ({ children }: TimeProps) => {
   );
 };
 
-interface NiceStatusPropsNotFinished {
-  children: Exclude<Status, Status.FINISHED>;
-  queriedHits: Job['parameters']['hits'];
-}
-interface NiceStatusPropsFinished {
-  children: Status.FINISHED;
-  hits: FinishedJob['data']['hits'];
+interface NiceStatusProps {
+  children: Status;
+  hits?: FinishedJob['data']['hits'];
   queriedHits: FinishedJob['parameters']['hits'];
 }
-type NiceStatusProps = NiceStatusPropsFinished & NiceStatusPropsNotFinished;
 
-const NiceStatus = ({ children, hits, queriedHits }: NiceStatusProps) => {
+const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
   switch (children) {
     case Status.CREATED:
     case Status.RUNNING:
@@ -105,20 +105,32 @@ const NiceStatus = ({ children, hits, queriedHits }: NiceStatusProps) => {
 
 interface ActionsProps {
   id: Job['internalID'];
+  parameters: Job['parameters'];
 }
 
-const Actions = ({ id }: ActionsProps) => {
+const Actions: FC<ActionsProps> = ({ id, parameters }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <span className="dashboard__body__actions">
-      <button type="button" disabled title="resubmit this job">
+      <button
+        type="button"
+        title="resubmit this job"
+        onClick={(event) => {
+          event.stopPropagation();
+          history.push(LocationToPath[Location.Blast], { parameters });
+        }}
+      >
         <RefreshIcon />
       </button>
       <button
         type="button"
-        onClick={() => dispatch(deleteJob(id))}
         title="delete this job"
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(deleteJob(id));
+        }}
       >
         <BinIcon />
       </button>
@@ -126,24 +138,81 @@ const Actions = ({ id }: ActionsProps) => {
   );
 };
 
+const keyframesForNew = {
+  opacity: [0, 1],
+  transform: ['scale(0.8)', 'scale(1.05)', 'scale(1)'],
+};
+const animationOptionsForNew: KeyframeAnimationOptions = {
+  duration: 500,
+  easing: 'ease-in-out',
+  fill: 'both',
+};
+const keyframesForStatusUpdate = {
+  opacity: [1, 0.5, 1, 0.5, 1],
+};
+const animationOptionsForStatusUpdate: KeyframeAnimationOptions = {
+  duration: 1000,
+  fill: 'both',
+};
+
 interface RowProps {
   job: Job;
 }
 
-const Row = memo(({ job }: RowProps) => {
+interface CustomLocationState {
+  parameters?: Job['parameters'];
+}
+
+const Row: FC<RowProps> = memo(({ job }) => {
+  const history = useHistory();
+  const ref = useRef<HTMLElement>(null);
+  const firstTime = useRef<boolean>(true);
+
   let jobLink: string | undefined;
   if ('remoteID' in job) {
     jobLink = `${LocationToPath[Location.Blast]}/${job.remoteID}`;
   }
-  const history = useHistory();
 
   const handleClick = () => {
-    if (!jobLink) return;
+    if (!jobLink) {
+      return;
+    }
     history.push(jobLink);
   };
 
+  // if the state of the current location contains the parameters from this job,
+  // it means we just arrived from a submission form page and this is the job
+  // that was just added, animate it to have it visually represented as "new"
+  useLayoutEffect(() => {
+    if (
+      job.parameters !==
+      (history.location?.state as CustomLocationState)?.parameters
+    ) {
+      return;
+    }
+    if (!(ref.current && 'animate' in ref.current)) {
+      return;
+    }
+    ref.current.animate(keyframesForNew, animationOptionsForNew);
+  }, [history, job.parameters]);
+
+  // if the status of the current job changes, make it "flash"
+  useLayoutEffect(() => {
+    if (!(ref.current && 'animate' in ref.current)) {
+      return;
+    }
+    if (firstTime.current) {
+      firstTime.current = false;
+      return;
+    }
+    ref.current.animate(
+      keyframesForStatusUpdate,
+      animationOptionsForStatusUpdate
+    );
+  }, [job.status]);
+
   return (
-    <Card onClick={handleClick}>
+    <Card onClick={handleClick} ref={ref}>
       <span className="dashboard__body__name">
         <Name id={job.internalID}>{job.title}</Name>
       </span>
@@ -162,7 +231,7 @@ const Row = memo(({ job }: RowProps) => {
         </NiceStatus>
       </span>
       <span className="dashboard__body__actions">
-        <Actions id={job.internalID} />
+        <Actions id={job.internalID} parameters={job.parameters} />
       </span>
       <span className="dashboard__body__id">
         {'remoteID' in job && jobLink && (

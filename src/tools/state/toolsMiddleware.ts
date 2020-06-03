@@ -45,20 +45,17 @@ const toolsMiddleware: Middleware = (store) => {
 
     const jobStore = new JobStore(Stores.METADATA);
 
-    const persistedJobs = [];
-    for await (const persistedJob of jobStore.getAll()) {
-      persistedJobs.push([
-        (persistedJob as Job).internalID,
-        persistedJob as Job,
-      ]);
+    const persistedJobs: { [internalID: string]: Job } = {};
+    for (const persistedJob of await jobStore.getAll()) {
+      persistedJobs[persistedJob.internalID] = persistedJob;
     }
 
-    if (!persistedJobs.length) return;
+    if (!Object.keys(persistedJobs).length) return;
 
     // Wait for browser idleness
     await schedule();
 
-    dispatch(rehydrateJobs(Object.fromEntries(persistedJobs)));
+    dispatch(rehydrateJobs(persistedJobs));
   })();
 
   // flag to avoid multiple pollJobs loop being scheduled
@@ -118,6 +115,21 @@ const toolsMiddleware: Middleware = (store) => {
       if (!currentStateOfJob) return;
 
       const now = Date.now();
+
+      if (!results.hits) {
+        dispatch(
+          updateJob({
+            ...currentStateOfJob,
+            timeLastUpdate: now,
+            status: Status.FAILED,
+          })
+        );
+        throw new Error(
+          `"${JSON.stringify(
+            response.data
+          )}" in not a valid result for this job`
+        );
+      }
       dispatch(
         updateJob({
           ...currentStateOfJob,
@@ -130,7 +142,7 @@ const toolsMiddleware: Middleware = (store) => {
       dispatch(
         addMessage({
           id: job.internalID,
-          content: `Job "${job.remoteID}" finished, found ${
+          content: `Job "${job.title || job.remoteID}" finished, found ${
             results.hits.length
           } hit${results.hits.length === 1 ? '' : 's'}`,
           format: MessageFormat.POP_UP,

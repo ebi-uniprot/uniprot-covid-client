@@ -21,7 +21,10 @@ const toolsReducers = (
   switch (action.type) {
     // rehydrate jobs
     case toolsActions.REHYDRATE_JOBS: {
-      return { ...state, ...action.payload.jobs };
+      return {
+        ...state,
+        ...action.payload.jobs,
+      };
     }
 
     // add job
@@ -30,7 +33,7 @@ const toolsReducers = (
       const newJob: CreatedJob = {
         status: Status.CREATED,
         internalID: `local-${v1()}`,
-        title: 'some title',
+        title: action.payload.jobName,
         type: action.payload.jobType,
         parameters: action.payload.parameters,
         timeCreated: now,
