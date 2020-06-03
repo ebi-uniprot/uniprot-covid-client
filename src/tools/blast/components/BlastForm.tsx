@@ -49,7 +49,8 @@ import {
   Scores,
   TaxIDs,
 } from '../types/blastServerParameters';
-import BlastFormInfo from './BlastFormInfo';
+import infoMappings from '../../../shared/config/InfoMappings';
+import { Tool } from '../../types';
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -268,10 +269,12 @@ const BlastForm = () => {
     getSequenceByAccessionOrID(searchByIDValue);
   }, [searchByIDValue]);
 
+  const { name, links, info } = infoMappings[Tool.blast];
+
   return (
     <SingleColumnLayout>
-      <PageIntro title="BLAST">
-        <BlastFormInfo />
+      <PageIntro title={name} links={links}>
+        {info}
       </PageIntro>
       <form onSubmit={submitBlastJob}>
         <fieldset>
@@ -334,9 +337,8 @@ const BlastForm = () => {
                 (formValues[BlastFields.taxons].selected as SelectedTaxon[]) ||
                 []
               ).map(({ label, id }: SelectedTaxon) => (
-                <div>
+                <div key={label}>
                   <Chip
-                    key={label}
                     onRemove={() => removeTaxonFormValue(id)}
                     className="secondary"
                   >
