@@ -46,7 +46,7 @@ const toolsMiddleware: Middleware = (store) => {
     const jobStore = new JobStore(Stores.METADATA);
 
     const persistedJobs: { [internalID: string]: Job } = {};
-    for await (const persistedJob of jobStore.getAll()) {
+    for (const persistedJob of await jobStore.getAll()) {
       persistedJobs[persistedJob.internalID] = persistedJob;
     }
 
