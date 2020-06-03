@@ -52,6 +52,20 @@ import {
 import infoMappings from '../../../shared/config/InfoMappings';
 import { Tool } from '../../types';
 
+// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3848038/
+const getAutoMatrixFor = (sequence: string): FormParameters['matrix'] => {
+  if (sequence.length <= 34) {
+    return 'PAM30';
+  }
+  if (sequence.length <= 49) {
+    return 'PAM70';
+  }
+  if (sequence.length <= 85) {
+    return 'BLOSUM80';
+  }
+  return 'BLOSUM62';
+};
+
 const FormSelect: FC<{
   formValues: BlastFormValues;
   type: BlastFields;
@@ -182,7 +196,10 @@ const BlastForm = () => {
         formValues[BlastFields.taxons].selected as SelectedTaxon[]
       ) as TaxIDs,
       threshold: formValues[BlastFields.threshold].selected as Exp,
-      matrix: formValues[BlastFields.matrix].selected as Matrix,
+      matrix:
+        formValues[BlastFields.matrix].selected === 'auto'
+          ? getAutoMatrixFor(formValues[BlastFields.sequence].selected)
+          : (formValues[BlastFields.matrix].selected as Matrix),
       filter: formValues[BlastFields.filter].selected as Filter,
       gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
       hits: parseInt(
@@ -268,6 +285,23 @@ const BlastForm = () => {
   useEffect(() => {
     getSequenceByAccessionOrID(searchByIDValue);
   }, [searchByIDValue]);
+
+  useEffect(() => {
+    const matrix = getAutoMatrixFor(formValues.Sequence.selected);
+    // eslint-disable-next-line no-shadow
+    setFormValues((formValues: BlastFormValues) => ({
+      ...formValues,
+      [BlastFields.matrix]: {
+        ...formValues[BlastFields.matrix],
+        values: [
+          { label: `Auto - ${matrix}`, value: 'auto' },
+          ...(formValues[BlastFields.matrix].values || []).filter(
+            (option) => option.value !== 'auto'
+          ),
+        ],
+      },
+    }));
+  }, [formValues.Sequence.selected]);
 
   const { name, links, info } = infoMappings[Tool.blast];
 
