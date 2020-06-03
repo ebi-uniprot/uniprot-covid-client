@@ -5,12 +5,12 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import App from './app/components/App';
 import { store, persistor } from './app/state/store';
-import ErrorBoundary from './shared/components/error-component/ErrorBoundary';
+import { NonWrappedErrorBoundary } from './shared/components/error-component/ErrorBoundary';
 
 const LoadingView = () => <span>Loading ...</span>;
 
 ReactDOM.render(
-  <ErrorBoundary>
+  <NonWrappedErrorBoundary>
     <Provider store={store}>
       {process.env.NODE_ENV === 'development' ? (
         <App />
@@ -20,7 +20,7 @@ ReactDOM.render(
         </PersistGate>
       )}
     </Provider>
-  </ErrorBoundary>,
+  </NonWrappedErrorBoundary>,
   document.getElementById('root')
 );
 
