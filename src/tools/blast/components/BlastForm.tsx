@@ -1,15 +1,14 @@
-import React, { FC, useState, FormEvent, MouseEvent } from 'react';
+import React, { FC, Fragment, useState, FormEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Chip, PageIntro } from 'franklin-sites';
+import { v1 } from 'uuid';
+import { CloseIcon, Chip, RefreshIcon, WarningIcon} from 'franklin-sites';
 import queryString from 'query-string';
-
-import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
+import { throttle } from 'lodash-es';
 
 import { FormParameters } from '../types/blastFormParameters';
 
 import * as actions from '../../state/toolsActions';
-
-import initialFormValues, {
+ import initialFormValues, {
   BlastFormValues,
   BlastFields,
   SelectedTaxon,
@@ -61,6 +60,7 @@ const BlastForm = () => {
   );
   const [searchByIDValue, setSearchByIDValue] = useState('');
   const [sequenceData, setSequenceData] = useState(null);
+  const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const updateFormValue = (type: BlastFields, value: string) => {
     const newFormValues = { ...formValues };
@@ -73,7 +73,7 @@ const BlastForm = () => {
     if (!id) return;
 
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { selected = [] } = taxonFormValues as { selected: SelectedTaxon[] };
+    const { selected = [] } = taxonFormValues;
 
     // If already there, don't add again
     if (selected.some((taxon: SelectedTaxon) => taxon.id === id)) return;
@@ -92,12 +92,13 @@ const BlastForm = () => {
 
   const removeTaxonFormValue = (id: string | number) => {
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { selected = [] } = taxonFormValues as { selected: SelectedTaxon[] };
     setFormValues({
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        selected: selected.filter((taxon: SelectedTaxon) => taxon.id !== id),
+        selected: taxonFormValues.selected.filter(
+          (taxon: SelectedTaxon) => taxon.id !== id
+        ),
       },
     });
   };
@@ -121,52 +122,90 @@ const BlastForm = () => {
     dispatch(actions.createJob(parameters as FormParameters, 'blast'));
   };
 
+  const resetSequenceData = () => {
+    setSequenceData(null);
+    updateFormValue(BlastFields.sequence, '');
+  }
+
+  const updateImportSequenceFeedback = throttle((feedback: string) => {
+    setSequenceImportFeedback(feedback);
+  }, 500);
+
   const getSequenceByAccessionOrID = (input: string) => {
+    if (!input) {
+      resetSequenceData();
+      return;
+    }
+
+    const clearInput = input.replace(/\s/g, '');
+
+    if (!clearInput.length < 0) {
+      resetSequenceData();
+      return;
+    }
+
     const query = queryString.stringify({
-      query: uniProtKBAccessionRegEx.test(input.replace(/\s/g, ''))
-        ? `accession:${input}`
-        : `id:${input}`,
+      query: uniProtKBAccessionRegEx.test(clearInput)
+        ? `accession:${clearInput}`
+        : `id:${clearInput}`,
       fields: 'sequence, id',
     });
+
+    // setSequenceImportFeedback('loading');
+    updateImportSequenceFeedback('loading');
 
     const fetchUrl = fetchData(`${uniProtKBApiUrls.search}?${query}`)
       .then(({ data }) => {
         const { results } = data;
-        if (results && results.length > 0) {
-          setSequenceData(results[0]);
-          updateFormValue(BlastFields.sequence, results[0].sequence.value);
+        if (results) {
+          if (results.length > 0) {
+            setSequenceData(results[0]);
+            updateFormValue(BlastFields.sequence, results[0].sequence.value);
+            setSequenceImportFeedback('success');
+            return;
+          } else {
+            // setSequenceImportFeedback('no-results');
+            updateImportSequenceFeedback('no-results');
+          }
+        } else {
+          // setSequenceImportFeedback('invalid');
+          updateImportSequenceFeedback('invalid');
         }
+
+        resetSequenceData();
       })
       .catch((e) => {
         console.error("can't get the sequence:", e);
       });
-  };
-  console.log('sequence data:', sequenceData);
-  const sequenceMetaData =
-    sequenceData &&
+  }
+
+  const sequenceMetaData = sequenceData &&
     `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
+    useEffect(() => {
+      getSequenceByAccessionOrID(searchByIDValue);
+    }, [searchByIDValue]);
+
   return (
-    <SingleColumnLayout>
-      <PageIntro title="BLAST" />
+    <Fragment>
+      <h3>Submit new job</h3>
       <form onSubmit={submitBlastJob}>
         <fieldset>
           <section>
-            <legend>
-              Find a protein to BLAST by UniProtID or keyword (examples).
-            </legend>
-            <input
-              type="text"
-              onChange={({ target }) => setSearchByIDValue(target.value)}
-              value={searchByIDValue}
-            />
-            <button
-              className="button primary"
-              type="button"
-              onClick={() => getSequenceByAccessionOrID(searchByIDValue)}
-            >
-              Get Sequence
-            </button>
+            <legend>Find a protein to BLAST by UniProtID or keyword (examples).</legend>
+            <div className="import-sequence-section">
+              <input
+                type="text"
+                onChange={({ target }) => setSearchByIDValue(target.value)}
+                value={searchByIDValue}
+              />
+              <span className="import-sequence-section_feedback">
+                {sequenceImportFeedback === 'loading' && <RefreshIcon width="32" height="32" />}
+                {(sequenceImportFeedback === 'no-results' && searchByIDValue !== '')
+                  && <CloseIcon width="32" height="32" />}
+                {/* sequenceImportFeedback === 'invalid' && <CloseIcon width="32" height="32" /> */}
+              </span>
+            </div>
           </section>
         </fieldset>
         <fieldset>
@@ -178,9 +217,8 @@ const BlastForm = () => {
                 updateFormValue(BlastFields.sequence, e.target.value)
               }
               className="blast-form-textarea"
-            >
-              {formValues[BlastFields.sequence].selected}
-            </textarea>
+              value={formValues[BlastFields.sequence].selected}
+            />
           </section>
           <section className="blast-form-section">
             <FormSelect
@@ -193,7 +231,7 @@ const BlastForm = () => {
                 url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
                 title="Restrict to taxonomy"
-                clearOnSelect
+                clearOnSelect={true}
               />
             </section>
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">
@@ -262,7 +300,7 @@ const BlastForm = () => {
           )}
         </fieldset>
       </form>
-    </SingleColumnLayout>
+    </Fragment>
   );
 };
 
