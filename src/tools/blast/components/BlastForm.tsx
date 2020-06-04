@@ -1,7 +1,21 @@
-import React, { FC, Fragment, useState, FormEvent, MouseEvent, useEffect } from 'react';
+import React, {
+  FC,
+  Fragment,
+  useState,
+  FormEvent,
+  MouseEvent,
+  useEffect,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
-import { CloseIcon, Chip, RefreshIcon, WarningIcon} from 'franklin-sites';
+import {
+  CloseIcon,
+  Chip,
+  RefreshIcon,
+  WarningIcon,
+  SequenceSubmission,
+  SearchInput,
+} from 'franklin-sites';
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
@@ -74,6 +88,18 @@ interface CustomLocationState {
   parameters?: Job['parameters'];
 }
 
+type SequenceData = {
+  primaryAccession: string;
+  uniProtkbId: string;
+};
+
+type SequenceSubmissionOnChangeEvent = {
+  sequence: string;
+  valid: boolean,
+  likelyType: 'na' | 'aa' | null,
+  message: string | null,
+};
+
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -102,7 +128,7 @@ const BlastForm = () => {
   });
 
   const [searchByIDValue, setSearchByIDValue] = useState('');
-  const [sequenceData, setSequenceData] = useState(null);
+  const [sequenceData, setSequenceData] = useState<SequenceData>();
   const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const updateFormValue = (type: BlastFields, value: string) => {
@@ -190,7 +216,7 @@ const BlastForm = () => {
   };
 
   const resetSequenceData = () => {
-    setSequenceData(null);
+    setSequenceData(undefined);
     updateFormValue(BlastFields.sequence, '');
   }
 
@@ -204,21 +230,20 @@ const BlastForm = () => {
       return;
     }
 
-    const clearInput = input.replace(/\s/g, '');
+    const clearInput : string = input.replace(/\s/g, '');
 
-    if (!clearInput.length < 0) {
+    if (clearInput.length === 0) {
       resetSequenceData();
       return;
     }
 
-    const query = queryString.stringify({
+    const query : string = queryString.stringify({
       query: uniProtKBAccessionRegEx.test(clearInput)
         ? `accession:${clearInput}`
         : `id:${clearInput}`,
       fields: 'sequence, id',
     });
 
-    // setSequenceImportFeedback('loading');
     updateImportSequenceFeedback('loading');
 
     const fetchUrl = fetchData(`${uniProtKBApiUrls.search}?${query}`)
@@ -231,11 +256,9 @@ const BlastForm = () => {
             setSequenceImportFeedback('success');
             return;
           } else {
-            // setSequenceImportFeedback('no-results');
             updateImportSequenceFeedback('no-results');
           }
         } else {
-          // setSequenceImportFeedback('invalid');
           updateImportSequenceFeedback('invalid');
         }
 
@@ -249,9 +272,9 @@ const BlastForm = () => {
   const sequenceMetaData = sequenceData &&
     `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
-    useEffect(() => {
-      getSequenceByAccessionOrID(searchByIDValue);
-    }, [searchByIDValue]);
+  useEffect(() => {
+    getSequenceByAccessionOrID(searchByIDValue);
+  }, [searchByIDValue]);
 
   return (
     <Fragment>
@@ -270,7 +293,6 @@ const BlastForm = () => {
                 {sequenceImportFeedback === 'loading' && <RefreshIcon width="32" height="32" />}
                 {(sequenceImportFeedback === 'no-results' && searchByIDValue !== '')
                   && <CloseIcon width="32" height="32" />}
-                {/* sequenceImportFeedback === 'invalid' && <CloseIcon width="32" height="32" /> */}
               </span>
             </div>
           </section>
@@ -278,10 +300,15 @@ const BlastForm = () => {
         <fieldset>
           <section>
             <legend>Sequence {sequenceData && sequenceMetaData}</legend>
-            <textarea
+            <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={(e) =>
-                updateFormValue(BlastFields.sequence, e.target.value)
+              onChange={(e: SequenceSubmissionOnChangeEvent) => {
+                if (e.sequence === formValues[BlastFields.sequence].selected) {
+                  return;
+                }
+
+                updateFormValue(BlastFields.sequence, e.sequence)
+                }
               }
               className="blast-form-textarea"
               value={formValues[BlastFields.sequence].selected}
