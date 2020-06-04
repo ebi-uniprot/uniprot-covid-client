@@ -348,7 +348,20 @@ const BlastForm = () => {
 
   useEffect(() => {
     const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
+    console.log({ sequence });
     if (!sequence && formValues[BlastFields.sequence].selected) {
+      return;
+    }
+
+    // if we have a URL to load, but no sequence available, erase the sequence
+    // in the form state
+    if (urlForAccessionOrID && !sequence) {
+      onSequenceChange({
+        sequence: '',
+        valid: false,
+        likelyType: null,
+        message: null,
+      });
       return;
     }
 
@@ -359,6 +372,7 @@ const BlastForm = () => {
       message: null,
     });
   }, [
+    urlForAccessionOrID,
     updateFormValue,
     onSequenceChange,
     dataForAccessionOrID.results,
