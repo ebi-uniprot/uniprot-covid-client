@@ -35,7 +35,7 @@ const convertFormParametersForServer = (formParameters: FormParameters) => {
     exp: threshold,
     filter,
     gapalign: gapped,
-    taxids: taxIDs.map(({ id }) => id).join(','),
+    taxids: taxIDs && taxIDs.map(({ id }) => id).join(','),
     stype,
     sequence,
     database,

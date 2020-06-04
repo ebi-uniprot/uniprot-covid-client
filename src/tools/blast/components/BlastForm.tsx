@@ -316,8 +316,6 @@ const BlastForm = () => {
             });
             setSequenceImportFeedback('success');
             return;
-          } else {
-            updateImportSequenceFeedback('no-results');
           }
           updateImportSequenceFeedback('no-results');
         } else {
