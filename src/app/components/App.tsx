@@ -66,16 +66,6 @@ const ResourceNotFoundPage = lazy(() =>
     /* webpackChunkName: "resource-not-found" */ '../../shared/components/error-pages/ResourceNotFoundPage'
   )
 );
-const ServiceUnavailablePage = lazy(() =>
-  import(
-    /* webpackChunkName: "service-unavailable" */ '../../shared/components/error-pages/ServiceUnavailablePage'
-  )
-);
-const JobErrorPage = lazy(() =>
-  import(
-    /* webpackChunkName: "job-error" */ '../../shared/components/error-pages/JobErrorPage'
-  )
-);
 
 const App = () => (
   <FranklinSite>
