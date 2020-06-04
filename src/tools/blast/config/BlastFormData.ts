@@ -152,4 +152,4 @@ export default Object.freeze({
     fieldName: 'name',
     type: BlastFieldTypes.textarea,
   }),
-});
+}) as Readonly<BlastFormValues>;

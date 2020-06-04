@@ -145,7 +145,7 @@ const BlastForm = () => {
               ]
             )
           )
-        );
+        ) as Readonly<BlastFormValues>;
       }
       // otherwise, pass the default values
       return initialFormValues;
