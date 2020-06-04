@@ -1,18 +1,9 @@
-import React, {
-  FC,
-  Fragment,
-  useState,
-  FormEvent,
-  MouseEvent,
-  useEffect,
-} from 'react';
+import React, { FC, useState, FormEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { v1 } from 'uuid';
 import {
   CloseIcon,
   Chip,
   RefreshIcon,
-  WarningIcon,
   PageIntro,
   SpinnerIcon,
 } from 'franklin-sites';
@@ -263,7 +254,7 @@ const BlastForm = () => {
 
     const clearInput = input.replace(/\s/g, '');
 
-    if (!clearInput.length < 0) {
+    if (clearInput.length < 0) {
       resetSequenceData();
       return;
     }
@@ -302,10 +293,6 @@ const BlastForm = () => {
         console.error("can't get the sequence:", e);
       });
   };
-
-  const sequenceMetaData =
-    sequenceData &&
-    `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
 
   useEffect(() => {
     getSequenceByAccessionOrID(searchByIDValue);
@@ -367,17 +354,14 @@ const BlastForm = () => {
         </section>
         <fieldset>
           <section className="text-block">
-            <legend>
-              Enter either a protein or nucleotide sequence.{' '}
-              {sequenceData && sequenceMetaData}
-            </legend>
+            <legend>Enter either a protein or nucleotide sequence.</legend>
             <textarea
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={(e) =>
                 updateFormValue(BlastFields.sequence, e.target.value)
               }
               className="blast-form-textarea"
-              value={formValues[BlastFields.sequence].selected}
+              value={String(formValues[BlastFields.sequence].selected)}
             />
           </section>
           <section className="blast-form-section">
