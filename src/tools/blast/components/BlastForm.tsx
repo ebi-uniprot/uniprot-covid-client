@@ -1,11 +1,7 @@
 import React, { FC, useState, FormEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { v1 } from 'uuid';
 import {
-  CloseIcon,
   Chip,
-  RefreshIcon,
-  WarningIcon,
   SequenceSubmission,
   SearchInput,
   PageIntro,
@@ -108,9 +104,9 @@ type SequenceData = {
 
 type SequenceSubmissionOnChangeEvent = {
   sequence: string;
-  valid: boolean,
-  likelyType: 'na' | 'aa' | null,
-  message: string | null,
+  valid: boolean;
+  likelyType: 'na' | 'aa' | null;
+  message: string | null;
 };
 
 const BlastForm = () => {
@@ -123,7 +119,6 @@ const BlastForm = () => {
   const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [searchByIDValue, setSearchByIDValue] = useState('');
-  const [sequenceData, setSequenceData] = useState<SequenceData>();
   const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
@@ -254,7 +249,6 @@ const BlastForm = () => {
   };
 
   const resetSequenceData = () => {
-    setSequenceData(undefined);
     updateFormValue(BlastFields.sequence, '');
   };
 
@@ -268,14 +262,14 @@ const BlastForm = () => {
       return;
     }
 
-    const clearInput : string = input.replace(/\s/g, '');
+    const clearInput: string = input.replace(/\s/g, '');
 
     if (clearInput.length === 0) {
       resetSequenceData();
       return;
     }
 
-    const query : string = queryString.stringify({
+    const query: string = queryString.stringify({
       query: uniProtKBAccessionRegEx.test(clearInput)
         ? `accession:${clearInput}`
         : `id:${clearInput}`,
@@ -289,7 +283,6 @@ const BlastForm = () => {
         const { results } = data;
         if (results) {
           if (results.length > 0) {
-            setSequenceData(results[0]);
             updateFormValue(BlastFields.sequence, results[0].sequence.value);
             setSequenceImportFeedback('success');
             return;
@@ -348,17 +341,14 @@ const BlastForm = () => {
               <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
             </legend>
             <div className="import-sequence-section">
-              <input
-                type="text"
+              <SearchInput
+                isLoading={false}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchByIDValue(e.target.value)
+                }
                 placeholder="P05067, A4_HUMAN, UPI0000000001"
-                onChange={({ target }) => setSearchByIDValue(target.value)}
                 value={searchByIDValue}
               />
-              <span className="import-sequence-section_feedback">
-                {sequenceImportFeedback === 'loading' && <RefreshIcon width="32" height="32" />}
-                {(sequenceImportFeedback === 'no-results' && searchByIDValue !== '')
-                  && <CloseIcon width="32" height="32" />}
-              </span>
             </div>
           </section>
         </fieldset>
@@ -375,9 +365,8 @@ const BlastForm = () => {
                   return;
                 }
 
-                updateFormValue(BlastFields.sequence, e.sequence)
-                }
-              }
+                updateFormValue(BlastFields.sequence, e.sequence);
+              }}
               className="blast-form-textarea"
               value={String(formValues[BlastFields.sequence].selected)}
             />
