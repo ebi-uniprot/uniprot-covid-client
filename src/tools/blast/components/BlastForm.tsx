@@ -400,6 +400,8 @@ const BlastForm = () => {
                 <input
                   name="title"
                   type="text"
+                  autoComplete="off"
+                  maxLength={22}
                   placeholder="my job title"
                   onChange={(e) =>
                     updateFormValue(BlastFields.name, e.target.value)

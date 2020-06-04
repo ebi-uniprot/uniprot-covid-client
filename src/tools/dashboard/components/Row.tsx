@@ -2,14 +2,22 @@ import React, {
   memo,
   useLayoutEffect,
   useRef,
-  FocusEvent,
+  useState,
+  useCallback,
   MouseEvent,
   KeyboardEvent,
+  ChangeEvent,
   FC,
 } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Card, RefreshIcon, BinIcon, SpinnerIcon } from 'franklin-sites';
+import {
+  Card,
+  RefreshIcon,
+  BinIcon,
+  SpinnerIcon,
+  EditIcon,
+} from 'franklin-sites';
 
 import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
@@ -31,22 +39,33 @@ interface NameProps {
 
 const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
+  const [text, setText] = useState(children);
 
-  const handleBlur = (event: FocusEvent<HTMLSpanElement>) => {
-    const text = event.target.innerText.trim();
-    if (text !== children) dispatch(updateJobTitle(id, text));
+  const handleBlur = () => {
+    const cleanedText = text.trim();
+    if (cleanedText !== children) {
+      dispatch(updateJobTitle(id, text));
+    }
   };
 
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  }, []);
+
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <span
-      contentEditable
-      onClick={stopPropagation}
-      onBlur={handleBlur}
-      onKeyDown={stopPropagation}
-    >
-      {children}
-    </span>
+    <>
+      <input
+        onClick={stopPropagation}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        autoComplete="off"
+        type="text"
+        value={text}
+        aria-label="job name"
+        maxLength={22}
+      />
+      <EditIcon width="2ch" />
+    </>
   );
 };
 

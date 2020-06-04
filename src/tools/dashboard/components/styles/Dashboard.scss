@@ -17,6 +17,12 @@
       &:focus,
       &:focus-within {
         background: #d2dce3;
+
+        & .dashboard__body__name svg,
+        & .dashboard__body__notify_message,
+        & .dashboard__body__actions {
+          opacity: 1;
+        }
       }
     }
 
@@ -29,26 +35,29 @@
       grid-template-columns: 27ch 10ch 20ch 18ch 1fr;
       grid-gap: 1ch;
       grid-template-rows: 1fr 1fr;
-
-      &:hover {
-        & .dashboard__body__notify_message,
-        & .dashboard__body__actions {
-          opacity: 1;
-        }
-      }
     }
 
     /* begin grid areas */
     &__name {
       grid-area: name;
-      display: contents;
       font-weight: bold;
+      width: 25ch;
+      display: flex;
 
-      & > * {
-        white-space: nowrap;
+      & input {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 0;
         overflow: scroll;
-        max-width: 100%;
-        cursor: text;
+        flex: 1;
+      }
+
+      & svg {
+        margin-left: 0.5ch;
+        opacity: 0;
+        transition: opacity ease-in-out 100ms;
       }
     }
 
