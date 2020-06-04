@@ -169,7 +169,6 @@ const BlastForm = () => {
   const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [searchByIDValue, setSearchByIDValue] = useState('');
-  const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
     () => {
@@ -336,6 +335,14 @@ const BlastForm = () => {
     }
     console.log('name:', name);
     updateFormValue(BlastFields.sequence, e.sequence);
+
+    // TODO We need to update both the stype and the program based on seq type
+    // if (e.likelyType == 'na') {
+    //   updateFormValue(BlastFields.stype, 'dna');
+    // } else {
+    //   // we want protein by default
+    //   updateFormValue(BlastFields.stype, 'protein');
+    // }
   };
 
   /* start of logic to load a sequence from an accession or an ID */
