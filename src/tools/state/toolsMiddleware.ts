@@ -90,7 +90,6 @@ const toolsMiddleware: Middleware = (store) => {
       if (status === Status.NOT_FOUND) {
         throw new Error('Job was not found on the server');
       }
-
       if (status === Status.RUNNING || status === Status.FAILED) {
         dispatch(
           updateJob({

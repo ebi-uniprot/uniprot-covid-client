@@ -1,3 +1,5 @@
+@import '../../../../../node_modules/franklin-sites/src/styles/colours';
+
 .dashboard {
   &__header .card__content {
     font-weight: bold;
@@ -8,6 +10,11 @@
   }
 
   &__body {
+    & .card--failure {
+      border: 1px solid $colour-failure;
+      border-left: 0.25rem solid $colour-failure;
+    }
+
     & .card:nth-of-type(2n + 1) {
       background: #e4e8eb;
     }
