@@ -13,7 +13,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
   Card,
-  RefreshIcon,
+  ReSubmitIcon,
   BinIcon,
   SpinnerIcon,
   EditIcon,
@@ -150,7 +150,7 @@ const Actions: FC<ActionsProps> = ({ parameters, onDelete }) => {
           history.push(LocationToPath[Location.Blast], { parameters });
         }}
       >
-        <RefreshIcon />
+        <ReSubmitIcon />
       </button>
       <button
         type="button"
