@@ -6,6 +6,7 @@ export const DB_NAME = 'UniProt-Jobs';
 
 export default class JobStore {
   storeName: string;
+
   dbPromise: Promise<IDBPDatabase>;
 
   constructor(storeName: Stores) {

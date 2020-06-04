@@ -232,11 +232,11 @@ const BlastForm = () => {
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
     event.preventDefault();
 
+    const sequence = formValues[BlastFields.sequence].selected as Sequence;
+    if (!sequence) return;
+
     setSubmitDisabled(true);
     setSending(true);
-
-    const sequence = formValues[BlastFields.sequence].selected as Sequence;
-    // TODO: validate sequence
 
     const parameters: FormParameters = {
       stype: formValues[BlastFields.stype].selected as SType,
@@ -307,7 +307,7 @@ const BlastForm = () => {
 
     updateImportSequenceFeedback('loading');
 
-    const fetchUrl = fetchData(`${uniProtKBApiUrls.search}?${query}`)
+    fetchData(`${uniProtKBApiUrls.search}?${query}`)
       .then(({ data }) => {
         const { results } = data;
         if (results) {
