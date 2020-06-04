@@ -221,9 +221,6 @@ const BlastForm = () => {
     });
   };
 
-  const getTaxIDs = (taxons: SelectedTaxon[] = []) =>
-    taxons.map(({ id }) => id).join(',');
-
   // the only thing to do here would be to check the values and prevent
   // and prevent submission if there is any issue
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
@@ -235,15 +232,17 @@ const BlastForm = () => {
     setSubmitDisabled(true);
     setSending(true);
 
+    // here we should just transform input values into FormParameters,
+    // transformation of FormParameters into ServerParameters happens in the
+    // tools middleware
     const parameters: FormParameters = {
       stype: formValues[BlastFields.stype].selected as SType,
       program: formValues[BlastFields.program].selected as Program,
       sequence,
       database: formValues[BlastFields.targetDb].selected as Database,
-      taxIDs: getTaxIDs(
-        formValues[BlastFields.taxons].selected as SelectedTaxon[]
-      ) as TaxIDs,
+      taxIDs: formValues[BlastFields.taxons].selected as SelectedTaxon[],
       threshold: formValues[BlastFields.threshold].selected as Exp,
+      // remove "auto", and transform into corresponding matrix
       matrix:
         formValues[BlastFields.matrix].selected === 'auto'
           ? getAutoMatrixFor(
@@ -251,7 +250,9 @@ const BlastForm = () => {
             )
           : (formValues[BlastFields.matrix].selected as Matrix),
       filter: formValues[BlastFields.filter].selected as Filter,
+      // transform string into boolean
       gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
+      // transform string into number
       hits: parseInt(
         formValues[BlastFields.hits].selected as string,
         10
@@ -259,9 +260,6 @@ const BlastForm = () => {
     };
 
     const jobName = formValues[BlastFields.name].selected as string;
-
-    // TODO: need to cast the values to the right types
-    // e.g. hits 50 gets stored as a string somehow...
 
     // we emit an action containing only the parameters and the type of job
     // the reducer will be in charge of generating a proper job object for
