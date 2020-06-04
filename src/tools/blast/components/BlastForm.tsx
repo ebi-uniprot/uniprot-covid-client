@@ -375,7 +375,6 @@ console.log("got a name:", name);
     } else if (searchByIDValue) {
       updateFormValue(BlastFields.name, searchByIDValue);
     }
-console.log("name:", name);
     updateFormValue(BlastFields.sequence, e.sequence);
   };
 
