@@ -164,7 +164,7 @@ const BlastForm = () => {
     if (!id) return;
 
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { selected = [] } = taxonFormValues;
+    const selected = (taxonFormValues.selected || []) as SelectedTaxon[];
 
     // If already there, don't add again
     if (selected.some((taxon: SelectedTaxon) => taxon.id === id)) return;
@@ -183,13 +183,12 @@ const BlastForm = () => {
 
   const removeTaxonFormValue = (id: string | number) => {
     const taxonFormValues = formValues[BlastFields.taxons];
+    const selected = (taxonFormValues.selected || []) as SelectedTaxon[];
     setFormValues({
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        selected: taxonFormValues.selected.filter(
-          (taxon: SelectedTaxon) => taxon.id !== id
-        ),
+        selected: selected.filter((taxon: SelectedTaxon) => taxon.id !== id),
       },
     });
   };
