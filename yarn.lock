@@ -5143,7 +5143,7 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fake-indexeddb@^3.0.0:
+fake-indexeddb@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fake-indexeddb/-/fake-indexeddb-3.0.0.tgz#1bd0ffce41b0f433409df301d334d8fd7d77da27"
   integrity sha512-VrnV9dJWlVWvd8hp9MMR+JS4RLC4ZmToSkuCg91ZwpYE5mSODb3n5VEaV62Hf3AusnbrPfwQhukU+rGZm5W8PQ==
@@ -5392,10 +5392,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.52:
-  version "0.0.52"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.52.tgz#cab044f5bc4af1a6bf1d55fa2f45131028e1777e"
-  integrity sha512-kqSRrYysN1Pl6K/INRIKsIv1ymJfouk4qGD1+7ZaMA0eTkEVs7lkxc/yDLCWRnKN0I4wU8uAQl5ORpu/ao0LfQ==
+franklin-sites@0.0.53:
+  version "0.0.53"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.53.tgz#0eb77d26bc67c2f4cce4d3c1ae74c7709863c438"
+  integrity sha512-QX9/LRxbJwKmffFN1itD1DaaZ+iaGYR9BpN60NWK4s3WUhvP3WreWA6dxcbsAZZAQPtCNProIG8pPkvOI4NAXQ==
   dependencies:
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"
@@ -6018,7 +6018,7 @@ icss-utils@^4.0.0, icss-utils@^4.1.1:
   dependencies:
     postcss "^7.0.14"
 
-idb@^5.0.4:
+idb@5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/idb/-/idb-5.0.4.tgz#9b6d42d5eff3c7f063b6f4d3e7c7e9aaeae2fd7a"
   integrity sha512-g+CRa0NLB5R+VTd8UQK/J8eEPlZk82iwekJQOYA0bFJsc7TGDKyBywNmLBUdHPUyyazV1wN8DdHhSKzEX9Z9kQ==
@@ -8686,7 +8686,7 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prettier@^2.0.5:
+prettier@2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
   integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==

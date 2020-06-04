@@ -1,7 +1,15 @@
-import React, { memo, useLayoutEffect, useRef, FocusEvent, FC } from 'react';
+import React, {
+  memo,
+  useLayoutEffect,
+  useRef,
+  FocusEvent,
+  MouseEvent,
+  KeyboardEvent,
+  FC,
+} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Card, RefreshIcon, BinIcon } from 'franklin-sites';
+import { Card, RefreshIcon, BinIcon, SpinnerIcon } from 'franklin-sites';
 
 import { Job, FinishedJob } from '../../blast/types/blastJob';
 import { Status } from '../../blast/types/blastStatuses';
@@ -12,9 +20,9 @@ import { LocationToPath, Location } from '../../../app/config/urls';
 
 import './styles/Dashboard.scss';
 
-const stopPropagation = (event: MouseEvent | KeyboardEvent) => {
-  event.stopPropagation();
-};
+const stopPropagation = (
+  event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
+) => event.stopPropagation();
 
 interface NameProps {
   id: Job['internalID'];
@@ -30,6 +38,7 @@ const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <span
       contentEditable
       onClick={stopPropagation}
@@ -75,7 +84,7 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
     case Status.RUNNING:
       return (
         <>
-          Running
+          Running <SpinnerIcon width="12" height="12" />
           <br />
           <span className="dashboard__body__notify_message">
             We&apos;ll notify you when it&apos;s done
@@ -91,7 +100,7 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
         <>
           Successful{' '}
           <span
-            title={`Found ${hits} ${hitText} even though you queried ${queriedHits}`}
+            title={`${hits} ${hitText} results found instead of the requested ${queriedHits}`}
           >
             ({hits} {hitText})
           </span>
@@ -104,12 +113,11 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
 };
 
 interface ActionsProps {
-  id: Job['internalID'];
   parameters: Job['parameters'];
+  onDelete(): void;
 }
 
-const Actions: FC<ActionsProps> = ({ id, parameters }) => {
-  const dispatch = useDispatch();
+const Actions: FC<ActionsProps> = ({ parameters, onDelete }) => {
   const history = useHistory();
 
   return (
@@ -129,13 +137,25 @@ const Actions: FC<ActionsProps> = ({ id, parameters }) => {
         title="delete this job"
         onClick={(event) => {
           event.stopPropagation();
-          dispatch(deleteJob(id));
+          onDelete();
         }}
       >
         <BinIcon />
       </button>
     </span>
   );
+};
+
+const KeyframesForDelete = {
+  opacity: [1, 1, 0],
+  transform: ['translateX(0)', 'translateX(-2ch)', 'translateX(75%)'],
+};
+
+const animationOptionsForDelete: KeyframeAnimationOptions = {
+  duration: 500,
+  delay: 100,
+  easing: 'ease-out',
+  fill: 'both',
 };
 
 const keyframesForNew = {
@@ -165,6 +185,7 @@ interface CustomLocationState {
 
 const Row: FC<RowProps> = memo(({ job }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const ref = useRef<HTMLElement>(null);
   const firstTime = useRef<boolean>(true);
 
@@ -178,6 +199,17 @@ const Row: FC<RowProps> = memo(({ job }) => {
       return;
     }
     history.push(jobLink);
+  };
+
+  const handleDelete = () => {
+    if (!(ref.current && 'animate' in ref.current)) {
+      dispatch(deleteJob(job.internalID));
+      return;
+    }
+    ref.current.animate(
+      KeyframesForDelete,
+      animationOptionsForDelete
+    ).onfinish = () => dispatch(deleteJob(job.internalID));
   };
 
   // if the state of the current location contains the parameters from this job,
@@ -231,7 +263,7 @@ const Row: FC<RowProps> = memo(({ job }) => {
         </NiceStatus>
       </span>
       <span className="dashboard__body__actions">
-        <Actions id={job.internalID} parameters={job.parameters} />
+        <Actions parameters={job.parameters} onDelete={handleDelete} />
       </span>
       <span className="dashboard__body__id">
         {'remoteID' in job && jobLink && (

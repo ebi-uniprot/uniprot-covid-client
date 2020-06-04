@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  Fragment,
-  useState,
-  FormEvent,
-  MouseEvent,
-  useEffect,
-} from 'react';
+import React, { FC, useState, FormEvent, MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { v1 } from 'uuid';
 import {
@@ -15,10 +8,13 @@ import {
   WarningIcon,
   SequenceSubmission,
   SearchInput,
+  PageIntro,
+  SpinnerIcon,
 } from 'franklin-sites';
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
+import { sleep } from 'timing-functions';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
 import { FormParameters } from '../types/blastFormParameters';
@@ -28,6 +24,7 @@ import * as actions from '../../state/toolsActions';
 import { LocationToPath, Location } from '../../../app/config/urls';
 import initialFormValues, {
   BlastFormValues,
+  BlastFormValue,
   BlastFields,
   SelectedTaxon,
 } from '../config/BlastFormData';
@@ -50,6 +47,22 @@ import {
   Scores,
   TaxIDs,
 } from '../types/blastServerParameters';
+import infoMappings from '../../../shared/config/InfoMappings';
+import { Tool } from '../../types';
+
+// https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3848038/
+const getAutoMatrixFor = (sequence: string): FormParameters['matrix'] => {
+  if (sequence.length <= 34) {
+    return 'PAM30';
+  }
+  if (sequence.length <= 49) {
+    return 'PAM70';
+  }
+  if (sequence.length <= 85) {
+    return 'BLOSUM80';
+  }
+  return 'BLOSUM62';
+};
 
 const FormSelect: FC<{
   formValues: BlastFormValues;
@@ -104,32 +117,47 @@ const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // used when the form submission needs to be disabled
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  // used when the form is about to be submitted to the server
+  const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
-  const [formValues, setFormValues] = useState<BlastFormValues>(() => {
-    // NOTE: we should use a similar logic to pre-fill fields based on querystring
-    const parametersFromHistoryState: FormParameters | undefined = (history
-      .location?.state as CustomLocationState)?.parameters;
-    if (parametersFromHistoryState) {
-      // if we get here, we got parameters passed with the location update to
-      // use as pre-filled fields
-      const output = {};
-      for (const [key, field] of Object.entries(
-        initialFormValues as BlastFormValues
-      )) {
-        output[key] = {
-          ...field,
-          selected: parametersFromHistoryState[field.fieldName],
-        };
-      }
-      return output as BlastFormValues;
-    }
-    // otherwise, pass the default values
-    return initialFormValues;
-  });
-
   const [searchByIDValue, setSearchByIDValue] = useState('');
   const [sequenceData, setSequenceData] = useState<SequenceData>();
   const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
+
+  const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
+    () => {
+      // NOTE: we should use a similar logic to pre-fill fields based on querystring
+      const parametersFromHistoryState: FormParameters | undefined = (history
+        .location?.state as CustomLocationState)?.parameters;
+      if (parametersFromHistoryState) {
+        // if we get here, we got parameters passed with the location update to
+        // use as pre-filled fields
+        // yes, I'm doing that in one go to avoid having typescript complain about
+        // the object not being of the right shape even though I want to construct
+        // it in multiple steps 🙄
+        return Object.freeze(
+          Object.fromEntries(
+            Object.entries(initialFormValues as BlastFormValues).map(
+              ([key, field]) => [
+                key,
+                Object.freeze({
+                  ...field,
+                  selected:
+                    parametersFromHistoryState[
+                      field.fieldName as keyof FormParameters
+                    ],
+                }) as Readonly<BlastFormValue>,
+              ]
+            )
+          )
+        ) as Readonly<BlastFormValues>;
+      }
+      // otherwise, pass the default values
+      return initialFormValues;
+    }
+  );
 
   const updateFormValue = (type: BlastFields, value: string) => {
     setFormValues({
@@ -143,7 +171,7 @@ const BlastForm = () => {
     if (!id) return;
 
     const taxonFormValues = formValues[BlastFields.taxons];
-    const { selected = [] } = taxonFormValues;
+    const selected = (taxonFormValues.selected || []) as SelectedTaxon[];
 
     // If already there, don't add again
     if (selected.some((taxon: SelectedTaxon) => taxon.id === id)) return;
@@ -162,13 +190,12 @@ const BlastForm = () => {
 
   const removeTaxonFormValue = (id: string | number) => {
     const taxonFormValues = formValues[BlastFields.taxons];
+    const selected = (taxonFormValues.selected || []) as SelectedTaxon[];
     setFormValues({
       ...formValues,
       [BlastFields.taxons]: {
         ...taxonFormValues,
-        selected: taxonFormValues.selected.filter(
-          (taxon: SelectedTaxon) => taxon.id !== id
-        ),
+        selected: selected.filter((taxon: SelectedTaxon) => taxon.id !== id),
       },
     });
   };
@@ -180,6 +207,9 @@ const BlastForm = () => {
   // and prevent submission if there is any issue
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
     event.preventDefault();
+
+    setSubmitDisabled(true);
+    setSending(true);
 
     const sequence = formValues[BlastFields.sequence].selected as Sequence;
     // TODO: validate sequence
@@ -193,7 +223,12 @@ const BlastForm = () => {
         formValues[BlastFields.taxons].selected as SelectedTaxon[]
       ) as TaxIDs,
       threshold: formValues[BlastFields.threshold].selected as Exp,
-      matrix: formValues[BlastFields.matrix].selected as Matrix,
+      matrix:
+        formValues[BlastFields.matrix].selected === 'auto'
+          ? getAutoMatrixFor(
+              formValues[BlastFields.sequence].selected as string
+            )
+          : (formValues[BlastFields.matrix].selected as Matrix),
       filter: formValues[BlastFields.filter].selected as Filter,
       gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
       hits: parseInt(
@@ -211,14 +246,17 @@ const BlastForm = () => {
     // the reducer will be in charge of generating a proper job object for
     // internal state
     dispatch(actions.createJob(parameters, 'blast', jobName));
-    // navigate to the dashboard
-    history.push(LocationToPath[Location.Dashboard], { parameters });
+    // navigate to the dashboard, not immediately, to give the impression that
+    // something is happening
+    sleep(1000).then(() => {
+      history.push(LocationToPath[Location.Dashboard], { parameters });
+    });
   };
 
   const resetSequenceData = () => {
     setSequenceData(undefined);
     updateFormValue(BlastFields.sequence, '');
-  }
+  };
 
   const updateImportSequenceFeedback = throttle((feedback: string) => {
     setSequenceImportFeedback(feedback);
@@ -258,6 +296,7 @@ const BlastForm = () => {
           } else {
             updateImportSequenceFeedback('no-results');
           }
+          updateImportSequenceFeedback('no-results');
         } else {
           updateImportSequenceFeedback('invalid');
         }
@@ -267,25 +306,51 @@ const BlastForm = () => {
       .catch((e) => {
         console.error("can't get the sequence:", e);
       });
-  }
-
-  const sequenceMetaData = sequenceData &&
-    `(${sequenceData.uniProtkbId}:${sequenceData.primaryAccession})`;
+  };
 
   useEffect(() => {
     getSequenceByAccessionOrID(searchByIDValue);
   }, [searchByIDValue]);
 
+  useEffect(() => {
+    const matrix = getAutoMatrixFor(formValues.Sequence.selected as string);
+    // eslint-disable-next-line no-shadow
+    setFormValues((formValues: BlastFormValues) => ({
+      ...formValues,
+      [BlastFields.matrix]: {
+        ...formValues[BlastFields.matrix],
+        values: [
+          { label: `Auto - ${matrix}`, value: 'auto' },
+          ...(formValues[BlastFields.matrix].values || []).filter(
+            (option) => option.value !== 'auto'
+          ),
+        ],
+      },
+    }));
+  }, [formValues.Sequence.selected]);
+
+  useEffect(() => {
+    getSequenceByAccessionOrID(searchByIDValue);
+  }, [searchByIDValue]);
+
+  const { name, links, info } = infoMappings[Tool.blast];
+
   return (
-    <Fragment>
-      <h3>Submit new job</h3>
+    <SingleColumnLayout>
+      <PageIntro title={name} links={links}>
+        {info}
+      </PageIntro>
       <form onSubmit={submitBlastJob}>
         <fieldset>
-          <section>
-            <legend>Find a protein to BLAST by UniProtID or keyword (examples).</legend>
+          <section className="blast-form-section__item">
+            <legend>
+              Find a protein to BLAST by UniProt ID{' '}
+              <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
+            </legend>
             <div className="import-sequence-section">
               <input
                 type="text"
+                placeholder="P05067, A4_HUMAN, UPI0000000001"
                 onChange={({ target }) => setSearchByIDValue(target.value)}
                 value={searchByIDValue}
               />
@@ -297,9 +362,12 @@ const BlastForm = () => {
             </div>
           </section>
         </fieldset>
+        <section className="text-block">
+          <strong>OR</strong>
+        </section>
         <fieldset>
-          <section>
-            <legend>Sequence {sequenceData && sequenceMetaData}</legend>
+          <section className="text-block">
+            <legend>Enter either a protein or nucleotide sequence.</legend>
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={(e: SequenceSubmissionOnChangeEvent) => {
@@ -311,7 +379,7 @@ const BlastForm = () => {
                 }
               }
               className="blast-form-textarea"
-              value={formValues[BlastFields.sequence].selected}
+              value={String(formValues[BlastFields.sequence].selected)}
             />
           </section>
           <section className="blast-form-section">
@@ -324,8 +392,8 @@ const BlastForm = () => {
               <AutocompleteWrapper
                 url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
-                title="Restrict to taxonomy"
-                clearOnSelect={true}
+                title="Restrict by taxonomy"
+                clearOnSelect
               />
             </section>
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">
@@ -333,9 +401,8 @@ const BlastForm = () => {
                 (formValues[BlastFields.taxons].selected as SelectedTaxon[]) ||
                 []
               ).map(({ label, id }: SelectedTaxon) => (
-                <div>
+                <div key={label}>
                   <Chip
-                    key={label}
                     onRemove={() => removeTaxonFormValue(id)}
                     className="secondary"
                   >
@@ -359,50 +426,54 @@ const BlastForm = () => {
                 />
               </label>
             </section>
-            <section className="blast-form-section__item blast-form-section__submit">
-              <input
-                className="button primary"
-                type="submit"
-                onClick={submitBlastJob}
-                value="Submit"
-              />
-            </section>
           </section>
-          <button
-            type="button"
-            className="button tertiary"
-            onClick={() => setDisplayAdvanced((display) => !display)}
-          >
-            Advanced {displayAdvanced ? '▾' : '▸'}
-          </button>
-          {displayAdvanced && (
-            <>
-              <section className="blast-form-section">
-                {[
-                  BlastFields.stype,
-                  BlastFields.program,
-                  BlastFields.threshold,
-                  BlastFields.matrix,
-                  BlastFields.filter,
-                  BlastFields.gapped,
-                  BlastFields.hits,
-                ].map((blastField) => (
-                  <FormSelect
-                    key={blastField}
-                    formValues={formValues}
-                    type={blastField}
-                    updateFormValues={updateFormValue}
-                  />
-                ))}
-              </section>
-              <section>
-                <input className="button secondary" type="reset" />
-              </section>
-            </>
-          )}
+          <section className="blast-form-section">
+            <button
+              className="button primary blast-form-section__submit"
+              type="submit"
+              disabled={submitDisabled}
+              onClick={submitBlastJob}
+            >
+              {sending ? <SpinnerIcon /> : 'Run Blast'}
+            </button>
+          </section>
+          <section>
+            <button
+              type="button"
+              className="button tertiary"
+              onClick={() => setDisplayAdvanced((display) => !display)}
+            >
+              Advanced parameters {displayAdvanced ? '▾' : '▸'}
+            </button>
+            {displayAdvanced && (
+              <>
+                <section className="blast-form-section">
+                  {[
+                    BlastFields.stype,
+                    BlastFields.program,
+                    BlastFields.threshold,
+                    BlastFields.matrix,
+                    BlastFields.filter,
+                    BlastFields.gapped,
+                    BlastFields.hits,
+                  ].map((blastField) => (
+                    <FormSelect
+                      key={blastField}
+                      formValues={formValues}
+                      type={blastField}
+                      updateFormValues={updateFormValue}
+                    />
+                  ))}
+                </section>
+                <section>
+                  <input className="button secondary" type="reset" />
+                </section>
+              </>
+            )}
+          </section>
         </fieldset>
       </form>
-    </Fragment>
+    </SingleColumnLayout>
   );
 };
 

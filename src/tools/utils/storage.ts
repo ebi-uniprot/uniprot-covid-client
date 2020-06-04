@@ -25,9 +25,9 @@ export default class JobStore {
     return (await this.dbPromise).getAll(this.storeName);
   }
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   async set(key: IDBValidKey, value: any) {
-    return; // temporarily don't set while in development
-    // return (await this.dbPromise).put(this.storeName, value, key);
+    return (await this.dbPromise).put(this.storeName, value, key);
   }
 
   async del(key: IDBValidKey) {

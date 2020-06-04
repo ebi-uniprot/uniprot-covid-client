@@ -12,7 +12,16 @@
       background: #e4e8eb;
     }
 
+    & .card--has-hover {
+      &:hover,
+      &:focus,
+      &:focus-within {
+        background: #d2dce3;
+      }
+    }
+
     & .card__content {
+      user-select: none;
       display: grid;
       grid-template-areas:
         'name type time status actions'
@@ -80,10 +89,26 @@
     &__actions {
       display: flex;
 
+      & svg {
+        overflow: visible;
+
+        & .bin_svg__cover {
+          transition: transform ease-in 100ms;
+          transform-origin: bottom left;
+        }
+      }
+
       & button {
         cursor: pointer;
         margin: 0.5ch;
         width: 2ch;
+
+        &:hover,
+        &:focus {
+          & .bin_svg__cover {
+            transform: rotate(-20deg);
+          }
+        }
       }
     }
 

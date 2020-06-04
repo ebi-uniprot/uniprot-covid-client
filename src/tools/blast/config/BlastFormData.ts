@@ -102,20 +102,18 @@ export default Object.freeze({
   [BlastFields.matrix]: Object.freeze({
     fieldName: 'matrix',
     type: BlastFieldTypes.select,
-    selected: 'BLOSUM62',
+    selected: 'auto',
     values: Object.freeze([
-      // TODO 'Auto' behaves as follows in current website
-      // length > 85: "blosum62"
-      // length > 49: "blosum80"
-      // length > 34: "pam70"
-      // otherwise "pam30"
-      // This should be handled in BlastForm.tsx
+      // "auto" will be replaced by the correct matrix value on submission
+      // but we need to have a distinc value here to not have 2 <option> with
+      // same values
+      { label: 'Auto - PAM30', value: 'auto' },
       { value: 'BLOSUM45' },
       { value: 'BLOSUM62' },
       { value: 'BLOSUM80' },
       { value: 'PAM70' },
       { value: 'PAM30' },
-    ] as Array<{ label?: string; value: FormParameters['matrix'] }>),
+    ] as Array<{ label?: string; value: FormParameters['matrix'] | 'auto' }>),
   }),
   [BlastFields.filter]: Object.freeze({
     fieldName: 'filter',
@@ -154,4 +152,4 @@ export default Object.freeze({
     fieldName: 'name',
     type: BlastFieldTypes.textarea,
   }),
-});
+}) as Readonly<BlastFormValues>;
