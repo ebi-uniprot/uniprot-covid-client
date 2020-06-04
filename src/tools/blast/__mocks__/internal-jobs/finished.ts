@@ -20,7 +20,7 @@ const finished: FinishedJob = {
     program: 'blastp',
     sequence: 'MLPGLALLLL',
     database: 'uniprotkb_refprotswissprot',
-    taxIDs: '9606',
+    taxIDs: [{ id: '9606', label: 'Homo sapiens' }],
     threshold: '10',
     matrix: 'BLOSUM62',
     filter: 'F',

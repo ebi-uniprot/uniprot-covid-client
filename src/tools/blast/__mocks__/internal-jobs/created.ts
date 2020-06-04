@@ -13,7 +13,7 @@ const created: CreatedJob = {
     sequence: 'MLPGLALLLL',
     program: 'blastp',
     database: 'uniprotkb_refprotswissprot',
-    taxIDs: '',
+    taxIDs: [],
     threshold: '1e-2',
     matrix: 'BLOSUM62',
     filter: 'T',
