@@ -401,9 +401,6 @@ const BlastForm = () => {
                 placeholder="P05067, A4_HUMAN, UPI0000000001"
                 value={searchByIDValue}
               />
-              {urlForAccessionOrID &&
-                !loadingForAccessionOrID &&
-                (sequence ? '✅' : '❌')}
             </div>
           </section>
         </fieldset>
@@ -415,9 +412,7 @@ const BlastForm = () => {
             <legend>Enter either a protein or nucleotide sequence.</legend>
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={(e: SequenceSubmissionOnChangeEvent) =>
-                onSequenceChange(e)
-              }
+              onChange={onSequenceChange}
               className="blast-form-textarea"
               value={String(formValues[BlastFields.sequence].selected)}
             />
