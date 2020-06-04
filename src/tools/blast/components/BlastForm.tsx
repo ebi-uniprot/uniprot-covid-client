@@ -278,10 +278,9 @@ const BlastForm = () => {
             updateFormValue(BlastFields.sequence, results[0].sequence.value);
             setSequenceImportFeedback('success');
             return;
-          } else {
-            // setSequenceImportFeedback('no-results');
-            updateImportSequenceFeedback('no-results');
           }
+          // setSequenceImportFeedback('no-results');
+          updateImportSequenceFeedback('no-results');
         } else {
           // setSequenceImportFeedback('invalid');
           updateImportSequenceFeedback('invalid');
@@ -375,7 +374,7 @@ const BlastForm = () => {
                 url={uniProtKBApiUrls.organismSuggester}
                 onSelect={updateTaxonFormValue}
                 title="Restrict by taxonomy"
-                clearOnSelect={true}
+                clearOnSelect
               />
             </section>
             <section className="blast-form-section__item blast-form-section__item--selected-taxon">

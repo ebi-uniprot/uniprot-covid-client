@@ -100,7 +100,7 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
         <>
           Successful{' '}
           <span
-            title={`Found ${hits} ${hitText} even though you queried ${queriedHits}`}
+            title={`${hits} ${hitText} results found instead of the requested ${queriedHits}`}
           >
             ({hits} {hitText})
           </span>
