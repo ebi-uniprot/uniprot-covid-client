@@ -104,12 +104,9 @@ export default Object.freeze({
     type: BlastFieldTypes.select,
     selected: 'auto',
     values: Object.freeze([
-      // TODO 'Auto' behaves as follows in current website
-      // length > 85: "blosum62"
-      // length > 49: "blosum80"
-      // length > 34: "pam70"
-      // otherwise "pam30"
-      // This should be handled in BlastForm.tsx
+      // "auto" will be replaced by the correct matrix value on submission
+      // but we need to have a distinc value here to not have 2 <option> with
+      // same values
       { label: 'Auto - PAM30', value: 'auto' },
       { value: 'BLOSUM45' },
       { value: 'BLOSUM62' },

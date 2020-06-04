@@ -119,27 +119,38 @@ const BlastForm = () => {
   const [sequenceData, setSequenceData] = useState(null);
   const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
-  const [formValues, setFormValues] = useState<BlastFormValues>(() => {
-    // NOTE: we should use a similar logic to pre-fill fields based on querystring
-    const parametersFromHistoryState: FormParameters | undefined = (history
-      .location?.state as CustomLocationState)?.parameters;
-    if (parametersFromHistoryState) {
-      // if we get here, we got parameters passed with the location update to
-      // use as pre-filled fields
-      const output = {};
-      for (const [key, field] of Object.entries(
-        initialFormValues as BlastFormValues
-      )) {
-        output[key] = {
-          ...field,
-          selected: parametersFromHistoryState[field.fieldName],
-        } as BlastFormValue;
+  const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
+    () => {
+      // NOTE: we should use a similar logic to pre-fill fields based on querystring
+      const parametersFromHistoryState: FormParameters | undefined = (history
+        .location?.state as CustomLocationState)?.parameters;
+      if (parametersFromHistoryState) {
+        // if we get here, we got parameters passed with the location update to
+        // use as pre-filled fields
+        // yes, I'm doing that in one go to avoid having typescript complain about
+        // the object not being of the right shape even though I want to construct
+        // it in multiple steps 🙄
+        return Object.freeze(
+          Object.fromEntries(
+            Object.entries(initialFormValues as BlastFormValues).map(
+              ([key, field]) => [
+                key,
+                Object.freeze({
+                  ...field,
+                  selected:
+                    parametersFromHistoryState[
+                      field.fieldName as keyof FormParameters
+                    ],
+                }) as Readonly<BlastFormValue>,
+              ]
+            )
+          )
+        );
       }
-      return output as BlastFormValues;
+      // otherwise, pass the default values
+      return initialFormValues;
     }
-    // otherwise, pass the default values
-    return initialFormValues;
-  });
+  );
 
   const updateFormValue = (type: BlastFields, value: string) => {
     setFormValues({
@@ -208,7 +219,9 @@ const BlastForm = () => {
       threshold: formValues[BlastFields.threshold].selected as Exp,
       matrix:
         formValues[BlastFields.matrix].selected === 'auto'
-          ? getAutoMatrixFor(formValues[BlastFields.sequence].selected)
+          ? getAutoMatrixFor(
+              formValues[BlastFields.sequence].selected as string
+            )
           : (formValues[BlastFields.matrix].selected as Matrix),
       filter: formValues[BlastFields.filter].selected as Filter,
       gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
@@ -300,7 +313,7 @@ const BlastForm = () => {
   }, [searchByIDValue]);
 
   useEffect(() => {
-    const matrix = getAutoMatrixFor(formValues.Sequence.selected);
+    const matrix = getAutoMatrixFor(formValues.Sequence.selected as string);
     // eslint-disable-next-line no-shadow
     setFormValues((formValues: BlastFormValues) => ({
       ...formValues,
