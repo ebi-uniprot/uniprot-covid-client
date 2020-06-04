@@ -40,7 +40,7 @@ interface NameProps {
 
 const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState(children);
+  const [text, setText] = useState(children || '');
 
   const handleBlur = () => {
     const cleanedText = text.trim();
