@@ -12,6 +12,14 @@
       background: #e4e8eb;
     }
 
+    & .card--has-hover {
+      &:hover,
+      &:focus,
+      &:focus-within {
+        background: #d2dce3;
+      }
+    }
+
     & .card__content {
       user-select: none;
       display: grid;
