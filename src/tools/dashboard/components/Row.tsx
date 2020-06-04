@@ -25,6 +25,7 @@ import { Status } from '../../blast/types/blastStatuses';
 import { updateJobTitle, deleteJob } from '../../state/toolsActions';
 
 import { LocationToPath, Location } from '../../../app/config/urls';
+import { getBEMClassName as bem } from '../../../shared/utils/utils';
 
 import './styles/Dashboard.scss';
 
@@ -261,9 +262,16 @@ const Row: FC<RowProps> = memo(({ job }) => {
       animationOptionsForStatusUpdate
     );
   }, [job.status]);
-
+  // job.status = Status.FAILED;
   return (
-    <Card onClick={handleClick} ref={ref}>
+    <Card
+      onClick={handleClick}
+      ref={ref}
+      className={bem({
+        b: 'card',
+        m: job.status === Status.FAILED && 'failure',
+      })}
+    >
       <span className="dashboard__body__name">
         <Name id={job.internalID}>{job.title}</Name>
       </span>
