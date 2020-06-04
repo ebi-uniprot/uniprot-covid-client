@@ -9,7 +9,7 @@ describe('BlastParametersAdapter tests', () => {
       threshold: '1e-4',
       filter: 'F',
       gapped: false,
-      taxIDs: '1234',
+      taxIDs: [{ id: '1234', label: 'some species' }],
       stype: 'protein',
       sequence: 'ATGC',
       database: 'UniProt',
