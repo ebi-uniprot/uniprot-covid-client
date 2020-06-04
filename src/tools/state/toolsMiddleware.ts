@@ -90,12 +90,16 @@ const toolsMiddleware: Middleware = (store) => {
       if (status === Status.NOT_FOUND) {
         throw new Error('Job was not found on the server');
       }
-      if (status === Status.RUNNING || status === Status.FAILED) {
+      if (
+        status === Status.RUNNING ||
+        status === Status.FAILURE ||
+        status === Status.ERRORED
+      ) {
         dispatch(
           updateJob({
             ...currentStateOfJob,
             timeLastUpdate: Date.now(),
-            status: status as Status.RUNNING | Status.FAILED,
+            status: status as Status.RUNNING | Status.FAILURE | Status.ERRORED,
           })
         );
 
@@ -120,7 +124,7 @@ const toolsMiddleware: Middleware = (store) => {
           updateJob({
             ...currentStateOfJob,
             timeLastUpdate: now,
-            status: Status.FAILED,
+            status: Status.FAILURE,
           })
         );
         throw new Error(
@@ -202,7 +206,7 @@ const toolsMiddleware: Middleware = (store) => {
       dispatch(
         updateJob({
           ...currentStateOfJob,
-          status: Status.FAILED,
+          status: Status.FAILURE,
           timeLastUpdate: Date.now(),
         })
       );

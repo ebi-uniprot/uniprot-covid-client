@@ -111,7 +111,8 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
           </span>
         </>
       );
-    case Status.FAILED:
+    case Status.FAILURE:
+    case Status.ERRORED:
       return <>Failed</>;
     case Status.FINISHED: {
       if (hits === queriedHits) return <>Successful</>;
@@ -262,14 +263,16 @@ const Row: FC<RowProps> = memo(({ job }) => {
       animationOptionsForStatusUpdate
     );
   }, [job.status]);
-  // job.status = Status.FAILED;
+  // job.status = Status.FAILURE;
   return (
     <Card
       onClick={handleClick}
       ref={ref}
       className={bem({
         b: 'card',
-        m: job.status === Status.FAILED && 'failure',
+        m:
+          (job.status === Status.FAILURE || job.status === Status.ERRORED) &&
+          'failure',
       })}
     >
       <span className="dashboard__body__name">

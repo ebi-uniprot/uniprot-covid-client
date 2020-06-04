@@ -6,7 +6,7 @@ const ONE_MINUTE_AGO = now - 1000 * 60;
 const TWO_MINUTES_AGO = now - 1000 * 60 * 2;
 
 const failedBeforeSubmission: FailedJob = {
-  status: Status.FAILED,
+  status: Status.FAILURE,
   internalID: 'local-97e5ab00-9ff0-11ea-baf5-bf14c0760620',
   title: 'my job title',
   type: 'blast',
