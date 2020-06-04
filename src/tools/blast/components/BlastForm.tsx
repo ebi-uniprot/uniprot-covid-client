@@ -110,7 +110,7 @@ type SequenceSubmissionOnChangeEvent = {
   message: string | null;
 };
 
-function extractNameFromFASTAHeader(fasta: string) : string | null | undefined {
+function extractNameFromFASTAHeader(fasta: string): string | null | undefined {
   if (!fasta) {
     return;
   }
@@ -118,14 +118,11 @@ function extractNameFromFASTAHeader(fasta: string) : string | null | undefined {
   const headers = fasta
     .split('\n')
     .map((line: string) => {
-      return line
-        .match(/>/g) ? line : null
+      return line.match(/>/g) ? line : null;
     })
     .filter(Boolean)
     .map((line: string | null) => {
-      return line!
-        .replace(/\s/ig, '')
-        .split('|')
+      return line!.replace(/\s/gi, '').split('|');
     });
 
   if (headers && headers.length === 0) {
@@ -183,7 +180,7 @@ const BlastForm = () => {
   );
 
   const updateFormValue = (type: BlastFields, value: string) => {
-    console.log("new value:", type, value);
+    console.log('new value:', type, value);
     setFormValues({
       ...formValues,
       [type]: { ...formValues[type], selected: value },
@@ -357,25 +354,23 @@ const BlastForm = () => {
     }));
   }, [formValues.Sequence.selected]);
 
-
   const { name, links, info } = infoMappings[Tool.blast];
 
-
   const onSequenceChange = (e: SequenceSubmissionOnChangeEvent) => {
-console.log("e:", e);
+    console.log('e:', e);
     if (e.sequence === formValues[BlastFields.sequence].selected) {
       return;
     }
 
     const name = extractNameFromFASTAHeader(e.sequence);
-    
+
     if (name) {
       updateFormValue(BlastFields.name, name);
-console.log("got a name:", name);
+      console.log('got a name:', name);
     } else if (searchByIDValue) {
       updateFormValue(BlastFields.name, searchByIDValue);
     }
-console.log("name:", name);
+    console.log('name:', name);
     updateFormValue(BlastFields.sequence, e.sequence);
   };
 
@@ -411,7 +406,9 @@ console.log("name:", name);
             <legend>Enter either a protein or nucleotide sequence.</legend>
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={(e: SequenceSubmissionOnChangeEvent) => onSequenceChange(e)}
+              onChange={(e: SequenceSubmissionOnChangeEvent) =>
+                onSequenceChange(e)
+              }
               className="blast-form-textarea"
               value={String(formValues[BlastFields.sequence].selected)}
             />

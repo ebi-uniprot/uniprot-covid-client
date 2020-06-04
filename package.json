@@ -52,6 +52,16 @@
       "<rootDir>/jest.serializer.js"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(ts|tsx|js|jsx|css|scss)": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@geneontology/ribbon": "1.11.2",
     "@sentry/browser": "5.15.5",
@@ -142,8 +152,10 @@
     "fake-indexeddb": "3.0.0",
     "html-loader": "1.1.0",
     "html-webpack-plugin": "4.3.0",
+    "husky": "4.2.5",
     "jest": "25.5.1",
     "jest-css-modules-transform": "4.0.0",
+    "lint-staged": "10.2.9",
     "lodash": "4.17.15",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.14.1",
