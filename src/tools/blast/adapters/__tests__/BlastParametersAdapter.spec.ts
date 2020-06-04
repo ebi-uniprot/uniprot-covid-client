@@ -1,10 +1,11 @@
 import convertFormParametersForServer from '../BlastParametersAdapter';
+import { FormParameters } from '../../types/blastFormParameters';
 
 describe('BlastParametersAdapter tests', () => {
   it('should translate blast parameters accurately', () => {
-    const formParams = {
-      program: 'program_name',
-      matrix: 'matrix_type',
+    const formParams: FormParameters = {
+      program: 'blastp',
+      matrix: 'PAM30',
       hits: 250,
       threshold: '1e-4',
       filter: 'F',
@@ -16,9 +17,9 @@ describe('BlastParametersAdapter tests', () => {
     };
     const formData = convertFormParametersForServer(formParams);
     expect(Array.from(formData.entries())).toEqual([
-      ['program', 'program_name'],
+      ['program', 'blastp'],
       ['email', 'uuw_dev@uniprot.org'],
-      ['matrix', 'matrix_type'],
+      ['matrix', 'PAM30'],
       ['alignments', '250'],
       ['scores', '250'],
       ['exp', '1e-4'],
