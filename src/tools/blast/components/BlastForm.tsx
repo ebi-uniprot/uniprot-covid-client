@@ -346,9 +346,9 @@ const BlastForm = () => {
     loading: loadingForAccessionOrID,
   } = useDataApi(urlForAccessionOrID);
 
+  const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
+
   useEffect(() => {
-    const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
-    console.log({ sequence });
     if (!sequence && formValues[BlastFields.sequence].selected) {
       return;
     }
@@ -375,7 +375,7 @@ const BlastForm = () => {
     urlForAccessionOrID,
     updateFormValue,
     onSequenceChange,
-    dataForAccessionOrID.results,
+    sequence,
     formValues,
   ]);
   /* end of logic to load a sequence from an accession or an ID */
@@ -401,6 +401,9 @@ const BlastForm = () => {
                 placeholder="P05067, A4_HUMAN, UPI0000000001"
                 value={searchByIDValue}
               />
+              {urlForAccessionOrID &&
+                !loadingForAccessionOrID &&
+                (sequence ? '✅' : '❌')}
             </div>
           </section>
         </fieldset>
