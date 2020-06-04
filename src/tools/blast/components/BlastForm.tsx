@@ -1,4 +1,11 @@
-import React, { FC, useState, FormEvent, MouseEvent, useEffect } from 'react';
+import React, {
+  FC,
+  useState,
+  useEffect,
+  useCallback,
+  FormEvent,
+  MouseEvent,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Chip,
@@ -9,29 +16,14 @@ import {
   // extractNameFromFASTAHeader,
 } from 'franklin-sites';
 import queryString from 'query-string';
-import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
 import { sleep } from 'timing-functions';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
+import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
+
 import { FormParameters } from '../types/blastFormParameters';
 import { Job } from '../types/blastJob';
-
-import * as actions from '../../state/toolsActions';
-import { LocationToPath, Location } from '../../../app/config/urls';
-import initialFormValues, {
-  BlastFormValues,
-  BlastFormValue,
-  BlastFields,
-  SelectedTaxon,
-} from '../config/BlastFormData';
-
-import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
-import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
-import fetchData from '../../../shared/utils/fetchData';
-import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
-
-import './styles/BlastForm.scss';
 import {
   SType,
   Program,
@@ -42,10 +34,26 @@ import {
   Exp,
   Filter,
   Scores,
-  TaxIDs,
 } from '../types/blastServerParameters';
-import infoMappings from '../../../shared/config/InfoMappings';
 import { Tool } from '../../types';
+
+import * as actions from '../../state/toolsActions';
+
+import useDataApi from '../../../shared/hooks/useDataApi';
+
+import { LocationToPath, Location } from '../../../app/config/urls';
+import initialFormValues, {
+  BlastFormValues,
+  BlastFormValue,
+  BlastFields,
+  SelectedTaxon,
+} from '../config/BlastFormData';
+import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
+import infoMappings from '../../../shared/config/InfoMappings';
+
+import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
+
+import './styles/BlastForm.scss';
 
 // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3848038/
 const getAutoMatrixFor = (sequence: string): FormParameters['matrix'] => {
@@ -134,6 +142,23 @@ function extractNameFromFASTAHeader(fasta: string): string | null | undefined {
   return accession;
 }
 
+const getURLForAccessionOrID = (input: string) => {
+  const cleanedInput = input.trim();
+  if (!cleanedInput) {
+    return;
+  }
+
+  const query = queryString.stringify({
+    query: uniProtKBAccessionRegEx.test(cleanedInput)
+      ? `accession:${cleanedInput}`
+      : `id:${cleanedInput}`,
+    fields: 'sequence, id',
+  });
+
+  // eslint-disable-next-line consistent-return
+  return `${uniProtKBApiUrls.search}?${query}`;
+};
+
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -179,13 +204,16 @@ const BlastForm = () => {
     }
   );
 
-  const updateFormValue = (type: BlastFields, value: string) => {
-    console.log('new value:', type, value);
-    setFormValues({
-      ...formValues,
-      [type]: { ...formValues[type], selected: value },
-    });
-  };
+  const updateFormValue = useCallback(
+    (type: BlastFields, value: string) => {
+      console.log('new value:', type, value);
+      setFormValues({
+        ...formValues,
+        [type]: { ...formValues[type], selected: value },
+      });
+    },
+    [formValues]
+  );
 
   const updateTaxonFormValue = (path: string, id: string) => {
     // Only proceed if a node is selected
@@ -272,70 +300,8 @@ const BlastForm = () => {
     });
   };
 
-  const resetSequenceData = () => {
-    updateFormValue(BlastFields.sequence, '');
-  };
-
-  const updateImportSequenceFeedback = throttle((feedback: string) => {
-    setSequenceImportFeedback(feedback);
-  }, 500);
-
-  const getSequenceByAccessionOrID = (input: string) => {
-    if (!input) {
-      resetSequenceData();
-      return;
-    }
-
-    const clearInput: string = input.replace(/\s/g, '');
-
-    if (clearInput.length === 0) {
-      resetSequenceData();
-      return;
-    }
-
-    const query: string = queryString.stringify({
-      query: uniProtKBAccessionRegEx.test(clearInput)
-        ? `accession:${clearInput}`
-        : `id:${clearInput}`,
-      fields: 'sequence, id',
-    });
-
-    updateImportSequenceFeedback('loading');
-
-    fetchData(`${uniProtKBApiUrls.search}?${query}`)
-      .then(({ data }) => {
-        const { results } = data;
-        if (results) {
-          if (results.length > 0) {
-            // updateFormValue(BlastFields.sequence, results[0].sequence.value);
-            onSequenceChange({
-              sequence: results[0].sequence.value,
-              valid: true,
-              likelyType: null,
-              message: null,
-            });
-            setSequenceImportFeedback('success');
-            return;
-          } else {
-            updateImportSequenceFeedback('no-results');
-          }
-          updateImportSequenceFeedback('no-results');
-        } else {
-          updateImportSequenceFeedback('invalid');
-        }
-
-        resetSequenceData();
-      })
-      .catch((e) => {
-        console.error("can't get the sequence:", e);
-      });
-  };
-
   useEffect(() => {
-    getSequenceByAccessionOrID(searchByIDValue);
-  }, [searchByIDValue]);
-
-  useEffect(() => {
+    console.log({ seq: formValues.Sequence.selected });
     const matrix = getAutoMatrixFor(formValues.Sequence.selected as string);
     // eslint-disable-next-line no-shadow
     setFormValues((formValues: BlastFormValues) => ({
@@ -372,6 +338,34 @@ const BlastForm = () => {
     updateFormValue(BlastFields.sequence, e.sequence);
   };
 
+  /* start of logic to load a sequence from an accession or an ID */
+  const urlForAccessionOrID = getURLForAccessionOrID(searchByIDValue);
+
+  const {
+    data: dataForAccessionOrID = {},
+    loading: loadingForAccessionOrID,
+  } = useDataApi(urlForAccessionOrID);
+
+  useEffect(() => {
+    const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
+    if (!sequence && formValues[BlastFields.sequence].selected) {
+      return;
+    }
+
+    onSequenceChange({
+      sequence: sequence || '',
+      valid: true,
+      likelyType: null,
+      message: null,
+    });
+  }, [
+    updateFormValue,
+    onSequenceChange,
+    dataForAccessionOrID.results,
+    formValues,
+  ]);
+  /* end of logic to load a sequence from an accession or an ID */
+
   return (
     <SingleColumnLayout>
       <PageIntro title={name} links={links}>
@@ -386,7 +380,7 @@ const BlastForm = () => {
             </legend>
             <div className="import-sequence-section">
               <SearchInput
-                isLoading={false}
+                isLoading={loadingForAccessionOrID}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setSearchByIDValue(e.target.value)
                 }
