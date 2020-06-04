@@ -6,6 +6,7 @@ import {
   SearchInput,
   PageIntro,
   SpinnerIcon,
+  // extractNameFromFASTAHeader,
 } from 'franklin-sites';
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
@@ -109,6 +110,33 @@ type SequenceSubmissionOnChangeEvent = {
   message: string | null;
 };
 
+function extractNameFromFASTAHeader(fasta: string) : string | null | undefined {
+  if (!fasta) {
+    return;
+  }
+
+  const headers = fasta
+    .split('\n')
+    .map((line: string) => {
+      return line
+        .match(/>/g) ? line : null
+    })
+    .filter(Boolean)
+    .map((line: string | null) => {
+      return line!
+        .replace(/\s/ig, '')
+        .split('|')
+    });
+
+  if (headers && headers.length === 0) {
+    return;
+  }
+
+  const accession = headers[0][1];
+
+  return accession;
+}
+
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -155,6 +183,7 @@ const BlastForm = () => {
   );
 
   const updateFormValue = (type: BlastFields, value: string) => {
+    console.log("new value:", type, value);
     setFormValues({
       ...formValues,
       [type]: { ...formValues[type], selected: value },
@@ -283,7 +312,13 @@ const BlastForm = () => {
         const { results } = data;
         if (results) {
           if (results.length > 0) {
-            updateFormValue(BlastFields.sequence, results[0].sequence.value);
+            // updateFormValue(BlastFields.sequence, results[0].sequence.value);
+            onSequenceChange({
+              sequence: results[0].sequence.value,
+              valid: true,
+              likelyType: null,
+              message: null,
+            });
             setSequenceImportFeedback('success');
             return;
           } else {
@@ -322,11 +357,27 @@ const BlastForm = () => {
     }));
   }, [formValues.Sequence.selected]);
 
-  useEffect(() => {
-    getSequenceByAccessionOrID(searchByIDValue);
-  }, [searchByIDValue]);
 
   const { name, links, info } = infoMappings[Tool.blast];
+
+
+  const onSequenceChange = (e: SequenceSubmissionOnChangeEvent) => {
+console.log("e:", e);
+    if (e.sequence === formValues[BlastFields.sequence].selected) {
+      return;
+    }
+
+    const name = extractNameFromFASTAHeader(e.sequence);
+    
+    if (name) {
+      updateFormValue(BlastFields.name, name);
+console.log("got a name:", name);
+    } else if (searchByIDValue) {
+      updateFormValue(BlastFields.name, searchByIDValue);
+    }
+console.log("name:", name);
+    updateFormValue(BlastFields.sequence, e.sequence);
+  };
 
   return (
     <SingleColumnLayout>
@@ -360,13 +411,7 @@ const BlastForm = () => {
             <legend>Enter either a protein or nucleotide sequence.</legend>
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={(e: SequenceSubmissionOnChangeEvent) => {
-                if (e.sequence === formValues[BlastFields.sequence].selected) {
-                  return;
-                }
-
-                updateFormValue(BlastFields.sequence, e.sequence);
-              }}
+              onChange={(e: SequenceSubmissionOnChangeEvent) => onSequenceChange(e)}
               className="blast-form-textarea"
               value={String(formValues[BlastFields.sequence].selected)}
             />
@@ -411,6 +456,7 @@ const BlastForm = () => {
                   autoComplete="off"
                   maxLength={22}
                   placeholder="my job title"
+                  value={formValues[BlastFields.name].selected as string}
                   onChange={(e) =>
                     updateFormValue(BlastFields.name, e.target.value)
                   }
