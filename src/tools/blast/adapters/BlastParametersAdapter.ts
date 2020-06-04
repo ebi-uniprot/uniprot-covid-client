@@ -20,7 +20,7 @@ const convertFormParametersForServer = (formParameters: FormParameters) => {
     threshold,
     filter,
     gapped,
-    taxIDs,
+    taxIDs = [],
     stype,
     sequence,
     database,

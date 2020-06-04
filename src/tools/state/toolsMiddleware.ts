@@ -156,12 +156,17 @@ const toolsMiddleware: Middleware = (store) => {
   };
 
   const submitJob = async (job: CreatedJob) => {
-    // specific logic to transform FormParameters to ServerParameters
-    const formData = convertFormParametersForServer(job.parameters);
-    formData.delete('scores');
-
-    const url = job.type === 'blast' ? blastUrls.runUrl : '';
     try {
+      // specific logic to transform FormParameters to ServerParameters
+      let formData;
+      try {
+        formData = convertFormParametersForServer(job.parameters);
+      } catch {
+        throw new Error('Internal error');
+      }
+      formData.delete('scores');
+      const url = job.type === 'blast' ? blastUrls.runUrl : '';
+
       const response = await postData(url, {
         data: formData,
         headers: {
