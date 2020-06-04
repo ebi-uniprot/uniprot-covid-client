@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Location } from 'history';
 
 import ErrorComponent from './ErrorComponent';
 
-type Props = {
+type Props = RouteComponentProps & {
   children: React.ReactNode;
   fallback?: React.ReactNode;
-  location: Location;
 };
 type State = { error?: Error; location?: Location };
 
@@ -17,8 +16,9 @@ type State = { error?: Error; location?: Location };
  * Provide a fallback message if you need to display a specific message instead
  * of the default one.
  * Provide `null` as a fallback to simply hide the error.
+ * Will try to rerender on location change.
  */
-export class NonWrappedErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   static defaultProps = { fallback: <ErrorComponent /> };
 
   constructor(props: Props) {
@@ -50,4 +50,4 @@ export class NonWrappedErrorBoundary extends Component<Props, State> {
   }
 }
 
-export default withRouter(NonWrappedErrorBoundary);
+export default withRouter(ErrorBoundary);

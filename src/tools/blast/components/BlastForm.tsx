@@ -14,6 +14,7 @@ import {
   RefreshIcon,
   WarningIcon,
   PageIntro,
+  SpinnerIcon,
 } from 'franklin-sites';
 import queryString from 'query-string';
 import { throttle } from 'lodash-es';
@@ -28,6 +29,7 @@ import * as actions from '../../state/toolsActions';
 import { LocationToPath, Location } from '../../../app/config/urls';
 import initialFormValues, {
   BlastFormValues,
+  BlastFormValue,
   BlastFields,
   SelectedTaxon,
 } from '../config/BlastFormData';
@@ -108,7 +110,10 @@ const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // used when the form submission needs to be disabled
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  // used when the form is about to be submitted to the server
+  const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
   const [searchByIDValue, setSearchByIDValue] = useState('');
   const [sequenceData, setSequenceData] = useState(null);
@@ -128,7 +133,7 @@ const BlastForm = () => {
         output[key] = {
           ...field,
           selected: parametersFromHistoryState[field.fieldName],
-        };
+        } as BlastFormValue;
       }
       return output as BlastFormValues;
     }
@@ -187,6 +192,7 @@ const BlastForm = () => {
     event.preventDefault();
 
     setSubmitDisabled(true);
+    setSending(true);
 
     const sequence = formValues[BlastFields.sequence].selected as Sequence;
     // TODO: validate sequence
@@ -223,7 +229,7 @@ const BlastForm = () => {
     dispatch(actions.createJob(parameters, 'blast', jobName));
     // navigate to the dashboard, not immediately, to give the impression that
     // something is happening
-    sleep(500).then(() => {
+    sleep(1000).then(() => {
       history.push(LocationToPath[Location.Dashboard], { parameters });
     });
   };
@@ -408,13 +414,14 @@ const BlastForm = () => {
             </section>
           </section>
           <section className="blast-form-section">
-            <input
+            <button
               className="button primary blast-form-section__submit"
               type="submit"
               disabled={submitDisabled}
               onClick={submitBlastJob}
-              value="Run BLAST"
-            />
+            >
+              {sending ? <SpinnerIcon /> : 'Run Blast'}
+            </button>
           </section>
           <section>
             <button

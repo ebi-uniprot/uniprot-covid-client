@@ -1,4 +1,12 @@
-import React, { memo, useLayoutEffect, useRef, FocusEvent, FC } from 'react';
+import React, {
+  memo,
+  useLayoutEffect,
+  useRef,
+  FocusEvent,
+  MouseEvent,
+  KeyboardEvent,
+  FC,
+} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Card, RefreshIcon, BinIcon, SpinnerIcon } from 'franklin-sites';
@@ -12,9 +20,9 @@ import { LocationToPath, Location } from '../../../app/config/urls';
 
 import './styles/Dashboard.scss';
 
-const stopPropagation = (event: MouseEvent | KeyboardEvent) => {
-  event.stopPropagation();
-};
+const stopPropagation = (
+  event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>
+) => event.stopPropagation();
 
 interface NameProps {
   id: Job['internalID'];
