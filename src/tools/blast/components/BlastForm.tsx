@@ -10,12 +10,10 @@ import { useDispatch } from 'react-redux';
 import {
   Chip,
   SequenceSubmission,
-  SearchInput,
   PageIntro,
   SpinnerIcon,
   // extractNameFromFASTAHeader,
 } from 'franklin-sites';
-import queryString from 'query-string';
 import { useHistory } from 'react-router-dom';
 import { sleep } from 'timing-functions';
 
@@ -39,8 +37,6 @@ import { Tool } from '../../types';
 
 import * as actions from '../../state/toolsActions';
 
-import useDataApi from '../../../shared/hooks/useDataApi';
-
 import { LocationToPath, Location } from '../../../app/config/urls';
 import initialFormValues, {
   BlastFormValues,
@@ -51,7 +47,9 @@ import initialFormValues, {
 import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
 import infoMappings from '../../../shared/config/InfoMappings';
 
-import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
+import SequenceSearchLoader, {
+  SequenceSubmissionOnChangeEvent,
+} from './SequenceSearchLoader';
 
 import './styles/BlastForm.scss';
 
@@ -111,56 +109,6 @@ type SequenceData = {
   uniProtkbId: string;
 };
 
-type SequenceSubmissionOnChangeEvent = {
-  sequence: string;
-  valid: boolean;
-  likelyType: 'na' | 'aa' | null;
-  message: string | null;
-};
-
-// eslint-disable-next-line consistent-return
-function extractNameFromFASTAHeader(fasta: string): string | null | undefined {
-  if (!fasta) {
-    return;
-  }
-
-  const headers = fasta
-    .split('\n')
-    .map((line: string) => {
-      return line.match(/>/g) ? line : null;
-    })
-    .filter(Boolean)
-    .map((line: string | null) => {
-      return line!.replace(/\s/gi, '').split('|');
-    });
-
-  if (headers && headers.length === 0) {
-    return;
-  }
-
-  const accession = headers[0][1];
-
-  // eslint-disable-next-line consistent-return
-  return accession;
-}
-
-const getURLForAccessionOrID = (input: string) => {
-  const cleanedInput = input.trim();
-  if (!cleanedInput) {
-    return;
-  }
-
-  const query = queryString.stringify({
-    query: uniProtKBAccessionRegEx.test(cleanedInput)
-      ? `accession:${cleanedInput}`
-      : `id:${cleanedInput}`,
-    fields: 'sequence, id',
-  });
-
-  // eslint-disable-next-line consistent-return
-  return `${uniProtKBApiUrls.search}?${query}`;
-};
-
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -170,7 +118,6 @@ const BlastForm = () => {
   // used when the form is about to be submitted to the server
   const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
-  const [searchByIDValue, setSearchByIDValue] = useState('');
 
   const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
     () => {
@@ -325,16 +272,7 @@ const BlastForm = () => {
       if (e.sequence === currentSequence) {
         return;
       }
-
-      // eslint-disable-next-line no-shadow
-      const name = extractNameFromFASTAHeader(e.sequence);
-
-      if (name) {
-        updateFormValue(BlastFields.name, name);
-      } else if (searchByIDValue) {
-        updateFormValue(BlastFields.name, searchByIDValue);
-      }
-
+      updateFormValue(BlastFields.name, e.name || '');
       updateFormValue(BlastFields.sequence, e.sequence);
 
       if (e.likelyType === 'na') {
@@ -346,50 +284,10 @@ const BlastForm = () => {
 
       setSubmitDisabled(!e.valid);
     },
-    [currentSequence, searchByIDValue, updateFormValue]
+    [currentSequence, updateFormValue]
   );
 
-  /* start of logic to load a sequence from an accession or an ID */
-  const urlForAccessionOrID = getURLForAccessionOrID(searchByIDValue);
-
-  const {
-    data: dataForAccessionOrID = {},
-    loading: loadingForAccessionOrID,
-  } = useDataApi(urlForAccessionOrID);
-
-  const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
-
-  useEffect(() => {
-    if (!sequence && formValues[BlastFields.sequence].selected) {
-      return;
-    }
-
-    // if we have a URL to load, but no sequence available, erase the sequence
-    // in the form state
-    if (urlForAccessionOrID && !sequence) {
-      onSequenceChange({
-        sequence: '',
-        valid: false,
-        likelyType: null,
-        message: null,
-      });
-      return;
-    }
-
-    onSequenceChange({
-      sequence: sequence || '',
-      valid: true,
-      likelyType: null,
-      message: null,
-    });
-  }, [
-    urlForAccessionOrID,
-    updateFormValue,
-    onSequenceChange,
-    sequence,
-    formValues,
-  ]);
-  /* end of logic to load a sequence from an accession or an ID */
+  // const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
 
   return (
     <SingleColumnLayout>
@@ -404,14 +302,7 @@ const BlastForm = () => {
               <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
             </legend>
             <div className="import-sequence-section">
-              <SearchInput
-                isLoading={loadingForAccessionOrID}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearchByIDValue(e.target.value)
-                }
-                placeholder="P05067, A4_HUMAN, UPI0000000001"
-                value={searchByIDValue}
-              />
+              <SequenceSearchLoader onLoad={onSequenceChange} />
             </div>
           </section>
         </fieldset>
@@ -424,7 +315,6 @@ const BlastForm = () => {
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={onSequenceChange}
-              className="blast-form-textarea"
               value={String(formValues[BlastFields.sequence].selected)}
             />
           </section>
