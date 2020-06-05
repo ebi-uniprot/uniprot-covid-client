@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, ChangeEvent } from 'react';
+import React, { FC, useState, useEffect, useRef, ChangeEvent } from 'react';
 import { SearchInput } from 'franklin-sites';
 import queryString from 'query-string';
 
@@ -10,8 +10,8 @@ import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
 
 import { APISequenceData } from '../types/apiSequenceData';
 
-const CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS = /(.{1,60})/g;
-const CHUNK_OF_TEXT_OF_TEN_CHARACTERS = /(.{1,10})/g;
+// const CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS = /(.{1,60})/g;
+// const CHUNK_OF_TEXT_OF_TEN_CHARACTERS = /(.{1,10})/g;
 
 const getURLForAccessionOrID = (input: string) => {
   const cleanedInput = input.trim();
@@ -43,10 +43,18 @@ const SequenceSearchLoader: FC<{
 }> = ({ onLoad }) => {
   const [accessionOrID, setAccessionOrID] = useState('');
 
+  // used to keep a reference to the previously generated sequence string
+  const sequenceRef = useRef('');
+
   const urlForAccessionOrID = getURLForAccessionOrID(accessionOrID);
   const { data, loading } = useDataApi(urlForAccessionOrID || '');
 
   const topResult: APISequenceData | null = data?.results?.[0];
+
+  // no new result, probably invalid query, reset ref
+  if (!topResult) {
+    sequenceRef.current = '';
+  }
 
   useEffect(() => {
     if (!topResult) {
@@ -63,13 +71,14 @@ const SequenceSearchLoader: FC<{
       return;
     }
 
-    let newSequence = (topResult.sequence.value || '')
-      .split(CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS)
-      .filter(Boolean)
-      .map((line) =>
-        line.replace(CHUNK_OF_TEXT_OF_TEN_CHARACTERS, '$1 ').trim()
-      )
-      .join('\n');
+    let newSequence = topResult.sequence.value || '';
+    // NOTE: if we decide to do formatting here, use formatting logic from franklin
+    // .split(CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS)
+    // .filter(Boolean)
+    // .map((line) =>
+    //   line.replace(CHUNK_OF_TEXT_OF_TEN_CHARACTERS, '$1 ').trim()
+    // )
+    // .join('\n');
     // build a "nicely"-formatted FASTA string
     // See https://www.uniprot.org/help/fasta-headers for current headers
     try {
@@ -89,6 +98,17 @@ const SequenceSearchLoader: FC<{
       // eslint-disable-next-line no-console
       console.error(error);
     }
+
+    if (newSequence === sequenceRef.current) {
+      // if the new generated sequence would be the same than the previously
+      // generated one, don't do anything
+      // we must have end up here because something else update (e.g. the user
+      // manually updated the sequence)
+      return;
+    }
+
+    // set ref to the value of the sequence we are about to set
+    sequenceRef.current = newSequence;
 
     onLoad({
       sequence: newSequence,
