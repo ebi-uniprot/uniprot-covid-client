@@ -2044,7 +2044,9 @@ exports[`Entry view should render 1`] = `
               length="10"
               sequence="SAPSQDFMRF"
             />
-            <protvista-datatable />
+            <protvista-datatable
+              filter-scroll="true"
+            />
             <div
               class="evidence-tag-content false"
             />
@@ -2075,7 +2077,9 @@ exports[`Entry view should render 1`] = `
           <interaction-viewer
             accession="P21802"
           />
-          <protvista-datatable />
+          <protvista-datatable
+            filter-scroll="true"
+          />
         </div>
       </section>
     </div>
