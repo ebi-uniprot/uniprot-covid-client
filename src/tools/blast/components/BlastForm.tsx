@@ -104,11 +104,6 @@ interface CustomLocationState {
   parameters?: Job['parameters'];
 }
 
-type SequenceData = {
-  primaryAccession: string;
-  uniProtkbId: string;
-};
-
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -286,8 +281,6 @@ const BlastForm = () => {
     },
     [currentSequence, updateFormValue]
   );
-
-  // const sequence = dataForAccessionOrID.results?.[0]?.sequence?.value;
 
   return (
     <SingleColumnLayout>
