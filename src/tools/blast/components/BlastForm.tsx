@@ -203,16 +203,14 @@ const BlastForm = () => {
     }
   );
 
-  const updateFormValue = useCallback(
-    (type: BlastFields, value: string) => {
-      console.log('new value:', type, value);
-      setFormValues({
-        ...formValues,
-        [type]: { ...formValues[type], selected: value },
-      });
-    },
-    [formValues]
-  );
+  const updateFormValue = useCallback((type: BlastFields, value: string) => {
+    console.log('new value:', type, value);
+    // eslint-disable-next-line no-shadow
+    setFormValues((formValues) => ({
+      ...formValues,
+      [type]: { ...formValues[type], selected: value },
+    }));
+  }, []);
 
   const updateTaxonFormValue = (path: string, id: string) => {
     // Only proceed if a node is selected
