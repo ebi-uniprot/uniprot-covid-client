@@ -344,33 +344,7 @@ exports[`ColumnConfiguration component should render all columns: DNA-binding re
 
 exports[`ColumnConfiguration component should render all columns: Date Created 1`] = `
 <DocumentFragment>
-  <a
-    href="/taxonomy/9606"
-  >
-    9606 
-  </a>
-  <a
-    class="external-link"
-    href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id=9606"
-    rel="noopener"
-    target="_blank"
-  >
-    NCBI
-    <svg
-      fill="none"
-      viewBox="0 0 16 16"
-      width="12.5"
-    >
-      <path
-        d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
-        fill="currentColor"
-      />
-      <path
-        d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
-        fill="currentColor"
-      />
-    </svg>
-  </a>
+  2015-08-02
 </DocumentFragment>
 `;
 
@@ -494,12 +468,17 @@ exports[`ColumnConfiguration component should render all columns: Disease Involv
         >
           3124
           <svg
-            fill="currentColor"
-            viewBox="0 0 576 512"
+            fill="none"
+            viewBox="0 0 16 16"
             width="12.5"
           >
             <path
-              d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+              d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+              fill="currentColor"
+            />
+            <path
+              d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+              fill="currentColor"
             />
           </svg>
         </a>
@@ -965,21 +944,7 @@ exports[`ColumnConfiguration component should render all columns: Interacts with
     <a
       href="/uniprotkb/P12345"
     >
-      sequence
-      <svg
-        fill="none"
-        viewBox="0 0 16 16"
-        width="12.5"
-      >
-        <path
-          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
-          fill="currentColor"
-        />
-        <path
-          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
-          fill="currentColor"
-        />
-      </svg>
+      P12345
     </a>
   </div>
   <div>
@@ -1190,12 +1155,17 @@ exports[`ColumnConfiguration component should render all columns: Organism 2`] =
   >
     NCBI
     <svg
-      fill="currentColor"
-      viewBox="0 0 576 512"
+      fill="none"
+      viewBox="0 0 16 16"
       width="12.5"
     >
       <path
-        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+        d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+        fill="currentColor"
       />
     </svg>
   </a>
@@ -1735,12 +1705,17 @@ exports[`ColumnConfiguration component should render all columns: Sequence Cauti
     >
       sequence
       <svg
-        fill="currentColor"
-        viewBox="0 0 576 512"
+        fill="none"
+        viewBox="0 0 16 16"
         width="12.5"
       >
         <path
-          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+          fill="currentColor"
+        />
+        <path
+          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+          fill="currentColor"
         />
       </svg>
     </a>
@@ -1940,241 +1915,13 @@ exports[`ColumnConfiguration component should render all columns: Temperature De
 </DocumentFragment>
 `;
 
-exports[`ColumnConfiguration component should render all columns 73`] = `
-<DocumentFragment>
-  <h3>
-    DiseaseEntry Id (someAcron)
-  </h3>
-  <span
-    class="text-block"
-  >
-    <button
-      aria-controls="<UUID>"
-      aria-expanded="false"
-      class="evidence-tag svg-colour-unreviewed"
-      data-testid="evidence-tag-trigger"
-      type="button"
-    >
-      <svg
-        fill="currentColor"
-        height="12"
-        viewBox="0 0 10 15"
-        width="12"
-      >
-        <path
-          d="M10 0H0v15l5-5 5 5V0z"
-        />
-      </svg>
-      <span
-        class="evidence-tag__label"
-        title=""
-      >
-        1 automatic annotation
-      </span>
-    </button>
-    <div
-      class="evidence-tag-content "
-      data-testid="evidence-tag-content"
-      id="<UUID>"
-    />
-  </span>
-  <div
-    class="info-list "
-  >
-    <div
-      class="info-list__item"
-    >
-      <div
-        class="info-list__item__title"
-      >
-        <h5
-          class="bold"
-        >
-          Note
-        </h5>
-      </div>
-      <div
-        class="info-list__item__content"
-      >
-        <ul
-          class="expandable-list no-bullet"
-        >
-          <li>
-            value2
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div
-      class="info-list__item"
-    >
-      <div
-        class="info-list__item__title"
-      >
-        <h5
-          class="bold"
-        >
-          Description
-        </h5>
-      </div>
-      <div
-        class="info-list__item__content"
-      >
-        some description
-      </div>
-    </div>
-    <div
-      class="info-list__item"
-    >
-      <div
-        class="info-list__item__title"
-      >
-        <h5
-          class="bold"
-        >
-          See also
-        </h5>
-      </div>
-      <div
-        class="info-list__item__content"
-      >
-        <a
-          class="external-link"
-          href="https://www.omim.org/entry/3124"
-          rel="noopener"
-          target="_blank"
-        >
-          3124
-          <svg
-            fill="none"
-            viewBox="0 0 16 16"
-            width="12.5"
-          >
-            <path
-              d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
-              fill="currentColor"
-            />
-            <path
-              d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
-              fill="currentColor"
-            />
-          </svg>
-        </a>
-          
-      </div>
-    </div>
-  </div>
-</DocumentFragment>
-`;
+exports[`ColumnConfiguration component should render all columns: Tissue Specificity 1`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 74`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns: Toxic Dose 1`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 75`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns: Uncertainty in sequence 1`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns 76`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 77`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 78`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 79`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 80`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 81`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 82`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 83`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 84`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 85`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 86`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 87`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 88`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 89`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 90`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 91`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 92`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 93`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 94`] = `
-<DocumentFragment>
-  <ul
-    class="expandable-list no-bullet"
-  >
-    <li>
-      <a
-        href="/citations/12345"
-      >
-        12345
-      </a>
-    </li>
-    <li>
-      <a
-        href="/citations/6789"
-      >
-        6789
-      </a>
-    </li>
-    <li>
-      <a
-        href="/citations/12348"
-      >
-        12348
-      </a>
-    </li>
-    <li>
-      <a
-        href="/citations/12346"
-      >
-        12346
-      </a>
-    </li>
-    <li>
-      <a
-        href="/citations/123415"
-      >
-        123415
-      </a>
-    </li>
-    <li>
-      <button
-        class="button tertiary"
-        data-testid="expandable-message"
-        type="button"
-      >
-        More items
-      </button>
-    </li>
-  </ul>
-</DocumentFragment>
-`;
-
-exports[`ColumnConfiguration component should render all columns 95`] = `<DocumentFragment />`;
-
-exports[`ColumnConfiguration component should render all columns 96`] = `
-<DocumentFragment>
-  2015-08-02
-</DocumentFragment>
-`;
-
-exports[`ColumnConfiguration component should render all columns 97`] = `
-<DocumentFragment>
-  2016-04-24
-</DocumentFragment>
-`;
-
-exports[`ColumnConfiguration component should render all columns 98`] = `
+exports[`ColumnConfiguration component should render all columns: Variants 1`] = `
 <DocumentFragment>
   <div
     class="loader-container"
@@ -2288,55 +2035,27 @@ exports[`ColumnConfiguration component should render all columns: pH Dependence 
   <section
     class="text-block"
   >
-    <li>
-      <a
-        class="external-link"
-        href="https://www.ensembl.org/id/id value"
-        rel="noopener"
-        target="_blank"
+    value1
+    <button
+      aria-controls="<UUID>"
+      aria-expanded="false"
+      class="evidence-tag svg-colour-reviewed"
+      data-testid="evidence-tag-trigger"
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="12"
+        viewBox="0 0 10 15"
+        width="12"
       >
-        id value
-        <svg
-          fill="none"
-          viewBox="0 0 16 16"
-          width="12.5"
-        >
-          <path
-            d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
-            fill="currentColor"
-          />
-          <path
-            d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
-            fill="currentColor"
-          />
-        </svg>
-      </a>
-       
-      <a
-        class="external-link"
-        href="https://www.ensembl.org/id/description value"
-        rel="noopener"
-        target="_blank"
-      >
-        description value
-        <svg
-          fill="none"
-          viewBox="0 0 16 16"
-          width="12.5"
-        >
-          <path
-            d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
-            fill="currentColor"
-          />
-          <path
-            d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
-            fill="currentColor"
-          />
-        </svg>
-      </a>
-       [
-      <a
-        href="#Q9NXB0-1"
+        <path
+          d="M10 0H0v15l5-5 5 5V0z"
+        />
+      </svg>
+      <span
+        class="evidence-tag__label"
+        title=""
       >
         1 automatic annotation
       </span>
