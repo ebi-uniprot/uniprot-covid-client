@@ -148,7 +148,6 @@ const BlastForm = () => {
   );
 
   const updateFormValue = useCallback((type: BlastFields, value: string) => {
-    console.log('new value:', type, value);
     // eslint-disable-next-line no-shadow
     setFormValues((formValues) => ({
       ...formValues,
@@ -257,7 +256,7 @@ const BlastForm = () => {
         ],
       },
     }));
-  }, [formValues.Sequence.selected]);
+  }, [formValues[BlastFields.sequence].selected]);
 
   const { name, links, info } = infoMappings[Tool.blast];
 
@@ -267,6 +266,7 @@ const BlastForm = () => {
       if (e.sequence === currentSequence) {
         return;
       }
+
       updateFormValue(BlastFields.name, e.name || '');
       updateFormValue(BlastFields.sequence, e.sequence);
 
