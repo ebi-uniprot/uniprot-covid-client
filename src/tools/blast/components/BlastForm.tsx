@@ -118,6 +118,7 @@ type SequenceSubmissionOnChangeEvent = {
   message: string | null;
 };
 
+// eslint-disable-next-line consistent-return
 function extractNameFromFASTAHeader(fasta: string): string | null | undefined {
   if (!fasta) {
     return;
@@ -139,6 +140,7 @@ function extractNameFromFASTAHeader(fasta: string): string | null | undefined {
 
   const accession = headers[0][1];
 
+  // eslint-disable-next-line consistent-return
   return accession;
 }
 
@@ -297,8 +299,8 @@ const BlastForm = () => {
     });
   };
 
+  // set the "Auto" matrix to the have the correct label depending on sequence
   useEffect(() => {
-    console.log({ seq: formValues.Sequence.selected });
     const matrix = getAutoMatrixFor(formValues.Sequence.selected as string);
     // eslint-disable-next-line no-shadow
     setFormValues((formValues: BlastFormValues) => ({
@@ -317,31 +319,33 @@ const BlastForm = () => {
 
   const { name, links, info } = infoMappings[Tool.blast];
 
-  const onSequenceChange = (e: SequenceSubmissionOnChangeEvent) => {
-    console.log('e:', e);
-    if (e.sequence === formValues[BlastFields.sequence].selected) {
-      return;
-    }
+  const currentSequence = formValues[BlastFields.sequence].selected;
+  const onSequenceChange = useCallback(
+    (e: SequenceSubmissionOnChangeEvent) => {
+      if (e.sequence === currentSequence) {
+        return;
+      }
 
-    const name = extractNameFromFASTAHeader(e.sequence);
+      // eslint-disable-next-line no-shadow
+      const name = extractNameFromFASTAHeader(e.sequence);
 
-    if (name) {
-      updateFormValue(BlastFields.name, name);
-      console.log('got a name:', name);
-    } else if (searchByIDValue) {
-      updateFormValue(BlastFields.name, searchByIDValue);
-    }
-    console.log('name:', name);
-    updateFormValue(BlastFields.sequence, e.sequence);
+      if (name) {
+        updateFormValue(BlastFields.name, name);
+      } else if (searchByIDValue) {
+        updateFormValue(BlastFields.name, searchByIDValue);
+      }
 
-    // TODO We need to update both the stype and the program based on seq type
-    // if (e.likelyType == 'na') {
-    //   updateFormValue(BlastFields.stype, 'dna');
-    // } else {
-    //   // we want protein by default
-    //   updateFormValue(BlastFields.stype, 'protein');
-    // }
-  };
+      updateFormValue(BlastFields.sequence, e.sequence);
+
+      if (e.likelyType === 'na') {
+        updateFormValue(BlastFields.stype, 'dna');
+      } else {
+        // we want protein by default
+        updateFormValue(BlastFields.stype, 'protein');
+      }
+    },
+    [currentSequence, searchByIDValue, updateFormValue]
+  );
 
   /* start of logic to load a sequence from an accession or an ID */
   const urlForAccessionOrID = getURLForAccessionOrID(searchByIDValue);
