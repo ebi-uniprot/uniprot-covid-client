@@ -13,7 +13,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
   Card,
-  RefreshIcon,
+  ReSubmitIcon,
   BinIcon,
   SpinnerIcon,
   EditIcon,
@@ -25,6 +25,7 @@ import { Status } from '../../blast/types/blastStatuses';
 import { updateJobTitle, deleteJob } from '../../state/toolsActions';
 
 import { LocationToPath, Location } from '../../../app/config/urls';
+import { getBEMClassName as bem } from '../../../shared/utils/utils';
 
 import './styles/Dashboard.scss';
 
@@ -39,7 +40,7 @@ interface NameProps {
 
 const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const dispatch = useDispatch();
-  const [text, setText] = useState(children);
+  const [text, setText] = useState(children || '');
 
   const handleBlur = () => {
     const cleanedText = text.trim();
@@ -110,7 +111,8 @@ const NiceStatus: FC<NiceStatusProps> = ({ children, hits, queriedHits }) => {
           </span>
         </>
       );
-    case Status.FAILED:
+    case Status.FAILURE:
+    case Status.ERRORED:
       return <>Failed</>;
     case Status.FINISHED: {
       if (hits === queriedHits) return <>Successful</>;
@@ -149,7 +151,7 @@ const Actions: FC<ActionsProps> = ({ parameters, onDelete }) => {
           history.push(LocationToPath[Location.Blast], { parameters });
         }}
       >
-        <RefreshIcon />
+        <ReSubmitIcon />
       </button>
       <button
         type="button"
@@ -261,9 +263,18 @@ const Row: FC<RowProps> = memo(({ job }) => {
       animationOptionsForStatusUpdate
     );
   }, [job.status]);
-
+  // job.status = Status.FAILURE;
   return (
-    <Card onClick={handleClick} ref={ref}>
+    <Card
+      onClick={handleClick}
+      ref={ref}
+      className={bem({
+        b: 'card',
+        m:
+          (job.status === Status.FAILURE || job.status === Status.ERRORED) &&
+          'failure',
+      })}
+    >
       <span className="dashboard__body__name">
         <Name id={job.internalID}>{job.title}</Name>
       </span>

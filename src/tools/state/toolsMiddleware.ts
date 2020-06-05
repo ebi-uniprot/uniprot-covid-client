@@ -90,13 +90,16 @@ const toolsMiddleware: Middleware = (store) => {
       if (status === Status.NOT_FOUND) {
         throw new Error('Job was not found on the server');
       }
-
-      if (status === Status.RUNNING || status === Status.FAILED) {
+      if (
+        status === Status.RUNNING ||
+        status === Status.FAILURE ||
+        status === Status.ERRORED
+      ) {
         dispatch(
           updateJob({
             ...currentStateOfJob,
             timeLastUpdate: Date.now(),
-            status: status as Status.RUNNING | Status.FAILED,
+            status: status as Status.RUNNING | Status.FAILURE | Status.ERRORED,
           })
         );
 
@@ -121,7 +124,7 @@ const toolsMiddleware: Middleware = (store) => {
           updateJob({
             ...currentStateOfJob,
             timeLastUpdate: now,
-            status: Status.FAILED,
+            status: Status.FAILURE,
           })
         );
         throw new Error(
@@ -156,12 +159,17 @@ const toolsMiddleware: Middleware = (store) => {
   };
 
   const submitJob = async (job: CreatedJob) => {
-    // specific logic to transform FormParameters to ServerParameters
-    const formData = convertFormParametersForServer(job.parameters);
-    formData.delete('scores');
-
-    const url = job.type === 'blast' ? blastUrls.runUrl : '';
     try {
+      // specific logic to transform FormParameters to ServerParameters
+      let formData;
+      try {
+        formData = convertFormParametersForServer(job.parameters);
+      } catch {
+        throw new Error('Internal error');
+      }
+      formData.delete('scores');
+      const url = job.type === 'blast' ? blastUrls.runUrl : '';
+
       const response = await postData(url, {
         data: formData,
         headers: {
@@ -198,7 +206,7 @@ const toolsMiddleware: Middleware = (store) => {
       dispatch(
         updateJob({
           ...currentStateOfJob,
-          status: Status.FAILED,
+          status: Status.FAILURE,
           timeLastUpdate: Date.now(),
         })
       );

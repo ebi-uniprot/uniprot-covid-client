@@ -17,7 +17,7 @@ const failedAfterSubmission: RunningJob = {
     stype: 'protein',
     sequence: 'MLPGLALLLL',
     database: 'uniprotkb_refprotswissprot',
-    taxIDs: '',
+    taxIDs: [],
     threshold: '1.0',
     matrix: 'BLOSUM50',
     filter: 'T',

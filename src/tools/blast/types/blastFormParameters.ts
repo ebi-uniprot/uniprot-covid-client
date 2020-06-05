@@ -9,15 +9,15 @@ import {
   Alignments,
   Program,
   Sequence,
-  TaxIDs,
 } from './blastServerParameters';
+import { SelectedTaxon } from '../config/BlastFormData';
 
 export type FormParameters = {
   stype: SType;
   program: Program;
   sequence: Sequence;
   database: Database;
-  taxIDs: TaxIDs;
+  taxIDs: SelectedTaxon[];
   threshold: Exp;
   matrix: Matrix;
   filter: Filter;

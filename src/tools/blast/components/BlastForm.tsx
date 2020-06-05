@@ -1,37 +1,27 @@
-import React, { FC, useState, FormEvent, MouseEvent, useEffect } from 'react';
+import React, {
+  FC,
+  useState,
+  useEffect,
+  useCallback,
+  FormEvent,
+  MouseEvent,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Chip,
   SequenceSubmission,
-  SearchInput,
   PageIntro,
   SpinnerIcon,
   // extractNameFromFASTAHeader,
 } from 'franklin-sites';
-import queryString from 'query-string';
-import { throttle } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
 import { sleep } from 'timing-functions';
 
 import SingleColumnLayout from '../../../shared/components/layouts/SingleColumnLayout';
+import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
+
 import { FormParameters } from '../types/blastFormParameters';
 import { Job } from '../types/blastJob';
-
-import * as actions from '../../state/toolsActions';
-import { LocationToPath, Location } from '../../../app/config/urls';
-import initialFormValues, {
-  BlastFormValues,
-  BlastFormValue,
-  BlastFields,
-  SelectedTaxon,
-} from '../config/BlastFormData';
-
-import AutocompleteWrapper from '../../../uniprotkb/components/query-builder/AutocompleteWrapper';
-import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
-import fetchData from '../../../shared/utils/fetchData';
-import { uniProtKBAccessionRegEx } from '../../../uniprotkb/utils';
-
-import './styles/BlastForm.scss';
 import {
   SType,
   Program,
@@ -42,10 +32,26 @@ import {
   Exp,
   Filter,
   Scores,
-  TaxIDs,
 } from '../types/blastServerParameters';
-import infoMappings from '../../../shared/config/InfoMappings';
 import { Tool } from '../../types';
+
+import * as actions from '../../state/toolsActions';
+
+import { LocationToPath, Location } from '../../../app/config/urls';
+import initialFormValues, {
+  BlastFormValues,
+  BlastFormValue,
+  BlastFields,
+  SelectedTaxon,
+} from '../config/BlastFormData';
+import uniProtKBApiUrls from '../../../uniprotkb/config/apiUrls';
+import infoMappings from '../../../shared/config/InfoMappings';
+
+import SequenceSearchLoader, {
+  SequenceSubmissionOnChangeEvent,
+} from './SequenceSearchLoader';
+
+import './styles/BlastForm.scss';
 
 // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3848038/
 const getAutoMatrixFor = (sequence: string): FormParameters['matrix'] => {
@@ -98,45 +104,6 @@ interface CustomLocationState {
   parameters?: Job['parameters'];
 }
 
-type SequenceData = {
-  primaryAccession: string;
-  uniProtkbId: string;
-};
-
-type SequenceSubmissionOnChangeEvent = {
-  sequence: string;
-  valid: boolean;
-  likelyType: 'na' | 'aa' | null;
-  message: string | null;
-};
-
-function extractNameFromFASTAHeader(fasta: string) : string | null | undefined {
-  if (!fasta) {
-    return;
-  }
-
-  const headers = fasta
-    .split('\n')
-    .map((line: string) => {
-      return line
-        .match(/>/g) ? line : null
-    })
-    .filter(Boolean)
-    .map((line: string | null) => {
-      return line!
-        .replace(/\s/ig, '')
-        .split('|')
-    });
-
-  if (headers && headers.length === 0) {
-    return;
-  }
-
-  const accession = headers[0][1];
-
-  return accession;
-}
-
 const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -146,8 +113,6 @@ const BlastForm = () => {
   // used when the form is about to be submitted to the server
   const [sending, setSending] = useState(false);
   const [displayAdvanced, setDisplayAdvanced] = useState(false);
-  const [searchByIDValue, setSearchByIDValue] = useState('');
-  const [sequenceImportFeedback, setSequenceImportFeedback] = useState('');
 
   const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
     () => {
@@ -182,13 +147,13 @@ const BlastForm = () => {
     }
   );
 
-  const updateFormValue = (type: BlastFields, value: string) => {
-    console.log("new value:", type, value);
-    setFormValues({
+  const updateFormValue = useCallback((type: BlastFields, value: string) => {
+    // eslint-disable-next-line no-shadow
+    setFormValues((formValues) => ({
       ...formValues,
       [type]: { ...formValues[type], selected: value },
-    });
-  };
+    }));
+  }, []);
 
   const updateTaxonFormValue = (path: string, id: string) => {
     // Only proceed if a node is selected
@@ -224,9 +189,6 @@ const BlastForm = () => {
     });
   };
 
-  const getTaxIDs = (taxons: SelectedTaxon[] = []) =>
-    taxons.map(({ id }) => id).join(',');
-
   // the only thing to do here would be to check the values and prevent
   // and prevent submission if there is any issue
   const submitBlastJob = (event: FormEvent | MouseEvent) => {
@@ -238,15 +200,17 @@ const BlastForm = () => {
     setSubmitDisabled(true);
     setSending(true);
 
+    // here we should just transform input values into FormParameters,
+    // transformation of FormParameters into ServerParameters happens in the
+    // tools middleware
     const parameters: FormParameters = {
       stype: formValues[BlastFields.stype].selected as SType,
       program: formValues[BlastFields.program].selected as Program,
       sequence,
       database: formValues[BlastFields.targetDb].selected as Database,
-      taxIDs: getTaxIDs(
-        formValues[BlastFields.taxons].selected as SelectedTaxon[]
-      ) as TaxIDs,
+      taxIDs: formValues[BlastFields.taxons].selected as SelectedTaxon[],
       threshold: formValues[BlastFields.threshold].selected as Exp,
+      // remove "auto", and transform into corresponding matrix
       matrix:
         formValues[BlastFields.matrix].selected === 'auto'
           ? getAutoMatrixFor(
@@ -254,7 +218,9 @@ const BlastForm = () => {
             )
           : (formValues[BlastFields.matrix].selected as Matrix),
       filter: formValues[BlastFields.filter].selected as Filter,
+      // transform string into boolean
       gapped: (formValues[BlastFields.gapped].selected === 'true') as GapAlign,
+      // transform string into number
       hits: parseInt(
         formValues[BlastFields.hits].selected as string,
         10
@@ -262,9 +228,6 @@ const BlastForm = () => {
     };
 
     const jobName = formValues[BlastFields.name].selected as string;
-
-    // TODO: need to cast the values to the right types
-    // e.g. hits 50 gets stored as a string somehow...
 
     // we emit an action containing only the parameters and the type of job
     // the reducer will be in charge of generating a proper job object for
@@ -277,69 +240,7 @@ const BlastForm = () => {
     });
   };
 
-  const resetSequenceData = () => {
-    updateFormValue(BlastFields.sequence, '');
-  };
-
-  const updateImportSequenceFeedback = throttle((feedback: string) => {
-    setSequenceImportFeedback(feedback);
-  }, 500);
-
-  const getSequenceByAccessionOrID = (input: string) => {
-    if (!input) {
-      resetSequenceData();
-      return;
-    }
-
-    const clearInput: string = input.replace(/\s/g, '');
-
-    if (clearInput.length === 0) {
-      resetSequenceData();
-      return;
-    }
-
-    const query: string = queryString.stringify({
-      query: uniProtKBAccessionRegEx.test(clearInput)
-        ? `accession:${clearInput}`
-        : `id:${clearInput}`,
-      fields: 'sequence, id',
-    });
-
-    updateImportSequenceFeedback('loading');
-
-    fetchData(`${uniProtKBApiUrls.search}?${query}`)
-      .then(({ data }) => {
-        const { results } = data;
-        if (results) {
-          if (results.length > 0) {
-            // updateFormValue(BlastFields.sequence, results[0].sequence.value);
-            onSequenceChange({
-              sequence: results[0].sequence.value,
-              valid: true,
-              likelyType: null,
-              message: null,
-            });
-            setSequenceImportFeedback('success');
-            return;
-          } else {
-            updateImportSequenceFeedback('no-results');
-          }
-          updateImportSequenceFeedback('no-results');
-        } else {
-          updateImportSequenceFeedback('invalid');
-        }
-
-        resetSequenceData();
-      })
-      .catch((e) => {
-        console.error("can't get the sequence:", e);
-      });
-  };
-
-  useEffect(() => {
-    getSequenceByAccessionOrID(searchByIDValue);
-  }, [searchByIDValue]);
-
+  // set the "Auto" matrix to the have the correct label depending on sequence
   useEffect(() => {
     const matrix = getAutoMatrixFor(formValues.Sequence.selected as string);
     // eslint-disable-next-line no-shadow
@@ -355,28 +256,31 @@ const BlastForm = () => {
         ],
       },
     }));
-  }, [formValues.Sequence.selected]);
-
+  }, [formValues[BlastFields.sequence].selected]);
 
   const { name, links, info } = infoMappings[Tool.blast];
 
+  const currentSequence = formValues[BlastFields.sequence].selected;
+  const onSequenceChange = useCallback(
+    (e: SequenceSubmissionOnChangeEvent) => {
+      if (e.sequence === currentSequence) {
+        return;
+      }
 
-  const onSequenceChange = (e: SequenceSubmissionOnChangeEvent) => {
-console.log("e:", e);
-    if (e.sequence === formValues[BlastFields.sequence].selected) {
-      return;
-    }
+      updateFormValue(BlastFields.name, e.name || '');
+      updateFormValue(BlastFields.sequence, e.sequence);
 
-    const name = extractNameFromFASTAHeader(e.sequence);
-    
-    if (name) {
-      updateFormValue(BlastFields.name, name);
-console.log("got a name:", name);
-    } else if (searchByIDValue) {
-      updateFormValue(BlastFields.name, searchByIDValue);
-    }
-    updateFormValue(BlastFields.sequence, e.sequence);
-  };
+      if (e.likelyType === 'na') {
+        updateFormValue(BlastFields.stype, 'dna');
+      } else {
+        // we want protein by default
+        updateFormValue(BlastFields.stype, 'protein');
+      }
+
+      setSubmitDisabled(!e.valid);
+    },
+    [currentSequence, updateFormValue]
+  );
 
   return (
     <SingleColumnLayout>
@@ -391,14 +295,7 @@ console.log("got a name:", name);
               <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
             </legend>
             <div className="import-sequence-section">
-              <SearchInput
-                isLoading={false}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearchByIDValue(e.target.value)
-                }
-                placeholder="P05067, A4_HUMAN, UPI0000000001"
-                value={searchByIDValue}
-              />
+              <SequenceSearchLoader onLoad={onSequenceChange} />
             </div>
           </section>
         </fieldset>
@@ -410,8 +307,7 @@ console.log("got a name:", name);
             <legend>Enter either a protein or nucleotide sequence.</legend>
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
-              onChange={(e: SequenceSubmissionOnChangeEvent) => onSequenceChange(e)}
-              className="blast-form-textarea"
+              onChange={onSequenceChange}
               value={String(formValues[BlastFields.sequence].selected)}
             />
           </section>
