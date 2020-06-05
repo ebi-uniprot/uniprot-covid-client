@@ -343,6 +343,8 @@ const BlastForm = () => {
         // we want protein by default
         updateFormValue(BlastFields.stype, 'protein');
       }
+
+      setSubmitDisabled(!e.valid);
     },
     [currentSequence, searchByIDValue, updateFormValue]
   );
