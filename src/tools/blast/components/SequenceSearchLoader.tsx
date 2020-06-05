@@ -63,13 +63,14 @@ const SequenceSearchLoader: FC<{
       return;
     }
 
-    let newSequence = (topResult.sequence.value || '')
-      .split(CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS)
-      .filter(Boolean)
-      .map((line) =>
-        line.replace(CHUNK_OF_TEXT_OF_TEN_CHARACTERS, '$1 ').trim()
-      )
-      .join('\n');
+    let newSequence = topResult.sequence.value || '';
+    // NOTE: if we decide to do formatting here, use formatting logic from franklin
+    // .split(CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS)
+    // .filter(Boolean)
+    // .map((line) =>
+    //   line.replace(CHUNK_OF_TEXT_OF_TEN_CHARACTERS, '$1 ').trim()
+    // )
+    // .join('\n');
     // build a "nicely"-formatted FASTA string
     // See https://www.uniprot.org/help/fasta-headers for current headers
     try {
