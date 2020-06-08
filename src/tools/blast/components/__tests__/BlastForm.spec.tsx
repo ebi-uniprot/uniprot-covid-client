@@ -11,6 +11,9 @@ import { mockSuggesterApi } from '../../../../uniprotkb/components/query-builder
 const mock = new MockAdapter(axios);
 mock.onGet().reply(200, mockSuggesterApi.response);
 
+const aaSequence = 'ABCDEFGHIJKLMNOPQRST';
+const ntSequence = 'ATCGAGCGATAGCGAGGGAC';
+
 let component;
 
 describe('BlastForm test', () => {
@@ -29,15 +32,41 @@ describe('BlastForm test', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('Sets the program and sequence type based on the sequence', () => {
+  it('Sets sequence type based on the sequence', () => {
     const { getByTestId } = component;
     const textArea = getByTestId('sequence-submission-input');
-    fireEvent.change(textArea, { target: { value: 'ABCDEFGHIJKLMN' } });
+    fireEvent.change(textArea, { target: { value: aaSequence } });
     const stype1 = getByTestId('Sequence type-protein');
     expect(stype1.selected).toBeTruthy();
-    fireEvent.change(textArea, { target: { value: 'ATCGAGCGATCAGA' } });
+    fireEvent.change(textArea, { target: { value: ntSequence } });
     const stype2 = getByTestId('Sequence type-dna');
     expect(stype2.selected).toBeTruthy();
+  });
+
+  it.skip('Sets the program type based on the sequence', () => {});
+
+  it.skip('Sets a name automatically', () => {});
+
+  it('Sets the automatic matrix based on the sequence', () => {
+    const { getByTestId } = component;
+    const textArea = getByTestId('sequence-submission-input');
+    fireEvent.change(textArea, { target: { value: aaSequence } });
+    const matrix = getByTestId('Matrix-auto');
+    expect(matrix.text).toEqual('Auto - PAM30');
+    fireEvent.change(textArea, {
+      target: { value: `${aaSequence}${aaSequence}` },
+    });
+    expect(matrix.text).toEqual('Auto - PAM70');
+    fireEvent.change(textArea, {
+      target: { value: `${aaSequence}${aaSequence}${aaSequence}` },
+    });
+    expect(matrix.text).toEqual('Auto - BLOSUM80');
+    fireEvent.change(textArea, {
+      target: {
+        value: `${aaSequence}${aaSequence}${aaSequence}${aaSequence}${aaSequence}`,
+      },
+    });
+    expect(matrix.text).toEqual('Auto - BLOSUM62');
   });
 
   it('Adds and removes a taxon', async () => {
