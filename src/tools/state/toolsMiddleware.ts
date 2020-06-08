@@ -29,7 +29,7 @@ import { addMessage } from '../../messages/state/messagesActions';
 import blastUrls from '../blast/config/blastUrls';
 
 import { ToolsState } from './toolsInitialState';
-import { getServerErrorDescription } from '../utils';
+import getServerErrorDescription from '../utils';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
