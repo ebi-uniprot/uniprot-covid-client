@@ -552,16 +552,20 @@ exports[`BlastForm test Renders the form 1`] = `
         <section
           class="blast-form-section"
         >
-          <input
-            class="button secondary"
-            type="reset"
-          />
-          <button
-            class="button primary blast-form-section__submit"
-            type="submit"
+          <section
+            class="button-group blast-form-section__buttons"
           >
-            Run Blast
-          </button>
+            <input
+              class="button secondary"
+              type="reset"
+            />
+            <button
+              class="button primary blast-form-section__submit"
+              type="submit"
+            >
+              Run Blast
+            </button>
+          </section>
         </section>
       </fieldset>
     </form>

@@ -113,7 +113,6 @@ const BlastForm = () => {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   // used when the form is about to be submitted to the server
   const [sending, setSending] = useState(false);
-  const [displayAdvanced, setDisplayAdvanced] = useState(false);
 
   const [formValues, setFormValues] = useState<Readonly<BlastFormValues>>(
     () => {
@@ -382,15 +381,17 @@ const BlastForm = () => {
             </section>
           </section>
           <section className="blast-form-section">
-            <input className="button secondary" type="reset" />
-            <button
-              className="button primary blast-form-section__submit"
-              type="submit"
-              disabled={submitDisabled}
-              onClick={submitBlastJob}
-            >
-              {sending ? <SpinnerIcon /> : 'Run Blast'}
-            </button>
+            <section className="button-group blast-form-section__buttons">
+              <input className="button secondary" type="reset" />
+              <button
+                className="button primary blast-form-section__submit"
+                type="submit"
+                disabled={submitDisabled}
+                onClick={submitBlastJob}
+              >
+                {sending ? <SpinnerIcon /> : 'Run Blast'}
+              </button>
+            </section>
           </section>
         </fieldset>
       </form>
