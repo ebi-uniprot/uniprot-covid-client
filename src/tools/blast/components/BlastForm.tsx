@@ -386,7 +386,7 @@ const BlastForm = () => {
               <button
                 className="button primary blast-form-section__submit"
                 type="submit"
-                disabled={submitDisabled}
+                // disabled={submitDisabled}
                 onClick={submitBlastJob}
               >
                 {sending ? <SpinnerIcon /> : 'Run Blast'}
