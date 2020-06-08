@@ -29,6 +29,17 @@ describe('BlastForm test', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  it('Sets the program and sequence type based on the sequence', () => {
+    const { getByTestId } = component;
+    const textArea = getByTestId('sequence-submission-input');
+    fireEvent.change(textArea, { target: { value: 'ABCDEFGHIJKLMN' } });
+    const stype1 = getByTestId('Sequence type-protein');
+    expect(stype1.selected).toBeTruthy();
+    fireEvent.change(textArea, { target: { value: 'ATCGAGCGATCAGA' } });
+    const stype2 = getByTestId('Sequence type-dna');
+    expect(stype2.selected).toBeTruthy();
+  });
+
   it('Adds and removes a taxon', async () => {
     const {
       getByPlaceholderText,

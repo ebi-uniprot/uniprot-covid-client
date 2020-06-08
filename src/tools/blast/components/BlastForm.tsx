@@ -90,6 +90,7 @@ const FormSelect: FC<{
               <option
                 value={String(formValue.value)}
                 key={String(formValue.value)}
+                data-testid={`${type}-${formValue.value}`}
               >
                 {formValue.label ? formValue.label : formValue.value}
               </option>
@@ -343,6 +344,26 @@ const BlastForm = () => {
             </section>
           </section>
           <section>
+            <section className="blast-form-section">
+              {[
+                BlastFields.stype,
+                BlastFields.program,
+                BlastFields.threshold,
+                BlastFields.matrix,
+                BlastFields.filter,
+                BlastFields.gapped,
+                BlastFields.hits,
+              ].map((blastField) => (
+                <FormSelect
+                  key={blastField}
+                  formValues={formValues}
+                  type={blastField}
+                  updateFormValues={updateFormValue}
+                />
+              ))}
+            </section>
+          </section>
+          <section>
             <section className="blast-form-section__item">
               <label>
                 Name your BLAST job
@@ -361,6 +382,7 @@ const BlastForm = () => {
             </section>
           </section>
           <section className="blast-form-section">
+            <input className="button secondary" type="reset" />
             <button
               className="button primary blast-form-section__submit"
               type="submit"
@@ -369,40 +391,6 @@ const BlastForm = () => {
             >
               {sending ? <SpinnerIcon /> : 'Run Blast'}
             </button>
-          </section>
-          <section>
-            <button
-              type="button"
-              className="button tertiary"
-              onClick={() => setDisplayAdvanced((display) => !display)}
-            >
-              Advanced parameters {displayAdvanced ? '▾' : '▸'}
-            </button>
-            {displayAdvanced && (
-              <>
-                <section className="blast-form-section">
-                  {[
-                    BlastFields.stype,
-                    BlastFields.program,
-                    BlastFields.threshold,
-                    BlastFields.matrix,
-                    BlastFields.filter,
-                    BlastFields.gapped,
-                    BlastFields.hits,
-                  ].map((blastField) => (
-                    <FormSelect
-                      key={blastField}
-                      formValues={formValues}
-                      type={blastField}
-                      updateFormValues={updateFormValue}
-                    />
-                  ))}
-                </section>
-                <section>
-                  <input className="button secondary" type="reset" />
-                </section>
-              </>
-            )}
           </section>
         </fieldset>
       </form>
