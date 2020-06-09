@@ -43,6 +43,30 @@ module.exports = (env, argv) => {
         react: path.resolve('./node_modules/react'),
         'react-dom': path.resolve('./node_modules/react-dom'),
         'react-router-dom': path.resolve('./node_modules/react-router-dom'),
+        // replace all usage of specific lodash submodules (from dependencies)
+        // with their corresponding ES modules from lodash-es (less duplication)
+        // (just looked at node_modules to see what packages were used, but
+        // didn't distinguish between used by devDeps or not)
+        'lodash._reinterpolate': path.resolve(
+          './node_modules/lodash-es/_reInterpolate'
+        ),
+        'lodash.camelcase': path.resolve('./node_modules/lodash-es/camelCase'),
+        'lodash.clonedeep': path.resolve('./node_modules/lodash-es/cloneDeep'),
+        'lodash.forin': path.resolve('./node_modules/lodash-es/forIn'),
+        'lodash.get': path.resolve('./node_modules/lodash-es/get'),
+        'lodash.isempty': path.resolve('./node_modules/lodash-es/isEmpty'),
+        'lodash.isplainobject': path.resolve(
+          './node_modules/lodash-es/isPlainObject'
+        ),
+        'lodash.memoize': path.resolve('./node_modules/lodash-es/memoize'),
+        'lodash.pickby': path.resolve('./node_modules/lodash-es/pickBy'),
+        'lodash.set': path.resolve('./node_modules/lodash-es/set'),
+        'lodash.sortby': path.resolve('./node_modules/lodash-es/sortBy'),
+        'lodash.template': path.resolve('./node_modules/lodash-es/template'),
+        'lodash.templatesettings': path.resolve(
+          './node_modules/lodash-es/templateSettings'
+        ),
+        'lodash.unset': path.resolve('./node_modules/lodash-es/unset'),
       },
       symlinks: false,
     },

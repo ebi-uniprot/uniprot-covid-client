@@ -1,28 +1,21 @@
 @import '../../../styles/settings';
 
-.base-layout {
-  display: grid;
-  grid-template-areas:
-    'main-header'
-    'in-page-messages'
-    'content'
-    'footer';
+$header-height: 70px;
 
-  grid-template-rows: 4rem auto auto;
+.base-layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   .header:not(.header--negative) > .header__logo svg g {
     fill: white;
+    height: $header-height;
   }
 
-  .main-header {
-    grid-area: main-header;
-  }
-
-  .in-page-messages {
-    grid-area: in-page-messages;
-  }
-
-  .footer {
-    grid-area: footer;
+  .main-content-and-footer {
+    width: 100%;
+    flex: 1;
+    overflow-y: scroll;
   }
 }

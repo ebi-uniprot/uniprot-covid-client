@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import ColumnConfiguration from '../../config/ColumnConfiguration';
+
 import { SortDirection } from '../../types/resultsTypes';
+import { SortableColumn, Column } from '../../types/columnTypes';
 import UniProtKBCard from './UniProtKBCard';
+// import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
+import ColumnConfiguration from '../../config/ColumnConfiguration';
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../../adapters/uniProtkbConverter';
 import { ViewMode } from '../../state/resultsInitialState';
-import { SortableColumn, Column } from '../../types/columnTypes';
-import './styles/warning.scss';
-import './styles/results-view.scss';
 import {
   getParamsFromURL,
   getLocationObjForParams,
@@ -20,6 +20,9 @@ import {
 import apiUrls, { getAPIQueryUrl } from '../../config/apiUrls';
 import useDataApi from '../../../shared/hooks/useDataApi';
 import getNextUrlFromResponse from '../../utils/queryUtils';
+
+import './styles/warning.scss';
+import './styles/results-view.scss';
 
 type ResultsTableProps = {
   selectedEntries: string[];

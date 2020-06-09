@@ -2,7 +2,10 @@ import { useState, useRef } from 'react';
 
 declare global {
   interface Window {
-    requestIdleCallback: (callback: () => void) => any;
+    requestIdleCallback: (
+      callback: () => void,
+      options?: { timeout: number }
+    ) => any;
     cancelIdleCallback: (handle: any) => void;
   }
 }

@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from 'react';
 import { v1 } from 'uuid';
 import { Card } from 'franklin-sites';
-import { hasContent } from '../../utils/utils';
+import { hasContent } from '../../utils';
 import FreeTextView, { TextView } from '../protein-data-views/FreeTextView';
 import CatalyticActivityView from '../protein-data-views/CatalyticActivityView';
 import KeywordView from '../protein-data-views/KeywordView';
@@ -43,7 +43,7 @@ export const KineticsView: FC<{ data: KineticParameters }> = ({ data }) => {
       <section className="text-block">
         {data.michaelisConstants && (
           <ul className="no-bullet">
-            {data.michaelisConstants.map(km => (
+            {data.michaelisConstants.map((km) => (
               <li key={km.constant}>
                 K<sub>M</sub>
                 {`=${km.constant}${km.unit} for ${km.substrate} `}
@@ -112,10 +112,10 @@ export const CofactorView: FC<{
   return (
     <Fragment>
       {title && <h3>{title}</h3>}
-      {cofactors.map(cofactorComment => (
+      {cofactors.map((cofactorComment) => (
         <section className="text-block" key={v1()}>
           {cofactorComment.cofactors &&
-            cofactorComment.cofactors.map(cofactor => (
+            cofactorComment.cofactors.map((cofactor) => (
               <span key={cofactor.name}>
                 {cofactor.name}{' '}
                 {cofactor.evidences && (

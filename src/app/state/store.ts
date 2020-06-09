@@ -10,6 +10,7 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import rootReducer from './rootReducer';
 import initialState from './rootInitialState';
+import toolsMiddleware from '../../tools/state/toolsMiddleware';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,11 @@ const persistConfig = {
     createBlacklistFilter(
       'query',
       ['clauses', 'queryString', 'namespace', 'searchTerms', 'evidences'] // ignore,
+    ),
+    createWhitelistFilter(
+      'blast',
+      ['jobs'], // save
+      ['jobs'] // load
     ),
     createBlacklistFilter('entry', ['accession', 'data', 'publicationsData']),
   ],
@@ -40,14 +46,14 @@ function configureStore() {
       rootReducer,
       initialState,
       debug
-        ? debug(applyMiddleware(thunkMiddleware))
-        : applyMiddleware(thunkMiddleware)
+        ? debug(applyMiddleware(thunkMiddleware, toolsMiddleware))
+        : applyMiddleware(thunkMiddleware, toolsMiddleware)
     );
   } else {
     store = createStore(
       persistorReducer,
       undefined,
-      applyMiddleware(thunkMiddleware)
+      applyMiddleware(thunkMiddleware, toolsMiddleware)
     );
   }
   return store;

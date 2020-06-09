@@ -26,7 +26,7 @@ import { UIModel } from './sectionConverter';
 import convertStructure from './structureConverter';
 import convertExternalLinks from './externalLinksConverter';
 import Comment, { Xref } from '../types/commentTypes';
-import { transfromProperties } from '../utils/utils';
+import { transfromProperties } from '../utils';
 import { Property } from '../types/modelTypes';
 import { Reference } from '../types/literatureTypes';
 
@@ -96,7 +96,7 @@ export type UniProtkbInactiveEntryModel = {
 };
 
 export const convertXrefProperties = (xrefs: Xref[]) =>
-  xrefs.map(xref => ({
+  xrefs.map((xref) => ({
     ...xref,
     properties: xref.properties
       ? transfromProperties((xref.properties as unknown) as Property[])

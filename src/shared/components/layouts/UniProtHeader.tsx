@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import { Header } from 'franklin-sites';
+
 import SearchContainer from '../../../uniprotkb/components/search/SearchContainer';
+import { LocationToPath, Location } from '../../../app/config/urls';
+
 import Logo from './svgs/uniprot-logo.svg';
 
+// NOTE: all of those paths should eventually come from the Location config object
 const tools = [
   {
     label: 'BLAST',
-    path: '/',
+    path: LocationToPath[Location.Blast],
   },
   {
     label: 'Align',
@@ -22,10 +27,15 @@ const tools = [
   },
 ];
 
+const dashboard = {
+  label: 'Dashboard',
+  path: LocationToPath[Location.Dashboard],
+};
+
 const links = [
   {
     label: 'Query Builder',
-    path: '/advancedSearch/reset',
+    path: LocationToPath[Location.UniProtKBQueryBuilder],
   },
   {
     label: 'API',
@@ -59,15 +69,28 @@ const links = [
   },
 ];
 
-const UniProtHeader = ({ isHomePage = false, isSearchPage = false }) => {
-  const shouldShowSearch = !isSearchPage && !isHomePage;
+const UniProtHeader = () => {
+  const advancedSearchMatch = useRouteMatch(
+    LocationToPath[Location.UniProtKBQueryBuilder]
+  );
+  const homeMatch = useRouteMatch(LocationToPath[Location.Home]);
+
+  const isHomePage = Boolean(homeMatch?.isExact);
+
+  // only show search if not on home page, or not on advanced search pafe
+  const shouldShowSearch = !(isHomePage || advancedSearchMatch);
+
+  const displayedLinks = useMemo(
+    () =>
+      isHomePage
+        ? [...tools, ...links]
+        : [{ label: 'Tools', links: [...tools, dashboard] }, ...links],
+    [isHomePage]
+  );
+
   return (
     <Header
-      links={
-        isHomePage
-          ? [...tools, ...links]
-          : [{ label: 'Tools', links: tools }, ...links]
-      }
+      links={displayedLinks}
       isNegative={isHomePage}
       search={shouldShowSearch && <SearchContainer />}
       logo={<Logo width={120} height={50} />}

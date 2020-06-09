@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { RootState, RootAction } from '../../../app/state/rootInitialState';
-import * as searchActions from '../../state/searchActions';
+
 import {
   Clause,
   SearchTermType,
@@ -12,15 +11,21 @@ import {
   Evidences,
   Namespace,
 } from '../../types/searchTypes';
+
 import AdvancedSearch from './AdvancedSearch';
+
+import { RootState, RootAction } from '../../../app/state/rootInitialState';
+import * as searchActions from '../../state/searchActions';
+
 import createQueryString from '../../utils/queryStringGenerator';
+
 import { Location, LocationToPath } from '../../../app/config/urls';
+
 import '../search/styles/search-container.scss';
 
 const queryBuilderPath = LocationToPath[Location.UniProtKBQueryBuilder];
 
 type Props = {
-  queryString: string;
   dispatchUpdateQueryString: (type: string) => void;
   searchTerms: SearchTermType[];
   namespace: Namespace;
@@ -50,8 +55,10 @@ type State = {
 export class Search extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    const { queryString } = props;
-    this.state = { queryString };
+
+    // const { queryString } = props;
+    // this.state = { queryString };
+    this.state = { queryString: '' };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleQueryStringChange = this.handleQueryStringChange.bind(this);
   }
@@ -68,12 +75,12 @@ export class Search extends Component<Props, State> {
     }
   }
 
-  componentDidUpdate(prevProps: Props) {
-    const { queryString: prevQueryString } = prevProps;
-    const { queryString } = this.props;
-    if (prevQueryString !== queryString) {
-      this.setState({ queryString });
-    }
+  componentDidUpdate() {
+    // const { queryString: prevQueryString } = prevProps;
+    // const { queryString } = this.props;
+    // if (prevQueryString !== queryString) {
+    //   this.setState({ queryString });
+    // }
   }
 
   handleSubmitClick() {

@@ -3,7 +3,7 @@ import { Card } from 'franklin-sites';
 import { html, TemplateResult } from 'lit-html';
 import ProtvistaDatatable from 'protvista-datatable';
 import InteractionViewer from 'interaction-viewer';
-import { hasContent } from '../../utils/utils';
+import { hasContent } from '../../utils';
 import EntrySection from '../../types/entrySection';
 import FreeTextView from '../protein-data-views/FreeTextView';
 import XRefView from '../protein-data-views/XRefView';
@@ -128,7 +128,7 @@ const InteractionSection: FC<{
           />
         )}
         <interaction-viewer accession={primaryAccession} />
-        <protvista-datatable ref={datatableContainer} />
+        <protvista-datatable ref={datatableContainer} filter-scroll />
         <XRefView xrefs={data.xrefData} primaryAccession={primaryAccession} />
       </Card>
     </div>
