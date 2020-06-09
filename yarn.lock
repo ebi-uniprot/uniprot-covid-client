@@ -9074,7 +9074,7 @@ protvista-uniprot@2.5.4:
     timing-functions "^1.0.0"
     url-join "^4.0.1"
 
-protvista-utils@^2.10.0:
+protvista-utils@2.10.0, protvista-utils@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/protvista-utils/-/protvista-utils-2.10.0.tgz#1effc105086a71fd87ce9351ea6b94ff62c69647"
   integrity sha512-Ui/Dq0PJOCdMEKl/YcIBGLOzoMtQCP08ahXGkKEyHTRTgjiKGWffy8B++ziWHxoSM8HrLPCycgH/8aLOlfd21Q==
