@@ -35,6 +35,7 @@ const MessageManager: FC<MessageManagerContainerProps> = ({
   } = groupBy(
     activeMessages,
     ({ omitAndDeleteAtLocations = [] }) =>
+      !!omitAndDeleteAtLocations &&
       omitAndDeleteAtLocations.length > 0 &&
       omitAndDeleteAtLocations.includes(currentLocation)
   );
