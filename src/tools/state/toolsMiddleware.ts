@@ -3,11 +3,6 @@ import { schedule, sleep } from 'timing-functions';
 
 import { Job, CreatedJob, RunningJob } from '../blast/types/blastJob';
 import { Status } from '../blast/types/blastStatuses';
-import {
-  MessageFormat,
-  MessageLevel,
-  MessageTag,
-} from '../../messages/types/messagesTypes';
 import { BlastResults } from '../blast/types/blastResults';
 
 import { Stores } from '../utils/stores';
@@ -29,8 +24,7 @@ import { addMessage } from '../../messages/state/messagesActions';
 import blastUrls from '../blast/config/blastUrls';
 
 import { ToolsState } from './toolsInitialState';
-import getServerErrorDescription from '../utils';
-import { Location } from '../../app/config/urls';
+import { getServerErrorDescription, getJobMessage } from '../utils';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
 
@@ -144,18 +138,7 @@ const toolsMiddleware: Middleware = (store) => {
           data: { hits: results.hits.length },
         })
       );
-      dispatch(
-        addMessage({
-          id: job.internalID,
-          content: `Job "${job.title || job.remoteID}" finished, found ${
-            results.hits.length
-          } hit${results.hits.length === 1 ? '' : 's'}`,
-          format: MessageFormat.POP_UP,
-          level: MessageLevel.SUCCESS,
-          tag: MessageTag.JOB,
-          omitAndDeleteAtLocations: [Location.Dashboard],
-        })
-      );
+      dispatch(addMessage(getJobMessage({ job, nHits: results.hits.length })));
     } catch (error) {
       console.error(error);
     }
@@ -217,16 +200,7 @@ const toolsMiddleware: Middleware = (store) => {
           errorDescription,
         })
       );
-      dispatch(
-        addMessage({
-          id: job.internalID,
-          content: errorDescription,
-          format: MessageFormat.POP_UP,
-          level: MessageLevel.FAILURE,
-          tag: MessageTag.JOB,
-          omitAndDeleteAtLocations: [Location.Dashboard],
-        })
-      );
+      dispatch(addMessage(getJobMessage({ job, errorDescription })));
     }
   };
 

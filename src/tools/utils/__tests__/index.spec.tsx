@@ -1,4 +1,4 @@
-import getServerErrorDescription from '../';
+import { getServerErrorDescription } from '..';
 
 describe('getServerErrorDescription', () => {
   it('should get formatted error string from server error', () => {
