@@ -12,7 +12,7 @@ import {
   SortDirection,
 } from '../../types/resultsTypes';
 import { getDownloadUrl } from '../../config/apiUrls';
-import urlsAreEqual from '../../../shared/utils/url';
+import { urlsAreEqual } from '../../../shared/utils/url';
 import fetchData from '../../../shared/utils/fetchData';
 
 export const getPreviewFileFormat = (fileFormat: FileFormat) =>
@@ -37,13 +37,13 @@ const Download: React.FC<DownloadTableProps> = ({
   history,
   location: {
     state: {
-      query,
-      selectedFacets,
-      sortColumn,
-      sortDirection,
-      selectedEntries,
-      totalNumberResults,
-    },
+      query = '',
+      selectedFacets = [],
+      sortColumn = Column.accession as SortableColumn,
+      sortDirection = SortDirection.ascend,
+      selectedEntries = [],
+      totalNumberResults = 0,
+    } = {},
   },
 }) => {
   const [selectedColumns, setSelectedColumns] = useState(tableColumns);
@@ -100,7 +100,9 @@ const Download: React.FC<DownloadTableProps> = ({
   const handlePreview = () => {
     setLoadingPreview(true);
     fetchData(previewUrl, {
-      Accept: fileFormatToContentType.get(previewFileFormat),
+      headers: {
+        Accept: fileFormatToContentType.get(previewFileFormat),
+      },
     })
       .then((response) => {
         const contentType = idx(

@@ -1,0 +1,138 @@
+@import '../../../../../node_modules/franklin-sites/src/styles/colours';
+
+.dashboard {
+  &__header .card__content {
+    font-weight: bold;
+    display: grid;
+    /* this needs to be the same as below to keep visual alignment */
+    grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+    grid-gap: 1ch;
+  }
+
+  &__body {
+    & .card--failure {
+      border: 1px solid $colour-failure;
+      border-left: 0.25rem solid $colour-failure;
+    }
+
+    & .card:nth-of-type(2n + 1) {
+      background: #e4e8eb;
+    }
+
+    & .card--has-hover {
+      &:hover,
+      &:focus,
+      &:focus-within {
+        background: #d2dce3;
+
+        & .dashboard__body__name svg,
+        & .dashboard__body__notify_message,
+        & .dashboard__body__actions {
+          opacity: 1;
+        }
+      }
+    }
+
+    & .card__content {
+      user-select: none;
+      display: grid;
+      grid-template-areas:
+        'name type time status actions'
+        'id   id   time status actions';
+      grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+      grid-gap: 1ch;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    /* begin grid areas */
+    &__name {
+      grid-area: name;
+      font-weight: bold;
+      width: 25ch;
+      display: flex;
+
+      & input {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        height: 1.5em;
+        padding: 0;
+        margin: 0;
+        overflow: scroll;
+        flex: 1;
+      }
+
+      & svg {
+        margin-left: 0.5ch;
+        opacity: 0;
+        transition: opacity ease-in-out 100ms;
+      }
+    }
+
+    &__type {
+      grid-area: type;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    &__time {
+      grid-area: time;
+    }
+
+    &__status {
+      grid-area: status;
+    }
+
+    &__actions {
+      grid-area: actions;
+      justify-self: end;
+    }
+
+    &__id {
+      grid-area: id;
+      font-size: 75%;
+      align-self: end;
+    }
+    /* end grid areas */
+
+    &__hours {
+      font-size: 75%;
+    }
+
+    &__notify_message {
+      font-size: 75%;
+    }
+
+    &__actions {
+      display: flex;
+
+      & svg {
+        overflow: visible;
+
+        & .bin_svg__cover {
+          transition: transform ease-in 100ms;
+          transform-origin: bottom left;
+        }
+      }
+
+      & button {
+        cursor: pointer;
+        margin: 0.5ch;
+        width: 2ch;
+
+        &:hover,
+        &:focus {
+          & .bin_svg__cover {
+            transform: rotate(-20deg);
+          }
+        }
+      }
+    }
+
+    &__notify_message,
+    &__actions {
+      opacity: 0.5;
+      transition: opacity ease-in-out 100ms;
+    }
+  }
+}

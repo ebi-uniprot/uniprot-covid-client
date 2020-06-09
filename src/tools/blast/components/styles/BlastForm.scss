@@ -1,0 +1,24 @@
+.blast-form-section {
+  display: flex;
+  flex-direction: row;
+
+  &__item {
+    display: inline-block;
+    margin-right: 2rem;
+    &--taxon-select {
+      width: 20rem;
+    }
+    &--selected-taxon {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__buttons {
+    margin-left: auto;
+    order: 2;
+  }
+}
+
+.import-sequence-section {
+  display: flex;
+}

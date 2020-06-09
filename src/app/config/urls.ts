@@ -5,23 +5,23 @@ export enum Location {
   UniProtKBResults = 'UniProtKBResults',
   UniProtKBEntry = 'UniProtKBEntry',
   UniProtKBDownload = 'UniProtKBDownload',
+  Blast = 'Blast',
+  BlastResult = 'BlastResult',
   UniProtKBCustomiseTable = 'UniProtKBCustomiseTable',
   UniProtKBQueryBuilder = 'UniProtKBQueryBuilder',
-  PageNotFound = 'PageNotFound',
-  ServiceUnavailable = 'ServiceUnavailable',
-  JobError = 'JobError',
+  Dashboard = 'Dashboard',
 }
 
 export const LocationToPath = {
   [Location.Home]: '/',
-  [Location.UniProtKBResults]: '/uniprotkb',
   [Location.UniProtKBEntry]: '/uniprotkb/:accession',
+  [Location.UniProtKBResults]: '/uniprotkb',
   [Location.UniProtKBDownload]: '/download',
+  [Location.BlastResult]: '/blast/:id',
+  [Location.Blast]: '/blast',
   [Location.UniProtKBCustomiseTable]: '/customise-table',
-  [Location.UniProtKBQueryBuilder]: '/advancedSearch',
-  [Location.PageNotFound]: '/page-not-found',
-  [Location.ServiceUnavailable]: '/service-unavailable',
-  [Location.JobError]: '/job-error',
+  [Location.UniProtKBQueryBuilder]: '/advanced-search',
+  [Location.Dashboard]: '/tool-dashboard',
 };
 
 export const PathToLocation = invert(LocationToPath);

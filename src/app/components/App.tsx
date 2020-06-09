@@ -4,12 +4,15 @@ import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 
 import BaseLayout from '../../shared/components/layouts/BaseLayout';
+import ErrorBoundary from '../../shared/components/error-component/ErrorBoundary';
+import GDPR from '../../shared/components/gdpr/GDPR';
 
 import history from '../../shared/utils/browserHistory';
 
 import { Location, LocationToPath } from '../config/urls';
 
 import './styles/app.scss';
+import SingleColumnLayout from '../../shared/components/layouts/SingleColumnLayout';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -46,21 +49,41 @@ const DownloadPage = lazy(() =>
     /* webpackChunkName: "download" */ '../../uniprotkb/components/download/DownloadContainer'
   )
 );
+const BlastResult = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-result" */ '../../tools/blast/components/BlastResult'
+  )
+);
+const BlastForm = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-form" */ '../../tools/blast/components/BlastForm'
+  )
+);
+const Dashboard = lazy(() =>
+  import(
+    /* webpackChunkName: "dashboard" */ '../../tools/dashboard/components/Dashboard'
+  )
+);
 const ResourceNotFoundPage = lazy(() =>
   import(
     /* webpackChunkName: "resource-not-found" */ '../../shared/components/error-pages/ResourceNotFoundPage'
   )
 );
-const ServiceUnavailablePage = lazy(() =>
-  import(
-    /* webpackChunkName: "service-unavailable" */ '../../shared/components/error-pages/ServiceUnavailablePage'
-  )
-);
-const JobErrorPage = lazy(() =>
-  import(
-    /* webpackChunkName: "job-error" */ '../../shared/components/error-pages/JobErrorPage'
-  )
-);
+
+const reportBugLinkStyles: React.CSSProperties = {
+  fontSize: '.8rem',
+  lineHeight: '1.5rem',
+  display: 'block',
+  padding: '.5rem 0',
+  color: '#FFF',
+  backgroundColor: 'red',
+  position: 'fixed',
+  bottom: '4rem',
+  right: 0,
+  writingMode: 'vertical-rl',
+  textOrientation: 'sideways',
+  zIndex: 99,
+};
 
 const App = () => (
   <FranklinSite>
@@ -83,33 +106,74 @@ const App = () => (
             />
             <Route
               path={LocationToPath[Location.UniProtKBCustomiseTable]}
-              component={CustomiseTablePage}
+              render={() => (
+                <SingleColumnLayout>
+                  <CustomiseTablePage />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.UniProtKBDownload]}
-              component={DownloadPage}
+              render={() => (
+                <SingleColumnLayout>
+                  <DownloadPage />
+                </SingleColumnLayout>
+              )}
             />
             <Route
-              path={LocationToPath[Location.PageNotFound]}
-              component={ResourceNotFoundPage}
+              path={LocationToPath[Location.BlastResult]}
+              render={() => (
+                <SingleColumnLayout>
+                  <BlastResult />
+                </SingleColumnLayout>
+              )}
             />
             <Route
-              path={LocationToPath[Location.ServiceUnavailable]}
-              component={ServiceUnavailablePage}
+              path={LocationToPath[Location.Blast]}
+              render={() => (
+                <SingleColumnLayout>
+                  <BlastForm />
+                </SingleColumnLayout>
+              )}
             />
             <Route
-              path={LocationToPath[Location.JobError]}
-              component={JobErrorPage}
+              path={LocationToPath[Location.Dashboard]}
+              render={() => (
+                <SingleColumnLayout>
+                  <Dashboard />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.UniProtKBQueryBuilder]}
-              component={AdvancedSearchPage}
+              render={() => (
+                <SingleColumnLayout>
+                  <AdvancedSearchPage />
+                </SingleColumnLayout>
+              )}
             />
-            <Route component={ResourceNotFoundPage} />
+            <Route
+              component={() => (
+                <SingleColumnLayout>
+                  <ResourceNotFoundPage />
+                </SingleColumnLayout>
+              )}
+            />
           </Switch>
         </Suspense>
       </BaseLayout>
+      <ErrorBoundary fallback={null}>
+        <GDPR />
+      </ErrorBoundary>
     </Router>
+    <a
+      style={reportBugLinkStyles}
+      target="_blank"
+      href="https://goo.gl/forms/VrAGbqg2XFg6Mpbh1"
+      rel="noopener noreferrer"
+    >
+      Report bug
+    </a>
   </FranklinSite>
 );
 
