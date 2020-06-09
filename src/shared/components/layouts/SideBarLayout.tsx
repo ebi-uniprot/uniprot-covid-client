@@ -17,8 +17,8 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
   actionButtons,
   children,
 }) => (
-  <section className="sidebar-layout">
-    {title && <section className="sidebar-layout__title">{title}</section>}
+  <div className="sidebar-layout">
+    <section className="sidebar-layout__title">{title}</section>
     {actionButtons && (
       <section className="sidebar-layout__action-buttons">
         {actionButtons}
@@ -30,7 +30,7 @@ const SideBarLayout: React.FC<SideBarLayoutProps> = ({
     <section className="sidebar-layout__content">
       <ErrorBoundary>{children}</ErrorBoundary>
     </section>
-  </section>
+  </div>
 );
 
 export default SideBarLayout;

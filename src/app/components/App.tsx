@@ -4,12 +4,15 @@ import { FranklinSite, Loader } from 'franklin-sites';
 import * as Sentry from '@sentry/browser';
 
 import BaseLayout from '../../shared/components/layouts/BaseLayout';
+import ErrorBoundary from '../../shared/components/error-component/ErrorBoundary';
+import GDPR from '../../shared/components/gdpr/GDPR';
 
 import history from '../../shared/utils/browserHistory';
 
 import { Location, LocationToPath } from '../config/urls';
 
 import './styles/app.scss';
+import SingleColumnLayout from '../../shared/components/layouts/SingleColumnLayout';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -67,6 +70,21 @@ const ResourceNotFoundPage = lazy(() =>
   )
 );
 
+const reportBugLinkStyles: React.CSSProperties = {
+  fontSize: '.8rem',
+  lineHeight: '1.5rem',
+  display: 'block',
+  padding: '.5rem 0',
+  color: '#FFF',
+  backgroundColor: 'red',
+  position: 'fixed',
+  bottom: '4rem',
+  right: 0,
+  writingMode: 'vertical-rl',
+  textOrientation: 'sideways',
+  zIndex: 99,
+};
+
 const App = () => (
   <FranklinSite>
     <Router history={history}>
@@ -88,33 +106,74 @@ const App = () => (
             />
             <Route
               path={LocationToPath[Location.UniProtKBCustomiseTable]}
-              component={CustomiseTablePage}
+              render={() => (
+                <SingleColumnLayout>
+                  <CustomiseTablePage />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.UniProtKBDownload]}
-              component={DownloadPage}
+              render={() => (
+                <SingleColumnLayout>
+                  <DownloadPage />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.BlastResult]}
-              component={BlastResult}
+              render={() => (
+                <SingleColumnLayout>
+                  <BlastResult />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.Blast]}
-              component={BlastForm}
+              render={() => (
+                <SingleColumnLayout>
+                  <BlastForm />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.Dashboard]}
-              component={Dashboard}
+              render={() => (
+                <SingleColumnLayout>
+                  <Dashboard />
+                </SingleColumnLayout>
+              )}
             />
             <Route
               path={LocationToPath[Location.UniProtKBQueryBuilder]}
-              component={AdvancedSearchPage}
+              render={() => (
+                <SingleColumnLayout>
+                  <AdvancedSearchPage />
+                </SingleColumnLayout>
+              )}
             />
-            <Route component={ResourceNotFoundPage} />
+            <Route
+              component={() => (
+                <SingleColumnLayout>
+                  <ResourceNotFoundPage />
+                </SingleColumnLayout>
+              )}
+            />
           </Switch>
         </Suspense>
       </BaseLayout>
+      <ErrorBoundary fallback={null}>
+        <GDPR />
+      </ErrorBoundary>
     </Router>
+    <a
+      style={reportBugLinkStyles}
+      target="_blank"
+      href="https://goo.gl/forms/VrAGbqg2XFg6Mpbh1"
+      rel="noopener noreferrer"
+    >
+      Report bug
+    </a>
   </FranklinSite>
 );
 
