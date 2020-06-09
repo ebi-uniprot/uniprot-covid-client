@@ -58,7 +58,7 @@ export default Object.freeze({
     selected: '',
   }),
   [BlastFields.targetDb]: Object.freeze({
-    fieldName: 'database',
+    fieldName: 'targetDb',
     type: BlastFieldTypes.select,
     selected: 'uniprotkb_refprotswissprot',
     values: Object.freeze([
