@@ -14,11 +14,11 @@ export enum Location {
 
 export const LocationToPath = {
   [Location.Home]: '/',
-  [Location.UniProtKBResults]: '/uniprotkb',
   [Location.UniProtKBEntry]: '/uniprotkb/:accession',
+  [Location.UniProtKBResults]: '/uniprotkb',
   [Location.UniProtKBDownload]: '/download',
-  [Location.Blast]: '/blast',
   [Location.BlastResult]: '/blast/:id',
+  [Location.Blast]: '/blast',
   [Location.UniProtKBCustomiseTable]: '/customise-table',
   [Location.UniProtKBQueryBuilder]: '/advanced-search',
   [Location.Dashboard]: '/tool-dashboard',
