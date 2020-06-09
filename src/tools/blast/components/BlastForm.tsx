@@ -228,15 +228,18 @@ const BlastForm = () => {
 
     const jobName = formValues[BlastFields.name].selected as string;
 
-    // we emit an action containing only the parameters and the type of job
-    // the reducer will be in charge of generating a proper job object for
-    // internal state
-    dispatch(actions.createJob(parameters, 'blast', jobName));
     // navigate to the dashboard, not immediately, to give the impression that
     // something is happening
-    sleep(1000).then(() => {
-      history.push(LocationToPath[Location.Dashboard], { parameters });
-    });
+    sleep(1000)
+      .then(() => {
+        history.push(LocationToPath[Location.Dashboard], { parameters });
+      })
+      .then(() => {
+        // we emit an action containing only the parameters and the type of job
+        // the reducer will be in charge of generating a proper job object for
+        // internal state
+        dispatch(actions.createJob(parameters, 'blast', jobName));
+      });
   };
 
   // set the "Auto" matrix to the have the correct label depending on sequence
