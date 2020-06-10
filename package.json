@@ -7,7 +7,8 @@
   "scripts": {
     "start": "webpack-dev-server --env.PUBLIC_PATH=/ --mode development --open",
     "build": "webpack --env.PUBLIC_PATH=/ --mode production",
-    "build:dev": "webpack --env.PUBLIC_PATH=/uniprot-covid-client --mode development",
+    "build:staging": "webpack --env.PUBLIC_PATH=/uniprot-covid-client/ --mode production",
+    "build:dev": "webpack --env.PUBLIC_PATH=/ --mode development",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*'",
     "lint-fix": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --fix",
