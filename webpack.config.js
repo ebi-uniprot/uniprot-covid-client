@@ -15,7 +15,7 @@ module.exports = (_env, argv) => {
     entry: [path.resolve(__dirname, 'src/index.tsx')],
     output: {
       path: path.resolve(__dirname, 'build'),
-      publicPath: isDev ? '/' : '/uniprot-website/',
+      publicPath: isDev ? '/' : '/',
       filename: 'app.[hash:6].js',
       chunkFilename: '[name].[chunkhash:6].js',
     },
@@ -136,7 +136,7 @@ module.exports = (_env, argv) => {
           filename: '404.html',
         }),
       new DefinePlugin({
-        BASE_URL: JSON.stringify(isDev ? '/' : '/uniprot-website/'),
+        BASE_URL: JSON.stringify(isDev ? '/' : '/'),
         LIVE_RELOAD: JSON.stringify(isLiveReload),
       }),
       !isLiveReload &&
