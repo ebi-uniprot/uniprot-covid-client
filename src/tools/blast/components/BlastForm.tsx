@@ -5,6 +5,7 @@ import React, {
   useCallback,
   FormEvent,
   MouseEvent,
+  useMemo,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -79,7 +80,6 @@ const FormSelect: FC<{
       <label htmlFor={label}>
         {label}
         <select
-          id={label}
           value={formValue.selected as string}
           onChange={(e) =>
             updateFormValue({ ...formValue, selected: e.target.value })
@@ -109,7 +109,7 @@ const BlastForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const getInitialValues = () => {
+  const initialFormValues = useMemo(() => {
     // NOTE: we should use a similar logic to pre-fill fields based on querystring
     const parametersFromHistoryState: FormParameters | undefined = (history
       .location?.state as CustomLocationState)?.parameters;
@@ -138,8 +138,7 @@ const BlastForm = () => {
     }
     // otherwise, pass the default values
     return defaultFormValues;
-  };
-  const initialFormValues = getInitialValues(); // Invoquing this immediately but there's probably a nicer way.
+  }, [history]);
 
   // used when the form submission needs to be disabled
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -157,8 +156,8 @@ const BlastForm = () => {
   >(initialFormValues[BlastFields.sequence]);
   const [jobName, setJobName] = useState(initialFormValues[BlastFields.name]);
   const [database, setDatabase] = useState<
-    BlastFormValues[BlastFields.targetDb]
-  >(initialFormValues[BlastFields.targetDb]);
+    BlastFormValues[BlastFields.database]
+  >(initialFormValues[BlastFields.database]);
   const [taxIDs, setTaxIDs] = useState<BlastFormValues[BlastFields.taxons]>(
     initialFormValues[BlastFields.taxons]
   );
