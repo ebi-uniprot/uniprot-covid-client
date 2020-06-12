@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import React, { FC, Fragment, useCallback } from 'react';
+import React, { FC, Fragment, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProtvistaTrack from 'protvista-track';
 import { BlastResults, BlastHsp, BlastHit } from '../types/blastResults';
@@ -7,7 +7,7 @@ import { loadWebComponent } from '../../../shared/utils/utils';
 
 import './styles/BlastResultTable.scss';
 
-const BlastResultsHsp: FC<{
+const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   length: number;
 }> = ({ hsp, length }) => {
@@ -30,11 +30,46 @@ const BlastResultsHsp: FC<{
   );
 
   return (
-    <section className="data-table__blast-hsp">
+    <section className="">
       {/* protvista-track height doesn't seem to be working properly */}
-      <protvista-track length={length} height={44} ref={setTrackData} />
+      <protvista-track length={length} height={10} ref={setTrackData} />
       {/* {`${hsp.hsp_hit_from}-${hsp.hsp_hit_to} bit-score:${hsp.hsp_bit_score}`} */}
     </section>
+  );
+};
+
+const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
+  hsps,
+  length,
+}) => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const hspsOrderedByScore = hsps.sort(
+    (hspA, hspB) => hspB.hsp_bit_score - hspA.hsp_bit_score
+  );
+
+  return (
+    <Fragment>
+      <BlastSummaryTrack hsp={hspsOrderedByScore[0]} length={length} />
+      {hspsOrderedByScore.length > 1 &&
+        !collapsed &&
+        hspsOrderedByScore
+          .slice(1)
+          .map((hsp) => (
+            <BlastSummaryTrack
+              hsp={hsp}
+              length={length}
+              key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+            />
+          ))}
+      {hspsOrderedByScore.length > 1 && collapsed && (
+        <small>
+          <button type="button" onClick={() => setCollapsed(false)}>{`+${
+            hspsOrderedByScore.length - 1
+          } more`}</button>
+        </small>
+      )}
+    </Fragment>
   );
 };
 
@@ -77,14 +112,8 @@ const BlastResultTable: FC<{ data: BlastResults }> = ({ data }) => {
                   <td className="data-table__table__body__cell">
                     <Link to={`/taxonomy/${hit_uni_ox}`}>{hit_uni_os}</Link>
                   </td>
-                  <td className="data-table__table__body__cell">
-                    {hit_hsps.map((hsp) => (
-                      <BlastResultsHsp
-                        hsp={hsp}
-                        length={data.query_len}
-                        key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
-                      />
-                    ))}
+                  <td className="data-table__table__body__cell data-table__blast-hsp">
+                    <BlastSummaryHsps hsps={hit_hsps} length={data.query_len} />
                   </td>
                 </tr>
               );
