@@ -11,30 +11,33 @@ const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   length: number;
 }> = ({ hsp, length }) => {
+  const { hsp_query_from, hsp_query_to, hsp_identity } = hsp;
+
   const setTrackData = useCallback(
     (node): void => {
       if (node) {
         // eslint-disable-next-line no-param-reassign
         node.data = [
           {
-            start: hsp.hsp_query_from,
-            end: hsp.hsp_query_to,
+            start: hsp_query_from,
+            end: hsp_query_to,
             // franklin $colour-sapphire-blue
             color: '#014371',
-            opacity: hsp.hsp_identity / 100,
+            opacity: hsp_identity / 100,
           },
         ];
       }
     },
-    [hsp]
+    [hsp_query_from, hsp_query_to, hsp_identity]
   );
 
   return (
-    <section className="">
-      {/* protvista-track height doesn't seem to be working properly */}
-      <protvista-track length={length} height={10} ref={setTrackData} />
-      {/* {`${hsp.hsp_hit_from}-${hsp.hsp_hit_to} bit-score:${hsp.hsp_bit_score}`} */}
-    </section>
+    <protvista-track
+      length={length}
+      height={10}
+      ref={setTrackData}
+      title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nIdentity: ${hsp_identity}%`}
+    />
   );
 };
 
