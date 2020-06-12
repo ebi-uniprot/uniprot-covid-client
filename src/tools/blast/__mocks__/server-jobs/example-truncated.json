@@ -59,6 +59,26 @@
           "hsp_qseq": "UIYUOIUIOUUITYIOUUOPUOUOIUOU",
           "hsp_mseq": "Y          Y",
           "hsp_hseq": "CCYCCCCCYCCCCYCCCCCYCCCCCCCC"
+        },
+        {
+          "hsp_num": 2,
+          "hsp_score": 90,
+          "hsp_bit_score": 39.5874,
+          "hsp_expect": 0.0048,
+          "hsp_align_len": 28,
+          "hsp_identity": 7.1,
+          "hsp_positive": 7.1,
+          "hsp_gaps": 0,
+          "hsp_query_frame": "0",
+          "hsp_hit_frame": "0",
+          "hsp_strand": "none/none",
+          "hsp_query_from": 3,
+          "hsp_query_to": 30,
+          "hsp_hit_from": 418,
+          "hsp_hit_to": 445,
+          "hsp_qseq": "UIYUOIUIOUUITYIOUUOPUOUOIUOU",
+          "hsp_mseq": "Y          Y",
+          "hsp_hseq": "CCYCCCCCYCCCCYCCCCCYCCCCCCCC"
         }
       ]
     }

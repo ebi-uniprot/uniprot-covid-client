@@ -33,6 +33,7 @@ const BlastSummaryTrack: FC<{
 
   return (
     <protvista-track
+      data-testid="blast-summary-track"
       length={length}
       height={10}
       ref={setTrackData}

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlastResultTable tests should render the results table 1`] = `
+<DocumentFragment>
+  <table
+    class="data-table__table"
+  >
+    <thead
+      class="data-table__table__header"
+    >
+      <tr
+        class="data-table__table__header__row"
+      >
+        <th
+          class="data-table__table__header__row__cell"
+        >
+          Accession
+        </th>
+        <th
+          class="data-table__table__header__row__cell"
+        >
+          Gene
+        </th>
+        <th
+          class="data-table__table__header__row__cell"
+        >
+          Organism
+        </th>
+        <th
+          class="data-table__table__header__row__cell"
+        >
+          Alignment
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="data-table__table__body"
+    >
+      <tr>
+        <td
+          class="data-table__table__body__cell"
+        >
+          <a
+            href="/uniprotkb/U6MKN0"
+          >
+            U6MKN0
+          </a>
+        </td>
+        <td
+          class="data-table__table__body__cell"
+        >
+          ENH_00046930
+        </td>
+        <td
+          class="data-table__table__body__cell"
+        >
+          <a
+            href="/taxonomy/51315"
+          >
+            Eimeria necatrix
+          </a>
+        </td>
+        <td
+          class="data-table__table__body__cell data-table__blast-hsp"
+        >
+          <protvista-track
+            data-testid="blast-summary-track"
+            height="10"
+            length="30"
+            title="Start: 3
+End: 30
+Identity: 7.1%"
+          />
+          <small>
+            <button
+              type="button"
+            >
+              +1 more
+            </button>
+          </small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</DocumentFragment>
+`;
