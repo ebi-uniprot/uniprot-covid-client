@@ -1,0 +1,11 @@
+.data-table__blast-hsp {
+  width: 40vw;
+  text-align: right;
+  svg {
+    margin: 0.1rem 0;
+  }
+  button {
+    // Compensate for protvista-track margin
+    margin-right: 0.5rem;
+  }
+}

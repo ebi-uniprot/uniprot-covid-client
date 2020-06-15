@@ -1,41 +1,96 @@
-import React, { FC, Fragment } from 'react';
+/* eslint-disable @typescript-eslint/camelcase */
+import React, { FC, Fragment, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ProtvistaTrack from 'protvista-track';
 import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
+import { loadWebComponent } from '../../../../shared/utils/utils';
 
-const parseHitDescription = (string: string) => {
-  const regex = new RegExp(/(.*)(OS=.*)(OX=.*)(GN=.*)(PE=.*)(SV=.*)/);
-  const matches = string.match(regex);
-  if (!matches) {
-    return {};
-  }
-  return {
-    proteinDescription: matches[1],
-    organism: matches[2] && matches[2].substring(3).trim(),
-    taxid: matches[3] && matches[3].substring(3).trim(),
-    geneName: matches[4] && matches[4].substring(3).trim(),
-    proteinExistence: matches[5] && matches[5].substring(3).trim(),
-  };
+import './styles/blast-result.scss';
+
+const BlastSummaryTrack: FC<{
+  hsp: BlastHsp;
+  length: number;
+}> = ({ hsp, length }) => {
+  const { hsp_query_from, hsp_query_to, hsp_identity } = hsp;
+
+  const setTrackData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = [
+          {
+            start: hsp_query_from,
+            end: hsp_query_to,
+            // franklin $colour-sapphire-blue
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
+        ];
+      }
+    },
+    [hsp_query_from, hsp_query_to, hsp_identity]
+  );
+
+  return (
+    <protvista-track
+      data-testid="blast-summary-track"
+      length={length}
+      height={10}
+      ref={setTrackData}
+      title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nIdentity: ${hsp_identity}%`}
+    />
+  );
 };
 
-const BlastResultsHsp: FC<{ hsp: BlastHsp }> = ({ hsp }) => (
-  <section>{`${hsp.hsp_hit_from}-${hsp.hsp_hit_to} bit-score:${hsp.hsp_bit_score}`}</section>
-);
+const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
+  hsps,
+  length,
+}) => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const hspsOrderedByScore = hsps.sort(
+    (hspA, hspB) => hspB.hsp_bit_score - hspA.hsp_bit_score
+  );
+
+  return (
+    <Fragment>
+      <BlastSummaryTrack hsp={hspsOrderedByScore[0]} length={length} />
+      {hspsOrderedByScore.length > 1 &&
+        !collapsed &&
+        hspsOrderedByScore
+          .slice(1)
+          .map((hsp) => (
+            <BlastSummaryTrack
+              hsp={hsp}
+              length={length}
+              key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+            />
+          ))}
+      {hspsOrderedByScore.length > 1 && collapsed && (
+        <small>
+          <button type="button" onClick={() => setCollapsed(false)}>{`+${
+            hspsOrderedByScore.length - 1
+          } more`}</button>
+        </small>
+      )}
+    </Fragment>
+  );
+};
 
 const BlastResultTable: FC<{ data: BlastResults }> = ({ data }) => {
   if (!data) {
     return null;
   }
+  loadWebComponent('protvista-track', ProtvistaTrack);
+
   return (
     <Fragment>
       <table className="data-table__table">
         <thead className="data-table__table__header">
           <tr className="data-table__table__header__row">
-            <th className="data-table__table__header__row__cell">Entry</th>
-            <th className="data-table__table__header__row__cell">
-              Protein name
-            </th>
+            <th className="data-table__table__header__row__cell">Accession</th>
+            <th className="data-table__table__header__row__cell">Gene</th>
             <th className="data-table__table__header__row__cell">Organism</th>
-            <th className="data-table__table__header__row__cell">Gene name</th>
             <th className="data-table__table__header__row__cell">Alignment</th>
           </tr>
         </thead>
@@ -44,30 +99,25 @@ const BlastResultTable: FC<{ data: BlastResults }> = ({ data }) => {
             data.hits &&
             data.hits.map((hit: BlastHit) => {
               const {
-                proteinDescription,
-                organism,
-                taxid,
-                geneName,
-              } = parseHitDescription(hit.hit_desc);
+                hit_acc,
+                hit_hsps,
+                hit_uni_gn,
+                hit_uni_os,
+                hit_uni_ox,
+              } = hit;
               return (
-                <tr key={hit.hit_acc}>
+                <tr key={hit_acc}>
                   <td className="data-table__table__body__cell">
-                    <Link to={`/uniprotkb/${hit.hit_acc}`}>{hit.hit_acc}</Link>
+                    <Link to={`/uniprotkb/${hit_acc}`}>{hit_acc}</Link>
                   </td>
                   <td className="data-table__table__body__cell">
-                    {proteinDescription}
+                    {hit_uni_gn}
                   </td>
                   <td className="data-table__table__body__cell">
-                    <Link to={`/taxonomy/${taxid}`}>{organism}</Link>
+                    <Link to={`/taxonomy/${hit_uni_ox}`}>{hit_uni_os}</Link>
                   </td>
-                  <td className="data-table__table__body__cell">{geneName}</td>
-                  <td className="data-table__table__body__cell">
-                    {hit.hit_hsps.map((hsp) => (
-                      <BlastResultsHsp
-                        hsp={hsp}
-                        key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
-                      />
-                    ))}
+                  <td className="data-table__table__body__cell data-table__blast-hsp">
+                    <BlastSummaryHsps hsps={hit_hsps} length={data.query_len} />
                   </td>
                 </tr>
               );
