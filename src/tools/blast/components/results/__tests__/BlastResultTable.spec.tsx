@@ -1,7 +1,7 @@
 import React from 'react';
 import BlastResultTable from '../BlastResultTable';
-import blastResultsMockData from '../../__mocks__/server-jobs/example-truncated.json';
-import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
+import blastResultsMockData from '../../../__mocks__/server-jobs/example-truncated.json';
+import renderWithRedux from '../../../../../shared/__test-helpers__/RenderWithRedux';
 import { fireEvent } from '@testing-library/react';
 
 let component;
