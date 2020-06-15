@@ -51,7 +51,7 @@ const DownloadPage = lazy(() =>
 );
 const BlastResult = lazy(() =>
   import(
-    /* webpackChunkName: "blast-result" */ '../../tools/blast/components/BlastResult'
+    /* webpackChunkName: "blast-result" */ '../../tools/blast/components/results/BlastResult'
   )
 );
 const BlastForm = lazy(() =>
@@ -122,11 +122,7 @@ const App = () => (
             />
             <Route
               path={LocationToPath[Location.BlastResult]}
-              render={() => (
-                <SingleColumnLayout>
-                  <BlastResult />
-                </SingleColumnLayout>
-              )}
+              component={BlastResult}
             />
             <Route
               path={LocationToPath[Location.Blast]}
