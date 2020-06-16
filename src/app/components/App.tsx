@@ -13,6 +13,7 @@ import { Location, LocationToPath } from '../config/urls';
 
 import './styles/app.scss';
 import SingleColumnLayout from '../../shared/components/layouts/SingleColumnLayout';
+import SidePanel from '../../shared/components/layouts/SidePanel';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -116,6 +117,8 @@ const App = () => (
               path={LocationToPath[Location.UniProtKBDownload]}
               render={() => (
                 <SingleColumnLayout>
+                  <SidePanel>HELLO</SidePanel>
+
                   <DownloadPage />
                 </SingleColumnLayout>
               )}

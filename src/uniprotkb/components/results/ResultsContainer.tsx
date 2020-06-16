@@ -24,6 +24,7 @@ import infoMappings from '../../../shared/config/InfoMappings';
 import { Clause, Namespace } from '../../types/searchTypes';
 import { Column } from '../../types/columnTypes';
 import Response from '../../types/responseTypes';
+import SidePanel from '../../../shared/components/layouts/SidePanel';
 
 type ResultsProps = {
   namespace: Namespace;
