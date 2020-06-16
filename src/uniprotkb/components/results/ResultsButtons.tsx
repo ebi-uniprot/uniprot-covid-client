@@ -65,7 +65,7 @@ const ResultsButtons: FC<{
         <button
           type="button"
           className="button tertiary"
-          onClick={() => setDisplayDownloadPanel(true)}
+          onClick={() => setDisplayDownloadPanel(!displayDownloadPanel)}
         >
           <DownloadIcon />
           Download
