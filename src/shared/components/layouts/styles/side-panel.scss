@@ -1,3 +1,4 @@
+@import '../../../styles/settings';
 @import '../../../../../node_modules/franklin-sites/src/styles/settings';
 @import '../../../../../node_modules/franklin-sites/src/styles/colours';
 @import '../../../../../node_modules/franklin-sites/src/styles/mixins';
@@ -12,4 +13,6 @@
   position: absolute;
   right: 0;
   top: 0;
+  z-index: $z-index-high;
+  overflow-y: auto;
 }

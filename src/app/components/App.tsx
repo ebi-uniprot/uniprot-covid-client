@@ -13,7 +13,6 @@ import { Location, LocationToPath } from '../config/urls';
 
 import './styles/app.scss';
 import SingleColumnLayout from '../../shared/components/layouts/SingleColumnLayout';
-import SidePanel from '../../shared/components/layouts/SidePanel';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -43,11 +42,6 @@ const AdvancedSearchPage = lazy(() =>
 const CustomiseTablePage = lazy(() =>
   import(
     /* webpackChunkName: "customise-table" */ '../../uniprotkb/components/customise-table/CustomiseTableContainer'
-  )
-);
-const DownloadPage = lazy(() =>
-  import(
-    /* webpackChunkName: "download" */ '../../uniprotkb/components/download/DownloadContainer'
   )
 );
 const BlastResult = lazy(() =>
@@ -110,16 +104,6 @@ const App = () => (
               render={() => (
                 <SingleColumnLayout>
                   <CustomiseTablePage />
-                </SingleColumnLayout>
-              )}
-            />
-            <Route
-              path={LocationToPath[Location.UniProtKBDownload]}
-              render={() => (
-                <SingleColumnLayout>
-                  <SidePanel>HELLO</SidePanel>
-
-                  <DownloadPage />
                 </SingleColumnLayout>
               )}
             />
