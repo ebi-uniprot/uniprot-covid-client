@@ -3539,7 +3539,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -5608,11 +5608,12 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.56:
-  version "0.0.56"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.56.tgz#db60a6d3d917d873bcd49979afeb255fe26ce4f1"
-  integrity sha512-LgKBxy7APKI7uXacjs32+KNLdwijPjRk39FVT2dUeSYLhhrzsUWLrXt19zSi9q63cOSrPPLlPztSXPSBBkEHPg==
+franklin-sites@0.0.58:
+  version "0.0.58"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.58.tgz#b4c36fe44a7a425a4e33df5be5cc36f12d00d922"
+  integrity sha512-/ahuP+Eh12MUIvJSwVIJ9SAzr4D15zpRqrJTauJGxUfcuSfdCxE9PUOD9x25HwvIMwcDEreDGRmfo3kUn0wgNg==
   dependencies:
+    classnames "^2.2.6"
     file-loader "^2.0.0"
     foundation-sites "^6.5.3"
     history "^4.10.1"

@@ -17,8 +17,7 @@
     "test:unit": "jest",
     "test:functional": "jest --config tests/jest.config.json tests/functional",
     "test:visual": "jest --config tests/jest.config.json tests/visual",
-    "clear-test-cache": "jest --clearCache",
-    "update-snapshots": "jest -u"
+    "clear-test-cache": "jest --clearCache"
   },
   "browserslist": [
     "last 2 version",
@@ -75,7 +74,7 @@
     "axios": "0.19.2",
     "d3": "5.16.0",
     "d3-scale": "3.2.1",
-    "franklin-sites": "0.0.56",
+    "franklin-sites": "0.0.58",
     "history": "4.10.1",
     "idb": "5.0.4",
     "idx": "2.5.6",
