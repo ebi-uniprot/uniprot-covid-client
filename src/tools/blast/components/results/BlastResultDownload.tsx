@@ -1,5 +1,4 @@
-import React, { memo } from 'react';
-import { Card, DownloadIcon } from 'franklin-sites';
+import React, { memo, useState } from 'react';
 
 import blastUrls, { ResultFormat } from '../../config/blastUrls';
 
@@ -47,30 +46,55 @@ const options: DownloadOptions[] = [
   { format: 'ffdp-subject-jpeg', description: 'FFDP subject JPG', ext: 'jpg' },
 ];
 
-const BlastResultDownload = memo<{ id: string }>(({ id }) => (
-  <>
-    {options.map(({ format, description, ext }) => {
-      const filename = `${format}.${ext}`;
-      return (
-        <Card
-          key={format}
-          title={
-            <a
-              title={`Download the file ${filename}`}
-              href={blastUrls.resultUrl(id, format)}
-              download={filename}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <DownloadIcon height="1em" /> <code>{filename}</code>
-            </a>
-          }
-        >
-          {description}
-        </Card>
-      );
-    })}
-  </>
-));
+const BlastResultDownload = memo<{ id: string; onClose: () => void }>(
+  ({ id, onClose }) => {
+    const [fileFormat, setFileFormat] = useState(options[0].format);
+
+    const updateFileFormat = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setFileFormat(e.target.value as ResultFormat);
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const link = document.createElement('a');
+      link.href = blastUrls.resultUrl(id, fileFormat);
+      link.target = '_blank';
+      link.setAttribute('download', '');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      onClose();
+    };
+
+    return (
+      <>
+        <h2>Download</h2>
+        <h3>BLAST results</h3>
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <legend>
+              Format
+              <select
+                id="file-format-select"
+                data-testid="file-format-select"
+                value={fileFormat}
+                onChange={(e) => updateFileFormat(e)}
+              >
+                {options.map(({ format, description }) => (
+                  <option value={format} key={format}>
+                    {description}
+                  </option>
+                ))}
+              </select>
+            </legend>
+            <button type="submit" className="button button-primary">
+              Download
+            </button>
+          </fieldset>
+        </form>
+      </>
+    );
+  }
+);
 
 export default BlastResultDownload;

@@ -4,12 +4,10 @@ import { Loader, PageIntro, Tabs } from 'franklin-sites';
 
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
-import ResultsButtons from '../../../../uniprotkb/components/results/ResultsButtons';
 import BlastResultSidebar from './BlastResultSidebar';
 import BlastResultTable from './BlastResultTable';
 import BlastResultTextOutput from './BlastResultTextOutput';
 import BlastResultToolInput from './BlastResultToolInput';
-// import BlastResultDownload from './BlastResultDownload';
 
 import useDataApi from '../../../../shared/hooks/useDataApi';
 
@@ -21,6 +19,7 @@ import { BlastResults, BlastHit } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 // what we import are types, even if they are in adapter file
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
+import BlastResultsButtons from './BlastResultsButtons';
 
 type Match = {
   params: {
@@ -105,7 +104,7 @@ const BlastResult = () => {
               <>
                 {/* TODO: make that component more generic */}
                 {/* @ts-ignore */}
-                <ResultsButtons />
+                <BlastResultsButtons jobId={match.params.id} />
                 <BlastResultTable data={data || blastData} />
               </>
             ),
@@ -117,7 +116,7 @@ const BlastResult = () => {
               <>
                 {/* TODO: make that component more generic */}
                 {/* @ts-ignore */}
-                <ResultsButtons />
+                <BlastResultsButtons jobId={match.params.id} />
                 Taxonomy content
               </>
             ),
@@ -129,7 +128,7 @@ const BlastResult = () => {
               <>
                 {/* TODO: make that component more generic */}
                 {/* @ts-ignore */}
-                <ResultsButtons />
+                <BlastResultsButtons jobId={match.params.id} />
                 Hit distribution content
               </>
             ),
@@ -145,11 +144,6 @@ const BlastResult = () => {
             content: <BlastResultToolInput id={match.params.id} />,
             id: 'tool-input',
           },
-          // {
-          //   title: 'Download',
-          //   content: <BlastResultDownload id={match.params.id} />,
-          //   id: 'download',
-          // },
         ]}
       />
     </SideBarLayout>
