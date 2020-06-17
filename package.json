@@ -17,7 +17,8 @@
     "test:unit": "jest",
     "test:functional": "jest --config tests/jest.config.json tests/functional",
     "test:visual": "jest --config tests/jest.config.json tests/visual",
-    "clear-test-cache": "jest --clearCache"
+    "clear-test-cache": "jest --clearCache",
+    "update-snapshots": "jest -u"
   },
   "browserslist": [
     "last 2 version",
