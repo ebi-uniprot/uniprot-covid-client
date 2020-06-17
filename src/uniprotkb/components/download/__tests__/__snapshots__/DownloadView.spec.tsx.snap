@@ -3,7 +3,6 @@
 exports[`DownloadView component should render 1`] = `
 <DocumentFragment>
   <form
-    class="download"
     data-testid="download-form"
   >
     <h2>
@@ -33,64 +32,64 @@ exports[`DownloadView component should render 1`] = `
       Download all (100)
     </label>
     <fieldset>
-      <legend>
+      <label>
         Format
-      </legend>
-      <select
-        data-testid="file-format-select"
-        id="file-format-select"
-      >
-        <option
-          value="FASTA (canonical)"
+        <select
+          data-testid="file-format-select"
+          id="file-format-select"
         >
-          FASTA (canonical)
-        </option>
-        <option
-          value="FASTA (canonical & isoform)"
-        >
-          FASTA (canonical & isoform)
-        </option>
-        <option
-          value="TSV"
-        >
-          TSV
-        </option>
-        <option
-          value="Excel"
-        >
-          Excel
-        </option>
-        <option
-          value="XML"
-        >
-          XML
-        </option>
-        <option
-          value="RDF/XML"
-        >
-          RDF/XML
-        </option>
-        <option
-          value="Text"
-        >
-          Text
-        </option>
-        <option
-          value="GFF"
-        >
-          GFF
-        </option>
-        <option
-          value="List"
-        >
-          List
-        </option>
-        <option
-          value="JSON"
-        >
-          JSON
-        </option>
-      </select>
+          <option
+            value="FASTA (canonical)"
+          >
+            FASTA (canonical)
+          </option>
+          <option
+            value="FASTA (canonical & isoform)"
+          >
+            FASTA (canonical & isoform)
+          </option>
+          <option
+            value="TSV"
+          >
+            TSV
+          </option>
+          <option
+            value="Excel"
+          >
+            Excel
+          </option>
+          <option
+            value="XML"
+          >
+            XML
+          </option>
+          <option
+            value="RDF/XML"
+          >
+            RDF/XML
+          </option>
+          <option
+            value="Text"
+          >
+            Text
+          </option>
+          <option
+            value="GFF"
+          >
+            GFF
+          </option>
+          <option
+            value="List"
+          >
+            List
+          </option>
+          <option
+            value="JSON"
+          >
+            JSON
+          </option>
+        </select>
+      </label>
     </fieldset>
     <fieldset>
       <legend>
@@ -177,8 +176,8 @@ exports[`DownloadView component should render 1`] = `
         </svg>
       </div>
     </fieldset>
-    <div
-      class="button-group customise-table--cancel-submit-buttons"
+    <section
+      class="button-group side-panel__button-row"
     >
       <button
         class="button secondary"
@@ -198,7 +197,7 @@ exports[`DownloadView component should render 1`] = `
       >
         Download
       </button>
-    </div>
+    </section>
   </form>
 </DocumentFragment>
 `;

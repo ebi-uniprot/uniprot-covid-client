@@ -87,9 +87,22 @@ const BlastResultDownload = memo<{ id: string; onClose: () => void }>(
                 ))}
               </select>
             </legend>
-            <button type="submit" className="button button-primary">
-              Download
-            </button>
+            <section className="button-group side-panel__button-row">
+              <button
+                className="button secondary"
+                type="button"
+                onClick={() => onClose()}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="button button-primary"
+                data-testid="submit-blast"
+              >
+                Download
+              </button>
+            </section>
           </fieldset>
         </form>
       </>
