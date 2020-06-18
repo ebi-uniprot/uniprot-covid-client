@@ -6,7 +6,7 @@ exports[`FeaturesView component it renders without crashing 1`] = `
     Features
   </h3>
   <protvista-manager
-    attributes="highlight displaystart displayend"
+    attributes="highlight displaystart displayend selectedid"
   >
     <protvista-navigation
       length="21"

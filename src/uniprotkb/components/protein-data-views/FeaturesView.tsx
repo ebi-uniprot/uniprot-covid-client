@@ -4,6 +4,7 @@ import ProtvistaTrack from 'protvista-track';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaSequence from 'protvista-sequence';
 import ProtvistaNavigation from 'protvista-navigation';
+import { v1 } from 'uuid';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { Evidence } from '../../types/modelTypes';
 import FeatureType from '../../types/featureType';
@@ -58,20 +59,24 @@ type FeatureProps = {
 
 // TODO: looks like this could be merged with ProtvistaFeature?
 export type ProcessedFeature = {
-  accession: string | undefined;
+  protvistaFeatureId?: string;
   start: number;
   end: number;
   startModifier: LocationModifier;
   endModifier: LocationModifier;
   type: FeatureType;
-  description: string | undefined;
-  evidences: Evidence[] | undefined;
+  description?: string;
+  evidences?: Evidence[];
+  sequence?: string;
 };
 
-const processData = (data: FeatureData): ProcessedFeature[] =>
+const processData = (
+  data: FeatureData,
+  sequence?: string
+): ProcessedFeature[] =>
   data.map(
     (feature): ProcessedFeature => ({
-      accession: feature.featureId,
+      protvistaFeatureId: feature.featureId ? feature.featureId : v1(),
       start: feature.location.start.value,
       end: feature.location.end.value,
       startModifier: feature.location.start.modifier,
@@ -79,6 +84,10 @@ const processData = (data: FeatureData): ProcessedFeature[] =>
       type: feature.type,
       description: feature.description,
       evidences: feature.evidences,
+      sequence: sequence?.substring(
+        feature.location.start.value - 1,
+        feature.location.end.value
+      ),
     })
   );
 
@@ -91,23 +100,25 @@ const FeaturesView: React.FC<FeatureProps> = ({
   loadWebComponent('protvista-sequence', ProtvistaSequence);
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
-  const processedData = processData(features);
+  const processedData = processData(features, sequence);
 
   const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => ({
     type: {
       label: 'Type',
-      resolver: (d: ProtvistaFeature): string => d.type,
+      resolver: (d: ProcessedFeature): string => {
+        return d.type;
+      },
     },
     positions: {
       label: 'Positions',
-      resolver: (d: ProtvistaFeature): string =>
+      resolver: (d: ProcessedFeature): string =>
         `${d.startModifier === LocationModifier.UNKNOWN ? '?' : d.start}-${
           d.endModifier === LocationModifier.UNKNOWN ? '?' : d.end
         }`,
     },
     description: {
       label: 'Description',
-      resolver: (d: ProtvistaFeature): TemplateResult =>
+      resolver: (d: ProcessedFeature): TemplateResult =>
         html`
           ${d.description}
           ${d.evidences &&
@@ -117,6 +128,11 @@ const FeaturesView: React.FC<FeatureProps> = ({
     featureId: {
       label: 'ID',
       resolver: (d: ProtvistaFeature) => (d.accession ? d.accession : '-'),
+    },
+    sequence: {
+      label: 'Sequence',
+      child: true,
+      resolver: (d: ProcessedFeature) => (d.sequence ? d.sequence : ''),
     },
   });
 
@@ -137,7 +153,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
   return (
     <Fragment>
       <h3>Features</h3>
-      <protvista-manager attributes="highlight displaystart displayend">
+      <protvista-manager attributes="highlight displaystart displayend selectedid">
         {sequence && (
           <Fragment>
             <protvista-navigation length={sequence.length} />

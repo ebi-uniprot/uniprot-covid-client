@@ -2039,7 +2039,7 @@ exports[`Entry view should render 1`] = `
             Features
           </h3>
           <protvista-manager
-            attributes="highlight displaystart displayend"
+            attributes="highlight displaystart displayend selectedid"
           >
             <protvista-navigation
               length="10"
