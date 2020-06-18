@@ -1,4 +1,11 @@
-import React, { FC, useState, useEffect, useRef, ChangeEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  ChangeEvent,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import { SearchInput } from 'franklin-sites';
 import queryString from 'query-string';
 
@@ -38,10 +45,15 @@ export type SequenceSubmissionOnChangeEvent = {
   name?: string;
 };
 
-const SequenceSearchLoader: FC<{
-  onLoad: (event: SequenceSubmissionOnChangeEvent) => void;
-}> = ({ onLoad }) => {
+const SequenceSearchLoader = forwardRef<
+  { reset: () => void },
+  { onLoad: (event: SequenceSubmissionOnChangeEvent) => void }
+>(({ onLoad }, ref) => {
   const [accessionOrID, setAccessionOrID] = useState('');
+
+  useImperativeHandle(ref, () => ({
+    reset: () => setAccessionOrID(''),
+  }));
 
   // used to keep a reference to the previously generated sequence string
   const sequenceRef = useRef('');
@@ -131,6 +143,6 @@ const SequenceSearchLoader: FC<{
       value={accessionOrID}
     />
   );
-};
+});
 
 export default SequenceSearchLoader;
