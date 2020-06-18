@@ -7,7 +7,7 @@ describe('Blast results download', () => {
     const onCloseMock = jest.fn();
 
     const { getByTestId } = render(
-      <BlastResultDownload id="1234" onClose={onCloseMock} />
+      <BlastResultDownload id="1234" onToggleDisplay={onCloseMock} />
     );
     const select = getByTestId('file-format-select');
     fireEvent.change(select, 'accs');

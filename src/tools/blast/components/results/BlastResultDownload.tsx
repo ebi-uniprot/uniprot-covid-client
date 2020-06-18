@@ -46,8 +46,8 @@ const options: DownloadOptions[] = [
   { format: 'ffdp-subject-jpeg', description: 'FFDP subject JPG', ext: 'jpg' },
 ];
 
-const BlastResultDownload = memo<{ id: string; onClose: () => void }>(
-  ({ id, onClose }) => {
+const BlastResultDownload = memo<{ id: string; onToggleDisplay: () => void }>(
+  ({ id, onToggleDisplay }) => {
     const [fileFormat, setFileFormat] = useState(options[0].format);
 
     const updateFileFormat = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,7 +63,7 @@ const BlastResultDownload = memo<{ id: string; onClose: () => void }>(
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      onClose();
+      onToggleDisplay();
     };
 
     return (
@@ -91,7 +91,7 @@ const BlastResultDownload = memo<{ id: string; onClose: () => void }>(
               <button
                 className="button secondary"
                 type="button"
-                onClick={() => onClose()}
+                onClick={() => onToggleDisplay()}
               >
                 Cancel
               </button>

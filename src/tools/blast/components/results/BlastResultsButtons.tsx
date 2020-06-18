@@ -18,7 +18,9 @@ const BlastResultsButtons: FC<{
           <SidePanel>
             <BlastResultDownload
               id={jobId}
-              onClose={() => setDisplayDownloadPanel(!displayDownloadPanel)}
+              onToggleDisplay={() =>
+                setDisplayDownloadPanel(!displayDownloadPanel)
+              }
             />
           </SidePanel>
         </Suspense>
