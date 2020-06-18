@@ -311,9 +311,8 @@ const Row: FC<RowProps> = memo(({ job }) => {
         <Actions parameters={job.parameters} onDelete={handleDelete} />
       </span>
       <span className="dashboard__body__id">
-        {'remoteID' in job && jobLink && (
-          <Link to={jobLink}>{job.remoteID}</Link>
-        )}
+        {'remoteID' in job &&
+          (jobLink ? <Link to={jobLink}>{job.remoteID}</Link> : job.remoteID)}
       </span>
     </Card>
   );
