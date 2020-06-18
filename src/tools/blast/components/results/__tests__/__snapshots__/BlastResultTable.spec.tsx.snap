@@ -84,14 +84,18 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               <div
                 class="data-table__blast-hsp"
               >
-                <protvista-track
-                  data-testid="blast-summary-track"
-                  height="10"
-                  length="30"
-                  title="Start: 3
+                <div
+                  class="data-table__blast-hsp__tracks"
+                >
+                  <protvista-track
+                    data-testid="blast-summary-track"
+                    height="10"
+                    length="30"
+                    title="Start: 3
 End: 30
 Identity: 7.1%"
-                />
+                  />
+                </div>
                 <button
                   type="button"
                 >

@@ -1,11 +1,13 @@
 .data-table__blast-hsp {
-  width: 40vw;
   display: flex;
-  svg {
-    margin: 0.1rem 0;
-  }
   button {
     white-space: nowrap;
+  }
+  &__tracks {
+    width: 40vw;
+    svg {
+      margin: 0.1rem 0;
+    }
   }
 }
 

@@ -55,18 +55,20 @@ const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
 
   return (
     <div className="data-table__blast-hsp">
-      <BlastSummaryTrack hsp={hspsOrderedByScore[0]} length={length} />
-      {hspsOrderedByScore.length > 1 &&
-        !collapsed &&
-        hspsOrderedByScore
-          .slice(1)
-          .map((hsp) => (
-            <BlastSummaryTrack
-              hsp={hsp}
-              length={length}
-              key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
-            />
-          ))}
+      <div className="data-table__blast-hsp__tracks">
+        <BlastSummaryTrack hsp={hspsOrderedByScore[0]} length={length} />
+        {hspsOrderedByScore.length > 1 &&
+          !collapsed &&
+          hspsOrderedByScore
+            .slice(1)
+            .map((hsp) => (
+              <BlastSummaryTrack
+                hsp={hsp}
+                length={length}
+                key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+              />
+            ))}
+      </div>
       {hspsOrderedByScore.length > 1 && collapsed && (
         <button type="button" onClick={() => setCollapsed(false)}>{`+${
           hspsOrderedByScore.length - 1
