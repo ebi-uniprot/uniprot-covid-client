@@ -64,8 +64,9 @@ const FeaturesTableView: FC<{
     <Fragment>
       <protvista-datatable ref={setTableData} filter-scroll />
       <div
-        className={`evidence-tag-content ${showEvidenceTagData &&
-          'evidence-tag-content--visible'}`}
+        className={`evidence-tag-content ${
+          showEvidenceTagData && 'evidence-tag-content--visible'
+        }`}
       >
         {selectedEvidenceData && selectedReferences && (
           <UniProtEvidenceTagContent
