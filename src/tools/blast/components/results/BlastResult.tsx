@@ -4,7 +4,6 @@ import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
-import ResultsButtons from '../../../../uniprotkb/components/results/ResultsButtons';
 import BlastResultSidebar from './BlastResultSidebar';
 // import BlastResultDownload from './BlastResultDownload';
 
@@ -18,6 +17,7 @@ import { BlastResults, BlastHit } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 // what we import are types, even if they are in adapter file
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
+import BlastResultsButtons from './BlastResultsButtons';
 
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
@@ -131,8 +131,7 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          {/* @ts-ignore */}
-          <ResultsButtons />
+          <BlastResultsButtons jobId={match.params.id} />
           <Suspense fallback={<Loader />}>
             <BlastResultTable data={data || blastData} />
           </Suspense>
@@ -144,8 +143,7 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          {/* @ts-ignore */}
-          <ResultsButtons />
+          <BlastResultsButtons jobId={match.params.id} />
           Taxonomy content
         </Tab>
         <Tab
@@ -157,8 +155,7 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          {/* @ts-ignore */}
-          <ResultsButtons />
+          <BlastResultsButtons jobId={match.params.id} />
           Hit distribution content
         </Tab>
         <Tab
