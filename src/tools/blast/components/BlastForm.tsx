@@ -408,11 +408,11 @@ const BlastForm = () => {
               />
             </label>
           </section>
-          <section className="blast-form-section blast-form-section__submit">
+          <section className="blast-form-section blast-form-section__main_actions">
             <section className="button-group blast-form-section__buttons">
               <input className="button secondary" type="reset" />
               <button
-                className="button primary blast-form-section__submit"
+                className="button primary"
                 type="submit"
                 disabled={submitDisabled}
                 onClick={submitBlastJob}

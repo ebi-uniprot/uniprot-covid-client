@@ -527,7 +527,7 @@ exports[`BlastForm test Renders the form 1`] = `
         </label>
       </section>
       <section
-        class="blast-form-section blast-form-section__submit"
+        class="blast-form-section blast-form-section__main_actions"
       >
         <section
           class="button-group blast-form-section__buttons"
@@ -537,7 +537,7 @@ exports[`BlastForm test Renders the form 1`] = `
             type="reset"
           />
           <button
-            class="button primary blast-form-section__submit"
+            class="button primary"
             type="submit"
           >
             Run Blast
