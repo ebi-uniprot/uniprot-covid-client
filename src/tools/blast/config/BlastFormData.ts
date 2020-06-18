@@ -80,7 +80,7 @@ export default Object.freeze({
     ] as Array<{ label?: string; value: FormParameters['database'] }>),
   }),
   [BlastFields.taxons]: Object.freeze({
-    fieldName: 'taxids',
+    fieldName: 'taxIDs',
     type: BlastFieldTypes.autocomplete,
   }),
   // 'exp' parameter
@@ -93,7 +93,7 @@ export default Object.freeze({
       { label: '0.001', value: '1e-3' },
       { label: '0.01', value: '1e-2' },
       { label: '0.1', value: '1e-1' },
-      { label: '1', value: '1' },
+      { label: '1', value: '1.0' },
       { value: '10' },
       { value: '100' },
       { value: '1000' },

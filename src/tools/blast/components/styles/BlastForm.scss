@@ -1,5 +1,6 @@
 .blast-form-section {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
 
   &__item {
@@ -13,7 +14,14 @@
     }
   }
 
+  &__submit {
+    pointer-events: none;
+    position: sticky;
+    bottom: 0;
+  }
+
   &__buttons {
+    pointer-events: initial;
     margin-left: auto;
     order: 2;
   }

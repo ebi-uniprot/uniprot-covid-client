@@ -6,6 +6,7 @@ import React, {
   FormEvent,
   MouseEvent,
   useMemo,
+  useRef,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -106,9 +107,14 @@ interface CustomLocationState {
 }
 
 const BlastForm = () => {
+  // refs
+  const sslRef = useRef<{ reset: () => void }>(null);
+
+  // hooks
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // state
   const initialFormValues = useMemo(() => {
     // NOTE: we should use a similar logic to pre-fill fields based on querystring
     const parametersFromHistoryState: FormParameters | undefined = (history
@@ -177,6 +183,7 @@ const BlastForm = () => {
     initialFormValues[BlastFields.hits]
   );
 
+  // taxon field handlers
   const updateTaxonFormValue = (path: string, id: string) => {
     // Only proceed if a node is selected
     if (!id) return;
@@ -201,6 +208,28 @@ const BlastForm = () => {
       ...taxIDs,
       selected: selected.filter((taxon: SelectedTaxon) => taxon.id !== id),
     });
+  };
+
+  // form event handlers
+  const handleReset = (event: FormEvent) => {
+    event.preventDefault();
+
+    // reset all form state to defaults
+    setSType(defaultFormValues[BlastFields.stype]);
+    setProgram(defaultFormValues[BlastFields.program]);
+    setSequence(defaultFormValues[BlastFields.sequence]);
+    setJobName(defaultFormValues[BlastFields.name]);
+    setDatabase(defaultFormValues[BlastFields.database]);
+    setTaxIDs(defaultFormValues[BlastFields.taxons]);
+    setThreshold(defaultFormValues[BlastFields.threshold]);
+    setMatrix(defaultFormValues[BlastFields.matrix]);
+    setFilter(defaultFormValues[BlastFields.filter]);
+    setGapped(defaultFormValues[BlastFields.gapped]);
+    setHits(defaultFormValues[BlastFields.hits]);
+
+    // imperatively reset SequenceSearchLoader... 😷
+    // eslint-disable-next-line no-unused-expressions
+    ((sslRef.current as unknown) as { reset: () => void }).reset();
   };
 
   // the only thing to do here would be to check the values and prevent
@@ -249,6 +278,7 @@ const BlastForm = () => {
     });
   };
 
+  // effects
   // set the "Auto" matrix to the have the correct label depending on sequence
   useEffect(() => {
     const autoMatrix = getAutoMatrixFor(sequence.selected as string);
@@ -291,7 +321,7 @@ const BlastForm = () => {
       <PageIntro title={name} links={links}>
         {info}
       </PageIntro>
-      <form onSubmit={submitBlastJob}>
+      <form onSubmit={submitBlastJob} onReset={handleReset}>
         <fieldset>
           <section className="blast-form-section__item">
             <legend>
@@ -299,7 +329,7 @@ const BlastForm = () => {
               <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
             </legend>
             <div className="import-sequence-section">
-              <SequenceSearchLoader onLoad={onSequenceChange} />
+              <SequenceSearchLoader ref={sslRef} onLoad={onSequenceChange} />
             </div>
           </section>
         </fieldset>
@@ -341,48 +371,44 @@ const BlastForm = () => {
               )}
             </section>
           </section>
-          <section>
-            <section className="blast-form-section">
-              {[
-                [stype, setSType],
-                [program, setProgram],
-                [threshold, setThreshold],
-                [matrix, setMatrix],
-                [filter, setFilter],
-                [gapped, setGapped],
-                [hits, setHits],
-              ].map(([stateItem, setStateItem]) => (
-                <FormSelect
-                  key={(stateItem as BlastFormValue).fieldName}
-                  formValue={stateItem as BlastFormValue}
-                  updateFormValue={
-                    setStateItem as React.Dispatch<
-                      React.SetStateAction<BlastFormValue>
-                    >
-                  }
-                />
-              ))}
-            </section>
-          </section>
-          <section>
-            <section className="blast-form-section__item">
-              <label>
-                Name your BLAST job
-                <input
-                  name="title"
-                  type="text"
-                  autoComplete="off"
-                  maxLength={22}
-                  placeholder="my job title"
-                  value={jobName.selected as string}
-                  onChange={(e) =>
-                    setJobName({ ...jobName, selected: e.target.value })
-                  }
-                />
-              </label>
-            </section>
-          </section>
           <section className="blast-form-section">
+            {[
+              [stype, setSType],
+              [program, setProgram],
+              [threshold, setThreshold],
+              [matrix, setMatrix],
+              [filter, setFilter],
+              [gapped, setGapped],
+              [hits, setHits],
+            ].map(([stateItem, setStateItem]) => (
+              <FormSelect
+                key={(stateItem as BlastFormValue).fieldName}
+                formValue={stateItem as BlastFormValue}
+                updateFormValue={
+                  setStateItem as React.Dispatch<
+                    React.SetStateAction<BlastFormValue>
+                  >
+                }
+              />
+            ))}
+          </section>
+          <section className="blast-form-section__item">
+            <label>
+              Name your BLAST job
+              <input
+                name="title"
+                type="text"
+                autoComplete="off"
+                maxLength={22}
+                placeholder="my job title"
+                value={jobName.selected as string}
+                onChange={(e) =>
+                  setJobName({ ...jobName, selected: e.target.value })
+                }
+              />
+            </label>
+          </section>
+          <section className="blast-form-section blast-form-section__submit">
             <section className="button-group blast-form-section__buttons">
               <input className="button secondary" type="reset" />
               <button
