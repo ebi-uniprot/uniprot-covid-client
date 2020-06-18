@@ -225,7 +225,7 @@ const Row: FC<RowProps> = memo(({ job }) => {
   const firstTime = useRef<boolean>(true);
 
   let jobLink: string | undefined;
-  if ('remoteID' in job) {
+  if ('remoteID' in job && job.status === Status.FINISHED) {
     jobLink = `${LocationToPath[Location.Blast]}/${job.remoteID}/overview`;
   }
 
@@ -275,7 +275,7 @@ const Row: FC<RowProps> = memo(({ job }) => {
       animationOptionsForStatusUpdate
     );
   }, [job.status]);
-  // job.status = Status.FAILURE;
+
   return (
     <Card
       onClick={handleClick}
