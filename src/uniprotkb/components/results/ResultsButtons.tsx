@@ -56,10 +56,20 @@ const ResultsButtons: FC<{
         </Suspense>
       )}
       <div className="button-group">
-        <button type="button" className="button tertiary disabled">
+        <button
+          type="button"
+          className={`button tertiary ${
+            selectedEntries.length === 1 ? '' : 'disabled'
+          }`}
+        >
           Blast
         </button>
-        <button type="button" className="button tertiary disabled">
+        <button
+          type="button"
+          className={`button tertiary ${
+            selectedEntries.length > 1 ? '' : 'disabled'
+          }`}
+        >
           Align
         </button>
         <button
@@ -70,7 +80,12 @@ const ResultsButtons: FC<{
           <DownloadIcon />
           Download
         </button>
-        <button type="button" className="button tertiary disabled">
+        <button
+          type="button"
+          className={`button tertiary ${
+            selectedEntries.length > 0 ? '' : 'disabled'
+          }`}
+        >
           <BasketIcon />
           Add
         </button>

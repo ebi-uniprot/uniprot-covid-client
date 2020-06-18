@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, lazy, Suspense } from 'react';
+import React, { useMemo, useEffect, lazy, Suspense, useState } from 'react';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
@@ -82,6 +82,8 @@ const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;
 
+  const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
+
   // data from blast
   const {
     loading: blastLoading,
@@ -112,6 +114,16 @@ const BlastResult = () => {
 
   const data = useMemo(() => enrich(blastData, apiData), [blastData, apiData]);
 
+  // Note: this function is duplicated in ResultsContainer.tsx
+  const handleSelectedEntries = (rowId: string) => {
+    const filtered = selectedEntries.filter((id) => id !== rowId);
+    setSelectedEntries(
+      filtered.length === selectedEntries.length
+        ? [...selectedEntries, rowId]
+        : filtered
+    );
+  };
+
   if (blastLoading) return <Loader />;
 
   if (blastError || !blastData) return <ErrorHandler status={blastStatus} />;
@@ -131,9 +143,16 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          <BlastResultsButtons jobId={match.params.id} />
+          <BlastResultsButtons
+            jobId={match.params.id}
+            selectedEntries={selectedEntries}
+          />
           <Suspense fallback={<Loader />}>
-            <BlastResultTable data={data || blastData} />
+            <BlastResultTable
+              data={data || blastData}
+              selectedEntries={selectedEntries}
+              handleSelectedEntries={handleSelectedEntries}
+            />
           </Suspense>
         </Tab>
         <Tab
@@ -143,7 +162,10 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          <BlastResultsButtons jobId={match.params.id} />
+          <BlastResultsButtons
+            jobId={match.params.id}
+            selectedEntries={selectedEntries}
+          />
           Taxonomy content
         </Tab>
         <Tab
@@ -155,7 +177,10 @@ const BlastResult = () => {
           }
         >
           {/* TODO: make that component more generic */}
-          <BlastResultsButtons jobId={match.params.id} />
+          <BlastResultsButtons
+            jobId={match.params.id}
+            selectedEntries={selectedEntries}
+          />
           Hit distribution content
         </Tab>
         <Tab
