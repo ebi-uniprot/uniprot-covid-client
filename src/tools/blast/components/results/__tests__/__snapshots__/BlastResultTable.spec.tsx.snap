@@ -9,7 +9,7 @@ exports[`BlastResultTable tests should render the results table 1`] = `
       class="data-loader__scroll-container"
     >
       <table
-        class="data-table data-table--compact "
+        class="data-table data-table--compact  "
       >
         <thead
           class="data-table__header"
@@ -18,27 +18,31 @@ exports[`BlastResultTable tests should render the results table 1`] = `
             class="data-table__row"
           >
             <th
-              class="data-table__header-cell"
+              class="data-table__header-cell data-table__header-cell--checkbox"
             >
                
             </th>
             <th
               class="data-table__header-cell "
+              style="width: auto;"
             >
               Accession
             </th>
             <th
               class="data-table__header-cell "
+              style="width: auto;"
             >
               Gene
             </th>
             <th
               class="data-table__header-cell "
+              style="width: auto;"
             >
               Organism
             </th>
             <th
               class="data-table__header-cell "
+              style="width: auto;"
             >
               Alignment
             </th>
@@ -56,7 +60,7 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               />
             </td>
             <td
-              class="data-table__cell "
+              class="data-table__cell  "
             >
               <a
                 href="/uniprotkb/U6MKN0"
@@ -65,12 +69,12 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               </a>
             </td>
             <td
-              class="data-table__cell "
+              class="data-table__cell  "
             >
               ENH_00046930
             </td>
             <td
-              class="data-table__cell "
+              class="data-table__cell  "
             >
               <a
                 href="/taxonomy/51315"
@@ -79,7 +83,7 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               </a>
             </td>
             <td
-              class="data-table__cell "
+              class="data-table__cell  "
             >
               <div
                 class="data-table__blast-hsp"
