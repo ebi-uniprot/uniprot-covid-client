@@ -58,17 +58,15 @@ const ResultsButtons: FC<{
       <div className="button-group">
         <button
           type="button"
-          className={`button tertiary ${
-            selectedEntries.length === 1 ? '' : 'disabled'
-          }`}
+          className="button tertiary"
+          disabled={selectedEntries.length !== 1}
         >
           Blast
         </button>
         <button
           type="button"
-          className={`button tertiary ${
-            selectedEntries.length > 1 ? '' : 'disabled'
-          }`}
+          className="button tertiary"
+          disabled={selectedEntries.length <= 1}
         >
           Align
         </button>
@@ -82,9 +80,8 @@ const ResultsButtons: FC<{
         </button>
         <button
           type="button"
-          className={`button tertiary ${
-            selectedEntries.length > 0 ? '' : 'disabled'
-          }`}
+          className="button tertiary"
+          disabled={selectedEntries.length <= 0}
         >
           <BasketIcon />
           Add
