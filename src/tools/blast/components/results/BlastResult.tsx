@@ -33,6 +33,14 @@ const BlastResultToolInput = lazy(() =>
   )
 );
 
+enum TabLocation {
+  Overview = 'overview',
+  Taxonomy = 'taxonomy',
+  HitDistribution = 'hit-distribution',
+  TextOutput = 'text-output',
+  ToolInput = 'tool-input',
+}
+
 type Match = {
   params: {
     id: string;
@@ -94,8 +102,6 @@ const BlastResult = () => {
     blastUrls.resultUrl(match.params.id, 'jdp?format=json')
   );
 
-  console.log(match);
-
   useEffect(() => {
     if (!match.params.subPage) {
       history.replace(
@@ -124,16 +130,38 @@ const BlastResult = () => {
     );
   };
 
-  if (blastLoading) return <Loader />;
+  if (blastLoading) {
+    return <Loader />;
+  }
 
-  if (blastError || !blastData) return <ErrorHandler status={blastStatus} />;
+  if (blastError || !blastData) {
+    return <ErrorHandler status={blastStatus} />;
+  }
+
+  // Deciding what should be displayed on the sidebar
+  const facetsSidebar = <BlastResultSidebar loading={apiLoading} data={data} />;
+  const emptySidebar = (
+    <div className="sidebar-layout__sidebar-content--empty" />
+  );
+  let sidebar;
+
+  switch (match.params.subPage) {
+    case TabLocation.TextOutput:
+    case TabLocation.ToolInput:
+      sidebar = emptySidebar;
+      break;
+
+    default:
+      sidebar = facetsSidebar;
+      break;
+  }
 
   return (
     <SideBarLayout
       title={
         <PageIntro title="BLAST Results" resultsCount={blastData.hits.length} />
       }
-      sidebar={<BlastResultSidebar loading={apiLoading} data={data} />}
+      sidebar={sidebar}
     >
       <Tabs active={match.params.subPage}>
         <Tab
