@@ -27,6 +27,11 @@ import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConve
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
 );
+const BlastResultTaxonomy = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-result-taxonomy" */ './BlastResultTaxonomy'
+  )
+);
 const BlastResultTextOutput = lazy(() =>
   import(
     /* webpackChunkName: "blast-result-text-output" */ './BlastResultTextOutput'
@@ -233,7 +238,7 @@ const BlastResult = () => {
             jobId={match.params.id}
             selectedEntries={selectedEntries}
           />
-          Taxonomy content
+          <BlastResultTaxonomy data={data} />
         </Tab>
         <Tab
           id="hit-distribution"
