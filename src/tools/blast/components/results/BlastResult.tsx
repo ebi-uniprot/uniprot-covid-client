@@ -33,6 +33,14 @@ const BlastResultToolInput = lazy(() =>
   )
 );
 
+enum TabLocation {
+  Overview = 'overview',
+  Taxonomy = 'taxonomy',
+  HitDistribution = 'hit-distribution',
+  TextOutput = 'text-output',
+  ToolInput = 'tool-input',
+}
+
 type Match = {
   params: {
     id: string;
@@ -126,8 +134,8 @@ const BlastResult = () => {
   let sidebar;
 
   switch (match.params.subPage) {
-    case 'text-output':
-    case 'tool-input':
+    case TabLocation.TextOutput:
+    case TabLocation.ToolInput:
       sidebar = emptySidebar;
       break;
 
