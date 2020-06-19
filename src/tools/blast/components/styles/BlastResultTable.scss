@@ -4,18 +4,10 @@
     white-space: nowrap;
   }
   &__tracks {
-    width: 40vw;
+    // Leave some room for the 'n more' link
+    width: 80%;
     svg {
       margin: 0.1rem 0;
     }
-  }
-}
-
-/**
-* HACK! this should be fixed in franklin
-*/
-.data-table {
-  input[type='checkbox'] {
-    margin: 0;
   }
 }

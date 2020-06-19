@@ -102,15 +102,23 @@ const BlastResultTable: FC<{
       render: ({ hit_uni_gn }: BlastHit) => hit_uni_gn,
     },
     {
+      label: 'Protein',
+      name: 'protein_name',
+      render: ({ hit_uni_de }: BlastHit) => hit_uni_de,
+      ellipsis: true,
+    },
+    {
       label: 'Organism',
       name: 'organism',
       render: ({ hit_uni_ox, hit_uni_os }: BlastHit) => (
         <Link to={`/taxonomy/${hit_uni_ox}`}>{hit_uni_os}</Link>
       ),
+      ellipsis: true,
     },
     {
       label: 'Alignment',
       name: 'alignment',
+      width: '40vw',
       render: ({ hit_hsps }: BlastHit) => (
         <BlastSummaryHsps hsps={hit_hsps} length={data.query_len} />
       ),
@@ -127,6 +135,7 @@ const BlastResultTable: FC<{
         selectable
         selected={selectedEntries}
         onSelect={handleSelectedEntries}
+        fixedLayout
       />
     </Fragment>
   );
