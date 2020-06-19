@@ -35,7 +35,7 @@
 
   &__sidebar-content {
     &--empty {
-      height: 100%;
+      height: calc(100% - 1rem);
       background-color: $colour-platinum;
     }
   }
