@@ -1,10 +1,11 @@
-import React, { FC, useMemo } from 'react';
-import { Loader } from 'franklin-sites';
-
+import React, { FC, useMemo, Fragment } from 'react';
+import { flatten } from 'lodash-es';
+import { useHistory } from 'react-router-dom';
+import { Loader, HistogramFilter } from 'franklin-sites';
 import ResultsFacets from '../../../../uniprotkb/components/results/ResultsFacets';
-
 import { EntryType } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { Facet, FacetValue } from '../../../../uniprotkb/types/responseTypes';
+import BlastResultsParametersFacets from './BlastResultsParametersFacets';
 import { EnrichedData } from './BlastResult';
 
 const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
@@ -57,14 +58,62 @@ const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
   return facets;
 };
 
+type BlastParameterFacets = {
+  scores: number[];
+};
+
+const getBlastParametersFacetsFromData = (
+  data?: EnrichedData | null
+): BlastParameterFacets => {
+  const results = {
+    scores: [],
+    identities: [],
+    eValues: [],
+  };
+
+  if (!data) {
+    return results;
+  }
+
+  return data.hits.reduce((all, hit) => {
+    const [scores, ids, e] = hit.hit_hsps.map((hsp) => [
+      hsp.hsp_score,
+      hsp.hsp_identity,
+      hsp.hsp_expect,
+    ]);
+
+    if (scores) {
+      results.scores = [...all.scores, ...scores];
+    }
+
+    if (ids) {
+      results.identities = [...all.identities, ...ids];
+    }
+
+    if (e) {
+      results.eValues = [...all.eValues, ...e];
+    }
+
+    return results;
+  }, results);
+};
+
 type Props = { loading: boolean; data?: EnrichedData | null };
 
 const BlastResultSidebar: FC<Props> = ({ loading, data }) => {
   const facets = useMemo(() => getFacetsFromData(data), [data]);
+  const params = useMemo(() => getBlastParametersFacetsFromData(data), [data]);
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return <Loader />;
+  }
 
-  return <ResultsFacets facets={facets} />;
+  return (
+    <Fragment>
+      <ResultsFacets facets={facets} />
+      <BlastResultsParametersFacets params={params} />
+    </Fragment>
+  );
 };
 
 export default BlastResultSidebar;
