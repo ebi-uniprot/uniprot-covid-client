@@ -42,6 +42,11 @@ const BlastResultToolInput = lazy(() =>
     /* webpackChunkName: "blast-result-tool-input" */ './BlastResultToolInput'
   )
 );
+const BlastResultHitDistribution = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-result-tool-input" */ './BlastResultHitDistribution'
+  )
+);
 
 enum TabLocation {
   Overview = 'overview',
@@ -252,7 +257,7 @@ const BlastResult = () => {
             jobId={match.params.id}
             selectedEntries={selectedEntries}
           />
-          Hit distribution content
+          <BlastResultHitDistribution hits={blastData.hits} />
         </Tab>
         <Tab
           id="text-output"
