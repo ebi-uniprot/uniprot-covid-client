@@ -1,13 +1,28 @@
 .data-table__blast-hsp {
+  $self: &;
   display: flex;
-  button {
-    white-space: nowrap;
+  .chip {
+    margin-top: 0;
   }
   &__tracks {
-    // Leave some room for the 'n more' link
-    width: 80%;
-    svg {
-      margin: 0.1rem 0;
+    position: relative;
+    #{ $self }__blast-track {
+      /**
+      * Magic number preventing the forever growing
+      * protvista-track
+      */
+      width: 32vw;
+      svg {
+        margin: 0.2rem;
+      }
     }
+    #{ $self }__blast-params {
+      position: absolute;
+      top: -0.6rem;
+      right: 0.1rem;
+    }
+  }
+  button {
+    margin-left: 0.5rem;
   }
 }
