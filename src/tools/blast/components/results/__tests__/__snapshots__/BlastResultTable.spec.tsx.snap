@@ -120,17 +120,20 @@ Hit Length: 486"
                       class="data-table__blast-hsp__blast-params"
                     >
                       <span
-                        class="chip  chip--compact "
+                        class="chip chip--compact"
+                        title="Identity"
                       >
                         7.1%
                       </span>
                       <span
-                        class="chip  chip--compact "
+                        class="chip chip--compact"
+                        title="Score"
                       >
                         41.5874
                       </span>
                       <span
-                        class="chip  chip--compact "
+                        class="chip chip--compact"
+                        title="e-value"
                       >
                         0.0048
                       </span>

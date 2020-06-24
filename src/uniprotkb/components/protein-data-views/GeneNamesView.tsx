@@ -13,7 +13,7 @@ export const geneAlternativeNamesView = (
     <Fragment>
       {firstComma && ', '}
       {alternativeNames
-        .map<React.ReactNode>(altName => (
+        .map<React.ReactNode>((altName) => (
           <NameWithEvidence data={altName} key={altName.value} />
         ))
         .reduce((prev, curr) => [prev, ', ', curr])}
@@ -24,9 +24,10 @@ export const geneAlternativeNamesView = (
 const GeneNamesView: React.FC<{
   geneNamesData: GeneNamesData;
   isCompact?: boolean;
-}> = ({ geneNamesData, isCompact = false }) => (
+  noTitles?: boolean;
+}> = ({ geneNamesData, isCompact = false, noTitles = false }) => (
   <Fragment>
-    {geneNamesData.map(geneNames => {
+    {geneNamesData.map((geneNames) => {
       const infoData = [
         {
           title: 'Name',
@@ -73,6 +74,7 @@ const GeneNamesView: React.FC<{
           key={geneNames.geneName ? geneNames.geneName.value : v1()}
           isCompact={isCompact}
           highlightFirstItem={isCompact}
+          noTitles={noTitles}
         />
       );
     })}
