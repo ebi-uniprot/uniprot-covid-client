@@ -16,9 +16,9 @@ export type BlastParamFacet = {
   eValues: number[];
 };
 
-type Props = { params: BlastParamFacet };
+type Props = { params: BlastParamFacet; binSize: number };
 
-const BlastResultsParametersFacets: FC<Props> = ({ params }) => {
+const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
   const { scores, identities, eValues } = params;
 
   const {
@@ -85,8 +85,6 @@ const BlastResultsParametersFacets: FC<Props> = ({ params }) => {
   const onBlastParamChange = (paramName: string, values: number[]) => {
     addFacet(paramName, values.join('-'));
   };
-
-  const binSize = 100;
 
   const histogramSettings = {
     scores: {

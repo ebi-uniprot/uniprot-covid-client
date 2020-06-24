@@ -189,8 +189,17 @@ const BlastResult = () => {
     return <ErrorHandler status={blastStatus} />;
   }
 
+  const histogramBinSize = 100;
+
   // Deciding what should be displayed on the sidebar
-  const facetsSidebar = <BlastResultSidebar loading={apiLoading} data={data} />;
+  const facetsSidebar = (
+    <BlastResultSidebar
+      loading={apiLoading}
+      data={data}
+      histogramBinSize={histogramBinSize}
+    />
+  );
+
   const emptySidebar = (
     <div className="sidebar-layout__sidebar-content--empty" />
   );
@@ -257,7 +266,10 @@ const BlastResult = () => {
             jobId={match.params.id}
             selectedEntries={selectedEntries}
           />
-          <BlastResultHitDistribution hits={blastData.hits} />
+          <BlastResultHitDistribution
+            hits={blastData.hits}
+            binSize={histogramBinSize}
+          />
         </Tab>
         <Tab
           id="text-output"

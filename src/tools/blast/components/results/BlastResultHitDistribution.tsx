@@ -8,11 +8,15 @@ import {
 } from '../../../../shared/utils/utils';
 import '../styles/BlastResultHitDistribution.scss';
 
-const BlastResultHitDistribution: FC<{ hits: BlastHit[] }> = ({ hits }) => {
+type Props = {
+  hits: BlastHit[];
+  binSize: number;
+};
+
+const BlastResultHitDistribution: FC<Props> = ({ hits, binSize }) => {
   const scores = flatten(
     hits.map((hit) => hit.hit_hsps.map((hsp) => hsp.hsp_score))
   );
-  const binSize = 100;
   const min = getSmallerMultiple(Math.min(...scores), binSize);
   const max = getLargerMultiple(Math.max(...scores), binSize);
   return (

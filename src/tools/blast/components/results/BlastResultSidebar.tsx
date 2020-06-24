@@ -94,9 +94,14 @@ const getBlastParametersFacetsFromData = (
   }, results);
 };
 
-type Props = { loading: boolean; data?: EnrichedData | null };
+type Props = {
+  loading: boolean;
+  data?: EnrichedData | null;
+  histogramBinSize: number;
+};
 
-const BlastResultSidebar: FC<Props> = ({ loading, data }) => {
+const BlastResultSidebar: FC<Props> = (props) => {
+  const { loading, data, histogramBinSize: binSize } = props;
   const facets = useMemo(() => getFacetsFromData(data), [data]);
   const params = useMemo(() => getBlastParametersFacetsFromData(data), [data]);
 
@@ -107,7 +112,7 @@ const BlastResultSidebar: FC<Props> = ({ loading, data }) => {
   return (
     <Fragment>
       <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets params={params} />
+      <BlastResultsParametersFacets params={params} binSize={binSize} />
     </Fragment>
   );
 };
