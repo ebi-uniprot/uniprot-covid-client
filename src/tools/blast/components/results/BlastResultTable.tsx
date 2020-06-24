@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { FC, Fragment, useCallback, useState } from 'react';
-import { DataTable, DENSITY_COMPACT } from 'franklin-sites';
+import { DataTable, DENSITY_COMPACT, Chip } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import ProtvistaTrack from 'protvista-track';
 import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
@@ -10,15 +10,33 @@ import '../styles/BlastResultTable.scss';
 
 const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
-  length: number;
-}> = ({ hsp, length }) => {
-  const { hsp_query_from, hsp_query_to, hsp_identity } = hsp;
+  queryLength: number;
+  hitLength: number;
+}> = ({ hsp, queryLength, hitLength }) => {
+  const {
+    hsp_query_from,
+    hsp_query_to,
+    hsp_identity,
+    hsp_bit_score,
+    hsp_expect,
+  } = hsp;
 
   const setTrackData = useCallback(
     (node): void => {
       if (node) {
+        /**
+         * TODO - would be nice to add gaps
+         * at some point
+         */
         // eslint-disable-next-line no-param-reassign
         node.data = [
+          {
+            start: 1,
+            end: hsp_query_from,
+            shape: 'line',
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
           {
             start: hsp_query_from,
             end: hsp_query_to,
@@ -26,27 +44,44 @@ const BlastSummaryTrack: FC<{
             color: '#014371',
             opacity: hsp_identity / 100,
           },
+          {
+            start: hsp_query_to,
+            end: hitLength > hsp_query_to ? hitLength : hsp_query_to,
+            shape: 'line',
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
         ];
       }
     },
-    [hsp_query_from, hsp_query_to, hsp_identity]
+    [hsp_query_from, hsp_query_to, hsp_identity, hitLength]
   );
 
   return (
-    <protvista-track
-      data-testid="blast-summary-track"
-      length={length}
-      height={10}
-      ref={setTrackData}
-      title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nIdentity: ${hsp_identity}%`}
-    />
+    <div className="data-table__blast-hsp__tracks">
+      <section className="data-table__blast-hsp__blast-track">
+        <protvista-track
+          data-testid="blast-summary-track"
+          length={queryLength}
+          height={10}
+          ref={setTrackData}
+          title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nHit Length: ${hitLength}`}
+        />
+      </section>
+      <span className="data-table__blast-hsp__blast-params">
+        <Chip compact title="Identity">{`${hsp_identity}%`}</Chip>
+        <Chip compact title="Score">{`${hsp_bit_score}`}</Chip>
+        <Chip compact title="e-value">{`${hsp_expect}`}</Chip>
+      </span>
+    </div>
   );
 };
 
-const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
-  hsps,
-  length,
-}) => {
+const BlastSummaryHsps: FC<{
+  hsps: BlastHsp[];
+  queryLength: number;
+  hitLength: number;
+}> = ({ hsps, queryLength, hitLength }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -55,8 +90,12 @@ const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
 
   return (
     <div className="data-table__blast-hsp">
-      <div className="data-table__blast-hsp__tracks">
-        <BlastSummaryTrack hsp={hspsOrderedByScore[0]} length={length} />
+      <div>
+        <BlastSummaryTrack
+          hsp={hspsOrderedByScore[0]}
+          queryLength={queryLength}
+          hitLength={hitLength}
+        />
         {hspsOrderedByScore.length > 1 &&
           !collapsed &&
           hspsOrderedByScore
@@ -64,7 +103,8 @@ const BlastSummaryHsps: FC<{ hsps: BlastHsp[]; length: number }> = ({
             .map((hsp) => (
               <BlastSummaryTrack
                 hsp={hsp}
-                length={length}
+                queryLength={queryLength}
+                hitLength={hitLength}
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
               />
             ))}
@@ -95,11 +135,13 @@ const BlastResultTable: FC<{
       render: ({ hit_acc }: BlastHit) => (
         <Link to={`/uniprotkb/${hit_acc}`}>{hit_acc}</Link>
       ),
+      width: '5rem',
     },
     {
       label: 'Gene',
       name: 'gene',
       render: ({ hit_uni_gn }: BlastHit) => hit_uni_gn,
+      width: '5rem',
     },
     {
       label: 'Protein',
@@ -119,8 +161,12 @@ const BlastResultTable: FC<{
       label: 'Alignment',
       name: 'alignment',
       width: '40vw',
-      render: ({ hit_hsps }: BlastHit) => (
-        <BlastSummaryHsps hsps={hit_hsps} length={data.query_len} />
+      render: ({ hit_hsps, hit_len }: BlastHit) => (
+        <BlastSummaryHsps
+          hsps={hit_hsps}
+          queryLength={data.query_len}
+          hitLength={hit_len}
+        />
       ),
     },
   ];

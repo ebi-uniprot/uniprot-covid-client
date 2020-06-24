@@ -3,13 +3,13 @@
 exports[`ProteomesEntryView component should render 1`] = `
 <DocumentFragment>
   <div
-    class="info-list "
+    class="info-list"
   >
     <div
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -18,7 +18,7 @@ exports[`ProteomesEntryView component should render 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         <a
           href="/proteomes/UP000005640"
@@ -31,7 +31,7 @@ exports[`ProteomesEntryView component should render 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -40,7 +40,7 @@ exports[`ProteomesEntryView component should render 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         Chromosome 21
       </div>
