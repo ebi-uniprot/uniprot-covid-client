@@ -101,6 +101,14 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     },
   };
 
+  const scoreFacetIndex = findFacet('score');
+  let scoreFacetValue;
+  let scoreMin, scoreMax;
+
+  if (scoreFacetIndex > -1) {
+    [scoreMin, scoreMax] = selectedFacets[scoreFacetIndex].value.split('-');
+  }
+
   return (
     <div className="blast-parameters-facet">
       <ul className="no-bullet">
@@ -116,8 +124,8 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  histogramSettings.scores.min,
-                  histogramSettings.scores.max,
+                  scoreMin || histogramSettings.scores.min,
+                  scoreMax || histogramSettings.scores.max,
                 ]}
                 values={scores}
               />

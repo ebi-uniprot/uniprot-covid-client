@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState, lazy, Suspense } from 'react';
-import { Link, useRouteMatch, useHistory } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
@@ -11,6 +11,10 @@ import BlastResultsButtons from './BlastResultsButtons';
 import useDataApi, {
   UseDataAPIState,
 } from '../../../../shared/hooks/useDataApi';
+import {
+  getLocationObjForParams,
+  getParamsFromURL,
+} from '../../../../uniprotkb/utils/resultsUtils';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -97,10 +101,50 @@ const useParamsData = (
   return paramsData;
 };
 
+const narrowByScore = (data, min, max) => {
+  return data.hits.filter((hit) => {
+    return hit.hit_hsps
+      .map((hsp) => hsp.hsp_score)
+      .filter((score) => score >= min && score <= max).length;
+  });
+};
+
+const narrowResultsByBlastParamFacets = (data, params) => {
+  let filteredData = data;
+  const blastParamNames = ['score', 'identities', 'evalues'];
+  const paramValues = {};
+
+  if (!data) {
+    return [];
+  }
+
+  if (Object.keys(params).length === 0) {
+    return data;
+  }
+
+  params.forEach(({ name, value }) => {
+    if (blastParamNames.includes(name)) {
+      paramValues[name] = value;
+    }
+  });
+
+  if (paramValues.score) {
+    const [min, max] = paramValues.score.split('-');
+    filteredData = narrowByScore(filteredData, min, max);
+  }
+
+  return {
+    ...data,
+    alignments: filteredData.length,
+    hits: filteredData,
+  };
+};
+
 const getEnrichApiUrl = (blastData?: BlastResults) => {
-  if (!blastData) {
+  if (!blastData || blastData.length === 0) {
     return null;
   }
+
   return getAPIQueryUrl(
     blastData.hits.map((hit) => `(accession:${hit.hit_acc})`).join(' OR '),
     undefined,
@@ -138,8 +182,10 @@ const enrich = (
 const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;
+  const location = useLocation();
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
+  const [blastParams, setBlastParams] = useState<any>({});
 
   // data from blast
   const {
@@ -162,12 +208,27 @@ const BlastResult = () => {
     }
   }, [match.params.subPage, history]);
 
-  // corresponding data from API
-  const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
-    useMemo(() => getEnrichApiUrl(blastData), [blastData])
+  const filteredBlastData = narrowResultsByBlastParamFacets(
+    blastData,
+    blastParams
   );
 
-  const data = useMemo(() => enrich(blastData, apiData), [blastData, apiData]);
+  // corresponding data from API
+  let { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
+    useMemo(() => getEnrichApiUrl(filteredBlastData), [filteredBlastData])
+  );
+
+  const data = useMemo(() => enrich(filteredBlastData, apiData), [
+    filteredBlastData,
+    apiData,
+  ]);
+
+  useEffect(() => {
+    const urlParams = getParamsFromURL(location.search);
+    // const newQuery = getLocationObjForParams(location);
+
+    setBlastParams(urlParams.selectedFacets);
+  }, [location.search, blastData]);
 
   const inputParamsData = useParamsData(match.params.id);
 
