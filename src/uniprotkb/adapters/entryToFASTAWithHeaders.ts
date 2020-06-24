@@ -1,6 +1,10 @@
 import { UniProtkbAPIModel, EntryType } from './uniProtkbConverter';
 import { APISequenceData } from '../../tools/blast/types/apiSequenceData';
 
+type Subset = { start: number; end: number };
+
+type Modifications = { subsets: Subset[] }; // keep open for variant for example?
+
 // const CHUNK_OF_TEXT_OF_SIXTY_CHARACTERS = /(.{1,60})/g;
 // const CHUNK_OF_TEXT_OF_TEN_CHARACTERS = /(.{1,10})/g;
 
@@ -14,9 +18,24 @@ import { APISequenceData } from '../../tools/blast/types/apiSequenceData';
 // build a "nicely"-formatted FASTA string
 // See https://www.uniprot.org/help/fasta-headers for current headers
 const entryToFASTAWithHeaders = (
-  entry: UniProtkbAPIModel | APISequenceData
+  entry: UniProtkbAPIModel | APISequenceData,
+  modifications?: Modifications
 ): string => {
   let sequence = entry.sequence.value || '';
+
+  const subsets = [];
+  // if any change is required on the sequence, do it here
+  if (modifications) {
+    if (modifications.subsets) {
+      let subsetSequence = '';
+      for (const { start, end } of modifications.subsets) {
+        subsetSequence += sequence.slice(start - 1, end);
+        subsets.push(`${start}-${end}`);
+      }
+      sequence = subsetSequence;
+    }
+  }
+
   try {
     let db;
     switch (entry.entryType) {
@@ -50,7 +69,11 @@ const entryToFASTAWithHeaders = (
     if (entry?.entryAudit?.sequenceVersion) {
       optionalSV = `SV=${entry.entryAudit.sequenceVersion}`;
     }
-    sequence = `>${db}|${entry.primaryAccession}|${entry.uniProtkbId} ${optionalProteinName}${optionalOS}${optionalOX}${optionalGN}PE=${pe} ${optionalSV}\n${sequence}`;
+    let optionalSubset = '';
+    if (subsets.length) {
+      optionalSubset = `${subsets.join(',')}|`;
+    }
+    sequence = `>${db}|${entry.primaryAccession}|${optionalSubset}${entry.uniProtkbId} ${optionalProteinName}${optionalOS}${optionalOX}${optionalGN}PE=${pe} ${optionalSV}\n${sequence}`;
   } catch {
     /* */
   }
