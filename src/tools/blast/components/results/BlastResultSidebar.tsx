@@ -1,11 +1,11 @@
 import React, { FC, useMemo, Fragment } from 'react';
-import { flatten } from 'lodash-es';
-import { useHistory } from 'react-router-dom';
-import { Loader, HistogramFilter } from 'franklin-sites';
+import { Loader } from 'franklin-sites';
 import ResultsFacets from '../../../../uniprotkb/components/results/ResultsFacets';
 import { EntryType } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { Facet, FacetValue } from '../../../../uniprotkb/types/responseTypes';
-import BlastResultsParametersFacets from './BlastResultsParametersFacets';
+import BlastResultsParametersFacets, {
+  BlastParamFacet,
+} from './BlastResultsParametersFacets';
 import { EnrichedData } from './BlastResult';
 
 const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
@@ -58,14 +58,10 @@ const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
   return facets;
 };
 
-type BlastParameterFacets = {
-  scores: number[];
-};
-
 const getBlastParametersFacetsFromData = (
   data?: EnrichedData | null
-): BlastParameterFacets => {
-  const results = {
+): BlastParamFacet => {
+  const results: BlastParamFacet = {
     scores: [],
     identities: [],
     eValues: [],
