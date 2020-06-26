@@ -108,7 +108,9 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
   if (scoreFacetIndex > -1) {
     [scoreMin, scoreMax] = selectedFacets[scoreFacetIndex].value.split('-');
   }
-
+  // console.log("scores:", scores);
+  // console.log("identities:", identities);
+  // console.log("eValues:", eValues);
   return (
     <div className="blast-parameters-facet">
       <ul className="no-bullet">
@@ -157,7 +159,7 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                   histogramSettings.eValues.min,
                   histogramSettings.eValues.max,
                 ]}
-                values={scores}
+                values={eValues}
               />
             </li>
           </ul>

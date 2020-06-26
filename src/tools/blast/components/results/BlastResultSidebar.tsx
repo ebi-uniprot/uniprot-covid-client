@@ -72,12 +72,11 @@ const getBlastParametersFacetsFromData = (
   }
 
   return data.hits.reduce((all, hit) => {
-    const [scores, ids, e] = hit.hit_hsps.map((hsp) => [
-      hsp.hsp_score,
-      hsp.hsp_identity,
-      hsp.hsp_expect,
-    ]);
-
+    const [scores, ids, e] = hit.hit_hsps.map((hsp) => {
+      console.log('hsps:', hsp.hsp_expect);
+      return [hsp.hsp_score, hsp.hsp_identity, hsp.hsp_expect];
+    });
+    console.log('hsp_expect:', e);
     if (scores) {
       results.scores = [...all.scores, ...scores];
     }
@@ -89,7 +88,7 @@ const getBlastParametersFacetsFromData = (
     if (e) {
       results.eValues = [...all.eValues, ...e];
     }
-
+    // console.log("results:", results);
     return results;
   }, results);
 };
