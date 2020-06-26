@@ -72,24 +72,23 @@ const getBlastParametersFacetsFromData = (
   }
 
   return data.hits.reduce((all, hit) => {
-    const [scores, ids, e] = hit.hit_hsps.map((hsp) => {
-      console.log('hsps:', hsp.hsp_expect);
+    const [[scores, ids, e]] = hit.hit_hsps.map((hsp, values) => {
       return [hsp.hsp_score, hsp.hsp_identity, hsp.hsp_expect];
     });
-    console.log('hsp_expect:', e);
+
     if (scores) {
-      results.scores = [...all.scores, ...scores];
+      all.scores = [...all.scores, scores];
     }
 
     if (ids) {
-      results.identities = [...all.identities, ...ids];
+      all.identities = [...all.identities, ids];
     }
 
     if (e) {
-      results.eValues = [...all.eValues, ...e];
+      all.eValues = [...all.eValues, e];
     }
-    // console.log("results:", results);
-    return results;
+
+    return all;
   }, results);
 };
 
