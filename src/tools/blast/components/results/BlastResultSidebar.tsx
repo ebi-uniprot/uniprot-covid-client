@@ -71,25 +71,15 @@ const getBlastParametersFacetsFromData = (
     return results;
   }
 
-  return data.hits.reduce((all, hit) => {
-    const [[scores, ids, e]] = hit.hit_hsps.map((hsp, values) => {
-      return [hsp.hsp_score, hsp.hsp_identity, hsp.hsp_expect];
+  data.hits.forEach(({ hit_hsps }) => {
+    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
+      results.scores.push(hsp_score);
+      results.identities.push(hsp_identity);
+      results.eValues.push(hsp_expect);
     });
+  });
 
-    if (scores) {
-      all.scores = [...all.scores, scores];
-    }
-
-    if (ids) {
-      all.identities = [...all.identities, ids];
-    }
-
-    if (e) {
-      all.eValues = [...all.eValues, e];
-    }
-
-    return all;
-  }, results);
+  return results;
 };
 
 type Props = {
