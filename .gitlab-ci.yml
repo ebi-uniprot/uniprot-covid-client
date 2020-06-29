@@ -19,7 +19,7 @@ test:
   only:
     refs:
       - master
-  image: buildkite/docker-puppeteer
+  image: buildkite/puppeteer
   stage: test
   before_script:
     - node --version
