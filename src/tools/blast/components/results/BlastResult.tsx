@@ -39,7 +39,7 @@ const BlastResultToolInput = lazy(() =>
 );
 const BlastResultHitDistribution = lazy(() =>
   import(
-    /* webpackChunkName: "blast-result-tool-input" */ './BlastResultHitDistribution'
+    /* webpackChunkName: "blast-result-hit-distribution" */ './BlastResultHitDistribution'
   )
 );
 
