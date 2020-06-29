@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { flatten } from 'lodash-es';
 import { Histogram } from 'franklin-sites';
 import { BlastHit } from '../../types/blastResults';
 import {
@@ -9,9 +8,9 @@ import {
 import '../styles/BlastResultHitDistribution.scss';
 
 const BlastResultHitDistribution: FC<{ hits: BlastHit[] }> = ({ hits }) => {
-  const scores = flatten(
-    hits.map((hit) => hit.hit_hsps.map((hsp) => hsp.hsp_score))
-  );
+  const scores = hits
+    .map((hit) => hit.hit_hsps.map((hsp) => hsp.hsp_score))
+    .flat();
   const binSize = 100;
   const min = getSmallerMultiple(Math.min(...scores), binSize);
   const max = getLargerMultiple(Math.max(...scores), binSize);
