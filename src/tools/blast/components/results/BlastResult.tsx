@@ -27,6 +27,11 @@ import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConve
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
 );
+const BlastResultTaxonomy = lazy(() =>
+  import(
+    /* webpackChunkName: "blast-result-taxonomy" */ './BlastResultTaxonomy'
+  )
+);
 const BlastResultTextOutput = lazy(() =>
   import(
     /* webpackChunkName: "blast-result-text-output" */ './BlastResultTextOutput'
@@ -202,6 +207,14 @@ const BlastResult = () => {
       break;
   }
 
+  const actionBar = (
+    <BlastResultsButtons
+      jobId={match.params.id}
+      selectedEntries={selectedEntries}
+      inputParamsData={inputParamsData.data}
+    />
+  );
+
   return (
     <SideBarLayout
       title={
@@ -216,10 +229,7 @@ const BlastResult = () => {
             <Link to={`/blast/${match.params.id}/overview`}>Overview</Link>
           }
         >
-          <BlastResultsButtons
-            jobId={match.params.id}
-            selectedEntries={selectedEntries}
-          />
+          {actionBar}
           <Suspense fallback={<Loader />}>
             <BlastResultTable
               data={data || blastData}
@@ -234,11 +244,8 @@ const BlastResult = () => {
             <Link to={`/blast/${match.params.id}/taxonomy`}>Taxonomy</Link>
           }
         >
-          <BlastResultsButtons
-            jobId={match.params.id}
-            selectedEntries={selectedEntries}
-          />
-          Taxonomy content
+          {actionBar}
+          <BlastResultTaxonomy data={data} />
         </Tab>
         <Tab
           id="hit-distribution"
@@ -248,10 +255,7 @@ const BlastResult = () => {
             </Link>
           }
         >
-          <BlastResultsButtons
-            jobId={match.params.id}
-            selectedEntries={selectedEntries}
-          />
+          {actionBar}
           <BlastResultHitDistribution hits={blastData.hits} />
         </Tab>
         <Tab

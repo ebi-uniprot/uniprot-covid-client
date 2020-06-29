@@ -3,13 +3,13 @@
 exports[`GeneNames should render gene_names 1`] = `
 <DocumentFragment>
   <div
-    class="info-list "
+    class="info-list"
   >
     <div
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -18,7 +18,7 @@ exports[`GeneNames should render gene_names 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         some Gene 
         <button
@@ -56,7 +56,7 @@ exports[`GeneNames should render gene_names 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -65,7 +65,7 @@ exports[`GeneNames should render gene_names 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         some Syn 
         <button
@@ -103,7 +103,7 @@ exports[`GeneNames should render gene_names 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -112,7 +112,7 @@ exports[`GeneNames should render gene_names 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         some orf 
         <button
@@ -150,7 +150,7 @@ exports[`GeneNames should render gene_names 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__item__title"
+        class="info-list__title"
       >
         <h5
           class="bold"
@@ -159,7 +159,7 @@ exports[`GeneNames should render gene_names 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__item__content"
+        class="info-list__content"
       >
         some locus 
         <button

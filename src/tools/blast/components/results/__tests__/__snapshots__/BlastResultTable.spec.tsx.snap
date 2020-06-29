@@ -9,7 +9,7 @@ exports[`BlastResultTable tests should render the results table 1`] = `
       class="data-loader__scroll-container"
     >
       <table
-        class="data-table data-table--compact  "
+        class="data-table data-table--compact  data-table--fixed"
       >
         <thead
           class="data-table__header"
@@ -24,15 +24,21 @@ exports[`BlastResultTable tests should render the results table 1`] = `
             </th>
             <th
               class="data-table__header-cell "
-              style="width: auto;"
+              style="width: 5rem;"
             >
               Accession
             </th>
             <th
               class="data-table__header-cell "
-              style="width: auto;"
+              style="width: 5rem;"
             >
               Gene
+            </th>
+            <th
+              class="data-table__header-cell "
+              style="width: auto;"
+            >
+              Protein
             </th>
             <th
               class="data-table__header-cell "
@@ -42,7 +48,7 @@ exports[`BlastResultTable tests should render the results table 1`] = `
             </th>
             <th
               class="data-table__header-cell "
-              style="width: auto;"
+              style="width: 40vw;"
             >
               Alignment
             </th>
@@ -56,11 +62,12 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               class="data-table__cell "
             >
               <input
+                aria-label="U6MKN0"
                 type="checkbox"
               />
             </td>
             <td
-              class="data-table__cell  "
+              class="data-table__cell  data-table__cell--ellipsis"
             >
               <a
                 href="/uniprotkb/U6MKN0"
@@ -69,12 +76,17 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               </a>
             </td>
             <td
-              class="data-table__cell  "
+              class="data-table__cell  data-table__cell--ellipsis"
             >
               ENH_00046930
             </td>
             <td
-              class="data-table__cell  "
+              class="data-table__cell  data-table__cell--ellipsis"
+            >
+              Uncharacterized protein
+            </td>
+            <td
+              class="data-table__cell  data-table__cell--ellipsis"
             >
               <a
                 href="/taxonomy/51315"
@@ -83,22 +95,50 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               </a>
             </td>
             <td
-              class="data-table__cell  "
+              class="data-table__cell  data-table__cell--ellipsis"
             >
               <div
                 class="data-table__blast-hsp"
               >
-                <div
-                  class="data-table__blast-hsp__tracks"
-                >
-                  <protvista-track
-                    data-testid="blast-summary-track"
-                    height="10"
-                    length="30"
-                    title="Start: 3
+                <div>
+                  <div
+                    class="data-table__blast-hsp__tracks"
+                  >
+                    <section
+                      class="data-table__blast-hsp__blast-track"
+                    >
+                      <protvista-track
+                        data-testid="blast-summary-track"
+                        height="10"
+                        length="30"
+                        title="Start: 3
 End: 30
-Identity: 7.1%"
-                  />
+Hit Length: 486"
+                      />
+                    </section>
+                    <span
+                      class="data-table__blast-hsp__blast-params"
+                    >
+                      <span
+                        class="chip chip--compact"
+                        title="Identity"
+                      >
+                        7.1%
+                      </span>
+                      <span
+                        class="chip chip--compact"
+                        title="Score"
+                      >
+                        41.5874
+                      </span>
+                      <span
+                        class="chip chip--compact"
+                        title="e-value"
+                      >
+                        0.0048
+                      </span>
+                    </span>
+                  </div>
                 </div>
                 <button
                   type="button"
