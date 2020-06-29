@@ -186,6 +186,9 @@ const BlastResult = () => {
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
   const [blastParams, setBlastParams] = useState<any>({});
+  const [originalBlastParamFacets, setOriginalBlastParamFacets] = useState<any>(
+    {}
+  );
 
   // data from blast
   const {
@@ -223,6 +226,11 @@ const BlastResult = () => {
     apiData,
   ]);
 
+  const originalData = useMemo(() => enrich(filteredBlastData, apiData), [
+    blastData,
+    apiData,
+  ]);
+
   useEffect(() => {
     const urlParams = getParamsFromURL(location.search);
     // const newQuery = getLocationObjForParams(location);
@@ -231,6 +239,17 @@ const BlastResult = () => {
   }, [location.search, blastData]);
 
   const inputParamsData = useParamsData(match.params.id);
+  const inputParamsDataOriginal = useParamsData(match.params.id);
+
+  //   useEffect(() => {
+  // // console.log("params changed:", inputParamsData);
+
+  //     // const data = inputParamsXMLToObject(paramsXMLData.data, sequenceData.data);
+
+  //     if (originalBlastParamFacets && Object.keys(originalBlastParamFacets).length === 0) {
+  //       setOriginalBlastParamFacets(inputParamsData.data);
+  //     }
+  //   }, [inputParamsData.data]);
 
   // Note: this function is duplicated in ResultsContainer.tsx
   const handleSelectedEntries = (rowId: string) => {
@@ -257,6 +276,7 @@ const BlastResult = () => {
     <BlastResultSidebar
       loading={apiLoading}
       data={data}
+      originalData={originalData}
       histogramBinSize={histogramBinSize}
     />
   );

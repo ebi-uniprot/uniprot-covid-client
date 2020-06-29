@@ -20,6 +20,7 @@ type Props = { params: BlastParamFacet; binSize: number };
 
 const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
   const { scores, identities, eValues } = params;
+  const { scoreMin, scoreMax } = params;
 
   const {
     push,
@@ -103,14 +104,14 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
 
   const scoreFacetIndex = findFacet('score');
   let scoreFacetValue;
-  let scoreMin, scoreMax;
+  let selectedScoreMin, selectedScoreMax;
 
   if (scoreFacetIndex > -1) {
-    [scoreMin, scoreMax] = selectedFacets[scoreFacetIndex].value.split('-');
+    [selectedScoreMin, selectedScoreMax] = selectedFacets[
+      scoreFacetIndex
+    ].value.split('-');
   }
-  // console.log("scores:", scores);
-  // console.log("identities:", identities);
-  // console.log("eValues:", eValues);
+
   return (
     <div className="blast-parameters-facet">
       <ul className="no-bullet">
@@ -123,11 +124,13 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                 height={50}
                 max={histogramSettings.scores.max}
                 min={histogramSettings.scores.min}
+                // max={scoreMin}
+                // min={scoreMax}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  scoreMin || histogramSettings.scores.min,
-                  scoreMax || histogramSettings.scores.max,
+                  selectedScoreMin || histogramSettings.scores.min,
+                  selectedScoreMax || histogramSettings.scores.max,
                 ]}
                 values={scores}
               />

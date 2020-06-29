@@ -89,9 +89,12 @@ type Props = {
 };
 
 const BlastResultSidebar: FC<Props> = (props) => {
-  const { loading, data, histogramBinSize: binSize } = props;
+  const { loading, data, histogramBinSize: binSize, originalData } = props;
   const facets = useMemo(() => getFacetsFromData(data), [data]);
-  const params = useMemo(() => getBlastParametersFacetsFromData(data), [data]);
+  // const params = useMemo(() => getBlastParametersFacetsFromData(data), [data]);
+  const params = useMemo(() => getBlastParametersFacetsFromData(originalData), [
+    originalData,
+  ]);
 
   if (loading) {
     return <Loader />;
