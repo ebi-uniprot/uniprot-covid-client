@@ -87,20 +87,20 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     addFacet(paramName, values.join('-'));
   };
 
-  const histogramSettings = {
-    scores: {
-      min: getSmallerMultiple(Math.min(...scores), binSize),
-      max: getLargerMultiple(Math.max(...scores), binSize),
-    },
-    identities: {
-      min: getSmallerMultiple(Math.min(...identities), binSize),
-      max: getLargerMultiple(Math.max(...identities), binSize),
-    },
-    eValues: {
-      min: getSmallerMultiple(Math.min(...eValues), binSize),
-      max: getLargerMultiple(Math.max(...eValues), binSize),
-    },
-  };
+  // const histogramSettings = {
+  //   scores: {
+  //     min: getSmallerMultiple(Math.min(...scores), binSize),
+  //     max: getLargerMultiple(Math.max(...scores), binSize),
+  //   },
+  //   identities: {
+  //     min: getSmallerMultiple(Math.min(...identities), binSize),
+  //     max: getLargerMultiple(Math.max(...identities), binSize),
+  //   },
+  //   eValues: {
+  //     min: getSmallerMultiple(Math.min(...eValues), binSize),
+  //     max: getLargerMultiple(Math.max(...eValues), binSize),
+  //   },
+  // };
 
   const scoreFacetIndex = findFacet('score');
   let scoreFacetValue;
@@ -122,47 +122,41 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">Score</span>
               <HistogramFilter
                 height={50}
-                max={histogramSettings.scores.max}
-                min={histogramSettings.scores.min}
+                max={params.scores.max}
+                min={params.scores.min}
                 // max={scoreMin}
                 // min={scoreMax}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  selectedScoreMin || histogramSettings.scores.min,
-                  selectedScoreMax || histogramSettings.scores.max,
+                  selectedScoreMin || params.scores.min,
+                  selectedScoreMax || params.scores.max,
                 ]}
-                values={scores}
+                values={scores.values}
               />
             </li>
             <li>
               <span className="">Identity</span>
               <HistogramFilter
                 height={50}
-                max={histogramSettings.identities.max}
-                min={histogramSettings.identities.min}
+                max={params.identities.max}
+                min={params.identities.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('identities', e)}
-                selectedRange={[
-                  histogramSettings.identities.min,
-                  histogramSettings.identities.max,
-                ]}
-                values={identities}
+                selectedRange={[params.identities.min, params.identities.max]}
+                values={identities.values}
               />
             </li>
             <li>
               <span className="">E-value</span>
               <HistogramFilter
                 height={50}
-                max={histogramSettings.eValues.max}
-                min={histogramSettings.eValues.min}
+                max={params.eValues.max}
+                min={params.eValues.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('evalues', e)}
-                selectedRange={[
-                  histogramSettings.eValues.min,
-                  histogramSettings.eValues.max,
-                ]}
-                values={eValues}
+                selectedRange={[params.eValues.min, params.eValues.max]}
+                values={eValues.values}
               />
             </li>
           </ul>

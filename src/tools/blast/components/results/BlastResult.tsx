@@ -15,6 +15,10 @@ import {
   getLocationObjForParams,
   getParamsFromURL,
 } from '../../../../uniprotkb/utils/resultsUtils';
+import {
+  getSmallerMultiple,
+  getLargerMultiple,
+} from '../../../../shared/utils/utils';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -179,6 +183,52 @@ const enrich = (
   return output;
 };
 
+const histogramBinSize = 100;
+
+const getBlastParametersFacetsFromData = (
+  data?: BlastResults | null
+): BlastParamFacet => {
+  const results: BlastParamFacet = {
+    scores: {
+      values: [],
+      min: undefined,
+      max: undefined,
+    },
+    identities: {
+      values: [],
+      min: undefined,
+      max: undefined,
+    },
+    eValues: {
+      values: [],
+      min: undefined,
+      max: undefined,
+    },
+  };
+
+  if (!data) {
+    return results;
+  }
+
+  data.hits.forEach(({ hit_hsps }) => {
+    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
+      results.scores.values.push(hsp_score);
+      results.identities.values.push(hsp_identity);
+      results.eValues.values.push(hsp_expect);
+    });
+  });
+
+  for (const [key, { values }] of Object.entries(results)) {
+    results[key].min = getSmallerMultiple(
+      Math.min(...values),
+      histogramBinSize
+    );
+    results[key].max = getLargerMultiple(Math.max(...values), histogramBinSize);
+  }
+
+  return results;
+};
+
 const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;
@@ -226,11 +276,6 @@ const BlastResult = () => {
     apiData,
   ]);
 
-  const originalData = useMemo(() => enrich(filteredBlastData, apiData), [
-    blastData,
-    apiData,
-  ]);
-
   useEffect(() => {
     const urlParams = getParamsFromURL(location.search);
     // const newQuery = getLocationObjForParams(location);
@@ -239,17 +284,6 @@ const BlastResult = () => {
   }, [location.search, blastData]);
 
   const inputParamsData = useParamsData(match.params.id);
-  const inputParamsDataOriginal = useParamsData(match.params.id);
-
-  //   useEffect(() => {
-  // // console.log("params changed:", inputParamsData);
-
-  //     // const data = inputParamsXMLToObject(paramsXMLData.data, sequenceData.data);
-
-  //     if (originalBlastParamFacets && Object.keys(originalBlastParamFacets).length === 0) {
-  //       setOriginalBlastParamFacets(inputParamsData.data);
-  //     }
-  //   }, [inputParamsData.data]);
 
   // Note: this function is duplicated in ResultsContainer.tsx
   const handleSelectedEntries = (rowId: string) => {
@@ -261,6 +295,11 @@ const BlastResult = () => {
     );
   };
 
+  const histogramSettings = useMemo(
+    () => getBlastParametersFacetsFromData(blastData),
+    [blastData]
+  );
+
   if (blastLoading) {
     return <Loader />;
   }
@@ -269,14 +308,12 @@ const BlastResult = () => {
     return <ErrorHandler status={blastStatus} />;
   }
 
-  const histogramBinSize = 100;
-
   // Deciding what should be displayed on the sidebar
   const facetsSidebar = (
     <BlastResultSidebar
       loading={apiLoading}
       data={data}
-      originalData={originalData}
+      histogramSettings={histogramSettings}
       histogramBinSize={histogramBinSize}
     />
   );

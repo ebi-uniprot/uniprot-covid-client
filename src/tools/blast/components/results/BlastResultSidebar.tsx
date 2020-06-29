@@ -58,43 +58,16 @@ const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
   return facets;
 };
 
-const getBlastParametersFacetsFromData = (
-  data?: EnrichedData | null
-): BlastParamFacet => {
-  const results: BlastParamFacet = {
-    scores: [],
-    identities: [],
-    eValues: [],
-  };
-
-  if (!data) {
-    return results;
-  }
-
-  data.hits.forEach(({ hit_hsps }) => {
-    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
-      results.scores.push(hsp_score);
-      results.identities.push(hsp_identity);
-      results.eValues.push(hsp_expect);
-    });
-  });
-
-  return results;
-};
-
 type Props = {
   loading: boolean;
   data?: EnrichedData | null;
   histogramBinSize: number;
+  histogramSettings: any;
 };
 
 const BlastResultSidebar: FC<Props> = (props) => {
-  const { loading, data, histogramBinSize: binSize, originalData } = props;
+  const { loading, data, histogramBinSize: binSize, histogramSettings } = props;
   const facets = useMemo(() => getFacetsFromData(data), [data]);
-  // const params = useMemo(() => getBlastParametersFacetsFromData(data), [data]);
-  const params = useMemo(() => getBlastParametersFacetsFromData(originalData), [
-    originalData,
-  ]);
 
   if (loading) {
     return <Loader />;
@@ -103,7 +76,10 @@ const BlastResultSidebar: FC<Props> = (props) => {
   return (
     <Fragment>
       <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets params={params} binSize={binSize} />
+      <BlastResultsParametersFacets
+        params={histogramSettings}
+        binSize={binSize}
+      />
     </Fragment>
   );
 };
