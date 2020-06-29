@@ -19,7 +19,7 @@ test:
   only:
     refs:
       - master
-  image: selenium/node-chrome
+  image: buildkite/docker-puppeteer
   stage: test
   before_script:
     - node --version
