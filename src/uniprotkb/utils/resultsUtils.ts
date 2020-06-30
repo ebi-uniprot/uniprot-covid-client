@@ -60,13 +60,15 @@ export const getLocationObjForParams = (
   query: string,
   selectedFacets: SelectedFacet[],
   sortColumn?: string,
-  sortDirection?: SortDirection
+  sortDirection?: SortDirection,
+  activeFacet?: string
 ) => ({
   pathname,
   search: [
     `query=${query}${facetsAsString(selectedFacets)}`,
     `${sortColumn ? `&sort=${sortColumn}` : ''}`,
     `${sortDirection ? `&dir=${sortDirection}` : ''}`,
+    `${activeFacet ? `&activeFacet=${activeFacet}` : ''}`,
   ].join(''),
 });
 

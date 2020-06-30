@@ -7,15 +7,15 @@ import {
 } from '../../../../uniprotkb/utils/resultsUtils';
 
 export type BlastParamFacet = {
-  scores: number[];
+  score: number[];
   identities: number[];
-  eValues: number[];
+  evalues: number[];
 };
 
 type Props = { params: BlastParamFacet; binSize: number };
 
 const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
-  const { scores, identities, eValues } = params;
+  const { score, identities, evalues } = params;
 
   const {
     push,
@@ -54,7 +54,8 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
         query,
         selectedFacets,
         sortColumn,
-        sortDirection
+        sortDirection,
+        facetName
       )
     );
   };
@@ -103,15 +104,15 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">Score</span>
               <HistogramFilter
                 height={50}
-                max={scores.max}
-                min={scores.min}
+                max={score.max}
+                min={score.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  selectedScoreMin || scores.min,
-                  selectedScoreMax || scores.max,
+                  selectedScoreMin || score.min,
+                  selectedScoreMax || score.max,
                 ]}
-                values={scores.values}
+                values={score.values}
               />
             </li>
             <li>
@@ -130,12 +131,12 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">E-value</span>
               <HistogramFilter
                 height={50}
-                max={eValues.max}
-                min={eValues.min}
+                max={evalues.max}
+                min={evalues.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('evalues', e)}
-                selectedRange={[eValues.min, eValues.max]}
-                values={eValues.values}
+                selectedRange={[evalues.min, evalues.max]}
+                values={evalues.values}
               />
             </li>
           </ul>

@@ -221,10 +221,6 @@ const getBlastParametersFacetsFromData = (
     return results;
   }
 
-  const inactiveFacets = Object.values(BlastFacets).filter(
-    (f) => f !== activeFacet
-  );
-
   const parsedFacets = Object.fromEntries(
     facets.map(({ name, value }) => {
       const [min, max] = value.split('-').map((x) => parseInt(x, 10));
@@ -235,13 +231,18 @@ const getBlastParametersFacetsFromData = (
   data.hits.forEach(({ hit_hsps }) => {
     hit_hsps.forEach((hsp) => {
       Object.values(BlastFacets).forEach((facet) => {
-        // results[facet].values.push()
+        const value = hsp[blastFacetToKeyName[facet]];
+        if (facet === activeFacet || !(facet in parsedFacets)) {
+          results[facet].values.push(value);
+        } else if (facet in parsedFacets) {
+          const { min, max } = parsedFacets[facet];
+          if (min <= value && value <= max) {
+            results[facet].values.push(value);
+          }
+        }
       });
-      // data.hits.map((hsp) => hsp[blastFacetToKeyName[facet]])
-      // .filter((score) => score >= min && score <= max).length;
     });
   });
-
   for (const [key, { values }] of Object.entries(results)) {
     results[key].min = getSmallerMultiple(
       Math.min(...values),
@@ -249,7 +250,7 @@ const getBlastParametersFacetsFromData = (
     );
     results[key].max = getLargerMultiple(Math.max(...values), histogramBinSize);
   }
-
+  console.log(results);
   return results;
 };
 
