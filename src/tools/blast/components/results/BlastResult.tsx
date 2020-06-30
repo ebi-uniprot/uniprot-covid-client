@@ -2,6 +2,7 @@ import React, { useMemo, useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
+import { identity } from 'lodash-es';
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import BlastResultSidebar from './BlastResultSidebar';
@@ -105,42 +106,48 @@ const useParamsData = (
   return paramsData;
 };
 
-const narrowByScore = (data, min, max) => {
-  return data.hits.filter((hit) => {
+enum BlastFacets {
+  SCORE = 'score',
+  IDENTITIES = 'identities',
+  EVALUES = 'evalues',
+}
+
+const blastFacetToKeyName = {
+  [BlastFacets.SCORE]: 'hsp_score',
+  [BlastFacets.IDENTITIES]: 'hsp_identity',
+  [BlastFacets.EVALUES]: 'hsp_expect',
+};
+
+const filterResultsByBlastFacet = (hits, min, max, facet) => {
+  return hits.filter((hit) => {
     return hit.hit_hsps
-      .map((hsp) => hsp.hsp_score)
+      .map((hsp) => hsp[blastFacetToKeyName[facet]])
       .filter((score) => score >= min && score <= max).length;
   });
 };
 
-const narrowResultsByBlastParamFacets = (data, params) => {
-  let filteredData = data;
-  const blastParamNames = ['score', 'identities', 'evalues'];
-  const paramValues = {};
-
+const filterResultsByBlastFacets = (data, facets) => {
   if (!data) {
-    return [];
+    return null;
   }
 
-  if (Object.keys(params).length === 0) {
+  if (!data.hits || !data.hits.length || !Object.keys(facets).length) {
     return data;
   }
 
-  params.forEach(({ name, value }) => {
-    if (blastParamNames.includes(name)) {
-      paramValues[name] = value;
+  let { hits } = data;
+
+  facets.forEach(({ name: facet, value }) => {
+    if (facet in blastFacetToKeyName) {
+      const [min, max] = value.split('-');
+      hits = filterResultsByBlastFacet(hits, min, max, facet);
     }
   });
 
-  if (paramValues.score) {
-    const [min, max] = paramValues.score.split('-');
-    filteredData = narrowByScore(filteredData, min, max);
-  }
-
   return {
     ...data,
-    alignments: filteredData.length,
-    hits: filteredData,
+    hits,
+    alignments: hits.length,
   };
 };
 
@@ -235,7 +242,7 @@ const BlastResult = () => {
   const location = useLocation();
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
-  const [blastParams, setBlastParams] = useState<any>({});
+  const [facets, setFacets] = useState<any>({});
   const [originalBlastParamFacets, setOriginalBlastParamFacets] = useState<any>(
     {}
   );
@@ -251,6 +258,7 @@ const BlastResult = () => {
   );
 
   useEffect(() => {
+    // TODO: investigate why /overview keeps recursively appended
     if (!match.params.subPage) {
       history.replace(
         history.createHref({
@@ -261,13 +269,16 @@ const BlastResult = () => {
     }
   }, [match.params.subPage, history]);
 
-  const filteredBlastData = narrowResultsByBlastParamFacets(
-    blastData,
-    blastParams
-  );
+  useEffect(() => {
+    const urlParams = getParamsFromURL(location.search);
+    setFacets(urlParams.selectedFacets);
+  }, [location.search, blastData]);
+
+  // BLAST results filtered by BLAST facets (ie score, e-value, identity)
+  const filteredBlastData = filterResultsByBlastFacets(blastData, facets);
 
   // corresponding data from API
-  let { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
+  const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
     useMemo(() => getEnrichApiUrl(filteredBlastData), [filteredBlastData])
   );
 
@@ -275,13 +286,6 @@ const BlastResult = () => {
     filteredBlastData,
     apiData,
   ]);
-
-  useEffect(() => {
-    const urlParams = getParamsFromURL(location.search);
-    // const newQuery = getLocationObjForParams(location);
-
-    setBlastParams(urlParams.selectedFacets);
-  }, [location.search, blastData]);
 
   const inputParamsData = useParamsData(match.params.id);
 
@@ -354,7 +358,7 @@ const BlastResult = () => {
           />
           <Suspense fallback={<Loader />}>
             <BlastResultTable
-              data={data || blastData}
+              data={data}
               selectedEntries={selectedEntries}
               handleSelectedEntries={handleSelectedEntries}
             />
