@@ -5,10 +5,6 @@ import {
   getLocationObjForParams,
   getParamsFromURL,
 } from '../../../../uniprotkb/utils/resultsUtils';
-import {
-  getSmallerMultiple,
-  getLargerMultiple,
-} from '../../../../shared/utils/utils';
 
 export type BlastParamFacet = {
   scores: number[];
@@ -20,7 +16,6 @@ type Props = { params: BlastParamFacet; binSize: number };
 
 const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
   const { scores, identities, eValues } = params;
-  const { scoreMin, scoreMax } = params;
 
   const {
     push,
@@ -87,24 +82,10 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     addFacet(paramName, values.join('-'));
   };
 
-  // const histogramSettings = {
-  //   scores: {
-  //     min: getSmallerMultiple(Math.min(...scores), binSize),
-  //     max: getLargerMultiple(Math.max(...scores), binSize),
-  //   },
-  //   identities: {
-  //     min: getSmallerMultiple(Math.min(...identities), binSize),
-  //     max: getLargerMultiple(Math.max(...identities), binSize),
-  //   },
-  //   eValues: {
-  //     min: getSmallerMultiple(Math.min(...eValues), binSize),
-  //     max: getLargerMultiple(Math.max(...eValues), binSize),
-  //   },
-  // };
-
   const scoreFacetIndex = findFacet('score');
   let scoreFacetValue;
-  let selectedScoreMin, selectedScoreMax;
+  let selectedScoreMin;
+  let selectedScoreMax;
 
   if (scoreFacetIndex > -1) {
     [selectedScoreMin, selectedScoreMax] = selectedFacets[
@@ -122,15 +103,13 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">Score</span>
               <HistogramFilter
                 height={50}
-                max={params.scores.max}
-                min={params.scores.min}
-                // max={scoreMin}
-                // min={scoreMax}
+                max={scores.max}
+                min={scores.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  selectedScoreMin || params.scores.min,
-                  selectedScoreMax || params.scores.max,
+                  selectedScoreMin || scores.min,
+                  selectedScoreMax || scores.max,
                 ]}
                 values={scores.values}
               />
@@ -139,11 +118,11 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">Identity</span>
               <HistogramFilter
                 height={50}
-                max={params.identities.max}
-                min={params.identities.min}
+                max={identities.max}
+                min={identities.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('identities', e)}
-                selectedRange={[params.identities.min, params.identities.max]}
+                selectedRange={[identities.min, identities.max]}
                 values={identities.values}
               />
             </li>
@@ -151,11 +130,11 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">E-value</span>
               <HistogramFilter
                 height={50}
-                max={params.eValues.max}
-                min={params.eValues.min}
+                max={eValues.max}
+                min={eValues.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('evalues', e)}
-                selectedRange={[params.eValues.min, params.eValues.max]}
+                selectedRange={[eValues.min, eValues.max]}
                 values={eValues.values}
               />
             </li>
