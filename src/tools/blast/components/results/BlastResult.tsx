@@ -20,6 +20,8 @@ import {
   getSmallerMultiple,
   getLargerMultiple,
 } from '../../../../shared/utils/utils';
+import { SelectedFacet } from '../../../../uniprotkb/types/resultsTypes';
+import { BlastParamFacet } from './BlastResultsParametersFacets';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -193,10 +195,12 @@ const enrich = (
 const histogramBinSize = 100;
 
 const getBlastParametersFacetsFromData = (
+  facets: SelectedFacet[],
+  activeFacet: string,
   data?: BlastResults | null
-): BlastParamFacet => {
-  const results: BlastParamFacet = {
-    scores: {
+) => {
+  const results = {
+    score: {
       values: [],
       min: undefined,
       max: undefined,
@@ -206,7 +210,7 @@ const getBlastParametersFacetsFromData = (
       min: undefined,
       max: undefined,
     },
-    eValues: {
+    evalues: {
       values: [],
       min: undefined,
       max: undefined,
@@ -217,11 +221,24 @@ const getBlastParametersFacetsFromData = (
     return results;
   }
 
+  const inactiveFacets = Object.values(BlastFacets).filter(
+    (f) => f !== activeFacet
+  );
+
+  const parsedFacets = Object.fromEntries(
+    facets.map(({ name, value }) => {
+      const [min, max] = value.split('-').map((x) => parseInt(x, 10));
+      return [name, { min, max }];
+    })
+  );
+
   data.hits.forEach(({ hit_hsps }) => {
-    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
-      results.scores.values.push(hsp_score);
-      results.identities.values.push(hsp_identity);
-      results.eValues.values.push(hsp_expect);
+    hit_hsps.forEach((hsp) => {
+      Object.values(BlastFacets).forEach((facet) => {
+        // results[facet].values.push()
+      });
+      // data.hits.map((hsp) => hsp[blastFacetToKeyName[facet]])
+      // .filter((score) => score >= min && score <= max).length;
     });
   });
 
@@ -242,7 +259,7 @@ const BlastResult = () => {
   const location = useLocation();
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
-  const [facets, setFacets] = useState<any>({});
+  const [urlParams, setUrlParams] = useState<any>({});
   const [originalBlastParamFacets, setOriginalBlastParamFacets] = useState<any>(
     {}
   );
@@ -270,12 +287,14 @@ const BlastResult = () => {
   }, [match.params.subPage, history]);
 
   useEffect(() => {
-    const urlParams = getParamsFromURL(location.search);
-    setFacets(urlParams.selectedFacets);
+    setUrlParams(getParamsFromURL(location.search));
   }, [location.search, blastData]);
 
   // BLAST results filtered by BLAST facets (ie score, e-value, identity)
-  const filteredBlastData = filterResultsByBlastFacets(blastData, facets);
+  const filteredBlastData = filterResultsByBlastFacets(
+    blastData,
+    urlParams.selectedFacets
+  );
 
   // corresponding data from API
   const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
@@ -300,7 +319,12 @@ const BlastResult = () => {
   };
 
   const histogramSettings = useMemo(
-    () => getBlastParametersFacetsFromData(blastData),
+    () =>
+      getBlastParametersFacetsFromData(
+        urlParams.selectedFacets,
+        urlParams.activeFacet,
+        blastData
+      ),
     [blastData]
   );
 
