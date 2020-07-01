@@ -194,6 +194,52 @@ const enrich = (
 
 const histogramBinSize = 100;
 
+const isBlastValueWithinRange = (blastResultDatum, selectedRanges, facet) => {
+  const value = blastResultDatum[facet];
+  const [min, max] = selectedRanges[facet];
+  return min <= value && value <= max;
+};
+
+const filterBlastDatum = (blastResultDatum, selectedRanges, activeFacet) => {
+  // All inactiveFacets (including user selected and not user selected) will need to have the intersection of all of the ranges applied (including the active).
+  // The activeFacet has only has the inactiveFacets intersection applied.
+
+  const inactiveRangedFacets = Object.keys(selectedRanges).filter(
+    (facet) => facet !== activeFacet
+  );
+
+  const includeActive = inactiveRangedFacets.every((facet) =>
+    isBlastValueWithinRange(blastResultDatum, selectedRanges, facet)
+  );
+  const includeInactive =
+    includeActive &&
+    isBlastValueWithinRange(blastResultDatum, selectedRanges, activeFacet);
+
+  const result = {};
+
+  const allInactiveFacets = Object.values(BlastFacets).filter(
+    (facet) => facet !== activeFacet
+  );
+
+  allInactiveFacets.forEach((facet) => {
+    if (includeInactive) {
+      result[facet] = blastResultDatum[facet];
+    }
+  });
+
+  result[activeFacet] = includeActive && blastResultDatum[activeFacet];
+
+  return result;
+};
+
+const t = filterBlastDatum(
+  { score: 300, evalues: 0, identity: 80 },
+  { score: [400, 600], identity: [70, 90] },
+  'score'
+);
+
+console.log(t);
+
 const getBlastParametersFacetsFromData = (
   facets: SelectedFacet[],
   activeFacet: string,
