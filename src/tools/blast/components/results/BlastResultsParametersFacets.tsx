@@ -8,14 +8,14 @@ import {
 
 export type BlastParamFacet = {
   score: number[];
-  identities: number[];
-  evalues: number[];
+  identity: number[];
+  evalue: number[];
 };
 
 type Props = { params: BlastParamFacet; binSize: number };
 
 const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
-  const { score, identities, evalues } = params;
+  const { score, identity, evalue } = params;
 
   const {
     push,
@@ -94,6 +94,17 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     ].value.split('-');
   }
 
+  const identityFacetIndex = findFacet('identity');
+  let scoreIdentityValue;
+  let selectedIdentityMin;
+  let selectedIdentityMax;
+
+  if (identityFacetIndex > -1) {
+    [selectedIdentityMin, selectedIdentityMax] = selectedFacets[
+      identityFacetIndex
+    ].value.split('-');
+  }
+
   return (
     <div className="blast-parameters-facet">
       <ul className="no-bullet">
@@ -119,24 +130,27 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
               <span className="">Identity</span>
               <HistogramFilter
                 height={50}
-                max={identities.max}
-                min={identities.min}
+                max={identity.max}
+                min={identity.min}
                 nBins={30}
-                onChange={(e: number[]) => onBlastParamChange('identities', e)}
-                selectedRange={[identities.min, identities.max]}
-                values={identities.values}
+                onChange={(e: number[]) => onBlastParamChange('identity', e)}
+                selectedRange={[
+                  selectedIdentityMin || identity.min,
+                  selectedIdentityMax || identity.max,
+                ]}
+                values={identity.values}
               />
             </li>
             <li>
               <span className="">E-value</span>
               <HistogramFilter
                 height={50}
-                max={evalues.max}
-                min={evalues.min}
+                max={evalue.max}
+                min={evalue.min}
                 nBins={30}
-                onChange={(e: number[]) => onBlastParamChange('evalues', e)}
-                selectedRange={[evalues.min, evalues.max]}
-                values={evalues.values}
+                onChange={(e: number[]) => onBlastParamChange('evalue', e)}
+                selectedRange={[evalue.min, evalue.max]}
+                values={evalue.values}
               />
             </li>
           </ul>

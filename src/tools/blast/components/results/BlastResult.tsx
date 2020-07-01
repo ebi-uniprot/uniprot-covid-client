@@ -110,14 +110,14 @@ const useParamsData = (
 
 enum BlastFacets {
   SCORE = 'score',
-  IDENTITIES = 'identities',
-  EVALUES = 'evalues',
+  IDENTITY = 'identity',
+  EVALUE = 'evalue',
 }
 
 const blastFacetToKeyName = {
   [BlastFacets.SCORE]: 'hsp_score',
-  [BlastFacets.IDENTITIES]: 'hsp_identity',
-  [BlastFacets.EVALUES]: 'hsp_expect',
+  [BlastFacets.IDENTITY]: 'hsp_identity',
+  [BlastFacets.EVALUE]: 'hsp_expect',
 };
 
 const filterResultsByBlastFacet = (hits, min, max, facet) => {
@@ -195,14 +195,24 @@ const enrich = (
 const histogramBinSize = 100;
 
 const isBlastValueWithinRange = (blastResultDatum, selectedRanges, facet) => {
-  const value = blastResultDatum[facet];
-  const [min, max] = selectedRanges[facet];
-  return min <= value && value <= max;
+  try {
+    const value = blastResultDatum[facet];
+    const [min, max] = selectedRanges[facet];
+    return min <= value && value <= max;
+  } catch (e) {
+    console.log('error:', e);
+  }
 };
 
 const filterBlastDatum = (blastResultDatum, selectedRanges, activeFacet) => {
   // All inactiveFacets (including user selected and not user selected) will need to have the intersection of all of the ranges applied (including the active).
   // The activeFacet has only has the inactiveFacets intersection applied.
+
+  // TODO check if the ranges aren't empty arrays
+
+  if (!selectedRanges || !Object.keys(selectedRanges).length) {
+    return blastResultDatum;
+  }
 
   const inactiveRangedFacets = Object.keys(selectedRanges).filter(
     (facet) => facet !== activeFacet
@@ -227,18 +237,65 @@ const filterBlastDatum = (blastResultDatum, selectedRanges, activeFacet) => {
     }
   });
 
-  result[activeFacet] = includeActive && blastResultDatum[activeFacet];
+  if (includeActive) {
+    result[activeFacet] = blastResultDatum[activeFacet];
+  }
 
   return result;
 };
 
-const t = filterBlastDatum(
-  { score: 300, evalues: 0, identity: 80 },
-  { score: [400, 600], identity: [70, 90] },
-  'score'
-);
+// const t = filterBlastDatum(
+//   { score: 300, evalue: 0, identity: 80 },
+//   { score: [400, 600], identity: [70, 90] },
+//   'score'
+// );
 
-console.log(t);
+// console.log("blast test:", t);
+
+// const row = {
+//   score: 100,
+//   identity: 10,
+//   evalue: 1,
+// };
+
+// const test_1 = filterBlastDatum(row);
+
+// console.log("test 1:", test_1);
+
+// const test_2 = filterBlastDatum(row,
+//   { score: [85, 150]},
+//   'score'
+// );
+
+// console.log("test 2:", test_2);
+
+// const test_3 = filterBlastDatum(row,
+//   { score: [200, 300]},
+//   'score'
+// );
+
+// console.log("test 3:", test_3);
+
+// const test_4 = filterBlastDatum(row,
+//   { score: [50, 150], identity: [20, 30]},
+//   'score'
+// );
+
+// console.log("test 4:", test_4);
+
+// const test_5 = filterBlastDatum(row,
+//   { score: [200, 300], identity: [5, 20]},
+//   'identity'
+// );
+
+// console.log("test 5:", test_5);
+
+// const test_6 = filterBlastDatum(row,
+//   { score: [10, 200], identity: [95, 100]},
+//   'identity'
+// );
+
+// console.log("test 6:", test_6);
 
 const getBlastParametersFacetsFromData = (
   facets: SelectedFacet[],
@@ -251,12 +308,12 @@ const getBlastParametersFacetsFromData = (
       min: undefined,
       max: undefined,
     },
-    identities: {
+    identity: {
       values: [],
       min: undefined,
       max: undefined,
     },
-    evalues: {
+    evalue: {
       values: [],
       min: undefined,
       max: undefined,
@@ -270,23 +327,31 @@ const getBlastParametersFacetsFromData = (
   const parsedFacets = Object.fromEntries(
     facets.map(({ name, value }) => {
       const [min, max] = value.split('-').map((x) => parseInt(x, 10));
-      return [name, { min, max }];
+      return [name, [min, max]];
     })
   );
 
   data.hits.forEach(({ hit_hsps }) => {
-    hit_hsps.forEach((hsp) => {
-      Object.values(BlastFacets).forEach((facet) => {
-        const value = hsp[blastFacetToKeyName[facet]];
-        if (facet === activeFacet || !(facet in parsedFacets)) {
-          results[facet].values.push(value);
-        } else if (facet in parsedFacets) {
-          const { min, max } = parsedFacets[facet];
-          if (min <= value && value <= max) {
-            results[facet].values.push(value);
-          }
-        }
-      });
+    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
+      const datum = {
+        score: hsp_score,
+        identity: hsp_identity,
+        evalue: hsp_expect,
+      };
+
+      const { score, identity, evalue } = filterBlastDatum(datum, parsedFacets);
+      console.log('---> score, identity, evalue:', score, identity, evalue);
+      if (score) {
+        results.score.values.push(score);
+      }
+
+      if (identity) {
+        results.identity.values.push(identity);
+      }
+
+      if (evalue) {
+        results.evalue.values.push(evalue);
+      }
     });
   });
   for (const [key, { values }] of Object.entries(results)) {
@@ -296,7 +361,7 @@ const getBlastParametersFacetsFromData = (
     );
     results[key].max = getLargerMultiple(Math.max(...values), histogramBinSize);
   }
-  console.log(results);
+  console.log('results:', results);
   return results;
 };
 
@@ -307,9 +372,6 @@ const BlastResult = () => {
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
   const [urlParams, setUrlParams] = useState<any>({});
-  const [originalBlastParamFacets, setOriginalBlastParamFacets] = useState<any>(
-    {}
-  );
 
   // data from blast
   const {
