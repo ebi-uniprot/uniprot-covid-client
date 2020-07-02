@@ -1,6 +1,6 @@
-import { filterBlastDatum } from '../blastFacetDataUtils';
+import { filterBlastHitForFacets } from '../blastFacetDataUtils';
 
-describe('filterBlastDatum', () => {
+describe('filterBlastHitForFacets', () => {
   const datapoint = {
     score: 100,
     identity: 10,
@@ -9,7 +9,7 @@ describe('filterBlastDatum', () => {
 
   it('should return all datapoint attributes when no filters are applied', () => {
     const rangeFilters = {};
-    expect(filterBlastDatum(datapoint, rangeFilters)).toEqual({
+    expect(filterBlastHitForFacets(datapoint, rangeFilters)).toEqual({
       score: 100,
       identity: 10,
       evalue: 1,
@@ -21,7 +21,9 @@ describe('filterBlastDatum', () => {
       score: [85, 150],
     };
     const activeFacet = 'score';
-    expect(filterBlastDatum(datapoint, rangeFilters, activeFacet)).toEqual({
+    expect(
+      filterBlastHitForFacets(datapoint, rangeFilters, activeFacet)
+    ).toEqual({
       score: 100,
       identity: 10,
       evalue: 1,
@@ -33,7 +35,9 @@ describe('filterBlastDatum', () => {
       score: [200, 300],
     };
     const activeFacet = 'score';
-    expect(filterBlastDatum(datapoint, rangeFilters, activeFacet)).toEqual({
+    expect(
+      filterBlastHitForFacets(datapoint, rangeFilters, activeFacet)
+    ).toEqual({
       score: 100,
     });
   });
@@ -44,7 +48,9 @@ describe('filterBlastDatum', () => {
       identity: [20, 30],
     };
     const activeFacet = 'score';
-    expect(filterBlastDatum(datapoint, rangeFilters, activeFacet)).toEqual({});
+    expect(
+      filterBlastHitForFacets(datapoint, rangeFilters, activeFacet)
+    ).toEqual({});
   });
 
   it('should return only active facet value when active range filter is outside of range and an inactive range filter is within range', () => {
@@ -53,7 +59,9 @@ describe('filterBlastDatum', () => {
       identity: [95, 100],
     };
     const activeFacet = 'identity';
-    expect(filterBlastDatum(datapoint, rangeFilters, activeFacet)).toEqual({
+    expect(
+      filterBlastHitForFacets(datapoint, rangeFilters, activeFacet)
+    ).toEqual({
       identity: 10,
     });
   });

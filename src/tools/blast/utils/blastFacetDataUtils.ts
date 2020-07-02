@@ -3,7 +3,47 @@ import {
   getLargerMultiple,
 } from '../../../shared/utils/utils';
 
-import { BlastResults, BlastFacets } from '../types/blastResults';
+import { BlastFacets, BlastHit } from '../types/blastResults';
+import { SelectedFacet } from '../../../uniprotkb/types/resultsTypes';
+
+const blastFacetToKeyName = {
+  [BlastFacets.SCORE]: 'hsp_score',
+  [BlastFacets.IDENTITY]: 'hsp_identity',
+  [BlastFacets.EVALUE]: 'hsp_expect',
+};
+
+export const filterBlastHitForResults = (hits, min, max, facet) => {
+  return hits.filter((hit) => {
+    return hit.hit_hsps
+      .map((hsp) => hsp[blastFacetToKeyName[facet]])
+      .filter((score) => score >= min && score <= max).length;
+  });
+};
+
+export const filterBlastDataForResults = (data, facets) => {
+  if (!data) {
+    return null;
+  }
+
+  if (!data.hits || !data.hits.length || !Object.keys(facets).length) {
+    return data;
+  }
+
+  let { hits } = data;
+
+  facets.forEach(({ name: facet, value }) => {
+    if (facet in blastFacetToKeyName) {
+      const [min, max] = value.split('-');
+      hits = filterBlastHitForResults(hits, min, max, facet);
+    }
+  });
+
+  return {
+    ...data,
+    hits,
+    alignments: hits.length,
+  };
+};
 
 export const isBlastValueWithinRange = (
   blastResultDatum,
@@ -19,7 +59,7 @@ export const isBlastValueWithinRange = (
   }
 };
 
-export const filterBlastDatum = (
+export const filterBlastHitForFacets = (
   blastResultDatum,
   rangeFilters,
   activeFacet
@@ -73,10 +113,10 @@ const setMinMaxValues = (results, facet, value) => {
   }
 };
 
-export const getBlastParametersFacetsFromData = (
+export const getFacetParametersFromBlastHits = (
   facets: SelectedFacet[],
   activeFacet: string,
-  data?: BlastResults | null,
+  hits?: BlastHit[] | null,
   histogramBinSize: number
 ) => {
   const results = {
@@ -97,7 +137,7 @@ export const getBlastParametersFacetsFromData = (
     },
   };
 
-  if (!data) {
+  if (!hits) {
     return results;
   }
 
@@ -108,7 +148,7 @@ export const getBlastParametersFacetsFromData = (
     })
   );
 
-  data.hits.forEach(({ hit_hsps }) => {
+  hits.forEach(({ hit_hsps }) => {
     hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
       const datum = {
         score: hsp_score,
@@ -116,7 +156,7 @@ export const getBlastParametersFacetsFromData = (
         evalue: hsp_expect,
       };
 
-      const { score, identity, evalue } = filterBlastDatum(
+      const { score, identity, evalue } = filterBlastHitForFacets(
         datum,
         parsedFacets,
         activeFacet

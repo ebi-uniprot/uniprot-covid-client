@@ -17,7 +17,10 @@ import {
 } from '../../../../uniprotkb/utils/resultsUtils';
 import { SelectedFacet } from '../../../../uniprotkb/types/resultsTypes';
 import { BlastParamFacet } from './BlastResultsParametersFacets';
-import { getBlastParametersFacetsFromData } from '../../utils/blastFacetDataUtils';
+import {
+  getFacetParametersFromBlastHits,
+  filterBlastDataForResults,
+} from '../../utils/blastFacetDataUtils';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -25,7 +28,7 @@ import { Location, LocationToPath } from '../../../../app/config/urls';
 import blastUrls from '../../config/blastUrls';
 import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
-import { BlastResults, BlastHit, BlastFacets } from '../../types/blastResults';
+import { BlastResults, BlastHit } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
@@ -104,45 +107,6 @@ const useParamsData = (
   return paramsData;
 };
 
-const blastFacetToKeyName = {
-  [BlastFacets.SCORE]: 'hsp_score',
-  [BlastFacets.IDENTITY]: 'hsp_identity',
-  [BlastFacets.EVALUE]: 'hsp_expect',
-};
-
-const filterResultsByBlastFacet = (hits, min, max, facet) => {
-  return hits.filter((hit) => {
-    return hit.hit_hsps
-      .map((hsp) => hsp[blastFacetToKeyName[facet]])
-      .filter((score) => score >= min && score <= max).length;
-  });
-};
-
-const filterResultsByBlastFacets = (data, facets) => {
-  if (!data) {
-    return null;
-  }
-
-  if (!data.hits || !data.hits.length || !Object.keys(facets).length) {
-    return data;
-  }
-
-  let { hits } = data;
-
-  facets.forEach(({ name: facet, value }) => {
-    if (facet in blastFacetToKeyName) {
-      const [min, max] = value.split('-');
-      hits = filterResultsByBlastFacet(hits, min, max, facet);
-    }
-  });
-
-  return {
-    ...data,
-    hits,
-    alignments: hits.length,
-  };
-};
-
 const getEnrichApiUrl = (blastData?: BlastResults) => {
   if (!blastData || blastData.length === 0) {
     return null;
@@ -219,7 +183,7 @@ const BlastResult = () => {
   }, [location.search, blastData]);
 
   // BLAST results filtered by BLAST facets (ie score, e-value, identity)
-  const filteredBlastData = filterResultsByBlastFacets(
+  const filteredBlastData = filterBlastDataForResults(
     blastData,
     urlParams.selectedFacets
   );
@@ -246,10 +210,10 @@ const BlastResult = () => {
     );
   };
 
-  const histogramSettings = getBlastParametersFacetsFromData(
+  const histogramSettings = getFacetParametersFromBlastHits(
     urlParams.selectedFacets,
     urlParams.activeFacet,
-    blastData,
+    blastData && blastData.hits,
     histogramBinSize
   );
 
