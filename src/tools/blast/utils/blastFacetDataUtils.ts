@@ -63,6 +63,16 @@ export const filterBlastDatum = (
   return result;
 };
 
+const setMinMaxValues = (results, facet, value) => {
+  if (typeof results[facet].min === 'undefined' || results[facet].min > value) {
+    results[facet].min = value;
+  }
+
+  if (typeof results[facet].max === 'undefined' || results[facet].max < value) {
+    results[facet].max = value;
+  }
+};
+
 export const getBlastParametersFacetsFromData = (
   facets: SelectedFacet[],
   activeFacet: string,
@@ -112,6 +122,10 @@ export const getBlastParametersFacetsFromData = (
         activeFacet
       );
 
+      setMinMaxValues(results, 'score', hsp_score);
+      setMinMaxValues(results, 'identity', hsp_identity);
+      setMinMaxValues(results, 'evalue', hsp_expect);
+
       // We would like to include 0 values, hence, check for 'undefined' explicitly
       if (score !== undefined) {
         results.score.values.push(score);
@@ -124,13 +138,6 @@ export const getBlastParametersFacetsFromData = (
       }
     });
   });
-  for (const [key, { values }] of Object.entries(results)) {
-    results[key].min = getSmallerMultiple(
-      Math.min(...values),
-      histogramBinSize
-    );
-    results[key].max = getLargerMultiple(Math.max(...values), histogramBinSize);
-  }
-  console.log('results:', results);
+
   return results;
 };
