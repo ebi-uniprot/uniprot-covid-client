@@ -103,7 +103,7 @@ export const getBlastParametersFacetsFromData = (
 
   const parsedFacets = Object.fromEntries(
     facets.map(({ name, value }) => {
-      const [min, max] = value.split('-').map((x) => parseInt(x, 10));
+      const [min, max] = value.split('-').map((x) => Number(x));
       return [name, [min, max]];
     })
   );
@@ -138,6 +138,6 @@ export const getBlastParametersFacetsFromData = (
       }
     });
   });
-
+  console.log('results:', results);
   return results;
 };

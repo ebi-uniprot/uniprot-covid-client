@@ -84,26 +84,29 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     addFacet(paramName, values.join('-'));
   };
 
-  const scoreFacetIndex = findFacet('score');
-  let scoreFacetValue;
-  let selectedScoreMin;
-  let selectedScoreMax;
+  const selectedMinMaxValues = {
+    score: {
+      min: score.min,
+      max: score.max,
+    },
+    identity: {
+      min: identity.min,
+      max: identity.max,
+    },
+    evalue: {
+      min: evalue.min,
+      max: evalue.max,
+    },
+  };
 
-  if (scoreFacetIndex > -1) {
-    [selectedScoreMin, selectedScoreMax] = selectedFacets[
-      scoreFacetIndex
-    ].value.split('-');
-  }
+  for (const [facet, values] of Object.entries(selectedMinMaxValues)) {
+    const index = findFacet(facet);
 
-  const identityFacetIndex = findFacet('identity');
-  let scoreIdentityValue;
-  let selectedIdentityMin;
-  let selectedIdentityMax;
+    if (index > -1) {
+      const [min, max] = selectedFacets[index].value.split('-');
 
-  if (identityFacetIndex > -1) {
-    [selectedIdentityMin, selectedIdentityMax] = selectedFacets[
-      identityFacetIndex
-    ].value.split('-');
+      selectedMinMaxValues[facet] = { min, max };
+    }
   }
 
   return (
@@ -121,8 +124,8 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('score', e)}
                 selectedRange={[
-                  selectedScoreMin || score.min,
-                  selectedScoreMax || score.max,
+                  selectedMinMaxValues.score.min,
+                  selectedMinMaxValues.score.max,
                 ]}
                 values={score.values}
               />
@@ -136,8 +139,8 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('identity', e)}
                 selectedRange={[
-                  selectedIdentityMin || identity.min,
-                  selectedIdentityMax || identity.max,
+                  selectedMinMaxValues.identity.min,
+                  selectedMinMaxValues.identity.max,
                 ]}
                 values={identity.values}
               />
@@ -150,7 +153,10 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
                 min={evalue.min}
                 nBins={30}
                 onChange={(e: number[]) => onBlastParamChange('evalue', e)}
-                selectedRange={[evalue.min, evalue.max]}
+                selectedRange={[
+                  selectedMinMaxValues.evalue.min,
+                  selectedMinMaxValues.evalue.max,
+                ]}
                 values={evalue.values}
               />
             </li>
