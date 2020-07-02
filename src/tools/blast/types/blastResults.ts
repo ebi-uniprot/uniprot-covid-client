@@ -69,7 +69,7 @@ export type BlastResults = {
   hits: BlastHit[];
 };
 
-export enum BlastFacets {
+export enum BlastFacet {
   SCORE = 'score',
   IDENTITY = 'identity',
   EVALUE = 'evalue',

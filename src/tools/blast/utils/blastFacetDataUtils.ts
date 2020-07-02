@@ -1,26 +1,47 @@
-import {
-  getSmallerMultiple,
-  getLargerMultiple,
-} from '../../../shared/utils/utils';
+// import {
+//   getSmallerMultiple,
+//   getLargerMultiple,
+// } from '../../../shared/utils/utils';
 
-import { BlastFacets, BlastHit } from '../types/blastResults';
+import {
+  BlastFacet,
+  BlastHit,
+  BlastResults,
+  BlastHsp,
+} from '../types/blastResults';
 import { SelectedFacet } from '../../../uniprotkb/types/resultsTypes';
 
 const blastFacetToKeyName = {
-  [BlastFacets.SCORE]: 'hsp_score',
-  [BlastFacets.IDENTITY]: 'hsp_identity',
-  [BlastFacets.EVALUE]: 'hsp_expect',
+  [BlastFacet.SCORE]: 'hsp_score',
+  [BlastFacet.IDENTITY]: 'hsp_identity',
+  [BlastFacet.EVALUE]: 'hsp_expect',
 };
 
-export const filterBlastHitForResults = (hits, min, max, facet) => {
+const parseBlastFacets = (facets: SelectedFacet[]): ParsedBlastFacets =>
+  Object.fromEntries(
+    facets.map(({ name, value }) => {
+      const [min, max] = value.split('-').map((x) => Number(x));
+      return [name, [min, max]];
+    })
+  );
+
+export const filterBlastHitForResults = (
+  hits: BlastHit[],
+  min: number,
+  max: number,
+  facet: BlastFacet
+) => {
   return hits.filter((hit) => {
     return hit.hit_hsps
-      .map((hsp) => hsp[blastFacetToKeyName[facet]])
+      .map((hsp) => hsp[blastFacetToKeyName[facet] as keyof BlastHsp])
       .filter((score) => score >= min && score <= max).length;
   });
 };
 
-export const filterBlastDataForResults = (data, facets) => {
+export const filterBlastDataForResults = (
+  data: BlastResults,
+  facets: SelectedFacet[]
+) => {
   if (!data) {
     return null;
   }
@@ -31,10 +52,10 @@ export const filterBlastDataForResults = (data, facets) => {
 
   let { hits } = data;
 
-  facets.forEach(({ name: facet, value }) => {
+  const parsedFacets = parseBlastFacets(facets);
+  Object.entries(parsedFacets).forEach(([facet, [min, max]]) => {
     if (facet in blastFacetToKeyName) {
-      const [min, max] = value.split('-');
-      hits = filterBlastHitForResults(hits, min, max, facet);
+      hits = filterBlastHitForResults(hits, min, max, facet as BlastFacet);
     }
   });
 
@@ -46,31 +67,40 @@ export const filterBlastDataForResults = (data, facets) => {
 };
 
 export const isBlastValueWithinRange = (
-  blastResultDatum,
-  rangeFilters,
-  facet
+  hitDatapoint: HitDatapoint,
+  rangeFilters: ParsedBlastFacets,
+  facet: BlastFacet
 ) => {
-  try {
-    const value = blastResultDatum[facet];
-    const [min, max] = rangeFilters[facet];
-    return min <= value && value <= max;
-  } catch (e) {
-    console.log('error:', e);
-  }
+  const value = hitDatapoint[facet];
+  const [min, max] = rangeFilters[facet];
+  return min <= value && value <= max;
 };
 
 export const filterBlastHitForFacets = (
-  blastResultDatum,
-  rangeFilters,
-  activeFacet
+  hitDatapoint: HitDatapoint,
+  rangeFilters: ParsedBlastFacets,
+  inActiveFacet?: BlastFacet
 ) => {
-  // All inactiveFacets (including user selected and not user selected) will need to have the intersection of all of the ranges applied (including the active).
-  // The activeFacet has only has the inactiveFacets intersection applied.
-
-  // TODO check if the ranges aren't empty arrays
+  // Notes:
+  // 1. All inactiveFacets (including user selected and not user selected) will need to
+  //    have the intersection of all of the ranges applied (including the active).
+  // 2. The activeFacet has only has the inactiveFacets intersection applied.
 
   if (!rangeFilters || !Object.keys(rangeFilters).length) {
-    return blastResultDatum;
+    return hitDatapoint;
+  }
+
+  let activeFacet = inActiveFacet;
+  if (!inActiveFacet) {
+    if (Object.keys(rangeFilters).length > 1) {
+      throw Error(
+        'More than one blast hit facet provided and no active facet set.'
+      );
+    } else {
+      // Guaranteed to be one here because it's nonzero but < 2
+      const facet = Object.keys(rangeFilters);
+      activeFacet = facet[0] as BlastFacet;
+    }
   }
 
   const inactiveRangedFacets = Object.keys(rangeFilters).filter(
@@ -78,105 +108,125 @@ export const filterBlastHitForFacets = (
   );
 
   const includeActive = inactiveRangedFacets.every((facet) =>
-    isBlastValueWithinRange(blastResultDatum, rangeFilters, facet)
+    isBlastValueWithinRange(hitDatapoint, rangeFilters, facet as BlastFacet)
   );
   const includeInactive =
     includeActive &&
-    isBlastValueWithinRange(blastResultDatum, rangeFilters, activeFacet);
+    isBlastValueWithinRange(
+      hitDatapoint,
+      rangeFilters,
+      activeFacet as BlastFacet
+    );
 
-  const result = {};
+  const result = new Map<BlastFacet, number>();
 
-  const allInactiveFacets = Object.values(BlastFacets).filter(
+  const allInactiveFacets = Object.values(BlastFacet).filter(
     (facet) => facet !== activeFacet
   );
 
   allInactiveFacets.forEach((facet) => {
     if (includeInactive) {
-      result[facet] = blastResultDatum[facet];
+      result.set(facet, hitDatapoint[facet]);
     }
   });
 
   if (includeActive) {
-    result[activeFacet] = blastResultDatum[activeFacet];
+    result.set(
+      activeFacet as BlastFacet,
+      hitDatapoint[activeFacet as BlastFacet]
+    );
   }
 
-  return result;
+  return Object.fromEntries(result);
 };
 
-const setMinMaxValues = (results, facet, value) => {
-  if (typeof results[facet].min === 'undefined' || results[facet].min > value) {
-    results[facet].min = value;
+const setMinMaxValues = (
+  parameters: BlastHitFacetParameters,
+  facet: BlastFacet,
+  value: number
+) => {
+  const facetParameter = parameters[facet];
+  if (typeof facetParameter.min === 'undefined' || facetParameter.min > value) {
+    facetParameter.min = value;
   }
 
-  if (typeof results[facet].max === 'undefined' || results[facet].max < value) {
-    results[facet].max = value;
+  if (typeof facetParameter.max === 'undefined' || facetParameter.max < value) {
+    facetParameter.max = value;
   }
+};
+
+type BlastHitFacetParameters = {
+  [facet in BlastFacet]: {
+    values: number[];
+    min?: number;
+    max?: number;
+  };
+};
+
+type HitDatapoint = {
+  [BlastFacet.SCORE]: number;
+  [BlastFacet.IDENTITY]: number;
+  [BlastFacet.EVALUE]: number;
+};
+
+export type ParsedBlastFacets = {
+  [key: string]: [number, number];
 };
 
 export const getFacetParametersFromBlastHits = (
   facets: SelectedFacet[],
-  activeFacet: string,
+  activeFacet: BlastFacet,
   hits?: BlastHit[] | null
 ) => {
-  const results = {
+  const parameters: BlastHitFacetParameters = {
     score: {
       values: [],
-      min: undefined,
-      max: undefined,
     },
     identity: {
       values: [],
-      min: undefined,
-      max: undefined,
     },
     evalue: {
       values: [],
-      min: undefined,
-      max: undefined,
     },
   };
 
   if (!hits) {
-    return results;
+    return parameters;
   }
 
-  const parsedFacets = Object.fromEntries(
-    facets.map(({ name, value }) => {
-      const [min, max] = value.split('-').map((x) => Number(x));
-      return [name, [min, max]];
-    })
-  );
+  hits.forEach(({ hit_hsps: hsps }) => {
+    hsps.forEach(
+      ({ hsp_score: score, hsp_identity: identity, hsp_expect: evalue }) => {
+        setMinMaxValues(parameters, BlastFacet.SCORE, score);
+        setMinMaxValues(parameters, BlastFacet.IDENTITY, identity);
+        setMinMaxValues(parameters, BlastFacet.EVALUE, evalue);
 
-  hits.forEach(({ hit_hsps }) => {
-    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
-      const datum = {
-        score: hsp_score,
-        identity: hsp_identity,
-        evalue: hsp_expect,
-      };
+        const hitData: HitDatapoint = {
+          score,
+          identity,
+          evalue,
+        };
 
-      const { score, identity, evalue } = filterBlastHitForFacets(
-        datum,
-        parsedFacets,
-        activeFacet
-      );
+        const parsedFacets = parseBlastFacets(facets);
 
-      setMinMaxValues(results, 'score', hsp_score);
-      setMinMaxValues(results, 'identity', hsp_identity);
-      setMinMaxValues(results, 'evalue', hsp_expect);
+        const {
+          score: filteredScore,
+          identity: filteredIdentity,
+          evalue: filteredEvalue,
+        } = filterBlastHitForFacets(hitData, parsedFacets, activeFacet);
 
-      // We would like to include 0 values, hence, check for 'undefined' explicitly
-      if (score !== undefined) {
-        results.score.values.push(score);
+        // We would like to include 0 values, hence, check for 'undefined' explicitly
+        if (filteredScore !== undefined) {
+          parameters.score.values.push(filteredScore);
+        }
+        if (filteredIdentity !== undefined) {
+          parameters.identity.values.push(filteredIdentity);
+        }
+        if (filteredEvalue !== undefined) {
+          parameters.evalue.values.push(filteredEvalue);
+        }
       }
-      if (identity !== undefined) {
-        results.identity.values.push(identity);
-      }
-      if (evalue !== undefined) {
-        results.evalue.values.push(evalue);
-      }
-    });
+    );
   });
-
-  return results;
+  return parameters;
 };

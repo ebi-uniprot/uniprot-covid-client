@@ -15,16 +15,14 @@ const facetsAsArray = (facetString: string): SelectedFacet[] => {
     };
   });
 };
-
-export const getParamsFromURL = (
-  url: string
-): {
+export type URLResultParams = {
   query: string;
   selectedFacets: SelectedFacet[];
   sortColumn: SortableColumn;
   sortDirection: SortDirection;
   activeFacet?: string;
-} => {
+};
+export const getParamsFromURL = (url: string): URLResultParams => {
   const urlParams = queryStringModule.parse(url);
   const { query, facets, sort, dir, activeFacet } = urlParams;
 
