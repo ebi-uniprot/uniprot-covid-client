@@ -169,7 +169,7 @@ type HitDatapoint = {
   [BlastFacet.EVALUE]: number;
 };
 
-type ParsedBlastFacets = {
+export type ParsedBlastFacets = {
   [key: string]: [number, number];
 };
 
