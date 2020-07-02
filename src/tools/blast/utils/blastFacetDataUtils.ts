@@ -7,12 +7,12 @@ import { BlastResults, BlastFacets } from '../types/blastResults';
 
 export const isBlastValueWithinRange = (
   blastResultDatum,
-  selectedRanges,
+  rangeFilters,
   facet
 ) => {
   try {
     const value = blastResultDatum[facet];
-    const [min, max] = selectedRanges[facet];
+    const [min, max] = rangeFilters[facet];
     return min <= value && value <= max;
   } catch (e) {
     console.log('error:', e);
@@ -21,7 +21,7 @@ export const isBlastValueWithinRange = (
 
 export const filterBlastDatum = (
   blastResultDatum,
-  selectedRanges,
+  rangeFilters,
   activeFacet
 ) => {
   // All inactiveFacets (including user selected and not user selected) will need to have the intersection of all of the ranges applied (including the active).
@@ -29,20 +29,20 @@ export const filterBlastDatum = (
 
   // TODO check if the ranges aren't empty arrays
 
-  if (!selectedRanges || !Object.keys(selectedRanges).length) {
+  if (!rangeFilters || !Object.keys(rangeFilters).length) {
     return blastResultDatum;
   }
 
-  const inactiveRangedFacets = Object.keys(selectedRanges).filter(
+  const inactiveRangedFacets = Object.keys(rangeFilters).filter(
     (facet) => facet !== activeFacet
   );
 
   const includeActive = inactiveRangedFacets.every((facet) =>
-    isBlastValueWithinRange(blastResultDatum, selectedRanges, facet)
+    isBlastValueWithinRange(blastResultDatum, rangeFilters, facet)
   );
   const includeInactive =
     includeActive &&
-    isBlastValueWithinRange(blastResultDatum, selectedRanges, activeFacet);
+    isBlastValueWithinRange(blastResultDatum, rangeFilters, activeFacet);
 
   const result = {};
 
