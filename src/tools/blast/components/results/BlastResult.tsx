@@ -178,17 +178,17 @@ const BlastResult = () => {
   }, [location.search, blastData]);
 
   // BLAST results filtered by BLAST facets (ie score, e-value, identity)
-  const filteredBlastData = filterBlastDataForResults(
-    blastData,
-    urlParams.selectedFacets
-  );
+  const filteredBlastData =
+    blastData && filterBlastDataForResults(blastData, urlParams.selectedFacets);
 
   // corresponding data from API
   const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
-    useMemo(() => getEnrichApiUrl(filteredBlastData), [filteredBlastData])
+    useMemo(() => getEnrichApiUrl(filteredBlastData || undefined), [
+      filteredBlastData,
+    ])
   );
 
-  const data = useMemo(() => enrich(filteredBlastData, apiData), [
+  const data = useMemo(() => enrich(filteredBlastData || undefined, apiData), [
     filteredBlastData,
     apiData,
   ]);
