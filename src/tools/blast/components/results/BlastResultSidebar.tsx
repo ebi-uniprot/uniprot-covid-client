@@ -3,9 +3,7 @@ import { Loader } from 'franklin-sites';
 import ResultsFacets from '../../../../uniprotkb/components/results/ResultsFacets';
 import { EntryType } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { Facet, FacetValue } from '../../../../uniprotkb/types/responseTypes';
-import BlastResultsParametersFacets, {
-  BlastParamFacet,
-} from './BlastResultsParametersFacets';
+import BlastResultsParametersFacets from './BlastResultsParametersFacets';
 import { EnrichedData } from './BlastResult';
 
 const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
@@ -61,12 +59,11 @@ const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
 type Props = {
   loading: boolean;
   data?: EnrichedData | null;
-  histogramBinSize: number;
   histogramSettings: any;
 };
 
 const BlastResultSidebar: FC<Props> = (props) => {
-  const { loading, data, histogramBinSize: binSize, histogramSettings } = props;
+  const { loading, data, histogramSettings } = props;
   const facets = useMemo(() => getFacetsFromData(data), [data]);
 
   if (loading) {
@@ -76,10 +73,7 @@ const BlastResultSidebar: FC<Props> = (props) => {
   return (
     <Fragment>
       <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets
-        params={histogramSettings}
-        binSize={binSize}
-      />
+      <BlastResultsParametersFacets params={histogramSettings} />
     </Fragment>
   );
 };
