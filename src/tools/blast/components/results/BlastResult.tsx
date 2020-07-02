@@ -2,7 +2,6 @@ import React, { useMemo, useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
-import { identity } from 'lodash-es';
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import BlastResultSidebar from './BlastResultSidebar';
@@ -16,12 +15,9 @@ import {
   getLocationObjForParams,
   getParamsFromURL,
 } from '../../../../uniprotkb/utils/resultsUtils';
-import {
-  getSmallerMultiple,
-  getLargerMultiple,
-} from '../../../../shared/utils/utils';
 import { SelectedFacet } from '../../../../uniprotkb/types/resultsTypes';
 import { BlastParamFacet } from './BlastResultsParametersFacets';
+import { getBlastParametersFacetsFromData } from '../../utils/blastFacetDataUtils';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -29,7 +25,7 @@ import { Location, LocationToPath } from '../../../../app/config/urls';
 import blastUrls from '../../config/blastUrls';
 import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
-import { BlastResults, BlastHit } from '../../types/blastResults';
+import { BlastResults, BlastHit, BlastFacets } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
@@ -107,12 +103,6 @@ const useParamsData = (
 
   return paramsData;
 };
-
-enum BlastFacets {
-  SCORE = 'score',
-  IDENTITY = 'identity',
-  EVALUE = 'evalue',
-}
 
 const blastFacetToKeyName = {
   [BlastFacets.SCORE]: 'hsp_score',
@@ -194,180 +184,6 @@ const enrich = (
 
 const histogramBinSize = 100;
 
-const isBlastValueWithinRange = (blastResultDatum, selectedRanges, facet) => {
-  try {
-    const value = blastResultDatum[facet];
-    const [min, max] = selectedRanges[facet];
-    return min <= value && value <= max;
-  } catch (e) {
-    console.log('error:', e);
-  }
-};
-
-const filterBlastDatum = (blastResultDatum, selectedRanges, activeFacet) => {
-  // All inactiveFacets (including user selected and not user selected) will need to have the intersection of all of the ranges applied (including the active).
-  // The activeFacet has only has the inactiveFacets intersection applied.
-
-  // TODO check if the ranges aren't empty arrays
-
-  if (!selectedRanges || !Object.keys(selectedRanges).length) {
-    return blastResultDatum;
-  }
-
-  const inactiveRangedFacets = Object.keys(selectedRanges).filter(
-    (facet) => facet !== activeFacet
-  );
-
-  const includeActive = inactiveRangedFacets.every((facet) =>
-    isBlastValueWithinRange(blastResultDatum, selectedRanges, facet)
-  );
-  const includeInactive =
-    includeActive &&
-    isBlastValueWithinRange(blastResultDatum, selectedRanges, activeFacet);
-
-  const result = {};
-
-  const allInactiveFacets = Object.values(BlastFacets).filter(
-    (facet) => facet !== activeFacet
-  );
-
-  allInactiveFacets.forEach((facet) => {
-    if (includeInactive) {
-      result[facet] = blastResultDatum[facet];
-    }
-  });
-
-  if (includeActive) {
-    result[activeFacet] = blastResultDatum[activeFacet];
-  }
-
-  return result;
-};
-
-// const t = filterBlastDatum(
-//   { score: 300, evalue: 0, identity: 80 },
-//   { score: [400, 600], identity: [70, 90] },
-//   'score'
-// );
-
-// console.log("blast test:", t);
-
-// const row = {
-//   score: 100,
-//   identity: 10,
-//   evalue: 1,
-// };
-
-// const test_1 = filterBlastDatum(row);
-
-// console.log("test 1:", test_1);
-
-// const test_2 = filterBlastDatum(row,
-//   { score: [85, 150]},
-//   'score'
-// );
-
-// console.log("test 2:", test_2);
-
-// const test_3 = filterBlastDatum(row,
-//   { score: [200, 300]},
-//   'score'
-// );
-
-// console.log("test 3:", test_3);
-
-// const test_4 = filterBlastDatum(row,
-//   { score: [50, 150], identity: [20, 30]},
-//   'score'
-// );
-
-// console.log("test 4:", test_4);
-
-// const test_5 = filterBlastDatum(row,
-//   { score: [200, 300], identity: [5, 20]},
-//   'identity'
-// );
-
-// console.log("test 5:", test_5);
-
-// const test_6 = filterBlastDatum(row,
-//   { score: [10, 200], identity: [95, 100]},
-//   'identity'
-// );
-
-// console.log("test 6:", test_6);
-
-const getBlastParametersFacetsFromData = (
-  facets: SelectedFacet[],
-  activeFacet: string,
-  data?: BlastResults | null
-) => {
-  const results = {
-    score: {
-      values: [],
-      min: undefined,
-      max: undefined,
-    },
-    identity: {
-      values: [],
-      min: undefined,
-      max: undefined,
-    },
-    evalue: {
-      values: [],
-      min: undefined,
-      max: undefined,
-    },
-  };
-
-  if (!data) {
-    return results;
-  }
-
-  const parsedFacets = Object.fromEntries(
-    facets.map(({ name, value }) => {
-      const [min, max] = value.split('-').map((x) => parseInt(x, 10));
-      return [name, [min, max]];
-    })
-  );
-
-  data.hits.forEach(({ hit_hsps }) => {
-    hit_hsps.forEach(({ hsp_score, hsp_identity, hsp_expect }) => {
-      const datum = {
-        score: hsp_score,
-        identity: hsp_identity,
-        evalue: hsp_expect,
-      };
-
-      const { score, identity, evalue } = filterBlastDatum(
-        datum,
-        parsedFacets,
-        activeFacet
-      );
-
-      // We would like to include 0 values, hence, check for 'undefined' explicitly
-      if (score !== undefined) {
-        results.score.values.push(score);
-      }
-      if (identity !== undefined) {
-        results.identity.values.push(identity);
-      }
-      if (evalue !== undefined) {
-        results.evalue.values.push(evalue);
-      }
-    });
-  });
-  for (const [key, { values }] of Object.entries(results)) {
-    results[key].min = getSmallerMultiple(
-      Math.min(...values),
-      histogramBinSize
-    );
-    results[key].max = getLargerMultiple(Math.max(...values), histogramBinSize);
-  }
-  console.log('results:', results);
-  return results;
-};
-
 const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;
@@ -433,7 +249,8 @@ const BlastResult = () => {
   const histogramSettings = getBlastParametersFacetsFromData(
     urlParams.selectedFacets,
     urlParams.activeFacet,
-    blastData
+    blastData,
+    histogramBinSize
   );
 
   if (blastLoading) {
