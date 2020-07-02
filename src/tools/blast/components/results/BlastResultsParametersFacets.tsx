@@ -74,7 +74,8 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
         query,
         [...selectedFacets.concat(facet)],
         sortColumn,
-        sortDirection
+        sortDirection,
+        facetName
       )
     );
   };

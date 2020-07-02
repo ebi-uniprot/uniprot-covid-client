@@ -339,17 +339,20 @@ const getBlastParametersFacetsFromData = (
         evalue: hsp_expect,
       };
 
-      const { score, identity, evalue } = filterBlastDatum(datum, parsedFacets);
-      console.log('---> score, identity, evalue:', score, identity, evalue);
-      if (score) {
+      const { score, identity, evalue } = filterBlastDatum(
+        datum,
+        parsedFacets,
+        activeFacet
+      );
+
+      // We would like to include 0 values, hence, check for 'undefined' explicitly
+      if (score !== undefined) {
         results.score.values.push(score);
       }
-
-      if (identity) {
+      if (identity !== undefined) {
         results.identity.values.push(identity);
       }
-
-      if (evalue) {
+      if (evalue !== undefined) {
         results.evalue.values.push(evalue);
       }
     });
@@ -427,14 +430,10 @@ const BlastResult = () => {
     );
   };
 
-  const histogramSettings = useMemo(
-    () =>
-      getBlastParametersFacetsFromData(
-        urlParams.selectedFacets,
-        urlParams.activeFacet,
-        blastData
-      ),
-    [blastData]
+  const histogramSettings = getBlastParametersFacetsFromData(
+    urlParams.selectedFacets,
+    urlParams.activeFacet,
+    blastData
   );
 
   if (blastLoading) {
