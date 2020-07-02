@@ -11,12 +11,7 @@ import BlastResultsButtons from './BlastResultsButtons';
 import useDataApi, {
   UseDataAPIState,
 } from '../../../../shared/hooks/useDataApi';
-import {
-  getLocationObjForParams,
-  getParamsFromURL,
-} from '../../../../uniprotkb/utils/resultsUtils';
-import { SelectedFacet } from '../../../../uniprotkb/types/resultsTypes';
-import { BlastParamFacet } from './BlastResultsParametersFacets';
+import { getParamsFromURL } from '../../../../uniprotkb/utils/resultsUtils';
 import {
   getFacetParametersFromBlastHits,
   filterBlastDataForResults,
@@ -108,7 +103,7 @@ const useParamsData = (
 };
 
 const getEnrichApiUrl = (blastData?: BlastResults) => {
-  if (!blastData || blastData.length === 0) {
+  if (!blastData || blastData.hits.length === 0) {
     return null;
   }
 
@@ -213,8 +208,7 @@ const BlastResult = () => {
   const histogramSettings = getFacetParametersFromBlastHits(
     urlParams.selectedFacets,
     urlParams.activeFacet,
-    blastData && blastData.hits,
-    histogramBinSize
+    blastData && blastData.hits
   );
 
   if (blastLoading) {
@@ -231,7 +225,6 @@ const BlastResult = () => {
       loading={apiLoading}
       data={data}
       histogramSettings={histogramSettings}
-      histogramBinSize={histogramBinSize}
     />
   );
 
@@ -270,11 +263,13 @@ const BlastResult = () => {
             selectedEntries={selectedEntries}
           />
           <Suspense fallback={<Loader />}>
-            <BlastResultTable
-              data={data}
-              selectedEntries={selectedEntries}
-              handleSelectedEntries={handleSelectedEntries}
-            />
+            {data && (
+              <BlastResultTable
+                data={data}
+                selectedEntries={selectedEntries}
+                handleSelectedEntries={handleSelectedEntries}
+              />
+            )}
           </Suspense>
         </Tab>
         <Tab

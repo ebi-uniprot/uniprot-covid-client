@@ -116,8 +116,7 @@ const setMinMaxValues = (results, facet, value) => {
 export const getFacetParametersFromBlastHits = (
   facets: SelectedFacet[],
   activeFacet: string,
-  hits?: BlastHit[] | null,
-  histogramBinSize: number
+  hits?: BlastHit[] | null
 ) => {
   const results = {
     score: {
@@ -178,6 +177,6 @@ export const getFacetParametersFromBlastHits = (
       }
     });
   });
-  console.log('results:', results);
+
   return results;
 };

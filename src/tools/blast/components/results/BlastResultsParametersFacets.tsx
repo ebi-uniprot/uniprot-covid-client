@@ -7,14 +7,26 @@ import {
 } from '../../../../uniprotkb/utils/resultsUtils';
 
 export type BlastParamFacet = {
-  score: number[];
-  identity: number[];
-  evalue: number[];
+  score: {
+    values: number[];
+    min: number | undefined;
+    max: number | undefined;
+  };
+  identity: {
+    values: number[];
+    min: number | undefined;
+    max: number | undefined;
+  };
+  evalue: {
+    values: number[];
+    min: number | undefined;
+    max: number | undefined;
+  };
 };
 
-type Props = { params: BlastParamFacet; binSize: number };
+type Props = { params: BlastParamFacet };
 
-const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
+const BlastResultsParametersFacets: FC<Props> = ({ params }) => {
   const { score, identity, evalue } = params;
 
   const {
@@ -99,15 +111,18 @@ const BlastResultsParametersFacets: FC<Props> = ({ params, binSize }) => {
     },
   };
 
-  for (const [facet, values] of Object.entries(selectedMinMaxValues)) {
+  Object.keys(selectedMinMaxValues).forEach((facet) => {
     const index = findFacet(facet);
 
     if (index > -1) {
       const [min, max] = selectedFacets[index].value.split('-');
 
-      selectedMinMaxValues[facet] = { min, max };
+      selectedMinMaxValues[facet as 'score' | 'identity' | 'evalue'] = {
+        min: Number(min),
+        max: Number(max),
+      };
     }
-  }
+  });
 
   return (
     <div className="blast-parameters-facet">
