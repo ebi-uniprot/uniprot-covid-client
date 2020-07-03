@@ -5,30 +5,13 @@ import {
   getLocationObjForParams,
   getParamsFromURL,
 } from '../../../../uniprotkb/utils/resultsUtils';
+import { BlastHitFacetParameters } from '../../utils/blastFacetDataUtils';
 
-export type BlastParamFacet = {
-  score: {
-    values: number[];
-    min: number | undefined;
-    max: number | undefined;
-  };
-  identity: {
-    values: number[];
-    min: number | undefined;
-    max: number | undefined;
-  };
-  evalue: {
-    values: number[];
-    min: number | undefined;
-    max: number | undefined;
-  };
-};
-
-type Props = { params: BlastParamFacet };
-
-const BlastResultsParametersFacets: FC<Props> = ({ params }) => {
-  const { score, identity, evalue } = params;
-
+const BlastResultsParametersFacets: FC<BlastHitFacetParameters> = ({
+  score,
+  identity,
+  evalue,
+}) => {
   const {
     push,
     location: { search: queryParamFromUrl, pathname },

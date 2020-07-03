@@ -5,6 +5,7 @@ import { EntryType } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { Facet, FacetValue } from '../../../../uniprotkb/types/responseTypes';
 import BlastResultsParametersFacets from './BlastResultsParametersFacets';
 import { EnrichedData } from './BlastResult';
+import { BlastHitFacetParameters } from '../../utils/blastFacetDataUtils';
 
 const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
   const facets: Facet[] = [];
@@ -56,24 +57,27 @@ const getFacetsFromData = (data?: EnrichedData | null): Facet[] => {
   return facets;
 };
 
-type Props = {
+type BlastResultSidebarProps = {
   loading: boolean;
   data?: EnrichedData | null;
-  histogramSettings: any;
+  histogramSettings?: BlastHitFacetParameters;
 };
 
-const BlastResultSidebar: FC<Props> = (props) => {
-  const { loading, data, histogramSettings } = props;
+const BlastResultSidebar: FC<BlastResultSidebarProps> = ({
+  loading,
+  data,
+  histogramSettings,
+}) => {
   const facets = useMemo(() => getFacetsFromData(data), [data]);
 
-  if (loading) {
+  if (loading || !histogramSettings) {
     return <Loader />;
   }
 
   return (
     <Fragment>
       <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets params={histogramSettings} />
+      <BlastResultsParametersFacets {...histogramSettings} />
     </Fragment>
   );
 };

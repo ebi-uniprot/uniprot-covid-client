@@ -155,7 +155,7 @@ const setMinMaxValues = (
   }
 };
 
-type BlastHitFacetParameters = {
+export type BlastHitFacetParameters = {
   [facet in BlastFacet]: {
     values: number[];
     min?: number;

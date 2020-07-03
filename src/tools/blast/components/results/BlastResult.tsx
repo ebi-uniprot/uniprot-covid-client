@@ -11,7 +11,10 @@ import BlastResultsButtons from './BlastResultsButtons';
 import useDataApi, {
   UseDataAPIState,
 } from '../../../../shared/hooks/useDataApi';
-import { getParamsFromURL } from '../../../../uniprotkb/utils/resultsUtils';
+import {
+  getParamsFromURL,
+  URLResultParams,
+} from '../../../../uniprotkb/utils/resultsUtils';
 import {
   getFacetParametersFromBlastHits,
   filterBlastDataForResults,
@@ -23,7 +26,7 @@ import { Location, LocationToPath } from '../../../../app/config/urls';
 import blastUrls from '../../config/blastUrls';
 import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
-import { BlastResults, BlastHit } from '../../types/blastResults';
+import { BlastResults, BlastHit, BlastFacet } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
@@ -149,7 +152,7 @@ const BlastResult = () => {
   const location = useLocation();
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
-  const [urlParams, setUrlParams] = useState<any>({});
+  const [urlParams, setUrlParams] = useState<URLResultParams>();
 
   // data from blast
   const {
@@ -179,7 +182,9 @@ const BlastResult = () => {
 
   // BLAST results filtered by BLAST facets (ie score, e-value, identity)
   const filteredBlastData =
-    blastData && filterBlastDataForResults(blastData, urlParams.selectedFacets);
+    blastData &&
+    urlParams &&
+    filterBlastDataForResults(blastData, urlParams.selectedFacets);
 
   // corresponding data from API
   const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
@@ -205,11 +210,13 @@ const BlastResult = () => {
     );
   };
 
-  const histogramSettings = getFacetParametersFromBlastHits(
-    urlParams.selectedFacets,
-    urlParams.activeFacet,
-    blastData && blastData.hits
-  );
+  const histogramSettings =
+    urlParams &&
+    getFacetParametersFromBlastHits(
+      urlParams.selectedFacets,
+      urlParams.activeFacet as BlastFacet,
+      blastData && blastData.hits
+    );
 
   if (blastLoading) {
     return <Loader />;
