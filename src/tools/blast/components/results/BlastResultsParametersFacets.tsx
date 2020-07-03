@@ -129,7 +129,9 @@ const BlastResultsParametersFacets: FC<{
                       max={max}
                       min={min}
                       nBins={30}
-                      onChange={(e: number[]) => onBlastParamChange('score', e)}
+                      onChange={(e: number[]) =>
+                        onBlastParamChange(blastFacet, e)
+                      }
                       selectedRange={[
                         selectedMinMaxValues[blastFacet as BlastFacet].min,
                         selectedMinMaxValues[blastFacet as BlastFacet].max,
