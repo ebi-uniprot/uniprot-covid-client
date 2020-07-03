@@ -56,13 +56,13 @@ exports[`Entry - External Links view should render 1`] = `
             Enzyme and pathway databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -71,7 +71,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -109,13 +109,13 @@ exports[`Entry - External Links view should render 1`] = `
             Family and domain databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -124,7 +124,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -161,7 +161,7 @@ exports[`Entry - External Links view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -170,7 +170,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -208,13 +208,13 @@ exports[`Entry - External Links view should render 1`] = `
             Genome annotation databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -223,7 +223,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -290,13 +290,13 @@ exports[`Entry - External Links view should render 1`] = `
             3D structure databases
           </h3>
           <div
-            class="info-list info-list--columns"
+            class="info-list info-list--columns "
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -305,7 +305,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -342,7 +342,7 @@ exports[`Entry - External Links view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__title"
+                class="info-list__item__title"
               >
                 <h5
                   class="bold"
@@ -351,7 +351,7 @@ exports[`Entry - External Links view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__content"
+                class="info-list__item__content"
               >
                 <ul
                   class="expandable-list no-bullet"

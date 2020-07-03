@@ -144,8 +144,6 @@ const enrich = (
   return output;
 };
 
-const histogramBinSize = 100;
-
 const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;

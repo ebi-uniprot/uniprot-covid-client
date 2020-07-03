@@ -12,13 +12,13 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
     class="text-block"
   />
   <div
-    class="info-list"
+    class="info-list "
   >
     <div
       class="info-list__item"
     >
       <div
-        class="info-list__title"
+        class="info-list__item__title"
       >
         <h5
           class="bold"
@@ -27,7 +27,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__content"
+        class="info-list__item__content"
       >
         <ul
           class="expandable-list no-bullet"
@@ -42,7 +42,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__title"
+        class="info-list__item__title"
       >
         <h5
           class="bold"
@@ -51,7 +51,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__content"
+        class="info-list__item__content"
       >
         Some description
       </div>
@@ -60,7 +60,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
       class="info-list__item"
     >
       <div
-        class="info-list__title"
+        class="info-list__item__title"
       >
         <h5
           class="bold"
@@ -69,7 +69,7 @@ exports[`DiseaseInvolvement should render DiseaseInvolvement 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__content"
+        class="info-list__item__content"
       >
         (
         <a

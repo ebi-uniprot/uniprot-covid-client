@@ -150,12 +150,6 @@ const BlastResultTable: FC<{
       ellipsis: true,
     },
     {
-      label: 'Protein',
-      name: 'protein_name',
-      render: ({ hit_uni_de }: BlastHit) => hit_uni_de,
-      ellipsis: true,
-    },
-    {
       label: 'Organism',
       name: 'organism',
       render: ({ hit_uni_ox, hit_uni_os }: BlastHit) => (

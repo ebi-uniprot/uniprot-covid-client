@@ -6,13 +6,13 @@ exports[`Keyword should render Keywords for section 1`] = `
     Keywords
   </h3>
   <div
-    class="info-list"
+    class="info-list "
   >
     <div
       class="info-list__item"
     >
       <div
-        class="info-list__title"
+        class="info-list__item__title"
       >
         <h5
           class="bold"
@@ -21,7 +21,7 @@ exports[`Keyword should render Keywords for section 1`] = `
         </h5>
       </div>
       <div
-        class="info-list__content"
+        class="info-list__item__content"
       />
     </div>
   </div>

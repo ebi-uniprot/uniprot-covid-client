@@ -62,7 +62,6 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               class="data-table__cell "
             >
               <input
-                aria-label="U6MKN0"
                 type="checkbox"
               />
             </td>
@@ -120,20 +119,17 @@ Hit Length: 486"
                       class="data-table__blast-hsp__blast-params"
                     >
                       <span
-                        class="chip chip--compact"
-                        title="Identity"
+                        class="chip  "
                       >
                         7.1%
                       </span>
                       <span
-                        class="chip chip--compact"
-                        title="Score"
+                        class="chip  "
                       >
                         41.5874
                       </span>
                       <span
-                        class="chip chip--compact"
-                        title="e-value"
+                        class="chip  "
                       >
                         0.0048
                       </span>
