@@ -6,12 +6,17 @@ import {
   getParamsFromURL,
 } from '../../../../uniprotkb/utils/resultsUtils';
 import { BlastHitFacetParameters } from '../../utils/blastFacetDataUtils';
+import { BlastFacet } from '../../types/blastResults';
 
-const BlastResultsParametersFacets: FC<BlastHitFacetParameters> = ({
-  score,
-  identity,
-  evalue,
-}) => {
+const blastFacetToString = {
+  [BlastFacet.SCORE]: 'Score',
+  [BlastFacet.IDENTITY]: 'Identity',
+  [BlastFacet.EVALUE]: 'E-Value',
+};
+
+const BlastResultsParametersFacets: FC<{
+  parameters: BlastHitFacetParameters;
+}> = ({ parameters }) => {
   const {
     push,
     location: { search: queryParamFromUrl, pathname },
@@ -80,17 +85,17 @@ const BlastResultsParametersFacets: FC<BlastHitFacetParameters> = ({
   };
 
   const selectedMinMaxValues = {
-    score: {
-      min: score.min,
-      max: score.max,
+    [BlastFacet.SCORE]: {
+      min: parameters.score.min,
+      max: parameters.score.max,
     },
-    identity: {
-      min: identity.min,
-      max: identity.max,
+    [BlastFacet.IDENTITY]: {
+      min: parameters.identity.min,
+      max: parameters.identity.max,
     },
-    evalue: {
-      min: evalue.min,
-      max: evalue.max,
+    [BlastFacet.EVALUE]: {
+      min: parameters.evalue.min,
+      max: parameters.evalue.max,
     },
   };
 
@@ -100,7 +105,7 @@ const BlastResultsParametersFacets: FC<BlastHitFacetParameters> = ({
     if (index > -1) {
       const [min, max] = selectedFacets[index].value.split('-');
 
-      selectedMinMaxValues[facet as 'score' | 'identity' | 'evalue'] = {
+      selectedMinMaxValues[facet as BlastFacet] = {
         min: Number(min),
         max: Number(max),
       };
@@ -113,51 +118,27 @@ const BlastResultsParametersFacets: FC<BlastHitFacetParameters> = ({
         <li>
           <span className="facet-name">Blast parameters</span>
           <ul className="expandable-list no-bullet">
-            <li>
-              <span className="">Score</span>
-              <HistogramFilter
-                height={50}
-                max={score.max}
-                min={score.min}
-                nBins={30}
-                onChange={(e: number[]) => onBlastParamChange('score', e)}
-                selectedRange={[
-                  selectedMinMaxValues.score.min,
-                  selectedMinMaxValues.score.max,
-                ]}
-                values={score.values}
-              />
-            </li>
-            <li>
-              <span className="">Identity</span>
-              <HistogramFilter
-                height={50}
-                max={identity.max}
-                min={identity.min}
-                nBins={30}
-                onChange={(e: number[]) => onBlastParamChange('identity', e)}
-                selectedRange={[
-                  selectedMinMaxValues.identity.min,
-                  selectedMinMaxValues.identity.max,
-                ]}
-                values={identity.values}
-              />
-            </li>
-            <li>
-              <span className="">E-value</span>
-              <HistogramFilter
-                height={50}
-                max={evalue.max}
-                min={evalue.min}
-                nBins={30}
-                onChange={(e: number[]) => onBlastParamChange('evalue', e)}
-                selectedRange={[
-                  selectedMinMaxValues.evalue.min,
-                  selectedMinMaxValues.evalue.max,
-                ]}
-                values={evalue.values}
-              />
-            </li>
+            {Object.entries(parameters).map(
+              ([blastFacet, { min, max, values }]) =>
+                // If all values are the same then don't render the histogram
+                min !== max && (
+                  <li key={blastFacet}>
+                    <span>{blastFacetToString[blastFacet as BlastFacet]}</span>
+                    <HistogramFilter
+                      height={50}
+                      max={max}
+                      min={min}
+                      nBins={30}
+                      onChange={(e: number[]) => onBlastParamChange('score', e)}
+                      selectedRange={[
+                        selectedMinMaxValues[blastFacet as BlastFacet].min,
+                        selectedMinMaxValues[blastFacet as BlastFacet].max,
+                      ]}
+                      values={values}
+                    />
+                  </li>
+                )
+            )}
           </ul>
         </li>
       </ul>

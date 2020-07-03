@@ -77,7 +77,7 @@ const BlastResultSidebar: FC<BlastResultSidebarProps> = ({
   return (
     <Fragment>
       <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets {...histogramSettings} />
+      <BlastResultsParametersFacets parameters={histogramSettings} />
     </Fragment>
   );
 };
