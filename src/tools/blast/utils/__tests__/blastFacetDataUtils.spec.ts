@@ -3,7 +3,7 @@ import {
   ParsedBlastFacets,
   getFacetParametersFromBlastHits,
 } from '../blastFacetDataUtils';
-import { SelectedFacet } from '../../types/blastResults';
+import { SelectedFacet } from '../../../../uniprotkb/types/resultsTypes';
 import { BlastFacet } from '../../types/blastResults';
 
 describe('filterBlastHitForFacets', () => {
@@ -125,7 +125,7 @@ describe('getFacetParametersFromBlastHits', () => {
   it('should return all if no facets have been set', () => {
     const results = getFacetParametersFromBlastHits(
       selectedFacetsEmpty,
-      '',
+      undefined,
       blastHits
     );
 
@@ -135,7 +135,7 @@ describe('getFacetParametersFromBlastHits', () => {
   it('should return all values for active facet, regardless of facet value', () => {
     const results = getFacetParametersFromBlastHits(
       selectedFacetsOne,
-      'score',
+      BlastFacet.SCORE,
       blastHits
     );
 
@@ -161,7 +161,7 @@ describe('getFacetParametersFromBlastHits', () => {
   it('should return only in-range values, when facet is not active', () => {
     const results = getFacetParametersFromBlastHits(
       selectedFacetsTwo,
-      'identity',
+      BlastFacet.IDENTITY,
       blastHits
     );
 
