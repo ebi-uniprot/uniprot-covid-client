@@ -183,7 +183,7 @@ describe('getFacetParametersFromBlastHits', () => {
 });
 
 describe('filterBlastDataForResults', () => {
-  it('should', () => {
+  it('should filter hits by score facet', () => {
     const facet = [
       {
         name: 'score',
