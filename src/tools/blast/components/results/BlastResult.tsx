@@ -273,13 +273,12 @@ const BlastResult = () => {
         >
           {actionBar}
           <Suspense fallback={<Loader />}>
-            {data && (
-              <BlastResultTable
-                data={data}
-                selectedEntries={selectedEntries}
-                handleSelectedEntries={handleSelectedEntries}
-              />
-            )}
+            <BlastResultTable
+              loading={apiLoading}
+              data={data}
+              selectedEntries={selectedEntries}
+              handleSelectedEntries={handleSelectedEntries}
+            />
           </Suspense>
         </Tab>
         <Tab
