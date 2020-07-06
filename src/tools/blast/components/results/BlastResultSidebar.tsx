@@ -1,4 +1,4 @@
-import React, { FC, useMemo, Fragment } from 'react';
+import React, { FC, useMemo, useRef, Fragment } from 'react';
 import { Loader } from 'franklin-sites';
 import ResultsFacets from '../../../../uniprotkb/components/results/ResultsFacets';
 import { EntryType } from '../../../../uniprotkb/adapters/uniProtkbConverter';
@@ -68,16 +68,26 @@ const BlastResultSidebar: FC<BlastResultSidebarProps> = ({
   data,
   histogramSettings,
 }) => {
+  const staleFacets = useRef<Facet[]>([]);
   const facets = useMemo(() => getFacetsFromData(data), [data]);
 
-  if (loading || !histogramSettings) {
+  if (facets.length) {
+    staleFacets.current = facets;
+  }
+
+  if ((!staleFacets.current.length && loading) || !histogramSettings) {
     return <Loader />;
   }
 
+  const isStale = staleFacets.current !== facets;
+
   return (
     <Fragment>
-      <ResultsFacets facets={facets} />
-      <BlastResultsParametersFacets parameters={histogramSettings} />
+      <ResultsFacets facets={staleFacets.current} isStale={isStale} />
+      <BlastResultsParametersFacets
+        parameters={histogramSettings}
+        isStale={isStale}
+      />
     </Fragment>
   );
 };

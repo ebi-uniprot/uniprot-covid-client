@@ -8,6 +8,8 @@ import {
 import { BlastHitFacetParameters } from '../../utils/blastFacetDataUtils';
 import { BlastFacet } from '../../types/blastResults';
 
+import './styles/results-view.scss';
+
 const blastFacetToString = {
   [BlastFacet.SCORE]: 'Score',
   [BlastFacet.IDENTITY]: 'Identity',
@@ -16,7 +18,8 @@ const blastFacetToString = {
 
 const BlastResultsParametersFacets: FC<{
   parameters: BlastHitFacetParameters;
-}> = ({ parameters }) => {
+  isStale: boolean;
+}> = ({ parameters, isStale }) => {
   const {
     push,
     location: { search: queryParamFromUrl, pathname },
@@ -113,7 +116,7 @@ const BlastResultsParametersFacets: FC<{
   });
 
   return (
-    <div className="blast-parameters-facet">
+    <div className={`blast-parameters-facet${isStale ? ' is-stale' : ''}`}>
       <ul className="no-bullet">
         <li>
           <span className="facet-name">Blast parameters</span>
