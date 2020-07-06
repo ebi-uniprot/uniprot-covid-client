@@ -119,7 +119,7 @@ const BlastSummaryHsps: FC<{
 };
 
 const BlastResultTable: FC<{
-  data?: BlastResults;
+  data: BlastResults | null;
   selectedEntries: string[];
   handleSelectedEntries: (rowId: string) => void;
   loading: boolean;
