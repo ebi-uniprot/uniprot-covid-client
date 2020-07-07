@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 import { ViewMode } from '../../state/resultsInitialState';
 
-import SidePanel from '../../../shared/components/layouts/SidePanel';
+import SlidingPanel from '../../../shared/components/layouts/SlidingPanel';
 import BlastButton from '../../../shared/components/action-buttons/Blast';
 import AlignButton from '../../../shared/components/action-buttons/Align';
 import AddToBasketButton from '../../../shared/components/action-buttons/AddToBasket';
@@ -47,7 +47,7 @@ const ResultsButtons: FC<{
     <>
       {displayDownloadPanel && (
         <Suspense fallback>
-          <SidePanel>
+          <SlidingPanel position="right">
             <DownloadComponent
               query={query}
               selectedFacets={selectedFacets}
@@ -57,7 +57,7 @@ const ResultsButtons: FC<{
               totalNumberResults={total}
               onClose={() => setDisplayDownloadPanel(false)}
             />
-          </SidePanel>
+          </SlidingPanel>
         </Suspense>
       )}
       <div className="button-group">
