@@ -43,7 +43,7 @@ const AlignButton: FC<AlignButtonProps> = ({ selectedEntries }) => {
       );
 
       history.push(LocationToPath[Location.Align], {
-        parameters: { sequence: sequences.join('\n') },
+        parameters: { sequence: sequences.join('\n\n') },
       });
     } catch (err) {
       setLoading(false);
