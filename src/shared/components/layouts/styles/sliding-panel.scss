@@ -3,18 +3,13 @@
 @import '../../../../../node_modules/franklin-sites/src/styles/colours';
 @import '../../../../../node_modules/franklin-sites/src/styles/mixins';
 
-.side-panel {
+.sliding-panel {
   @include box-shadow(0.125rem);
   background-color: $colour-sky-white;
   border-radius: 0.2rem;
   padding: 0 $global-padding;
-  height: 100vh;
-  width: 40vw;
   position: absolute;
-  right: 0;
-  top: 0;
   z-index: $z-index-high;
-  overflow-y: auto;
 
   &__button-row {
     position: sticky;
@@ -23,5 +18,37 @@
     padding: $global-padding/2 0;
     background-color: $colour-sky-white;
     bottom: 0;
+  }
+
+  &--top,
+  &--bottom {
+    width: 100vw;
+    height: 40vh;
+    left: 0;
+    overflow-y: auto;
+  }
+
+  &--top {
+    top: 0;
+  }
+
+  &--bottom {
+    bottom: 0;
+  }
+
+  &--left,
+  &--right {
+    height: 100vh;
+    width: 40vw;
+    top: 0;
+    overflow-y: auto;
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
   }
 }

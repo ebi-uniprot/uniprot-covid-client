@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { sleep } from 'timing-functions';
 import { DownloadIcon, ReSubmitIcon } from 'franklin-sites';
 
-import SidePanel from '../../../../shared/components/layouts/SidePanel';
+import SlidingPanel from '../../../../shared/components/layouts/SlidingPanel';
 import BlastButton from '../../../../shared/components/action-buttons/Blast';
 import AlignButton from '../../../../shared/components/action-buttons/Align';
 import AddToBasketButton from '../../../../shared/components/action-buttons/AddToBasket';
@@ -114,14 +114,14 @@ const BlastResultsButtons: FC<BlastResultsButtonsProps> = ({
     <>
       {displayDownloadPanel && (
         <Suspense fallback>
-          <SidePanel>
+          <SlidingPanel position="right">
             <BlastResultDownload
               id={jobId}
               onToggleDisplay={() =>
                 setDisplayDownloadPanel(!displayDownloadPanel)
               }
             />
-          </SidePanel>
+          </SlidingPanel>
         </Suspense>
       )}
       <div className="button-group">
