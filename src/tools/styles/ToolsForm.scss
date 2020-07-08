@@ -23,6 +23,7 @@
   &__buttons {
     pointer-events: initial;
     justify-content: flex-end;
+    flex: 1; // align right
   }
 }
 
