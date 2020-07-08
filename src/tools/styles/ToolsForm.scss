@@ -18,12 +18,12 @@
     pointer-events: none;
     position: sticky;
     bottom: 0;
+    justify-content: flex-end;
   }
 
   &__buttons {
     pointer-events: initial;
     justify-content: flex-end;
-    flex: 1; // align right
   }
 }
 
