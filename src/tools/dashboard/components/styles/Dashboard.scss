@@ -51,6 +51,10 @@
       width: 25ch;
       display: flex;
 
+      & label {
+        display: inline-flex;
+      }
+
       & input {
         background: transparent;
         box-shadow: none;
@@ -85,6 +89,7 @@
 
     &__actions {
       grid-area: actions;
+      align-self: start;
       justify-self: end;
     }
 
