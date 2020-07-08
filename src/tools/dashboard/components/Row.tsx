@@ -96,9 +96,10 @@ const Time: FC<TimeProps> = ({ children }) => {
 
 interface NiceStatusProps {
   job: Job;
+  jobLink?: string;
 }
 
-const NiceStatus: FC<NiceStatusProps> = ({ job }) => {
+const NiceStatus: FC<NiceStatusProps> = ({ job, jobLink }) => {
   switch (job.status) {
     case Status.CREATED:
     case Status.RUNNING:
@@ -129,18 +130,19 @@ const NiceStatus: FC<NiceStatusProps> = ({ job }) => {
     case Status.NOT_FOUND:
       return <>Job not found on the server</>;
     case Status.FINISHED: {
+      const link = jobLink ? <Link to={jobLink}>Successful</Link> : null;
       if (
         // not a blast job, or
         !('hits' in job.data && 'hits' in job.parameters) ||
         // same number of hits than queried
         job.data.hits === job.parameters.hits
       ) {
-        return <>Successful</>;
+        return link;
       }
       const hitText = `hit${job.data.hits === 1 ? '' : 's'}`;
       return (
         <>
-          Successful{' '}
+          {link}{' '}
           <span
             title={`${job.data.hits} ${hitText} results found instead of the requested ${job.parameters.hits}`}
           >
@@ -331,14 +333,13 @@ const Row: FC<RowProps> = memo(({ job, hasExpired }) => {
         )}
       </span>
       <span className="dashboard__body__status">
-        <NiceStatus job={job} />
+        <NiceStatus job={job} jobLink={jobLink} />
       </span>
       <span className="dashboard__body__actions">
         <Actions job={job} onDelete={handleDelete} />
       </span>
       <span className="dashboard__body__id">
-        {'remoteID' in job &&
-          (jobLink ? <Link to={jobLink}>{job.remoteID}</Link> : job.remoteID)}
+        {'remoteID' in job && job.remoteID}
       </span>
     </Card>
   );

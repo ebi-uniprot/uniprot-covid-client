@@ -27,11 +27,15 @@ const EXPIRED_TIME = 1000 * 60 * 60 * 24 * 7; // 1 week
 const sortNewestFirst = (a: Job, b: Job) => b.timeCreated - a.timeCreated;
 
 const Dashboard = () => {
-  const jobs = useSelector<RootState, Job[]>((state) =>
-    Object.values(state.tools)
-  ).sort(sortNewestFirst);
+  const [activeJobs, expiredJobs] = useSelector<RootState, [Job[], Job[]]>(
+    (state) => {
+      const jobs = Array.from(Object.values(state.tools)).sort(sortNewestFirst);
+      const now = Date.now();
+      return partition(jobs, (job) => now - job.timeCreated < EXPIRED_TIME);
+    }
+  );
 
-  if (!jobs.length) {
+  if (!(activeJobs.length || expiredJobs.length)) {
     const noResultsSubtitle = (
       <div>
         Try using <Link to={LocationToPath[Location.Blast]}>BLAST</Link>,{' '}
@@ -54,12 +58,6 @@ const Dashboard = () => {
     );
   }
 
-  const now = Date.now();
-  const [activeJobs, expiredJobs] = partition(
-    jobs,
-    (job) => now - job.timeCreated < EXPIRED_TIME
-  );
-
   return (
     <>
       <PageIntro title="Tool results" />
@@ -72,8 +70,8 @@ const Dashboard = () => {
       <div className="dashboard">
         <div className="dashboard__header">
           <Card>
-            <span>Name</span>
             <span>Job type</span>
+            <span>Name</span>
             <span>Created</span>
             <span>Status</span>
           </Card>

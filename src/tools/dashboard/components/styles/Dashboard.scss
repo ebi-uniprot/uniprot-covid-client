@@ -5,7 +5,7 @@
     font-weight: bold;
     display: grid;
     /* this needs to be the same as below to keep visual alignment */
-    grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+    grid-template-columns: 10ch 27ch 18ch 20ch 1fr;
     grid-gap: 1ch;
   }
 
@@ -13,6 +13,18 @@
     & .card--failure {
       border: 1px solid $colour-failure;
       border-left: 0.25rem solid $colour-failure;
+
+      & * {
+        outline-color: $colour-failure;
+      }
+
+      & .dashboard__body__status {
+        color: $colour-failure;
+
+        & .dashboard__body__notify_message {
+          color: initial;
+        }
+      }
     }
 
     & .card--expired {
@@ -54,9 +66,9 @@
       user-select: none;
       display: grid;
       grid-template-areas:
-        'name type time status actions'
+        'type name time status actions'
         'id   id   time status actions';
-      grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+      grid-template-columns: 10ch 27ch 18ch 20ch 1fr;
       grid-gap: 1ch;
       grid-template-rows: 1fr 1fr;
     }
