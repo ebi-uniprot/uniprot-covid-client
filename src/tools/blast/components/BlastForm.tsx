@@ -392,21 +392,23 @@ const BlastForm = () => {
               />
             ))}
           </section>
-          <section className="tools-form-section__item">
-            <label>
-              Name your BLAST job
-              <input
-                name="title"
-                type="text"
-                autoComplete="off"
-                maxLength={22}
-                placeholder="my job title"
-                value={jobName.selected as string}
-                onChange={(e) =>
-                  setJobName({ ...jobName, selected: e.target.value })
-                }
-              />
-            </label>
+          <section className="tools-form-section">
+            <section className="tools-form-section__item">
+              <label>
+                Name your BLAST job
+                <input
+                  name="title"
+                  type="text"
+                  autoComplete="off"
+                  maxLength={22}
+                  placeholder="my job title"
+                  value={jobName.selected as string}
+                  onChange={(e) =>
+                    setJobName({ ...jobName, selected: e.target.value })
+                  }
+                />
+              </label>
+            </section>
           </section>
           <section className="tools-form-section tools-form-section__main_actions">
             <section className="button-group tools-form-section__buttons">
