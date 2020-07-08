@@ -1,4 +1,4 @@
-import { Store } from 'redux';
+import { AnyAction, MiddlewareAPI, Dispatch } from 'redux';
 
 import { formParametersToServerParameters } from '../adapters/parameters';
 
@@ -11,10 +11,14 @@ import { updateJob } from './toolsActions';
 import toolsURLs from '../config/urls';
 import postData from '../../uniprotkb/config/postData';
 
+import { RootState } from '../../app/state/rootInitialState';
 import { Status } from '../types/toolsStatuses';
 import { CreatedJob } from '../types/toolsJob';
 
-const getSubmitJob = ({ dispatch, getState }: Store) => async (
+const getSubmitJob = ({
+  dispatch,
+  getState,
+}: MiddlewareAPI<Dispatch<AnyAction>, RootState>) => async (
   job: CreatedJob
 ) => {
   try {
@@ -49,8 +53,7 @@ const getSubmitJob = ({ dispatch, getState }: Store) => async (
 
     const now = Date.now();
     dispatch(
-      updateJob({
-        ...currentStateOfJob,
+      updateJob(job.internalID, {
         status: Status.RUNNING,
         remoteID,
         timeSubmitted: now,
@@ -67,8 +70,7 @@ const getSubmitJob = ({ dispatch, getState }: Store) => async (
       return;
     }
     dispatch(
-      updateJob({
-        ...currentStateOfJob,
+      updateJob(job.internalID, {
         status: Status.FAILURE,
         timeLastUpdate: Date.now(),
         errorDescription,
