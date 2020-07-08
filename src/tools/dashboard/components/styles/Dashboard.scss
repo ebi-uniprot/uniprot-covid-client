@@ -64,6 +64,10 @@
         margin: 0;
         overflow: scroll;
         flex: 1;
+
+        &:not(:focus) {
+          border: solid 1px transparent;
+        }
       }
 
       & svg {
