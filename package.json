@@ -85,6 +85,7 @@
     "protvista-datatable": "2.12.0",
     "protvista-filter": "2.12.0",
     "protvista-manager": "2.12.0",
+    "protvista-msa": "^2.14.0",
     "protvista-navigation": "2.12.0",
     "protvista-sequence": "2.12.0",
     "protvista-structure": "2.12.0",
@@ -186,6 +187,7 @@
     "webpack-bundle-analyzer": "3.7.0",
     "webpack-cli": "3.3.11",
     "webpack-dev-server": "3.11.0",
-    "workbox-webpack-plugin": "5.1.3"
+    "workbox-webpack-plugin": "5.1.3",
+    "worker-loader": "^2.0.0"
   }
 }

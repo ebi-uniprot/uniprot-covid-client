@@ -12,7 +12,8 @@ const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   queryLength: number;
   hitLength: number;
-}> = ({ hsp, queryLength, hitLength }) => {
+  setHspDetail: (hsp: BlastHsp) => void;
+}> = ({ hsp, queryLength, hitLength, setHspDetail }) => {
   const {
     hsp_query_from,
     hsp_query_to,
@@ -66,6 +67,7 @@ const BlastSummaryTrack: FC<{
           height={10}
           ref={setTrackData}
           title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nHit Length: ${hitLength}`}
+          onClick={() => setHspDetail(hsp)}
         />
       </section>
       <span className="data-table__blast-hsp__blast-params">
@@ -81,7 +83,8 @@ const BlastSummaryHsps: FC<{
   hsps: BlastHsp[];
   queryLength: number;
   hitLength: number;
-}> = ({ hsps, queryLength, hitLength }) => {
+  setHspDetail: (hsp: BlastHsp) => void;
+}> = ({ hsps, queryLength, hitLength, setHspDetail }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -95,6 +98,7 @@ const BlastSummaryHsps: FC<{
           hsp={hspsOrderedByScore[0]}
           queryLength={queryLength}
           hitLength={hitLength}
+          setHspDetail={setHspDetail}
         />
         {hspsOrderedByScore.length > 1 &&
           !collapsed &&
@@ -106,6 +110,7 @@ const BlastSummaryHsps: FC<{
                 queryLength={queryLength}
                 hitLength={hitLength}
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+                setHspDetail={setHspDetail}
               />
             ))}
       </div>
@@ -122,8 +127,15 @@ const BlastResultTable: FC<{
   data: BlastResults | null;
   selectedEntries: string[];
   handleSelectedEntries: (rowId: string) => void;
+  setHspDetail: (hsp: BlastHsp) => void;
   loading: boolean;
-}> = ({ data, selectedEntries, handleSelectedEntries, loading }) => {
+}> = ({
+  data,
+  selectedEntries,
+  handleSelectedEntries,
+  setHspDetail,
+  loading,
+}) => {
   if (loading) {
     return <Loader />;
   }
@@ -171,6 +183,7 @@ const BlastResultTable: FC<{
           hsps={hit_hsps}
           queryLength={data.query_len}
           hitLength={hit_len}
+          setHspDetail={setHspDetail}
         />
       ),
     },
