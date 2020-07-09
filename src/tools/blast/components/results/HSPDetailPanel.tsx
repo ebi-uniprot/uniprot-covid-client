@@ -16,12 +16,14 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
   console.log(hsp);
   return (
     <SlidingPanel position="bottom">
-      <h2>{hsp.hsp_expect}</h2>
-      <protvista-manager>
-        <protvista-navigation />
-        <protvista-msa />
-        <protvista-track />
-      </protvista-manager>
+      <>
+        <h2>{hsp.hsp_expect}</h2>
+        <protvista-manager>
+          <protvista-navigation />
+          <protvista-msa />
+          <protvista-track />
+        </protvista-manager>
+      </>
     </SlidingPanel>
   );
 };

@@ -276,71 +276,75 @@ const BlastResult = () => {
       }
       sidebar={sidebar}
     >
-      <Tabs active={match.params.subPage}>
-        <Tab
-          id="overview"
-          title={
-            <Link to={`/blast/${match.params.id}/overview`}>Overview</Link>
-          }
-        >
-          {actionBar}
-          <Suspense fallback={<Loader />}>
-            <BlastResultTable
-              loading={apiLoading}
-              data={data}
-              selectedEntries={selectedEntries}
-              handleSelectedEntries={handleSelectedEntries}
-              setHspDetail={setHspDetail}
-            />
-          </Suspense>
-        </Tab>
-        <Tab
-          id="taxonomy"
-          title={
-            <Link to={`/blast/${match.params.id}/taxonomy`}>Taxonomy</Link>
-          }
-        >
-          {actionBar}
-          <BlastResultTaxonomy data={data} />
-        </Tab>
-        <Tab
-          id="hit-distribution"
-          title={
-            <Link to={`/blast/${match.params.id}/hit-distribution`}>
-              Hit Distribution
-            </Link>
-          }
-        >
-          {actionBar}
-          <BlastResultHitDistribution hits={blastData.hits} />
-        </Tab>
-        <Tab
-          id="text-output"
-          title={
-            <Link to={`/blast/${match.params.id}/text-output`}>
-              Text Output
-            </Link>
-          }
-        >
-          <Suspense fallback={<Loader />}>
-            <BlastResultTextOutput id={match.params.id} />
-          </Suspense>
-        </Tab>
-        <Tab
-          id="tool-input"
-          title={
-            <Link to={`/blast/${match.params.id}/tool-input`}>Tool Input</Link>
-          }
-        >
-          <Suspense fallback={<Loader />}>
-            <BlastResultToolInput
-              id={match.params.id}
-              inputParamsData={inputParamsData}
-            />
-          </Suspense>
-        </Tab>
-      </Tabs>
-      {hspDetail && <HSPDetailPanel hsp={hspDetail} />}
+      <>
+        <Tabs active={match.params.subPage}>
+          <Tab
+            id="overview"
+            title={
+              <Link to={`/blast/${match.params.id}/overview`}>Overview</Link>
+            }
+          >
+            {actionBar}
+            <Suspense fallback={<Loader />}>
+              <BlastResultTable
+                loading={apiLoading}
+                data={data}
+                selectedEntries={selectedEntries}
+                handleSelectedEntries={handleSelectedEntries}
+                setHspDetail={setHspDetail}
+              />
+            </Suspense>
+          </Tab>
+          <Tab
+            id="taxonomy"
+            title={
+              <Link to={`/blast/${match.params.id}/taxonomy`}>Taxonomy</Link>
+            }
+          >
+            {actionBar}
+            <BlastResultTaxonomy data={data} />
+          </Tab>
+          <Tab
+            id="hit-distribution"
+            title={
+              <Link to={`/blast/${match.params.id}/hit-distribution`}>
+                Hit Distribution
+              </Link>
+            }
+          >
+            {actionBar}
+            <BlastResultHitDistribution hits={blastData.hits} />
+          </Tab>
+          <Tab
+            id="text-output"
+            title={
+              <Link to={`/blast/${match.params.id}/text-output`}>
+                Text Output
+              </Link>
+            }
+          >
+            <Suspense fallback={<Loader />}>
+              <BlastResultTextOutput id={match.params.id} />
+            </Suspense>
+          </Tab>
+          <Tab
+            id="tool-input"
+            title={
+              <Link to={`/blast/${match.params.id}/tool-input`}>
+                Tool Input
+              </Link>
+            }
+          >
+            <Suspense fallback={<Loader />}>
+              <BlastResultToolInput
+                id={match.params.id}
+                inputParamsData={inputParamsData}
+              />
+            </Suspense>
+          </Tab>
+        </Tabs>
+        {hspDetail && <HSPDetailPanel hsp={hspDetail} />}
+      </>
     </SideBarLayout>
   );
 };
