@@ -7,21 +7,19 @@ import { UseDataAPIState } from '../../../../shared/hooks/useDataApi';
 
 import toolsURLs from '../../../config/urls';
 
-import {
-  ServerParameters,
-  PublicServerParameters,
-} from '../../types/blastServerParameters';
+import { PublicServerParameters } from '../../types/blastServerParameters';
 import { JobTypes } from '../../../types/toolsJobTypes';
 
-const inputToCurl = (input: Partial<ServerParameters>, jobType: JobTypes) => {
-  return `curl ${Object.entries(input)
-    .map(
-      ([key, value]) =>
-        `-F ${
-          typeof value === 'string' && value.includes("'") ? '$' : ''
-        }'${key}=${value}'`
-    )
-    .join(' \\\n')} \\\n${toolsURLs(jobType).runUrl}`;
+const inputToCurl = (
+  input: Partial<PublicServerParameters>,
+  jobType: JobTypes
+) => {
+  let command = "curl -F 'email=<enter your email here>' \\\n";
+  for (const [key, value] of Object.entries(input)) {
+    command += `     -F '${key}=${value}' \\\n`;
+  }
+  command += `     ${toolsURLs(jobType).runUrl}`;
+  return command;
 };
 
 type Props = {
@@ -68,9 +66,16 @@ const BlastResultToolInput: FC<Props> = ({ id, inputParamsData, jobType }) => {
         , you could run a new job on the command line with the same input like
         this:
         <br />
-        <CodeBlock lightMode>
-          {inputToCurl({ email: '<enter your email here>', ...data }, jobType)}
-        </CodeBlock>
+        <CodeBlock lightMode>{inputToCurl(data, jobType)}</CodeBlock>
+        {data.sequence.includes("'") && (
+          <>
+            <br />
+            <small>
+              You might need to escape the sequence as it contains special
+              characters
+            </small>
+          </>
+        )}
       </p>
     </section>
   );
