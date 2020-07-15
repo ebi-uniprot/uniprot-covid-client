@@ -48,7 +48,7 @@ const apiUrls = {
   ),
   // Retrieve results
   search: joinUrl(devPrefix, '/uniprot/api/uniprotkb/search'),
-  download: joinUrl(devPrefix, '/uniprot/api/uniprotkb/download'),
+  download: joinUrl(devPrefix, '/uniprot/api/uniprotkb/stream'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
 
   entry: (accession: string) =>
@@ -171,12 +171,14 @@ export const getDownloadUrl = ({
     includeIsoform?: boolean;
     size?: number;
     compressed?: boolean;
+    download: true;
   } = {
     query: selectedAccessions.length
       ? createAccessionsQueryString(selectedAccessions)
       : `${query}${createFacetsQueryString(selectedFacets)}`,
     // fallback to json if something goes wrong
     format: fileFormatToUrlParameter.get(fileFormat) || 'json',
+    download: true,
   };
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   if (isColumnFileFormat && sortColumn) {
