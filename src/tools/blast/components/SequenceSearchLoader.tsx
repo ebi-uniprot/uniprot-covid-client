@@ -43,8 +43,12 @@ export type SequenceSubmissionOnChangeEvent = {
   name?: string;
 };
 
+export interface SequenceSearchLoaderInterface {
+  reset: () => void;
+}
+
 const SequenceSearchLoader = forwardRef<
-  { reset: () => void },
+  SequenceSearchLoaderInterface,
   { onLoad: (event: SequenceSubmissionOnChangeEvent) => void }
 >(({ onLoad }, ref) => {
   const [accessionOrID, setAccessionOrID] = useState('');
