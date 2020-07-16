@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaMSA from 'protvista-msa';
@@ -23,9 +23,24 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
     hsp_hit_to,
     hsp_hseq,
   } = hsp;
-
+  // console.log("hsp:", hsp);
   // TODO calculate actual length based on total match and query lengths
   const actualLength = hsp_align_len;
+  const [highlightPosition, setHighlighPosition] = useState('');
+
+  const regex = /([-]+)/gm;
+  let match = null;
+  const gaps = [];
+
+  while ((match = regex.exec(hsp_qseq))) {
+    const start = match.index;
+    const end = match.index + match[0].length;
+    gaps.push({ start, end });
+  }
+
+  // const highlight = "100:500";
+
+  // console.log("gaps:", gaps);
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -33,10 +48,11 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
         // TODO calculate actual start|end based on actualLength
         // eslint-disable-next-line no-param-reassign
         node.data = [
-          {
-            start: hsp_query_from,
-            end: hsp_query_to,
-          },
+          // {
+          //   start: hsp_query_from,
+          //   end: hsp_query_to,
+          // },
+          ...gaps,
         ];
       }
     },
@@ -73,10 +89,34 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
             sequence: hsp_hseq,
           },
         ];
+
+        node.onActiveTrackChange = (trackId) => {
+          console.log('on active track change:', trackId);
+        };
       }
     },
     [hsp_qseq, hsp_hseq]
   );
+
+  const navRef = useCallback((node): void => {
+    if (node) {
+      // const displaystart = node.getAttribute('displaystart');
+      // const displayend = node.getAttribute('displayend');
+      // console.log("---- start, end:", displaystart, displayend);
+
+      node.addEventListener('change', ({ detail }) =>
+        findHighlighPositions(detail)
+      );
+    }
+  });
+
+  // useEffect(() => {
+  //   console.log("nav change:", navRef);
+  // }, [navRef])
+
+  const findHighlighPositions = ({ displaystart, displayend }) => {
+    setHighlighPosition(`${displaystart}:${displayend}`);
+  };
 
   return (
     <SlidingPanel position="bottom">
@@ -86,8 +126,12 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
         {/* TODO row of buttons - Highlight properties - Show annotation - View toggle */}
         <section className="hsp-row">
           <protvista-manager attributes="displaystart displayend">
-            <protvista-navigation length={hsp_align_len} />
-            <protvista-msa ref={setMSAData} length={hsp_align_len} />
+            <protvista-navigation ref={navRef} length={hsp_align_len} />
+            <protvista-msa
+              ref={setMSAData}
+              length={hsp_align_len}
+              // labelWidth="100"
+            />
           </protvista-manager>
         </section>
         <section className="hsp-row">
@@ -101,6 +145,7 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
             ref={setQueryTrackData}
             length={actualLength}
             layout="non-overlapping"
+            highlight={highlightPosition}
           />
           {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
           <protvista-track
@@ -108,6 +153,7 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
             ref={setMatchTrackData}
             length={actualLength}
             layout="non-overlapping"
+            highlight={highlightPosition}
           />
           {/* TODO add configured feature tracks here */}
         </section>
