@@ -2,25 +2,26 @@
 
 import { Program, SType, Filter, Matrix } from './blastServerParameters';
 
+// Definitions taken from https://www.ncbi.nlm.nih.gov/data_specs/dtd/NCBI_BlastOutput2.mod.dtd
 export type BlastHsp = {
-  hsp_num: number;
-  hsp_score: number;
-  hsp_bit_score: number;
-  hsp_expect: number;
-  hsp_align_len: number;
-  hsp_identity: number;
-  hsp_positive: number;
-  hsp_gaps: number;
-  hsp_query_frame: string;
-  hsp_hit_frame: string;
-  hsp_strand: string;
-  hsp_query_from: number;
-  hsp_query_to: number;
-  hsp_hit_from: number;
-  hsp_hit_to: number;
-  hsp_qseq: string;
-  hsp_mseq: string;
-  hsp_hseq: string;
+  hsp_num: number; // HSP (High-scoring Segment Pair) number (integer)
+  hsp_score: number; // score of HSP (real)
+  hsp_bit_score: number; // score (in bits) of HSP (real)
+  hsp_expect: number; // expectation (real)
+  hsp_align_len: number; // length of the alignment used (integer)
+  hsp_identity: number; // number of identities in HSP (integer)
+  hsp_positive: number; // number of positives in HSP (integer)
+  hsp_gaps: number; // number of gaps in HSP (integer)
+  hsp_query_frame: string; // translation frame of query (integer)
+  hsp_hit_frame: string; // translation frame of subject (integer)
+  hsp_strand: string; // strand of query (used for blastn jobs)
+  hsp_query_from: number; // start of HSP in query (integer)
+  hsp_query_to: number; // end of HSP (integer)
+  hsp_hit_from: number; // start of HSP in subject (integer)
+  hsp_hit_to: number; // end of HSP in subject (integer)
+  hsp_qseq: string; // alignment string for the query (with gaps) (PCDATA)
+  hsp_mseq: string; // (assuming this is the hsp_midline in NCBI) formating middle line (PCDATA)
+  hsp_hseq: string; // alignment string for subject (=hit) (with gaps) (PCDATA)
 };
 
 export type BlastHit = {
