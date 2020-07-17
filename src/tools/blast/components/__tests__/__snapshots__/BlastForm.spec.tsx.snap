@@ -124,6 +124,7 @@ exports[`BlastForm test Renders the form 1`] = `
           class="sequence-submission-input"
           data-testid="sequence-submission-input"
           placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
+          spellcheck="false"
         />
       </section>
       <section
@@ -544,7 +545,7 @@ exports[`BlastForm test Renders the form 1`] = `
             class="button primary"
             type="submit"
           >
-            Run Blast
+            Run BLAST
           </button>
         </section>
       </section>
