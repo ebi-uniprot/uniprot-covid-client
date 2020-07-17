@@ -28,6 +28,7 @@ import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
 import { BlastResults, BlastHit, BlastFacet } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
+import { JobTypes } from '../../../types/toolsJobTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
@@ -327,6 +328,7 @@ const BlastResult = () => {
           <Suspense fallback={<Loader />}>
             <BlastResultToolInput
               id={match.params.id}
+              jobType={JobTypes.BLAST}
               inputParamsData={inputParamsData}
             />
           </Suspense>
