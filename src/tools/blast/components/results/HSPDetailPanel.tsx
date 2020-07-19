@@ -1,19 +1,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/camelcase */
-import React, {
-  FC,
-  useCallback,
-  useEffect,
-  useState,
-  useRef,
-  Fragment,
-} from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaMSA from 'protvista-msa';
 import ProtvistaManager from 'protvista-manager';
-import { Loader, DropdownButton, DownloadIcon } from 'franklin-sites';
-import { uniqBy, uniq } from 'lodash-es';
+import { Loader, DropdownButton, CloseIcon } from 'franklin-sites';
+import { uniq } from 'lodash-es';
 import SlidingPanel from '../../../../shared/components/layouts/SlidingPanel';
 import { BlastHsp } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
@@ -22,20 +15,40 @@ import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConve
 import apiUrls from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
-import { fileFormatEntryDownload } from '../../../../uniprotkb/types/resultsTypes';
-import AddToBasketButton from '../../../../shared/components/action-buttons/AddToBasket';
+import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
+import aminoAcidProperties from '../../../config/aminoAcidProperties.json';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
+class ColorScheme {
+  colorMap: { [acid: string]: string };
+
+  defaultColor: string;
+
+  constructor(acids: string[], color: string, defaultColor = 'white') {
+    this.colorMap = Object.fromEntries(acids.map((acid) => [acid, color]));
+    this.defaultColor = defaultColor;
+  }
+
+  getColor(acid: string) {
+    return acid in this.colorMap ? this.colorMap[acid] : this.defaultColor;
+  }
+}
+
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
   hitAccession: string;
+  onClose: () => void;
 };
 
-const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
+const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
+  hsp,
+  hitAccession,
+  onClose,
+}) => {
   const {
     hsp_align_len,
     hsp_query_from,
@@ -50,8 +63,8 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
   const actualLength = hsp_align_len;
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
+  const [property, setProperty] = useState<keyof typeof aminoAcidProperties>();
   // const featureTrackRef = useRef();
-
   const regex = /([-]+)/gm;
   let match = null;
   const gaps = [];
@@ -99,32 +112,56 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
     [hsp_hit_from, hsp_hit_to]
   );
 
-  const setMSAData = useCallback(
+  const setMSAAttributes = useCallback(
     (node): void => {
-      if (node) {
-        node.data = [
-          {
-            name: 'Query',
-            sequence: hsp_qseq,
-          },
-          {
-            name: 'Match',
-            sequence: hsp_hseq,
-          },
-        ];
-        node.onActiveTrackChange = (trackId) => {
-          setActiveTrack(trackId);
-          console.log('on active track change:', trackId);
-        };
+      if (!node) {
+        return;
       }
+      node.data = [
+        {
+          name: 'Query',
+          sequence: hsp_qseq,
+        },
+        {
+          name: 'Match',
+          sequence: hsp_hseq,
+        },
+      ];
+
+      node.onActiveTrackChange = (trackId) => {
+        setActiveTrack(trackId);
+        console.log('on active track change:', trackId);
+      };
+
+      // TODO respond to property changes: this causes an error in
+      // at state.colorScheme.updateConservation(state.conservation)
+      // react-msa-viewer to arise.
+      // console.log('property', property);
+      // if (property && aminoAcidProperties[property]) {
+      //   const colorScheme = new ColorScheme(
+      //     aminoAcidProperties[property].aminoAcids,
+      //     aminoAcidProperties[property].colour
+      //   );
+      //   node.colorscheme = colorScheme;
+      //   console.log(colorScheme?.getColor('R'));
+      //   console.log(colorScheme?.colorMap);
+      // }
     },
     [hsp_qseq, hsp_hseq]
   );
-  // TODO deal with error if present
-  const { loading, data } = useDataApi<UniProtkbAPIModel>(
+
+  const { loading, data, status, error } = useDataApi<UniProtkbAPIModel>(
     apiUrls.entry(hitAccession)
   );
+
   const features = data?.features;
+  const recommendedName =
+    data?.proteinDescription?.recommendedName?.fullName.value;
+  const organism = data?.organism?.scientificName;
+
+  const title = [hitAccession, recommendedName, organism]
+    .filter(Boolean)
+    .join(' · ');
 
   const annotationChoices = uniq(features?.map(({ type }) => type));
   if (!annotation && !!annotationChoices?.length) {
@@ -163,20 +200,57 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
     setHighlighPosition(`${displaystart}:${displayend}`);
   };
 
+  if (error) {
+    return <ErrorHandler status={status} />;
+  }
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <SlidingPanel position="bottom">
       <>
-        {/* TODO close link */}
-        <h4>Protein name - Organism</h4>
+        {/* TODO move to stylesheet */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingTop: '0.5rem',
+            paddingLeft: '0.5rem',
+            paddingRight: '0.5rem',
+          }}
+        >
+          <h4>{title}</h4>
+          <button type="button" onClick={onClose}>
+            <CloseIcon width="16" height="16" />
+          </button>
+        </div>
+
         <div className="button-group">
           <DropdownButton label="Highlight properties" className="tertiary">
-            <div className="dropdown-menu__content">
-              <ul>
-                {fileFormatEntryDownload.map((fileFormat) => (
-                  <li key={fileFormat}>{fileFormat}</li>
-                ))}
-              </ul>
-            </div>
+            {(setShowMenu: (showMenu: boolean) => void) => (
+              <div className="dropdown-menu__content">
+                <ul>
+                  {Object.keys(aminoAcidProperties).map((propertyChoice) => (
+                    // TODO: indicate currently selected
+                    <li key={propertyChoice}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowMenu(false);
+                          setProperty(
+                            propertyChoice as keyof typeof aminoAcidProperties
+                          );
+                        }}
+                      >
+                        {propertyChoice}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </DropdownButton>
           {!!annotationChoices?.length && (
             <DropdownButton label="Show annotation" className="tertiary">
@@ -184,8 +258,8 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
                 <div className="dropdown-menu__content">
                   <ul>
                     {annotationChoices.map((annotationChoice) => (
-                      // TODO: set currently selected
-                      <li key={annotation}>
+                      // TODO: indicate currently selected
+                      <li key={annotationChoice}>
                         <button
                           type="button"
                           onClick={() => {
@@ -193,7 +267,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
                             setAnnotation(annotationChoice);
                           }}
                         >
-                          {annotation}
+                          {annotationChoice}
                         </button>
                       </li>
                     ))}
@@ -215,7 +289,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
           <protvista-manager attributes="displaystart displayend">
             <protvista-navigation ref={navRef} length={hsp_align_len} />
             <protvista-msa
-              ref={setMSAData}
+              ref={setMSAAttributes}
               length={hsp_align_len}
               // labelWidth="100"
             />
@@ -242,18 +316,13 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({ hsp, hitAccession }) => {
             layout="non-overlapping"
             highlight={highlightPosition}
           />
-          {/* TODO add configured feature tracks here */}
-          {loading ? (
-            <Loader />
-          ) : (
-            <protvista-track
-              // height="10"
-              ref={setFeatureTrackData}
-              length={actualLength}
-              layout="non-overlapping"
-              highlight={highlightPosition}
-            />
-          )}
+          <protvista-track
+            // height="10"
+            ref={setFeatureTrackData}
+            length={actualLength}
+            layout="non-overlapping"
+            highlight={highlightPosition}
+          />
         </section>
       </>
     </SlidingPanel>
