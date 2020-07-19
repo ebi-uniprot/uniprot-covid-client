@@ -180,7 +180,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [features, annotation]
   );
 
-  const navRef = useCallback((node): void => {
+  const managerRef = useCallback((node): void => {
     if (node) {
       // const displaystart = node.getAttribute('displaystart');
       // const displayend = node.getAttribute('displayend');
@@ -286,8 +286,11 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           </DropdownButton>
         </div>
         <section className="hsp-row">
-          <protvista-manager attributes="displaystart displayend">
-            <protvista-navigation ref={navRef} length={hsp_align_len} />
+          <protvista-manager
+            ref={managerRef}
+            attributes="displaystart displayend"
+          >
+            <protvista-navigation length={hsp_align_len} />
             <protvista-msa
               ref={setMSAAttributes}
               length={hsp_align_len}
