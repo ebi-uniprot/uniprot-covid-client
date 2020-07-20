@@ -51,7 +51,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const actualLength = hsp_align_len;
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
-  const [property, setProperty] = useState<MsaColorScheme>();
+  const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
   // const featureTrackRef = useRef();
   const regex = /([-]+)/gm;
   let match = null;
@@ -228,7 +228,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
                           type="button"
                           onClick={() => {
                             setShowMenu(false);
-                            setProperty(schemeValue);
+                            setHighlightProperty(schemeValue as MsaColorScheme);
                           }}
                         >
                           {schemeString}
@@ -282,6 +282,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             <protvista-msa
               ref={setMSAAttributes}
               length={hsp_align_len}
+              colorscheme={highlightProperty}
               // labelWidth="100"
             />
           </protvista-manager>
