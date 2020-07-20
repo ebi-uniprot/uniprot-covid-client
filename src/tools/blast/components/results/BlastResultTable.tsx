@@ -13,7 +13,7 @@ const BlastSummaryTrack: FC<{
   queryLength: number;
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
-}> = ({ hsp, queryLength, hitLength, setHspDetail }) => {
+}> = ({ hsp, queryLength, hitLength, setHspDetail, setHitLength }) => {
   const {
     hsp_query_from,
     hsp_query_to,
@@ -67,7 +67,10 @@ const BlastSummaryTrack: FC<{
           height={10}
           ref={setTrackData}
           title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nHit Length: ${hitLength}`}
-          onClick={() => setHspDetail(hsp)}
+          onClick={() => {
+            setHspDetail(hsp);
+            setHitLength(hitLength);
+          }}
         />
       </section>
       <span className="data-table__blast-hsp__blast-params">
@@ -84,7 +87,7 @@ const BlastSummaryHsps: FC<{
   queryLength: number;
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
-}> = ({ hsps, queryLength, hitLength, setHspDetail }) => {
+}> = ({ hsps, queryLength, hitLength, setHspDetail, setHitLength }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -99,6 +102,7 @@ const BlastSummaryHsps: FC<{
           queryLength={queryLength}
           hitLength={hitLength}
           setHspDetail={setHspDetail}
+          setHitLength={setHitLength}
         />
         {hspsOrderedByScore.length > 1 &&
           !collapsed &&
@@ -111,6 +115,7 @@ const BlastSummaryHsps: FC<{
                 hitLength={hitLength}
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
                 setHspDetail={setHspDetail}
+                setHitLength={setHitLength}
               />
             ))}
       </div>
@@ -135,6 +140,7 @@ const BlastResultTable: FC<{
   handleSelectedEntries,
   setHspDetail,
   loading,
+  setHitLength,
 }) => {
   if (loading) {
     return <Loader />;
@@ -184,6 +190,7 @@ const BlastResultTable: FC<{
           queryLength={data.query_len}
           hitLength={hit_len}
           setHspDetail={setHspDetail}
+          setHitLength={setHitLength}
         />
       ),
     },

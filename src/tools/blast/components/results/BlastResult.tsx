@@ -158,6 +158,7 @@ const BlastResult = () => {
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
   const [urlParams, setUrlParams] = useState<URLResultParams>();
   const [hspDetail, setHspDetail] = useState<BlastHsp>();
+  const [hitLength, setHitLength] = useState<number>();
 
   // data from blast
   const {
@@ -292,6 +293,7 @@ const BlastResult = () => {
                 selectedEntries={selectedEntries}
                 handleSelectedEntries={handleSelectedEntries}
                 setHspDetail={setHspDetail}
+                setHitLength={setHitLength}
               />
             </Suspense>
           </Tab>
@@ -343,7 +345,9 @@ const BlastResult = () => {
             </Suspense>
           </Tab>
         </Tabs>
-        {hspDetail && <HSPDetailPanel hsp={hspDetail} />}
+        {hspDetail && hitLength && (
+          <HSPDetailPanel hsp={hspDetail} hitLength={hitLength} />
+        )}
       </>
     </SideBarLayout>
   );

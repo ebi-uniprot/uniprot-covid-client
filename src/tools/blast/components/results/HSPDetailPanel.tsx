@@ -13,7 +13,10 @@ loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
-const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
+const HSPDetailPanel: FC<{ hsp: BlastHsp; hitLength: number }> = ({
+  hsp,
+  hitLength,
+}) => {
   const {
     hsp_align_len,
     hsp_query_from,
@@ -22,25 +25,29 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
     hsp_hit_from,
     hsp_hit_to,
     hsp_hseq,
+    hsp_identity,
   } = hsp;
   // console.log("hsp:", hsp);
   // TODO calculate actual length based on total match and query lengths
   const actualLength = hsp_align_len;
   const [highlightPosition, setHighlighPosition] = useState('');
 
-  const regex = /([-]+)/gm;
-  let match = null;
-  const gaps = [];
+  // const regex = /([-]+)/gm;
+  // let match = null;
+  // const q_gaps = [];
+  // const h_gaps = [];
+  // const q_range = [];
+  // const h_range = [];
+  // const rangeMax = (hsp_hseq.length > hsp_qseq.length)
+  //   ? hsp_hseq.length
+  //   : hsp_qseq.length;
 
-  while ((match = regex.exec(hsp_qseq))) {
-    const start = match.index;
-    const end = match.index + match[0].length;
-    gaps.push({ start, end });
-  }
+  // while ((match = regex.exec(hsp_qseq))) {
+  //   const start = match.index;
+  //   const end = match.index + match[0].length;
 
-  // const highlight = "100:500";
-
-  // console.log("gaps:", gaps);
+  //   q_gaps.push({ start, end });
+  // }
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -48,15 +55,32 @@ const HSPDetailPanel: FC<{ hsp: BlastHsp }> = ({ hsp }) => {
         // TODO calculate actual start|end based on actualLength
         // eslint-disable-next-line no-param-reassign
         node.data = [
-          // {
-          //   start: hsp_query_from,
-          //   end: hsp_query_to,
-          // },
-          ...gaps,
+          // ...gaps,
+          {
+            start: 1,
+            end: hsp_query_from,
+            shape: 'line',
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
+          {
+            start: hsp_query_from,
+            end: hsp_query_to,
+            // franklin $colour-sapphire-blue
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
+          {
+            start: hsp_query_to,
+            end: hitLength > hsp_query_to ? hitLength : hsp_query_to,
+            shape: 'line',
+            color: '#014371',
+            opacity: hsp_identity / 100,
+          },
         ];
       }
     },
-    [hsp_query_from, hsp_query_to]
+    [hsp_query_from, hsp_query_to, hsp_identity, hitLength]
   );
 
   const setMatchTrackData = useCallback(
