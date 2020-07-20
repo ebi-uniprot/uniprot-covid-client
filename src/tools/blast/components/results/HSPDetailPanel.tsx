@@ -16,27 +16,15 @@ import apiUrls from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
-import aminoAcidProperties from '../../../config/aminoAcidProperties.json';
+import {
+  MsaColorScheme,
+  msaColorSchemeToString,
+} from '../../../config/msaColorSchemes';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
-
-class ColorScheme {
-  colorMap: { [acid: string]: string };
-
-  defaultColor: string;
-
-  constructor(acids: string[], color: string, defaultColor = 'white') {
-    this.colorMap = Object.fromEntries(acids.map((acid) => [acid, color]));
-    this.defaultColor = defaultColor;
-  }
-
-  getColor(acid: string) {
-    return acid in this.colorMap ? this.colorMap[acid] : this.defaultColor;
-  }
-}
 
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
@@ -63,7 +51,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const actualLength = hsp_align_len;
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
-  const [property, setProperty] = useState<keyof typeof aminoAcidProperties>();
+  const [property, setProperty] = useState<MsaColorScheme>();
   // const featureTrackRef = useRef();
   const regex = /([-]+)/gm;
   let match = null;
@@ -232,22 +220,22 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             {(setShowMenu: (showMenu: boolean) => void) => (
               <div className="dropdown-menu__content">
                 <ul>
-                  {Object.keys(aminoAcidProperties).map((propertyChoice) => (
-                    // TODO: indicate currently selected
-                    <li key={propertyChoice}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setShowMenu(false);
-                          setProperty(
-                            propertyChoice as keyof typeof aminoAcidProperties
-                          );
-                        }}
-                      >
-                        {propertyChoice}
-                      </button>
-                    </li>
-                  ))}
+                  {Object.entries(msaColorSchemeToString).map(
+                    ([schemeValue, schemeString]) => (
+                      // TODO: indicate currently selected
+                      <li key={schemeString}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowMenu(false);
+                            setProperty(schemeValue);
+                          }}
+                        >
+                          {schemeString}
+                        </button>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             )}
