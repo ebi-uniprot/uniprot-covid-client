@@ -7,13 +7,24 @@ import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
 import './styles/BlastResultTable.scss';
+import { HSPDetail } from './HSPDetailPanel';
 
 const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   queryLength: number;
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
-}> = ({ hsp, queryLength, hitLength, setHspDetail, setHitLength }) => {
+  setHspDetailPanel: (props: HSPDetail) => void;
+  hitAccession: string;
+}> = ({
+  hsp,
+  queryLength,
+  hitLength,
+  setHspDetail,
+  setHitLength,
+  setHspDetailPanel,
+  hitAccession,
+}) => {
   const {
     hsp_query_from,
     hsp_query_to,
@@ -70,7 +81,9 @@ const BlastSummaryTrack: FC<{
           onClick={() => {
             setHspDetail(hsp);
             setHitLength(hitLength);
+            setHspDetailPanel({ hsp, hitAccession });
           }}
+          // onClick={() => setHspDetailPanel({ hsp, hitAccession })}
         />
       </section>
       <span className="data-table__blast-hsp__blast-params">
@@ -87,7 +100,17 @@ const BlastSummaryHsps: FC<{
   queryLength: number;
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
-}> = ({ hsps, queryLength, hitLength, setHspDetail, setHitLength }) => {
+  hitAccession: string;
+  setHspDetailPanel: (props: HSPDetail) => void;
+}> = ({
+  hsps,
+  queryLength,
+  hitLength,
+  setHspDetailPanel,
+  hitAccession,
+  setHspDetail,
+  setHitLength,
+}) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -103,6 +126,8 @@ const BlastSummaryHsps: FC<{
           hitLength={hitLength}
           setHspDetail={setHspDetail}
           setHitLength={setHitLength}
+          hitAccession={hitAccession}
+          setHspDetailPanel={setHspDetailPanel}
         />
         {hspsOrderedByScore.length > 1 &&
           !collapsed &&
@@ -116,6 +141,8 @@ const BlastSummaryHsps: FC<{
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
                 setHspDetail={setHspDetail}
                 setHitLength={setHitLength}
+                hitAccession={hitAccession}
+                setHspDetailPanel={setHspDetailPanel}
               />
             ))}
       </div>
@@ -132,15 +159,16 @@ const BlastResultTable: FC<{
   data: BlastResults | null;
   selectedEntries: string[];
   handleSelectedEntries: (rowId: string) => void;
-  setHspDetail: (hsp: BlastHsp) => void;
+  setHspDetailPanel: (props: HSPDetail) => void;
   loading: boolean;
 }> = ({
   data,
   selectedEntries,
   handleSelectedEntries,
-  setHspDetail,
+  setHspDetailPanel,
   loading,
   setHitLength,
+  setHspDetail,
 }) => {
   if (loading) {
     return <Loader />;
@@ -184,13 +212,15 @@ const BlastResultTable: FC<{
       label: 'Alignment',
       name: 'alignment',
       width: '40vw',
-      render: ({ hit_hsps, hit_len }: BlastHit) => (
+      render: ({ hit_hsps, hit_len, hit_acc }: BlastHit) => (
         <BlastSummaryHsps
           hsps={hit_hsps}
           queryLength={data.query_len}
           hitLength={hit_len}
           setHspDetail={setHspDetail}
           setHitLength={setHitLength}
+          hitAccession={hit_acc}
+          setHspDetailPanel={setHspDetailPanel}
         />
       ),
     },
