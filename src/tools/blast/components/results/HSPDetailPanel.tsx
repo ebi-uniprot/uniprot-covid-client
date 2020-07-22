@@ -52,6 +52,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
+  const [, setActiveTrack] = useState<string>();
   // const featureTrackRef = useRef();
   const regex = /([-]+)/gm;
   let match = null;
@@ -81,7 +82,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         ];
       }
     },
-    [hsp_query_from, hsp_query_to]
+    [gaps]
   );
 
   const setMatchTrackData = useCallback(
@@ -116,24 +117,10 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         },
       ];
 
-      node.onActiveTrackChange = (trackId) => {
+      node.onActiveTrackChange = (trackId: string) => {
         setActiveTrack(trackId);
         console.log('on active track change:', trackId);
       };
-
-      // TODO respond to property changes: this causes an error in
-      // at state.colorScheme.updateConservation(state.conservation)
-      // react-msa-viewer to arise.
-      // console.log('property', property);
-      // if (property && aminoAcidProperties[property]) {
-      //   const colorScheme = new ColorScheme(
-      //     aminoAcidProperties[property].aminoAcids,
-      //     aminoAcidProperties[property].colour
-      //   );
-      //   node.colorscheme = colorScheme;
-      //   console.log(colorScheme?.getColor('R'));
-      //   console.log(colorScheme?.colorMap);
-      // }
     },
     [hsp_qseq, hsp_hseq]
   );
@@ -168,25 +155,26 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [features, annotation]
   );
 
+  type EventDetail = {
+    displaystart: string;
+    displayend: string;
+  };
+
+  const findHighlighPositions = ({ displaystart, displayend }: EventDetail) => {
+    setHighlighPosition(`${displaystart}:${displayend}`);
+  };
+
   const managerRef = useCallback((node): void => {
     if (node) {
       // const displaystart = node.getAttribute('displaystart');
       // const displayend = node.getAttribute('displayend');
       // console.log("---- start, end:", displaystart, displayend);
 
-      node.addEventListener('change', ({ detail }) =>
+      node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
         findHighlighPositions(detail)
       );
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log("nav change:", navRef);
-  // }, [navRef])
-
-  const findHighlighPositions = ({ displaystart, displayend }) => {
-    setHighlighPosition(`${displaystart}:${displayend}`);
-  };
 
   if (error) {
     return <ErrorHandler status={status} />;
