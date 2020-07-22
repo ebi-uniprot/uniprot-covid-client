@@ -159,7 +159,10 @@ const BlastResult = () => {
   const [urlParams, setUrlParams] = useState<URLResultParams>();
   const [hspDetail, setHspDetail] = useState<BlastHsp>();
   const [hitLength, setHitLength] = useState<number>();
-  const [hspDetailPanel, setHspDetailPanel] = useState<HSPDetailPanelProps>();
+  const [
+    hspDetailPanel,
+    setHspDetailPanel,
+  ] = useState<HSPDetailPanelProps | null>();
 
   // data from blast
   const {
@@ -352,18 +355,12 @@ const BlastResult = () => {
         {hspDetailPanel && hspDetail && hitLength && queryLength && (
           <HSPDetailPanel
             {...hspDetailPanel}
-            onClose={() => setHspDetailPanel()}
+            onClose={() => setHspDetailPanel(null)}
             hsp={hspDetail}
             hitLength={hitLength}
             queryLength={queryLength}
           />
         )}
-        {/* hspDetailPanel && (
-          <HSPDetailPanel
-            {...hspDetailPanel}
-            onClose={() => setHspDetailPanel()}
-          />
-        ) */}
       </>
     </SideBarLayout>
   );

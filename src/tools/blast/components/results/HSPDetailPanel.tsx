@@ -54,7 +54,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     hsp_hit_to,
     hsp_hseq,
     hsp_identity,
-    hsp_gaps,
   } = hsp;
   // TODO calculate actual length based on total match and query lengths
   // const actualLength = hsp_align_len;
@@ -63,21 +62,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
   const [, setActiveTrack] = useState<string>();
-
-  // finds inner gaps within a sequence
-  const findGaps = (seq: string) => {
-    const regex = /([-]+)/gm;
-    let match = null;
-    const gaps = [];
-
-    while ((match = regex.exec(seq))) {
-      const start = match.index;
-      const end = match.index + match[0].length;
-      gaps.push([start, end]);
-    }
-
-    return gaps;
-  };
 
   type SegmentRange = {
     start: number | null;
@@ -118,7 +102,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     (node): void => {
       if (node) {
         const seqSegments = findSequenceSegments(hsp_qseq);
-        const gaps = findGaps(hsp_qseq);
         const offset = Math.abs(hsp_hit_from - hsp_query_from);
         const opacity = hsp_identity / 100;
 
@@ -158,7 +141,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     (node): void => {
       if (node) {
         const seqSegments = findSequenceSegments(hsp_hseq);
-        const gaps = findGaps(hsp_hseq);
         const offset = Math.abs(hsp_hit_from - hsp_query_from);
         const opacity = hsp_identity / 100;
 
@@ -385,13 +367,13 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             layout="overlapping"
             highlight={highlightPosition}
           />
-          {/* <protvista-track
+          <protvista-track
             // height="10"
             ref={setFeatureTrackData}
             length={actualLength}
             layout="non-overlapping"
             highlight={highlightPosition}
-          /> */}
+          />
         </section>
       </>
     </SlidingPanel>

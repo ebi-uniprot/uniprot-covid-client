@@ -82,9 +82,15 @@ const BlastSummaryTrack: FC<{
           onClick={() => {
             setHspDetail(hsp);
             setHitLength(hitLength);
-            setHspDetailPanel({ hsp, hitAccession });
+            // TODO the following needs more investigation, specially 'onClose'
+            setHspDetailPanel({
+              hsp,
+              hitAccession,
+              onClose: () => null,
+              queryLength,
+              hitLength,
+            });
           }}
-          // onClick={() => setHspDetailPanel({ hsp, hitAccession })}
         />
       </section>
       <span className="data-table__blast-hsp__blast-params">
