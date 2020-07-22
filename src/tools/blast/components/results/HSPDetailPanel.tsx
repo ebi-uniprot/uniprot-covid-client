@@ -16,27 +16,19 @@ import apiUrls from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
-import aminoAcidProperties from '../../../config/aminoAcidProperties.json';
+import {
+  MsaColorScheme,
+  msaColorSchemeToString,
+} from '../../../config/msaColorSchemes';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
-class ColorScheme {
-  colorMap: { [acid: string]: string };
-
-  defaultColor: string;
-
-  constructor(acids: string[], color: string, defaultColor = 'white') {
-    this.colorMap = Object.fromEntries(acids.map((acid) => [acid, color]));
-    this.defaultColor = defaultColor;
-  }
-
-  getColor(acid: string) {
-    return acid in this.colorMap ? this.colorMap[acid] : this.defaultColor;
-  }
-}
+type UniProtkbAccessionsAPI = {
+  results: UniProtkbAPIModel[];
+};
 
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
@@ -68,6 +60,18 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [property, setProperty] = useState<keyof typeof aminoAcidProperties>();
+  const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
+  const [, setActiveTrack] = useState<string>();
+  // const featureTrackRef = useRef();
+  const regex = /([-]+)/gm;
+  let match = null;
+  const gaps = [];
+
+  while ((match = regex.exec(hsp_qseq))) {
+    const start = match.index;
+    const end = match.index + match[0].length;
+    gaps.push({ start, end });
+  }
 
   const findGaps = (seq: string) => {
     const regex = /([-]+)/gm;
@@ -270,36 +274,22 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         },
       ];
 
-      node.onActiveTrackChange = (trackId) => {
+      node.onActiveTrackChange = (trackId: string) => {
         setActiveTrack(trackId);
         console.log('on active track change:', trackId);
       };
-
-      // TODO respond to property changes: this causes an error in
-      // at state.colorScheme.updateConservation(state.conservation)
-      // react-msa-viewer to arise.
-      // console.log('property', property);
-      // if (property && aminoAcidProperties[property]) {
-      //   const colorScheme = new ColorScheme(
-      //     aminoAcidProperties[property].aminoAcids,
-      //     aminoAcidProperties[property].colour
-      //   );
-      //   node.colorscheme = colorScheme;
-      //   console.log(colorScheme?.getColor('R'));
-      //   console.log(colorScheme?.colorMap);
-      // }
     },
     [hsp_qseq, hsp_hseq]
   );
 
-  const { loading, data, status, error } = useDataApi<UniProtkbAPIModel>(
-    apiUrls.entry(hitAccession)
+  const { loading, data, status, error } = useDataApi<UniProtkbAccessionsAPI>(
+    apiUrls.entries([hitAccession])
   );
 
-  const features = data?.features;
+  const features = data?.results?.[0]?.features;
   const recommendedName =
-    data?.proteinDescription?.recommendedName?.fullName.value;
-  const organism = data?.organism?.scientificName;
+    data?.results?.[0]?.proteinDescription?.recommendedName?.fullName.value;
+  const organism = data?.results?.[0]?.organism?.scientificName;
 
   const title = [hitAccession, recommendedName, organism]
     .filter(Boolean)
@@ -322,25 +312,26 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [features, annotation]
   );
 
+  type EventDetail = {
+    displaystart: string;
+    displayend: string;
+  };
+
+  const findHighlighPositions = ({ displaystart, displayend }: EventDetail) => {
+    setHighlighPosition(`${displaystart}:${displayend}`);
+  };
+
   const managerRef = useCallback((node): void => {
     if (node) {
       // const displaystart = node.getAttribute('displaystart');
       // const displayend = node.getAttribute('displayend');
       // console.log("---- start, end:", displaystart, displayend);
 
-      node.addEventListener('change', ({ detail }) =>
+      node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
         findHighlighPositions(detail)
       );
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log("nav change:", navRef);
-  // }, [navRef])
-
-  const findHighlighPositions = ({ displaystart, displayend }) => {
-    setHighlighPosition(`${displaystart}:${displayend}`);
-  };
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -374,22 +365,22 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             {(setShowMenu: (showMenu: boolean) => void) => (
               <div className="dropdown-menu__content">
                 <ul>
-                  {Object.keys(aminoAcidProperties).map((propertyChoice) => (
-                    // TODO: indicate currently selected
-                    <li key={propertyChoice}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setShowMenu(false);
-                          setProperty(
-                            propertyChoice as keyof typeof aminoAcidProperties
-                          );
-                        }}
-                      >
-                        {propertyChoice}
-                      </button>
-                    </li>
-                  ))}
+                  {Object.entries(msaColorSchemeToString).map(
+                    ([schemeValue, schemeString]) => (
+                      // TODO: indicate currently selected
+                      <li key={schemeString}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowMenu(false);
+                            setHighlightProperty(schemeValue as MsaColorScheme);
+                          }}
+                        >
+                          {schemeString}
+                        </button>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             )}
@@ -436,6 +427,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             <protvista-msa
               ref={setMSAAttributes}
               length={hsp_align_len}
+              colorscheme={highlightProperty}
               // labelWidth="100"
             />
           </protvista-manager>
