@@ -13,7 +13,7 @@ import { SortableColumn } from '../types/columnTypes';
 const devPrefix = 'https://wwwdev.ebi.ac.uk';
 const prodPrefix = 'https://www.ebi.ac.uk';
 const covidPrefix = 'https://www.ebi.ac.uk/uniprot/api/covid-19';
-// const covidPrefix = 'http://wp-p2m-be:8090/uniprot/api/covid-19';
+// const covidPrefix = 'http://ves-hx-cb.ebi.ac.uk:8090/uniprot/api/covid-19';
 
 const apiUrls = {
   // uniprotkb advanced search terms
