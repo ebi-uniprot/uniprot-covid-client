@@ -205,6 +205,8 @@ const BlastResult = () => {
     apiData,
   ]);
 
+  const queryLength = data && data.query_len;
+
   const inputParamsData = useParamsData(match.params.id);
 
   // Note: this function is duplicated in ResultsContainer.tsx
@@ -347,12 +349,13 @@ const BlastResult = () => {
             </Suspense>
           </Tab>
         </Tabs>
-        {hspDetailPanel && hspDetail && hitLength && (
+        {hspDetailPanel && hspDetail && hitLength && queryLength && (
           <HSPDetailPanel
             {...hspDetailPanel}
             onClose={() => setHspDetailPanel()}
             hsp={hspDetail}
             hitLength={hitLength}
+            queryLength={queryLength}
           />
         )}
         {/* hspDetailPanel && (

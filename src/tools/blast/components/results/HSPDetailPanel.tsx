@@ -35,6 +35,7 @@ export type HSPDetailPanelProps = {
   hitAccession: string;
   onClose: () => void;
   hitLength: number;
+  queryLength: number;
 };
 
 const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
@@ -42,6 +43,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   hitAccession,
   onClose,
   hitLength,
+  queryLength,
 }) => {
   const {
     hsp_align_len,
@@ -59,20 +61,10 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const actualLength = hitLength;
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
-  const [property, setProperty] = useState<keyof typeof aminoAcidProperties>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
   const [, setActiveTrack] = useState<string>();
-  // const featureTrackRef = useRef();
-  const regex = /([-]+)/gm;
-  let match = null;
-  const gaps = [];
 
-  while ((match = regex.exec(hsp_qseq))) {
-    const start = match.index;
-    const end = match.index + match[0].length;
-    gaps.push({ start, end });
-  }
-
+  // finds inner gaps within a sequence
   const findGaps = (seq: string) => {
     const regex = /([-]+)/gm;
     let match = null;
@@ -87,18 +79,19 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     return gaps;
   };
 
-  type Range = {
-    [key: string]: number | null;
+  type SegmentRange = {
+    start: number | null;
+    end: number | null;
   };
 
   const findSequenceSegments = (seq: string) => {
-    const ranges = [];
+    const ranges: number[][] = [];
     const newRange = () => ({
       start: null,
       end: null,
     });
 
-    let range: Range = newRange();
+    let range: SegmentRange = newRange();
 
     [...seq].forEach((ch, i) => {
       if (ch !== '-') {
@@ -113,7 +106,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
 
       if (i === seq.length - 1 && range.end === null) {
         range.end = i + 1;
-        ranges.push([range.start, range.end]);
+        ranges.push([range.start as number, range.end as number]);
         range = newRange();
       }
     });
@@ -127,69 +120,35 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         const seqSegments = findSequenceSegments(hsp_qseq);
         const gaps = findGaps(hsp_qseq);
         const offset = Math.abs(hsp_hit_from - hsp_query_from);
+        const opacity = hsp_identity / 100;
 
         const blockSegments = seqSegments.map(([start, end]) => ({
           start: start + offset,
           end: end + offset,
           // franklin $colour-sapphire-blue
           color: '#014371',
-          opacity: hsp_identity / 100,
+          opacity,
         }));
 
-        const lineSegments = gaps.map(([start, end]) => ({
-          start: start + offset + 1,
-          end: end + offset,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        }));
-
-        lineSegments.unshift({
-          start: offset,
-          end: hsp_query_from + 1,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        });
-
-        lineSegments.push({
-          start: blockSegments[blockSegments.length - 1].end,
-          end: hsp_query_to + offset,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        });
-        // console.log("offset:", offset);
-        // console.log("hsp:", hsp);
-        // console.log("line segments:", lineSegments);
-        // eslint-disable-next-line no-param-reassign
-        node.data = [
-          ...lineSegments,
-          // {
-          //   // start: hsp_hit_from - hsp_query_from + hsp_gaps,
-          //   // end: hsp_query_from,
-          //   start: offset,
-          //   end: hsp_query_from + hsp_align_len + offset,
-          //   shape: 'line',
-          //   color: '#014371',
-          //   opacity: hsp_identity / 100,
-          // },
-          ...blockSegments,
-          // {
-          //   start: hsp_query_from + offset,
-          //   end: hsp_query_from + hsp_align_len + offset,
-          //   // franklin $colour-sapphire-blue
-          //   color: '#014371',
-          //   opacity: hsp_identity / 100,
-          // },
-          // {
-          //   start: hsp_query_to,
-          //   end: hitLength > hsp_query_to ? hitLength : hsp_query_to,
-          //   shape: 'line',
-          //   color: '#014371',
-          //   opacity: hsp_identity / 100,
-          // },
+        const lineSegments = [
+          {
+            start: offset + 1,
+            end: hsp_query_from + 1,
+            shape: 'line',
+            color: '#014371',
+            opacity,
+          },
+          {
+            start: blockSegments[blockSegments.length - 1].end + 1,
+            end: queryLength + offset,
+            shape: 'line',
+            color: '#014371',
+            opacity,
+          },
         ];
+
+        // eslint-disable-next-line no-param-reassign
+        node.data = [...lineSegments, ...blockSegments];
       }
     },
     [hsp_query_from, hsp_query_to, hsp_identity, hitLength]
@@ -201,58 +160,35 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         const seqSegments = findSequenceSegments(hsp_hseq);
         const gaps = findGaps(hsp_hseq);
         const offset = Math.abs(hsp_hit_from - hsp_query_from);
+        const opacity = hsp_identity / 100;
 
         const blockSegments = seqSegments.map(([start, end]) => ({
           start: start + offset,
           end: end + offset,
           // franklin $colour-sapphire-blue
           color: '#014371',
-          opacity: hsp_identity / 100,
+          opacity,
         }));
 
-        const lineSegments = gaps.map(([start, end]) => ({
-          start: start + offset + 1,
-          end: end + offset,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        }));
-
-        lineSegments.unshift({
-          start: offset,
-          end: hsp_hit_from + 1,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        });
-
-        lineSegments.push({
-          start: blockSegments[blockSegments.length - 1].end,
-          end: hsp_hit_to + offset,
-          shape: 'line',
-          color: '#014371',
-          opacity: hsp_identity / 100,
-        });
+        const lineSegments = [
+          {
+            start: 1,
+            end: offset,
+            shape: 'line',
+            color: '#014371',
+            opacity,
+          },
+          {
+            start: blockSegments[blockSegments.length - 1].end + 1,
+            end: hitLength,
+            shape: 'line',
+            color: '#014371',
+            opacity,
+          },
+        ];
 
         // eslint-disable-next-line no-param-reassign
-        node.data = [
-          ...lineSegments,
-          // {
-          //   start: 1,
-          //   // end: hsp_hit_to,
-          //   end: hitLength,
-          //   shape: 'line',
-          //   color: '#014371',
-          //   opacity: hsp_identity / 100,
-          // },
-          ...blockSegments,
-          // {
-          //   start: hsp_hit_from,
-          //   end: hsp_hit_from + hsp_align_len,
-          //   color: '#014371',
-          //   opacity: hsp_identity / 100,
-          // },
-        ];
+        node.data = [...lineSegments, ...blockSegments];
       }
     },
     [hsp_hit_from, hsp_hit_to, hsp_identity, hitLength]
@@ -323,10 +259,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
 
   const managerRef = useCallback((node): void => {
     if (node) {
-      // const displaystart = node.getAttribute('displaystart');
-      // const displayend = node.getAttribute('displayend');
-      // console.log("---- start, end:", displaystart, displayend);
-
       node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
         findHighlighPositions(detail)
       );

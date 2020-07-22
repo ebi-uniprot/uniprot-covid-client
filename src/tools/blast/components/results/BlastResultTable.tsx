@@ -16,6 +16,7 @@ const BlastSummaryTrack: FC<{
   setHspDetail: (hsp: BlastHsp) => void;
   setHspDetailPanel: (props: HSPDetail) => void;
   hitAccession: string;
+  setHitLength: (length: number) => void;
 }> = ({
   hsp,
   queryLength,
@@ -102,6 +103,7 @@ const BlastSummaryHsps: FC<{
   setHspDetail: (hsp: BlastHsp) => void;
   hitAccession: string;
   setHspDetailPanel: (props: HSPDetail) => void;
+  setHitLength: (length: number) => void;
 }> = ({
   hsps,
   queryLength,
@@ -161,6 +163,8 @@ const BlastResultTable: FC<{
   handleSelectedEntries: (rowId: string) => void;
   setHspDetailPanel: (props: HSPDetail) => void;
   loading: boolean;
+  setHitLength: (length: number) => void;
+  setHspDetail: (hsp: BlastHsp) => void;
 }> = ({
   data,
   selectedEntries,
