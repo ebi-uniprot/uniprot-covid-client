@@ -7,14 +7,14 @@ import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
 import './styles/BlastResultTable.scss';
-import { HSPDetail } from './HSPDetailPanel';
+import { HSPDetailPanelProps } from './HSPDetailPanel';
 
 const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   queryLength: number;
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
-  setHspDetailPanel: (props: HSPDetail) => void;
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
   hitAccession: string;
   setHitLength: (length: number) => void;
 }> = ({
@@ -102,7 +102,7 @@ const BlastSummaryHsps: FC<{
   hitLength: number;
   setHspDetail: (hsp: BlastHsp) => void;
   hitAccession: string;
-  setHspDetailPanel: (props: HSPDetail) => void;
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
   setHitLength: (length: number) => void;
 }> = ({
   hsps,
@@ -161,7 +161,7 @@ const BlastResultTable: FC<{
   data: BlastResults | null;
   selectedEntries: string[];
   handleSelectedEntries: (rowId: string) => void;
-  setHspDetailPanel: (props: HSPDetail) => void;
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
   loading: boolean;
   setHitLength: (length: number) => void;
   setHspDetail: (hsp: BlastHsp) => void;

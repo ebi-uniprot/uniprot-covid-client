@@ -36,7 +36,7 @@ import Response from '../../../../uniprotkb/types/responseTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
-import HSPDetailPanel, { HSPDetail } from './HSPDetailPanel';
+import HSPDetailPanel, { HSPDetailPanelProps } from './HSPDetailPanel';
 
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
@@ -159,7 +159,7 @@ const BlastResult = () => {
   const [urlParams, setUrlParams] = useState<URLResultParams>();
   const [hspDetail, setHspDetail] = useState<BlastHsp>();
   const [hitLength, setHitLength] = useState<number>();
-  const [hspDetailPanel, setHspDetailPanel] = useState<HSPDetail>();
+  const [hspDetailPanel, setHspDetailPanel] = useState<HSPDetailPanelProps>();
 
   // data from blast
   const {
