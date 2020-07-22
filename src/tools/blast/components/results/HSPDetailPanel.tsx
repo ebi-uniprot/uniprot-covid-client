@@ -140,6 +140,24 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           opacity: hsp_identity / 100,
         }));
 
+        lineSegments.unshift({
+          start: offset,
+          end: hsp_query_from + 1,
+          shape: 'line',
+          color: '#014371',
+          opacity: hsp_identity / 100,
+        });
+
+        lineSegments.push({
+          start: blockSegments[blockSegments.length - 1].end,
+          end: hsp_query_to + offset,
+          shape: 'line',
+          color: '#014371',
+          opacity: hsp_identity / 100,
+        });
+        // console.log("offset:", offset);
+        // console.log("hsp:", hsp);
+        // console.log("line segments:", lineSegments);
         // eslint-disable-next-line no-param-reassign
         node.data = [
           ...lineSegments,
@@ -195,6 +213,22 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           color: '#014371',
           opacity: hsp_identity / 100,
         }));
+
+        lineSegments.unshift({
+          start: offset,
+          end: hsp_hit_from + 1,
+          shape: 'line',
+          color: '#014371',
+          opacity: hsp_identity / 100,
+        });
+
+        lineSegments.push({
+          start: blockSegments[blockSegments.length - 1].end,
+          end: hsp_hit_to + offset,
+          shape: 'line',
+          color: '#014371',
+          opacity: hsp_identity / 100,
+        });
 
         // eslint-disable-next-line no-param-reassign
         node.data = [
