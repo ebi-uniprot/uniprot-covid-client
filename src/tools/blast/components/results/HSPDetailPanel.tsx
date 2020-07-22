@@ -26,6 +26,10 @@ loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
+type UniProtkbAccessionsAPI = {
+  results: UniProtkbAPIModel[];
+};
+
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
   hitAccession: string;
@@ -125,14 +129,14 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [hsp_qseq, hsp_hseq]
   );
 
-  const { loading, data, status, error } = useDataApi<UniProtkbAPIModel>(
-    apiUrls.entry(hitAccession)
+  const { loading, data, status, error } = useDataApi<UniProtkbAccessionsAPI>(
+    apiUrls.entries([hitAccession])
   );
 
-  const features = data?.features;
+  const features = data?.results?.[0]?.features;
   const recommendedName =
-    data?.proteinDescription?.recommendedName?.fullName.value;
-  const organism = data?.organism?.scientificName;
+    data?.results?.[0]?.proteinDescription?.recommendedName?.fullName.value;
+  const organism = data?.results?.[0]?.organism?.scientificName;
 
   const title = [hitAccession, recommendedName, organism]
     .filter(Boolean)
