@@ -9480,10 +9480,10 @@ protvista-interpro-track@^2.6.1:
     lodash-es "^4.17.11"
     protvista-track "^2.6.1"
 
-protvista-manager@2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/protvista-manager/-/protvista-manager-2.12.0.tgz#9ce86335fc356943f197437b454e12677ed04b92"
-  integrity sha512-C18wAntl73ZKED+vtu1qoTwc6fqcpsN9/I/U5johA5eCpo6uQpev+ZwmWBF3TxBTmeznbgBJZomad0z3fGq9cw==
+protvista-manager@2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/protvista-manager/-/protvista-manager-2.15.1.tgz#3903f92ed65c2d58b7252b24be6778d93f9f1252"
+  integrity sha512-ZNZ5sfA3hsy06TDMQecdG91efFNaqTBhHywEpnLWBJpbbjvDEAZkIRnd1TCmyReDaTxYzclRBbB4/049ixoOZA==
   dependencies:
     lodash-es "^4.17.11"
 
@@ -9494,13 +9494,13 @@ protvista-manager@^2.9.1:
   dependencies:
     lodash-es "^4.17.11"
 
-protvista-msa@^2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/protvista-msa/-/protvista-msa-2.15.0.tgz#43cb4bb30b7e83bcbcbf8f278c6d127158924e2c"
-  integrity sha512-bnNGqkRziFQ1uwQJLb7S3s+7azK/Uctehl/VVYFtSHAnhNA88ZDCzf0rmkfGVPfeD9CFjWq8SR3DmxXKyglHfQ==
+protvista-msa@^2.15.2:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/protvista-msa/-/protvista-msa-2.15.2.tgz#26060e18cbec9dde87bd0e84edf518f8d016b521"
+  integrity sha512-apjp0ptjPQtpeFwsZlRiZ54QBQiqQIMEJxm/HDTs4NVymmVTfghVjrlq8n0QMaG+G3kG/sMU5L0Cxvdd38eLRg==
   dependencies:
     protvista-zoomable "^2.12.0"
-    react-msa-viewer "https://github.com/ebi-webcomponents/react-msa-viewer#semver:1.2.2"
+    react-msa-viewer "https://github.com/ebi-webcomponents/react-msa-viewer#semver:1.3.1"
 
 protvista-navigation@2.12.0:
   version "2.12.0"
@@ -9572,10 +9572,10 @@ protvista-tooltip@^2.9.2:
     lit-element "^2.2.0"
     lodash-es "^4.17.11"
 
-protvista-track@2.12.2, protvista-track@^2.12.2:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/protvista-track/-/protvista-track-2.12.2.tgz#ed19d55f83e48cda285643105bb44bec90cefad8"
-  integrity sha512-8Atq2W9so8bhqj4zM0Bms4GR4Oz2VFnmiozbQffiggsd+i3qy6zvTYXv6bK/W6tYAbB2Smw+/rIwqfzwp+jz1A==
+protvista-track@2.13.0, protvista-track@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/protvista-track/-/protvista-track-2.13.0.tgz#84abe55e41d91dd25df853236c5e4625619ef03b"
+  integrity sha512-jfH5+x849ZmFqrAjWURUnIaIayPx3Fry++XcosW2+RE3v8d81gxR8LtGCE7fxUFVPSQbP917zm3/O3VnQosbuQ==
   dependencies:
     lodash-es "^4.17.11"
     protvista-zoomable "^2.12.0"
@@ -9654,13 +9654,13 @@ protvista-variation-graph@^2.9.3:
   dependencies:
     protvista-track "^2.6.1"
 
-protvista-variation@2.12.2:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/protvista-variation/-/protvista-variation-2.12.2.tgz#472c8af213f44f4a2a6d07cc25c5affff5093e5f"
-  integrity sha512-IgtLLN8mrKOx79VKZoDyb44aPexJpwAu/CHqyRJgQxqR1aTITAUh+0wm0VZQ++6VmntGMksLyObHtW31JDqQQg==
+protvista-variation@2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/protvista-variation/-/protvista-variation-2.13.0.tgz#f127299e40ef606d090ca3de57f4666adb6185d9"
+  integrity sha512-KN0jmkh5hj9Pquil6NN1AxmDmvMK2Lj0LIPahVx7ie8Q7TTx0zhBQbNWVmvBepVv+A7IRZgwk7cEC+RLyt0zqQ==
   dependencies:
     lodash-es "^4.17.11"
-    protvista-track "^2.12.2"
+    protvista-track "^2.13.0"
 
 protvista-variation@^2.6.1:
   version "2.6.1"
@@ -9943,9 +9943,9 @@ react-markdown@^4.2.2:
     unist-util-visit "^1.3.0"
     xtend "^4.0.1"
 
-"react-msa-viewer@https://github.com/ebi-webcomponents/react-msa-viewer#semver:1.2.2":
-  version "1.2.2"
-  resolved "https://github.com/ebi-webcomponents/react-msa-viewer#20fc2b77c337e79851efc80979f0e1cb1af16fef"
+"react-msa-viewer@git+https://github.com/ebi-webcomponents/react-msa-viewer.git#semver:1.3.1":
+  version "1.3.1"
+  resolved "git+https://github.com/ebi-webcomponents/react-msa-viewer.git#8e816a652b79ac12ae363d07a670bd9e917f4dfb"
   dependencies:
     lodash-es "4.17.15"
     plotly-icons "1.3.14"
