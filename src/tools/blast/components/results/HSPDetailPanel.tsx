@@ -20,6 +20,7 @@ import {
   MsaColorScheme,
   msaColorSchemeToString,
 } from '../../../config/msaColorSchemes';
+import { findSequenceSegments } from '../../../utils';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -62,41 +63,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
   const [, setActiveTrack] = useState<string>();
-
-  type SegmentRange = {
-    start: number | null;
-    end: number | null;
-  };
-
-  const findSequenceSegments = (seq: string) => {
-    const ranges: number[][] = [];
-    const newRange = () => ({
-      start: null,
-      end: null,
-    });
-
-    let range: SegmentRange = newRange();
-
-    [...seq].forEach((ch, i) => {
-      if (ch !== '-') {
-        if (range.start === null) {
-          range.start = i + 1;
-        }
-      } else if (range.start !== null && range.end === null) {
-        range.end = i;
-        ranges.push([range.start, range.end]);
-        range = newRange();
-      }
-
-      if (i === seq.length - 1 && range.end === null) {
-        range.end = i + 1;
-        ranges.push([range.start as number, range.end as number]);
-        range = newRange();
-      }
-    });
-
-    return ranges;
-  };
 
   const setQueryTrackData = useCallback(
     (node): void => {
