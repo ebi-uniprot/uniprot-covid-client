@@ -62,12 +62,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
-
-  const calcOffestOfTracks = () => Math.abs(hsp_hit_from - hsp_query_from);
-  let tracksOffset = calcOffestOfTracks();
+  const tracksOffset = Math.abs(hsp_hit_from - hsp_query_from);
 
   useEffect(() => {
-    tracksOffset = calcOffestOfTracks();
     setHighlighPosition('0:0');
   }, [hsp_hit_from, hsp_query_from]);
 
@@ -106,7 +103,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = [...lineSegments, ...blockSegments];
       }
     },
-    [hsp_query_from, hsp_identity, hsp_hit_from, hsp_qseq, queryLength]
+    [hsp_query_from, hsp_identity, hsp_qseq, queryLength, tracksOffset]
   );
 
   const setMatchTrackData = useCallback(
@@ -144,7 +141,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = [...lineSegments, ...blockSegments];
       }
     },
-    [hsp_hit_from, hsp_identity, hitLength, hsp_hseq, hsp_query_from]
+    [hsp_identity, hitLength, hsp_hseq, tracksOffset]
   );
 
   const setMSAAttributes = useCallback(
@@ -202,11 +199,14 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     displayend: string;
   };
 
-  const findHighlighPositions = ({ displaystart, displayend }: EventDetail) => {
-    const start = tracksOffset + parseInt(displaystart, 10);
-    const end = tracksOffset + parseInt(displayend, 10);
-    setHighlighPosition(`${start}:${end}`);
-  };
+  const findHighlighPositions = useCallback(
+    ({ displaystart, displayend }: EventDetail) => {
+      const start = tracksOffset + parseInt(displaystart, 10);
+      const end = tracksOffset + parseInt(displayend, 10);
+      setHighlighPosition(`${start}:${end}`);
+    },
+    [tracksOffset]
+  );
 
   const managerRef = useCallback(
     (node): void => {
@@ -218,7 +218,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.setAttribute('displayend', initialDisplayEnd);
       }
     },
-    [initialDisplayEnd]
+    [initialDisplayEnd, findHighlighPositions]
   );
 
   if (error) {
