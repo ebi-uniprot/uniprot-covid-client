@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/camelcase */
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaMSA from 'protvista-msa';
@@ -63,16 +63,23 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     number | undefined
   >();
 
+  const calcOffestOfTracks = () => Math.abs(hsp_hit_from - hsp_query_from);
+  let tracksOffset = calcOffestOfTracks();
+
+  useEffect(() => {
+    tracksOffset = calcOffestOfTracks();
+    setHighlighPosition('0:0');
+  }, [hsp_hit_from, hsp_query_from]);
+
   const setQueryTrackData = useCallback(
     (node): void => {
       if (node) {
         const seqSegments = findSequenceSegments(hsp_qseq);
-        const offset = Math.abs(hsp_hit_from - hsp_query_from);
         const opacity = hsp_identity / 100;
 
         const blockSegments = seqSegments.map(([start, end]) => ({
-          start: start + offset,
-          end: end + offset,
+          start: start + tracksOffset,
+          end: end + tracksOffset,
           // franklin $colour-sapphire-blue
           color: '#014371',
           opacity,
@@ -80,7 +87,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
 
         const lineSegments = [
           {
-            start: offset + 1,
+            start: tracksOffset + 1,
             end: hsp_query_from + 1,
             shape: 'line',
             color: '#014371',
@@ -88,7 +95,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           },
           {
             start: blockSegments[blockSegments.length - 1].end + 1,
-            end: queryLength + offset,
+            end: queryLength + tracksOffset,
             shape: 'line',
             color: '#014371',
             opacity,
@@ -106,12 +113,11 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     (node): void => {
       if (node) {
         const seqSegments = findSequenceSegments(hsp_hseq);
-        const offset = Math.abs(hsp_hit_from - hsp_query_from);
         const opacity = hsp_identity / 100;
 
         const blockSegments = seqSegments.map(([start, end]) => ({
-          start: start + offset,
-          end: end + offset,
+          start: start + tracksOffset,
+          end: end + tracksOffset,
           // franklin $colour-sapphire-blue
           color: '#014371',
           opacity,
@@ -120,7 +126,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         const lineSegments = [
           {
             start: 1,
-            end: offset,
+            end: tracksOffset,
             shape: 'line',
             color: '#014371',
             opacity,
@@ -197,7 +203,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   };
 
   const findHighlighPositions = ({ displaystart, displayend }: EventDetail) => {
-    setHighlighPosition(`${displaystart}:${displayend}`);
+    const start = tracksOffset + parseInt(displaystart, 10);
+    const end = tracksOffset + parseInt(displayend, 10);
+    setHighlighPosition(`${start}:${end}`);
   };
 
   const managerRef = useCallback(
@@ -299,7 +307,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
               ref={setMSAAttributes}
               length={hsp_align_len}
               colorscheme={highlightProperty}
-              // labelWidth="100"
             />
           </protvista-manager>
         </section>
