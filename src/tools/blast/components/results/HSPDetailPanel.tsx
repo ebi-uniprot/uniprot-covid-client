@@ -21,6 +21,7 @@ import {
   msaColorSchemeToString,
 } from '../../../config/msaColorSchemes';
 import { findSequenceSegments } from '../../../utils';
+import './styles/HSPDetailPanel.scss';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -49,20 +50,15 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const {
     hsp_align_len,
     hsp_query_from,
-    hsp_query_to,
     hsp_qseq,
     hsp_hit_from,
-    hsp_hit_to,
     hsp_hseq,
     hsp_identity,
   } = hsp;
   // TODO calculate actual length based on total match and query lengths
-  // const actualLength = hsp_align_len;
-  const actualLength = hitLength;
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
-  const [, setActiveTrack] = useState<string>();
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -100,7 +96,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = [...lineSegments, ...blockSegments];
       }
     },
-    [hsp_query_from, hsp_query_to, hsp_identity, hitLength]
+    [hsp_query_from, hsp_identity, hsp_hit_from, hsp_qseq, queryLength]
   );
 
   const setMatchTrackData = useCallback(
@@ -139,7 +135,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = [...lineSegments, ...blockSegments];
       }
     },
-    [hsp_hit_from, hsp_hit_to, hsp_identity, hitLength]
+    [hsp_hit_from, hsp_identity, hitLength, hsp_hseq, hsp_query_from]
   );
 
   const setMSAAttributes = useCallback(
@@ -157,11 +153,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           sequence: hsp_hseq,
         },
       ];
-
-      node.onActiveTrackChange = (trackId: string) => {
-        setActiveTrack(trackId);
-        console.log('on active track change:', trackId);
-      };
     },
     [hsp_qseq, hsp_hseq]
   );
@@ -224,16 +215,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   return (
     <SlidingPanel position="bottom">
       <>
-        {/* TODO move to stylesheet */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            paddingTop: '0.5rem',
-            paddingLeft: '0.5rem',
-            paddingRight: '0.5rem',
-          }}
-        >
+        <div className="hsp-detail-panel__header">
           <h4>{title}</h4>
           <button type="button" onClick={onClose}>
             <CloseIcon width="16" height="16" />
@@ -321,7 +303,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           <protvista-track
             height="30"
             ref={setQueryTrackData}
-            length={actualLength}
+            length={hitLength}
             layout="overlapping"
             highlight={highlightPosition}
           />
@@ -329,14 +311,14 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           <protvista-track
             height="30"
             ref={setMatchTrackData}
-            length={actualLength}
+            length={hitLength}
             layout="overlapping"
             highlight={highlightPosition}
           />
           <protvista-track
             // height="10"
             ref={setFeatureTrackData}
-            length={actualLength}
+            length={hitLength}
             layout="non-overlapping"
             highlight={highlightPosition}
           />
