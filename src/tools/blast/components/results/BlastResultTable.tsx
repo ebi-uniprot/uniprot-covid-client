@@ -13,19 +13,9 @@ const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   queryLength: number;
   hitLength: number;
-  setHspDetail: (hsp: BlastHsp) => void;
   setHspDetailPanel: (props: HSPDetailPanelProps) => void;
   hitAccession: string;
-  setHitLength: (length: number) => void;
-}> = ({
-  hsp,
-  queryLength,
-  hitLength,
-  setHspDetail,
-  setHitLength,
-  setHspDetailPanel,
-  hitAccession,
-}) => {
+}> = ({ hsp, queryLength, hitLength, setHspDetailPanel, hitAccession }) => {
   const {
     hsp_query_from,
     hsp_query_to,
@@ -80,9 +70,6 @@ const BlastSummaryTrack: FC<{
           ref={setTrackData}
           title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nHit Length: ${hitLength}`}
           onClick={() => {
-            setHspDetail(hsp);
-            setHitLength(hitLength);
-            // TODO the following needs more investigation, specially 'onClose'
             setHspDetailPanel({
               hsp,
               hitAccession,
@@ -106,19 +93,9 @@ const BlastSummaryHsps: FC<{
   hsps: BlastHsp[];
   queryLength: number;
   hitLength: number;
-  setHspDetail: (hsp: BlastHsp) => void;
   hitAccession: string;
   setHspDetailPanel: (props: HSPDetailPanelProps) => void;
-  setHitLength: (length: number) => void;
-}> = ({
-  hsps,
-  queryLength,
-  hitLength,
-  setHspDetailPanel,
-  hitAccession,
-  setHspDetail,
-  setHitLength,
-}) => {
+}> = ({ hsps, queryLength, hitLength, setHspDetailPanel, hitAccession }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -132,8 +109,6 @@ const BlastSummaryHsps: FC<{
           hsp={hspsOrderedByScore[0]}
           queryLength={queryLength}
           hitLength={hitLength}
-          setHspDetail={setHspDetail}
-          setHitLength={setHitLength}
           hitAccession={hitAccession}
           setHspDetailPanel={setHspDetailPanel}
         />
@@ -147,8 +122,6 @@ const BlastSummaryHsps: FC<{
                 queryLength={queryLength}
                 hitLength={hitLength}
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
-                setHspDetail={setHspDetail}
-                setHitLength={setHitLength}
                 hitAccession={hitAccession}
                 setHspDetailPanel={setHspDetailPanel}
               />
@@ -169,16 +142,12 @@ const BlastResultTable: FC<{
   handleSelectedEntries: (rowId: string) => void;
   setHspDetailPanel: (props: HSPDetailPanelProps) => void;
   loading: boolean;
-  setHitLength: (length: number) => void;
-  setHspDetail: (hsp: BlastHsp) => void;
 }> = ({
   data,
   selectedEntries,
   handleSelectedEntries,
   setHspDetailPanel,
   loading,
-  setHitLength,
-  setHspDetail,
 }) => {
   if (loading) {
     return <Loader />;
@@ -227,8 +196,6 @@ const BlastResultTable: FC<{
           hsps={hit_hsps}
           queryLength={data.query_len}
           hitLength={hit_len}
-          setHspDetail={setHspDetail}
-          setHitLength={setHitLength}
           hitAccession={hit_acc}
           setHspDetailPanel={setHspDetailPanel}
         />

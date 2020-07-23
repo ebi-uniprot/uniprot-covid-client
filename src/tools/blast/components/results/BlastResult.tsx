@@ -26,12 +26,7 @@ import { Location, LocationToPath } from '../../../../app/config/urls';
 import blastUrls from '../../config/blastUrls';
 import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
-import {
-  BlastResults,
-  BlastHit,
-  BlastFacet,
-  BlastHsp,
-} from '../../types/blastResults';
+import { BlastResults, BlastHit, BlastFacet } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
@@ -157,8 +152,6 @@ const BlastResult = () => {
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
   const [urlParams, setUrlParams] = useState<URLResultParams>();
-  const [hspDetail, setHspDetail] = useState<BlastHsp>();
-  const [hitLength, setHitLength] = useState<number>();
   const [
     hspDetailPanel,
     setHspDetailPanel,
@@ -207,8 +200,6 @@ const BlastResult = () => {
     filteredBlastData,
     apiData,
   ]);
-
-  const queryLength = data && data.query_len;
 
   const inputParamsData = useParamsData(match.params.id);
 
@@ -298,8 +289,6 @@ const BlastResult = () => {
                 data={data}
                 selectedEntries={selectedEntries}
                 handleSelectedEntries={handleSelectedEntries}
-                setHspDetail={setHspDetail}
-                setHitLength={setHitLength}
                 setHspDetailPanel={setHspDetailPanel}
               />
             </Suspense>
@@ -352,13 +341,10 @@ const BlastResult = () => {
             </Suspense>
           </Tab>
         </Tabs>
-        {hspDetailPanel && hspDetail && hitLength && queryLength && (
+        {hspDetailPanel && (
           <HSPDetailPanel
             {...hspDetailPanel}
             onClose={() => setHspDetailPanel(null)}
-            hsp={hspDetail}
-            hitLength={hitLength}
-            queryLength={queryLength}
           />
         )}
       </>
