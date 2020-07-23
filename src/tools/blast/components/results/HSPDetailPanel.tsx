@@ -7,6 +7,7 @@ import ProtvistaMSA from 'protvista-msa';
 import ProtvistaManager from 'protvista-manager';
 import { Loader, DropdownButton, CloseIcon } from 'franklin-sites';
 import { uniq } from 'lodash-es';
+import { Link } from 'react-router-dom';
 import SlidingPanel from '../../../../shared/components/layouts/SlidingPanel';
 import { BlastHsp } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
@@ -297,7 +298,8 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             </div>
           </DropdownButton>
         </div>
-        <section className="hsp-row">
+        <section className="hsp-detail-panel__visualisation">
+          <section className="hsp-label">Alignment</section>
           <protvista-manager
             ref={managerRef}
             attributes="displaystart displayend"
@@ -309,13 +311,12 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
               colorscheme={highlightProperty}
             />
           </protvista-manager>
-        </section>
-        <section className="hsp-row">
           {/* 
           TODO listen to "highlight" event from block above and set on these 2 tracks,
           working as protvista-manager
           */}
           {/* Query track */}
+          <section className="hsp-label">Query</section>
           <protvista-track
             height="30"
             ref={setQueryTrackData}
@@ -324,6 +325,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             highlight={highlightPosition}
           />
           {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
+          <section className="hsp-label">
+            <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
+          </section>
           <protvista-track
             height="30"
             ref={setMatchTrackData}
@@ -331,6 +335,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             layout="overlapping"
             highlight={highlightPosition}
           />
+          <section className="hsp-label">**Feature type**</section>
           <protvista-track
             // height="10"
             ref={setFeatureTrackData}
