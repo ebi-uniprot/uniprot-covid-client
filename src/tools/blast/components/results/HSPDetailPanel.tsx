@@ -63,6 +63,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
   const [, setActiveTrack] = useState<string>();
+  const [initialDisplayEnd, setInitialDisplayEnd] = useState<
+    number | undefined
+  >();
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -147,6 +150,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
       if (!node) {
         return;
       }
+      setInitialDisplayEnd(hsp_align_len / (15 / node.getSingleBaseWidth()));
       node.data = [
         {
           name: 'Query',
@@ -205,13 +209,18 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     setHighlighPosition(`${displaystart}:${displayend}`);
   };
 
-  const managerRef = useCallback((node): void => {
-    if (node) {
-      node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
-        findHighlighPositions(detail)
-      );
-    }
-  }, []);
+  const managerRef = useCallback(
+    (node): void => {
+      if (node && initialDisplayEnd) {
+        node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
+          findHighlighPositions(detail)
+        );
+        node.setAttribute('displaystart', 1);
+        node.setAttribute('displayend', initialDisplayEnd);
+      }
+    },
+    [initialDisplayEnd]
+  );
 
   if (error) {
     return <ErrorHandler status={status} />;
