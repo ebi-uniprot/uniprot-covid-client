@@ -156,7 +156,7 @@ exports[`SequenceView component should render SequenceInfo with provided sequenc
     <a
       class="button"
       download=""
-      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/Isoform.fasta"
+      href="/uniprotkb/accession/Isoform.fasta"
     >
       <svg
         fill="currentColor"
@@ -527,7 +527,7 @@ exports[`SequenceView component should render SequenceView 1`] = `
     <a
       class="button"
       download=""
-      href="https://www.ebi.ac.uk/uniprot/api/covid-19/uniprotkb/accession/P05067.fasta"
+      href="/uniprotkb/accession/P05067.fasta"
     >
       <svg
         fill="currentColor"

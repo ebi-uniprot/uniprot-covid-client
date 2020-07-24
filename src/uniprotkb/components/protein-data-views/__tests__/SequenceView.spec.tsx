@@ -3,6 +3,10 @@ import { render } from '@testing-library/react';
 import SequenceView, { SequenceInfo } from '../SequenceView';
 import SequenceUIDataJson from './__mocks__/sequenceUIData.json';
 
+// Don't want the prefix to be part of the url in those instances when pushing
+// code for testing on backup machine
+jest.mock('url-join', () => jest.fn((...args) => args.slice(1).join('/')));
+
 describe('SequenceView component', () => {
   beforeEach(() => {
     window.SVGElement.prototype.getBBox = () => ({
