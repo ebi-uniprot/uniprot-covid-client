@@ -217,6 +217,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         );
         node.setAttribute('displaystart', 1);
         node.setAttribute('displayend', initialDisplayEnd);
+        setHighlighPosition(
+          `${tracksOffset + 1}:${tracksOffset + initialDisplayEnd}`
+        );
       }
     },
     [initialDisplayEnd, findHighlighPositions]
