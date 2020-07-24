@@ -12,8 +12,8 @@ import { SortableColumn } from '../types/columnTypes';
 
 const devPrefix = 'https://wwwdev.ebi.ac.uk';
 const prodPrefix = 'https://www.ebi.ac.uk';
-const covidPrefix = 'https://www.ebi.ac.uk/uniprot/api/covid-19';
-// const covidPrefix = 'http://wp-np2-be:8090/uniprot/api/';
+// const covidPrefix = 'https://www.ebi.ac.uk/uniprot/api/covid-19';
+const covidPrefix = 'http://wp-p2m-be:8090/uniprot/api/covid-19';
 
 const apiUrls = {
   // uniprotkb advanced search terms
@@ -50,7 +50,7 @@ const apiUrls = {
   ),
   // Retrieve results
   search: joinUrl(covidPrefix, '/uniprotkb/search'),
-  download: joinUrl(covidPrefix, '/uniprotkb/download'),
+  download: joinUrl(covidPrefix, '/uniprotkb/stream'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
 
   entry: (accession: string) =>
@@ -95,7 +95,7 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
   );
 
 export const createAccessionsQueryString = (accessions: string[]) =>
-  accessions.map(accession => `accession:${accession}`).join(' OR ');
+  accessions.map((accession) => `accession:${accession}`).join(' OR ');
 
 export const getAPIQueryUrl = (
   query: string,
@@ -121,7 +121,7 @@ export const getUniProtPublicationsQueryUrl = (
   `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,study_type',
     query: selectedFacets
-      .map(facet => `(${facet.name}:"${facet.value}")`)
+      .map((facet) => `(${facet.name}:"${facet.value}")`)
       .join(' AND '),
   })}`;
 
@@ -154,12 +154,14 @@ export const getDownloadUrl = ({
     includeIsoform?: boolean;
     size?: number;
     compressed?: boolean;
+    download: true;
   } = {
     query: selectedAccessions.length
       ? createAccessionsQueryString(selectedAccessions)
       : `${query}${createFacetsQueryString(selectedFacets)}`,
     // fallback to json if something goes wrong
     format: fileFormatToUrlParameter.get(fileFormat) || 'json',
+    download: true,
   };
   const isColumnFileFormat = fileFormatsWithColumns.includes(fileFormat);
   if (isColumnFileFormat && sortColumn) {
@@ -191,5 +193,5 @@ export const getPublicationURL = (id: string) =>
 
 export const getPublicationsURL = (ids: string[]) =>
   `${literatureApiUrls.literature}/search?query=(${ids
-    .map(id => `id:${id}`)
+    .map((id) => `id:${id}`)
     .join(' OR ')})`;
