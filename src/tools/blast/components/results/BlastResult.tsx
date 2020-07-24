@@ -163,9 +163,7 @@ const BlastResult = () => {
     data: blastData,
     error: blastError,
     status: blastStatus,
-  } = useDataApi<BlastResults>(
-    blastUrls.resultUrl(match.params.id, 'jdp?format=json')
-  );
+  } = useDataApi<BlastResults>(blastUrls.resultUrl(match.params.id, 'json'));
 
   useEffect(() => {
     // TODO: investigate why /overview keeps recursively appended
