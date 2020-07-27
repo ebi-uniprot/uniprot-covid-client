@@ -1,21 +1,24 @@
 import React, {
   useState,
-  // useEffect,
   useCallback,
   FormEvent,
   MouseEvent,
   useMemo,
-  // useRef,
+  useRef,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   SequenceSubmission,
   PageIntro,
   SpinnerIcon,
-  // extractNameFromFASTAHeader,
+  sequenceProcessor,
 } from 'franklin-sites';
 import { useHistory } from 'react-router-dom';
 import { sleep } from 'timing-functions';
+
+import SequenceSearchLoader, {
+  ParsedSequence,
+} from '../../components/SequenceSearchLoader';
 
 import { JobTypes } from '../../types/toolsJobTypes';
 import { FormParameters } from '../types/alignFormParameters';
@@ -38,8 +41,8 @@ interface CustomLocationState {
 }
 
 const AlignForm = () => {
-  // // refs
-  // const sslRef = useRef<{ reset: () => void }>(null);
+  // refs
+  const sslRef = useRef<{ reset: () => void }>(null);
 
   // hooks
   const dispatch = useDispatch();
@@ -53,25 +56,23 @@ const AlignForm = () => {
     if (parametersFromHistoryState) {
       // if we get here, we got parameters passed with the location update to
       // use as pre-filled fields
-      // yes, I'm doing that in one go to avoid having typescript complain about
-      // the object not being of the right shape even though I want to construct
-      // it in multiple steps 🙄
-      return Object.freeze(
-        Object.fromEntries(
-          Object.entries(defaultFormValues as AlignFormValues).map(
-            ([key, field]) => [
-              key,
-              Object.freeze({
-                ...field,
-                selected:
-                  parametersFromHistoryState[
-                    field.fieldName as keyof FormParameters
-                  ] || field.selected,
-              }) as Readonly<AlignFormValue>,
-            ]
-          )
-        )
-      ) as Readonly<AlignFormValues>;
+      const formValues: Partial<AlignFormValues> = {};
+      const defaultValuesEntries = Object.entries(defaultFormValues) as [
+        AlignFields,
+        AlignFormValue
+      ][];
+      // for every field of the form, get its value from the history state if
+      // present, otherwise go for the default one
+      for (const [key, field] of defaultValuesEntries) {
+        formValues[key] = Object.freeze({
+          ...field,
+          selected:
+            parametersFromHistoryState[
+              field.fieldName as keyof FormParameters
+            ] || field.selected,
+        }) as Readonly<AlignFormValue>;
+      }
+      return Object.freeze(formValues) as Readonly<AlignFormValues>;
     }
     // otherwise, pass the default values
     return defaultFormValues;
@@ -81,10 +82,19 @@ const AlignForm = () => {
   const [submitDisabled, setSubmitDisabled] = useState(false);
   // used when the form is about to be submitted to the server
   const [sending, setSending] = useState(false);
+  // flag to see if the user manually changed the title
+  const [jobNameEdited, setJobNameEdited] = useState(false);
+  // store parsed sequence objects
+  const [parsedSequences, setParsedSequences] = useState<ParsedSequence[]>(
+    sequenceProcessor(initialFormValues[AlignFields.sequence].selected)
+  );
 
+  // actual form fields
   const [sequence, setSequence] = useState<
     AlignFormValues[AlignFields.sequence]
   >(initialFormValues[AlignFields.sequence]);
+
+  // extra job-related fields
   const [jobName, setJobName] = useState(initialFormValues[AlignFields.name]);
 
   // form event handlers
@@ -92,8 +102,15 @@ const AlignForm = () => {
     event.preventDefault();
 
     // reset all form state to defaults
+    setParsedSequences([]);
+
     setSequence(defaultFormValues[AlignFields.sequence]);
+
     setJobName(defaultFormValues[AlignFields.name]);
+
+    // imperatively reset SequenceSearchLoader... 😷
+    // eslint-disable-next-line no-unused-expressions
+    ((sslRef.current as unknown) as { reset: () => void }).reset();
   };
 
   // the only thing to do here would be to check the values and prevent
@@ -101,7 +118,7 @@ const AlignForm = () => {
   const submitAlignJob = (event: FormEvent | MouseEvent) => {
     event.preventDefault();
 
-    if (!sequence) {
+    if (!sequence.selected) {
       return;
     }
 
@@ -118,7 +135,9 @@ const AlignForm = () => {
     // navigate to the dashboard, not immediately, to give the impression that
     // something is happening
     sleep(1000).then(() => {
-      history.push(LocationToPath[Location.Dashboard], { parameters });
+      history.push(LocationToPath[Location.Dashboard], {
+        parameters: [parameters],
+      });
       // We emit an action containing only the parameters and the type of job
       // the reducer will be in charge of generating a proper job object for
       // internal state. Dispatching after history.push so that pop-up messages (as a
@@ -129,22 +148,63 @@ const AlignForm = () => {
     });
   };
 
-  const { name, links, info } = infoMappings[JobTypes.ALIGN];
-
-  // const currentSequence = formValues[BlastFields.sequence].selected;
   const onSequenceChange = useCallback(
-    (e) => {
-      if (e.sequence === sequence.selected) {
-        return;
+    (parsedSequences: ParsedSequence[]) => {
+      if (!jobNameEdited) {
+        // if the user didn't manually change the title, autofill it
+        const firstName = parsedSequences.find((item) => item.name)?.name;
+        let potentialJobName = '';
+        if (firstName) {
+          potentialJobName = firstName;
+          if (parsedSequences.length > 1) {
+            potentialJobName += ` +${parsedSequences.length - 1}`;
+          }
+        } else if (parsedSequences.length) {
+          potentialJobName = `${parsedSequences.length} sequence${
+            parsedSequences.length === 1 ? '' : 's'
+          }`;
+        }
+        setJobName((jobName) => {
+          if (jobName.selected === potentialJobName) {
+            // avoid unecessary rerender by keeping the same object
+            return jobName;
+          }
+          return { ...jobName, selected: potentialJobName };
+        });
       }
 
-      setJobName({ ...jobName, selected: e.name || '' });
-      setSequence({ ...sequence, selected: e.sequence });
-
-      setSubmitDisabled(!e.valid);
+      setParsedSequences(parsedSequences);
+      setSequence((sequence) => ({
+        ...sequence,
+        selected: parsedSequences
+          .map((parsedSequence) => parsedSequence.raw)
+          .join('\n'),
+      }));
+      setSubmitDisabled(
+        parsedSequences.some((parsedSequence) => !parsedSequence.valid) ||
+          parsedSequences.length === 1
+      );
     },
-    [jobName, sequence]
+    [jobNameEdited]
   );
+
+  // specific logic to prepend loaded sequences instead of just replacing
+  const onSequenceLoad = useCallback(
+    (parsedRetrievedSequences: ParsedSequence[]) => {
+      onSequenceChange([...parsedRetrievedSequences, ...parsedSequences]);
+    },
+    [onSequenceChange, parsedSequences]
+  );
+
+  const { name, links, info } = infoMappings[JobTypes.ALIGN];
+
+  let submitButtonContent: string | JSX.Element = 'Run Align';
+  if (parsedSequences.length > 1) {
+    submitButtonContent = `Align ${parsedSequences.length} sequences`;
+  }
+  if (sending) {
+    submitButtonContent = <SpinnerIcon />;
+  }
 
   return (
     <>
@@ -152,17 +212,19 @@ const AlignForm = () => {
         {info}
       </PageIntro>
       <form onSubmit={submitAlignJob} onReset={handleReset}>
-        {/* <fieldset>
+        <fieldset>
           <section className="tools-form-section__item">
             <legend>
-              Find a protein to BLAST by UniProt ID{' '}
+              Find proteins to Align by UniProt ID{' '}
               <small>(e.g. P05067 or A4_HUMAN or UPI0000000001)</small>.
+              <br />
+              You can also paste a list of IDs.
             </legend>
             <div className="import-sequence-section">
-              <SequenceSearchLoader ref={sslRef} onLoad={onSequenceChange} />
+              <SequenceSearchLoader ref={sslRef} onLoad={onSequenceLoad} />
             </div>
           </section>
-        </fieldset> */}
+        </fieldset>
         <section className="text-block">
           <strong>OR</strong>
         </section>
@@ -175,7 +237,7 @@ const AlignForm = () => {
             <SequenceSubmission
               placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
               onChange={onSequenceChange}
-              value={sequence.selected}
+              value={parsedSequences.map((sequence) => sequence.raw).join('\n')}
             />
           </section>
           <section className="tools-form-section">
@@ -189,9 +251,10 @@ const AlignForm = () => {
                   maxLength={22}
                   placeholder="my job title"
                   value={jobName.selected as string}
-                  onChange={(e) =>
-                    setJobName({ ...jobName, selected: e.target.value })
-                  }
+                  onChange={(event) => {
+                    setJobNameEdited(Boolean(event.target.value));
+                    setJobName({ ...jobName, selected: event.target.value });
+                  }}
                 />
               </label>
             </section>
@@ -205,7 +268,7 @@ const AlignForm = () => {
                 disabled={submitDisabled}
                 onClick={submitAlignJob}
               >
-                {sending ? <SpinnerIcon /> : 'Run Align'}
+                {submitButtonContent}
               </button>
             </section>
           </section>
