@@ -232,7 +232,13 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   if (loading) {
     return <Loader />;
   }
-
+  const conservationOptions =
+    highlightProperty === MsaColorScheme.CONSERVATION
+      ? {
+          'calculate-conservation': true,
+          'overlay-conservation': true,
+        }
+      : {};
   return (
     <SlidingPanel position="bottom" className="hsp-detail-panel">
       <div className="hsp-detail-panel__header">
@@ -277,6 +283,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
                     <li key={annotationChoice}>
                       <button
                         type="button"
+                        className="annotation-choice"
                         onClick={() => {
                           setShowMenu(false);
                           setAnnotation(annotationChoice);
@@ -311,6 +318,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             ref={setMSAAttributes}
             length={hsp_align_len}
             colorscheme={highlightProperty}
+            {...conservationOptions}
           />
         </protvista-manager>
         {/* 
@@ -337,7 +345,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           layout="overlapping"
           highlight={highlightPosition}
         />
-        <section className="hsp-label">**Feature type**</section>
+        <section className="hsp-label">{annotation}</section>
         <protvista-track
           // height="10"
           ref={setFeatureTrackData}

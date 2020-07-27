@@ -135,7 +135,6 @@ const FeaturesView: React.FC<FeatureProps> = ({
       if (node) {
         // eslint-disable-next-line no-param-reassign
         node.data = processedData;
-        console.log(processedData);
       }
     },
     [processedData]
