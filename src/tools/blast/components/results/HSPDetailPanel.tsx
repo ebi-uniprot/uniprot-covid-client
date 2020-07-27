@@ -222,7 +222,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         );
       }
     },
-    [initialDisplayEnd, findHighlighPositions]
+    [initialDisplayEnd, findHighlighPositions, tracksOffset]
   );
 
   if (error) {
