@@ -7,7 +7,6 @@ import './styles/sliding-panel.scss';
 type Position = 'top' | 'bottom' | 'left' | 'right';
 
 const SlidingPanel: FC<{
-  children: JSX.Element;
   position: Position;
   className?: string;
 }> = ({ children, position, className }) => {

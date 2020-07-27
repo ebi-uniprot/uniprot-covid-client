@@ -235,119 +235,117 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
 
   return (
     <SlidingPanel position="bottom" className="hsp-detail-panel">
-      <>
-        <div className="hsp-detail-panel__header">
-          <h4>{title}</h4>
-          <button type="button" onClick={onClose}>
-            <CloseIcon width="16" height="16" />
-          </button>
-        </div>
+      <div className="hsp-detail-panel__header">
+        <h4>{title}</h4>
+        <button type="button" onClick={onClose}>
+          <CloseIcon width="16" height="16" />
+        </button>
+      </div>
 
-        <div className="button-group">
-          <DropdownButton label="Highlight properties" className="tertiary">
+      <div className="button-group">
+        <DropdownButton label="Highlight properties" className="tertiary">
+          {(setShowMenu: (showMenu: boolean) => void) => (
+            <div className="dropdown-menu__content">
+              <ul>
+                {Object.entries(msaColorSchemeToString).map(
+                  ([schemeValue, schemeString]) => (
+                    // TODO: indicate currently selected
+                    <li key={schemeString}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowMenu(false);
+                          setHighlightProperty(schemeValue as MsaColorScheme);
+                        }}
+                      >
+                        {schemeString}
+                      </button>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          )}
+        </DropdownButton>
+        {!!annotationChoices?.length && (
+          <DropdownButton label="Show annotation" className="tertiary">
             {(setShowMenu: (showMenu: boolean) => void) => (
               <div className="dropdown-menu__content">
                 <ul>
-                  {Object.entries(msaColorSchemeToString).map(
-                    ([schemeValue, schemeString]) => (
-                      // TODO: indicate currently selected
-                      <li key={schemeString}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowMenu(false);
-                            setHighlightProperty(schemeValue as MsaColorScheme);
-                          }}
-                        >
-                          {schemeString}
-                        </button>
-                      </li>
-                    )
-                  )}
+                  {annotationChoices.map((annotationChoice) => (
+                    // TODO: indicate currently selected
+                    <li key={annotationChoice}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowMenu(false);
+                          setAnnotation(annotationChoice);
+                        }}
+                      >
+                        {annotationChoice}
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
           </DropdownButton>
-          {!!annotationChoices?.length && (
-            <DropdownButton label="Show annotation" className="tertiary">
-              {(setShowMenu: (showMenu: boolean) => void) => (
-                <div className="dropdown-menu__content">
-                  <ul>
-                    {annotationChoices.map((annotationChoice) => (
-                      // TODO: indicate currently selected
-                      <li key={annotationChoice}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowMenu(false);
-                            setAnnotation(annotationChoice);
-                          }}
-                        >
-                          {annotationChoice}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </DropdownButton>
-          )}
-          <DropdownButton label="View" className="tertiary">
-            <div className="dropdown-menu__content">
-              <ul>
-                <li key="overview">Overview</li>
-                <li key="wrapped">Wrapped</li>
-              </ul>
-            </div>
-          </DropdownButton>
-        </div>
-        <section className="hsp-detail-panel__visualisation">
-          <section className="hsp-label">Alignment</section>
-          <protvista-manager
-            ref={managerRef}
-            attributes="displaystart displayend"
-          >
-            <protvista-navigation length={hsp_align_len} />
-            <protvista-msa
-              ref={setMSAAttributes}
-              length={hsp_align_len}
-              colorscheme={highlightProperty}
-            />
-          </protvista-manager>
-          {/* 
+        )}
+        <DropdownButton label="View" className="tertiary">
+          <div className="dropdown-menu__content">
+            <ul>
+              <li key="overview">Overview</li>
+              <li key="wrapped">Wrapped</li>
+            </ul>
+          </div>
+        </DropdownButton>
+      </div>
+      <section className="hsp-detail-panel__visualisation">
+        <section className="hsp-label">Alignment</section>
+        <protvista-manager
+          ref={managerRef}
+          attributes="displaystart displayend"
+        >
+          <protvista-navigation length={hsp_align_len} />
+          <protvista-msa
+            ref={setMSAAttributes}
+            length={hsp_align_len}
+            colorscheme={highlightProperty}
+          />
+        </protvista-manager>
+        {/* 
           TODO listen to "highlight" event from block above and set on these 2 tracks,
           working as protvista-manager
           */}
-          {/* Query track */}
-          <section className="hsp-label">Query</section>
-          <protvista-track
-            height="30"
-            ref={setQueryTrackData}
-            length={hitLength}
-            layout="overlapping"
-            highlight={highlightPosition}
-          />
-          {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
-          <section className="hsp-label">
-            <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
-          </section>
-          <protvista-track
-            height="30"
-            ref={setMatchTrackData}
-            length={hitLength}
-            layout="overlapping"
-            highlight={highlightPosition}
-          />
-          <section className="hsp-label">**Feature type**</section>
-          <protvista-track
-            // height="10"
-            ref={setFeatureTrackData}
-            length={hitLength}
-            layout="non-overlapping"
-            highlight={highlightPosition}
-          />
+        {/* Query track */}
+        <section className="hsp-label">Query</section>
+        <protvista-track
+          height="30"
+          ref={setQueryTrackData}
+          length={hitLength}
+          layout="overlapping"
+          highlight={highlightPosition}
+        />
+        {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
+        <section className="hsp-label">
+          <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
         </section>
-      </>
+        <protvista-track
+          height="30"
+          ref={setMatchTrackData}
+          length={hitLength}
+          layout="overlapping"
+          highlight={highlightPosition}
+        />
+        <section className="hsp-label">**Feature type**</section>
+        <protvista-track
+          // height="10"
+          ref={setFeatureTrackData}
+          length={hitLength}
+          layout="non-overlapping"
+          highlight={highlightPosition}
+        />
+      </section>
     </SlidingPanel>
   );
 };
