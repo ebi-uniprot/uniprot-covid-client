@@ -1,4 +1,6 @@
 .hsp-detail-panel {
+  height: auto;
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -9,6 +11,7 @@
   &__visualisation {
     display: grid;
     grid-template-columns: 1fr 9fr;
+    margin-bottom: 1em;
   }
 }
 .hsp-label {

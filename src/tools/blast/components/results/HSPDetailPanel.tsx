@@ -234,7 +234,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   }
 
   return (
-    <SlidingPanel position="bottom">
+    <SlidingPanel position="bottom" className="hsp-detail-panel">
       <>
         <div className="hsp-detail-panel__header">
           <h4>{title}</h4>
