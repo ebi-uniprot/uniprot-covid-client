@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react';
-import { generatePath } from 'react-router-dom';
+import React from 'react';
+import { Link, generatePath } from 'react-router-dom';
+
 import {
   MessageFormat,
   MessageLevel,
   MessageTag,
 } from '../../messages/types/messagesTypes';
-import { Location, LocationToPath } from '../../app/config/urls';
-import { Job } from '../blast/types/blastJob';
+
+import { Location, jobTypeToPath } from '../../app/config/urls';
+
+import { Job } from '../types/toolsJob';
 
 const parseXML = (xml: string) => {
   return new window.DOMParser().parseFromString(xml, 'text/xml');
@@ -64,17 +67,64 @@ export const getJobMessage = ({
     jobName = '';
   }
 
-  const href =
-    'remoteID' in job &&
-    generatePath(LocationToPath[Location.BlastResult], { id: job.remoteID });
+  let href;
+  if ('remoteID' in job) {
+    const pathTemplate = jobTypeToPath(job.type, true);
+    if (pathTemplate) {
+      href = generatePath(pathTemplate, {
+        id: job.remoteID,
+        subPage: 'overview',
+      });
+    }
+  }
+  let hitsMessage = '';
+  if (typeof nHits !== 'undefined') {
+    hitsMessage = `, found ${nHits} hit${nHits === 1 ? '' : 's'}`;
+  }
+
   return {
     ...message,
     content: (
-      <Fragment>
-        Job {href ? <a href={href}>{jobName}</a> : { jobName }}
-        {` finished, found ${nHits} hit${nHits === 1 ? '' : 's'}`}
-      </Fragment>
+      <>
+        {job.type} job {href ? <Link to={href}>{jobName}</Link> : { jobName }}
+        {` finished${hitsMessage}`}
+      </>
     ),
     level: MessageLevel.SUCCESS,
   };
+};
+
+export const findSequenceSegments = (seq: string) => {
+  const ranges: number[][] = [];
+  const newRange = () => ({
+    start: null,
+    end: null,
+  });
+
+  type SegmentRange = {
+    start: number | null;
+    end: number | null;
+  };
+
+  let range: SegmentRange = newRange();
+
+  [...seq].forEach((ch, i) => {
+    if (ch !== '-') {
+      if (range.start === null) {
+        range.start = i + 1;
+      }
+    } else if (range.start !== null && range.end === null) {
+      range.end = i;
+      ranges.push([range.start, range.end]);
+      range = newRange();
+    }
+
+    if (i === seq.length - 1 && range.start !== null && range.end === null) {
+      range.end = i + 1;
+      ranges.push([range.start as number, range.end as number]);
+      range = newRange();
+    }
+  });
+
+  return ranges;
 };

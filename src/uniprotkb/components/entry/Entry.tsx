@@ -34,6 +34,9 @@ import EntryPublications from './EntryPublications';
 import EntryMain from './EntryMain';
 import EntryExternalLinks from './EntryExternalLinks';
 
+import BlastButton from '../../../shared/components/action-buttons/Blast';
+import AlignButton from '../../../shared/components/action-buttons/Align';
+import AddToBasketButton from '../../../shared/components/action-buttons/AddToBasket';
 import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
 import ObsoleteEntryPage from '../../../shared/components/error-pages/ObsoleteEntryPage';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
@@ -48,6 +51,11 @@ import uniProtKbConverter, {
   UniProtkbInactiveEntryModel,
   UniProtkbAPIModel,
 } from '../../adapters/uniProtkbConverter';
+import {
+  CommentType,
+  AlternativeProductsComment,
+  Isoform,
+} from '../../types/commentTypes';
 
 import { hasContent, hasExternalLinks } from '../../utils';
 import apiUrls from '../../config/apiUrls';
@@ -117,6 +125,22 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
         : !hasContent(transformedData[section.name]),
   }));
 
+  const listOfIsoformAccessions =
+    data.comments
+      ?.filter(
+        (comment) => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
+      )
+      ?.map((comment) =>
+        (comment as AlternativeProductsComment).isoforms.map(
+          (isoform) => (isoform as Isoform).isoformIds
+        )
+      )
+      ?.flat(2)
+      ?.filter(
+        (maybeAccession: string | undefined): maybeAccession is string =>
+          typeof maybeAccession === 'string'
+      ) || [];
+
   const displayMenuData = [
     {
       name: 'Entry',
@@ -128,12 +152,10 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
       exact: true,
       actionButtons: (
         <div className="button-group">
-          <button type="button" className="button tertiary">
-            Blast
-          </button>
-          <button type="button" className="button tertiary">
-            Align
-          </button>
+          <BlastButton selectedEntries={[accession]} />
+          <AlignButton
+            selectedEntries={[accession, ...listOfIsoformAccessions]}
+          />
           <DropdownButton
             label={
               <Fragment>
@@ -161,9 +183,7 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
               </ul>
             </div>
           </DropdownButton>
-          <button type="button" className="button tertiary">
-            Add
-          </button>
+          <AddToBasketButton selectedEntries={[accession]} />
         </div>
       ),
       mainContent: <EntryMain transformedData={transformedData} />,

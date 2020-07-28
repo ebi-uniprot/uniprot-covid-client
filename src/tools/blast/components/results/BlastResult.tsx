@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState, lazy, Suspense } from 'react';
-import { Link, useRouteMatch, useHistory } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
@@ -11,6 +11,14 @@ import BlastResultsButtons from './BlastResultsButtons';
 import useDataApi, {
   UseDataAPIState,
 } from '../../../../shared/hooks/useDataApi';
+import {
+  getParamsFromURL,
+  URLResultParams,
+} from '../../../../uniprotkb/utils/resultsUtils';
+import {
+  getFacetParametersFromBlastHits,
+  filterBlastDataForResults,
+} from '../../utils/blastFacetDataUtils';
 
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
@@ -18,11 +26,13 @@ import { Location, LocationToPath } from '../../../../app/config/urls';
 import blastUrls from '../../config/blastUrls';
 import { getAPIQueryUrl } from '../../../../uniprotkb/config/apiUrls';
 
-import { BlastResults, BlastHit } from '../../types/blastResults';
+import { BlastResults, BlastHit, BlastFacet } from '../../types/blastResults';
 import Response from '../../../../uniprotkb/types/responseTypes';
+import { JobTypes } from '../../../types/toolsJobTypes';
 import { PublicServerParameters } from '../../types/blastServerParameters';
 // what we import are types, even if they are in adapter file
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
+import HSPDetailPanel, { HSPDetailPanelProps } from './HSPDetailPanel';
 
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
@@ -98,9 +108,10 @@ const useParamsData = (
 };
 
 const getEnrichApiUrl = (blastData?: BlastResults) => {
-  if (!blastData) {
+  if (!blastData || blastData.hits.length === 0) {
     return null;
   }
+
   return getAPIQueryUrl(
     blastData.hits.map((hit) => `(accession:${hit.hit_acc})`).join(' OR '),
     undefined,
@@ -138,8 +149,14 @@ const enrich = (
 const BlastResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.BlastResult]) as Match;
+  const location = useLocation();
 
   const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
+  const [urlParams, setUrlParams] = useState<URLResultParams>();
+  const [
+    hspDetailPanel,
+    setHspDetailPanel,
+  ] = useState<HSPDetailPanelProps | null>();
 
   // data from blast
   const {
@@ -147,11 +164,10 @@ const BlastResult = () => {
     data: blastData,
     error: blastError,
     status: blastStatus,
-  } = useDataApi<BlastResults>(
-    blastUrls.resultUrl(match.params.id, 'jdp?format=json')
-  );
+  } = useDataApi<BlastResults>(blastUrls.resultUrl(match.params.id, 'json'));
 
   useEffect(() => {
+    // TODO: investigate why /overview keeps recursively appended
     if (!match.params.subPage) {
       history.replace(
         history.createHref({
@@ -162,12 +178,27 @@ const BlastResult = () => {
     }
   }, [match.params.subPage, history]);
 
+  useEffect(() => {
+    setUrlParams(getParamsFromURL(location.search));
+  }, [location.search, blastData]);
+
+  // BLAST results filtered by BLAST facets (ie score, e-value, identity)
+  const filteredBlastData =
+    blastData &&
+    urlParams &&
+    filterBlastDataForResults(blastData, urlParams.selectedFacets);
+
   // corresponding data from API
   const { loading: apiLoading, data: apiData } = useDataApi<Response['data']>(
-    useMemo(() => getEnrichApiUrl(blastData), [blastData])
+    useMemo(() => getEnrichApiUrl(filteredBlastData || undefined), [
+      filteredBlastData,
+    ])
   );
 
-  const data = useMemo(() => enrich(blastData, apiData), [blastData, apiData]);
+  const data = useMemo(() => enrich(filteredBlastData || undefined, apiData), [
+    filteredBlastData,
+    apiData,
+  ]);
 
   const inputParamsData = useParamsData(match.params.id);
 
@@ -181,6 +212,14 @@ const BlastResult = () => {
     );
   };
 
+  const histogramSettings =
+    urlParams &&
+    getFacetParametersFromBlastHits(
+      urlParams.selectedFacets,
+      urlParams.activeFacet as BlastFacet,
+      blastData && blastData.hits
+    );
+
   if (blastLoading) {
     return <Loader />;
   }
@@ -190,7 +229,14 @@ const BlastResult = () => {
   }
 
   // Deciding what should be displayed on the sidebar
-  const facetsSidebar = <BlastResultSidebar loading={apiLoading} data={data} />;
+  const facetsSidebar = (
+    <BlastResultSidebar
+      loading={apiLoading}
+      data={data}
+      histogramSettings={histogramSettings}
+    />
+  );
+
   const emptySidebar = (
     <div className="sidebar-layout__sidebar-content--empty" />
   );
@@ -212,6 +258,11 @@ const BlastResult = () => {
       jobId={match.params.id}
       selectedEntries={selectedEntries}
       inputParamsData={inputParamsData.data}
+      nHits={blastData.hits.length}
+      isTableResultsFiltered={
+        typeof data?.hits.length !== 'undefined' &&
+        data?.hits.length !== blastData.hits.length
+      }
     />
   );
 
@@ -222,68 +273,81 @@ const BlastResult = () => {
       }
       sidebar={sidebar}
     >
-      <Tabs active={match.params.subPage}>
-        <Tab
-          id="overview"
-          title={
-            <Link to={`/blast/${match.params.id}/overview`}>Overview</Link>
-          }
-        >
-          {actionBar}
-          <Suspense fallback={<Loader />}>
-            <BlastResultTable
-              data={data || blastData}
-              selectedEntries={selectedEntries}
-              handleSelectedEntries={handleSelectedEntries}
-            />
-          </Suspense>
-        </Tab>
-        <Tab
-          id="taxonomy"
-          title={
-            <Link to={`/blast/${match.params.id}/taxonomy`}>Taxonomy</Link>
-          }
-        >
-          {actionBar}
-          <BlastResultTaxonomy data={data} />
-        </Tab>
-        <Tab
-          id="hit-distribution"
-          title={
-            <Link to={`/blast/${match.params.id}/hit-distribution`}>
-              Hit Distribution
-            </Link>
-          }
-        >
-          {actionBar}
-          <BlastResultHitDistribution hits={blastData.hits} />
-        </Tab>
-        <Tab
-          id="text-output"
-          title={
-            <Link to={`/blast/${match.params.id}/text-output`}>
-              Text Output
-            </Link>
-          }
-        >
-          <Suspense fallback={<Loader />}>
-            <BlastResultTextOutput id={match.params.id} />
-          </Suspense>
-        </Tab>
-        <Tab
-          id="tool-input"
-          title={
-            <Link to={`/blast/${match.params.id}/tool-input`}>Tool Input</Link>
-          }
-        >
-          <Suspense fallback={<Loader />}>
-            <BlastResultToolInput
-              id={match.params.id}
-              inputParamsData={inputParamsData}
-            />
-          </Suspense>
-        </Tab>
-      </Tabs>
+      <>
+        <Tabs active={match.params.subPage}>
+          <Tab
+            id="overview"
+            title={
+              <Link to={`/blast/${match.params.id}/overview`}>Overview</Link>
+            }
+          >
+            {actionBar}
+            <Suspense fallback={<Loader />}>
+              <BlastResultTable
+                loading={apiLoading}
+                data={data}
+                selectedEntries={selectedEntries}
+                handleSelectedEntries={handleSelectedEntries}
+                setHspDetailPanel={setHspDetailPanel}
+              />
+            </Suspense>
+          </Tab>
+          <Tab
+            id="taxonomy"
+            title={
+              <Link to={`/blast/${match.params.id}/taxonomy`}>Taxonomy</Link>
+            }
+          >
+            {actionBar}
+            <BlastResultTaxonomy data={data} />
+          </Tab>
+          <Tab
+            id="hit-distribution"
+            title={
+              <Link to={`/blast/${match.params.id}/hit-distribution`}>
+                Hit Distribution
+              </Link>
+            }
+          >
+            {actionBar}
+            <BlastResultHitDistribution hits={blastData.hits} />
+          </Tab>
+          <Tab
+            id="text-output"
+            title={
+              <Link to={`/blast/${match.params.id}/text-output`}>
+                Text Output
+              </Link>
+            }
+          >
+            <Suspense fallback={<Loader />}>
+              <BlastResultTextOutput id={match.params.id} />
+            </Suspense>
+          </Tab>
+          <Tab
+            id="tool-input"
+            title={
+              <Link to={`/blast/${match.params.id}/tool-input`}>
+                Tool Input
+              </Link>
+            }
+          >
+            <Suspense fallback={<Loader />}>
+              <BlastResultToolInput
+                id={match.params.id}
+                jobType={JobTypes.BLAST}
+                inputParamsData={inputParamsData}
+              />
+            </Suspense>
+          </Tab>
+        </Tabs>
+        {hspDetailPanel && (
+          <HSPDetailPanel
+            {...hspDetailPanel}
+            onClose={() => setHspDetailPanel(null)}
+          />
+        )}
+      </>
     </SideBarLayout>
   );
 };

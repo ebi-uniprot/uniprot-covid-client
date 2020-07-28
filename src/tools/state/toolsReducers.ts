@@ -1,14 +1,15 @@
 import { ActionType } from 'typesafe-actions';
 import { v1 } from 'uuid';
 
-import { CreatedJob } from '../blast/types/blastJob';
-import { Status } from '../blast/types/blastStatuses';
-import { Stores } from '../utils/stores';
-
 import JobStore from '../utils/storage';
 
 import * as toolsActions from './toolsActions';
+
 import toolsInitialState, { ToolsState } from './toolsInitialState';
+
+import { CreatedJob, Job } from '../types/toolsJob';
+import { Status } from '../types/toolsStatuses';
+import { Stores } from '../utils/stores';
 
 export type ToolsAction = ActionType<typeof toolsActions>;
 
@@ -17,7 +18,7 @@ const store = new JobStore(Stores.METADATA);
 const toolsReducers = (
   state: ToolsState = toolsInitialState,
   action: ToolsAction
-) => {
+): ToolsState => {
   switch (action.type) {
     // rehydrate jobs
     case toolsActions.REHYDRATE_JOBS: {
@@ -38,6 +39,7 @@ const toolsReducers = (
         parameters: action.payload.parameters,
         timeCreated: now,
         timeLastUpdate: now,
+        saved: false,
       };
 
       store.set(newJob.internalID, newJob);
@@ -54,18 +56,17 @@ const toolsReducers = (
       return newState;
     }
 
-    // update job
-    case toolsActions.UPDATE_JOB:
-      store.set(action.payload.job.internalID, action.payload.job);
-
-      return { ...state, [action.payload.job.internalID]: action.payload.job };
-
-    // update job title
-    case toolsActions.UPDATE_JOB_TITLE: {
+    // update job from internal ID and partial job info
+    case toolsActions.UPDATE_JOB: {
+      const originalJob = state[action.payload.id];
+      // in case we try to update a job that doesn't exist anymore, just bail
+      if (!originalJob) {
+        return state;
+      }
       const updatedJob = {
-        ...state[action.payload.id],
-        title: action.payload.title,
-      };
+        ...originalJob,
+        ...action.payload.partialJob,
+      } as Job;
 
       store.set(action.payload.id, updatedJob);
 

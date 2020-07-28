@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { FC, Fragment, useCallback, useState } from 'react';
-import { DataTable, DENSITY_COMPACT, Chip } from 'franklin-sites';
+import { DataTable, DENSITY_COMPACT, Chip, Loader } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import ProtvistaTrack from 'protvista-track';
 import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
-import '../styles/BlastResultTable.scss';
+import './styles/BlastResultTable.scss';
+import { HSPDetailPanelProps } from './HSPDetailPanel';
 
 const BlastSummaryTrack: FC<{
   hsp: BlastHsp;
   queryLength: number;
   hitLength: number;
-}> = ({ hsp, queryLength, hitLength }) => {
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
+  hitAccession: string;
+}> = ({ hsp, queryLength, hitLength, setHspDetailPanel, hitAccession }) => {
   const {
     hsp_query_from,
     hsp_query_to,
@@ -66,6 +69,15 @@ const BlastSummaryTrack: FC<{
           height={10}
           ref={setTrackData}
           title={`Start: ${hsp_query_from}\nEnd: ${hsp_query_to}\nHit Length: ${hitLength}`}
+          onClick={() => {
+            setHspDetailPanel({
+              hsp,
+              hitAccession,
+              onClose: () => null,
+              queryLength,
+              hitLength,
+            });
+          }}
         />
       </section>
       <span className="data-table__blast-hsp__blast-params">
@@ -81,7 +93,9 @@ const BlastSummaryHsps: FC<{
   hsps: BlastHsp[];
   queryLength: number;
   hitLength: number;
-}> = ({ hsps, queryLength, hitLength }) => {
+  hitAccession: string;
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
+}> = ({ hsps, queryLength, hitLength, setHspDetailPanel, hitAccession }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const hspsOrderedByScore = hsps.sort(
@@ -95,6 +109,8 @@ const BlastSummaryHsps: FC<{
           hsp={hspsOrderedByScore[0]}
           queryLength={queryLength}
           hitLength={hitLength}
+          hitAccession={hitAccession}
+          setHspDetailPanel={setHspDetailPanel}
         />
         {hspsOrderedByScore.length > 1 &&
           !collapsed &&
@@ -106,6 +122,8 @@ const BlastSummaryHsps: FC<{
                 queryLength={queryLength}
                 hitLength={hitLength}
                 key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+                hitAccession={hitAccession}
+                setHspDetailPanel={setHspDetailPanel}
               />
             ))}
       </div>
@@ -119,10 +137,22 @@ const BlastSummaryHsps: FC<{
 };
 
 const BlastResultTable: FC<{
-  data: BlastResults;
+  data: BlastResults | null;
   selectedEntries: string[];
   handleSelectedEntries: (rowId: string) => void;
-}> = ({ data, selectedEntries, handleSelectedEntries }) => {
+  setHspDetailPanel: (props: HSPDetailPanelProps) => void;
+  loading: boolean;
+}> = ({
+  data,
+  selectedEntries,
+  handleSelectedEntries,
+  setHspDetailPanel,
+  loading,
+}) => {
+  if (loading) {
+    return <Loader />;
+  }
+
   if (!data) {
     return null;
   }
@@ -161,11 +191,13 @@ const BlastResultTable: FC<{
       label: 'Alignment',
       name: 'alignment',
       width: '40vw',
-      render: ({ hit_hsps, hit_len }: BlastHit) => (
+      render: ({ hit_hsps, hit_len, hit_acc }: BlastHit) => (
         <BlastSummaryHsps
           hsps={hit_hsps}
           queryLength={data.query_len}
           hitLength={hit_len}
+          hitAccession={hit_acc}
+          setHspDetailPanel={setHspDetailPanel}
         />
       ),
     },

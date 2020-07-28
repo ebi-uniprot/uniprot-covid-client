@@ -17,15 +17,17 @@ import {
   BinIcon,
   SpinnerIcon,
   EditIcon,
+  WarningTriangleIcon,
 } from 'franklin-sites';
 
-import { Job, FinishedJob } from '../../blast/types/blastJob';
-import { Status } from '../../blast/types/blastStatuses';
+import { updateJob, deleteJob } from '../../state/toolsActions';
 
-import { updateJobTitle, deleteJob } from '../../state/toolsActions';
+import { jobTypeToPath } from '../../../app/config/urls';
 
-import { LocationToPath, Location } from '../../../app/config/urls';
 import { getBEMClassName as bem } from '../../../shared/utils/utils';
+
+import { Job } from '../../types/toolsJob';
+import { Status } from '../../types/toolsStatuses';
 
 import './styles/Dashboard.scss';
 
@@ -45,7 +47,7 @@ const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   const handleBlur = () => {
     const cleanedText = text.trim();
     if (cleanedText !== children) {
-      dispatch(updateJobTitle(id, text));
+      dispatch(updateJob(id, { title: text }));
     }
   };
 
@@ -54,19 +56,18 @@ const Name: FC<NameProps> = ({ children, id }: NameProps) => {
   }, []);
 
   return (
-    <>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <label onClick={stopPropagation} aria-label="job name">
       <input
-        onClick={stopPropagation}
         onBlur={handleBlur}
         onChange={handleChange}
         autoComplete="off"
         type="text"
         value={text}
-        aria-label="job name"
         maxLength={22}
       />
       <EditIcon width="2ch" />
-    </>
+    </label>
   );
 };
 
@@ -77,7 +78,8 @@ interface TimeProps {
 const Time: FC<TimeProps> = ({ children }) => {
   const date = new Date(children);
   const YYYY = date.getFullYear();
-  const MM = `${date.getMonth()}`.padStart(2, '0');
+  // date.getMonth() starts at 0 for January
+  const MM = `${date.getMonth() + 1}`.padStart(2, '0');
   const DD = `${date.getDate()}`.padStart(2, '0');
   const hh = `${date.getHours()}`.padStart(2, '0');
   const mm = `${date.getMinutes()}`.padStart(2, '0');
@@ -93,19 +95,12 @@ const Time: FC<TimeProps> = ({ children }) => {
 };
 
 interface NiceStatusProps {
-  children: Status;
-  hits?: FinishedJob['data']['hits'];
-  queriedHits: FinishedJob['parameters']['hits'];
-  errorDescription?: string;
+  job: Job;
+  jobLink?: string;
 }
 
-const NiceStatus: FC<NiceStatusProps> = ({
-  children,
-  hits,
-  queriedHits,
-  errorDescription,
-}) => {
-  switch (children) {
+const NiceStatus: FC<NiceStatusProps> = ({ job, jobLink }) => {
+  switch (job.status) {
     case Status.CREATED:
     case Status.RUNNING:
       return (
@@ -122,22 +117,36 @@ const NiceStatus: FC<NiceStatusProps> = ({
       return (
         <>
           Failed
-          <br />
-          <span className="dashboard__body__notify_message">
-            {errorDescription}
-          </span>
+          {'errorDescription' in job && (
+            <>
+              <br />
+              <span className="dashboard__body__notify_message">
+                {job.errorDescription}
+              </span>
+            </>
+          )}
         </>
       );
+    case Status.NOT_FOUND:
+      return <>Job not found on the server</>;
     case Status.FINISHED: {
-      if (hits === queriedHits) return <>Successful</>;
-      const hitText = `hit${hits === 1 ? '' : 's'}`;
+      const link = jobLink ? <Link to={jobLink}>Successful</Link> : null;
+      if (
+        // not a blast job, or
+        !('hits' in job.data && 'hits' in job.parameters) ||
+        // same number of hits than queried
+        job.data.hits === job.parameters.hits
+      ) {
+        return link;
+      }
+      const hitText = `hit${job.data.hits === 1 ? '' : 's'}`;
       return (
         <>
-          Successful{' '}
+          {link}{' '}
           <span
-            title={`${hits} ${hitText} results found instead of the requested ${queriedHits}`}
+            title={`${job.data.hits} ${hitText} results found instead of the requested ${job.parameters.hits}`}
           >
-            ({hits} {hitText})
+            ({job.data.hits} {hitText})
           </span>
         </>
       );
@@ -148,21 +157,35 @@ const NiceStatus: FC<NiceStatusProps> = ({
 };
 
 interface ActionsProps {
-  parameters: Job['parameters'];
+  job: Job;
   onDelete(): void;
 }
 
-const Actions: FC<ActionsProps> = ({ parameters, onDelete }) => {
+const Actions: FC<ActionsProps> = ({ job, onDelete }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <span className="dashboard__body__actions">
       <button
         type="button"
+        title="keep this job"
+        onClick={(event) => {
+          event.stopPropagation();
+          dispatch(updateJob(job.internalID, { saved: !job.saved }));
+        }}
+      >
+        {job.saved ? '★' : '☆'}
+      </button>
+      <button
+        type="button"
         title="resubmit this job"
         onClick={(event) => {
           event.stopPropagation();
-          history.push(LocationToPath[Location.Blast], { parameters });
+          const formPath = jobTypeToPath(job.type);
+          if (formPath) {
+            history.push(formPath, { parameters: job.parameters });
+          }
         }}
       >
         <ReSubmitIcon />
@@ -212,21 +235,22 @@ const animationOptionsForStatusUpdate: KeyframeAnimationOptions = {
 
 interface RowProps {
   job: Job;
+  hasExpired?: boolean;
 }
 
 interface CustomLocationState {
-  parameters?: Job['parameters'];
+  parameters?: Job['parameters'][];
 }
 
-const Row: FC<RowProps> = memo(({ job }) => {
+const Row: FC<RowProps> = memo(({ job, hasExpired }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const ref = useRef<HTMLElement>(null);
   const firstTime = useRef<boolean>(true);
 
   let jobLink: string | undefined;
-  if ('remoteID' in job && job.status === Status.FINISHED) {
-    jobLink = `${LocationToPath[Location.Blast]}/${job.remoteID}/overview`;
+  if ('remoteID' in job && job.status === Status.FINISHED && !hasExpired) {
+    jobLink = `${jobTypeToPath(job.type)}/${job.remoteID}/overview`;
   }
 
   const handleClick = () => {
@@ -251,10 +275,13 @@ const Row: FC<RowProps> = memo(({ job }) => {
   // it means we just arrived from a submission form page and this is the job
   // that was just added, animate it to have it visually represented as "new"
   useLayoutEffect(() => {
+    if (!(ref.current && 'animate' in ref.current)) {
+      return;
+    }
     if (
-      job.parameters !==
-        (history.location?.state as CustomLocationState)?.parameters ||
-      !(ref.current && 'animate' in ref.current)
+      !(history.location?.state as CustomLocationState)?.parameters?.includes(
+        job.parameters
+      )
     ) {
       return;
     }
@@ -282,37 +309,40 @@ const Row: FC<RowProps> = memo(({ job }) => {
       ref={ref}
       className={bem({
         b: 'card',
-        m:
+        m: [
           (job.status === Status.FAILURE || job.status === Status.ERRORED) &&
-          'failure',
+            'failure',
+          Boolean(hasExpired) && 'expired',
+        ],
       })}
     >
       <span className="dashboard__body__name">
         <Name id={job.internalID}>{job.title}</Name>
       </span>
       <span className="dashboard__body__type">{job.type}</span>
-      <span className="dashboard__body__time">
+      <span
+        className="dashboard__body__time"
+        title={
+          hasExpired
+            ? 'This job has expired and its data is no longer available'
+            : undefined
+        }
+      >
         {'timeSubmitted' in job && job.timeSubmitted && (
-          <Time>{job.timeSubmitted}</Time>
+          <>
+            <Time>{job.timeSubmitted}</Time>
+            {hasExpired && <WarningTriangleIcon width="1em" />}
+          </>
         )}
       </span>
       <span className="dashboard__body__status">
-        <NiceStatus
-          hits={'data' in job ? job.data.hits : undefined}
-          queriedHits={job.parameters.hits}
-          errorDescription={
-            'errorDescription' in job ? job.errorDescription : undefined
-          }
-        >
-          {job.status}
-        </NiceStatus>
+        <NiceStatus job={job} jobLink={jobLink} />
       </span>
       <span className="dashboard__body__actions">
-        <Actions parameters={job.parameters} onDelete={handleDelete} />
+        <Actions job={job} onDelete={handleDelete} />
       </span>
       <span className="dashboard__body__id">
-        {'remoteID' in job &&
-          (jobLink ? <Link to={jobLink}>{job.remoteID}</Link> : job.remoteID)}
+        {'remoteID' in job && job.remoteID}
       </span>
     </Card>
   );

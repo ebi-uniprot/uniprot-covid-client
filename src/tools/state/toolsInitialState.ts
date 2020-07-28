@@ -1,8 +1,8 @@
-import { Job } from '../blast/types/blastJob';
+import { Job } from '../types/toolsJob';
 
-export interface ToolsState {
+export type ToolsState = {
   [key: string]: Job;
-}
+};
 
 const toolsInitialState: ToolsState = {};
 

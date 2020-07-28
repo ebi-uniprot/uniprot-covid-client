@@ -2,9 +2,9 @@
 
 exports[`getJobMessage should create a success message object 1`] = `
 <DocumentFragment>
-  Job 
+  blast job 
   <a
-    href="/blast/ncbiblast-R20200522-953245-6299-98843150-p1m"
+    href="/blast/ncbiblast-R20200522-953245-6299-98843150-p1m/overview"
   >
     "my job title"
   </a>

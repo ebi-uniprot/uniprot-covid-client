@@ -5,7 +5,7 @@
     font-weight: bold;
     display: grid;
     /* this needs to be the same as below to keep visual alignment */
-    grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+    grid-template-columns: 10ch 27ch 18ch 20ch 1fr;
     grid-gap: 1ch;
   }
 
@@ -13,6 +13,35 @@
     & .card--failure {
       border: 1px solid $colour-failure;
       border-left: 0.25rem solid $colour-failure;
+
+      & * {
+        outline-color: $colour-failure;
+      }
+
+      & .dashboard__body__status {
+        color: $colour-failure;
+
+        & .dashboard__body__notify_message {
+          color: initial;
+        }
+      }
+    }
+
+    & .card--expired {
+      & .dashboard__body__name,
+      & .dashboard__body__type,
+      & .dashboard__body__status,
+      & .dashboard__body__id {
+        opacity: 0.5;
+      }
+
+      & .card__content {
+        cursor: not-allowed;
+      }
+
+      & .dashboard__body__actions {
+        opacity: 1;
+      }
     }
 
     & .card:nth-of-type(2n + 1) {
@@ -37,9 +66,9 @@
       user-select: none;
       display: grid;
       grid-template-areas:
-        'name type time status actions'
+        'type name time status actions'
         'id   id   time status actions';
-      grid-template-columns: 27ch 10ch 18ch 20ch 1fr;
+      grid-template-columns: 10ch 27ch 18ch 20ch 1fr;
       grid-gap: 1ch;
       grid-template-rows: 1fr 1fr;
     }
@@ -51,6 +80,10 @@
       width: 25ch;
       display: flex;
 
+      & label {
+        display: inline-flex;
+      }
+
       & input {
         background: transparent;
         box-shadow: none;
@@ -60,6 +93,10 @@
         margin: 0;
         overflow: scroll;
         flex: 1;
+
+        &:not(:focus) {
+          border: solid 1px transparent;
+        }
       }
 
       & svg {
@@ -77,6 +114,14 @@
 
     &__time {
       grid-area: time;
+
+      display: flex;
+      align-items: flex-start;
+
+      & svg {
+        margin: 0.4em;
+        color: #f0c135;
+      }
     }
 
     &__status {
@@ -85,6 +130,7 @@
 
     &__actions {
       grid-area: actions;
+      align-self: start;
       justify-self: end;
     }
 

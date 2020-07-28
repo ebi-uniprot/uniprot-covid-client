@@ -1,38 +1,34 @@
-import { Middleware, Store, Dispatch } from 'redux';
-import { schedule, sleep } from 'timing-functions';
+import { Middleware, Dispatch, AnyAction } from 'redux';
+import { schedule, sleep, frame } from 'timing-functions';
 
-import { CreatedJob, RunningJob } from '../blast/types/blastJob';
-import { Status } from '../blast/types/blastStatuses';
+import { CREATE_JOB, REHYDRATE_JOBS, deleteJob } from './toolsActions';
 
-import { CREATE_JOB, REHYDRATE_JOBS } from './toolsActions';
+import rehydrateJobs from './rehydrateJobs';
+import getCheckJobStatus from './getCheckJobStatus';
+import getSubmitJob from './getSubmitJob';
 
-import { ToolsState } from './toolsInitialState';
+import { CreatedJob, RunningJob } from '../types/toolsJob';
+import { Status } from '../types/toolsStatuses';
 
-import rehydrateJobs from '../utils/rehydrateJobs';
-import getCheckJobStatus from '../utils/getCheckJobStatus';
-import getSubmitJob from '../utils/getSubmitJob';
+import { RootState } from '../../app/state/rootInitialState';
 
 const POLLING_INTERVAL = 1000 * 3; // 3 seconds
+const EXPIRED_INTERVAL = 1000 * 60 * 5; // 5 minutes
+const AUTO_DELETE_TIME = 1000 * 60 * 60 * 24 * 14; // 2 weeks
 
-const toolsMiddleware: Middleware = (store) => {
+const toolsMiddleware: Middleware<Dispatch<AnyAction>, RootState> = (store) => {
   const { dispatch, getState } = store;
 
   // rehydrate jobs, run once in the application lifetime
   rehydrateJobs(dispatch as Dispatch);
 
-  // flag to avoid multiple pollJobs loop being scheduled
-  let scheduledPollJobs = false;
+  const checkJobStatus = getCheckJobStatus(store);
 
-  const checkJobStatus = getCheckJobStatus(store as Store);
+  const submitJob = getSubmitJob(store);
 
-  const submitJob = getSubmitJob(store as Store);
-
-  // main loop
+  // main loop to poll job statuses
   const pollJobs = async () => {
-    // Wait for browser idleness
-    await schedule();
-
-    const toolsState: ToolsState = getState().tools;
+    const toolsState = getState().tools;
 
     const jobsToSubmit = Object.values(toolsState).filter(
       (job) => job.status === Status.CREATED
@@ -43,7 +39,7 @@ const toolsMiddleware: Middleware = (store) => {
 
     // nothing to check, early exit, no recursion
     if (!(jobsToSubmit.length || jobsToPoll.length)) {
-      scheduledPollJobs = false;
+      pollJobs.scheduled = false;
       return;
     }
 
@@ -58,25 +54,72 @@ const toolsMiddleware: Middleware = (store) => {
     }
 
     // reset flag
-    scheduledPollJobs = false;
+    pollJobs.scheduled = false;
 
     await sleep(POLLING_INTERVAL);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    schedulePollJobs();
+    pollJobs.schedule();
+  };
+  // flag to avoid multiple pollJobs loop being scheduled
+  pollJobs.scheduled = false;
+  // scheduler using the flag
+  pollJobs.schedule = async () => {
+    if (pollJobs.scheduled) {
+      return;
+    }
+    pollJobs.scheduled = true;
+    // wait for the browser to not be busy
+    await schedule();
+    // wait for a frame to be scheduled (so won't fire until tab in foreground)
+    await frame();
+    pollJobs();
   };
 
-  const schedulePollJobs = async () => {
-    if (scheduledPollJobs) return;
-    scheduledPollJobs = true;
-    await schedule(POLLING_INTERVAL);
-    pollJobs();
+  // loop to check for expired jobs
+  const expiredJobs = async () => {
+    const toolsState = getState().tools;
+
+    const now = Date.now();
+    for (const [internalID, job] of Object.entries(toolsState)) {
+      if (now - job.timeCreated > AUTO_DELETE_TIME && !job.saved) {
+        // job is older than 7 days
+        dispatch(deleteJob(internalID));
+      } else if (job.status === Status.FINISHED) {
+        // job is finished and should still be present on the server
+        // eslint-disable-next-line no-await-in-loop
+        await checkJobStatus(job);
+      }
+    }
+
+    // reset flag
+    expiredJobs.scheduled = false;
+
+    await sleep(EXPIRED_INTERVAL);
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    expiredJobs.schedule();
+  };
+  // flag to avoid multiple expiredJobs loop being scheduled
+  expiredJobs.scheduled = false;
+  expiredJobs.schedule = async () => {
+    if (expiredJobs.scheduled) {
+      return;
+    }
+    expiredJobs.scheduled = true;
+    // wait for the browser to not be busy
+    await schedule();
+    // wait for a frame to be scheduled (so won't fire until tab in foreground)
+    await frame();
+    expiredJobs();
   };
 
   return (next) => (action) => {
     switch (action.type) {
       case CREATE_JOB:
+        pollJobs.schedule();
+        break;
       case REHYDRATE_JOBS:
-        schedulePollJobs();
+        pollJobs.schedule();
+        expiredJobs.schedule();
         break;
       default:
       // do nothing

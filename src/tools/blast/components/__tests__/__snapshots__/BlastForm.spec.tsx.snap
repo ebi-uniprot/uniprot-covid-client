@@ -43,7 +43,7 @@ exports[`BlastForm test Renders the form 1`] = `
           Your BLAST job will be provided a default name. You may edit this name as per your choice.
         </li>
         <li>
-          Finally, click the Run BLAST button to submit your BLAST job.
+          Finally, click the "Run BLAST" button to submit your BLAST job.
         </li>
       </ul>
       <div
@@ -65,7 +65,7 @@ exports[`BlastForm test Renders the form 1`] = `
   <form>
     <fieldset>
       <section
-        class="blast-form-section__item"
+        class="tools-form-section__item"
       >
         <legend>
           Find a protein to BLAST by UniProt ID 
@@ -124,13 +124,14 @@ exports[`BlastForm test Renders the form 1`] = `
           class="sequence-submission-input"
           data-testid="sequence-submission-input"
           placeholder="MLPGLALLLL or AGTTTCCTCGGCAGCGGTAGGC"
+          spellcheck="false"
         />
       </section>
       <section
-        class="blast-form-section"
+        class="tools-form-section"
       >
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Target database"
@@ -195,7 +196,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item blast-form-section__item--taxon-select"
+          class="tools-form-section__item tools-form-section__item--taxon-select"
         >
           <label
             for="5"
@@ -241,14 +242,14 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item blast-form-section__item--selected-taxon"
+          class="tools-form-section__item tools-form-section__item--selected-taxon"
         />
       </section>
       <section
-        class="blast-form-section"
+        class="tools-form-section"
       >
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Sequence type"
@@ -271,7 +272,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Program"
@@ -312,7 +313,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="E-Threshold"
@@ -371,7 +372,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Matrix"
@@ -418,7 +419,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Filter"
@@ -441,7 +442,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Gapped"
@@ -464,7 +465,7 @@ exports[`BlastForm test Renders the form 1`] = `
           </label>
         </section>
         <section
-          class="blast-form-section__item"
+          class="tools-form-section__item"
         >
           <label
             for="Hits"
@@ -512,25 +513,29 @@ exports[`BlastForm test Renders the form 1`] = `
         </section>
       </section>
       <section
-        class="blast-form-section__item"
-      >
-        <label>
-          Name your BLAST job
-          <input
-            autocomplete="off"
-            maxlength="22"
-            name="title"
-            placeholder="my job title"
-            type="text"
-            value=""
-          />
-        </label>
-      </section>
-      <section
-        class="blast-form-section blast-form-section__main_actions"
+        class="tools-form-section"
       >
         <section
-          class="button-group blast-form-section__buttons"
+          class="tools-form-section__item"
+        >
+          <label>
+            Name your BLAST job
+            <input
+              autocomplete="off"
+              maxlength="22"
+              name="title"
+              placeholder="my job title"
+              type="text"
+              value=""
+            />
+          </label>
+        </section>
+      </section>
+      <section
+        class="tools-form-section tools-form-section__main_actions"
+      >
+        <section
+          class="button-group tools-form-section__buttons"
         >
           <input
             class="button secondary"
@@ -540,7 +545,7 @@ exports[`BlastForm test Renders the form 1`] = `
             class="button primary"
             type="submit"
           >
-            Run Blast
+            Run BLAST
           </button>
         </section>
       </section>
