@@ -6,22 +6,21 @@ import renderWithRouter from '../../../../shared/__test-helpers__/RenderWithRout
 jest.mock('../../../../shared/hooks/useDataApi', () => jest.fn());
 import useDataApi from '../../../../shared/hooks/useDataApi';
 
+const headers = { 'x-totalrecords': mockPublicationsData.results.length };
+const dataMock = {
+  loading: false,
+  data: mockPublicationsData,
+  headers,
+};
+
 describe('EntryPublications tests', () => {
   it('should call useDataApi and render', async () => {
-    const headers = { 'x-totalrecords': mockPublicationsData.results.length };
-    useDataApi.mockImplementation(() => {
-      return {
-        loading: false,
-        data: mockPublicationsData,
-        headers,
-      };
-    });
+    useDataApi.mockImplementation(() => dataMock);
     const { findByText } = renderWithRouter(
       <EntryPublications accession="P05067" />
     );
     expect(useDataApi).toHaveBeenCalled();
-    const item = await findByText(/ISOFORM APP751/);
-    // expect(item).toBeTruthy();
+    expect(await findByText(/ISOFORM APP751/)).toBeTruthy();
   });
 
   it('should render the error', async () => {

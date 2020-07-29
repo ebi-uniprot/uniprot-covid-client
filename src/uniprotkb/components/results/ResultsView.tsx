@@ -79,7 +79,15 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   });
 
   useEffect(() => {
-    if (!data) return;
+    setAllResults([]);
+    setMetaData({ total: 0, nextUrl: undefined });
+    setUrl(initialApiUrl);
+  }, [initialApiUrl]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
     const { results } = data;
     setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
@@ -119,13 +127,13 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         : SortDirection.descend;
 
     history.push(
-      getLocationObjForParams(
-        '/uniprotkb',
+      getLocationObjForParams({
+        pathname: '/uniprotkb',
         query,
         selectedFacets,
-        sortableColumn,
-        updatedSortDirection
-      )
+        sortColumn: sortableColumn,
+        sortDirection: updatedSortDirection,
+      })
     );
   };
 
