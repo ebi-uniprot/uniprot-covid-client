@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FormEvent, MouseEvent } from 'react';
 import ClauseList from './ClauseList';
 import {
   Namespace,
@@ -18,7 +18,7 @@ type AdvancedSearchProps = {
   evidences: Evidences;
   dispatchfetchEvidencesIfNeeded: (type: Evidence) => void;
   dispatchFetchSearchTermsIfNeeded: () => void;
-  handleAdvancedSubmitClick: () => void;
+  handleAdvancedSubmitClick: (event: FormEvent | MouseEvent) => void;
   dispatchAddClause: () => void;
   handleFieldSelect: (clauseId: string, field: SearchTermType) => void;
   handleInputChange: (clauseId: string, value: string, id?: string) => void;
