@@ -68,18 +68,13 @@ const Results: FC = () => {
     isStale,
   } = useDataApiWithStale<Response['data']>(initialApiUrl);
 
-  if (loading && !data) {
-    return <Loader />;
-  }
-
-  if (error || !data) {
+  if (error || !(loading || data)) {
     return <ErrorHandler status={status} />;
   }
 
-  const { facets, results } = data;
   const total = headers?.['x-totalrecords'];
 
-  if (!results || results.length === 0) {
+  if (total === 0) {
     return <NoResultsPage />;
   }
 
@@ -112,7 +107,13 @@ const Results: FC = () => {
           total={total}
         />
       }
-      sidebar={<ResultsFacets facets={facets} isStale={isStale} />}
+      sidebar={
+        loading ? (
+          <Loader />
+        ) : (
+          <ResultsFacets facets={data?.facets || []} isStale={isStale} />
+        )
+      }
     >
       <ResultsView
         columns={columns}
