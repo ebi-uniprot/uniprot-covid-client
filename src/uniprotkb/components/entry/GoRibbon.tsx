@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
+
+// NOTE: this dependency is quite big, so make sure to download this whole file
+// NOTE: ('GoRibbon.tsx') as a dynamic import to code-split it
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
+
 import '@geneontology/ribbon/es/main.scss';
 import './styles/go-ribbon.scss';
 
