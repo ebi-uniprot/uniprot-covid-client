@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Loader, CodeBlock } from 'franklin-sites';
+import { Loader } from 'franklin-sites';
 
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 
@@ -9,16 +9,22 @@ import toolsURLs from '../../../config/urls';
 
 import { JobTypes } from '../../../types/toolsJobTypes';
 
-const BlastResultTextOutput: FC<{ id: string }> = ({ id }) => {
+const alignURLs = toolsURLs(JobTypes.ALIGN);
+
+const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
   const { loading, data, error, status } = useDataApi<string>(
-    toolsURLs(JobTypes.BLAST).resultUrl(id, 'out')
+    alignURLs.resultUrl(id, 'pim')
   );
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return <Loader />;
+  }
 
-  if (error || !data) return <ErrorHandler status={status} />;
+  if (error || !data) {
+    return <ErrorHandler status={status} />;
+  }
 
-  return <CodeBlock>{data}</CodeBlock>;
+  return <p>{data}</p>;
 };
 
-export default BlastResultTextOutput;
+export default AlignResultPIM;
