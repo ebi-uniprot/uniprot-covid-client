@@ -2076,6 +2076,7 @@ exports[`Entry view should render 1`] = `
         >
           <interaction-viewer
             accession="P21802"
+            style="display: block; min-height: 6em;"
           />
           <protvista-datatable
             filter-scroll="true"
