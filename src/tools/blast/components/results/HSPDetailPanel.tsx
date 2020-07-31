@@ -1,33 +1,25 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { FC, useCallback, useState, useEffect } from 'react';
-import ProtvistaTrack from 'protvista-track';
-import ProtvistaNavigation from 'protvista-navigation';
-import ProtvistaMSA from 'protvista-msa';
-import ProtvistaManager from 'protvista-manager';
 import { Loader, DropdownButton, CloseIcon } from 'franklin-sites';
 import { uniq } from 'lodash-es';
 import { Link } from 'react-router-dom';
 import SlidingPanel from '../../../../shared/components/layouts/SlidingPanel';
 import { BlastHsp } from '../../types/blastResults';
-import { loadWebComponent } from '../../../../shared/utils/utils';
 import useDataApi from '../../../../shared/hooks/useDataApi';
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
+import HSPDetailOverview from './HSPDetailOverview';
+import HSPDetailWrapped from './HSPDetailWrapped';
 import {
   MsaColorScheme,
   msaColorSchemeToString,
 } from '../../../config/msaColorSchemes';
 import { findSequenceSegments } from '../../../utils';
 import './styles/HSPDetailPanel.scss';
-
-loadWebComponent('protvista-navigation', ProtvistaNavigation);
-loadWebComponent('protvista-track', ProtvistaTrack);
-loadWebComponent('protvista-msa', ProtvistaMSA);
-loadWebComponent('protvista-manager', ProtvistaManager);
 
 type UniProtkbAccessionsAPI = {
   results: UniProtkbAPIModel[];
@@ -63,6 +55,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
+  const [activeView, setActiveView] = useState<'overview' | 'wrapped'>(
+    'overview'
+  );
   const tracksOffset = Math.abs(hsp_hit_from - hsp_query_from);
 
   useEffect(() => {
@@ -165,6 +160,44 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [hsp_qseq, hsp_hseq, hsp_align_len]
   );
 
+  const numberOfWrappedViewSegments = Math.round(hsp_align_len / 60);
+  let setMSAAttributesWrapped = Array(numberOfWrappedViewSegments).fill(null);
+
+  // setMSAAttributesWrapped = setMSAAttributesWrapped
+  //   .map((segment, index) => useCallback(
+  //     (node): void => {
+  //       if (!node) {
+  //         return;
+  //       }
+
+  //       node.data = [
+  //         {
+  //           name: 'Query',
+  //           sequence: hsp_qseq.substring(index * 60, index * 60 + 60),
+  //         },
+  //         {
+  //           name: 'Match',
+  //           sequence: hsp_hseq.substring(index * 60, index * 60 + 60),
+  //         },
+  //       ];
+  //     },
+  //     [hsp_qseq, hsp_hseq, hsp_align_len]
+  //   ));
+
+  setMSAAttributesWrapped =
+    hsp_qseq &&
+    hsp_hseq &&
+    setMSAAttributesWrapped.map((segment, index) => [
+      {
+        name: 'Query',
+        sequence: hsp_qseq.substring(index * 60, index * 60 + 60),
+      },
+      {
+        name: 'Match',
+        sequence: hsp_hseq.substring(index * 60, index * 60 + 60),
+      },
+    ]);
+
   const { loading, data, status, error } = useDataApi<UniProtkbAccessionsAPI>(
     getAccessionsURL([hitAccession], { facets: [] })
   );
@@ -239,6 +272,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           'overlay-conservation': true,
         }
       : {};
+
   return (
     <SlidingPanel position="bottom" className="hsp-detail-panel">
       <div className="hsp-detail-panel__header">
@@ -301,58 +335,60 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         <DropdownButton label="View" className="tertiary">
           <div className="dropdown-menu__content">
             <ul>
-              <li key="overview">Overview</li>
-              <li key="wrapped">Wrapped</li>
+              <li key="overview">
+                <button
+                  type="button"
+                  className="button tertiary"
+                  onClick={() => setActiveView('overview')}
+                >
+                  Overview
+                </button>
+              </li>
+              <li key="wrapped">
+                <button
+                  type="button"
+                  className="button tertiary"
+                  onClick={() => setActiveView('wrapped')}
+                >
+                  Wrapped
+                </button>
+              </li>
             </ul>
           </div>
         </DropdownButton>
       </div>
       <section className="hsp-detail-panel__visualisation">
-        <section className="hsp-label">Alignment</section>
-        <protvista-manager
-          ref={managerRef}
-          attributes="displaystart displayend"
-        >
-          <protvista-navigation length={hsp_align_len} />
-          <protvista-msa
-            ref={setMSAAttributes}
-            length={hsp_align_len}
-            colorscheme={highlightProperty}
-            {...conservationOptions}
+        {activeView === 'overview' ? (
+          <HSPDetailOverview
+            managerRef={managerRef}
+            hsp_align_len={hsp_align_len}
+            setMSAAttributes={setMSAAttributes}
+            highlightProperty={highlightProperty}
+            conservationOptions={conservationOptions}
+            setQueryTrackData={setQueryTrackData}
+            hitLength={hitLength}
+            highlightPosition={highlightPosition}
+            hitAccession={hitAccession}
+            setMatchTrackData={setMatchTrackData}
+            annotation={annotation}
+            setFeatureTrackData={setFeatureTrackData}
           />
-        </protvista-manager>
-        {/* 
-          TODO listen to "highlight" event from block above and set on these 2 tracks,
-          working as protvista-manager
-          */}
-        {/* Query track */}
-        <section className="hsp-label">Query</section>
-        <protvista-track
-          height="30"
-          ref={setQueryTrackData}
-          length={hitLength}
-          layout="overlapping"
-          highlight={highlightPosition}
-        />
-        {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
-        <section className="hsp-label">
-          <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
-        </section>
-        <protvista-track
-          height="30"
-          ref={setMatchTrackData}
-          length={hitLength}
-          layout="overlapping"
-          highlight={highlightPosition}
-        />
-        <section className="hsp-label">{annotation}</section>
-        <protvista-track
-          // height="10"
-          ref={setFeatureTrackData}
-          length={hitLength}
-          layout="non-overlapping"
-          highlight={highlightPosition}
-        />
+        ) : (
+          <HSPDetailWrapped
+            managerRef={managerRef}
+            hsp_align_len={hsp_align_len}
+            setMSAAttributes={setMSAAttributesWrapped}
+            highlightProperty={highlightProperty}
+            conservationOptions={conservationOptions}
+            setQueryTrackData={setQueryTrackData}
+            hitLength={hitLength}
+            highlightPosition={highlightPosition}
+            hitAccession={hitAccession}
+            setMatchTrackData={setMatchTrackData}
+            annotation={annotation}
+            setFeatureTrackData={setFeatureTrackData}
+          />
+        )}
       </section>
     </SlidingPanel>
   );
