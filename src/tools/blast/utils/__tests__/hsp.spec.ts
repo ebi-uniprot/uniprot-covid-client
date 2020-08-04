@@ -1,4 +1,8 @@
-import { getFullAlignmentSegments, getFullAlignmentLength } from '../hsp';
+import {
+  getFullAlignmentSegments,
+  getFullAlignmentLength,
+  getOffset,
+} from '../hsp';
 import mockData from '../__mocks__/hspMocks.json';
 
 describe('HSP util tests', () => {
@@ -22,5 +26,13 @@ describe('HSP util tests', () => {
       770
     );
     expect(totalLength).toBe(3310);
+  });
+
+  it('should return the right offset', () => {
+    const { shortQueryLongHit, longQueryMiddleHit } = mockData;
+    let offset = getOffset(longQueryMiddleHit.hsp);
+    expect(offset).toBe(771);
+    offset = getOffset(shortQueryLongHit.hsp);
+    expect(offset).toBe(40);
   });
 });

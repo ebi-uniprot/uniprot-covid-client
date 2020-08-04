@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback, useState, useEffect } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaMSA from 'protvista-msa';
@@ -25,6 +25,7 @@ import './styles/HSPDetailPanel.scss';
 import {
   getFullAlignmentLength,
   getFullAlignmentSegments,
+  getOffset,
 } from '../../utils/hsp';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
@@ -51,13 +52,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   hitLength,
   queryLength,
 }) => {
-  const {
-    hsp_align_len,
-    hsp_query_from,
-    hsp_qseq,
-    hsp_hit_from,
-    hsp_hseq,
-  } = hsp;
+  const { hsp_align_len, hsp_qseq, hsp_hseq } = hsp;
 
   // TODO calculate actual length based on total match and query lengths
   const [highlightPosition, setHighlighPosition] = useState('');
@@ -66,14 +61,10 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
-  const tracksOffset = Math.abs(hsp_hit_from - hsp_query_from);
 
+  const tracksOffset = getOffset(hsp);
   const totalLength = getFullAlignmentLength(hsp, queryLength, hitLength);
   const segments = getFullAlignmentSegments(hsp, queryLength, hitLength);
-
-  useEffect(() => {
-    setHighlighPosition('0:0');
-  }, [hsp_hit_from, hsp_query_from]);
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -168,7 +159,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.setAttribute('displaystart', 1);
         node.setAttribute('displayend', initialDisplayEnd);
         setHighlighPosition(
-          `${tracksOffset + 1}:${tracksOffset + initialDisplayEnd}`
+          `${tracksOffset}:${tracksOffset + initialDisplayEnd}`
         );
       }
     },
@@ -271,10 +262,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             {...conservationOptions}
           />
         </protvista-manager>
-        {/* 
-          TODO listen to "highlight" event from block above and set on these 2 tracks,
-          working as protvista-manager
-          */}
         {/* Query track */}
         <section className="hsp-label">Query</section>
         <protvista-track

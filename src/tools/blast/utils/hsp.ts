@@ -28,6 +28,9 @@ export const getFullAlignmentLength = (
   return prefix - 1 + hsp_align_len + suffix;
 };
 
+export const getOffset = ({ hsp_hit_from, hsp_query_from }: BlastHsp) =>
+  hsp_hit_from > hsp_query_from ? hsp_hit_from : hsp_query_from;
+
 export const getFullAlignmentSegments = (
   hsp: BlastHsp,
   queryLength: number,
