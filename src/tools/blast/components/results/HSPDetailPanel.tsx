@@ -21,7 +21,6 @@ import {
   MsaColorScheme,
   msaColorSchemeToString,
 } from '../../../config/msaColorSchemes';
-import { findSequenceSegments } from '../../../utils';
 import './styles/HSPDetailPanel.scss';
 import {
   getFullAlignmentLength,
@@ -58,8 +57,8 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     hsp_qseq,
     hsp_hit_from,
     hsp_hseq,
-    hsp_identity,
   } = hsp;
+
   // TODO calculate actual length based on total match and query lengths
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
@@ -83,7 +82,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = segments.querySegments;
       }
     },
-    [queryLength]
+    [segments.querySegments]
   );
 
   const setMatchTrackData = useCallback(
@@ -93,7 +92,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.data = segments.hitSegments;
       }
     },
-    [hitLength]
+    [segments.hitSegments]
   );
 
   const setMSAAttributes = useCallback(

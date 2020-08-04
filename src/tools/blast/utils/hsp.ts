@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { BlastHsp } from '../types/blastResults';
 import { findSequenceSegments } from '../../utils';
 
