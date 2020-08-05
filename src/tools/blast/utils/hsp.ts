@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import { BlastHsp } from '../types/blastResults';
 import { findSequenceSegments } from '../../utils';
-import { count } from 'console';
 
 export const getFullAlignmentLength = (
   hsp: BlastHsp,
