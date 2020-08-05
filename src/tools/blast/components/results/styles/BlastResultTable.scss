@@ -1,3 +1,19 @@
+.data-table {
+  .query-sequence-wrapper {
+    width: 32vw;
+    margin-left: 0.2rem;
+    // Hide unwanted items from navigation
+    protvista-navigation {
+      .zoom-polygon,
+      .brush,
+      .start-label,
+      .end-label {
+        display: none;
+      }
+    }
+  }
+}
+
 .data-table__blast-hsp {
   $self: &;
   display: flex;
