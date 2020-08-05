@@ -114,5 +114,70 @@
         }
       ]
     }
+  },
+  "withGaps": {
+    "hsp": {
+      "hsp_num": 2,
+      "hsp_score": 4058,
+      "hsp_bit_score": 1567.75,
+      "hsp_expect": 0,
+      "hsp_align_len": 60,
+      "hsp_identity": 100,
+      "hsp_positive": 100,
+      "hsp_gaps": 0,
+      "hsp_query_frame": "0",
+      "hsp_hit_frame": "0",
+      "hsp_strand": "none/none",
+      "hsp_query_from": 20,
+      "hsp_query_to": 24,
+      "hsp_hit_from": 40,
+      "hsp_hit_to": 44,
+      "hsp_qseq": "ABC--DE",
+      "hsp_mseq": "ABC-DE",
+      "hsp_hseq": "-ABC-DE"
+    },
+    "result": {
+      "querySegments": [
+        {
+          "color": "#014371",
+          "start": 20,
+          "end": 40,
+          "opacity": 1,
+          "shape": "line"
+        },
+        {
+          "color": "#014371",
+          "start": 40,
+          "end": 42,
+          "opacity": 1
+        },
+        { "color": "#014371", "end": 46, "opacity": 1, "start": 45 },
+        {
+          "color": "#014371",
+          "start": 46,
+          "end": 52,
+          "opacity": 1,
+          "shape": "line"
+        }
+      ],
+      "hitSegments": [
+        {
+          "color": "#014371",
+          "start": 1,
+          "end": 40,
+          "opacity": 1,
+          "shape": "line"
+        },
+        { "color": "#014371", "end": 43, "opacity": 1, "start": 41 },
+        { "color": "#014371", "end": 46, "opacity": 1, "start": 45 },
+        {
+          "color": "#014371",
+          "start": 46,
+          "end": 62,
+          "opacity": 1,
+          "shape": "line"
+        }
+      ]
+    }
   }
 }

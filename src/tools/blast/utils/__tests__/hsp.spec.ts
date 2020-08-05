@@ -18,6 +18,12 @@ describe('HSP util tests', () => {
     expect(align).toEqual(shortQueryLongHit.result);
   });
 
+  it('should work with gaps', () => {
+    const { withGaps } = mockData;
+    const align = getFullAlignmentSegments(withGaps.hsp, 30, 60);
+    expect(align).toEqual(withGaps.result);
+  });
+
   it('should get the correct length', () => {
     const { longQueryMiddleHit } = mockData;
     const totalLength = getFullAlignmentLength(

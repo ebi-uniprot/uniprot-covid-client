@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { BlastHsp } from '../types/blastResults';
 import { findSequenceSegments } from '../../utils';
+import { count } from 'console';
 
 export const getFullAlignmentLength = (
   hsp: BlastHsp,
@@ -50,6 +51,11 @@ export const getFullAlignmentSegments = (
   } = hsp;
   const opacity = hsp_identity / 100;
 
+  const countGaps = (seq: string) => {
+    const matches = seq.match(/-/g);
+    return matches ? matches.length : 0;
+  };
+
   const offsets = {
     queryPrefix:
       hsp_hit_from - hsp_query_from > 0 ? hsp_hit_from - hsp_query_from : 0,
@@ -76,8 +82,8 @@ export const getFullAlignmentSegments = (
         opacity,
       })),
       {
-        start: offsets.queryPrefix + hsp_query_to,
-        end: offsets.queryPrefix + queryLength,
+        start: offsets.queryPrefix + hsp_query_to + countGaps(hsp_qseq),
+        end: offsets.queryPrefix + queryLength + countGaps(hsp_qseq),
         shape: 'line',
         color: colour,
         opacity,
@@ -98,8 +104,8 @@ export const getFullAlignmentSegments = (
         opacity,
       })),
       {
-        start: offsets.hitPrefix + hsp_hit_to,
-        end: offsets.hitPrefix + hitLength,
+        start: offsets.hitPrefix + hsp_hit_to + countGaps(hsp_hseq),
+        end: offsets.hitPrefix + hitLength + countGaps(hsp_hseq),
         shape: 'line',
         color: colour,
         opacity,
