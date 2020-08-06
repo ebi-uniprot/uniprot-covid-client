@@ -91,7 +91,19 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
       if (!node) {
         return;
       }
-      setInitialDisplayEnd(hsp_align_len / (15 / node.getSingleBaseWidth()));
+
+      const displayEndValue = hsp_align_len / (15 / node.getSingleBaseWidth());
+      if (
+        displayEndValue < hsp_hseq.length ||
+        displayEndValue < hsp_qseq.length
+      ) {
+        setInitialDisplayEnd(displayEndValue);
+      } else {
+        setInitialDisplayEnd(
+          hsp_hseq.length > hsp_qseq.length ? hsp_hseq.length : hsp_qseq.length
+        );
+      }
+
       node.data = [
         {
           name: 'Query',
