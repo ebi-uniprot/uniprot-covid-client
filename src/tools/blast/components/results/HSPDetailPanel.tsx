@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback, useState, useEffect } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaMSA from 'protvista-msa';
@@ -21,8 +21,12 @@ import {
   MsaColorScheme,
   msaColorSchemeToString,
 } from '../../../config/msaColorSchemes';
-import { findSequenceSegments } from '../../../utils';
 import './styles/HSPDetailPanel.scss';
+import {
+  getFullAlignmentLength,
+  getFullAlignmentSegments,
+  getOffset,
+} from '../../utils/hsp';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -48,14 +52,8 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   hitLength,
   queryLength,
 }) => {
-  const {
-    hsp_align_len,
-    hsp_query_from,
-    hsp_qseq,
-    hsp_hit_from,
-    hsp_hseq,
-    hsp_identity,
-  } = hsp;
+  const { hsp_align_len, hsp_qseq, hsp_hseq } = hsp;
+
   // TODO calculate actual length based on total match and query lengths
   const [highlightPosition, setHighlighPosition] = useState('');
   const [annotation, setAnnotation] = useState<FeatureType>();
@@ -63,86 +61,29 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
-  const tracksOffset = Math.abs(hsp_hit_from - hsp_query_from);
 
-  useEffect(() => {
-    setHighlighPosition('0:0');
-  }, [hsp_hit_from, hsp_query_from]);
+  const tracksOffset = getOffset(hsp);
+  const totalLength = getFullAlignmentLength(hsp, queryLength, hitLength);
+  const segments = getFullAlignmentSegments(hsp, queryLength, hitLength);
 
   const setQueryTrackData = useCallback(
     (node): void => {
       if (node) {
-        const seqSegments = findSequenceSegments(hsp_qseq);
-        const opacity = hsp_identity / 100;
-
-        const blockSegments = seqSegments.map(([start, end]) => ({
-          start: start + tracksOffset,
-          end: end + tracksOffset,
-          // franklin $colour-sapphire-blue
-          color: '#014371',
-          opacity,
-        }));
-
-        const lineSegments = [
-          {
-            start: tracksOffset + 1,
-            end: hsp_query_from + 1,
-            shape: 'line',
-            color: '#014371',
-            opacity,
-          },
-          {
-            start: blockSegments[blockSegments.length - 1].end + 1,
-            end: queryLength + tracksOffset,
-            shape: 'line',
-            color: '#014371',
-            opacity,
-          },
-        ];
-
         // eslint-disable-next-line no-param-reassign
-        node.data = [...lineSegments, ...blockSegments];
+        node.data = segments.querySegments;
       }
     },
-    [hsp_query_from, hsp_identity, hsp_qseq, queryLength, tracksOffset]
+    [segments.querySegments]
   );
 
   const setMatchTrackData = useCallback(
     (node): void => {
       if (node) {
-        const seqSegments = findSequenceSegments(hsp_hseq);
-        const opacity = hsp_identity / 100;
-
-        const blockSegments = seqSegments.map(([start, end]) => ({
-          start: start + tracksOffset,
-          end: end + tracksOffset,
-          // franklin $colour-sapphire-blue
-          color: '#014371',
-          opacity,
-        }));
-
-        const lineSegments = [
-          {
-            start: 1,
-            end: tracksOffset,
-            shape: 'line',
-            color: '#014371',
-            opacity,
-          },
-          {
-            start: blockSegments[blockSegments.length - 1].end + 1,
-            end: hitLength,
-            shape: 'line',
-            color: '#014371',
-            opacity,
-          },
-        ];
-
         // eslint-disable-next-line no-param-reassign
-        node.data = [...lineSegments, ...blockSegments];
+        node.data = segments.hitSegments;
       }
     },
-    [hsp_identity, hitLength, hsp_hseq, tracksOffset]
+    [segments.hitSegments]
   );
 
   const setMSAAttributes = useCallback(
@@ -150,7 +91,19 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
       if (!node) {
         return;
       }
-      setInitialDisplayEnd(hsp_align_len / (15 / node.getSingleBaseWidth()));
+
+      const displayEndValue = hsp_align_len / (15 / node.getSingleBaseWidth());
+      if (
+        displayEndValue < hsp_hseq.length ||
+        displayEndValue < hsp_qseq.length
+      ) {
+        setInitialDisplayEnd(displayEndValue);
+      } else {
+        setInitialDisplayEnd(
+          hsp_hseq.length > hsp_qseq.length ? hsp_hseq.length : hsp_qseq.length
+        );
+      }
+
       node.data = [
         {
           name: 'Query',
@@ -218,7 +171,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         node.setAttribute('displaystart', 1);
         node.setAttribute('displayend', initialDisplayEnd);
         setHighlighPosition(
-          `${tracksOffset + 1}:${tracksOffset + initialDisplayEnd}`
+          `${tracksOffset}:${tracksOffset + initialDisplayEnd}`
         );
       }
     },
@@ -321,16 +274,12 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
             {...conservationOptions}
           />
         </protvista-manager>
-        {/* 
-          TODO listen to "highlight" event from block above and set on these 2 tracks,
-          working as protvista-manager
-          */}
         {/* Query track */}
         <section className="hsp-label">Query</section>
         <protvista-track
           height="30"
           ref={setQueryTrackData}
-          length={hitLength}
+          length={totalLength}
           layout="overlapping"
           highlight={highlightPosition}
         />
@@ -341,7 +290,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         <protvista-track
           height="30"
           ref={setMatchTrackData}
-          length={hitLength}
+          length={totalLength}
           layout="overlapping"
           highlight={highlightPosition}
         />
@@ -349,7 +298,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         <protvista-track
           // height="10"
           ref={setFeatureTrackData}
-          length={hitLength}
+          length={totalLength}
           layout="non-overlapping"
           highlight={highlightPosition}
         />

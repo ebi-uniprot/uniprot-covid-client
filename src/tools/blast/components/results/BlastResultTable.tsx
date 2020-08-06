@@ -121,7 +121,7 @@ const BlastSummaryHsps: FC<{
                 hsp={hsp}
                 queryLength={queryLength}
                 hitLength={hitLength}
-                key={`${hsp.hsp_hit_from}-${hsp.hsp_hit_to}`}
+                key={`hsp_${hsp.hsp_num}`}
                 hitAccession={hitAccession}
                 setHspDetailPanel={setHspDetailPanel}
               />
