@@ -1,5 +1,6 @@
 .hsp-detail-panel {
   height: auto;
+  max-height: 50%;
 
   &__header {
     display: flex;
@@ -12,10 +13,17 @@
     display: grid;
     grid-template-columns: 1fr 9fr;
     margin-bottom: 1em;
+    // grid-row-gap: 1rem;
   }
 
   .annotation-choice:first-letter {
     text-transform: uppercase;
+  }
+
+  .hsp-locations {
+    display: flex;
+    flex-flow: row nowrap;
+    // justify-content: space-around;
   }
 }
 

@@ -46,7 +46,7 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
   setFeatureTrackData,
 }) => {
   return (
-    <>
+    <section className="hsp-detail-panel__visualisation">
       <section className="hsp-label">Alignment</section>
       <protvista-manager ref={managerRef} attributes="displaystart displayend">
         <protvista-navigation length={hsp_align_len} />
@@ -89,7 +89,7 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
         layout="non-overlapping"
         highlight={highlightPosition}
       />
-    </>
+    </section>
   );
 };
 
