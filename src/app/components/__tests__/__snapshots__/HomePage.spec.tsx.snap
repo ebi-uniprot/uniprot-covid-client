@@ -420,7 +420,32 @@ exports[`HomePage component should render 1`] = `
     <section
       class="footer"
     >
-      <footer />
+      <footer
+        class="uniprot-footer"
+      >
+        © 2002 – 2020
+        <span
+          class="uniprot-footer__links"
+        >
+          <a
+            href="https://www.uniprot.org/help/about"
+          >
+            UniProt Consortium
+          </a>
+           | 
+          <a
+            href="https://www.uniprot.org/help/license"
+          >
+            License & Disclaimer
+          </a>
+           | 
+          <a
+            href="https://www.uniprot.org/help/privacy"
+          >
+            Privacy Notice
+          </a>
+        </span>
+      </footer>
     </section>
     <div
       class="gdpr-section"
