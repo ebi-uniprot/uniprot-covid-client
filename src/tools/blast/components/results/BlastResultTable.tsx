@@ -3,6 +3,7 @@ import React, { FC, Fragment, useCallback, useState, useRef } from 'react';
 import { DataTable, DENSITY_COMPACT, Chip, Loader } from 'franklin-sites';
 import { Link } from 'react-router-dom';
 import ProtvistaTrack from 'protvista-track';
+import ProtvistaNavigation from 'protvista-navigation';
 import { BlastResults, BlastHsp, BlastHit } from '../../types/blastResults';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
@@ -155,6 +156,23 @@ const BlastResultTable: FC<{
     hitsRef.current = data?.hits || [];
   }
 
+  // The "query" column header
+  const queryColumnHeaderRef = useCallback(
+    (node) => {
+      if (node && data) {
+        const { query_len } = data;
+        // eslint-disable-next-line no-param-reassign
+        node.data = [
+          {
+            start: 1,
+            end: query_len,
+          },
+        ];
+      }
+    },
+    [data]
+  );
+
   if (loading && !hitsRef.current.length) {
     return <Loader />;
   }
@@ -163,6 +181,7 @@ const BlastResultTable: FC<{
     return null;
   }
   loadWebComponent('protvista-track', ProtvistaTrack);
+  loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
   const columns = [
     {
@@ -194,7 +213,16 @@ const BlastResultTable: FC<{
       ellipsis: true,
     },
     {
-      label: 'Alignment',
+      label: (
+        <div className="query-sequence-wrapper">
+          <protvista-navigation
+            ref={queryColumnHeaderRef}
+            length={data.query_len}
+            height={10}
+            title="Query"
+          />
+        </div>
+      ),
       name: 'alignment',
       width: '40vw',
       render: ({ hit_hsps, hit_len, hit_acc }: BlastHit) => (
