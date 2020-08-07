@@ -26,40 +26,23 @@ import { loadWebComponent } from '../../../../shared/utils/utils';
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
+loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
-const rowLength = 50;
+const rowLength = 60;
 
-const Locations = ({ start, end }: { start: number; end: number }) => {
-  const ref = useCallback(
-    (node) => {
-      if (node && start && end) {
-        // eslint-disable-next-line no-param-reassign
-        node.data = [
-          {
-            start,
-            end,
-          },
-        ];
-      }
-    },
-    [start, end]
-  );
-  loadWebComponent('protvista-navigation', ProtvistaNavigation);
-
-  return (
-    <>
-      <section />
-      <div className="hsp-locations">
-        <protvista-navigation
-          ref={ref}
-          length={end - start}
-          height={2}
-          title="Query"
-        />
-      </div>
-    </>
-  );
-};
+const Locations = ({ start }: { start: number }) => (
+  <>
+    <section />
+    <div className="hsp-locations">
+      <protvista-navigation
+        // ref={ref}
+        length={rowLength}
+        height={2}
+        rulerstart={start}
+      />
+    </div>
+  </>
+);
 
 type Sequence = {
   name: string;
@@ -79,23 +62,17 @@ export type HSPDetailWrappedRowProps = {
 
 const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
   sequences,
-  start,
-  end,
+  ranges,
   annotation,
-  hitLength,
   setFeatureTrackData,
   conservationOptions,
   highlightProperty,
 }) => {
-  const [initialSingleBaseWidth, setInitialSingleBaseWidth] = useState<number>(
-    24
-  );
   const setMSAAttributes = useCallback(
     (node): void => {
       if (!node) {
         return;
       }
-      setInitialSingleBaseWidth(node.getSingleBaseWidth());
       node.data = sequences;
     },
     [sequences]
@@ -103,7 +80,7 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
 
   return (
     <section className="hsp-detail-panel__visualisation">
-      <Locations start={start} end={end} />
+      <Locations start={ranges.query.start} />
       <section className="hsp-label">Alignment</section>
       <protvista-msa
         ref={setMSAAttributes}
@@ -111,14 +88,14 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
         colorscheme={highlightProperty}
         {...conservationOptions}
       />
-      <Locations start={start} end={end} />
+      <Locations start={ranges.hit.start} />
       <section className="hsp-label">{annotation}</section>
       <protvista-track
         ref={setFeatureTrackData}
-        length={end - start + 1}
+        length={ranges.hit.end - ranges.hit.start + 1}
         layout="non-overlapping"
-        displaystart={start}
-        displayend={end}
+        displaystart={ranges.hit.start}
+        displayend={ranges.hit.end}
       />
     </section>
   );
@@ -149,6 +126,8 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
   setFeatureTrackData,
   hsp_qseq,
   hsp_hseq,
+  hsp_hit_from,
+  hsp_query_from,
 }) => {
   const sequenceChunks = useMemo(() => {
     const numberRows = Math.ceil(hsp_align_len / rowLength);
@@ -157,8 +136,16 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
       const end = start + rowLength;
       return {
         id: `row-${index}`,
-        start,
-        end,
+        ranges: {
+          hit: {
+            start: start + hsp_hit_from,
+            end: end + hsp_hit_from - 1,
+          },
+          query: {
+            start: start + hsp_query_from,
+            end: end + hsp_query_from - 1,
+          },
+        },
         sequences: [
           {
             name: 'Query',
@@ -172,17 +159,15 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
       };
     });
     return chunks;
-  }, [hsp_align_len, hsp_hseq, hsp_qseq]);
+  }, [hsp_align_len, hsp_hit_from, hsp_hseq, hsp_qseq, hsp_query_from]);
   return (
     <div style={{ overflowY: 'auto', maxHeight: '40vh' }}>
-      {sequenceChunks.map(({ sequences, id, start, end }) => (
+      {sequenceChunks.map(({ sequences, id, ranges }) => (
         <HSPDetailWrappedRow
           key={id}
           sequences={sequences}
-          start={start}
-          end={end}
+          ranges={ranges}
           annotation={annotation}
-          hitLength={hitLength}
           setFeatureTrackData={setFeatureTrackData}
           highlightProperty={highlightProperty}
           conservationOptions={conservationOptions}
