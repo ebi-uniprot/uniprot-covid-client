@@ -12,6 +12,7 @@ import React, {
 } from 'react';
 import { v1 } from 'uuid';
 import ProtvistaManager from 'protvista-manager';
+import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
 import { range } from 'lodash-es';
@@ -26,6 +27,104 @@ loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
+const rowLength = 50;
+
+const Locations = ({ start, end }) => {
+  const ref = useCallback(
+    (node) => {
+      if (node && start && end) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = [
+          {
+            start,
+            end,
+          },
+        ];
+      }
+    },
+    [start, end]
+  );
+  loadWebComponent('protvista-navigation', ProtvistaNavigation);
+
+  return (
+    <>
+      <section />
+      <div className="hsp-locations">
+        <protvista-navigation
+          ref={ref}
+          length={end - start}
+          height={2}
+          title="Query"
+        />
+      </div>
+    </>
+  );
+};
+
+export type HSPDetailWrappedRowProps = {
+  managerRef: object;
+  hsp_align_len: number;
+  setMSAAttributes: object[];
+  highlightProperty: MsaColorScheme | undefined;
+  conservationOptions: object;
+  setQueryTrackData: object;
+  hitLength: number;
+  highlightPosition: string;
+  hitAccession: string;
+  setMatchTrackData: object;
+  annotation: FeatureType | undefined;
+  setFeatureTrackData: object;
+  hsp_qseq: string;
+  hsp_hseq: string;
+};
+
+const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
+  sequences,
+  start,
+  end,
+  annotation,
+  hitLength,
+  setFeatureTrackData,
+  conservationOptions,
+  highlightProperty,
+}) => {
+  const [initialSingleBaseWidth, setInitialSingleBaseWidth] = useState<number>(
+    24
+  );
+  const setMSAAttributes = useCallback(
+    (node): void => {
+      if (!node) {
+        return;
+      }
+      setInitialSingleBaseWidth(node.getSingleBaseWidth());
+      node.data = sequences;
+    },
+    [sequences]
+  );
+
+  return (
+    <section className="hsp-detail-panel__visualisation">
+      <Locations start={start} end={end} />
+      <section className="hsp-label">Alignment</section>
+      <protvista-msa
+        ref={setMSAAttributes}
+        length={rowLength}
+        colorscheme={highlightProperty}
+        {...conservationOptions}
+      />
+      <Locations start={start} end={end} />
+      <section className="hsp-label">{annotation}</section>
+      <protvista-track
+        ref={setFeatureTrackData}
+        length={end - start + 1}
+        layout="non-overlapping"
+        displaystart={start}
+        displayend={end}
+      />
+    </section>
+  );
+};
+
 export type HSPDetailWrappedProps = {
   managerRef: object;
   hsp_align_len: number;
@@ -39,86 +138,15 @@ export type HSPDetailWrappedProps = {
   setMatchTrackData: object;
   annotation: FeatureType | undefined;
   setFeatureTrackData: object;
-};
-
-const rowLength = 50;
-const positionStride = 10;
-
-const HSPDetailWrappedRow = ({
-  sequences,
-  start,
-  end,
-  annotation,
-  hitLength,
-  setFeatureTrackData,
-  conservationOptions,
-  highlightProperty,
-}) => {
-  const [initialSingleBaseWidth, setInitialSingleBaseWidth] = useState<number>(
-    26
-  );
-  const setMSAAttributes = useCallback(
-    (node): void => {
-      if (!node) {
-        return;
-      }
-      setInitialSingleBaseWidth(node.getSingleBaseWidth());
-      node.data = sequences;
-    },
-    [sequences]
-  );
-  const locations = range(
-    start + positionStride,
-    end + positionStride,
-    positionStride
-  );
-
-  return (
-    <section className="hsp-detail-panel__visualisation">
-      <section />
-      <section className="hsp-locations">
-        {locations.map((location) => (
-          <span
-            style={{
-              // width: `${100 / locations.length}%`,
-              width: initialSingleBaseWidth * positionStride,
-              textAlign: 'right',
-              paddingRight: 2,
-            }}
-          >
-            {location}
-          </span>
-        ))}
-      </section>
-
-      <section className="hsp-label">Alignment</section>
-      <protvista-msa
-        ref={setMSAAttributes}
-        length={rowLength}
-        colorscheme={highlightProperty}
-        {...conservationOptions}
-      />
-      <section className="hsp-label">{annotation}</section>
-      <protvista-track
-        ref={setFeatureTrackData}
-        length={hitLength}
-        layout="non-overlapping"
-        displaystart={start}
-        displayend={end}
-      />
-    </section>
-  );
+  hsp_qseq: string;
+  hsp_hseq: string;
 };
 
 const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
-  managerRef,
   hsp_align_len,
   highlightProperty,
   conservationOptions,
-  setQueryTrackData,
   hitLength,
-  hitAccession,
-  setMatchTrackData,
   annotation,
   setFeatureTrackData,
   hsp_qseq,

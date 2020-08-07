@@ -21,9 +21,17 @@
   }
 
   .hsp-locations {
-    display: flex;
-    flex-flow: row nowrap;
-    // justify-content: space-around;
+    protvista-navigation {
+      .zoom-polygon,
+      .brush,
+      .start-label,
+      .end-label {
+        display: none;
+      }
+      height: 1.25rem;
+      padding-top: 0.25rem;
+      padding-bottom: 1.25rem;
+    }
   }
 }
 

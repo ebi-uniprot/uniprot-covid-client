@@ -45,6 +45,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     hsp_query_from,
     hsp_qseq,
     hsp_hit_from,
+    hsp_hit_to,
     hsp_hseq,
     hsp_identity,
   } = hsp;
@@ -160,44 +161,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     [hsp_qseq, hsp_hseq, hsp_align_len]
   );
 
-  const numberOfWrappedViewSegments = Math.round(hsp_align_len / 60);
-  let setMSAAttributesWrapped = Array(numberOfWrappedViewSegments).fill(null);
-
-  // setMSAAttributesWrapped = setMSAAttributesWrapped
-  //   .map((segment, index) => useCallback(
-  //     (node): void => {
-  //       if (!node) {
-  //         return;
-  //       }
-
-  //       node.data = [
-  //         {
-  //           name: 'Query',
-  //           sequence: hsp_qseq.substring(index * 60, index * 60 + 60),
-  //         },
-  //         {
-  //           name: 'Match',
-  //           sequence: hsp_hseq.substring(index * 60, index * 60 + 60),
-  //         },
-  //       ];
-  //     },
-  //     [hsp_qseq, hsp_hseq, hsp_align_len]
-  //   ));
-
-  setMSAAttributesWrapped =
-    hsp_qseq &&
-    hsp_hseq &&
-    setMSAAttributesWrapped.map((segment, index) => [
-      {
-        name: 'Query',
-        sequence: hsp_qseq.substring(index * 60, index * 60 + 60),
-      },
-      {
-        name: 'Match',
-        sequence: hsp_hseq.substring(index * 60, index * 60 + 60),
-      },
-    ]);
-
   const { loading, data, status, error } = useDataApi<UniProtkbAccessionsAPI>(
     getAccessionsURL([hitAccession], { facets: [] })
   );
@@ -219,13 +182,21 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const setFeatureTrackData = useCallback(
     (node): void => {
       if (node && features && annotation) {
-        const processedFeatures = processFeaturesData(
+        let processedFeatures = processFeaturesData(
           features.filter(({ type }) => type === annotation)
         );
+        if (activeView === 'wrapped') {
+          processedFeatures = processedFeatures
+            .map((feature) => ({
+              ...feature,
+              start: feature.start - hsp_hit_from,
+            }))
+            .filter(({ start }) => start >= 0 && start <= hsp_hit_to);
+        }
         node.data = processedFeatures;
       }
     },
-    [features, annotation]
+    [features, annotation, activeView, hsp_hit_from, hsp_hit_to]
   );
 
   type EventDetail = {
@@ -333,28 +304,36 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           </DropdownButton>
         )}
         <DropdownButton label="View" className="tertiary">
-          <div className="dropdown-menu__content">
-            <ul>
-              <li key="overview">
-                <button
-                  type="button"
-                  className="button tertiary"
-                  onClick={() => setActiveView('overview')}
-                >
-                  Overview
-                </button>
-              </li>
-              <li key="wrapped">
-                <button
-                  type="button"
-                  className="button tertiary"
-                  onClick={() => setActiveView('wrapped')}
-                >
-                  Wrapped
-                </button>
-              </li>
-            </ul>
-          </div>
+          {(setShowMenu: (showMenu: boolean) => void) => (
+            <div className="dropdown-menu__content">
+              <ul>
+                <li key="overview">
+                  <button
+                    type="button"
+                    className="button tertiary"
+                    onClick={() => {
+                      setShowMenu(false);
+                      setActiveView('overview');
+                    }}
+                  >
+                    Overview
+                  </button>
+                </li>
+                <li key="wrapped">
+                  <button
+                    type="button"
+                    className="button tertiary"
+                    onClick={() => {
+                      setShowMenu(false);
+                      setActiveView('wrapped');
+                    }}
+                  >
+                    Wrapped
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </DropdownButton>
       </div>
       {activeView === 'overview' ? (
@@ -378,7 +357,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           hsp_align_len={hsp_align_len}
           hsp_qseq={hsp_qseq}
           hsp_hseq={hsp_hseq}
-          setMSAAttributes={setMSAAttributesWrapped}
           highlightProperty={highlightProperty}
           conservationOptions={conservationOptions}
           setQueryTrackData={setQueryTrackData}

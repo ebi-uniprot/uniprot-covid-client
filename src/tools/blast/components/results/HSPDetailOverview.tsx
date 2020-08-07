@@ -83,7 +83,6 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
       />
       <section className="hsp-label">{annotation}</section>
       <protvista-track
-        // height="10"
         ref={setFeatureTrackData}
         length={hitLength}
         layout="non-overlapping"
