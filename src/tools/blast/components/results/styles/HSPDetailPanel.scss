@@ -13,7 +13,21 @@
     display: grid;
     grid-template-columns: 1fr 9fr;
     margin-bottom: 1em;
-    // grid-row-gap: 1rem;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-template-areas:
+      '. query-ruler'
+      'msa-label msa-viz'
+      '. match-ruler'
+      'track-label track-viz';
+    align-items: center;
+
+    &__viz {
+      grid-area: viz;
+    }
   }
 
   .annotation-choice:first-letter {

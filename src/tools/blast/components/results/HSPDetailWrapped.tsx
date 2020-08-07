@@ -16,9 +16,8 @@ loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
 const rowLength = 60;
 
-const Locations = ({ start }: { start: number }) => (
-  <>
-    <section />
+const Locations = ({ start, style }: { start: number; style: object }) => (
+  <div className="hsp-detail-panel__row__location" style={style}>
     <div className="hsp-locations">
       <protvista-navigation
         // ref={ref}
@@ -27,7 +26,7 @@ const Locations = ({ start }: { start: number }) => (
         rulerstart={start}
       />
     </div>
-  </>
+  </div>
 );
 
 type Sequence = {
@@ -74,23 +73,34 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
   );
 
   return (
-    <section className="hsp-detail-panel__visualisation">
-      <Locations start={ranges.query.start} />
-      <section className="hsp-label">Alignment</section>
+    <section className="hsp-detail-panel__row">
+      <Locations
+        start={ranges.query.start}
+        style={{ gridArea: 'query-ruler' }}
+      />
+      <section className="hsp-label" style={{ gridArea: 'msa-label' }}>
+        Alignment
+      </section>
       <protvista-msa
         ref={setMSAAttributes}
+        className="hsp-detail-panel__row__viz"
         length={rowLength}
         colorscheme={highlightProperty}
         {...conservationOptions}
+        style={{ gridArea: 'msa-viz' }}
       />
-      <Locations start={ranges.hit.start} />
-      <section className="hsp-label">{annotation}</section>
+      <Locations start={ranges.hit.start} style={{ gridArea: 'match-ruler' }} />
+      <section className="hsp-label" style={{ gridArea: 'track-label' }}>
+        {annotation}
+      </section>
       <protvista-track
         ref={setFeatureTrackData}
+        className="hsp-detail-panel__row__viz"
         length={ranges.hit.end - ranges.hit.start + 1}
         layout="non-overlapping"
         displaystart={ranges.hit.start}
         displayend={ranges.hit.end}
+        style={{ gridArea: 'track-viz' }}
       />
     </section>
   );
