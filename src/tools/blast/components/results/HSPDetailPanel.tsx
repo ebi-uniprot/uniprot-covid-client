@@ -3,7 +3,6 @@
 import React, { FC, useCallback, useState, useEffect } from 'react';
 import { Loader, DropdownButton, CloseIcon } from 'franklin-sites';
 import { uniq } from 'lodash-es';
-import { Link } from 'react-router-dom';
 import SlidingPanel from '../../../../shared/components/layouts/SlidingPanel';
 import { BlastHsp } from '../../types/blastResults';
 import useDataApi from '../../../../shared/hooks/useDataApi';
@@ -362,7 +361,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           highlightProperty={highlightProperty}
           conservationOptions={conservationOptions}
           setQueryTrackData={setQueryTrackData}
-          hitLength={hitLength}
           highlightPosition={highlightPosition}
           hitAccession={hitAccession}
           setMatchTrackData={setMatchTrackData}

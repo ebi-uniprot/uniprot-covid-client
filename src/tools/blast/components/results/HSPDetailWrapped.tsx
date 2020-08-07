@@ -1,25 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/camelcase */
-import React, {
-  FC,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  createRef,
-  useMemo,
-  useLayoutEffect,
-} from 'react';
-import { v1 } from 'uuid';
+import React, { FC, useCallback, useMemo } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
-import { range } from 'lodash-es';
-import {
-  MsaColorScheme,
-  msaColorSchemeToString,
-} from '../../../config/msaColorSchemes';
+import { MsaColorScheme } from '../../../config/msaColorSchemes';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
@@ -49,15 +35,24 @@ type Sequence = {
   sequence: string;
 };
 
+type Ranges = {
+  hit: {
+    start: number;
+    end: number;
+  };
+  query: {
+    start: number;
+    end: number;
+  };
+};
+
 export type HSPDetailWrappedRowProps = {
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: object;
-  hitLength: number;
   annotation: FeatureType | undefined;
   setFeatureTrackData: object;
   sequences: Sequence[];
-  start: number;
-  end: number;
+  ranges: Ranges;
 };
 
 const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
@@ -107,7 +102,6 @@ export type HSPDetailWrappedProps = {
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: object;
   setQueryTrackData: object;
-  hitLength: number;
   highlightPosition: string;
   hitAccession: string;
   setMatchTrackData: object;
@@ -115,13 +109,14 @@ export type HSPDetailWrappedProps = {
   setFeatureTrackData: object;
   hsp_qseq: string;
   hsp_hseq: string;
+  hsp_hit_from: number;
+  hsp_query_from: number;
 };
 
 const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
   hsp_align_len,
   highlightProperty,
   conservationOptions,
-  hitLength,
   annotation,
   setFeatureTrackData,
   hsp_qseq,

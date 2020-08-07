@@ -1,13 +1,11 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
-import {
-  MsaColorScheme,
-  msaColorSchemeToString,
-} from '../../../config/msaColorSchemes';
+import { MsaColorScheme } from '../../../config/msaColorSchemes';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../../../shared/utils/utils';
 
