@@ -29,7 +29,7 @@ loadWebComponent('protvista-manager', ProtvistaManager);
 
 const rowLength = 50;
 
-const Locations = ({ start, end }) => {
+const Locations = ({ start, end }: { start: number; end: number }) => {
   const ref = useCallback(
     (node) => {
       if (node && start && end) {
@@ -61,21 +61,20 @@ const Locations = ({ start, end }) => {
   );
 };
 
+type Sequence = {
+  name: string;
+  sequence: string;
+};
+
 export type HSPDetailWrappedRowProps = {
-  managerRef: object;
-  hsp_align_len: number;
-  setMSAAttributes: object[];
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: object;
-  setQueryTrackData: object;
   hitLength: number;
-  highlightPosition: string;
-  hitAccession: string;
-  setMatchTrackData: object;
   annotation: FeatureType | undefined;
   setFeatureTrackData: object;
-  hsp_qseq: string;
-  hsp_hseq: string;
+  sequences: Sequence[];
+  start: number;
+  end: number;
 };
 
 const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
@@ -128,7 +127,6 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
 export type HSPDetailWrappedProps = {
   managerRef: object;
   hsp_align_len: number;
-  setMSAAttributes: object[];
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: object;
   setQueryTrackData: object;
