@@ -335,39 +335,41 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           )}
         </DropdownButton>
       </div>
-      {activeView === 'overview' ? (
-        <HSPDetailOverview
-          managerRef={managerRef}
-          hsp_align_len={hsp_align_len}
-          setMSAAttributes={setMSAAttributes}
-          highlightProperty={highlightProperty}
-          conservationOptions={conservationOptions}
-          setQueryTrackData={setQueryTrackData}
-          hitLength={hitLength}
-          highlightPosition={highlightPosition}
-          hitAccession={hitAccession}
-          setMatchTrackData={setMatchTrackData}
-          annotation={annotation}
-          setFeatureTrackData={setFeatureTrackData}
-        />
-      ) : (
-        <HSPDetailWrapped
-          managerRef={managerRef}
-          hsp_align_len={hsp_align_len}
-          hsp_qseq={hsp_qseq}
-          hsp_hseq={hsp_hseq}
-          hsp_hit_from={hsp_hit_from}
-          hsp_query_from={hsp_query_from}
-          highlightProperty={highlightProperty}
-          conservationOptions={conservationOptions}
-          setQueryTrackData={setQueryTrackData}
-          highlightPosition={highlightPosition}
-          hitAccession={hitAccession}
-          setMatchTrackData={setMatchTrackData}
-          annotation={annotation}
-          setFeatureTrackData={setFeatureTrackData}
-        />
-      )}
+      <div className="hsp-detail-panel__body">
+        {activeView === 'overview' ? (
+          <HSPDetailOverview
+            managerRef={managerRef}
+            hsp_align_len={hsp_align_len}
+            setMSAAttributes={setMSAAttributes}
+            highlightProperty={highlightProperty}
+            conservationOptions={conservationOptions}
+            setQueryTrackData={setQueryTrackData}
+            hitLength={hitLength}
+            highlightPosition={highlightPosition}
+            hitAccession={hitAccession}
+            setMatchTrackData={setMatchTrackData}
+            annotation={annotation}
+            setFeatureTrackData={setFeatureTrackData}
+          />
+        ) : (
+          <HSPDetailWrapped
+            managerRef={managerRef}
+            hsp_align_len={hsp_align_len}
+            hsp_qseq={hsp_qseq}
+            hsp_hseq={hsp_hseq}
+            hsp_hit_from={hsp_hit_from}
+            hsp_query_from={hsp_query_from}
+            highlightProperty={highlightProperty}
+            conservationOptions={conservationOptions}
+            setQueryTrackData={setQueryTrackData}
+            highlightPosition={highlightPosition}
+            hitAccession={hitAccession}
+            setMatchTrackData={setMatchTrackData}
+            annotation={annotation}
+            setFeatureTrackData={setFeatureTrackData}
+          />
+        )}
+      </div>
     </SlidingPanel>
   );
 };

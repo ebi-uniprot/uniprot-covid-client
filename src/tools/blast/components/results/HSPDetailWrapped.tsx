@@ -16,19 +16,6 @@ loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
 const rowLength = 60;
 
-const Locations = ({ start, style }: { start: number; style: object }) => (
-  <div className="hsp-detail-panel__row__location" style={style}>
-    <div className="hsp-locations">
-      <protvista-navigation
-        // ref={ref}
-        length={rowLength}
-        height={2}
-        rulerstart={start}
-      />
-    </div>
-  </div>
-);
-
 type Sequence = {
   name: string;
   sequence: string;
@@ -73,35 +60,40 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
   );
 
   return (
-    <section className="hsp-detail-panel__row">
-      <Locations
-        start={ranges.query.start}
-        style={{ gridArea: 'query-ruler' }}
-      />
-      <section className="hsp-label" style={{ gridArea: 'msa-label' }}>
-        Alignment
+    <section className="hsp-detail-panel__visualisation hsp-detail-panel__visualisation__wrapped-row">
+      <section className="query-ruler">
+        <protvista-navigation
+          length={rowLength}
+          height={2}
+          rulerstart={ranges.query.start}
+        />
       </section>
-      <protvista-msa
-        ref={setMSAAttributes}
-        className="hsp-detail-panel__row__viz"
-        length={rowLength}
-        colorscheme={highlightProperty}
-        {...conservationOptions}
-        style={{ gridArea: 'msa-viz' }}
-      />
-      <Locations start={ranges.hit.start} style={{ gridArea: 'match-ruler' }} />
-      <section className="hsp-label" style={{ gridArea: 'track-label' }}>
-        {annotation}
+      <section className="hsp-label hsp-label__msa">Alignment</section>
+      <section className="hsp-detail-panel__visualisation__msa">
+        <protvista-msa
+          ref={setMSAAttributes}
+          length={rowLength}
+          colorscheme={highlightProperty}
+          {...conservationOptions}
+        />
       </section>
-      <protvista-track
-        ref={setFeatureTrackData}
-        className="hsp-detail-panel__row__viz"
-        length={ranges.hit.end - ranges.hit.start + 1}
-        layout="non-overlapping"
-        displaystart={ranges.hit.start}
-        displayend={ranges.hit.end}
-        style={{ gridArea: 'track-viz' }}
-      />
+      <section className="hit-ruler">
+        <protvista-navigation
+          length={rowLength}
+          height={2}
+          rulerstart={ranges.hit.start}
+        />
+      </section>
+      <section className="hsp-label hsp-label__track">{annotation}</section>
+      <section className="hsp-detail-panel__visualisation__track">
+        <protvista-track
+          ref={setFeatureTrackData}
+          length={ranges.hit.end - ranges.hit.start + 1}
+          layout="non-overlapping"
+          displaystart={ranges.hit.start}
+          displayend={ranges.hit.end}
+        />
+      </section>
     </section>
   );
 };
@@ -166,7 +158,7 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
     return chunks;
   }, [hsp_align_len, hsp_hit_from, hsp_hseq, hsp_qseq, hsp_query_from]);
   return (
-    <div style={{ overflowY: 'auto', maxHeight: '40vh' }}>
+    <>
       {sequenceChunks.map(({ sequences, id, ranges }) => (
         <HSPDetailWrappedRow
           key={id}
@@ -178,7 +170,7 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
           conservationOptions={conservationOptions}
         />
       ))}
-    </div>
+    </>
   );
 };
 
