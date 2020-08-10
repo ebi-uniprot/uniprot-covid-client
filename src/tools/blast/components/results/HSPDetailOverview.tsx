@@ -43,52 +43,50 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
   setMatchTrackData,
   annotation,
   setFeatureTrackData,
-}) => {
-  return (
-    <section className="hsp-detail-panel__visualisation">
-      <section className="hsp-label">Alignment</section>
-      <protvista-manager ref={managerRef} attributes="displaystart displayend">
-        <protvista-navigation length={hsp_align_len} />
-        <protvista-msa
-          ref={setMSAAttributes}
-          length={hsp_align_len}
-          colorscheme={highlightProperty}
-          {...conservationOptions}
-        />
-      </protvista-manager>
-      {/* 
+}) => (
+  <section className="hsp-detail-panel__visualisation">
+    <section className="hsp-label">Alignment</section>
+    <protvista-manager ref={managerRef} attributes="displaystart displayend">
+      <protvista-navigation length={hsp_align_len} />
+      <protvista-msa
+        ref={setMSAAttributes}
+        length={hsp_align_len}
+        colorscheme={highlightProperty}
+        {...conservationOptions}
+      />
+    </protvista-manager>
+    {/* 
           TODO listen to "highlight" event from block above and set on these 2 tracks,
           working as protvista-manager
           */}
-      {/* Query track */}
-      <section className="hsp-label">Query</section>
-      <protvista-track
-        height="30"
-        ref={setQueryTrackData}
-        length={hitLength}
-        layout="overlapping"
-        highlight={highlightPosition}
-      />
-      {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
-      <section className="hsp-label">
-        <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
-      </section>
-      <protvista-track
-        height="30"
-        ref={setMatchTrackData}
-        length={hitLength}
-        layout="overlapping"
-        highlight={highlightPosition}
-      />
-      <section className="hsp-label">{annotation}</section>
-      <protvista-track
-        ref={setFeatureTrackData}
-        length={hitLength}
-        layout="non-overlapping"
-        highlight={highlightPosition}
-      />
+    {/* Query track */}
+    <section className="hsp-label">Query</section>
+    <protvista-track
+      height="30"
+      ref={setQueryTrackData}
+      length={hitLength}
+      layout="overlapping"
+      highlight={highlightPosition}
+    />
+    {/* Match track - to colour based on score, see BlastSummaryTrack in BlastResultTable */}
+    <section className="hsp-label">
+      <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
     </section>
-  );
-};
+    <protvista-track
+      height="30"
+      ref={setMatchTrackData}
+      length={hitLength}
+      layout="overlapping"
+      highlight={highlightPosition}
+    />
+    <section className="hsp-label">{annotation}</section>
+    <protvista-track
+      ref={setFeatureTrackData}
+      length={hitLength}
+      layout="non-overlapping"
+      highlight={highlightPosition}
+    />
+  </section>
+);
 
 export default HSPDetailOverview;
