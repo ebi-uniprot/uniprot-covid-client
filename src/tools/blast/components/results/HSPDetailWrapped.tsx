@@ -1,5 +1,5 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/camelcase */
 import React, { FC, useCallback, useMemo } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
