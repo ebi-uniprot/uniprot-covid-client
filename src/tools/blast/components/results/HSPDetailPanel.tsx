@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 import React, { FC, useCallback, useState, useEffect } from 'react';
 import { Loader, DropdownButton, CloseIcon } from 'franklin-sites';
 import { uniq } from 'lodash-es';

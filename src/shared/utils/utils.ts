@@ -2,13 +2,13 @@
 
 // Keeping this util because _.omit is marked to be deprecated:
 // https://github.com/lodash/lodash/wiki/Roadmap
-export const removeProperty = (
-  obj: { [key: string]: any },
-  property: string | number
-): { [key: string]: object } => {
+export function removeProperty<
+  O extends Record<string | number, any>,
+  P extends string | number
+>(obj: O, property: P): Omit<O, P> {
   const { [property]: unwantedProperty, ...objWithoutProperty } = obj;
   return objWithoutProperty;
-};
+}
 
 export const formatLargeNumber = (x: number) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -70,9 +70,3 @@ export const getBEMClassName = ({
   }
   return className;
 };
-
-export const getSmallerMultiple = (n: number, factor: number) =>
-  Math.floor(n / factor) * factor;
-
-export const getLargerMultiple = (n: number, factor: number) =>
-  Math.ceil(n / factor) * factor;
