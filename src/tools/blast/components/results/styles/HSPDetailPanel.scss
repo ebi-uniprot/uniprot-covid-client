@@ -21,11 +21,11 @@
     margin-bottom: 1em;
     align-items: center;
 
-    &__msa {
+    &--msa {
       grid-area: msa;
     }
 
-    &__track {
+    &--track {
       grid-area: track;
     }
 
@@ -69,11 +69,11 @@
       text-transform: uppercase;
     }
 
-    &__msa {
+    &--msa {
       grid-area: msa-label;
     }
 
-    &__track {
+    &--track {
       grid-area: track-label;
     }
   }

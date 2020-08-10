@@ -68,8 +68,8 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
           rulerstart={ranges.query.start}
         />
       </section>
-      <section className="hsp-label hsp-label__msa">Alignment</section>
-      <section className="hsp-detail-panel__visualisation__msa">
+      <section className="hsp-label hsp-label--msa">Alignment</section>
+      <section className="hsp-detail-panel__visualisation--msa">
         <protvista-msa
           ref={setMSAAttributes}
           length={rowLength}
@@ -84,8 +84,8 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
           rulerstart={ranges.hit.start}
         />
       </section>
-      <section className="hsp-label hsp-label__track">{annotation}</section>
-      <section className="hsp-detail-panel__visualisation__track">
+      <section className="hsp-label hsp-label--track">{annotation}</section>
+      <section className="hsp-detail-panel__visualisation--track">
         <protvista-track
           ref={setFeatureTrackData}
           length={ranges.hit.end - ranges.hit.start + 1}
