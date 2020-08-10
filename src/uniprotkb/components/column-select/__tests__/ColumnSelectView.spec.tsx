@@ -16,7 +16,6 @@ describe('ColumnSelectView component', () => {
       onReset: jest.fn(),
     };
     rendered = render(<ColumnSelectView {...props} />);
-    console.log(rendered);
   });
 
   test('should render', () => {
