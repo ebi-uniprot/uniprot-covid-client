@@ -8,6 +8,7 @@ import ProtvistaMSA from 'protvista-msa';
 import { MsaColorScheme } from '../../../config/msaColorSchemes';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../../../shared/utils/utils';
+import { ConservationOptions } from './HSPDetailPanel';
 
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
@@ -34,9 +35,9 @@ type Ranges = {
 
 export type HSPDetailWrappedRowProps = {
   highlightProperty: MsaColorScheme | undefined;
-  conservationOptions: object;
+  conservationOptions: ConservationOptions;
   annotation: FeatureType | undefined;
-  setFeatureTrackData: object;
+  setFeatureTrackData: (node: HTMLElement) => void;
   sequences: Sequence[];
   ranges: Ranges;
 };
@@ -99,16 +100,16 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
 };
 
 export type HSPDetailWrappedProps = {
-  managerRef: object;
+  managerRef: (node: HTMLElement) => void;
   hsp_align_len: number;
   highlightProperty: MsaColorScheme | undefined;
-  conservationOptions: object;
-  setQueryTrackData: object;
+  conservationOptions: ConservationOptions;
+  setQueryTrackData: (node: HTMLElement) => void;
   highlightPosition: string;
   hitAccession: string;
-  setMatchTrackData: object;
+  setMatchTrackData: (node: HTMLElement) => void;
   annotation: FeatureType | undefined;
-  setFeatureTrackData: object;
+  setFeatureTrackData: (node: HTMLElement) => void;
   hsp_qseq: string;
   hsp_hseq: string;
   hsp_hit_from: number;

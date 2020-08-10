@@ -8,6 +8,7 @@ import ProtvistaMSA from 'protvista-msa';
 import { MsaColorScheme } from '../../../config/msaColorSchemes';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../../../shared/utils/utils';
+import { ConservationOptions } from './HSPDetailPanel';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -15,18 +16,18 @@ loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
 export type HSPDetailOverviewProps = {
-  managerRef: object;
+  managerRef: (node: HTMLElement) => void;
   hsp_align_len: number;
-  setMSAAttributes: object;
+  setMSAAttributes: (node: HTMLElement) => void;
   highlightProperty: MsaColorScheme | undefined;
-  conservationOptions: object;
-  setQueryTrackData: object;
+  conservationOptions: ConservationOptions;
+  setQueryTrackData: (node: HTMLElement) => void;
   hitLength: number;
   highlightPosition: string;
   hitAccession: string;
-  setMatchTrackData: object;
+  setMatchTrackData: (node: HTMLElement) => void;
   annotation: FeatureType | undefined;
-  setFeatureTrackData: object;
+  setFeatureTrackData: (node: HTMLElement) => void;
 };
 
 const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({

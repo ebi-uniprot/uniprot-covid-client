@@ -29,6 +29,11 @@ enum View {
   wrapped,
 }
 
+export type ConservationOptions = {
+  'calculate-conservation'?: true;
+  'overlay-conservation'?: true;
+};
+
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
   hitAccession: string;
@@ -245,7 +250,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   if (loading) {
     return <Loader />;
   }
-  const conservationOptions =
+  const conservationOptions: ConservationOptions =
     highlightProperty === MsaColorScheme.CONSERVATION
       ? {
           'calculate-conservation': true,
