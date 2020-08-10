@@ -24,6 +24,11 @@ type UniProtkbAccessionsAPI = {
   results: UniProtkbAPIModel[];
 };
 
+enum View {
+  overview,
+  wrapped,
+}
+
 export type HSPDetailPanelProps = {
   hsp: BlastHsp;
   hitAccession: string;
@@ -55,14 +60,19 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
-  const [activeView, setActiveView] = useState<'overview' | 'wrapped'>(
-    'overview'
-  );
+  const [activeView, setActiveView] = useState<View>(View.overview);
   const tracksOffset = Math.abs(hsp_hit_from - hsp_query_from);
 
   useEffect(() => {
     setHighlighPosition('0:0');
   }, [hsp_hit_from, hsp_query_from]);
+
+  // Reset view when different hit is being viewed
+  useEffect(() => {
+    setActiveView(View.overview);
+    setAnnotation(undefined);
+    setHighlightProperty(undefined);
+  }, [hitAccession]);
 
   const setQueryTrackData = useCallback(
     (node): void => {
@@ -184,7 +194,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         let processedFeatures = processFeaturesData(
           features.filter(({ type }) => type === annotation)
         );
-        if (activeView === 'wrapped') {
+        if (activeView === View.wrapped) {
           processedFeatures = processedFeatures
             .map((feature) => ({
               ...feature,
@@ -312,7 +322,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      setActiveView('overview');
+                      setActiveView(View.overview);
                     }}
                   >
                     Overview
@@ -324,7 +334,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      setActiveView('wrapped');
+                      setActiveView(View.wrapped);
                     }}
                   >
                     Wrapped
@@ -336,7 +346,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
         </DropdownButton>
       </div>
       <div className="hsp-detail-panel__body">
-        {activeView === 'overview' ? (
+        {activeView === View.overview ? (
           <HSPDetailOverview
             managerRef={managerRef}
             hsp_align_len={hsp_align_len}
