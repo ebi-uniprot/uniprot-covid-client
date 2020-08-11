@@ -5,8 +5,7 @@ import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 import SideBarLayout from '../../../../shared/components/layouts/SideBarLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import BlastResultSidebar from './BlastResultSidebar';
-// import BlastResultDownload from './BlastResultDownload';
-import BlastResultButtons from './BlastResultButtons';
+import ResultButtons from '../../../components/ResultButtons';
 
 import useDataApi, {
   UseDataAPIState,
@@ -23,7 +22,7 @@ import {
 import inputParamsXMLToObject from '../../adapters/inputParamsXMLToObject';
 
 import { Location, LocationToPath } from '../../../../app/config/urls';
-import blastUrls from '../../config/blastUrls';
+import toolsURLs from '../../../config/urls';
 import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 
 import { BlastResults, BlastHit } from '../../types/blastResults';
@@ -36,28 +35,33 @@ import BlastResultLocalFacets from './BlastResultLocalFacets';
 import ErrorBoundary from '../../../../shared/components/error-component/ErrorBoundary';
 import HSPDetailPanel, { HSPDetailPanelProps } from './HSPDetailPanel';
 
+import '../../../styles/ToolsResult.scss';
+
+const blastURls = toolsURLs(JobTypes.BLAST);
+
+// overview
 const BlastResultTable = lazy(() =>
   import(/* webpackChunkName: "blast-result-page" */ './BlastResultTable')
 );
+// taxonomy
 const BlastResultTaxonomy = lazy(() =>
   import(
     /* webpackChunkName: "blast-result-taxonomy" */ './BlastResultTaxonomy'
   )
 );
-const BlastResultTextOutput = lazy(() =>
-  import(
-    /* webpackChunkName: "blast-result-text-output" */ './BlastResultTextOutput'
-  )
-);
-const BlastResultToolInput = lazy(() =>
-  import(
-    /* webpackChunkName: "blast-result-tool-input" */ './BlastResultToolInput'
-  )
-);
+// hit-distribution
 const BlastResultHitDistribution = lazy(() =>
   import(
     /* webpackChunkName: "blast-result-hit-distribution" */ './BlastResultHitDistribution'
   )
+);
+// text-output
+const TextOutput = lazy(() =>
+  import(/* webpackChunkName: "text-output" */ '../../../components/TextOutput')
+);
+// tool-input
+const ToolInput = lazy(() =>
+  import(/* webpackChunkName: "tool-input" */ '../../../components/ToolInput')
 );
 
 enum TabLocation {
@@ -71,7 +75,7 @@ enum TabLocation {
 type Match = {
   params: {
     id: string;
-    subPage?: string;
+    subPage?: TabLocation;
   };
 };
 
@@ -86,9 +90,9 @@ const useParamsData = (
   >({});
 
   const paramsXMLData = useDataApi<string>(
-    blastUrls.resultUrl(id, 'parameters')
+    blastURls.resultUrl(id, 'parameters')
   );
-  const sequenceData = useDataApi<string>(blastUrls.resultUrl(id, 'sequence'));
+  const sequenceData = useDataApi<string>(blastURls.resultUrl(id, 'sequence'));
 
   useEffect(() => {
     const loading = paramsXMLData.loading || sequenceData.loading;
@@ -149,7 +153,7 @@ const BlastResult = () => {
       history.replace(
         history.createHref({
           ...history.location,
-          pathname: `${history.location.pathname}/overview`,
+          pathname: `${history.location.pathname}/${TabLocation.Overview}`,
         })
       );
     }
@@ -161,7 +165,7 @@ const BlastResult = () => {
     data: blastData,
     error: blastError,
     status: blastStatus,
-  } = useDataApi<BlastResults>(blastUrls.resultUrl(match.params.id, 'json'));
+  } = useDataApi<BlastResults>(blastURls.resultUrl(match.params.id, 'json'));
 
   // extract facets and other info from URL querystring
   const urlParams: URLResultParams = useMemo(
@@ -282,15 +286,13 @@ const BlastResult = () => {
   }
 
   const actionBar = (
-    <BlastResultButtons
+    <ResultButtons
+      jobType={JobTypes.BLAST}
       jobId={match.params.id}
       selectedEntries={selectedEntries}
       inputParamsData={inputParamsData.data}
       nHits={blastData.hits.length}
-      isTableResultsFiltered={
-        typeof data?.hits.length !== 'undefined' &&
-        data?.hits.length !== blastData.hits.length
-      }
+      isTableResultsFiltered={blastData?.hits.length !== hitsFiltered.length}
     />
   );
 
@@ -300,15 +302,16 @@ const BlastResult = () => {
         <PageIntro title="BLAST Results" resultsCount={blastData.hits.length} />
       }
       sidebar={sidebar}
+      className="tools-result"
     >
       <Tabs active={match.params.subPage}>
         <Tab
-          id="overview"
+          id={TabLocation.Overview}
           title={
             <Link
               to={(location) => ({
                 ...location,
-                pathname: `/blast/${match.params.id}/overview`,
+                pathname: `/blast/${match.params.id}/${TabLocation.Overview}`,
               })}
             >
               Overview
@@ -327,12 +330,12 @@ const BlastResult = () => {
           </Suspense>
         </Tab>
         <Tab
-          id="taxonomy"
+          id={TabLocation.Taxonomy}
           title={
             <Link
               to={(location) => ({
                 ...location,
-                pathname: `/blast/${match.params.id}/taxonomy`,
+                pathname: `/blast/${match.params.id}/${TabLocation.Taxonomy}`,
               })}
             >
               Taxonomy
@@ -343,12 +346,12 @@ const BlastResult = () => {
           <BlastResultTaxonomy data={data} />
         </Tab>
         <Tab
-          id="hit-distribution"
+          id={TabLocation.HitDistribution}
           title={
             <Link
               to={(location) => ({
                 ...location,
-                pathname: `/blast/${match.params.id}/hit-distribution`,
+                pathname: `/blast/${match.params.id}/${TabLocation.HitDistribution}`,
               })}
             >
               Hit Distribution
@@ -363,12 +366,12 @@ const BlastResult = () => {
           />
         </Tab>
         <Tab
-          id="text-output"
+          id={TabLocation.TextOutput}
           title={
             <Link
               to={(location) => ({
                 ...location,
-                pathname: `/blast/${match.params.id}/text-output`,
+                pathname: `/blast/${match.params.id}/${TabLocation.TextOutput}`,
               })}
             >
               Text Output
@@ -376,16 +379,16 @@ const BlastResult = () => {
           }
         >
           <Suspense fallback={<Loader />}>
-            <BlastResultTextOutput id={match.params.id} />
+            <TextOutput id={match.params.id} jobType={JobTypes.BLAST} />
           </Suspense>
         </Tab>
         <Tab
-          id="tool-input"
+          id={TabLocation.ToolInput}
           title={
             <Link
               to={(location) => ({
                 ...location,
-                pathname: `/blast/${match.params.id}/tool-input`,
+                pathname: `/blast/${match.params.id}/${TabLocation.ToolInput}`,
               })}
             >
               Tool Input
@@ -393,7 +396,7 @@ const BlastResult = () => {
           }
         >
           <Suspense fallback={<Loader />}>
-            <BlastResultToolInput
+            <ToolInput
               id={match.params.id}
               jobType={JobTypes.BLAST}
               inputParamsData={inputParamsData}

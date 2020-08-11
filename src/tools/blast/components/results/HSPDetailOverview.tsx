@@ -22,7 +22,7 @@ export type HSPDetailOverviewProps = {
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: ConservationOptions;
   setQueryTrackData: (node: HTMLElement) => void;
-  hitLength: number;
+  totalLength: number;
   highlightPosition: string;
   hitAccession: string;
   setMatchTrackData: (node: HTMLElement) => void;
@@ -37,7 +37,7 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
   highlightProperty,
   conservationOptions,
   setQueryTrackData,
-  hitLength,
+  totalLength,
   highlightPosition,
   hitAccession,
   setMatchTrackData,
@@ -67,7 +67,7 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
     <protvista-track
       height="30"
       ref={setQueryTrackData}
-      length={hitLength}
+      length={totalLength}
       layout="overlapping"
       highlight={highlightPosition}
     />
@@ -78,14 +78,14 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
     <protvista-track
       height="30"
       ref={setMatchTrackData}
-      length={hitLength}
+      length={totalLength}
       layout="overlapping"
       highlight={highlightPosition}
     />
     <section className="hsp-label">{annotation}</section>
     <protvista-track
       ref={setFeatureTrackData}
-      length={hitLength}
+      length={totalLength}
       layout="non-overlapping"
       highlight={highlightPosition}
     />

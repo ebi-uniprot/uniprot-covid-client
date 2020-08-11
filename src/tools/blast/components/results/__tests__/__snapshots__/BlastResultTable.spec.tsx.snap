@@ -50,7 +50,15 @@ exports[`BlastResultTable tests should render the results table 1`] = `
               class="data-table__header-cell "
               style="width: 40vw;"
             >
-              Alignment
+              <div
+                class="query-sequence-wrapper"
+              >
+                <protvista-navigation
+                  height="10"
+                  length="30"
+                  title="Query"
+                />
+              </div>
             </th>
           </tr>
         </thead>
