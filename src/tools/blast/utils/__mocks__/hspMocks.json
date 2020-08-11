@@ -179,5 +179,19 @@
         }
       ]
     }
-  }
+  },
+  "features": [
+    {
+      "protvistaFeatureId": "60f6f7b0-dbab-11ea-b5c1-ed65ca4c7436",
+      "start": 324,
+      "end": 344,
+      "startModifier": "EXACT",
+      "endModifier": "EXACT",
+      "type": "coiled-coil region",
+      "description": "",
+      "evidences": [
+        { "evidenceCode": "ECO:0000256", "source": "SAM", "id": "Coils" }
+      ]
+    }
+  ]
 }

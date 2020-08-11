@@ -15,6 +15,7 @@ loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
+// TODO replace with useSize hook
 const rowLength = 60;
 
 type Sequence = {

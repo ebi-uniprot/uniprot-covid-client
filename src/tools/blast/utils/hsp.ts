@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { BlastHsp } from '../types/blastResults';
 import { findSequenceSegments } from '../../utils';
+import { ProcessedFeature } from '../../../uniprotkb/components/protein-data-views/FeaturesView';
 
 export const getFullAlignmentLength = (
   hsp: BlastHsp,
@@ -112,3 +113,10 @@ export const getFullAlignmentSegments = (
     ],
   };
 };
+
+export const transformFeaturesPositions = (features: ProcessedFeature[]) =>
+  features.map((feature) => ({
+    ...feature,
+    start: feature.start - 1,
+    end: feature.end - 1,
+  }));

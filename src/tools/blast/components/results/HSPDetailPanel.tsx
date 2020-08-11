@@ -9,10 +9,7 @@ import useDataApi from '../../../../shared/hooks/useDataApi';
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
-import {
-  processFeaturesData,
-  ProcessedFeature,
-} from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
+import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import HSPDetailOverview from './HSPDetailOverview';
 import HSPDetailWrapped from './HSPDetailWrapped';
@@ -25,6 +22,7 @@ import {
   getFullAlignmentLength,
   getFullAlignmentSegments,
   getOffset,
+  transformFeaturesPositions,
 } from '../../utils/hsp';
 
 type UniProtkbAccessionsAPI = {
@@ -49,18 +47,6 @@ export type HSPDetailPanelProps = {
   queryLength: number;
 };
 
-export const filterFeaturesOutsideOfAlignment = (
-  features: ProcessedFeature[],
-  hsp_hit_from: number,
-  hsp_hit_to: number
-) =>
-  features
-    .map((feature) => ({
-      ...feature,
-      start: feature.start - hsp_hit_from,
-    }))
-    .filter(({ start }) => start >= 0 && start <= hsp_hit_to);
-
 const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   hsp,
   hitAccession,
@@ -73,7 +59,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     hsp_query_from,
     hsp_qseq,
     hsp_hit_from,
-    hsp_hit_to,
     hsp_hseq,
   } = hsp;
   // TODO calculate actual length based on total match and query lengths
@@ -87,7 +72,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   const tracksOffset = getOffset(hsp);
   const totalLength = getFullAlignmentLength(hsp, queryLength, hitLength);
   const segments = getFullAlignmentSegments(hsp, queryLength, hitLength);
-
   // Reset view when different hit is being viewed
   useEffect(() => {
     setActiveView(View.overview);
@@ -172,16 +156,12 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           features.filter(({ type }) => type === annotation)
         );
         if (activeView === View.wrapped) {
-          processedFeatures = filterFeaturesOutsideOfAlignment(
-            processedFeatures,
-            hsp_hit_from,
-            hsp_hit_to
-          );
+          processedFeatures = transformFeaturesPositions(processedFeatures);
         }
         node.data = processedFeatures;
       }
     },
-    [features, annotation, activeView, hsp_hit_from, hsp_hit_to]
+    [features, annotation, activeView]
   );
 
   type EventDetail = {
