@@ -101,13 +101,22 @@ const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
                 opacity = getExponentialContrast(value / 100, contrast);
               }
 
+              const isHovered =
+                // is hovered cell in down left triangle
+                (hovered[0] === indexRow && hovered[1] === indexCol) ||
+                // or is corresponding cell in up right triangle
+                (hovered[1] === indexRow && hovered[0] === indexCol);
+
               const delay =
                 (WAVE_EFFECT_TIME * (indexCol + indexRow)) /
                 (parsed.length + parsed.length - 2);
               return (
                 <span
                   key={indexCol} // eslint-disable-line react/no-array-index-key
-                  className="align-result-pim__cell"
+                  className={cn('align-result-pim__cell', {
+                    'align-result-pim__cell--hovered': isHovered,
+                    'align-result-pim__cell--dark': opacity < 0.5,
+                  })}
                   title={`${accession || name} vs ${
                     vsSequence.accession || vsSequence.name
                   }: ${stringValue}`}
@@ -120,7 +129,6 @@ const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
                     // looks like the effect start from where the button is
                     transitionDelay: `${WAVE_EFFECT_TIME - delay}ms`,
                     backgroundColor: `rgba(1,67,113,${opacity})`,
-                    color: opacity < 0.5 ? 'black' : 'white',
                   }}
                 >
                   <span>{stringValue}</span>

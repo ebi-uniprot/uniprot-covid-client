@@ -57,8 +57,17 @@
     // transition on contrast update
     transition: background-color ease-in-out 100ms;
 
-    &:hover {
-      border-color: $colour-vivid-cerulean;
+    &--dark {
+      color: black;
+    }
+
+    &--hovered {
+      border-color: $colour-medium-turquoise;
+    }
+
+    // combine both modifiers for classes on the same element
+    &--dark#{&}--hovered {
+      border-color: $colour-sapphire-blue;
     }
   }
 }
