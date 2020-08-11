@@ -559,7 +559,7 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
           </section>
           <protvista-manager
             attributes="displaystart displayend"
-            displayend="37.333333333333336"
+            displayend="28"
             displaystart="1"
           >
             <protvista-navigation
@@ -576,7 +576,7 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
           </section>
           <protvista-track
             height="30"
-            highlight="416:452.3333333333333"
+            highlight="418:446"
             layout="overlapping"
             length="486"
           />
@@ -591,7 +591,7 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
           </section>
           <protvista-track
             height="30"
-            highlight="416:452.3333333333333"
+            highlight="418:446"
             layout="overlapping"
             length="486"
           />
@@ -599,7 +599,7 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
             class="hsp-label"
           />
           <protvista-track
-            highlight="416:452.3333333333333"
+            highlight="418:446"
             layout="non-overlapping"
             length="486"
           />
