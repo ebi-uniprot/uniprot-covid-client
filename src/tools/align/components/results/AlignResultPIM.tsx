@@ -1,6 +1,7 @@
 import React, { Fragment, useState, FC } from 'react';
 import { Loader } from 'franklin-sites';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 
@@ -42,6 +43,7 @@ const DEFAULT_CONTRAST = 2; // need to be >1
 const WAVE_EFFECT_TIME = 250; // in ms
 
 const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
+  const [hovered, setHovered] = useState<number[]>([]);
   const [contrast, setContrast] = useState(DEFAULT_CONTRAST);
   const { loading, data, error, status } = useDataApi<string>(
     alignURLs.resultUrl(id, 'pim')
@@ -76,16 +78,29 @@ const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
           <Fragment
             key={indexRow} // eslint-disable-line react/no-array-index-key
           >
-            <span className="align-result-pim__name">
+            <span
+              className={cn('align-result-pim__name', {
+                'align-result-pim__name--hovered': hovered.includes(indexRow),
+              })}
+            >
               <NameWithPossibleAccession accession={accession}>
                 {name}
               </NameWithPossibleAccession>
             </span>
             {/* for each of the sequences this one is measured against */}
             {values.map((value, indexCol) => {
-              const opacity = getExponentialContrast(value / 100, contrast);
               // sequence against which this one is compared
               const vsSequence = parsed[indexCol];
+
+              let stringValue;
+              let opacity = 0;
+              if (Number.isNaN(value)) {
+                stringValue = `Not a Number`;
+              } else {
+                stringValue = `${value.toFixed(2)}%`;
+                opacity = getExponentialContrast(value / 100, contrast);
+              }
+
               const delay =
                 (WAVE_EFFECT_TIME * (indexCol + indexRow)) /
                 (parsed.length + parsed.length - 2);
@@ -95,7 +110,9 @@ const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
                   className="align-result-pim__cell"
                   title={`${accession || name} vs ${
                     vsSequence.accession || vsSequence.name
-                  }: ${value}%`}
+                  }: ${stringValue}`}
+                  onPointerEnter={() => setHovered([indexRow, indexCol])}
+                  onPointerLeave={() => setHovered([])}
                   style={{
                     // effect from top left to bottom right on mount
                     animationDelay: `${delay}ms`,
@@ -106,7 +123,7 @@ const AlignResultPIM: FC<{ id: string }> = ({ id }) => {
                     color: opacity < 0.5 ? 'black' : 'white',
                   }}
                 >
-                  <span>{value.toFixed(2)}%</span>
+                  <span>{stringValue}</span>
                 </span>
               );
             })}
