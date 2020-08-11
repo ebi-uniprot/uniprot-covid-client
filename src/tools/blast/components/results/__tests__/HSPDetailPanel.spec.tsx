@@ -1,36 +1,48 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
 import blastResultsMockData from '../../../../__mocks__/server-jobs/example-truncated.json';
 import HSPDetailPanel from '../HSPDetailPanel';
+import modelData from '../../../../../uniprotkb/__mocks__/entryModelData.json';
+import renderWithRouter from '../../../../../shared/__test-helpers__/RenderWithRouter';
 
-describe('HSPDetailPanel tests', () => {
+jest.mock('../../../../../shared/hooks/useDataApi', () => jest.fn());
+import useDataApi from '../../../../../shared/hooks/useDataApi';
+
+const dataMock = {
+  loading: false,
+  data: modelData,
+};
+useDataApi.mockImplementation(() => dataMock);
+
+describe('HSPDetailPanel', () => {
   let rendered;
   const onClose = jest.fn();
-  beforeEach(() => {
-    const hit = blastResultsMockData.hits[0];
-    rendered = render(
+  const hit = blastResultsMockData.hits[0];
+  const hsp = hit.hit_hsps[0];
+
+  beforeEach(async () => {
+    rendered = renderWithRouter(
       <HSPDetailPanel
-        hsp={hit.hit_hsps[0]}
+        hsp={hsp}
         hitAccession={hit.hit_acc}
         onClose={onClose}
         hitLength={hit.hit_len}
         queryLength={blastResultsMockData.query_len}
       />
     );
+    await rendered;
   });
 
-  it('should render the results table', () => {
+  it('should render', () => {
     const { asFragment } = rendered;
     expect(asFragment()).toMatchSnapshot();
   });
 
-  // it('should toggle the extra hss', async () => {
-  //   const { getByText, findAllByTestId } = component;
-  //   let hspTracks = await findAllByTestId('blast-summary-track');
-  //   expect(hspTracks.length).toBe(1);
-  //   const toggle = getByText('+1 more');
-  //   fireEvent.click(toggle);
-  //   hspTracks = await findAllByTestId('blast-summary-track');
-  //   expect(hspTracks.length).toBe(2);
-  // });
+  it('should load correct query and match sequence data', async () => {
+    const { container } = rendered;
+    const msa = container.querySelector('protvista-msa');
+    expect(msa.data).toEqual([
+      { name: 'Query', sequence: hsp.hsp_qseq },
+      { name: 'Match', sequence: hsp.hsp_hseq },
+    ]);
+  });
 });
