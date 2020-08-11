@@ -2,6 +2,7 @@ import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { Loader, PageIntro, Tabs, Tab } from 'franklin-sites';
 
+import ErrorBoundary from '../../../../shared/components/error-component/ErrorBoundary';
 import SingleColumnLayout from '../../../../shared/components/layouts/SingleColumnLayout';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import ResultButtons from '../../../components/ResultButtons';
@@ -166,13 +167,15 @@ const AlignResult = () => {
           }
         >
           {actionBar}
-          <Suspense fallback={<Loader />}>
-            {data}
-            {/* <AlignResultOverview 
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              {data}
+              {/* <AlignResultOverview 
               selectedEntries={selectedEntries}
               handleSelectedEntries={handleSelectedEntries}
             /> */}
-          </Suspense>
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
         <Tab
           id={TabLocation.PhyloTree}
@@ -188,9 +191,11 @@ const AlignResult = () => {
           }
         >
           {actionBar}
-          <Suspense fallback={<Loader />}>
-            <AlignResultPhyloTree id={match.params.id} />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <AlignResultPhyloTree id={match.params.id} />
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
         <Tab
           id={TabLocation.PIM}
@@ -206,9 +211,11 @@ const AlignResult = () => {
           }
         >
           {actionBar}
-          <Suspense fallback={<Loader />}>
-            <AlignResultPIM id={match.params.id} />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <AlignResultPIM id={match.params.id} />
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
         <Tab
           id={TabLocation.TextOutput}
@@ -224,9 +231,11 @@ const AlignResult = () => {
           }
         >
           {actionBar}
-          <Suspense fallback={<Loader />}>
-            <TextOutput id={match.params.id} jobType={JobTypes.ALIGN} />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <TextOutput id={match.params.id} jobType={JobTypes.ALIGN} />
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
         <Tab
           id={TabLocation.ToolInput}
@@ -241,13 +250,15 @@ const AlignResult = () => {
             </Link>
           }
         >
-          <Suspense fallback={<Loader />}>
-            <ToolInput
-              id={match.params.id}
-              jobType={JobTypes.ALIGN}
-              inputParamsData={inputParamsData}
-            />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <ToolInput
+                id={match.params.id}
+                jobType={JobTypes.ALIGN}
+                inputParamsData={inputParamsData}
+              />
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
       </Tabs>
     </SingleColumnLayout>

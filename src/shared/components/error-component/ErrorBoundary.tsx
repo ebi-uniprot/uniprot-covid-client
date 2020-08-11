@@ -32,9 +32,15 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    if (nextProps.location === prevState.location) return null;
-    // Any change in location should reset the error state, and try to re-render
-    return { error: null };
+    if (
+      nextProps.location.pathname === prevState.location?.pathname &&
+      nextProps.location.search === prevState.location?.search
+    ) {
+      // if same pathname and querystring, don't do anything
+      return null;
+    }
+    // otherwise, reset error, and keep new location in state
+    return { error: null, location: nextProps.location };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
