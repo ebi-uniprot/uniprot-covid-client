@@ -61,7 +61,10 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
   );
 
   return (
-    <section className="hsp-detail-panel__visualisation hsp-detail-panel__visualisation__wrapped-row">
+    <section
+      data-testid="wrapped-hsp-detail"
+      className="hsp-detail-panel__visualisation hsp-detail-panel__visualisation__wrapped-row"
+    >
       <section className="query-ruler">
         <protvista-navigation
           length={rowLength}

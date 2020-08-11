@@ -44,7 +44,10 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
   annotation,
   setFeatureTrackData,
 }) => (
-  <section className="hsp-detail-panel__visualisation">
+  <section
+    data-testid="overview-hsp-detail"
+    className="hsp-detail-panel__visualisation"
+  >
     <section className="hsp-label">Alignment</section>
     <protvista-manager ref={managerRef} attributes="displaystart displayend">
       <protvista-navigation length={hsp_align_len} />

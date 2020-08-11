@@ -9,7 +9,10 @@ import useDataApi from '../../../../shared/hooks/useDataApi';
 import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConverter';
 import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
-import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
+import {
+  processFeaturesData,
+  ProcessedFeature,
+} from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import HSPDetailOverview from './HSPDetailOverview';
 import HSPDetailWrapped from './HSPDetailWrapped';
@@ -41,6 +44,18 @@ export type HSPDetailPanelProps = {
   hitLength: number;
   queryLength: number;
 };
+
+export const filterFeaturesOutsideOfAlignment = (
+  features: ProcessedFeature[],
+  hsp_hit_from: number,
+  hsp_hit_to: number
+) =>
+  features
+    .map((feature) => ({
+      ...feature,
+      start: feature.start - hsp_hit_from,
+    }))
+    .filter(({ start }) => start >= 0 && start <= hsp_hit_to);
 
 const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
   hsp,
@@ -200,12 +215,11 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           features.filter(({ type }) => type === annotation)
         );
         if (activeView === View.wrapped) {
-          processedFeatures = processedFeatures
-            .map((feature) => ({
-              ...feature,
-              start: feature.start - hsp_hit_from,
-            }))
-            .filter(({ start }) => start >= 0 && start <= hsp_hit_to);
+          processedFeatures = filterFeaturesOutsideOfAlignment(
+            processedFeatures,
+            hsp_hit_from,
+            hsp_hit_to
+          );
         }
         node.data = processedFeatures;
       }
