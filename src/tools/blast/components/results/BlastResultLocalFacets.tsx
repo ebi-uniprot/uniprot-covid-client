@@ -49,8 +49,8 @@ const LocalFacet: FC<LocalFacetProps> = ({
     const facetsWithoutModified = selectedFacets.filter(
       ({ name }) => name !== facet
     );
-    const value = `[${min === bounds.min ? '*' : min} TO ${
-      max === bounds.max ? '*' : max
+    const value = `[${min <= bounds.min ? '*' : min} TO ${
+      max >= bounds.max ? '*' : max
     }]`;
 
     let nextFacets: SelectedFacet[];
