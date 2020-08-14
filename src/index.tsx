@@ -85,26 +85,7 @@ import(
     'message',
     (message: CustomMessageEvent<SWMessage>) => {
       if (message.data.type === MessageTypes.UPDATED_DATA) {
-        store.dispatch(
-          addMessage({
-            id: 'new-version-data',
-            content: (
-              <>
-                A newer version of the data on this page is available.
-                <br />
-                <button
-                  type="button"
-                  className="button secondary tiny"
-                  onClick={() => window.location.reload()}
-                >
-                  Refresh page
-                </button>
-              </>
-            ),
-            format: MessageFormat.POP_UP,
-            level: MessageLevel.INFO,
-          })
-        );
+        // new data available, we decided to not do anything special for now
       }
     }
   );
