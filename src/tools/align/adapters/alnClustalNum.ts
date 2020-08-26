@@ -45,7 +45,28 @@ const alnClustalNum = (string?: string): AlnClustalNum | null => {
             `Inconsistent number of sequences in block: ${nSequences} !== ${nSequencesInBlock}`
           );
         }
-        conservation += line.slice(sequenceStart, sequenceEnd);
+
+        if (
+          typeof sequenceStart === 'undefined' ||
+          typeof sequenceEnd === 'undefined'
+        ) {
+          throw new SyntaxError(`sequenceStart or sequenceEnd undefined`);
+        }
+
+        let conservationLine;
+        const sequenceLength = sequenceEnd - sequenceStart + 1;
+        if (!line) {
+          conservationLine = ' '.repeat(sequenceLength);
+        } else if (!line.startsWith(' '.repeat(sequenceStart))) {
+          throw new SyntaxError(
+            'Inconsistent number of spaces before conservation line'
+          );
+        } else {
+          conservationLine = line
+            .slice(sequenceStart, sequenceEnd)
+            .padEnd(sequenceLength - 1);
+        }
+        conservation += conservationLine;
         readingSequences = false;
         nSequencesInBlock = 0;
         continue;
@@ -90,6 +111,8 @@ const alnClustalNum = (string?: string): AlnClustalNum | null => {
               `Inconsistent sequence column end : ${sequenceEnd} <  ${lineSequenceEnd}:\n${line}`
             );
           }
+          // This needs to be updated if we're at the last block and the sequences are shorter
+          sequenceEnd = lineSequenceEnd;
           continue;
         }
       }
