@@ -7,16 +7,16 @@ import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
 
-import { loadWebComponent } from '../../../../shared/utils/utils';
+import { loadWebComponent } from '../../shared/utils/utils';
 
-import useSize from '../../../../shared/hooks/useSize';
-import useSafeState from '../../../../shared/hooks/useSafeState';
-import useStaggeredRenderingHelper from '../../../../shared/hooks/useStaggeredRenderingHelper';
+import useSize from '../../shared/hooks/useSize';
+import useSafeState from '../../shared/hooks/useSafeState';
+import useStaggeredRenderingHelper from '../../shared/hooks/useStaggeredRenderingHelper';
 
-import { ConservationOptions } from './HSPDetailPanel';
-import { MsaColorScheme } from '../../../config/msaColorSchemes';
+import { ConservationOptions } from '../blast/components/results/HSPDetailPanel';
+import { MsaColorScheme } from '../config/msaColorSchemes';
 
-import FeatureType from '../../../../uniprotkb/types/featureType';
+import FeatureType from '../../uniprotkb/types/featureType';
 
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);

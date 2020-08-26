@@ -11,8 +11,8 @@ import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 import FeatureType from '../../../../uniprotkb/types/featureType';
 import { processFeaturesData } from '../../../../uniprotkb/components/protein-data-views/FeaturesView';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
-import HSPDetailOverview from './HSPDetailOverview';
-import HSPDetailWrapped from './HSPDetailWrapped';
+import MSAView from '../../../components/MSAView';
+import HSPDetailWrapped from '../../../components/MSAWrappedView';
 import {
   MsaColorScheme,
   msaColorSchemeToString,
@@ -303,7 +303,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
       </div>
       <div className="hsp-detail-panel__body">
         {activeView === View.overview ? (
-          <HSPDetailOverview
+          <MSAView
             managerRef={managerRef}
             hsp_align_len={hsp_align_len}
             setMSAAttributes={setMSAAttributes}

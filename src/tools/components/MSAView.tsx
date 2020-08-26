@@ -5,17 +5,17 @@ import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
-import { MsaColorScheme } from '../../../config/msaColorSchemes';
-import FeatureType from '../../../../uniprotkb/types/featureType';
-import { loadWebComponent } from '../../../../shared/utils/utils';
-import { ConservationOptions } from './HSPDetailPanel';
+import { MsaColorScheme } from '../config/msaColorSchemes';
+import FeatureType from '../../uniprotkb/types/featureType';
+import { loadWebComponent } from '../../shared/utils/utils';
+import { ConservationOptions } from '../blast/components/results/HSPDetailPanel';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
-export type HSPDetailOverviewProps = {
+export type MSAViewProps = {
   managerRef: (node: HTMLElement) => void;
   hsp_align_len: number;
   setMSAAttributes: (node: HTMLElement) => void;
@@ -30,7 +30,7 @@ export type HSPDetailOverviewProps = {
   setFeatureTrackData: (node: HTMLElement) => void;
 };
 
-const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
+const MSAView: FC<MSAViewProps> = ({
   managerRef,
   hsp_align_len,
   setMSAAttributes,
@@ -88,4 +88,4 @@ const HSPDetailOverview: FC<HSPDetailOverviewProps> = ({
   </section>
 );
 
-export default HSPDetailOverview;
+export default MSAView;
