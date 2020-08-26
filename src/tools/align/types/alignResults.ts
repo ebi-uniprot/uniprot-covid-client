@@ -13,3 +13,11 @@ export type PhyloTree = PhyloTreeNode;
 
 export type PIMRow = { name: string; accession?: string; values: number[] };
 export type PIM = PIMRow[];
+
+export type AlnClustalNum = {
+  sequences: {
+    sequence: string;
+    name: string;
+  }[];
+  conservation: string;
+};
