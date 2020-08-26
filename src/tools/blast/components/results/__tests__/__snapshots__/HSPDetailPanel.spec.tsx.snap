@@ -557,23 +557,6 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
           <section
             class="hsp-label"
           >
-            Alignment
-          </section>
-          <protvista-manager
-            attributes="displaystart displayend"
-            displayend="28"
-            displaystart="1"
-          >
-            <protvista-navigation
-              length="28"
-            />
-            <protvista-msa
-              length="28"
-            />
-          </protvista-manager>
-          <section
-            class="hsp-label"
-          >
             Query
           </section>
           <protvista-track
@@ -605,6 +588,23 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
             layout="non-overlapping"
             length="486"
           />
+          <section
+            class="hsp-label"
+          >
+            Alignment
+          </section>
+          <protvista-manager
+            attributes="displaystart displayend"
+            displayend="28"
+            displaystart="1"
+          >
+            <protvista-navigation
+              length="28"
+            />
+            <protvista-msa
+              length="28"
+            />
+          </protvista-manager>
         </section>
       </div>
     </div>
