@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
@@ -9,6 +9,8 @@ import { MsaColorScheme } from '../config/msaColorSchemes';
 import FeatureType from '../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../shared/utils/utils';
 import { MSAInput, ConservationOptions } from './MSAWrapper';
+import { processFeaturesData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
+import { transformFeaturesPositions } from '../blast/utils/hsp';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -24,7 +26,6 @@ export type MSAViewProps = {
   totalLength: number;
   highlightPosition: string;
   annotation: FeatureType | undefined;
-  // setFeatureTrackData: (node: HTMLElement) => void;
 };
 
 const MSAView: FC<MSAViewProps> = ({
@@ -57,19 +58,24 @@ const MSAView: FC<MSAViewProps> = ({
       // }
 
       node.data = alignment.map(({ name, sequence }) => ({ name, sequence }));
-
-      // node.data = [
-      //   {
-      //     name: 'Query',
-      //     sequence: hsp_qseq,
-      //   },
-      //   {
-      //     name: 'Match',
-      //     sequence: hsp_hseq,
-      //   },
-      // ];
     },
     [alignment]
+  );
+
+  // This should use state to handle selection of alignment and set features
+  const features = useMemo(() => alignment[1].features, [alignment]);
+
+  const setFeatureTrackData = useCallback(
+    (node): void => {
+      if (node && features && annotation) {
+        let processedFeatures = processFeaturesData(
+          features.filter(({ type }) => type === annotation)
+        );
+        processedFeatures = transformFeaturesPositions(processedFeatures);
+        node.data = processedFeatures;
+      }
+    },
+    [features, annotation]
   );
 
   // const setQueryTrackData = useCallback(
@@ -117,13 +123,13 @@ const MSAView: FC<MSAViewProps> = ({
         layout="overlapping"
         highlight={highlightPosition}
       /> */}
-      {/* <section className="hsp-label">{annotation}</section>
+      <section className="hsp-label">{annotation}</section>
       <protvista-track
         ref={setFeatureTrackData}
         length={totalLength}
         layout="non-overlapping"
         highlight={highlightPosition}
-      /> */}
+      />
       <section className="hsp-label">Alignment</section>
       <protvista-manager ref={managerRef} attributes="displaystart displayend">
         <protvista-navigation length={alignmentLength} />

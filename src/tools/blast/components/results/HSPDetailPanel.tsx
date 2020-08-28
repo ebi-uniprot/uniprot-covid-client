@@ -47,8 +47,6 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
     hsp_hseq,
   } = hsp;
 
-  console.log(extra);
-
   const tracksOffset = getOffset(hsp);
   const totalLength = getFullAlignmentLength(hsp, queryLength, hitLength);
 
@@ -84,23 +82,9 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
       sequence: hsp_hseq,
       from: hsp_hit_from,
       accession: hitAccession,
+      features: extra?.features,
     },
   ];
-
-  // const setFeatureTrackData = useCallback(
-  //   (node): void => {
-  //     if (node && features && annotation) {
-  //       let processedFeatures = processFeaturesData(
-  //         features.filter(({ type }) => type === annotation)
-  //       );
-  //       if (activeView === View.wrapped) {
-  //         processedFeatures = transformFeaturesPositions(processedFeatures);
-  //       }
-  //       node.data = processedFeatures;
-  //     }
-  //   },
-  //   [features, annotation, activeView]
-  // );
 
   if (error) {
     return <ErrorHandler status={status} />;
