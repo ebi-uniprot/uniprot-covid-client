@@ -10,11 +10,6 @@ import MSAView from './MSAView';
 import MSAWrappedView from './MSAWrappedView';
 import { FeatureData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
 
-type EventDetail = {
-  displaystart: string;
-  displayend: string;
-};
-
 export type ConservationOptions = {
   'calculate-conservation'?: true;
   'overlay-conservation'?: true;
@@ -42,10 +37,6 @@ const MSAWrapper: React.FC<{
   const [activeView, setActiveView] = useState<View>(View.overview);
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
-  const [highlightPosition, setHighlighPosition] = useState('');
-  const [initialDisplayEnd, setInitialDisplayEnd] = useState<
-    number | undefined
-  >();
 
   const features = alignment
     .map(({ features }) => features)
@@ -56,31 +47,6 @@ const MSAWrapper: React.FC<{
   if (!annotation && !!annotationChoices?.length) {
     setAnnotation(annotationChoices[0]);
   }
-
-  const findHighlighPositions = useCallback(
-    ({ displaystart, displayend }: EventDetail) => {
-      const start = tracksOffset + parseInt(displaystart, 10);
-      const end = tracksOffset + parseInt(displayend, 10);
-      setHighlighPosition(`${start}:${end}`);
-    },
-    [tracksOffset]
-  );
-
-  const managerRef = useCallback(
-    (node): void => {
-      if (node && initialDisplayEnd) {
-        node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
-          findHighlighPositions(detail)
-        );
-        node.setAttribute('displaystart', 1);
-        node.setAttribute('displayend', initialDisplayEnd);
-        setHighlighPosition(
-          `${tracksOffset}:${tracksOffset + initialDisplayEnd}`
-        );
-      }
-    },
-    [initialDisplayEnd, findHighlighPositions, tracksOffset]
-  );
 
   const conservationOptions: ConservationOptions =
     highlightProperty === MsaColorScheme.CONSERVATION
@@ -179,14 +145,12 @@ const MSAWrapper: React.FC<{
         {/* {activeView === View.overview ? ( */}
         <MSAView
           alignment={alignment}
-          managerRef={managerRef}
           alignmentLength={alignmentLength}
           highlightProperty={highlightProperty}
           conservationOptions={conservationOptions}
           totalLength={totalLength}
-          highlightPosition={highlightPosition}
           annotation={annotation}
-          // setFeatureTrackData={setFeatureTrackData}
+          tracksOffset={tracksOffset}
         />
         {/* ) : (
           <MSAWrappedView

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
@@ -17,49 +17,82 @@ loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
 
+// Do we have this defined somewhere else?
+type EventDetail = {
+  displaystart: string;
+  displayend: string;
+};
+
 export type MSAViewProps = {
-  managerRef: (node: HTMLElement) => void;
   alignment: MSAInput[];
   alignmentLength: number;
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: ConservationOptions;
   totalLength: number;
-  highlightPosition: string;
   annotation: FeatureType | undefined;
+  tracksOffset: number;
 };
 
 const MSAView: FC<MSAViewProps> = ({
   alignment,
-  managerRef,
   alignmentLength,
   highlightProperty,
   conservationOptions,
   totalLength,
-  highlightPosition,
   annotation,
-  // setFeatureTrackData,
+  tracksOffset,
 }) => {
+  const [highlightPosition, setHighlighPosition] = useState('');
+  const [initialDisplayEnd, setInitialDisplayEnd] = useState<
+    number | undefined
+  >();
+
+  const findHighlighPositions = useCallback(
+    ({ displaystart, displayend }: EventDetail) => {
+      const start = tracksOffset + parseInt(displaystart, 10);
+      const end = tracksOffset + parseInt(displayend, 10);
+      setHighlighPosition(`${start}:${end}`);
+    },
+    [tracksOffset]
+  );
+
+  const managerRef = useCallback(
+    (node): void => {
+      if (node && initialDisplayEnd) {
+        node.addEventListener('change', ({ detail }: { detail: EventDetail }) =>
+          findHighlighPositions(detail)
+        );
+        node.setAttribute('displaystart', 1);
+        node.setAttribute('displayend', initialDisplayEnd);
+        setHighlighPosition(
+          `${tracksOffset}:${tracksOffset + initialDisplayEnd}`
+        );
+      }
+    },
+    [initialDisplayEnd, findHighlighPositions, tracksOffset]
+  );
+
   const setMSAAttributes = useCallback(
     (node): void => {
       if (!node) {
         return;
       }
 
-      // const displayEndValue = hsp_align_len / (15 / node.getSingleBaseWidth());
-      // if (
-      //   displayEndValue < hsp_hseq.length ||
-      //   displayEndValue < hsp_qseq.length
-      // ) {
-      //   setInitialDisplayEnd(displayEndValue);
-      // } else {
-      //   setInitialDisplayEnd(
-      //     hsp_hseq.length > hsp_qseq.length ? hsp_hseq.length : hsp_qseq.length
-      //   );
-      // }
+      const displayEndValue =
+        alignmentLength / (15 / node.getSingleBaseWidth());
+
+      const maxSequenceLength = Math.max(
+        ...alignment.map((al) => al.sequence.length)
+      );
+      if (displayEndValue < maxSequenceLength) {
+        setInitialDisplayEnd(displayEndValue);
+      } else {
+        setInitialDisplayEnd(maxSequenceLength);
+      }
 
       node.data = alignment.map(({ name, sequence }) => ({ name, sequence }));
     },
-    [alignment]
+    [alignment, alignmentLength]
   );
 
   // This should use state to handle selection of alignment and set features
@@ -135,7 +168,8 @@ const MSAView: FC<MSAViewProps> = ({
         <protvista-navigation length={alignmentLength} />
         <protvista-msa
           ref={setMSAAttributes}
-          labelwidth={200}
+          // Looks like displaylength initialisation is ignored when there's labels - bug in MSA
+          // labelwidth={200}
           length={alignmentLength}
           colorscheme={highlightProperty}
           {...conservationOptions}

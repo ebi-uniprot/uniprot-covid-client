@@ -119,7 +119,6 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
 };
 
 export type HSPDetailWrappedProps = {
-  managerRef: (node: HTMLElement) => void;
   hsp_align_len: number;
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: ConservationOptions;
