@@ -13,10 +13,10 @@ import useSize from '../../shared/hooks/useSize';
 import useSafeState from '../../shared/hooks/useSafeState';
 import useStaggeredRenderingHelper from '../../shared/hooks/useStaggeredRenderingHelper';
 
-import { ConservationOptions } from '../blast/components/results/HSPDetailPanel';
 import { MsaColorScheme } from '../config/msaColorSchemes';
 
 import FeatureType from '../../uniprotkb/types/featureType';
+import { ConservationOptions } from './MSAWrapper';
 
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
@@ -123,10 +123,8 @@ export type HSPDetailWrappedProps = {
   hsp_align_len: number;
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: ConservationOptions;
-  setQueryTrackData: (node: HTMLElement) => void;
   highlightPosition: string;
   hitAccession: string;
-  setMatchTrackData: (node: HTMLElement) => void;
   annotation: FeatureType | undefined;
   setFeatureTrackData: (node: HTMLElement) => void;
   hsp_qseq: string;
@@ -135,7 +133,7 @@ export type HSPDetailWrappedProps = {
   hsp_query_from: number;
 };
 
-const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
+const MSAWrappedView: FC<HSPDetailWrappedProps> = ({
   hsp_align_len,
   highlightProperty,
   conservationOptions,
@@ -245,4 +243,4 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
   );
 };
 
-export default HSPDetailWrapped;
+export default MSAWrappedView;
