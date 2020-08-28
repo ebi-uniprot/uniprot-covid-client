@@ -185,11 +185,12 @@ const HSPDetailWrapped: FC<HSPDetailWrappedProps> = ({
       const start = index * rowLength;
       const end = start + rowLength;
       return {
-        // FIXME: UGLY trick to have the whole track re-render on change of size
-        // at the moment when the track is updated instead of re-rendered, we
-        // get a weird effect towards the end of the track.
-        // Need to check with the MSA track itself in Nightingale
-        id: `row-${Math.random()}`,
+        // NOTE: This is a bit of an ugly trick to have the whole track
+        // re-render on change of size. Otherwise when the track is updated
+        // instead of re-rendered, we get the track overflowing on the right.
+        // Might be able to avoid that by playing with sizes in the panel grid
+        // and from within the Nightingale component
+        id: `row-${index}-${rowLength}`,
         ranges: {
           hit: {
             start: start + hsp_hit_from,
