@@ -207,17 +207,17 @@ const BlastResult = () => {
   );
 
   // list of all the accessions returned by the accessions endpoint
-  const accessionsFilteredByServer = useMemo(
-    () =>
-      new Set(
-        (accessionsData &&
-          accessionsData.results.map(
-            ({ primaryAccession }) => primaryAccession
-          )) ||
-          []
-      ),
-    [accessionsData]
-  );
+  // const accessionsFilteredByServer = useMemo(
+  //   () =>
+  //     new Set(
+  //       (accessionsData &&
+  //         accessionsData.results.map(
+  //           ({ primaryAccession }) => primaryAccession
+  //         )) ||
+  //         []
+  //     ),
+  //   [accessionsData]
+  // );
 
   // filter BLAST results according to facets (through accession endpoint and other BLAST facets facets)
   const filteredBlastData =

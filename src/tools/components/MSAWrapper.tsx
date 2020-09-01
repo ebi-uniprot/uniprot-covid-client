@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { DropdownButton } from 'franklin-sites';
 import { uniq } from 'lodash-es';
 import {
@@ -7,43 +7,46 @@ import {
 } from '../config/msaColorSchemes';
 import FeatureType from '../../uniprotkb/types/featureType';
 import MSAView from './MSAView';
-import MSAWrappedView from './MSAWrappedView';
+// import MSAWrappedView from './MSAWrappedView';
 import { FeatureData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
+import { getFullAlignmentLength } from '../utils/sequences';
 
 export type ConservationOptions = {
   'calculate-conservation'?: true;
   'overlay-conservation'?: true;
 };
 
-enum View {
-  overview,
-  wrapped,
-}
+// enum View {
+//   overview,
+//   wrapped,
+// }
 
 export type MSAInput = {
   name?: string;
   accession?: string;
   sequence: string;
   from: number;
+  to: number;
+  length: number;
   features?: FeatureData;
 };
 
 const MSAWrapper: React.FC<{
   alignment: MSAInput[];
-  tracksOffset?: number;
   alignmentLength: number;
-  totalLength: number;
-}> = ({ alignment, tracksOffset = 0, alignmentLength, totalLength }) => {
-  const [activeView, setActiveView] = useState<View>(View.overview);
+}> = ({ alignment, alignmentLength }) => {
+  // const [activeView, setActiveView] = useState<View>(View.overview);
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
 
+  const totalLength = getFullAlignmentLength(alignment, alignmentLength);
+
   const features = alignment
     .map(({ features }) => features)
-    .filter((features) => features)
-    .flat();
+    .flat()
+    .filter((features) => features);
 
-  const annotationChoices = uniq(features?.map(({ type }) => type));
+  const annotationChoices = uniq(features?.map((feature) => feature?.type));
   if (!annotation && !!annotationChoices?.length) {
     setAnnotation(annotationChoices[0]);
   }
@@ -118,7 +121,7 @@ const MSAWrapper: React.FC<{
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      setActiveView(View.overview);
+                      // setActiveView(View.overview);
                     }}
                   >
                     Overview
@@ -130,7 +133,7 @@ const MSAWrapper: React.FC<{
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      setActiveView(View.wrapped);
+                      // setActiveView(View.wrapped);
                     }}
                   >
                     Wrapped
@@ -150,7 +153,6 @@ const MSAWrapper: React.FC<{
           conservationOptions={conservationOptions}
           totalLength={totalLength}
           annotation={annotation}
-          tracksOffset={tracksOffset}
         />
         {/* ) : (
           <MSAWrappedView

@@ -10,7 +10,10 @@ import FeatureType from '../../uniprotkb/types/featureType';
 import { loadWebComponent } from '../../shared/utils/utils';
 import { MSAInput, ConservationOptions } from './MSAWrapper';
 import { processFeaturesData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
-import { transformFeaturesPositions } from '../blast/utils/hsp';
+import {
+  transformFeaturesPositions,
+  getFullAlignmentSegments,
+} from '../utils/sequences';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -30,7 +33,6 @@ export type MSAViewProps = {
   conservationOptions: ConservationOptions;
   totalLength: number;
   annotation: FeatureType | undefined;
-  tracksOffset: number;
 };
 
 const MSAView: FC<MSAViewProps> = ({
@@ -40,12 +42,13 @@ const MSAView: FC<MSAViewProps> = ({
   conservationOptions,
   totalLength,
   annotation,
-  tracksOffset,
 }) => {
   const [highlightPosition, setHighlighPosition] = useState('');
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
+
+  const tracksOffset = Math.max(...alignment.map(({ from }) => from));
 
   const findHighlighPositions = useCallback(
     ({ displaystart, displayend }: EventDetail) => {
@@ -111,25 +114,17 @@ const MSAView: FC<MSAViewProps> = ({
     [features, annotation]
   );
 
-  // const setQueryTrackData = useCallback(
-  //   (node): void => {
-  //     if (node) {
-  //       // eslint-disable-next-line no-param-reassign
-  //       node.data = segments.querySegments;
-  //     }
-  //   },
-  //   [segments.querySegments]
-  // );
-
-  // const setMatchTrackData = useCallback(
-  //   (node): void => {
-  //     if (node) {
-  //       // eslint-disable-next-line no-param-reassign
-  //       node.data = segments.hitSegments;
-  //     }
-  //   },
-  //   [segments.hitSegments]
-  // );
+  const setOverviewTrackData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = getFullAlignmentSegments(alignment)
+          .map(({ trackData }) => trackData)
+          .flat();
+      }
+    },
+    [alignment]
+  );
 
   return (
     <section
@@ -137,14 +132,15 @@ const MSAView: FC<MSAViewProps> = ({
       className="hsp-detail-panel__visualisation"
     >
       {/* Query track */}
-      {/* <section className="hsp-label">Query</section>
+      {/* NOTE: both tracks currently merged into one - new Nightingale component needed */}
+      <section className="hsp-label">Overview</section>
       <protvista-track
         height="30"
-        ref={setQueryTrackData}
+        ref={setOverviewTrackData}
         length={totalLength}
-        layout="overlapping"
+        layout="non-overlapping"
         highlight={highlightPosition}
-      /> */}
+      />
       {/* Match track - coloured based on score */}
       {/* <section className="hsp-label">
         <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
