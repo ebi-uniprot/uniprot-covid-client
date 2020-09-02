@@ -7,7 +7,7 @@ import {
 } from '../config/msaColorSchemes';
 import FeatureType from '../../uniprotkb/types/featureType';
 import MSAView from './MSAView';
-// import MSAWrappedView from './MSAWrappedView';
+import MSAWrappedView from './MSAWrappedView';
 import { FeatureData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
 import { getFullAlignmentLength } from '../utils/sequences';
 
@@ -16,10 +16,10 @@ export type ConservationOptions = {
   'overlay-conservation'?: true;
 };
 
-// enum View {
-//   overview,
-//   wrapped,
-// }
+enum View {
+  overview,
+  wrapped,
+}
 
 export type MSAInput = {
   name?: string;
@@ -35,7 +35,7 @@ const MSAWrapper: React.FC<{
   alignment: MSAInput[];
   alignmentLength: number;
 }> = ({ alignment, alignmentLength }) => {
-  // const [activeView, setActiveView] = useState<View>(View.overview);
+  const [activeView, setActiveView] = useState<View>(View.overview);
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
 
@@ -121,7 +121,7 @@ const MSAWrapper: React.FC<{
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      // setActiveView(View.overview);
+                      setActiveView(View.overview);
                     }}
                   >
                     Overview
@@ -133,7 +133,7 @@ const MSAWrapper: React.FC<{
                     className="button tertiary"
                     onClick={() => {
                       setShowMenu(false);
-                      // setActiveView(View.wrapped);
+                      setActiveView(View.wrapped);
                     }}
                   >
                     Wrapped
@@ -145,31 +145,25 @@ const MSAWrapper: React.FC<{
         </DropdownButton>
       </div>
       <div>
-        {/* {activeView === View.overview ? ( */}
-        <MSAView
-          alignment={alignment}
-          alignmentLength={alignmentLength}
-          highlightProperty={highlightProperty}
-          conservationOptions={conservationOptions}
-          totalLength={totalLength}
-          annotation={annotation}
-        />
-        {/* ) : (
-          <MSAWrappedView
-            managerRef={managerRef}
-            hsp_align_len={alignmentLength}
-            hsp_qseq={hsp_qseq}
-            hsp_hseq={hsp_hseq}
-            hsp_hit_from={hsp_hit_from}
-            hsp_query_from={hsp_query_from}
+        {activeView === View.overview ? (
+          <MSAView
+            alignment={alignment}
+            alignmentLength={alignmentLength}
             highlightProperty={highlightProperty}
             conservationOptions={conservationOptions}
-            highlightPosition={highlightPosition}
-            hitAccession={hitAccession}
+            totalLength={totalLength}
             annotation={annotation}
-            setFeatureTrackData={setFeatureTrackData}
           />
-        )} */}
+        ) : (
+          <MSAWrappedView
+            alignment={alignment}
+            alignmentLength={alignmentLength}
+            highlightProperty={highlightProperty}
+            conservationOptions={conservationOptions}
+            totalLength={totalLength}
+            annotation={annotation}
+          />
+        )}
       </div>
     </>
   );
