@@ -1,6 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  SetStateAction,
+  Dispatch,
+} from 'react';
 import { debounce } from 'lodash-es';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
@@ -50,8 +58,8 @@ export type HSPDetailWrappedRowProps = {
   conservationOptions: ConservationOptions;
   annotation: FeatureType | undefined;
   sequences: Sequence[];
-  selectedId: string;
-  setSelectedId: () => void;
+  selectedId?: string;
+  setSelectedId: Dispatch<SetStateAction<string | undefined>>;
 };
 
 const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
@@ -150,7 +158,7 @@ const MSAWrappedView: FC<MSAViewProps> = ({
   conservationOptions,
   annotation,
 }) => {
-  const [selectedId, setSelectedId] = useState();
+  const [selectedId, setSelectedId] = useState<string>();
   const containerRef = useRef<HTMLDivElement>(null);
   const [size] = useSize(containerRef);
 
@@ -196,7 +204,7 @@ const MSAWrappedView: FC<MSAViewProps> = ({
         // Need to check with the MSA track itself in Nightingale
         id: `row-${Math.random()}`,
         sequences: alignment.map(({ name, sequence, from, features }) => ({
-          name,
+          name: name || '',
           sequence: sequence.slice(start, end),
           start: start + from,
           end: end + from - 1,
