@@ -109,6 +109,7 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
         <protvista-msa
           ref={setMSAAttributes}
           length={rowLength}
+          height={sequences.length * 20}
           colorscheme={highlightProperty}
           {...conservationOptions}
         />
