@@ -1,6 +1,14 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useMemo,
+  useState,
+  Children,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
@@ -114,17 +122,69 @@ const MSAView: FC<MSAViewProps> = ({
     [features, annotation]
   );
 
-  const setOverviewTrackData = useCallback(
-    (node): void => {
-      if (node) {
-        // eslint-disable-next-line no-param-reassign
-        node.data = getFullAlignmentSegments(alignment)
-          .map(({ trackData }) => trackData)
-          .flat();
-      }
-    },
-    [alignment]
-  );
+  //   const setOverviewTrackData = useCallback(
+  //     (node): void => {
+  //       if (node) {
+  //         // eslint-disable-next-line no-param-reassign
+  //         node.data = getFullAlignmentSegments(alignment)
+  //           .map(({ trackData }) => trackData)
+  //           .flat();
+  // // console.log("overview track data:", getFullAlignmentSegments(alignment));
+  //       }
+  //     },
+  //     [alignment]
+  //   );
+
+  const OverviewTrack = ({ trackType, highlight, length, height }) => {
+    const setTrackData = useCallback(
+      (node): void => {
+        if (node) {
+          const data = getFullAlignmentSegments(alignment).find(
+            (item) => item.name.toLowerCase() === trackType.toLowerCase()
+          ).trackData;
+          // console.log("overview track data:", data);
+
+          // eslint-disable-next-line no-param-reassign
+          node.data = data;
+        }
+      },
+      [alignment]
+    );
+    console.log('height:', height);
+
+    const marginBottom = height / 6;
+
+    return (
+      <protvista-track
+        height={height - marginBottom}
+        ref={setTrackData}
+        length={length}
+        layout="overlapping"
+        highlight={highlight}
+        margin={{ bottom: marginBottom }}
+        // style={{marginBottom: '1px'}}
+      />
+    );
+  };
+
+  const OverviewTracksContainer = ({ height, children }) => {
+    console.log('number of children:', children.length);
+
+    return (
+      <div>
+        {Children.map(children, (child) => {
+          if (isValidElement(child)) {
+            return cloneElement(child, {
+              ...child.props,
+              height: Math.floor(height / children.length),
+            });
+          } else {
+            return child;
+          }
+        })}
+      </div>
+    );
+  };
 
   return (
     <section
@@ -134,13 +194,38 @@ const MSAView: FC<MSAViewProps> = ({
       {/* Query track */}
       {/* NOTE: both tracks currently merged into one - new Nightingale component needed */}
       <section className="hsp-label">Overview</section>
-      <protvista-track
+
+      <OverviewTracksContainer height="100">
+        <OverviewTrack
+          trackType="Query"
+          length={totalLength}
+          highlight={highlightPosition}
+        />
+        <OverviewTrack
+          trackType="Match"
+          length={totalLength}
+          highlight={highlightPosition}
+        />
+        <OverviewTrack
+          trackType="Query"
+          length={totalLength}
+          highlight={highlightPosition}
+        />
+        <OverviewTrack
+          trackType="Match"
+          length={totalLength}
+          highlight={highlightPosition}
+        />
+      </OverviewTracksContainer>
+
+      {/* <protvista-track
         height="30"
         ref={setOverviewTrackData}
         length={totalLength}
         layout="non-overlapping"
         highlight={highlightPosition}
-      />
+      /> */}
+
       {/* Match track - coloured based on score */}
       {/* <section className="hsp-label">
         <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
