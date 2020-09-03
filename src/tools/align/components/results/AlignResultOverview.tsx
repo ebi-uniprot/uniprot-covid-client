@@ -48,7 +48,7 @@ const enrichParsed = (
   if (!parsed) {
     return null;
   }
-  const { sequences } = parsed as { sequences: Partial<EnrichedSequence>[] };
+  const sequences = Array.from(parsed.sequences) as Partial<EnrichedSequence>[];
   for (const info of sequenceInfo.data.values()) {
     const matchIndex = sequences.findIndex((s) => s.name === info.name);
     if (matchIndex !== -1) {
