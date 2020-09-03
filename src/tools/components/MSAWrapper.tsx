@@ -38,6 +38,11 @@ const MSAWrapper: React.FC<{
   const [activeView, setActiveView] = useState<View>(View.overview);
   const [annotation, setAnnotation] = useState<FeatureType>();
   const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
+  const [selectedId, setSelectedId] = useState<string | undefined>(
+    alignment
+      .filter(({ accession }) => accession)
+      .map(({ accession }) => accession)[0]
+  );
 
   const totalLength = getFullAlignmentLength(alignment, alignmentLength);
 
@@ -153,6 +158,8 @@ const MSAWrapper: React.FC<{
             conservationOptions={conservationOptions}
             totalLength={totalLength}
             annotation={annotation}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
           />
         ) : (
           <MSAWrappedView
@@ -162,6 +169,8 @@ const MSAWrapper: React.FC<{
             conservationOptions={conservationOptions}
             totalLength={totalLength}
             annotation={annotation}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
           />
         )}
       </div>

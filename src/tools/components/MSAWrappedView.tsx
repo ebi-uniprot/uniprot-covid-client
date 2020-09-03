@@ -5,7 +5,6 @@ import React, {
   useCallback,
   useMemo,
   useRef,
-  useState,
   SetStateAction,
   Dispatch,
 } from 'react';
@@ -45,6 +44,7 @@ type Sequence = {
   start: number;
   end: number;
   features?: FeatureData;
+  accession?: string;
 };
 
 type Chunk = {
@@ -52,7 +52,7 @@ type Chunk = {
   sequences: Sequence[];
 };
 
-export type HSPDetailWrappedRowProps = {
+export type MSAWrappedRowProps = {
   rowLength: number;
   highlightProperty: MsaColorScheme | undefined;
   conservationOptions: ConservationOptions;
@@ -62,7 +62,7 @@ export type HSPDetailWrappedRowProps = {
   setSelectedId: Dispatch<SetStateAction<string | undefined>>;
 };
 
-const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
+const MSAWrappedRow: FC<MSAWrappedRowProps> = ({
   rowLength,
   highlightProperty,
   conservationOptions,
@@ -83,7 +83,9 @@ const HSPDetailWrappedRow: FC<HSPDetailWrappedRowProps> = ({
   const setFeatureTrackData = useCallback(
     (node): void => {
       if (node && annotation) {
-        const featuresSeq = sequences.find(({ name }) => name === selectedId);
+        const featuresSeq = sequences.find(
+          ({ accession }) => accession && accession === selectedId
+        );
         const features = featuresSeq?.features?.filter(
           ({ type }) => type === annotation
         );
@@ -157,8 +159,9 @@ const MSAWrappedView: FC<MSAViewProps> = ({
   highlightProperty,
   conservationOptions,
   annotation,
+  selectedId,
+  setSelectedId,
 }) => {
-  const [selectedId, setSelectedId] = useState<string>();
   const containerRef = useRef<HTMLDivElement>(null);
   const [size] = useSize(containerRef);
 
@@ -204,13 +207,16 @@ const MSAWrappedView: FC<MSAViewProps> = ({
         // Might be able to avoid that by playing with sizes in the panel grid
         // and from within the Nightingale component
         id: `row-${index}-${rowLength}`,
-        sequences: alignment.map(({ name, sequence, from, features }) => ({
-          name: name || '',
-          sequence: sequence.slice(start, end),
-          start: start + from,
-          end: end + from - 1,
-          features,
-        })),
+        sequences: alignment.map(
+          ({ name, sequence, from, features, accession }) => ({
+            name: name || '',
+            sequence: sequence.slice(start, end),
+            start: start + from,
+            end: end + from - 1,
+            features,
+            accession,
+          })
+        ),
       };
     });
     return chunks;
@@ -221,7 +227,7 @@ const MSAWrappedView: FC<MSAViewProps> = ({
       {sequenceChunks.map(({ sequences, id }, index) => {
         if (index < nItemsToRender) {
           return (
-            <HSPDetailWrappedRow
+            <MSAWrappedRow
               key={id}
               rowLength={rowLength}
               sequences={sequences}
