@@ -23,7 +23,8 @@ import { PublicServerParameters } from '../../types/alignServerParameters';
 
 import '../../../styles/ToolsResult.scss';
 
-const alignUrls = toolsURLs(JobTypes.ALIGN);
+const jobType = JobTypes.ALIGN;
+const urls = toolsURLs(jobType);
 
 // overview
 const AlignResultOverview = lazy(() =>
@@ -47,6 +48,10 @@ const InputParameters = lazy(() =>
     /* webpackChunkName: "input-parameters" */ '../../../components/InputParameters'
   )
 );
+// input-parameters
+const APIRequest = lazy(() =>
+  import(/* webpackChunkName: "api-request" */ '../../../components/APIRequest')
+);
 
 enum TabLocation {
   Overview = 'overview',
@@ -54,6 +59,7 @@ enum TabLocation {
   PIM = 'percent-identity-matrix',
   TextOutput = 'text-output',
   InputParameters = 'input-parameters',
+  APIRequest = 'api-request',
 }
 
 type Match = {
@@ -73,10 +79,8 @@ const useParamsData = (
     Partial<UseDataAPIState<PublicServerParameters>>
   >({});
 
-  const paramsXMLData = useDataApi<string>(
-    alignUrls.resultUrl(id, 'submission')
-  );
-  const sequenceData = useDataApi<string>(alignUrls.resultUrl(id, 'sequence'));
+  const paramsXMLData = useDataApi<string>(urls.resultUrl(id, 'submission'));
+  const sequenceData = useDataApi<string>(urls.resultUrl(id, 'sequence'));
 
   useEffect(() => {
     const loading = paramsXMLData.loading || sequenceData.loading;
@@ -117,7 +121,7 @@ const AlignResult = () => {
 
   // get data from the align endpoint
   const { loading, data, error, status } = useDataApi<AlignResults>(
-    alignUrls.resultUrl(match.params.id, 'aln-clustal_num')
+    urls.resultUrl(match.params.id, 'aln-clustal_num')
   );
 
   const inputParamsData = useParamsData(match.params.id);
@@ -144,7 +148,7 @@ const AlignResult = () => {
 
   const actionBar = (
     <ResultButtons
-      jobType={JobTypes.ALIGN}
+      jobType={jobType}
       jobId={match.params.id}
       selectedEntries={selectedEntries}
       inputParamsData={inputParamsData.data}
@@ -241,7 +245,7 @@ const AlignResult = () => {
         >
           <ErrorBoundary>
             <Suspense fallback={<Loader />}>
-              <TextOutput id={match.params.id} jobType={JobTypes.ALIGN} />
+              <TextOutput id={match.params.id} jobType={jobType} />
             </Suspense>
           </ErrorBoundary>
         </Tab>
@@ -262,9 +266,27 @@ const AlignResult = () => {
             <Suspense fallback={<Loader />}>
               <InputParameters
                 id={match.params.id}
-                jobType={JobTypes.ALIGN}
                 inputParamsData={inputParamsData}
               />
+            </Suspense>
+          </ErrorBoundary>
+        </Tab>
+        <Tab
+          id={TabLocation.APIRequest}
+          title={
+            <Link
+              to={(location) => ({
+                ...location,
+                pathname: `/align/${match.params.id}/${TabLocation.APIRequest}`,
+              })}
+            >
+              API Request
+            </Link>
+          }
+        >
+          <ErrorBoundary>
+            <Suspense fallback={<Loader />}>
+              <APIRequest jobType={jobType} inputParamsData={inputParamsData} />
             </Suspense>
           </ErrorBoundary>
         </Tab>
