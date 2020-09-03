@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { DropdownButton } from 'franklin-sites';
-import { uniq } from 'lodash-es';
+import cn from 'classnames';
+
+import MSAView from './MSAView';
+import MSAWrappedView from './MSAWrappedView';
+
 import {
   msaColorSchemeToString,
   MsaColorScheme,
 } from '../config/msaColorSchemes';
-import FeatureType from '../../uniprotkb/types/featureType';
-import MSAView from './MSAView';
-import MSAWrappedView from './MSAWrappedView';
-import { FeatureData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
+
 import { getFullAlignmentLength } from '../utils/sequences';
+
+import FeatureType from '../../uniprotkb/types/featureType';
+import { FeatureData } from '../../uniprotkb/components/protein-data-views/FeaturesView';
+
+import './styles/MSAWrapper.scss';
 
 export type ConservationOptions = {
   'calculate-conservation'?: true;
@@ -17,8 +23,8 @@ export type ConservationOptions = {
 };
 
 enum View {
-  overview,
-  wrapped,
+  overview = 'Overview',
+  wrapped = 'Wrapped',
 }
 
 export type MSAInput = {
@@ -35,21 +41,31 @@ const MSAWrapper: React.FC<{
   alignment: MSAInput[];
   alignmentLength: number;
 }> = ({ alignment, alignmentLength }) => {
+  const annotationChoices = useMemo(() => {
+    const features = alignment
+      .map(({ features }) => features)
+      .flat()
+      .filter((features) => features);
+
+    return Array.from(new Set(features?.map((feature) => feature?.type)));
+  }, [alignment]);
+
   const [activeView, setActiveView] = useState<View>(View.overview);
-  const [annotation, setAnnotation] = useState<FeatureType>();
-  const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>();
+  const [annotation, setAnnotation] = useState<FeatureType | undefined>(
+    annotationChoices[0]
+  );
+  const [highlightProperty, setHighlightProperty] = useState<MsaColorScheme>(
+    MsaColorScheme.CLUSTAL
+  );
+
+  useEffect(() => {
+    // if no default value was available on first render, set it now
+    if (!annotation && annotationChoices.length) {
+      setAnnotation(annotationChoices[0]);
+    }
+  }, [annotation, annotationChoices]);
 
   const totalLength = getFullAlignmentLength(alignment, alignmentLength);
-
-  const features = alignment
-    .map(({ features }) => features)
-    .flat()
-    .filter((features) => features);
-
-  const annotationChoices = uniq(features?.map((feature) => feature?.type));
-  if (!annotation && !!annotationChoices?.length) {
-    setAnnotation(annotationChoices[0]);
-  }
 
   const conservationOptions: ConservationOptions =
     highlightProperty === MsaColorScheme.CONSERVATION
@@ -68,10 +84,13 @@ const MSAWrapper: React.FC<{
               <ul>
                 {Object.entries(msaColorSchemeToString).map(
                   ([schemeValue, schemeString]) => (
-                    // TODO: indicate currently selected
                     <li key={schemeString}>
                       <button
                         type="button"
+                        className={cn('button', {
+                          primary: highlightProperty === schemeValue,
+                          tertiary: highlightProperty !== schemeValue,
+                        })}
                         onClick={() => {
                           setShowMenu(false);
                           setHighlightProperty(schemeValue as MsaColorScheme);
@@ -86,17 +105,19 @@ const MSAWrapper: React.FC<{
             </div>
           )}
         </DropdownButton>
-        {!!annotationChoices?.length && (
+        {!!annotationChoices.length && (
           <DropdownButton label="Show annotation" className="tertiary">
             {(setShowMenu: (showMenu: boolean) => void) => (
               <div className="dropdown-menu__content">
                 <ul>
                   {annotationChoices.map((annotationChoice) => (
-                    // TODO: indicate currently selected
                     <li key={annotationChoice}>
                       <button
                         type="button"
-                        className="annotation-choice"
+                        className={cn('button', 'annotation-choice', {
+                          primary: annotation === annotationChoice,
+                          tertiary: annotation !== annotationChoice,
+                        })}
                         onClick={() => {
                           setShowMenu(false);
                           setAnnotation(annotationChoice);
@@ -115,30 +136,23 @@ const MSAWrapper: React.FC<{
           {(setShowMenu: (showMenu: boolean) => void) => (
             <div className="dropdown-menu__content">
               <ul>
-                <li key="overview">
-                  <button
-                    type="button"
-                    className="button tertiary"
-                    onClick={() => {
-                      setShowMenu(false);
-                      setActiveView(View.overview);
-                    }}
-                  >
-                    Overview
-                  </button>
-                </li>
-                <li key="wrapped">
-                  <button
-                    type="button"
-                    className="button tertiary"
-                    onClick={() => {
-                      setShowMenu(false);
-                      setActiveView(View.wrapped);
-                    }}
-                  >
-                    Wrapped
-                  </button>
-                </li>
+                {Object.values(View).map((view) => (
+                  <li key={view}>
+                    <button
+                      type="button"
+                      className={cn('button', {
+                        primary: activeView === view,
+                        tertiary: activeView !== view,
+                      })}
+                      onClick={() => {
+                        setShowMenu(false);
+                        setActiveView(view);
+                      }}
+                    >
+                      {view}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
           )}
