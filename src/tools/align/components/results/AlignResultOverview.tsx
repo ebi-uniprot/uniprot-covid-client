@@ -45,7 +45,7 @@ const enrichParsed = (
   parsed: AlnClustalNum | null,
   sequenceInfo: SequenceInfo
 ) => {
-  if (!parsed) {
+  if (!parsed || sequenceInfo.loading) {
     return null;
   }
   const sequences = Array.from(parsed.sequences) as Partial<EnrichedSequence>[];
