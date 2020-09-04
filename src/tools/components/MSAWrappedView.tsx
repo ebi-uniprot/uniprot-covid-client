@@ -10,7 +10,6 @@ import React, {
 } from 'react';
 import { debounce } from 'lodash-es';
 import ProtvistaManager from 'protvista-manager';
-import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
 import ProtvistaMSA from 'protvista-msa';
 
@@ -34,7 +33,6 @@ import { transformFeaturesPositions } from '../utils/sequences';
 loadWebComponent('protvista-track', ProtvistaTrack);
 loadWebComponent('protvista-msa', ProtvistaMSA);
 loadWebComponent('protvista-manager', ProtvistaManager);
-loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
 const widthOfAA = 20;
 
@@ -107,13 +105,6 @@ const MSAWrappedRow: FC<MSAWrappedRowProps> = ({
       data-testid="wrapped-hsp-detail"
       className="hsp-detail-panel__visualisation hsp-detail-panel__visualisation__wrapped-row"
     >
-      {/* <section className="query-ruler">
-        <protvista-navigation
-          length={rowLength}
-          height={2}
-          rulerstart={ranges.query.start}
-        />
-      </section> */}
       <section className="hsp-label hsp-label--msa">Alignment</section>
       <section className="hsp-detail-panel__visualisation--msa">
         <protvista-msa
@@ -124,13 +115,6 @@ const MSAWrappedRow: FC<MSAWrappedRowProps> = ({
           {...conservationOptions}
         />
       </section>
-      {/* <section className="hit-ruler">
-        <protvista-navigation
-          length={rowLength}
-          height={2}
-          rulerstart={ranges.hit.start}
-        />
-      </section> */}
       <section className="hsp-label hsp-label--track">{annotation}</section>
       <section className="hsp-detail-panel__visualisation--track">
         <protvista-track ref={setFeatureTrackData} />
@@ -138,20 +122,6 @@ const MSAWrappedRow: FC<MSAWrappedRowProps> = ({
     </section>
   );
 };
-
-// export type HSPDetailWrappedProps = {
-//   hsp_align_len: number;
-//   highlightProperty: MsaColorScheme | undefined;
-//   conservationOptions: ConservationOptions;
-//   highlightPosition: string;
-//   hitAccession: string;
-//   annotation: FeatureType | undefined;
-//   setFeatureTrackData: (node: HTMLElement) => void;
-//   hsp_qseq: string;
-//   hsp_hseq: string;
-//   hsp_hit_from: number;
-//   hsp_query_from: number;
-// };
 
 const MSAWrappedView: FC<MSAViewProps> = ({
   alignment,
