@@ -1,12 +1,20 @@
 import React, {
   FC,
-  useCallback,
   Children,
   cloneElement,
   isValidElement,
+  ReactNode,
 } from 'react';
 
-const AlignmentOverview = ({ height, children }) => {
+type AlignmentOverviewProps = {
+  height: string;
+  children: ReactNode;
+};
+
+const AlignmentOverview: FC<AlignmentOverviewProps> = ({
+  height,
+  children,
+}) => {
   const trackHeight = Math.floor(
     parseInt(height, 10) / Children.toArray(children).length
   );
@@ -20,9 +28,9 @@ const AlignmentOverview = ({ height, children }) => {
             ...child.props,
             height: trackHeight - marginBottom,
           });
-        } else {
-          return child;
         }
+
+        return child;
       })}
     </div>
   );

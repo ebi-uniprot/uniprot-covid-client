@@ -119,14 +119,17 @@ const MSAView: FC<MSAViewProps> = ({
     (node): void => {
       if (node) {
         const data = getFullAlignmentSegments(alignment).find(
-          (item) => item.name.toLowerCase() === 'query'
-        ).trackData;
-        // eslint-disable-next-line no-param-reassign
-        node.data = data;
-        node.margin = {
-          ...node.margin,
-          bottom: node.margin.bottom,
-        };
+          (item) => item.name && item.name.toLowerCase() === 'query'
+        );
+
+        if (data && data.trackData) {
+          // eslint-disable-next-line no-param-reassign
+          node.data = data.trackData;
+          node.margin = {
+            ...node.margin,
+            bottom: node.margin.bottom,
+          };
+        }
       }
     },
     [alignment]
@@ -136,14 +139,16 @@ const MSAView: FC<MSAViewProps> = ({
     (node): void => {
       if (node) {
         const data = getFullAlignmentSegments(alignment).find(
-          (item) => item.name.toLowerCase() === 'match'
-        ).trackData;
-        // eslint-disable-next-line no-param-reassign
-        node.data = data;
-        node.margin = {
-          ...node.margin,
-          bottom: node.margin.bottom,
-        };
+          (item) => item.name && item.name.toLowerCase() === 'match'
+        );
+        if (data && data.trackData) {
+          // eslint-disable-next-line no-param-reassign
+          node.data = data.trackData;
+          node.margin = {
+            ...node.margin,
+            bottom: node.margin.bottom,
+          };
+        }
       }
     },
     [alignment]
