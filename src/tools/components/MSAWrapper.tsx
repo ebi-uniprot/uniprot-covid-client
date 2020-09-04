@@ -22,7 +22,7 @@ export type ConservationOptions = {
   'overlay-conservation'?: true;
 };
 
-enum View {
+export enum View {
   overview = 'Overview',
   wrapped = 'Wrapped',
 }
@@ -40,7 +40,8 @@ export type MSAInput = {
 const MSAWrapper: React.FC<{
   alignment: MSAInput[];
   alignmentLength: number;
-}> = ({ alignment, alignmentLength }) => {
+  defaultView?: View;
+}> = ({ alignment, alignmentLength, defaultView }) => {
   const annotationChoices = useMemo(() => {
     const features = alignment
       .map(({ features }) => features)
@@ -50,7 +51,9 @@ const MSAWrapper: React.FC<{
     return Array.from(new Set(features?.map((feature) => feature?.type)));
   }, [alignment]);
 
-  const [activeView, setActiveView] = useState<View>(View.overview);
+  const [activeView, setActiveView] = useState<View>(
+    defaultView || View.wrapped
+  );
   const [annotation, setAnnotation] = useState<FeatureType | undefined>(
     annotationChoices[0]
   );
@@ -137,31 +140,27 @@ const MSAWrapper: React.FC<{
             )}
           </DropdownButton>
         )}
-        <DropdownButton label="View" className="tertiary">
-          {(setShowMenu: (showMenu: boolean) => void) => (
-            <div className="dropdown-menu__content">
-              <ul>
-                {Object.values(View).map((view) => (
-                  <li key={view}>
-                    <button
-                      type="button"
-                      className={cn('button', {
-                        primary: activeView === view,
-                        tertiary: activeView !== view,
-                      })}
-                      onClick={() => {
-                        setShowMenu(false);
-                        setActiveView(view);
-                      }}
-                    >
-                      {view}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </DropdownButton>
+        <fieldset className="msa-view-choice">
+          View:
+          <label>
+            <input
+              name="view"
+              type="radio"
+              checked={activeView === View.overview}
+              onChange={() => setActiveView(View.overview)}
+            />
+            Overview
+          </label>
+          <label>
+            <input
+              name="view"
+              type="radio"
+              checked={activeView === View.wrapped}
+              onChange={() => setActiveView(View.wrapped)}
+            />
+            Wrapped
+          </label>
+        </fieldset>
       </div>
       <div>
         {activeView === View.overview ? (

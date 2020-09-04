@@ -1,7 +1,8 @@
 import React, { FC, useMemo } from 'react';
+import { Loader } from 'franklin-sites';
 
 import AlignLabel from './AlignLabel';
-import MSAWrapper from '../../../components/MSAWrapper';
+import MSAWrapper, { View } from '../../../components/MSAWrapper';
 
 import alnClustalNum from '../../adapters/alnClustalNum';
 
@@ -77,6 +78,10 @@ const AlignResultOverview: FC<Props> = ({ data, sequenceInfo }) => {
   );
 
   if (!parsedAndEnriched) {
+    if (sequenceInfo.loading) {
+      return <Loader />;
+    }
+
     return null;
   }
 
@@ -95,6 +100,7 @@ const AlignResultOverview: FC<Props> = ({ data, sequenceInfo }) => {
         <MSAWrapper
           alignment={parsedAndEnriched.sequences}
           alignmentLength={parsedAndEnriched.sequences[0].sequence.length}
+          defaultView={View.wrapped}
         />
       </div>
     </section>

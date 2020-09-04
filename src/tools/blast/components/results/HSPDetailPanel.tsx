@@ -9,7 +9,7 @@ import { UniProtkbAPIModel } from '../../../../uniprotkb/adapters/uniProtkbConve
 import { getAccessionsURL } from '../../../../uniprotkb/config/apiUrls';
 import ErrorHandler from '../../../../shared/components/error-pages/ErrorHandler';
 import './styles/HSPDetailPanel.scss';
-import MSAWrapper, { MSAInput } from '../../../components/MSAWrapper';
+import MSAWrapper, { MSAInput, View } from '../../../components/MSAWrapper';
 
 type UniProtkbAccessionsAPI = {
   results: UniProtkbAPIModel[];
@@ -120,6 +120,7 @@ const HSPDetailPanel: FC<HSPDetailPanelProps> = ({
           alignmentLength={hsp_align_len}
           // totalLength={totalLength}
           alignment={alignment}
+          defaultView={View.overview}
         />
       </div>
     </SlidingPanel>
