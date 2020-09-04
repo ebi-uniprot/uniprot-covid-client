@@ -125,10 +125,13 @@ const MSAView: FC<MSAViewProps> = ({
         if (data && data.trackData) {
           // eslint-disable-next-line no-param-reassign
           node.data = data.trackData;
-          node.margin = {
-            ...node.margin,
-            bottom: node.margin.bottom,
-          };
+
+          if (node.margin) {
+            node.margin = {
+              ...node.margin,
+              bottom: node.margin.bottom,
+            };
+          }
         }
       }
     },
@@ -144,10 +147,13 @@ const MSAView: FC<MSAViewProps> = ({
         if (data && data.trackData) {
           // eslint-disable-next-line no-param-reassign
           node.data = data.trackData;
-          node.margin = {
-            ...node.margin,
-            bottom: node.margin.bottom,
-          };
+
+          if (node.margin) {
+            node.margin = {
+              ...node.margin,
+              bottom: node.margin.bottom,
+            };
+          }
         }
       }
     },
