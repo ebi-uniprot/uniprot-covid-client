@@ -1,6 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable camelcase */
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useMemo,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
 import ProtvistaTrack from 'protvista-track';
@@ -34,6 +41,8 @@ export type MSAViewProps = {
   conservationOptions: ConservationOptions;
   totalLength: number;
   annotation: FeatureType | undefined;
+  selectedId?: string;
+  setSelectedId: Dispatch<SetStateAction<string | undefined>>;
 };
 
 const MSAView: FC<MSAViewProps> = ({
@@ -210,6 +219,7 @@ const MSAView: FC<MSAViewProps> = ({
           // Looks like displaylength initialisation is ignored when there's labels - bug in MSA
           // labelwidth={200}
           length={alignmentLength}
+          height={alignment.length * 20}
           colorscheme={highlightProperty}
           {...conservationOptions}
         />
