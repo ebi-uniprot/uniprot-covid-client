@@ -1,36 +1,77 @@
-import React, {
-  FC,
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactNode,
-} from 'react';
+import React, { FC, useCallback } from 'react';
+import ProtvistaTrack from 'protvista-track';
+import { loadWebComponent } from '../../shared/utils/utils';
+import { FullAlignmentSegments, SegmentTrackData } from '../utils/sequences';
+
+loadWebComponent('protvista-track', ProtvistaTrack);
 
 type AlignmentOverviewProps = {
   height: string;
-  children: ReactNode;
+  data: FullAlignmentSegments[];
+  length: number;
+  highlight: string;
+};
+
+type AlignmentOverviewTrackProps = {
+  height: number;
+  data: SegmentTrackData[];
+  length: number;
+  highlight: string;
+};
+
+const AlignmentOverviewTrack: FC<AlignmentOverviewTrackProps> = ({
+  data,
+  highlight,
+  length,
+  height,
+}) => {
+  const marginBottom = Math.floor(height / 6);
+  const setTrackData = useCallback(
+    (node): void => {
+      if (node) {
+        // eslint-disable-next-line no-param-reassign
+        node.data = data;
+        // not supported yet in protvista-track
+        // node.margin = {
+        //   bottom: marginBottom,
+        // };
+      }
+    },
+    [data]
+  );
+
+  return (
+    <protvista-track
+      height={height - marginBottom}
+      ref={setTrackData}
+      length={length}
+      layout="overlapping"
+      highlight={highlight}
+    />
+  );
 };
 
 const AlignmentOverview: FC<AlignmentOverviewProps> = ({
   height,
-  children,
+  data,
+  length,
+  highlight,
 }) => {
-  const trackHeight = Math.floor(
-    parseInt(height, 10) / Children.toArray(children).length
-  );
-  const marginBottom = Math.floor(trackHeight / 6);
+  if (!data || data.length < 1) {
+    return null;
+  }
 
   return (
     <div>
-      {Children.map(children, (child) => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {
-            ...child.props,
-            height: trackHeight - marginBottom,
-          });
-        }
-
-        return child;
+      {data.map(({ trackData }) => {
+        return (
+          <AlignmentOverviewTrack
+            data={trackData}
+            height={parseInt(height, 10)}
+            length={length}
+            highlight={highlight}
+          />
+        );
       })}
     </div>
   );

@@ -1,7 +1,10 @@
 /* eslint-disable camelcase */
 
 import { MSAInput } from '../components/MSAWrapper';
-import { ProcessedFeature } from '../../uniprotkb/components/protein-data-views/FeaturesView';
+import {
+  ProcessedFeature,
+  FeatureData,
+} from '../../uniprotkb/components/protein-data-views/FeaturesView';
 
 export const findSequenceSegments = (seq: string) => {
   const ranges: number[][] = [];
@@ -50,6 +53,24 @@ export const getFullAlignmentLength = (
   const prefix = Math.max(...alignment.map(({ from }) => from));
   const suffix = Math.max(...alignment.map(({ length, to }) => length - to));
   return prefix - 1 + alignmentLength + suffix;
+};
+
+export type SegmentTrackData = {
+  start: number;
+  end: number;
+  shape?: string;
+  color: string;
+};
+
+export type FullAlignmentSegments = {
+  name?: string;
+  accession?: string;
+  sequence: string;
+  from: number;
+  to: number;
+  length: number;
+  features?: FeatureData;
+  trackData: SegmentTrackData[];
 };
 
 export const getFullAlignmentSegments = (alignment: MSAInput[]) => {

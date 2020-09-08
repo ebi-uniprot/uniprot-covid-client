@@ -7,6 +7,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
@@ -20,6 +21,7 @@ import { processFeaturesData } from '../../uniprotkb/components/protein-data-vie
 import {
   transformFeaturesPositions,
   getFullAlignmentSegments,
+  FullAlignmentSegments,
 } from '../utils/sequences';
 import AlignmentOverview from './AlignmentOverview';
 
@@ -57,6 +59,9 @@ const MSAView: FC<MSAViewProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
+  const [overviewTracksData, setOverviewTracksData] = useState<
+    FullAlignmentSegments[]
+  >([]);
 
   const tracksOffset = Math.max(...alignment.map(({ from }) => from));
 
@@ -124,50 +129,11 @@ const MSAView: FC<MSAViewProps> = ({
     [features, annotation]
   );
 
-  const setOverviewQueryData = useCallback(
-    (node): void => {
-      if (node) {
-        const data = getFullAlignmentSegments(alignment).find(
-          (item) => item.name && item.name.toLowerCase() === 'query'
-        );
-
-        if (data && data.trackData) {
-          // eslint-disable-next-line no-param-reassign
-          node.data = data.trackData;
-
-          if (node.margin) {
-            node.margin = {
-              ...node.margin,
-              bottom: node.margin.bottom,
-            };
-          }
-        }
-      }
-    },
-    [alignment]
-  );
-
-  const setOverviewMatchData = useCallback(
-    (node): void => {
-      if (node) {
-        const data = getFullAlignmentSegments(alignment).find(
-          (item) => item.name && item.name.toLowerCase() === 'match'
-        );
-        if (data && data.trackData) {
-          // eslint-disable-next-line no-param-reassign
-          node.data = data.trackData;
-
-          if (node.margin) {
-            node.margin = {
-              ...node.margin,
-              bottom: node.margin.bottom,
-            };
-          }
-        }
-      }
-    },
-    [alignment]
-  );
+  useEffect(() => {
+    if (alignment) {
+      setOverviewTracksData(getFullAlignmentSegments(alignment));
+    }
+  }, [alignment]);
 
   return (
     <section
@@ -178,32 +144,12 @@ const MSAView: FC<MSAViewProps> = ({
       {/* NOTE: both tracks currently merged into one - new Nightingale component needed */}
       <section className="hsp-label">Overview</section>
 
-      <AlignmentOverview height="20">
-        <protvista-track
-          ref={setOverviewQueryData}
-          length={totalLength}
-          layout="overlapping"
-          highlight={highlightPosition}
-        />
-        <protvista-track
-          ref={setOverviewMatchData}
-          length={totalLength}
-          layout="overlapping"
-          highlight={highlightPosition}
-        />
-      </AlignmentOverview>
-
-      {/* Match track - coloured based on score */}
-      {/* <section className="hsp-label">
-        <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
-      </section>
-      <protvista-track
-        height="30"
-        ref={setMatchTrackData}
+      <AlignmentOverview
+        height="20"
         length={totalLength}
-        layout="overlapping"
         highlight={highlightPosition}
-      /> */}
+        data={overviewTracksData}
+      />
       <section className="hsp-label">{annotation}</section>
       <protvista-track
         ref={setFeatureTrackData}
