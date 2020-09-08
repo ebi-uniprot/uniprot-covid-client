@@ -7,7 +7,6 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
-  useEffect,
 } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaNavigation from 'protvista-navigation';
@@ -21,7 +20,6 @@ import { processFeaturesData } from '../../uniprotkb/components/protein-data-vie
 import {
   transformFeaturesPositions,
   getFullAlignmentSegments,
-  FullAlignmentSegments,
 } from '../utils/sequences';
 import AlignmentOverview from './AlignmentOverview';
 
@@ -59,9 +57,6 @@ const MSAView: FC<MSAViewProps> = ({
   const [initialDisplayEnd, setInitialDisplayEnd] = useState<
     number | undefined
   >();
-  const [overviewTracksData, setOverviewTracksData] = useState<
-    FullAlignmentSegments[]
-  >([]);
 
   const tracksOffset = Math.max(...alignment.map(({ from }) => from));
 
@@ -129,12 +124,6 @@ const MSAView: FC<MSAViewProps> = ({
     [features, annotation]
   );
 
-  useEffect(() => {
-    if (alignment) {
-      setOverviewTracksData(getFullAlignmentSegments(alignment));
-    }
-  }, [alignment]);
-
   return (
     <section
       data-testid="overview-hsp-detail"
@@ -148,7 +137,7 @@ const MSAView: FC<MSAViewProps> = ({
         height="20"
         length={totalLength}
         highlight={highlightPosition}
-        data={overviewTracksData}
+        data={alignment ? getFullAlignmentSegments(alignment) : []}
       />
       <section className="hsp-label">{annotation}</section>
       <protvista-track

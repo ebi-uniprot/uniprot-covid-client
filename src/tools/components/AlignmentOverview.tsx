@@ -1,4 +1,5 @@
 import React, { FC, useCallback } from 'react';
+import { v1 } from 'uuid';
 import ProtvistaTrack from 'protvista-track';
 import { loadWebComponent } from '../../shared/utils/utils';
 import { FullAlignmentSegments, SegmentTrackData } from '../utils/sequences';
@@ -61,15 +62,18 @@ const AlignmentOverview: FC<AlignmentOverviewProps> = ({
     return null;
   }
 
+  const singleTrackHeight = Math.floor(parseInt(height, 10) / data.length);
+
   return (
     <div>
       {data.map(({ trackData }) => {
         return (
           <AlignmentOverviewTrack
             data={trackData}
-            height={parseInt(height, 10)}
+            height={singleTrackHeight}
             length={length}
             highlight={highlight}
+            key={v1()}
           />
         );
       })}
