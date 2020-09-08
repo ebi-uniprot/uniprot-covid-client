@@ -542,12 +542,20 @@ exports[`HSPDetailPanel should initially render overview 1`] = `
             >
               Overview
             </section>
-            <protvista-track
-              height="30"
-              highlight="418:446"
-              layout="non-overlapping"
-              length="486"
-            />
+            <div>
+              <protvista-track
+                height="9"
+                highlight="418:446"
+                layout="overlapping"
+                length="486"
+              />
+              <protvista-track
+                height="9"
+                highlight="418:446"
+                layout="overlapping"
+                length="486"
+              />
+            </div>
             <section
               class="hsp-label"
             />

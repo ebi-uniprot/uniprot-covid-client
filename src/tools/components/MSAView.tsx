@@ -21,6 +21,7 @@ import {
   transformFeaturesPositions,
   getFullAlignmentSegments,
 } from '../utils/sequences';
+import AlignmentOverview from './AlignmentOverview';
 
 loadWebComponent('protvista-navigation', ProtvistaNavigation);
 loadWebComponent('protvista-track', ProtvistaTrack);
@@ -123,18 +124,6 @@ const MSAView: FC<MSAViewProps> = ({
     [features, annotation]
   );
 
-  const setOverviewTrackData = useCallback(
-    (node): void => {
-      if (node) {
-        // eslint-disable-next-line no-param-reassign
-        node.data = getFullAlignmentSegments(alignment)
-          .map(({ trackData }) => trackData)
-          .flat();
-      }
-    },
-    [alignment]
-  );
-
   return (
     <section
       data-testid="overview-hsp-detail"
@@ -143,24 +132,13 @@ const MSAView: FC<MSAViewProps> = ({
       {/* Query track */}
       {/* NOTE: both tracks currently merged into one - new Nightingale component needed */}
       <section className="hsp-label">Overview</section>
-      <protvista-track
-        height="30"
-        ref={setOverviewTrackData}
+
+      <AlignmentOverview
+        height="20"
         length={totalLength}
-        layout="non-overlapping"
         highlight={highlightPosition}
+        data={alignment ? getFullAlignmentSegments(alignment) : []}
       />
-      {/* Match track - coloured based on score */}
-      {/* <section className="hsp-label">
-        <Link to={`/uniprotkb/${hitAccession}`}>{hitAccession}</Link>
-      </section>
-      <protvista-track
-        height="30"
-        ref={setMatchTrackData}
-        length={totalLength}
-        layout="overlapping"
-        highlight={highlightPosition}
-      /> */}
       <section className="hsp-label">{annotation}</section>
       <protvista-track
         ref={setFeatureTrackData}
