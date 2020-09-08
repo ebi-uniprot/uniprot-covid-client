@@ -121,8 +121,10 @@ const useParamsData = (
 
 // probably going to change with the custom endpoint to enrich data, so keep it
 // here for now, enventually might be a new type in a type folder
+export type EnrichedBlastHit = BlastHit & { extra?: UniProtkbAPIModel };
+
 export interface EnrichedData extends BlastResults {
-  hits: Array<BlastHit & { extra?: UniProtkbAPIModel }>;
+  hits: Array<EnrichedBlastHit>;
 }
 
 const enrich = (
@@ -209,30 +211,19 @@ const BlastResult = () => {
   );
 
   // list of all the accessions returned by the accessions endpoint
-  const accessionsFilteredByServer = useMemo(
-    () =>
-      new Set(
-        (accessionsData &&
-          accessionsData.results.map(
-            ({ primaryAccession }) => primaryAccession
-          )) ||
-          []
-      ),
-    [accessionsData]
-  );
+  // const accessionsFilteredByServer = useMemo(
+  //   () =>
+  //     new Set(
+  //       (accessionsData &&
+  //         accessionsData.results.map(
+  //           ({ primaryAccession }) => primaryAccession
+  //         )) ||
+  //         []
+  //     ),
+  //   [accessionsData]
+  // );
 
-  // additionally filter the blast results by server-calculated facets
-  const hitsFiltered = useMemo(
-    () =>
-      (accessionsFilteredByServer.size &&
-        hitsFilteredByLocalFacets.filter((hit) =>
-          accessionsFilteredByServer.has(hit.hit_acc)
-        )) ||
-      [],
-    [accessionsFilteredByServer, hitsFilteredByLocalFacets]
-  );
-
-  // filter BLAST results according facets (through accession endpoint and other BLAST facets facets)
+  // filter BLAST results according to facets (through accession endpoint and other BLAST facets facets)
   const filteredBlastData =
     blastData &&
     urlParams &&
@@ -241,6 +232,13 @@ const BlastResult = () => {
   const data = useMemo(
     () => enrich(filteredBlastData || undefined, accessionsData),
     [filteredBlastData, accessionsData]
+  );
+
+  // Hits filtered out by server facets don't have "extra"
+  // This could be improved by filtering things out in filteredBlastData??
+  const hitsFiltered = useMemo(
+    () => (data?.hits ? data.hits.filter((hit) => hit.extra) : []),
+    [data]
   );
 
   const inputParamsData = useParamsData(match.params.id);

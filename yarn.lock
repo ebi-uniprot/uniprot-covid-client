@@ -6534,10 +6534,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-franklin-sites@0.0.67:
-  version "0.0.67"
-  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.67.tgz#54e45d0a804a68c5c1908a282572d0768ec715e7"
-  integrity sha512-24XpG5/D1e1oNFFf8+aZX619L7JwDa4ywRoEeTirKZh+SLVaDEk4Zue/GxmYo6HwnDBwZNbdZpW5zbIrQuuymw==
+franklin-sites@0.0.69:
+  version "0.0.69"
+  resolved "https://registry.yarnpkg.com/franklin-sites/-/franklin-sites-0.0.69.tgz#feac4fe5467217a86dbaa3d057225c3961851f20"
+  integrity sha512-bkMfYeiOvLKt4ixPlT1xtxA/c6LHhUY9eEJHwuSYBh7kh8/5g+lbgS2v17S+Sh4Pb8OtAc0d394Zk9c1R5tHAA==
   dependencies:
     classnames "^2.2.6"
     d3-array "^2.5.0"

@@ -27,9 +27,9 @@ const jobType = JobTypes.ALIGN;
 const urls = toolsURLs(jobType);
 
 // overview
-// const AlignResultOverview = lazy(() =>
-//   import(/* webpackChunkName: "align-overview" */ './AlignResultOverview')
-// );
+const AlignResultOverview = lazy(() =>
+  import(/* webpackChunkName: "align-overview" */ './AlignResultOverview')
+);
 // phylogenetic-tree
 const AlignResultPhyloTree = lazy(() =>
   import(/* webpackChunkName: "align-phylotree" */ './AlignResultPhyloTree')
@@ -105,10 +105,7 @@ const AlignResult = () => {
   const history = useHistory();
   const match = useRouteMatch(LocationToPath[Location.AlignResult]) as Match;
 
-  // TODO: remove all those when we start using 'setSelectedEntries'
-  // eslint-disable-next-line
-  // @ts-ignore
-  const [selectedEntries, setSelectedEntries] = useState<string[]>([]); // eslint-disable-line
+  const [selectedEntries, setSelectedEntries] = useState<string[]>([]);
 
   // if URL doesn't finish with "overview" redirect to /overview by default
   useEffect(() => {
@@ -132,14 +129,14 @@ const AlignResult = () => {
   const sequenceInfo = useSequenceInfo(inputParamsData.data?.sequence);
 
   // Note: this function is duplicated in ResultsContainer.tsx
-  // const handleSelectedEntries = (rowId: string) => {
-  //   const filtered = selectedEntries.filter((id) => id !== rowId);
-  //   setSelectedEntries(
-  //     filtered.length === selectedEntries.length
-  //       ? [...selectedEntries, rowId]
-  //       : filtered
-  //   );
-  // };
+  const handleSelectedEntries = (rowId: string) => {
+    const filtered = selectedEntries.filter((id) => id !== rowId);
+    setSelectedEntries(
+      filtered.length === selectedEntries.length
+        ? [...selectedEntries, rowId]
+        : filtered
+    );
+  };
 
   if (loading) {
     return <Loader />;
@@ -178,11 +175,12 @@ const AlignResult = () => {
           {actionBar}
           <ErrorBoundary>
             <Suspense fallback={<Loader />}>
-              <pre>{data}</pre>
-              {/* <AlignResultOverview 
-              selectedEntries={selectedEntries}
-              handleSelectedEntries={handleSelectedEntries}
-            /> */}
+              <AlignResultOverview
+                data={data}
+                sequenceInfo={sequenceInfo}
+                selectedEntries={selectedEntries}
+                handleSelectedEntries={handleSelectedEntries}
+              />
             </Suspense>
           </ErrorBoundary>
         </Tab>
