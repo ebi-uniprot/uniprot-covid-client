@@ -1,0 +1,217 @@
+@import '../../../../../node_modules/franklin-sites/src/styles/colours';
+
+.dashboard {
+  &__header .card__content {
+    font-weight: bold;
+    display: grid;
+    /* this needs to be the same as below to keep visual alignment */
+    grid-template-columns: 10ch 27ch 12ch 1fr;
+    grid-gap: 1ch;
+  }
+
+  &__body {
+    min-width: fit-content;
+
+    & .card--failure {
+      border: 1px solid $colour-failure;
+      border-left: 0.25rem solid $colour-failure;
+
+      & * {
+        outline-color: $colour-failure;
+      }
+
+      & .dashboard__body__status {
+        color: $colour-failure;
+
+        & .dashboard__body__notify_message {
+          color: initial;
+        }
+      }
+    }
+
+    & .card--expired {
+      & .dashboard__body__name,
+      & .dashboard__body__type,
+      & .dashboard__body__status,
+      & .dashboard__body__id {
+        opacity: 0.5;
+      }
+
+      & .card__content {
+        cursor: not-allowed;
+      }
+
+      & .dashboard__body__actions {
+        opacity: 1;
+      }
+    }
+
+    & .card:nth-of-type(2n + 1) {
+      background: #e4e8eb;
+    }
+
+    & .card--has-hover {
+      &:hover,
+      &:focus,
+      &:focus-within {
+        background: #d2dce3;
+
+        & .dashboard__body__name svg,
+        & .dashboard__body__notify_message,
+        & .dashboard__body__actions {
+          opacity: 1;
+        }
+
+        & input[type='text'] {
+          background: rgba(255, 255, 255, 0.25);
+        }
+      }
+    }
+
+    & .card__content {
+      user-select: none;
+      display: grid;
+      grid-template-areas:
+        'type name time status actions'
+        'id   id   time status actions';
+      grid-template-columns: 10ch 27ch 12ch 1fr max-content;
+      grid-gap: 1ch;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    /* begin grid areas */
+    &__name {
+      grid-area: name;
+      font-weight: bold;
+
+      & label {
+        width: 90%;
+        display: inline-flex;
+      }
+
+      & input {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        border-radius: 0.25em;
+        height: 1.5em;
+        padding: 0;
+        margin: 0;
+        overflow: scroll;
+        flex: 1;
+
+        &:not(:focus) {
+          border: solid 1px transparent;
+        }
+      }
+
+      & svg {
+        margin-left: 0.5ch;
+        opacity: 0;
+        transition: opacity ease-in-out 100ms;
+      }
+    }
+
+    &__type {
+      grid-area: type;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    &__time {
+      grid-area: time;
+
+      display: flex;
+      align-items: flex-start;
+
+      & svg {
+        margin: 0.4em;
+        color: #f0c135;
+      }
+    }
+
+    &__status {
+      grid-area: status;
+    }
+
+    &__actions {
+      grid-area: actions;
+      align-self: start;
+      justify-self: end;
+    }
+
+    &__id {
+      grid-area: id;
+      font-size: 75%;
+      align-self: end;
+    }
+    /* end grid areas */
+
+    &__hours {
+      font-size: 75%;
+    }
+
+    &__notify_message {
+      font-size: 75%;
+    }
+
+    &__actions {
+      display: flex;
+
+      & svg {
+        overflow: visible;
+
+        & .bin_svg__cover {
+          transition: transform ease-in 100ms;
+          transform-origin: bottom left;
+        }
+      }
+
+      & button {
+        cursor: pointer;
+        margin: 0.5ch;
+        width: 2ch;
+
+        &:hover,
+        &:focus {
+          & .bin_svg__cover {
+            transform: rotate(-20deg);
+          }
+        }
+      }
+    }
+
+    &__notify_message,
+    &__actions {
+      opacity: 0.5;
+      transition: opacity ease-in-out 100ms;
+    }
+  }
+}
+
+// switch to narrow view before content starts escaping the cards
+@media only screen and (max-width: 50em) {
+  .dashboard {
+    &__header {
+      display: none;
+    }
+
+    &__body {
+      & .card__content {
+        grid-template-areas:
+          'type name   time'
+          '.    status time'
+          'id   id     actions';
+        grid-template-columns: 10ch minmax(27ch, auto) 12ch;
+        grid-gap: 0;
+        grid-template-rows: 1fr 1fr 1fr;
+      }
+
+      &__time {
+        text-align: end;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

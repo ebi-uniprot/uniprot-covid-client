@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
+
+// NOTE: this dependency is quite big (because of "amigo2-instance-data"), so
+// NOTE: you can lazy load this module to avoid blocking the rest of the page
+// NOTE: while instantiating this
 import Ribbon, { RibbonDataProvider } from '@geneontology/ribbon';
+
 import '@geneontology/ribbon/es/main.scss';
 import './styles/go-ribbon.scss';
 
@@ -18,21 +23,18 @@ enum COLOR_BY {
   ANNOTATION_COUNT = 1,
 }
 
+type RibbonData = {
+  entities: any;
+  config: any;
+  dataError: any;
+  dataReceived: any;
+};
+
 const GoRibbon: FC<{ primaryAccession: string }> = ({ primaryAccession }) => (
   <div className="GoRibbon">
     <h3>GO Annotations</h3>
     <RibbonDataProvider subject={`UniProtKB:${primaryAccession}`}>
-      {({
-        entities,
-        config,
-        dataError,
-        dataReceived,
-      }: {
-        entities: any;
-        config: any;
-        dataError: any;
-        dataReceived: any;
-      }) => (
+      {({ entities, config, dataError, dataReceived }: RibbonData) => (
         <div className="GoRibbon__container">
           {dataReceived && (
             <Ribbon

@@ -2,10 +2,11 @@
 
 exports[`AdvancedSearch shallow components should render 1`] = `
 <DocumentFragment>
-  <div
+  <form
     class="advanced-search"
+    data-testid="advanced-search-form"
   >
-    <div>
+    <fieldset>
       <label
         for="namespace-select"
       >
@@ -18,48 +19,45 @@ exports[`AdvancedSearch shallow components should render 1`] = `
           </option>
         </select>
       </label>
-    </div>
-    <div
-      class="advanced-search__clause"
-    >
-      <select
-        class="advanced-search__logic"
-        data-testid="advanced-search-logic-select"
-      >
-        <option
-          value="AND"
-        >
-          AND
-        </option>
-        <option
-          value="OR"
-        >
-          OR
-        </option>
-        <option
-          value="NOT"
-        >
-          NOT
-        </option>
-      </select>
+    </fieldset>
+    <fieldset>
       <div
-        class="dropdown-container"
+        class="advanced-search__clause"
       >
-        <button
-          class="button dropdown "
-          type="button"
+        <select
+          class="advanced-search__logic"
+          data-testid="advanced-search-logic-select"
         >
-          All
-        </button>
-        <div
-          class="dropdown-menu"
-          style="top: 0px;"
-        >
-          <div
-            class="autocomplete-container"
+          <option
+            value="AND"
           >
-            <form
-              data-testid="autocomplete-form"
+            AND
+          </option>
+          <option
+            value="OR"
+          >
+            OR
+          </option>
+          <option
+            value="NOT"
+          >
+            NOT
+          </option>
+        </select>
+        <div
+          class="dropdown-container"
+        >
+          <button
+            class="button dropdown "
+            type="button"
+          >
+            All
+          </button>
+          <div
+            class="dropdown-menu"
+          >
+            <div
+              class="autocomplete-container"
             >
               <span
                 class="search-input"
@@ -87,92 +85,87 @@ exports[`AdvancedSearch shallow components should render 1`] = `
                   </svg>
                 </span>
               </span>
-            </form>
-            <div
-              class="autocomplete-menu"
-            >
               <div
-                class="dropdown-menu__panel"
+                class="autocomplete-menu"
+              >
+                <div
+                  class="dropdown-menu__panel"
+                />
+              </div>
+            </div>
+            <div
+              class="dropdown-menu__panel"
+            >
+              <ul
+                class=""
               />
             </div>
           </div>
-          <div
-            class="dropdown-menu__panel"
-          >
-            <ul
-              class=""
-            />
-          </div>
         </div>
-      </div>
-      <div
-        class="advanced-search__inputs"
-      >
         <div
           class="advanced-search__inputs"
         >
-          <label
-            for="input_All"
+          <div
+            class="advanced-search__inputs"
           >
-            All
-            <input
-              id="input_All"
-              placeholder="a4_human, P05067, cdc7 human"
-              type="text"
-              value=""
-            />
-          </label>
+            <label
+              for="input_All"
+            >
+              All
+              <input
+                id="input_All"
+                placeholder="a4_human, P05067, cdc7 human"
+                type="text"
+                value=""
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <button
-        class="button-remove"
-        data-testid="clause-list-button-remove"
-        type="button"
-      >
-        Remove
-      </button>
-    </div>
-    <div
-      class="advanced-search__clause"
-    >
-      <select
-        class="advanced-search__logic"
-        data-testid="advanced-search-logic-select"
-      >
-        <option
-          value="AND"
-        >
-          AND
-        </option>
-        <option
-          value="OR"
-        >
-          OR
-        </option>
-        <option
-          value="NOT"
-        >
-          NOT
-        </option>
-      </select>
-      <div
-        class="dropdown-container"
-      >
         <button
-          class="button dropdown "
+          class="button tertiary button-remove"
+          data-testid="clause-list-button-remove"
           type="button"
         >
-          All
+          Remove
         </button>
-        <div
-          class="dropdown-menu"
-          style="top: 0px;"
+      </div>
+      <div
+        class="advanced-search__clause"
+      >
+        <select
+          class="advanced-search__logic"
+          data-testid="advanced-search-logic-select"
         >
-          <div
-            class="autocomplete-container"
+          <option
+            value="AND"
           >
-            <form
-              data-testid="autocomplete-form"
+            AND
+          </option>
+          <option
+            value="OR"
+          >
+            OR
+          </option>
+          <option
+            value="NOT"
+          >
+            NOT
+          </option>
+        </select>
+        <div
+          class="dropdown-container"
+        >
+          <button
+            class="button dropdown "
+            type="button"
+          >
+            All
+          </button>
+          <div
+            class="dropdown-menu"
+          >
+            <div
+              class="autocomplete-container"
             >
               <span
                 class="search-input"
@@ -200,92 +193,87 @@ exports[`AdvancedSearch shallow components should render 1`] = `
                   </svg>
                 </span>
               </span>
-            </form>
-            <div
-              class="autocomplete-menu"
-            >
               <div
-                class="dropdown-menu__panel"
+                class="autocomplete-menu"
+              >
+                <div
+                  class="dropdown-menu__panel"
+                />
+              </div>
+            </div>
+            <div
+              class="dropdown-menu__panel"
+            >
+              <ul
+                class=""
               />
             </div>
           </div>
-          <div
-            class="dropdown-menu__panel"
-          >
-            <ul
-              class=""
-            />
-          </div>
         </div>
-      </div>
-      <div
-        class="advanced-search__inputs"
-      >
         <div
           class="advanced-search__inputs"
         >
-          <label
-            for="input_All"
+          <div
+            class="advanced-search__inputs"
           >
-            All
-            <input
-              id="input_All"
-              placeholder="a4_human, P05067, cdc7 human"
-              type="text"
-              value=""
-            />
-          </label>
+            <label
+              for="input_All"
+            >
+              All
+              <input
+                id="input_All"
+                placeholder="a4_human, P05067, cdc7 human"
+                type="text"
+                value=""
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <button
-        class="button-remove"
-        data-testid="clause-list-button-remove"
-        type="button"
-      >
-        Remove
-      </button>
-    </div>
-    <div
-      class="advanced-search__clause"
-    >
-      <select
-        class="advanced-search__logic"
-        data-testid="advanced-search-logic-select"
-      >
-        <option
-          value="AND"
-        >
-          AND
-        </option>
-        <option
-          value="OR"
-        >
-          OR
-        </option>
-        <option
-          value="NOT"
-        >
-          NOT
-        </option>
-      </select>
-      <div
-        class="dropdown-container"
-      >
         <button
-          class="button dropdown "
+          class="button tertiary button-remove"
+          data-testid="clause-list-button-remove"
           type="button"
         >
-          All
+          Remove
         </button>
-        <div
-          class="dropdown-menu"
-          style="top: 0px;"
+      </div>
+      <div
+        class="advanced-search__clause"
+      >
+        <select
+          class="advanced-search__logic"
+          data-testid="advanced-search-logic-select"
         >
-          <div
-            class="autocomplete-container"
+          <option
+            value="AND"
           >
-            <form
-              data-testid="autocomplete-form"
+            AND
+          </option>
+          <option
+            value="OR"
+          >
+            OR
+          </option>
+          <option
+            value="NOT"
+          >
+            NOT
+          </option>
+        </select>
+        <div
+          class="dropdown-container"
+        >
+          <button
+            class="button dropdown "
+            type="button"
+          >
+            All
+          </button>
+          <div
+            class="dropdown-menu"
+          >
+            <div
+              class="autocomplete-container"
             >
               <span
                 class="search-input"
@@ -313,92 +301,87 @@ exports[`AdvancedSearch shallow components should render 1`] = `
                   </svg>
                 </span>
               </span>
-            </form>
-            <div
-              class="autocomplete-menu"
-            >
               <div
-                class="dropdown-menu__panel"
+                class="autocomplete-menu"
+              >
+                <div
+                  class="dropdown-menu__panel"
+                />
+              </div>
+            </div>
+            <div
+              class="dropdown-menu__panel"
+            >
+              <ul
+                class=""
               />
             </div>
           </div>
-          <div
-            class="dropdown-menu__panel"
-          >
-            <ul
-              class=""
-            />
-          </div>
         </div>
-      </div>
-      <div
-        class="advanced-search__inputs"
-      >
         <div
           class="advanced-search__inputs"
         >
-          <label
-            for="input_All"
+          <div
+            class="advanced-search__inputs"
           >
-            All
-            <input
-              id="input_All"
-              placeholder="a4_human, P05067, cdc7 human"
-              type="text"
-              value=""
-            />
-          </label>
+            <label
+              for="input_All"
+            >
+              All
+              <input
+                id="input_All"
+                placeholder="a4_human, P05067, cdc7 human"
+                type="text"
+                value=""
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <button
-        class="button-remove"
-        data-testid="clause-list-button-remove"
-        type="button"
-      >
-        Remove
-      </button>
-    </div>
-    <div
-      class="advanced-search__clause"
-    >
-      <select
-        class="advanced-search__logic"
-        data-testid="advanced-search-logic-select"
-      >
-        <option
-          value="AND"
-        >
-          AND
-        </option>
-        <option
-          value="OR"
-        >
-          OR
-        </option>
-        <option
-          value="NOT"
-        >
-          NOT
-        </option>
-      </select>
-      <div
-        class="dropdown-container"
-      >
         <button
-          class="button dropdown "
+          class="button tertiary button-remove"
+          data-testid="clause-list-button-remove"
           type="button"
         >
-          All
+          Remove
         </button>
-        <div
-          class="dropdown-menu"
-          style="top: 0px;"
+      </div>
+      <div
+        class="advanced-search__clause"
+      >
+        <select
+          class="advanced-search__logic"
+          data-testid="advanced-search-logic-select"
         >
-          <div
-            class="autocomplete-container"
+          <option
+            value="AND"
           >
-            <form
-              data-testid="autocomplete-form"
+            AND
+          </option>
+          <option
+            value="OR"
+          >
+            OR
+          </option>
+          <option
+            value="NOT"
+          >
+            NOT
+          </option>
+        </select>
+        <div
+          class="dropdown-container"
+        >
+          <button
+            class="button dropdown "
+            type="button"
+          >
+            All
+          </button>
+          <div
+            class="dropdown-menu"
+          >
+            <div
+              class="autocomplete-container"
             >
               <span
                 class="search-input"
@@ -426,68 +409,70 @@ exports[`AdvancedSearch shallow components should render 1`] = `
                   </svg>
                 </span>
               </span>
-            </form>
-            <div
-              class="autocomplete-menu"
-            >
               <div
-                class="dropdown-menu__panel"
+                class="autocomplete-menu"
+              >
+                <div
+                  class="dropdown-menu__panel"
+                />
+              </div>
+            </div>
+            <div
+              class="dropdown-menu__panel"
+            >
+              <ul
+                class=""
               />
             </div>
           </div>
-          <div
-            class="dropdown-menu__panel"
-          >
-            <ul
-              class=""
-            />
-          </div>
         </div>
-      </div>
-      <div
-        class="advanced-search__inputs"
-      >
         <div
           class="advanced-search__inputs"
         >
-          <label
-            for="input_All"
+          <div
+            class="advanced-search__inputs"
           >
-            All
-            <input
-              id="input_All"
-              placeholder="a4_human, P05067, cdc7 human"
-              type="text"
-              value=""
-            />
-          </label>
+            <label
+              for="input_All"
+            >
+              All
+              <input
+                id="input_All"
+                placeholder="a4_human, P05067, cdc7 human"
+                type="text"
+                value=""
+              />
+            </label>
+          </div>
         </div>
+        <button
+          class="button tertiary button-remove"
+          data-testid="clause-list-button-remove"
+          type="button"
+        >
+          Remove
+        </button>
       </div>
+    </fieldset>
+    <div
+      class="advanced-search__actions"
+    >
       <button
-        class="button-remove"
-        data-testid="clause-list-button-remove"
+        class="button tertiary"
+        data-testid="advanced-search-add-field"
+        id="add-field"
         type="button"
       >
-        Remove
+        Add Field
       </button>
-    </div>
-    <button
-      data-testid="advanced-search-add-field"
-      id="add-field"
-      type="button"
-    >
-      Add Field
-    </button>
-    <div>
       <button
         class="button"
-        data-testid="advanced-search-submit"
         id="submit-query"
-        type="button"
+        type="submit"
       >
         Search
       </button>
     </div>
-  </div>
+  </form>
 </DocumentFragment>
 `;

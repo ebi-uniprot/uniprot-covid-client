@@ -1,32 +1,38 @@
-import React, { FC, Fragment, useState } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { PageIntro, Loader } from 'franklin-sites';
-import { Clause, Namespace } from '../../types/searchTypes';
-import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
+
 import ResultsView from './ResultsView';
-import infoMappings from '../../../shared/config/InfoMappings';
-import { RootState } from '../../../app/state/rootInitialState';
-import { Column } from '../../types/columnTypes';
-import { ViewMode } from '../../state/resultsInitialState';
-import BaseLayout from '../../../shared/components/layouts/BaseLayout';
-import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
-import { getParamsFromURL } from '../../utils/resultsUtils';
-import useLocalStorage from '../../../shared/hooks/useLocalStorage';
-import { getAPIQueryUrl } from '../../config/apiUrls';
-import useDataApi from '../../../shared/hooks/useDataApi';
 import ResultsButtons from './ResultsButtons';
 import ResultsFacets from './ResultsFacets';
+import NoResultsPage from '../../../shared/components/error-pages/NoResultsPage';
 import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
+import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
 
-type ResultsProps = {
-  namespace: Namespace;
-  tableColumns: Column[];
-  clauses?: Clause[];
-} & RouteComponentProps;
+import { ViewMode } from '../../state/resultsInitialState';
+import { RootState } from '../../../app/state/rootInitialState';
 
-const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
-  const { search: queryParamFromUrl } = location;
+import { getParamsFromURL } from '../../utils/resultsUtils';
+
+import useLocalStorage from '../../../shared/hooks/useLocalStorage';
+import useDataApiWithStale from '../../../shared/hooks/useDataApiWithStale';
+
+import { getAPIQueryUrl } from '../../config/apiUrls';
+import infoMappings from '../../../shared/config/InfoMappings';
+
+import { Namespace } from '../../types/searchTypes';
+import { Column } from '../../types/columnTypes';
+import Response from '../../types/responseTypes';
+
+const Results: FC = () => {
+  const namespace = useSelector<RootState, Namespace>(
+    (state) => state.query.namespace
+  );
+  const tableColumns = useSelector<RootState, Column[]>(
+    (state) => state.results.tableColumns
+  );
+  const { search: queryParamFromUrl } = useLocation();
   const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
     queryParamFromUrl
   );
@@ -48,33 +54,34 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
     columns,
     selectedFacets,
     sortColumn,
-    sortDirection
+    sortDirection,
+    undefined,
+    1 // TODO: change to 0 whenever the API accepts it
   );
 
-  const { data, error, loading, headers, status } = useDataApi(initialApiUrl);
+  const {
+    data,
+    error,
+    loading,
+    headers,
+    status,
+    isStale,
+  } = useDataApiWithStale<Response['data']>(initialApiUrl);
 
-  if (error) {
+  if (error || !(loading || data)) {
     return <ErrorHandler status={status} />;
   }
 
-  if (loading) {
-    return <Loader />;
-  }
+  const releaseDate = headers?.['x-release'];
+  const total = headers?.['x-totalrecords'];
 
-  const { facets, results } = data;
-  const total = headers['x-totalrecords'];
-  const releaseDate = headers['x-release'];
-
-  if (!results || results.length === 0) {
-    return (
-      <BaseLayout>
-        <NoResultsPage />
-      </BaseLayout>
-    );
+  // no results if total is 0, or if not loading anymore and still no total info
+  if (total === 0 || !(total || loading)) {
+    return <NoResultsPage />;
   }
 
   const handleEntrySelection = (rowId: string): void => {
-    const filtered = selectedEntries.filter(id => id !== rowId);
+    const filtered = selectedEntries.filter((id) => id !== rowId);
     setSelectedEntries(
       filtered.length === selectedEntries.length
         ? [...selectedEntries, rowId]
@@ -84,56 +91,41 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   const { name, links, info } = infoMappings[namespace];
 
   return (
-    <Fragment>
-      <SideBarLayout
-        title={
-          <Fragment>
-            <PageIntro
-              title={name}
-              links={links}
-              resultsCount={total}
-              showContent
-            >
-              {info}
-              <strong>Latest update</strong>: {releaseDate}
-            </PageIntro>
-          </Fragment>
-        }
-        actionButtons={
-          <ResultsButtons
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            query={query}
-            selectedFacets={selectedFacets}
-            selectedEntries={selectedEntries}
-            sortColumn={sortColumn}
-            sortDirection={sortDirection}
-            total={total}
-          />
-        }
-        sidebar={<ResultsFacets facets={facets} />}
-      >
-        <Fragment>
-          <ResultsView
-            columns={columns}
-            handleEntrySelection={handleEntrySelection}
-            selectedEntries={selectedEntries}
-            viewMode={viewMode}
-          />
-        </Fragment>
-      </SideBarLayout>
-    </Fragment>
+    <SideBarLayout
+      title={
+        <PageIntro title={name} links={links} resultsCount={total} showContent>
+          {info}
+          <strong>Latest update</strong>: {releaseDate}
+        </PageIntro>
+      }
+      actionButtons={
+        <ResultsButtons
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          query={query}
+          selectedFacets={selectedFacets}
+          selectedEntries={selectedEntries}
+          sortColumn={sortColumn}
+          sortDirection={sortDirection}
+          total={total}
+        />
+      }
+      sidebar={
+        loading ? (
+          <Loader />
+        ) : (
+          <ResultsFacets facets={data?.facets || []} isStale={isStale} />
+        )
+      }
+    >
+      <ResultsView
+        columns={columns}
+        handleEntrySelection={handleEntrySelection}
+        selectedEntries={selectedEntries}
+        viewMode={viewMode}
+      />
+    </SideBarLayout>
   );
-  // }
 };
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    namespace: state.query.namespace,
-    tableColumns: state.results.tableColumns,
-  };
-};
-
-const ResultsContainer = withRouter(connect(mapStateToProps)(Results));
-
-export default ResultsContainer;
+export default Results;

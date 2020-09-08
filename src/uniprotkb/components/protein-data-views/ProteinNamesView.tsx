@@ -158,7 +158,12 @@ type ListElement = {
 const ProteinNamesView: React.FC<{
   proteinNames?: ProteinNamesData;
   isCompact?: boolean;
-}> = ({ proteinNames, isCompact = false }): JSX.Element | null => {
+  noTitles?: boolean;
+}> = ({
+  proteinNames,
+  isCompact = false,
+  noTitles = false,
+}): JSX.Element | null => {
   if (!proteinNames) {
     return null;
   }
@@ -259,6 +264,7 @@ const ProteinNamesView: React.FC<{
       infoData={infoData}
       isCompact={isCompact}
       highlightFirstItem={isCompact}
+      noTitles={noTitles}
     />
   );
 };

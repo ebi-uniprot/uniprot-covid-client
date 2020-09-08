@@ -1,0 +1,52 @@
+@import '../../../styles/settings';
+@import '../../../../../node_modules/franklin-sites/src/styles/settings';
+@import '../../../../../node_modules/franklin-sites/src/styles/colours';
+@import '../../../../../node_modules/franklin-sites/src/styles/mixins';
+
+.sliding-panel {
+  @include box-shadow(0.125rem);
+  background-color: $colour-sky-white;
+  border-radius: 0.2rem;
+  padding: 0 $global-padding;
+  position: absolute;
+  z-index: $z-index-high;
+
+  &__button-row {
+    position: sticky;
+    display: flex;
+    justify-content: flex-end;
+    padding: $global-padding/2 0;
+    background-color: $colour-sky-white;
+    bottom: 0;
+  }
+
+  &--top,
+  &--bottom {
+    width: 100vw;
+    height: 40vh;
+    left: 0;
+  }
+
+  &--top {
+    top: 0;
+  }
+
+  &--bottom {
+    bottom: 0;
+  }
+
+  &--left,
+  &--right {
+    height: 100vh;
+    width: 40vw;
+    top: 0;
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}

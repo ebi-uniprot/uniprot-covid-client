@@ -5,14 +5,25 @@ stages:
 .js:
   image: node
   before_script:
+    - git --version
     - node --version
     - npm --version
     - yarn --version
     - yarn
 
 test:
-  extends: .js
+  only:
+    refs:
+      - master
+  image: buildkite/puppeteer
   stage: test
+  before_script:
+    - apt-get update && apt-get install -y git
+    - git --version
+    - node --version
+    - npm --version
+    - yarn --version
+    - yarn
   script:
     - yarn test
 
@@ -20,7 +31,7 @@ build_static_assets:
   extends: .js
   stage: build_static_assets
   script:
-    - yarn build
+    - yarn build:prod
   artifacts:
     paths:
       - build/

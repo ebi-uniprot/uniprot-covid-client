@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import apiUrls, { getAPIQueryUrl, createFacetsQueryString } from '../apiUrls';
 import { FileFormat } from '../../types/resultsTypes';
 
@@ -9,7 +12,7 @@ describe('getQueryUrl', () => {
     ];
     const queryString = getAPIQueryUrl('cdc7', [], facets);
     expect(queryString).toMatch(
-      /https?:\/\/[a-zA-Z\-0-9:\.]+\/uniprot\/api\/covid-19\/uniprotkb\/search\?facets=reviewed%2Cmodel_organism%2Cother_organism%2Cproteins_with%2Cexistence%2Cannotation_score&fields=&query=cdc7%20AND%20%28facet1%3A%22value%201%22%29%20AND%20%28facet2%3A%22value%203%22%29/
+      /https?:\/\/[a-zA-Z\-0-9:\.]+\/uniprot\/api\/covid-19\/uniprotkb\/search\?facets=reviewed%2Cmodel_organism%2Cother_organism%2Cproteins_with%2Cexistence%2Cannotation_score&query=cdc7%20AND%20%28facet1%3A%22value%201%22%29%20AND%20%28facet2%3A%22value%203%22%29/
     );
   });
 });
@@ -24,7 +27,7 @@ describe('createFacetsQueryString', () => {
     ];
     const queryString = createFacetsQueryString(facets);
     expect(queryString).toBe(
-      ' AND (facet1:"value 1") AND (facet2:"value 3") AND (facet3:value3) AND (facet4:[1 TO *])'
+      '(facet1:"value 1") AND (facet2:"value 3") AND (facet3:value3) AND (facet4:[1 TO *])'
     );
   });
 });

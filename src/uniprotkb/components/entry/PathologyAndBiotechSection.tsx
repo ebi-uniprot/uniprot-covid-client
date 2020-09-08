@@ -4,7 +4,7 @@ import FeaturesView from '../protein-data-views/FeaturesView';
 import DiseaseInvolvementView from '../protein-data-views/DiseaseInvolvementView';
 import KeywordView from '../protein-data-views/KeywordView';
 import EntrySection from '../../types/entrySection';
-import { hasContent } from '../../utils/utils';
+import { hasContent } from '../../utils';
 import { UIModel } from '../../adapters/sectionConverter';
 import {
   CommentType,

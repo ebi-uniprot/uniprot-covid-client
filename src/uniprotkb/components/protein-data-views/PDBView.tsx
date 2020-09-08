@@ -78,12 +78,7 @@ const getColumnConfig = () => ({
                 >${displayName}</a
               >
             `
-        ).reduce(
-          (prev, curr) =>
-            html`
-              ${prev} · ${curr}
-            `
-        )}
+        ).reduce((prev, curr) => html` ${prev} · ${curr} `)}
       `,
   },
 });
@@ -122,6 +117,7 @@ const PDBView: FC<{
         selectedId={firstId}
         noScrollToRow
         noDeselect
+        filter-scroll
       />
     </protvista-manager>
   );

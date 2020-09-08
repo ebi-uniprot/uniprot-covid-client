@@ -15,5 +15,10 @@
 .env.test.local
 .env.production.local
 .vscode
+__diff_output__
 
 *.log
+
+# Tests temp directory
+/tests/.tmp/
+report.*.json

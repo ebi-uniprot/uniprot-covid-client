@@ -12,21 +12,24 @@ exports[`PopupMessageHub tests it should render and call dismiss 1`] = `
         class="message message--info"
         role="status"
       >
+        <div
+          class="message__side-border"
+        />
+        <svg
+          fill="currentColor"
+          height="1.125em"
+          viewBox="0 0 18 18"
+          width="1.125em"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
+            fill-rule="evenodd"
+          />
+        </svg>
         <section
           class="message__content"
         >
-          <svg
-            fill="currentColor"
-            height="1.125em"
-            viewBox="0 0 18 18"
-            width="1.125em"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M18 9A9 9 0 110 9a9 9 0 0118 0zM8 4a1 1 0 112 0v6a1 1 0 11-2 0V4zm1 9a1 1 0 100 2 1 1 0 000-2z"
-              fill-rule="evenodd"
-            />
-          </svg>
           <small>
             lorem
           </small>

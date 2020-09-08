@@ -1,0 +1,77 @@
+@import '../../../../../../node_modules/franklin-sites/src/styles/colours';
+
+// keyframe to have the base style when the component mounts,
+// the "to" is automatically decided with what we define in the component's code
+@keyframes appear {
+  from {
+    background-color: white;
+  }
+}
+
+.align-result-pim {
+  & fieldset {
+    float: right;
+
+    & label {
+      display: flex;
+    }
+  }
+
+  &__matrix {
+    min-width: 100%;
+    display: grid;
+    align-items: center;
+    gap: 0.5ch;
+  }
+
+  &__name {
+    padding: 1ch;
+    justify-self: start;
+    background-color: transparent;
+
+    &--hovered {
+      background-color: $colour-gainsborough;
+    }
+  }
+
+  &__cell {
+    border-radius: 0.5ch;
+    border: 1px solid transparent;
+    // to center the inner text
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bolder;
+    color: white;
+
+    // animation on mount
+    animation-duration: 100ms;
+    animation-name: appear;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: backwards;
+
+    // transition on contrast update
+    transition: background-color ease-in-out 100ms;
+
+    // CSS hack to have 1/1 aspect-ratio
+    &::before {
+      content: '';
+      padding-bottom: 100%; // meaning, 100% of the width to bottom padding
+    }
+
+    &--dark {
+      color: black;
+    }
+
+    &--hovered {
+      border-color: $colour-medium-turquoise;
+    }
+
+    // combine both modifiers for classes on the same element
+    &--dark#{&}--hovered {
+      border-color: $colour-sapphire-blue;
+    }
+  }
+}
