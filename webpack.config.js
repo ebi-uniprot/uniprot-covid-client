@@ -9,6 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (env, argv) => {
   const isDev = argv.mode === 'development';
   const isLiveReload = !!argv.liveReload;
+  const isTest = env.TEST;
 
   let publicPath = '/';
   if (env.PUBLIC_PATH) {
@@ -32,6 +33,7 @@ module.exports = (env, argv) => {
       chunkFilename: '[name].[chunkhash:6].js',
     },
     devtool: (() => {
+      if (isTest) return;
       if (isLiveReload) return 'inline-sourcemap';
       if (isDev) return 'eval-source-map';
       // else, prod
@@ -43,19 +45,56 @@ module.exports = (env, argv) => {
         react: path.resolve('./node_modules/react'),
         'react-dom': path.resolve('./node_modules/react-dom'),
         'react-router-dom': path.resolve('./node_modules/react-router-dom'),
+        redux: path.resolve('./node_modules/redux'),
+        // replace all usage of specific lodash submodules (from dependencies)
+        // with their corresponding ES modules from lodash-es (less duplication)
+        // (just looked at node_modules to see what packages were used, but
+        // didn't distinguish between used by devDeps or not)
+        'lodash._reinterpolate': path.resolve(
+          './node_modules/lodash-es/_reInterpolate'
+        ),
+        'lodash.camelcase': path.resolve('./node_modules/lodash-es/camelCase'),
+        'lodash.clonedeep': path.resolve('./node_modules/lodash-es/cloneDeep'),
+        'lodash.forin': path.resolve('./node_modules/lodash-es/forIn'),
+        'lodash.get': path.resolve('./node_modules/lodash-es/get'),
+        'lodash.isempty': path.resolve('./node_modules/lodash-es/isEmpty'),
+        'lodash.isplainobject': path.resolve(
+          './node_modules/lodash-es/isPlainObject'
+        ),
+        'lodash.memoize': path.resolve('./node_modules/lodash-es/memoize'),
+        'lodash.pickby': path.resolve('./node_modules/lodash-es/pickBy'),
+        'lodash.set': path.resolve('./node_modules/lodash-es/set'),
+        'lodash.sortby': path.resolve('./node_modules/lodash-es/sortBy'),
+        'lodash.template': path.resolve('./node_modules/lodash-es/template'),
+        'lodash.templatesettings': path.resolve(
+          './node_modules/lodash-es/templateSettings'
+        ),
+        'lodash.unset': path.resolve('./node_modules/lodash-es/unset'),
       },
       symlinks: false,
     },
     // MODULE
     module: {
-      // JavaScript and Typescript files
       rules: [
+        // JavaScript and Typescript files
         {
           test: /\.(js|jsx|tsx|ts)$/,
-          exclude: /node_modules/,
+          exclude: /node_modules\/((?!protvista-msa|react-msa-viewer).*)/,
           use: {
             loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
           },
+        },
+        /**
+         * Worker required for msa-react-viewer. Gustavo looking at
+         * making dependency optional
+         * */
+
+        {
+          test: /\.worker\.js$/,
+          use: { loader: 'worker-loader' },
         },
         // Stylesheets
         {
@@ -162,6 +201,7 @@ module.exports = (env, argv) => {
           exclude: [/fonts/],
         }),
       !isLiveReload &&
+        !isTest &&
         new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)({
           analyzerMode: 'disabled',
           generateStatsFile: true,
@@ -203,6 +243,11 @@ module.exports = (env, argv) => {
           franklin: {
             test: /[\\/]node_modules[\\/]franklin-sites[\\/]/,
             name: 'franklin',
+            chunks: 'all',
+          },
+          geneontology: {
+            test: /[\\/]node_modules[\\/]@geneontology|amigo2-instance-data[\\/]/,
+            name: 'geneontology',
             chunks: 'all',
           },
           react: {

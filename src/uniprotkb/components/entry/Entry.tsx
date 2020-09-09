@@ -19,35 +19,51 @@ import {
   DropdownButton,
   ProtVistaIcon,
 } from 'franklin-sites';
-import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
-import { RootAction } from '../../../app/state/rootInitialState';
-import uniProtKbConverter, {
-  EntryType,
-  UniProtkbInactiveEntryModel,
-} from '../../adapters/uniProtkbConverter';
-import { hasContent, hasExternalLinks } from '../../utils/utils';
-import EntrySection from '../../types/entrySection';
-import EntryMain from './EntryMain';
-import EntryExternalLinks from './EntryExternalLinks';
-import apiUrls from '../../config/apiUrls';
-import { fileFormatEntryDownload } from '../../types/resultsTypes';
-import EntryPublicationsFacets from './EntryPublicationsFacets';
-import EntryPublications from './EntryPublications';
-import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
-import BaseLayout from '../../../shared/components/layouts/BaseLayout';
-import ObsoleteEntryPage from '../../../shared/components/error-pages/ObsoleteEntryPage';
-import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
-import FeatureViewer from './FeatureViewer';
-import useDataApi from '../../../shared/hooks/useDataApi';
 
-import * as messagesActions from '../../../messages/state/messagesActions';
+import { fileFormatEntryDownload, FileFormat } from '../../types/resultsTypes';
+import EntrySection from '../../types/entrySection';
 import {
   MessageLevel,
   MessageFormat,
   MessageType,
   MessageTag,
 } from '../../../messages/types/messagesTypes';
+
+import FeatureViewer from './FeatureViewer';
+import EntryPublicationsFacets from './EntryPublicationsFacets';
+import EntryPublications from './EntryPublications';
+import EntryMain from './EntryMain';
+import EntryExternalLinks from './EntryExternalLinks';
+
+// import BlastButton from '../../../shared/components/action-buttons/Blast';
+// import AlignButton from '../../../shared/components/action-buttons/Align';
+// import AddToBasketButton from '../../../shared/components/action-buttons/AddToBasket';
+import SideBarLayout from '../../../shared/components/layouts/SideBarLayout';
+import ObsoleteEntryPage from '../../../shared/components/error-pages/ObsoleteEntryPage';
+import ErrorHandler from '../../../shared/components/error-pages/ErrorHandler';
+
+import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
+
+import { RootAction } from '../../../app/state/rootInitialState';
+import * as messagesActions from '../../../messages/state/messagesActions';
+
 import submitBlast from '../../../blast_website/BlastUtils';
+
+import uniProtKbConverter, {
+  EntryType,
+  UniProtkbInactiveEntryModel,
+  UniProtkbAPIModel,
+} from '../../adapters/uniProtkbConverter';
+// import {
+//   CommentType,
+//   AlternativeProductsComment,
+//   Isoform,
+// } from '../../types/commentTypes';
+
+import { hasContent, hasExternalLinks } from '../../utils';
+import apiUrls from '../../config/apiUrls';
+
+import useDataApi from '../../../shared/hooks/useDataApi';
 
 type MatchParams = {
   accession: string;
@@ -62,9 +78,9 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   const { path, params } = match;
   const { accession } = params;
 
-  const { loading, data, status, error, redirectedTo } = useDataApi(
-    apiUrls.entry(accession)
-  );
+  const { loading, data, status, error, redirectedTo } = useDataApi<
+    UniProtkbAPIModel
+  >(apiUrls.entry(accession));
 
   if (error) {
     return <ErrorHandler status={status} />;
@@ -75,15 +91,14 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   }
 
   if (data && data.entryType === EntryType.INACTIVE) {
-    const inactiveEntryData: UniProtkbInactiveEntryModel = data as UniProtkbInactiveEntryModel;
+    // TODO: check models, because I have no idea what I'm doing here 🤷🏽‍♂️
+    const inactiveEntryData = (data as unknown) as UniProtkbInactiveEntryModel;
 
     return (
-      <BaseLayout>
-        <ObsoleteEntryPage
-          accession={accession}
-          details={inactiveEntryData.inactiveReason}
-        />
-      </BaseLayout>
+      <ObsoleteEntryPage
+        accession={accession}
+        details={inactiveEntryData.inactiveReason}
+      />
     );
   }
 
@@ -113,12 +128,28 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
         : !hasContent(transformedData[section.name]),
   }));
 
+  // const listOfIsoformAccessions =
+  //   data.comments
+  //     ?.filter(
+  //       (comment) => comment.commentType === CommentType.ALTERNATIVE_PRODUCTS
+  //     )
+  //     ?.map((comment) =>
+  //       (comment as AlternativeProductsComment).isoforms.map(
+  //         (isoform) => (isoform as Isoform).isoformIds
+  //       )
+  //     )
+  //     ?.flat(2)
+  //     ?.filter(
+  //       (maybeAccession: string | undefined): maybeAccession is string =>
+  //         typeof maybeAccession === 'string'
+  //     ) || [];
+
   const displayMenuData = [
     {
       name: 'Entry',
       icon: <TremblIcon />,
       itemContent: (
-        <InPageNav sections={sections} rootElement=".base-layout__content" />
+        <InPageNav sections={sections} rootElement=".sidebar-layout__content" />
       ),
       path: '',
       exact: true,
@@ -148,18 +179,20 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
           >
             <div className="dropdown-menu__content">
               <ul>
-                {fileFormatEntryDownload.map((fileFormat) => (
-                  <li key={fileFormat}>
-                    <a
-                      href={apiUrls.entryDownload(
-                        transformedData.primaryAccession,
-                        fileFormat
-                      )}
-                    >
-                      {fileFormat}
-                    </a>
-                  </li>
-                ))}
+                {fileFormatEntryDownload
+                  .filter((format) => format !== FileFormat.rdfXml) // this download file type currently doesn't work so remove for now
+                  .map((fileFormat) => (
+                    <li key={fileFormat}>
+                      <a
+                        href={apiUrls.entryDownload(
+                          transformedData.primaryAccession,
+                          fileFormat
+                        )}
+                      >
+                        {fileFormat}
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </div>
           </DropdownButton>
@@ -205,38 +238,36 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   ];
 
   return (
-    <section id="entry-container">
-      <SideBarLayout
-        sidebar={
-          <DisplayMenu
-            data={displayMenuData}
-            title={`Publications for ${accession}`}
-          />
-        }
-        actionButtons={
-          <Switch>
-            {displayMenuData.map((displayItem) => (
-              <Route
-                path={`${path}/${displayItem.path}`}
-                render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
-                key={displayItem.name}
-              />
-            ))}
-          </Switch>
-        }
-      >
+    <SideBarLayout
+      sidebar={
+        <DisplayMenu
+          data={displayMenuData}
+          title={`Publications for ${accession}`}
+        />
+      }
+      actionButtons={
         <Switch>
           {displayMenuData.map((displayItem) => (
             <Route
               path={`${path}/${displayItem.path}`}
-              render={() => <Fragment>{displayItem.mainContent}</Fragment>}
+              render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
               key={displayItem.name}
-              exact={displayItem.exact}
             />
           ))}
         </Switch>
-      </SideBarLayout>
-    </section>
+      }
+    >
+      <Switch>
+        {displayMenuData.map((displayItem) => (
+          <Route
+            path={`${path}/${displayItem.path}`}
+            render={() => <Fragment>{displayItem.mainContent}</Fragment>}
+            key={displayItem.name}
+            exact={displayItem.exact}
+          />
+        ))}
+      </Switch>
+    </SideBarLayout>
   );
 };
 

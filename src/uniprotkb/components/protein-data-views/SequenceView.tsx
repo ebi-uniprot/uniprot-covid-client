@@ -2,6 +2,19 @@ import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { InfoList, Sequence, ExternalLink } from 'franklin-sites';
 import idx from 'idx';
 import { Link } from 'react-router-dom';
+
+import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
+import numberView, { Unit } from './NumberView';
+
+import { formatLargeNumber } from '../../../shared/utils/utils';
+import fetchData from '../../../shared/utils/fetchData';
+import submitBlast from '../../../blast_website/BlastUtils';
+
+import { SequenceUIModel } from '../../adapters/sequenceConverter';
+
+import externalUrls from '../../config/externalUrls';
+import apiUrls from '../../config/apiUrls';
+
 import {
   Isoform,
   SequenceCautionComment,
@@ -9,14 +22,7 @@ import {
   RNAEditingComment,
   AlternativeProductsComment,
 } from '../../types/commentTypes';
-import apiUrls from '../../config/apiUrls';
-import fetchData from '../../../shared/utils/fetchData';
-import { formatLargeNumber } from '../../../shared/utils/utils';
-import { SequenceUIModel } from '../../adapters/sequenceConverter';
-import UniProtKBEvidenceTag from './UniProtKBEvidenceTag';
-import numberView, { Unit } from './NumberView';
-import externalUrls from '../../config/externalUrls';
-import submitBlast from '../../../blast_website/BlastUtils';
+import { UniProtkbAPIModel } from '../../adapters/uniProtkbConverter';
 
 export type SequenceData = {
   value: string;
@@ -41,7 +47,7 @@ export const SequenceInfo: React.FC<{
   lastUpdateDate,
   displayLoadSequenceButton = true,
 }) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<UniProtkbAPIModel['sequence']>();
   const [isoformToFetch, setIsoformToFetch] = useState('');
 
   useEffect(() => {
@@ -49,8 +55,10 @@ export const SequenceInfo: React.FC<{
       return;
     }
     const fetchIsoformData = async () => {
-      const result = await fetchData(`${apiUrls.entry(isoformToFetch)}`);
-      setData(result.data.sequence);
+      const response = await fetchData<UniProtkbAPIModel>(
+        `${apiUrls.entry(isoformToFetch)}`
+      );
+      setData(response.data.sequence);
     };
 
     fetchIsoformData();

@@ -70,7 +70,7 @@ export type ProcessedFeature = {
   sequence?: string;
 };
 
-const processData = (
+export const processFeaturesData = (
   data: FeatureData,
   sequence?: string
 ): ProcessedFeature[] =>
@@ -100,7 +100,7 @@ const FeaturesView: React.FC<FeatureProps> = ({
   loadWebComponent('protvista-sequence', ProtvistaSequence);
   loadWebComponent('protvista-navigation', ProtvistaNavigation);
 
-  const processedData = processData(features, sequence);
+  const processedData = processFeaturesData(features, sequence);
 
   const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => ({
     type: {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 import React, { Fragment } from 'react';
 import { ExpandableList, Sequence } from 'franklin-sites';
 import idx from 'idx';
@@ -133,7 +133,7 @@ ColumnConfiguration.set(Column.proteinName, {
     const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
       proteinNamesData && (
-        <ProteinNamesView proteinNames={proteinNamesData} isCompact />
+        <ProteinNamesView proteinNames={proteinNamesData} noTitles />
       )
     );
   },
@@ -144,7 +144,7 @@ ColumnConfiguration.set(Column.geneNames, {
   render: (data) => {
     const { geneNamesData } = data[EntrySection.NamesAndTaxonomy];
     return (
-      geneNamesData && <GeneNamesView geneNamesData={geneNamesData} isCompact />
+      geneNamesData && <GeneNamesView geneNamesData={geneNamesData} noTitles />
     );
   },
 });
@@ -253,18 +253,6 @@ ColumnConfiguration.set(Column.organismId, {
   render: (data) => {
     const { organismData } = data[EntrySection.NamesAndTaxonomy];
     return organismData && <OrganismId taxonId={organismData.taxonId} />;
-  },
-});
-
-ColumnConfiguration.set(Column.proteinName, {
-  label: 'Protein names',
-  render: (data) => {
-    const { proteinNamesData } = data[EntrySection.NamesAndTaxonomy];
-    return (
-      proteinNamesData && (
-        <ProteinNamesView proteinNames={proteinNamesData} isCompact />
-      )
-    );
   },
 });
 

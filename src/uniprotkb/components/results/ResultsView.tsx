@@ -1,25 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import ColumnConfiguration from '../../config/ColumnConfiguration';
-import { SortDirection } from '../../types/resultsTypes';
+
 import UniProtKBCard from './UniProtKBCard';
+
 import uniProtKbConverter, {
   UniProtkbUIModel,
   UniProtkbAPIModel,
 } from '../../adapters/uniProtkbConverter';
+
 import { ViewMode } from '../../state/resultsInitialState';
-import { SortableColumn, Column } from '../../types/columnTypes';
-import './styles/warning.scss';
-import './styles/results-view.scss';
+
+import apiUrls, { getAPIQueryUrl } from '../../config/apiUrls';
+import ColumnConfiguration from '../../config/ColumnConfiguration';
+
+import useDataApi from '../../../shared/hooks/useDataApi';
+
+import getNextUrlFromResponse from '../../utils/queryUtils';
 import {
   getParamsFromURL,
   getLocationObjForParams,
   getSortableColumnToSortColumn,
 } from '../../utils/resultsUtils';
-import apiUrls, { getAPIQueryUrl } from '../../config/apiUrls';
-import useDataApi from '../../../shared/hooks/useDataApi';
-import getNextUrlFromResponse from '../../utils/queryUtils';
+
+import { SortDirection, ReceivedFieldData } from '../../types/resultsTypes';
+import { SortableColumn, Column } from '../../types/columnTypes';
+
+import './styles/warning.scss';
+import './styles/results-view.scss';
 
 type ResultsTableProps = {
   selectedEntries: string[];
@@ -59,14 +67,29 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     Map<Column, string>
   >();
 
-  const { data, headers } = useDataApi(url);
-  const { data: dataResultFields } = useDataApi(apiUrls.resultsFields);
+  const { data, headers } = useDataApi<{ results: UniProtkbAPIModel[] }>(url);
+  const { data: dataResultFields } = useDataApi<ReceivedFieldData>(
+    apiUrls.resultsFields
+  );
   // TODO handle error
 
+  const prevViewMode = useRef<ViewMode>();
   useEffect(() => {
-    if (!data) return;
+    prevViewMode.current = viewMode;
+  });
+
+  useEffect(() => {
+    setAllResults([]);
+    setMetaData({ total: 0, nextUrl: undefined });
+    setUrl(initialApiUrl);
+  }, [initialApiUrl]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
     const { results } = data;
-    setAllResults(allRes => [...allRes, ...results]);
+    setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -83,7 +106,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   if (
     allResults.length === 0 ||
     !sortableColumnToSortColumn ||
-    sortableColumnToSortColumn.size === 0
+    sortableColumnToSortColumn.size === 0 ||
+    prevViewMode.current !== viewMode
   ) {
     return <Loader />;
   }
@@ -103,13 +127,13 @@ const ResultsView: React.FC<ResultsTableProps> = ({
         : SortDirection.descend;
 
     history.push(
-      getLocationObjForParams(
-        '/uniprotkb',
+      getLocationObjForParams({
+        pathname: '/uniprotkb',
         query,
         selectedFacets,
-        sortableColumn,
-        updatedSortDirection
-      )
+        sortColumn: sortableColumn,
+        sortDirection: updatedSortDirection,
+      })
     );
   };
 
@@ -136,7 +160,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = columns.map(columnName => {
+  const columnsToDisplay = columns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {

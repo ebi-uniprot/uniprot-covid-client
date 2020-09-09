@@ -16,18 +16,19 @@ exports[`Entry view should render 1`] = `
             class="uniprot-title"
           >
             <span
-              class="uniprot-title__status icon--unreviewed"
+              class="uniprot-title__status icon--reviewed"
+              title="This marks a reviewed entry"
             >
               <svg
                 fill="currentColor"
-                viewBox="0 0 400 512"
+                viewBox="0 0 426 512"
               >
                 <path
-                  d="M400 144H256V0l144 144zm-176 32V0H0v512h400V176H224z"
+                  d="M432 144H288V0l144 144zM113 404l66 35-13-74 54-52-74-11-33-67-33 67-74 11 53 52-12 74 66-35zm-81 88v20h200l-119-63-81 43zm114-190l-33-67-33 67-48 7v29l27 27-12 74 66-35 66 35-13-74 54-52-74-11zm110-126V0H32v269l21-3 60-121 60 121 133 19-97 94 23 133h200V176H256z"
                 />
               </svg>
             </span>
-            P21802 · uniprot id
+            P21802 · uniprot_id
           </span>
         </h2>
       </div>
@@ -35,13 +36,13 @@ exports[`Entry view should render 1`] = `
         class="card__content"
       >
         <div
-          class="info-list "
+          class="info-list"
         >
           <div
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -50,7 +51,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               rec full Name
             </div>
@@ -59,7 +60,7 @@ exports[`Entry view should render 1`] = `
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -68,7 +69,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               <div>
                 1.2.3.4
@@ -79,7 +80,7 @@ exports[`Entry view should render 1`] = `
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -88,7 +89,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               <a
                 class="external-link"
@@ -98,12 +99,17 @@ exports[`Entry view should render 1`] = `
               >
                 scientific name (common name)  (synonyms 1)
                 <svg
-                  fill="currentColor"
-                  viewBox="0 0 576 512"
+                  fill="none"
+                  viewBox="0 0 16 16"
                   width="12.5"
                 >
                   <path
-                    d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                    d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                    fill="currentColor"
                   />
                 </svg>
               </a>
@@ -113,7 +119,7 @@ exports[`Entry view should render 1`] = `
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -122,7 +128,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               <div
                 class="info-list info-list--compact"
@@ -131,7 +137,7 @@ exports[`Entry view should render 1`] = `
                   class="info-list__item"
                 >
                   <div
-                    class="info-list__item__title"
+                    class="info-list__title"
                   >
                     <h5
                       class="bold"
@@ -140,7 +146,7 @@ exports[`Entry view should render 1`] = `
                     </h5>
                   </div>
                   <div
-                    class="info-list__item__content"
+                    class="info-list__content"
                   >
                     <strong>
                       some Gene 
@@ -180,7 +186,7 @@ exports[`Entry view should render 1`] = `
                   class="info-list__item"
                 >
                   <div
-                    class="info-list__item__title"
+                    class="info-list__title"
                   >
                     <h5
                       class="bold"
@@ -189,7 +195,7 @@ exports[`Entry view should render 1`] = `
                     </h5>
                   </div>
                   <div
-                    class="info-list__item__content"
+                    class="info-list__content"
                   >
                     some Syn 
                     <button
@@ -227,7 +233,7 @@ exports[`Entry view should render 1`] = `
                   class="info-list__item"
                 >
                   <div
-                    class="info-list__item__title"
+                    class="info-list__title"
                   >
                     <h5
                       class="bold"
@@ -236,7 +242,7 @@ exports[`Entry view should render 1`] = `
                     </h5>
                   </div>
                   <div
-                    class="info-list__item__content"
+                    class="info-list__content"
                   >
                     some orf 
                     <button
@@ -274,7 +280,7 @@ exports[`Entry view should render 1`] = `
                   class="info-list__item"
                 >
                   <div
-                    class="info-list__item__title"
+                    class="info-list__title"
                   >
                     <h5
                       class="bold"
@@ -283,7 +289,7 @@ exports[`Entry view should render 1`] = `
                     </h5>
                   </div>
                   <div
-                    class="info-list__item__content"
+                    class="info-list__content"
                   >
                     some locus 
                     <button
@@ -324,7 +330,7 @@ exports[`Entry view should render 1`] = `
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -333,7 +339,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               1: Evidence at protein level
             </div>
@@ -342,7 +348,7 @@ exports[`Entry view should render 1`] = `
             class="info-list__item"
           >
             <div
-              class="info-list__item__title"
+              class="info-list__title"
             >
               <h5
                 class="bold"
@@ -351,7 +357,7 @@ exports[`Entry view should render 1`] = `
               </h5>
             </div>
             <div
-              class="info-list__item__content"
+              class="info-list__content"
             >
               <span
                 title="Annotation Score"
@@ -827,17 +833,69 @@ exports[`Entry view should render 1`] = `
               id="<UUID>"
             />
           </section>
+          <div
+            class="loader-container"
+          >
+            <svg
+              class="loader"
+              height="100"
+              viewBox="0 0 100 100"
+              width="100"
+            >
+              <g
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <path
+                  d="M9 50c6.833-10.667 13.667-16 20.5-16S43.167 39.333 50 50s13.667 16 20.5 16S84.167 60.667 91 50"
+                  stroke="#3ca3ca"
+                  stroke-linecap="square"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="9"
+                  cy="50"
+                  fill="#3ca3ca"
+                  r="6"
+                />
+                <circle
+                  cx="30"
+                  cy="34"
+                  fill="#3ca3ca"
+                  r="6"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  fill="#3ca3ca"
+                  r="6"
+                />
+                <circle
+                  cx="70"
+                  cy="66"
+                  fill="#3ca3ca"
+                  r="6"
+                />
+                <circle
+                  cx="91"
+                  cy="50"
+                  fill="#3ca3ca"
+                  r="6"
+                />
+              </g>
+            </svg>
+          </div>
           <h3>
             Enzyme and pathway databases
           </h3>
           <div
-            class="info-list info-list--columns "
+            class="info-list info-list--columns"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -846,7 +904,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -860,12 +918,17 @@ exports[`Entry view should render 1`] = `
                     >
                       Search...
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -902,13 +965,13 @@ exports[`Entry view should render 1`] = `
             Protein names
           </h3>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -917,7 +980,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 rec full Name 
                 <button
@@ -955,7 +1018,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -964,7 +1027,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 1.2.3.4 
                 <button
@@ -1002,7 +1065,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1011,7 +1074,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 recommended short name 
                 <button
@@ -1049,7 +1112,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1058,7 +1121,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -1133,7 +1196,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1142,7 +1205,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -1161,7 +1224,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1170,7 +1233,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -1214,7 +1277,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1223,7 +1286,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 biotech 
                 <button
@@ -1261,7 +1324,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1270,14 +1333,14 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               />
             </div>
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1286,7 +1349,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               />
             </div>
           </div>
@@ -1294,13 +1357,13 @@ exports[`Entry view should render 1`] = `
             Gene names
           </h3>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1309,7 +1372,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 some Gene 
                 <button
@@ -1347,7 +1410,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1356,7 +1419,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 some Syn 
                 <button
@@ -1394,7 +1457,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1403,7 +1466,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 some orf 
                 <button
@@ -1441,7 +1504,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1450,7 +1513,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 some locus 
                 <button
@@ -1489,13 +1552,13 @@ exports[`Entry view should render 1`] = `
             Organism names
           </h3>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1504,7 +1567,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <a
                   class="external-link"
@@ -1514,12 +1577,17 @@ exports[`Entry view should render 1`] = `
                 >
                   scientific name (common name)
                   <svg
-                    fill="currentColor"
-                    viewBox="0 0 576 512"
+                    fill="none"
+                    viewBox="0 0 16 16"
                     width="12.5"
                   >
                     <path
-                      d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                      d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                      fill="currentColor"
                     />
                   </svg>
                 </a>
@@ -1558,7 +1626,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1567,7 +1635,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <a
                   class="external-link"
@@ -1577,12 +1645,17 @@ exports[`Entry view should render 1`] = `
                 >
                   9606
                   <svg
-                    fill="currentColor"
-                    viewBox="0 0 576 512"
+                    fill="none"
+                    viewBox="0 0 16 16"
                     width="12.5"
                   >
                     <path
-                      d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                      d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                      fill="currentColor"
                     />
                   </svg>
                 </a>
@@ -1592,7 +1665,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1601,7 +1674,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 lineage 1
               </div>
@@ -1610,7 +1683,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1619,7 +1692,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <p>
                   <a
@@ -1630,12 +1703,17 @@ exports[`Entry view should render 1`] = `
                   >
                     scientific name (common name)  (synonyms 1)
                     <svg
-                      fill="currentColor"
-                      viewBox="0 0 576 512"
+                      fill="none"
+                      viewBox="0 0 16 16"
                       width="12.5"
                     >
                       <path
-                        d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                        d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                        fill="currentColor"
                       />
                     </svg>
                   </a>
@@ -1838,13 +1916,13 @@ exports[`Entry view should render 1`] = `
             />
           </span>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1853,7 +1931,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -1868,7 +1946,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1877,7 +1955,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 some description
               </div>
@@ -1886,7 +1964,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -1895,7 +1973,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <a
                   class="external-link"
@@ -1905,12 +1983,17 @@ exports[`Entry view should render 1`] = `
                 >
                   3124
                   <svg
-                    fill="currentColor"
-                    viewBox="0 0 576 512"
+                    fill="none"
+                    viewBox="0 0 16 16"
                     width="12.5"
                   >
                     <path
-                      d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                      d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                      fill="currentColor"
                     />
                   </svg>
                 </a>
@@ -2053,7 +2136,9 @@ exports[`Entry view should render 1`] = `
               length="10"
               sequence="SAPSQDFMRF"
             />
-            <protvista-datatable />
+            <protvista-datatable
+              filter-scroll="true"
+            />
             <div
               class="evidence-tag-content false"
             />
@@ -2083,8 +2168,11 @@ exports[`Entry view should render 1`] = `
         >
           <interaction-viewer
             accession="P21802"
+            style="display: block; min-height: 6em;"
           />
-          <protvista-datatable />
+          <protvista-datatable
+            filter-scroll="true"
+          />
         </div>
       </section>
     </div>
@@ -2112,13 +2200,13 @@ exports[`Entry view should render 1`] = `
             3D structure databases
           </h3>
           <div
-            class="info-list info-list--columns "
+            class="info-list info-list--columns"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2127,7 +2215,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -2141,12 +2229,17 @@ exports[`Entry view should render 1`] = `
                     >
                       Search...
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -2159,7 +2252,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2168,7 +2261,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -2182,12 +2275,17 @@ exports[`Entry view should render 1`] = `
                     >
                       Submit a new modelling project...
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -2224,13 +2322,13 @@ exports[`Entry view should render 1`] = `
             Keywords
           </h3>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2239,7 +2337,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <a
                   href="//www.uniprot.org/keywords/KW-11111"
@@ -2253,13 +2351,13 @@ exports[`Entry view should render 1`] = `
             Family and domain databases
           </h3>
           <div
-            class="info-list info-list--columns "
+            class="info-list info-list--columns"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2268,7 +2366,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -2282,12 +2380,17 @@ exports[`Entry view should render 1`] = `
                     >
                       Search...
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -2300,7 +2403,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2309,7 +2412,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -2323,12 +2426,17 @@ exports[`Entry view should render 1`] = `
                     >
                       Search...
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -2362,13 +2470,13 @@ exports[`Entry view should render 1`] = `
           class="card__content"
         >
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2377,7 +2485,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 Fragment
               </div>
@@ -2404,13 +2512,13 @@ exports[`Entry view should render 1`] = `
             isoID1
           </h3>
           <div
-            class="info-list "
+            class="info-list"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2419,7 +2527,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 name
               </div>
@@ -2428,7 +2536,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2437,7 +2545,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 syn value
               </div>
@@ -2446,7 +2554,7 @@ exports[`Entry view should render 1`] = `
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2455,7 +2563,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 value1
               </div>
@@ -2482,12 +2590,17 @@ exports[`Entry view should render 1`] = `
             >
               sequence
               <svg
-                fill="currentColor"
-                viewBox="0 0 576 512"
+                fill="none"
+                viewBox="0 0 16 16"
                 width="12.5"
               >
                 <path
-                  d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                  d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                  fill="currentColor"
                 />
               </svg>
             </a>
@@ -2642,13 +2755,13 @@ exports[`Entry view should render 1`] = `
             Genome annotation databases
           </h3>
           <div
-            class="info-list info-list--columns "
+            class="info-list info-list--columns"
           >
             <div
               class="info-list__item"
             >
               <div
-                class="info-list__item__title"
+                class="info-list__title"
               >
                 <h5
                   class="bold"
@@ -2657,7 +2770,7 @@ exports[`Entry view should render 1`] = `
                 </h5>
               </div>
               <div
-                class="info-list__item__content"
+                class="info-list__content"
               >
                 <ul
                   class="expandable-list no-bullet"
@@ -2671,12 +2784,17 @@ exports[`Entry view should render 1`] = `
                     >
                       id value
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>
@@ -2689,12 +2807,17 @@ exports[`Entry view should render 1`] = `
                     >
                       description value
                       <svg
-                        fill="currentColor"
-                        viewBox="0 0 576 512"
+                        fill="none"
+                        viewBox="0 0 16 16"
                         width="12.5"
                       >
                         <path
-                          d="M576 24v128c0 21-26 32-41 17l-36-36-243 244c-10 9-25 9-34 0l-23-23c-9-9-9-24 0-34L443 77l-36-36c-15-15-4-41 17-41h128c13 0 24 11 24 24zM407 271l-16 16a24 24 0 00-7 17v144H64V128h264a24 24 0 0017-7l16-16c15-15 4-41-17-41H48C21 64 0 85 0 112v352c0 27 21 48 48 48h352c27 0 48-21 48-48V288c0-22-26-32-41-17z"
+                          d="M16 0h-6v2h3.071L7 8.071l1.414 1.414L14 3.9V6h2V0z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M7 2H0v14h14V9h-2v5H2V4h5V2z"
+                          fill="currentColor"
                         />
                       </svg>
                     </a>

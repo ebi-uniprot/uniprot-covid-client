@@ -3,6 +3,7 @@ import { Loader } from 'franklin-sites';
 import ColumnSelectContainer from '../column-select/ColumnSelectContainer';
 import { FileFormat, fileFormatsWithColumns } from '../../types/resultsTypes';
 import { Column } from '../../types/columnTypes';
+
 import './styles/download.scss';
 
 type DownloadViewProps = {
@@ -59,12 +60,8 @@ const DownloadView: React.FC<DownloadViewProps> = ({
   }
   return (
     <Fragment>
-      <form
-        onSubmit={onSubmit}
-        className="download"
-        data-testid="download-form"
-      >
-        <h3>Download</h3>
+      <form onSubmit={onSubmit} data-testid="download-form">
+        <h2>Download</h2>
         <label htmlFor="data-selection-false">
           <input
             id="data-selection-false"
@@ -89,21 +86,23 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           Download all ({totalNumberResults})
         </label>
         <fieldset>
-          <legend>Format</legend>
-          <select
-            id="file-format-select"
-            data-testid="file-format-select"
-            value={fileFormat}
-            onChange={onFileFormatChange}
-          >
-            {Object.values(FileFormat)
-              .filter((format) => format !== FileFormat.rdfXml) // this download file type currently doesn't work so remove for now
-              .map((format) => (
-                <option value={format} key={format}>
-                  {format}
-                </option>
-              ))}
-          </select>
+          <label>
+            Format
+            <select
+              id="file-format-select"
+              data-testid="file-format-select"
+              value={fileFormat}
+              onChange={onFileFormatChange}
+            >
+              {Object.values(FileFormat)
+                .filter((format) => format !== FileFormat.rdfXml) // this download file type currently doesn't work so remove for now
+                .map((format) => (
+                  <option value={format} key={format}>
+                    {format}
+                  </option>
+                ))}
+            </select>
+          </label>
         </fieldset>
         <fieldset>
           <legend>Compressed</legend>
@@ -139,7 +138,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
             />
           </fieldset>
         )}
-        <div className="button-group customise-table--cancel-submit-buttons">
+        <section className="button-group side-panel__button-row">
           <button className="button secondary" type="button" onClick={onCancel}>
             Cancel
           </button>
@@ -153,7 +152,7 @@ const DownloadView: React.FC<DownloadViewProps> = ({
           <button className="button" type="submit">
             Download
           </button>
-        </div>
+        </section>
       </form>
       {previewNode}
     </Fragment>

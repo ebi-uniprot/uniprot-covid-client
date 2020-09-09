@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import joinUrl from 'url-join';
+
 import {
   getApiSortDirection,
   SortDirection,
@@ -9,6 +10,7 @@ import {
   fileFormatToUrlParameter,
 } from '../types/resultsTypes';
 import { SortableColumn } from '../types/columnTypes';
+import { BlastFacet } from '../../tools/blast/types/blastResults';
 
 const devPrefix = 'https://wwwdev.ebi.ac.uk';
 const prodPrefix = 'https://www.ebi.ac.uk';
@@ -52,6 +54,8 @@ const apiUrls = {
   search: joinUrl(covidPrefix, '/uniprotkb/search'),
   download: joinUrl(covidPrefix, '/uniprotkb/stream'),
   variation: joinUrl(prodPrefix, '/proteins/api/variation'),
+  features: joinUrl(prodPrefix, '/proteins/api/features'),
+  accessions: joinUrl(devPrefix, '/uniprot/api/uniprotkb/accessions'),
 
   entry: (accession: string) =>
     joinUrl(covidPrefix, '/uniprotkb/accession', accession),
@@ -68,6 +72,7 @@ const apiUrls = {
       : `${apiUrls.entry(accession)}.${fileFormatToUrlParameter.get(format)}`,
   entryPublications: (accession: string) =>
     joinUrl(covidPrefix, '/uniprotkb/accession', accession, '/publications'),
+  organismSuggester: '/uniprot/api/suggester?dict=organism&query=?',
 };
 
 export default apiUrls;
@@ -84,45 +89,123 @@ export const createFacetsQueryString = (facets: SelectedFacet[]) =>
    * Single word values shouldn't have double quotes as they can be boolean.
    * Range queries (/^\[.*]$/) should not have double quotes either.
    * */
-  facets.reduce(
-    (queryAccumulator, facet) =>
-      `${queryAccumulator} AND (${facet.name}:${
-        facet.value.indexOf(' ') >= 0 && !facet.value.match(/^\[.*\]$/)
-          ? `"${facet.value}"`
-          : facet.value
-      })`,
-    ''
-  );
+  facets
+    .map(
+      (facet) =>
+        `(${facet.name}:${
+          facet.value.indexOf(' ') >= 0 && !facet.value.match(/^\[.*\]$/)
+            ? `"${facet.value}"`
+            : facet.value
+        })`
+    )
+    .join(' AND ');
 
 export const createAccessionsQueryString = (accessions: string[]) =>
-  accessions.map((accession) => `accession:${accession}`).join(' OR ');
+  accessions
+    .map((accession) => `accession:${accession}`)
+    .sort() // to improve possible cache hit
+    .join(' OR ');
 
+const defaultFacets = [
+  'reviewed',
+  'model_organism',
+  'other_organism',
+  'proteins_with',
+  'existence',
+  'annotation_score',
+];
+// TODO: should probably change those params to an object
 export const getAPIQueryUrl = (
   query: string,
-  columns: string[] | null,
-  selectedFacets: SelectedFacet[],
+  columns: string[] = [],
+  selectedFacets: SelectedFacet[] = [],
   sortColumn: SortableColumn | undefined = undefined,
-  sortDirection: SortDirection | undefined = SortDirection.ascend
-) =>
-  `${apiUrls.search}?${queryString.stringify({
-    query: `${query}${createFacetsQueryString(selectedFacets)}`,
-    fields: columns && columns.join(','),
-    facets:
-      'reviewed,model_organism,other_organism,proteins_with,existence,annotation_score',
+  sortDirection: SortDirection | undefined = SortDirection.ascend,
+  facets: string[] = defaultFacets,
+  size?: number
+) => {
+  return `${apiUrls.search}?${queryString.stringify({
+    size,
+    query: `${[query || '*', createFacetsQueryString(selectedFacets)]
+      .filter(Boolean)
+      .join(' AND ')}`,
+    fields: (columns && columns.join(',')) || undefined,
+    facets: facets.join(',') || undefined,
     sort:
       sortColumn &&
       `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
   })}`;
+};
 
-export const getUniProtPublicationsQueryUrl = (
-  accession: string,
-  selectedFacets: SelectedFacet[]
-) =>
+const localBlastFacets = Object.values(BlastFacet) as string[];
+const excludeLocalBlastFacets = ({ name }: SelectedFacet) =>
+  !localBlastFacets.includes(name);
+
+type GetOptions = {
+  columns?: string[];
+  selectedFacets?: SelectedFacet[];
+  sortColumn?: SortableColumn;
+  sortDirection?: SortDirection;
+  facets?: string[];
+  size?: number;
+};
+
+export const getFeaturesURL = (accessions?: string[]) => {
+  if (!(accessions && accessions.length)) {
+    return null;
+  }
+  return `${apiUrls.features}?${queryString.stringify({
+    // sort to improve possible cache hit
+    accession: Array.from(accessions).sort().join(','),
+  })}`;
+};
+
+export const getAccessionsURL = (
+  accessions?: string[],
+  {
+    columns = [],
+    selectedFacets = [],
+    sortColumn = undefined,
+    sortDirection = SortDirection.ascend,
+    facets = defaultFacets,
+    size,
+  }: GetOptions = {}
+) => {
+  if (!(accessions && accessions.length)) {
+    return null;
+  }
+  return `${apiUrls.accessions}?${queryString.stringify({
+    size,
+    // sort to improve possible cache hit
+    accessions: Array.from(accessions).sort().join(','),
+    facetFilter:
+      createFacetsQueryString(selectedFacets.filter(excludeLocalBlastFacets)) ||
+      undefined,
+    fields: (columns && columns.join(',')) || undefined,
+    facets: facets.join(',') || undefined,
+    sort:
+      sortColumn &&
+      `${sortColumn} ${getApiSortDirection(SortDirection[sortDirection])}`,
+  })}`;
+};
+
+type GetUniProtPublicationsQueryUrl = {
+  accession: string;
+  selectedFacets: SelectedFacet[];
+  size?: number;
+};
+export const getUniProtPublicationsQueryUrl = ({
+  accession,
+  selectedFacets,
+  size,
+}: GetUniProtPublicationsQueryUrl) =>
   `${apiUrls.entryPublications(accession)}?${queryString.stringify({
     facets: 'source,category,study_type',
-    query: selectedFacets
-      .map((facet) => `(${facet.name}:"${facet.value}")`)
-      .join(' AND '),
+    query:
+      selectedFacets
+        .map((facet) => `(${facet.name}:"${facet.value}")`)
+        .join(' AND ') || undefined,
+    size,
   })}`;
 
 export const getDownloadUrl = ({
@@ -195,3 +278,6 @@ export const getPublicationsURL = (ids: string[]) =>
   `${literatureApiUrls.literature}/search?query=(${ids
     .map((id) => `id:${id}`)
     .join(' OR ')})`;
+
+export const getProteinsApiUrl = (accession: string) =>
+  `https://www.ebi.ac.uk/proteins/api/proteins/${accession}`;

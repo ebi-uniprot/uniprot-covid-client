@@ -1,0 +1,571 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlastForm test Renders the form 1`] = `
+<DocumentFragment>
+  <div
+    class="page-intro"
+  >
+    <h2>
+      <button
+        class="dropdown"
+        type="button"
+      >
+        <svg
+          fill="currentColor"
+          height="20"
+          viewBox="0 0 512 311"
+          width="20"
+        >
+          <path
+            d="M236 302L9 75a28 28 0 010-40L35 9C46-2 64-2 75 9l181 180L437 9c11-11 29-11 40 0l26 26c11 11 11 29 0 40L276 302a28 28 0 01-40 0z"
+          />
+        </svg>
+         BLAST
+      </button>
+    </h2>
+    <div
+      class="intro-content false"
+    >
+      <p>
+        The Basic Local Alignment Search Tool (BLAST) finds regions of local similarity between sequences, which can be used to infer functional and evolutionary relationships between sequences as well as help identify members of gene families.
+      </p>
+      <ul>
+        <li>
+          Start by providing a UniProt ID (UniProtKB accession/UniProtKB entry name/UniParc accession) into the input form OR a protein/nucleotide sequence.
+        </li>
+        <li>
+          Optionally, you may change the Target database your BLAST will be run against or restrict by Taxonomy using the Taxonomy ID or name.
+        </li>
+        <li>
+          Further advanced options can be used to change BLAST algorithm parameters.
+        </li>
+        <li>
+          Your BLAST job will be provided a default name. You may edit this name as per your choice.
+        </li>
+        <li>
+          Finally, click the "Run BLAST" button to submit your BLAST job.
+        </li>
+      </ul>
+      <div
+        class="intro-links"
+      >
+        <a
+          href="/"
+        >
+          Help
+        </a>
+        <a
+          href="/"
+        >
+          Video
+        </a>
+      </div>
+    </div>
+  </div>
+  <form>
+    <fieldset>
+      <section
+        class="tools-form-section__item"
+      >
+        <legend>
+          Find a protein sequence to run BLAST sequence similarity search by UniProt ID (e.g. P05067 or A4_HUMAN or UPI0000000001).
+        </legend>
+        <div
+          class="import-sequence-section"
+        >
+          <span
+            class="search-input"
+          >
+            <input
+              data-testid="search-input"
+              placeholder="UniProt IDs"
+              type="text"
+              value=""
+            />
+            <span
+              class="search-input__suffix"
+              data-testid="search-input-suffix"
+              role="presentation"
+            >
+              <svg
+                fill="currentColor"
+                height="14"
+                viewBox="0 0 512 512"
+                width="14"
+              >
+                <path
+                  d="M505 443L405 343c-4-4-10-7-17-7h-16a208 208 0 10-36 36v16c0 7 3 13 7 17l100 100c9 9 24 9 34 0l28-28c9-10 9-25 0-34zM208 336a128 128 0 110-256 128 128 0 010 256z"
+                />
+              </svg>
+            </span>
+          </span>
+        </div>
+      </section>
+    </fieldset>
+    <section
+      class="text-block"
+    >
+      <strong>
+        OR
+      </strong>
+    </section>
+    <fieldset>
+      <section
+        class="text-block"
+      >
+        <legend>
+          Enter one or more sequences (20 max). You may also
+          <label
+            class="tools-form-section__file-input"
+          >
+            load from a text file
+            <input
+              type="file"
+            />
+          </label>
+          .
+        </legend>
+        <textarea
+          class="sequence-submission-input"
+          data-testid="sequence-submission-input"
+          placeholder="Protein or nucleotide sequence(s) in FASTA format."
+          spellcheck="false"
+        />
+      </section>
+      <section
+        class="tools-form-section"
+      >
+        <section
+          class="tools-form-section__item"
+        >
+          <label
+            for="Target database"
+          >
+            Target database
+            <select>
+              <option
+                data-testid="Target database-uniprotkb_refprotswissprot"
+                value="uniprotkb_refprotswissprot"
+              >
+                UniProtKB reference proteomes + Swiss-Prot
+              </option>
+              <option
+                data-testid="Target database-uniprotkb"
+                value="uniprotkb"
+              >
+                UniProtKB
+              </option>
+              <option
+                data-testid="Target database-uniprotkb_pdb"
+                value="uniprotkb_pdb"
+              >
+                UniProtKB with 3D structure (PDB)
+              </option>
+              <option
+                data-testid="Target database-uniprotkb_reference_proteomes"
+                value="uniprotkb_reference_proteomes"
+              >
+                UniProtKB reference proteomes
+              </option>
+              <option
+                data-testid="Target database-uniprotkb_swissprot"
+                value="uniprotkb_swissprot"
+              >
+                UniProtKB Swiss-Prot
+              </option>
+              <option
+                data-testid="Target database-UniRef100"
+                value="UniRef100"
+              >
+                UniRef100
+              </option>
+              <option
+                data-testid="Target database-UniRef90"
+                value="UniRef90"
+              >
+                UniRef90
+              </option>
+              <option
+                data-testid="Target database-UniRef50"
+                value="UniRef50"
+              >
+                UniRef50
+              </option>
+              <option
+                data-testid="Target database-uniparc"
+                value="uniparc"
+              >
+                UniParc
+              </option>
+            </select>
+          </label>
+        </section>
+        <section
+          class="tools-form-section__item tools-form-section__item--taxon-select"
+        >
+          <label
+            for="5"
+          >
+            Restrict by taxonomy
+            <div
+              class="autocomplete-container"
+            >
+              <span
+                class="search-input"
+              >
+                <input
+                  data-testid="search-input"
+                  placeholder="Enter taxonomy names or tax IDs"
+                  type="text"
+                  value=""
+                />
+                <span
+                  class="search-input__suffix"
+                  data-testid="search-input-suffix"
+                  role="presentation"
+                >
+                  <svg
+                    fill="currentColor"
+                    height="14"
+                    viewBox="0 0 512 512"
+                    width="14"
+                  >
+                    <path
+                      d="M505 443L405 343c-4-4-10-7-17-7h-16a208 208 0 10-36 36v16c0 7 3 13 7 17l100 100c9 9 24 9 34 0l28-28c9-10 9-25 0-34zM208 336a128 128 0 110-256 128 128 0 010 256z"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <div
+                class="autocomplete-menu"
+              >
+                <div
+                  class="dropdown-menu__panel"
+                />
+              </div>
+            </div>
+          </label>
+        </section>
+        <section
+          class="tools-form-section__item tools-form-section__item--selected-taxon"
+        />
+      </section>
+      <section
+        class="tools-form-section"
+      >
+        <section
+          class="tools-form-section__item"
+        >
+          <label>
+            Name your BLAST job
+            <input
+              autocomplete="off"
+              maxlength="100"
+              name="title"
+              placeholder="my job title"
+              style="width: 2ch;"
+              type="text"
+              value=""
+            />
+          </label>
+        </section>
+      </section>
+      <details
+        class="tools-form-advanced"
+        open=""
+      >
+        <summary>
+          <span>
+            Advanced parameters
+          </span>
+        </summary>
+        <section
+          class="tools-form-section"
+        >
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Sequence type"
+            >
+              Sequence type
+              <select>
+                <option
+                  data-testid="Sequence type-protein"
+                  value="protein"
+                >
+                  Protein
+                </option>
+                <option
+                  data-testid="Sequence type-dna"
+                  value="dna"
+                >
+                  DNA/RNA
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Program"
+            >
+              Program
+              <select>
+                <option
+                  data-testid="Program-blastp"
+                  value="blastp"
+                >
+                  blastp
+                </option>
+                <option
+                  data-testid="Program-blastx"
+                  value="blastx"
+                >
+                  blastx
+                </option>
+                <option
+                  data-testid="Program-blastn"
+                  value="blastn"
+                >
+                  blastn
+                </option>
+                <option
+                  data-testid="Program-tblastx"
+                  value="tblastx"
+                >
+                  tblastx
+                </option>
+                <option
+                  data-testid="Program-tblastn"
+                  value="tblastn"
+                >
+                  tblastn
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="E-Threshold"
+            >
+              E-Threshold
+              <select>
+                <option
+                  data-testid="E-Threshold-1e-4"
+                  value="1e-4"
+                >
+                  0.0001
+                </option>
+                <option
+                  data-testid="E-Threshold-1e-3"
+                  value="1e-3"
+                >
+                  0.001
+                </option>
+                <option
+                  data-testid="E-Threshold-1e-2"
+                  value="1e-2"
+                >
+                  0.01
+                </option>
+                <option
+                  data-testid="E-Threshold-1e-1"
+                  value="1e-1"
+                >
+                  0.1
+                </option>
+                <option
+                  data-testid="E-Threshold-1.0"
+                  value="1.0"
+                >
+                  1
+                </option>
+                <option
+                  data-testid="E-Threshold-10"
+                  value="10"
+                >
+                  10
+                </option>
+                <option
+                  data-testid="E-Threshold-100"
+                  value="100"
+                >
+                  100
+                </option>
+                <option
+                  data-testid="E-Threshold-1000"
+                  value="1000"
+                >
+                  1000
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Matrix"
+            >
+              Matrix
+              <select>
+                <option
+                  data-testid="Matrix-auto"
+                  value="auto"
+                >
+                  Auto - PAM30
+                </option>
+                <option
+                  data-testid="Matrix-BLOSUM45"
+                  value="BLOSUM45"
+                >
+                  BLOSUM45
+                </option>
+                <option
+                  data-testid="Matrix-BLOSUM62"
+                  value="BLOSUM62"
+                >
+                  BLOSUM62
+                </option>
+                <option
+                  data-testid="Matrix-BLOSUM80"
+                  value="BLOSUM80"
+                >
+                  BLOSUM80
+                </option>
+                <option
+                  data-testid="Matrix-PAM70"
+                  value="PAM70"
+                >
+                  PAM70
+                </option>
+                <option
+                  data-testid="Matrix-PAM30"
+                  value="PAM30"
+                >
+                  PAM30
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Filter"
+            >
+              Filter
+              <select>
+                <option
+                  data-testid="Filter-F"
+                  value="F"
+                >
+                  None
+                </option>
+                <option
+                  data-testid="Filter-T"
+                  value="T"
+                >
+                  Filter low complexity regions
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Gapped"
+            >
+              Gapped
+              <select>
+                <option
+                  data-testid="Gapped-true"
+                  value="true"
+                >
+                  yes
+                </option>
+                <option
+                  data-testid="Gapped-false"
+                  value="false"
+                >
+                  no
+                </option>
+              </select>
+            </label>
+          </section>
+          <section
+            class="tools-form-section__item"
+          >
+            <label
+              for="Hits"
+            >
+              Hits
+              <select>
+                <option
+                  data-testid="Hits-50"
+                  value="50"
+                >
+                  50
+                </option>
+                <option
+                  data-testid="Hits-100"
+                  value="100"
+                >
+                  100
+                </option>
+                <option
+                  data-testid="Hits-250"
+                  value="250"
+                >
+                  250
+                </option>
+                <option
+                  data-testid="Hits-500"
+                  value="500"
+                >
+                  500
+                </option>
+                <option
+                  data-testid="Hits-750"
+                  value="750"
+                >
+                  750
+                </option>
+                <option
+                  data-testid="Hits-1000"
+                  value="1000"
+                >
+                  1000
+                </option>
+              </select>
+            </label>
+          </section>
+        </section>
+      </details>
+      <section
+        class="tools-form-section tools-form-section__main_actions"
+      >
+        <section
+          class="button-group tools-form-section__buttons"
+        >
+          <input
+            class="button secondary"
+            type="reset"
+          />
+          <button
+            class="button primary"
+            type="submit"
+          >
+            Run BLAST
+          </button>
+        </section>
+      </section>
+    </fieldset>
+  </form>
+</DocumentFragment>
+`;

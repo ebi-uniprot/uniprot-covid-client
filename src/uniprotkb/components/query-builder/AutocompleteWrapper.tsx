@@ -6,9 +6,11 @@ import { getSuggesterUrl } from '../../config/apiUrls';
 
 type Props = {
   url: string;
-  onSelect: Function;
+  onSelect: (path: string, id?: string) => void;
   title: string;
+  placeholder?: string;
   value?: string;
+  clearOnSelect?: boolean;
 };
 
 type Suggestion = {
@@ -16,7 +18,7 @@ type Suggestion = {
   id: string;
 };
 
-type Suggestions = {
+export type Suggestions = {
   dictionary: string;
   query: string;
   suggestions: Suggestion[];
@@ -25,6 +27,7 @@ type Suggestions = {
 type State = {
   data: SelectValue[];
   previousTextInputValue: string;
+  isLoading: boolean;
 };
 
 type SelectValue = {
@@ -52,7 +55,7 @@ class AutocompleteWrapper extends Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { data: [], previousTextInputValue: '' };
+    this.state = { data: [], previousTextInputValue: '', isLoading: false };
     this.id = v1();
   }
 
@@ -99,11 +102,14 @@ class AutocompleteWrapper extends Component<Props, State> {
   fetchOptions = (textInputValue: string) => {
     const { url } = this.props;
     const suggesterUrl = getSuggesterUrl(url, textInputValue);
-    fetchData(suggesterUrl)
-      .then(data => AutocompleteWrapper.prepareData(data.data.suggestions))
-      .then(data => this.setState({ data }))
+    this.setState({ isLoading: true });
+    fetchData<Suggestions>(suggesterUrl)
+      .then((response) =>
+        AutocompleteWrapper.prepareData(response.data.suggestions)
+      )
+      .then((data) => this.setState({ data, isLoading: false }))
       // eslint-disable-next-line no-console
-      .catch(e => console.error(e));
+      .catch((e) => console.error(e));
   };
 
   handleSelect = (inputValue: SelectValue | string) => {
@@ -116,8 +122,13 @@ class AutocompleteWrapper extends Component<Props, State> {
   };
 
   render() {
-    const { data } = this.state;
-    const { title, value } = this.props;
+    const { data, isLoading } = this.state;
+    const {
+      title,
+      value,
+      clearOnSelect = false,
+      placeholder = '',
+    } = this.props;
     return (
       <label htmlFor={this.id}>
         {title}
@@ -128,7 +139,10 @@ class AutocompleteWrapper extends Component<Props, State> {
           onChange={this.handleChange}
           filter={false}
           value={value}
+          placeholder={placeholder}
           minCharsToShowDropdown={minCharsToShowDropdown}
+          clearOnSelect={clearOnSelect}
+          isLoading={isLoading}
         />
       </label>
     );

@@ -65,10 +65,8 @@ export const getEntrySectionToDatabaseCategoryOrder = (
   databaseNameToCategory: Map<string, DatabaseCategory>
 ) => {
   const entrySectionToDatabaseCategoryOrder = new Map<EntrySection, string[]>();
-  // eslint-disable-next-line no-restricted-syntax
   for (const [entrySection, databaseNames] of entrySectionToDatabaseNames) {
     const uniqueCategories: DatabaseCategory[] = [];
-    // eslint-disable-next-line no-restricted-syntax
     for (const databaseName of databaseNames) {
       const databaseCategory = databaseNameToCategory.get(databaseName);
       if (databaseCategory && !uniqueCategories.includes(databaseCategory)) {

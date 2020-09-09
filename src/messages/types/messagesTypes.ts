@@ -13,7 +13,7 @@ export enum MessageFormat {
 }
 
 export enum MessageTag {
-  BLAST_JOB = 'BLAST_JOB',
+  JOB = 'JOB',
   DOWNTIME = 'DOWNTIME',
   REDIRECT = 'REDIRECT',
 }
@@ -27,4 +27,5 @@ export type MessageType = {
   dateExpired?: number;
   tag?: MessageTag;
   locations?: Location[];
+  omitAndDeleteAtLocations?: Location[];
 };

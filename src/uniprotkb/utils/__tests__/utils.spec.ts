@@ -1,4 +1,4 @@
-import { hasContent, transfromProperties, getPropertyValue } from '../utils';
+import { hasContent, transfromProperties, getPropertyValue } from '../index';
 import { PropertyKey } from '../../types/modelTypes';
 
 describe('Model Utils', () => {
