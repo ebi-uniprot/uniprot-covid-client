@@ -22,6 +22,7 @@ export type ProtvistaVariant = {
   begin: number;
   end: number;
   type: FeatureType.VARIANT;
+  ftId?: string;
   wildType: string;
   alternativeSequence: string;
   polyphenPrediction?: string;
@@ -115,15 +116,12 @@ const getColumnConfig = (evidenceTagCallback: FeaturesTableCallback) => {
     description: {
       label: 'Description',
       resolver: (d: ProtvistaVariant) => {
-        if (!d.description) {
-          return '';
-        }
-        const formatedDescription = formatVariantDescription(d.description);
-        return formatedDescription
-          ? formatedDescription.map(
-              (descriptionLine) => html` <p>${descriptionLine}</p> `
-            )
-          : '';
+        const id = d.ftId ? html`[Feature identifier]: ${d.ftId}` : undefined;
+        const description =
+          formatVariantDescription(d.description || '')?.map(
+            (descriptionLine) => html`<p>${descriptionLine}</p> `
+          ) || [];
+        return [id, ...description];
       },
     },
     somaticStatus: {
