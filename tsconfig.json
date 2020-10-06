@@ -21,5 +21,9 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "src/**/*.spec.ts*"]
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts*",
+    "src/shared/__test-helpers__/*.*"
+  ]
 }
