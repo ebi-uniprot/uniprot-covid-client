@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.(js|jsx|tsx|ts)$/,
-          exclude: /node_modules/,
+          exclude: /node_modules\/((?!protvista-uniprot).*)/,
           use: {
             loader: 'babel-loader',
           },
