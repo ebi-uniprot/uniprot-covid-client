@@ -74,7 +74,7 @@ const Results: FC<ResultsProps> = ({ namespace, location, tableColumns }) => {
   }
 
   const handleEntrySelection = (rowId: string): void => {
-    const filtered = selectedEntries.filter(id => id !== rowId);
+    const filtered = selectedEntries.filter((id) => id !== rowId);
     setSelectedEntries(
       filtered.length === selectedEntries.length
         ? [...selectedEntries, rowId]

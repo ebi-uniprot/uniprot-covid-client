@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DataTable, DataList, Loader } from 'franklin-sites';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ColumnConfiguration from '../../config/ColumnConfiguration';
@@ -66,7 +66,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   useEffect(() => {
     if (!data) return;
     const { results } = data;
-    setAllResults(allRes => [...allRes, ...results]);
+    setAllResults((allRes) => [...allRes, ...results]);
     setMetaData(() => ({
       total: headers['x-totalrecords'],
       nextUrl: getNextUrlFromResponse(headers.link),
@@ -80,10 +80,17 @@ const ResultsView: React.FC<ResultsTableProps> = ({
     );
   }, [dataResultFields]);
 
+  // Hacky way to wait for new data and re-render
+  const prevViewMode = useRef<ViewMode>(viewMode);
+  useEffect(() => {
+    prevViewMode.current = viewMode;
+  });
+
   if (
     allResults.length === 0 ||
     !sortableColumnToSortColumn ||
-    sortableColumnToSortColumn.size === 0
+    sortableColumnToSortColumn.size === 0 ||
+    prevViewMode.current !== viewMode
   ) {
     return <Loader />;
   }
@@ -136,7 +143,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
       </div>
     );
   } // viewMode === ViewMode.TABLE
-  const columnsToDisplay = columns.map(columnName => {
+  const columnsToDisplay = columns.map((columnName) => {
     const columnConfig = ColumnConfiguration.get(columnName);
     if (columnConfig) {
       return {
