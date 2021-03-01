@@ -185,7 +185,7 @@ export const getDownloadUrl = ({
 };
 
 export const literatureApiUrls = {
-  literature: joinUrl(devPrefix, '/uniprot/api/literature'),
+  literature: joinUrl(devPrefix, '/uniprot/api/citations'),
 };
 
 export const getPublicationURL = (id: string) =>
