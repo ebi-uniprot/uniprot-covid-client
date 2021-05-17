@@ -98,6 +98,7 @@ export type TemperatureDependenceComment = {
 
 export type CatalyticActivityComment = {
   commentType: CommentType.CATALYTIC_ACTIVITY;
+  molecule?: string;
   reaction?: {
     name: string;
     reactionCrossReferences?: { database: string; id: string }[];

@@ -407,10 +407,15 @@ exports[`Entry view should render 1`] = `
         <div
           class="card__content"
         >
-          <h3>
+          <h3
+            style="text-transform: capitalize;"
+          >
             catalytic activity
           </h3>
-          <span
+          <h5>
+            Isoform 3
+          </h5>
+          <div
             class="text-block"
           >
             <strong>
@@ -482,7 +487,7 @@ exports[`Entry view should render 1`] = `
               data-testid="evidence-tag-content"
               id="<UUID>"
             />
-          </span>
+          </div>
           <h3>
             cofactor
           </h3>

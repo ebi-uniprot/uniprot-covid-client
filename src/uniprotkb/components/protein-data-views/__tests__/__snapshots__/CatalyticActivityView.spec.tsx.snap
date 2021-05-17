@@ -2,10 +2,12 @@
 
 exports[`CatalyticActivityView component should render catalytic activity 1`] = `
 <DocumentFragment>
-  <h3>
+  <h3
+    style="text-transform: capitalize;"
+  >
     Catalytic activity
   </h3>
-  <span
+  <div
     class="text-block"
   >
     <strong>
@@ -82,13 +84,13 @@ exports[`CatalyticActivityView component should render catalytic activity 1`] = 
       id="<UUID>"
     />
      directions 
-  </span>
+  </div>
 </DocumentFragment>
 `;
 
 exports[`CatalyticActivityView component should render catalytic activity when comment does not have reactionCrossReferences 1`] = `
 <DocumentFragment>
-  <span
+  <div
     class="text-block"
   >
     <strong>
@@ -165,7 +167,7 @@ exports[`CatalyticActivityView component should render catalytic activity when c
       id="<UUID>"
     />
      directions 
-  </span>
+  </div>
 </DocumentFragment>
 `;
 
