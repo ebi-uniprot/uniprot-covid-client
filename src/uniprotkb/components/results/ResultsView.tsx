@@ -37,9 +37,8 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   location,
 }) => {
   const { search: queryParamFromUrl } = location;
-  const { query, selectedFacets, sortColumn, sortDirection } = getParamsFromURL(
-    queryParamFromUrl
-  );
+  const { query, selectedFacets, sortColumn, sortDirection } =
+    getParamsFromURL(queryParamFromUrl);
 
   const initialApiUrl = getAPIQueryUrl(
     query,
@@ -57,7 +56,7 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   const [allResults, setAllResults] = useState<UniProtkbAPIModel[]>([]);
   const [sortableColumnToSortColumn, setSortableColumnToSortColumn] = useState<
     Map<Column, string>
-  >();
+  >(new Map());
 
   const { data, headers } = useDataApi(url);
   const { data: dataResultFields } = useDataApi(apiUrls.resultsFields);
@@ -89,7 +88,6 @@ const ResultsView: React.FC<ResultsTableProps> = ({
   if (
     allResults.length === 0 ||
     !sortableColumnToSortColumn ||
-    sortableColumnToSortColumn.size === 0 ||
     prevViewMode.current !== viewMode
   ) {
     return <Loader />;
