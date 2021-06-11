@@ -194,8 +194,8 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
   let firstRheaId: number | null = null;
   return (
     <Fragment>
-      {title && <h3>{title}</h3>}
-      {comments.map(({ reaction, physiologicalReactions }) => {
+      {title && <h3 style={{ textTransform: 'capitalize' }}>{title}</h3>}
+      {comments.map(({ reaction, physiologicalReactions, molecule }) => {
         if (!reaction) {
           return null;
         }
@@ -211,26 +211,29 @@ const CatalyticActivityView: React.FC<CatalyticActivityProps> = ({
           firstRheaId = rheaId;
         }
         return (
-          <span className="text-block" key={reaction.ecNumber}>
-            <strong>{reaction.ecNumber}</strong>
-            {/* Need a link to search for EC in UniProtKB:
+          <>
+            {molecule && <h5>{molecule}</h5>}
+            <div className="text-block" key={reaction.ecNumber}>
+              <strong>{reaction.ecNumber}</strong>
+              {/* Need a link to search for EC in UniProtKB:
              https://www.ebi.ac.uk/panda/jira/browse/TRM-23597 */}
-            {` ${reaction.name}`}
-            {reaction.evidences && (
-              <UniProtKBEvidenceTag evidences={reaction.evidences} />
-            )}
-            {physiologicalReactions && physiologicalReactions.length && (
-              <ReactionDirection
-                physiologicalReactions={physiologicalReactions}
-              />
-            )}
-            {!!rheaId && (
-              <RheaReactionVisualizer
-                rheaId={rheaId}
-                show={rheaId === firstRheaId}
-              />
-            )}
-          </span>
+              {` ${reaction.name}`}
+              {reaction.evidences && (
+                <UniProtKBEvidenceTag evidences={reaction.evidences} />
+              )}
+              {physiologicalReactions && physiologicalReactions.length && (
+                <ReactionDirection
+                  physiologicalReactions={physiologicalReactions}
+                />
+              )}
+              {!!rheaId && (
+                <RheaReactionVisualizer
+                  rheaId={rheaId}
+                  show={rheaId === firstRheaId}
+                />
+              )}
+            </div>
+          </>
         );
       })}
     </Fragment>

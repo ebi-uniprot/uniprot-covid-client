@@ -189,7 +189,10 @@ exports[`ColumnConfiguration component should render all columns: Biotechnologic
 
 exports[`ColumnConfiguration component should render all columns: Catalytic Activity 1`] = `
 <DocumentFragment>
-  <span
+  <h5>
+    Isoform 3
+  </h5>
+  <div
     class="text-block"
   >
     <strong>
@@ -261,7 +264,7 @@ exports[`ColumnConfiguration component should render all columns: Catalytic Acti
       data-testid="evidence-tag-content"
       id="<UUID>"
     />
-  </span>
+  </div>
 </DocumentFragment>
 `;
 
