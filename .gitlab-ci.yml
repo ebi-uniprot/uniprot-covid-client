@@ -9,6 +9,7 @@ stages:
     - npm --version
     - yarn --version
     - yarn
+    - yarn rebuild-node-sass
 
 test:
   extends: .js
