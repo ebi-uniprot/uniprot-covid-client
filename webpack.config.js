@@ -4,6 +4,7 @@ const fs = require('fs');
 const { DefinePlugin } = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // some plugins are conditionally-loaded as they are also conditionally used.
 
 module.exports = (env, argv) => {
@@ -171,6 +172,10 @@ module.exports = (env, argv) => {
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash:6].css',
           chunkFilename: '[id].[contenthash:6].css',
+        }),
+      !isDev &&
+        new CopyPlugin({
+          patterns: [{ from: 'sitemap.txt' }],
         }),
     ].filter(Boolean),
     // END PLUGINS
