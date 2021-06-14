@@ -210,7 +210,7 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   return (
     <>
       <Helmet>
-        <title>{accession} - UniProt</title>
+        <title>{accession} - UniProtKB</title>
       </Helmet>
       <section id="entry-container">
         <SideBarLayout
