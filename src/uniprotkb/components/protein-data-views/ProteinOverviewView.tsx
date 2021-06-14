@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { InfoList } from 'franklin-sites';
 import idx from 'idx';
+import { Helmet } from 'react-helmet';
 import OrganismView from './OrganismView';
 import { UniProtkbUIModel } from '../../adapters/uniProtkbConverter';
 import EntrySection from '../../types/entrySection';
@@ -11,14 +12,13 @@ export const ProteinOverview: FC<{
   transformedData: UniProtkbUIModel;
 }> = ({ transformedData }) => {
   const { proteinExistence, annotationScore } = transformedData;
-  const { proteinNamesData, geneNamesData, organismData } = transformedData[
-    EntrySection.NamesAndTaxonomy
-  ];
+  const { proteinNamesData, geneNamesData, organismData } =
+    transformedData[EntrySection.NamesAndTaxonomy];
   const proteinName = idx(
     proteinNamesData,
-    o => o.recommendedName.fullName.value
+    (o) => o.recommendedName.fullName.value
   );
-  const ECnumbers = idx(proteinNamesData, o => o.recommendedName.ecNumbers);
+  const ECnumbers = idx(proteinNamesData, (o) => o.recommendedName.ecNumbers);
 
   const infoListData = [
     {
@@ -28,7 +28,8 @@ export const ProteinOverview: FC<{
     {
       title: 'EC number',
       content:
-        ECnumbers && ECnumbers.map(ec => <div key={ec.value}>{ec.value}</div>),
+        ECnumbers &&
+        ECnumbers.map((ec) => <div key={ec.value}>{ec.value}</div>),
     },
     {
       title: 'Organism',
@@ -50,7 +51,18 @@ export const ProteinOverview: FC<{
     },
   ];
 
-  return <InfoList infoData={infoListData} />;
+  const descriptionMetaHead = `${
+    geneNamesData?.length ? geneNamesData[0].geneName?.value : ''
+  } - ${proteinName} - ${organismData?.scientificName}`;
+
+  return (
+    <>
+      <Helmet>
+        <meta name="description" content={`${descriptionMetaHead}`} />
+      </Helmet>
+      <InfoList infoData={infoListData} />
+    </>
+  );
 };
 
 export default ProteinOverview;
