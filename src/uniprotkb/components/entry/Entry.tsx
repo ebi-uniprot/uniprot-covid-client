@@ -19,6 +19,8 @@ import {
   DropdownButton,
   ProtVistaIcon,
 } from 'franklin-sites';
+import { Helmet } from 'react-helmet';
+
 import UniProtKBEntryConfig from '../../config/UniProtEntryConfig';
 import { RootAction } from '../../../app/state/rootInitialState';
 import uniProtKbConverter, {
@@ -75,7 +77,8 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   }
 
   if (data && data.entryType === EntryType.INACTIVE) {
-    const inactiveEntryData: UniProtkbInactiveEntryModel = data as UniProtkbInactiveEntryModel;
+    const inactiveEntryData: UniProtkbInactiveEntryModel =
+      data as UniProtkbInactiveEntryModel;
 
     return (
       <BaseLayout>
@@ -205,38 +208,45 @@ const Entry: React.FC<EntryProps> = ({ addMessage, match }) => {
   ];
 
   return (
-    <section id="entry-container">
-      <SideBarLayout
-        sidebar={
-          <DisplayMenu
-            data={displayMenuData}
-            title={`Publications for ${accession}`}
-          />
-        }
-        actionButtons={
+    <>
+      <Helmet>
+        <title>{accession} - UniProtKB</title>
+      </Helmet>
+      <section id="entry-container">
+        <SideBarLayout
+          sidebar={
+            <DisplayMenu
+              data={displayMenuData}
+              title={`Publications for ${accession}`}
+            />
+          }
+          actionButtons={
+            <Switch>
+              {displayMenuData.map((displayItem) => (
+                <Route
+                  path={`${path}/${displayItem.path}`}
+                  render={() => (
+                    <Fragment>{displayItem.actionButtons}</Fragment>
+                  )}
+                  key={displayItem.name}
+                />
+              ))}
+            </Switch>
+          }
+        >
           <Switch>
             {displayMenuData.map((displayItem) => (
               <Route
                 path={`${path}/${displayItem.path}`}
-                render={() => <Fragment>{displayItem.actionButtons}</Fragment>}
+                render={() => <Fragment>{displayItem.mainContent}</Fragment>}
                 key={displayItem.name}
+                exact={displayItem.exact}
               />
             ))}
           </Switch>
-        }
-      >
-        <Switch>
-          {displayMenuData.map((displayItem) => (
-            <Route
-              path={`${path}/${displayItem.path}`}
-              render={() => <Fragment>{displayItem.mainContent}</Fragment>}
-              key={displayItem.name}
-              exact={displayItem.exact}
-            />
-          ))}
-        </Switch>
-      </SideBarLayout>
-    </section>
+        </SideBarLayout>
+      </section>
+    </>
   );
 };
 
