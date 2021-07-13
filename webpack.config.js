@@ -74,9 +74,11 @@ module.exports = (env, argv) => {
           ],
           use: [
             {
-              loader: isLiveReload
-                ? 'style-loader'
-                : MiniCssExtractPlugin.loader,
+              // loader: isLiveReload
+              //   ? 'style-loader'
+              //   : MiniCssExtractPlugin.loader,
+              // NOTE: deoptimising this because of issue with Google indexing
+              loader: 'style-loader',
             },
             {
               loader: 'css-loader', // translates CSS into CommonJS
