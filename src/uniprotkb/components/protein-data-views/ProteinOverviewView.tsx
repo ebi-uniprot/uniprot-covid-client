@@ -51,14 +51,19 @@ export const ProteinOverview: FC<{
     },
   ];
 
-  const descriptionMetaHead = `${
-    geneNamesData?.length ? geneNamesData[0].geneName?.value : ''
-  } - ${proteinName} - ${organismData?.scientificName}`;
-
   return (
     <>
       <Helmet>
-        <meta name="description" content={`${descriptionMetaHead}`} />
+        <meta
+          name="description"
+          content={[
+            geneNamesData?.[0].geneName?.value,
+            proteinName,
+            organismData?.scientificName,
+          ]
+            .filter((t) => Boolean(t))
+            .join(' - ')}
+        />
       </Helmet>
       <InfoList infoData={infoListData} />
     </>
