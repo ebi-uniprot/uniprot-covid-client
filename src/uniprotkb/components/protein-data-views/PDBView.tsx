@@ -13,8 +13,8 @@ loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
 loadWebComponent('protvista-uniprot-structure', ProtvistaUniprotStructure);
 
-const processData = (xrefs: Xref[]) =>
-  xrefs.map(({ id, properties }) => {
+const processData = (xrefs?: Xref[]) =>
+  xrefs?.map(({ id, properties }) => {
     if (!properties) {
       return null;
     }
@@ -84,7 +84,7 @@ const getColumnConfig = () => ({
 });
 
 const PDBView: FC<{
-  xrefs: Xref[];
+  xrefs?: Xref[];
   noStructure?: boolean;
   primaryAccession?: string;
 }> = ({ xrefs, noStructure = false, primaryAccession }) => {
@@ -107,19 +107,13 @@ const PDBView: FC<{
     return <protvista-datatable ref={setTableData} />;
   }
 
-  const sortedIds = xrefs.map(({ id }) => id).sort();
+  const sortedIds = xrefs?.map(({ id }) => id).sort();
   const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
   return (
     <protvista-manager attributes="pdb-id">
       <protvista-uniprot-structure
         structureid={firstId}
         accession={primaryAccession}
-      />
-      <protvista-datatable
-        ref={setTableData}
-        selectedId={firstId}
-        noScrollToRow
-        noDeselect
       />
     </protvista-manager>
   );

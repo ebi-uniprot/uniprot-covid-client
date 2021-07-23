@@ -47,18 +47,13 @@ const StructureSection: FC<{
     arrayStructureDatabases.length === 1 &&
     arrayStructureDatabases[0];
   if (structureDatabases) {
-    const {
-      PDBDatabase,
-      otherStructureDatabases,
-    } = partitionStructureDatabases(structureDatabases.databases);
-    if (PDBDatabase && PDBDatabase.xrefs.length) {
-      PDBViewNode = (
-        <PDBView
-          xrefs={PDBDatabase.xrefs}
-          primaryAccession={primaryAccession}
-        />
-      );
-    }
+    const { PDBDatabase, otherStructureDatabases } =
+      partitionStructureDatabases(structureDatabases.databases);
+    // if (PDBDatabase && PDBDatabase.xrefs.length) {
+    PDBViewNode = (
+      <PDBView xrefs={PDBDatabase?.xrefs} primaryAccession={primaryAccession} />
+    );
+    // }
     const nonPDBStructureDatabases: XrefUIModel = {
       category: DatabaseCategory.STRUCTURE,
       databases: otherStructureDatabases,
