@@ -1,7 +1,7 @@
 import React, { useCallback, FC } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaDatatable from 'protvista-datatable';
-import ProtvistaUniProtStructure from 'protvista-uniprot/dist/es/protvista-uniprot-structure';
+import { ProtvistaUniprotStructure } from 'protvista-uniprot';
 import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { PDBMirrorsInfo } from '../../config/database';
@@ -11,7 +11,7 @@ import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
-loadWebComponent('protvista-uniprot-structure', ProtvistaUniProtStructure);
+loadWebComponent('protvista-uniprot-structure', ProtvistaUniprotStructure);
 
 const processData = (xrefs: Xref[]) =>
   xrefs.map(({ id, properties }) => {

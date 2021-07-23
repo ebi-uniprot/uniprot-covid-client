@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { DefinePlugin, NormalModuleReplacementPlugin } = require('webpack');
+const { DefinePlugin } = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -142,13 +142,6 @@ module.exports = (env, argv) => {
     },
     // PLUGINS
     plugins: [
-      new NormalModuleReplacementPlugin(
-        /icons\/spinner\.svg/,
-        path.resolve(
-          __dirname,
-          'node_modules/protvista-uniprot/src/icons/spinner.svg'
-        )
-      ),
       !isLiveReload &&
         new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
       new HtmlWebPackPlugin({
