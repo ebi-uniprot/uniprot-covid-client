@@ -129,7 +129,7 @@ const EMBLXref: FC<{
       {') '}
       {id && <ExternalLink url={externalUrls.ENA(id)}>{id}</ExternalLink>}
       {additionalIds &&
-        additionalIds.map(additionalId => (
+        additionalIds.map((additionalId) => (
           <ExternalLink url={externalUrls.ENA(additionalId)} key={additionalId}>
             {additionalId}
           </ExternalLink>
@@ -183,7 +183,7 @@ export const XRef: FC<XRefProps> = ({
   }
   let propertiesNode;
   if (properties && !implicit) {
-    propertiesNode = Object.keys(properties).map(key =>
+    propertiesNode = Object.keys(properties).map((key) =>
       [PropertyKey.ProteinId, PropertyKey.GeneId].includes(key as PropertyKey)
         ? getPropertyLink(databaseInfo, key as PropertyKey, xref)
         : getPropertyString(key, properties[key])
@@ -303,33 +303,28 @@ type StructureXRefsGroupedByCategoryProps = {
   taxonId?: number;
 };
 
-const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> = ({
-  databases,
-  primaryAccession,
-  crc64,
-  taxonId,
-}): JSX.Element => {
-  const { PDBDatabase, otherStructureDatabases } = partitionStructureDatabases(
-    databases
-  );
-  let PDBViewNode;
-  if (PDBDatabase && PDBDatabase.xrefs.length) {
-    PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} noStructure />;
-  }
-  return (
-    <Fragment>
-      {PDBViewNode}
-      {otherStructureDatabases && otherStructureDatabases.length && (
-        <XRefsGroupedByCategory
-          databases={otherStructureDatabases}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-          taxonId={taxonId}
-        />
-      )}
-    </Fragment>
-  );
-};
+const StructureXRefsGroupedByCategory: FC<StructureXRefsGroupedByCategoryProps> =
+  ({ databases, primaryAccession, crc64, taxonId }): JSX.Element => {
+    const { PDBDatabase, otherStructureDatabases } =
+      partitionStructureDatabases(databases);
+    let PDBViewNode;
+    if (PDBDatabase && PDBDatabase.xrefs.length) {
+      PDBViewNode = <PDBView xrefs={PDBDatabase.xrefs} noStructure />;
+    }
+    return (
+      <Fragment>
+        {PDBViewNode}
+        {otherStructureDatabases && otherStructureDatabases.length && (
+          <XRefsGroupedByCategory
+            databases={otherStructureDatabases}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+            taxonId={taxonId}
+          />
+        )}
+      </Fragment>
+    );
+  };
 
 type XRefsGroupedByCategoryProps = {
   databases: XrefsGoupedByDatabase[];
@@ -345,25 +340,29 @@ const XRefsGroupedByCategory: FC<XRefsGroupedByCategoryProps> = ({
   taxonId,
 }): JSX.Element => {
   const infoData = sortBy(databases, ({ database }) => [
-    idx(databaseToDatabaseInfo, o => o[database].implicit),
+    idx(databaseToDatabaseInfo, (o) => o[database].implicit),
     database,
-  ]).map((database): {
-    title: string;
-    content: JSX.Element;
-  } => {
-    const databaseInfo = databaseToDatabaseInfo[database.database];
-    return {
-      title: databaseInfo.displayName,
-      content: (
-        <DatabaseList
-          xrefsGoupedByDatabase={database}
-          primaryAccession={primaryAccession}
-          crc64={crc64}
-          taxonId={taxonId}
-        />
-      ),
-    };
-  });
+  ]).map(
+    (
+      database
+    ): {
+      title: string;
+      content: JSX.Element;
+    } => {
+      const databaseInfo = databaseToDatabaseInfo[database.database];
+      return {
+        title: databaseInfo.displayName,
+        content: (
+          <DatabaseList
+            xrefsGoupedByDatabase={database}
+            primaryAccession={primaryAccession}
+            crc64={crc64}
+            taxonId={taxonId}
+          />
+        ),
+      };
+    }
+  );
   return <InfoList infoData={infoData} columns />;
 };
 
@@ -383,36 +382,34 @@ const XRefView: FC<XRefViewProps> = ({
   if (!xrefs) {
     return null;
   }
-  const nodes = xrefs.map(
-    ({ databases, category }): JSX.Element => {
-      const xrefsNode =
-        category === DatabaseCategory.STRUCTURE ? (
-          <StructureXRefsGroupedByCategory
-            databases={databases}
-            primaryAccession={primaryAccession}
-            crc64={crc64}
-            taxonId={taxonId}
-          />
-        ) : (
-          <XRefsGroupedByCategory
-            databases={databases}
-            primaryAccession={primaryAccession}
-            crc64={crc64}
-            taxonId={taxonId}
-          />
-        );
-      let title;
-      if (category && databaseCategoryToString[category]) {
-        title = databaseCategoryToString[category];
-      }
-      return (
-        <Fragment key={v1()}>
-          <h3>{title}</h3>
-          {xrefsNode}
-        </Fragment>
+  const nodes = xrefs.map(({ databases, category }): JSX.Element => {
+    const xrefsNode =
+      category === DatabaseCategory.STRUCTURE ? (
+        <StructureXRefsGroupedByCategory
+          databases={databases}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+          taxonId={taxonId}
+        />
+      ) : (
+        <XRefsGroupedByCategory
+          databases={databases}
+          primaryAccession={primaryAccession}
+          crc64={crc64}
+          taxonId={taxonId}
+        />
       );
+    let title;
+    if (category && databaseCategoryToString[category]) {
+      title = databaseCategoryToString[category];
     }
-  );
+    return (
+      <Fragment key={v1()}>
+        <h3>{title}</h3>
+        {xrefsNode}
+      </Fragment>
+    );
+  });
   return <Fragment>{nodes}</Fragment>;
 };
 

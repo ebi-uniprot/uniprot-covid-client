@@ -1,7 +1,7 @@
 import React, { useCallback, FC } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaDatatable from 'protvista-datatable';
-import ProtvistaStructure from 'protvista-structure';
+import { ProtvistaUniprotStructure } from 'protvista-uniprot';
 import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { PDBMirrorsInfo } from '../../config/database';
@@ -11,10 +11,10 @@ import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
-loadWebComponent('protvista-structure', ProtvistaStructure);
+loadWebComponent('protvista-uniprot-structure', ProtvistaUniprotStructure);
 
-const processData = (xrefs: Xref[]) =>
-  xrefs.map(({ id, properties }) => {
+const processData = (xrefs?: Xref[]) =>
+  xrefs?.map(({ id, properties }) => {
     if (!properties) {
       return null;
     }
@@ -78,18 +78,13 @@ const getColumnConfig = () => ({
                 >${displayName}</a
               >
             `
-        ).reduce(
-          (prev, curr) =>
-            html`
-              ${prev} · ${curr}
-            `
-        )}
+        ).reduce((prev, curr) => html` ${prev} · ${curr} `)}
       `,
   },
 });
 
 const PDBView: FC<{
-  xrefs: Xref[];
+  xrefs?: Xref[];
   noStructure?: boolean;
   primaryAccession?: string;
 }> = ({ xrefs, noStructure = false, primaryAccession }) => {
@@ -112,16 +107,13 @@ const PDBView: FC<{
     return <protvista-datatable ref={setTableData} />;
   }
 
-  const sortedIds = xrefs.map(({ id }) => id).sort();
+  const sortedIds = xrefs?.map(({ id }) => id).sort();
   const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
   return (
     <protvista-manager attributes="pdb-id">
-      <protvista-structure pdb-id={firstId} accession={primaryAccession} />
-      <protvista-datatable
-        ref={setTableData}
-        selectedId={firstId}
-        noScrollToRow
-        noDeselect
+      <protvista-uniprot-structure
+        structureid={firstId}
+        accession={primaryAccession}
       />
     </protvista-manager>
   );
