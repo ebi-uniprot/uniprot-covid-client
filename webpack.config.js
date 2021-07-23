@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { DefinePlugin } = require('webpack');
+const { DefinePlugin, NormalModuleReplacementPlugin } = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -41,9 +41,10 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.tsx', '.jsx', '.js', '.ts'],
       alias: {
-        react: path.resolve('./node_modules/react'),
-        'react-dom': path.resolve('./node_modules/react-dom'),
-        'react-router-dom': path.resolve('./node_modules/react-router-dom'),
+        // Deopts here, because we're not on track with React's versions anymore
+        // react: path.resolve('./node_modules/react'),
+        // 'react-dom': path.resolve('./node_modules/react-dom'),
+        // 'react-router-dom': path.resolve('./node_modules/react-router-dom'),
       },
       symlinks: false,
     },
@@ -70,6 +71,7 @@ module.exports = (env, argv) => {
             fs.realpathSync(
               `${__dirname}/node_modules/interaction-viewer/styles`
             ),
+            fs.realpathSync(`${__dirname}/node_modules/molstar/build/`),
             path.resolve(__dirname, 'src'),
           ],
           use: [
@@ -117,6 +119,7 @@ module.exports = (env, argv) => {
           test: /\.svg$/,
           include: [
             path.resolve(__dirname, 'node_modules/protvista-datatable'),
+            path.resolve(__dirname, 'node_modules/protvista-uniprot'),
           ],
           loader: 'svg-inline-loader',
         },
@@ -139,6 +142,13 @@ module.exports = (env, argv) => {
     },
     // PLUGINS
     plugins: [
+      new NormalModuleReplacementPlugin(
+        /icons\/spinner\.svg/,
+        path.resolve(
+          __dirname,
+          'node_modules/protvista-uniprot/src/icons/spinner.svg'
+        )
+      ),
       !isLiveReload &&
         new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
       new HtmlWebPackPlugin({

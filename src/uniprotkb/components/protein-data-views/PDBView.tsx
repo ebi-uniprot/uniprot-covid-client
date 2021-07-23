@@ -1,7 +1,7 @@
 import React, { useCallback, FC } from 'react';
 import ProtvistaManager from 'protvista-manager';
 import ProtvistaDatatable from 'protvista-datatable';
-import ProtvistaStructure from 'protvista-structure';
+import ProtvistaUniProtStructure from 'protvista-uniprot/dist/es/protvista-uniprot-structure';
 import { TemplateResult, html } from 'lit-html';
 import { loadWebComponent } from '../../../shared/utils/utils';
 import { PDBMirrorsInfo } from '../../config/database';
@@ -11,7 +11,7 @@ import 'litemol/dist/css/LiteMol-plugin.css';
 
 loadWebComponent('protvista-manager', ProtvistaManager);
 loadWebComponent('protvista-datatable', ProtvistaDatatable);
-loadWebComponent('protvista-structure', ProtvistaStructure);
+loadWebComponent('protvista-uniprot-structure', ProtvistaUniProtStructure);
 
 const processData = (xrefs: Xref[]) =>
   xrefs.map(({ id, properties }) => {
@@ -78,12 +78,7 @@ const getColumnConfig = () => ({
                 >${displayName}</a
               >
             `
-        ).reduce(
-          (prev, curr) =>
-            html`
-              ${prev} · ${curr}
-            `
-        )}
+        ).reduce((prev, curr) => html` ${prev} · ${curr} `)}
       `,
   },
 });
@@ -116,7 +111,10 @@ const PDBView: FC<{
   const firstId = sortedIds && sortedIds.length ? sortedIds[0] : '';
   return (
     <protvista-manager attributes="pdb-id">
-      <protvista-structure pdb-id={firstId} accession={primaryAccession} />
+      <protvista-uniprot-structure
+        structureid={firstId}
+        accession={primaryAccession}
+      />
       <protvista-datatable
         ref={setTableData}
         selectedId={firstId}
