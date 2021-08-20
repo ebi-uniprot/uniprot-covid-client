@@ -12,7 +12,12 @@ const UniProtKBInfo = () => (
     </section>
     <section className="text-block">
       This data can also be accessed via our FTP on{' '}
-      <a href="ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/">
+      <a
+        href="ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/"
+        style={{
+          overflowWrap: 'anywhere',
+        }}
+      >
         ftp://ftp.uniprot.org/pub/databases/uniprot/pre_release/
       </a>
     </section>
