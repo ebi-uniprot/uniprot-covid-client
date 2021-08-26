@@ -45,8 +45,8 @@ const apiUrls = {
   ),
   // All result fields except database cross reference fields
   resultsFields: joinUrl(
-    devPrefix,
-    '/uniprot/api/configure/uniprotkb/result-fields'
+    prodPrefix,
+    '/uniprot/beta/api/configure/uniprotkb/result-fields'
   ),
   // Retrieve results
   search: joinUrl(covidPrefix, '/uniprotkb/search'),
