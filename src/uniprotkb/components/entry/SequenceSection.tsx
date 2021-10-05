@@ -42,7 +42,7 @@ const SequenceSection: FC<{
         )}
         {data.polymorphysm && data.polymorphysm.length > 0 && (
           <Fragment>
-            <h3>Polymorphysm</h3>
+            <h3>Polymorphism</h3>
             <FreeTextView comments={data.polymorphysm} />
           </Fragment>
         )}

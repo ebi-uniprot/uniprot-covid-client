@@ -185,7 +185,7 @@ export const getDownloadUrl = ({
 };
 
 export const literatureApiUrls = {
-  literature: joinUrl(devPrefix, '/uniprot/api/citations'),
+  literature: 'https://www.ebi.ac.uk/uniprot/beta/api/citations',
 };
 
 export const getPublicationURL = (id: string) =>

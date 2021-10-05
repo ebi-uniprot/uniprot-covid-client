@@ -389,7 +389,7 @@ ColumnConfiguration.set(Column.ftNonStd, getFeatureColumn(FeatureType.NON_STD));
 ColumnConfiguration.set(Column.ftNonTer, getFeatureColumn(FeatureType.NON_TER));
 
 ColumnConfiguration.set(Column.ccPolymorphism, {
-  label: 'Polymorphysm',
+  label: 'Polymorphism',
   render: (data) => {
     const { polymorphysm } = data[EntrySection.Sequence];
     return polymorphysm && <FreeTextView comments={polymorphysm} />;

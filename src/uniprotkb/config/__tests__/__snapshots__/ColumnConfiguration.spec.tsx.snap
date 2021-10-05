@@ -1179,7 +1179,7 @@ exports[`ColumnConfiguration component should render all columns: Pathway 1`] = 
 
 exports[`ColumnConfiguration component should render all columns: Pharmaceutical Use 1`] = `<DocumentFragment />`;
 
-exports[`ColumnConfiguration component should render all columns: Polymorphysm 1`] = `<DocumentFragment />`;
+exports[`ColumnConfiguration component should render all columns: Polymorphism 1`] = `<DocumentFragment />`;
 
 exports[`ColumnConfiguration component should render all columns: Post-Translational Modification 1`] = `<DocumentFragment />`;
 
