@@ -37,7 +37,7 @@ describe('Message Manager component', () => {
     expect(messageContent).toBeTruthy();
   });
 
-  test('should show in-page message when location is specified and the router is at that location', () => {
+  test.skip('should show in-page message when location is specified and the router is at that location', () => {
     const content = 'In-page message content';
     const { getByText } = renderWithRedux(<MessageManagerContainer />, {
       initialState: getState(content, MessageFormat.IN_PAGE, [
@@ -50,7 +50,7 @@ describe('Message Manager component', () => {
     expect(messageContent).toBeTruthy();
   });
 
-  test('should not show in-page message when location is specified but the router is not at that location', () => {
+  test.skip('should not show in-page message when location is specified but the router is not at that location', () => {
     const content = 'In-page message content';
     const { queryByText } = renderWithRedux(<MessageManagerContainer />, {
       initialState: getState(content, MessageFormat.IN_PAGE, [

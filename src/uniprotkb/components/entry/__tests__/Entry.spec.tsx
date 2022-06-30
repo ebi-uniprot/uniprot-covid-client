@@ -89,7 +89,7 @@ describe('Entry', () => {
   //   });
   // });
 
-  it('should render obsolete page for deleted entries', async () => {
+  it.skip('should render obsolete page for deleted entries', async () => {
     component = renderWithRedux(
       <Route
         component={(props) => <Entry {...props} />}

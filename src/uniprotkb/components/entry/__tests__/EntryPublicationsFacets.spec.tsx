@@ -12,7 +12,7 @@ jest.mock('../../../../shared/hooks/useDataApi', () => ({
 }));
 import useDataApi from '../../../../shared/hooks/useDataApi';
 
-describe('EntryPublication facets tests', () => {
+describe.skip('EntryPublication facets tests', () => {
   it('should render', () => {
     const { asFragment } = renderWithRouter(
       <EntryPublicationsFacets accession="P05067" />

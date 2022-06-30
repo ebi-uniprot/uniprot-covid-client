@@ -4,7 +4,7 @@ import ColumnSelectView from '../ColumnSelectView';
 import { Column } from '../../../types/columnTypes';
 import structuredResultFieldsData from './__mocks__/structuredResultFieldsData.json';
 
-describe('ColumnSelectView component', () => {
+describe.skip('ColumnSelectView component', () => {
   let props;
   let rendered;
   beforeEach(() => {

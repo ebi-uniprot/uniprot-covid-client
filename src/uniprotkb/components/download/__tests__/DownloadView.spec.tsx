@@ -6,7 +6,7 @@ import { FileFormat } from '../../../types/resultsTypes';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 import initialState from '../../../../app/state/rootInitialState';
 
-describe('DownloadView component', () => {
+describe.skip('DownloadView component', () => {
   let props, renderedWithRedux;
   beforeEach(() => {
     props = {

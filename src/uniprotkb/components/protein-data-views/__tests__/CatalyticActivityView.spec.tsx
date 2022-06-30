@@ -12,7 +12,7 @@ import { removeProperty } from '../../../../shared/utils/utils';
 import renderWithRedux from '../../../../shared/__test-helpers__/RenderWithRedux';
 
 describe('CatalyticActivityView component', () => {
-  test('should render catalytic activity', () => {
+  test.skip('should render catalytic activity', () => {
     const { asFragment } = renderWithRedux(
       <CatalyticActivityView
         comments={catalyticActivityUIDataJson}
@@ -21,7 +21,7 @@ describe('CatalyticActivityView component', () => {
     );
     expect(asFragment()).toMatchSnapshot();
   });
-  test('should render catalytic activity when comment does not have reactionCrossReferences', () => {
+  test.skip('should render catalytic activity when comment does not have reactionCrossReferences', () => {
     const comment = catalyticActivityUIDataJson[0];
     const commentWithoutReactionReferences = {
       ...comment,
