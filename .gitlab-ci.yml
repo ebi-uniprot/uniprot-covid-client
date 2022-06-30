@@ -1,26 +1,7 @@
-stages:
-  - test
-  - build_static_assets
+include:
+  - project: 'uniprot/front-end/front-end-deploy'
+    file: 'templates/.gitlab-ci-template.yml'
 
-.js:
-  image: node
-  before_script:
-    - node --version
-    - npm --version
-    - yarn --version
-    - yarn
-
-test:
-  extends: .js
-  stage: test
-  script:
-    - yarn test
-
-build_static_assets:
-  extends: .js
-  stage: build_static_assets
-  script:
-    - yarn build
-  artifacts:
-    paths:
-      - build/
+variables:
+  CHART_PROD: 'uniprot-covid-client-prod'
+  CHART_FALLBACK: 'uniprot-covid-client-fallback'
