@@ -7,7 +7,6 @@
   "scripts": {
     "start": "webpack-dev-server --env.PUBLIC_PATH=/ --mode development --open",
     "build:prod": "webpack --env.PUBLIC_PATH=/ --mode production",
-    "build:staging": "webpack --env.PUBLIC_PATH=/uniprot-covid-client/ --mode production",
     "build:dev": "webpack --env.PUBLIC_PATH=/ --mode development",
     "check-types": "tsc",
     "lint": "eslint 'src/**/*.ts*' --ignore-pattern 'src/**/*.spec.ts*' --ignore-pattern 'src/shared/__test-helpers__/*.*'",
