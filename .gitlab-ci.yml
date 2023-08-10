@@ -1,6 +1,5 @@
 include:
   - project: 'uniprot/front-end/front-end-deploy'
-    ref: 'security-context'
     file: '.gitlab-ci-template.yml'
 
 variables:
