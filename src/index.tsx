@@ -24,8 +24,8 @@ ReactDOM.render(
 import(
   /* webpackChunkName: "service-worker-client" */ './service-worker/client'
 ).then((serviceWorker) => {
-  serviceWorker.register();
+  // serviceWorker.register();
   // switch commented line if we want to enable/disable service worker
   // if that implies a change from what is currently deployed ( -> if an issue)
-  // serviceWorker.unregister();
+  serviceWorker.unregister();
 });
