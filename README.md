@@ -1,3 +1,6 @@
+# Important notice
+This project is now **discontinued** as the corresponding data is now in the main UniProt website
+
 ## Deployment
 
 See internal front-end-deploy repository for details.
